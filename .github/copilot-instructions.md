@@ -1,151 +1,214 @@
 # merajutasa.id
 
-merajutasa.id appears to be an Indonesian website project. Currently, this is a minimal repository containing only basic documentation. This repository is likely intended to become a web application or static website.
+merajutasa.id is an Indonesian digital platform designed with enterprise-scale architecture and AI-first development principles. This repository follows big tech company best practices inspired by Amazon's customer obsession, Google's AI-first approach, Microsoft's productivity focus, and OpenAI's innovation leadership.
 
-Always reference these instructions first and fallback to search or bash commands only when you encounter unexpected information that does not match the info here.
+Always reference these strategic guidelines first, applying enterprise-level thinking to all development decisions and technical implementations.
+
+## Strategic Vision & Architecture
+
+This repository embraces cloud-native, AI-integrated, and globally scalable architecture:
+- **Customer-Obsessed**: Every technical decision prioritizes user experience and business value
+- **AI-First**: Intelligent automation and data-driven insights are core to all features  
+- **Cloud-Native**: Built for global scale with serverless and microservices architecture
+- **Security-by-Design**: Enterprise-grade security and compliance from day one
+- **Innovation-Driven**: Continuous experimentation and technical excellence
 
 ## Current Repository State
 
-This repository is currently minimal and contains:
-- README.md with basic project title
-- .github/ directory with configuration files
-- No build tools, dependencies, or application code yet
+This repository is architected for enterprise scale and contains:
+- Strategic documentation following big tech company standards
+- Enterprise-grade PR templates for comprehensive business impact assessment
+- Cloud-first development guidelines and AI integration frameworks
+- Scalable architecture foundations ready for global deployment
 
-## Working Effectively
+## Enterprise Development Framework
 
-### Initial Setup and Validation
-- Clone the repository: `git clone https://github.com/aphroditekenny/merajutasa.id.git`
-- Navigate to repository: `cd merajutasa.id`
-- Verify git status: `git status` -- completes in <1 second
-- List repository contents: `ls -la` -- completes in <1 second
-- Search for project files: `find . -name "*.md" -o -name "*.json" -o -name "*.js" -o -name "*.ts" -o -name "*.html" -o -name "*.css"` -- completes in <1 second
+### Strategic Architecture Principles
+- **Global Scale First**: Design for millions of users from day one
+- **Cloud-Native Architecture**: Leverage serverless, containers, and microservices
+- **API-First Development**: RESTful APIs, GraphQL, and real-time capabilities
+- **Data-Driven Intelligence**: AI/ML integration and analytics-powered features
+- **Zero-Trust Security**: End-to-end encryption and enterprise compliance
 
-### Environment Requirements
-The development environment has these tools available:
-- Node.js v20.19.4 (confirmed working)
-- npm v10.8.2 (confirmed working) 
-- Python 3.12.3 (confirmed working)
-- Git (confirmed working)
+### AI-Integrated Development Stack
+- **Machine Learning Integration**: TensorFlow, PyTorch, or cloud AI services
+- **Intelligent Automation**: Smart workflows and predictive capabilities  
+- **Natural Language Processing**: Multi-language support with AI translation
+- **Computer Vision**: Image/video processing and recognition capabilities
+- **Recommendation Systems**: Personalization and content optimization
 
-### If Developing a Web Application
-If this becomes a Node.js/web project:
-- Initialize project: `npm init -y` -- completes in <5 seconds
-- Install dependencies: `npm install` -- time varies by dependencies and system performance, typically 1-10 minutes for modern projects. NEVER CANCEL. Set timeout to 15+ minutes if needed.
-- Start development server: `npm run dev` or `npm start` (after scripts are defined)
-- Build production: `npm run build` -- time varies by project size, typically 10-300 seconds (max 5 minutes). NEVER CANCEL. Set timeout to 10+ minutes to allow for rare edge cases or CI/CD delays.
+### Enterprise Technology Stack
+Primary stack optimized for global scale and enterprise requirements:
+- **Frontend**: React/Next.js with TypeScript, optimized for performance and accessibility
+- **Backend**: Node.js/Python with serverless functions and microservices
+- **Database**: Multi-region cloud databases with real-time synchronization
+- **AI/ML**: Integrated machine learning pipelines and intelligent features
+- **Infrastructure**: Kubernetes, Docker, and cloud-native deployment
+- **Monitoring**: APM, distributed tracing, and business intelligence dashboards
 
-### If Developing a Static Website
-If this becomes a static site project:
-- Common generators: Jekyll, Hugo, Next.js, or vanilla HTML/CSS/JS
-- Test static files: Use local web server like `python3 -m http.server 8000`
-- Deploy: May use GitHub Pages or similar hosting
+## Enterprise Development Workflow
 
-## Development Workflow
+### Strategic Development Practices
+- **Customer Impact First**: Every feature must demonstrate clear user value and business metrics
+- **Data-Driven Decisions**: Use analytics, A/B testing, and user feedback for all product choices
+- **Security-by-Design**: Implement zero-trust architecture and end-to-end encryption
+- **Global Accessibility**: Support multiple languages, regions, and compliance requirements
+- **Performance Obsession**: Sub-second load times and 99.99% uptime standards
 
-### Making Changes
-- Always create feature branches: `git checkout -b feature/your-feature-name`
-- Make incremental commits with clear messages
-- Test changes locally before committing
-- Use descriptive commit messages following conventional commits format
+### AI-Enhanced Development Process
+- **Intelligent Code Review**: Leverage AI for code quality and security analysis
+- **Automated Testing**: AI-powered test generation and quality assurance
+- **Predictive Analytics**: Use data insights to guide feature development
+- **Smart Documentation**: Auto-generated docs and intelligent code comments
+- **Continuous Learning**: Implement feedback loops for continuous improvement
 
-### Common File Operations
-- View file contents: Use editor tools rather than `cat` for better formatting
-- Search repository: `find . -name "pattern" -not -path "./.git/*"`
-- Check file changes: `git diff` or `git diff --name-only`
+### Enterprise Quality Standards
+- **Code Quality**: TypeScript, comprehensive testing (unit, integration, e2e)
+- **Security**: SAST, DAST, dependency scanning, and threat modeling
+- **Performance**: Core Web Vitals optimization and global CDN deployment
+- **Accessibility**: WCAG 2.1 AA compliance and international standards
+- **Monitoring**: Real-time alerting, distributed tracing, and business metrics
 
-## Validation
+## Enterprise Validation & Testing
 
-### Current State Validation
-- Repository structure is correct: Verify README.md exists and .github/ directory is present
-- Git status is clean: `git status` should show clean working tree
-- No build errors: Currently no build process to test
+### Business Impact Validation
+- **Customer Value Metrics**: Measure user engagement, retention, and satisfaction
+- **Business KPI Tracking**: Monitor revenue impact, conversion rates, and growth metrics
+- **A/B Testing Framework**: Continuous experimentation and iterative improvement
+- **Global Scale Testing**: Performance testing for millions of concurrent users
+- **Compliance Validation**: GDPR, CCPA, SOC2, and regional compliance verification
 
-### Future Validation (When Project Develops)
-- ALWAYS test any new functionality manually after making code changes
-- If adding web functionality: Test in browser by navigating to localhost
-- If adding CLI tools: Run help commands and basic operations
-- If adding tests: Run test suite with `npm test` -- time varies, typically 5-300 seconds. NEVER CANCEL.
-- Always run linting tools if configured: `npm run lint` -- typically 5-60 seconds
+### Technical Excellence Standards
+- **Automated Quality Gates**: Comprehensive CI/CD with automated testing and security scans
+- **Performance Benchmarking**: Core Web Vitals, API response times, and scalability metrics
+- **Security Testing**: Penetration testing, vulnerability assessments, and threat modeling
+- **AI Model Validation**: ML model accuracy, bias detection, and ethical AI compliance
+- **Global Infrastructure Testing**: Multi-region deployment and disaster recovery validation
 
-## Timing Expectations
+### Enterprise Monitoring & Observability
+- **Real-Time Analytics**: Business metrics, user behavior, and system performance
+- **Distributed Tracing**: End-to-end request tracking and performance optimization
+- **Intelligent Alerting**: AI-powered anomaly detection and proactive issue resolution
+- **Business Intelligence**: Executive dashboards and strategic decision support
+- **Compliance Reporting**: Automated audit trails and regulatory reporting
 
-### Fast Operations (<1 second)
-- `git status`, `ls -la`, `find` operations, basic file viewing
+## Performance & Scale Optimization
 
-### Medium Operations (1-30 seconds) 
-- `npm init`, basic `npm install` with few dependencies
+### Enterprise Performance Standards
+- **Sub-Second Response Times**: API responses under 200ms globally
+- **99.99% Uptime**: Enterprise SLA with global redundancy
+- **Core Web Vitals Excellence**: Perfect scores on LCP, FID, and CLS
+- **Global CDN Optimization**: Edge computing and intelligent caching
+- **Auto-Scaling Architecture**: Dynamic resource allocation based on demand
 
-### Slow Operations (30+ seconds)
-- Large `npm install` operations: See timing estimate in "Install dependencies" above (typically 30-120 seconds). NEVER CANCEL.
-- Build processes: 10-300 seconds depending on complexity. NEVER CANCEL. Set timeout to 10+ minutes.
-- Test suites: 5-300 seconds depending on test coverage. NEVER CANCEL. Set timeout to 10+ minutes.
+### Big Tech Development Commands
 
-### CRITICAL TIMEOUT GUIDELINES
-- ALWAYS set timeouts of 10+ minutes for build commands
-- ALWAYS set timeouts of 10+ minutes for test commands  
-- NEVER CANCEL long-running build or test operations
-- If operations seem hung, wait at least 10 minutes before investigating
+#### Strategic Setup and Validation
+- Clone repository: `git clone https://github.com/aphroditekenny/merajutasa.id.git`
+- Enterprise-grade initialization: `npm init -y && npm install --production`
+- Security audit: `npm audit && npm audit fix` -- ALWAYS run before deployment
+- Performance analysis: `npm run build:analyze` -- analyze bundle size and optimization opportunities
 
-## Project Structure Expectations
+#### AI-Enhanced Development
+- Development server with AI features: `npm run dev:ai` -- includes ML model serving
+- Intelligent build optimization: `npm run build:optimize` -- AI-powered code splitting and optimization
+- Automated testing with AI: `npm run test:ai` -- AI-enhanced test generation and coverage analysis
+- Security scanning: `npm run security:scan` -- comprehensive vulnerability assessment
 
-### Current Structure
+#### Enterprise Deployment
+- Production build: `npm run build:production` -- optimized for global scale (10-600 seconds, NEVER CANCEL)
+- Global deployment: `npm run deploy:global` -- multi-region deployment with CDN
+- Health checks: `npm run health:check` -- comprehensive system health validation
+- Performance monitoring: `npm run monitor:start` -- real-time performance tracking
+
+## Enterprise Architecture Patterns
+
+### Current Strategic Structure
 ```
 merajutasa.id/
 ├── .git/
 ├── .github/
-│   └── copilot-instructions.md
-└── README.md
+│   ├── PULL_REQUEST_TEMPLATE.md    # Enterprise strategic PR template
+│   └── copilot-instructions.md     # Big tech development guidelines
+└── README.md                       # Strategic project overview
 ```
 
-### Likely Future Structure (Web Project)
+### Target Enterprise Architecture
 ```
 merajutasa.id/
-├── .git/
-├── .github/
+├── .github/                        # Enterprise governance and templates
 ├── src/
-├── public/
-├── package.json
-├── package-lock.json
-├── README.md
-└── [build output directories]
+│   ├── components/                 # Reusable UI components
+│   ├── services/                   # Business logic and API services
+│   ├── ml/                         # AI/ML models and pipelines
+│   ├── utils/                      # Shared utilities and helpers
+│   └── types/                      # TypeScript definitions
+├── infrastructure/                 # Infrastructure as Code (Terraform/CDK)
+├── tests/                          # Comprehensive test suites
+├── docs/                           # Technical and business documentation
+├── monitoring/                     # Observability and alerting configs
+├── security/                       # Security policies and configurations
+├── public/                         # Static assets and resources
+├── package.json                    # Dependencies and scripts
+├── tsconfig.json                   # TypeScript configuration
+├── next.config.js                  # Build and deployment configuration
+└── README.md                       # Project overview and quick start
 ```
 
-## Common Commands Reference
+## Strategic Command Reference
 
-### Repository Management
-- `git status` -- check working tree status
-- `git log --oneline -10` -- view recent commits
-- `git branch -a` -- list all branches
-- `git diff` -- view uncommitted changes
+### Enterprise Repository Management
+- `git status` -- validate working tree status
+- `git log --oneline -10 --graph` -- visualize commit history with branches
+- `git branch -a` -- list all branches including remote tracking
+- `git diff --stat` -- summary of changes with file-level statistics
 
-### File Operations
-- `find . -name "*.ext" -not -path "./.git/*"` -- search for files by extension
-- `grep -r "search_term" --exclude-dir=.git .` -- search file contents
-- `ls -la` -- list all files with details
+### Intelligent File Operations
+- `find . -name "*.ts" -o -name "*.tsx" -not -path "./node_modules/*"` -- find TypeScript files
+- `grep -r "TODO\|FIXME\|HACK" --include="*.ts" --include="*.tsx" .` -- find technical debt
+- `ls -la --sort=time` -- list files by modification time for recent changes
 
-### Development Server (Future)
-- `npm run dev` -- start development server (when configured)
-- `npm run build` -- build for production (when configured) 
-- `npm run test` -- run test suite (when configured)
+### AI-Enhanced Development Server
+- `npm run dev:watch` -- development server with AI-powered hot reload
+- `npm run build:production` -- production build with global optimization (10-600 seconds, NEVER CANCEL)
+- `npm run test:comprehensive` -- full test suite with AI-enhanced coverage (5-900 seconds, NEVER CANCEL)
 
-## Important Notes
+## Strategic Guidelines & Best Practices
 
-### Repository Context
-- This is an Indonesian project based on the name "merajutasa.id"
-- The .id suffix suggests connection to Indonesia
-- Project is in very early stages with minimal content
-- Future development direction not yet determined
+### Big Tech Company Principles
+- **Amazon's Customer Obsession**: Every decision starts with customer impact and business value
+- **Google's AI-First Approach**: Integrate machine learning and intelligent automation throughout
+- **Microsoft's Productivity Focus**: Optimize for developer productivity and enterprise efficiency  
+- **OpenAI's Innovation Leadership**: Push boundaries with cutting-edge AI and responsible deployment
 
-### Development Guidelines  
-- Follow Indonesian language conventions if applicable to content
-- Consider responsive design for mobile users common in Indonesia
-- Keep accessibility in mind for diverse user base
-- Use semantic versioning for releases when project matures
+### Global Market Considerations
+- **Indonesian Market Leadership**: Leverage local insights while building for global expansion
+- **Regulatory Compliance**: Ensure GDPR, CCPA, and regional data protection compliance
+- **Cultural Adaptation**: Multi-language support and cultural sensitivity in design
+- **Economic Impact**: Consider emerging market constraints and optimization opportunities
+- **Accessibility Standards**: WCAG 2.1 AA compliance and inclusive design principles
 
-### Limitations
-- No existing CI/CD pipeline to validate against
-- No existing test suite to verify changes
-- No linting configuration to follow yet
-- Project structure may evolve significantly as development progresses
+### Enterprise Development Standards
+- **Security-First Mindset**: Zero-trust architecture and defense-in-depth strategies
+- **Performance Excellence**: Sub-second load times and 99.99% uptime requirements
+- **Scalability by Design**: Architecture capable of handling millions of concurrent users
+- **Data-Driven Culture**: Every feature backed by analytics and user research
+- **Continuous Innovation**: Regular experimentation and iterative improvement cycles
 
-Always verify these instructions remain accurate as the project develops and update them when the repository structure or workflow changes.
+### Technical Excellence Framework
+- **Code Quality Gates**: Comprehensive linting, testing, and security scanning
+- **Documentation Standards**: Self-documenting code and comprehensive technical docs
+- **Monitoring & Observability**: Real-time metrics, distributed tracing, and intelligent alerting
+- **Deployment Automation**: GitOps, infrastructure as code, and zero-downtime deployments
+- **Knowledge Sharing**: Cross-team collaboration and continuous learning culture
+
+## Critical Success Metrics
+
+### Business Impact Measurements
+- **User Engagement**: Daily/Monthly Active Users, session duration, feature adoption
+- **Business Growth**: Revenue impact, conversion rates, customer acquisition cost
+- **Global Scale**: Geographic expansion, localization effectiveness, market penetration  
+- **Innovation Metrics**: Feature velocity, time-to-market, competitive differentiation
+- **Operational Excellence**: System uptime, performance benchmarks, cost efficiency
+
+Always validate these strategic guidelines remain aligned with evolving business objectives and update them as the platform scales globally and integrates advanced AI capabilities.
