@@ -76,7 +76,7 @@ If this becomes a static site project:
 - `npm init`, basic `npm install` with few dependencies
 
 ### Slow Operations (30+ seconds)
-- Large `npm install` operations: 30-120 seconds. NEVER CANCEL.
+- Large `npm install` operations: See timing estimate in "Install dependencies" above (typically 30-120 seconds). NEVER CANCEL.
 - Build processes: 10-300 seconds depending on complexity. NEVER CANCEL. Set timeout to 10+ minutes.
 - Test suites: 5-300 seconds depending on test coverage. NEVER CANCEL. Set timeout to 10+ minutes.
 
