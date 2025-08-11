@@ -1,6 +1,6 @@
 # Ringkasan
 Jelaskan secara singkat perubahan yang dilakukan <!-- Contoh: Menambahkan fitur X, memperbaiki bug Y, dll. -->
-Fixes # (tambahkan jika sudah ada issue terkait)
+Fixes #123 (ganti 123 dengan nomor issue terkait, jika ada)
 
 ## Struktur Eksekusi
 
