@@ -99,7 +99,7 @@ Fixes #123 (ganti 123 dengan nomor issue terkait, jika ada)
 - **Kriteria sukses**: <!-- Kriteria keberhasilan -->
 
 ## Checklist
-- [ ] Judul mengikuti Conventional Commits
+- [ ] Commit message mengikuti format Conventional Commits
 - [ ] Terkait issue (Fixes #...)
 - [ ] Dokumentasi ditambahkan/diperbarui
 - [ ] Tidak ada dead links atau broken references
