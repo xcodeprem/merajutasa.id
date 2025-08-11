@@ -30,7 +30,7 @@ The development environment has these tools available:
 ### If Developing a Web Application
 If this becomes a Node.js/web project:
 - Initialize project: `npm init -y` -- completes in <5 seconds
-- Install dependencies: `npm install` -- time varies by dependencies, typically 30-120 seconds. NEVER CANCEL.
+- Install dependencies: `npm install` -- time varies by dependencies and system performance, typically 1-10 minutes for modern projects. NEVER CANCEL. Set timeout to 15+ minutes if needed.
 - Start development server: `npm run dev` or `npm start` (after scripts are defined)
 - Build production: `npm run build` -- time varies by project size, typically 10-300 seconds. NEVER CANCEL. Set timeout to 10+ minutes.
 
