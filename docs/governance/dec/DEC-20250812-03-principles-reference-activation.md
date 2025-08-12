@@ -80,11 +80,11 @@ risks:
 non_removal_assertion:
   - Tidak ada strategi sebelumnya dihapus; seluruh langkah bersifat additive (lint activation + hash sealing).
 signoff:
-  governance_chair: "SIGNED <name>"
-  data_lead: "SIGNED <name>"
-  ethics_representative: "SIGNED <name>"
-  product_owner: "SIGNED <name>"
-hash_of_decision_document: "<PENDING_HASH>"
+  governance_chair: "SIGNED <Farid>"
+  data_lead: "SIGNED <Farid>"
+  ethics_representative: "SIGNED <Farid>"
+  product_owner: "SIGNED <Farid>"
+hash_of_decision_document: "a4e90575f4c26aa8b2497b93ad0eb03f90788d66e4f06836f1039cf3072efe9e"  # sealed SHA256
 integrity_manifest_pointer: "docs/integrity/spec-hash-manifest-v1.json#files[path=docs/governance/dec/DEC-20250812-03-principles-reference-activation.md]"
 supersede_policy: "Future refinements (thresholds / additional rules) require new DEC referencing this id."
 append_only_notice: "This DEC file is immutable; changes require a successor DEC."

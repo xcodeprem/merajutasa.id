@@ -293,6 +293,17 @@
       "next_change_requires_dec": true,
       "notes": "Root README fairness & governance narrative; perubahan substantif memerlukan DEC."
     }
+    ,
+    {
+      "path": "docs/governance/dec/DEC-20250812-04-governance-baseline-thresholds.md",
+      "version": "1.0.0",
+      "dec_ref": "SELF",
+      "hash_sha256": "<PENDING_HASH>",
+      "integrity_class": "decision",
+      "mutable_policy": "immutable",
+      "next_change_requires_dec": false,
+      "notes": "Ratifikasi consolidated baseline thresholds (multi-category PII, evidence hash display length, terminology trigger, revocation codes, truncation decimals, min aggregation)."
+    }
   ],
   "integrity_rules": {
     "immutable": "File content must never change; new adjustments require new file.",

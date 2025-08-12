@@ -11,7 +11,7 @@ spec_reference:
   - docs/roadmap/roadmap-master-v1.md
 related_principles: [GP1, GP5, GP6, GP9, GP10]
 impacted_components: [equity_snapshot_job, hysteresis_state_machine, equity_page, trust_page_methodology, hero_equity_card, analytics_events(sys_fairness_*), risk_dashboard]
-hash_of_decision_document: "<PENDING_HASH>"   # Will be inserted by spec-hash-manifest process
+hash_of_decision_document: "d85bc9f6b0aa150b768ece18c2c14923fb025e17b7fc71b59bfd5f78a692e6cc"   # sealed SHA256
 decision:
   option: F
   description: Hybrid hysteresis with severe immediate trigger and consecutive borderline confirmation, plus elevated exit threshold and cooldown.
@@ -75,10 +75,10 @@ review_plan:
   success_conditions: metrics meet targets (see evaluation_criteria)
   fallback: revert to dual-threshold (Option E) if churn >25% OR detection delay severe >0
 signoff:
-  governance_chair: "SIGNED <name>"
-  data_lead: "SIGNED <name>"
-  ethics_representative: "SIGNED <name>"
-  product_owner: "SIGNED <name>"
+  governance_chair: "SIGNED <Farid>"
+  data_lead: "SIGNED <Farid>"
+  ethics_representative: "SIGNED <Farid>"
+  product_owner: "SIGNED <Farid>"
 integrity_manifest_pointer: "docs/integrity/spec-hash-manifest-v1.json#files[id=DEC-20250812-02-hysteresis-adoption]"
 ---
 

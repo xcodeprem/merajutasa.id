@@ -1,0 +1,17 @@
+{
+  "name": "merajutasa-governance",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Governance & integrity tooling (hash sealing, lint, fairness) for merajutasa.id",
+  "license": "UNLICENSED",
+  "scripts": {
+    "governance:verify": "node tools/governance-verify.js",
+    "lint:md": "markdownlint-cli2 \"**/*.md\""
+  },
+  "devDependencies": {
+    "markdownlint": "^0.34.0",
+    "markdownlint-cli2": "^0.14.0",
+    "yaml": "^2.4.5",
+    "glob": "^10.3.10"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  // Explicit config so the extension tidak menginterpret package.json kosong sebagai config konten
+  "globs": ["**/*.md", "!node_modules"] ,
+  "config": {
+    "MD013": false,
+    "MD033": false
+  }
+}
