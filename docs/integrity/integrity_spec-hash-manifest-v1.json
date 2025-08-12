@@ -1,0 +1,238 @@
+{
+  "schema_version": "1.0",
+  "generation_timestamp_utc": "2025-08-12T05:29:55Z",
+  "generator_note": "Initial draft manifest (APPEND-ONLY). Hash values are placeholders until CI fills them. Do NOT remove prior entries; future changes create new objects with incremented version or delta_ref.",
+  "files": [
+    {
+      "path": "docs/roadmap/roadmap-master-v1.md",
+      "version": "1.0.0",
+      "dec_ref": null,
+      "hash_sha256": "<PENDING_HASH>",
+      "integrity_class": "roadmap",
+      "mutable_policy": "append-only",
+      "next_change_requires_dec": true,
+      "notes": "Baseline roadmap; future evolution via delta files."
+    },
+    {
+      "path": "docs/fairness/hysteresis-config-v1.yml",
+      "version": "1.0.0",
+      "dec_ref": "DEC-20250812-02",
+      "hash_sha256": "<PENDING_HASH>",
+      "integrity_class": "config",
+      "mutable_policy": "locked-by-config-hash",
+      "next_change_requires_dec": true,
+      "notes": "Parameters governed by hysteresis.params.lock policy."
+    },
+    {
+      "path": "docs/fairness/hysteresis-public-methodology-fragment-v1.md",
+      "version": "1.0.0",
+      "dec_ref": "DEC-20250812-02",
+      "hash_sha256": "<PENDING_HASH>",
+      "integrity_class": "public-methodology",
+      "mutable_policy": "delta-via-dec",
+      "next_change_requires_dec": true,
+      "notes": "Public fairness narrative fragment."
+    },
+    {
+      "path": "docs/fairness/hysteresis-state-machine-transitions.md",
+      "version": "1.0.0",
+      "dec_ref": "DEC-20250812-02",
+      "hash_sha256": "<PENDING_HASH>",
+      "integrity_class": "spec-detail",
+      "mutable_policy": "append-only",
+      "next_change_requires_dec": true,
+      "notes": "Concrete transitions; future param changes add new DEC reference."
+    },
+    {
+      "path": "docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md",
+      "version": "1.0.0",
+      "dec_ref": "SELF",
+      "hash_sha256": "<PENDING_HASH>",
+      "integrity_class": "decision",
+      "mutable_policy": "immutable",
+      "next_change_requires_dec": false,
+      "notes": "DEC file itself; superseded only by later DEC referencing this id."
+    },
+    {
+      "path": "docs/governance/README-decision-log-process.md",
+      "version": "1.0.0",
+      "dec_ref": null,
+      "hash_sha256": "<PENDING_HASH>",
+      "integrity_class": "process",
+      "mutable_policy": "append-only",
+      "next_change_requires_dec": true,
+      "notes": "Decision log process overview."
+    },
+    {
+      "path": "docs/governance/lint-principles-reference-spec-v1.md",
+      "version": "1.0.0",
+      "dec_ref": "DEC-20250812-03? (planned)",
+      "hash_sha256": "<PENDING_HASH>",
+      "integrity_class": "lint-spec",
+      "mutable_policy": "activation-pending",
+      "next_change_requires_dec": true,
+      "notes": "Will be marked adopted after DEC-20250812-03."
+    },
+    {
+      "path": "docs/governance/todo-post-DEC-20250812-02.md",
+      "version": "1.0.0",
+      "dec_ref": "DEC-20250812-02",
+      "hash_sha256": "<PENDING_HASH>",
+      "integrity_class": "action-list",
+      "mutable_policy": "snapshot-then-new-file",
+      "next_change_requires_dec": false,
+      "notes": "Will spawn follow-up file rather than edit when tasks close (preserve history)."
+    },
+    {
+      "path": "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
+      "version": "1.0.0",
+      "dec_ref": null,
+      "hash_sha256": "<PENDING_HASH>",
+      "integrity_class": "audit",
+      "mutable_policy": "immutable",
+      "next_change_requires_dec": false,
+      "notes": "Each audit capture is immutable; new capture => new file."
+    },
+    {
+      "path": ".github/pull_request_template.md",
+      "version": "1.0.0",
+      "dec_ref": "DEC-20250812-02 (context) + future DEC for Section 37 activation",
+      "hash_sha256": "<PENDING_HASH>",
+      "integrity_class": "workflow-template",
+      "mutable_policy": "append-only",
+      "next_change_requires_dec": true,
+      "notes": "Sections 26–37 with AUTO markers; modifications require DEC."
+    },
+    {
+      "path": "docs/master-spec-deltas/delta-master-spec-v2-DEC-20250812-02.md",
+      "version": "1.0.0",
+      "dec_ref": "DEC-20250812-02",
+      "hash_sha256": "<PENDING_HASH>",
+      "integrity_class": "delta",
+      "mutable_policy": "immutable",
+      "next_change_requires_dec": false,
+      "notes": "Delta file; new changes create additional delta files."
+    },
+    {
+      "path": "docs/principles/GP1-GP10-index.md",
+      "version": "1.0.0",
+      "dec_ref": null,
+      "hash_sha256": "<PENDING_HASH>",
+      "integrity_class": "principles-index",
+      "mutable_policy": "append-only",
+      "next_change_requires_dec": true,
+      "notes": "Index only; Master Spec remains source of truth."
+    },
+    {
+      "path": "docs/privacy/pii-pattern-library-v1.md",
+      "version": "1.0.0",
+      "dec_ref": null,
+      "hash_sha256": "<PENDING_HASH>",
+      "integrity_class": "privacy-spec",
+      "mutable_policy": "delta-via-dec",
+      "next_change_requires_dec": true,
+      "notes": "Pattern changes require DEC referencing performance metrics."
+    },
+    {
+      "path": "docs/analytics/dashboard-widgets-hysteresis-initial.md",
+      "version": "1.0.0",
+      "dec_ref": null,
+      "hash_sha256": "<PENDING_HASH>",
+      "integrity_class": "analytics-spec",
+      "mutable_policy": "append-only",
+      "next_change_requires_dec": false,
+      "notes": "Will get version bump after KPI adjustments (non-method)."
+    },
+    {
+      "path": "docs/tests/hysteresis-test-plan-v1.md",
+      "version": "1.0.0",
+      "dec_ref": "DEC-20250812-02",
+      "hash_sha256": "<PENDING_HASH>",
+      "integrity_class": "test-plan",
+      "mutable_policy": "append-only",
+      "next_change_requires_dec": false,
+      "notes": "Execution status appended; plan body not removed."
+    },
+    {
+      "path": "docs/faq/faq-fairness-hysteresis-update.md",
+      "version": "1.0.0",
+      "dec_ref": "DEC-20250812-02",
+      "hash_sha256": "<PENDING_HASH>",
+      "integrity_class": "faq",
+      "mutable_policy": "append-only",
+      "next_change_requires_dec": true,
+      "notes": "FAQ expansions can require DEC if altering meaning."
+    },
+    {
+      "path": "docs/status/progress-recap-latest-2025-08-12T035901Z.md",
+      "version": "1.0.0",
+      "dec_ref": null,
+      "hash_sha256": "<PENDING_HASH>",
+      "integrity_class": "status-recap",
+      "mutable_policy": "immutable",
+      "next_change_requires_dec": false,
+      "notes": "New recap => new file (timestamped)."
+    },
+    {
+      "path": "docs/governance/disclaimers-lint-spec-v1.md",
+      "version": "1.0.0",
+      "dec_ref": "DEC-PREEXISTING? (to confirm)",
+      "hash_sha256": "<PENDING_HASH>",
+      "integrity_class": "lint-spec",
+      "mutable_policy": "delta-via-dec",
+      "next_change_requires_dec": true,
+      "notes": "Add once canonical file committed; status now MISSING."
+    },
+    {
+      "path": "docs/integrity/credential-schema-final-v1.md",
+      "version": "1.0.0",
+      "dec_ref": "DEC-PREEXISTING? (to confirm)",
+      "hash_sha256": "<PENDING_HASH>",
+      "integrity_class": "schema",
+      "mutable_policy": "versioned",
+      "next_change_requires_dec": true,
+      "notes": "Placeholder manifest entry for canonical credential schema (commit required)."
+    },
+    {
+      "path": "docs/analytics/event-schema-canonical-v1.md",
+      "version": "1.0.0",
+      "dec_ref": "DEC-PREEXISTING? (to confirm)",
+      "hash_sha256": "<PENDING_HASH>",
+      "integrity_class": "schema",
+      "mutable_policy": "versioned",
+      "next_change_requires_dec": true,
+      "notes": "Placeholder manifest entry for canonical event schema."
+    },
+    {
+      "path": "docs/master-spec/master-spec-v2.0.md",
+      "version": "2.0.0",
+      "dec_ref": null,
+      "hash_sha256": "<PENDING_HASH>",
+      "integrity_class": "master-spec",
+      "mutable_policy": "delta-files",
+      "next_change_requires_dec": true,
+      "notes": "Master Spec baseline; changes only through delta files."
+    }
+  ],
+  "integrity_rules": {
+    "immutable": "File content must never change; new adjustments require new file.",
+    "append-only": "Only additive changes (new sections) allowed; no deletion of prior lines.",
+    "delta-via-dec": "Any semantic change requires DEC and possibly new delta file.",
+    "locked-by-config-hash": "Runtime enforcement via policy comparing config hash at build.",
+    "activation-pending": "Spec present but not enforced until DEC adoption.",
+    "versioned": "Semver increments required for structural changes.",
+    "delta-files": "Master file static; changes captured in delta files referencing DEC."
+  },
+  "ci_expectations": {
+    "hash_update_process": [
+      "Compute hash for each path",
+      "If '<PENDING_HASH>' and file exists -> replace with computed",
+      "If hash changed without DEC where next_change_requires_dec=true -> FAIL",
+      "Emit diff report artifact spec-hash-diff.json"
+    ],
+    "policy_links": {
+      "hysteresis.params.lock": "docs/fairness/hysteresis-config-v1.yml",
+      "principles.reference": "docs/governance/lint-principles-reference-spec-v1.md"
+    }
+  }
+}

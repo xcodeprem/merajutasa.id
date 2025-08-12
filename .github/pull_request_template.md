@@ -1,0 +1,341 @@
+# Pull Request Template – MerajutASA
+
+(Template ini disusun BERDASARKAN seluruh spesifikasi & keputusan yang sudah terdokumentasi: Master Spec v2.0, Credential Schema v1.0, Hysteresis Decision (DEC-20250812-02), Event Schema v1.0, Disclaimers Lint Spec v1.0, PII Pattern Library v1.0, Roadmap Master v1.0, Progress Recaps, dan semua prinsip GP1–GP10. Template INI TIDAK menggantikan dokumen manapun dan TIDAK menghapus strategi sebelumnya. Gunakan untuk memastikan setiap perubahan selaras dengan guardrail dan governance. Setiap bagian WAJIB dipertimbangkan; kosongkan hanya bila benar‑benar tidak relevan dan jelaskan mengapa.)
+
+> AUTOMATION & AGENT NOTES  
+>
+> - Bagian dengan marker `<!-- AUTO:... -->` diisi otomatis oleh pipeline (CI bot / governance agent).  
+> - Jangan hapus marker; jika konten manual berbeda dari hasil otomatis, CI akan FAIL.  
+> - File ini APPEND-ONLY untuk penambahan struktur. Perubahan format eksisting memerlukan DEC.  
+> - Script yang mengisi:  
+>   - spec hash diff: `tools/spec-hash-diff.js` → Section 26  
+>   - evidence bundle collector: `tools/evidence-bundle.js` → Section 27  
+>   - parameter integrity scan: `tools/param-integrity.js` → Section 28  
+>   - terminology adoption scanner: `tools/terminology-scan.js` → Section 29  
+>   - observability sampler: `tools/observability-metrics.js` → Section 30  
+>   - fairness churn/anomaly simulator: `tools/fairness-sim.js` → Section 31  
+>   - revocation impact checker: `tools/revocation-impact.js` → Section 32  
+>   - data minimization classifier: `tools/data-field-classifier.js` → Section 33  
+>   - hype lexicon lint: `tools/hype-lint.js` → Section 34  
+>   - audit replay validator: `tools/audit-replay.js` → Section 35  
+>   - final drift checklist aggregator: `tools/no-silent-drift.js` → Section 36  
+
+---
+
+## 1. RINGKASAN
+
+(Deskripsi singkat perubahan. Jelaskan apa yang ditambahkan / diubah / diperbaiki tanpa marketing hype.)
+
+- Tujuan utama:
+- Komponen utama yang terpengaruh:
+- Apakah ini mengikuti backlog / roadmap item? (Referensi ID atau daftar)
+- Apakah ini memerlukan DEC baru? (Ya/Tidak – jika Ya, isi Section 12)
+
+## 2. JENIS PERUBAHAN
+
+(Tandai minimal satu, boleh lebih)
+
+- [ ] Fitur baru (pengembangan sesuai roadmap)
+- [ ] Perubahan integritas (signer / chain / credential)
+- [ ] Perubahan fairness (equity snapshot / hysteresis / under‑served logic)
+- [ ] Instrumentation / Event schema update
+- [ ] Policy-as-code / Lint / Governance automation
+- [ ] Perbaikan bug
+- [ ] Dokumentasi saja
+- [ ] Performa / A11y
+- [ ] Keamanan / Privasi (PII)
+- [ ] Refactor internal (tanpa perubahan perilaku eksternal)
+- [ ] Lainnya (jelaskan):
+
+## 3. REFERENSI DOKUMEN / SPESIFIKASI
+
+(Cantumkan path relatif – jangan hapus referensi sebelumnya)
+
+- [ ] Master Spec v2.0 (bagian terkait: …)
+- [ ] Credential Schema v1.0 (docs/integrity/credential-schema-final-v1.md)
+- [ ] Hysteresis DEC (docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md)
+- [ ] Event Schema v1.0 (docs/analytics/event-schema-canonical-v1.md)
+- [ ] Disclaimers Lint Spec (docs/governance/disclaimers-lint-spec-v1.md)
+- [ ] PII Pattern Library (docs/privacy/pii-pattern-library-v1.md)
+- [ ] Roadmap Master (docs/roadmap/roadmap-master-v1.md)
+- [ ] Delta Master Spec terbaru (jika relevan): …
+- [ ] Lainnya (sebutkan):
+
+## 4. INTEGRITY IMPACT (CREDENTIAL / HASH CHAIN / SIGNATURE)
+
+- Apakah credential schema disentuh? (Ya/Tidak)
+  - Jika Ya: Perubahan bersifat optional field / required / breaking? (Butuh DEC?)
+- Apakah menambah / mengubah logic canonicalization atau hashing?
+- Apakah menambah chain event tipe baru (CREDENTIAL_ISSUED, UNDER_SERVED_ENTER, DEC_REFERENCE, dll)?
+- Test vector baru dibuat? (path)
+- Bukti verifikasi manual (ringkas):
+
+## 5. FAIRNESS / HYSTERESIS IMPACT
+
+- Menyentuh parameter hysteresis? (Jika Ya → harus sama dengan config atau sertakan alasan divergensi)
+  - Diff vs docs/fairness/hysteresis-config-v1.yml: (tempel atau “no diff”)
+- Mengubah sumber data equity snapshot / formula? (Jika Ya, jelaskan & potensi bias)
+- Mengubah logika entry_reason atau event sys_fairness_*?
+- Pengaruh ke churn / detection delay (estimasi):
+
+## 6. PRIVACY / PII & DATA MINIMIZATION
+
+- Menambah input text bebas baru? Apakah scanner PII diterapkan?
+- Kategori PII baru diperlukan? (Jika Ya → memerlukan DEC untuk pattern library patch)
+- Risiko false positive / negative yang diidentifikasi:
+- Apakah ada potensi data anak / identifier sensitif masuk? Jelaskan mitigasi.
+
+## 7. DISCLAIMER & COPY GUARDRAILS
+
+- Apakah menambah halaman baru yang memerlukan disclaimers (D1–D7)?
+- Lint disclaimers lulus lokal? (tempel ringkasan hasil)
+- Ada perubahan teks canonical disclaimers? (Jika Ya → DEC)
+- Banned phrase check (ranking/top dsb) lulus? (Ya/Tidak + bukti lint)
+
+## 8. POLICY-AS-CODE & LINT STATUS
+
+| Policy / Lint | Status | Catatan | Artifact Path |
+|---------------|--------|---------|---------------|
+| aggregation.min_cell_threshold |  |  |  |
+| disclaimers.presence |  |  |  |
+| credential.field.prohibited |  |  |  |
+| hysteresis.params.lock |  |  |  |
+| terminology.usage.threshold |  |  |  |
+| equity.delta.anomaly (observational) |  |  |  |
+| hype.language (jika aktif) |  |  |  |
+| PII pattern config load |  |  |  |
+
+## 9. EVENT SCHEMA & INSTRUMENTATION
+
+- Menambah event_name baru? (Daftar)
+- Mengubah meta schema existing event? (Butuh patch version)
+- Apakah event collector validation diperbarui?
+- Apakah sampling / pipeline_hash berubah?
+- Apakah integrity.event_hash reproduksi diuji (script output)?
+
+## 10. TEST & QUALITY
+
+- [ ] Unit tests (credential / signer / chain)
+- [ ] Unit tests (hysteresis transitions)
+- [ ] Integration tests (equity snapshot + state machine)
+- [ ] PII detection tests (kategori baru / existing)
+- [ ] Lint tests (disclaimers / terminology / hype)
+- [ ] Performance budget p75 LCP tidak naik >5% (evidence)
+- [ ] A11y scan (axe/pa11y) tanpa critical
+- [ ] Chain continuity tests (prevHash mismatch negative test)
+- [ ] Rehash verification script PASS
+- [ ] Manual verification (CLI) PASS
+Coverage (%): …
+
+## 11. RISK ASSESSMENT
+
+| Risk | Likelihood | Impact | Mitigasi | Residual |
+|------|------------|--------|----------|----------|
+|  |  |  |  |  |
+
+## 12. DECISIONS (BARU ATAU DI-UPDATE)
+
+- DEC yang diusulkan: (ID placeholder DEC-YYYYMMDD-XX)
+- Jenis (CIC-A/B/C/D/E):
+- Dokumen spesifikasi / patch dilampirkan? (path)
+- Hash file spesifikasi (sementara, isi setelah commit):
+- Ringkasan alasan & dampak:
+- Perubahan apa yang TIDAK dilakukan (menegaskan non-removal strategi):
+
+## 13. ROLLBACK PLAN
+
+1. …
+2. …
+3. …
+Chain events annotate? (Ya/Tidak)
+
+## 14. POST-MERGE ACTIONS
+
+| Action | Owner | Deadline | Status |
+|--------|-------|----------|--------|
+| Update DEC hash references |  |  |  |
+| Publish methodology fragment update |  |  |  |
+| Seed new config to staging/prod |  |  |  |
+| Run backfill script / reindex |  |  |  |
+| Dashboard panel update |  |  |  |
+| Add changelog excerpt entry (if H2+) |  |  |  |
+
+## 15. OBSERVABILITY CHECKLIST
+
+- Ingestion success (last 24h %):
+- Event lag p95 (ms):
+- Alerts needed / updated:
+
+## 16. SECURITY REVIEW (Jika Relevan)
+
+- Key material touched? (#keys-n):
+- New API surface:
+- Input validation evidence:
+- DOS/spam mitigation:
+
+## 17. PERFORMANCE & A11Y NOTES
+
+| Aspect | Result | Baseline | Evidence |
+|--------|--------|----------|----------|
+| p75 LCP delta |  |  |  |
+| Bundle size delta (KB) |  |  |  |
+| Accessibility new issues |  |  |  |
+| CPU / Memory regression |  |  |  |
+
+## 18. FAIRNESS & USER COMPREHENSION COPY
+
+- FAQ update? (path)
+- Disclaimers reposition? (lint evidence)
+- Micro-infographic needed? (Y/N)
+
+## 19. DATA SCHEMA / STORAGE MIGRATIONS
+
+| Table | Change | Backward-Compatible? | Migration Script Path |
+|-------|--------|----------------------|-----------------------|
+|  |  |  |  |
+Rollback strategy:
+
+## 20. CONFIG / PARAMETER DIFF
+
+Tempel diff (hysteresis-config-v1.yml / patterns.yml / performance budgets).
+Per parameter status (unchanged / changed / DEC):
+
+## 21. LOG/AUDIT ARTIFACTS
+
+- Chain events sample:
+- New event payload + event_hash:
+- Redacted feedback sample:
+
+## 22. TIDAK MENGHAPUS STRATEGI (CONFIRMATION)
+
+Saya menyatakan PR ini:
+
+- [ ] Tidak menghapus atau mengurangi prinsip GP1–GP10.
+- [ ] Tidak menghilangkan disclaimers wajib.
+- [ ] Tidak memperkenalkan ranking / skor kompetitif.
+- [ ] Tidak menambah PII anak.
+- [ ] Menjaga konsistensi narasi fairness & privacy.
+
+## 23. SCREENSHOTS / EVIDENCE
+
+(Opsional UI / logs)
+
+## 24. REVIU DIBUTUHKAN
+
+- [ ] Integrity (Signer / Chain)
+- [ ] Fairness / Data
+- [ ] Privacy / PII
+- [ ] Governance / Policy
+- [ ] Instrumentation / Analytics
+- [ ] UX / Content
+- [ ] Performance / A11y
+- [ ] Security
+
+## 25. CATATAN TAMBAHAN
+
+(Asumsi / constraint)
+
+---
+
+# EXTENSION (APPEND-ONLY) – AUTOMATED EVIDENCE & DRIFT GUARDS
+
+## 26. SPEC HASH INTEGRITY (NEW – DO NOT REMOVE)
+
+| Spec File | Old Hash | New Hash | Expected Version Bump | DEC Ref | Status |
+|-----------|----------|----------|-----------------------|---------|--------|
+<!-- AUTO:SPEC_HASH_ROWS -->
+Script Output: <!-- AUTO:SPEC_HASH_ARTIFACT -->
+
+## 27. EVIDENCE BUNDLE (NEW)
+
+Checklist (path file harus ada):
+
+- [ ] disclaimers-lint-report.json <!-- AUTO:EVIDENCE:DISCLAIMERS -->
+- [ ] event-schema-validation-report.json <!-- AUTO:EVIDENCE:EVENT_SCHEMA -->
+- [ ] pii-scan-test-summary.json <!-- AUTO:EVIDENCE:PII -->
+- [ ] hysteresis-transition-test-report.json <!-- AUTO:EVIDENCE:HYSTERESIS -->
+- [ ] chain-continuity-check.txt <!-- AUTO:EVIDENCE:CHAIN -->
+- [ ] credential-verify-cli-output.txt <!-- AUTO:EVIDENCE:VERIFY -->
+- [ ] performance-lcp-report.json <!-- AUTO:EVIDENCE:PERF -->
+- [ ] accessibility-scan-report.json <!-- AUTO:EVIDENCE:A11Y -->
+If any missing, justify:
+
+## 28. PARAMETER INTEGRITY MATRIX (NEW)
+
+| Domain | Parameter | Config Value | Code Detected | Match? | Action |
+|--------|-----------|--------------|---------------|--------|--------|
+<!-- AUTO:PARAM_MATRIX -->
+
+## 29. TERMINOLOGY ADOPTION IMPACT (NEW)
+
+- Token lama ditambah? …
+- Token baru ditambah? …
+- adoptionPercent Before → After: <!-- AUTO:TERM_ADOPTION_DIFF -->
+- Recalc script output: <!-- AUTO:TERM_ADOPTION_ARTIFACT -->
+- Regression? (Y/N) (If Y > threshold DEC required)
+
+## 30. SAMPLING & OBSERVABILITY (NEW)
+
+| Item | Old | New | DEC Required? | Notes |
+|------|-----|-----|---------------|-------|
+<!-- AUTO:OBS_SAMPLING -->
+Ingestion success 24h: <!-- AUTO:OBS_INGEST_PCT -->%  
+Event lag p95: <!-- AUTO:OBS_LAG_P95 --> ms  
+pipeline_hash diff: <!-- AUTO:PIPELINE_HASH_DIFF -->
+
+## 31. FAIRNESS ANOMALY & CHURN SIMULATION (NEW)
+
+- Simulation dataset: <!-- AUTO:FAIR_SIM_DATA -->
+- Projected churn: <!-- AUTO:FAIR_SIM_CHURN -->
+- Borderline detection delay avg: <!-- AUTO:FAIR_SIM_DELAY -->
+- Adjustment suggested: <!-- AUTO:FAIR_SIM_ADJ -->
+
+## 32. REVOCATION LIFECYCLE CONSIDERATION (NEW)
+
+- UI/endpoint change: …
+- Reason code addition: …
+- Confirm no ranking semantics added: [ ]
+
+## 33. DATA MINIMIZATION & FIELD CLASSIFICATION (NEW)
+
+| Field | Level (L0–L4) | Sensitive? | Justification | Alt Considered |
+|-------|---------------|------------|--------------|----------------|
+<!-- AUTO:DATA_FIELDS -->
+
+## 34. EXTERNAL NARRATIVE & ANTI-HYPE AUDIT (NEW)
+
+Hype lint hits: <!-- AUTO:HYPE_HITS -->  
+Banned phrase scan: <!-- AUTO:HYPE_BANNED_STATUS -->  
+Overrides w/ DEC: <!-- AUTO:HYPE_OVERRIDES -->
+
+## 35. AUDIT REPLAY CAPABILITY (NEW)
+
+- Chain replay: <!-- AUTO:AUDIT_REPLAY -->
+- Under-served timeline reconstruction: <!-- AUTO:AUDIT_TIMELINE -->
+- Event→State mismatch count: <!-- AUTO:AUDIT_MISMATCH -->
+
+## 36. “NO SILENT DRIFT” FINAL CHECKLIST (NEW)
+
+- [ ] Semua spec hash perubahan ada DEC <!-- AUTO:NO_DRIFT_SPEC -->
+- [ ] Tidak ada parameter mismatch hysteresis / PII / policy <!-- AUTO:NO_DRIFT_PARAMS -->
+- [ ] Tidak ada field credential baru tanpa schema patch <!-- AUTO:NO_DRIFT_SCHEMA -->
+- [ ] Semua event schema mod punya version bump rationale <!-- AUTO:NO_DRIFT_EVENT -->
+- [ ] Tidak ada disclaimers hilang / drift <!-- AUTO:NO_DRIFT_DISC -->
+- [ ] Tidak ada ranking-like terminology <!-- AUTO:NO_DRIFT_RANK -->
+- [ ] PII patterns baru diuji FP rate & terdokumentasi <!-- AUTO:NO_DRIFT_PII -->
+
+---
+
+### QUICK SELF CHECK BEFORE SUBMIT (RESTATE)
+
+- Sudah jalankan semua lint (Y/N)
+- Semua test PASS (Y/N)
+- Rehash & signature verify PASS (Y/N)
+- Parameter fairness & PII sesuai config (Y/N)
+- Tidak ada drift disclaimers (Y/N)
+
+Jika N pada salah satu → tangguhkan merge sampai resolved atau DEC.
+
+---
+
+Terima kasih telah menjaga integritas, fairness, privasi, dan konsistensi narasi. Template ini hanya boleh diperluas (APPEND) melalui proses governance (DEC). Jangan hapus bagian apapun—tambahkan bila diperlukan ekstensi baru.
