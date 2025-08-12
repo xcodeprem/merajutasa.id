@@ -1,3 +1,235 @@
-# merajutasa.id
+# Fairness & Integrity Governance Scaffold (Baseline PRE-SEAL)
 
-Master Spec v2.0, Credential Schema v1.0, Hysteresis Decision (DEC-20250812-02), Event Schema v1.0, Disclaimers Lint Spec v1.0, PII Pattern Library v1.0, Roadmap Master v1.0, Progress Recaps, dan semua prinsip GP1–GP10
+STATUS: PRE-HASH SEAL (Hash baseline belum diisi – proses “seal-first” akan menulis hash real & mengunci konten canonical).  
+Non-Removal Assertion: README ini akan dikelola append-only; perubahan substansial (narasi fairness, klaim integritas, prinsip) memerlukan DEC baru.
+
+---
+
+## 1. Tujuan Proyek
+Menyediakan kerangka (scaffold) governance, fairness, dan integrity untuk sistem penandaan “under‑served” berbasis hysteresis (Option F) yang:
+1. Stabil (menghindari volatilitas metrik lewat hysteresis thresholds).
+2. Transparan (narasi publik + methodology fragment).
+3. Terverifikasi (hash manifest + decision log).
+4. Minim trust theater (claim = dapat dipetakan ke bukti / artifact).
+
+---
+
+## 2. Keputusan Formal (DEC Chain)
+| DEC ID | Judul | Fungsi | Status |
+|--------|-------|--------|--------|
+| DEC-20250812-02 | Hysteresis Adoption Option F | Mengunci parameter fairness (T_enter_major=0.50, T_enter_standard=0.60, consecutive_required_standard=2, T_exit=0.65, cooldown=1 snapshot, stalled window 5 (0.55–<0.65), anomaly delta 0.03) | Adopted |
+| DEC-20250812-03 | Principles Reference Activation | Mengaktifkan lint principles.reference (Phase 0 WARN → +48h Phase 1 ERROR → +7d Phase 2 DENY) | Adopted |
+| (Planned) DISC-DEC | Disclaimers Activation | Mengaktifkan presence rules disclaimers (D1–D7) | Draft Pending |
+| (Planned) ANOM-DEC | Anomaly Equity Delta Policy | Mengunci perubahan anomaly_delta_threshold_equity_ratio | Draft Pending |
+| (Planned) REVOC-DEC | Credential Revocation Placeholder | Siklus hidup credential & future revocation state | Planned |
+| (Planned) TERM-DEC | Terminology Stage Escalation | Mengangkat adopsi terminologi baru ke Stage 2 | Planned |
+
+Catatan: Hash masing-masing DEC akan dimasukkan ke field hash_of_decision_document setelah seal.
+
+---
+
+## 3. Ringkasan Fairness Hysteresis (Option F Final)
+Parameter final (tersinkron di 3 tempat: DEC-20250812-02, hysteresis-config-v1.yml, methodology fragment):
+- Severe Enter: equity_ratio < 0.50 (1 snapshot)
+- Borderline Enter: equity_ratio < 0.60 pada 2 snapshot berturut-turut
+- Exit: equity_ratio ≥ 0.65
+- Cooldown: 1 snapshot setelah exit sebelum label bisa aktif kembali
+- Stalled (internal only): 5 snapshot berturut equity_ratio antara 0.55 dan <0.65 (monitoring)
+- Anomaly Delta: Perubahan mendadak ≥ 0.03 equity_ratio memicu flag analitik (bukan label publik)
+
+Tujuan: Mengurangi noise / flapping label “under-served” tanpa mengubah sifat non‑ranking.
+
+---
+
+## 4. Prinsip (GP1–GP10) (Ringkas)
+| Kode | Fokus (Ringkas) |
+|------|-----------------|
+| GP1 | Privasi & Minimasi Data |
+| GP2 | Transparansi Metodologi |
+| GP3 | Keadilan & Non-Diskriminasi |
+| GP4 | Akuntabilitas & Auditability |
+| GP5 | Robustness & Resilience |
+| GP6 | Anti Misuse / Anti-Hype (Non-Ranking) |
+| GP7 | Governed Evolution (Controlled Change) |
+| GP8 | Security & Integrity Chain |
+| GP9 | Fairness Signal Stability (Hysteresis) |
+| GP10 | Data & Event Schema Consistency |
+
+Lint principles.reference memaksa penjelasan dampak (Section 37 PR template).
+
+---
+
+## 5. Disclaimers (D1–D7) (Draft Canonical)
+| ID | Tema | Tujuan |
+|----|------|--------|
+| D1 | Non-Ranking | Menegaskan sistem bukan ranking kompetitif |
+| D2 | Keterbatasan Data | Menyatakan potensi keterbatasan & sampling |
+| D3 | Interpretasi Terbatas | Mencegah over-claim atas label |
+| D4 | Frekuensi Snapshot | Menjelaskan jeda update |
+| D5 | Sinyal Bukan Nilai Mutlak | Menegaskan label indikatif |
+| D6 | Evolusi Metodologi | Notifikasi potensi perubahan via DEC |
+| D7 | Privasi & Agregasi | Menjelaskan agregasi & minimasi identitas |
+
+Aktivasi enforcement menunggu DEC khusus (DISC-DEC).
+
+---
+
+## 6. Integritas & Hash Chain
+File canonical tercantum di: docs/integrity/spec-hash-manifest-v1.json  
+Status sekarang: <PENDING_HASH> placeholders menunggu mode seal-first.  
+Pasca seal:
+1. Semua hash_sha256 di manifest terisi.
+2. Field hash_of_decision_document di tiap DEC cocok 1:1 dengan manifest.
+3. Perubahan file kunci (next_change_requires_dec=true) tanpa DEC → build FAIL (HASH_MISMATCH_DEC_REQUIRED).
+4. Tidak ada placeholder tersisa (PLACEHOLDER_AFTER_SEAL = FAIL).
+
+---
+
+## 7. Struktur Dokumen Penting
+| Domain | File Utama | Peran |
+|--------|------------|-------|
+| Fairness Config | docs/fairness/hysteresis-config-v1.yml | Parameter runtime |
+| Narrative Publik | docs/fairness/hysteresis-public-methodology-fragment-v1.md | Penjelasan mekanisme & disclaimers |
+| State Machine | docs/fairness/hysteresis-state-machine-transitions.md | Transisi label |
+| Test Plan | docs/tests/hysteresis-test-plan-v1.md | Kasus T01–T10 |
+| DEC Hysteresis | docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md | Sumber adopsi final |
+| DEC Principles | docs/governance/dec/DEC-20250812-03-principles-reference-activation.md | Enforcement fase |
+| Disclaimers Spec | docs/governance/disclaimers-lint-spec-v1.md | Canonical disclaimers & rule codes |
+| Manifest | docs/integrity/spec-hash-manifest-v1.json | Anchor hash integritas |
+| Credential Schema | docs/integrity/credential-schema-final-v1.md | Struktur credential |
+| Event Schema | docs/analytics/event-schema-canonical-v1.md | Event fairness & envelope |
+| Archive Options | docs/archive/fairness_equity-hysteresis-options-v1.md | Opsi A–F historis |
+| Archive UX | docs/archive/ux_public-multipage-experience-master-spec-v2.md | Spesifikasi multipage historical |
+| Trace Index | docs/governance/trace/archive-trace-index-v1.md | Peta archive → canonical |
+| PR Template | .github/pull_request_template.md | 37 section governance gating |
+
+---
+
+## 8. Archive & Non-Removal Policy
+- Arsip (fairness_equity-hysteresis-options-v1.md, ux_public-multipage-experience-master-spec-v2.md) bersifat immutable.
+- Trace index mendokumentasikan mapping parameter & narasi.
+- Setiap klarifikasi baru → file baru (append), bukan edit destructive.
+- Prinsip: “Tidak menghapus jejak rencana & keputusan.”
+
+---
+
+## 9. Kontribusi & PR Guard
+Langkah PR wajib (sekilas):
+1. Isi semua section PR template (jangan hapus nomor).
+2. Section 37: sebutkan prinsip terdampak & mitigasi.
+3. Jangan ubah angka parameter fairness tanpa DEC (akan ditolak).
+4. Hindari istilah terlarang (lihat Anti‑Hype).
+
+Anti‑Hype (Contoh Kata Dilarang – akan lint):
+- “ranking”, “peringkat”, “top”, “terbaik”, “no.1”, “paling unggul”, “skor kompetitif”
+Gunakan framing “indikator stabil fairness” bukan “peringkat”.
+
+---
+
+## 10. Evidence Bundle (Target Pasca Seal)
+Artifact (awal sebagian):
+| Artifact | File (rencana) | Status |
+|----------|----------------|--------|
+| spec-hash-diff report | artifacts/spec-hash-diff.json | Pending seal |
+| param-integrity matrix | artifacts/param-integrity-matrix.json | Pending |
+| principles impact report | artifacts/principles-impact-report.json | Stub |
+| disclaimers lint report | artifacts/disclaimers-lint-report.json | Pending DEC |
+| hype lint report | artifacts/hype-lint-report.json | Pending |
+| pii scan summary | artifacts/pii-scan-test-summary.json | Pending |
+| fairness sim report | artifacts/fairness-sim-report.json | Pending |
+| observability metrics | artifacts/observability-metrics.json | Pending |
+| no-silent-drift report | artifacts/no-silent-drift-report.json | Stub |
+| audit replay | artifacts/audit-replay.json | Stub |
+
+Completeness threshold (Phase 2) akan ditentukan.
+
+---
+
+## 11. Roadmap Milestone (Ringkas)
+| Horizon | Sasaran Inti |
+|---------|--------------|
+| 7 hari | Hash seal, minimal test T01–T05, param-integrity real, bukti awal |
+| 30 hari | Disclaimers activation DEC, anomaly DEC, observability non-null, changelog entry |
+| 60 hari | Phase 2 readiness, terminologi baseline, revocation placeholder DEC |
+| 90 hari | Full evidence gating tiap PR, credential signing demo, matured changelog (≥5 entri) |
+
+Detail lengkap: docs/roadmap/roadmap-master-v1.md
+
+---
+
+## 12. Checklist Seal (Ringkas)
+[ ] Manifest final (README entry aktif)  
+[ ] Archive banner sudah ada  
+[ ] Jalankan seal-first (tools/spec-hash-diff.js)  
+[ ] Isi hash_of_decision_document DEC otomatis  
+[ ] Verify mode 0 violations  
+[ ] Audit snapshot posthash dibuat  
+[ ] Changelog pertama diperbarui  
+[ ] Simulasi drift memicu FAIL  
+
+---
+
+## 13. Larangan Klaim Ranking
+Sistem TIDAK:
+- Mengurutkan entitas secara kompetitif.
+- Memberi skor performa numerik per entitas untuk publik.
+- Mengklaim “terbaik”, “top”, “juara”.
+
+Jika butuh membandingkan, gunakan bahasa: “indikator fairness stabil untuk mendeteksi under‑served” bukan “peringkat”.
+
+---
+
+## 14. Permintaan Perubahan (Decision Pack Format)
+Ajukan perubahan signifikan dengan struktur:
+1. Context
+2. Opsi (2–3) + pro/kontra
+3. Rekomendasi
+4. Dampak jika salah pilih
+5. Deadline
+↳ Judul: [DEC-PROPOSAL] <topik>  
+↳ Balasan keputusan singkat (“Adopsi Opsi B”) memicu file DEC baru.
+
+---
+
+## 15. Pertanyaan Terbuka (Ringkas)
+Lihat: (planned) docs/governance/open-questions-v1.md (belum dibuat).  
+Daftar gating (sementara):
+- Aktivasi disclaimers
+- Anomaly DEC
+- Parameter drift escalation policy
+- Evidence completeness threshold
+- Terminology adoption threshold
+- Revocation model baseline
+
+---
+
+## 16. Status Hash (Dinamis)
+- Mode Saat Ini: PRE-SEAL
+- Commit Baseline Hash (nanti): <TO_BE_FILLED_POST_SEAL_COMMIT_HASH>
+- Tag (opsional): hash-seal-baseline-v1
+
+---
+
+## 17. Lisensi & Privasi (Placeholder)
+- Lisensi: (Tentukan – MIT / Apache-2.0 / Internal Only)  
+- Catatan Privasi: Tidak menampung PII mentah dalam repo; regex PII hanya contoh pattern; data nyata dikelola secara eksternal.
+
+---
+
+## 18. Kontak / Escalation
+- Governance Owner: (Isi)
+- Integrity Maintainer: (Isi)
+- Untuk proposal DEC baru: buat issue “[DEC-PROPOSAL] <judul>”
+- Insiden integritas (hash mismatch): label issue “integrity-incident” PRIORITY:HIGH
+
+---
+
+## 19. Non-Removal Assertion
+Tidak ada penghapusan retrospektif dokumen historis (archive) – hanya append trace / DEC baru. Pelanggaran = investigasi integritas.
+
+---
+
+## 20. Ringkas Eksekutif
+Struktur keputusan & parameter fairness sudah solid; tinggal hash seal + evidence gating agar klaim bisa diverifikasi secara kriptografis sebelum enforcement meningkat.
+
+(EOF)

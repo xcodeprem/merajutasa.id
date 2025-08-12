@@ -1,3 +1,27 @@
+<!-- ARCHIVE STATUS: HISTORICAL UX MULTIPAGE SPEC
+	ORIGIN: Konsolidasi preferensi Anda atas public_landing_dummy_preview dan variasi sebelumnya.
+	CURRENT CANONICAL SOURCES: master-spec-v2.0.md (§30, §35, §49), methodology fragment, disclaimers-lint-spec-v1.md, dashboard-widgets-hysteresis-initial.md
+	IMMUTABILITY: Jangan edit file ini. Evolusi baru → file baru (misal ux_public-multipage-experience-master-spec-v3.md) atau delta terpisah.
+	NON-REMOVAL ASSERTION: Teks asli dipertahankan.
+-->
+( SELURUH ISI HISTORIS ASLI TETAP DI SINI TANPA PERUBAHAN )
+
+<!-- ARCHIVE STATUS: HISTORICAL UX MULTIPAGE SPEC
+	ORIGIN: Konsolidasi preferensi Anda atas public_landing_dummy_preview dan variasi sebelumnya.
+	CURRENT CANONICAL SOURCES: master-spec-v2.0.md (§30, §35, §49), methodology fragment, disclaimers-lint-spec-v1.md, dashboard-widgets-hysteresis-initial.md
+	IMMUTABILITY: Jangan edit file ini. Evolusi baru → file baru (misal ux_public-multipage-experience-master-spec-v3.md) atau delta terpisah.
+	NON-REMOVAL ASSERTION: Teks asli dipertahankan.
+-->
+( SELURUH ISI HISTORIS ASLI TETAP DI SINI TANPA PERUBAHAN )
+
+<!-- ARCHIVE STATUS: HISTORICAL UX MULTIPAGE SPEC
+	ORIGIN: Konsolidasi preferensi Anda atas public_landing_dummy_preview dan variasi sebelumnya.
+	CURRENT CANONICAL SOURCES: master-spec-v2.0.md (§30, §35, §49), methodology fragment, disclaimers-lint-spec-v1.md, dashboard-widgets-hysteresis-initial.md
+	IMMUTABILITY: Jangan edit file ini. Evolusi baru → file baru (misal ux_public-multipage-experience-master-spec-v3.md) atau delta terpisah.
+	NON-REMOVAL ASSERTION: Teks asli dipertahankan.
+-->
+( SELURUH ISI HISTORIS ASLI TETAP DI SINI TANPA PERUBAHAN )
+
 # MerajutASA — Public Multi‑Page Experience Master Specification (v2.0 “Hero Constellation”)  
 Status: Draft for Core Alignment → Then Governance Notation (Decision Log Entry Pending)  
 Owner: Product • UX • Governance • Data • Ethics  

@@ -338,4 +338,84 @@ Jika N pada salah satu → tangguhkan merge sampai resolved atau DEC.
 
 ---
 
-Terima kasih telah menjaga integritas, fairness, privasi, dan konsistensi narasi. Template ini hanya boleh diperluas (APPEND) melalui proses governance (DEC). Jangan hapus bagian apapun—tambahkan bila diperlukan ekstensi baru.
+## 37. PRINCIPLES IMPACT MATRIX (AUTO + MANUAL)
+
+Penjelasan:
+- Baris di bawah akan dihasilkan otomatis oleh tools/principles-impact.js.
+- Anda (author) WAJIB memverifikasi kolom Declared & Mitigation jika heuristic menandai (Inferred=TRUE).
+- Jangan menulis manual di antara marker; tambahkan klarifikasi di bawah marker “SUMMARY” atau di Section 25 / 22 bila perlu.
+
+| Principle | Inferred (Heuristic) | Declared (Author) | Alignment | Mitigation / Notes |
+|-----------|----------------------|-------------------|----------|--------------------|
+<!-- AUTO:PRINCIPLES_MATRIX_ROWS -->
+
+Summary / Additional Manual Notes:
+<!-- AUTO:PRINCIPLES_MATRIX_SUMMARY -->
+
+If any Alignment = DIVERGE → Jelaskan mitigasi jelas (policy link / lint / DEC plan) sebelum merge.
+
+---
+
+### APPENDIX A: AUTOMATION LEGEND (REFERENCE – DO NOT MODIFY ABOVE)
+
+| Marker | Source Script | Output Type | Phase Available | Failure Condition |
+|--------|---------------|------------|-----------------|------------------|
+| AUTO:SPEC_HASH_ROWS | spec-hash-diff.js | Table rows (file hash diff) | Post-seal | Hash changed tanpa DEC |
+| AUTO:SPEC_HASH_ARTIFACT | spec-hash-diff.js | JSON artifact name | Post-seal | Missing artifact |
+| AUTO:EVIDENCE:* | evidence-bundle.js | Checklist ticks | Phase 1+ | Missing critical artifact |
+| AUTO:PARAM_MATRIX | param-integrity.js | Table rows (parameter comparisons) | Phase 1 | Mismatch w/out DEC |
+| AUTO:TERM_ADOPTION_DIFF | terminology-scan.js | Percentage delta | Phase 1 | Adoption regression |
+| AUTO:TERM_ADOPTION_ARTIFACT | terminology-scan.js | JSON path | Phase 1 | Missing artifact |
+| AUTO:OBS_SAMPLING / OBS_INGEST_PCT / OBS_LAG_P95 | observability-metrics.js | Metrics numeric | Phase 1 | Null / sentinel -1 |
+| AUTO:FAIR_SIM_* | fairness-sim.js | Simulation metrics | Phase 1 | Churn spike > threshold |
+| AUTO:DATA_FIELDS | data-field-classifier.js | Table classification | Phase 1 | Unjustified sensitive field |
+| AUTO:HYPE_* | hype-lint.js | Count / status | Phase 1 | Banned terms present |
+| AUTO:AUDIT_* | audit-replay.js | Replay summary | Phase 2 | Mismatch chain/state |
+| AUTO:NO_DRIFT_* | no-silent-drift.js | Checklist results | Phase 2 | Any drift flag |
+| AUTO:PRINCIPLES_MATRIX_ROWS | principles-impact.js | Principle rows | Phase 0 | Undeclared impacted principle |
+| AUTO:PRINCIPLES_MATRIX_SUMMARY | principles-impact.js | Summary text | Phase 0 | Summary empty while rows flagged |
+
+Legend Status (Policy/Lint):
+- PASS = Compliant & artifact produced
+- WARN = Non-blocking issue (Phase 0 / early Phase 1)
+- FAIL = Block merge (policy gating)
+- N/A = Tidak relevan PR ini
+- TBD = Belum dihitung (jelaskan pada Section 25)
+
+Alignment (Principles):
+- MATCH = Declared set principle(s) sama dengan heuristik
+- DIVERGE = Heuristik mendeteksi tambahan / mismatch (butuh mitigasi)
+
+---
+
+### APPENDIX B: POLICY CODE REFERENCE (PLACEHOLDER)
+
+| Policy Code | Domain | Active Phase | DEC Required on Change | Notes |
+|-------------|--------|-------------|------------------------|-------|
+| hysteresis.params.lock | Fairness | Phase 0 | Yes | Parameter fairness Option F |
+| principles.reference | Governance | Phase 0 (WARN) | Yes | Escalates 48h→ERROR |
+| disclaimers.presence | Narrative | (Planned) | Yes | Menunggu DISC-DEC |
+| equity.delta.anomaly | Analytics | (Planned) | Yes | Lock anomaly delta (0.03) |
+| credential.field.prohibited | Schema | (Planned) | Yes | Disallow risky mutable fields |
+| aggregation.min_cell_threshold | Privacy | (Planned) | Yes | Prevent small group leakage |
+| terminology.usage.threshold | Adoption | (Planned) | No (DEC escalate) | Track new term adoption |
+| hype.language | Narrative | (Planned) | No (config) | Banned lexicon gating |
+| pii.patterns.lock | Privacy | (Planned) | Yes | Append vs modify distinction |
+| evidence.completeness | Governance | (Phase 2) | Yes | Merge block if below threshold |
+
+(Baris baru hanya ditambahkan, tidak mengganti.)
+
+---
+
+### APPENDIX C: POST-SEAL PLACEHOLDER JUSTIFICATION (FILL IF ANY AUTO SECTION EMPTY)
+
+Jika setelah Phase 1 dimulai ada marker AUTO masih kosong:
+- Sebutkan marker:
+- Alasan belum terisi:
+- ETA implementasi:
+- Apakah mitigasi sementara ada? (Y/N)
+
+---
+
+### EOF TEMPLATE SENTINEL
+<!-- DO NOT REMOVE: EOF_PR_TEMPLATE_V1_SENTINEL -->

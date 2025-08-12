@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "generation_timestamp_utc": "2025-08-12T07:30:00Z",
-  "generator_note": "Updated manifest to append onboarding agent bootstrap entry. No prior entries removed; hashes remain placeholders until CI fills them.",
+  "generation_timestamp_utc": "2025-08-12T07:58:00Z",
+  "generator_note": "Refined manifest: added onboarding & (optional) README, fixed dec_ref placeholders, standardized mutable_policy for adopted lint spec. All existing entries preserved; only additive or metadata corrections before first hash seal.",
   "files": [
     {
       "path": "docs/roadmap/roadmap-master-v1.md",
@@ -79,9 +79,9 @@
       "dec_ref": "DEC-20250812-03",
       "hash_sha256": "<PENDING_HASH>",
       "integrity_class": "lint-spec",
-      "mutable_policy": "activation-pending→append-only",
+      "mutable_policy": "append-only",
       "next_change_requires_dec": true,
-      "notes": "Now adopted; further rule relaxations require new DEC."
+      "notes": "Adopted rules; modifications require DEC."
     },
     {
       "path": "docs/governance/todo-post-DEC-20250812-02.md",
@@ -91,7 +91,7 @@
       "integrity_class": "action-list",
       "mutable_policy": "snapshot-then-new-file",
       "next_change_requires_dec": false,
-      "notes": "Will spawn follow-up file rather than edit when tasks close (preserve history)."
+      "notes": "Will spawn follow-up file rather than edit when tasks close."
     },
     {
       "path": "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
@@ -151,7 +151,7 @@
       "integrity_class": "analytics-spec",
       "mutable_policy": "append-only",
       "next_change_requires_dec": false,
-      "notes": "Will get version bump after KPI adjustments (non-method)."
+      "notes": "Widget baseline; KPI shifts may add new version."
     },
     {
       "path": "docs/tests/hysteresis-test-plan-v1.md",
@@ -161,7 +161,7 @@
       "integrity_class": "test-plan",
       "mutable_policy": "append-only",
       "next_change_requires_dec": false,
-      "notes": "Execution status appended; plan body not removed."
+      "notes": "Execution status appended; plan body preserved."
     },
     {
       "path": "docs/faq/faq-fairness-hysteresis-update.md",
@@ -171,7 +171,7 @@
       "integrity_class": "faq",
       "mutable_policy": "append-only",
       "next_change_requires_dec": true,
-      "notes": "FAQ expansions can require DEC if altering meaning."
+      "notes": "FAQ expansions that alter meaning require DEC."
     },
     {
       "path": "docs/status/progress-recap-latest-2025-08-12T035901Z.md",
@@ -186,32 +186,32 @@
     {
       "path": "docs/governance/disclaimers-lint-spec-v1.md",
       "version": "1.0.0",
-      "dec_ref": "DEC-PREEXISTING? (to confirm)",
+      "dec_ref": null,
       "hash_sha256": "<PENDING_HASH>",
       "integrity_class": "lint-spec",
       "mutable_policy": "delta-via-dec",
       "next_change_requires_dec": true,
-      "notes": "Add once canonical file committed; status now MISSING."
+      "notes": "Canonical disclaimers lint spec (awaiting activation DEC)."
     },
     {
       "path": "docs/integrity/credential-schema-final-v1.md",
       "version": "1.0.0",
-      "dec_ref": "DEC-PREEXISTING? (to confirm)",
+      "dec_ref": null,
       "hash_sha256": "<PENDING_HASH>",
       "integrity_class": "schema",
       "mutable_policy": "versioned",
       "next_change_requires_dec": true,
-      "notes": "Placeholder manifest entry for canonical credential schema (commit required)."
+      "notes": "Canonical credential schema baseline v1."
     },
     {
       "path": "docs/analytics/event-schema-canonical-v1.md",
       "version": "1.0.0",
-      "dec_ref": "DEC-PREEXISTING? (to confirm)",
+      "dec_ref": null,
       "hash_sha256": "<PENDING_HASH>",
       "integrity_class": "schema",
       "mutable_policy": "versioned",
       "next_change_requires_dec": true,
-      "notes": "Placeholder manifest entry for canonical event schema."
+      "notes": "Canonical event schema baseline v1."
     },
     {
       "path": "docs/master-spec/master-spec-v2.0.md",
@@ -244,6 +244,36 @@
       "notes": "Updated to reference activation DEC."
     },
     {
+      "path": "docs/archive/fairness_equity-hysteresis-options-v1.md",
+      "version": "1.0.0",
+      "dec_ref": "DEC-20250812-02",
+      "hash_sha256": "<PENDING_HASH>",
+      "integrity_class": "archive-spec",
+      "mutable_policy": "immutable",
+      "next_change_requires_dec": false,
+      "notes": "Historical hysteresis option exploration (A–F)."
+    },
+    {
+      "path": "docs/archive/ux_public-multipage-experience-master-spec-v2.md",
+      "version": "1.0.0",
+      "dec_ref": null,
+      "hash_sha256": "<PENDING_HASH>",
+      "integrity_class": "archive-ux-spec",
+      "mutable_policy": "immutable",
+      "next_change_requires_dec": false,
+      "notes": "Historical UX multipage composite spec."
+    },
+    {
+      "path": "docs/governance/trace/archive-trace-index-v1.md",
+      "version": "1.0.0",
+      "dec_ref": null,
+      "hash_sha256": "<PENDING_HASH>",
+      "integrity_class": "trace-index",
+      "mutable_policy": "append-only",
+      "next_change_requires_dec": true,
+      "notes": "Maps archived exploratory documents to canonical active specs."
+    },
+    {
       "path": "docs/onboarding/agent-bootstrap-manifest.md",
       "version": "1.0.0",
       "dec_ref": null,
@@ -251,7 +281,17 @@
       "integrity_class": "onboarding-spec",
       "mutable_policy": "append-only",
       "next_change_requires_dec": false,
-      "notes": "Bootstrap manifest for new agents; additive only."
+      "notes": "Bootstrap for new agents; additive evolution only."
+    },
+    {
+      "path": "README.md",
+      "version": "1.0.0",
+      "dec_ref": null,
+      "hash_sha256": "<PENDING_HASH>",
+      "integrity_class": "repository-readme",
+      "mutable_policy": "append-only",
+      "next_change_requires_dec": true,
+      "notes": "Root README fairness & governance narrative; perubahan substantif memerlukan DEC."
     }
   ],
   "integrity_rules": {

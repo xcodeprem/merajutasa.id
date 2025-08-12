@@ -1,3 +1,27 @@
+<!-- ARCHIVE STATUS: SUPERSEDED (Historical Hysteresis Option Pack)
+   PURPOSE: Menyimpan semua opsi A–F sebelum adopsi Option F.
+   ADOPTED OPTION: F (DEC-20250812-02)
+   IMMUTABILITY: File ini tidak boleh diedit; setiap klarifikasi baru → buat file trace/delta terpisah.
+   NON-REMOVAL ASSERTION: Teks asli di bawah ini dipertahankan utuh.
+-->
+( SELURUH ISI HISTORIS ASLI TETAP DI SINI TANPA PERUBAHAN )
+
+<!-- ARCHIVE STATUS: SUPERSEDED (Historical Hysteresis Option Pack)
+   PURPOSE: Menyimpan semua opsi A–F sebelum adopsi Option F.
+   ADOPTED OPTION: F (DEC-20250812-02)
+   IMMUTABILITY: File ini tidak boleh diedit; setiap klarifikasi baru → buat file trace/delta terpisah.
+   NON-REMOVAL ASSERTION: Teks asli di bawah ini dipertahankan utuh.
+-->
+( SELURUH ISI HISTORIS ASLI TETAP DI SINI TANPA PERUBAHAN )
+
+<!-- ARCHIVE STATUS: SUPERSEDED (Historical Hysteresis Option Pack)
+   PURPOSE: Menyimpan semua opsi A–F sebelum adopsi Option F.
+   ADOPTED OPTION: F (DEC-20250812-02)
+   IMMUTABILITY: File ini tidak boleh diedit; setiap klarifikasi baru → buat file trace/delta terpisah.
+   NON-REMOVAL ASSERTION: Teks asli di bawah ini dipertahankan utuh.
+-->
+( SELURUH ISI HISTORIS ASLI TETAP DI SINI TANPA PERUBAHAN )
+
 # MerajutASA – Equity Under‑Served Hysteresis Options (Decision Pack v1.0)
 Status: Draft for Governance & Data Review (No prior strategy removed)  
 Related Specs: Master Spec v2.0 (Hero Constellation), Integrity Credential Schema v1.0, Fairness Audit Methodology (v1.x)  

@@ -1,0 +1,61 @@
+name: Hash Seal & Verify
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "seal-first or verify"
+        required: true
+        default: "verify"
+
+jobs:
+  hash-seal:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install (if deps required later)
+        run: echo "No dependencies yet."
+
+      - name: Run spec-hash-diff
+        run: |
+          MODE="${{ github.event.inputs.mode }}"
+          echo "[workflow] Running mode=$MODE"
+          node tools/spec-hash-diff.js --mode=$MODE || (echo "spec-hash-diff failed" && exit 1)
+
+      - name: Fail if placeholders remain (post-seal guard)
+        if: ${{ github.event.inputs.mode == 'verify' }}
+        run: |
+          if grep -R "<PENDING_HASH>" docs/integrity/spec-hash-manifest-v1.json >/dev/null 2>&1; then
+            echo "Placeholder detected post-seal."
+            exit 1
+          fi
+
+      - name: Upload artifact report
+        uses: actions/upload-artifact@v4
+        with:
+          name: spec-hash-diff-report
+          path: artifacts/spec-hash-diff.json
+
+      - name: Commit seal changes (only for seal-first)
+        if: ${{ github.event.inputs.mode == 'seal-first' }}
+        run: |
+          git config user.name "hash-seal-bot"
+            git config user.email "hash-seal-bot@users.noreply.github.com"
+          if git diff --quiet; then
+            echo "No changes to commit."
+          else
+            git add docs/integrity/spec-hash-manifest-v1.json
+            git add docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md
+            git add docs/governance/dec/DEC-20250812-03-principles-reference-activation.md
+            git commit -m "feat: hash seal baseline (automated)"
+            git push
+          fi
