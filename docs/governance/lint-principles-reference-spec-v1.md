@@ -1,6 +1,4 @@
 # Lint Specification – principles.reference (v1.0)
-(Duplikat isi dari file asli `lint-priciples-reference-spec-v1.md` – ejaan dikoreksi pada nama file. Versi ini tidak mengubah isi, hanya menyediakan path dengan ejaan konsisten.)
-
 Status: Draft for Activation (CIC-A)  
 Prepared: 2025-08-12  
 Scope: Memastikan setiap PR yang berpotensi memengaruhi satu atau lebih prinsip GP1–GP10 secara eksplisit mendeklarasikan dampak & mitigasi (bukan asumsi diam). Tidak menghapus lint eksisting; ini ADDITIVE.
@@ -97,3 +95,13 @@ Activation: CIC-A (no semantic meaning change).
 Any relaxation (e.g., removing heuristic) → CIC-E.
 
 End of spec (append-only).
+
+---
+
+## Adoption Addendum (APPENDED – DO NOT ALTER ORIGINAL CONTENT)
+Adoption DEC: DEC-20250812-03  
+Adoption Date: 2025-08-12T06:22:10Z  
+Status Change: Draft → Adopted (Phase 0 WARN, Phase 1 DENY after 48h, Phase 2 extended checks after 7d)  
+No semantic rule changes from draft; only enforcement status elevated per DEC.  
+Hash Post-Adoption: <PENDING_HASH_AFTER_UPDATE> (to be inserted into spec-hash-manifest-v1.json)  
+Non-Removal Assertion: Konten asli di atas dipertahankan utuh; addendum hanya menambahkan status adopsi.

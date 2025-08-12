@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "generation_timestamp_utc": "2025-08-12T05:29:55Z",
-  "generator_note": "Initial draft manifest (APPEND-ONLY). Hash values are placeholders until CI fills them. Do NOT remove prior entries; future changes create new objects with incremented version or delta_ref.",
+  "generation_timestamp_utc": "2025-08-12T06:22:10Z",
+  "generator_note": "Updated manifest after DEC-20250812-03 adoption. Existing entries preserved; ONLY updated dec_ref fields & appended new DEC entry. Hash values remain placeholders until CI fills them.",
   "files": [
     {
       "path": "docs/roadmap/roadmap-master-v1.md",
@@ -54,6 +54,16 @@
       "notes": "DEC file itself; superseded only by later DEC referencing this id."
     },
     {
+      "path": "docs/governance/dec/DEC-20250812-03-principles-reference-activation.md",
+      "version": "1.0.0",
+      "dec_ref": "SELF",
+      "hash_sha256": "<PENDING_HASH>",
+      "integrity_class": "decision",
+      "mutable_policy": "immutable",
+      "next_change_requires_dec": false,
+      "notes": "Activation DEC for principles.reference lint & hash sealing enforcement."
+    },
+    {
       "path": "docs/governance/README-decision-log-process.md",
       "version": "1.0.0",
       "dec_ref": null,
@@ -66,12 +76,12 @@
     {
       "path": "docs/governance/lint-principles-reference-spec-v1.md",
       "version": "1.0.0",
-      "dec_ref": "DEC-20250812-03? (planned)",
+      "dec_ref": "DEC-20250812-03",
       "hash_sha256": "<PENDING_HASH>",
       "integrity_class": "lint-spec",
-      "mutable_policy": "activation-pending",
+      "mutable_policy": "activation-pending→append-only",
       "next_change_requires_dec": true,
-      "notes": "Will be marked adopted after DEC-20250812-03."
+      "notes": "Now adopted; further rule relaxations require new DEC."
     },
     {
       "path": "docs/governance/todo-post-DEC-20250812-02.md",
@@ -96,7 +106,7 @@
     {
       "path": ".github/pull_request_template.md",
       "version": "1.0.0",
-      "dec_ref": "DEC-20250812-02 (context) + future DEC for Section 37 activation",
+      "dec_ref": "DEC-20250812-02 + DEC-20250812-03",
       "hash_sha256": "<PENDING_HASH>",
       "integrity_class": "workflow-template",
       "mutable_policy": "append-only",
@@ -212,6 +222,26 @@
       "mutable_policy": "delta-files",
       "next_change_requires_dec": true,
       "notes": "Master Spec baseline; changes only through delta files."
+    },
+    {
+      "path": "docs/transparency/changelog-excerpt-phase1.5.md",
+      "version": "0.1.0",
+      "dec_ref": null,
+      "hash_sha256": "<PENDING_HASH>",
+      "integrity_class": "transparency-placeholder",
+      "mutable_policy": "append-only",
+      "next_change_requires_dec": false,
+      "notes": "Placeholder until public activation; then version bump."
+    },
+    {
+      "path": "docs/governance/policy-index-v1.md",
+      "version": "1.0.0",
+      "dec_ref": "DEC-20250812-03",
+      "hash_sha256": "<PENDING_HASH>",
+      "integrity_class": "policy-index",
+      "mutable_policy": "append-only",
+      "next_change_requires_dec": true,
+      "notes": "Updated to reference activation DEC."
     }
   ],
   "integrity_rules": {
@@ -233,6 +263,7 @@
     "policy_links": {
       "hysteresis.params.lock": "docs/fairness/hysteresis-config-v1.yml",
       "principles.reference": "docs/governance/lint-principles-reference-spec-v1.md"
-    }
+    },
+    "enforcement_escalation": "principles.reference: WARN 48h → DENY"
   }
 }
