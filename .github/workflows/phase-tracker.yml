@@ -1,0 +1,34 @@
+name: Phase Tracker
+
+on:
+  schedule:
+    - cron: "0 * * * *" # hourly
+  workflow_dispatch: {}
+
+jobs:
+  phase-tracker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Generate Phase Tracker
+        run: |
+          bash scripts/generate-phase-tracker.sh
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase-tracker
+          path: artifacts/phase-tracker.json
+      - name: Commit (optional auto-update)
+        run: |
+          if git diff --quiet artifacts/phase-tracker.json; then
+            echo "No phase change."
+          else
+            git config user.name "phase-tracker-bot"
+            git config user.email "phase-tracker-bot@users.noreply.github.com"
+            git add artifacts/phase-tracker.json
+            git commit -m "chore: update phase-tracker $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            git push
+          fi
