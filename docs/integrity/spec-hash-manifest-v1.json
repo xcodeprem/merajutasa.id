@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "generation_timestamp_utc": "2025-08-12T06:22:10Z",
-  "generator_note": "Updated manifest after DEC-20250812-03 adoption. Existing entries preserved; ONLY updated dec_ref fields & appended new DEC entry. Hash values remain placeholders until CI fills them.",
+  "generation_timestamp_utc": "2025-08-12T07:30:00Z",
+  "generator_note": "Updated manifest to append onboarding agent bootstrap entry. No prior entries removed; hashes remain placeholders until CI fills them.",
   "files": [
     {
       "path": "docs/roadmap/roadmap-master-v1.md",
@@ -242,6 +242,16 @@
       "mutable_policy": "append-only",
       "next_change_requires_dec": true,
       "notes": "Updated to reference activation DEC."
+    },
+    {
+      "path": "docs/onboarding/agent-bootstrap-manifest.md",
+      "version": "1.0.0",
+      "dec_ref": null,
+      "hash_sha256": "<PENDING_HASH>",
+      "integrity_class": "onboarding-spec",
+      "mutable_policy": "append-only",
+      "next_change_requires_dec": false,
+      "notes": "Bootstrap manifest for new agents; additive only."
     }
   ],
   "integrity_rules": {
