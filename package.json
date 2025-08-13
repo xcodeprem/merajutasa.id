@@ -13,10 +13,11 @@
   "lint:md": "markdownlint-cli2 \"**/*.md\"",
   "service:signer": "node tools/services/signer.js",
   "service:chain": "node tools/services/chain.js",
+  "lint:disclaimers": "node tools/disclaimers-lint.js",
   "gen:test-vectors": "node tools/generate-test-vectors.js",
   "test:integrity": "node tools/tests/run-basic-integrity-tests.js"
-  ,"fairness:generate-snapshots": "node tools/fairness/generate-equity-snapshots.js"
-  ,"fairness:hysteresis-run": "node tools/fairness/hysteresis-engine.js"
+  ,"fairness:generate-snapshots": "node tools/fairness/generate-equity-snapshots.js",
+  "fairness:hysteresis-run": "node tools/fairness/hysteresis-engine.js"
   },
   "devDependencies": {
     "markdownlint": "^0.34.0",

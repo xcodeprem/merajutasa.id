@@ -1,0 +1,204 @@
+{
+  "timestamp": "2025-08-13T03:10:50.262Z",
+  "artifacts": {
+    "specHash": {
+      "mode": "report-only",
+      "timestamp_utc": "2025-08-13T03:10:49Z",
+      "updated": [],
+      "unchanged": [
+        "docs/roadmap/roadmap-master-v1.md",
+        "docs/fairness/hysteresis-public-methodology-fragment-v1.md",
+        "docs/fairness/hysteresis-state-machine-transitions.md",
+        "docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md",
+        "docs/governance/dec/DEC-20250812-03-principles-reference-activation.md",
+        "docs/governance/README-decision-log-process.md",
+        "docs/governance/lint-principles-reference-spec-v1.md",
+        "docs/governance/todo-post-DEC-20250812-02.md",
+        "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
+        ".github/pull_request_template.md",
+        "docs/master-spec-deltas/delta-master-spec-v2-DEC-20250812-02.md",
+        "docs/principles/GP1-GP10-index.md",
+        "docs/privacy/pii-pattern-library-v1.md",
+        "docs/analytics/dashboard-widgets-hysteresis-initial.md",
+        "docs/tests/hysteresis-test-plan-v1.md",
+        "docs/faq/faq-fairness-hysteresis-update.md",
+        "docs/status/progress-recap-latest-2025-08-12T035901Z.md",
+        "docs/governance/disclaimers-lint-spec-v1.md",
+        "docs/integrity/credential-schema-final-v1.md",
+        "docs/analytics/event-schema-canonical-v1.md",
+        "docs/master-spec/master-spec-v2.0.md",
+        "docs/transparency/changelog-excerpt-phase1.5.md",
+        "docs/governance/policy-index-v1.md",
+        "docs/archive/fairness_equity-hysteresis-options-v1.md",
+        "docs/archive/ux_public-multipage-experience-master-spec-v2.md",
+        "docs/governance/trace/archive-trace-index-v1.md",
+        "docs/onboarding/agent-bootstrap-manifest.md",
+        "README.md",
+        "docs/governance/dec/DEC-20250812-04-governance-baseline-thresholds.md",
+        "docs/governance/dec/DEC-20250813-01-known-debt-register.md",
+        "docs/onboarding/agent-role-policy-v1.md"
+      ],
+      "placeholders_sealed": [],
+      "placeholders_remaining": [],
+      "violations": [
+        {
+          "code": "HASH_MISMATCH_DEC_REQUIRED",
+          "path": "docs/fairness/hysteresis-config-v1.yml",
+          "detail": "Manifest=adf27e37a983dfd1e45e89f45834b99f04e3874e74ce0bb4cd030d0a201ca3db current=c07f4ccc93bd68e18a74c106980a262904d50a59b2ffa25b9e3f899028037825"
+        }
+      ],
+      "summary": {
+        "total_entries": 32,
+        "updated_count": 0,
+        "violation_count": 1,
+        "placeholders_remaining_count": 0
+      }
+    },
+    "params": {
+      "status": "MISMATCH",
+      "total": 13,
+      "mismatches": 4,
+      "rows": [
+        {
+          "parameter": "T_enter_major",
+          "config": 0.5,
+          "declared": null,
+          "match": true
+        },
+        {
+          "parameter": "T_enter_standard",
+          "config": 0.6,
+          "declared": null,
+          "match": true
+        },
+        {
+          "parameter": "consecutive_required_standard",
+          "config": 2,
+          "declared": null,
+          "match": true
+        },
+        {
+          "parameter": "T_exit",
+          "config": 0.65,
+          "declared": null,
+          "match": true
+        },
+        {
+          "parameter": "cooldown_snapshots_after_exit",
+          "config": 1,
+          "declared": null,
+          "match": true
+        },
+        {
+          "parameter": "stalled_window_snapshots",
+          "config": 5,
+          "declared": null,
+          "match": true
+        },
+        {
+          "parameter": "stalled_min_ratio",
+          "config": 0.55,
+          "declared": null,
+          "match": true
+        },
+        {
+          "parameter": "stalled_max_ratio_below_exit",
+          "config": 0.65,
+          "declared": null,
+          "match": true
+        },
+        {
+          "parameter": "anomaly_delta_threshold_equity_ratio",
+          "config": 0.03,
+          "declared": "0.03",
+          "match": true
+        },
+        {
+          "parameter": "multi_category_block_threshold",
+          "config": null,
+          "declared": "2",
+          "match": false
+        },
+        {
+          "parameter": "evidence_hash_display_len",
+          "config": null,
+          "declared": "16",
+          "match": false
+        },
+        {
+          "parameter": "numeric_sampling_truncation_decimals",
+          "config": null,
+          "declared": "2",
+          "match": false
+        },
+        {
+          "parameter": "min_cell_aggregation_threshold",
+          "config": null,
+          "declared": "20",
+          "match": false
+        }
+      ]
+    },
+    "hype": {
+      "status": "STUB",
+      "total_hits": 0,
+      "findings": [],
+      "note": "Real scan disabled temporarily (Wave 0 stub)."
+    },
+    "disclaimers": {
+      "version": 0,
+      "mode": "stub",
+      "status": "PASS_STUB",
+      "files_scanned": 1,
+      "rules": [
+        {
+          "id": "DISC-PRES-001",
+          "description": "Presence of canonical disclaimer set (stub)",
+          "status": "PRESENT"
+        }
+      ],
+      "items": [
+        {
+          "file": "docs\\governance\\disclaimers-lint-spec-v1.md",
+          "length": 23794,
+          "hash": "7b012d6ec8c681b1358c5963c7911b6b623530dc9fc44662474921616a5dba2f"
+        }
+      ]
+    },
+    "principles": [
+      {
+        "principle": "GP9",
+        "inferredImpact": true,
+        "declaredImpact": "Yes",
+        "mitigation": "Baseline activation"
+      },
+      {
+        "principle": "GP1",
+        "inferredImpact": false,
+        "declaredImpact": "No",
+        "mitigation": ""
+      }
+    ],
+    "drift": {
+      "timestamp_utc": "2025-08-13T03:10:50.245Z",
+      "components": {
+        "spec_hash": "ADVISORY",
+        "params": "MISMATCH",
+        "hype": "PASS",
+        "disclaimers": "PASS_STUB"
+      },
+      "summary": {
+        "hype_hits": 0,
+        "param_mismatches": 4
+      },
+      "status": "ADVISORY"
+    }
+  },
+  "summary": {
+    "total_param_checks": 13,
+    "param_mismatches": 4,
+    "hype_hits": 0,
+    "disclaimers_status": "PASS_STUB",
+    "drift_status": "ADVISORY"
+  }
+}

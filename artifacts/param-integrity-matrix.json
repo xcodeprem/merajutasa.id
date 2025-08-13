@@ -1,0 +1,198 @@
+{
+  "version": 2,
+  "generated_utc": "2025-08-13T03:22:21.531Z",
+  "status": "PASS",
+  "summary_counts": {
+    "MATCH": 11
+  },
+  "rows": [
+    {
+      "parameter": "T_exit",
+      "aliases": {
+        "config": "T_exit",
+        "dec": "T_exit"
+      },
+      "values": {
+        "config": 0.65,
+        "dec": null,
+        "code": 0.65
+      },
+      "sources_present": [
+        "config",
+        "code"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "parameter": "T_entry_standard",
+      "aliases": {
+        "config": "T_enter_standard",
+        "dec": "T_enter_standard"
+      },
+      "values": {
+        "config": 0.6,
+        "dec": null,
+        "code": 0.6
+      },
+      "sources_present": [
+        "config",
+        "code"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "parameter": "T_entry_major",
+      "aliases": {
+        "config": "T_enter_major",
+        "dec": "T_enter_major"
+      },
+      "values": {
+        "config": 0.5,
+        "dec": null,
+        "code": 0.5
+      },
+      "sources_present": [
+        "config",
+        "code"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "parameter": "cooldown_min",
+      "aliases": {
+        "config": "cooldown_snapshots_after_exit",
+        "dec": "cooldown_snapshots_after_exit"
+      },
+      "values": {
+        "config": 1,
+        "dec": null,
+        "code": 1
+      },
+      "sources_present": [
+        "config",
+        "code"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "parameter": "cooldown_max",
+      "aliases": {
+        "config": "cooldown_snapshots_after_exit",
+        "dec": "cooldown_snapshots_after_exit"
+      },
+      "values": {
+        "config": 1,
+        "dec": null,
+        "code": 1
+      },
+      "sources_present": [
+        "config",
+        "code"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "parameter": "lookback_window",
+      "aliases": {
+        "config": "stalled_window_snapshots",
+        "dec": "stalled_window_snapshots"
+      },
+      "values": {
+        "config": 5,
+        "dec": null,
+        "code": 5
+      },
+      "sources_present": [
+        "config",
+        "code"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "parameter": "anomaly_delta",
+      "aliases": {
+        "config": "anomaly_delta_threshold_equity_ratio",
+        "dec": "anomaly_delta_threshold_equity_ratio"
+      },
+      "values": {
+        "config": 0.03,
+        "dec": 0.03,
+        "code": 0.03
+      },
+      "sources_present": [
+        "config",
+        "dec",
+        "code"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "parameter": "multi_category_block_threshold",
+      "aliases": {
+        "config": null,
+        "dec": "multi_category_block_threshold"
+      },
+      "values": {
+        "config": null,
+        "dec": 2,
+        "code": 2
+      },
+      "sources_present": [
+        "dec",
+        "code"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "parameter": "min_cell_aggregation_threshold",
+      "aliases": {
+        "config": null,
+        "dec": "min_cell_aggregation_threshold"
+      },
+      "values": {
+        "config": null,
+        "dec": 20,
+        "code": 20
+      },
+      "sources_present": [
+        "dec",
+        "code"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "parameter": "evidence_hash_display_len",
+      "aliases": {
+        "config": null,
+        "dec": "evidence_hash_display_len"
+      },
+      "values": {
+        "config": null,
+        "dec": 16,
+        "code": 16
+      },
+      "sources_present": [
+        "dec",
+        "code"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "parameter": "numeric_sampling_truncation_decimals",
+      "aliases": {
+        "config": null,
+        "dec": "numeric_sampling_truncation_decimals"
+      },
+      "values": {
+        "config": null,
+        "dec": 2,
+        "code": 2
+      },
+      "sources_present": [
+        "dec",
+        "code"
+      ],
+      "status": "MATCH"
+    }
+  ]
+}

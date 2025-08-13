@@ -1,0 +1,14 @@
+[
+  {
+    "principle": "GP9",
+    "inferredImpact": true,
+    "declaredImpact": "Yes",
+    "mitigation": "Baseline activation"
+  },
+  {
+    "principle": "GP1",
+    "inferredImpact": false,
+    "declaredImpact": "No",
+    "mitigation": ""
+  }
+]

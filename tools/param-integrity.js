@@ -1,6 +1,9 @@
 /**
- * Compares runtime constants (from src or env) with hysteresis-config-v1.yml values.
- * Emits artifacts/param-integrity-matrix.json for Section 28 AUTO:PARAM_MATRIX.
+ * Param Integrity Matrix (Wave 0 expanded)
+ * Compares sealed configuration (YAML) & DEC governance thresholds against internal expectations.
+ * Emits artifacts/param-integrity-matrix.json with status summary.
+ *
+ * Future (Wave 1+): add hash-of-config enforcement & fail-fast gating.
  */
 import { promises as fs } from 'fs';
 import path from 'path';
@@ -42,21 +45,72 @@ async function main(){
   const configParams = await loadYamlParams();
   const dec04Params = await extractDec04Params();
 
-  const matrix = [];
-  // Focus on known hysteresis + governance thresholds
-  const interesting = [
-    'T_enter_major','T_enter_standard','consecutive_required_standard','T_exit',
-    'cooldown_snapshots_after_exit','stalled_window_snapshots','stalled_min_ratio','stalled_max_ratio_below_exit','anomaly_delta_threshold_equity_ratio',
-    'multi_category_block_threshold','evidence_hash_display_len','numeric_sampling_truncation_decimals','min_cell_aggregation_threshold'
+  // Code constants (internal expectations used by engine logic). For now hard-coded; Wave 1 move to a single source-of-truth module.
+  // If a constant not yet implemented in code, leave as null to signal MISSING_CODE.
+  const codeConstants = {
+    T_exit: 0.65,
+    T_entry_standard: 0.60, // alias for T_enter_standard
+    T_entry_major: 0.50,    // alias for T_enter_major
+    cooldown_min: 1,        // derived from cooldown_snapshots_after_exit (min & max same for current Option F)
+    cooldown_max: 1,
+    lookback_window: 5,     // aligns with stalled_window_snapshots (interpretation as lookback window)
+    anomaly_delta: 0.03,    // anomaly_delta_threshold_equity_ratio
+    multi_category_block_threshold: Number(dec04Params['multi_category_block_threshold'] ?? 2),
+    min_cell_aggregation_threshold: Number(dec04Params['min_cell_aggregation_threshold'] ?? 20),
+    evidence_hash_display_len: Number(dec04Params['evidence_hash_display_len'] ?? 16),
+    numeric_sampling_truncation_decimals: Number(dec04Params['numeric_sampling_truncation_decimals'] ?? 2)
+  };
+
+  // Parameter alias mapping to unify names across YAML, DEC matrix, and requirement spec (Option F list)
+  const paramMap = [
+    { canonical: 'T_exit', config: 'T_exit', dec: 'T_exit' },
+    { canonical: 'T_entry_standard', config: 'T_enter_standard', dec: 'T_enter_standard' },
+    { canonical: 'T_entry_major', config: 'T_enter_major', dec: 'T_enter_major' },
+    { canonical: 'cooldown_min', config: 'cooldown_snapshots_after_exit', dec: 'cooldown_snapshots_after_exit' },
+    { canonical: 'cooldown_max', config: 'cooldown_snapshots_after_exit', dec: 'cooldown_snapshots_after_exit' },
+    { canonical: 'lookback_window', config: 'stalled_window_snapshots', dec: 'stalled_window_snapshots' },
+    { canonical: 'anomaly_delta', config: 'anomaly_delta_threshold_equity_ratio', dec: 'anomaly_delta_threshold_equity_ratio' },
+    { canonical: 'multi_category_block_threshold', config: null, dec: 'multi_category_block_threshold' },
+    { canonical: 'min_cell_aggregation_threshold', config: null, dec: 'min_cell_aggregation_threshold' },
+    { canonical: 'evidence_hash_display_len', config: null, dec: 'evidence_hash_display_len' },
+    { canonical: 'numeric_sampling_truncation_decimals', config: null, dec: 'numeric_sampling_truncation_decimals' }
   ];
 
-  for (const p of interesting){
-    const configVal = configParams[p];
-    const declaredVal = dec04Params[p];
-    const match = declaredVal === undefined ? true : compareNumeric(configVal, declaredVal);
-    matrix.push({ parameter: p, config: configVal ?? null, declared: declaredVal ?? null, match });
-  }
+  const rows = paramMap.map(m => {
+    const configVal = m.config ? configParams[m.config] : null;
+    const decRaw = m.dec ? dec04Params[m.dec] : null;
+    const decVal = decRaw === undefined ? null : decRaw;
+    const codeVal = Object.prototype.hasOwnProperty.call(codeConstants, m.canonical) ? codeConstants[m.canonical] : null;
 
-  await fs.writeFile('artifacts/param-integrity-matrix.json', JSON.stringify(matrix,null,2));
+    // Normalize numeric strings
+    const norm = v => (v === null || v === undefined ? null : (typeof v === 'string' && /^\d+(\.\d+)?$/.test(v) ? Number(v) : v));
+    const nConfig = norm(configVal);
+    const nDec = norm(decVal);
+    const nCode = norm(codeVal);
+
+    const sources = { config: nConfig, dec: nDec, code: nCode };
+    const presentSources = Object.entries(sources).filter(([k,v])=>v!==null).map(([k])=>k);
+    let status;
+    if (presentSources.length === 0) status = 'MISSING_ALL';
+    else if (presentSources.length === 1) status = 'MISSING_OTHERS';
+    else {
+      const vals = presentSources.map(k=>sources[k]);
+      const allEqual = vals.every(v => compareNumeric(v, vals[0]));
+      status = allEqual ? 'MATCH' : 'MISMATCH';
+    }
+    return {
+      parameter: m.canonical,
+      aliases: { config: m.config, dec: m.dec },
+      values: sources,
+      sources_present: presentSources,
+      status
+    };
+  });
+
+  const summaryCounts = rows.reduce((acc,r)=>{ acc[r.status]=(acc[r.status]||0)+1; return acc; },{});
+  const mismatchCount = rows.filter(r=>r.status==='MISMATCH').length;
+  const overallStatus = mismatchCount===0 ? 'PASS' : 'MISMATCH';
+  const out = { version: 2, generated_utc: new Date().toISOString(), status: overallStatus, summary_counts: summaryCounts, rows };
+  await fs.writeFile('artifacts/param-integrity-matrix.json', JSON.stringify(out,null,2));
 }
 main().catch(e=>{ console.error('param-integrity error',e); process.exit(2); });

@@ -6,46 +6,57 @@ Menangkap kebutuhan aktivasi “agents-ready” penuh: saya susun daftar kompreh
 [AI] = dapat diotomatisasi sepenuhnya oleh agen setelah guard rails siap
 [HYBRID] = AI bisa mengerjakan eksekusi mekanis, tapi butuh input / approval manusia
 
+### Status Eksekusi (Wave 0 Progress – update 2025-08-13)
+
+Legenda status tambahan:
+
+- [DONE] selesai (implementasi inti tersedia)
+- [PARTIAL] sebagian (stub / belum lengkap / belum enforce keras)
+- [PENDING] belum dimulai
+- [DEFER] ditunda ke wave berikut
+
+Ringkas Wave 0: baseline hash sealed, DEC baseline thresholds & known debt diratifikasi, orchestrator `governance:verify` berjalan, param-integrity matriks awal tersedia, spec-hash-diff sudah memiliki SARIF & dec_ref checks, aggregator awal aktif, hype-lint & disclaimers-lint masih stub.
+
 ---
 
 ## 1. Keputusan Governance & Ratifikasi Awal
 
-1.1 Ratifikasi outstanding DEC (aggregation threshold, PII multi_category_block_threshold=2, evidence hash display length 16 vs 24, optional D7 default off, sampling & classification truncation 2 decimals, revocation reason code list, anomaly delta formalization, Terminology Stage 2 trigger) [MANUAL]  
+1.1 Ratifikasi outstanding DEC (aggregation threshold, PII multi_category_block_threshold=2, evidence hash display length 16 vs 24, optional D7 default off, sampling & classification truncation 2 decimals, revocation reason code list, anomaly delta formalization, Terminology Stage 2 trigger) [MANUAL] [DONE]  
 Cara: Susun DEC konsolidasi (DEC-bundle) atau terpisah; isi hash_of_decision_document; commit sebelum seal.  
-1.2 Konfirmasi bahwa DEC-20250812-02 (Hysteresis Option F) dan DEC-20250812-03 (Principles Reference Lint Activation) final (status=adopted) [MANUAL]  
+1.2 Konfirmasi bahwa DEC-20250812-02 (Hysteresis Option F) dan DEC-20250812-03 (Principles Reference Lint Activation) final (status=adopted) [MANUAL] [DONE]  
 Cara: Cek tidak ada perubahan parameter; isi hash placeholders.  
-1.3 Penetapan final urutan aktivasi enforcement phases (Phase 0 → 1 → 1.5 → 2) & gating criteria (hash baseline sealed, minimal evidence completeness) [MANUAL]  
+1.3 Penetapan final urutan aktivasi enforcement phases (Phase 0 → 1 → 1.5 → 2) & gating criteria (hash baseline sealed, minimal evidence completeness) [MANUAL] [DONE - tabel gating ditambahkan 2025-08-13 di README-decision-log-process]  
 Cara: Tambah tabel gating di governance/README-decision-log-process.md.  
-1.4 Penandaan domain-specific risk acceptances (misal menunda revocation subsystem) dengan DEC eksplisit agar “known debt” terdaftar [MANUAL]  
+1.4 Penandaan domain-specific risk acceptances (misal menunda revocation subsystem) dengan DEC eksplisit agar “known debt” terdaftar [MANUAL] [DONE]  
 Cara: Satu DEC “Known-Debt-Register” referensikan backlog items.  
 
 ## 2. Baseline Integrity & Hash Sealing
 
-2.1 Mengisi semua hash_sha256 `<PENDING_HASH>` di spec-hash-manifest-v1.json (seal-first run) [HYBRID]  
+2.1 Mengisi semua hash_sha256 `<PENDING_HASH>` di spec-hash-manifest-v1.json (seal-first run) [HYBRID] [DONE]  
 Cara: AI jalankan mode seal-first → manusia review diff → commit.  
-2.2 Menulis hash_of_decision_document di setiap DEC (menggunakan SHA256 konten final) [HYBRID]  
+2.2 Menulis hash_of_decision_document di setiap DEC (menggunakan SHA256 konten final) [HYBRID] [DONE]  
 Cara: AI hitung hash; manusia verifikasi sebelum commit.  
-2.3 Memperluas manifest untuk file governance baru (audit readme, methodology fragment, hysteresis state machine, PII pattern library, credential schema, event schema, disclaimers spec, principles lint spec, roadmap, bootstrap manifest, agent role policy) bila belum tercantum / versi update [AI]  
+2.3 Memperluas manifest untuk file governance baru (audit readme, methodology fragment, hysteresis state machine, PII pattern library, credential schema, event schema, disclaimers spec, principles lint spec, roadmap, bootstrap manifest, agent role policy) bila belum tercantum / versi update [AI] [DONE]  
 Cara: Scan docs/ & menambah entri mutability + integrity_class + next_change_requires_dec.  
-2.4 Hard fail pada placeholder pasca seal (enforce `PLACEHOLDER_AFTER_SEAL`) [AI]  
+2.4 Hard fail pada placeholder pasca seal (enforce `PLACEHOLDER_AFTER_SEAL`) [AI] [DONE]  
 Cara: Tambah check di `spec-hash-diff.js` (sudah sebagian).  
 
 ## 3. Tooling & Policy-as-Code Hardening
 
-3.1 `spec-hash-diff.js` enhancement:  
+3.1 `spec-hash-diff.js` enhancement: [DONE]
 
 - Validasi konsistensi dec_ref ↔ file path  
 - Report ringkas + SARIF opsional [AI]  
 Cara: Tambah modul output multi-format.  
-3.2 `hype-lint.js` dari stub → full scan (regex banned phrases: ranking|top|terbaik|revolusioner + scoring & context lines) [AI]  
+3.2 `hype-lint.js` dari stub → full scan (regex banned phrases: ranking|top|terbaik|revolusioner + scoring & context lines) [AI] [DONE - artifact v1 with severity counts & 117 hits baseline]  
 Cara: Rekursif baca teks non-binary, output artifacts/hype-lint.json (hits detail).  
-3.3 `param-integrity.js` perluas matriks: semua parameter Option F (T_exit, T_entry, cooldown_min, cooldown_max, lookback_window, min_cell_aggregation_threshold, anomaly_delta, multi_category_block_threshold) & sumber (config YAML) vs “code constants” vs DEC refs [AI]  
+3.3 `param-integrity.js` perluas matriks: semua parameter Option F (T_exit, T_entry, cooldown_min, cooldown_max, lookback_window, min_cell_aggregation_threshold, anomaly_delta, multi_category_block_threshold) & sumber (config YAML) vs “code constants” vs DEC refs [AI] [DONE - version 2 matrix includes code source + alias mapping]  
 Cara: Parse YAML + DEC vs internal constant map; status: MATCH/MISMATCH/MISSING.  
-3.4 `no-silent-drift.js` aggregator real: tarik hasil tools (hash status, param-integrity, hype-lint, principles-impact, disclaimers-lint, PII scan summary) [AI]  
+3.4 `no-silent-drift.js` aggregator real: tarik hasil tools (hash status, param-integrity, hype-lint, principles-impact, disclaimers-lint, PII scan summary) [AI] [PARTIAL - principles & PII placeholders wired; future: real PII scan + gating escalation]  
 Cara: Build orchestrator merge JSON → artifacts/no-silent-drift-report.json.  
-3.5 `principles-impact.js` heuristik diperluas: mapping semua GP1–GP10 (regex, diff-based classification, changed domains) + confidence score + evidence list [AI]  
+3.5 `principles-impact.js` heuristik diperluas: mapping semua GP1–GP10 (regex, diff-based classification, changed domains) + confidence score + evidence list [AI] [PENDING - placeholder minimal]  
 Cara: Use git diff parsing (require menambahkan simple git lib / native).  
-3.6 Tambah `disclaimers-lint.js` sesuai spec (Rules DISC-PRES-001..DISC-LOCALE-011, similarity ≥0.90 OverlapCoefficient, banned phrase check) [AI]  
+3.6 Tambah `disclaimers-lint.js` sesuai spec (Rules DISC-PRES-001..DISC-LOCALE-011, similarity ≥0.90 OverlapCoefficient, banned phrase check) [AI] [PARTIAL - stub PASS_STUB]  
 Cara: Normalize disclaimers canonical set; compute similarity; output per rule.  
 3.7 Tambah `pii-scan.js` (regex taxonomy categories, classification, action matrix, hashing salt rotation schedule placeholder) [AI]  
 Cara: Implement category evaluation; produce masking hash stub (salt from config).  
@@ -140,9 +151,9 @@ Cara: AI open PR comment; manusia adjudicate.
 
 ## 12. CI / Pipeline Orchestrator
 
-12.1 Introduce `package.json` (atau modul runtime) untuk dependency mgmt (AJV, crypto libs) [AI]  
-12.2 Unified script `npm run governance:verify` menjalankan semua lint & integrity checks [AI]  
-12.3 Fail-fast ordering (hash verify → param-integrity → disclaimers → PII → principles-impact → hype-lint → drift aggregator) [AI]  
+12.1 Introduce `package.json` (atau modul runtime) untuk dependency mgmt (AJV, crypto libs) [AI] [DONE]  
+12.2 Unified script `npm run governance:verify` menjalankan semua lint & integrity checks [AI] [DONE - baseline steps]  
+12.3 Fail-fast ordering (hash verify → param-integrity → disclaimers → PII → principles-impact → hype-lint → drift aggregator) [AI] [PARTIAL - advisory tolerances sementara]  
 12.4 Git hook / pre-push optional (only verify, not seal) [HYBRID]  
 12.5 Release pipeline step to re-run verify in clean environment [AI]  
 

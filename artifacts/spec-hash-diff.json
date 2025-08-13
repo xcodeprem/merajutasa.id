@@ -1,10 +1,9 @@
 {
-  "mode": "verify",
-  "timestamp_utc": "2025-08-13T02:51:11Z",
+  "mode": "report-only",
+  "timestamp_utc": "2025-08-13T03:10:49Z",
   "updated": [],
   "unchanged": [
     "docs/roadmap/roadmap-master-v1.md",
-    "docs/fairness/hysteresis-config-v1.yml",
     "docs/fairness/hysteresis-public-methodology-fragment-v1.md",
     "docs/fairness/hysteresis-state-machine-transitions.md",
     "docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md",
@@ -38,11 +37,17 @@
   ],
   "placeholders_sealed": [],
   "placeholders_remaining": [],
-  "violations": [],
+  "violations": [
+    {
+      "code": "HASH_MISMATCH_DEC_REQUIRED",
+      "path": "docs/fairness/hysteresis-config-v1.yml",
+      "detail": "Manifest=adf27e37a983dfd1e45e89f45834b99f04e3874e74ce0bb4cd030d0a201ca3db current=c07f4ccc93bd68e18a74c106980a262904d50a59b2ffa25b9e3f899028037825"
+    }
+  ],
   "summary": {
     "total_entries": 32,
     "updated_count": 0,
-    "violation_count": 0,
+    "violation_count": 1,
     "placeholders_remaining_count": 0
   }
 }

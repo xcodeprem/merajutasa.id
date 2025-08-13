@@ -1,25 +1,94 @@
 /**
- * Scans changed text for banned hype phrases.
- * Emits artifacts/hype-lint.json with hits count.
+ * hype-lint (Wave 1 full scan)
+ * Recursively scans textual content under docs/ (and README.md) for banned / overclaim phrases.
+ * Outputs artifacts/hype-lint.json with per-hit context and severity scoring.
+ * Exit code: 0 always (enforcement escalation handled by aggregator / phase gating).
  */
 import { promises as fs } from 'fs';
+import path from 'path';
 import { glob } from 'glob';
 
-async function main(){
-  const banned = [/\branking\b/i,/\btop\b/i,/terbaik/i,/revolusioner/i];
-  const files = await glob('docs/**/*.md');
-  const findings = [];
-  for (const f of files){
-    const text = await fs.readFile(f,'utf8');
-    banned.forEach(r=>{
-      let m; while((m = r.exec(text))){
-        const idx = m.index;
-        const line = text.slice(0,idx).split(/\n/).length;
-        findings.push({ file:f, line, match:m[0], pattern:r.toString() });
-      }
-    });
-  }
-  await fs.mkdir('artifacts',{recursive:true});
-  await fs.writeFile('artifacts/hype-lint.json', JSON.stringify({ total_hits: findings.length, findings },null,2));
+const BANNED_DEFS = [
+  { id:'RANKING',     needles:['ranking'],         baseSeverity:'MEDIUM', rationale:'Unsubstantiated ranking claim.', wordBoundary:true },
+  { id:'TOP',         needles:['top'],             baseSeverity:'MEDIUM', rationale:'Generic superiority claim.', wordBoundary:true },
+  { id:'TERBAIK',     needles:['terbaik'],         baseSeverity:'HIGH',   rationale:'“Terbaik” (best) absolute claim.' },
+  { id:'REVOLUSIONER',needles:['revolusioner'],    baseSeverity:'HIGH',   rationale:'Overclaim “revolutionary”.' }
+];
+
+function classifySeverity(def, line){
+  // Potential future adjustments (context-based downgrade). For now return base.
+  return def.baseSeverity;
 }
-main().catch(e=>{ console.error('hype-lint error',e); process.exit(2); });
+
+async function scanFile(f){
+  let raw; try { raw = await fs.readFile(f,'utf8'); } catch { return []; }
+  if (/\x00/.test(raw.slice(0,1024))) return []; // skip binary
+  const lines = raw.split(/\r?\n/);
+  const hits = [];
+  for (let i=0;i<lines.length;i++){
+    const line = lines[i];
+    const lower = line.toLowerCase();
+    for (const def of BANNED_DEFS){
+      for (const needle of def.needles){
+        let idx = 0; const needleLower = needle.toLowerCase();
+        while((idx = lower.indexOf(needleLower, idx)) !== -1){
+          // word boundary check if requested
+          if (def.wordBoundary){
+            const before = idx===0 ? ' ' : lower[idx-1];
+            const after = idx+needleLower.length >= lower.length ? ' ' : lower[idx+needleLower.length];
+            if (/[^a-z0-9_]/i.test(before) && /[^a-z0-9_]/i.test(after)) {
+              hits.push({ file:f, line:i+1, column:idx+1, match: line.substr(idx, needle.length), rule:def.id, severity:classifySeverity(def,line), rationale:def.rationale, context_line: line });
+            }
+          } else {
+            hits.push({ file:f, line:i+1, column:idx+1, match: line.substr(idx, needle.length), rule:def.id, severity:classifySeverity(def,line), rationale:def.rationale, context_line: line });
+          }
+          idx += needleLower.length;
+        }
+      }
+    }
+  }
+  return hits;
+}
+
+function aggregate(findings){
+  const severityCounts = findings.reduce((acc,f)=>{acc[f.severity]=(acc[f.severity]||0)+1; return acc;},{});
+  const ruleCounts = findings.reduce((acc,f)=>{acc[f.rule]=(acc[f.rule]||0)+1; return acc;},{});
+  const maxSeverity = ['HIGH','MEDIUM','LOW'].find(s=>severityCounts[s]>0) || 'NONE';
+  return { severityCounts, ruleCounts, maxSeverity };
+}
+
+async function main(){
+  const patterns = ['docs/**/*.md','README.md'];
+  const files = (await Promise.all(patterns.map(p=>glob(p)))).flat()
+    .filter((v,i,a)=>a.indexOf(v)===i)
+    .sort();
+
+  const allFindings = [];
+  for (const f of files){
+    // Skip very large (>500k) to prevent memory spikes
+    try {
+      const stat = await fs.stat(f);
+      if (stat.size > 500_000) continue;
+    } catch { continue; }
+    const rel = f.split(path.sep).join('/');
+    const findings = await scanFile(rel);
+    allFindings.push(...findings);
+  }
+
+  const { severityCounts, ruleCounts, maxSeverity } = aggregate(allFindings);
+  await fs.mkdir('artifacts',{recursive:true});
+  const out = {
+    version: 1,
+    generated_utc: new Date().toISOString(),
+    file_count: files.length,
+    total_hits: allFindings.length,
+    max_severity: maxSeverity,
+    severity_counts: severityCounts,
+    rule_counts: ruleCounts,
+  findings: allFindings.slice(0, 500), // cap
+  truncated: allFindings.length > 500
+  };
+  await fs.writeFile('artifacts/hype-lint.json', JSON.stringify(out,null,2));
+}
+
+main().catch(e=>{ console.error('hype-lint error', e); /* do not fail pipeline */ });

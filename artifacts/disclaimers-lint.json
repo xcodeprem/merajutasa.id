@@ -1,0 +1,20 @@
+{
+  "version": 0,
+  "mode": "stub",
+  "status": "PASS_STUB",
+  "files_scanned": 1,
+  "rules": [
+    {
+      "id": "DISC-PRES-001",
+      "description": "Presence of canonical disclaimer set (stub)",
+      "status": "PRESENT"
+    }
+  ],
+  "items": [
+    {
+      "file": "docs\\governance\\disclaimers-lint-spec-v1.md",
+      "length": 23794,
+      "hash": "7b012d6ec8c681b1358c5963c7911b6b623530dc9fc44662474921616a5dba2f"
+    }
+  ]
+}

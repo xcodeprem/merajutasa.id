@@ -1,0 +1,28 @@
+{
+  "timestamp_utc": "2025-08-13T03:23:10.525Z",
+  "components": {
+    "spec_hash": "ADVISORY",
+    "params": "PASS",
+    "hype": "ADVISORY",
+    "disclaimers": "PASS_STUB",
+    "principles": "PASS_STUB",
+    "pii": "ADVISORY"
+  },
+  "summary": {
+    "hype_hits": 117,
+    "hype_max_severity": "HIGH",
+    "hype_high": 9,
+    "hype_medium": 108,
+    "hype_rule_counts": {
+      "RANKING": 90,
+      "TOP": 18,
+      "TERBAIK": 6,
+      "REVOLUSIONER": 3
+    },
+    "param_mismatches": 0,
+    "principles_entries": 2,
+    "pii_critical": 0,
+    "pii_total": 0
+  },
+  "status": "ADVISORY"
+}
