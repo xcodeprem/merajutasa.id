@@ -3,6 +3,7 @@
  * Outputs artifacts/no-silent-drift-report.json used to populate Section 36 in PR template.
  */
 import { promises as fs } from 'fs';
+import crypto from 'crypto';
 async function safeReadJSON(p){ try { return JSON.parse(await fs.readFile(p,'utf8')); } catch { return null; } }
 function overallStatus(parts){
   if (parts.some(p=>p==='FAIL')) return 'FAIL';
@@ -43,23 +44,51 @@ async function main() {
     piiStatus = critical>0 ? 'ADVISORY' : 'PASS_STUB';
   }
 
-  // Gating thresholds (Wave 1 initial)
-  const thresholds = {
-    hype_high_max: 0,                              // any HIGH hype term -> fail
-    disclaimers_errors_allowed: 0,                 // when presence_enforcement true
-    freshness_required_status: 'PASS'              // freshness overall_status must be PASS
-  };
+  // Load gating policy
+  let gatingPolicy=null; let thresholds=null;
+  try {
+    gatingPolicy = JSON.parse(await fs.readFile('docs/integrity/gating-policy-v1.json','utf8'));
+    thresholds = gatingPolicy.thresholds || {};
+  } catch {
+    thresholds = {};
+  }
+  // Derived required artifacts list
+  const evidenceRequired = Array.isArray(thresholds.evidence_minimum_artifacts) ? thresholds.evidence_minimum_artifacts : [];
 
   const freshnessStatus = freshness ? (freshness.summary?.overall_status || 'UNKNOWN') : 'MISSING';
   const hypeHigh = hype?.severity_counts?.HIGH || 0;
   const discErrors = disclaimers?.summary?.errors || 0;
   const discEnforced = disclaimers?.summary?.presence_enforcement === true;
+  const specViolations = spec?.violations?.length || 0;
+  const paramStatusPass = params?.status === (thresholds.param_integrity_status || 'PASS');
+  const piiCritical = pii?.summary?.critical_matches || 0;
+  // Fairness unit test artifact presence & status
+  let fairnessUnitStatus=null; let fairnessUnitFailCount=null;
+  try {
+    const fut = JSON.parse(await fs.readFile('artifacts/fairness-engine-unit-tests.json','utf8'));
+    fairnessUnitFailCount = fut.summary?.fail || 0;
+    fairnessUnitStatus = (fut.summary?.fail===0) ? 'PASS' : 'FAIL';
+  } catch {/* not present */}
+  // Hash fairness config to confirm lock (param lock script will emit artifact; fallback inline)
+  let configHash=null;
+  try { const raw = await fs.readFile('docs/fairness/hysteresis-config-v1.yml'); configHash = crypto.createHash('sha256').update(raw).digest('hex'); } catch {}
 
   const gateChecks = [
-    { id:'HYPE_HIGH', passed: hypeHigh <= thresholds.hype_high_max, detail:{ high:hypeHigh, max:thresholds.hype_high_max } },
-    { id:'DISCLAIMERS_PRESENCE', passed: !discEnforced || discErrors <= thresholds.disclaimers_errors_allowed, detail:{ enforced:discEnforced, errors:discErrors } },
-    { id:'FRESHNESS', passed: freshnessStatus === thresholds.freshness_required_status, detail:{ status:freshnessStatus, required:thresholds.freshness_required_status } }
+    { id:'SPEC_HASH', passed: specViolations <= (thresholds.spec_hash_violation_count ?? 0), detail:{ violations:specViolations, allowed:thresholds.spec_hash_violation_count ?? 0 } },
+    { id:'PARAM_INTEGRITY', passed: paramStatusPass, detail:{ status:params?.status, required:thresholds.param_integrity_status } },
+    { id:'HYPE_HIGH', passed: hypeHigh <= (thresholds.hype_high_max ?? 0), detail:{ high:hypeHigh, max:thresholds.hype_high_max ?? 0 } },
+    { id:'DISCLAIMERS_PRESENCE', passed: !discEnforced || discErrors <= (thresholds.disclaimers_errors_allowed ?? 0), detail:{ enforced:discEnforced, errors:discErrors, allowed:thresholds.disclaimers_errors_allowed ?? 0 } },
+    { id:'PII_CRITICAL', passed: piiCritical <= (thresholds.pii_critical_max ?? 0), detail:{ critical:piiCritical, max:thresholds.pii_critical_max ?? 0 } },
+    { id:'FAIRNESS_UNIT', passed: !thresholds.fairness_engine_required || fairnessUnitStatus==='PASS', detail:{ required:thresholds.fairness_engine_required, status:fairnessUnitStatus, failCount:fairnessUnitFailCount } },
+  { id:'EVIDENCE_MINIMUM', passed: (await Promise.all(evidenceRequired.map(async p=>{ try { await fs.access(p); return true; } catch { return false; } }))).every(v=>v), detail:{ requiredCount:evidenceRequired.length } }
   ];
+  if (thresholds.freshness_required_status){
+    gateChecks.push({ id:'FRESHNESS', passed: freshnessStatus === thresholds.freshness_required_status, detail:{ status:freshnessStatus, required:thresholds.freshness_required_status } });
+  }
+  if (thresholds.principles_required){
+    const principlesPresent = Array.isArray(principles) && principles.length>0;
+    gateChecks.push({ id:'PRINCIPLES_IMPACT', passed: principlesPresent, detail:{ present:principlesPresent } });
+  }
   const gateStatus = gateChecks.every(c=>c.passed) ? 'PASS' : 'FAIL';
 
   const report = {
@@ -88,7 +117,8 @@ async function main() {
       disclaimers_rule_counts: disclaimers?.summary?.ruleCounts || {},
       gate_status: gateStatus,
       gate_checks: gateChecks,
-      thresholds
+  thresholds,
+  gating_policy_version: gatingPolicy?.version || null
     },
     gating: { version:'1.0', status: gateStatus, checks: gateChecks }
   };

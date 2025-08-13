@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-13T08:57:53.004Z",
+  "generated_utc": "2025-08-13T11:11:36.233Z",
   "default_threshold_hours": 24,
   "items": [
     {
@@ -46,7 +46,7 @@
     {
       "path": "artifacts/pii-scan-report.json",
       "exists": true,
-      "age_hours": 5.37,
+      "age_hours": 7.6,
       "threshold_hours": 24,
       "status": "PASS",
       "source_timestamp_type": "mtime"
@@ -54,7 +54,7 @@
     {
       "path": "artifacts/fairness-sim-scenarios.json",
       "exists": true,
-      "age_hours": 0.07,
+      "age_hours": 2.3,
       "threshold_hours": 24,
       "status": "PASS",
       "source_timestamp_type": "mtime"
@@ -62,7 +62,7 @@
     {
       "path": "artifacts/fairness-sim-report.json",
       "exists": true,
-      "age_hours": 0.07,
+      "age_hours": 2.3,
       "threshold_hours": 24,
       "status": "PASS",
       "source_timestamp_type": "mtime"
@@ -70,7 +70,7 @@
     {
       "path": "artifacts/no-silent-drift-report.json",
       "exists": true,
-      "age_hours": 0.01,
+      "age_hours": 2.23,
       "threshold_hours": 6,
       "status": "PASS",
       "source_timestamp_type": "internal"
@@ -78,7 +78,7 @@
     {
       "path": "artifacts/evidence-bundle.json",
       "exists": true,
-      "age_hours": 0,
+      "age_hours": 2.18,
       "threshold_hours": 6,
       "status": "PASS",
       "source_timestamp_type": "internal"

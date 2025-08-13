@@ -6,6 +6,7 @@
  */
 import { promises as fs } from 'fs';
 import yaml from 'yaml';
+import { decide } from './fairness/engine-core.js';
 
 const CONFIG_PATH = 'docs/fairness/hysteresis-config-v1.yml';
 
@@ -15,33 +16,7 @@ async function loadConfig(){
   return parsed.parameters;
 }
 
-function decide(p, prevState, ratio){
-  const state = prevState?.state || 'NONE';
-  const consecutive = prevState?.consecutive || 0;
-  const cooldownLeft = prevState?.cooldownLeft || 0;
-  let newState = state; let newConsec = consecutive; let newCooldown = cooldownLeft>0? cooldownLeft-1:0; const events=[];
-  const severe = ratio < p.T_enter_major;
-  const borderline = ratio < p.T_enter_standard && ratio >= p.T_enter_major;
-  switch(state){
-    case 'NONE':
-      if (severe){ newState='ACTIVE'; events.push({type:'ENTER',reason:'severe'}); }
-      else if (borderline){ newState='CANDIDATE'; newConsec=1; }
-      break;
-    case 'CANDIDATE':
-      if (severe){ newState='ACTIVE'; events.push({type:'ENTER',reason:'severe'}); }
-      else if (borderline){ newConsec+=1; if (newConsec >= p.consecutive_required_standard){ newState='ACTIVE'; events.push({type:'ENTER',reason:'consecutive'});} }
-      else { newState='NONE'; newConsec=0; }
-      break;
-    case 'ACTIVE':
-      if (ratio >= p.T_exit){ newState='CLEARED'; newCooldown=p.cooldown_snapshots_after_exit; events.push({type:'EXIT'}); }
-      break;
-    case 'CLEARED':
-      if (severe){ newState='ACTIVE'; events.push({type:'REENTER',reason:'severe'}); }
-      else if (newCooldown===0 && borderline){ newState='CANDIDATE'; newConsec=1; }
-      break;
-  }
-  return { state:newState, consecutive:newConsec, cooldownLeft:newCooldown, events };
-}
+// decide imported from engine-core
 
 function generateSequence(len=40){
   // Random ratios 0.45–0.75 biased to borderline zone to exercise transitions

@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "wave": "1",
+  "generated_utc": "",
+  "thresholds": {
+    "hype_high_max": 0,
+    "disclaimers_errors_allowed": 0,
+    "param_integrity_status": "PASS",
+    "spec_hash_violation_count": 0,
+    "pii_critical_max": 0,
+    "fairness_engine_required": true,
+  "freshness_required_status": "PASS",
+  "principles_required": true,
+    "evidence_minimum_artifacts": [
+      "artifacts/spec-hash-diff.json",
+      "artifacts/param-integrity-matrix.json",
+      "artifacts/principles-impact-report.json",
+      "artifacts/hype-lint.json",
+      "artifacts/disclaimers-lint.json",
+      "artifacts/pii-scan-report.json",
+      "artifacts/fairness-sim-report.json"
+    ]
+  },
+  "escalation": {
+    "freshness_grace_minutes": 30,
+    "advisory_to_fail_after_days": 7
+  },
+  "notes": [
+    "Wave 1 gating: strict zero tolerance for param mismatches & spec hash violations.",
+    "Hype high severity becomes blocking (previously advisory).",
+    "PII scanner critical matches escalate to fail in Wave 1."
+  ]
+}

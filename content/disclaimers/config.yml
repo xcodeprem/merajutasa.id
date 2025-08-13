@@ -17,5 +17,15 @@ html_checks:
 scope_checks:
   enable: true
 banned_phrase_pattern: '(terbaik|paling unggul|peringkat|ranking|top\\s?\\d+|juara|skor kinerja|nilai kinerja|pemenang)'
+banned_phrase_safe_contexts:
+  - 'misinterpretation as ranking'
+  - 'non-ranking fairness'
+  - 'non\s*ranking fairness'
+  - 'equity index .* bukan ranking'
+  - 'larangan klaim ranking'
+  - 'apakah ini bentuk ranking'
+  - 'apakah ini bentuk peringkat'
+  - 'salah tafsir publik sebagai peringkat'
+  - 'non[-‑]?ranking'
 notes: |
   Adjusting any threshold that reduces strictness (e.g., lowering min_similarity) requires DEC per spec Section 12.

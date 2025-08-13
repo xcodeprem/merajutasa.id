@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "generated_utc": "2025-08-13T08:57:52.953Z",
+  "generated_utc": "2025-08-13T11:11:36.167Z",
   "principles": [
     {
       "principle": "GP1",
-      "match_count": 720,
+      "match_count": 740,
       "domains": [
         "other"
       ],
@@ -16,7 +16,7 @@
           "line": 3,
           "snippet": "STATUS: PRE-HASH SEAL (Hash baseline belum diisi – proses “seal-first” akan menulis hash real & mengunci konten canonical).",
           "pattern": "hash(ing)?",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
@@ -24,7 +24,7 @@
           "line": 14,
           "snippet": "3. Terverifikasi (hash manifest + decision log).",
           "pattern": "hash(ing)?",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
@@ -32,79 +32,79 @@
           "line": 30,
           "snippet": "Catatan: Hash masing-masing DEC akan dimasukkan ke field hash_of_decision_document setelah seal.",
           "pattern": "hash(ing)?",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
           "file": "README.md",
-          "line": 84,
+          "line": 88,
+          "snippet": "<p data-disclaimer-id=\"D5\">Hash excerpt hanya metadata perubahan; tidak memuat konten sensitif.</p>",
+          "pattern": "hash(ing)?",
+          "changed": true,
+          "domain": "other"
+        },
+        {
+          "file": "README.md",
+          "line": 95,
           "snippet": "## 6. Integritas & Hash Chain",
           "pattern": "hash(ing)?",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
           "file": "README.md",
-          "line": 86,
+          "line": 97,
           "snippet": "File canonical tercantum di: docs/integrity/spec-hash-manifest-v1.json",
           "pattern": "hash(ing)?",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
           "file": "README.md",
-          "line": 87,
+          "line": 98,
           "snippet": "Status sekarang: <PENDING_HASH> placeholders menunggu mode seal-first.",
           "pattern": "hash(ing)?",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
           "file": "README.md",
-          "line": 90,
+          "line": 101,
           "snippet": "1. Semua hash_sha256 di manifest terisi.",
           "pattern": "hash(ing)?",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
           "file": "README.md",
-          "line": 91,
+          "line": 102,
           "snippet": "2. Field hash_of_decision_document di tiap DEC cocok 1:1 dengan manifest.",
           "pattern": "hash(ing)?",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
           "file": "README.md",
-          "line": 92,
+          "line": 103,
           "snippet": "3. Perubahan file kunci (next_change_requires_dec=true) tanpa DEC → build FAIL (HASH_MISMATCH_DEC_REQUIRED).",
           "pattern": "hash(ing)?",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
           "file": "README.md",
-          "line": 108,
+          "line": 119,
           "snippet": "| Manifest | docs/integrity/spec-hash-manifest-v1.json | Anchor hash integritas |",
           "pattern": "hash(ing)?",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
           "file": "README.md",
-          "line": 149,
+          "line": 160,
           "snippet": "| spec-hash-diff report | artifacts/spec-hash-diff.json | Yes | Active |",
           "pattern": "hash(ing)?",
-          "changed": false,
-          "domain": "other"
-        },
-        {
-          "file": "README.md",
-          "line": 154,
-          "snippet": "| pii scan summary | artifacts/pii-scan-report.json | Yes | Active |",
-          "pattern": "pii",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         }
       ],
@@ -148,7 +148,7 @@
     },
     {
       "principle": "GP3",
-      "match_count": 66,
+      "match_count": 68,
       "domains": [
         "other"
       ],
@@ -157,26 +157,26 @@
       "evidence_sample": [
         {
           "file": "README.md",
-          "line": 113,
+          "line": 124,
           "snippet": "| Trace Index | docs/governance/trace/archive-trace-index-v1.md | Peta archive → canonical |",
           "pattern": "trace",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
           "file": "README.md",
-          "line": 121,
+          "line": 132,
           "snippet": "- Trace index mendokumentasikan mapping parameter & narasi.",
           "pattern": "trace",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
           "file": "README.md",
-          "line": 256,
+          "line": 267,
           "snippet": "Tidak ada penghapusan retrospektif dokumen historis (archive) – hanya append trace / DEC baru. Pelanggaran = investigasi integritas.",
           "pattern": "trace",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
@@ -256,7 +256,7 @@
     },
     {
       "principle": "GP4",
-      "match_count": 395,
+      "match_count": 414,
       "domains": [
         "other"
       ],
@@ -268,7 +268,7 @@
           "line": 1,
           "snippet": "# Fairness & Integrity Governance Scaffold (Baseline PRE-SEAL)",
           "pattern": "governance",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
@@ -276,7 +276,7 @@
           "line": 10,
           "snippet": "Menyediakan kerangka (scaffold) governance, fairness, dan integrity untuk sistem penandaan “under‑served” berbasis hysteresis (Option F) yang:",
           "pattern": "governance",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
@@ -284,7 +284,7 @@
           "line": 23,
           "snippet": "| DEC-20250812-02 | Hysteresis Adoption Option F | Mengunci parameter fairness (T_enter_major=0.50, T_enter_standard=0.60, consecutive_required_standard=2, T_exit=0.65, cooldown=1 snapshot, stalled wi",
           "pattern": "dec\\-",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
@@ -292,7 +292,7 @@
           "line": 24,
           "snippet": "| DEC-20250812-03 | Principles Reference Activation | Mengaktifkan lint principles.reference (Phase 0 WARN → +48h Phase 1 ERROR → +7d Phase 2 DENY) | Adopted |",
           "pattern": "dec\\-",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
@@ -300,63 +300,63 @@
           "line": 36,
           "snippet": "Parameter final (tersinkron di 3 tempat: DEC-20250812-02, hysteresis-config-v1.yml, methodology fragment):",
           "pattern": "dec\\-",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
           "file": "README.md",
-          "line": 105,
+          "line": 116,
           "snippet": "| DEC Hysteresis | docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md | Sumber adopsi final |",
           "pattern": "governance",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
           "file": "README.md",
-          "line": 105,
+          "line": 116,
           "snippet": "| DEC Hysteresis | docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md | Sumber adopsi final |",
           "pattern": "dec\\-",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
           "file": "README.md",
-          "line": 106,
+          "line": 117,
           "snippet": "| DEC Principles | docs/governance/dec/DEC-20250812-03-principles-reference-activation.md | Enforcement fase |",
           "pattern": "governance",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
           "file": "README.md",
-          "line": 106,
+          "line": 117,
           "snippet": "| DEC Principles | docs/governance/dec/DEC-20250812-03-principles-reference-activation.md | Enforcement fase |",
           "pattern": "dec\\-",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
           "file": "README.md",
-          "line": 107,
+          "line": 118,
           "snippet": "| Disclaimers Spec | docs/governance/disclaimers-lint-spec-v1.md | Canonical disclaimers & rule codes |",
           "pattern": "governance",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
           "file": "README.md",
-          "line": 113,
+          "line": 124,
           "snippet": "| Trace Index | docs/governance/trace/archive-trace-index-v1.md | Peta archive → canonical |",
           "pattern": "governance",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
           "file": "README.md",
-          "line": 114,
+          "line": 125,
           "snippet": "| PR Template | .github/pull_request_template.md | 37 section governance gating |",
           "pattern": "governance",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         }
       ],
@@ -364,7 +364,7 @@
     },
     {
       "principle": "GP5",
-      "match_count": 316,
+      "match_count": 327,
       "domains": [
         "other"
       ],
@@ -376,7 +376,7 @@
           "line": 10,
           "snippet": "Menyediakan kerangka (scaffold) governance, fairness, dan integrity untuk sistem penandaan “under‑served” berbasis hysteresis (Option F) yang:",
           "pattern": "hysteresis",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
@@ -384,7 +384,7 @@
           "line": 12,
           "snippet": "1. Stabil (menghindari volatilitas metrik lewat hysteresis thresholds).",
           "pattern": "hysteresis",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
@@ -392,7 +392,7 @@
           "line": 23,
           "snippet": "| DEC-20250812-02 | Hysteresis Adoption Option F | Mengunci parameter fairness (T_enter_major=0.50, T_enter_standard=0.60, consecutive_required_standard=2, T_exit=0.65, cooldown=1 snapshot, stalled wi",
           "pattern": "anomaly",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
@@ -400,7 +400,7 @@
           "line": 23,
           "snippet": "| DEC-20250812-02 | Hysteresis Adoption Option F | Mengunci parameter fairness (T_enter_major=0.50, T_enter_standard=0.60, consecutive_required_standard=2, T_exit=0.65, cooldown=1 snapshot, stalled wi",
           "pattern": "cooldown",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
@@ -408,7 +408,7 @@
           "line": 23,
           "snippet": "| DEC-20250812-02 | Hysteresis Adoption Option F | Mengunci parameter fairness (T_enter_major=0.50, T_enter_standard=0.60, consecutive_required_standard=2, T_exit=0.65, cooldown=1 snapshot, stalled wi",
           "pattern": "stalled",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
@@ -416,7 +416,7 @@
           "line": 23,
           "snippet": "| DEC-20250812-02 | Hysteresis Adoption Option F | Mengunci parameter fairness (T_enter_major=0.50, T_enter_standard=0.60, consecutive_required_standard=2, T_exit=0.65, cooldown=1 snapshot, stalled wi",
           "pattern": "hysteresis",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
@@ -424,7 +424,7 @@
           "line": 26,
           "snippet": "| (Planned) ANOM-DEC | Anomaly Equity Delta Policy | Mengunci perubahan anomaly_delta_threshold_equity_ratio | Draft Pending |",
           "pattern": "anomaly",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
@@ -432,7 +432,7 @@
           "line": 34,
           "snippet": "## 3. Ringkasan Fairness Hysteresis (Option F Final)",
           "pattern": "hysteresis",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
@@ -440,7 +440,7 @@
           "line": 36,
           "snippet": "Parameter final (tersinkron di 3 tempat: DEC-20250812-02, hysteresis-config-v1.yml, methodology fragment):",
           "pattern": "hysteresis",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
@@ -448,7 +448,7 @@
           "line": 41,
           "snippet": "- Cooldown: 1 snapshot setelah exit sebelum label bisa aktif kembali",
           "pattern": "cooldown",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
@@ -456,7 +456,7 @@
           "line": 42,
           "snippet": "- Stalled (internal only): 5 snapshot berturut equity_ratio antara 0.55 dan <0.65 (monitoring)",
           "pattern": "stalled",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
@@ -464,7 +464,7 @@
           "line": 43,
           "snippet": "- Anomaly Delta: Perubahan mendadak ≥ 0.03 equity_ratio memicu flag analitik (bukan label publik)",
           "pattern": "anomaly",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         }
       ],
@@ -472,7 +472,7 @@
     },
     {
       "principle": "GP6",
-      "match_count": 53,
+      "match_count": 55,
       "domains": [
         "other"
       ],
@@ -484,7 +484,7 @@
           "line": 58,
           "snippet": "| GP6 | Anti Misuse / Anti-Hype (Non-Ranking) |",
           "pattern": "non-?ranking",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
@@ -492,7 +492,7 @@
           "line": 72,
           "snippet": "| D1 | Non-Ranking | Menegaskan sistem bukan ranking kompetitif |",
           "pattern": "non-?ranking",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
@@ -528,30 +528,6 @@
           "domain": "other"
         },
         {
-          "file": "docs\\principles\\GP1-GP10-index.md",
-          "line": 16,
-          "snippet": "| GP6 | Outcome Honesty | Tidak mempresentasikan sinyal sebagai ranking / kualitas; menghindari misframing performa. | Ethical Framing | §14 Fairness Narrative, §30 Equity UI | No “top”, disclaimers R",
-          "pattern": "outcome honesty",
-          "changed": false,
-          "domain": "other"
-        },
-        {
-          "file": "docs\\principles\\GP1-GP10-index.md",
-          "line": 16,
-          "snippet": "| GP6 | Outcome Honesty | Tidak mempresentasikan sinyal sebagai ranking / kualitas; menghindari misframing performa. | Ethical Framing | §14 Fairness Narrative, §30 Equity UI | No “top”, disclaimers R",
-          "pattern": "non-?ranking",
-          "changed": false,
-          "domain": "other"
-        },
-        {
-          "file": "docs\\principles\\GP1-GP10-index.md",
-          "line": 19,
-          "snippet": "| GP9 | Non-Ranking Fairness | Label under‑served & equity index tidak memeringkat; hanya sinyal pemerataan dengan hysteresis stabil untuk menekan noise. | Fairness Stability | §14 Fairness, §42 Hyste",
-          "pattern": "non-?ranking",
-          "changed": false,
-          "domain": "other"
-        },
-        {
           "file": "docs\\privacy\\pii-pattern-library-v1.md",
           "line": 6,
           "snippet": "NON-DESTRUCTIVE: Dokumen ini MENAMBAHKAN detail; tidak menghapus strategi/konstraint sebelumnya (GP1 Privacy-by-Architecture, GP6 Outcome Honesty, GP9 Non-Ranking).",
@@ -574,13 +550,37 @@
           "pattern": "outcome honesty",
           "changed": false,
           "domain": "other"
+        },
+        {
+          "file": "docs\\privacy\\pii-pattern-library-v1.md",
+          "line": 21,
+          "snippet": "| GP9 Non-Ranking Fairness | Scanner tidak membuat penilaian entitas; hanya sanitasi. |",
+          "pattern": "non-?ranking",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs\\principles\\GP1-GP10-index.md",
+          "line": 16,
+          "snippet": "| GP6 | Outcome Honesty | Tidak mempresentasikan sinyal sebagai ranking / kualitas; menghindari misframing performa. | Ethical Framing | §14 Fairness Narrative, §30 Equity UI | No “top”, disclaimers R",
+          "pattern": "outcome honesty",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs\\principles\\GP1-GP10-index.md",
+          "line": 16,
+          "snippet": "| GP6 | Outcome Honesty | Tidak mempresentasikan sinyal sebagai ranking / kualitas; menghindari misframing performa. | Ethical Framing | §14 Fairness Narrative, §30 Equity UI | No “top”, disclaimers R",
+          "pattern": "non-?ranking",
+          "changed": false,
+          "domain": "other"
         }
       ],
       "evidence_truncated": true
     },
     {
       "principle": "GP7",
-      "match_count": 112,
+      "match_count": 115,
       "domains": [
         "other"
       ],
@@ -592,71 +592,71 @@
           "line": 58,
           "snippet": "| GP6 | Anti Misuse / Anti-Hype (Non-Ranking) |",
           "pattern": "hype",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
           "file": "README.md",
-          "line": 134,
+          "line": 145,
           "snippet": "4. Hindari istilah terlarang (lihat Anti‑Hype).",
           "pattern": "hype",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
           "file": "README.md",
-          "line": 136,
+          "line": 147,
           "snippet": "Anti‑Hype (Contoh Kata Dilarang – akan lint):",
           "pattern": "hype",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
           "file": "README.md",
-          "line": 138,
-          "snippet": "- “ranking”, “peringkat”, “top”, “terbaik”, “no.1”, “paling unggul”, “skor kompetitif”",
+          "line": 149,
+          "snippet": "- “ranking”, “peringkat”, “top”, “terbaik”, “no.1”, “paling unggul”, “skor kompetitif” <!-- lint-allow-negated-context -->",
           "pattern": "terbaik",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
           "file": "README.md",
-          "line": 138,
-          "snippet": "- “ranking”, “peringkat”, “top”, “terbaik”, “no.1”, “paling unggul”, “skor kompetitif”",
+          "line": 149,
+          "snippet": "- “ranking”, “peringkat”, “top”, “terbaik”, “no.1”, “paling unggul”, “skor kompetitif” <!-- lint-allow-negated-context -->",
           "pattern": "unggul",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
           "file": "README.md",
-          "line": 138,
-          "snippet": "- “ranking”, “peringkat”, “top”, “terbaik”, “no.1”, “paling unggul”, “skor kompetitif”",
+          "line": 149,
+          "snippet": "- “ranking”, “peringkat”, “top”, “terbaik”, “no.1”, “paling unggul”, “skor kompetitif” <!-- lint-allow-negated-context -->",
           "pattern": "top\\b",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
           "file": "README.md",
-          "line": 152,
+          "line": 163,
           "snippet": "| hype lint report | artifacts/hype-lint.json | Yes | Active |",
           "pattern": "hype",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
           "file": "README.md",
-          "line": 196,
+          "line": 207,
           "snippet": "- Mengklaim “terbaik”, “top”, “juara”.",
           "pattern": "terbaik",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
           "file": "README.md",
-          "line": 196,
+          "line": 207,
           "snippet": "- Mengklaim “terbaik”, “top”, “juara”.",
           "pattern": "top\\b",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
@@ -705,7 +705,7 @@
         },
         {
           "file": "docs\\integrity\\credential-schema-final-v1.md",
-          "line": 19,
+          "line": 23,
           "snippet": "| GP3 Federated Mindset | Format JSON-LD / W3C Verifiable Credential compatible subset → portabilitas lintas platform. |",
           "pattern": "portabil",
           "changed": false,
@@ -713,7 +713,7 @@
         },
         {
           "file": "docs\\integrity\\credential-schema-final-v1.md",
-          "line": 89,
+          "line": 94,
           "snippet": "| country | string | Optional | “ID” default | For portability |",
           "pattern": "portabil",
           "changed": false,
@@ -721,7 +721,7 @@
         },
         {
           "file": "docs\\integrity\\credential-schema-final-v1.md",
-          "line": 495,
+          "line": 502,
           "snippet": "Credential uses canonical English tokens for portability; UI localizes labels. Do not localize field keys. Terminology object stage enumerations remain English-coded identifiers.",
           "pattern": "portabil",
           "changed": false,
@@ -729,7 +729,7 @@
         },
         {
           "file": "docs\\integrity\\credential-schema-final-v1.md",
-          "line": 590,
+          "line": 599,
           "snippet": "| Portability | JSON-LD + DID method |",
           "pattern": "portabil",
           "changed": false,
@@ -737,16 +737,16 @@
         },
         {
           "file": "docs\\integrity\\credential-schema-final-v1.md",
-          "line": 648,
-          "snippet": "Integrity Credential v1.0 memberikan pondasi portabel, minim, non‑ranking, dan dapat diaudit yang menyelaraskan semua pilar: privacy, fairness, governance, portability, & transition. Tidak ada deviati",
+          "line": 657,
+          "snippet": "Integrity Credential v1.0 memberikan pondasi portabel, minim, tanpa mekanisme peringkat kompetitif, dan dapat diaudit yang menyelaraskan semua pilar: privacy, fairness, governance, portability, & tran",
           "pattern": "portabil",
           "changed": false,
           "domain": "other"
         },
         {
           "file": "docs\\integrity\\credential-schema-final-v1.md",
-          "line": 648,
-          "snippet": "Integrity Credential v1.0 memberikan pondasi portabel, minim, non‑ranking, dan dapat diaudit yang menyelaraskan semua pilar: privacy, fairness, governance, portability, & transition. Tidak ada deviati",
+          "line": 657,
+          "snippet": "Integrity Credential v1.0 memberikan pondasi portabel, minim, tanpa mekanisme peringkat kompetitif, dan dapat diaudit yang menyelaraskan semua pilar: privacy, fairness, governance, portability, & tran",
           "pattern": "extensib",
           "changed": false,
           "domain": "other"
@@ -764,7 +764,7 @@
     },
     {
       "principle": "GP9",
-      "match_count": 318,
+      "match_count": 340,
       "domains": [
         "other"
       ],
@@ -776,7 +776,7 @@
           "line": 1,
           "snippet": "# Fairness & Integrity Governance Scaffold (Baseline PRE-SEAL)",
           "pattern": "fairness",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
@@ -784,7 +784,7 @@
           "line": 4,
           "snippet": "Non-Removal Assertion: README ini akan dikelola append-only; perubahan substansial (narasi fairness, klaim integritas, prinsip) memerlukan DEC baru.",
           "pattern": "fairness",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
@@ -792,7 +792,7 @@
           "line": 10,
           "snippet": "Menyediakan kerangka (scaffold) governance, fairness, dan integrity untuk sistem penandaan “under‑served” berbasis hysteresis (Option F) yang:",
           "pattern": "fairness",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
@@ -800,7 +800,7 @@
           "line": 23,
           "snippet": "| DEC-20250812-02 | Hysteresis Adoption Option F | Mengunci parameter fairness (T_enter_major=0.50, T_enter_standard=0.60, consecutive_required_standard=2, T_exit=0.65, cooldown=1 snapshot, stalled wi",
           "pattern": "fairness",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
@@ -808,7 +808,7 @@
           "line": 34,
           "snippet": "## 3. Ringkasan Fairness Hysteresis (Option F Final)",
           "pattern": "fairness",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
@@ -816,7 +816,7 @@
           "line": 45,
           "snippet": "Tujuan: Mengurangi noise / flapping label “under-served” tanpa mengubah sifat non‑ranking.",
           "pattern": "under-?served",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
@@ -824,7 +824,7 @@
           "line": 58,
           "snippet": "| GP6 | Anti Misuse / Anti-Hype (Non-Ranking) |",
           "pattern": "non-?ranking",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
@@ -832,7 +832,7 @@
           "line": 61,
           "snippet": "| GP9 | Fairness Signal Stability (Hysteresis) |",
           "pattern": "fairness",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
@@ -840,31 +840,31 @@
           "line": 72,
           "snippet": "| D1 | Non-Ranking | Menegaskan sistem bukan ranking kompetitif |",
           "pattern": "non-?ranking",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
           "file": "README.md",
-          "line": 101,
+          "line": 85,
+          "snippet": "<p data-disclaimer-id=\"D1\">Equity Index & daftar under‑served bukan ranking kualitas—hanya sinyal pemerataan.</p>",
+          "pattern": "equity index",
+          "changed": true,
+          "domain": "other"
+        },
+        {
+          "file": "README.md",
+          "line": 112,
           "snippet": "| Fairness Config | docs/fairness/hysteresis-config-v1.yml | Parameter runtime |",
           "pattern": "fairness",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         },
         {
           "file": "README.md",
-          "line": 102,
+          "line": 113,
           "snippet": "| Narrative Publik | docs/fairness/hysteresis-public-methodology-fragment-v1.md | Penjelasan mekanisme & disclaimers |",
           "pattern": "fairness",
-          "changed": false,
-          "domain": "other"
-        },
-        {
-          "file": "README.md",
-          "line": 103,
-          "snippet": "| State Machine | docs/fairness/hysteresis-state-machine-transitions.md | Transisi label |",
-          "pattern": "fairness",
-          "changed": false,
+          "changed": true,
           "domain": "other"
         }
       ],
@@ -968,9 +968,9 @@
           "domain": "other"
         },
         {
-          "file": "docs\\master-spec\\master-spec-v2.0.md",
-          "line": 44,
-          "snippet": "§35 Ethical & Copy Guidelines (Disclaimers, Anti-Hype – GP5, GP6, GP7)",
+          "file": "docs\\integrity\\credential-schema-final-v1.md",
+          "line": 117,
+          "snippet": "| Predictive / Risk | riskScore, vulnerabilityIndex | Ethical hazard, not validated |",
           "pattern": "ethic",
           "changed": false,
           "domain": "other"

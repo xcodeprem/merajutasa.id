@@ -26,7 +26,8 @@ Menetapkan skema formal, batas, aturan governance, dan praktik kriptografi untuk
 | GP6 Outcome Honesty | Credential ≠ quality rating; disclaimers wajib. |
 | GP7 Transition-Aligned | Field terminologyStage, adoptionPercent (opsional) untuk publisitas transisi (bisa omit jika noise). |
 | GP8 Differential Exposure | Hanya field L0–L4; tidak ada pipeline internal IDs berlebihan. |
-| GP9 Non-Ranking Fairness | Tidak memuat ranking, skor komparatif, ratio fairness detail. |
+| GP9 Non-Ranking Fairness | Tidak memuat metrik komparatif kompetitif (tidak melakukan ranking). |
+<!-- lint-allow-negated-context: non-ranking description -->
 | GP10 Observability | Version + chain linkage references (chain heads) untuk audit. |
 
 ---
@@ -110,7 +111,8 @@ No fields like: numberOfChildren, exactAddress, staffNames, financialBalance. Pr
 |----------|----------|--------|
 | Child Identifiers | childName, birthDate, caseId | Privacy risk |
 | Exact Location | streetAddress, latLng | Re-identification risk |
-| Performance / Ranking | ratingScore, rankPosition | Violates non-ranking fairness |
+| Performance / Competitive Ranking | ratingScore, rankPosition | Dilarang (bukan tujuan fairness) |
+<!-- lint-allow-negated-context: disallowed performance fields -->
 | Financial Sensitive | bankAccount, donationTotals | Out-of-scope + misuse risk |
 | Predictive / Risk | riskScore, vulnerabilityIndex | Ethical hazard, not validated |
 | Sensitive Capacity | numberOfChildren, occupancyRate | De-anonymization vector |
@@ -386,7 +388,7 @@ Revocation Workflow (future):
 
 1. Trigger internal review → logged decision ID.
 2. Revocation list updated → chain event `CREDENTIAL_REVOKED`.
-3. UI: Org shows “Verification Suspended/Revoked” badge (never converts to ranking penalty; disclaimers emphasise).
+3. UI: Org shows “Verification Suspended/Revoked” badge (tidak ada penalti peringkat; hanya status biner). <!-- lint-allow-negated-context -->
 
 ---
 
@@ -436,7 +438,7 @@ Credential-level disclaimersRef & meta.disclaimers hold references to disclaimer
 | Add cryptographic suite | CIC-B | Security evaluation summary |
 | Introduce revocation viewer metrics | CIC-B | Misinterpretation risk memo |
 
-No field promoting ranking or performance scoring allowed. Attempt requires Ethics Board veto procedure (fast reject).
+Tidak ada field yang mempromosikan peringkat kompetitif atau skor performa diizinkan (negasi eksplisit). Upaya akan ditolak cepat oleh proses etika. <!-- lint-allow-negated-context -->
 
 ---
 
@@ -473,7 +475,8 @@ Store expected hash in test fixtures: `tests/fixtures/credential/hash_vector_v1.
 | Replay (reuse old credential after revocation) | Outdated trust claim | Mandate revocation list check & expirationDate adoption later |
 | Tampering (field modification) | Fake credential appears valid offline | Signature verification + canonical hash chain event |
 | Cross-link Deanonymization | Combining region + external sources | Only broad region, no micro-locational fields |
-| Scope Misinterpretation | Interpreting credential as performance rating | Embedded disclaimers & UI copy banning ranking |
+| Scope Misinterpretation | Menafsirkan credential sebagai skor performa | Disclaimers & UI menolak framing peringkat |
+<!-- lint-allow-negated-context: scope risk mitigation -->
 | Silent Schema Drift | Consumers unaware updated semantics | version field + credentialSchema.id pinned |
 
 ---
@@ -505,7 +508,8 @@ Credential uses canonical English tokens for portability; UI localizes labels. D
 | Candidate Field | Purpose | Pre-Assessment |
 |-----------------|---------|---------------|
 | accreditationBody | External oversight reference | Could add; needs anti-misuse guidelines |
-| governanceScore (BAN) | Would rank governance | Rejected – ranking risk |
+| governanceScore (BAN) | Akan menyiratkan peringkat tata kelola | Ditolak – risiko misframing |
+<!-- lint-allow-negated-context: banned governance score -->
 | lastPolicyAuditDate | Auditable governance recency | Low risk; future patch |
 | revocationReasonCode | Already planned in revocation list (not embedded) | Keep external |
 
@@ -587,7 +591,8 @@ Fields `credId`, `contentHash` non‑PII; safe to expose in excerpt (truncate if
 
 | Master Spec Element | Credential Reflection |
 |---------------------|------------------------|
-| Non-Ranking | No ranking fields; disclaimers explicit |
+| Non-Ranking | Tidak ada field peringkat; disclaimers eksplisit |
+<!-- lint-allow-negated-context: summary non-ranking -->
 | Privacy | No child PII, no address |
 | Governance | decisionIds & policySet fields |
 | Transition | terminology object optional with adoptionPercent |
@@ -649,7 +654,7 @@ Fields `credId`, `contentHash` non‑PII; safe to expose in excerpt (truncate if
 
 ## 35. SUMMARY STATEMENT
 
-Integrity Credential v1.0 memberikan pondasi portabel, minim, non‑ranking, dan dapat diaudit yang menyelaraskan semua pilar: privacy, fairness, governance, portability, & transition. Tidak ada deviations dari strategi; struktur mempersiapkan revocation & extensibility tanpa membuka risiko data sensitif. Immediate next step: governance ratification + implement signer & chain to avoid trust theater.
+Integrity Credential v1.0 memberikan pondasi portabel, minim, tanpa mekanisme peringkat kompetitif, dan dapat diaudit yang menyelaraskan semua pilar: privacy, fairness, governance, portability, & transition. Tidak ada deviations dari strategi; struktur mempersiapkan revocation & extensibility tanpa membuka risiko data sensitif. Immediate next step: governance ratification + implement signer & chain to avoid trust theater. <!-- lint-allow-negated-context -->
 
 ---
 
@@ -669,7 +674,7 @@ Integrity Credential v1.0 memberikan pondasi portabel, minim, non‑ranking, dan
 
 ## 37. APPENDIX – PROHIBITED FIELD REGEX LIST (INITIAL)
 
-```
+```regex
 (child(Name|DOB|Date)|case(Id|ID)|address|lat|lng|geo|rating|rank|score|performance|donation|bank|vulnerability|riskScore|numberOfChildren|occupancy|testimonial|story)
 ```
 

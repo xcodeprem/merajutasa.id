@@ -1,21 +1,21 @@
 {
-  "timestamp_utc": "2025-08-13T08:57:53.117Z",
+  "timestamp_utc": "2025-08-13T11:11:36.640Z",
   "components": {
     "spec_hash": "PASS",
     "params": "PASS",
     "hype": "ADVISORY",
-    "disclaimers": "ADVISORY",
+    "disclaimers": "PASS_STUB",
     "principles": "ADVISORY",
     "pii": "PASS_STUB",
     "freshness": "PASS"
   },
   "summary": {
-    "hype_hits": 120,
+    "hype_hits": 124,
     "hype_max_severity": "HIGH",
     "hype_high": 9,
-    "hype_medium": 111,
+    "hype_medium": 115,
     "hype_rule_counts": {
-      "RANKING": 93,
+      "RANKING": 97,
       "TOP": 18,
       "TERBAIK": 6,
       "REVOLUSIONER": 3
@@ -24,17 +24,30 @@
     "principles_entries": 0,
     "pii_critical": 0,
     "pii_total": 0,
-    "disclaimers_errors": 18,
-    "disclaimers_warnings": 19,
+    "disclaimers_errors": 0,
+    "disclaimers_warnings": 8,
     "disclaimers_rule_counts": {
-      "DISC-PRES-001": 13,
-      "DISC-TEXT-003": 2,
-      "DISC-PHRASE-009": 4,
-      "DISC-DUPL-005": 11,
-      "DISC-SCOPE-006": 7
+      "DISC-DUPL-005": 2,
+      "DISC-SCOPE-006": 6
     },
     "gate_status": "FAIL",
     "gate_checks": [
+      {
+        "id": "SPEC_HASH",
+        "passed": true,
+        "detail": {
+          "violations": 0,
+          "allowed": 0
+        }
+      },
+      {
+        "id": "PARAM_INTEGRITY",
+        "passed": true,
+        "detail": {
+          "status": "PASS",
+          "required": "PASS"
+        }
+      },
       {
         "id": "HYPE_HIGH",
         "passed": false,
@@ -47,8 +60,33 @@
         "id": "DISCLAIMERS_PRESENCE",
         "passed": true,
         "detail": {
-          "enforced": false,
-          "errors": 18
+          "enforced": true,
+          "errors": 0,
+          "allowed": 0
+        }
+      },
+      {
+        "id": "PII_CRITICAL",
+        "passed": true,
+        "detail": {
+          "critical": 0,
+          "max": 0
+        }
+      },
+      {
+        "id": "FAIRNESS_UNIT",
+        "passed": true,
+        "detail": {
+          "required": true,
+          "status": "PASS",
+          "failCount": 0
+        }
+      },
+      {
+        "id": "EVIDENCE_MINIMUM",
+        "passed": true,
+        "detail": {
+          "requiredCount": 7
         }
       },
       {
@@ -57,19 +95,57 @@
         "detail": {
           "status": "PASS",
           "required": "PASS"
+        }
+      },
+      {
+        "id": "PRINCIPLES_IMPACT",
+        "passed": false,
+        "detail": {
+          "present": false
         }
       }
     ],
     "thresholds": {
       "hype_high_max": 0,
       "disclaimers_errors_allowed": 0,
-      "freshness_required_status": "PASS"
-    }
+      "param_integrity_status": "PASS",
+      "spec_hash_violation_count": 0,
+      "pii_critical_max": 0,
+      "fairness_engine_required": true,
+      "freshness_required_status": "PASS",
+      "principles_required": true,
+      "evidence_minimum_artifacts": [
+        "artifacts/spec-hash-diff.json",
+        "artifacts/param-integrity-matrix.json",
+        "artifacts/principles-impact-report.json",
+        "artifacts/hype-lint.json",
+        "artifacts/disclaimers-lint.json",
+        "artifacts/pii-scan-report.json",
+        "artifacts/fairness-sim-report.json"
+      ]
+    },
+    "gating_policy_version": 1
   },
   "gating": {
     "version": "1.0",
     "status": "FAIL",
     "checks": [
+      {
+        "id": "SPEC_HASH",
+        "passed": true,
+        "detail": {
+          "violations": 0,
+          "allowed": 0
+        }
+      },
+      {
+        "id": "PARAM_INTEGRITY",
+        "passed": true,
+        "detail": {
+          "status": "PASS",
+          "required": "PASS"
+        }
+      },
       {
         "id": "HYPE_HIGH",
         "passed": false,
@@ -82,8 +158,33 @@
         "id": "DISCLAIMERS_PRESENCE",
         "passed": true,
         "detail": {
-          "enforced": false,
-          "errors": 18
+          "enforced": true,
+          "errors": 0,
+          "allowed": 0
+        }
+      },
+      {
+        "id": "PII_CRITICAL",
+        "passed": true,
+        "detail": {
+          "critical": 0,
+          "max": 0
+        }
+      },
+      {
+        "id": "FAIRNESS_UNIT",
+        "passed": true,
+        "detail": {
+          "required": true,
+          "status": "PASS",
+          "failCount": 0
+        }
+      },
+      {
+        "id": "EVIDENCE_MINIMUM",
+        "passed": true,
+        "detail": {
+          "requiredCount": 7
         }
       },
       {
@@ -92,6 +193,13 @@
         "detail": {
           "status": "PASS",
           "required": "PASS"
+        }
+      },
+      {
+        "id": "PRINCIPLES_IMPACT",
+        "passed": false,
+        "detail": {
+          "present": false
         }
       }
     ]

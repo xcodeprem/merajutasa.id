@@ -21,13 +21,18 @@
     "fairness:hysteresis-run": "node tools/fairness/hysteresis-engine.js",
     "fairness:sim": "node tools/fairness-sim.js",
   "fairness:engine": "node tools/fairness-engine-runtime.js",
+  "test:fairness-unit": "node tools/tests/fairness-engine-unit-tests.js",
+  "snapshot:artifacts": "node tools/snapshot-artifacts-baseline.js",
     "evidence:validate": "node tools/validate-evidence.js",
     "evidence:bundle": "node tools/evidence-bundle.js",
   "evidence:collision": "node tools/evidence-collision-test.js",
   "param:integrity": "node tools/param-integrity.js",
     "agent:trend": "node tools/agent-trend-summary.js",
     "pr:labels": "node tools/pr-label-advisor.js",
-    "baseline:snapshot": "node tools/snapshot-governance-baseline.js"
+  "baseline:snapshot": "node tools/snapshot-governance-baseline.js",
+  "fairness:metrics": "node tools/fairness/fairness-metrics.js",
+  "param:lock": "node tools/param-lock-verify.js",
+  "governed:scan": "node tools/governed-change-scan.js"
   },
   "devDependencies": {
     "markdownlint": "^0.34.0",

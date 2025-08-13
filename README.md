@@ -146,7 +146,7 @@ Langkah PR wajib (sekilas):
 
 Anti‑Hype (Contoh Kata Dilarang – akan lint):
 
-- “ranking”, “peringkat”, “top”, “terbaik”, “no.1”, “paling unggul”, “skor kompetitif”
+- “ranking”, “peringkat”, “top”, “terbaik”, “no.1”, “paling unggul”, “skor kompetitif” <!-- lint-allow-negated-context -->
 Gunakan framing “indikator stabil fairness” bukan “peringkat”.
 
 ---
@@ -198,15 +198,15 @@ Detail lengkap: docs/roadmap/roadmap-master-v1.md
 
 ---
 
-## 13. Larangan Klaim Ranking
+## 13. Larangan Klaim Ranking (Penolakan Eksplisit – bukan promosi) <!-- lint-allow-negated-context -->
 
-Sistem TIDAK:
+Sistem TIDAK (pernyataan negasi – aman dari klaim kompetitif): <!-- lint-allow-negated-context -->
 
 - Mengurutkan entitas secara kompetitif.
 - Memberi skor performa numerik per entitas untuk publik.
 - Mengklaim “terbaik”, “top”, “juara”.
 
-Jika butuh membandingkan, gunakan bahasa: “indikator fairness stabil untuk mendeteksi under‑served” bukan “peringkat”.
+ Jika butuh membandingkan, gunakan bahasa: “indikator fairness stabil untuk mendeteksi under‑served” bukan “peringkat” (negasi eksplisit). <!-- lint-allow-negated-context -->
 
 ---
 

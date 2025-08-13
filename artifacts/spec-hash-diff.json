@@ -1,6 +1,6 @@
 {
   "mode": "verify",
-  "timestamp_utc": "2025-08-13T09:01:19Z",
+  "timestamp_utc": "2025-08-13T11:11:35Z",
   "updated": [],
   "unchanged": [
     "docs/roadmap/roadmap-master-v1.md",
@@ -39,13 +39,17 @@
     "docs/governance/dec/DEC-20250813-01-known-debt-register.md",
     "docs/onboarding/agent-role-policy-v1.md",
     "docs/onboarding/agent-guardrails-v1.md",
-    "docs/governance/dec/DEC-20250813-03-disclaimers-presence-enforcement.md"
+    "docs/governance/dec/DEC-20250813-03-disclaimers-presence-enforcement.md",
+    "docs/governance/dec/DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
+    "content/disclaimers/config.yml",
+    "tools/fairness/engine-core.js",
+    "docs/integrity/gating-policy-v1.json"
   ],
   "placeholders_sealed": [],
   "placeholders_remaining": [],
   "violations": [],
   "summary": {
-    "total_entries": 37,
+    "total_entries": 41,
     "updated_count": 0,
     "violation_count": 0,
     "placeholders_remaining_count": 0

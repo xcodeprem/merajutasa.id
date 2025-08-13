@@ -5,6 +5,7 @@
  */
 import { promises as fs } from 'fs';
 import yaml from 'yaml';
+import { decide } from './engine-core.js';
 
 const CONFIG_PATH = 'docs/fairness/hysteresis-config-v1.yml';
 const SNAPSHOT_INPUT = process.env.HYST_SNAPSHOT_INPUT || 'artifacts/equity-snapshots.json';
@@ -19,33 +20,7 @@ async function loadSnapshots(){ try { return JSON.parse(await fs.readFile(SNAPSH
 async function loadState(){ try { return JSON.parse(await fs.readFile(STATE_PATH,'utf8')); } catch { return {}; } }
 async function loadEvents(){ try { return JSON.parse(await fs.readFile(EVENTS_PATH,'utf8')); } catch { return []; } }
 
-function decide(p, prev, ratio){
-  const state = prev?.state || 'NONE';
-  const consecutive = prev?.consecutive || 0;
-  const cooldownLeft = prev?.cooldownLeft || 0;
-  let newState = state; let newConsec = consecutive; let newCooldown = cooldownLeft>0? cooldownLeft-1:0; const evs=[];
-  const severe = ratio < p.T_enter_major;
-  const borderline = ratio < p.T_enter_standard && ratio >= p.T_enter_major;
-  switch(state){
-    case 'NONE':
-      if (severe){ newState='ACTIVE'; evs.push({type:'ENTER',reason:'severe'}); }
-      else if (borderline){ newState='CANDIDATE'; newConsec=1; }
-      break;
-    case 'CANDIDATE':
-      if (severe){ newState='ACTIVE'; evs.push({type:'ENTER',reason:'severe'}); }
-      else if (borderline){ newConsec+=1; if (newConsec >= p.consecutive_required_standard){ newState='ACTIVE'; evs.push({type:'ENTER',reason:'consecutive'});} }
-      else { newState='NONE'; newConsec=0; }
-      break;
-    case 'ACTIVE':
-      if (ratio >= p.T_exit){ newState='CLEARED'; newCooldown=p.cooldown_snapshots_after_exit; evs.push({type:'EXIT'}); }
-      break;
-    case 'CLEARED':
-      if (severe){ newState='ACTIVE'; evs.push({type:'REENTER',reason:'severe'}); }
-      else if (newCooldown===0 && borderline){ newState='CANDIDATE'; newConsec=1; }
-      break;
-  }
-  return { state:newState, consecutive:newConsec, cooldownLeft:newCooldown, events:evs };
-}
+// decide() now imported from engine-core.js
 
 async function main(){
   const p = await loadConfig();

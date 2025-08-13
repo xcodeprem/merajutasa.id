@@ -1,49 +1,27 @@
 {
   "version": 3,
-  "status": "ERROR",
+  "status": "PASS",
   "summary": {
-    "errors": 4,
-    "warnings": 10,
+    "errors": 0,
+    "warnings": 8,
     "metrics": {
       "missingIds": 0,
       "drift": 0,
       "shadow": 0,
-      "bannedNear": 4,
-      "duplicates": 4,
+      "bannedNear": 0,
+      "duplicates": 2,
       "scope": 6,
       "locale": 0
     },
     "versionMismatch": false,
     "computed_hash": "10c03b7fc7c7543399d1c2ce9bf121ec5e7fb46ddee876b286fdadde035089d0",
     "ruleCounts": {
-      "DISC-PHRASE-009": 4,
-      "DISC-DUPL-005": 4,
+      "DISC-DUPL-005": 2,
       "DISC-SCOPE-006": 6
     },
     "presence_enforcement": true
   },
-  "errors": [
-    {
-      "code": "DISC-PHRASE-009",
-      "file": "README.md",
-      "severity": "ERROR"
-    },
-    {
-      "code": "DISC-PHRASE-009",
-      "file": "docs\\integrity\\credential-schema-final-v1.md",
-      "severity": "ERROR"
-    },
-    {
-      "code": "DISC-PHRASE-009",
-      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
-      "severity": "ERROR"
-    },
-    {
-      "code": "DISC-PHRASE-009",
-      "file": "docs\\governance\\dec\\DEC-20250812-02-hysteresis-adoption.md",
-      "severity": "ERROR"
-    }
-  ],
+  "errors": [],
   "warnings": [
     {
       "code": "DISC-DUPL-005",
@@ -57,20 +35,6 @@
       "page": "landing",
       "id": "D7",
       "count": 4,
-      "severity": "WARNING"
-    },
-    {
-      "code": "DISC-DUPL-005",
-      "page": "landing",
-      "id": "D2",
-      "count": 3,
-      "severity": "WARNING"
-    },
-    {
-      "code": "DISC-DUPL-005",
-      "page": "governance",
-      "id": "D7",
-      "count": 3,
       "severity": "WARNING"
     },
     {

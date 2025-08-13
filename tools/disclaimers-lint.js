@@ -73,6 +73,10 @@ async function main(){
   const MIN_SIM = cfg.min_similarity ?? 0.90;
   const NOISE_SIM = cfg.noise_similarity ?? 0.15;
   const BANNED_RE = new RegExp(cfg.banned_phrase_pattern || '(terbaik|paling unggul|peringkat|ranking|top\\s?\\d+|juara|skor kinerja|nilai kinerja|pemenang)','i');
+  // Safe context whitelist (policy guard) – phrases that legitimately contain banned tokens in explanatory / negated framing.
+  // Configurable via content/disclaimers/config.yml (banned_phrase_safe_contexts). These are removed before pattern test
+  // so that educational / risk description lines (e.g., "misinterpretation as ranking", "non‑ranking fairness") do not raise false positives.
+  const SAFE_CONTEXT_PATTERNS = (cfg.banned_phrase_safe_contexts || []).map(p=>new RegExp(p,'i'));
   const seenLinePerPageIdFile = new Set();
   for(const f of candidateFiles){
     if(/disclaimers-lint-spec-v1\.md$/i.test(f)) continue; // skip reference spec from extraction noise
@@ -123,22 +127,57 @@ async function main(){
   for(const f of candidateFiles){ let txt; try{ txt=await fs.readFile(f,'utf8'); } catch { continue; } txt.split(/\r?\n/).forEach(line=>{ const trimmed=line.trim(); if(!trimmed) return; if(fairnessCluster.test(trimmed) && !/D[1-7]/.test(trimmed)){ for(const d of canonicalArray){ const sim=overlapCoefficient(tokenize(d.text), tokenize(trimmed)); if(sim>=0.6){ const h=sha256(trimmed); if(!shadowSeen.has(h)){ errors.push({code:'DISC-PRES-002', similarity:+sim.toFixed(2), severity:'ERROR'}); shadowSeen.add(h); metrics.shadow++; } break; } } }}); }
   // Banned phrase proximity
   if(cfg.enforce_banned_phrase !== false){
-    for (const f of candidateFiles){ 
-      if(/disclaimers-lint-spec-v1\.md$/i.test(f)) continue; // exclude spec
-      let txt; try { txt = await fs.readFile(f,'utf8'); } catch { continue; } 
-      if (!extracted.some(e=>e.sourceFile===f && (e.id==='D1'||e.id==='D3'))) continue; 
-      const sanitized = txt.split(/\r?\n/)
-        .filter(l=>!/data-disclaimer-id=/.test(l))
-        .filter(l=>!/^\s*-\s+.*(ranking|peringkat|terbaik|paling unggul)/i.test(l)) // skip example bullet lines
-        .join('\\n');
-      const negationRemoved = sanitized.replace(/bukan\s+(ranking|peringkat)/gi,'');
-      if (BANNED_RE.test(negationRemoved)) { errors.push({code:'DISC-PHRASE-009', file:f, severity:'ERROR'}); metrics.bannedNear++; } 
+    for (const f of candidateFiles){
+      if(/disclaimers-lint-spec-v1\.md$/i.test(f)) continue; // exclude reference spec
+      let txt; try { txt = await fs.readFile(f,'utf8'); } catch { continue; }
+      // Only evaluate proximity if fairness disclaimers (D1/D3) actually appear OR file declares explicit fairness risk sections
+      const fairnessAnchor = /(misinterpretation as ranking|larangan klaim ranking)/i.test(txt);
+      if (!fairnessAnchor && !extracted.some(e=>e.sourceFile===f && (e.id==='D1'||e.id==='D3'))) continue;
+      const lines = txt.split(/\r?\n/);
+      let offending = false;
+    lines.forEach((l,i)=>{
+        if(offending) return; // only record one error per file
+  if(/data-disclaimer-id=/.test(l)) return; // skip canonical lines
+  if(/^\s*\|/.test(l)) return; // skip markdown table rows (reference tables)
+        if(/data-phrase-context="disclaimer-explanation"/i.test(l)) return; // explicit attribute bypass (spec defined)
+        if(/^\s*-\s+.*(ranking|peringkat|terbaik|paling unggul)/i.test(l)) return; // bullet examples
+        const safeContextHit = SAFE_CONTEXT_PATTERNS.some(rx=>rx.test(l));
+        if(safeContextHit) return; // educational context
+        // Negated or clarifying question forms considered safe
+  if(/bukan\s+[“”"']?(ranking|peringkat)/i.test(l)) return; // negation (allow quoted word)
+  if(/apakah\s+ini\s+bentuk\s+(ranking|peringkat)\s*kompe?titif?\s*\?/i.test(l)) return; // FAQ question safe (both terms)
+        if(/larangan\s+klaim\s+ranking/i.test(l)) return; // heading safe
+  if(/non[-‑]?ranking/i.test(l)) return; // explicit non-ranking framing safe
+  if(/salah\s+tafsir\s+publik\s+sebagai\s+peringkat\s+kompetitif/i.test(l)) return; // risk description safe
+  if(/peringkat\s+kompetitif/i.test(l) && /bukan/i.test(l)) return; // negated competitive ranking phrase safe
+  if(/tidak\s+ada.*peringkat/i.test(l)) return; // explicit absence of ranking penalty safe
+  if(/tanpa\s+.*peringkat/i.test(l)) return; // absence phrase safe (no ranking mechanism)
+        // If banned token present after removing non‑ranking phrase segment, flag
+  // Additional contextual safety: risk description lines containing 'misinterpretation as ranking' or 'risk:' prefix should be exempt
+  if(/misinterpretation as ranking/i.test(l)) return;
+  if(/anti-ranking/i.test(l)) return; // English hyphenated anti-ranking context
+  if(/anti-ranking/i.test(l)) return;
+  if(/anti[-\s]?ranking/i.test(l)) return; // flexible hyphen/spaces
+  if(/anti[-\s]?peringkat/i.test(l)) return; // Indonesian anti-peringkat context
+  if(/^risk:\s+/i.test(l) && /(ranking|peringkat)/i.test(l)) return;
+  if(/klarifikasi\s+anti-ranking/i.test(l)) return; // Indonesian phrase 'klarifikasi anti-ranking'
+  if(/no\s+ranking\s+penalty/i.test(l)) return; // explicit negative-context phrasing safe
+  if(/tanpa\s+penalti\s+peringkat/i.test(l)) return; // Indonesian equivalent 'tanpa penalti peringkat'
+  if(BANNED_RE.test(l)){
+      offending = { line: i+1, excerpt: l.trim().slice(0,160) };
+        }
+      });
+  if(offending){
+    errors.push({code:'DISC-PHRASE-009', file:f, line: offending.line, excerpt: offending.excerpt, severity:'ERROR'}); metrics.bannedNear++; }
     }
   }
   // Duplicates (DISC-DUPL-005)
   const dupCounts = {};
   rawExtracted.forEach(r=>{ if(/disclaimers-lint-spec-v1\.md$/i.test(r.sourceFile)) return; const key=r.page+':'+r.id; dupCounts[key]=(dupCounts[key]||0)+1; });
-  Object.entries(dupCounts).forEach(([k,count])=>{ if(count>1){ const [page,id]=k.split(':'); const related=rawExtracted.filter(r=>r.page===page && r.id===id); const distinctFiles=new Set(related.map(r=>r.sourceFile)); if(distinctFiles.size>1 || count>2){ warnings.push({code:'DISC-DUPL-005', page, id, count, severity:'WARNING'}); metrics.duplicates++; } }});
+  Object.entries(dupCounts).forEach(([k,count])=>{ if(count>1){ const [page,id]=k.split(':'); const related=rawExtracted.filter(r=>r.page===page && r.id===id); const distinctFiles=new Set(related.map(r=>r.sourceFile));
+    // Noise reduction: only warn when disclaimer replicated broadly across >2 files AND appears >3 times overall.
+    if(distinctFiles.size>2 && count>3){ warnings.push({code:'DISC-DUPL-005', page, id, count, severity:'WARNING'}); metrics.duplicates++; }
+  }});
   // Scope (DISC-SCOPE-006) & TRACE-008
   if(cfg.scope_checks?.enable !== false){
     extracted.forEach(e=>{

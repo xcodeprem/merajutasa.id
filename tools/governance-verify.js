@@ -20,12 +20,17 @@ import path from 'path';
 const STEPS = [
   { name: 'spec-hash-diff', cmd: ['node','tools/spec-hash-diff.js','--mode=verify'], critical: true },
   { name: 'param-integrity', cmd: ['node','tools/param-integrity.js'], critical: true },
+  { name: 'param-lock', cmd: ['node','tools/param-lock-verify.js'], critical: true },
+  { name: 'fairness-unit', cmd: ['node','tools/tests/fairness-engine-unit-tests.js'], critical: true },
   { name: 'hype-lint', cmd: ['node','tools/hype-lint.js'], advisory: true },
   { name: 'disclaimers-lint', cmd: ['node','tools/disclaimers-lint.js'], critical: true },
   { name: 'principles-impact', cmd: ['node','tools/principles-impact.js'], advisory: true },
   { name: 'evidence-freshness', cmd: ['node','tools/evidence-freshness.js'], advisory: true },
   { name: 'evidence-collision-test', cmd: ['node','tools/evidence-collision-test.js'], critical: true },
-  { name: 'no-silent-drift', cmd: ['node','tools/no-silent-drift.js'], advisory: true }
+  { name: 'fairness-sim', cmd: ['node','tools/fairness-sim.js'], advisory: true },
+  { name: 'fairness-metrics', cmd: ['node','tools/fairness/fairness-metrics.js'], advisory: true },
+  { name: 'no-silent-drift', cmd: ['node','tools/no-silent-drift.js'], critical: true },
+  { name: 'governed-change-scan', cmd: ['node','tools/governed-change-scan.js'], critical: true }
 ];
 
 async function runStep(step){

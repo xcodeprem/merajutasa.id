@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "generated_utc": "2025-08-13T11:11:36.736Z",
+  "changed_count": 45,
+  "governed_impacted": [
+    "README.md",
+    "content/disclaimers/config.yml",
+    "docs/fairness/hysteresis-public-methodology-fragment-v1.md",
+    "docs/faq/faq-fairness-hysteresis-update.md",
+    "docs/governance/disclaimers-lint-spec-v1.md",
+    "docs/governance/policy-index-v1.md",
+    "docs/integrity/credential-schema-final-v1.md"
+  ],
+  "dec_files_changed": [],
+  "violations": [
+    {
+      "path": "README.md",
+      "code": "GOVERNED_CHANGE_NO_DEC_REF"
+    },
+    {
+      "path": "content/disclaimers/config.yml",
+      "code": "GOVERNED_CHANGE_NO_DEC_REF"
+    },
+    {
+      "path": "docs/fairness/hysteresis-public-methodology-fragment-v1.md",
+      "code": "GOVERNED_CHANGE_NO_DEC_REF"
+    },
+    {
+      "path": "docs/faq/faq-fairness-hysteresis-update.md",
+      "code": "GOVERNED_CHANGE_NO_DEC_REF"
+    },
+    {
+      "path": "docs/governance/disclaimers-lint-spec-v1.md",
+      "code": "GOVERNED_CHANGE_NO_DEC_REF"
+    },
+    {
+      "path": "docs/governance/policy-index-v1.md",
+      "code": "GOVERNED_CHANGE_NO_DEC_REF"
+    },
+    {
+      "path": "docs/integrity/credential-schema-final-v1.md",
+      "code": "GOVERNED_CHANGE_NO_DEC_REF"
+    }
+  ],
+  "evidence": []
+}
