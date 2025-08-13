@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generation_timestamp_utc": "2025-08-13T02:50:52Z",
+  "generation_timestamp_utc": "2025-08-13T07:58:25Z",
   "generator_note": "Refined manifest: added onboarding & (optional) README, fixed dec_ref placeholders, standardized mutable_policy for adopted lint spec. All existing entries preserved; only additive or metadata corrections before first hash seal.",
   "files": [
     {
@@ -17,7 +17,7 @@
       "path": "docs/governance/signature-pipeline-plan-v1.md",
       "version": "1.0.0",
       "dec_ref": "DEC-20250813-02 (draft)",
-  "hash_sha256": "b6448924edeb23970ecefa3dd5c37bf5f27616349a918615612e0e21bcda9225",
+      "hash_sha256": "b6448924edeb23970ecefa3dd5c37bf5f27616349a918615612e0e21bcda9225",
       "integrity_class": "signature-design",
       "mutable_policy": "append-only",
       "next_change_requires_dec": true,
@@ -26,9 +26,9 @@
     {
       "path": "docs/governance/dec/DEC-20250813-02-signature-pipeline-adoption.md",
       "version": "1.0.0",
-  "dec_ref": "SELF",
-  "hash_sha256": "0ca785fe0c26e8053b644cc0c582abb461c851e7aafb621d5d6364729db66ff0",
-  "integrity_class": "decision",
+      "dec_ref": "SELF",
+      "hash_sha256": "0ca785fe0c26e8053b644cc0c582abb461c851e7aafb621d5d6364729db66ff0",
+      "integrity_class": "decision",
       "mutable_policy": "immutable",
       "next_change_requires_dec": false,
       "notes": "Draft DEC for phased Ed25519 evidence signing (S0). Status changes on adoption."
@@ -37,7 +37,7 @@
       "path": "docs/fairness/hysteresis-config-v1.yml",
       "version": "1.0.0",
       "dec_ref": "DEC-20250812-02",
-  "hash_sha256": "c07f4ccc93bd68e18a74c106980a262904d50a59b2ffa25b9e3f899028037825",
+      "hash_sha256": "c07f4ccc93bd68e18a74c106980a262904d50a59b2ffa25b9e3f899028037825",
       "integrity_class": "config",
       "mutable_policy": "locked-by-config-hash",
       "next_change_requires_dec": true,
@@ -67,7 +67,7 @@
       "path": "docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md",
       "version": "1.0.0",
       "dec_ref": "SELF",
-      "hash_sha256": "23885d2c790a1648944278843fbceea6e1c68e6e38a47acf03c2e98554b3d47f",
+      "hash_sha256": "e32cb525cdc8109bf80ed9d92b7239191539b2e7e1dd04707508734721f8fe11",
       "integrity_class": "decision",
       "mutable_policy": "immutable",
       "next_change_requires_dec": false,
@@ -107,7 +107,7 @@
       "path": "docs/governance/todo-post-DEC-20250812-02.md",
       "version": "1.0.0",
       "dec_ref": "DEC-20250812-02",
-  "hash_sha256": "52cb6ac1c41f9a09a756ddea21d3abaecbe974b92ec18b0a2b46b7559b45f943",
+      "hash_sha256": "52cb6ac1c41f9a09a756ddea21d3abaecbe974b92ec18b0a2b46b7559b45f943",
       "integrity_class": "action-list",
       "mutable_policy": "snapshot-then-new-file",
       "next_change_requires_dec": false,
@@ -207,7 +207,7 @@
       "path": "docs/governance/disclaimers-lint-spec-v1.md",
       "version": "1.0.0",
       "dec_ref": null,
-  "hash_sha256": "d0055ec4bac8ae20e71d86ef0122abf65cb516cd9c0d648a3f64a039cd671718",
+      "hash_sha256": "d0055ec4bac8ae20e71d86ef0122abf65cb516cd9c0d648a3f64a039cd671718",
       "integrity_class": "lint-spec",
       "mutable_policy": "delta-via-dec",
       "next_change_requires_dec": true,
@@ -307,7 +307,7 @@
       "path": "README.md",
       "version": "1.0.0",
       "dec_ref": null,
-  "hash_sha256": "37e24620a943e9d54385f786c779472019bbacce71e6233fdb216227655e7b03",
+      "hash_sha256": "37e24620a943e9d54385f786c779472019bbacce71e6233fdb216227655e7b03",
       "integrity_class": "repository-readme",
       "mutable_policy": "append-only",
       "next_change_requires_dec": true,
@@ -317,7 +317,7 @@
       "path": "docs/governance/dec/DEC-20250812-04-governance-baseline-thresholds.md",
       "version": "1.0.0",
       "dec_ref": "SELF",
-      "hash_sha256": "e4dfb57481e6672626dfb806dcb960a4b482a6c6bfa3e96a91b8c845c1846ad6",
+      "hash_sha256": "fce2c9404bfa4401cd67761649c7829b586acbeda5a7330b67e7f4f1cb566ef2",
       "integrity_class": "decision",
       "mutable_policy": "immutable",
       "next_change_requires_dec": false,
@@ -352,16 +352,26 @@
       "mutable_policy": "append-only",
       "next_change_requires_dec": true,
       "notes": "Agent role guard rails; amendments require DEC referencing this policy."
-    }
-    ,{
+    },
+    {
       "path": "docs/onboarding/agent-guardrails-v1.md",
       "version": "1.0.0",
       "dec_ref": null,
-  "hash_sha256": "d07ff3c31e20fa969543fc3f62bdcb5867adfa611b5ba1b1d6a57fde6539f4c3",
+      "hash_sha256": "1c2de1f87a2808a064b4cdd030f6c3827e5971953852b86edb35565488148be9",
       "integrity_class": "guardrails-spec",
       "mutable_policy": "append-only",
       "next_change_requires_dec": true,
       "notes": "Operational guardrails for automation agents (bootstrap)."
+    },
+    {
+      "path": "docs/governance/dec/DEC-20250813-03-disclaimers-presence-enforcement.md",
+      "version": "1.0.0",
+      "dec_ref": "SELF",
+      "hash_sha256": "ab74f55133a1381f49e609243f490b6ffc4ca790efc04465152d8c12fc00c3a5",
+      "integrity_class": "decision",
+      "mutable_policy": "immutable",
+      "next_change_requires_dec": false,
+      "notes": "Activation DEC for disclaimers presence enforcement Phase 2 trigger."
     }
   ],
   "integrity_rules": {

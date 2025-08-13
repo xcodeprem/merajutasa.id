@@ -1,0 +1,28 @@
+{
+  "generated_utc": "2025-08-13T07:42:38.492Z",
+  "days": [
+    {
+      "day": "20250813",
+      "actions": {
+        "total": 8,
+        "OK": 7,
+        "ADVISORY": 1
+      },
+      "steps": [
+        "spec-hash-diff",
+        "param-integrity",
+        "hype-lint",
+        "disclaimers-lint",
+        "principles-impact",
+        "evidence-freshness",
+        "no-silent-drift"
+      ]
+    }
+  ],
+  "totals": {
+    "total": 8,
+    "OK": 7,
+    "ADVISORY": 1,
+    "ERROR": 0
+  }
+}

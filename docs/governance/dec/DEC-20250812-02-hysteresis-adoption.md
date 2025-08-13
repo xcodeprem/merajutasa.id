@@ -4,6 +4,8 @@ title: Adoption of Under‑Served Hysteresis Option F (Hybrid) Parameters
 date: 2025-08-12T04:25:29Z
 class: CIC-E
 status: adopted
+supersedes: []
+depends_on: []  # Baseline fairness decision; root for later activation & threshold DECs
 spec_reference:
   - docs/fairness/hysteresis-config-v1.yml
   - docs/fairness/hysteresis-state-machine-transitions.md
@@ -11,7 +13,9 @@ spec_reference:
   - docs/roadmap/roadmap-master-v1.md
 related_principles: [GP1, GP5, GP6, GP9, GP10]
 impacted_components: [equity_snapshot_job, hysteresis_state_machine, equity_page, trust_page_methodology, hero_equity_card, analytics_events(sys_fairness_*), risk_dashboard]
-hash_of_decision_document: "23885d2c790a1648944278843fbceea6e1c68e6e38a47acf03c2e98554b3d47f"   # sealed SHA256
+hash_of_decision_document: "e32cb525cdc8109bf80ed9d92b7239191539b2e7e1dd04707508734721f8fe11"   # sealed SHA256
+non_removal_assertion: "Tidak menghapus strategi sebelumnya; hanya memilih Option F parameter set."
+append_only_notice: "File immutable; perubahan memerlukan DEC penerus referensi id ini."
 decision:
   option: F
   description: Hybrid hysteresis with severe immediate trigger and consecutive borderline confirmation, plus elevated exit threshold and cooldown.

@@ -1,35 +1,71 @@
 #!/usr/bin/env node
 /**
  * governance-verify.js
- * Orchestrates baseline governance checks: spec-hash-diff (report-only), param-integrity, hype-lint, principles-impact, no-silent-drift aggregation.
- * Phase: pre-seal baseline (Wave 0).
+ * Wave 0 (Enable Seal) orchestration with fail-fast ordering (12.3):
+ *  1. spec-hash-diff (verify mode) – CRITICAL (must be clean; no advisory bypass now)
+ *  2. param-integrity – CRITICAL (matrix must generate; mismatches will be enforced Wave 1)
+ *  3. hype-lint – NON-CRITICAL (advisory only Wave 0)
+ *  4. disclaimers-lint – ADVISORY (bootstrap tolerance via DISC_BOOTSTRAP env)
+ *  5. principles-impact – NON-CRITICAL (informational baseline)
+ *  6. evidence-freshness – NON-CRITICAL (advisory freshness signals)
+ *  7. no-silent-drift – NON-CRITICAL aggregator
+ *
+ * Exit policy (Wave 0): any CRITICAL step non-zero exit -> overall failure; ADVISORY steps allowed to continue.
  */
 import { spawn } from 'child_process';
 import { promises as fs } from 'fs';
+import path from 'path';
 
 const STEPS = [
-  { name: 'spec-hash-diff', cmd: ['node','tools/spec-hash-diff.js','--mode=report-only'] },
-  { name: 'param-integrity', cmd: ['node','tools/param-integrity.js'] },
-  { name: 'hype-lint', cmd: ['node','tools/hype-lint.js'] },
-  { name: 'disclaimers-lint', cmd: ['node','tools/disclaimers-lint.js'] },
-  { name: 'principles-impact', cmd: ['node','tools/principles-impact.js'] },
-  { name: 'evidence-freshness', cmd: ['node','tools/evidence-freshness.js'] },
-  { name: 'no-silent-drift', cmd: ['node','tools/no-silent-drift.js'] }
+  { name: 'spec-hash-diff', cmd: ['node','tools/spec-hash-diff.js','--mode=verify'], critical: true },
+  { name: 'param-integrity', cmd: ['node','tools/param-integrity.js'], critical: true },
+  { name: 'hype-lint', cmd: ['node','tools/hype-lint.js'], advisory: true },
+  { name: 'disclaimers-lint', cmd: ['node','tools/disclaimers-lint.js'], advisory: true },
+  { name: 'principles-impact', cmd: ['node','tools/principles-impact.js'], advisory: true },
+  { name: 'evidence-freshness', cmd: ['node','tools/evidence-freshness.js'], advisory: true },
+  { name: 'no-silent-drift', cmd: ['node','tools/no-silent-drift.js'], advisory: true }
 ];
 
 async function runStep(step){
   return new Promise((resolve,reject)=>{
+    const started = Date.now();
     const child = spawn(step.cmd[0], step.cmd.slice(1), { stdio: 'inherit' });
     child.on('exit', code => {
-      if (code === 0) return resolve();
-      // Wave 0: allow spec-hash-diff non-zero (advisory) to proceed
-      if (step.name === 'spec-hash-diff' || step.name === 'disclaimers-lint') {
-        console.error(`[governance-verify] Continuing despite non-zero exit from ${step.name} (advisory bootstrap mode)`);
-        return resolve();
+      const durationMs = Date.now() - started;
+      const isAdvisory = !!step.advisory;
+      const isCritical = !!step.critical;
+      let status;
+      if(code === 0) status = 'OK';
+      else if(isAdvisory) status = 'ADVISORY';
+      else if(isCritical) status = 'ERROR';
+      else status = 'ERROR';
+      if(code !== 0 && isAdvisory){
+        console.error(`[governance-verify] Advisory step non-zero (continuing): ${step.name} exit=${code}`);
       }
-      reject(new Error(`${step.name} exited with code ${code}`));
+      logAction({ action: 'step', step: step.name, cmd: step.cmd.join(' '), exit_code: code, status, duration_ms: durationMs, critical:isCritical, advisory:isAdvisory });
+      if(code === 0 || isAdvisory) return resolve();
+      reject(new Error(`${step.name} critical failure`));
     });
   });
+}
+
+const ACTION_LOG_DIR = 'artifacts';
+function currentLogPath(){
+  const d = new Date();
+  const day = d.toISOString().slice(0,10).replace(/-/g,'');
+  return path.join(ACTION_LOG_DIR, `agent-action-log-${day}.json`);
+}
+async function logAction(entry){
+  try {
+    await fs.mkdir(ACTION_LOG_DIR,{recursive:true});
+    const p = currentLogPath();
+    let arr = [];
+    try { arr = JSON.parse(await fs.readFile(p,'utf8')); if(!Array.isArray(arr)) arr=[]; } catch {/*ignore*/}
+    arr.push({ timestamp: new Date().toISOString(), ...entry });
+    await fs.writeFile(p, JSON.stringify(arr,null,2));
+  } catch (e){
+    console.error('[governance-verify] Failed to write action log', e);
+  }
 }
 
 async function aggregate(){
@@ -59,10 +95,11 @@ async function aggregate(){
 
 async function main(){
   for (const step of STEPS){
-    console.log(`[governance-verify] Running step: ${step.name}`);
+    console.log(`[governance-verify] Running step: ${step.name}${step.critical?' [CRITICAL]': (step.advisory?' [ADVISORY]':'')}`);
     await runStep(step);
   }
   await aggregate();
+  await logAction({ action: 'aggregate', status: 'OK' });
   console.log('[governance-verify] Completed. See artifacts/governance-verify-summary.json');
 }
 

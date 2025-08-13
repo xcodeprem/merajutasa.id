@@ -1,6 +1,6 @@
 {
-  "mode": "report-only",
-  "timestamp_utc": "2025-08-13T07:37:41Z",
+  "mode": "verify",
+  "timestamp_utc": "2025-08-13T08:43:33Z",
   "updated": [],
   "unchanged": [
     "docs/roadmap/roadmap-master-v1.md",
@@ -38,13 +38,14 @@
     "docs/integrity/evidence-minimum-phase1.5-v1.md",
     "docs/governance/dec/DEC-20250813-01-known-debt-register.md",
     "docs/onboarding/agent-role-policy-v1.md",
-    "docs/onboarding/agent-guardrails-v1.md"
+    "docs/onboarding/agent-guardrails-v1.md",
+    "docs/governance/dec/DEC-20250813-03-disclaimers-presence-enforcement.md"
   ],
   "placeholders_sealed": [],
   "placeholders_remaining": [],
   "violations": [],
   "summary": {
-    "total_entries": 36,
+    "total_entries": 37,
     "updated_count": 0,
     "violation_count": 0,
     "placeholders_remaining_count": 0

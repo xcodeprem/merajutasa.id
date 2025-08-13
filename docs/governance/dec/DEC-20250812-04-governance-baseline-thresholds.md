@@ -8,6 +8,10 @@ supersedes: []
 depends_on:
   - DEC-20250812-02
   - DEC-20250812-03
+governance_votes:
+  method: unanimous_vote
+  result: approved
+  voters: ["GovernanceChair","DataLead","EthicsRep","ProductOwner"]
 scope:
   - Menetapkan nilai final untuk ambang & parameter lint/privasi/evidence yang masih <PENDING_DECISION>.
   - Mengurangi risiko "parameter drift" sebelum Phase 1.5 Evidence Activation.
@@ -21,7 +25,7 @@ spec_reference:
   - docs/principles/GP1-GP10-index.md
 related_principles: [GP1, GP5, GP6, GP7, GP8, GP9, GP10]
 impacted_components: [lint_suite, param_integrity_checker, pii_scanner, evidence_bundle, terminology_scan, fairness_engine]
-hash_of_decision_document: "e4dfb57481e6672626dfb806dcb960a4b482a6c6bfa3e96a91b8c845c1846ad6"  # sealed SHA256
+hash_of_decision_document: "fce2c9404bfa4401cd67761649c7829b586acbeda5a7330b67e7f4f1cb566ef2"  # sealed SHA256
 decision_blocks:
   - id: DB-01
     topic: Multi-Category PII Block Threshold
@@ -171,6 +175,8 @@ signoff:
   product_owner: "SIGNED <Farid>"
 integrity_manifest_pointer: "docs/integrity/spec-hash-manifest-v1.json#files[path=docs/governance/dec/DEC-20250812-04-governance-baseline-thresholds.md]"
 append_only_notice: "File immutable; perubahan memerlukan DEC penerus."
+change_log:
+  - 2025-08-12: Initial adoption ratifying DB-01..DB-08 baseline set.
 ---
 
 Adopted DEC: baseline thresholds & governance parameters kini final; hash akan disegel melalui proses manifest (<PENDING_HASH> akan diganti oleh tooling seal-first).

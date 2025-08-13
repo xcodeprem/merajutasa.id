@@ -145,17 +145,17 @@
     },
     {
       "code": "DISC-PHRASE-009",
-      "file": "docs\\integrity\\credential-schema-final-v1.md",
-      "severity": "ERROR"
-    },
-    {
-      "code": "DISC-PHRASE-009",
       "file": "docs\\governance\\disclaimers-lint-spec-v1.md",
       "severity": "ERROR"
     },
     {
       "code": "DISC-PHRASE-009",
       "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
+      "severity": "ERROR"
+    },
+    {
+      "code": "DISC-PHRASE-009",
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
       "severity": "ERROR"
     }
   ],
@@ -179,7 +179,7 @@
       "code": "DISC-DUPL-005",
       "page": "landing",
       "id": "D7",
-      "count": 28,
+      "count": 30,
       "severity": "WARNING"
     },
     {

@@ -1,10 +1,13 @@
 {
-  "version": 2,
-  "generated_utc": "2025-08-13T07:35:56.254Z",
+  "version": 3,
+  "gating_mode": "hard_fail_on_mismatch_or_missing",
+  "generated_utc": "2025-08-13T08:43:33.249Z",
   "status": "PASS",
   "summary_counts": {
-    "MATCH": 11
+    "MATCH": 15
   },
+  "mismatch_count": 0,
+  "missing_count": 0,
   "rows": [
     {
       "parameter": "T_exit",
@@ -187,6 +190,74 @@
         "config": null,
         "dec": 2,
         "code": 2
+      },
+      "sources_present": [
+        "dec",
+        "code"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "parameter": "disclaimer_D7_default",
+      "aliases": {
+        "config": null,
+        "dec": "disclaimer_D7_default"
+      },
+      "values": {
+        "config": null,
+        "dec": "off",
+        "code": "off"
+      },
+      "sources_present": [
+        "dec",
+        "code"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "parameter": "terminology_stage2_trigger_formula",
+      "aliases": {
+        "config": null,
+        "dec": "terminology_stage2_trigger_formula"
+      },
+      "values": {
+        "config": null,
+        "dec": "5 distinct OR 12 cumulative/7d",
+        "code": "5 distinct OR 12 cumulative/7d"
+      },
+      "sources_present": [
+        "dec",
+        "code"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "parameter": "revocation_reason_codes",
+      "aliases": {
+        "config": null,
+        "dec": "revocation_reason_codes"
+      },
+      "values": {
+        "config": null,
+        "dec": "USER_REQUEST|COMPROMISED|POLICY_VIOLATION|DATA_SUPERSEDED|INTEGRITY_ERROR",
+        "code": "USER_REQUEST|COMPROMISED|POLICY_VIOLATION|DATA_SUPERSEDED|INTEGRITY_ERROR"
+      },
+      "sources_present": [
+        "dec",
+        "code"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "parameter": "revocation_reason_codes_count",
+      "aliases": {
+        "config": null,
+        "dec": "revocation_reason_codes"
+      },
+      "values": {
+        "config": null,
+        "dec": 5,
+        "code": 5
       },
       "sources_present": [
         "dec",

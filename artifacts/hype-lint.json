@@ -1,15 +1,15 @@
 {
   "version": 1,
-  "generated_utc": "2025-08-13T07:35:56.354Z",
-  "file_count": 34,
-  "total_hits": 118,
+  "generated_utc": "2025-08-13T08:43:33.364Z",
+  "file_count": 37,
+  "total_hits": 120,
   "max_severity": "HIGH",
   "severity_counts": {
-    "MEDIUM": 109,
+    "MEDIUM": 111,
     "HIGH": 9
   },
   "rule_counts": {
-    "RANKING": 91,
+    "RANKING": 93,
     "TOP": 18,
     "TERBAIK": 6,
     "REVOLUSIONER": 3
@@ -437,7 +437,7 @@
     },
     {
       "file": "docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md",
-      "line": 52,
+      "line": 56,
       "column": 41,
       "match": "ranking",
       "rule": "RANKING",
@@ -447,7 +447,7 @@
     },
     {
       "file": "docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md",
-      "line": 53,
+      "line": 57,
       "column": 48,
       "match": "ranking",
       "rule": "RANKING",
@@ -984,6 +984,26 @@
       "severity": "HIGH",
       "rationale": "Overclaim “revolutionary”.",
       "context_line": "| GP7 | `revolusioner|terbaik|unggul|paling\\\\s(bagus|hebat)` |"
+    },
+    {
+      "file": "docs/onboarding/agent-guardrails-v1.md",
+      "line": 10,
+      "column": 111,
+      "match": "ranking",
+      "rule": "RANKING",
+      "severity": "MEDIUM",
+      "rationale": "Unsubstantiated ranking claim.",
+      "context_line": "Menetapkan batas eksplisit untuk aktivasi awal agen otomatis sehingga integritas (hash ledger), fairness (non‑ranking), privacy (PII minimization), dan anti-hype tetap terjaga saat sebagian kontrol masih dalam fase bootstrap (misal disclaimers lint presence enforcement belum ON penuh)."
+    },
+    {
+      "file": "docs/onboarding/agent-guardrails-v1.md",
+      "line": 33,
+      "column": 27,
+      "match": "ranking",
+      "rule": "RANKING",
+      "severity": "MEDIUM",
+      "rationale": "Unsubstantiated ranking claim.",
+      "context_line": "| G6 | Memasukkan istilah ranking/hype baru | Pelanggaran GP6/GP7 | Block PR + alert |"
     },
     {
       "file": "docs/onboarding/agent-role-policy-v1.md",

@@ -1,9 +1,12 @@
 /**
- * Param Integrity Matrix (Wave 0 expanded)
+ * Param Integrity Matrix (Wave 1)
  * Compares sealed configuration (YAML) & DEC governance thresholds against internal expectations.
  * Emits artifacts/param-integrity-matrix.json with status summary.
  *
- * Future (Wave 1+): add hash-of-config enforcement & fail-fast gating.
+ * Wave 1 changes:
+ *  - Added parameters: disclaimer_D7_default, terminology_stage2_trigger_formula, revocation_reason_codes, revocation_reason_codes_count
+ *  - Hard fail (non-zero exit) on any MISMATCH or missing source (MISSING_ALL / MISSING_OTHERS)
+ *  - Added derived count row (revocation_reason_codes_count) to verify enumeration cardinality stability
  */
 import { promises as fs } from 'fs';
 import path from 'path';
@@ -58,7 +61,12 @@ async function main(){
     multi_category_block_threshold: Number(dec04Params['multi_category_block_threshold'] ?? 2),
     min_cell_aggregation_threshold: Number(dec04Params['min_cell_aggregation_threshold'] ?? 20),
     evidence_hash_display_len: Number(dec04Params['evidence_hash_display_len'] ?? 16),
-    numeric_sampling_truncation_decimals: Number(dec04Params['numeric_sampling_truncation_decimals'] ?? 2)
+  numeric_sampling_truncation_decimals: Number(dec04Params['numeric_sampling_truncation_decimals'] ?? 2),
+  // Wave 1 added constants
+  disclaimer_D7_default: (dec04Params['disclaimer_D7_default'] || 'off'),
+  terminology_stage2_trigger_formula: normalizeQuoted(dec04Params['terminology_stage2_trigger_formula'] || '5 distinct OR 12 cumulative/7d'),
+  revocation_reason_codes: normalizeQuoted(dec04Params['revocation_reason_codes'] || 'USER_REQUEST|COMPROMISED|POLICY_VIOLATION|DATA_SUPERSEDED|INTEGRITY_ERROR'),
+  revocation_reason_codes_count: (normalizeQuoted(dec04Params['revocation_reason_codes'] || '')).split('|').filter(s=>s).length
   };
 
   // Parameter alias mapping to unify names across YAML, DEC matrix, and requirement spec (Option F list)
@@ -73,13 +81,20 @@ async function main(){
     { canonical: 'multi_category_block_threshold', config: null, dec: 'multi_category_block_threshold' },
     { canonical: 'min_cell_aggregation_threshold', config: null, dec: 'min_cell_aggregation_threshold' },
     { canonical: 'evidence_hash_display_len', config: null, dec: 'evidence_hash_display_len' },
-    { canonical: 'numeric_sampling_truncation_decimals', config: null, dec: 'numeric_sampling_truncation_decimals' }
+    { canonical: 'numeric_sampling_truncation_decimals', config: null, dec: 'numeric_sampling_truncation_decimals' },
+    // Wave 1 additions
+    { canonical: 'disclaimer_D7_default', config: null, dec: 'disclaimer_D7_default' },
+    { canonical: 'terminology_stage2_trigger_formula', config: null, dec: 'terminology_stage2_trigger_formula', decTransform: normalizeQuoted },
+    { canonical: 'revocation_reason_codes', config: null, dec: 'revocation_reason_codes', decTransform: normalizeQuoted },
+    { canonical: 'revocation_reason_codes_count', config: null, dec: 'revocation_reason_codes', decTransform: v => normalizeQuoted(v).split('|').filter(s=>s).length }
   ];
 
   const rows = paramMap.map(m => {
     const configVal = m.config ? configParams[m.config] : null;
     const decRaw = m.dec ? dec04Params[m.dec] : null;
-    const decVal = decRaw === undefined ? null : decRaw;
+    let decVal = decRaw === undefined ? null : decRaw;
+    if (typeof decVal === 'string') decVal = normalizeQuoted(decVal);
+    if (decVal !== null && m.decTransform) decVal = m.decTransform(decVal);
     const codeVal = Object.prototype.hasOwnProperty.call(codeConstants, m.canonical) ? codeConstants[m.canonical] : null;
 
     // Normalize numeric strings
@@ -109,8 +124,23 @@ async function main(){
 
   const summaryCounts = rows.reduce((acc,r)=>{ acc[r.status]=(acc[r.status]||0)+1; return acc; },{});
   const mismatchCount = rows.filter(r=>r.status==='MISMATCH').length;
-  const overallStatus = mismatchCount===0 ? 'PASS' : 'MISMATCH';
-  const out = { version: 2, generated_utc: new Date().toISOString(), status: overallStatus, summary_counts: summaryCounts, rows };
+  const missingCount = rows.filter(r=>r.status==='MISSING_ALL' || r.status==='MISSING_OTHERS').length;
+  const overallStatus = (mismatchCount===0 && missingCount===0) ? 'PASS' : 'FAIL';
+  const out = { version: 3, gating_mode: 'hard_fail_on_mismatch_or_missing', generated_utc: new Date().toISOString(), status: overallStatus, summary_counts: summaryCounts, mismatch_count: mismatchCount, missing_count: missingCount, rows };
   await fs.writeFile('artifacts/param-integrity-matrix.json', JSON.stringify(out,null,2));
+  if (overallStatus !== 'PASS') {
+    console.error('[param-integrity] HARD FAIL – mismatches or missing parameters detected');
+    process.exit(10);
+  }
 }
 main().catch(e=>{ console.error('param-integrity error',e); process.exit(2); });
+
+// Helper placed at end to avoid hoist confusion above
+function normalizeQuoted(v){
+  if (typeof v !== 'string') return v;
+  const trimmed = v.trim();
+  if ((trimmed.startsWith('"') && trimmed.endsWith('"')) || (trimmed.startsWith("'") && trimmed.endsWith("'"))) {
+    return trimmed.substring(1, trimmed.length-1);
+  }
+  return trimmed;
+}

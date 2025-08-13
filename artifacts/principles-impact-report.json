@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "generated_utc": "2025-08-13T07:35:56.667Z",
+  "generated_utc": "2025-08-13T08:43:33.707Z",
   "principles": [
     {
       "principle": "GP1",
-      "match_count": 673,
+      "match_count": 720,
       "domains": [
         "other"
       ],
@@ -148,7 +148,7 @@
     },
     {
       "principle": "GP3",
-      "match_count": 64,
+      "match_count": 66,
       "domains": [
         "other"
       ],
@@ -256,7 +256,7 @@
     },
     {
       "principle": "GP4",
-      "match_count": 355,
+      "match_count": 395,
       "domains": [
         "other"
       ],
@@ -364,7 +364,7 @@
     },
     {
       "principle": "GP5",
-      "match_count": 310,
+      "match_count": 316,
       "domains": [
         "other"
       ],
@@ -472,7 +472,7 @@
     },
     {
       "principle": "GP6",
-      "match_count": 52,
+      "match_count": 53,
       "domains": [
         "other"
       ],
@@ -580,7 +580,7 @@
     },
     {
       "principle": "GP7",
-      "match_count": 93,
+      "match_count": 112,
       "domains": [
         "other"
       ],
@@ -660,26 +660,26 @@
           "domain": "other"
         },
         {
-          "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
-          "line": 38,
-          "snippet": "4. Event Schema Canonical v1.0 – Struktur top-level, taxonomy event, meta sub-schema strategy, integrity hashing, governance change control.",
-          "pattern": "top\\b",
-          "changed": false,
-          "domain": "other"
-        },
-        {
-          "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
-          "line": 127,
-          "snippet": "| Lint gates enforced | Disclaimers & hype prevention functioning |",
+          "file": "docs\\status\\progress-recap-wave0-completion-2025-08-13T0819Z.md",
+          "line": 17,
+          "snippet": "| Hype Control | Tidak aktif | hype-lint v1 (baseline 120 hits) | Akan ditekan bertahap |",
           "pattern": "hype",
           "changed": false,
           "domain": "other"
         },
         {
-          "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
-          "line": 179,
-          "snippet": "## 7. GAP & RISIKO PRIORITAS (TOP 6)",
-          "pattern": "top\\b",
+          "file": "docs\\status\\progress-recap-wave0-completion-2025-08-13T0819Z.md",
+          "line": 45,
+          "snippet": "- Uniform front-matter fields ditambahkan (supersedes, depends_on, integrity_manifest_pointer, append_only_notice)",
+          "pattern": "super(ior)?",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs\\status\\progress-recap-wave0-completion-2025-08-13T0819Z.md",
+          "line": 57,
+          "snippet": "| hype-lint.js | v1 baseline | Anti-hype lexicon detection | 120 hits baseline captured |",
+          "pattern": "hype",
           "changed": false,
           "domain": "other"
         }
@@ -764,7 +764,7 @@
     },
     {
       "principle": "GP9",
-      "match_count": 304,
+      "match_count": 318,
       "domains": [
         "other"
       ],
@@ -872,7 +872,7 @@
     },
     {
       "principle": "GP10",
-      "match_count": 50,
+      "match_count": 52,
       "domains": [
         "other"
       ],
@@ -968,9 +968,9 @@
           "domain": "other"
         },
         {
-          "file": "docs\\master-spec\\master-spec-v2.0.md",
-          "line": 44,
-          "snippet": "§35 Ethical & Copy Guidelines (Disclaimers, Anti-Hype – GP5, GP6, GP7)",
+          "file": "docs\\integrity\\credential-schema-final-v1.md",
+          "line": 111,
+          "snippet": "| Predictive / Risk | riskScore, vulnerabilityIndex | Ethical hazard, not validated |",
           "pattern": "ethic",
           "changed": false,
           "domain": "other"

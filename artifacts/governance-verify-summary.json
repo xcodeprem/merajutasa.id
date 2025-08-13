@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-08-13T07:35:56.786Z",
+  "timestamp": "2025-08-13T08:43:33.826Z",
   "artifacts": {
     "specHash": {
-      "mode": "report-only",
-      "timestamp_utc": "2025-08-13T07:35:56Z",
+      "mode": "verify",
+      "timestamp_utc": "2025-08-13T08:43:33Z",
       "updated": [],
       "unchanged": [
         "docs/roadmap/roadmap-master-v1.md",
@@ -40,25 +40,30 @@
         "docs/governance/dec/DEC-20250812-04-governance-baseline-thresholds.md",
         "docs/integrity/evidence-minimum-phase1.5-v1.md",
         "docs/governance/dec/DEC-20250813-01-known-debt-register.md",
-        "docs/onboarding/agent-role-policy-v1.md"
+        "docs/onboarding/agent-role-policy-v1.md",
+        "docs/onboarding/agent-guardrails-v1.md",
+        "docs/governance/dec/DEC-20250813-03-disclaimers-presence-enforcement.md"
       ],
       "placeholders_sealed": [],
       "placeholders_remaining": [],
       "violations": [],
       "summary": {
-        "total_entries": 35,
+        "total_entries": 37,
         "updated_count": 0,
         "violation_count": 0,
         "placeholders_remaining_count": 0
       }
     },
     "params": {
-      "version": 2,
-      "generated_utc": "2025-08-13T07:35:56.254Z",
+      "version": 3,
+      "gating_mode": "hard_fail_on_mismatch_or_missing",
+      "generated_utc": "2025-08-13T08:43:33.249Z",
       "status": "PASS",
       "summary_counts": {
-        "MATCH": 11
+        "MATCH": 15
       },
+      "mismatch_count": 0,
+      "missing_count": 0,
       "rows": [
         {
           "parameter": "T_exit",
@@ -247,21 +252,89 @@
             "code"
           ],
           "status": "MATCH"
+        },
+        {
+          "parameter": "disclaimer_D7_default",
+          "aliases": {
+            "config": null,
+            "dec": "disclaimer_D7_default"
+          },
+          "values": {
+            "config": null,
+            "dec": "off",
+            "code": "off"
+          },
+          "sources_present": [
+            "dec",
+            "code"
+          ],
+          "status": "MATCH"
+        },
+        {
+          "parameter": "terminology_stage2_trigger_formula",
+          "aliases": {
+            "config": null,
+            "dec": "terminology_stage2_trigger_formula"
+          },
+          "values": {
+            "config": null,
+            "dec": "5 distinct OR 12 cumulative/7d",
+            "code": "5 distinct OR 12 cumulative/7d"
+          },
+          "sources_present": [
+            "dec",
+            "code"
+          ],
+          "status": "MATCH"
+        },
+        {
+          "parameter": "revocation_reason_codes",
+          "aliases": {
+            "config": null,
+            "dec": "revocation_reason_codes"
+          },
+          "values": {
+            "config": null,
+            "dec": "USER_REQUEST|COMPROMISED|POLICY_VIOLATION|DATA_SUPERSEDED|INTEGRITY_ERROR",
+            "code": "USER_REQUEST|COMPROMISED|POLICY_VIOLATION|DATA_SUPERSEDED|INTEGRITY_ERROR"
+          },
+          "sources_present": [
+            "dec",
+            "code"
+          ],
+          "status": "MATCH"
+        },
+        {
+          "parameter": "revocation_reason_codes_count",
+          "aliases": {
+            "config": null,
+            "dec": "revocation_reason_codes"
+          },
+          "values": {
+            "config": null,
+            "dec": 5,
+            "code": 5
+          },
+          "sources_present": [
+            "dec",
+            "code"
+          ],
+          "status": "MATCH"
         }
       ]
     },
     "hype": {
       "version": 1,
-      "generated_utc": "2025-08-13T07:35:56.354Z",
-      "file_count": 34,
-      "total_hits": 118,
+      "generated_utc": "2025-08-13T08:43:33.364Z",
+      "file_count": 37,
+      "total_hits": 120,
       "max_severity": "HIGH",
       "severity_counts": {
-        "MEDIUM": 109,
+        "MEDIUM": 111,
         "HIGH": 9
       },
       "rule_counts": {
-        "RANKING": 91,
+        "RANKING": 93,
         "TOP": 18,
         "TERBAIK": 6,
         "REVOLUSIONER": 3
@@ -689,7 +762,7 @@
         },
         {
           "file": "docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md",
-          "line": 52,
+          "line": 56,
           "column": 41,
           "match": "ranking",
           "rule": "RANKING",
@@ -699,7 +772,7 @@
         },
         {
           "file": "docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md",
-          "line": 53,
+          "line": 57,
           "column": 48,
           "match": "ranking",
           "rule": "RANKING",
@@ -1238,6 +1311,26 @@
           "context_line": "| GP7 | `revolusioner|terbaik|unggul|paling\\\\s(bagus|hebat)` |"
         },
         {
+          "file": "docs/onboarding/agent-guardrails-v1.md",
+          "line": 10,
+          "column": 111,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "Menetapkan batas eksplisit untuk aktivasi awal agen otomatis sehingga integritas (hash ledger), fairness (non‑ranking), privacy (PII minimization), dan anti-hype tetap terjaga saat sebagian kontrol masih dalam fase bootstrap (misal disclaimers lint presence enforcement belum ON penuh)."
+        },
+        {
+          "file": "docs/onboarding/agent-guardrails-v1.md",
+          "line": 33,
+          "column": 27,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| G6 | Memasukkan istilah ranking/hype baru | Pelanggaran GP6/GP7 | Block PR + alert |"
+        },
+        {
           "file": "docs/onboarding/agent-role-policy-v1.md",
           "line": 13,
           "column": 25,
@@ -1597,17 +1690,17 @@
         },
         {
           "code": "DISC-PHRASE-009",
-          "file": "docs\\integrity\\credential-schema-final-v1.md",
-          "severity": "ERROR"
-        },
-        {
-          "code": "DISC-PHRASE-009",
           "file": "docs\\governance\\disclaimers-lint-spec-v1.md",
           "severity": "ERROR"
         },
         {
           "code": "DISC-PHRASE-009",
           "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
+          "severity": "ERROR"
+        },
+        {
+          "code": "DISC-PHRASE-009",
+          "file": "docs\\integrity\\credential-schema-final-v1.md",
           "severity": "ERROR"
         }
       ],
@@ -1631,7 +1724,7 @@
           "code": "DISC-DUPL-005",
           "page": "landing",
           "id": "D7",
-          "count": 28,
+          "count": 30,
           "severity": "WARNING"
         },
         {
@@ -1747,11 +1840,11 @@
     },
     "principles": {
       "version": 2,
-      "generated_utc": "2025-08-13T07:35:56.667Z",
+      "generated_utc": "2025-08-13T08:43:33.707Z",
       "principles": [
         {
           "principle": "GP1",
-          "match_count": 673,
+          "match_count": 720,
           "domains": [
             "other"
           ],
@@ -1895,7 +1988,7 @@
         },
         {
           "principle": "GP3",
-          "match_count": 64,
+          "match_count": 66,
           "domains": [
             "other"
           ],
@@ -2003,7 +2096,7 @@
         },
         {
           "principle": "GP4",
-          "match_count": 355,
+          "match_count": 395,
           "domains": [
             "other"
           ],
@@ -2111,7 +2204,7 @@
         },
         {
           "principle": "GP5",
-          "match_count": 310,
+          "match_count": 316,
           "domains": [
             "other"
           ],
@@ -2219,7 +2312,7 @@
         },
         {
           "principle": "GP6",
-          "match_count": 52,
+          "match_count": 53,
           "domains": [
             "other"
           ],
@@ -2327,7 +2420,7 @@
         },
         {
           "principle": "GP7",
-          "match_count": 93,
+          "match_count": 112,
           "domains": [
             "other"
           ],
@@ -2407,26 +2500,26 @@
               "domain": "other"
             },
             {
-              "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
-              "line": 38,
-              "snippet": "4. Event Schema Canonical v1.0 – Struktur top-level, taxonomy event, meta sub-schema strategy, integrity hashing, governance change control.",
-              "pattern": "top\\b",
-              "changed": false,
-              "domain": "other"
-            },
-            {
-              "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
-              "line": 127,
-              "snippet": "| Lint gates enforced | Disclaimers & hype prevention functioning |",
+              "file": "docs\\status\\progress-recap-wave0-completion-2025-08-13T0819Z.md",
+              "line": 17,
+              "snippet": "| Hype Control | Tidak aktif | hype-lint v1 (baseline 120 hits) | Akan ditekan bertahap |",
               "pattern": "hype",
               "changed": false,
               "domain": "other"
             },
             {
-              "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
-              "line": 179,
-              "snippet": "## 7. GAP & RISIKO PRIORITAS (TOP 6)",
-              "pattern": "top\\b",
+              "file": "docs\\status\\progress-recap-wave0-completion-2025-08-13T0819Z.md",
+              "line": 45,
+              "snippet": "- Uniform front-matter fields ditambahkan (supersedes, depends_on, integrity_manifest_pointer, append_only_notice)",
+              "pattern": "super(ior)?",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\status\\progress-recap-wave0-completion-2025-08-13T0819Z.md",
+              "line": 57,
+              "snippet": "| hype-lint.js | v1 baseline | Anti-hype lexicon detection | 120 hits baseline captured |",
+              "pattern": "hype",
               "changed": false,
               "domain": "other"
             }
@@ -2511,7 +2604,7 @@
         },
         {
           "principle": "GP9",
-          "match_count": 304,
+          "match_count": 318,
           "domains": [
             "other"
           ],
@@ -2619,7 +2712,7 @@
         },
         {
           "principle": "GP10",
-          "match_count": 50,
+          "match_count": 52,
           "domains": [
             "other"
           ],
@@ -2715,9 +2808,9 @@
               "domain": "other"
             },
             {
-              "file": "docs\\master-spec\\master-spec-v2.0.md",
-              "line": 44,
-              "snippet": "§35 Ethical & Copy Guidelines (Disclaimers, Anti-Hype – GP5, GP6, GP7)",
+              "file": "docs\\integrity\\credential-schema-final-v1.md",
+              "line": 111,
+              "snippet": "| Predictive / Risk | riskScore, vulnerabilityIndex | Ethical hazard, not validated |",
               "pattern": "ethic",
               "changed": false,
               "domain": "other"
@@ -2734,7 +2827,7 @@
       }
     },
     "drift": {
-      "timestamp_utc": "2025-08-13T07:35:56.779Z",
+      "timestamp_utc": "2025-08-13T08:43:33.818Z",
       "components": {
         "spec_hash": "PASS",
         "params": "PASS",
@@ -2745,12 +2838,12 @@
         "freshness": "PASS"
       },
       "summary": {
-        "hype_hits": 118,
+        "hype_hits": 120,
         "hype_max_severity": "HIGH",
         "hype_high": 9,
-        "hype_medium": 109,
+        "hype_medium": 111,
         "hype_rule_counts": {
-          "RANKING": 91,
+          "RANKING": 93,
           "TOP": 18,
           "TERBAIK": 6,
           "REVOLUSIONER": 3
@@ -2773,9 +2866,9 @@
     }
   },
   "summary": {
-    "total_param_checks": 11,
+    "total_param_checks": 15,
     "param_mismatches": 0,
-    "hype_hits": 118,
+    "hype_hits": 120,
     "disclaimers_status": "ERROR",
     "drift_status": "ADVISORY"
   }

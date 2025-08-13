@@ -1,0 +1,316 @@
+[
+  {
+    "timestamp": "2025-08-13T07:42:26.083Z",
+    "action": "step",
+    "step": "spec-hash-diff",
+    "cmd": "node tools/spec-hash-diff.js --mode=report-only",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 69
+  },
+  {
+    "timestamp": "2025-08-13T07:42:26.180Z",
+    "action": "step",
+    "step": "param-integrity",
+    "cmd": "node tools/param-integrity.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 96
+  },
+  {
+    "timestamp": "2025-08-13T07:42:26.280Z",
+    "action": "step",
+    "step": "hype-lint",
+    "cmd": "node tools/hype-lint.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 99
+  },
+  {
+    "timestamp": "2025-08-13T07:42:26.448Z",
+    "action": "step",
+    "step": "disclaimers-lint",
+    "cmd": "node tools/disclaimers-lint.js",
+    "exit_code": 1,
+    "status": "ADVISORY",
+    "duration_ms": 168
+  },
+  {
+    "timestamp": "2025-08-13T07:42:26.593Z",
+    "action": "step",
+    "step": "principles-impact",
+    "cmd": "node tools/principles-impact.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 144
+  },
+  {
+    "timestamp": "2025-08-13T07:42:26.648Z",
+    "action": "step",
+    "step": "evidence-freshness",
+    "cmd": "node tools/evidence-freshness.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 55
+  },
+  {
+    "timestamp": "2025-08-13T07:42:26.697Z",
+    "action": "step",
+    "step": "no-silent-drift",
+    "cmd": "node tools/no-silent-drift.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 53
+  },
+  {
+    "timestamp": "2025-08-13T07:42:26.714Z",
+    "action": "aggregate",
+    "status": "OK"
+  },
+  {
+    "timestamp": "2025-08-13T08:14:48.594Z",
+    "action": "step",
+    "step": "spec-hash-diff",
+    "cmd": "node tools/spec-hash-diff.js --mode=verify",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 76,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-13T08:14:48.697Z",
+    "action": "step",
+    "step": "param-integrity",
+    "cmd": "node tools/param-integrity.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 103,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-13T08:14:48.797Z",
+    "action": "step",
+    "step": "hype-lint",
+    "cmd": "node tools/hype-lint.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 101,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-13T08:14:48.963Z",
+    "action": "step",
+    "step": "disclaimers-lint",
+    "cmd": "node tools/disclaimers-lint.js",
+    "exit_code": 1,
+    "status": "ADVISORY",
+    "duration_ms": 165,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-13T08:14:49.116Z",
+    "action": "step",
+    "step": "principles-impact",
+    "cmd": "node tools/principles-impact.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 153,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-13T08:14:49.174Z",
+    "action": "step",
+    "step": "evidence-freshness",
+    "cmd": "node tools/evidence-freshness.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 58,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-13T08:14:49.226Z",
+    "action": "step",
+    "step": "no-silent-drift",
+    "cmd": "node tools/no-silent-drift.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 56,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-13T08:14:49.240Z",
+    "action": "aggregate",
+    "status": "OK"
+  },
+  {
+    "timestamp": "2025-08-13T08:19:16.167Z",
+    "action": "step",
+    "step": "spec-hash-diff",
+    "cmd": "node tools/spec-hash-diff.js --mode=verify",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 98,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-13T08:19:16.267Z",
+    "action": "step",
+    "step": "param-integrity",
+    "cmd": "node tools/param-integrity.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 107,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-13T08:19:16.371Z",
+    "action": "step",
+    "step": "hype-lint",
+    "cmd": "node tools/hype-lint.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 102,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-13T08:19:16.541Z",
+    "action": "step",
+    "step": "disclaimers-lint",
+    "cmd": "node tools/disclaimers-lint.js",
+    "exit_code": 1,
+    "status": "ADVISORY",
+    "duration_ms": 169,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-13T08:19:16.696Z",
+    "action": "step",
+    "step": "principles-impact",
+    "cmd": "node tools/principles-impact.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 156,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-13T08:19:16.754Z",
+    "action": "step",
+    "step": "evidence-freshness",
+    "cmd": "node tools/evidence-freshness.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 58,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-13T08:19:16.804Z",
+    "action": "step",
+    "step": "no-silent-drift",
+    "cmd": "node tools/no-silent-drift.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 55,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-13T08:19:16.820Z",
+    "action": "aggregate",
+    "status": "OK"
+  },
+  {
+    "timestamp": "2025-08-13T08:43:33.156Z",
+    "action": "step",
+    "step": "spec-hash-diff",
+    "cmd": "node tools/spec-hash-diff.js --mode=verify",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 76,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-13T08:43:33.265Z",
+    "action": "step",
+    "step": "param-integrity",
+    "cmd": "node tools/param-integrity.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 107,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-13T08:43:33.380Z",
+    "action": "step",
+    "step": "hype-lint",
+    "cmd": "node tools/hype-lint.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 116,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-13T08:43:33.560Z",
+    "action": "step",
+    "step": "disclaimers-lint",
+    "cmd": "node tools/disclaimers-lint.js",
+    "exit_code": 1,
+    "status": "ADVISORY",
+    "duration_ms": 180,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-13T08:43:33.723Z",
+    "action": "step",
+    "step": "principles-impact",
+    "cmd": "node tools/principles-impact.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 163,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-13T08:43:33.780Z",
+    "action": "step",
+    "step": "evidence-freshness",
+    "cmd": "node tools/evidence-freshness.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 57,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-13T08:43:33.827Z",
+    "action": "step",
+    "step": "no-silent-drift",
+    "cmd": "node tools/no-silent-drift.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 51,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-13T08:43:33.841Z",
+    "action": "aggregate",
+    "status": "OK"
+  }
+]
