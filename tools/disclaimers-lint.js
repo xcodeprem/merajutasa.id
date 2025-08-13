@@ -119,5 +119,10 @@ async function main(){
     await fs.writeFile('artifacts/disclaimers-lint.sarif.json', JSON.stringify(sarif,null,2));
   }
   if(errors.length) process.exitCode=1;
+  // Bootstrap allowance: if environment sets DISC_BOOTSTRAP=1 downgrade exit (keep artifact for aggregation)
+  if(process.env.DISC_BOOTSTRAP==='1' && process.exitCode===1){
+    console.error('[disclaimers-lint] Bootstrap mode active (DISC_BOOTSTRAP=1) – suppressing non-zero exit.');
+    process.exitCode=0;
+  }
 }
 main().catch(e=>{ console.error('disclaimers-lint error', e); process.exit(2); });

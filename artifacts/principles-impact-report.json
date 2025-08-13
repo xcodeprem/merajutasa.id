@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "generated_utc": "2025-08-13T03:24:36.381Z",
+  "generated_utc": "2025-08-13T07:35:56.667Z",
   "principles": [
     {
       "principle": "GP1",
-      "match_count": 648,
+      "match_count": 673,
       "domains": [
         "other"
       ],
@@ -94,7 +94,7 @@
         {
           "file": "README.md",
           "line": 149,
-          "snippet": "| spec-hash-diff report | artifacts/spec-hash-diff.json | Pending seal |",
+          "snippet": "| spec-hash-diff report | artifacts/spec-hash-diff.json | Yes | Active |",
           "pattern": "hash(ing)?",
           "changed": false,
           "domain": "other"
@@ -102,7 +102,7 @@
         {
           "file": "README.md",
           "line": 154,
-          "snippet": "| pii scan summary | artifacts/pii-scan-test-summary.json | Pending |",
+          "snippet": "| pii scan summary | artifacts/pii-scan-report.json | Yes | Active |",
           "pattern": "pii",
           "changed": false,
           "domain": "other"
@@ -148,7 +148,7 @@
     },
     {
       "principle": "GP3",
-      "match_count": 61,
+      "match_count": 64,
       "domains": [
         "other"
       ],
@@ -256,7 +256,7 @@
     },
     {
       "principle": "GP4",
-      "match_count": 345,
+      "match_count": 355,
       "domains": [
         "other"
       ],
@@ -364,7 +364,7 @@
     },
     {
       "principle": "GP5",
-      "match_count": 305,
+      "match_count": 310,
       "domains": [
         "other"
       ],
@@ -580,7 +580,7 @@
     },
     {
       "principle": "GP7",
-      "match_count": 86,
+      "match_count": 93,
       "domains": [
         "other"
       ],
@@ -637,8 +637,8 @@
         },
         {
           "file": "README.md",
-          "line": 153,
-          "snippet": "| hype lint report | artifacts/hype-lint-report.json | Pending |",
+          "line": 152,
+          "snippet": "| hype lint report | artifacts/hype-lint.json | Yes | Active |",
           "pattern": "hype",
           "changed": false,
           "domain": "other"
@@ -764,7 +764,7 @@
     },
     {
       "principle": "GP9",
-      "match_count": 296,
+      "match_count": 304,
       "domains": [
         "other"
       ],

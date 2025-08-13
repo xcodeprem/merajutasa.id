@@ -5,8 +5,7 @@ date: 2025-08-13T00:00:00Z
 class: CIC-E
 status: draft
 related_requirements: [4.4]
-hash_of_decision_document: "<PENDING_HASH>"
-hash_of_decision_document: "23faa0a56c0eddab056b1815b07da2079100da7090f340c69c5ff41d63d3594d"
+hash_of_decision_document: "0ca785fe0c26e8053b644cc0c582abb461c851e7aafb621d5d6364729db66ff0"
 spec_reference:
   - docs/governance/signature-pipeline-plan-v1.md
   - artifacts/evidence-bundle.json

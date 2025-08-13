@@ -1,12 +1,15 @@
 {
-  "timestamp": "2025-08-13T03:10:50.262Z",
+  "timestamp": "2025-08-13T07:35:56.786Z",
   "artifacts": {
     "specHash": {
       "mode": "report-only",
-      "timestamp_utc": "2025-08-13T03:10:49Z",
+      "timestamp_utc": "2025-08-13T07:35:56Z",
       "updated": [],
       "unchanged": [
         "docs/roadmap/roadmap-master-v1.md",
+        "docs/governance/signature-pipeline-plan-v1.md",
+        "docs/governance/dec/DEC-20250813-02-signature-pipeline-adoption.md",
+        "docs/fairness/hysteresis-config-v1.yml",
         "docs/fairness/hysteresis-public-methodology-fragment-v1.md",
         "docs/fairness/hysteresis-state-machine-transitions.md",
         "docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md",
@@ -35,170 +38,2745 @@
         "docs/onboarding/agent-bootstrap-manifest.md",
         "README.md",
         "docs/governance/dec/DEC-20250812-04-governance-baseline-thresholds.md",
+        "docs/integrity/evidence-minimum-phase1.5-v1.md",
         "docs/governance/dec/DEC-20250813-01-known-debt-register.md",
         "docs/onboarding/agent-role-policy-v1.md"
       ],
       "placeholders_sealed": [],
       "placeholders_remaining": [],
-      "violations": [
-        {
-          "code": "HASH_MISMATCH_DEC_REQUIRED",
-          "path": "docs/fairness/hysteresis-config-v1.yml",
-          "detail": "Manifest=adf27e37a983dfd1e45e89f45834b99f04e3874e74ce0bb4cd030d0a201ca3db current=c07f4ccc93bd68e18a74c106980a262904d50a59b2ffa25b9e3f899028037825"
-        }
-      ],
+      "violations": [],
       "summary": {
-        "total_entries": 32,
+        "total_entries": 35,
         "updated_count": 0,
-        "violation_count": 1,
+        "violation_count": 0,
         "placeholders_remaining_count": 0
       }
     },
     "params": {
-      "status": "MISMATCH",
-      "total": 13,
-      "mismatches": 4,
+      "version": 2,
+      "generated_utc": "2025-08-13T07:35:56.254Z",
+      "status": "PASS",
+      "summary_counts": {
+        "MATCH": 11
+      },
       "rows": [
         {
-          "parameter": "T_enter_major",
-          "config": 0.5,
-          "declared": null,
-          "match": true
-        },
-        {
-          "parameter": "T_enter_standard",
-          "config": 0.6,
-          "declared": null,
-          "match": true
-        },
-        {
-          "parameter": "consecutive_required_standard",
-          "config": 2,
-          "declared": null,
-          "match": true
-        },
-        {
           "parameter": "T_exit",
-          "config": 0.65,
-          "declared": null,
-          "match": true
+          "aliases": {
+            "config": "T_exit",
+            "dec": "T_exit"
+          },
+          "values": {
+            "config": 0.65,
+            "dec": null,
+            "code": 0.65
+          },
+          "sources_present": [
+            "config",
+            "code"
+          ],
+          "status": "MATCH"
         },
         {
-          "parameter": "cooldown_snapshots_after_exit",
-          "config": 1,
-          "declared": null,
-          "match": true
+          "parameter": "T_entry_standard",
+          "aliases": {
+            "config": "T_enter_standard",
+            "dec": "T_enter_standard"
+          },
+          "values": {
+            "config": 0.6,
+            "dec": null,
+            "code": 0.6
+          },
+          "sources_present": [
+            "config",
+            "code"
+          ],
+          "status": "MATCH"
         },
         {
-          "parameter": "stalled_window_snapshots",
-          "config": 5,
-          "declared": null,
-          "match": true
+          "parameter": "T_entry_major",
+          "aliases": {
+            "config": "T_enter_major",
+            "dec": "T_enter_major"
+          },
+          "values": {
+            "config": 0.5,
+            "dec": null,
+            "code": 0.5
+          },
+          "sources_present": [
+            "config",
+            "code"
+          ],
+          "status": "MATCH"
         },
         {
-          "parameter": "stalled_min_ratio",
-          "config": 0.55,
-          "declared": null,
-          "match": true
+          "parameter": "cooldown_min",
+          "aliases": {
+            "config": "cooldown_snapshots_after_exit",
+            "dec": "cooldown_snapshots_after_exit"
+          },
+          "values": {
+            "config": 1,
+            "dec": null,
+            "code": 1
+          },
+          "sources_present": [
+            "config",
+            "code"
+          ],
+          "status": "MATCH"
         },
         {
-          "parameter": "stalled_max_ratio_below_exit",
-          "config": 0.65,
-          "declared": null,
-          "match": true
+          "parameter": "cooldown_max",
+          "aliases": {
+            "config": "cooldown_snapshots_after_exit",
+            "dec": "cooldown_snapshots_after_exit"
+          },
+          "values": {
+            "config": 1,
+            "dec": null,
+            "code": 1
+          },
+          "sources_present": [
+            "config",
+            "code"
+          ],
+          "status": "MATCH"
         },
         {
-          "parameter": "anomaly_delta_threshold_equity_ratio",
-          "config": 0.03,
-          "declared": "0.03",
-          "match": true
+          "parameter": "lookback_window",
+          "aliases": {
+            "config": "stalled_window_snapshots",
+            "dec": "stalled_window_snapshots"
+          },
+          "values": {
+            "config": 5,
+            "dec": null,
+            "code": 5
+          },
+          "sources_present": [
+            "config",
+            "code"
+          ],
+          "status": "MATCH"
+        },
+        {
+          "parameter": "anomaly_delta",
+          "aliases": {
+            "config": "anomaly_delta_threshold_equity_ratio",
+            "dec": "anomaly_delta_threshold_equity_ratio"
+          },
+          "values": {
+            "config": 0.03,
+            "dec": 0.03,
+            "code": 0.03
+          },
+          "sources_present": [
+            "config",
+            "dec",
+            "code"
+          ],
+          "status": "MATCH"
         },
         {
           "parameter": "multi_category_block_threshold",
-          "config": null,
-          "declared": "2",
-          "match": false
-        },
-        {
-          "parameter": "evidence_hash_display_len",
-          "config": null,
-          "declared": "16",
-          "match": false
-        },
-        {
-          "parameter": "numeric_sampling_truncation_decimals",
-          "config": null,
-          "declared": "2",
-          "match": false
+          "aliases": {
+            "config": null,
+            "dec": "multi_category_block_threshold"
+          },
+          "values": {
+            "config": null,
+            "dec": 2,
+            "code": 2
+          },
+          "sources_present": [
+            "dec",
+            "code"
+          ],
+          "status": "MATCH"
         },
         {
           "parameter": "min_cell_aggregation_threshold",
-          "config": null,
-          "declared": "20",
-          "match": false
+          "aliases": {
+            "config": null,
+            "dec": "min_cell_aggregation_threshold"
+          },
+          "values": {
+            "config": null,
+            "dec": 20,
+            "code": 20
+          },
+          "sources_present": [
+            "dec",
+            "code"
+          ],
+          "status": "MATCH"
+        },
+        {
+          "parameter": "evidence_hash_display_len",
+          "aliases": {
+            "config": null,
+            "dec": "evidence_hash_display_len"
+          },
+          "values": {
+            "config": null,
+            "dec": 16,
+            "code": 16
+          },
+          "sources_present": [
+            "dec",
+            "code"
+          ],
+          "status": "MATCH"
+        },
+        {
+          "parameter": "numeric_sampling_truncation_decimals",
+          "aliases": {
+            "config": null,
+            "dec": "numeric_sampling_truncation_decimals"
+          },
+          "values": {
+            "config": null,
+            "dec": 2,
+            "code": 2
+          },
+          "sources_present": [
+            "dec",
+            "code"
+          ],
+          "status": "MATCH"
         }
       ]
     },
     "hype": {
-      "status": "STUB",
-      "total_hits": 0,
-      "findings": [],
-      "note": "Real scan disabled temporarily (Wave 0 stub)."
-    },
-    "disclaimers": {
-      "version": 0,
-      "mode": "stub",
-      "status": "PASS_STUB",
-      "files_scanned": 1,
-      "rules": [
+      "version": 1,
+      "generated_utc": "2025-08-13T07:35:56.354Z",
+      "file_count": 34,
+      "total_hits": 118,
+      "max_severity": "HIGH",
+      "severity_counts": {
+        "MEDIUM": 109,
+        "HIGH": 9
+      },
+      "rule_counts": {
+        "RANKING": 91,
+        "TOP": 18,
+        "TERBAIK": 6,
+        "REVOLUSIONER": 3
+      },
+      "findings": [
         {
-          "id": "DISC-PRES-001",
-          "description": "Presence of canonical disclaimer set (stub)",
-          "status": "PRESENT"
+          "file": "README.md",
+          "line": 45,
+          "column": 83,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "Tujuan: Mengurangi noise / flapping label “under-served” tanpa mengubah sifat non‑ranking."
+        },
+        {
+          "file": "README.md",
+          "line": 58,
+          "column": 38,
+          "match": "Ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| GP6 | Anti Misuse / Anti-Hype (Non-Ranking) |"
+        },
+        {
+          "file": "README.md",
+          "line": 72,
+          "column": 12,
+          "match": "Ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| D1 | Non-Ranking | Menegaskan sistem bukan ranking kompetitif |"
+        },
+        {
+          "file": "README.md",
+          "line": 72,
+          "column": 46,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| D1 | Non-Ranking | Menegaskan sistem bukan ranking kompetitif |"
+        },
+        {
+          "file": "README.md",
+          "line": 138,
+          "column": 4,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "- “ranking”, “peringkat”, “top”, “terbaik”, “no.1”, “paling unggul”, “skor kompetitif”"
+        },
+        {
+          "file": "README.md",
+          "line": 138,
+          "column": 28,
+          "match": "top",
+          "rule": "TOP",
+          "severity": "MEDIUM",
+          "rationale": "Generic superiority claim.",
+          "context_line": "- “ranking”, “peringkat”, “top”, “terbaik”, “no.1”, “paling unggul”, “skor kompetitif”"
+        },
+        {
+          "file": "README.md",
+          "line": 138,
+          "column": 35,
+          "match": "terbaik",
+          "rule": "TERBAIK",
+          "severity": "HIGH",
+          "rationale": "“Terbaik” (best) absolute claim.",
+          "context_line": "- “ranking”, “peringkat”, “top”, “terbaik”, “no.1”, “paling unggul”, “skor kompetitif”"
+        },
+        {
+          "file": "README.md",
+          "line": 190,
+          "column": 23,
+          "match": "Ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "## 13. Larangan Klaim Ranking"
+        },
+        {
+          "file": "README.md",
+          "line": 196,
+          "column": 25,
+          "match": "top",
+          "rule": "TOP",
+          "severity": "MEDIUM",
+          "rationale": "Generic superiority claim.",
+          "context_line": "- Mengklaim “terbaik”, “top”, “juara”."
+        },
+        {
+          "file": "README.md",
+          "line": 196,
+          "column": 14,
+          "match": "terbaik",
+          "rule": "TERBAIK",
+          "severity": "HIGH",
+          "rationale": "“Terbaik” (best) absolute claim.",
+          "context_line": "- Mengklaim “terbaik”, “top”, “juara”."
+        },
+        {
+          "file": "docs/analytics/event-schema-canonical-v1.md",
+          "line": 13,
+          "column": 91,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "- Observability: mendukung analitik KPI & fairness governance tanpa melanggar prinsip non-ranking.  "
+        },
+        {
+          "file": "docs/analytics/event-schema-canonical-v1.md",
+          "line": 26,
+          "column": 11,
+          "match": "Ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| GP9 Non-Ranking Fairness | Under-served events menandai interaksi, bukan ranking order. |"
+        },
+        {
+          "file": "docs/analytics/event-schema-canonical-v1.md",
+          "line": 26,
+          "column": 76,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| GP9 Non-Ranking Fairness | Under-served events menandai interaksi, bukan ranking order. |"
+        },
+        {
+          "file": "docs/analytics/event-schema-canonical-v1.md",
+          "line": 51,
+          "column": 1,
+          "match": "Top",
+          "rule": "TOP",
+          "severity": "MEDIUM",
+          "rationale": "Generic superiority claim.",
+          "context_line": "Top-level required fields (all events):"
+        },
+        {
+          "file": "docs/analytics/event-schema-canonical-v1.md",
+          "line": 72,
+          "column": 19,
+          "match": "top",
+          "rule": "TOP",
+          "severity": "MEDIUM",
+          "rationale": "Generic superiority claim.",
+          "context_line": "Notes: Additional top-level keys beyond allowed must be rejected (strict mode)."
+        },
+        {
+          "file": "docs/analytics/event-schema-canonical-v1.md",
+          "line": 501,
+          "column": 34,
+          "match": "top",
+          "rule": "TOP",
+          "severity": "MEDIUM",
+          "rationale": "Generic superiority claim.",
+          "context_line": "1. Parse JSON; reject if unknown top-level key."
+        },
+        {
+          "file": "docs/analytics/event-schema-canonical-v1.md",
+          "line": 621,
+          "column": 3,
+          "match": "Ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "- Ranking labels (“top_unit”)"
+        },
+        {
+          "file": "docs/analytics/event-schema-canonical-v1.md",
+          "line": 656,
+          "column": 83,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| pub_revocation_notice_view | Revocation UI live | Ensure not misread as penalty ranking |"
+        },
+        {
+          "file": "docs/analytics/event-schema-canonical-v1.md",
+          "line": 698,
+          "column": 125,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "Event Schema v1.0 memberikan fondasi observability yang selaras dengan etos: verifiability tanpa ekses data, fairness tanpa ranking, dan privasi terjaga. Event architecture ini siap dipakai menutup gap “instrumentation blindness” yang diidentifikasi dalam Master Spec, sebelum aktivasi baseline KPI dalam 30 hari pertama."
+        },
+        {
+          "file": "docs/archive/fairness_equity-hysteresis-options-v1.md",
+          "line": 31,
+          "column": 171,
+          "match": "Ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "Purpose: Menetapkan opsi mekanisme hysteresis agar penandaan “under‑served” stabil, tidak fluktuatif karena noise kecil atau snapshot outlier; mempertahankan prinsip Non-Ranking Fairness & Outcome Honesty tanpa mempromosikan gaming."
+        },
+        {
+          "file": "docs/archive/fairness_equity-hysteresis-options-v1.md",
+          "line": 164,
+          "column": 124,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "- If after 5 snapshots flagged r never <0.55 lagi tapi juga belum ≥0.65, trigger “Stalled Recovery” note internally (no UI ranking)."
+        },
+        {
+          "file": "docs/archive/fairness_equity-hysteresis-options-v1.md",
+          "line": 172,
+          "column": 52,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "- Balances urgency vs noise filtering; matches non-ranking fairness (no incentive to micro-optimize borderline increments)."
+        },
+        {
+          "file": "docs/archive/fairness_equity-hysteresis-options-v1.md",
+          "line": 422,
+          "column": 7,
+          "match": "Ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| Non-Ranking Fairness (GP9) | Yes | Only classification presence/absence; no ordering. |"
+        },
+        {
+          "file": "docs/archive/fairness_equity-hysteresis-options-v1.md",
+          "line": 487,
+          "column": 90,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| Multi-Dimensional Shortage Tag | Combine r with reporting timeliness | Potential quasi-ranking | Ethics review |"
+        },
+        {
+          "file": "docs/archive/fairness_equity-hysteresis-options-v1.md",
+          "line": 588,
+          "column": 66,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "Semua struktur di sini mematuhi strategi terdahulu: fairness non-ranking, privacy, transparency, avoidance of algorithmic opacity. Tidak ada penghapusan jalur lama—hanya elaborasi."
+        },
+        {
+          "file": "docs/archive/ux_public-multipage-experience-master-spec-v2.md",
+          "line": 67,
+          "column": 57,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| GP6 | Outcome Honesty | Hindari metric theatrics | No ranking, no growth superlatives |"
+        },
+        {
+          "file": "docs/archive/ux_public-multipage-experience-master-spec-v2.md",
+          "line": 70,
+          "column": 13,
+          "match": "Ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| GP9 | Non-Ranking Fairness | Resource fairness ≠ performance race | Buckets + under‑served criteria; no ordered scoreboard |"
+        },
+        {
+          "file": "docs/archive/ux_public-multipage-experience-master-spec-v2.md",
+          "line": 83,
+          "column": 42,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| Under-served fairness surfacing | Unit ranking leaderboard |"
+        },
+        {
+          "file": "docs/archive/ux_public-multipage-experience-master-spec-v2.md",
+          "line": 194,
+          "column": 82,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| C1 | Integrity Credential | Sample attested org (mock baseline) | Credential ≠ ranking | /trust#credential |"
+        },
+        {
+          "file": "docs/archive/ux_public-multipage-experience-master-spec-v2.md",
+          "line": 195,
+          "column": 56,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| C2 | Equity Index | Snapshot equity aggregated | Non-ranking fairness signal | /equity |"
+        },
+        {
+          "file": "docs/archive/ux_public-multipage-experience-master-spec-v2.md",
+          "line": 206,
+          "column": 6,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "- No ranking ordering — order is logical pipeline: Integrity→Fairness→Fairness Action→Audit→Governance→Transition→Participation."
+        },
+        {
+          "file": "docs/archive/ux_public-multipage-experience-master-spec-v2.md",
+          "line": 225,
+          "column": 66,
+          "match": "Top",
+          "rule": "TOP",
+          "severity": "MEDIUM",
+          "rationale": "Generic superiority claim.",
+          "context_line": "| Equity Card | Classification (Healthy/Monitoring/Imbalance) | “Top” or “best” |"
+        },
+        {
+          "file": "docs/archive/ux_public-multipage-experience-master-spec-v2.md",
+          "line": 357,
+          "column": 64,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "New surface: “Hero Composite” – Risk of inferred institutional ranking by visual proximity. Mitigation: uniform card size & non-sorted order; disclaimers."
+        },
+        {
+          "file": "docs/archive/ux_public-multipage-experience-master-spec-v2.md",
+          "line": 420,
+          "column": 51,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| PUB-R9 | User interprets card order as priority ranking | Medium | Low | Document fixed canonical order; disclaimers | Monitoring |"
+        },
+        {
+          "file": "docs/archive/ux_public-multipage-experience-master-spec-v2.md",
+          "line": 489,
+          "column": 28,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| High misinterpretation (“ranking” feedback) | ≥5% ranking confusion | Add persistent “Non-Ranking Fairness” badge near equity & under-served |"
+        },
+        {
+          "file": "docs/archive/ux_public-multipage-experience-master-spec-v2.md",
+          "line": 489,
+          "column": 53,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| High misinterpretation (“ranking” feedback) | ≥5% ranking confusion | Add persistent “Non-Ranking Fairness” badge near equity & under-served |"
+        },
+        {
+          "file": "docs/archive/ux_public-multipage-experience-master-spec-v2.md",
+          "line": 489,
+          "column": 93,
+          "match": "Ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| High misinterpretation (“ranking” feedback) | ≥5% ranking confusion | Add persistent “Non-Ranking Fairness” badge near equity & under-served |"
+        },
+        {
+          "file": "docs/archive/ux_public-multipage-experience-master-spec-v2.md",
+          "line": 511,
+          "column": 45,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| Equity | Equity Index, Under-Served | Non-ranking emphasis |"
+        },
+        {
+          "file": "docs/archive/ux_public-multipage-experience-master-spec-v2.md",
+          "line": 584,
+          "column": 29,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| D1 | Equity signals bukan ranking kualitas. | Equity page, hero equity card, under-served card |"
+        },
+        {
+          "file": "docs/archive/ux_public-multipage-experience-master-spec-v2.md",
+          "line": 646,
+          "column": 83,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "- Governance & Ethics advisory for ensuring hero pattern does not create implicit ranking semantics."
+        },
+        {
+          "file": "docs/fairness/hysteresis-public-methodology-fragment-v1.md",
+          "line": 20,
+          "column": 48,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "- D1: Equity Index & daftar under‑served bukan ranking kualitas—hanya sinyal pemerataan."
+        },
+        {
+          "file": "docs/faq/faq-fairness-hysteresis-update.md",
+          "line": 12,
+          "column": 22,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "Q: Apakah ini bentuk ranking?  "
+        },
+        {
+          "file": "docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md",
+          "line": 52,
+          "column": 41,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "      risk: Public misinterpretation as ranking"
+        },
+        {
+          "file": "docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md",
+          "line": 53,
+          "column": 48,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "      mitigation: Disclaimer D1 presence + non-ranking FAQ entry"
+        },
+        {
+          "file": "docs/governance/dec/DEC-20250812-03-principles-reference-activation.md",
+          "line": 46,
+          "column": 9,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "  - New ranking-like token & GP9 not Yes (PRIN-REF-004)."
+        },
+        {
+          "file": "docs/governance/disclaimers-lint-spec-v1.md",
+          "line": 13,
+          "column": 332,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "Menetapkan standar otomatis (lint + policy-as-code) untuk memastikan setiap halaman, komponen, dan artefak publik yang diwajibkan menampilkan, merujuk, atau mengikat disclaimers menengah (D1–D7) secara konsisten, tidak hilang karena refactor UI, dan tidak terjadi drift terminologi / framing yang melemahkan integritas naratif non-ranking, privacy-by-architecture, serta anti-hype."
+        },
+        {
+          "file": "docs/governance/disclaimers-lint-spec-v1.md",
+          "line": 36,
+          "column": 50,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| D1 | “Equity Index & daftar under‑served bukan ranking kualitas—hanya sinyal pemerataan.” | Anti-ranking fairness clarity |"
+        },
+        {
+          "file": "docs/governance/disclaimers-lint-spec-v1.md",
+          "line": 36,
+          "column": 100,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| D1 | “Equity Index & daftar under‑served bukan ranking kualitas—hanya sinyal pemerataan.” | Anti-ranking fairness clarity |"
+        },
+        {
+          "file": "docs/governance/disclaimers-lint-spec-v1.md",
+          "line": 54,
+          "column": 43,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| Equity Under‑Served Section | D1 | Anti-ranking emphasis |"
+        },
+        {
+          "file": "docs/governance/disclaimers-lint-spec-v1.md",
+          "line": 55,
+          "column": 15,
+          "match": "top",
+          "rule": "TOP",
+          "severity": "MEDIUM",
+          "rationale": "Generic superiority claim.",
+          "context_line": "| Trust Page (top) | D2, D3, D5 | Privacy + credential + hash scope |"
+        },
+        {
+          "file": "docs/governance/disclaimers-lint-spec-v1.md",
+          "line": 70,
+          "column": 50,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| Under‑Served Method Explainer (FAQ) | D1 | Non-ranking reaffirmation |"
+        },
+        {
+          "file": "docs/governance/disclaimers-lint-spec-v1.md",
+          "line": 86,
+          "column": 44,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| DISC-PHRASE-009 | Banned phrase implying ranking appears near fairness disclaimers (“peringkat”, “top”, “paling unggul”) | ERROR |"
+        },
+        {
+          "file": "docs/governance/disclaimers-lint-spec-v1.md",
+          "line": 86,
+          "column": 101,
+          "match": "top",
+          "rule": "TOP",
+          "severity": "MEDIUM",
+          "rationale": "Generic superiority claim.",
+          "context_line": "| DISC-PHRASE-009 | Banned phrase implying ranking appears near fairness disclaimers (“peringkat”, “top”, “paling unggul”) | ERROR |"
+        },
+        {
+          "file": "docs/governance/disclaimers-lint-spec-v1.md",
+          "line": 102,
+          "column": 67,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "    { \"id\":\"D1\", \"text\":\"Equity Index & daftar under‑served bukan ranking kualitas—hanya sinyal pemerataan.\" },"
+        },
+        {
+          "file": "docs/governance/disclaimers-lint-spec-v1.md",
+          "line": 187,
+          "column": 48,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "- Fairness cluster: `(under.?served|pemerataan|ranking|kualitas)`"
+        },
+        {
+          "file": "docs/governance/disclaimers-lint-spec-v1.md",
+          "line": 197,
+          "column": 34,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "(terbaik|paling unggul|peringkat|ranking|top\\\\s?\\\\d+|juara|skor kinerja|nilai kinerja|pemenang)"
+        },
+        {
+          "file": "docs/governance/disclaimers-lint-spec-v1.md",
+          "line": 197,
+          "column": 42,
+          "match": "top",
+          "rule": "TOP",
+          "severity": "MEDIUM",
+          "rationale": "Generic superiority claim.",
+          "context_line": "(terbaik|paling unggul|peringkat|ranking|top\\\\s?\\\\d+|juara|skor kinerja|nilai kinerja|pemenang)"
+        },
+        {
+          "file": "docs/governance/disclaimers-lint-spec-v1.md",
+          "line": 197,
+          "column": 2,
+          "match": "terbaik",
+          "rule": "TERBAIK",
+          "severity": "HIGH",
+          "rationale": "“Terbaik” (best) absolute claim.",
+          "context_line": "(terbaik|paling unggul|peringkat|ranking|top\\\\s?\\\\d+|juara|skor kinerja|nilai kinerja|pemenang)"
+        },
+        {
+          "file": "docs/governance/disclaimers-lint-spec-v1.md",
+          "line": 321,
+          "column": 83,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "- Stopword retention (do NOT remove) to catch subtle drift (e.g., removing “bukan ranking” reduces meaning)."
+        },
+        {
+          "file": "docs/governance/disclaimers-lint-spec-v1.md",
+          "line": 344,
+          "column": 53,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| Banned phrase legitimate context (FAQ explaining “ranking”) | Incorrect block | Allow attribute `data-phrase-context=\"disclaimer-explanation\"` triggers bypass for that node |"
+        },
+        {
+          "file": "docs/governance/disclaimers-lint-spec-v1.md",
+          "line": 393,
+          "column": 71,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "  <p data-disclaimer-id=\"D1\">Equity Index & daftar under‑served bukan ranking kualitas—hanya sinyal pemerataan.</p>"
+        },
+        {
+          "file": "docs/governance/disclaimers-lint-spec-v1.md",
+          "line": 505,
+          "column": 163,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "“Disclaimers lint memastikan bahwa setiap klaim fairness, privacy, dan integrity tetap eksplisit, tidak tergeser oleh refactor, dan bebas dari kontaminasi bahasa ranking atau hype.”"
+        },
+        {
+          "file": "docs/governance/lint-principles-reference-spec-v1.md",
+          "line": 9,
+          "column": 127,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "Mencegah “silent erosion” prinsip melalui perubahan incremental (misal menambahkan field numerik yang bisa dipersepsi sebagai ranking, atau memperluas data yang mengurangi minimisasi)."
+        },
+        {
+          "file": "docs/governance/lint-principles-reference-spec-v1.md",
+          "line": 18,
+          "column": 37,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "  - Penambahan kata kunci potensial ranking: `ranking|top|peringkat|score|skor` (case-insensitive)."
+        },
+        {
+          "file": "docs/governance/lint-principles-reference-spec-v1.md",
+          "line": 18,
+          "column": 47,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "  - Penambahan kata kunci potensial ranking: `ranking|top|peringkat|score|skor` (case-insensitive)."
+        },
+        {
+          "file": "docs/governance/lint-principles-reference-spec-v1.md",
+          "line": 18,
+          "column": 55,
+          "match": "top",
+          "rule": "TOP",
+          "severity": "MEDIUM",
+          "rationale": "Generic superiority claim.",
+          "context_line": "  - Penambahan kata kunci potensial ranking: `ranking|top|peringkat|score|skor` (case-insensitive)."
+        },
+        {
+          "file": "docs/governance/lint-principles-reference-spec-v1.md",
+          "line": 38,
+          "column": 32,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| PRIN-REF-004 | New potential ranking token added & GP9 not marked Yes | ERROR |"
+        },
+        {
+          "file": "docs/governance/lint-principles-reference-spec-v1.md",
+          "line": 56,
+          "column": 34,
+          "match": "terbaik",
+          "rule": "TERBAIK",
+          "severity": "HIGH",
+          "rationale": "“Terbaik” (best) absolute claim.",
+          "context_line": "| GP7 | Hype words `revolusioner|terbaik|super|unggul` added |"
+        },
+        {
+          "file": "docs/governance/lint-principles-reference-spec-v1.md",
+          "line": 56,
+          "column": 21,
+          "match": "revolusioner",
+          "rule": "REVOLUSIONER",
+          "severity": "HIGH",
+          "rationale": "Overclaim “revolutionary”.",
+          "context_line": "| GP7 | Hype words `revolusioner|terbaik|super|unggul` added |"
+        },
+        {
+          "file": "docs/governance/trace/archive-trace-index-v1.md",
+          "line": 31,
+          "column": 7,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| Non-ranking fairness framing | Landing narrative draft | methodology fragment + Master Spec §30/§35 | hype-lint + disclaimers presence |"
+        },
+        {
+          "file": "docs/integrity/credential-schema-final-v1.md",
+          "line": 9,
+          "column": 321,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "Menetapkan skema formal, batas, aturan governance, dan praktik kriptografi untuk “Integrity Credential” yang menjadi trust primitive utama. Credential ini: (a) Memverifikasi bahwa sebuah unit/organisasi (selanjutnya: “unit kesejahteraan anak”) telah melalui proses verifikasi standar, (b) Menyediakan bukti portabel non‑ranking, (c) Tidak memuat data pribadi anak, (d) Memungkinkan audit transisi & revocation di masa depan, (e) Selaras dengan prinsip privacy-by-architecture & non-ranking fairness."
+        },
+        {
+          "file": "docs/integrity/credential-schema-final-v1.md",
+          "line": 9,
+          "column": 483,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "Menetapkan skema formal, batas, aturan governance, dan praktik kriptografi untuk “Integrity Credential” yang menjadi trust primitive utama. Credential ini: (a) Memverifikasi bahwa sebuah unit/organisasi (selanjutnya: “unit kesejahteraan anak”) telah melalui proses verifikasi standar, (b) Menyediakan bukti portabel non‑ranking, (c) Tidak memuat data pribadi anak, (d) Memungkinkan audit transisi & revocation di masa depan, (e) Selaras dengan prinsip privacy-by-architecture & non-ranking fairness."
+        },
+        {
+          "file": "docs/integrity/credential-schema-final-v1.md",
+          "line": 25,
+          "column": 11,
+          "match": "Ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| GP9 Non-Ranking Fairness | Tidak memuat ranking, skor komparatif, ratio fairness detail. |"
+        },
+        {
+          "file": "docs/integrity/credential-schema-final-v1.md",
+          "line": 25,
+          "column": 43,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| GP9 Non-Ranking Fairness | Tidak memuat ranking, skor komparatif, ratio fairness detail. |"
+        },
+        {
+          "file": "docs/integrity/credential-schema-final-v1.md",
+          "line": 39,
+          "column": 20,
+          "match": "top",
+          "rule": "TOP",
+          "severity": "MEDIUM",
+          "rationale": "Generic superiority claim.",
+          "context_line": "High-level fields (top-level):"
+        },
+        {
+          "file": "docs/integrity/credential-schema-final-v1.md",
+          "line": 86,
+          "column": 52,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| name | string | Yes | 3–120 chars; sanitized (no ranking adjectives) | Display name |"
+        },
+        {
+          "file": "docs/integrity/credential-schema-final-v1.md",
+          "line": 109,
+          "column": 17,
+          "match": "Ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| Performance / Ranking | ratingScore, rankPosition | Violates non-ranking fairness |"
+        },
+        {
+          "file": "docs/integrity/credential-schema-final-v1.md",
+          "line": 109,
+          "column": 68,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| Performance / Ranking | ratingScore, rankPosition | Violates non-ranking fairness |"
+        },
+        {
+          "file": "docs/integrity/credential-schema-final-v1.md",
+          "line": 385,
+          "column": 76,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "3. UI: Org shows “Verification Suspended/Revoked” badge (never converts to ranking penalty; disclaimers emphasise)."
+        },
+        {
+          "file": "docs/integrity/credential-schema-final-v1.md",
+          "line": 435,
+          "column": 20,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "No field promoting ranking or performance scoring allowed. Attempt requires Ethics Board veto procedure (fast reject)."
+        },
+        {
+          "file": "docs/integrity/credential-schema-final-v1.md",
+          "line": 472,
+          "column": 116,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| Scope Misinterpretation | Interpreting credential as performance rating | Embedded disclaimers & UI copy banning ranking |"
+        },
+        {
+          "file": "docs/integrity/credential-schema-final-v1.md",
+          "line": 504,
+          "column": 62,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| governanceScore (BAN) | Would rank governance | Rejected – ranking risk |"
+        },
+        {
+          "file": "docs/integrity/credential-schema-final-v1.md",
+          "line": 586,
+          "column": 7,
+          "match": "Ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| Non-Ranking | No ranking fields; disclaimers explicit |"
+        },
+        {
+          "file": "docs/integrity/credential-schema-final-v1.md",
+          "line": 586,
+          "column": 20,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| Non-Ranking | No ranking fields; disclaimers explicit |"
+        },
+        {
+          "file": "docs/integrity/credential-schema-final-v1.md",
+          "line": 648,
+          "column": 67,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "Integrity Credential v1.0 memberikan pondasi portabel, minim, non‑ranking, dan dapat diaudit yang menyelaraskan semua pilar: privacy, fairness, governance, portability, & transition. Tidak ada deviations dari strategi; struktur mempersiapkan revocation & extensibility tanpa membuka risiko data sensitif. Immediate next step: governance ratification + implement signer & chain to avoid trust theater."
+        },
+        {
+          "file": "docs/integrity/credential-schema-final-v1.md",
+          "line": 678,
+          "column": 116,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "`[CRED-LINT-004] Prohibited field 'ratingScore' detected in credentialSubject. Remove to comply with privacy & non-ranking policy.`"
+        },
+        {
+          "file": "docs/integrity/evidence-minimum-phase1.5-v1.md",
+          "line": 15,
+          "column": 71,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| A4 | Hype Lint Report | `artifacts/hype-lint.json` | Kontrol bahasa ranking / over-claim | `total_hits`, `severity_counts`, `max_severity` | 24h | `max_severity!='HIGH'` AND `severity_counts.HIGH=0` | `max_severity='HIGH'` but total HIGH <= baseline exception (<=3) | HIGH > baseline OR file missing |"
+        },
+        {
+          "file": "docs/master-spec/master-spec-v2.0.md",
+          "line": 39,
+          "column": 28,
+          "match": "Ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "§30 Equity Narrative & Non-Ranking Framing (GP6)  "
+        },
+        {
+          "file": "docs/master-spec/master-spec-v2.0.md",
+          "line": 67,
+          "column": 113,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "Definisi mekanisme hysteresis: Parameter aktif ditetapkan lewat DEC (misal DEC-20250812-02 Option F). Tidak ada ranking / scoring kompetitif. Status ‘under‑served’ sinyal perbaikan, bukan kualitas relatif."
+        },
+        {
+          "file": "docs/master-spec/master-spec-v2.0.md",
+          "line": 79,
+          "column": 67,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "Disclaimers D1–D7 wajib pada surface tertentu. Larangan leksikal: ranking/top/terbaik/“peringkat” kecuali dalam konteks redaksi (educational example). Anti-hype lint memblok frasa prospektif yang memicu overclaim."
+        },
+        {
+          "file": "docs/master-spec/master-spec-v2.0.md",
+          "line": 79,
+          "column": 75,
+          "match": "top",
+          "rule": "TOP",
+          "severity": "MEDIUM",
+          "rationale": "Generic superiority claim.",
+          "context_line": "Disclaimers D1–D7 wajib pada surface tertentu. Larangan leksikal: ranking/top/terbaik/“peringkat” kecuali dalam konteks redaksi (educational example). Anti-hype lint memblok frasa prospektif yang memicu overclaim."
+        },
+        {
+          "file": "docs/master-spec/master-spec-v2.0.md",
+          "line": 79,
+          "column": 79,
+          "match": "terbaik",
+          "rule": "TERBAIK",
+          "severity": "HIGH",
+          "rationale": "“Terbaik” (best) absolute claim.",
+          "context_line": "Disclaimers D1–D7 wajib pada surface tertentu. Larangan leksikal: ranking/top/terbaik/“peringkat” kecuali dalam konteks redaksi (educational example). Anti-hype lint memblok frasa prospektif yang memicu overclaim."
+        },
+        {
+          "file": "docs/onboarding/agent-bootstrap-manifest.md",
+          "line": 100,
+          "column": 3,
+          "match": "Ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "- Ranking token addition & GP9=No → PRIN-REF-004"
+        },
+        {
+          "file": "docs/onboarding/agent-bootstrap-manifest.md",
+          "line": 293,
+          "column": 10,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| GP6 | `ranking|peringkat|top\\\\s\\\\d+|score|skor` |"
+        },
+        {
+          "file": "docs/onboarding/agent-bootstrap-manifest.md",
+          "line": 293,
+          "column": 28,
+          "match": "top",
+          "rule": "TOP",
+          "severity": "MEDIUM",
+          "rationale": "Generic superiority claim.",
+          "context_line": "| GP6 | `ranking|peringkat|top\\\\s\\\\d+|score|skor` |"
+        },
+        {
+          "file": "docs/onboarding/agent-bootstrap-manifest.md",
+          "line": 294,
+          "column": 23,
+          "match": "terbaik",
+          "rule": "TERBAIK",
+          "severity": "HIGH",
+          "rationale": "“Terbaik” (best) absolute claim.",
+          "context_line": "| GP7 | `revolusioner|terbaik|unggul|paling\\\\s(bagus|hebat)` |"
+        },
+        {
+          "file": "docs/onboarding/agent-bootstrap-manifest.md",
+          "line": 294,
+          "column": 10,
+          "match": "revolusioner",
+          "rule": "REVOLUSIONER",
+          "severity": "HIGH",
+          "rationale": "Overclaim “revolutionary”.",
+          "context_line": "| GP7 | `revolusioner|terbaik|unggul|paling\\\\s(bagus|hebat)` |"
+        },
+        {
+          "file": "docs/onboarding/agent-role-policy-v1.md",
+          "line": 13,
+          "column": 25,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "- Memperkenalkan bahasa ranking / hype terlarang."
+        },
+        {
+          "file": "docs/onboarding/agent-role-policy-v1.md",
+          "line": 45,
+          "column": 18,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| C | C6 | Klaim ranking / performa kompetitif | DENY |"
+        },
+        {
+          "file": "docs/onboarding/agent-role-policy-v1.md",
+          "line": 73,
+          "column": 4,
+          "match": "top",
+          "rule": "TOP",
+          "severity": "MEDIUM",
+          "rationale": "Generic superiority claim.",
+          "context_line": "At top of new appended section. Missing tag → violation (policy scanner future)."
+        },
+        {
+          "file": "docs/onboarding/agent-role-policy-v1.md",
+          "line": 126,
+          "column": 23,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| TS8 | “Klaim sistem ranking global” | DENY (C6) |"
+        },
+        {
+          "file": "docs/onboarding/agent-role-policy-v1.md",
+          "line": 168,
+          "column": 43,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| GP5 Robustness | Deny config mutation & ranking claims |"
+        },
+        {
+          "file": "docs/principles/GP1-GP10-index.md",
+          "line": 16,
+          "column": 65,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| GP6 | Outcome Honesty | Tidak mempresentasikan sinyal sebagai ranking / kualitas; menghindari misframing performa. | Ethical Framing | §14 Fairness Narrative, §30 Equity UI | No “top”, disclaimers Reinforce non-ranking |"
+        },
+        {
+          "file": "docs/principles/GP1-GP10-index.md",
+          "line": 16,
+          "column": 214,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| GP6 | Outcome Honesty | Tidak mempresentasikan sinyal sebagai ranking / kualitas; menghindari misframing performa. | Ethical Framing | §14 Fairness Narrative, §30 Equity UI | No “top”, disclaimers Reinforce non-ranking |"
+        },
+        {
+          "file": "docs/principles/GP1-GP10-index.md",
+          "line": 16,
+          "column": 182,
+          "match": "top",
+          "rule": "TOP",
+          "severity": "MEDIUM",
+          "rationale": "Generic superiority claim.",
+          "context_line": "| GP6 | Outcome Honesty | Tidak mempresentasikan sinyal sebagai ranking / kualitas; menghindari misframing performa. | Ethical Framing | §14 Fairness Narrative, §30 Equity UI | No “top”, disclaimers Reinforce non-ranking |"
+        },
+        {
+          "file": "docs/principles/GP1-GP10-index.md",
+          "line": 17,
+          "column": 76,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| GP7 | Anti-Hype & Plain Language | Bahasa pemasaran berlebihan & ambigu (ranking, “revolusioner”) diblok lint demi kejelasan & menghindari overclaim. | Copy Discipline | §35 Ethical Content, Disclaimers Lint, Hype Lint (planned) | Banned phrase list, hype lexicon lint |"
+        },
+        {
+          "file": "docs/principles/GP1-GP10-index.md",
+          "line": 17,
+          "column": 86,
+          "match": "revolusioner",
+          "rule": "REVOLUSIONER",
+          "severity": "HIGH",
+          "rationale": "Overclaim “revolutionary”.",
+          "context_line": "| GP7 | Anti-Hype & Plain Language | Bahasa pemasaran berlebihan & ambigu (ranking, “revolusioner”) diblok lint demi kejelasan & menghindari overclaim. | Copy Discipline | §35 Ethical Content, Disclaimers Lint, Hype Lint (planned) | Banned phrase list, hype lexicon lint |"
+        },
+        {
+          "file": "docs/principles/GP1-GP10-index.md",
+          "line": 19,
+          "column": 13,
+          "match": "Ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| GP9 | Non-Ranking Fairness | Label under‑served & equity index tidak memeringkat; hanya sinyal pemerataan dengan hysteresis stabil untuk menekan noise. | Fairness Stability | §14 Fairness, §42 Hysteresis, DEC-20250812-02 | Hysteresis Option F, D1 disclaimer |"
+        },
+        {
+          "file": "docs/privacy/pii-pattern-library-v1.md",
+          "line": 6,
+          "column": 156,
+          "match": "Ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "NON-DESTRUCTIVE: Dokumen ini MENAMBAHKAN detail; tidak menghapus strategi/konstraint sebelumnya (GP1 Privacy-by-Architecture, GP6 Outcome Honesty, GP9 Non-Ranking).  "
+        },
+        {
+          "file": "docs/privacy/pii-pattern-library-v1.md",
+          "line": 21,
+          "column": 11,
+          "match": "Ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| GP9 Non-Ranking Fairness | Scanner tidak membuat penilaian entitas; hanya sanitasi. |"
+        },
+        {
+          "file": "docs/privacy/pii-pattern-library-v1.md",
+          "line": 610,
+          "column": 193,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "Spec ini mempertahankan integritas strategi: menutup gap privasi sebelum skala, menghindari trust theater, mempersiapkan audit trail melalui event schema & governance log, serta tidak membawa ranking atau data anak ke permukaan—konsisten dengan semua dokumen sebelumnya."
+        },
+        {
+          "file": "docs/roadmap/roadmap-master-v1.md",
+          "line": 492,
+          "column": 44,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| Lint | D1 text truncated removing “bukan ranking” | Drift error |"
+        },
+        {
+          "file": "docs/roadmap/roadmap-master-v1.md",
+          "line": 554,
+          "column": 55,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| Hysteresis Methodology Explainer | H1 | Clarify non-ranking fairness |"
+        },
+        {
+          "file": "docs/roadmap/roadmap-master-v1.md",
+          "line": 557,
+          "column": 12,
+          "match": "Ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "| Hero Non-Ranking Tooltip (conditional) | H2 | If confusion >5% |"
+        },
+        {
+          "file": "docs/status/progress-recap-latest-2025-08-12T035901Z.md",
+          "line": 38,
+          "column": 43,
+          "match": "top",
+          "rule": "TOP",
+          "severity": "MEDIUM",
+          "rationale": "Generic superiority claim.",
+          "context_line": "4. Event Schema Canonical v1.0 – Struktur top-level, taxonomy event, meta sub-schema strategy, integrity hashing, governance change control."
+        },
+        {
+          "file": "docs/status/progress-recap-latest-2025-08-12T035901Z.md",
+          "line": 179,
+          "column": 31,
+          "match": "TOP",
+          "rule": "TOP",
+          "severity": "MEDIUM",
+          "rationale": "Generic superiority claim.",
+          "context_line": "## 7. GAP & RISIKO PRIORITAS (TOP 6)"
+        },
+        {
+          "file": "docs/status/progress-recap-latest-2025-08-12T035901Z.md",
+          "line": 192,
+          "column": 27,
+          "match": "TOP",
+          "rule": "TOP",
+          "severity": "MEDIUM",
+          "rationale": "Generic superiority claim.",
+          "context_line": "## 8. DIRECT ACTION LIST (TOP 15 – URUT EKSEKUSI)"
+        },
+        {
+          "file": "docs/status/progress-recap-latest-2025-08-12T035901Z.md",
+          "line": 381,
+          "column": 88,
+          "match": "ranking",
+          "rule": "RANKING",
+          "severity": "MEDIUM",
+          "rationale": "Unsubstantiated ranking claim.",
+          "context_line": "Semua jalur tetap konsisten dengan GP1–GP10. Tidak ada penurunan komitmen terhadap non-ranking fairness & privacy. Fokus sekarang = menghapus jurang antara blueprint dan trust primitives nyata. Kecepatan implementasi 2 minggu pertama akan menentukan kredibilitas eksternal jangka panjang."
         }
       ],
-      "items": [
-        {
-          "file": "docs\\governance\\disclaimers-lint-spec-v1.md",
-          "length": 23794,
-          "hash": "7b012d6ec8c681b1358c5963c7911b6b623530dc9fc44662474921616a5dba2f"
-        }
-      ]
+      "truncated": false
     },
-    "principles": [
-      {
-        "principle": "GP9",
-        "inferredImpact": true,
-        "declaredImpact": "Yes",
-        "mitigation": "Baseline activation"
+    "disclaimers": {
+      "version": 3,
+      "status": "ERROR",
+      "summary": {
+        "errors": 17,
+        "warnings": 19,
+        "metrics": {
+          "missingIds": 20,
+          "drift": 1,
+          "shadow": 0,
+          "bannedNear": 3,
+          "duplicates": 11,
+          "scope": 7,
+          "locale": 0
+        },
+        "versionMismatch": false,
+        "computed_hash": "10c03b7fc7c7543399d1c2ce9bf121ec5e7fb46ddee876b286fdadde035089d0",
+        "ruleCounts": {
+          "DISC-PRES-001": 13,
+          "DISC-TEXT-003": 2,
+          "DISC-PHRASE-009": 3,
+          "DISC-DUPL-005": 11,
+          "DISC-SCOPE-006": 7
+        },
+        "presence_enforcement": false
       },
-      {
-        "principle": "GP1",
-        "inferredImpact": false,
-        "declaredImpact": "No",
-        "mitigation": ""
+      "errors": [
+        {
+          "code": "DISC-PRES-001",
+          "page": "equity",
+          "missing": [
+            "D1",
+            "D2"
+          ],
+          "severity": "ERROR"
+        },
+        {
+          "code": "DISC-PRES-001",
+          "page": "equity_under_served_section",
+          "missing": [
+            "D1"
+          ],
+          "severity": "ERROR"
+        },
+        {
+          "code": "DISC-PRES-001",
+          "page": "trust",
+          "missing": [
+            "D2",
+            "D3",
+            "D5"
+          ],
+          "severity": "ERROR"
+        },
+        {
+          "code": "DISC-PRES-001",
+          "page": "trust_hysteresis",
+          "missing": [
+            "D1"
+          ],
+          "severity": "ERROR"
+        },
+        {
+          "code": "DISC-PRES-001",
+          "page": "governance",
+          "missing": [
+            "D5"
+          ],
+          "severity": "ERROR"
+        },
+        {
+          "code": "DISC-PRES-001",
+          "page": "terminology",
+          "missing": [
+            "D6",
+            "D2"
+          ],
+          "severity": "ERROR"
+        },
+        {
+          "code": "DISC-PRES-001",
+          "page": "terminology_banner",
+          "missing": [
+            "D6"
+          ],
+          "severity": "ERROR"
+        },
+        {
+          "code": "DISC-PRES-001",
+          "page": "feedback",
+          "missing": [
+            "D2"
+          ],
+          "severity": "ERROR"
+        },
+        {
+          "code": "DISC-PRES-001",
+          "page": "hash_excerpt_module",
+          "missing": [
+            "D5"
+          ],
+          "severity": "ERROR"
+        },
+        {
+          "code": "DISC-PRES-001",
+          "page": "media_digest",
+          "missing": [
+            "D4",
+            "D1",
+            "D2"
+          ],
+          "severity": "ERROR"
+        },
+        {
+          "code": "DISC-PRES-001",
+          "page": "about_faq_data",
+          "missing": [
+            "D2"
+          ],
+          "severity": "ERROR"
+        },
+        {
+          "code": "DISC-PRES-001",
+          "page": "api_verification_docs",
+          "missing": [
+            "D5",
+            "D3"
+          ],
+          "severity": "ERROR"
+        },
+        {
+          "code": "DISC-PRES-001",
+          "page": "changelog_excerpt",
+          "missing": [
+            "D5"
+          ],
+          "severity": "ERROR"
+        },
+        {
+          "code": "DISC-TEXT-003",
+          "id": "D1",
+          "page": "about_faq_data",
+          "similarity": 0.2,
+          "severity": "ERROR"
+        },
+        {
+          "code": "DISC-PHRASE-009",
+          "file": "docs\\integrity\\credential-schema-final-v1.md",
+          "severity": "ERROR"
+        },
+        {
+          "code": "DISC-PHRASE-009",
+          "file": "docs\\governance\\disclaimers-lint-spec-v1.md",
+          "severity": "ERROR"
+        },
+        {
+          "code": "DISC-PHRASE-009",
+          "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
+          "severity": "ERROR"
+        }
+      ],
+      "warnings": [
+        {
+          "code": "DISC-TEXT-003",
+          "id": "D1",
+          "page": "credential_viewer",
+          "similarity": 0.1,
+          "severity": "WARNING",
+          "note": "Below noise threshold (<0.15) likely spurious match"
+        },
+        {
+          "code": "DISC-DUPL-005",
+          "page": "landing",
+          "id": "D1",
+          "count": 55,
+          "severity": "WARNING"
+        },
+        {
+          "code": "DISC-DUPL-005",
+          "page": "landing",
+          "id": "D7",
+          "count": 28,
+          "severity": "WARNING"
+        },
+        {
+          "code": "DISC-DUPL-005",
+          "page": "landing",
+          "id": "D2",
+          "count": 40,
+          "severity": "WARNING"
+        },
+        {
+          "code": "DISC-DUPL-005",
+          "page": "landing",
+          "id": "D3",
+          "count": 22,
+          "severity": "WARNING"
+        },
+        {
+          "code": "DISC-DUPL-005",
+          "page": "landing",
+          "id": "D4",
+          "count": 7,
+          "severity": "WARNING"
+        },
+        {
+          "code": "DISC-DUPL-005",
+          "page": "landing",
+          "id": "D5",
+          "count": 16,
+          "severity": "WARNING"
+        },
+        {
+          "code": "DISC-DUPL-005",
+          "page": "landing",
+          "id": "D6",
+          "count": 7,
+          "severity": "WARNING"
+        },
+        {
+          "code": "DISC-DUPL-005",
+          "page": "credential_viewer",
+          "id": "D1",
+          "count": 3,
+          "severity": "WARNING"
+        },
+        {
+          "code": "DISC-DUPL-005",
+          "page": "credential_viewer",
+          "id": "D3",
+          "count": 2,
+          "severity": "WARNING"
+        },
+        {
+          "code": "DISC-DUPL-005",
+          "page": "credential_viewer",
+          "id": "D7",
+          "count": 2,
+          "severity": "WARNING"
+        },
+        {
+          "code": "DISC-DUPL-005",
+          "page": "governance",
+          "id": "D7",
+          "count": 3,
+          "severity": "WARNING"
+        },
+        {
+          "code": "DISC-SCOPE-006",
+          "page": "landing",
+          "id": "D7",
+          "severity": "WARNING"
+        },
+        {
+          "code": "DISC-SCOPE-006",
+          "page": "landing",
+          "id": "D4",
+          "severity": "WARNING"
+        },
+        {
+          "code": "DISC-SCOPE-006",
+          "page": "landing",
+          "id": "D6",
+          "severity": "WARNING"
+        },
+        {
+          "code": "DISC-SCOPE-006",
+          "page": "credential_viewer",
+          "id": "D1",
+          "severity": "WARNING"
+        },
+        {
+          "code": "DISC-SCOPE-006",
+          "page": "credential_viewer",
+          "id": "D5",
+          "severity": "WARNING"
+        },
+        {
+          "code": "DISC-SCOPE-006",
+          "page": "credential_viewer",
+          "id": "D7",
+          "severity": "WARNING"
+        },
+        {
+          "code": "DISC-SCOPE-006",
+          "page": "governance",
+          "id": "D7",
+          "severity": "WARNING"
+        }
+      ],
+      "config_effective": {
+        "min_similarity": 0.9,
+        "noise_similarity": 0.15
       }
-    ],
+    },
+    "principles": {
+      "version": 2,
+      "generated_utc": "2025-08-13T07:35:56.667Z",
+      "principles": [
+        {
+          "principle": "GP1",
+          "match_count": 673,
+          "domains": [
+            "other"
+          ],
+          "inferredImpact": true,
+          "confidence": 0.9,
+          "evidence_sample": [
+            {
+              "file": "README.md",
+              "line": 3,
+              "snippet": "STATUS: PRE-HASH SEAL (Hash baseline belum diisi – proses “seal-first” akan menulis hash real & mengunci konten canonical).",
+              "pattern": "hash(ing)?",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 14,
+              "snippet": "3. Terverifikasi (hash manifest + decision log).",
+              "pattern": "hash(ing)?",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 30,
+              "snippet": "Catatan: Hash masing-masing DEC akan dimasukkan ke field hash_of_decision_document setelah seal.",
+              "pattern": "hash(ing)?",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 84,
+              "snippet": "## 6. Integritas & Hash Chain",
+              "pattern": "hash(ing)?",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 86,
+              "snippet": "File canonical tercantum di: docs/integrity/spec-hash-manifest-v1.json",
+              "pattern": "hash(ing)?",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 87,
+              "snippet": "Status sekarang: <PENDING_HASH> placeholders menunggu mode seal-first.",
+              "pattern": "hash(ing)?",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 90,
+              "snippet": "1. Semua hash_sha256 di manifest terisi.",
+              "pattern": "hash(ing)?",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 91,
+              "snippet": "2. Field hash_of_decision_document di tiap DEC cocok 1:1 dengan manifest.",
+              "pattern": "hash(ing)?",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 92,
+              "snippet": "3. Perubahan file kunci (next_change_requires_dec=true) tanpa DEC → build FAIL (HASH_MISMATCH_DEC_REQUIRED).",
+              "pattern": "hash(ing)?",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 108,
+              "snippet": "| Manifest | docs/integrity/spec-hash-manifest-v1.json | Anchor hash integritas |",
+              "pattern": "hash(ing)?",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 149,
+              "snippet": "| spec-hash-diff report | artifacts/spec-hash-diff.json | Yes | Active |",
+              "pattern": "hash(ing)?",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 154,
+              "snippet": "| pii scan summary | artifacts/pii-scan-report.json | Yes | Active |",
+              "pattern": "pii",
+              "changed": false,
+              "domain": "other"
+            }
+          ],
+          "evidence_truncated": true
+        },
+        {
+          "principle": "GP2",
+          "match_count": 3,
+          "domains": [
+            "other"
+          ],
+          "inferredImpact": true,
+          "confidence": 0.55,
+          "evidence_sample": [
+            {
+              "file": "docs\\roadmap\\roadmap-master-v1.md",
+              "line": 318,
+              "snippet": "| Public API Access | Rate-limited aggregated metrics API | Governance gating & policy | Abuse risk (scraping misuse) |",
+              "pattern": "abuse",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\privacy\\pii-pattern-library-v1.md",
+              "line": 398,
+              "snippet": "| Over-reliance (false sense of safety) | Hidden risk | High | Messaging: “Deteksi bersifat best-effort” in privacy policy |",
+              "pattern": "safety",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\analytics\\event-schema-canonical-v1.md",
+              "line": 554,
+              "snippet": "| PII leakage attempt in meta | PII scanner + reject + block event_name if repeated abuse |",
+              "pattern": "abuse",
+              "changed": false,
+              "domain": "other"
+            }
+          ],
+          "evidence_truncated": false
+        },
+        {
+          "principle": "GP3",
+          "match_count": 64,
+          "domains": [
+            "other"
+          ],
+          "inferredImpact": true,
+          "confidence": 0.9,
+          "evidence_sample": [
+            {
+              "file": "README.md",
+              "line": 113,
+              "snippet": "| Trace Index | docs/governance/trace/archive-trace-index-v1.md | Peta archive → canonical |",
+              "pattern": "trace",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 121,
+              "snippet": "- Trace index mendokumentasikan mapping parameter & narasi.",
+              "pattern": "trace",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 256,
+              "snippet": "Tidak ada penghapusan retrospektif dokumen historis (archive) – hanya append trace / DEC baru. Pelanggaran = investigasi integritas.",
+              "pattern": "trace",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
+              "line": 64,
+              "snippet": "| Revocation Endpoint & List | Placeholder saja | Revocation transparency nol saat insiden |",
+              "pattern": "transparenc",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
+              "line": 67,
+              "snippet": "| Governance Decision Log Automation | Belum template DEC populating CI | Traceability manual & rentan lupa |",
+              "pattern": "trace",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
+              "line": 95,
+              "snippet": "6. Transparency Hardening",
+              "pattern": "transparenc",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\roadmap\\roadmap-master-v1.md",
+              "line": 16,
+              "snippet": "- Horizon 2 (Hari 31–60): Governance Depth & Transparency Amplification (changelog excerpt, support matrix, anomaly watchers, revocation placeholder UI, a11y/performance enforcement).",
+              "pattern": "transparenc",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\roadmap\\roadmap-master-v1.md",
+              "line": 44,
+              "snippet": "| I Revocation Futureproof | Revocation list endpoint placeholder & schema wiring | Credential Schema revocation section | Lifecycle transparency readiness |",
+              "pattern": "transparenc",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\roadmap\\roadmap-master-v1.md",
+              "line": 45,
+              "snippet": "| J Transparency & Education | Methodology narrative, FAQ expansions, disclaimers presence | Master Spec v2.0 & Disclaimers Lint | User comprehension fairness/trust |",
+              "pattern": "transparenc",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\roadmap\\roadmap-master-v1.md",
+              "line": 412,
+              "snippet": "## 13. BACKLOG → ROADMAP MAPPING TABLE (TRACEABILITY)",
+              "pattern": "trace",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\roadmap\\roadmap-master-v1.md",
+              "line": 463,
+              "snippet": "| Gate 2 – Expanded Transparency | Changelog excerpt live, anomaly detector stable, adoption scanner operational, accessibility automated pass | Mid H2 |",
+              "pattern": "transparenc",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\roadmap\\roadmap-master-v1.md",
+              "line": 497,
+              "snippet": "## 18. DOCUMENTATION & TRACEABILITY BINDINGS",
+              "pattern": "trace",
+              "changed": false,
+              "domain": "other"
+            }
+          ],
+          "evidence_truncated": true
+        },
+        {
+          "principle": "GP4",
+          "match_count": 355,
+          "domains": [
+            "other"
+          ],
+          "inferredImpact": true,
+          "confidence": 0.9,
+          "evidence_sample": [
+            {
+              "file": "README.md",
+              "line": 1,
+              "snippet": "# Fairness & Integrity Governance Scaffold (Baseline PRE-SEAL)",
+              "pattern": "governance",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 10,
+              "snippet": "Menyediakan kerangka (scaffold) governance, fairness, dan integrity untuk sistem penandaan “under‑served” berbasis hysteresis (Option F) yang:",
+              "pattern": "governance",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 23,
+              "snippet": "| DEC-20250812-02 | Hysteresis Adoption Option F | Mengunci parameter fairness (T_enter_major=0.50, T_enter_standard=0.60, consecutive_required_standard=2, T_exit=0.65, cooldown=1 snapshot, stalled wi",
+              "pattern": "dec\\-",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 24,
+              "snippet": "| DEC-20250812-03 | Principles Reference Activation | Mengaktifkan lint principles.reference (Phase 0 WARN → +48h Phase 1 ERROR → +7d Phase 2 DENY) | Adopted |",
+              "pattern": "dec\\-",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 36,
+              "snippet": "Parameter final (tersinkron di 3 tempat: DEC-20250812-02, hysteresis-config-v1.yml, methodology fragment):",
+              "pattern": "dec\\-",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 105,
+              "snippet": "| DEC Hysteresis | docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md | Sumber adopsi final |",
+              "pattern": "governance",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 105,
+              "snippet": "| DEC Hysteresis | docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md | Sumber adopsi final |",
+              "pattern": "dec\\-",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 106,
+              "snippet": "| DEC Principles | docs/governance/dec/DEC-20250812-03-principles-reference-activation.md | Enforcement fase |",
+              "pattern": "governance",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 106,
+              "snippet": "| DEC Principles | docs/governance/dec/DEC-20250812-03-principles-reference-activation.md | Enforcement fase |",
+              "pattern": "dec\\-",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 107,
+              "snippet": "| Disclaimers Spec | docs/governance/disclaimers-lint-spec-v1.md | Canonical disclaimers & rule codes |",
+              "pattern": "governance",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 113,
+              "snippet": "| Trace Index | docs/governance/trace/archive-trace-index-v1.md | Peta archive → canonical |",
+              "pattern": "governance",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 114,
+              "snippet": "| PR Template | .github/pull_request_template.md | 37 section governance gating |",
+              "pattern": "governance",
+              "changed": false,
+              "domain": "other"
+            }
+          ],
+          "evidence_truncated": true
+        },
+        {
+          "principle": "GP5",
+          "match_count": 310,
+          "domains": [
+            "other"
+          ],
+          "inferredImpact": true,
+          "confidence": 0.9,
+          "evidence_sample": [
+            {
+              "file": "README.md",
+              "line": 10,
+              "snippet": "Menyediakan kerangka (scaffold) governance, fairness, dan integrity untuk sistem penandaan “under‑served” berbasis hysteresis (Option F) yang:",
+              "pattern": "hysteresis",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 12,
+              "snippet": "1. Stabil (menghindari volatilitas metrik lewat hysteresis thresholds).",
+              "pattern": "hysteresis",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 23,
+              "snippet": "| DEC-20250812-02 | Hysteresis Adoption Option F | Mengunci parameter fairness (T_enter_major=0.50, T_enter_standard=0.60, consecutive_required_standard=2, T_exit=0.65, cooldown=1 snapshot, stalled wi",
+              "pattern": "anomaly",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 23,
+              "snippet": "| DEC-20250812-02 | Hysteresis Adoption Option F | Mengunci parameter fairness (T_enter_major=0.50, T_enter_standard=0.60, consecutive_required_standard=2, T_exit=0.65, cooldown=1 snapshot, stalled wi",
+              "pattern": "cooldown",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 23,
+              "snippet": "| DEC-20250812-02 | Hysteresis Adoption Option F | Mengunci parameter fairness (T_enter_major=0.50, T_enter_standard=0.60, consecutive_required_standard=2, T_exit=0.65, cooldown=1 snapshot, stalled wi",
+              "pattern": "stalled",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 23,
+              "snippet": "| DEC-20250812-02 | Hysteresis Adoption Option F | Mengunci parameter fairness (T_enter_major=0.50, T_enter_standard=0.60, consecutive_required_standard=2, T_exit=0.65, cooldown=1 snapshot, stalled wi",
+              "pattern": "hysteresis",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 26,
+              "snippet": "| (Planned) ANOM-DEC | Anomaly Equity Delta Policy | Mengunci perubahan anomaly_delta_threshold_equity_ratio | Draft Pending |",
+              "pattern": "anomaly",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 34,
+              "snippet": "## 3. Ringkasan Fairness Hysteresis (Option F Final)",
+              "pattern": "hysteresis",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 36,
+              "snippet": "Parameter final (tersinkron di 3 tempat: DEC-20250812-02, hysteresis-config-v1.yml, methodology fragment):",
+              "pattern": "hysteresis",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 41,
+              "snippet": "- Cooldown: 1 snapshot setelah exit sebelum label bisa aktif kembali",
+              "pattern": "cooldown",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 42,
+              "snippet": "- Stalled (internal only): 5 snapshot berturut equity_ratio antara 0.55 dan <0.65 (monitoring)",
+              "pattern": "stalled",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 43,
+              "snippet": "- Anomaly Delta: Perubahan mendadak ≥ 0.03 equity_ratio memicu flag analitik (bukan label publik)",
+              "pattern": "anomaly",
+              "changed": false,
+              "domain": "other"
+            }
+          ],
+          "evidence_truncated": true
+        },
+        {
+          "principle": "GP6",
+          "match_count": 52,
+          "domains": [
+            "other"
+          ],
+          "inferredImpact": true,
+          "confidence": 0.9,
+          "evidence_sample": [
+            {
+              "file": "README.md",
+              "line": 58,
+              "snippet": "| GP6 | Anti Misuse / Anti-Hype (Non-Ranking) |",
+              "pattern": "non-?ranking",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 72,
+              "snippet": "| D1 | Non-Ranking | Menegaskan sistem bukan ranking kompetitif |",
+              "pattern": "non-?ranking",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
+              "line": 381,
+              "snippet": "Semua jalur tetap konsisten dengan GP1–GP10. Tidak ada penurunan komitmen terhadap non-ranking fairness & privacy. Fokus sekarang = menghapus jurang antara blueprint dan trust primitives nyata. Kecepa",
+              "pattern": "non-?ranking",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\roadmap\\roadmap-master-v1.md",
+              "line": 313,
+              "snippet": "| Revocation Lifecycle | Live revocation events & viewer delta tracking | Simulated tests stable | Misinterpretation as punishment |",
+              "pattern": "misinterpret",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\roadmap\\roadmap-master-v1.md",
+              "line": 554,
+              "snippet": "| Hysteresis Methodology Explainer | H1 | Clarify non-ranking fairness |",
+              "pattern": "non-?ranking",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\roadmap\\roadmap-master-v1.md",
+              "line": 557,
+              "snippet": "| Hero Non-Ranking Tooltip (conditional) | H2 | If confusion >5% |",
+              "pattern": "non-?ranking",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\privacy\\pii-pattern-library-v1.md",
+              "line": 6,
+              "snippet": "NON-DESTRUCTIVE: Dokumen ini MENAMBAHKAN detail; tidak menghapus strategi/konstraint sebelumnya (GP1 Privacy-by-Architecture, GP6 Outcome Honesty, GP9 Non-Ranking).",
+              "pattern": "outcome honesty",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\privacy\\pii-pattern-library-v1.md",
+              "line": 6,
+              "snippet": "NON-DESTRUCTIVE: Dokumen ini MENAMBAHKAN detail; tidak menghapus strategi/konstraint sebelumnya (GP1 Privacy-by-Architecture, GP6 Outcome Honesty, GP9 Non-Ranking).",
+              "pattern": "non-?ranking",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\privacy\\pii-pattern-library-v1.md",
+              "line": 20,
+              "snippet": "| GP6 Outcome Honesty | Tidak over-claim (pattern “100% akurat”); jelaskan false positive possibility. |",
+              "pattern": "outcome honesty",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\privacy\\pii-pattern-library-v1.md",
+              "line": 21,
+              "snippet": "| GP9 Non-Ranking Fairness | Scanner tidak membuat penilaian entitas; hanya sanitasi. |",
+              "pattern": "non-?ranking",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\principles\\GP1-GP10-index.md",
+              "line": 16,
+              "snippet": "| GP6 | Outcome Honesty | Tidak mempresentasikan sinyal sebagai ranking / kualitas; menghindari misframing performa. | Ethical Framing | §14 Fairness Narrative, §30 Equity UI | No “top”, disclaimers R",
+              "pattern": "outcome honesty",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\principles\\GP1-GP10-index.md",
+              "line": 16,
+              "snippet": "| GP6 | Outcome Honesty | Tidak mempresentasikan sinyal sebagai ranking / kualitas; menghindari misframing performa. | Ethical Framing | §14 Fairness Narrative, §30 Equity UI | No “top”, disclaimers R",
+              "pattern": "non-?ranking",
+              "changed": false,
+              "domain": "other"
+            }
+          ],
+          "evidence_truncated": true
+        },
+        {
+          "principle": "GP7",
+          "match_count": 93,
+          "domains": [
+            "other"
+          ],
+          "inferredImpact": true,
+          "confidence": 0.9,
+          "evidence_sample": [
+            {
+              "file": "README.md",
+              "line": 58,
+              "snippet": "| GP6 | Anti Misuse / Anti-Hype (Non-Ranking) |",
+              "pattern": "hype",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 134,
+              "snippet": "4. Hindari istilah terlarang (lihat Anti‑Hype).",
+              "pattern": "hype",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 136,
+              "snippet": "Anti‑Hype (Contoh Kata Dilarang – akan lint):",
+              "pattern": "hype",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 138,
+              "snippet": "- “ranking”, “peringkat”, “top”, “terbaik”, “no.1”, “paling unggul”, “skor kompetitif”",
+              "pattern": "terbaik",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 138,
+              "snippet": "- “ranking”, “peringkat”, “top”, “terbaik”, “no.1”, “paling unggul”, “skor kompetitif”",
+              "pattern": "unggul",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 138,
+              "snippet": "- “ranking”, “peringkat”, “top”, “terbaik”, “no.1”, “paling unggul”, “skor kompetitif”",
+              "pattern": "top\\b",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 152,
+              "snippet": "| hype lint report | artifacts/hype-lint.json | Yes | Active |",
+              "pattern": "hype",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 196,
+              "snippet": "- Mengklaim “terbaik”, “top”, “juara”.",
+              "pattern": "terbaik",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 196,
+              "snippet": "- Mengklaim “terbaik”, “top”, “juara”.",
+              "pattern": "top\\b",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
+              "line": 38,
+              "snippet": "4. Event Schema Canonical v1.0 – Struktur top-level, taxonomy event, meta sub-schema strategy, integrity hashing, governance change control.",
+              "pattern": "top\\b",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
+              "line": 127,
+              "snippet": "| Lint gates enforced | Disclaimers & hype prevention functioning |",
+              "pattern": "hype",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
+              "line": 179,
+              "snippet": "## 7. GAP & RISIKO PRIORITAS (TOP 6)",
+              "pattern": "top\\b",
+              "changed": false,
+              "domain": "other"
+            }
+          ],
+          "evidence_truncated": true
+        },
+        {
+          "principle": "GP8",
+          "match_count": 8,
+          "domains": [
+            "other"
+          ],
+          "inferredImpact": true,
+          "confidence": 0.9,
+          "evidence_sample": [
+            {
+              "file": "docs\\roadmap\\roadmap-master-v1.md",
+              "line": 47,
+              "snippet": "| L Federation & Future | DID portability, external attestation, localization, CBOR | Future expansions in Credential spec | Scalability & portability guardrail |",
+              "pattern": "portabil",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\integrity\\credential-schema-final-v1.md",
+              "line": 19,
+              "snippet": "| GP3 Federated Mindset | Format JSON-LD / W3C Verifiable Credential compatible subset → portabilitas lintas platform. |",
+              "pattern": "portabil",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\integrity\\credential-schema-final-v1.md",
+              "line": 89,
+              "snippet": "| country | string | Optional | “ID” default | For portability |",
+              "pattern": "portabil",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\integrity\\credential-schema-final-v1.md",
+              "line": 495,
+              "snippet": "Credential uses canonical English tokens for portability; UI localizes labels. Do not localize field keys. Terminology object stage enumerations remain English-coded identifiers.",
+              "pattern": "portabil",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\integrity\\credential-schema-final-v1.md",
+              "line": 590,
+              "snippet": "| Portability | JSON-LD + DID method |",
+              "pattern": "portabil",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\integrity\\credential-schema-final-v1.md",
+              "line": 648,
+              "snippet": "Integrity Credential v1.0 memberikan pondasi portabel, minim, non‑ranking, dan dapat diaudit yang menyelaraskan semua pilar: privacy, fairness, governance, portability, & transition. Tidak ada deviati",
+              "pattern": "portabil",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\integrity\\credential-schema-final-v1.md",
+              "line": 648,
+              "snippet": "Integrity Credential v1.0 memberikan pondasi portabel, minim, non‑ranking, dan dapat diaudit yang menyelaraskan semua pilar: privacy, fairness, governance, portability, & transition. Tidak ada deviati",
+              "pattern": "extensib",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
+              "line": 64,
+              "snippet": "| GP3 | Federated Mindset | Cegah platform lock-in; integrity portability | Credential JSON-LD minimal; portable verify semantics |",
+              "pattern": "portabil",
+              "changed": false,
+              "domain": "other"
+            }
+          ],
+          "evidence_truncated": false
+        },
+        {
+          "principle": "GP9",
+          "match_count": 304,
+          "domains": [
+            "other"
+          ],
+          "inferredImpact": true,
+          "confidence": 0.9,
+          "evidence_sample": [
+            {
+              "file": "README.md",
+              "line": 1,
+              "snippet": "# Fairness & Integrity Governance Scaffold (Baseline PRE-SEAL)",
+              "pattern": "fairness",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 4,
+              "snippet": "Non-Removal Assertion: README ini akan dikelola append-only; perubahan substansial (narasi fairness, klaim integritas, prinsip) memerlukan DEC baru.",
+              "pattern": "fairness",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 10,
+              "snippet": "Menyediakan kerangka (scaffold) governance, fairness, dan integrity untuk sistem penandaan “under‑served” berbasis hysteresis (Option F) yang:",
+              "pattern": "fairness",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 23,
+              "snippet": "| DEC-20250812-02 | Hysteresis Adoption Option F | Mengunci parameter fairness (T_enter_major=0.50, T_enter_standard=0.60, consecutive_required_standard=2, T_exit=0.65, cooldown=1 snapshot, stalled wi",
+              "pattern": "fairness",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 34,
+              "snippet": "## 3. Ringkasan Fairness Hysteresis (Option F Final)",
+              "pattern": "fairness",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 45,
+              "snippet": "Tujuan: Mengurangi noise / flapping label “under-served” tanpa mengubah sifat non‑ranking.",
+              "pattern": "under-?served",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 58,
+              "snippet": "| GP6 | Anti Misuse / Anti-Hype (Non-Ranking) |",
+              "pattern": "non-?ranking",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 61,
+              "snippet": "| GP9 | Fairness Signal Stability (Hysteresis) |",
+              "pattern": "fairness",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 72,
+              "snippet": "| D1 | Non-Ranking | Menegaskan sistem bukan ranking kompetitif |",
+              "pattern": "non-?ranking",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 101,
+              "snippet": "| Fairness Config | docs/fairness/hysteresis-config-v1.yml | Parameter runtime |",
+              "pattern": "fairness",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 102,
+              "snippet": "| Narrative Publik | docs/fairness/hysteresis-public-methodology-fragment-v1.md | Penjelasan mekanisme & disclaimers |",
+              "pattern": "fairness",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "README.md",
+              "line": 103,
+              "snippet": "| State Machine | docs/fairness/hysteresis-state-machine-transitions.md | Transisi label |",
+              "pattern": "fairness",
+              "changed": false,
+              "domain": "other"
+            }
+          ],
+          "evidence_truncated": true
+        },
+        {
+          "principle": "GP10",
+          "match_count": 50,
+          "domains": [
+            "other"
+          ],
+          "inferredImpact": true,
+          "confidence": 0.9,
+          "evidence_sample": [
+            {
+              "file": "docs\\roadmap\\roadmap-master-v1.md",
+              "line": 273,
+              "snippet": "| Sampling biases KPI interpretasi | Document weighting & apply expansion factors |",
+              "pattern": "bias",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\roadmap\\roadmap-master-v1.md",
+              "line": 319,
+              "snippet": "| Community Action | Ethical contribution micro guidance | Support page matured | Scope creep activism |",
+              "pattern": "ethic",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\roadmap\\roadmap-master-v1.md",
+              "line": 319,
+              "snippet": "| Community Action | Ethical contribution micro guidance | Support page matured | Scope creep activism |",
+              "pattern": "ethical",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\roadmap\\roadmap-master-v1.md",
+              "line": 451,
+              "snippet": "| Ethics / Privacy | Bi-weekly | PII metrics, blocked attempts, drift attempts |",
+              "pattern": "ethic",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\principles\\GP1-GP10-index.md",
+              "line": 15,
+              "snippet": "| GP5 | Transparency | Definisi metrik, disclaimers, metodologi (fairness/hysteresis) dapat diinspeksi publik tanpa dark logic. | Public Clarity | §13 Hero, §35 Ethical Content, Methodology Fragments ",
+              "pattern": "ethic",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\principles\\GP1-GP10-index.md",
+              "line": 15,
+              "snippet": "| GP5 | Transparency | Definisi metrik, disclaimers, metodologi (fairness/hysteresis) dapat diinspeksi publik tanpa dark logic. | Public Clarity | §13 Hero, §35 Ethical Content, Methodology Fragments ",
+              "pattern": "ethical",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\principles\\GP1-GP10-index.md",
+              "line": 16,
+              "snippet": "| GP6 | Outcome Honesty | Tidak mempresentasikan sinyal sebagai ranking / kualitas; menghindari misframing performa. | Ethical Framing | §14 Fairness Narrative, §30 Equity UI | No “top”, disclaimers R",
+              "pattern": "ethic",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\principles\\GP1-GP10-index.md",
+              "line": 16,
+              "snippet": "| GP6 | Outcome Honesty | Tidak mempresentasikan sinyal sebagai ranking / kualitas; menghindari misframing performa. | Ethical Framing | §14 Fairness Narrative, §30 Equity UI | No “top”, disclaimers R",
+              "pattern": "ethical",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\principles\\GP1-GP10-index.md",
+              "line": 17,
+              "snippet": "| GP7 | Anti-Hype & Plain Language | Bahasa pemasaran berlebihan & ambigu (ranking, “revolusioner”) diblok lint demi kejelasan & menghindari overclaim. | Copy Discipline | §35 Ethical Content, Disclai",
+              "pattern": "ethic",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\principles\\GP1-GP10-index.md",
+              "line": 17,
+              "snippet": "| GP7 | Anti-Hype & Plain Language | Bahasa pemasaran berlebihan & ambigu (ranking, “revolusioner”) diblok lint demi kejelasan & menghindari overclaim. | Copy Discipline | §35 Ethical Content, Disclai",
+              "pattern": "ethical",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\onboarding\\agent-role-policy-v1.md",
+              "line": 166,
+              "snippet": "| GP3 Fairness | Parameter only via DEC; prevents silent bias shifts |",
+              "pattern": "bias",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\master-spec\\master-spec-v2.0.md",
+              "line": 44,
+              "snippet": "§35 Ethical & Copy Guidelines (Disclaimers, Anti-Hype – GP5, GP6, GP7)",
+              "pattern": "ethic",
+              "changed": false,
+              "domain": "other"
+            }
+          ],
+          "evidence_truncated": true
+        }
+      ],
+      "summary": {
+        "total_principles": 10,
+        "impacted": 10,
+        "average_confidence": 0.87,
+        "max_confidence": 0.9
+      }
+    },
     "drift": {
-      "timestamp_utc": "2025-08-13T03:10:50.245Z",
+      "timestamp_utc": "2025-08-13T07:35:56.779Z",
       "components": {
-        "spec_hash": "ADVISORY",
-        "params": "MISMATCH",
-        "hype": "PASS",
-        "disclaimers": "PASS_STUB"
+        "spec_hash": "PASS",
+        "params": "PASS",
+        "hype": "ADVISORY",
+        "disclaimers": "ADVISORY",
+        "principles": "ADVISORY",
+        "pii": "PASS_STUB",
+        "freshness": "PASS"
       },
       "summary": {
-        "hype_hits": 0,
-        "param_mismatches": 4
+        "hype_hits": 118,
+        "hype_max_severity": "HIGH",
+        "hype_high": 9,
+        "hype_medium": 109,
+        "hype_rule_counts": {
+          "RANKING": 91,
+          "TOP": 18,
+          "TERBAIK": 6,
+          "REVOLUSIONER": 3
+        },
+        "param_mismatches": 0,
+        "principles_entries": 0,
+        "pii_critical": 0,
+        "pii_total": 0,
+        "disclaimers_errors": 17,
+        "disclaimers_warnings": 19,
+        "disclaimers_rule_counts": {
+          "DISC-PRES-001": 13,
+          "DISC-TEXT-003": 2,
+          "DISC-PHRASE-009": 3,
+          "DISC-DUPL-005": 11,
+          "DISC-SCOPE-006": 7
+        }
       },
       "status": "ADVISORY"
     }
   },
   "summary": {
-    "total_param_checks": 13,
-    "param_mismatches": 4,
-    "hype_hits": 0,
-    "disclaimers_status": "PASS_STUB",
+    "total_param_checks": 11,
+    "param_mismatches": 0,
+    "hype_hits": 118,
+    "disclaimers_status": "ERROR",
     "drift_status": "ADVISORY"
   }
 }

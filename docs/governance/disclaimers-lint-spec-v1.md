@@ -569,7 +569,7 @@ Setelah keputusan:
 
 ## 34. APPENDIX – SAMPLE MARKDOWN REPORT (AUTO-GENERATED)
 
-```
+```text
 # Disclaimers Lint Report
 
 Date: 2025-08-12T03:45:00Z

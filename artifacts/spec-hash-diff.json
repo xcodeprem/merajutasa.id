@@ -1,15 +1,19 @@
 {
   "mode": "report-only",
-  "timestamp_utc": "2025-08-13T05:41:08Z",
+  "timestamp_utc": "2025-08-13T07:37:41Z",
   "updated": [],
   "unchanged": [
     "docs/roadmap/roadmap-master-v1.md",
+    "docs/governance/signature-pipeline-plan-v1.md",
+    "docs/governance/dec/DEC-20250813-02-signature-pipeline-adoption.md",
+    "docs/fairness/hysteresis-config-v1.yml",
     "docs/fairness/hysteresis-public-methodology-fragment-v1.md",
     "docs/fairness/hysteresis-state-machine-transitions.md",
     "docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md",
     "docs/governance/dec/DEC-20250812-03-principles-reference-activation.md",
     "docs/governance/README-decision-log-process.md",
     "docs/governance/lint-principles-reference-spec-v1.md",
+    "docs/governance/todo-post-DEC-20250812-02.md",
     "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
     ".github/pull_request_template.md",
     "docs/master-spec-deltas/delta-master-spec-v2-DEC-20250812-02.md",
@@ -29,48 +33,20 @@
     "docs/archive/ux_public-multipage-experience-master-spec-v2.md",
     "docs/governance/trace/archive-trace-index-v1.md",
     "docs/onboarding/agent-bootstrap-manifest.md",
+    "README.md",
     "docs/governance/dec/DEC-20250812-04-governance-baseline-thresholds.md",
+    "docs/integrity/evidence-minimum-phase1.5-v1.md",
     "docs/governance/dec/DEC-20250813-01-known-debt-register.md",
-    "docs/onboarding/agent-role-policy-v1.md"
+    "docs/onboarding/agent-role-policy-v1.md",
+    "docs/onboarding/agent-guardrails-v1.md"
   ],
   "placeholders_sealed": [],
   "placeholders_remaining": [],
-  "violations": [
-    {
-      "code": "HASH_MISMATCH_DEC_REQUIRED",
-      "path": "docs/governance/signature-pipeline-plan-v1.md",
-      "detail": "Manifest=d85b586f9cb6c0aad0390089e78bf8572c19384a5a68ebd7481a714a2b63edc8 current=b6448924edeb23970ecefa3dd5c37bf5f27616349a918615612e0e21bcda9225"
-    },
-    {
-      "code": "HASH_MISMATCH",
-      "path": "docs/governance/dec/DEC-20250813-02-signature-pipeline-adoption.md",
-      "detail": "Manifest=23faa0a56c0eddab056b1815b07da2079100da7090f340c69c5ff41d63d3594d current=ffec064003c65e40807fb1664f4861e84ee32042dab60a8a8d51d80357bda78a"
-    },
-    {
-      "code": "HASH_MISMATCH_DEC_REQUIRED",
-      "path": "docs/fairness/hysteresis-config-v1.yml",
-      "detail": "Manifest=adf27e37a983dfd1e45e89f45834b99f04e3874e74ce0bb4cd030d0a201ca3db current=c07f4ccc93bd68e18a74c106980a262904d50a59b2ffa25b9e3f899028037825"
-    },
-    {
-      "code": "HASH_MISMATCH",
-      "path": "docs/governance/todo-post-DEC-20250812-02.md",
-      "detail": "Manifest=fc7e8d484e475524aa4644599d33bd59636126d0b125567aeff9829f33a57229 current=52cb6ac1c41f9a09a756ddea21d3abaecbe974b92ec18b0a2b46b7559b45f943"
-    },
-    {
-      "code": "HASH_MISMATCH_DEC_REQUIRED",
-      "path": "README.md",
-      "detail": "Manifest=e70f88680b546f66545d267587e8bac43396bbe0a6170fc7adfd5c6e0677f58e current=37e24620a943e9d54385f786c779472019bbacce71e6233fdb216227655e7b03"
-    },
-    {
-      "code": "DEC_REF_INCONSISTENT",
-      "path": "docs/governance/dec/DEC-20250813-02-signature-pipeline-adoption.md",
-      "detail": "Non-decision file marked SELF dec_ref"
-    }
-  ],
+  "violations": [],
   "summary": {
-    "total_entries": 34,
+    "total_entries": 36,
     "updated_count": 0,
-    "violation_count": 6,
+    "violation_count": 0,
     "placeholders_remaining_count": 0
   }
 }

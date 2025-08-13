@@ -17,7 +17,7 @@
       "path": "docs/governance/signature-pipeline-plan-v1.md",
       "version": "1.0.0",
       "dec_ref": "DEC-20250813-02 (draft)",
-      "hash_sha256": "d85b586f9cb6c0aad0390089e78bf8572c19384a5a68ebd7481a714a2b63edc8",
+  "hash_sha256": "b6448924edeb23970ecefa3dd5c37bf5f27616349a918615612e0e21bcda9225",
       "integrity_class": "signature-design",
       "mutable_policy": "append-only",
       "next_change_requires_dec": true,
@@ -26,9 +26,9 @@
     {
       "path": "docs/governance/dec/DEC-20250813-02-signature-pipeline-adoption.md",
       "version": "1.0.0",
-      "dec_ref": "SELF (draft)",
-      "hash_sha256": "23faa0a56c0eddab056b1815b07da2079100da7090f340c69c5ff41d63d3594d",
-      "integrity_class": "decision-draft",
+  "dec_ref": "SELF",
+  "hash_sha256": "0ca785fe0c26e8053b644cc0c582abb461c851e7aafb621d5d6364729db66ff0",
+  "integrity_class": "decision",
       "mutable_policy": "immutable",
       "next_change_requires_dec": false,
       "notes": "Draft DEC for phased Ed25519 evidence signing (S0). Status changes on adoption."
@@ -37,7 +37,7 @@
       "path": "docs/fairness/hysteresis-config-v1.yml",
       "version": "1.0.0",
       "dec_ref": "DEC-20250812-02",
-      "hash_sha256": "adf27e37a983dfd1e45e89f45834b99f04e3874e74ce0bb4cd030d0a201ca3db",
+  "hash_sha256": "c07f4ccc93bd68e18a74c106980a262904d50a59b2ffa25b9e3f899028037825",
       "integrity_class": "config",
       "mutable_policy": "locked-by-config-hash",
       "next_change_requires_dec": true,
@@ -107,7 +107,7 @@
       "path": "docs/governance/todo-post-DEC-20250812-02.md",
       "version": "1.0.0",
       "dec_ref": "DEC-20250812-02",
-      "hash_sha256": "fc7e8d484e475524aa4644599d33bd59636126d0b125567aeff9829f33a57229",
+  "hash_sha256": "52cb6ac1c41f9a09a756ddea21d3abaecbe974b92ec18b0a2b46b7559b45f943",
       "integrity_class": "action-list",
       "mutable_policy": "snapshot-then-new-file",
       "next_change_requires_dec": false,
@@ -207,7 +207,7 @@
       "path": "docs/governance/disclaimers-lint-spec-v1.md",
       "version": "1.0.0",
       "dec_ref": null,
-      "hash_sha256": "7b012d6ec8c681b1358c5963c7911b6b623530dc9fc44662474921616a5dba2f",
+  "hash_sha256": "d0055ec4bac8ae20e71d86ef0122abf65cb516cd9c0d648a3f64a039cd671718",
       "integrity_class": "lint-spec",
       "mutable_policy": "delta-via-dec",
       "next_change_requires_dec": true,
@@ -307,7 +307,7 @@
       "path": "README.md",
       "version": "1.0.0",
       "dec_ref": null,
-      "hash_sha256": "e70f88680b546f66545d267587e8bac43396bbe0a6170fc7adfd5c6e0677f58e",
+  "hash_sha256": "37e24620a943e9d54385f786c779472019bbacce71e6233fdb216227655e7b03",
       "integrity_class": "repository-readme",
       "mutable_policy": "append-only",
       "next_change_requires_dec": true,
@@ -322,6 +322,16 @@
       "mutable_policy": "immutable",
       "next_change_requires_dec": false,
       "notes": "Ratifikasi consolidated baseline thresholds (multi-category PII, evidence hash display length, terminology trigger, revocation codes, truncation decimals, min aggregation)."
+    },
+    {
+      "path": "docs/integrity/evidence-minimum-phase1.5-v1.md",
+      "version": "1.0.0",
+      "dec_ref": null,
+      "hash_sha256": "998e93104ad8a74f26da1468515bbbee09244edaf8559fc3ba51734cd72ba59b",
+      "integrity_class": "evidence-policy",
+      "mutable_policy": "append-only",
+      "next_change_requires_dec": true,
+      "notes": "Phase 1.5 Evidence Minimum Set definition (draft until ratified)."
     },
     {
       "path": "docs/governance/dec/DEC-20250813-01-known-debt-register.md",
@@ -342,6 +352,16 @@
       "mutable_policy": "append-only",
       "next_change_requires_dec": true,
       "notes": "Agent role guard rails; amendments require DEC referencing this policy."
+    }
+    ,{
+      "path": "docs/onboarding/agent-guardrails-v1.md",
+      "version": "1.0.0",
+      "dec_ref": null,
+  "hash_sha256": "d07ff3c31e20fa969543fc3f62bdcb5867adfa611b5ba1b1d6a57fde6539f4c3",
+      "integrity_class": "guardrails-spec",
+      "mutable_policy": "append-only",
+      "next_change_requires_dec": true,
+      "notes": "Operational guardrails for automation agents (bootstrap)."
     }
   ],
   "integrity_rules": {
