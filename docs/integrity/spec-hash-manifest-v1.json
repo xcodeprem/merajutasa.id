@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generation_timestamp_utc": "2025-08-13T08:25:00Z",
+  "generation_timestamp_utc": "2025-08-13T12:52:01Z",
   "generator_note": "Refined manifest: added onboarding & (optional) README, fixed dec_ref placeholders, standardized mutable_policy for adopted lint spec. All existing entries preserved; only additive or metadata corrections before first hash seal.",
   "files": [
     {
@@ -47,7 +47,7 @@
       "path": "docs/fairness/hysteresis-public-methodology-fragment-v1.md",
       "version": "1.0.0",
       "dec_ref": "DEC-20250812-02 + DEC-20250813-04",
-  "hash_sha256": "855e4a1e98d970ce40a4190468eb2575d2c16a897f21dea4a1af784bbafdd5bd",
+      "hash_sha256": "855e4a1e98d970ce40a4190468eb2575d2c16a897f21dea4a1af784bbafdd5bd",
       "integrity_class": "public-methodology",
       "mutable_policy": "delta-via-dec",
       "next_change_requires_dec": true,
@@ -186,8 +186,8 @@
     {
       "path": "docs/faq/faq-fairness-hysteresis-update.md",
       "version": "1.0.0",
-      "dec_ref": "DEC-20250812-02 + DEC-20250813-04",
-  "hash_sha256": "8a9b492c4a34291a1fa3387e81a31779b8163049f59d04c00c97b9a9d92271b7",
+      "dec_ref": "DEC-20250812-02 + DEC-20250813-04 + DEC-20250813-06",
+      "hash_sha256": "639a25102f752f7f500cd96b7b1cf95d4cd79496bc85ec67cebdd0bf923b593b",
       "integrity_class": "faq",
       "mutable_policy": "append-only",
       "next_change_requires_dec": true,
@@ -206,8 +206,8 @@
     {
       "path": "docs/governance/disclaimers-lint-spec-v1.md",
       "version": "1.0.0",
-      "dec_ref": "DEC-20250813-04",
-  "hash_sha256": "c3b9b9a033f1866dc5366a17ac111425969f375415ad51a068e891caac3a9f83",
+      "dec_ref": "DEC-20250813-04 + DEC-20250813-06",
+      "hash_sha256": "c3b9b9a033f1866dc5366a17ac111425969f375415ad51a068e891caac3a9f83",
       "integrity_class": "lint-spec",
       "mutable_policy": "delta-via-dec",
       "next_change_requires_dec": true,
@@ -216,8 +216,8 @@
     {
       "path": "docs/integrity/credential-schema-final-v1.md",
       "version": "1.0.0",
-      "dec_ref": "DEC-20250813-04",
-  "hash_sha256": "3720f8a2300ac390ccdcf33317caf7c86017ae8c2655e2d7604f75942fedddff",
+      "dec_ref": "DEC-20250813-04 + DEC-20250813-06",
+      "hash_sha256": "24d2f7cd42be2eaf96f30ecf9df2ed2151bb48b53ac32e97e44bf005ff021477",
       "integrity_class": "schema",
       "mutable_policy": "versioned",
       "next_change_requires_dec": true,
@@ -227,7 +227,7 @@
       "path": "docs/analytics/event-schema-canonical-v1.md",
       "version": "1.0.0",
       "dec_ref": null,
-      "hash_sha256": "9fc6b557bfbfe7281e8f8f82977231b48a6cb2d6a5399d2a6bc73b3fcce3289e",
+      "hash_sha256": "a74f2a1d553c49453a671468a48b2563238c1b26b30479f42c6f21b972ae0ced",
       "integrity_class": "schema",
       "mutable_policy": "versioned",
       "next_change_requires_dec": true,
@@ -246,8 +246,8 @@
     {
       "path": "docs/transparency/changelog-excerpt-phase1.5.md",
       "version": "0.1.0",
-      "dec_ref": "DEC-20250813-04",
-  "hash_sha256": "6c2c9d77ae57d18e5b458150ff987c47c2aa6ec0161cc4e86433bb5e47268447",
+      "dec_ref": "DEC-20250813-04 + DEC-20250813-06",
+      "hash_sha256": "6c2c9d77ae57d18e5b458150ff987c47c2aa6ec0161cc4e86433bb5e47268447",
       "integrity_class": "transparency-placeholder",
       "mutable_policy": "append-only",
       "next_change_requires_dec": false,
@@ -256,8 +256,8 @@
     {
       "path": "docs/governance/policy-index-v1.md",
       "version": "1.0.0",
-      "dec_ref": "DEC-20250812-03 + DEC-20250813-04",
-  "hash_sha256": "1f322257e1c94deaebba47e0fbc0cc3ed9f5ff9c0009e821d69b388c3811b308",
+      "dec_ref": "DEC-20250812-03 + DEC-20250813-04 + DEC-20250813-06",
+      "hash_sha256": "1f322257e1c94deaebba47e0fbc0cc3ed9f5ff9c0009e821d69b388c3811b308",
       "integrity_class": "policy-index",
       "mutable_policy": "append-only",
       "next_change_requires_dec": true,
@@ -306,8 +306,8 @@
     {
       "path": "README.md",
       "version": "1.0.0",
-      "dec_ref": "DEC-20250813-04",
-  "hash_sha256": "c3720ba122677b057009ef37a4303f668ba44b26f7d31793a2a297afa9ca89fd",
+      "dec_ref": "DEC-20250813-04 + DEC-20250813-06",
+      "hash_sha256": "b43a8a6c844782b09b860b5053f4ce74b8602d01383852614dd6a86b200b51e3",
       "integrity_class": "repository-readme",
       "mutable_policy": "append-only",
       "next_change_requires_dec": true,
@@ -377,7 +377,7 @@
       "path": "docs/governance/dec/DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
       "version": "1.0.0",
       "dec_ref": "SELF",
-  "hash_sha256": "f331424d73e1cd7cbecc89548365e2581a7c8dd16b3e8d72843e5693bfda1c39",
+      "hash_sha256": "f331424d73e1cd7cbecc89548365e2581a7c8dd16b3e8d72843e5693bfda1c39",
       "integrity_class": "decision",
       "mutable_policy": "immutable",
       "next_change_requires_dec": false,
@@ -387,13 +387,12 @@
       "path": "content/disclaimers/config.yml",
       "version": "1.0.0",
       "dec_ref": "DEC-20250813-04",
-  "hash_sha256": "4f586fbb813b2d09dd70f046d881ba63daafd8e8628daa257ef61f9f806975b9",
+      "hash_sha256": "4f586fbb813b2d09dd70f046d881ba63daafd8e8628daa257ef61f9f806975b9",
       "integrity_class": "lint-config",
       "mutable_policy": "append-only",
       "next_change_requires_dec": true,
       "notes": "Whitelist safe contexts & thresholds for disclaimers lint."
-    }
-    ,
+    },
     {
       "path": "tools/fairness/engine-core.js",
       "version": "1.0.0",
@@ -407,12 +406,62 @@
     {
       "path": "docs/integrity/gating-policy-v1.json",
       "version": "1.0.0",
-  "dec_ref": "DEC-20250812-04 + DEC-20250813-05",
-  "hash_sha256": "6674b3ec3149d54224b89ddc9a8086a10729799518da35e7874ebd895e36c211",
+      "dec_ref": "DEC-20250812-04 + DEC-20250813-05 + DEC-20250813-07",
+      "hash_sha256": "d2a04697d1a542126c692d1251249df751cc1ed245e619854c489fdce0647d21",
       "integrity_class": "gating-policy",
       "mutable_policy": "append-only",
       "next_change_requires_dec": true,
       "notes": "Wave 1 gating thresholds (hype zero-tolerance, spec hash strict, param PASS required)."
+    },
+    {
+      "path": "docs/governance/dec/DEC-20250813-07-hype-threshold-transition.md",
+      "version": "1.0.0",
+      "dec_ref": "SELF",
+      "hash_sha256": "c9483a189cbe193e8f4b2da52b444ae06e14ce5de3b94d4fc1e240d642903cbc",
+      "integrity_class": "decision",
+      "mutable_policy": "immutable",
+      "next_change_requires_dec": false,
+      "notes": "Transitional hype threshold segmentation (Wave 1.1)."
+    },
+    {
+      "path": "docs/governance/dec/DEC-style-guide-v1.md",
+      "version": "1.0.0",
+      "dec_ref": null,
+      "hash_sha256": "99e5419636ca95a248f14a6de69a01018c112dfe7dba4951a30dd7c06b7c45ca",
+      "integrity_class": "decision-guidance",
+      "mutable_policy": "immutable",
+      "next_change_requires_dec": false,
+      "notes": "Authoring style guide for DEC format standardization (superseded by v2)."
+    },
+    {
+      "path": "docs/governance/dec/DEC-style-guide-v2.md",
+      "version": "2.0.0",
+      "dec_ref": null,
+  "hash_sha256": "1c76360fd35171e9866254fe31fe9609c6a52f19cccf438b96317033b0223445",
+      "integrity_class": "decision-guidance",
+      "mutable_policy": "immutable",
+      "next_change_requires_dec": false,
+      "notes": "Unified YAML-only DEC authoring style (v2)."
+    },
+    {
+      "path": "docs/governance/dec/DEC-20250813-05-gating-policy-wave1-adoption.md",
+      "version": "1.0.0",
+      "dec_ref": "SELF",
+      "hash_sha256": "3a1531d53017473182648eaecb7b00ebba451e7487f591d141c12493b8651ae4",
+      "integrity_class": "decision",
+      "mutable_policy": "immutable",
+      "next_change_requires_dec": false,
+      "notes": "Adoption of Wave 1 gating policy thresholds & fairness engine core governance linkage."
+    },
+    {
+      "path": "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md",
+      "version": "1.0.0",
+      "dec_ref": "SELF",
+      "hash_sha256": "f915ad7693e086dac99de40f98694a022c0ae1360620bf759354146c5e22c43d",
+      "integrity_class": "decision",
+      "mutable_policy": "immutable",
+      "next_change_requires_dec": false,
+      "notes": "Retroactive authorization consolidation for governed editorial / whitelist alignment edits (Wave 1)."
     }
   ],
   "integrity_rules": {

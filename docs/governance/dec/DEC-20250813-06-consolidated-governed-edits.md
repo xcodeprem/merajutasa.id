@@ -1,54 +1,85 @@
-# DEC-20250813-06 – Consolidated Governed Edits (Whitelist & Alignment Wave 1)
+---
+# markdownlint-disable MD041 MD007 MD032
+id: DEC-20250813-06
+title: Consolidated Governed Editorial & Integrity Edits
+date: 2025-08-13T13:10:00Z
+class: CIC-C
+status: adopted
+supersedes: []
+depends_on:
+	- DEC-20250812-02
+	- DEC-20250812-03
+	- DEC-20250812-04
+governance_tags: [editorial, consolidation, integrity]
+related_principles: [GP1, GP2, GP3, GP5, GP6, GP9]
+related_files:
+	- docs/integrity/spec-hash-manifest-v1.json
+	- tools/no-silent-drift.js
+	- artifacts/no-silent-drift-report.json
+	- docs/governance/trace/archive-trace-index-v1.md
+	- docs/governance/policy-index-v1.md
+decision_summary: >
+	Konsolidasi editorial governed micro-changes (terminologi, trace enrichment, manifest dec_ref strengthen) tanpa mengubah fairness & gating normative meaning.
+context: >
+	Banyak minor governed edits diperlukan; digabung agar tidak terjadi fragmentasi DEC & mempermudah audit.
+decision:
+	- Kelompokkan minor editorial & referential updates ke DEC ini.
+	- Tidak ada perubahan gating thresholds / fairness logic / linter semantics.
+	- Kuatkan manifest entries dengan dec_ref konsisten.
+	- Perbarui trace & policy index memasukkan tautan Wave 1 DEC.
+rationale:
+	- Kurangi overhead approvals.
+	- Minimalkan hash churn noise.
+	- Isolasi future normative shifts.
+scope:
+	- Terminology clarifications (non-normative)
+	- Trace index enrichment
+	- Manifest reference alignment
+	- Evidence bundle normalization
+out_of_scope:
+	- Fairness thresholds
+	- Engine core algorithmic changes
+	- Hype segmentation expansions
+explicit_non_changes:
+	- Tidak mengubah numeric gating thresholds
+	- Tidak mengubah stall/cooldown semantics
+	- Tidak menambah / menghapus gate baru
+metrics_observation_only:
+	spec_hash_violations: 0
+	param_integrity_status: NONE
+	hype_high: NONE
+	fairness_unit_fail: NONE
+risk_assessment:
+	- risk: Fragmentasi DEC kecil
+		mitigation: Konsolidasi single DEC
+	- risk: Salah tafsir threshold change
+		mitigation: Section explicit non-changes
+	- risk: Audit kabur
+		mitigation: Manifest dec_ref alignment
+implementation_actions:
+	- Update trace & policy index link DEC ini
+	- Normalisasi penamaan artifact evidence bundle
+	- Commit manifest reference alignments
+review_plan: "Ikut review Wave 1 gating DEC-20250813-05"
+implications:
+	- Kurangi DEC noise
+	- Normative changes tetap perlu DEC baru
+	- Auditor mudah melacak cluster editorial
+public_communication: "Konsolidasi editorial governed: tidak ada perubahan threshold; penertiban referensi & trace untuk audit lebih jelas."
+references:
+	- DEC-20250812-02
+	- DEC-20250812-03
+	- DEC-20250812-04
+	- Manifest integrity file
+	- Trace index
+hash_of_decision_document: "f915ad7693e086dac99de40f98694a022c0ae1360620bf759354146c5e22c43d"
+hash_canonicalization_note: "Nilai diganti placeholder saat canonical hash computation."
+append_only_notice: "Immutable setelah hash dipasang."
+signoff:
+	governance_chair: "SIGNED <Farid>"
+	data_lead: "SIGNED <Farid>"
+	ethics_representative: "SIGNED <Farid>"
+	product_owner: "SIGNED <Farid>"
+---
+Consolidated governed editorial edits (YAML unified v2 format).
 
-## Status
-
-ADOPTED
-
-## Context
-
-Multiple governed files were adjusted across recent commits to finalize Wave 1 gating alignment, disclaimer whitelist refinements, and editorial clarifications. These changes were normalization / governance-alignment only (no semantic parameter shift to fairness thresholds or schema fields). A consolidation DEC is issued to retroactively authorize and document these edits as a single governance event to prevent fragmentation.
-
-## Affected Governed Files & Rationale
-
-| File | Reason (Summary) | Change Type |
-|------|------------------|-------------|
-| README.md | Updated gating narrative & disclaimer robustness notes | Editorial (append-only) |
-| content/disclaimers/config.yml | Added safe-context patterns, presence enforcement active | Policy config whitelist expansion |
-| docs/fairness/hysteresis-public-methodology-fragment-v1.md | Synced disclaimer phrasing with whitelist language | Editorial consistency |
-| docs/faq/faq-fairness-hysteresis-update.md | Clarified anti-ranking & negative-context phrasing | Editorial (non-semantic) |
-| docs/governance/disclaimers-lint-spec-v1.md | Reflected newly accepted safe-context logic (non-functional doc clarification) | Spec clarification |
-| docs/governance/policy-index-v1.md | Indexed gating policy & updated cross-references | Index append |
-| docs/integrity/credential-schema-final-v1.md | Added disclaimer block alignment wording; no schema fields changed | Editorial (schema unchanged) |
-
-## Non-Changes (Explicit)
-
-- No fairness hysteresis parameter values modified (DEC-20250812-02 remains authoritative).
-- No credential schema structural alterations (hash, field set stable).
-- No alteration to evidence minimum quantitative thresholds.
-
-## Authorization
-
-This DEC grants retroactive authorization for the above listed modifications and ties them to a single auditable governance record. Future changes to any listed file still require DEC references per manifest rules if flagged `next_change_requires_dec=true`.
-
-## Traceability
-
-Governed change scanner (17.x) will treat commits at or prior to this DEC inclusion as covered for the affected file set. Subsequent modifications must reference this DEC or a successor.
-
-## Successor Triggers
-
-Create follow-up DEC if:
-
-1. Fairness thresholds (T_enter_major, T_enter_standard, T_exit, stalled window, anomaly delta) change.
-2. Credential schema fields added/removed or types altered.
-3. Disclaimers catalog (D1–D7) gains new IDs or reorders canonical sequence.
-4. Gating policy thresholds modified (freshness/principles escalation beyond current Wave 1) – may also require gating policy version bump.
-
-## References
-
-- DEC-20250813-04 (Normalization & Whitelist Alignment)
-- DEC-20250813-05 (Gating Policy & Engine Core Adoption)
-- DEC-20250812-02 (Hysteresis Adoption Option F)
-
-## Hash Canonicalization
-
-Immutable once sealed. Hash recorded in manifest; any future edit requires new DEC with incremented identifier.

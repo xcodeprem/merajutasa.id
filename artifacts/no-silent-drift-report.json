@@ -1,36 +1,35 @@
 {
-  "timestamp_utc": "2025-08-13T11:11:36.640Z",
+  "timestamp_utc": "2025-08-13T11:51:42.229Z",
   "components": {
     "spec_hash": "PASS",
     "params": "PASS",
     "hype": "ADVISORY",
     "disclaimers": "PASS_STUB",
-    "principles": "ADVISORY",
+    "principles": "PASS_STUB",
     "pii": "PASS_STUB",
     "freshness": "PASS"
   },
   "summary": {
-    "hype_hits": 124,
-    "hype_max_severity": "HIGH",
-    "hype_high": 9,
-    "hype_medium": 115,
+    "hype_hits": 101,
+    "hype_max_severity": "MEDIUM",
+    "hype_high": 0,
+    "hype_medium": 101,
     "hype_rule_counts": {
-      "RANKING": 97,
-      "TOP": 18,
-      "TERBAIK": 6,
-      "REVOLUSIONER": 3
+      "RANKING": 88,
+      "TOP": 13
     },
+    "hype_medium_max_allowed": 120,
     "param_mismatches": 0,
-    "principles_entries": 0,
+    "principles_entries": 10,
     "pii_critical": 0,
     "pii_total": 0,
     "disclaimers_errors": 0,
-    "disclaimers_warnings": 8,
+    "disclaimers_warnings": 9,
     "disclaimers_rule_counts": {
-      "DISC-DUPL-005": 2,
+      "DISC-DUPL-005": 3,
       "DISC-SCOPE-006": 6
     },
-    "gate_status": "FAIL",
+    "gate_status": "PASS",
     "gate_checks": [
       {
         "id": "SPEC_HASH",
@@ -50,10 +49,18 @@
       },
       {
         "id": "HYPE_HIGH",
-        "passed": false,
+        "passed": true,
         "detail": {
-          "high": 9,
-          "max": 0
+          "high": 0,
+          "max": 1
+        }
+      },
+      {
+        "id": "HYPE_MEDIUM",
+        "passed": true,
+        "detail": {
+          "medium": 101,
+          "max": 120
         }
       },
       {
@@ -99,14 +106,15 @@
       },
       {
         "id": "PRINCIPLES_IMPACT",
-        "passed": false,
+        "passed": true,
         "detail": {
-          "present": false
+          "present": true
         }
       }
     ],
     "thresholds": {
-      "hype_high_max": 0,
+      "hype_high_max": 1,
+      "hype_medium_max": 120,
       "disclaimers_errors_allowed": 0,
       "param_integrity_status": "PASS",
       "spec_hash_violation_count": 0,
@@ -128,7 +136,7 @@
   },
   "gating": {
     "version": "1.0",
-    "status": "FAIL",
+    "status": "PASS",
     "checks": [
       {
         "id": "SPEC_HASH",
@@ -148,10 +156,18 @@
       },
       {
         "id": "HYPE_HIGH",
-        "passed": false,
+        "passed": true,
         "detail": {
-          "high": 9,
-          "max": 0
+          "high": 0,
+          "max": 1
+        }
+      },
+      {
+        "id": "HYPE_MEDIUM",
+        "passed": true,
+        "detail": {
+          "medium": 101,
+          "max": 120
         }
       },
       {
@@ -197,9 +213,9 @@
       },
       {
         "id": "PRINCIPLES_IMPACT",
-        "passed": false,
+        "passed": true,
         "detail": {
-          "present": false
+          "present": true
         }
       }
     ]

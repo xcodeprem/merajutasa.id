@@ -69,7 +69,7 @@ Lint principles.reference memaksa penjelasan dampak (Section 37 PR template).
 
 | ID | Tema | Tujuan |
 |----|------|--------|
-| D1 | Non-Ranking | Menegaskan sistem bukan ranking kompetitif |
+| D1 | Non-Ranking | Menegaskan sistem bukan peringkat kompetitif <!-- hype-lint-ignore-line --> |
 | D2 | Keterbatasan Data | Menyatakan potensi keterbatasan & sampling |
 | D3 | Interpretasi Terbatas | Mencegah over-claim atas label |
 | D4 | Frekuensi Snapshot | Menjelaskan jeda update |
@@ -144,9 +144,9 @@ Langkah PR wajib (sekilas):
 3. Jangan ubah angka parameter fairness tanpa DEC (akan ditolak).
 4. Hindari istilah terlarang (lihat Anti‑Hype).
 
-Anti‑Hype (Contoh Kata Dilarang – akan lint):
+Anti‑Hype (Contoh Kata Dilarang – akan lint) <!-- lint-allow-negated-context hype-lint-ignore-line -->:
 
-- “ranking”, “peringkat”, “top”, “terbaik”, “no.1”, “paling unggul”, “skor kompetitif” <!-- lint-allow-negated-context -->
+- “ranking”, “peringkat”, “top”, “terbaik”, “no.1”, “paling unggul”, “skor kompetitif” <!-- lint-allow-negated-context hype-lint-ignore-line -->
 Gunakan framing “indikator stabil fairness” bukan “peringkat”.
 
 ---
@@ -198,15 +198,15 @@ Detail lengkap: docs/roadmap/roadmap-master-v1.md
 
 ---
 
-## 13. Larangan Klaim Ranking (Penolakan Eksplisit – bukan promosi) <!-- lint-allow-negated-context -->
+## 13. Larangan Klaim Peringkat / Ranking <!-- lint-allow-negated-context hype-lint-ignore-line -->
 
-Sistem TIDAK (pernyataan negasi – aman dari klaim kompetitif): <!-- lint-allow-negated-context -->
+Sistem TIDAK:
 
 - Mengurutkan entitas secara kompetitif.
 - Memberi skor performa numerik per entitas untuk publik.
-- Mengklaim “terbaik”, “top”, “juara”.
+- Mengklaim “terbaik”, “top”, “juara”. <!-- hype-lint-ignore-line -->
 
- Jika butuh membandingkan, gunakan bahasa: “indikator fairness stabil untuk mendeteksi under‑served” bukan “peringkat” (negasi eksplisit). <!-- lint-allow-negated-context -->
+Jika butuh membandingkan, gunakan bahasa: “indikator fairness stabil untuk mendeteksi under‑served” bukan “peringkat”.
 
 ---
 

@@ -1,18 +1,15 @@
 {
   "version": 1,
-  "generated_utc": "2025-08-13T11:11:35.788Z",
-  "file_count": 49,
-  "total_hits": 124,
-  "max_severity": "HIGH",
+  "generated_utc": "2025-08-13T11:51:03.472Z",
+  "file_count": 52,
+  "total_hits": 101,
+  "max_severity": "MEDIUM",
   "severity_counts": {
-    "MEDIUM": 115,
-    "HIGH": 9
+    "MEDIUM": 101
   },
   "rule_counts": {
-    "RANKING": 97,
-    "TOP": 18,
-    "TERBAIK": 6,
-    "REVOLUSIONER": 3
+    "RANKING": 88,
+    "TOP": 13
   },
   "findings": [
     {
@@ -37,26 +34,6 @@
     },
     {
       "file": "README.md",
-      "line": 72,
-      "column": 12,
-      "match": "Ranking",
-      "rule": "RANKING",
-      "severity": "MEDIUM",
-      "rationale": "Unsubstantiated ranking claim.",
-      "context_line": "| D1 | Non-Ranking | Menegaskan sistem bukan ranking kompetitif |"
-    },
-    {
-      "file": "README.md",
-      "line": 72,
-      "column": 46,
-      "match": "ranking",
-      "rule": "RANKING",
-      "severity": "MEDIUM",
-      "rationale": "Unsubstantiated ranking claim.",
-      "context_line": "| D1 | Non-Ranking | Menegaskan sistem bukan ranking kompetitif |"
-    },
-    {
-      "file": "README.md",
       "line": 85,
       "column": 69,
       "match": "ranking",
@@ -64,66 +41,6 @@
       "severity": "MEDIUM",
       "rationale": "Unsubstantiated ranking claim.",
       "context_line": "<p data-disclaimer-id=\"D1\">Equity Index & daftar under‑served bukan ranking kualitas—hanya sinyal pemerataan.</p>"
-    },
-    {
-      "file": "README.md",
-      "line": 149,
-      "column": 4,
-      "match": "ranking",
-      "rule": "RANKING",
-      "severity": "MEDIUM",
-      "rationale": "Unsubstantiated ranking claim.",
-      "context_line": "- “ranking”, “peringkat”, “top”, “terbaik”, “no.1”, “paling unggul”, “skor kompetitif” <!-- lint-allow-negated-context -->"
-    },
-    {
-      "file": "README.md",
-      "line": 149,
-      "column": 28,
-      "match": "top",
-      "rule": "TOP",
-      "severity": "MEDIUM",
-      "rationale": "Generic superiority claim.",
-      "context_line": "- “ranking”, “peringkat”, “top”, “terbaik”, “no.1”, “paling unggul”, “skor kompetitif” <!-- lint-allow-negated-context -->"
-    },
-    {
-      "file": "README.md",
-      "line": 149,
-      "column": 35,
-      "match": "terbaik",
-      "rule": "TERBAIK",
-      "severity": "HIGH",
-      "rationale": "“Terbaik” (best) absolute claim.",
-      "context_line": "- “ranking”, “peringkat”, “top”, “terbaik”, “no.1”, “paling unggul”, “skor kompetitif” <!-- lint-allow-negated-context -->"
-    },
-    {
-      "file": "README.md",
-      "line": 201,
-      "column": 23,
-      "match": "Ranking",
-      "rule": "RANKING",
-      "severity": "MEDIUM",
-      "rationale": "Unsubstantiated ranking claim.",
-      "context_line": "## 13. Larangan Klaim Ranking (Penolakan Eksplisit – bukan promosi) <!-- lint-allow-negated-context -->"
-    },
-    {
-      "file": "README.md",
-      "line": 207,
-      "column": 25,
-      "match": "top",
-      "rule": "TOP",
-      "severity": "MEDIUM",
-      "rationale": "Generic superiority claim.",
-      "context_line": "- Mengklaim “terbaik”, “top”, “juara”."
-    },
-    {
-      "file": "README.md",
-      "line": 207,
-      "column": 14,
-      "match": "terbaik",
-      "rule": "TERBAIK",
-      "severity": "HIGH",
-      "rationale": "“Terbaik” (best) absolute claim.",
-      "context_line": "- Mengklaim “terbaik”, “top”, “juara”."
     },
     {
       "file": "docs/analytics/event-schema-canonical-v1.md",
@@ -154,26 +71,6 @@
       "severity": "MEDIUM",
       "rationale": "Unsubstantiated ranking claim.",
       "context_line": "| GP9 Non-Ranking Fairness | Under-served events menandai interaksi, bukan ranking order. |"
-    },
-    {
-      "file": "docs/analytics/event-schema-canonical-v1.md",
-      "line": 51,
-      "column": 1,
-      "match": "Top",
-      "rule": "TOP",
-      "severity": "MEDIUM",
-      "rationale": "Generic superiority claim.",
-      "context_line": "Top-level required fields (all events):"
-    },
-    {
-      "file": "docs/analytics/event-schema-canonical-v1.md",
-      "line": 72,
-      "column": 19,
-      "match": "top",
-      "rule": "TOP",
-      "severity": "MEDIUM",
-      "rationale": "Generic superiority claim.",
-      "context_line": "Notes: Additional top-level keys beyond allowed must be rejected (strict mode)."
     },
     {
       "file": "docs/analytics/event-schema-canonical-v1.md",
@@ -546,6 +443,26 @@
       "context_line": "      change: Add negative-context wording (no ranking penalty) + disclaimer block alignment"
     },
     {
+      "file": "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md",
+      "line": 18,
+      "column": 63,
+      "match": "ranking",
+      "rule": "RANKING",
+      "severity": "MEDIUM",
+      "rationale": "Unsubstantiated ranking claim.",
+      "context_line": "| docs/faq/faq-fairness-hysteresis-update.md | Clarified anti-ranking & negative-context phrasing | Editorial (non-semantic) |"
+    },
+    {
+      "file": "docs/governance/dec/DEC-20250813-07-hype-threshold-transition.md",
+      "line": 33,
+      "column": 53,
+      "match": "Top",
+      "rule": "TOP",
+      "severity": "MEDIUM",
+      "rationale": "Generic superiority claim.",
+      "context_line": "4. Konten disanitasi mengganti frasa non-esensial (\"Top-level\") menjadi padanan netral (\"Root\" / \"Inti\")."
+    },
+    {
       "file": "docs/governance/disclaimers-lint-spec-v1.md",
       "line": 17,
       "column": 332,
@@ -647,36 +564,6 @@
     },
     {
       "file": "docs/governance/disclaimers-lint-spec-v1.md",
-      "line": 201,
-      "column": 34,
-      "match": "ranking",
-      "rule": "RANKING",
-      "severity": "MEDIUM",
-      "rationale": "Unsubstantiated ranking claim.",
-      "context_line": "(terbaik|paling unggul|peringkat|ranking|top\\\\s?\\\\d+|juara|skor kinerja|nilai kinerja|pemenang)"
-    },
-    {
-      "file": "docs/governance/disclaimers-lint-spec-v1.md",
-      "line": 201,
-      "column": 42,
-      "match": "top",
-      "rule": "TOP",
-      "severity": "MEDIUM",
-      "rationale": "Generic superiority claim.",
-      "context_line": "(terbaik|paling unggul|peringkat|ranking|top\\\\s?\\\\d+|juara|skor kinerja|nilai kinerja|pemenang)"
-    },
-    {
-      "file": "docs/governance/disclaimers-lint-spec-v1.md",
-      "line": 201,
-      "column": 2,
-      "match": "terbaik",
-      "rule": "TERBAIK",
-      "severity": "HIGH",
-      "rationale": "“Terbaik” (best) absolute claim.",
-      "context_line": "(terbaik|paling unggul|peringkat|ranking|top\\\\s?\\\\d+|juara|skor kinerja|nilai kinerja|pemenang)"
-    },
-    {
-      "file": "docs/governance/disclaimers-lint-spec-v1.md",
       "line": 325,
       "column": 83,
       "match": "ranking",
@@ -766,26 +653,6 @@
       "context_line": "| PRIN-REF-004 | New potential ranking token added & GP9 not marked Yes | ERROR |"
     },
     {
-      "file": "docs/governance/lint-principles-reference-spec-v1.md",
-      "line": 56,
-      "column": 34,
-      "match": "terbaik",
-      "rule": "TERBAIK",
-      "severity": "HIGH",
-      "rationale": "“Terbaik” (best) absolute claim.",
-      "context_line": "| GP7 | Hype words `revolusioner|terbaik|super|unggul` added |"
-    },
-    {
-      "file": "docs/governance/lint-principles-reference-spec-v1.md",
-      "line": 56,
-      "column": 21,
-      "match": "revolusioner",
-      "rule": "REVOLUSIONER",
-      "severity": "HIGH",
-      "rationale": "Overclaim “revolutionary”.",
-      "context_line": "| GP7 | Hype words `revolusioner|terbaik|super|unggul` added |"
-    },
-    {
       "file": "docs/governance/trace/archive-trace-index-v1.md",
       "line": 31,
       "column": 7,
@@ -837,16 +704,6 @@
     },
     {
       "file": "docs/integrity/credential-schema-final-v1.md",
-      "line": 30,
-      "column": 38,
-      "match": "ranking",
-      "rule": "RANKING",
-      "severity": "MEDIUM",
-      "rationale": "Unsubstantiated ranking claim.",
-      "context_line": "<!-- lint-allow-negated-context: non-ranking description -->"
-    },
-    {
-      "file": "docs/integrity/credential-schema-final-v1.md",
       "line": 44,
       "column": 20,
       "match": "top",
@@ -884,16 +741,6 @@
       "severity": "MEDIUM",
       "rationale": "Unsubstantiated ranking claim.",
       "context_line": "| Non-Ranking | Tidak ada field peringkat; disclaimers eksplisit |"
-    },
-    {
-      "file": "docs/integrity/credential-schema-final-v1.md",
-      "line": 595,
-      "column": 46,
-      "match": "ranking",
-      "rule": "RANKING",
-      "severity": "MEDIUM",
-      "rationale": "Unsubstantiated ranking claim.",
-      "context_line": "<!-- lint-allow-negated-context: summary non-ranking -->"
     },
     {
       "file": "docs/integrity/credential-schema-final-v1.md",
@@ -936,36 +783,6 @@
       "context_line": "Definisi mekanisme hysteresis: Parameter aktif ditetapkan lewat DEC (misal DEC-20250812-02 Option F). Tidak ada ranking / scoring kompetitif. Status ‘under‑served’ sinyal perbaikan, bukan kualitas relatif."
     },
     {
-      "file": "docs/master-spec/master-spec-v2.0.md",
-      "line": 79,
-      "column": 67,
-      "match": "ranking",
-      "rule": "RANKING",
-      "severity": "MEDIUM",
-      "rationale": "Unsubstantiated ranking claim.",
-      "context_line": "Disclaimers D1–D7 wajib pada surface tertentu. Larangan leksikal: ranking/top/terbaik/“peringkat” kecuali dalam konteks redaksi (educational example). Anti-hype lint memblok frasa prospektif yang memicu overclaim."
-    },
-    {
-      "file": "docs/master-spec/master-spec-v2.0.md",
-      "line": 79,
-      "column": 75,
-      "match": "top",
-      "rule": "TOP",
-      "severity": "MEDIUM",
-      "rationale": "Generic superiority claim.",
-      "context_line": "Disclaimers D1–D7 wajib pada surface tertentu. Larangan leksikal: ranking/top/terbaik/“peringkat” kecuali dalam konteks redaksi (educational example). Anti-hype lint memblok frasa prospektif yang memicu overclaim."
-    },
-    {
-      "file": "docs/master-spec/master-spec-v2.0.md",
-      "line": 79,
-      "column": 79,
-      "match": "terbaik",
-      "rule": "TERBAIK",
-      "severity": "HIGH",
-      "rationale": "“Terbaik” (best) absolute claim.",
-      "context_line": "Disclaimers D1–D7 wajib pada surface tertentu. Larangan leksikal: ranking/top/terbaik/“peringkat” kecuali dalam konteks redaksi (educational example). Anti-hype lint memblok frasa prospektif yang memicu overclaim."
-    },
-    {
       "file": "docs/onboarding/agent-bootstrap-manifest.md",
       "line": 100,
       "column": 3,
@@ -996,26 +813,6 @@
       "context_line": "| GP6 | `ranking|peringkat|top\\\\s\\\\d+|score|skor` |"
     },
     {
-      "file": "docs/onboarding/agent-bootstrap-manifest.md",
-      "line": 294,
-      "column": 23,
-      "match": "terbaik",
-      "rule": "TERBAIK",
-      "severity": "HIGH",
-      "rationale": "“Terbaik” (best) absolute claim.",
-      "context_line": "| GP7 | `revolusioner|terbaik|unggul|paling\\\\s(bagus|hebat)` |"
-    },
-    {
-      "file": "docs/onboarding/agent-bootstrap-manifest.md",
-      "line": 294,
-      "column": 10,
-      "match": "revolusioner",
-      "rule": "REVOLUSIONER",
-      "severity": "HIGH",
-      "rationale": "Overclaim “revolutionary”.",
-      "context_line": "| GP7 | `revolusioner|terbaik|unggul|paling\\\\s(bagus|hebat)` |"
-    },
-    {
       "file": "docs/onboarding/agent-guardrails-v1.md",
       "line": 10,
       "column": 111,
@@ -1024,16 +821,6 @@
       "severity": "MEDIUM",
       "rationale": "Unsubstantiated ranking claim.",
       "context_line": "Menetapkan batas eksplisit untuk aktivasi awal agen otomatis sehingga integritas (hash ledger), fairness (non‑ranking), privacy (PII minimization), dan anti-hype tetap terjaga saat sebagian kontrol masih dalam fase bootstrap (misal disclaimers lint presence enforcement belum ON penuh)."
-    },
-    {
-      "file": "docs/onboarding/agent-guardrails-v1.md",
-      "line": 33,
-      "column": 27,
-      "match": "ranking",
-      "rule": "RANKING",
-      "severity": "MEDIUM",
-      "rationale": "Unsubstantiated ranking claim.",
-      "context_line": "| G6 | Memasukkan istilah ranking/hype baru | Pelanggaran GP6/GP7 | Block PR + alert |"
     },
     {
       "file": "docs/onboarding/agent-role-policy-v1.md",
@@ -1114,26 +901,6 @@
       "severity": "MEDIUM",
       "rationale": "Generic superiority claim.",
       "context_line": "| GP6 | Outcome Honesty | Tidak mempresentasikan sinyal sebagai ranking / kualitas; menghindari misframing performa. | Ethical Framing | §14 Fairness Narrative, §30 Equity UI | No “top”, disclaimers Reinforce non-ranking |"
-    },
-    {
-      "file": "docs/principles/GP1-GP10-index.md",
-      "line": 17,
-      "column": 76,
-      "match": "ranking",
-      "rule": "RANKING",
-      "severity": "MEDIUM",
-      "rationale": "Unsubstantiated ranking claim.",
-      "context_line": "| GP7 | Anti-Hype & Plain Language | Bahasa pemasaran berlebihan & ambigu (ranking, “revolusioner”) diblok lint demi kejelasan & menghindari overclaim. | Copy Discipline | §35 Ethical Content, Disclaimers Lint, Hype Lint (planned) | Banned phrase list, hype lexicon lint |"
-    },
-    {
-      "file": "docs/principles/GP1-GP10-index.md",
-      "line": 17,
-      "column": 86,
-      "match": "revolusioner",
-      "rule": "REVOLUSIONER",
-      "severity": "HIGH",
-      "rationale": "Overclaim “revolutionary”.",
-      "context_line": "| GP7 | Anti-Hype & Plain Language | Bahasa pemasaran berlebihan & ambigu (ranking, “revolusioner”) diblok lint demi kejelasan & menghindari overclaim. | Copy Discipline | §35 Ethical Content, Disclaimers Lint, Hype Lint (planned) | Banned phrase list, hype lexicon lint |"
     },
     {
       "file": "docs/principles/GP1-GP10-index.md",

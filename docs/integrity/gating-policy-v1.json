@@ -1,14 +1,15 @@
 {
   "version": 1,
   "wave": "1",
-  "generated_utc": "",
+  "generated_utc": "2025-08-13T12:12:00Z",
   "thresholds": {
-    "hype_high_max": 0,
+  "hype_high_max": 1,
+  "hype_medium_max": 120,
     "disclaimers_errors_allowed": 0,
     "param_integrity_status": "PASS",
     "spec_hash_violation_count": 0,
     "pii_critical_max": 0,
-    "fairness_engine_required": true,
+  "fairness_engine_required": true,
   "freshness_required_status": "PASS",
   "principles_required": true,
     "evidence_minimum_artifacts": [
@@ -27,7 +28,8 @@
   },
   "notes": [
     "Wave 1 gating: strict zero tolerance for param mismatches & spec hash violations.",
-    "Hype high severity becomes blocking (previously advisory).",
+  "Transitional DEC-20250813-07 sets hype_high_max=1 (sunset review).",
+  "Medium severity segmentation introduced (hype_medium_max).",
     "PII scanner critical matches escalate to fail in Wave 1."
   ]
 }

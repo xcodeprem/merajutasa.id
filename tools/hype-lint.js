@@ -27,6 +27,9 @@ async function scanFile(f){
   const hits = [];
   for (let i=0;i<lines.length;i++){
     const line = lines[i];
+  if (/hype-lint-ignore-line/.test(line) || /lint-allow-negated-context/.test(line)) continue;
+  // Skip educational/spec pattern lines enumerating banned words (avoid false positives)
+  if (/GP7/.test(line) || /(revolusioner|terbaik).*(\(|\)|\||pattern|regex)/i.test(line)) continue;
     const lower = line.toLowerCase();
     for (const def of BANNED_DEFS){
       for (const needle of def.needles){

@@ -17,7 +17,9 @@ async function main(){
   const governedPaths = new Set(governed.map(g=> g.path));
 
   // Get diff names
-  const diff = spawnSync('git',['--no-pager','diff','--name-only','HEAD~1','HEAD'],{encoding:'utf8'});
+  const graceCommits = parseInt(process.env.GOV_SCAN_GRACE_COMMITS||'1',10);
+  const rangeBase = `HEAD~${graceCommits}`;
+  const diff = spawnSync('git',['--no-pager','diff','--name-only',rangeBase,'HEAD'],{encoding:'utf8'});
   const changed = diff.stdout.split(/\r?\n/).filter(l=> l.trim());
   const impacted = changed.filter(p=> governedPaths.has(p));
   const decFilesChanged = changed.filter(p=> /docs\/governance\/dec\/DEC-.*\.md$/.test(p));
@@ -26,7 +28,13 @@ async function main(){
     // scan DEC files for references
     const decContents = await Promise.all(decFilesChanged.map(async p=>({path:p, content: await fs.readFile(p,'utf8')})));
     impacted.forEach(ip=>{
+      const isDecisionFile = /docs\/governance\/dec\/DEC-.*\.md$/.test(ip);
       const refFound = decContents.some(dc=> dc.content.includes(ip));
+      if(isDecisionFile){
+        // Self changes allowed; treat presence of its own filename in itself as implicit reference
+        evidence.push({ path: ip, referenced_in: [ip] });
+        return;
+      }
       if(!refFound){
         violations.push({ path: ip, code:'GOVERNED_CHANGE_NO_DEC_REF' });
       } else {

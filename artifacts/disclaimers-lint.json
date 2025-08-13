@@ -3,20 +3,20 @@
   "status": "PASS",
   "summary": {
     "errors": 0,
-    "warnings": 8,
+    "warnings": 9,
     "metrics": {
       "missingIds": 0,
       "drift": 0,
       "shadow": 0,
       "bannedNear": 0,
-      "duplicates": 2,
+      "duplicates": 3,
       "scope": 6,
       "locale": 0
     },
     "versionMismatch": false,
     "computed_hash": "10c03b7fc7c7543399d1c2ce9bf121ec5e7fb46ddee876b286fdadde035089d0",
     "ruleCounts": {
-      "DISC-DUPL-005": 2,
+      "DISC-DUPL-005": 3,
       "DISC-SCOPE-006": 6
     },
     "presence_enforcement": true
@@ -33,6 +33,13 @@
     {
       "code": "DISC-DUPL-005",
       "page": "landing",
+      "id": "D7",
+      "count": 4,
+      "severity": "WARNING"
+    },
+    {
+      "code": "DISC-DUPL-005",
+      "page": "governance",
       "id": "D7",
       "count": 4,
       "severity": "WARNING"

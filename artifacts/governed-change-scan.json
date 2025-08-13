@@ -1,46 +1,82 @@
 {
   "version": 1,
-  "generated_utc": "2025-08-13T11:11:36.736Z",
-  "changed_count": 45,
+  "generated_utc": "2025-08-13T11:22:32.665Z",
+  "changed_count": 41,
   "governed_impacted": [
     "README.md",
     "content/disclaimers/config.yml",
-    "docs/fairness/hysteresis-public-methodology-fragment-v1.md",
     "docs/faq/faq-fairness-hysteresis-update.md",
-    "docs/governance/disclaimers-lint-spec-v1.md",
-    "docs/governance/policy-index-v1.md",
-    "docs/integrity/credential-schema-final-v1.md"
+    "docs/governance/dec/DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
+    "docs/governance/dec/DEC-20250813-05-gating-policy-wave1-adoption.md",
+    "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md",
+    "docs/integrity/credential-schema-final-v1.md",
+    "docs/integrity/gating-policy-v1.json",
+    "tools/fairness/engine-core.js"
   ],
-  "dec_files_changed": [],
-  "violations": [
+  "dec_files_changed": [
+    "docs/governance/dec/DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
+    "docs/governance/dec/DEC-20250813-05-gating-policy-wave1-adoption.md",
+    "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md"
+  ],
+  "violations": [],
+  "evidence": [
     {
       "path": "README.md",
-      "code": "GOVERNED_CHANGE_NO_DEC_REF"
+      "referenced_in": [
+        "docs/governance/dec/DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
+        "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md"
+      ]
     },
     {
       "path": "content/disclaimers/config.yml",
-      "code": "GOVERNED_CHANGE_NO_DEC_REF"
-    },
-    {
-      "path": "docs/fairness/hysteresis-public-methodology-fragment-v1.md",
-      "code": "GOVERNED_CHANGE_NO_DEC_REF"
+      "referenced_in": [
+        "docs/governance/dec/DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
+        "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md"
+      ]
     },
     {
       "path": "docs/faq/faq-fairness-hysteresis-update.md",
-      "code": "GOVERNED_CHANGE_NO_DEC_REF"
+      "referenced_in": [
+        "docs/governance/dec/DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
+        "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md"
+      ]
     },
     {
-      "path": "docs/governance/disclaimers-lint-spec-v1.md",
-      "code": "GOVERNED_CHANGE_NO_DEC_REF"
+      "path": "docs/governance/dec/DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
+      "referenced_in": [
+        "docs/governance/dec/DEC-20250813-04-text-normalization-disclaimers-whitelist.md"
+      ]
     },
     {
-      "path": "docs/governance/policy-index-v1.md",
-      "code": "GOVERNED_CHANGE_NO_DEC_REF"
+      "path": "docs/governance/dec/DEC-20250813-05-gating-policy-wave1-adoption.md",
+      "referenced_in": [
+        "docs/governance/dec/DEC-20250813-05-gating-policy-wave1-adoption.md"
+      ]
+    },
+    {
+      "path": "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md",
+      "referenced_in": [
+        "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md"
+      ]
     },
     {
       "path": "docs/integrity/credential-schema-final-v1.md",
-      "code": "GOVERNED_CHANGE_NO_DEC_REF"
+      "referenced_in": [
+        "docs/governance/dec/DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
+        "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md"
+      ]
+    },
+    {
+      "path": "docs/integrity/gating-policy-v1.json",
+      "referenced_in": [
+        "docs/governance/dec/DEC-20250813-05-gating-policy-wave1-adoption.md"
+      ]
+    },
+    {
+      "path": "tools/fairness/engine-core.js",
+      "referenced_in": [
+        "docs/governance/dec/DEC-20250813-05-gating-policy-wave1-adoption.md"
+      ]
     }
-  ],
-  "evidence": []
+  ]
 }

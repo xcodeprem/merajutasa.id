@@ -36,7 +36,8 @@ async function main() {
     else if (hype.max_severity==='HIGH') hypeStatus='ADVISORY'; // Phase 0 keep advisory; future Phase 1 escalate to FAIL
   }
   const discStatus = disclaimers ? (disclaimers.status === 'ERROR' ? 'ADVISORY' : 'PASS_STUB') : 'ADVISORY'; // Phase: downgrade until DEC activation
-  const principlesStatus = Array.isArray(principles) ? 'PASS_STUB' : 'ADVISORY';
+  const principlesArray = Array.isArray(principles) ? principles : (principles?.principles || []);
+  const principlesStatus = principlesArray.length>0 ? 'PASS_STUB' : 'ADVISORY';
   // PII status heuristic: if file missing -> ADVISORY; if present and has critical >0 -> ADVISORY (Phase 0), else PASS
   let piiStatus = 'ADVISORY';
   if (pii){
@@ -57,6 +58,7 @@ async function main() {
 
   const freshnessStatus = freshness ? (freshness.summary?.overall_status || 'UNKNOWN') : 'MISSING';
   const hypeHigh = hype?.severity_counts?.HIGH || 0;
+  const hypeMedium = hype?.severity_counts?.MEDIUM || 0;
   const discErrors = disclaimers?.summary?.errors || 0;
   const discEnforced = disclaimers?.summary?.presence_enforcement === true;
   const specViolations = spec?.violations?.length || 0;
@@ -76,7 +78,8 @@ async function main() {
   const gateChecks = [
     { id:'SPEC_HASH', passed: specViolations <= (thresholds.spec_hash_violation_count ?? 0), detail:{ violations:specViolations, allowed:thresholds.spec_hash_violation_count ?? 0 } },
     { id:'PARAM_INTEGRITY', passed: paramStatusPass, detail:{ status:params?.status, required:thresholds.param_integrity_status } },
-    { id:'HYPE_HIGH', passed: hypeHigh <= (thresholds.hype_high_max ?? 0), detail:{ high:hypeHigh, max:thresholds.hype_high_max ?? 0 } },
+  { id:'HYPE_HIGH', passed: hypeHigh <= (thresholds.hype_high_max ?? 0), detail:{ high:hypeHigh, max:thresholds.hype_high_max ?? 0 } },
+  ...(thresholds.hype_medium_max !== undefined ? [{ id:'HYPE_MEDIUM', passed: hypeMedium <= thresholds.hype_medium_max, detail:{ medium:hypeMedium, max:thresholds.hype_medium_max } }] : []),
     { id:'DISCLAIMERS_PRESENCE', passed: !discEnforced || discErrors <= (thresholds.disclaimers_errors_allowed ?? 0), detail:{ enforced:discEnforced, errors:discErrors, allowed:thresholds.disclaimers_errors_allowed ?? 0 } },
     { id:'PII_CRITICAL', passed: piiCritical <= (thresholds.pii_critical_max ?? 0), detail:{ critical:piiCritical, max:thresholds.pii_critical_max ?? 0 } },
     { id:'FAIRNESS_UNIT', passed: !thresholds.fairness_engine_required || fairnessUnitStatus==='PASS', detail:{ required:thresholds.fairness_engine_required, status:fairnessUnitStatus, failCount:fairnessUnitFailCount } },
@@ -86,7 +89,7 @@ async function main() {
     gateChecks.push({ id:'FRESHNESS', passed: freshnessStatus === thresholds.freshness_required_status, detail:{ status:freshnessStatus, required:thresholds.freshness_required_status } });
   }
   if (thresholds.principles_required){
-    const principlesPresent = Array.isArray(principles) && principles.length>0;
+    const principlesPresent = principlesArray.length>0;
     gateChecks.push({ id:'PRINCIPLES_IMPACT', passed: principlesPresent, detail:{ present:principlesPresent } });
   }
   const gateStatus = gateChecks.every(c=>c.passed) ? 'PASS' : 'FAIL';
@@ -107,9 +110,10 @@ async function main() {
       hype_max_severity: hype?.max_severity ?? null,
       hype_high: hype?.severity_counts?.HIGH ?? 0,
       hype_medium: hype?.severity_counts?.MEDIUM ?? 0,
-      hype_rule_counts: hype?.rule_counts || {},
+  hype_rule_counts: hype?.rule_counts || {},
+  hype_medium_max_allowed: thresholds.hype_medium_max ?? null,
       param_mismatches: params?.mismatches ?? 0,
-      principles_entries: Array.isArray(principles) ? principles.length : 0,
+  principles_entries: principlesArray.length,
       pii_critical: pii?.summary?.critical_matches ?? 0,
       pii_total: pii?.summary?.total_matches ?? 0,
       disclaimers_errors: disclaimers?.summary?.errors ?? 0,

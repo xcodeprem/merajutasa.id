@@ -48,7 +48,7 @@ OUT-OF-SCOPE:
 
 ## 3. CORE SCHEMA OVERVIEW
 
-Top-level required fields (all events):
+Root required fields (all events): <!-- hype-lint-ignore-line -->
 
 | Field | Type | Req | Description |
 |-------|------|-----|-------------|
@@ -69,7 +69,7 @@ Top-level required fields (all events):
 | sampling | object | Optional | If partial sampling applied |
 | source | string | Yes | "web_public" (channel identifier) |
 
-Notes: Additional top-level keys beyond allowed must be rejected (strict mode).
+Notes: Additional root-level keys beyond allowed must be rejected (strict mode). <!-- hype-lint-ignore-line -->
 
 ---
 

@@ -1,6 +1,6 @@
 {
-  "mode": "verify",
-  "timestamp_utc": "2025-08-13T11:11:35Z",
+  "mode": "report-only",
+  "timestamp_utc": "2025-08-13T13:07:28Z",
   "updated": [],
   "unchanged": [
     "docs/roadmap/roadmap-master-v1.md",
@@ -43,13 +43,18 @@
     "docs/governance/dec/DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
     "content/disclaimers/config.yml",
     "tools/fairness/engine-core.js",
-    "docs/integrity/gating-policy-v1.json"
+    "docs/integrity/gating-policy-v1.json",
+    "docs/governance/dec/DEC-20250813-07-hype-threshold-transition.md",
+    "docs/governance/dec/DEC-style-guide-v1.md",
+    "docs/governance/dec/DEC-style-guide-v2.md",
+    "docs/governance/dec/DEC-20250813-05-gating-policy-wave1-adoption.md",
+    "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md"
   ],
   "placeholders_sealed": [],
   "placeholders_remaining": [],
   "violations": [],
   "summary": {
-    "total_entries": 41,
+    "total_entries": 46,
     "updated_count": 0,
     "violation_count": 0,
     "placeholders_remaining_count": 0
