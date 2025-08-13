@@ -1,13 +1,17 @@
 # Lint Specification – principles.reference (v1.0)
+
 Status: Draft for Activation (CIC-A)  
 Prepared: 2025-08-12  
 Scope: Memastikan setiap PR yang berpotensi memengaruhi satu atau lebih prinsip GP1–GP10 secara eksplisit mendeklarasikan dampak & mitigasi (bukan asumsi diam). Tidak menghapus lint eksisting; ini ADDITIVE.
 
 ## 1. Purpose
+
 Mencegah “silent erosion” prinsip melalui perubahan incremental (misal menambahkan field numerik yang bisa dipersepsi sebagai ranking, atau memperluas data yang mengurangi minimisasi).
 
 ## 2. Trigger Conditions
+
 Lint dijalankan jika dalam diff terdapat salah satu:
+
 - File di path: `docs/`, `config/`, `content/`, `src/` yang mengandung:
   - Penambahan field event schema / credential / snapshot.
   - Perubahan parameter fairness (hysteresis, thresholds).
@@ -17,6 +21,7 @@ Lint dijalankan jika dalam diff terdapat salah satu:
   - Penambahan file YAML/JSON di config kecuali test fixtures.
 
 ## 3. Required PR Sections
+
 PR template Section 37 (PRINCIPLES IMPACT MATRIX) harus ada tabel minimal:
 
 | Principle | Potential Impact (Yes/No) | Note / Mitigation |
@@ -24,6 +29,7 @@ PR template Section 37 (PRINCIPLES IMPACT MATRIX) harus ada tabel minimal:
 Semua prinsip yang diberi “Yes” butuh catatan spesifik (bukan “N/A”).
 
 ## 4. Rule Codes
+
 | Code | Description | Level |
 |------|-------------|-------|
 | PRIN-REF-001 | Section 37 missing entirely | ERROR |
@@ -38,6 +44,7 @@ Semua prinsip yang diberi “Yes” butuh catatan spesifik (bukan “N/A”).
 | PRIN-REF-010 | Excessive generic mitigation text (“no impact”) repeated for Yes | WARN |
 
 ## 5. Heuristic Detection (Impact Inference)
+
 | Principle | Heuristic Regex / Condition |
 |-----------|-----------------------------|
 | GP1 | Added lines with `user_ip|email|phone|address|lat|lng` or config PII |
@@ -52,6 +59,7 @@ Semua prinsip yang diberi “Yes” butuh catatan spesifik (bukan “N/A”).
 | GP10 | Event schema file or validator code diff |
 
 ## 6. Pseudocode
+
 ```python
 def run():
   diff = collect_git_diff()
@@ -66,6 +74,7 @@ def run():
 ```
 
 ## 7. Output JSON Example
+
 ```json
 {
   "summary":{"errors":2,"warnings":1},
@@ -78,19 +87,23 @@ def run():
 ```
 
 ## 8. Integration Order
+
 Run AFTER:
+
 1. spec hash diff
 2. parameter integrity
 3. hype language lint
 So heuristics get stable diff data.
 
 ## 9. Acceptance Criteria
+
 - [ ] Detect all synthetic test diffs (10 scenarios).
 - [ ] 0 false negative on param hysteresis change.
 - [ ] <5% false positive on neutral copy changes.
 - [ ] CI fails on any ERROR codes.
 
 ## 10. Governance
+
 Activation: CIC-A (no semantic meaning change).  
 Any relaxation (e.g., removing heuristic) → CIC-E.
 
@@ -99,6 +112,7 @@ End of spec (append-only).
 ---
 
 ## Adoption Addendum (APPENDED – DO NOT ALTER ORIGINAL CONTENT)
+
 Adoption DEC: DEC-20250812-03  
 Adoption Date: 2025-08-12T06:22:10Z  
 Status Change: Draft → Adopted (Phase 0 WARN, Phase 1 DENY after 48h, Phase 2 extended checks after 7d)  

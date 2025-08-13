@@ -3,6 +3,7 @@
 Purpose: Menstandarkan artefak audit setelah hash seal baseline.
 
 ## 1. Artifacts
+
 | Artifact | Path | Trigger | Purpose |
 |----------|------|---------|---------|
 | spec-hash-diff report | artifacts/spec-hash-diff.json | seal-first & verify | Integritas hash & drift detection |
@@ -11,6 +12,7 @@ Purpose: Menstandarkan artefak audit setelah hash seal baseline.
 | Evidence bundle report | artifacts/evidence-bundle-report.json | CI per PR | Kelengkapan bukti governance |
 
 ## 2. Hash Seal Procedure (Condensed)
+
 1. Freeze baseline (declared).
 2. Run seal-first (fills placeholders + DEC internal hash).
 3. Generate PR template line audit snapshot.
@@ -19,6 +21,7 @@ Purpose: Menstandarkan artefak audit setelah hash seal baseline.
 6. Add changelog excerpt entry referencing commit & DEC IDs.
 
 ## 3. Violation Handling
+
 | Code | Action |
 |------|--------|
 | PLACEHOLDER_AFTER_SEAL | FAIL build; root-cause mengapa placeholder dibiarkan |
@@ -27,9 +30,11 @@ Purpose: Menstandarkan artefak audit setelah hash seal baseline.
 | MISSING_FILE | FAIL; telusuri commit yang menghapus tanpa policy |
 
 ## 4. Non-Removal Assertion
+
 File audit snapshot TIDAK diubah; tambahan snapshot → file baru.
 
 ## 5. Future Extensions
+
 - Append section untuk risk register referensi
 - Link ke DEC disclaimers / anomaly saat tersedia
 - Phase tracker summary embed

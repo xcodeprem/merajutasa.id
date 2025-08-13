@@ -1,4 +1,5 @@
 # MerajutASA – Public Tier Event Schema Canonical Specification (v1.0)
+
 Status: Draft for Ratification (CIC-A for instrumentation; CIC-E if semantic meaning of core fields changes)  
 Prepared: 2025-08-12  
 Related Docs: Master Spec v2.0 (Sections 21, 27, 37), Integrity & Fairness Specs, Hysteresis Options Decision Pack  
@@ -6,6 +7,7 @@ NON-DESTRUCTIVE: Dokumen ini MENAMBAHKAN detail; tidak menghapus strategi atau d
 
 > Tujuan  
 Menyediakan skema formal, kontrak semantik, versioning, lint rules, dan contoh implementasi untuk seluruh event publik (landing & multi-page), termasuk hero constellation, equity, trust audit, feedback, terminology adoption, dll. Memastikan:  
+
 - Konsistensi: setiap event memiliki struktur inti identik.  
 - Privasi: tidak ada PII, tidak ada data anak, tidak ada fingerprinting agresif.  
 - Observability: mendukung analitik KPI & fairness governance tanpa melanggar prinsip non-ranking.  
@@ -14,6 +16,7 @@ Menyediakan skema formal, kontrak semantik, versioning, lint rules, dan contoh i
 ---
 
 ## 1. PRINCIPLES MAPPING
+
 | Principle | Event Schema Refleksi |
 |-----------|-----------------------|
 | GP1 Privacy-by-Architecture | Tidak menyertakan user agent fingerprint detail; sesi ephemeral; no PII fields. |
@@ -26,13 +29,16 @@ Menyediakan skema formal, kontrak semantik, versioning, lint rules, dan contoh i
 ---
 
 ## 2. SCOPE & NON-SCOPE
+
 IN-SCOPE:
+
 - Public UX interactions (landing hero, cards, navigation, equity, trust, registry, terminology, feedback form).
 - Hysteresis internal event bridging (enter/exit under-served) – flagged internal group subset.
 - Schema for event ingestion: `v1`.
 - Validation JSON Schema + semantic rules + prohibited fields.
 
 OUT-OF-SCOPE:
+
 - Authenticated dashboards (future doc).
 - Backend internal metrics (ETL runtime, DB latency).
 - PII capture (strictly prohibited).
@@ -52,7 +58,7 @@ Top-level required fields (all events):
 | occurred_at | string (ISO 8601 UTC) | Yes | Event timestamp (client or server normalized) |
 | received_at | string (ISO 8601 UTC) | Yes | Ingestion timestamp (server) |
 | session_id | string (UUIDv4) | Yes | Ephemeral session reference |
-| user_type | string | Yes | "public_anonymous" | 
+| user_type | string | Yes | "public_anonymous" |
 | page | string | Yes | Logical page slug (e.g. "landing","equity","trust","unit_profile") |
 | referrer | string | Optional | URL or internal slug; sanitized |
 | user_agent_class | string | Optional | Simplified: "desktop","mobile","tablet","bot_suspect" |
@@ -70,6 +76,7 @@ Notes: Additional top-level keys beyond allowed must be rejected (strict mode).
 ## 4. EVENT NAME TAXONOMY (CURRENT SET v1.0)
 
 Category: Landing / Hero
+
 - pub_landing_impression
 - pub_hero_card_impression
 - pub_hero_card_cta_click
@@ -79,12 +86,14 @@ Category: Landing / Hero
 - pub_hero_metric_hover
 
 Category: Navigation & Discovery
+
 - pub_nav_link_click
 - pub_registry_filter_used
 - pub_registry_unit_view
 - pub_unit_profile_view
 
 Category: Equity & Fairness
+
 - pub_equity_view
 - pub_equity_bucket_info_open
 - pub_equity_under_served_click
@@ -94,6 +103,7 @@ Category: Equity & Fairness
 - sys_fairness_under_served_exit
 
 Category: Trust & Governance
+
 - pub_trust_view
 - pub_trust_metric_tooltip_open
 - pub_hash_verify_click
@@ -101,26 +111,31 @@ Category: Trust & Governance
 - pub_governance_section_view
 
 Category: Terminology Transition
+
 - pub_terminology_page_view
 - pub_terminology_banner_click
 - pub_terminology_glossary_term_expand
 
 Category: Media & Digest
+
 - pub_media_digest_view
 - pub_media_citation_copy
 
 Category: Feedback & Participation
+
 - pub_feedback_form_open
 - pub_feedback_submit
 - pub_feedback_block_pii (sanitized; no raw snippet)
 - pub_feedback_category_select
 
 Category: Error & Edge Displays
+
 - pub_error_equity_no_data
 - pub_error_registry_fetch
 - pub_placeholder_snapshot_loading
 
 Category: Performance / Resilience (optional lightweight)
+
 - pub_perf_lcp_bucket
 - pub_perf_first_input_delay_bucket
 
@@ -164,14 +179,17 @@ Each event may specify meta object keys. Required meta keys per event:
 ## 6. CORE FIELD SPECS
 
 ### 6.1 session_id
+
 - UUIDv4; rotated when browser storage cleared; lifetime max 24h; no cross-site correlation.
 - If user blocks storage, fallback ephemeral random; still conform to UUID format.
 
 ### 6.2 user_type
+
 - Always `public_anonymous` for current scope.
 - Future reserved: `internal_observer`, `governance_audit` (NOT to be confused with authentication).
 
 ### 6.3 integrity object
+
 | Field | Type | Description |
 |-------|------|-------------|
 | pipeline_hash | string | Hash of canonical schema file version currently enforced |
@@ -180,6 +198,7 @@ Each event may specify meta object keys. Required meta keys per event:
 | schema_version_ack | string | Mirrors schema_version for redundancy |
 
 ### 6.4 privacy object
+
 | Field | Type | Description |
 |-------|------|-------------|
 | pii_scan_performed | boolean | Always true for events with free text (feedback) else false |
@@ -187,6 +206,7 @@ Each event may specify meta object keys. Required meta keys per event:
 | raw_payload_scrubbed | boolean | Should always be true after ingestion pipeline normalization |
 
 ### 6.5 sampling object (optional)
+
 | Field | Type | Description |
 |-------|------|-------------|
 | rate | number (0..1) | Effective sampling fraction |
@@ -285,6 +305,7 @@ Example (pub_hero_card_cta_click meta):
 ---
 
 ## 9. EVENT VERSIONING & RENUMBERING
+
 - schema_version covers structural base (1.0.x patch for additive meta field optional).
 - Adding new event_name: patch release 1.0.x.
 - Removing event_name: minor release (1.1.0) + deprecation notice 30 days prior (not expected early).
@@ -319,6 +340,7 @@ Example (pub_hero_card_cta_click meta):
 ---
 
 ## 12. INTEGRITY HASH COMPUTATION (event_hash)
+
 1. Remove `integrity.event_hash` from object before hashing.
 2. Stable key sort (JCS).
 3. Hash algorithm: SHA-256; hex lower-case.
@@ -475,6 +497,7 @@ Rationale: tamper detection & schema drift spotting.
 ## 15. VALIDATION LOGIC (SERVER PIPELINE)
 
 Pseudosteps:
+
 1. Parse JSON; reject if unknown top-level key.
 2. Validate against base schema.
 3. Look up event-specific meta schema; validate meta; if fail → log & reject (soft or hard configurable).
@@ -489,6 +512,7 @@ Pseudosteps:
 ## 16. LINT & CI (DEVELOPER CLIENT LIBRARY)
 
 Client library test:
+
 - Prevent sending event if meta missing required key.
 - Enforce sampling logic centrally (avoid per-event developer hacks).
 - Rate limiting: no more than X hero_card_impression events per card per session (X=1).
@@ -558,6 +582,7 @@ Monitoring: daily discrepancy report.
 ## 22. DEPRECATION PROCESS
 
 Steps:
+
 1. Mark event deprecated in taxonomy table (vNext doc).
 2. Emit warning log on server when receiving old event.
 3. After grace (e.g., 30d), reject (410 code equivalently).
@@ -583,12 +608,14 @@ No deprecations allowed first 60 days unless severe misdesign.
 ## 24. EVENT NAMING GUIDELINES
 
 Pattern: `<scope>_<domain>_<action>[_<detail>]`
+
 - scope: pub (public user) / sys (system fairness internal) / perf (if separate later)
 - domain: hero, equity, trust, registry, feedback, terminology
 - action: click / view / submit / impression / verify / copy / open
 - detail: optional clarifier
 
 Prohibited:
+
 - Past tense (“clicked”)
 - Marketing adjectives (“amazing”)
 - Ranking labels (“top_unit”)
@@ -703,6 +730,7 @@ Event Schema v1.0 memberikan fondasi observability yang selaras dengan etos: ver
 ## 34. APPENDIX – HASH RE-COMPUTE SCRIPT OUTLINE (INFORMATIVE)
 
 Steps:
+
 - Input JSON event
 - Remove integrity.event_hash
 - Canonicalize (JCS)
@@ -730,6 +758,7 @@ Contoh format:
 `KEPUTUSAN: Setujui classification truncated 2dp, sampling after 30d baseline, sys under-served exit internal.`
 
 Setelah konfirmasi:
+
 1. AI update Master Spec (delta instrumentation).
 2. AI buat template DEC log entry.
 3. AI susun test checklist file.

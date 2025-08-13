@@ -1,4 +1,5 @@
 # GP1–GP10 Principles Index (Quick Machine & Reviewer Reference)
+
 Status: Final Index v1.0 (APPEND-ONLY – Tidak menggantikan Master Spec v2.0)  
 Prepared: 2025-08-12  
 Purpose: Menyediakan ringkasan 1 kalimat + pointer pasal Master Spec agar Agent / lint / reviewer cepat melakukan cross-check kepatuhan tanpa membuka keseluruhan dokumen. Tidak menghapus atau mengubah substansi prinsip yang sudah hidup di Master Spec v2.0.  
@@ -21,6 +22,7 @@ Purpose: Menyediakan ringkasan 1 kalimat + pointer pasal Master Spec agar Agent 
 *Nomor pasal (Section numbers) mengacu ke struktur Master Spec v2.0 sebagaimana telah digunakan dalam dokumen sebelumnya (referential – jika penomoran internal berubah, delta file wajib menyesuaikan tanpa mengubah makna).  
 
 ## Cross-File Pointers
+
 - DEC Files: `docs/governance/dec/` (misal DEC-20250812-02)
 - Disclaimers Canonical: `content/disclaimers/master.json`
 - Hysteresis Config: `docs/fairness/hysteresis-config-v1.yml`
@@ -29,6 +31,7 @@ Purpose: Menyediakan ringkasan 1 kalimat + pointer pasal Master Spec agar Agent 
 - Roadmap Master: `docs/roadmap/roadmap-master-v1.md`
 
 ## Lint Integration Hooks
+
 - `principles.reference` lint (baru) memvalidasi bahwa PR yang berpotensi menyentuh domain prinsip menandai dampak per prinsip (lihat Section PRINCIPLES IMPACT MATRIX di PR template).
 - Parameter drift lint: `hysteresis.params.lock` → GP2, GP9
 - Disclaimers lint: → GP5, GP6, GP7, GP9
@@ -37,15 +40,18 @@ Purpose: Menyediakan ringkasan 1 kalimat + pointer pasal Master Spec agar Agent 
 - Hype language lint: → GP7
 
 ## Change Control
+
 - Update ringkasan satu kalimat: CIC-E (butuh DEC & Master Spec delta).
 - Penambahan prinsip baru (GP11+): memerlukan dokumen konseptual + versi Master Spec mayor.
 
 ## Usage (Agent)
+
 1. Agent parse tabel; buat mapping ID→Focus→Spec sections.
 2. Saat PR template Section 37 (PRINCIPLES IMPACT MATRIX) terisi auto, lint memastikan minimal semua prinsip yang berdampak “Yes” punya catatan mitigasi jika menyentuh domain sensitif (privacy, fairness, integrity).
 3. Jika ada field baru di event atau credential & GP1/GP3/GP10 tidak ditandai → fail.
 
 ## No Removal Guarantee
+
 Dokumen ini tidak mengganti definisi tekstual lengkap; hanya indeks ringkas. Tidak ada strategi dihapus.
 
 (End of GP1–GP10 Principles Index v1.0)

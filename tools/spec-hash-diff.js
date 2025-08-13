@@ -29,7 +29,6 @@ async function fileExists(p) { try { await fs.access(p); return true; } catch { 
 
 async function main() {
   const mode = parseArg('mode','report-only');
-  const allowInitialPlaceholders = /^(true|1|yes)$/i.test(parseArg('allow-initial-placeholders','false'));
   if (!VALID_MODES.has(mode)) {
     console.error(`[spec-hash-diff] ERROR: Invalid mode "${mode}". Use seal-first|verify|report-only.`);
     process.exit(2);
@@ -113,13 +112,9 @@ async function main() {
   }
 
   if (mode !== 'seal-first' && placeholdersRemaining.length > 0) {
-    if (!allowInitialPlaceholders) {
-      placeholdersRemaining.forEach(p =>
-        violations.push({ code: 'PLACEHOLDER_AFTER_SEAL', path: p, detail: 'Placeholder remained post-freeze' })
-      );
-    } else {
-      console.log('[spec-hash-diff] Allowing placeholders (pre-seal baseline).');
-    }
+    placeholdersRemaining.forEach(p =>
+      violations.push({ code: 'PLACEHOLDER_AFTER_SEAL', path: p, detail: 'Placeholder remained post-freeze' })
+    );
   }
 
   // Write DEC changes

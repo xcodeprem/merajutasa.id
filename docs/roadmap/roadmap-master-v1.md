@@ -1,4 +1,5 @@
 # MerajutASA – Roadmap & Milestones Komprehensif (Master Consolidation)
+
 Status: Living Draft (Menunggu Ratifikasi Governance untuk beberapa keputusan parameter)  
 Prepared: 2025-08-12  
 Scope: Mengkonsolidasikan SEMUA rencana, strategi, spesifikasi, keputusan, dependency, guardrail, lint, fairness, privacy, instrumentation, serta ekspansi jangka panjang.  
@@ -9,6 +10,7 @@ Important: Dokumen INI TIDAK MENGHAPUS atau MENGGANTIKAN strategi sebelumnya. Se
 ## 0. EXECUTIVE OVERVIEW
 
 Roadmap ini memfokuskan 4 horizon waktu:
+
 - Horizon 0 (Hari 0–7): Hardening Fondasi Trust Primitives (signer, chain, snapshot, lint, PII).
 - Horizon 1 (Hari 8–30): Stabilitas Fairness & Observability (hysteresis implementasi, instrumentation penuh, equity pipeline).
 - Horizon 2 (Hari 31–60): Governance Depth & Transparency Amplification (changelog excerpt, support matrix, anomaly watchers, revocation placeholder UI, a11y/performance enforcement).
@@ -16,6 +18,7 @@ Roadmap ini memfokuskan 4 horizon waktu:
 - Horizon N+ (>90): Federation, revocation lifecycle real, peer attestations, CBOR/compact verification, localization, advanced fairness analytics (variance & hysteresis tuning).
 
 Setiap horizon memetakan:
+
 1) Deliverables
 2) Acceptance Criteria
 3) Dependencies
@@ -73,6 +76,7 @@ Setiap horizon memetakan:
 ## 3. HORIZON 0 (HARI 0–7) – TRUST PRIMITIVES FOUNDATION
 
 ### 3.1 Deliverables
+
 | ID | Deliverable | Description |
 |----|-------------|-------------|
 | H0-A1 | Ed25519 Signer Service MVP | REST endpoint sign credential canonical JSON (no caching) |
@@ -93,6 +97,7 @@ Setiap horizon memetakan:
 | H0-A4 | Verify CLI Doc Draft | Step-by-step verification instructions |
 
 ### 3.2 Acceptance Criteria (Key)
+
 - Signer signature verifies via CLI on fixture.
 - Chain append enforces prevHash continuity & rejects mismatch.
 - Lint job fails on removing D2 from landing (tested).
@@ -104,6 +109,7 @@ Setiap horizon memetakan:
 - Feedback submission with phone/email redacted accepted; NIK blocked.
 
 ### 3.3 Dependencies
+
 | Deliverable | Depends On | Explanation |
 |-------------|-----------|-------------|
 | H0-A1 | Credential Schema final | Field canonicalization |
@@ -116,6 +122,7 @@ Setiap horizon memetakan:
 | H0-H1 | Equity snapshot script | Provide initial metrics for hero SSR |
 
 ### 3.4 Risks & Mitigasi
+
 | Risk | Mitigasi |
 |------|----------|
 | Delayed Hysteresis DEC menunda B2 | Fast governance meeting Day 1 |
@@ -125,6 +132,7 @@ Setiap horizon memetakan:
 | Snapshot math error memicu distrust | Cross-check equity index with manual small dataset |
 
 ### 3.5 KPIs (Early Visibility)
+
 | KPI | Target Day 7 (Indicative) |
 |-----|---------------------------|
 | Hero Module Interaction Coverage | Measurement only (no target enforcement yet) |
@@ -133,6 +141,7 @@ Setiap horizon memetakan:
 | Lint Violations Resolved | 100% (no persistent errors) |
 
 ### 3.6 RACI (Condensed)
+
 | Deliverable | R | A | C | I |
 |-------------|---|---|---|---|
 | Signer Service | Engineering | Governance | Security | All |
@@ -145,6 +154,7 @@ Setiap horizon memetakan:
 | Feedback Schema | Engineering | Product | Privacy | Governance |
 
 ### 3.7 Governance / DEC
+
 - Issue DEC files: DEC-20250812-01 (Credential Schema), DEC-20250812-02 (Hysteresis Option F), DEC-20250812-03 (Event Schema), DEC-20250812-04 (Disclaimers Lint activation), DEC-20250812-05 (PII Pattern adoption), DEC-20250812-06 (Aggregation threshold).
 
 ---
@@ -152,6 +162,7 @@ Setiap horizon memetakan:
 ## 4. HORIZON 1 (HARI 8–30) – FAIRNESS & OBSERVABILITY STABILIZATION
 
 ### 4.1 Deliverables
+
 | ID | Deliverable | Description |
 |----|-------------|-------------|
 | H1-A1 | Hash Chain Persistence Hardening (storage backend) | Move from file/memory → durable store w/ indexing |
@@ -171,11 +182,12 @@ Setiap horizon memetakan:
 | H1-H2 | Accessibility Automated Test Pass (axe, pa11y) | Reports route coverage + severity gating |
 | H1-J1 | Updated /trust & /equity with final hysteresis narrative | Replace “Decision Pending” stub |
 | H1-K1 | Chain Event Integrity Monitoring (alert mismatches) | Detect missing seq or hash divergence |
-| H1-I1 | Revocation Empty Endpoint Deployed | Returns JSON list [] with schema | 
+| H1-I1 | Revocation Empty Endpoint Deployed | Returns JSON list [] with schema |
 | H1-I2 | Credential Viewer “0 revoked” label | Transparent placeholder |
 | H1-L1 | Localization Key Scaffolding & Fallback | Keys present for disclaimers & hero labels |
 
 ### 4.2 Acceptance Criteria (Highlights)
+
 - Hysteresis ACTIVE units match simulated state transitions (test dataset).
 - KPI dashboard shows non-zero event ingestion for ≥80% canonical events.
 - Performance budgets: p75 LCP ≤ defined (DEC-PERF-12), bundle size ≤ budget.
@@ -185,6 +197,7 @@ Setiap horizon memetakan:
 - Policy-as-code denies commit introducing banned old term count > threshold.
 
 ### 4.3 Dependencies
+
 | Deliverable | Depends On |
 |-------------|-----------|
 | H1-B1 | H0-B2 + snapshot job reliability |
@@ -197,6 +210,7 @@ Setiap horizon memetakan:
 | H1-I2 | Credential schema revocation placeholder final |
 
 ### 4.4 Risks & Mitigation
+
 | Risk | Mitigasi |
 |------|----------|
 | Anomaly detector FPs tinggi (noisy) | Introduce cool-down / min sample size |
@@ -206,6 +220,7 @@ Setiap horizon memetakan:
 | Feedback category misclassification (keyword naive) | Provide manual recoding option internal |
 
 ### 4.5 KPIs (End of H1 Targets)
+
 | KPI | Target |
 |-----|--------|
 | Hero Module Interaction Coverage | ≥35% |
@@ -222,6 +237,7 @@ Setiap horizon memetakan:
 ## 5. HORIZON 2 (HARI 31–60) – GOVERNANCE DEPTH & EXPANSION
 
 ### 5.1 Deliverables
+
 | ID | Deliverable | Description |
 |----|-------------|-------------|
 | H2-A1 | Key Rotation Procedure & Overlap Implementation | Add #keys-2 to DID, test dual verify |
@@ -242,6 +258,7 @@ Setiap horizon memetakan:
 | H2-L1 | Localization Pilot Plan (English; content token verification only) | Non-production test subset |
 
 ### 5.2 Acceptance Criteria (Key)
+
 - Key rotation: both keys verify overlapping period; old key removal scheduled.
 - Quarterly audit template reconstructs under-served timeline with 100% consistency vs events.
 - Stage 2 adoption report produced (even if threshold not met).
@@ -249,6 +266,7 @@ Setiap horizon memetakan:
 - Hype lexicon lint catches seeded test adjectives (“revolutionary fairness engine”) blocking build.
 
 ### 5.3 Risks & Mitigation
+
 | Risk | Mitigasi |
 |------|----------|
 | Key rotation mishandled → broken verify | Staged rollout & test both keys before removal |
@@ -261,6 +279,7 @@ Setiap horizon memetakan:
 ## 6. HORIZON 3 (HARI 61–90) – MATURITY & EXTERNAL AUDIT READINESS
 
 ### 6.1 Deliverables
+
 | ID | Deliverable | Description |
 |----|-------------|-------------|
 | H3-A1 | Verify CLI Hardening (multi-platform script + integrity cross-check) | Shell + Node examples |
@@ -278,6 +297,7 @@ Setiap horizon memetakan:
 | H3-L1 | Localization PoC (English toggled internal) | Validate disclaimers translation equivalence |
 
 ### 6.2 Acceptance Criteria (Key)
+
 - Verify CLI passes cross-platform reproducibility hash tests.
 - Hysteresis review: documented churn stats & parameter decision (retain or adjust).
 - Incident banner can deploy in <5 min with pre-defined message template.
@@ -334,8 +354,10 @@ Terminology Scanner -> Adoption Metrics -> Stage 2 Transition
 ## 10. GOVERNANCE & DECISION LOG MANAGEMENT
 
 ### 10.1 DEC File Naming
+
 Pattern: `DEC-YYYYMMDD-XX.md`  
 Fields:
+
 ```
 id: DEC-20250812-01
 title: Adopt Credential Schema v1.0
@@ -348,6 +370,7 @@ rationale: ...
 ```
 
 ### 10.2 Automation Idea
+
 - Lint detects new spec file hash difference without DEC referencing commit → FAIL.
 - Maintain `dec-index.json` for quick mapping ID → hash & impacted components.
 - Chain events include DEC ID for major method changes (type=DEC_REFERENCE).
@@ -447,6 +470,7 @@ rationale: ...
 ## 17. QUALITY ASSURANCE MATRICES
 
 ### 17.1 Regression Test Coverage Targets
+
 | Area | Target Coverage |
 |------|-----------------|
 | Credential serialization & signature verify | ≥95% logic paths |
@@ -457,6 +481,7 @@ rationale: ...
 | Policy-as-code | All deny cases + at least 2 pass cases per policy |
 
 ### 17.2 Negative Testing Examples
+
 | Area | Negative Case | Expected |
 |------|---------------|----------|
 | Chain Append | Wrong prevHash | Reject 400 |
@@ -637,6 +662,7 @@ rationale: ...
 ## 29. NEXT USER ACTION PROMPTS
 
 Pilih langkah lanjut:
+
 - “KEPUTUSAN: Opsi F hysteresis (0.50/0.60/0.65 cooldown=1 stalled=5) disetujui.”
 - “LANJUTKAN: DEC templates”
 - “LANJUTKAN: Verify CLI doc”

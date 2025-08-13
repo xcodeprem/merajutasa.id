@@ -1,4 +1,5 @@
 # MerajutASA – Integrity Credential Schema (Final Draft v1.0)
+
 Status: Ready for Governance Ratification (CIC-C)  
 Spec Version ID: cred-schema-v1.0 (locked upon decision log entry)  
 Related Master Spec: Public Multi‑Page Experience Master Specification v2.0 (“Hero Constellation”)  
@@ -10,6 +11,7 @@ Menetapkan skema formal, batas, aturan governance, dan praktik kriptografi untuk
 ---
 
 ## 1. PRINCIPLES (RESTATED & BOUND TO SCHEMA)
+
 | Code | Application in Credential |
 |------|---------------------------|
 | GP1 Privacy-by-Architecture | Tidak ada child PII; organisasi hanya minimal metadata non sensitif (name normative, region broad). |
@@ -26,13 +28,16 @@ Menetapkan skema formal, batas, aturan governance, dan praktik kriptografi untuk
 ---
 
 ## 2. SCOPE & NON-SCOPE
+
 IN-SCOPE: Schema definisi, enumerasi nilai, JSON Schema, contoh valid, normalisasi hashing, penandatanganan, versi, revocation placeholder, governance gating, compliance lint.
 OUT-OF-SCOPE: Implementasi service signing produksi, key management operational details (Anda yang lakukan), predictive scoring, per-unit sensitive operational KPIs, geolokasi granular, data anak.
 
 ---
 
 ## 3. CORE DATA MODEL (OVERVIEW)
+
 High-level fields (top-level):
+
 - @context
 - type
 - id
@@ -57,7 +62,7 @@ Not all optional sub-objects harus muncul. Minimal required for MVP: @context, t
 
 | Field | Type | Req | Constraint / Pattern | Rationale / Notes | Governance Class on Change |
 |-------|------|-----|---------------------|-------------------|-----------------------------|
-| @context | array/string | Yes | MUST include “https://www.w3.org/2018/credentials/v1” & MerajutASA context URL | VC compatibility | CIC-E if removal |
+| @context | array/string | Yes | MUST include “<https://www.w3.org/2018/credentials/v1”> & MerajutASA context URL | VC compatibility | CIC-E if removal |
 | type | array | Yes | MUST contain “VerifiableCredential” & “IntegrityCredential” | Semantic classification | CIC-E |
 | id | string (URI) | Yes | DID-agnostic resolvable or URN `urn:merajutasa:cred:{uuid}` | Global uniqueness | CIC-B if format change |
 | credentialSchema | object | Yes | id + type (“JsonSchemaValidator2018” or variant) | Machine validation | CIC-E |
@@ -96,6 +101,7 @@ No fields like: numberOfChildren, exactAddress, staffNames, financialBalance. Pr
 ---
 
 ## 5. PROHIBITED / BLACKLIST FIELDS
+
 | Category | Examples | Reason |
 |----------|----------|--------|
 | Child Identifiers | childName, birthDate, caseId | Privacy risk |
@@ -111,6 +117,7 @@ Lint MUST block any addition matching regex list (case-insensitive).
 ---
 
 ## 6. ENUMERATIONS & VALIDATIONS
+
 - verificationStatus: `pending` → credential SHOULD NOT be publicly surfaced as proof-of-integrity (but allowed for pipeline test).  
 - When verificationStatus = `verified`, required: lastVerificationUpdate.  
 - verificationScope subset must be non-empty if status = verified.  
@@ -121,11 +128,14 @@ Lint MUST block any addition matching regex list (case-insensitive).
 ---
 
 ## 7. JSON-LD CONTEXT
-Base: 
+
+Base:
+
 - `https://www.w3.org/2018/credentials/v1`
 - `https://schema.merajutasa.id/contexts/integrity-credential-v1.json` (to publish; defines custom terms)
   
 Custom terms (indicative, not exhaustive):
+
 | Term | IRI |
 |------|-----|
 | IntegrityCredential | `https://schema.merajutasa.id/IntegrityCredential` |
@@ -259,6 +269,7 @@ Custom terms (indicative, not exhaustive):
 ---
 
 ## 9. SHACL (OPTIONAL VALIDATION LAYER – INFORMATIVE)
+
 (Keep a SHACL shapes file separately if needed; omitted here for brevity; not replacing JSON Schema.)
 
 ---
@@ -326,9 +337,11 @@ Custom terms (indicative, not exhaustive):
 ---
 
 ## 11. CANONICALIZATION & HASHING GUIDELINES
+
 Goal: Deterministic binary representation for hashing + chain inclusion.
 
 Steps:
+
 1. JSON Canonicalization using JCS (RFC 8785 style) OR strict lexicographic sort of keys (lowest ASCII).
 2. Remove `proof` object when hashing for `credentialContentHash` (pre-sign).
 3. Compute `sha256(utf8(canonicalJson))` → hex (lowercase).
@@ -340,19 +353,22 @@ Rationale: Stable pre-proof hash ensures detect differences even if re-signed.
 ---
 
 ## 12. SIGNATURE & KEY MANAGEMENT (ABSTRACT SPEC)
+
 - Algorithm baseline: Ed25519 (libsodium).
 - DID Document: `did:web:merajutasa.id` hosts verificationMethod entries (#keys-1, #keys-2...) with public keys (base58).
 - Rotation: New key addition before old key deprecation (overlap 7 days).
 - Key custody: HUMAN (Anda/tim) – AI tidak mengelola kunci.
-- proof.jws: Detached JWS: header.alg=EdDSA, header.typ=“JWT” optional; payload = base64url(canonical credential object WITHOUT proof). 
+- proof.jws: Detached JWS: header.alg=EdDSA, header.typ=“JWT” optional; payload = base64url(canonical credential object WITHOUT proof).
 - Optional upgrade: Ed25519Signature2023 / JcsEd25519Signature2024 once ecosystem stable—requires schema version patch bump.
 
 ---
 
 ## 13. REVOCATION MODEL (PLACEHOLDER)
+
 Revocation not immediate; placeholder ensures forward compatibility.
 
 Design:
+
 - External `revocation list` endpoint returns array of {credId, status, revokedAt, reasonCode}.
 - Credential’s own `revocation.status` is “active” or updated to “revoked” (shadow update) but consumers MUST check revocation list (list-of-truth).
 - Reason codes (initial reserved):  
@@ -363,6 +379,7 @@ Design:
 - Governance change (CIC-C) required to add new code.
 
 Revocation Workflow (future):
+
 1. Trigger internal review → logged decision ID.
 2. Revocation list updated → chain event `CREDENTIAL_REVOKED`.
 3. UI: Org shows “Verification Suspended/Revoked” badge (never converts to ranking penalty; disclaimers emphasise).
@@ -370,6 +387,7 @@ Revocation Workflow (future):
 ---
 
 ## 14. GOVERNANCE INTEGRATION
+
 | Governance Event | Credential Field Affected | Log Type |
 |------------------|---------------------------|---------|
 | Initial issuance | Whole credential | CREDENTIAL_ISSUED |
@@ -383,6 +401,7 @@ All events hashed + appended. Decision IDs inserted in governance.decisionIds.
 ---
 
 ## 15. POLICY-AS-CODE HOOKS (OPA / REGO TARGETS)
+
 Pseudo conditions prior to issuance:
 
 | Policy Name | Condition | Action if Fail |
@@ -398,11 +417,13 @@ Pseudo conditions prior to issuance:
 ---
 
 ## 16. DISCLAIMER LINKAGE
+
 Credential-level disclaimersRef & meta.disclaimers hold references to disclaimers library IDs (D1–D7). UI must still show disclaimers outside credential—this is not substitution, only traceability.
 
 ---
 
 ## 17. EXTENSION & CHANGE CONTROL
+
 | Extension Proposal | Governance Class | Required Docs |
 |--------------------|------------------|---------------|
 | Add optional field (non-sensitive) | CIC-C | Impact note + privacy review |
@@ -416,7 +437,9 @@ No field promoting ranking or performance scoring allowed. Attempt requires Ethi
 ---
 
 ## 18. LINT & CI CHECKS (REQUIRED)
+
 Automated build must:
+
 1. Validate JSON against schema.
 2. Ensure no prohibited field names (regex list).
 3. Confirm disclaimersRef points to versioned disclaimers file (exists).
@@ -430,7 +453,9 @@ Fail = pipeline abort (except policy.terminology.stage.logic which warns first t
 ---
 
 ## 19. TEST VECTORS (HASH & SIGNATURE) (INFORMATIVE)
+
 Canonical (hypothetical) pre-proof object hash example:
+
 - Pre-proof canonical JSON (sorted keys) → SHA256 hex: `4c2b5c4f37d4ca25e7e1f0c5a7df23b4ab71c2d064f26c476b1c7658d2dd6f4a` (example; recompute once finalized).
 *Recompute after final editorial changes before production commit.*  
 Store expected hash in test fixtures: `tests/fixtures/credential/hash_vector_v1.json`.
@@ -438,6 +463,7 @@ Store expected hash in test fixtures: `tests/fixtures/credential/hash_vector_v1.
 ---
 
 ## 20. SECURITY & PRIVACY CONSIDERATIONS
+
 | Vector | Risk | Mitigation |
 |--------|------|-----------|
 | Replay (reuse old credential after revocation) | Outdated trust claim | Mandate revocation list check & expirationDate adoption later |
@@ -449,7 +475,9 @@ Store expected hash in test fixtures: `tests/fixtures/credential/hash_vector_v1.
 ---
 
 ## 21. MISINTERPRETATION HANDLING
+
 If feedback cluster indicates credential dianggap “rating” (>5% confusion):
+
 1. Add global banner clarifying.
 2. Append additional disclaimer ID (e.g., D3 reinforcement).
 3. Consider adding field `interpretationNote` (requires CIC-C) — optionally reject if leads to verbosity.
@@ -457,16 +485,19 @@ If feedback cluster indicates credential dianggap “rating” (>5% confusion):
 ---
 
 ## 22. PERFORMANCE
+
 Credential size target: ≤ 3 KB typical (excluding signature). Avoid bloat: limit arrays (verificationScope ≤3), truncated evidence hash (16–24 hex recommended while maintain collision practicality for display; full hash stored internally in chain event).
 
 ---
 
 ## 23. LOCALIZATION
+
 Credential uses canonical English tokens for portability; UI localizes labels. Do not localize field keys. Terminology object stage enumerations remain English-coded identifiers.
 
 ---
 
 ## 24. FUTURE EXTENSIONS (PLACEHOLDER, NOT APPROVED)
+
 | Candidate Field | Purpose | Pre-Assessment |
 |-----------------|---------|---------------|
 | accreditationBody | External oversight reference | Could add; needs anti-misuse guidelines |
@@ -477,6 +508,7 @@ Credential uses canonical English tokens for portability; UI localizes labels. D
 ---
 
 ## 25. DEPLOYMENT STEPS (MVP)
+
 1. Publish JSON Schema at canonical URL.
 2. Publish context JSON-LD.
 3. Generate DID document with key #keys-1.
@@ -488,7 +520,9 @@ Credential uses canonical English tokens for portability; UI localizes labels. D
 ---
 
 ## 26. VERIFICATION PROCESS (CONSUMER)
+
 Steps:
+
 1. Fetch credential JSON.
 2. Validate against schema (fail early).
 3. Extract proof; canonicalize credential minus proof.
@@ -503,6 +537,7 @@ Return status: { isValid, signatureValid, schemaValid, notRevoked, chainAnchored
 ---
 
 ## 27. ERROR / WARNING CODES (SPEC)
+
 | Code | Level | Meaning | Consumer Action |
 |------|-------|---------|-----------------|
 | ERR_SCHEMA_INVALID | error | Fails JSON Schema | Reject |
@@ -516,6 +551,7 @@ Return status: { isValid, signatureValid, schemaValid, notRevoked, chainAnchored
 ---
 
 ## 28. CHANGE MANAGEMENT & VERSIONING
+
 - Minor additive optional field: version patch (1.0.x).
 - Add required field / structural semantics shift: bump minor (1.1.x) (still within major 1).
 - Breaking removal or meaning change: major 2.0 (requires governance multi-step: announce → deprecation window → migration plan).
@@ -524,7 +560,9 @@ Return status: { isValid, signatureValid, schemaValid, notRevoked, chainAnchored
 ---
 
 ## 29. AUDIT LOG MAPPING (CHAIN EVENT)
+
 Chain entry JSON (example):
+
 ```json
 {
   "seq": 142,
@@ -536,24 +574,27 @@ Chain entry JSON (example):
   "signature": "z9Ed...sig"
 }
 ```
+
 Fields `credId`, `contentHash` non‑PII; safe to expose in excerpt (truncate if needed).
 
 ---
 
 ## 30. COMPLIANCE WITH MASTER SPEC (TRACE)
+
 | Master Spec Element | Credential Reflection |
 |---------------------|------------------------|
 | Non-Ranking | No ranking fields; disclaimers explicit |
 | Privacy | No child PII, no address |
 | Governance | decisionIds & policySet fields |
 | Transition | terminology object optional with adoptionPercent |
-| Portability | JSON-LD + DID method | 
+| Portability | JSON-LD + DID method |
 | Observability | hashChainHead reference & chain anchoring |
 | Revocation Future | placeholder revocation section |
 
 ---
 
 ## 31. OPEN DECISIONS (NEEDED TO RATIFY)
+
 | Decision | Options | Recommendation | Owner |
 |----------|---------|----------------|-------|
 | Expiration adoption timing | immediate / after revocation subsystem | After revocation subsystem (Phase 2) | Governance |
@@ -565,6 +606,7 @@ Fields `credId`, `contentHash` non‑PII; safe to expose in excerpt (truncate if
 ---
 
 ## 32. IMPLEMENTATION ACCEPTANCE CRITERIA (MVP)
+
 - [ ] Schema published & fetchable (200 OK).
 - [ ] Example credential validates & signature verifiable.
 - [ ] Lint blocks prohibited field injection test.
@@ -577,9 +619,10 @@ Fields `credId`, `contentHash` non‑PII; safe to expose in excerpt (truncate if
 ---
 
 ## 33. RISKS & MITIGATIONS
+
 | Risk | Impact | Likelihood | Mitigation |
 |------|--------|------------|-----------|
-| Incorrect canonicalization leads to signature mismatch | Undermines trust | Medium | Provide test vectors & JCS libs | 
+| Incorrect canonicalization leads to signature mismatch | Undermines trust | Medium | Provide test vectors & JCS libs |
 | Schema drift without version bump | Consumers misinterpret | Low | Lint requiring version bump on diff |
 | Overuse of optional fields → bloat | Larger payload & complexity | Medium | Policy limiting additive fields per quarter |
 | Revocation path not ready but field exists | Confusion | Medium | Document placeholder + status=active only |
@@ -589,6 +632,7 @@ Fields `credId`, `contentHash` non‑PII; safe to expose in excerpt (truncate if
 ---
 
 ## 34. FUTURE ROADMAP (CREDENTIAL EVOLUTION)
+
 | Phase | Enhancement | Gate |
 |-------|-------------|------|
 | 1.5 | Add lastPolicyAuditDate (optional) | Governance sign-off |
@@ -600,11 +644,13 @@ Fields `credId`, `contentHash` non‑PII; safe to expose in excerpt (truncate if
 ---
 
 ## 35. SUMMARY STATEMENT
+
 Integrity Credential v1.0 memberikan pondasi portabel, minim, non‑ranking, dan dapat diaudit yang menyelaraskan semua pilar: privacy, fairness, governance, portability, & transition. Tidak ada deviations dari strategi; struktur mempersiapkan revocation & extensibility tanpa membuka risiko data sensitif. Immediate next step: governance ratification + implement signer & chain to avoid trust theater.
 
 ---
 
 ## 36. ACTION NEXT (AI vs ANDA)
+
 | Action | Owner |
 |--------|-------|
 | Ratify open decisions (Section 31) | ANDA / Governance |
@@ -618,20 +664,25 @@ Integrity Credential v1.0 memberikan pondasi portabel, minim, non‑ranking, dan
 ---
 
 ## 37. APPENDIX – PROHIBITED FIELD REGEX LIST (INITIAL)
+
 ```
 (child(Name|DOB|Date)|case(Id|ID)|address|lat|lng|geo|rating|rank|score|performance|donation|bank|vulnerability|riskScore|numberOfChildren|occupancy|testimonial|story)
 ```
+
 Case-insensitive; boundaries ensured; can expand.
 
 ---
 
 ## 38. APPENDIX – SAMPLE LINT FAILURE MESSAGE
+
 `[CRED-LINT-004] Prohibited field 'ratingScore' detected in credentialSubject. Remove to comply with privacy & non-ranking policy.`
 
 ---
 
 ## 39. APPENDIX – DIFF POLICY
+
 Any diff to schema file triggers:
+
 1. Extract structural changes (keys added/removed/modified).
 2. Compare with version bump rule; if mismatch → fail pipeline with instruction.
 3. Generate machine patch summary saved to `docs/integrity/diff/cred-schema-v1.0-to-v1.0.x.json`.

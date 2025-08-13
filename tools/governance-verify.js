@@ -8,7 +8,7 @@ import { spawn } from 'child_process';
 import { promises as fs } from 'fs';
 
 const STEPS = [
-  { name: 'spec-hash-diff', cmd: ['node','tools/spec-hash-diff.js','--mode=report-only','--allow-initial-placeholders=true'] },
+  { name: 'spec-hash-diff', cmd: ['node','tools/spec-hash-diff.js','--mode=report-only'] },
   { name: 'param-integrity', cmd: ['node','tools/param-integrity.js'] },
   { name: 'hype-lint', cmd: ['node','tools/hype-lint.js'] },
   { name: 'principles-impact', cmd: ['node','tools/principles-impact.js'] },

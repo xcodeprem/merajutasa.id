@@ -1,4 +1,5 @@
 # MerajutASA – PII Pattern Library & Detection Framework (v1.0)
+
 Status: Draft for Ratification (CIC-A on tooling implementation; CIC-E if detection semantics expanded beyond declared scope)  
 Prepared: 2025-08-12  
 Related Docs: Master Spec v2.0 (Privacy & Fairness Principles), Event Schema Canonical v1.0, Disclaimers Lint Spec v1.0, Integrity Credential Schema v1.0, Hysteresis Options Decision Pack  
@@ -10,6 +11,7 @@ Menyediakan katalog pola (regex & heuristik) untuk mendeteksi, menandai, atau me
 ---
 
 ## 1. PRINCIPLES APPLIED
+
 | Principle | Application |
 |----------|-------------|
 | GP1 Privacy-by-Architecture | Blok atau scramble PII sebelum persist/log; tidak menyimpan raw. |
@@ -22,12 +24,15 @@ Menyediakan katalog pola (regex & heuristik) untuk mendeteksi, menandai, atau me
 ---
 
 ## 2. SCOPE & NON-SCOPE
+
 IN-SCOPE:  
+
 - Input feedback form, optional free-text internal admin notes (future).  
 - Inline detection pada pipeline ingestion event.  
 - PII kategori: identitas personal (NIK), identitas pendidikan (NISN), identitas keluarga (No KK), nomor telepon, alamat email, potensi alamat rumah, rekening bank umum, plat kendaraan (opsional filter), nama anak + usia bersanding (heuristik), tanggal lahir individu, pola KTP.  
 
 OUT-OF-SCOPE (v1):  
+
 - Gambar / OCR, audio, file attachments.  
 - Advanced NLP de-identification (contextual redaction).  
 - Entity linking cross-dataset.  
@@ -57,6 +62,7 @@ OUT-OF-SCOPE (v1):
 ---
 
 ## 4. PATTERN DEFINITIONS (REGEX CORE)
+
 Semua regex case-insensitive kecuali disebutkan.
 
 | Code | Regex (simplified) | Notes / False Positive Mitigation |
@@ -65,7 +71,7 @@ Semua regex case-insensitive kecuali disebutkan.
 | IDN_NKK | `\b\d{16}\b` + NOT matched as NIK? (fallback classification) | If fails NIK province list but still 16 digits → assume NKK unless context denies. |
 | EDU_NISN | `\b\d{10}\b` + context word boundary with preceding/following “NISN” (case-ins) optional | To reduce FP with random numbers. |
 | CONTACT_EMAIL | `\b[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}\b` | Truncate local part to first 2 chars + hash remainder. |
-| CONTACT_PHONE | `\b(?:\+62|62|0)(?:8[1-9])[0-9]{6,10}\b` | Carrier-specific prefix reduce FP; length 9–13 digits. |
+| CONTACT_PHONE | `\b[?:\+62|62|0](?:8[1-9)](0-9){6,10}\b` | Carrier-specific prefix reduce FP; length 9–13 digits. |
 | ADDRESS_STREET | `\b(Jl\.?|Jalan)\s+[A-Za-z0-9]+(?:\s+[A-Za-z0-9]+){0,4}(?:\s*No\.?\s*\d+)?` OR presence of `RT\s*\d{1,3}/RW\s*\d{1,3}` | Combine tokens; threshold >2 address markers to trigger. |
 | DOB | `\b(0?[1-9]|[12][0-9]|3[01])([-/])(0?[1-9]|1[0-2])\2(19|20)\d{2}\b` OR spelled month Indonesian | Exclude if appears inside hash or code context. |
 | BANK_ACCOUNT | `\b(?:bank|rek|rekening)\b.*?\b\d{10,16}\b` | Require keyword within 40 chars to reduce FP. |
@@ -80,6 +86,7 @@ Normalization required: collapse Unicode homoglyphs (e.g., fullwidth digits, zer
 ---
 
 ## 5. PROVINCE CODE LIST (NIK prefix validation)
+
 Valid first 2 digits (subset; complete list maintained separately):  
 `11,12,13,14,15,16,17,18,19,21,31,32,33,34,35,36,51,52,53,61,62,63,64,65,71,72,73,74,75,76,81,82,91,92,94,95`  
 If 16-digit number prefix not in set → degrade classification to GENERIC_16DIGIT (no block unless with context `NIK|KTP`).
@@ -87,6 +94,7 @@ If 16-digit number prefix not in set → degrade classification to GENERIC_16DIG
 ---
 
 ## 6. CLASSIFICATION LOGIC (DECISION TREE)
+
 1. Normalize input (strip ASCII control, unify whitespace).
 2. Tokenize & run multi-pattern matches.
 3. If multiple categories detected with escalating severity (e.g., EMAIL + PHONE + ADDRESS) do combined risk escalation.
@@ -131,6 +139,7 @@ Hash salt rotated daily; keep 7-day rolling salts to detect repeat submissions w
 ## 9. NORMALIZATION PIPELINE
 
 Steps:
+
 1. Unicode NFKC normalization.
 2. Replace zero-width & control chars.
 3. Standardize line breaks to `\n`.
@@ -192,6 +201,7 @@ Review monthly; adjust patterns.
 ## 13. EVENT INTEGRATION
 
 When BLOCK or REDACT triggered:
+
 - Emit `pub_feedback_block_pii` (pattern_type = highest severity category OR “multi”).
 - If multiple categories, include `meta.pattern_type="multi"` and summary counts in internal-only field (not public event schema unless extended).
 - For accepted with redaction, original event `pub_feedback_submit` includes `contains_pii=true` (already in Event Schema recommended extension).
@@ -291,6 +301,7 @@ function scanPII(inputRaw, config):
 ---
 
 ## 16. HASHING STRATEGY
+
 - For CONTACT_EMAIL / CONTACT_PHONE only.
 - Hash input normalized (e.g., lowercased email) + daily rotating salt.
 - Format stored: `sha256(base64url(salt)||value)` truncated to 16 hex for storage footprint.
@@ -311,12 +322,15 @@ function scanPII(inputRaw, config):
 ---
 
 ## 18. CHILD PROTECTION EXTENSION (FUTURE)
+
 Add pattern: “(Anak|Adik|Si kecil)\s+[A-Z][a-z]+” combined with age pattern. For now avoid over-blocking; evaluate false positives with test bench.
 
 ---
 
 ## 19. NAME + AGE HEURISTIC DETAIL
+
 Regex combination:
+
 - Name token: `\b[A-Z][a-z]{2,}(\s[A-Z][a-z]{2,})?\b`
 - Age: `\b(\d{1,2})\s*(th|tahun)\b`
 Window ≤ 25 characters between. If age ≤17 & context words `anak|usia|umur` present → CHILD_NAME_AGE.
@@ -324,6 +338,7 @@ Window ≤ 25 characters between. If age ≤17 & context words `anak|usia|umur` 
 ---
 
 ## 20. LATENCY OPTIMIZATION
+
 - Precompile all regex patterns.
 - Multi-phase scan: high-risk numeric patterns first (NIK/KK) to early exit if BLOCK.
 - Use Aho-Corasick for keyword triggers (bank, jalan, RT, RW) before expensive expansions.
@@ -332,7 +347,9 @@ Window ≤ 25 characters between. If age ≤17 & context words `anak|usia|umur` 
 ---
 
 ## 21. LOGGING & OBSERVABILITY FIELDS
+
 Internal log (not user visible):
+
 | Field | Example |
 |-------|---------|
 | pii_scan_version | `pii-v1.0` |
@@ -361,7 +378,9 @@ All changes recorded in decision log, referencing pattern library version bump.
 ---
 
 ## 23. VERSIONING POLICY
+
 File: `docs/privacy/pii-pattern-library-v1.md` version increments:
+
 - Patch (1.0.x): refine regex (tighten), add false-positive mitigation.
 - Minor (1.1.0): add new category.
 - Major (2.0.0): shift detection approach (NLP context-based) or change action semantics.
@@ -396,6 +415,7 @@ Privacy FAQ Addition:
 ---
 
 ## 26. PUBLIC TRANSPARENCY (ABRIDGED)
+
 Publish a simplified excerpt: categories monitored (no raw regex) + rationale + oversight statement; keep full pattern details internal to reduce evasion risk.
 
 ---
@@ -481,6 +501,7 @@ Trigger: If Block Rate > 20% first month → review threshold (may overly strict
 ## 32. GOVERNANCE DECISION PROMPT (TO RATIFY)
 
 Decisions needed:
+
 | Decision | Options | Recommendation |
 |----------|---------|---------------|
 | Enter thresholds (multi_category_block_threshold) | 2 / 3 | 2 |
@@ -519,6 +540,7 @@ Balas format:
 ---
 
 ## 35. SUMMARY ONE-LINER
+
 “Pattern library v1.0 memberikan deteksi deterministik, terukur, dan dapat diaudit untuk mencegah kebocoran data pribadi sambil mempertahankan umpan balik bernilai dengan redaksi adaptif.”
 
 ---
@@ -577,12 +599,14 @@ Balas format:
 ---
 
 ## 38. APPENDIX – SIMPLIFIED PUBLIC EXCERPT (FOR PRIVACY PAGE)
+
 (Not for internal lint; just educational)
 “Platform otomatis menyaring pola data pribadi seperti nomor identitas kependudukan, nomor kartu keluarga, kontak (email/telepon), alamat spesifik, tanggal lahir, dan detail anak. Jika terdeteksi, entri diblokir atau disamarkan. Sistem tidak menyimpan data pribadi bentuk mentah.”
 
 ---
 
 ## 39. ACKNOWLEDGEMENT
+
 Spec ini mempertahankan integritas strategi: menutup gap privasi sebelum skala, menghindari trust theater, mempersiapkan audit trail melalui event schema & governance log, serta tidak membawa ranking atau data anak ke permukaan—konsisten dengan semua dokumen sebelumnya.
 
 (End of PII Pattern Library & Detection Framework v1.0)

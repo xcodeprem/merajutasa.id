@@ -1,7 +1,9 @@
 # MerajutASA – Disclaimers Presence & Integrity Lint Specification (v1.0)
+
 Status: Draft for Ratification (CIC-A on implementation; CIC-D for copy edits; CIC-E if semantic scope of required pages changes)  
 Prepared: 2025-08-12  
 Related Master Spec Sections:  
+
 - Master Spec v2.0: Sections 13 (Hero), 27 (Events), 35 (Ethical Content Assurance), 49 (Disclaimer Library), 28 (Lint & Governance Automation)  
 - Integrity Credential Schema v1.0 (credential-level disclaimersRef)  
 - Hysteresis Options Decision Pack (methodology narrative)  
@@ -164,6 +166,7 @@ File: `content/disclaimers/bindings.json`
 ## 8. DIFF & DRIFT DETECTION
 
 Procedure:
+
 1. Compute token set (simple whitespace tokenization, case-insensitive) of master vs deployed variant.
 2. Calculate Jaccard similarity = |Intersection| / |Union|.
 3. If similarity < 0.90 AND no DEC ID reference near variant (e.g., data-attr dec-ref=DEC-YYYYMMDD-XX) → FAIL (DISC-TEXT-003).
@@ -175,10 +178,12 @@ Procedure:
 ## 9. SHADOW COPY DETECTION HEURISTICS
 
 A shadow copy suspected when:
+
 - The page contains tokens from canonical disclaimers (≥60% overlap) but no disclaimer ID marker attribute (e.g., `data-disclaimer-id="D1"`).
 - Lint identifies variant >2 disclaimers referencing fairness/verification words but absent IDs.
 
 Heuristic regex for disclaimers vocabulary clusters:
+
 - Fairness cluster: `(under.?served|pemerataan|ranking|kualitas)`
 - Privacy cluster: `(data pribadi|PII|anak|identitas)`
 - Credential cluster: `(credential|verifikasi|status)`
@@ -191,6 +196,7 @@ If cluster tokens present but no ID attribute → error DISC-PRES-002.
 ```
 (terbaik|paling unggul|peringkat|ranking|top\\s?\\d+|juara|skor kinerja|nilai kinerja|pemenang)
 ```
+
 Case-insensitive. If appears in a block containing disclaimers D1/D3 or within 200 chars, error out (avoid coupling fairness disclaimers with competitive marketing semantics).
 
 ---
@@ -207,6 +213,7 @@ Case-insensitive. If appears in a block containing disclaimers D1/D3 or within 2
 8. Scan for shadow copies.
 9. Check banned phrase proximity.
 10. Output structured report JSON:
+
    ```json
    {
      "summary":{"errors":2,"warnings":1},
@@ -217,6 +224,7 @@ Case-insensitive. If appears in a block containing disclaimers D1/D3 or within 2
      ]
    }
    ```
+
 11. Fail build if errors >0. Warnings pass but logged.
 
 ---
@@ -250,6 +258,7 @@ Adjustments require DEC entry if they reduce strictness (e.g., lowering `min_sim
 - On fail emits artifact `disclaimer-lint-report.json` + human-readable markdown summary appended as comment in PR (if GitHub Action).
 
 PR comment format (example):
+
 ```
 Disclaimers Lint Report:
 Errors (2):
@@ -264,6 +273,7 @@ Warnings (1):
 ## 14. EVENT INSTRUMENTATION (OPTIONAL TELEMETRY)
 
 Emit event `sys_disclaimer_lint_result` (internal only) with meta:
+
 - build_id
 - errors_count
 - warnings_count
@@ -319,6 +329,7 @@ WHY: Governance can monitor frequency of near-miss or recurrent omissions (risk 
 ## 18. SECURITY & PRIVACY ANGLE
 
 Disclaimers themselves are non-sensitive; however:
+
 - Lint prevents injection of promotional / manipulative language near fairness disclaimers (reduces reputational risk).
 - Ensures privacy promise (D2) not accidentally omitted when new layout created (critical trust anchor).
 
@@ -339,6 +350,7 @@ Disclaimers themselves are non-sensitive; however:
 ## 20. INTEGRATION WITH OTHER LINTS
 
 Sequence order recommended:
+
 1. Copy / banned lexicon lint (hype)
 2. Terminology adoption lint
 3. Disclaimers lint (depends on stable text)
@@ -360,6 +372,7 @@ Chaining ensures disclaimers lint uses final microcopy stage.
 ## 22. OPERATIONAL RUNBOOK (ON FAIL)
 
 When CI fails:
+
 1. Developer reads PR comment & artifact.
 2. For DISC-TEXT-003 (drift): Either revert to canonical OR open governance DEC referencing reason for change.
 3. For missing disclaimers: Re-add component snippet referencing master ID.
@@ -368,6 +381,7 @@ When CI fails:
 6. Merge only when all ERROR level resolved.
 
 Escalation:
+
 - If 3 sequential PRs attempt to remove same disclaimer (D1/D2) → trigger governance alert (potential pattern).
 
 ---
@@ -513,6 +527,7 @@ Silakan balas format:
 atau modifikasi param yang diinginkan.
 
 Setelah keputusan:
+
 1. AI append delta ke Master Spec (Lint section).
 2. AI buat skeleton lint script pseudocode lebih lengkap (on request).
 3. AI siapkan template DEC log entry.
