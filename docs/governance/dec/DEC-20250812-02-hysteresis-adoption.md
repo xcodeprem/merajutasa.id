@@ -11,7 +11,7 @@ spec_reference:
   - docs/roadmap/roadmap-master-v1.md
 related_principles: [GP1, GP5, GP6, GP9, GP10]
 impacted_components: [equity_snapshot_job, hysteresis_state_machine, equity_page, trust_page_methodology, hero_equity_card, analytics_events(sys_fairness_*), risk_dashboard]
-hash_of_decision_document: "d85bc9f6b0aa150b768ece18c2c14923fb025e17b7fc71b59bfd5f78a692e6cc"   # sealed SHA256
+hash_of_decision_document: "23885d2c790a1648944278843fbceea6e1c68e6e38a47acf03c2e98554b3d47f"   # sealed SHA256
 decision:
   option: F
   description: Hybrid hysteresis with severe immediate trigger and consecutive borderline confirmation, plus elevated exit threshold and cooldown.

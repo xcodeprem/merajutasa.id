@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generation_timestamp_utc": "2025-08-13T02:50:24Z",
+  "generation_timestamp_utc": "2025-08-13T02:50:52Z",
   "generator_note": "Refined manifest: added onboarding & (optional) README, fixed dec_ref placeholders, standardized mutable_policy for adopted lint spec. All existing entries preserved; only additive or metadata corrections before first hash seal.",
   "files": [
     {
@@ -307,7 +307,7 @@
       "path": "docs/governance/dec/DEC-20250813-01-known-debt-register.md",
       "version": "1.0.0",
       "dec_ref": "SELF",
-      "hash_sha256": "0dda88e7cb32bf35c57ca3e596b9d1bacc25760378f9f4b0db316b5cc6f97267",
+      "hash_sha256": "15b4eb65659e5f484035a3bceeb85c381b7b0a3027c09c79b74565f82c608075",
       "integrity_class": "decision",
       "mutable_policy": "immutable",
       "next_change_requires_dec": false,
