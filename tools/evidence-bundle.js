@@ -55,7 +55,8 @@ async function main(){
     }
     const buf = await readFileMaybe(item.path);
     const hash = buf ? sha256(buf) : null;
-    artifacts.push({ id:item.id, path:item.path, exists:true, size_bytes:st.size, sha256:hash, sha256_short: hash? hash.slice(0,16):null, schema_ref:item.schema?path.basename(item.schema):null, category:item.category });
+  const sha256_short = hash? hash.slice(0,16):null; // DEC-20250813-08 prefix length = 16
+  artifacts.push({ id:item.id, path:item.path, exists:true, size_bytes:st.size, sha256:hash, sha256_short, display_hash_prefix: sha256_short, schema_ref:item.schema?path.basename(item.schema):null, category:item.category });
   }
 
   // Derive bundle hash from existing artifacts only (stable ordering by path)

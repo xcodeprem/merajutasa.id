@@ -65,7 +65,7 @@ signoff:
   governance_chair: PENDING
   product_owner: PENDING
   security_reviewer: PENDING
-hash_of_decision_document: <PENDING_HASH>
+hash_of_decision_document: "923da62bad7eebca7ea9df99d1481b043f9d58395cdb1a56f9009390de5dab14"
 integrity_manifest_pointer: <ADD_ON_SEAL>
 append_only_notice: "Immutable; perubahan butuh DEC penerus."
 supersede_policy: none

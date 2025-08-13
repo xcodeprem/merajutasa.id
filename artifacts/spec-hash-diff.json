@@ -1,6 +1,6 @@
 {
-  "mode": "seal-first",
-  "timestamp_utc": "2025-08-13T13:32:20Z",
+  "mode": "verify",
+  "timestamp_utc": "2025-08-13T13:57:36Z",
   "updated": [],
   "unchanged": [
     "docs/roadmap/roadmap-master-v1.md",
@@ -48,13 +48,19 @@
     "docs/governance/dec/DEC-style-guide-v1.md",
     "docs/governance/dec/DEC-style-guide-v2.md",
     "docs/governance/dec/DEC-20250813-05-gating-policy-wave1-adoption.md",
-    "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md"
+    "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md",
+    "docs/governance/dec/DEC-20250813-08-evidence-hash-display-length.md",
+    "docs/governance/dec/DEC-20250813-09-equity-index-rounding.md",
+    "docs/governance/dec/DEC-20250813-10-feedback-categories-canonical.md",
+    "policies/aggregation-min-cell.rego",
+    "docs/fairness/equity-snapshot-pseudocode.md",
+    "docs/integrity/verify-cli-doc-draft.md"
   ],
   "placeholders_sealed": [],
   "placeholders_remaining": [],
   "violations": [],
   "summary": {
-    "total_entries": 46,
+    "total_entries": 52,
     "updated_count": 0,
     "violation_count": 0,
     "placeholders_remaining_count": 0

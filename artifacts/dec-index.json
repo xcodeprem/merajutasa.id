@@ -1,0 +1,171 @@
+{
+  "generated_utc": "2025-08-13T13:54:26.223Z",
+  "count": 15,
+  "decisions": [
+    {
+      "file": "DEC-20250812-02-hysteresis-adoption.md",
+      "id": "DEC-20250812-02",
+      "title": "Adoption of Under‑Served Hysteresis Option F (Hybrid) Parameters",
+      "class": "CIC-E",
+      "status": "adopted",
+      "hash_field": "e32cb525cdc8109bf80ed9d92b7239191539b2e7e1dd04707508734721f8fe11",
+      "content_sha256": "a99e20be90ef46ca20a0e46f7fd1c3c9b8688081fb53bac667875eb5f8bb70d0",
+      "canonicalization_note": null,
+      "parse_error": null
+    },
+    {
+      "file": "DEC-20250812-03-principles-reference-activation.md",
+      "id": "DEC-20250812-03",
+      "title": "Activation of principles.reference Lint & Hash Sealing Enforcement Phase 1",
+      "class": "CIC-A",
+      "status": "adopted",
+      "hash_field": "6f8089ffae66751df193e0a4ef7606f0a0a02a0097ddb049d11f845fc4f25c17\"  # sealed SHA256",
+      "content_sha256": "2b130509be258ce212ffc2e32dac9713e85f6eb0b6ccc989cd08cb4419580f2c",
+      "canonicalization_note": null,
+      "parse_error": "MULTILINE_IMPLICIT_KEY"
+    },
+    {
+      "file": "DEC-20250812-04-governance-baseline-thresholds.md",
+      "id": "DEC-20250812-04",
+      "title": "Ratifikasi Baseline Ambang & Parameter Governance Tertunda (Consolidated Threshold Ratification)",
+      "class": "CIC-B",
+      "status": "adopted",
+      "hash_field": "fce2c9404bfa4401cd67761649c7829b586acbeda5a7330b67e7f4f1cb566ef2",
+      "content_sha256": "5c50fd47b4238aad25118c06e4b4024b66bedd1f1c66ecd5e307ad4dcc57abd6",
+      "canonicalization_note": null,
+      "parse_error": null
+    },
+    {
+      "file": "DEC-20250813-01-known-debt-register.md",
+      "id": "DEC-20250813-01",
+      "title": "Known Debt & Deferred Controls Register (Initial Compilation)",
+      "class": "CIC-D",
+      "status": "adopted",
+      "hash_field": "15b4eb65659e5f484035a3bceeb85c381b7b0a3027c09c79b74565f82c608075",
+      "content_sha256": "3323845a5d7236bff20ba6485c9d7fc88a03ae0f0877ba1e7c0894acb4380348",
+      "canonicalization_note": null,
+      "parse_error": null
+    },
+    {
+      "file": "DEC-20250813-02-signature-pipeline-adoption.md",
+      "id": "DEC-20250813-02",
+      "title": "Signature Pipeline Adoption (Phased Ed25519 Evidence Signing)",
+      "class": "CIC-E",
+      "status": "draft",
+      "hash_field": "0ca785fe0c26e8053b644cc0c582abb461c851e7aafb621d5d6364729db66ff0",
+      "content_sha256": "c0798623aa8949bf4f1ce115d719bdf641450d8ad906ed4b61cc34534b8163a0",
+      "canonicalization_note": null,
+      "parse_error": null
+    },
+    {
+      "file": "DEC-20250813-03-disclaimers-presence-enforcement.md",
+      "id": "DEC-20250813-03",
+      "title": "Disclaimers Presence Enforcement Activation (Phase 2 Trigger)",
+      "class": "CIC-A",
+      "status": "draft",
+      "hash_field": "ab74f55133a1381f49e609243f490b6ffc4ca790efc04465152d8c12fc00c3a5",
+      "content_sha256": "47cd481b4ed82add3e37851f8ccb5aa60147c5a54d2ceb9c7f5b6c225c8ad2c7",
+      "canonicalization_note": null,
+      "parse_error": null
+    },
+    {
+      "file": "DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
+      "id": "DEC-20250813-04",
+      "title": "Editorial Normalization & Disclaimers Whitelist Alignment (Batch 1)",
+      "class": "CIC-C",
+      "status": "adopted-pending-hash",
+      "hash_field": "f331424d73e1cd7cbecc89548365e2581a7c8dd16b3e8d72843e5693bfda1c39",
+      "content_sha256": "7648f585a0b56b29ca8fe31a97ecb75ba3908f86f372e7ab1b46e137e3f76424",
+      "canonicalization_note": null,
+      "parse_error": null
+    },
+    {
+      "file": "DEC-20250813-05-gating-policy-wave1-adoption.md",
+      "id": "DEC-20250813-05",
+      "title": "Wave 1 Gating Policy & Engine Core Governance Adoption",
+      "class": "CIC-C",
+      "status": "adopted",
+      "hash_field": "3a1531d53017473182648eaecb7b00ebba451e7487f591d141c12493b8651ae4",
+      "content_sha256": "64dd6ca471fe6768ce8a633295a9aa39a3390b0d3c943c52806b9c3a50d24076",
+      "canonicalization_note": null,
+      "parse_error": "MULTILINE_IMPLICIT_KEY"
+    },
+    {
+      "file": "DEC-20250813-06-consolidated-governed-edits.md",
+      "id": "DEC-20250813-06",
+      "title": "Consolidated Governed Editorial & Integrity Edits",
+      "class": "CIC-C",
+      "status": "adopted",
+      "hash_field": "f915ad7693e086dac99de40f98694a022c0ae1360620bf759354146c5e22c43d",
+      "content_sha256": "9d046ec0c5dea3eba0369a3de25b713de4f32e0cd2aff5d071a7bb5f0a10020b",
+      "canonicalization_note": "Nilai diganti placeholder saat canonical hash computation.",
+      "parse_error": null
+    },
+    {
+      "file": "DEC-20250813-07-hype-threshold-transition.md",
+      "id": "DEC-20250813-07",
+      "title": "Hype Threshold Transition (Segmentation & Hard Gate Alignment)",
+      "class": "CIC-C",
+      "status": "adopted",
+      "hash_field": "c9483a189cbe193e8f4b2da52b444ae06e14ce5de3b94d4fc1e240d642903cbc",
+      "content_sha256": "db127caee34415e9046289967d84800a12bb75634eca44be5ea0afd5c4b2480d",
+      "canonicalization_note": null,
+      "parse_error": "BLOCK_AS_IMPLICIT_KEY"
+    },
+    {
+      "file": "DEC-20250813-08-evidence-hash-display-length.md",
+      "id": "DEC-20250813-08",
+      "title": "Evidence Hash Display Length Confirmation (UI Prefix Policy)",
+      "class": "CIC-C",
+      "status": "draft",
+      "hash_field": "923da62bad7eebca7ea9df99d1481b043f9d58395cdb1a56f9009390de5dab14",
+      "content_sha256": "5f6bff7ece250ff0d9bf7dc3a88461a831565d18997a0cdaaa819511fce565cb",
+      "canonicalization_note": "Hash diganti placeholder saat perhitungan.",
+      "parse_error": null
+    },
+    {
+      "file": "DEC-20250813-09-equity-index-rounding.md",
+      "id": "DEC-20250813-09",
+      "title": "Equity Index Rounding Precision (2 Decimal Truncation Standard)",
+      "class": "CIC-B",
+      "status": "draft",
+      "hash_field": "94a2843dfa86cf991d5e8e673c719470ad5f21c6b8995e6f09a9f9d440ad06ca",
+      "content_sha256": "9621605f0aaf99aa9a971aed35eab31e8ae346b62d49c2639e1c0b7df8a6eaa1",
+      "canonicalization_note": "Hash placeholder digunakan saat hashing.",
+      "parse_error": null
+    },
+    {
+      "file": "DEC-20250813-10-feedback-categories-canonical.md",
+      "id": "DEC-20250813-10",
+      "title": "Canonical Feedback Categories Adoption (Governance/Improvement/Fairness/Other)",
+      "class": "CIC-B",
+      "status": "draft",
+      "hash_field": "98bf229f5d6cc9f4c64496f0cb4fe7567a2e0ea55f5e919f328300460886ffe7",
+      "content_sha256": "29ad36b8744ae3dfbdb15852f8ac7d24774dd5642d1380facbbf5822af55dfe8",
+      "canonicalization_note": "Placeholder digunakan saat hashing.",
+      "parse_error": null
+    },
+    {
+      "file": "DEC-style-guide-v1.md",
+      "id": "GUIDANCE-DOC-DEC-STYLE-V1",
+      "title": "Decision (DEC) Authoring Style Guide v1",
+      "class": "guidance",
+      "status": "superseded",
+      "hash_field": "e1dcff6a2e0558e8335086d83f8a3385c31ef3a3d1f9ee4b66bc5c04ddfafb60",
+      "content_sha256": "99e5419636ca95a248f14a6de69a01018c112dfe7dba4951a30dd7c06b7c45ca",
+      "canonicalization_note": null,
+      "parse_error": null
+    },
+    {
+      "file": "DEC-style-guide-v2.md",
+      "id": "GUIDANCE-DEC-STYLE-V2",
+      "title": "DEC Authoring Style Guide v2 (Unified YAML-Only)",
+      "class": "guidance",
+      "status": "adopted",
+      "hash_field": "a62354e51d7e71ab71dbed854fbf3cc67a89e234252602060642386d49b403ad",
+      "content_sha256": "1c76360fd35171e9866254fe31fe9609c6a52f19cccf438b96317033b0223445",
+      "canonicalization_note": "Hash field diganti placeholder saat perhitungan canonical.",
+      "parse_error": null
+    }
+  ]
+}

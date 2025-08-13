@@ -32,7 +32,9 @@
   "baseline:snapshot": "node tools/snapshot-governance-baseline.js",
   "fairness:metrics": "node tools/fairness/fairness-metrics.js",
   "param:lock": "node tools/param-lock-verify.js",
-  "governed:scan": "node tools/governed-change-scan.js"
+  "governed:scan": "node tools/governed-change-scan.js",
+  "dec:index": "node tools/generate-dec-index.js",
+  "test:governance": "node tools/tests/policy-aggregation-threshold.test.js && node tools/tests/feedback-categories-ingestion.test.js && node tools/tests/evidence-bundle-prefix.test.js"
   },
   "devDependencies": {
     "markdownlint": "^0.34.0",

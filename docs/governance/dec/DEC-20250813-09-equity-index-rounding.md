@@ -64,7 +64,7 @@ signoff:
   governance_chair: PENDING
   data_lead: PENDING
   ethics_representative: PENDING
-hash_of_decision_document: <PENDING_HASH>
+hash_of_decision_document: "94a2843dfa86cf991d5e8e673c719470ad5f21c6b8995e6f09a9f9d440ad06ca"
 integrity_manifest_pointer: <ADD_ON_SEAL>
 append_only_notice: "Immutable; successor DEC required for changes."
 supersede_policy: none

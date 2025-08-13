@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generation_timestamp_utc": "2025-08-13T12:52:01Z",
+  "generation_timestamp_utc": "2025-08-13T13:38:18Z",
   "generator_note": "Refined manifest: added onboarding & (optional) README, fixed dec_ref placeholders, standardized mutable_policy for adopted lint spec. All existing entries preserved; only additive or metadata corrections before first hash seal.",
   "files": [
     {
@@ -437,7 +437,7 @@
       "path": "docs/governance/dec/DEC-style-guide-v2.md",
       "version": "2.0.0",
       "dec_ref": null,
-  "hash_sha256": "1c76360fd35171e9866254fe31fe9609c6a52f19cccf438b96317033b0223445",
+      "hash_sha256": "1c76360fd35171e9866254fe31fe9609c6a52f19cccf438b96317033b0223445",
       "integrity_class": "decision-guidance",
       "mutable_policy": "immutable",
       "next_change_requires_dec": false,
@@ -462,6 +462,66 @@
       "mutable_policy": "immutable",
       "next_change_requires_dec": false,
       "notes": "Retroactive authorization consolidation for governed editorial / whitelist alignment edits (Wave 1)."
+    },
+    {
+      "path": "docs/governance/dec/DEC-20250813-08-evidence-hash-display-length.md",
+      "version": "1.0.0",
+      "dec_ref": "SELF",
+      "hash_sha256": "923da62bad7eebca7ea9df99d1481b043f9d58395cdb1a56f9009390de5dab14",
+      "integrity_class": "decision",
+      "mutable_policy": "immutable",
+      "next_change_requires_dec": false,
+      "notes": "Confirmation DEC for evidence hash UI prefix length (16 hex)."
+    },
+    {
+      "path": "docs/governance/dec/DEC-20250813-09-equity-index-rounding.md",
+      "version": "1.0.0",
+      "dec_ref": "SELF",
+      "hash_sha256": "94a2843dfa86cf991d5e8e673c719470ad5f21c6b8995e6f09a9f9d440ad06ca",
+      "integrity_class": "decision",
+      "mutable_policy": "immutable",
+      "next_change_requires_dec": false,
+      "notes": "Rounding precision DEC (equity index 2 decimals half-up)."
+    },
+    {
+      "path": "docs/governance/dec/DEC-20250813-10-feedback-categories-canonical.md",
+      "version": "1.0.0",
+      "dec_ref": "SELF",
+      "hash_sha256": "98bf229f5d6cc9f4c64496f0cb4fe7567a2e0ea55f5e919f328300460886ffe7",
+      "integrity_class": "decision",
+      "mutable_policy": "immutable",
+      "next_change_requires_dec": false,
+      "notes": "Adoption of canonical feedback categories (4-set)."
+    },
+    {
+      "path": "policies/aggregation-min-cell.rego",
+      "version": "0.1.0",
+      "dec_ref": "DEC-20250812-04",
+      "hash_sha256": "27dfbfa0909e72c6f0a5183d0104915ecf8b458cbe8dcd63ffbb5470e0c6c636",
+      "integrity_class": "policy-rule",
+      "mutable_policy": "append-only",
+      "next_change_requires_dec": true,
+      "notes": "OPA rule enforcing min cell aggregation threshold with DEC override."
+    },
+    {
+      "path": "docs/fairness/equity-snapshot-pseudocode.md",
+      "version": "0.1.0",
+      "dec_ref": null,
+      "hash_sha256": "a5c06427d7d33520241d4dd7d7caed5dc557e0081569f8e1b46756e5f229ba18",
+      "integrity_class": "pseudocode",
+      "mutable_policy": "append-only",
+      "next_change_requires_dec": true,
+      "notes": "Draft pseudocode for equity snapshot computation (pre-implementation)."
+    },
+    {
+      "path": "docs/integrity/verify-cli-doc-draft.md",
+      "version": "0.1.0",
+      "dec_ref": null,
+      "hash_sha256": "8c784c0cccf6b5a14605a91530341bef62eb207e134cf28603bd590e72cfd617",
+      "integrity_class": "doc-draft",
+      "mutable_policy": "append-only",
+      "next_change_requires_dec": true,
+      "notes": "Draft verification CLI usage instructions."
     }
   ],
   "integrity_rules": {
