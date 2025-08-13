@@ -1,4 +1,5 @@
 # MerajutASA – Progress Recap (Latest)  
+
 Timestamp: 2025-08-12T03:59:01Z  
 Scope: Menggabungkan rekap sebelumnya + penambahan dokumen baru (Credential Schema v1.0, Hysteresis Options Pack v1.0, Event Schema Canonical v1.0, Disclaimers Lint Spec v1.0, PII Pattern Library v1.0).  
 Catatan: Tidak ada strategi / prinsip yang dihapus. Semua penambahan = elaborasi atas rencana yang telah disepakati.
@@ -103,6 +104,7 @@ Fokus 30 hari = Hardening Trust & Fairness (tidak melompat ke fitur sekunder).
    - Empty revocation list endpoint + update credential viewer to show “0 revoked”.
 
 ### 4.2 7-Day Focus (Actionable)
+
 | Day | Milestone |
 |-----|-----------|
 | 1 | Ratify decisions: Hysteresis Option F parameters + Credential schema open decisions |
@@ -114,6 +116,7 @@ Fokus 30 hari = Hardening Trust & Fairness (tidak melompat ke fitur sekunder).
 | 7 | Equity snapshot job (manual run) + stub hysteresis transitions (logging only) |
 
 ### 4.3 30-Day Outcomes
+
 | Outcome | Description |
 |---------|-------------|
 | Credential issuance end-to-end verifiable | CLI verify returns valid |
@@ -252,43 +255,52 @@ Policy-as-Code --> (Publication gating) --> (Metric authenticity)
 ## 12. STATUS DETAIL PER TRACK
 
 ### Track A – Integrity
+
 - Credential schema final (OK).
 - Pending: signer, chain, test vector, CLI doc.
 - Risk: Launch before cryptographic readiness (jangan).
 
 ### Track B – Fairness
+
 - Hysteresis design finished; pending DEC.
 - Equity snapshot job & data persistence absent.
 - Under-served UI currently dummy; risk toggling noise.
 
 ### Track C – Governance & Policy
+
 - Lint disclaimers spec ready; implementation pending.
 - Policy-as-code scripts (aggregation threshold) belum.
 - Decision log automation belum (need file template + script).
 
 ### Track D – Instrumentation & Analytics
+
 - Event schema ready.
 - Collector & validator missing.
 - No pipeline hash instrumentation yet (integrity object still conceptual).
 
 ### Track E – Privacy & Security
+
 - PII pattern library final; runtime scanner missing.
 - Hash salt rotation strategy defined; not implemented.
 - No privacy dashboard yet (to visualize block vs redact).
 
 ### Track F – Content & Terminology
+
 - Disclaimers canonical stable.
 - Terminology adoption field appears in credential (optional) but scanner not implemented → cannot auto-update adoptionPercent.
 
 ### Track G – Participation
+
 - Feedback form (front-end) part of dummy but backend not capturing sanitized data.
 - Category taxonomy (governance, fairness, improvement) not yet coded.
 
 ### Track H – Performance & A11y
+
 - Budgets defined conceptually.
 - Need actual measurement harness + threshold enforcement.
 
 ### Track I – Revocation Future
+
 - Placeholder fields; no list endpoint.
 - No revocation reason code finalization.
 
@@ -357,6 +369,7 @@ Policy-as-Code --> (Publication gating) --> (Metric authenticity)
 | Signer Service Interface | Endpoint contract + error codes |
 
 Perintah contoh:  
+
 - “LANJUTKAN: DEC templates”  
 - “LANJUTKAN: Verify CLI doc”  
 - “LANJUTKAN: Policy-as-code min cell threshold”  
