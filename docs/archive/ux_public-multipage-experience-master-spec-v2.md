@@ -23,10 +23,12 @@
 ( SELURUH ISI HISTORIS ASLI TETAP DI SINI TANPA PERUBAHAN )
 
 # MerajutASA — Public Multi‑Page Experience Master Specification (v2.0 “Hero Constellation”)  
+
 Status: Draft for Core Alignment → Then Governance Notation (Decision Log Entry Pending)  
 Owner: Product • UX • Governance • Data • Ethics  
 Last Updated: 2025-08-12  
 Supersedes / Consolidates:  
+
 - v1.0 Public Multi‑Page Experience Comprehensive Specification  
 - v1.1 Extension (Sections 36–57)  
 - Sully-inspired Narrative Alignment (UI Grammar Adaptation)  
@@ -180,11 +182,13 @@ Added “CardGrid (Integrity Constellation)” component; each card inherits dis
 ## 13. HERO CONSTELLATION (NEW CANONICAL SPEC) [DELTA v2]
 
 ### 13.1 Narrative Grammar
+
 Scene 1: Constellation emerges (cards fade & slight elevation).  
 Scene 2 (optional future animation path): Focal zoom per card (progressive educational highlight) — deferred for accessibility review.  
 Scene 3: Cards settle into grid (static; reduces motion after initial reveal).  
 
 ### 13.2 Cards Inventory (Immutable Set v2)
+
 | ID | Name | Data Field Sources | Disclaimers | CTA Target |
 |----|------|-------------------|-------------|-----------|
 | C1 | Integrity Credential | Sample attested org (mock baseline) | Credential ≠ ranking | /trust#credential |
@@ -196,21 +200,25 @@ Scene 3: Cards settle into grid (static; reduces motion after initial reveal).
 | C7 | Feedback Pulse | Count + actionable ratio placeholder | Aggregated, no raw messages | /feedback |
 
 ### 13.3 Layout Rules
+
 - Grid min 230px card width; auto-fit; maintain vertical rhythm (16–20px gutters).
 - Uniform card min-height to avoid priority illusions.
 - No ranking ordering — order is logical pipeline: Integrity→Fairness→Fairness Action→Audit→Governance→Transition→Participation.
 
 ### 13.4 Motion Constraints
+
 - Single entrance animation (duration < 600ms). No infinite loops.
 - Reduced motion preference triggers static immediate layout (WCAG respect).
 - No numeric count-up animations (GP6).
 
 ### 13.5 Accessibility
+
 - Each card: `<article>` with `aria-label`.
 - Gauge (Equity) includes textual numeric fallback, classification label.
 - Live region for rotator text (polite). Rotator change interval 4s minimum.
 
 ### 13.6 Content Tone Table (Enforced)
+
 | Element | Must Include | Must Avoid |
 |---------|--------------|------------|
 | Credential Card | Hash truncated, issuer DID | Value adjectives (“premium credential”) |
@@ -606,13 +614,16 @@ Hero constellation bukan “fitur baru” melainkan “visual coherence layer”
 ---
 
 ## 52. APPENDICES (EXCERPTS; FULL TEXT IN PRIOR MERGED SECTIONS)  
+
 (All prior appendices A–M from v1.0 retained; hero-specific appendices not replacing them.)
 
 ### Appendix H (Instrumentation) [Extended]
+
 Add sample payload keys for hero events:  
 `meta: { page:"landing", card_id:"C2", classification:"Monitoring" }`
 
 ### Appendix K (Lint Rules) [Extended]
+
 Add rule snippet referencing hero order & hype detection (conceptual pseudocode only; implementation in CIC pipeline — unchanged principle).
 
 _All other appendices unchanged — no deletion._

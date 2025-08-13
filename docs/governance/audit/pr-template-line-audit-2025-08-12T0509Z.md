@@ -1,12 +1,15 @@
 # PR Template Line & Integrity Audit (Initial Capture)
+
 Status: Draft v1.0 (APPEND-ONLY)  
 Timestamp (UTC): 2025-08-12T05:09:02Z  
 Purpose: Mendokumentasikan struktur & jejak .github/pull_request_template.md pasca penambahan Section 37 (PRINCIPLES IMPACT MATRIX). Tidak menggantikan template; hanya audit agar tidak ada kecurigaan penghapusan.  
 
 ## 1. Source File
+
 Path: `.github/pull_request_template.md`
 
 ## 2. Section Inventory (Expected)
+
 1. Ringkasan  
 2. Jenis Perubahan  
 3. Referensi Dokumen/Spesifikasi  
@@ -48,6 +51,7 @@ Path: `.github/pull_request_template.md`
 Total sections: 37 (bertambah dari sebelumnya yang berakhir di 36).  
 
 ## 3. Line Count Snapshot
+
 (Angka ini akan diisi otomatis oleh script spec-hash-diff nanti; sementara placeholder.)
 
 | Metric | Count (Current) | Notes |
@@ -59,12 +63,15 @@ Total sections: 37 (bertambah dari sebelumnya yang berakhir di 36).
 | Section headers (## ) | 37 | Sesuai inventory |
 
 ## 4. Integrity Hashes
+
 (Placeholder – isi lewat pipeline. Gunakan SHA256 konten file persis.)
+
 - sha256_current: <PENDING_COMPUTE>
 - sha256_previous: (isi jika ada snapshot commit sebelumnya)
 - diff_ratio_estimate: <PENDING> (token-level Jaccard; hanya bertambah?)
 
 ## 5. Structural Additions Since Prior Version
+
 | Change | Type | Notes |
 |--------|------|-------|
 | Added Section 37 | Addition | Principles Impact Matrix |
@@ -72,12 +79,14 @@ Total sections: 37 (bertambah dari sebelumnya yang berakhir di 36).
 | Maintained all earlier sections 1–36 | Preservation | Tidak ada rename |
 
 ## 6. No Removal Assertion
+
 - Tidak ada penghapusan daftar referensi spesifikasi.
 - Tidak ada penghapusan referensi GP1–GP10.
 - Tidak ada penghapusan placeholder DEC.
 - Tidak ada penghapusan guardrail disclaimers / fairness.
 
 ## 7. Optional Future Enhancements
+
 | Idea | Rationale | DEC Needed? |
 |------|-----------|-------------|
 | Append archived “raw previous template” block (commented) | Menenangkan audit sejarah visual | Tidak (append only) |
@@ -85,7 +94,9 @@ Total sections: 37 (bertambah dari sebelumnya yang berakhir di 36).
 | Automatic per-section hash list | Granular tamper detection | CIC-A |
 
 ## 8. Verification Steps (Script Outline)
+
 Pseudocode:
+
 ```bash
 # 1. Extract section headers
 grep '^## ' .github/pull_request_template.md > sections.txt
@@ -100,11 +111,13 @@ grep -q 'GP1–GP10' .github/pull_request_template.md
 ```
 
 ## 9. Next Actions
+
 - [ ] Run automation to fill placeholders.
 - [ ] Commit spec hash diff artifact.
 - [ ] (Optional) Append archival block if requested.
 
 ## 10. Append-Only Guarantee
+
 Peraturan: File ini hanya boleh bertambah dengan segmen audit baru (tanggal baru). Tidak boleh menghapus segmen terdahulu.
 
 (End of audit file v1.0)

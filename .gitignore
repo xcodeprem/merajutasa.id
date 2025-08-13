@@ -1,0 +1,42 @@
+# Node dependencies
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+logs/
+*.log
+
+# Build / dist outputs (none generated yet, placeholder patterns)
+dist/
+build/
+coverage/
+out/
+.tmp/
+.temp/
+.cache/
+
+# Framework caches (future-proof)
+.next/
+
+# OS / Editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+
+# Environment & secrets (.env.example may be committed intentionally)
+.env
+.env.*
+!.env.example
+
+# Package artifacts
+*.tgz
+
+# Governance Artifacts Notice:
+# Do NOT ignore artifacts/ directory: evidence & integrity JSON meant to be committed post-seal.
+# If specific large transient files appear later, add targeted patterns instead of excluding the whole folder.

@@ -1,6 +1,6 @@
 {
-  "mode": "verify",
-  "timestamp_utc": "2025-08-12T08:25:15Z",
+  "mode": "report-only",
+  "timestamp_utc": "2025-08-13T02:46:47Z",
   "updated": [],
   "unchanged": [],
   "placeholders_sealed": [],
@@ -33,7 +33,10 @@
     "docs/archive/ux_public-multipage-experience-master-spec-v2.md",
     "docs/governance/trace/archive-trace-index-v1.md",
     "docs/onboarding/agent-bootstrap-manifest.md",
-    "README.md"
+    "README.md",
+    "docs/governance/dec/DEC-20250812-04-governance-baseline-thresholds.md",
+    "docs/governance/dec/DEC-20250813-01-known-debt-register.md",
+    "docs/onboarding/agent-role-policy-v1.md"
   ],
   "violations": [
     {
@@ -180,12 +183,27 @@
       "code": "PLACEHOLDER_AFTER_SEAL",
       "path": "README.md",
       "detail": "Placeholder remained post-freeze"
+    },
+    {
+      "code": "PLACEHOLDER_AFTER_SEAL",
+      "path": "docs/governance/dec/DEC-20250812-04-governance-baseline-thresholds.md",
+      "detail": "Placeholder remained post-freeze"
+    },
+    {
+      "code": "PLACEHOLDER_AFTER_SEAL",
+      "path": "docs/governance/dec/DEC-20250813-01-known-debt-register.md",
+      "detail": "Placeholder remained post-freeze"
+    },
+    {
+      "code": "PLACEHOLDER_AFTER_SEAL",
+      "path": "docs/onboarding/agent-role-policy-v1.md",
+      "detail": "Placeholder remained post-freeze"
     }
   ],
   "summary": {
-    "total_entries": 29,
+    "total_entries": 32,
     "updated_count": 0,
-    "violation_count": 29,
-    "placeholders_remaining_count": 29
+    "violation_count": 32,
+    "placeholders_remaining_count": 32
   }
 }

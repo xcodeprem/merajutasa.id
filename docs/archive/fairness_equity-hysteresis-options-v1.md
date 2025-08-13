@@ -23,6 +23,7 @@
 ( SELURUH ISI HISTORIS ASLI TETAP DI SINI TANPA PERUBAHAN )
 
 # MerajutASA – Equity Under‑Served Hysteresis Options (Decision Pack v1.0)
+
 Status: Draft for Governance & Data Review (No prior strategy removed)  
 Related Specs: Master Spec v2.0 (Hero Constellation), Integrity Credential Schema v1.0, Fairness Audit Methodology (v1.x)  
 Prepared: 2025-08-12  
@@ -36,11 +37,13 @@ Purpose: Menetapkan opsi mekanisme hysteresis agar penandaan “under‑served�
 ## 1. LATAR & MASALAH
 
 Tanpa hysteresis, unit dapat:
+
 - Muncul “under‑served” 1 hari (rasio fulfillment < threshold) lalu hilang esok hari → persepsi sistem tidak konsisten.
 - Mengalami toggling akibat fulfillment menit terakhir (late reporting).
 - Memicu bias atensi mendadak pada unit borderline sehingga perilaku “fulfillment injection” demi keluar label.
 
 Kita butuh mekanisme:
+
 1. Mengurangi fluktuasi (reduce churn).
 2. Menghindari delay yang terlalu lama (jangan menunda sinyal real shortage).
 3. Menyediakan narasi jelas di /trust & Equity page (transparansi metodologi).
@@ -63,6 +66,7 @@ Kita butuh mekanisme:
 ## 3. DATA KARAKTERISTIK (ASUMSI AWAL)
 
 Sebelum data nyata, asumsi:
+
 - Distribusi ratio fulfillment condong ke mid-high (≥0.5) dengan tail low.
 - Hari-hari awal, noise bisa tinggi (pelaporan manual).  
 - Expected unit count awal < 200 (skala kecil → varians per unit dapat besar).  
@@ -100,7 +104,9 @@ Impikasi: Hysteresis *harus ringan* supaya early-phase tetap informatif.
 ## 6. DETAIL OPSI
 
 ### 6.1 Opsi A: Simple Consecutive Count
+
 Rules:
+
 - Enter: dua snapshot berturut r < T.
 - Exit: satu snapshot r ≥ T + Δ (misal Δ=0.05).
 - If r rebound di antara T dan T+Δ → tetap under‑served sampai break ≥ T+Δ atau 3 snapshot non-consecutive ok? (varian).
@@ -109,24 +115,28 @@ Cons: Delay minimal (1 extra day) bisa menyembunyikan shortage mendadak.
 Risk: Jika T=0.60 dan r=0.20 (parah) butuh 2 snapshot → terlambat.
 
 ### 6.2 Opsi B: Sliding Window Proportion
+
 Parameters: Window W=3, K=2 (≥2 dari 3 raw flags untuk enter), L=2 (≥2 ok flags untuk exit).
 Pros: Tolerant terhadap single anomaly.
 Cons: Hard to message: “2 dari 3 snapshot terakhir.”
 Risk: With small W early-phase sample, can still be jumpy.
 
 ### 6.3 Opsi C: Score Accumulation
+
 Score s starts =0. Each raw flag s+=1, each ok s-=1 (min 0). Enter when s≥2; exit when s=0.
 Pros: Smooth; handles intermittent shortage.
 Cons: Harder for public comprehension; more internal complexity.
 Risk: Extended time to appear if alternating.
 
 ### 6.4 Opsi D: Time Weighted Decay
+
 ShortageScore(t) = α * ShortageScore(t-1) + (raw_flag?1:0). Threshold θ (e.g., 1.5).
 Pros: Very smooth; filters noise.
 Cons: Completely opaque to public w/out math explanation.
 Risk: Perceived black-box (contradicts transparency ethos GP5).
 
 ### 6.5 Opsi E: Dual Threshold (Schmitt Trigger style)
+
 Parameters: T_enter = 0.60, T_exit = 0.65.
 Enter: r < 0.60 (immediate).
 Exit: r ≥ 0.65.
@@ -135,14 +145,18 @@ Cons: Borderline units (0.59 ↔ 0.61) still toggle if improvement not large eno
 Risk: If improvements incremental (0.59→0.61), unit stays flagged maybe too long (is that acceptable? Possibly encourages sustained improvement).
 
 ### 6.6 Opsi F: Hybrid (Recommended Candidate)
+
 Parameters:
+
 - T_enter_major = 0.50 (severe shortage immediate).
 - T_enter_standard = 0.60 (need 2 consecutive to avoid noise).
 - T_exit = 0.65 (single snapshot).
 Enter Rules:
+
 1. If r < 0.50 at snapshot S → under‑served immediately (severity override).
 2. Else if r < 0.60 two snapshots berturut (S-1, S) → under‑served.
 Exit Rule:
+
 - If r ≥ 0.65 at snapshot Sx → exit immediately.
 Persistence:
 - If improvement r in [0.60,0.649] → still under‑served (needs solid recovery).
@@ -175,6 +189,7 @@ Simulated ratio sequence r(t) for a borderline unit:
 | 7 0.66 | No | Exit (≥0.65) | Exit | Exit |
 
 Observation:
+
 - Opsi E triggers earlier labeling (possible false early label if noise).
 - Opsi A delays initial detection (maybe appropriate for borderline).
 - Opsi F similar to A for mild, but urgent path for severe shortage (not shown here).
@@ -201,6 +216,7 @@ Severe shortage sequence: `0.43, 0.44, 0.46, 0.55, 0.57, 0.61, 0.66`
 | Re-Entry Rate | flagged units re-enter within 3 snapshots exit | Over-filter vs under-filter |
 
 Baseline targets (initial):
+
 - Severe entry delay = 0.
 - Borderline entry delay ≤1.
 - False positive proxy <15%.
@@ -224,12 +240,14 @@ Baseline targets (initial):
 ## 10. REKOMENDASI (AI)
 
 Pilih Opsi F (Hybrid):
+
 - Menjaga prinsip fairness + outcome honesty
 - Memberikan jalur cepat untuk shortage serius (etika)
 - Meminimalkan noise borderline
 - Masih dapat dijelaskan: “Masuk cepat jika <50%, atau jika 2 hari berturut-turut di bawah 60%. Keluar bila sudah ≥65%.”
 
 Parameter awal (dapat disesuaikan setelah 30 hari):
+
 - T_enter_major = 0.50
 - T_enter_standard = 0.60 (2 consecutive)
 - T_exit = 0.65
@@ -253,6 +271,7 @@ Recommendation: Keep earliest thresholds (0.50 / 0.60 / 0.65) first 60 days; rev
 ## 12. IMPLEMENTATION STATE MACHINE (OPSI F)
 
 States:
+
 - NONE (not under-served)
 - CANDIDATE (1st snapshot <0.60 but ≥0.50)
 - ACTIVE (flagged)
@@ -261,6 +280,7 @@ States:
 - CLEARED (after exit; 1 snapshot cooldown to avoid immediate re-entry if r dips just below threshold once)
 
 Transitions (summary):
+
 1. NONE → ACTIVE if r <0.50 (severe)
 2. NONE → CANDIDATE if 0.50 ≤ r <0.60
 3. CANDIDATE → ACTIVE if second consecutive snapshot 0.50 ≤ r <0.60
@@ -310,10 +330,10 @@ for each unit:
 
 ## 14. PUBLISHABLE METHODOLOGY NARASI (SINGKAT)
 
-“Unit ditandai ‘under‑served’ jika kekurangan pemenuhan kebutuhan terbukti stabil: 
-(a) Turun drastis (rasio <50%) akan tampil segera, atau 
-(b) Dua snapshot berturut-turut di bawah 60%. 
-Keluar dari daftar setelah mencapai ≥65% pada satu snapshot. 
+“Unit ditandai ‘under‑served’ jika kekurangan pemenuhan kebutuhan terbukti stabil:
+(a) Turun drastis (rasio <50%) akan tampil segera, atau
+(b) Dua snapshot berturut-turut di bawah 60%.
+Keluar dari daftar setelah mencapai ≥65% pada satu snapshot.
 Ini mencegah fluktuasi jangka sangat pendek menyesatkan publik dan memastikan fokus pada kesenjangan yang konsisten, bukan sekadar perubahan sesaat.”
 
 ---
@@ -354,6 +374,7 @@ Ini mencegah fluktuasi jangka sangat pendek menyesatkan publik dan memastikan fo
 ## 18. DATA FIELDS TAMBAHAN (INTERNAL STORAGE)
 
 Store per unit (not public):
+
 - consecutiveBelow60
 - lastBelow60SnapshotIndex
 - flaggedSinceSnapshotIndex
@@ -369,6 +390,7 @@ Justification: Minimizing public complexity while enabling audit.
 ## 19. EVALUASI 30 HARI (POST-LAUNCH)
 
 Checklist:
+
 - [ ] Compute churn rate.
 - [ ] Compare severe vs borderline entries.
 - [ ] Assess distribution of recovery distances (how many just cross 0.65 vs overshoot).
@@ -382,6 +404,7 @@ If multiple metrics out of bounds, propose parameter revision pack (Patch govern
 ## 20. MIGRASI DARI TANPA HYSTERESIS → DENGAN
 
 If early internal soft launch started without hysteresis:
+
 1. Mark “baseline window start” snapshot (S0).
 2. Recompute last K snapshots to seed state without altering historical public feed (internal only).
 3. Publish change log: “Mulai tanggal X penerapan hysteresis fairness untuk stabilitas penandaan.”
@@ -470,6 +493,7 @@ Result: F highest weighted.
 ## 27. AUDIT LOG INTEGRATION (OPTIONAL ENHANCEMENT)
 
 Record chain event when:
+
 - Unit enters ACTIVE (type=UNDER_SERVED_ENTER, reason=“severe”/“consecutive”).
 - Unit exits (type=UNDER_SERVED_EXIT).
 Fields: credId or orgId, snapshotId, reason, prevState, newState.
@@ -567,14 +591,16 @@ Semua struktur di sini mematuhi strategi terdahulu: fairness non-ranking, privac
 
 ## 36. DECISION PROMPT
 
-Silakan pilih: 
-- Opsi A / E / F 
+Silakan pilih:
+
+- Opsi A / E / F
 - Jika F, konfirmasi parameter: T_enter_major=0.50, T_enter_standard=0.60 (2 consecutive), T_exit=0.65, cooldown=1, stalledWindow=5.
 
 Balas format:
 `KEPUTUSAN: Opsi F, parameter disetujui / (atau modifikasi)`
 
 AI kemudian akan:
+
 1. Integrasi parameter ke Master Spec (append delta).
 2. Siapkan template DEC log.
 3. Susun copy final /trust & /equity bagian hysteresis.

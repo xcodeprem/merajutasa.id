@@ -1,4 +1,5 @@
 # Agent Bootstrap Manifest v1.0 (Append-Only)
+
 Status: Baseline Draft (hash pending – will be included in spec-hash-manifest at next update)  
 Prepared: 2025-08-12  
 Authoring Context: Created to enable any NEW Agent (governance bot, CI lint worker, audit assistant) memahami seluruh jejak strategi tanpa menghapus atau menimpa dokumen sebelumnya.  
@@ -8,7 +9,9 @@ Non-Removal Assertion: Dokumen ini TIDAK mengganti, menyederhanakan, atau mengha
 ---
 
 ## 1. Tujuan
+
 Memberikan panduan deterministik bagi Agent baru untuk:
+
 1. Menemukan & memverifikasi file canonical.
 2. Memastikan integritas (hash sealing) dan kepatuhan DEC chain.
 3. Menjalankan lint principles.reference & guardrails lain secara benar.
@@ -18,12 +21,14 @@ Memberikan panduan deterministik bagi Agent baru untuk:
 ---
 
 ## 2. Ruang Lingkup & Batasan
+
 Termasuk: fairness hysteresis governance, hash manifest, DEC activation, principles matrix enforcement, disclaimers lint, credential/event schema canonical, test plan execution placeholders.  
 Tidak termasuk: implementasi internal bisnis, pipeline runtime beyond governance surface.
 
 ---
 
 ## 3. File Canonical & Mutability (Snapshot)
+
 | Path | Domain | Mutability Rule | dec_ref | Notes |
 |------|--------|-----------------|---------|-------|
 | docs/integrity/spec-hash-manifest-v1.json | Integrity Core | append-only (replace placeholders) | multiple | Sumber daftar & aturan |
@@ -49,6 +54,7 @@ Tidak termasuk: implementasi internal bisnis, pipeline runtime beyond governance
 ---
 
 ## 4. Bootstrap Sequence (High-Level)
+
 1. Parse spec-hash-manifest → build internal registry (path → rules).
 2. Validate no critical canonical path missing (error if absent unless manifest marks placeholder).
 3. For each file with hash_sha256 placeholder `<PENDING_HASH>`:
@@ -64,6 +70,7 @@ Tidak termasuk: implementasi internal bisnis, pipeline runtime beyond governance
 ---
 
 ## 5. Hash & Integrity Validation (Deterministic Steps)
+
 | Step | Description | Fail Code (suggested) |
 |------|-------------|-----------------------|
 | H1 | Manifest JSON parse valid | INTEGRITY_MANIFEST_PARSE |
@@ -78,6 +85,7 @@ Note: Agent tidak mengedit (kecuali penggantian placeholder awal). Mode strict �
 ---
 
 ## 6. PR Evaluation Workflow (Principles Impact)
+
 | Phase | Condition | Enforcement |
 |-------|-----------|-------------|
 | 0 | <48h post DEC-20250812-03 | WARN for PRIN-REF errors |
@@ -85,6 +93,7 @@ Note: Agent tidak mengedit (kecuali penggantian placeholder awal). Mode strict �
 | 2 | ≥7d | ERROR + requires evidence bundle completeness |
 
 Matrix Checks:
+
 - Missing table → PRIN-REF-001
 - Inferred Impact vs Declared No → PRIN-REF-002
 - Missing mitigation for Yes → PRIN-REF-003
@@ -94,7 +103,9 @@ Matrix Checks:
 ---
 
 ## 7. Parameter & Hysteresis Integrity
+
 Validation Source:
+
 - docs/fairness/hysteresis-config-v1.yml
 - Code constants (extracted via regex or build export)
 Checks:
@@ -105,7 +116,9 @@ Checks:
 ---
 
 ## 8. Evidence Bundle Composition (Section 27)
+
 Required Artifacts (initial set):
+
 | Artifact | Produced By | Purpose |
 |----------|-------------|---------|
 | disclaimers-lint-report.json | disclaimers lint | Validate disclaimers presence |
@@ -119,11 +132,13 @@ Required Artifacts (initial set):
 | audit-replay.json | audit-replay.js | Reproducibility baseline |
 
 Completeness Rule:
+
 - For Phase 2 DEC-20250812-03 enforcement, all artifacts must exist (even if some metrics null). Missing → EVIDENCE_INCOMPLETE.
 
 ---
 
 ## 9. Policy-as-Code Order (CI Pipeline)
+
 1. spec-hash-diff (fills & verifies hash)  
 2. param-integrity (hysteresis lock)  
 3. disclaimers-lint (ensures presence & hash)  
@@ -137,6 +152,7 @@ Failure short-circuit semantics: If earlier step is ERROR → subsequent steps m
 ---
 
 ## 10. RAG Snapshot (Embedded for Agent Baseline)
+
 | Domain | Status | Key Gap |
 |--------|--------|---------|
 | Fairness Methodology | GREEN | Hash sealing pending |
@@ -154,6 +170,7 @@ Agent must not downgrade RED status until conditions resolved (see Section 12).
 ---
 
 ## 11. Open Gating Decisions (For Reference)
+
 | Decision | Needed For | Current State |
 |----------|------------|---------------|
 | DEC anomaly (delta threshold formalization) | Anomaly events enforcement | Pending |
@@ -166,6 +183,7 @@ Agent should read DEC-20250812-03.date then compute enforcement windows; do NOT 
 ---
 
 ## 12. Bootstrap Pseudocode
+
 ```python
 def bootstrap(mode='strict'):
     manifest = load_manifest()
@@ -189,6 +207,7 @@ def bootstrap(mode='strict'):
 ---
 
 ## 13. Failure Codes (Suggested)
+
 | Code | Meaning | Recovery Hint |
 |------|---------|---------------|
 | INTEGRITY_MANIFEST_PARSE | Manifest invalid JSON | Validate JSON schema |
@@ -206,13 +225,16 @@ def bootstrap(mode='strict'):
 ---
 
 ## 14. Append-Only Change Policy (Untuk Dokumen Ini)
+
 Perubahan yang diperbolehkan:
+
 - Menambahkan baris/section baru.
 - Menambahkan entry tabel baru.
 Tidak diperbolehkan:
 - Menghapus atau menyunting definisi di bagian sebelumnya kecuali menambah Addendum yang menyatakan supersede (tanpa menghapus teks lama).
 
 Addendum format:
+
 ```
 ## Addendum YYYY-MM-DD – Reason
 (Deskripsi tambahan; tidak mengubah konten baseline.)
@@ -221,7 +243,9 @@ Addendum format:
 ---
 
 ## 15. Interaksi Agent Multi-Peran
+
 Jika ada lebih dari satu Agent (lint vs audit):
+
 - Audit Agent menjalankan hash & structural snapshot; menyimpan artifacts/audit-scan-<ts>.json
 - Lint Agent membaca snapshot (jika timestamp <5m) agar tidak re-hash (idempotent).
 - Conflict avoidance: hanya satu Agent diberi izin write manifest (lock file .ci/manifest.lock). Jika lock ada & >10m stale → override safe mode log.
@@ -229,6 +253,7 @@ Jika ada lebih dari satu Agent (lint vs audit):
 ---
 
 ## 16. Metrics Minimal yang Dianjurkan (First Fill)
+
 | Metric | Source | Target (Initial) |
 |--------|--------|------------------|
 | missing_matrix_rate | principles lint | 0% Phase 1 |
@@ -243,7 +268,9 @@ Agent boleh menulis placeholder null → tidak menurunkan status, tapi generate 
 ---
 
 ## 17. Terminology Adoption Guidance
+
 If terminology-scan shows adoptionPercent_after < adoptionPercent_before:
+
 - Flag TERM_REGRESSION (WARN) → Developer review.
 If new_tokens non-empty:
 - Ensure principles matrix marks GP5 (transparency) or GP7 (anti-hype) appropriately if tokens user-facing.
@@ -251,13 +278,16 @@ If new_tokens non-empty:
 ---
 
 ## 18. Security & Integrity Chain Cross-Check
+
 For credential / event schema changes:
+
 - Ensure GP4 (verifiability) & GP10 (auditability) flagged Yes.
 - If signature/public_key_id field semantics added → require new DEC.
 
 ---
 
 ## 19. Minimal Heuristic Regex Set (Seed)
+
 | Principle | Regex (case-insensitive) |
 |-----------|--------------------------|
 | GP6 | `ranking|peringkat|top\\s\\d+|score|skor` |
@@ -271,6 +301,7 @@ Agent boleh memperluas, tetapi tidak menghapus baseline.
 ---
 
 ## 20. Output Report Schema (Suggested)
+
 ```json
 {
   "timestamp": "2025-08-12T06:55:00Z",
@@ -287,12 +318,15 @@ Agent boleh memperluas, tetapi tidak menghapus baseline.
 ---
 
 ## 21. Roadmap Hooks
+
 Agent dapat mengekstrak milestone dari docs/roadmap/roadmap-master-v1.md lalu membuat delta interpretasi internal tanpa mengedit file (tulis output ke artifacts/roadmap-scan.json).
 
 ---
 
 ## 22. Logging & Traceability
+
 All agent actions log ke:
+
 - artifacts/agent-run-<timestamp>.log
 Include:
 - Manifest revision hash.
@@ -303,7 +337,9 @@ Include:
 ---
 
 ## 23. Konflik & Recovery
+
 Jika HASH_MISMATCH_DEC_REQUIRED:
+
 1. Mark PR as BLOCKED.
 2. Append suggestion: “Tambahkan DEC baru atau revert commit X.”
 3. Do not auto-correct content (immutability principle).
@@ -311,11 +347,13 @@ Jika HASH_MISMATCH_DEC_REQUIRED:
 ---
 
 ## 24. Addendum Reserved
+
 (Empty – future append only)
 
 ---
 
 ## 25. Ringkasan Eksekutif Untuk Agent
+
 “Validasikan set canonical, seal hash, terapkan lint prinsip dengan heuristik, kumpulkan evidence, laporkan RAG. Tidak pernah menghapus sejarah—selalu append.”
 
 ---
