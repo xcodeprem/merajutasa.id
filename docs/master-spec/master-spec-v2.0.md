@@ -1,10 +1,12 @@
 # Master Spec v2.0 (Baseline Canonical)
+
 Version: 2.0.0  
 Status: Baseline (hash pending – will be sealed via spec-hash-manifest-v1.json)  
 Change Policy: delta-files (NO direct edits for semantic changes; use docs/master-spec-deltas/)  
 Non-Removal Assertion: Bagian lama tidak dihapus; penambahan melalui delta saja.
 
 ## Table of Contents (Section Numbers Stable)
+
 §1 Introduction  
 §2 Scope & Non-Goals  
 §3 Terminology & Controlled Vocabulary  
@@ -57,27 +59,35 @@ Non-Removal Assertion: Bagian lama tidak dihapus; penambahan melalui delta saja.
 §50 Future Work (Reserved Only – append)  
 
 ## §12 Privacy Foundations (Excerpt)
+
 Principles GP1 & GP3 menekankan minimisasi struktural: sistem dirancang agar PII tidak perlu dikumpulkan; redaction terjadi sebelum persist. Field-level classification L0–L4 menjaga eksplisit scope. (Detail elaboration – refer privacy spec & PII pattern library.)
 
 ## §14 Fairness Methodology (Anchor)
+
 Definisi mekanisme hysteresis: Parameter aktif ditetapkan lewat DEC (misal DEC-20250812-02 Option F). Tidak ada ranking / scoring kompetitif. Status ‘under‑served’ sinyal perbaikan, bukan kualitas relatif.
 
 ## §27 Event Schema Canonical Overview (Anchor)
+
 Event mandatory fields: event_name, event_version, occurred_at, meta.integrity.event_hash, meta.client.app_version, meta.privacy.redaction_status. Field additions memerlukan patch version & DEC jika memengaruhi interpretasi fairness, integrity, atau privacy scope.
 
 ## §31 Integrity Chain (Excerpt)
+
 Setiap event di-hash: event_hash = hash(canonical_json(event minus signature)). pipeline_hash memetakan transform graph versi. Credential issuance melakukan canonicalization deterministic sebelum signing (Ed25519).
 
 ## §35 Ethical & Copy Guidelines (Excerpt)
+
 Disclaimers D1–D7 wajib pada surface tertentu. Larangan leksikal: ranking/top/terbaik/“peringkat” kecuali dalam konteks redaksi (educational example). Anti-hype lint memblok frasa prospektif yang memicu overclaim.
 
 ## §42 Hysteresis Parameter Table
+
 (Lihat docs/fairness/hysteresis-config-v1.yml – config canonical. Master Spec tidak menduplikasi nilai agar drift tidak terjadi; hanya memuat link.)
 
 ## §46 Principles Impact Matrix Requirement
+
 Semua PR wajib Section 37 – memetakan dampak per prinsip GP1–GP10. Lint principles.reference memverifikasi korelasi diff vs deklarasi.
 
 ## Hash & Integrity Notice
+
 Hash (SHA256) baseline akan diisi di manifest. Setiap delta spec harus menambah file di docs/master-spec-deltas/ dengan DEC baru.
 
 (End of Master Spec v2.0 Baseline – Append-Only via deltas)

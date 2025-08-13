@@ -1,9 +1,11 @@
 # Hysteresis Test Plan (Post DEC-20250812-02)
 
 ## Objectives
+
 Validate correctness, stability, and auditability of Option F parameters & state transitions.
 
 ## Test Categories
+
 1. Unit Tests (state transition)
 2. Integration Tests (snapshot ingestion -> state updates -> events)
 3. Data Consistency (state table vs emitted events)
@@ -12,6 +14,7 @@ Validate correctness, stability, and auditability of Option F parameters & state
 6. Audit Reconstruction
 
 ## Key Unit Test Cases
+
 | ID | Scenario | Sequence (r) | Expected Entry Reason | Exit Snapshot | Notes |
 |----|----------|--------------|-----------------------|---------------|-------|
 | UT1 | Severe immediate | 0.47,0.53,0.66 | severe | 3 | Immediate entry |
@@ -22,11 +25,13 @@ Validate correctness, stability, and auditability of Option F parameters & state
 | UT6 | Cooldown borderline again | ACTIVE exit (0.67), then 0.58,0.59 | consecutive | after second 0.59 if cooldown expired | |
 
 ## Integration Assertions
+
 - Every ACTIVE entry has corresponding enter event with correct entry_reason.
 - Each exit event has matching prior active state and ratio ≥0.65.
 - No duplicate ACTIVE without intervening exit.
 
 ## Data Consistency Queries
+
 ```sql
 -- Orphan enter events
 SELECT unit_id FROM enter_events e
@@ -41,12 +46,15 @@ AND first_active_snapshot_id IS NOT NULL;
 ```
 
 ## Performance Target
+
 - p95 state update batch (N units <=200): < 150ms.
 
 ## Audit Reconstruction
+
 Procedure: replay snapshot series & compare reconstructed events vs stored events; mismatch tolerance = 0.
 
 ## Failure Handling
+
 - Snapshot invalid flag -> skip update; log reason.
 - Divergent parameters vs config -> warn; after 2 builds fail CI.
 

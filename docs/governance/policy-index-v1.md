@@ -1,4 +1,5 @@
 # Policy Index v1.0 (Append-Only)
+
 Status: Draft Initialization (To be sealed after hash manifest fill)  
 Purpose: Konsolidasi seluruh policy-as-code & lint guardrail agar traceable ke DEC & prinsip GP1–GP10 tanpa menghapus jejak strategi.
 
@@ -17,5 +18,6 @@ Purpose: Konsolidasi seluruh policy-as-code & lint guardrail agar traceable ke D
 Hash Manifest Link: docs/integrity/spec-hash-manifest-v1.json
 
 Addendum (Appended after DEC-20250812-03):
+
 - Updated DEC Ref disclaimers.presence to DEC-20250812-03 for activation alignment.
 - No prior row removed (immutability preserved).

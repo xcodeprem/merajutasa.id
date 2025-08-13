@@ -341,6 +341,7 @@ Jika N pada salah satu → tangguhkan merge sampai resolved atau DEC.
 ## 37. PRINCIPLES IMPACT MATRIX (AUTO + MANUAL)
 
 Penjelasan:
+
 - Baris di bawah akan dihasilkan otomatis oleh tools/principles-impact.js.
 - Anda (author) WAJIB memverifikasi kolom Declared & Mitigation jika heuristic menandai (Inferred=TRUE).
 - Jangan menulis manual di antara marker; tambahkan klarifikasi di bawah marker “SUMMARY” atau di Section 25 / 22 bila perlu.
@@ -376,6 +377,7 @@ If any Alignment = DIVERGE → Jelaskan mitigasi jelas (policy link / lint / DEC
 | AUTO:PRINCIPLES_MATRIX_SUMMARY | principles-impact.js | Summary text | Phase 0 | Summary empty while rows flagged |
 
 Legend Status (Policy/Lint):
+
 - PASS = Compliant & artifact produced
 - WARN = Non-blocking issue (Phase 0 / early Phase 1)
 - FAIL = Block merge (policy gating)
@@ -383,6 +385,7 @@ Legend Status (Policy/Lint):
 - TBD = Belum dihitung (jelaskan pada Section 25)
 
 Alignment (Principles):
+
 - MATCH = Declared set principle(s) sama dengan heuristik
 - DIVERGE = Heuristik mendeteksi tambahan / mismatch (butuh mitigasi)
 
@@ -410,6 +413,7 @@ Alignment (Principles):
 ### APPENDIX C: POST-SEAL PLACEHOLDER JUSTIFICATION (FILL IF ANY AUTO SECTION EMPTY)
 
 Jika setelah Phase 1 dimulai ada marker AUTO masih kosong:
+
 - Sebutkan marker:
 - Alasan belum terisi:
 - ETA implementasi:

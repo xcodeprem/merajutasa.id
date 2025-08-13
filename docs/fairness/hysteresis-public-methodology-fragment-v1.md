@@ -16,10 +16,12 @@ Mulai 12 Agustus 2025 (DEC-20250812-02), sistem menggunakan mekanisme hibrida:
 7. Anomali: Perubahan tajam (delta rasio >=0.03) dianotasi internal untuk konteks.
 
 Disclaimers relevan:
+
 - D1: Equity Index & daftar under‑served bukan ranking kualitas—hanya sinyal pemerataan.
 - D2: Tidak ada data pribadi anak dikumpulkan / ditampilkan.
 
 Audit & Verifiability:
+
 - Fragment ini di-hash; hash tercantum di manifest integritas.
 - Perubahan parameter tanpa DEC → CI fail (hysteresis.params.lock).
 

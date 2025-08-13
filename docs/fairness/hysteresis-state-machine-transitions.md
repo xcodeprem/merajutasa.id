@@ -4,6 +4,7 @@ DEC Reference: DEC-20250812-02
 Do NOT remove previous conceptual descriptions; this file concretizes transitions with adopted parameters.
 
 ## States
+
 - NONE
 - CANDIDATE
 - ACTIVE
@@ -11,6 +12,7 @@ Do NOT remove previous conceptual descriptions; this file concretizes transition
 - CLEARED
 
 ## Parameters (bound)
+
 T_enter_major = 0.50  
 T_enter_standard = 0.60 (2 consecutive)  
 T_exit = 0.65  
@@ -20,6 +22,7 @@ stalled_min_ratio = 0.55
 stalled_max_ratio_below_exit = 0.65  
 
 ## Transitions
+
 | From | Condition | To | Notes |
 |------|-----------|----|------|
 | NONE | r < 0.50 | ACTIVE | entryReason=severe |
@@ -34,6 +37,7 @@ stalled_max_ratio_below_exit = 0.65
 | CLEARED | cooldown not expired | CLEARED | hold |
 
 ## Pseudocode (Bound)
+
 ```python
 def update_state(unit, r, history):
     st = unit.state
@@ -64,6 +68,7 @@ def update_state(unit, r, history):
 ```
 
 ## Instrumentation Mapping
+
 | Transition Emitted | Event |
 |--------------------|-------|
 | NONE→ACTIVE | sys_fairness_under_served_enter |
@@ -74,9 +79,11 @@ def update_state(unit, r, history):
 STALLED enter optional (internal log only).
 
 ## Policy-as-Code Lock
+
 File hysteresis-config-v1.yml hashed; pipeline compares live code constants. Divergence >2 consecutive builds ⇒ fail (CIC-E guard).
 
 Audit fields persisted internal per unit:
+
 - entry_reason
 - first_active_snapshot_id
 - last_state_change_snapshot_id
