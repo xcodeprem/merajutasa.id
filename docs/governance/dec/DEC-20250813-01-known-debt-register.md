@@ -13,7 +13,7 @@ scope:
   - Mendokumentasikan eksplisit semua kontrol / subsistem governance, fairness, privacy, integrity yang DISENGAJA ditunda atau dalam mode placeholder sehingga risiko & hutang (debt) dapat diaudit.
   - Menetapkan kode risiko, mitigasi sementara, dan kriteria pemicu aktivasi.
 non_removal_assertion: "Dokumen ini tidak menghapus strategi; hanya menandai penundaan terkelola (managed deferral)."
-hash_of_decision_document: "<PENDING_HASH>"  # Diisi saat seal-first baseline hash sebelum Phase 1 transisi.
+hash_of_decision_document: "0dda88e7cb32bf35c57ca3e596b9d1bacc25760378f9f4b0db316b5cc6f97267"  # Diisi saat seal-first baseline hash sebelum Phase 1 transisi.
 related_principles: [GP1, GP4, GP5, GP6, GP7, GP8, GP9, GP10]
 related_files:
   - docs/governance/README-decision-log-process.md
