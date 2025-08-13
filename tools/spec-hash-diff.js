@@ -8,11 +8,22 @@ import crypto from 'crypto';
 
 const MANIFEST_PATH = 'docs/integrity/spec-hash-manifest-v1.json';
 const DEC_SELF_CLASS = 'decision';
-const VALID_MODES = new Set(['seal-first','verify','report-only']);
+const VALID_MODES = new Set(['seal-first','verify','report-only','canonicalize-dec']);
+const WRITE_SARIF = process.env.SPEC_HASH_SARIF === '1';
+const SUMMARY_PATH = 'artifacts/spec-hash-summary.json';
+const SARIF_PATH = 'artifacts/spec-hash-diff.sarif.json';
 
-function sha256File(buf) {
-  return crypto.createHash('sha256').update(buf).digest('hex');
+function canonicalizeDecContent(text){
+  // Remove the hash_of_decision_document value for stable external hashing
+  return text.replace(/hash_of_decision_document:\s*"[0-9a-f]{64}"/,'hash_of_decision_document:"<CANON>"');
 }
+
+function computeDecHash(buf){
+  const txt = buf.toString('utf8');
+  return sha256File(Buffer.from(canonicalizeDecContent(txt),'utf8'));
+}
+
+function sha256File(buf) { return crypto.createHash('sha256').update(buf).digest('hex'); }
 async function readJSON(p) {
   const raw = await fs.readFile(p, 'utf8');
   return { raw, json: JSON.parse(raw) };
@@ -30,7 +41,7 @@ async function fileExists(p) { try { await fs.access(p); return true; } catch { 
 async function main() {
   const mode = parseArg('mode','report-only');
   if (!VALID_MODES.has(mode)) {
-    console.error(`[spec-hash-diff] ERROR: Invalid mode "${mode}". Use seal-first|verify|report-only.`);
+    console.error(`[spec-hash-diff] ERROR: Invalid mode "${mode}". Use seal-first|verify|report-only|canonicalize-dec.`);
     process.exit(2);
   }
   console.log(`[spec-hash-diff] START mode=${mode}`);
@@ -49,6 +60,7 @@ async function main() {
   const placeholdersSealed = [];
   const placeholdersRemaining = [];
   const violations = [];
+  const decRefInconsistencies = [];
   const writeBackDECUpdates = [];
   let manifestModified = false;
 
@@ -61,8 +73,8 @@ async function main() {
       continue;
     }
 
-    const buf = await fs.readFile(fPath);
-    const currentHash = sha256File(buf);
+  const buf = await fs.readFile(fPath);
+  const currentHash = integrity_class === DEC_SELF_CLASS ? computeDecHash(buf) : sha256File(buf);
 
     if (mode === 'seal-first' && isPlaceholder) {
       entry.hash_sha256 = currentHash;
@@ -75,11 +87,8 @@ async function main() {
         if (/hash_of_decision_document:\s*"<PENDING_HASH>"/.test(text)) {
           const replaced = text.replace(/hash_of_decision_document:\s*"<PENDING_HASH>"/, `hash_of_decision_document: "${currentHash}"`);
           writeBackDECUpdates.push({ path: fPath, data: replaced });
-        } else {
-          // If missing placeholder, attempt to detect existing hash
-            if (!/hash_of_decision_document:\s*"[0-9a-f]{64}"/.test(text)) {
-              violations.push({ code: 'DEC_HASH_FIELD_MISSING', path: fPath, detail: 'No placeholder & no existing hash field' });
-            }
+        } else if (!/hash_of_decision_document:\s*"[0-9a-f]{64}"/.test(text)) {
+          violations.push({ code: 'DEC_HASH_FIELD_MISSING', path: fPath, detail: 'No placeholder & no existing hash field' });
         }
       }
       continue;
@@ -92,6 +101,10 @@ async function main() {
     if (!isPlaceholder) {
       if (hash_sha256 === currentHash) {
         unchanged.push(fPath);
+      } else if (integrity_class === DEC_SELF_CLASS && mode === 'canonicalize-dec') {
+        entry.hash_sha256 = currentHash;
+        manifestModified = true;
+        updated.push(fPath);
       } else {
         violations.push({
           code: next_change_requires_dec ? 'HASH_MISMATCH_DEC_REQUIRED' : 'HASH_MISMATCH',
@@ -104,8 +117,21 @@ async function main() {
         const m = text.match(/hash_of_decision_document:\s*"([0-9a-f]{64})"/);
         if (!m) {
           violations.push({ code: 'DEC_HASH_FIELD_MISSING', path: fPath, detail: 'Expected hash_of_decision_document field' });
-        } else if (m[1] !== entry.hash_sha256) {
-          violations.push({ code: 'DEC_HASH_FIELD_MISMATCH', path: fPath, detail: `Internal=${m[1]} manifest=${entry.hash_sha256}` });
+        } else {
+          const internal = m[1];
+          const canonicalHash = computeDecHash(buf);
+          if (entry.hash_sha256 !== canonicalHash && mode !== 'canonicalize-dec') {
+            violations.push({ code: 'DEC_CANONICAL_HASH_MISMATCH', path: fPath, detail: `canonical=${canonicalHash} manifest=${entry.hash_sha256}` });
+          }
+            if (internal !== canonicalHash) {
+              if (mode === 'canonicalize-dec') {
+                const replaced = text.replace(/hash_of_decision_document:\s*"[0-9a-f]{64}"/, `hash_of_decision_document: "${canonicalHash}"`);
+                writeBackDECUpdates.push({ path: fPath, data: replaced });
+                updated.push(fPath);
+              } else {
+                violations.push({ code: 'DEC_INTERNAL_HASH_DIFFERS', path: fPath, detail: `internal=${internal} canonical=${canonicalHash}` });
+              }
+            }
         }
       }
     }
@@ -130,6 +156,17 @@ async function main() {
     console.log('[spec-hash-diff] Manifest not modified in this run.');
   }
 
+  // dec_ref consistency pass (manifest self-integrity)
+  for (const entry of manifest.files) {
+    if (entry.dec_ref && /SELF/.test(entry.dec_ref) && entry.integrity_class !== DEC_SELF_CLASS && entry.path.includes('/dec/')) {
+      decRefInconsistencies.push({ path: entry.path, issue: 'Non-decision file marked SELF dec_ref' });
+    }
+    if (entry.integrity_class === DEC_SELF_CLASS && entry.dec_ref !== 'SELF') {
+      decRefInconsistencies.push({ path: entry.path, issue: 'Decision file dec_ref must be SELF' });
+    }
+  }
+  decRefInconsistencies.forEach(x=>violations.push({ code: 'DEC_REF_INCONSISTENT', path: x.path, detail: x.issue }));
+
   const report = {
     mode,
     timestamp_utc: nowUTC(),
@@ -149,7 +186,36 @@ async function main() {
   await fs.mkdir('artifacts', { recursive: true });
   await fs.writeFile('artifacts/spec-hash-diff.json', JSON.stringify(report, null, 2));
 
-  console.log(`[spec-hash-diff] Summary: updated=${updated.length} violations=${violations.length} remaining_placeholders=${placeholdersRemaining.length}`);
+  const summaryOut = {
+    updated_count: updated.length,
+    violations: violations.map(v=>v.code),
+    violation_count: violations.length,
+    remaining_placeholders: placeholdersRemaining.length,
+    dec_ref_inconsistencies: decRefInconsistencies.length
+  };
+  await fs.writeFile(SUMMARY_PATH, JSON.stringify(summaryOut,null,2));
+
+  // Optional SARIF output
+  if (WRITE_SARIF) {
+    const sarif = {
+      version: '2.1.0',
+      $schema: 'https://json.schemastore.org/sarif-2.1.0.json',
+      runs: [
+        {
+          tool: { driver: { name: 'spec-hash-diff', informationUri: 'https://example.local/spec-hash', rules: [] } },
+          results: violations.map(v=>({
+            ruleId: v.code,
+            level: 'error',
+            message: { text: `${v.code}: ${v.detail}` },
+            locations: [ { physicalLocation: { artifactLocation: { uri: v.path } } } ]
+          }))
+        }
+      ]
+    };
+    await fs.writeFile(SARIF_PATH, JSON.stringify(sarif,null,2));
+  }
+
+  console.log(`[spec-hash-diff] Summary: updated=${updated.length} violations=${violations.length} remaining_placeholders=${placeholdersRemaining.length} dec_ref_inconsistencies=${decRefInconsistencies.length}`);
   if (violations.length > 0) {
     violations.forEach(v => console.error(` VIOLATION ${v.code} ${v.path} :: ${v.detail}`));
     process.exit(1);
