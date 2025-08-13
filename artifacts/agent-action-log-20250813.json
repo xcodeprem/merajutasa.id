@@ -312,5 +312,153 @@
     "timestamp": "2025-08-13T08:43:33.841Z",
     "action": "aggregate",
     "status": "OK"
+  },
+  {
+    "timestamp": "2025-08-13T08:53:33.518Z",
+    "action": "step",
+    "step": "spec-hash-diff",
+    "cmd": "node tools/spec-hash-diff.js --mode=verify",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 72,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-13T08:53:33.630Z",
+    "action": "step",
+    "step": "param-integrity",
+    "cmd": "node tools/param-integrity.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 112,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-13T08:57:52.455Z",
+    "action": "step",
+    "step": "spec-hash-diff",
+    "cmd": "node tools/spec-hash-diff.js --mode=verify",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 73,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-13T08:57:52.551Z",
+    "action": "step",
+    "step": "param-integrity",
+    "cmd": "node tools/param-integrity.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 97,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-13T08:57:52.653Z",
+    "action": "step",
+    "step": "hype-lint",
+    "cmd": "node tools/hype-lint.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 101,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-13T08:57:52.814Z",
+    "action": "step",
+    "step": "disclaimers-lint",
+    "cmd": "node tools/disclaimers-lint.js",
+    "exit_code": 1,
+    "status": "ADVISORY",
+    "duration_ms": 160,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-13T08:57:52.968Z",
+    "action": "step",
+    "step": "principles-impact",
+    "cmd": "node tools/principles-impact.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 154,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-13T08:57:53.024Z",
+    "action": "step",
+    "step": "evidence-freshness",
+    "cmd": "node tools/evidence-freshness.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 55,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-13T08:57:53.082Z",
+    "action": "step",
+    "step": "evidence-collision-test",
+    "cmd": "node tools/evidence-collision-test.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 56,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-13T08:57:53.125Z",
+    "action": "step",
+    "step": "no-silent-drift",
+    "cmd": "node tools/no-silent-drift.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 49,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-13T08:57:53.145Z",
+    "action": "aggregate",
+    "status": "OK"
+  },
+  {
+    "timestamp": "2025-08-13T09:01:19.225Z",
+    "action": "step",
+    "step": "spec-hash-diff",
+    "cmd": "node tools/spec-hash-diff.js --mode=verify",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 68,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-13T09:01:19.330Z",
+    "action": "step",
+    "step": "param-integrity",
+    "cmd": "node tools/param-integrity.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 102,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-13T09:01:19.434Z",
+    "action": "step",
+    "step": "hype-lint",
+    "cmd": "node tools/hype-lint.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 105,
+    "critical": false,
+    "advisory": true
   }
 ]

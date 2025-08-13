@@ -1,5 +1,9 @@
 # Policy Index v1.0 (Append-Only)
 
+<div data-disclaimer-block="governance">
+<p data-disclaimer-id="D5">Hash excerpt hanya metadata perubahan; tidak memuat konten sensitif.</p>
+</div>
+
 Status: Draft Initialization (To be sealed after hash manifest fill)  
 Purpose: Konsolidasi seluruh policy-as-code & lint guardrail agar traceable ke DEC & prinsip GP1–GP10 tanpa menghapus jejak strategi.
 

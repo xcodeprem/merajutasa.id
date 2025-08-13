@@ -3,14 +3,14 @@ version: 1
 min_similarity: 0.90          # DISC-TEXT-003 threshold (overlap coefficient)
 noise_similarity: 0.15        # Below this drift similarity -> downgrade to warning (noise)
 shadow_overlap_threshold: 0.60
-presence_enforcement: false   # When false, DISC-PRES-001 downgraded to WARN until real embeds exist
+presence_enforcement: true    # Wave 1: DISC-PRES-001 now enforced (errors become blocking)
 enforce_banned_phrase: true
 enable_optional_id_D7: false
 phase:
   i18n: false                 # If true, locale variants allowed (suppresses DISC-LOCALE-011)
 locale_codes: ["id"]          # Future list of permitted locale codes
 ordering:
-  enforce: false              # Enable DISC-ORDER-004 when actual render order available
+  enforce: true               # Ordering enforcement now active (DISC-ORDER-004 WARN level)
   canonical_order: ["D1","D2","D3","D5","D4","D6","D7"]
 html_checks:
   enable_interactive_wrap_check: false  # Enable DISC-HTML-010 when real HTML available

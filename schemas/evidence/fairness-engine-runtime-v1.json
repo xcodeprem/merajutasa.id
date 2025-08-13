@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Fairness Engine Runtime Report v1",
+  "type": "object",
+  "required": ["version","generated_utc","metrics","sequence"],
+  "properties": {
+    "version": {"type":"string"},
+    "generated_utc": {"type":"string"},
+    "params_version": {"type":["string","null"]},
+    "metrics": {
+      "type":"object",
+      "required":["total_snapshots","transitions","enters","reenters","exits","final_state","state_durations","state_distribution"],
+      "properties": {
+        "total_snapshots": {"type":"number"},
+        "transitions": {"type":"number"},
+        "enters": {"type":"number"},
+        "reenters": {"type":"number"},
+        "exits": {"type":"number"},
+        "final_state": {"type":"string"},
+        "state_durations": {"type":"object"},
+        "state_distribution": {"type":"object"}
+      }
+    },
+    "sequence": { "type":"array", "items": {"type":"number"} }
+  }
+}

@@ -1,5 +1,9 @@
 # MerajutASA – Integrity Credential Schema (Final Draft v1.0)
 
+<div data-disclaimer-block="hash_excerpt_module">
+<p data-disclaimer-id="D5">Hash excerpt hanya metadata perubahan; tidak memuat konten sensitif.</p>
+</div>
+
 Status: Ready for Governance Ratification (CIC-C)  
 Spec Version ID: cred-schema-v1.0 (locked upon decision log entry)  
 Related Master Spec: Public Multi‑Page Experience Master Specification v2.0 (“Hero Constellation”)  

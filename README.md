@@ -79,6 +79,17 @@ Lint principles.reference memaksa penjelasan dampak (Section 37 PR template).
 
 Aktivasi enforcement menunggu DEC khusus (DISC-DEC).
 
+### Canonical Disclaimer Block (Embed Once Per Core Page Group)
+
+<div data-disclaimer-block="hero_primary">
+<p data-disclaimer-id="D1">Equity Index & daftar under‑served bukan ranking kualitas—hanya sinyal pemerataan.</p>
+<p data-disclaimer-id="D2">Tidak ada data pribadi anak dikumpulkan / ditampilkan.</p>
+<p data-disclaimer-id="D3">Credential = status verifikasi; bukan skor performa.</p>
+<p data-disclaimer-id="D5">Hash excerpt hanya metadata perubahan; tidak memuat konten sensitif.</p>
+</div>
+
+Catatan: Blok di atas menjadi sumber tunggal untuk hero/landing; halaman lain cukup referensi tanpa menduplikasi baris secara verbatim.
+
 ---
 
 ## 6. Integritas & Hash Chain

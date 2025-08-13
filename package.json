@@ -20,8 +20,11 @@
     "fairness:generate-snapshots": "node tools/fairness/generate-equity-snapshots.js",
     "fairness:hysteresis-run": "node tools/fairness/hysteresis-engine.js",
     "fairness:sim": "node tools/fairness-sim.js",
+  "fairness:engine": "node tools/fairness-engine-runtime.js",
     "evidence:validate": "node tools/validate-evidence.js",
     "evidence:bundle": "node tools/evidence-bundle.js",
+  "evidence:collision": "node tools/evidence-collision-test.js",
+  "param:integrity": "node tools/param-integrity.js",
     "agent:trend": "node tools/agent-trend-summary.js",
     "pr:labels": "node tools/pr-label-advisor.js",
     "baseline:snapshot": "node tools/snapshot-governance-baseline.js"

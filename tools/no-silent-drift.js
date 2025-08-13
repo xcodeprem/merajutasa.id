@@ -43,6 +43,25 @@ async function main() {
     piiStatus = critical>0 ? 'ADVISORY' : 'PASS_STUB';
   }
 
+  // Gating thresholds (Wave 1 initial)
+  const thresholds = {
+    hype_high_max: 0,                              // any HIGH hype term -> fail
+    disclaimers_errors_allowed: 0,                 // when presence_enforcement true
+    freshness_required_status: 'PASS'              // freshness overall_status must be PASS
+  };
+
+  const freshnessStatus = freshness ? (freshness.summary?.overall_status || 'UNKNOWN') : 'MISSING';
+  const hypeHigh = hype?.severity_counts?.HIGH || 0;
+  const discErrors = disclaimers?.summary?.errors || 0;
+  const discEnforced = disclaimers?.summary?.presence_enforcement === true;
+
+  const gateChecks = [
+    { id:'HYPE_HIGH', passed: hypeHigh <= thresholds.hype_high_max, detail:{ high:hypeHigh, max:thresholds.hype_high_max } },
+    { id:'DISCLAIMERS_PRESENCE', passed: !discEnforced || discErrors <= thresholds.disclaimers_errors_allowed, detail:{ enforced:discEnforced, errors:discErrors } },
+    { id:'FRESHNESS', passed: freshnessStatus === thresholds.freshness_required_status, detail:{ status:freshnessStatus, required:thresholds.freshness_required_status } }
+  ];
+  const gateStatus = gateChecks.every(c=>c.passed) ? 'PASS' : 'FAIL';
+
   const report = {
     timestamp_utc: new Date().toISOString(),
     components: {
@@ -51,8 +70,8 @@ async function main() {
       hype: hypeStatus,
       disclaimers: discStatus,
       principles: principlesStatus,
-  pii: piiStatus,
-  freshness: freshness ? (freshness.summary?.overall_status || 'ADVISORY') : 'ADVISORY'
+      pii: piiStatus,
+      freshness: freshnessStatus
     },
     summary: {
       hype_hits: hype?.total_hits ?? 0,
@@ -60,14 +79,18 @@ async function main() {
       hype_high: hype?.severity_counts?.HIGH ?? 0,
       hype_medium: hype?.severity_counts?.MEDIUM ?? 0,
       hype_rule_counts: hype?.rule_counts || {},
-  param_mismatches: params?.mismatches ?? 0,
-  principles_entries: Array.isArray(principles) ? principles.length : 0,
-  pii_critical: pii?.summary?.critical_matches ?? 0,
-  pii_total: pii?.summary?.total_matches ?? 0,
-  disclaimers_errors: disclaimers?.summary?.errors ?? 0,
-  disclaimers_warnings: disclaimers?.summary?.warnings ?? 0,
-  disclaimers_rule_counts: disclaimers?.summary?.ruleCounts || {}
-    }
+      param_mismatches: params?.mismatches ?? 0,
+      principles_entries: Array.isArray(principles) ? principles.length : 0,
+      pii_critical: pii?.summary?.critical_matches ?? 0,
+      pii_total: pii?.summary?.total_matches ?? 0,
+      disclaimers_errors: disclaimers?.summary?.errors ?? 0,
+      disclaimers_warnings: disclaimers?.summary?.warnings ?? 0,
+      disclaimers_rule_counts: disclaimers?.summary?.ruleCounts || {},
+      gate_status: gateStatus,
+      gate_checks: gateChecks,
+      thresholds
+    },
+    gating: { version:'1.0', status: gateStatus, checks: gateChecks }
   };
   report.status = overallStatus(Object.values(report.components));
   await fs.writeFile('artifacts/no-silent-drift-report.json', JSON.stringify(report,null,2));

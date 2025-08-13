@@ -36,6 +36,14 @@
     "exists": true
   },
   {
+    "file": "fairness-engine-runtime-report.json",
+    "exists": true
+  },
+  {
+    "file": "evidence-collision-test.json",
+    "exists": true
+  },
+  {
     "file": "evidence-schema-validation.json",
     "exists": true
   }

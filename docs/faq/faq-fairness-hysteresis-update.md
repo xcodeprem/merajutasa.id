@@ -10,7 +10,7 @@ Q: Apa arti “severe” dan “consecutive”?
 A: “Severe” berarti rasio sekali jatuh di bawah 50%. “Consecutive” berarti dua snapshot berturut antara 50% dan <60%.
 
 Q: Apakah ini bentuk ranking?  
-A: Tidak. Ini bukan peringkat kualitas layanan, hanya indikator pemerataan pemenuhan (lihat Disclaimer D1).
+A: <span data-disclaimer-id="D1">Equity Index & daftar under‑served bukan ranking kualitas—hanya sinyal pemerataan.</span>
 
 Q: Bagaimana jika data harian hilang?  
 A: Snapshot tidak valid diabaikan dan tidak menghitung bukti consecutive.
@@ -19,3 +19,8 @@ Q: Kapan parameter bisa berubah?
 A: Setelah review 30 hari dengan data cukup, melalui keputusan governance baru (DEC baru), bukan perubahan diam-diam.
 
 End of FAQ.
+
+<div data-disclaimer-block="about_faq_data">
+<p data-disclaimer-id="D2">Tidak ada data pribadi anak dikumpulkan / ditampilkan.</p>
+<p data-disclaimer-id="D1">Equity Index & daftar under‑served bukan ranking kualitas—hanya sinyal pemerataan.</p>
+</div>

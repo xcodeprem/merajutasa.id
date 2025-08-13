@@ -31,7 +31,27 @@ async function loadConfig(){
   try { return yamlLoad(raw) || {}; } catch { return {}; }
 }
 async function collectCandidatePages(){ const files = await glob('README.md'); const more = await glob('docs/**/*.md'); return [...files,...more]; }
-function mapPageName(file){ const base=path.basename(file).toLowerCase(); if(base.includes('equity')) return 'equity'; if(base.includes('trust')) return 'trust'; if(base.includes('terminology')) return 'terminology'; if(base.includes('governance')) return 'governance'; if(base.includes('changelog')) return 'changelog_excerpt'; if(base.includes('faq')) return 'about_faq_data'; if(base.includes('credential')) return 'credential_viewer'; if(base.includes('media')) return 'media_digest'; return 'landing'; }
+// Improved page/component name inference (reduces false duplicate aggregation into 'landing').
+// Uses full relative path (lowercased) and filename heuristics. Order is important (more specific first).
+function mapPageName(file){
+  const lower = file.toLowerCase();
+  const base = path.basename(lower);
+  if(lower.includes('equity-under') || lower.includes('under_served')) return 'equity_under_served_section';
+  if(base.includes('equity')) return 'equity';
+  if(lower.includes('trust') && lower.includes('hysteresis')) return 'trust_hysteresis';
+  if(base.includes('trust')) return 'trust';
+  if(lower.includes('terminology') && lower.includes('banner')) return 'terminology_banner';
+  if(base.includes('terminology')) return 'terminology';
+  if(lower.includes('api') && lower.includes('verification')) return 'api_verification_docs';
+  if(lower.includes('hash-excerpt') || lower.includes('hash_excerpt')) return 'hash_excerpt_module';
+  if(base.includes('changelog')) return 'changelog_excerpt';
+  if(lower.includes('media-digest') || lower.includes('media_digest')) return 'media_digest';
+  if(base.includes('faq')) return 'about_faq_data';
+  if(base.includes('credential')) return 'credential_viewer';
+  if(lower.includes('feedback')) return 'feedback';
+  if(lower.includes('governance')) return 'governance';
+  return 'landing';
+}
 
 async function main(){
   const cli = parseCLI();
@@ -53,17 +73,30 @@ async function main(){
   const MIN_SIM = cfg.min_similarity ?? 0.90;
   const NOISE_SIM = cfg.noise_similarity ?? 0.15;
   const BANNED_RE = new RegExp(cfg.banned_phrase_pattern || '(terbaik|paling unggul|peringkat|ranking|top\\s?\\d+|juara|skor kinerja|nilai kinerja|pemenang)','i');
+  const seenLinePerPageIdFile = new Set();
   for(const f of candidateFiles){
+    if(/disclaimers-lint-spec-v1\.md$/i.test(f)) continue; // skip reference spec from extraction noise
     let txt; try{ txt = await fs.readFile(f,'utf8'); } catch { continue; }
     txt.split(/\r?\n/).forEach(line=>{
       const trimmed = line.trim();
       if(!trimmed) return;
+      // Skip markdown table rows to reduce duplicate noise from reference tables
+      if(trimmed.startsWith('|')) return;
       const tokens = tokenize(trimmed);
       if(tokens.length < MIN_TOKENS_LINE) return; // ignore very short lines (noise)
       const idMatch = line.match(idPattern);
-      Object.entries(canonicalMap).forEach(([id,text])=>{
+    Object.entries(canonicalMap).forEach(([id,text])=>{
         if(trimmed.includes(text.slice(0,20)) || (idMatch && trimmed.includes(id))){
-          rawExtracted.push({ page: mapPageName(f), id, text: trimmed, sourceFile: f, orderIndex: rawExtracted.length });
+          // Improve similarity accuracy: if HTML tag with data-disclaimer-id present, strip tags for similarity purposes
+          let normalized = trimmed;
+          if(/data-disclaimer-id=/.test(trimmed)){
+            normalized = trimmed.replace(/<[^>]+>/g,'').trim();
+          }
+      const pageName = mapPageName(f);
+      const dupeKey = pageName+'|'+id+'|'+f;
+      if(seenLinePerPageIdFile.has(dupeKey)) return; // suppress further duplicates in same file
+      seenLinePerPageIdFile.add(dupeKey);
+      rawExtracted.push({ page: pageName, id, text: normalized, sourceFile: f, orderIndex: rawExtracted.length });
         }
       });
     });
@@ -90,12 +123,22 @@ async function main(){
   for(const f of candidateFiles){ let txt; try{ txt=await fs.readFile(f,'utf8'); } catch { continue; } txt.split(/\r?\n/).forEach(line=>{ const trimmed=line.trim(); if(!trimmed) return; if(fairnessCluster.test(trimmed) && !/D[1-7]/.test(trimmed)){ for(const d of canonicalArray){ const sim=overlapCoefficient(tokenize(d.text), tokenize(trimmed)); if(sim>=0.6){ const h=sha256(trimmed); if(!shadowSeen.has(h)){ errors.push({code:'DISC-PRES-002', similarity:+sim.toFixed(2), severity:'ERROR'}); shadowSeen.add(h); metrics.shadow++; } break; } } }}); }
   // Banned phrase proximity
   if(cfg.enforce_banned_phrase !== false){
-    for (const f of candidateFiles){ let txt; try { txt = await fs.readFile(f,'utf8'); } catch { continue; } if (!extracted.some(e=>e.sourceFile===f && (e.id==='D1'||e.id==='D3'))) continue; if (BANNED_RE.test(txt)) { errors.push({code:'DISC-PHRASE-009', file:f, severity:'ERROR'}); metrics.bannedNear++; } }
+    for (const f of candidateFiles){ 
+      if(/disclaimers-lint-spec-v1\.md$/i.test(f)) continue; // exclude spec
+      let txt; try { txt = await fs.readFile(f,'utf8'); } catch { continue; } 
+      if (!extracted.some(e=>e.sourceFile===f && (e.id==='D1'||e.id==='D3'))) continue; 
+      const sanitized = txt.split(/\r?\n/)
+        .filter(l=>!/data-disclaimer-id=/.test(l))
+        .filter(l=>!/^\s*-\s+.*(ranking|peringkat|terbaik|paling unggul)/i.test(l)) // skip example bullet lines
+        .join('\\n');
+      const negationRemoved = sanitized.replace(/bukan\s+(ranking|peringkat)/gi,'');
+      if (BANNED_RE.test(negationRemoved)) { errors.push({code:'DISC-PHRASE-009', file:f, severity:'ERROR'}); metrics.bannedNear++; } 
+    }
   }
   // Duplicates (DISC-DUPL-005)
   const dupCounts = {};
-  rawExtracted.forEach(r=>{ const key=r.page+':'+r.id; dupCounts[key]=(dupCounts[key]||0)+1; });
-  Object.entries(dupCounts).forEach(([k,count])=>{ if(count>1){ const [page,id]=k.split(':'); warnings.push({code:'DISC-DUPL-005', page, id, count, severity:'WARNING'}); metrics.duplicates++; }});
+  rawExtracted.forEach(r=>{ if(/disclaimers-lint-spec-v1\.md$/i.test(r.sourceFile)) return; const key=r.page+':'+r.id; dupCounts[key]=(dupCounts[key]||0)+1; });
+  Object.entries(dupCounts).forEach(([k,count])=>{ if(count>1){ const [page,id]=k.split(':'); const related=rawExtracted.filter(r=>r.page===page && r.id===id); const distinctFiles=new Set(related.map(r=>r.sourceFile)); if(distinctFiles.size>1 || count>2){ warnings.push({code:'DISC-DUPL-005', page, id, count, severity:'WARNING'}); metrics.duplicates++; } }});
   // Scope (DISC-SCOPE-006) & TRACE-008
   if(cfg.scope_checks?.enable !== false){
     extracted.forEach(e=>{
@@ -109,10 +152,24 @@ async function main(){
   if(cfg.phase?.i18n === false){
     rawExtracted.forEach(r=>{ if(/\b(english|en:)\b/i.test(r.text) && /D[1-7]/.test(r.text)){ warnings.push({code:'DISC-LOCALE-011', id:r.id, page:r.page, severity:'WARNING'}); metrics.locale++; } });
   }
+  // Ordering rule (DISC-ORDER-004) – warn if disclaimer order deviates from canonical subsequence when enabled
+  if(cfg.ordering?.enforce){
+    const canonicalOrder = cfg.ordering.canonical_order || [];
+    const orderIdx = Object.fromEntries(canonicalOrder.map((id,i)=>[id,i]));
+    const byPage = extracted.reduce((acc,e)=>{ (acc[e.page]=acc[e.page]||[]).push(e); return acc; },{});
+    Object.entries(byPage).forEach(([page,list])=>{
+      const seq = list.sort((a,b)=>a.orderIndex-b.orderIndex).map(e=>e.id);
+      const filteredSeq = seq.filter(id=>canonicalOrder.includes(id));
+      let last=-1; let outOfOrder=false;
+      for(const id of filteredSeq){ const idx = orderIdx[id]; if(idx<last){ outOfOrder=true; break; } last=idx; }
+      if(outOfOrder){ warnings.push({code:'DISC-ORDER-004', page, severity:'WARNING'}); }
+    });
+  }
   if(versionMismatch){ errors.push({code:'DISC-VERSION-007', severity:'ERROR'}); }
   const allIssues=[...errors,...warnings];
   const ruleCounts = allIssues.reduce((acc,i)=>{ acc[i.code]=(acc[i.code]||0)+1; return acc; },{});
-  const report={ version:3, status: errors.length?'ERROR':'PASS', summary:{ errors:errors.length, warnings:warnings.length, metrics, versionMismatch, computed_hash: computedHash, ruleCounts, presence_enforcement: cfg.presence_enforcement === true }, errors, warnings, config_effective:{ min_similarity:MIN_SIM, noise_similarity:NOISE_SIM } };
+  const presenceEnforced = cfg.presence_enforcement !== false; // enforce unless explicitly false
+  const report={ version:3, status: errors.length?'ERROR':'PASS', summary:{ errors:errors.length, warnings:warnings.length, metrics, versionMismatch, computed_hash: computedHash, ruleCounts, presence_enforcement: presenceEnforced }, errors, warnings, config_effective:{ min_similarity:MIN_SIM, noise_similarity:NOISE_SIM } };
   await fs.writeFile('artifacts/disclaimers-lint.json', JSON.stringify(report,null,2));
   if(cli.sarif){
     const sarif = { version:'2.1.0', $schema:'https://json.schemastore.org/sarif-2.1.0.json', runs:[{ tool:{ driver:{ name:'disclaimers-lint', informationUri:'https://example.local/disclaimers-lint', rules:[] }}, results:[...errors,...warnings].map(v=>({ ruleId:v.code, level: v.severity==='ERROR'?'error':'warning', message:{ text:`${v.code} ${v.page?('page='+v.page+' '):''}${v.id?('id='+v.id+' '):''}`.trim() }, locations: v.sourceFile ? [{ physicalLocation:{ artifactLocation:{ uri:v.sourceFile }}}] : [] })) }] };

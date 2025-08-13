@@ -9,6 +9,10 @@ Related Master Spec Sections:
 - Hysteresis Options Decision Pack (methodology narrative)  
 NON-DESTRUCTIVE: Dokumen ini MENAMBAHKAN detail; tidak menghapus strategi terdahulu. Semua ID disclaimers (D1–D7) tetap sama sebagaimana didefinisikan sebelumnya.
 
+<div data-disclaimer-block="governance">
+<p data-disclaimer-id="D5">Hash excerpt hanya metadata perubahan; tidak memuat konten sensitif.</p>
+</div>
+
 > TUJUAN  
 Menetapkan standar otomatis (lint + policy-as-code) untuk memastikan setiap halaman, komponen, dan artefak publik yang diwajibkan menampilkan, merujuk, atau mengikat disclaimers menengah (D1–D7) secara konsisten, tidak hilang karena refactor UI, dan tidak terjadi drift terminologi / framing yang melemahkan integritas naratif non-ranking, privacy-by-architecture, serta anti-hype.
 

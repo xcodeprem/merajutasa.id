@@ -35,6 +35,8 @@ const EVIDENCE_MAP = [
   { id:'A7', path:'artifacts/fairness-sim-scenarios.json', schema:'schemas/evidence/fairness-sim-scenarios-v1.json', category:'fairness-sim' },
   { id:'A7R', path:'artifacts/fairness-sim-report.json', schema:'schemas/evidence/fairness-sim-report-v1.json', category:'fairness-sim' },
   { id:'A8', path:'artifacts/no-silent-drift-report.json', schema:'schemas/evidence/no-silent-drift-v1.json', category:'aggregator' },
+  { id:'A9', path:'artifacts/fairness-engine-runtime-report.json', schema:'schemas/evidence/fairness-engine-runtime-v1.json', category:'fairness-runtime' },
+  { id:'A10', path:'artifacts/evidence-collision-test.json', schema:'schemas/evidence/evidence-collision-test-v1.json', category:'governance' },
   { id:'SCHEMA_VALIDATION', path:'artifacts/evidence-schema-validation.json', schema:null, category:'meta' }
 ];
 

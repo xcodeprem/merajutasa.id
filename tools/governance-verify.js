@@ -8,7 +8,8 @@
  *  4. disclaimers-lint – ADVISORY (bootstrap tolerance via DISC_BOOTSTRAP env)
  *  5. principles-impact – NON-CRITICAL (informational baseline)
  *  6. evidence-freshness – NON-CRITICAL (advisory freshness signals)
- *  7. no-silent-drift – NON-CRITICAL aggregator
+ *  7. evidence-collision-test – CRITICAL (DB-02 hash prefix uniqueness)
+ *  8. no-silent-drift – NON-CRITICAL aggregator (now includes gating matrix)
  *
  * Exit policy (Wave 0): any CRITICAL step non-zero exit -> overall failure; ADVISORY steps allowed to continue.
  */
@@ -20,9 +21,10 @@ const STEPS = [
   { name: 'spec-hash-diff', cmd: ['node','tools/spec-hash-diff.js','--mode=verify'], critical: true },
   { name: 'param-integrity', cmd: ['node','tools/param-integrity.js'], critical: true },
   { name: 'hype-lint', cmd: ['node','tools/hype-lint.js'], advisory: true },
-  { name: 'disclaimers-lint', cmd: ['node','tools/disclaimers-lint.js'], advisory: true },
+  { name: 'disclaimers-lint', cmd: ['node','tools/disclaimers-lint.js'], critical: true },
   { name: 'principles-impact', cmd: ['node','tools/principles-impact.js'], advisory: true },
   { name: 'evidence-freshness', cmd: ['node','tools/evidence-freshness.js'], advisory: true },
+  { name: 'evidence-collision-test', cmd: ['node','tools/evidence-collision-test.js'], critical: true },
   { name: 'no-silent-drift', cmd: ['node','tools/no-silent-drift.js'], advisory: true }
 ];
 

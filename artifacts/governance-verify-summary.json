@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-08-13T08:43:33.826Z",
+  "timestamp": "2025-08-13T08:57:53.124Z",
   "artifacts": {
     "specHash": {
       "mode": "verify",
-      "timestamp_utc": "2025-08-13T08:43:33Z",
+      "timestamp_utc": "2025-08-13T08:57:52Z",
       "updated": [],
       "unchanged": [
         "docs/roadmap/roadmap-master-v1.md",
@@ -57,7 +57,7 @@
     "params": {
       "version": 3,
       "gating_mode": "hard_fail_on_mismatch_or_missing",
-      "generated_utc": "2025-08-13T08:43:33.249Z",
+      "generated_utc": "2025-08-13T08:57:52.537Z",
       "status": "PASS",
       "summary_counts": {
         "MATCH": 15
@@ -325,7 +325,7 @@
     },
     "hype": {
       "version": 1,
-      "generated_utc": "2025-08-13T08:43:33.364Z",
+      "generated_utc": "2025-08-13T08:57:52.638Z",
       "file_count": 37,
       "total_hits": 120,
       "max_severity": "HIGH",
@@ -1547,13 +1547,13 @@
       "version": 3,
       "status": "ERROR",
       "summary": {
-        "errors": 17,
+        "errors": 18,
         "warnings": 19,
         "metrics": {
           "missingIds": 20,
           "drift": 1,
           "shadow": 0,
-          "bannedNear": 3,
+          "bannedNear": 4,
           "duplicates": 11,
           "scope": 7,
           "locale": 0
@@ -1563,7 +1563,7 @@
         "ruleCounts": {
           "DISC-PRES-001": 13,
           "DISC-TEXT-003": 2,
-          "DISC-PHRASE-009": 3,
+          "DISC-PHRASE-009": 4,
           "DISC-DUPL-005": 11,
           "DISC-SCOPE-006": 7
         },
@@ -1690,7 +1690,7 @@
         },
         {
           "code": "DISC-PHRASE-009",
-          "file": "docs\\governance\\disclaimers-lint-spec-v1.md",
+          "file": "docs\\integrity\\credential-schema-final-v1.md",
           "severity": "ERROR"
         },
         {
@@ -1700,7 +1700,12 @@
         },
         {
           "code": "DISC-PHRASE-009",
-          "file": "docs\\integrity\\credential-schema-final-v1.md",
+          "file": "docs\\fairness\\hysteresis-public-methodology-fragment-v1.md",
+          "severity": "ERROR"
+        },
+        {
+          "code": "DISC-PHRASE-009",
+          "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
           "severity": "ERROR"
         }
       ],
@@ -1840,7 +1845,7 @@
     },
     "principles": {
       "version": 2,
-      "generated_utc": "2025-08-13T08:43:33.707Z",
+      "generated_utc": "2025-08-13T08:57:52.953Z",
       "principles": [
         {
           "principle": "GP1",
@@ -2368,6 +2373,30 @@
               "domain": "other"
             },
             {
+              "file": "docs\\principles\\GP1-GP10-index.md",
+              "line": 16,
+              "snippet": "| GP6 | Outcome Honesty | Tidak mempresentasikan sinyal sebagai ranking / kualitas; menghindari misframing performa. | Ethical Framing | §14 Fairness Narrative, §30 Equity UI | No “top”, disclaimers R",
+              "pattern": "outcome honesty",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\principles\\GP1-GP10-index.md",
+              "line": 16,
+              "snippet": "| GP6 | Outcome Honesty | Tidak mempresentasikan sinyal sebagai ranking / kualitas; menghindari misframing performa. | Ethical Framing | §14 Fairness Narrative, §30 Equity UI | No “top”, disclaimers R",
+              "pattern": "non-?ranking",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\principles\\GP1-GP10-index.md",
+              "line": 19,
+              "snippet": "| GP9 | Non-Ranking Fairness | Label under‑served & equity index tidak memeringkat; hanya sinyal pemerataan dengan hysteresis stabil untuk menekan noise. | Fairness Stability | §14 Fairness, §42 Hyste",
+              "pattern": "non-?ranking",
+              "changed": false,
+              "domain": "other"
+            },
+            {
               "file": "docs\\privacy\\pii-pattern-library-v1.md",
               "line": 6,
               "snippet": "NON-DESTRUCTIVE: Dokumen ini MENAMBAHKAN detail; tidak menghapus strategi/konstraint sebelumnya (GP1 Privacy-by-Architecture, GP6 Outcome Honesty, GP9 Non-Ranking).",
@@ -2388,30 +2417,6 @@
               "line": 20,
               "snippet": "| GP6 Outcome Honesty | Tidak over-claim (pattern “100% akurat”); jelaskan false positive possibility. |",
               "pattern": "outcome honesty",
-              "changed": false,
-              "domain": "other"
-            },
-            {
-              "file": "docs\\privacy\\pii-pattern-library-v1.md",
-              "line": 21,
-              "snippet": "| GP9 Non-Ranking Fairness | Scanner tidak membuat penilaian entitas; hanya sanitasi. |",
-              "pattern": "non-?ranking",
-              "changed": false,
-              "domain": "other"
-            },
-            {
-              "file": "docs\\principles\\GP1-GP10-index.md",
-              "line": 16,
-              "snippet": "| GP6 | Outcome Honesty | Tidak mempresentasikan sinyal sebagai ranking / kualitas; menghindari misframing performa. | Ethical Framing | §14 Fairness Narrative, §30 Equity UI | No “top”, disclaimers R",
-              "pattern": "outcome honesty",
-              "changed": false,
-              "domain": "other"
-            },
-            {
-              "file": "docs\\principles\\GP1-GP10-index.md",
-              "line": 16,
-              "snippet": "| GP6 | Outcome Honesty | Tidak mempresentasikan sinyal sebagai ranking / kualitas; menghindari misframing performa. | Ethical Framing | §14 Fairness Narrative, §30 Equity UI | No “top”, disclaimers R",
-              "pattern": "non-?ranking",
               "changed": false,
               "domain": "other"
             }
@@ -2808,9 +2813,9 @@
               "domain": "other"
             },
             {
-              "file": "docs\\integrity\\credential-schema-final-v1.md",
-              "line": 111,
-              "snippet": "| Predictive / Risk | riskScore, vulnerabilityIndex | Ethical hazard, not validated |",
+              "file": "docs\\master-spec\\master-spec-v2.0.md",
+              "line": 44,
+              "snippet": "§35 Ethical & Copy Guidelines (Disclaimers, Anti-Hype – GP5, GP6, GP7)",
               "pattern": "ethic",
               "changed": false,
               "domain": "other"
@@ -2827,7 +2832,7 @@
       }
     },
     "drift": {
-      "timestamp_utc": "2025-08-13T08:43:33.818Z",
+      "timestamp_utc": "2025-08-13T08:57:53.117Z",
       "components": {
         "spec_hash": "PASS",
         "params": "PASS",
@@ -2852,15 +2857,77 @@
         "principles_entries": 0,
         "pii_critical": 0,
         "pii_total": 0,
-        "disclaimers_errors": 17,
+        "disclaimers_errors": 18,
         "disclaimers_warnings": 19,
         "disclaimers_rule_counts": {
           "DISC-PRES-001": 13,
           "DISC-TEXT-003": 2,
-          "DISC-PHRASE-009": 3,
+          "DISC-PHRASE-009": 4,
           "DISC-DUPL-005": 11,
           "DISC-SCOPE-006": 7
+        },
+        "gate_status": "FAIL",
+        "gate_checks": [
+          {
+            "id": "HYPE_HIGH",
+            "passed": false,
+            "detail": {
+              "high": 9,
+              "max": 0
+            }
+          },
+          {
+            "id": "DISCLAIMERS_PRESENCE",
+            "passed": true,
+            "detail": {
+              "enforced": false,
+              "errors": 18
+            }
+          },
+          {
+            "id": "FRESHNESS",
+            "passed": true,
+            "detail": {
+              "status": "PASS",
+              "required": "PASS"
+            }
+          }
+        ],
+        "thresholds": {
+          "hype_high_max": 0,
+          "disclaimers_errors_allowed": 0,
+          "freshness_required_status": "PASS"
         }
+      },
+      "gating": {
+        "version": "1.0",
+        "status": "FAIL",
+        "checks": [
+          {
+            "id": "HYPE_HIGH",
+            "passed": false,
+            "detail": {
+              "high": 9,
+              "max": 0
+            }
+          },
+          {
+            "id": "DISCLAIMERS_PRESENCE",
+            "passed": true,
+            "detail": {
+              "enforced": false,
+              "errors": 18
+            }
+          },
+          {
+            "id": "FRESHNESS",
+            "passed": true,
+            "detail": {
+              "status": "PASS",
+              "required": "PASS"
+            }
+          }
+        ]
       },
       "status": "ADVISORY"
     }

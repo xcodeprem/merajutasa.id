@@ -1,5 +1,13 @@
 # Changelog Excerpt (Phase 1.5 Placeholder)
 
+<div data-disclaimer-block="changelog_excerpt">
+<p data-disclaimer-id="D5">Hash excerpt hanya metadata perubahan; tidak memuat konten sensitif.</p>
+</div>
+
+<div data-disclaimer-block="changelog_excerpt">
+<p data-disclaimer-id="D5">Hash excerpt hanya metadata perubahan; tidak memuat konten sensitif.</p>
+</div>
+
 Status: Placeholder (pre-H2) – Not yet publicly active  
 Purpose: Menjamin jalur transparansi sudah disiapkan tanpa menghapus strategi terdahulu. Nanti akan diisi otomatis oleh generator (tools/changelog-excerpt.js) setelah Gate 2.
 

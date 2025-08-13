@@ -123,14 +123,14 @@ Legend: G=Good (operational), A=Amber (partial / advisory), R=Red (not started),
 | Hash Ledger & DEC Canonicalization | G | 0 violations |
 | Parameter Integrity | G | All MATCH (Wave1 hard-fail gating active) |
 | Governance Orchestrator | G | Fail-fast in place |
-| Disclaimers Enforcement | A | Advisory only (ERROR output tolerated) |
+| Disclaimers Enforcement | R→ENF | presence_enforcement=TRUE; currently failing until pages embed IDs |
 | Hype Control | A | Baseline only; no thresholds |
 | Terminology Trigger | A | Stage1; Stage2 pending metrics |
 | Revocation Prep | A | Codes enumerated; no subsystem |
 | Privacy Scanner Runtime | G | v1 scanning + escalation logic prepared |
-| Fairness Hysteresis Runtime | B | Parameters ratified; engine integration next |
+| Fairness Hysteresis Runtime | G | Runtime harness + metrics (A9 evidence) |
 | Evidence Minimum Set | G | Defined & generated |
-| Drift Aggregation Gating | A | Advisory (no hard fail matrix yet) |
+| Drift Aggregation Gating | A→Matrix | PASS/FAIL matrix (hype/disclaimers/freshness) present |
 
 ---
 
@@ -179,10 +179,10 @@ Contains SHA256 for governance-verify summary + spec-hash-diff + param-integrity
 ## 12. SHORT DIRECT ACTION LIST FOR WAVE 1 KICKOFF
 
 1. (DONE) Extend param-integrity (added D7 default, terminology trigger formula parse, revocation codes + count) – mismatch/missing now hard-fail.
-2. Turn on presence_enforcement flag (staged) + reduce duplicates (dedupe heuristics) in disclaimers-lint.
-3. Add PASS/FAIL matrix to no-silent-drift (define gating thresholds: hype HIGH=0, disclaimers status=PASS, freshness age <24h).
-4. Implement fairness engine execution harness (state machine real run) & record transition metrics.
-5. Introduce evidence collision sanity test for hash prefix length (DB-02) & add to governance-verify.
+2. (DONE) presence_enforcement flag turned ON (now critical) + plan for duplicate suppression.
+3. (DONE) PASS/FAIL matrix added to no-silent-drift (thresholds: hype HIGH=0, enforced disclaimers errors=0, freshness=PASS).
+4. (DONE) Fairness runtime engine harness implemented (state distribution & transitions metrics A9 evidence).
+5. (DONE) Evidence collision test integrated (A10 evidence, CRITICAL DB-02).
 
 ---
 

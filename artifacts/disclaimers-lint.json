@@ -2,150 +2,35 @@
   "version": 3,
   "status": "ERROR",
   "summary": {
-    "errors": 17,
-    "warnings": 19,
+    "errors": 4,
+    "warnings": 10,
     "metrics": {
-      "missingIds": 20,
-      "drift": 1,
+      "missingIds": 0,
+      "drift": 0,
       "shadow": 0,
-      "bannedNear": 3,
-      "duplicates": 11,
-      "scope": 7,
+      "bannedNear": 4,
+      "duplicates": 4,
+      "scope": 6,
       "locale": 0
     },
     "versionMismatch": false,
     "computed_hash": "10c03b7fc7c7543399d1c2ce9bf121ec5e7fb46ddee876b286fdadde035089d0",
     "ruleCounts": {
-      "DISC-PRES-001": 13,
-      "DISC-TEXT-003": 2,
-      "DISC-PHRASE-009": 3,
-      "DISC-DUPL-005": 11,
-      "DISC-SCOPE-006": 7
+      "DISC-PHRASE-009": 4,
+      "DISC-DUPL-005": 4,
+      "DISC-SCOPE-006": 6
     },
-    "presence_enforcement": false
+    "presence_enforcement": true
   },
   "errors": [
     {
-      "code": "DISC-PRES-001",
-      "page": "equity",
-      "missing": [
-        "D1",
-        "D2"
-      ],
-      "severity": "ERROR"
-    },
-    {
-      "code": "DISC-PRES-001",
-      "page": "equity_under_served_section",
-      "missing": [
-        "D1"
-      ],
-      "severity": "ERROR"
-    },
-    {
-      "code": "DISC-PRES-001",
-      "page": "trust",
-      "missing": [
-        "D2",
-        "D3",
-        "D5"
-      ],
-      "severity": "ERROR"
-    },
-    {
-      "code": "DISC-PRES-001",
-      "page": "trust_hysteresis",
-      "missing": [
-        "D1"
-      ],
-      "severity": "ERROR"
-    },
-    {
-      "code": "DISC-PRES-001",
-      "page": "governance",
-      "missing": [
-        "D5"
-      ],
-      "severity": "ERROR"
-    },
-    {
-      "code": "DISC-PRES-001",
-      "page": "terminology",
-      "missing": [
-        "D6",
-        "D2"
-      ],
-      "severity": "ERROR"
-    },
-    {
-      "code": "DISC-PRES-001",
-      "page": "terminology_banner",
-      "missing": [
-        "D6"
-      ],
-      "severity": "ERROR"
-    },
-    {
-      "code": "DISC-PRES-001",
-      "page": "feedback",
-      "missing": [
-        "D2"
-      ],
-      "severity": "ERROR"
-    },
-    {
-      "code": "DISC-PRES-001",
-      "page": "hash_excerpt_module",
-      "missing": [
-        "D5"
-      ],
-      "severity": "ERROR"
-    },
-    {
-      "code": "DISC-PRES-001",
-      "page": "media_digest",
-      "missing": [
-        "D4",
-        "D1",
-        "D2"
-      ],
-      "severity": "ERROR"
-    },
-    {
-      "code": "DISC-PRES-001",
-      "page": "about_faq_data",
-      "missing": [
-        "D2"
-      ],
-      "severity": "ERROR"
-    },
-    {
-      "code": "DISC-PRES-001",
-      "page": "api_verification_docs",
-      "missing": [
-        "D5",
-        "D3"
-      ],
-      "severity": "ERROR"
-    },
-    {
-      "code": "DISC-PRES-001",
-      "page": "changelog_excerpt",
-      "missing": [
-        "D5"
-      ],
-      "severity": "ERROR"
-    },
-    {
-      "code": "DISC-TEXT-003",
-      "id": "D1",
-      "page": "about_faq_data",
-      "similarity": 0.2,
+      "code": "DISC-PHRASE-009",
+      "file": "README.md",
       "severity": "ERROR"
     },
     {
       "code": "DISC-PHRASE-009",
-      "file": "docs\\governance\\disclaimers-lint-spec-v1.md",
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
       "severity": "ERROR"
     },
     {
@@ -155,87 +40,30 @@
     },
     {
       "code": "DISC-PHRASE-009",
-      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "file": "docs\\governance\\dec\\DEC-20250812-02-hysteresis-adoption.md",
       "severity": "ERROR"
     }
   ],
   "warnings": [
     {
-      "code": "DISC-TEXT-003",
-      "id": "D1",
-      "page": "credential_viewer",
-      "similarity": 0.1,
-      "severity": "WARNING",
-      "note": "Below noise threshold (<0.15) likely spurious match"
-    },
-    {
       "code": "DISC-DUPL-005",
       "page": "landing",
       "id": "D1",
-      "count": 55,
+      "count": 5,
       "severity": "WARNING"
     },
     {
       "code": "DISC-DUPL-005",
       "page": "landing",
       "id": "D7",
-      "count": 30,
+      "count": 4,
       "severity": "WARNING"
     },
     {
       "code": "DISC-DUPL-005",
       "page": "landing",
       "id": "D2",
-      "count": 40,
-      "severity": "WARNING"
-    },
-    {
-      "code": "DISC-DUPL-005",
-      "page": "landing",
-      "id": "D3",
-      "count": 22,
-      "severity": "WARNING"
-    },
-    {
-      "code": "DISC-DUPL-005",
-      "page": "landing",
-      "id": "D4",
-      "count": 7,
-      "severity": "WARNING"
-    },
-    {
-      "code": "DISC-DUPL-005",
-      "page": "landing",
-      "id": "D5",
-      "count": 16,
-      "severity": "WARNING"
-    },
-    {
-      "code": "DISC-DUPL-005",
-      "page": "landing",
-      "id": "D6",
-      "count": 7,
-      "severity": "WARNING"
-    },
-    {
-      "code": "DISC-DUPL-005",
-      "page": "credential_viewer",
-      "id": "D1",
       "count": 3,
-      "severity": "WARNING"
-    },
-    {
-      "code": "DISC-DUPL-005",
-      "page": "credential_viewer",
-      "id": "D3",
-      "count": 2,
-      "severity": "WARNING"
-    },
-    {
-      "code": "DISC-DUPL-005",
-      "page": "credential_viewer",
-      "id": "D7",
-      "count": 2,
       "severity": "WARNING"
     },
     {
@@ -253,26 +81,14 @@
     },
     {
       "code": "DISC-SCOPE-006",
-      "page": "landing",
-      "id": "D4",
-      "severity": "WARNING"
-    },
-    {
-      "code": "DISC-SCOPE-006",
-      "page": "landing",
-      "id": "D6",
+      "page": "credential_viewer",
+      "id": "D5",
       "severity": "WARNING"
     },
     {
       "code": "DISC-SCOPE-006",
       "page": "credential_viewer",
       "id": "D1",
-      "severity": "WARNING"
-    },
-    {
-      "code": "DISC-SCOPE-006",
-      "page": "credential_viewer",
-      "id": "D5",
       "severity": "WARNING"
     },
     {
@@ -285,6 +101,12 @@
       "code": "DISC-SCOPE-006",
       "page": "governance",
       "id": "D7",
+      "severity": "WARNING"
+    },
+    {
+      "code": "DISC-SCOPE-006",
+      "page": "governance",
+      "id": "D1",
       "severity": "WARNING"
     }
   ],

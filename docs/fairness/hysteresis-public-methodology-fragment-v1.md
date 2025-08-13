@@ -20,6 +20,10 @@ Disclaimers relevan:
 - D1: Equity Index & daftar under‑served bukan ranking kualitas—hanya sinyal pemerataan.
 - D2: Tidak ada data pribadi anak dikumpulkan / ditampilkan.
 
+<div data-disclaimer-block="trust_hysteresis">
+<p data-disclaimer-id="D1">Equity Index & daftar under‑served bukan ranking kualitas—hanya sinyal pemerataan.</p>
+</div>
+
 Audit & Verifiability:
 
 - Fragment ini di-hash; hash tercantum di manifest integritas.

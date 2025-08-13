@@ -1,5 +1,5 @@
 {
-  "timestamp_utc": "2025-08-13T08:43:33.818Z",
+  "timestamp_utc": "2025-08-13T08:57:53.117Z",
   "components": {
     "spec_hash": "PASS",
     "params": "PASS",
@@ -24,15 +24,77 @@
     "principles_entries": 0,
     "pii_critical": 0,
     "pii_total": 0,
-    "disclaimers_errors": 17,
+    "disclaimers_errors": 18,
     "disclaimers_warnings": 19,
     "disclaimers_rule_counts": {
       "DISC-PRES-001": 13,
       "DISC-TEXT-003": 2,
-      "DISC-PHRASE-009": 3,
+      "DISC-PHRASE-009": 4,
       "DISC-DUPL-005": 11,
       "DISC-SCOPE-006": 7
+    },
+    "gate_status": "FAIL",
+    "gate_checks": [
+      {
+        "id": "HYPE_HIGH",
+        "passed": false,
+        "detail": {
+          "high": 9,
+          "max": 0
+        }
+      },
+      {
+        "id": "DISCLAIMERS_PRESENCE",
+        "passed": true,
+        "detail": {
+          "enforced": false,
+          "errors": 18
+        }
+      },
+      {
+        "id": "FRESHNESS",
+        "passed": true,
+        "detail": {
+          "status": "PASS",
+          "required": "PASS"
+        }
+      }
+    ],
+    "thresholds": {
+      "hype_high_max": 0,
+      "disclaimers_errors_allowed": 0,
+      "freshness_required_status": "PASS"
     }
+  },
+  "gating": {
+    "version": "1.0",
+    "status": "FAIL",
+    "checks": [
+      {
+        "id": "HYPE_HIGH",
+        "passed": false,
+        "detail": {
+          "high": 9,
+          "max": 0
+        }
+      },
+      {
+        "id": "DISCLAIMERS_PRESENCE",
+        "passed": true,
+        "detail": {
+          "enforced": false,
+          "errors": 18
+        }
+      },
+      {
+        "id": "FRESHNESS",
+        "passed": true,
+        "detail": {
+          "status": "PASS",
+          "required": "PASS"
+        }
+      }
+    ]
   },
   "status": "ADVISORY"
 }
