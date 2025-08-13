@@ -1,10 +1,8 @@
 {
-  "mode": "report-only",
-  "timestamp_utc": "2025-08-13T02:46:47Z",
+  "mode": "verify",
+  "timestamp_utc": "2025-08-13T02:51:11Z",
   "updated": [],
-  "unchanged": [],
-  "placeholders_sealed": [],
-  "placeholders_remaining": [
+  "unchanged": [
     "docs/roadmap/roadmap-master-v1.md",
     "docs/fairness/hysteresis-config-v1.yml",
     "docs/fairness/hysteresis-public-methodology-fragment-v1.md",
@@ -38,172 +36,13 @@
     "docs/governance/dec/DEC-20250813-01-known-debt-register.md",
     "docs/onboarding/agent-role-policy-v1.md"
   ],
-  "violations": [
-    {
-      "code": "PLACEHOLDER_AFTER_SEAL",
-      "path": "docs/roadmap/roadmap-master-v1.md",
-      "detail": "Placeholder remained post-freeze"
-    },
-    {
-      "code": "PLACEHOLDER_AFTER_SEAL",
-      "path": "docs/fairness/hysteresis-config-v1.yml",
-      "detail": "Placeholder remained post-freeze"
-    },
-    {
-      "code": "PLACEHOLDER_AFTER_SEAL",
-      "path": "docs/fairness/hysteresis-public-methodology-fragment-v1.md",
-      "detail": "Placeholder remained post-freeze"
-    },
-    {
-      "code": "PLACEHOLDER_AFTER_SEAL",
-      "path": "docs/fairness/hysteresis-state-machine-transitions.md",
-      "detail": "Placeholder remained post-freeze"
-    },
-    {
-      "code": "PLACEHOLDER_AFTER_SEAL",
-      "path": "docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md",
-      "detail": "Placeholder remained post-freeze"
-    },
-    {
-      "code": "PLACEHOLDER_AFTER_SEAL",
-      "path": "docs/governance/dec/DEC-20250812-03-principles-reference-activation.md",
-      "detail": "Placeholder remained post-freeze"
-    },
-    {
-      "code": "PLACEHOLDER_AFTER_SEAL",
-      "path": "docs/governance/README-decision-log-process.md",
-      "detail": "Placeholder remained post-freeze"
-    },
-    {
-      "code": "PLACEHOLDER_AFTER_SEAL",
-      "path": "docs/governance/lint-principles-reference-spec-v1.md",
-      "detail": "Placeholder remained post-freeze"
-    },
-    {
-      "code": "PLACEHOLDER_AFTER_SEAL",
-      "path": "docs/governance/todo-post-DEC-20250812-02.md",
-      "detail": "Placeholder remained post-freeze"
-    },
-    {
-      "code": "PLACEHOLDER_AFTER_SEAL",
-      "path": "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
-      "detail": "Placeholder remained post-freeze"
-    },
-    {
-      "code": "PLACEHOLDER_AFTER_SEAL",
-      "path": ".github/pull_request_template.md",
-      "detail": "Placeholder remained post-freeze"
-    },
-    {
-      "code": "PLACEHOLDER_AFTER_SEAL",
-      "path": "docs/master-spec-deltas/delta-master-spec-v2-DEC-20250812-02.md",
-      "detail": "Placeholder remained post-freeze"
-    },
-    {
-      "code": "PLACEHOLDER_AFTER_SEAL",
-      "path": "docs/principles/GP1-GP10-index.md",
-      "detail": "Placeholder remained post-freeze"
-    },
-    {
-      "code": "PLACEHOLDER_AFTER_SEAL",
-      "path": "docs/privacy/pii-pattern-library-v1.md",
-      "detail": "Placeholder remained post-freeze"
-    },
-    {
-      "code": "PLACEHOLDER_AFTER_SEAL",
-      "path": "docs/analytics/dashboard-widgets-hysteresis-initial.md",
-      "detail": "Placeholder remained post-freeze"
-    },
-    {
-      "code": "PLACEHOLDER_AFTER_SEAL",
-      "path": "docs/tests/hysteresis-test-plan-v1.md",
-      "detail": "Placeholder remained post-freeze"
-    },
-    {
-      "code": "PLACEHOLDER_AFTER_SEAL",
-      "path": "docs/faq/faq-fairness-hysteresis-update.md",
-      "detail": "Placeholder remained post-freeze"
-    },
-    {
-      "code": "PLACEHOLDER_AFTER_SEAL",
-      "path": "docs/status/progress-recap-latest-2025-08-12T035901Z.md",
-      "detail": "Placeholder remained post-freeze"
-    },
-    {
-      "code": "PLACEHOLDER_AFTER_SEAL",
-      "path": "docs/governance/disclaimers-lint-spec-v1.md",
-      "detail": "Placeholder remained post-freeze"
-    },
-    {
-      "code": "PLACEHOLDER_AFTER_SEAL",
-      "path": "docs/integrity/credential-schema-final-v1.md",
-      "detail": "Placeholder remained post-freeze"
-    },
-    {
-      "code": "PLACEHOLDER_AFTER_SEAL",
-      "path": "docs/analytics/event-schema-canonical-v1.md",
-      "detail": "Placeholder remained post-freeze"
-    },
-    {
-      "code": "PLACEHOLDER_AFTER_SEAL",
-      "path": "docs/master-spec/master-spec-v2.0.md",
-      "detail": "Placeholder remained post-freeze"
-    },
-    {
-      "code": "PLACEHOLDER_AFTER_SEAL",
-      "path": "docs/transparency/changelog-excerpt-phase1.5.md",
-      "detail": "Placeholder remained post-freeze"
-    },
-    {
-      "code": "PLACEHOLDER_AFTER_SEAL",
-      "path": "docs/governance/policy-index-v1.md",
-      "detail": "Placeholder remained post-freeze"
-    },
-    {
-      "code": "PLACEHOLDER_AFTER_SEAL",
-      "path": "docs/archive/fairness_equity-hysteresis-options-v1.md",
-      "detail": "Placeholder remained post-freeze"
-    },
-    {
-      "code": "PLACEHOLDER_AFTER_SEAL",
-      "path": "docs/archive/ux_public-multipage-experience-master-spec-v2.md",
-      "detail": "Placeholder remained post-freeze"
-    },
-    {
-      "code": "PLACEHOLDER_AFTER_SEAL",
-      "path": "docs/governance/trace/archive-trace-index-v1.md",
-      "detail": "Placeholder remained post-freeze"
-    },
-    {
-      "code": "PLACEHOLDER_AFTER_SEAL",
-      "path": "docs/onboarding/agent-bootstrap-manifest.md",
-      "detail": "Placeholder remained post-freeze"
-    },
-    {
-      "code": "PLACEHOLDER_AFTER_SEAL",
-      "path": "README.md",
-      "detail": "Placeholder remained post-freeze"
-    },
-    {
-      "code": "PLACEHOLDER_AFTER_SEAL",
-      "path": "docs/governance/dec/DEC-20250812-04-governance-baseline-thresholds.md",
-      "detail": "Placeholder remained post-freeze"
-    },
-    {
-      "code": "PLACEHOLDER_AFTER_SEAL",
-      "path": "docs/governance/dec/DEC-20250813-01-known-debt-register.md",
-      "detail": "Placeholder remained post-freeze"
-    },
-    {
-      "code": "PLACEHOLDER_AFTER_SEAL",
-      "path": "docs/onboarding/agent-role-policy-v1.md",
-      "detail": "Placeholder remained post-freeze"
-    }
-  ],
+  "placeholders_sealed": [],
+  "placeholders_remaining": [],
+  "violations": [],
   "summary": {
     "total_entries": 32,
     "updated_count": 0,
-    "violation_count": 32,
-    "placeholders_remaining_count": 32
+    "violation_count": 0,
+    "placeholders_remaining_count": 0
   }
 }

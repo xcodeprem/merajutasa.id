@@ -15,7 +15,9 @@ state_labels_internal: [NONE, CANDIDATE, ACTIVE, STALLED, CLEARED]
 entry_reasons: [severe, consecutive]
 enforcement:
   lock_policy: hysteresis.params.lock
-  on_mismatch: warn_first_then_fail_after: 2   # number of consecutive mismatches before failing CI
+  on_mismatch:
+    strategy: warn_first_then_fail_after
+    threshold_consecutive: 2   # number of consecutive mismatches before failing CI
 hash_sha256_manifest_ref: "<PENDING_HASH (spec-hash-manifest-v1.json entry)>"  # Will be reconciled by CI; do not edit manually once filled.
 integrity_notes:
   - "Any parameter change requires new DEC and version increment (1.0.x -> 1.1.0 if threshold semantics change)."

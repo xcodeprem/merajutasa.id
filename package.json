@@ -9,8 +9,14 @@
     "governance:verify": "node tools/governance-verify.js",
     "spec-hash:verify": "node tools/spec-hash-diff.js --mode=verify",
     "spec-hash:seal": "node tools/spec-hash-diff.js --mode=seal-first",
-    "spec-hash:canonicalize-dec": "node tools/spec-hash-diff.js --mode=canonicalize-dec",
-    "lint:md": "markdownlint-cli2 \"**/*.md\""
+  "spec-hash:canonicalize-dec": "node tools/spec-hash-diff.js --mode=canonicalize-dec",
+  "lint:md": "markdownlint-cli2 \"**/*.md\"",
+  "service:signer": "node tools/services/signer.js",
+  "service:chain": "node tools/services/chain.js",
+  "gen:test-vectors": "node tools/generate-test-vectors.js",
+  "test:integrity": "node tools/tests/run-basic-integrity-tests.js"
+  ,"fairness:generate-snapshots": "node tools/fairness/generate-equity-snapshots.js"
+  ,"fairness:hysteresis-run": "node tools/fairness/hysteresis-engine.js"
   },
   "devDependencies": {
     "markdownlint": "^0.34.0",
