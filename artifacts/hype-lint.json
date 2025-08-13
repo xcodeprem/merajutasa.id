@@ -1,15 +1,15 @@
 {
   "version": 1,
-  "generated_utc": "2025-08-13T03:19:11.042Z",
-  "file_count": 31,
-  "total_hits": 117,
+  "generated_utc": "2025-08-13T05:41:10.437Z",
+  "file_count": 34,
+  "total_hits": 118,
   "max_severity": "HIGH",
   "severity_counts": {
-    "MEDIUM": 108,
+    "MEDIUM": 109,
     "HIGH": 9
   },
   "rule_counts": {
-    "RANKING": 90,
+    "RANKING": 91,
     "TOP": 18,
     "TERBAIK": 6,
     "REVOLUSIONER": 3
@@ -874,6 +874,16 @@
       "severity": "MEDIUM",
       "rationale": "Unsubstantiated ranking claim.",
       "context_line": "`[CRED-LINT-004] Prohibited field 'ratingScore' detected in credentialSubject. Remove to comply with privacy & non-ranking policy.`"
+    },
+    {
+      "file": "docs/integrity/evidence-minimum-phase1.5-v1.md",
+      "line": 15,
+      "column": 71,
+      "match": "ranking",
+      "rule": "RANKING",
+      "severity": "MEDIUM",
+      "rationale": "Unsubstantiated ranking claim.",
+      "context_line": "| A4 | Hype Lint Report | `artifacts/hype-lint.json` | Kontrol bahasa ranking / over-claim | `total_hits`, `severity_counts`, `max_severity` | 24h | `max_severity!='HIGH'` AND `severity_counts.HIGH=0` | `max_severity='HIGH'` but total HIGH <= baseline exception (<=3) | HIGH > baseline OR file missing |"
     },
     {
       "file": "docs/master-spec/master-spec-v2.0.md",

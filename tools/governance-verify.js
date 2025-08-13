@@ -13,6 +13,7 @@ const STEPS = [
   { name: 'hype-lint', cmd: ['node','tools/hype-lint.js'] },
   { name: 'disclaimers-lint', cmd: ['node','tools/disclaimers-lint.js'] },
   { name: 'principles-impact', cmd: ['node','tools/principles-impact.js'] },
+  { name: 'evidence-freshness', cmd: ['node','tools/evidence-freshness.js'] },
   { name: 'no-silent-drift', cmd: ['node','tools/no-silent-drift.js'] }
 ];
 

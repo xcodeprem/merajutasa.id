@@ -14,6 +14,26 @@
       "notes": "Baseline roadmap; future evolution via delta files."
     },
     {
+      "path": "docs/governance/signature-pipeline-plan-v1.md",
+      "version": "1.0.0",
+      "dec_ref": "DEC-20250813-02 (draft)",
+      "hash_sha256": "d85b586f9cb6c0aad0390089e78bf8572c19384a5a68ebd7481a714a2b63edc8",
+      "integrity_class": "signature-design",
+      "mutable_policy": "append-only",
+      "next_change_requires_dec": true,
+      "notes": "Signature pipeline design (S0). Draft until adoption DEC finalized."
+    },
+    {
+      "path": "docs/governance/dec/DEC-20250813-02-signature-pipeline-adoption.md",
+      "version": "1.0.0",
+      "dec_ref": "SELF (draft)",
+      "hash_sha256": "23faa0a56c0eddab056b1815b07da2079100da7090f340c69c5ff41d63d3594d",
+      "integrity_class": "decision-draft",
+      "mutable_policy": "immutable",
+      "next_change_requires_dec": false,
+      "notes": "Draft DEC for phased Ed25519 evidence signing (S0). Status changes on adoption."
+    },
+    {
       "path": "docs/fairness/hysteresis-config-v1.yml",
       "version": "1.0.0",
       "dec_ref": "DEC-20250812-02",

@@ -1,0 +1,18 @@
+{
+  "$schema":"http://json-schema.org/draft-07/schema#",
+  "$id":"https://merajutasa.id/schemas/evidence/hype-lint-v1.json",
+  "title":"Hype Lint Report v1",
+  "type":"object",
+  "required":["version","generated_utc","file_count","total_hits","max_severity","severity_counts","rule_counts"],
+  "properties":{
+    "version":{"type":"number"},
+    "generated_utc":{"type":"string"},
+    "file_count":{"type":"number"},
+    "total_hits":{"type":"number"},
+    "max_severity":{"type":"string"},
+    "severity_counts":{"type":"object","additionalProperties":{"type":"number"}},
+    "rule_counts":{"type":"object","additionalProperties":{"type":"number"}},
+    "findings": {"type":"array","items":{"type":"object","required":["file","line","column","match","rule","severity"],"properties":{"file":{"type":"string"},"line":{"type":"number"},"column":{"type":"number"},"match":{"type":"string"},"rule":{"type":"string"},"severity":{"type":"string"},"rationale":{"type":"string"},"context_line":{"type":"string"}}}}
+  },
+  "additionalProperties": true
+}

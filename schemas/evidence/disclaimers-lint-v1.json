@@ -1,0 +1,23 @@
+{
+  "$schema":"http://json-schema.org/draft-07/schema#",
+  "$id":"https://merajutasa.id/schemas/evidence/disclaimers-lint-v1.json",
+  "title":"Disclaimers Lint Report v1",
+  "type":"object",
+  "required":["version","status","summary"],
+  "properties":{
+    "version":{"type":"number"},
+    "status":{"type":"string"},
+    "summary":{"type":"object","required":["errors","warnings","metrics","versionMismatch","ruleCounts"],"properties":{
+      "errors":{"type":"number"},
+      "warnings":{"type":"number"},
+      "metrics":{"type":"object","properties":{"missingIds":{"type":"number"},"drift":{"type":"number"},"shadow":{"type":"number"},"bannedNear":{"type":"number"},"duplicates":{"type":"number"},"scope":{"type":"number"},"locale":{"type":"number"}},"additionalProperties":false},
+      "versionMismatch":{"type":"boolean"},
+      "ruleCounts":{"type":"object","additionalProperties":{"type":"number"}},
+      "presence_enforcement":{"type":"boolean"}
+    }},
+    "errors":{"type":"array","items":{"type":"object"}},
+    "warnings":{"type":"array","items":{"type":"object"}},
+    "config_effective":{"type":"object","properties":{"min_similarity":{"type":"number"},"noise_similarity":{"type":"number"}}}
+  },
+  "additionalProperties": true
+}

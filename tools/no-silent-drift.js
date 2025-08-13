@@ -17,6 +17,7 @@ async function main() {
   const disclaimers = await safeReadJSON('artifacts/disclaimers-lint.json');
   const principles = await safeReadJSON('artifacts/principles-impact-report.json');
   const pii = await safeReadJSON('artifacts/pii-scan-report.json'); // may not exist yet (stub future)
+  const freshness = await safeReadJSON('artifacts/evidence-freshness-report.json');
 
   let specStatus = 'ADVISORY';
   if (spec){
@@ -50,7 +51,8 @@ async function main() {
       hype: hypeStatus,
       disclaimers: discStatus,
       principles: principlesStatus,
-  pii: piiStatus
+  pii: piiStatus,
+  freshness: freshness ? (freshness.summary?.overall_status || 'ADVISORY') : 'ADVISORY'
     },
     summary: {
       hype_hits: hype?.total_hits ?? 0,

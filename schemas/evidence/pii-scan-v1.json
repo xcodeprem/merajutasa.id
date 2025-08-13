@@ -1,0 +1,19 @@
+{
+  "$schema":"http://json-schema.org/draft-07/schema#",
+  "$id":"https://merajutasa.id/schemas/evidence/pii-scan-v1.json",
+  "title":"PII Scan Report v1",
+  "type":"object",
+  "required":["version","status","summary","findings"],
+  "properties":{
+    "version":{"type":"number"},
+    "status":{"type":"string"},
+    "summary":{"type":"object","required":["distinctCategories","totalFindings","categoryCounts","highRiskHits"],"properties":{
+      "distinctCategories":{"type":"number"},
+      "totalFindings":{"type":"number"},
+      "categoryCounts":{"type":"object","additionalProperties":{"type":"number"}},
+      "highRiskHits":{"type":"number"}
+    }},
+    "findings":{"type":"array","items":{"type":"object","properties":{"file":{"type":"string"},"category":{"type":"string"},"action":{"type":"string"},"sample":{"type":"string"},"code":{"type":"string"},"categories":{"type":"array","items":{"type":"string"}},"threshold":{"type":"number"}},"additionalProperties":true}}
+  },
+  "additionalProperties": true
+}

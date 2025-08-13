@@ -1,0 +1,31 @@
+{
+  "$schema":"http://json-schema.org/draft-07/schema#",
+  "$id":"https://merajutasa.id/schemas/evidence/fairness-sim-scenarios-v1.json",
+  "title":"Fairness Simulation Scenarios v1",
+  "type":"object",
+  "required":["version","coverage_tag","scenario_count","scenarios"],
+  "properties":{
+    "version":{"type":"string"},
+    "coverage_tag":{"type":"string"},
+    "dec_ref":{"type":["string","null"]},
+    "scenario_count":{"type":"number"},
+    "scenarios":{"type":"array","items":{"type":"object","required":["id","description","sequence","expected","result","pass"],"properties":{
+      "id":{"type":"string"},
+      "description":{"type":"string"},
+      "sequence":{"type":"array","items":{"type":"number"}},
+      "expected":{"type":"object"},
+      "result":{"type":"object","required":["final_state","entry_reason","transitions"],"properties":{
+        "final_state":{"type":"string"},
+        "entry_reason":{"type":["string","null"]},
+        "transitions":{"type":"array","items":{"type":"object","required":["idx","ratio","type"],"properties":{
+          "idx":{"type":"number"},
+          "ratio":{"type":"number"},
+          "type":{"type":"string"},
+          "reason":{"type":["string","null"]}
+        }}}
+      }},
+      "pass":{"type":"boolean"}
+    }}}
+  },
+  "additionalProperties": false
+}

@@ -1,9 +1,14 @@
 {
   "updated_count": 0,
   "violations": [
-    "HASH_MISMATCH_DEC_REQUIRED"
+    "HASH_MISMATCH_DEC_REQUIRED",
+    "HASH_MISMATCH",
+    "HASH_MISMATCH_DEC_REQUIRED",
+    "HASH_MISMATCH",
+    "HASH_MISMATCH_DEC_REQUIRED",
+    "DEC_REF_INCONSISTENT"
   ],
-  "violation_count": 1,
+  "violation_count": 6,
   "remaining_placeholders": 0,
-  "dec_ref_inconsistencies": 0
+  "dec_ref_inconsistencies": 1
 }

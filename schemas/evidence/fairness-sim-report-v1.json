@@ -1,0 +1,20 @@
+{
+  "$schema":"http://json-schema.org/draft-07/schema#",
+  "$id":"https://merajutasa.id/schemas/evidence/fairness-sim-report-v1.json",
+  "title":"Fairness Simulation Aggregate Report v1",
+  "type":"object",
+  "required":["version","generated_at","scenarios_total","scenarios_pass","active_entries_total","reentries_total","exits_total","churn_ratio"],
+  "properties":{
+    "version":{"type":"string"},
+    "generated_at":{"type":"string"},
+    "dec_ref":{"type":["string","null"]},
+    "scenarios_total":{"type":"number"},
+    "scenarios_pass":{"type":"number"},
+    "active_entries_total":{"type":"number"},
+    "reentries_total":{"type":"number"},
+    "exits_total":{"type":"number"},
+    "churn_ratio":{"type":"number"},
+    "detection_delay_avg_snapshots":{"type":["number","null"]}
+  },
+  "additionalProperties": false
+}

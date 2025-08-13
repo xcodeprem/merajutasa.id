@@ -17,12 +17,16 @@
   "gen:test-vectors": "node tools/generate-test-vectors.js",
   "test:integrity": "node tools/tests/run-basic-integrity-tests.js"
   ,"fairness:generate-snapshots": "node tools/fairness/generate-equity-snapshots.js",
-  "fairness:hysteresis-run": "node tools/fairness/hysteresis-engine.js"
+  "fairness:hysteresis-run": "node tools/fairness/hysteresis-engine.js",
+  "fairness:sim": "node tools/fairness-sim.js",
+  "evidence:validate": "node tools/validate-evidence.js",
+  "evidence:bundle": "node tools/evidence-bundle.js"
   },
   "devDependencies": {
     "markdownlint": "^0.34.0",
     "markdownlint-cli2": "^0.14.0",
     "yaml": "^2.4.5",
-    "glob": "^10.3.10"
+    "glob": "^10.3.10",
+    "ajv": "^8.17.1"
   }
 }

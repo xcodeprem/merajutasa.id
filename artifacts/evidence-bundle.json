@@ -1,0 +1,117 @@
+{
+  "version": "1.0.0",
+  "generated_utc": "2025-08-13T05:19:49.897Z",
+  "evidence_phase": "1.5",
+  "artifacts": [
+    {
+      "id": "A1",
+      "path": "artifacts/spec-hash-diff.json",
+      "exists": true,
+      "size_bytes": 3077,
+      "sha256": "b8eb9fb175d720272658c731bd13eb42c517824f8f62542fa5e511105f6e6e18",
+      "sha256_short": "b8eb9fb175d72027",
+      "schema_ref": "spec-hash-diff-v1.json",
+      "category": "governance"
+    },
+    {
+      "id": "A2",
+      "path": "artifacts/param-integrity-matrix.json",
+      "exists": true,
+      "size_bytes": 3938,
+      "sha256": "617cdb2892419e9055f41f7489d1e4c87015d508d9c770736ba30c2b97ab2a7d",
+      "sha256_short": "617cdb2892419e90",
+      "schema_ref": "param-integrity-v1.json",
+      "category": "fairness"
+    },
+    {
+      "id": "A3",
+      "path": "artifacts/principles-impact-report.json",
+      "exists": true,
+      "size_bytes": 36027,
+      "sha256": "f2d430018340cb024f03d9748cb28a019ec196a1305991890de85a6cc575a068",
+      "sha256_short": "f2d430018340cb02",
+      "schema_ref": "principles-impact-v2.json",
+      "category": "principles"
+    },
+    {
+      "id": "A4",
+      "path": "artifacts/hype-lint.json",
+      "exists": true,
+      "size_bytes": 46170,
+      "sha256": "68456a727458f5dfce6c51f5e323e4ae69d6a1c483c5733b8985c4de887e5451",
+      "sha256_short": "68456a727458f5df",
+      "schema_ref": "hype-lint-v1.json",
+      "category": "language"
+    },
+    {
+      "id": "A5",
+      "path": "artifacts/disclaimers-lint.json",
+      "exists": true,
+      "size_bytes": 5776,
+      "sha256": "b9e0e88129e50958902c56c9b6a82e746bdab11a8234f195bac69e3e579953cc",
+      "sha256_short": "b9e0e88129e50958",
+      "schema_ref": "disclaimers-lint-v1.json",
+      "category": "disclaimers"
+    },
+    {
+      "id": "A6",
+      "path": "artifacts/pii-scan-report.json",
+      "exists": true,
+      "size_bytes": 1540,
+      "sha256": "c3a9879c5f961c9b97bad27b12ab2540009ddea5218a2ab279d918af2c0d3c9a",
+      "sha256_short": "c3a9879c5f961c9b",
+      "schema_ref": "pii-scan-v1.json",
+      "category": "privacy"
+    },
+    {
+      "id": "A7",
+      "path": "artifacts/fairness-sim-scenarios.json",
+      "exists": true,
+      "size_bytes": 6295,
+      "sha256": "e2bb2203b850679647972d5251ece539a11e310f144df1248d220a85f6bf0d40",
+      "sha256_short": "e2bb2203b8506796",
+      "schema_ref": "fairness-sim-scenarios-v1.json",
+      "category": "fairness-sim"
+    },
+    {
+      "id": "A7R",
+      "path": "artifacts/fairness-sim-report.json",
+      "exists": true,
+      "size_bytes": 303,
+      "sha256": "3d95d3e5f235b425d8ef85b0d337e9f00a8d8244bfe44af613fdffe87d0e6dc9",
+      "sha256_short": "3d95d3e5f235b425",
+      "schema_ref": "fairness-sim-report-v1.json",
+      "category": "fairness-sim"
+    },
+    {
+      "id": "A8",
+      "path": "artifacts/no-silent-drift-report.json",
+      "exists": true,
+      "size_bytes": 588,
+      "sha256": "a36d8a47d47e0f707a7c89c969c3614f983507c48c02ababe4ec4848a804e0ad",
+      "sha256_short": "a36d8a47d47e0f70",
+      "schema_ref": "no-silent-drift-v1.json",
+      "category": "aggregator"
+    },
+    {
+      "id": "SCHEMA_VALIDATION",
+      "path": "artifacts/evidence-schema-validation.json",
+      "exists": true,
+      "size_bytes": 1192,
+      "sha256": "35bfb15acf8343ca38986d4c447d89a0c453a78c030affb5700a541b4fcf2955",
+      "sha256_short": "35bfb15acf8343ca",
+      "schema_ref": null,
+      "category": "meta"
+    }
+  ],
+  "summary": {
+    "total": 10,
+    "missing": 0,
+    "with_schema": 9,
+    "bundle_hash": "d49d8c34d34c37baae86f6092db0bbde9379fb4042344934d21c2f1eb59b6b42"
+  },
+  "integrity": {
+    "hash_algorithm": "SHA256",
+    "bundle_hash_derivation": "sha256(concat(sorted sha256 per existing artifact with \"\\n\"))"
+  }
+}

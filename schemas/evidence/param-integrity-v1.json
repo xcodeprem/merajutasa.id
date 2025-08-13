@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://merajutasa.id/schemas/evidence/param-integrity-v1.json",
+  "title": "Param Integrity Matrix v1",
+  "type": "object",
+  "required": ["version","generated_utc","status","summary_counts","rows"],
+  "properties": {
+    "version": {"type":"number","const":2},
+    "generated_utc": {"type":"string"},
+    "status": {"type":"string","enum":["PASS","MISMATCH"]},
+    "summary_counts": {"type":"object","additionalProperties":{"type":"number"}},
+    "rows": {
+      "type":"array",
+      "items": {
+        "type":"object",
+        "required":["parameter","aliases","values","sources_present","status"],
+        "properties": {
+          "parameter":{"type":"string"},
+          "aliases": {"type":"object","properties":{"config":{"type":["string","null"]},"dec":{"type":["string","null"]}},"required":["config","dec"],"additionalProperties":false},
+          "values": {"type":"object","properties":{"config":{},"dec":{},"code":{}},"required":["config","dec","code"],"additionalProperties":false},
+          "sources_present": {"type":"array","items":{"type":"string"}},
+          "status": {"type":"string","enum":["MATCH","MISMATCH","MISSING_ALL","MISSING_OTHERS"]}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

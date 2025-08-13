@@ -1,0 +1,18 @@
+{
+  "$schema":"http://json-schema.org/draft-07/schema#",
+  "$id": "https://merajutasa.id/schemas/evidence/spec-hash-diff-v1.json",
+  "title": "Spec Hash Diff Report v1",
+  "type":"object",
+  "required":["mode","timestamp_utc","violations","summary"],
+  "properties": {
+    "mode": {"type":"string"},
+    "timestamp_utc": {"type":"string"},
+    "updated": {"type":"array","items":{"type":"string"}},
+    "unchanged": {"type":"array","items":{"type":"string"}},
+    "placeholders_sealed": {"type":"array","items":{"type":"string"}},
+    "placeholders_remaining": {"type":"array","items":{"type":"string"}},
+    "violations": {"type":"array","items": {"type":"object","required":["code","path"],"properties":{"code":{"type":"string"},"path":{"type":"string"},"detail":{"type":"string"}}}},
+    "summary": {"type":"object","required":["total_entries","updated_count","violation_count","placeholders_remaining_count"],"properties": {"total_entries":{"type":"number"},"updated_count":{"type":"number"},"violation_count":{"type":"number"},"placeholders_remaining_count":{"type":"number"}}}
+  },
+  "additionalProperties": true
+}

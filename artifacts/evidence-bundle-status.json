@@ -1,0 +1,42 @@
+[
+  {
+    "file": "spec-hash-diff.json",
+    "exists": true
+  },
+  {
+    "file": "param-integrity-matrix.json",
+    "exists": true
+  },
+  {
+    "file": "principles-impact-report.json",
+    "exists": true
+  },
+  {
+    "file": "hype-lint.json",
+    "exists": true
+  },
+  {
+    "file": "disclaimers-lint.json",
+    "exists": true
+  },
+  {
+    "file": "pii-scan-report.json",
+    "exists": true
+  },
+  {
+    "file": "fairness-sim-scenarios.json",
+    "exists": true
+  },
+  {
+    "file": "fairness-sim-report.json",
+    "exists": true
+  },
+  {
+    "file": "no-silent-drift-report.json",
+    "exists": true
+  },
+  {
+    "file": "evidence-schema-validation.json",
+    "exists": true
+  }
+]

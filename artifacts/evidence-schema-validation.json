@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "generated_utc": "2025-08-13T05:02:59.056Z",
+  "summary": {
+    "total": 9,
+    "pass": 9,
+    "fail": 0,
+    "missing": 0,
+    "schema_missing": 0
+  },
+  "results": [
+    {
+      "artifact": "artifacts/spec-hash-diff.json",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "artifact": "artifacts/param-integrity-matrix.json",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "artifact": "artifacts/principles-impact-report.json",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "artifact": "artifacts/hype-lint.json",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "artifact": "artifacts/disclaimers-lint.json",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "artifact": "artifacts/pii-scan-report.json",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "artifact": "artifacts/fairness-sim-scenarios.json",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "artifact": "artifacts/fairness-sim-report.json",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "artifact": "artifacts/no-silent-drift-report.json",
+      "status": "PASS",
+      "errors": []
+    }
+  ]
+}

@@ -73,13 +73,13 @@ Cara: Output term frequency, flagged terms, stage status.
 
 4.1 Definisikan “Phase 1.5 Evidence Minimum Set” (hash diff, param-integrity, principles-impact, hype-lint, disclaimers, PII, no-silent-drift, fairness-sim scenario list) [MANUAL] [DONE - docs/integrity/evidence-minimum-phase1.5-v1.md]
 Cara: Tambah tabel gating di docs/integrity/ atau governance/policy-index.  
-4.2 Implement fairness-sim harness minimal (simulate state transitions Option F) [AI]  
+4.2 Implement fairness-sim harness minimal (simulate state transitions Option F) [AI] [DONE - tools/fairness-sim.js baseline_v1 (10 scenarios pass) → artifacts/fairness-sim-scenarios.json & artifacts/fairness-sim-report.json]
 Cara: Parser config YAML + apply state machine transitions spec; produce coverage metrics.  
-4.3 Evidence file schema versioning & JSON Schema definisi (e.g., `schemas/evidence/param-integrity-v1.json`) [AI]  
+4.3 Evidence file schema versioning & JSON Schema definisi (e.g., `schemas/evidence/param-integrity-v1.json`) [AI] [DONE - schemas/evidence/*.json + tools/validate-evidence.js (artifact evidence-schema-validation.json PASS 9/9)]  
 Cara: Generate schemas & validate pre-write.  
-4.4 Hash & signature (future) pipeline plan (Ed25519) – arsitektur & DEC enablement timeline [MANUAL]  
+4.4 Hash & signature (future) pipeline plan (Ed25519) – arsitektur & DEC enablement timeline [MANUAL] [DONE - docs/governance/signature-pipeline-plan-v1.md + draft DEC-20250813-02 (phased S0–S4)]  
 Cara: Buat design doc & DEC; mark as backlog until key mgmt ready.  
-4.5 Evidence bundle index file (manifest of artifacts + hashes) [AI]  
+4.5 Evidence bundle index file (manifest of artifacts + hashes) [AI] [DONE - tools/evidence-bundle.js → artifacts/evidence-bundle.json (10 artifacts, missing=0, bundle_hash derivation documented)]  
 Cara: Collect file list & SHA256 -> artifacts/evidence-bundle.json.
 
 ## 5. Fairness Hysteresis Implementation
