@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "pages": [
+    { "page": "landing", "ids": ["D1", "D2", "D3", "D5"] },
+    { "page": "equity", "ids": ["D1", "D2"] },
+    { "page": "equity_under_served_section", "ids": ["D1"] },
+    { "page": "trust", "ids": ["D2", "D3", "D5"] },
+    { "page": "trust_hysteresis", "ids": ["D1"] },
+    { "page": "governance", "ids": ["D5"] },
+    { "page": "terminology", "ids": ["D6", "D2"] },
+    { "page": "terminology_banner", "ids": ["D6"] },
+    { "page": "feedback", "ids": ["D2"] },
+    { "page": "credential_viewer", "ids": ["D2", "D3"] },
+    { "page": "hash_excerpt_module", "ids": ["D5"] },
+    { "page": "media_digest", "ids": ["D4", "D1", "D2"] },
+    { "page": "about_faq_data", "ids": ["D2", "D1"] },
+    { "page": "api_verification_docs", "ids": ["D5", "D3"] },
+    { "page": "changelog_excerpt", "ids": ["D5"] }
+  ],
+  "components": [
+    { "component": "hero_equity_card_tooltip", "ids": ["D1"] },
+    { "component": "hero_credential_card_footer", "ids": ["D3"] },
+    { "component": "hero_aggregate_card", "optional_ids": ["D7"] }
+  ]
+}

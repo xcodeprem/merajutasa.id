@@ -54,7 +54,7 @@ Cara: Rekursif baca teks non-binary, output artifacts/hype-lint.json (hits detai
 Cara: Parse YAML + DEC vs internal constant map; status: MATCH/MISMATCH/MISSING.  
 3.4 `no-silent-drift.js` aggregator real: tarik hasil tools (hash status, param-integrity, hype-lint, principles-impact, disclaimers-lint, PII scan summary) [AI] [PARTIAL - principles & PII placeholders wired; future: real PII scan + gating escalation]  
 Cara: Build orchestrator merge JSON → artifacts/no-silent-drift-report.json.  
-3.5 `principles-impact.js` heuristik diperluas: mapping semua GP1–GP10 (regex, diff-based classification, changed domains) + confidence score + evidence list [AI] [PENDING - placeholder minimal]  
+3.5 `principles-impact.js` heuristik diperluas: mapping semua GP1–GP10 (regex, diff-based classification, changed domains) + confidence score + evidence list [AI] [DONE - heuristic engine v1 (regex sets, domain tagging, confidence scoring) outputting artifacts/principles-impact-report.json v2]  
 Cara: Use git diff parsing (require menambahkan simple git lib / native).  
 3.6 Tambah `disclaimers-lint.js` sesuai spec (Rules DISC-PRES-001..DISC-LOCALE-011, similarity ≥0.90 OverlapCoefficient, banned phrase check) [AI] [PARTIAL - stub PASS_STUB]  
 Cara: Normalize disclaimers canonical set; compute similarity; output per rule.  
@@ -62,16 +62,16 @@ Cara: Normalize disclaimers canonical set; compute similarity; output per rule.
 Cara: Implement category evaluation; produce masking hash stub (salt from config).  
 3.8 Tambah `terminology-scan.js` (sudah ada file): aktifkan Stage 1 (inventory), Stage 2 pending DEC [AI]  
 Cara: Output term frequency, flagged terms, stage status.  
-3.9 Tambah `observability-metrics.js`: generate metrics JSON skeleton (latency budget placeholders, collection readiness) [AI]  
-Cara: Provide initial counters, mark gaps.  
-3.10 Tambah config central `tools/config/integrity-policy.json` (thresholds, similarity, hash display length) [HYBRID]  
-Cara: AI generate; manusia review.  
-3.11 SARIF output adaptors untuk semua lint tools guna integrasi pipelines [AI]  
-Cara: Shared helper module.
+3.6 Tambah `disclaimers-lint.js` sesuai spec (Rules DISC-PRES-001..DISC-LOCALE-011, similarity ≥0.90 OverlapCoefficient, banned phrase check) [AI] [PARTIAL - heuristic engine v1 (presence, drift, shadow, banned phrase, version hash) – pending HTML extraction & full rule coverage]  
+Cara: Normalize disclaimers canonical set; compute similarity; output per rule.  
+3.7 Tambah `pii-scan.js` (regex taxonomy categories, classification, action matrix, hashing salt rotation schedule placeholder) [AI] [DONE - scanner v1 (categories, actions, multi-category escalation, salted masking) artifact pii-scan-report.json]  
+Cara: Implement category evaluation; produce masking hash stub (salt dari config).  
+3.8 Tambah `terminology-scan.js` (sudah ada file): aktifkan Stage 1 (inventory), Stage 2 pending DEC [AI] [DONE - stage1 inventory with key token frequency + banned term counts]  
+Cara: Output term frequency, flagged terms, stage status.  
 
 ## 4. Evidence Bundle & Artifacts Completeness
 
-4.1 Definisikan “Phase 1.5 Evidence Minimum Set” (hash diff, param-integrity, principles-impact, hype-lint, disclaimers, PII, no-silent-drift, fairness-sim scenario list) [MANUAL]  
+4.1 Definisikan “Phase 1.5 Evidence Minimum Set” (hash diff, param-integrity, principles-impact, hype-lint, disclaimers, PII, no-silent-drift, fairness-sim scenario list) [MANUAL] [DONE - docs/integrity/evidence-minimum-phase1.5-v1.md]
 Cara: Tambah tabel gating di docs/integrity/ atau governance/policy-index.  
 4.2 Implement fairness-sim harness minimal (simulate state transitions Option F) [AI]  
 Cara: Parser config YAML + apply state machine transitions spec; produce coverage metrics.  

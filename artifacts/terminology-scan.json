@@ -1,0 +1,288 @@
+{
+  "version": 1,
+  "stage": {
+    "stage1": true,
+    "stage2_active": false
+  },
+  "key_token_frequency": {
+    "fairness": 182,
+    "privacy": 106,
+    "hysteresis": 168,
+    "hash": 215,
+    "credential": 155,
+    "governance": 223,
+    "revocation": 97
+  },
+  "totalKey": 1146,
+  "banned_terms_detected": 118,
+  "banned_samples": [
+    {
+      "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
+      "term": "top"
+    },
+    {
+      "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
+      "term": "TOP"
+    },
+    {
+      "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
+      "term": "TOP"
+    },
+    {
+      "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\roadmap\\roadmap-master-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\roadmap\\roadmap-master-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\roadmap\\roadmap-master-v1.md",
+      "term": "Ranking"
+    },
+    {
+      "file": "docs\\privacy\\pii-pattern-library-v1.md",
+      "term": "Ranking"
+    },
+    {
+      "file": "docs\\privacy\\pii-pattern-library-v1.md",
+      "term": "Ranking"
+    },
+    {
+      "file": "docs\\privacy\\pii-pattern-library-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\principles\\GP1-GP10-index.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\principles\\GP1-GP10-index.md",
+      "term": "top"
+    },
+    {
+      "file": "docs\\principles\\GP1-GP10-index.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\principles\\GP1-GP10-index.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\principles\\GP1-GP10-index.md",
+      "term": "Ranking"
+    },
+    {
+      "file": "docs\\onboarding\\agent-role-policy-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\onboarding\\agent-role-policy-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\onboarding\\agent-role-policy-v1.md",
+      "term": "top"
+    },
+    {
+      "file": "docs\\onboarding\\agent-role-policy-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\onboarding\\agent-role-policy-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\onboarding\\agent-bootstrap-manifest.md",
+      "term": "Ranking"
+    },
+    {
+      "file": "docs\\onboarding\\agent-bootstrap-manifest.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\onboarding\\agent-bootstrap-manifest.md",
+      "term": "peringkat"
+    },
+    {
+      "file": "docs\\onboarding\\agent-bootstrap-manifest.md",
+      "term": "top"
+    },
+    {
+      "file": "docs\\onboarding\\agent-bootstrap-manifest.md",
+      "term": "terbaik"
+    },
+    {
+      "file": "docs\\master-spec\\master-spec-v2.0.md",
+      "term": "Ranking"
+    },
+    {
+      "file": "docs\\master-spec\\master-spec-v2.0.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\master-spec\\master-spec-v2.0.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\master-spec\\master-spec-v2.0.md",
+      "term": "top"
+    },
+    {
+      "file": "docs\\master-spec\\master-spec-v2.0.md",
+      "term": "terbaik"
+    },
+    {
+      "file": "docs\\governance\\lint-principles-reference-spec-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\governance\\lint-principles-reference-spec-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\governance\\lint-principles-reference-spec-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\governance\\lint-principles-reference-spec-v1.md",
+      "term": "top"
+    },
+    {
+      "file": "docs\\governance\\lint-principles-reference-spec-v1.md",
+      "term": "peringkat"
+    },
+    {
+      "file": "docs\\governance\\disclaimers-lint-spec-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\governance\\disclaimers-lint-spec-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\governance\\disclaimers-lint-spec-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\governance\\disclaimers-lint-spec-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\governance\\disclaimers-lint-spec-v1.md",
+      "term": "top"
+    },
+    {
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "term": "Ranking"
+    },
+    {
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "term": "top"
+    },
+    {
+      "file": "docs\\fairness\\hysteresis-public-methodology-fragment-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
+      "term": "peringkat"
+    },
+    {
+      "file": "docs\\analytics\\event-schema-canonical-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\analytics\\event-schema-canonical-v1.md",
+      "term": "Ranking"
+    },
+    {
+      "file": "docs\\analytics\\event-schema-canonical-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\analytics\\event-schema-canonical-v1.md",
+      "term": "Top"
+    },
+    {
+      "file": "docs\\analytics\\event-schema-canonical-v1.md",
+      "term": "top"
+    },
+    {
+      "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
+      "term": "Ranking"
+    },
+    {
+      "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
+      "term": "Ranking"
+    },
+    {
+      "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
+      "term": "Ranking"
+    },
+    {
+      "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250812-03-principles-reference-activation.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250812-02-hysteresis-adoption.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250812-02-hysteresis-adoption.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\governance\\trace\\archive-trace-index-v1.md",
+      "term": "ranking"
+    }
+  ]
+}

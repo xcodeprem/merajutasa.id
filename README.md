@@ -142,22 +142,22 @@ Gunakan framing “indikator stabil fairness” bukan “peringkat”.
 
 ## 10. Evidence Bundle (Target Pasca Seal)
 
-Artifact (awal sebagian):
+Phase 1.5 Evidence Minimum Set didefinisikan di `docs/integrity/evidence-minimum-phase1.5-v1.md`.
 
-| Artifact | File (rencana) | Status |
-|----------|----------------|--------|
-| spec-hash-diff report | artifacts/spec-hash-diff.json | Pending seal |
-| param-integrity matrix | artifacts/param-integrity-matrix.json | Pending |
-| principles impact report | artifacts/principles-impact-report.json | Stub |
-| disclaimers lint report | artifacts/disclaimers-lint-report.json | Pending DEC |
-| hype lint report | artifacts/hype-lint-report.json | Pending |
-| pii scan summary | artifacts/pii-scan-test-summary.json | Pending |
-| fairness sim report | artifacts/fairness-sim-report.json | Pending |
-| observability metrics | artifacts/observability-metrics.json | Pending |
-| no-silent-drift report | artifacts/no-silent-drift-report.json | Stub |
-| audit replay | artifacts/audit-replay.json | Stub |
+| Artifact | File | Phase 1.5 Minimum? | Status (Current) |
+|----------|------|-------------------|------------------|
+| spec-hash-diff report | artifacts/spec-hash-diff.json | Yes | Active |
+| param-integrity matrix | artifacts/param-integrity-matrix.json | Yes | Active |
+| principles impact report | artifacts/principles-impact-report.json | Yes | Active |
+| hype lint report | artifacts/hype-lint.json | Yes | Active |
+| disclaimers lint report | artifacts/disclaimers-lint.json | Yes | Active (bootstrap presence) |
+| pii scan summary | artifacts/pii-scan-report.json | Yes | Active |
+| fairness sim scenario list | artifacts/fairness-sim-scenarios.json | Yes | Pending (stub) |
+| no-silent-drift aggregator | artifacts/no-silent-drift-report.json | Yes | Active (partial gating) |
+| observability metrics | artifacts/observability-metrics.json | No (Phase 2) | Pending |
+| audit replay | artifacts/audit-replay.json | No (Phase 2) | Stub |
 
-Completeness threshold (Phase 2) akan ditentukan.
+Kriteria PASS/WARN/FAIL rinci & freshness: lihat file definisi Phase 1.5.
 
 ---
 

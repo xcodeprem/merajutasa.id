@@ -1,0 +1,305 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "disclaimers-lint",
+          "informationUri": "https://example.local/disclaimers-lint",
+          "rules": []
+        }
+      },
+      "results": [
+        {
+          "ruleId": "DISC-PRES-001",
+          "level": "error",
+          "message": {
+            "text": "DISC-PRES-001 page=equity"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-PRES-001",
+          "level": "error",
+          "message": {
+            "text": "DISC-PRES-001 page=equity_under_served_section"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-PRES-001",
+          "level": "error",
+          "message": {
+            "text": "DISC-PRES-001 page=trust"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-PRES-001",
+          "level": "error",
+          "message": {
+            "text": "DISC-PRES-001 page=trust_hysteresis"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-PRES-001",
+          "level": "error",
+          "message": {
+            "text": "DISC-PRES-001 page=governance"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-PRES-001",
+          "level": "error",
+          "message": {
+            "text": "DISC-PRES-001 page=terminology"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-PRES-001",
+          "level": "error",
+          "message": {
+            "text": "DISC-PRES-001 page=terminology_banner"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-PRES-001",
+          "level": "error",
+          "message": {
+            "text": "DISC-PRES-001 page=feedback"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-PRES-001",
+          "level": "error",
+          "message": {
+            "text": "DISC-PRES-001 page=hash_excerpt_module"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-PRES-001",
+          "level": "error",
+          "message": {
+            "text": "DISC-PRES-001 page=media_digest"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-PRES-001",
+          "level": "error",
+          "message": {
+            "text": "DISC-PRES-001 page=about_faq_data"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-PRES-001",
+          "level": "error",
+          "message": {
+            "text": "DISC-PRES-001 page=api_verification_docs"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-PRES-001",
+          "level": "error",
+          "message": {
+            "text": "DISC-PRES-001 page=changelog_excerpt"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-TEXT-003",
+          "level": "error",
+          "message": {
+            "text": "DISC-TEXT-003 page=about_faq_data id=D1"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-PHRASE-009",
+          "level": "error",
+          "message": {
+            "text": "DISC-PHRASE-009"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-PHRASE-009",
+          "level": "error",
+          "message": {
+            "text": "DISC-PHRASE-009"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-PHRASE-009",
+          "level": "error",
+          "message": {
+            "text": "DISC-PHRASE-009"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-TEXT-003",
+          "level": "warning",
+          "message": {
+            "text": "DISC-TEXT-003 page=credential_viewer id=D1"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-DUPL-005",
+          "level": "warning",
+          "message": {
+            "text": "DISC-DUPL-005 page=landing id=D1"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-DUPL-005",
+          "level": "warning",
+          "message": {
+            "text": "DISC-DUPL-005 page=landing id=D7"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-DUPL-005",
+          "level": "warning",
+          "message": {
+            "text": "DISC-DUPL-005 page=landing id=D2"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-DUPL-005",
+          "level": "warning",
+          "message": {
+            "text": "DISC-DUPL-005 page=landing id=D3"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-DUPL-005",
+          "level": "warning",
+          "message": {
+            "text": "DISC-DUPL-005 page=landing id=D4"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-DUPL-005",
+          "level": "warning",
+          "message": {
+            "text": "DISC-DUPL-005 page=landing id=D5"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-DUPL-005",
+          "level": "warning",
+          "message": {
+            "text": "DISC-DUPL-005 page=landing id=D6"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-DUPL-005",
+          "level": "warning",
+          "message": {
+            "text": "DISC-DUPL-005 page=credential_viewer id=D1"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-DUPL-005",
+          "level": "warning",
+          "message": {
+            "text": "DISC-DUPL-005 page=credential_viewer id=D3"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-DUPL-005",
+          "level": "warning",
+          "message": {
+            "text": "DISC-DUPL-005 page=credential_viewer id=D7"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-DUPL-005",
+          "level": "warning",
+          "message": {
+            "text": "DISC-DUPL-005 page=governance id=D7"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-SCOPE-006",
+          "level": "warning",
+          "message": {
+            "text": "DISC-SCOPE-006 page=landing id=D7"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-SCOPE-006",
+          "level": "warning",
+          "message": {
+            "text": "DISC-SCOPE-006 page=landing id=D4"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-SCOPE-006",
+          "level": "warning",
+          "message": {
+            "text": "DISC-SCOPE-006 page=landing id=D6"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-SCOPE-006",
+          "level": "warning",
+          "message": {
+            "text": "DISC-SCOPE-006 page=credential_viewer id=D1"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-SCOPE-006",
+          "level": "warning",
+          "message": {
+            "text": "DISC-SCOPE-006 page=credential_viewer id=D5"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-SCOPE-006",
+          "level": "warning",
+          "message": {
+            "text": "DISC-SCOPE-006 page=credential_viewer id=D7"
+          },
+          "locations": []
+        },
+        {
+          "ruleId": "DISC-SCOPE-006",
+          "level": "warning",
+          "message": {
+            "text": "DISC-SCOPE-006 page=governance id=D7"
+          },
+          "locations": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+version: 1
+# Thresholds & feature flags externalized from tools/disclaimers-lint.js (auto‑loaded)
+min_similarity: 0.90          # DISC-TEXT-003 threshold (overlap coefficient)
+noise_similarity: 0.15        # Below this drift similarity -> downgrade to warning (noise)
+shadow_overlap_threshold: 0.60
+presence_enforcement: false   # When false, DISC-PRES-001 downgraded to WARN until real embeds exist
+enforce_banned_phrase: true
+enable_optional_id_D7: false
+phase:
+  i18n: false                 # If true, locale variants allowed (suppresses DISC-LOCALE-011)
+locale_codes: ["id"]          # Future list of permitted locale codes
+ordering:
+  enforce: false              # Enable DISC-ORDER-004 when actual render order available
+  canonical_order: ["D1","D2","D3","D5","D4","D6","D7"]
+html_checks:
+  enable_interactive_wrap_check: false  # Enable DISC-HTML-010 when real HTML available
+scope_checks:
+  enable: true
+banned_phrase_pattern: '(terbaik|paling unggul|peringkat|ranking|top\\s?\\d+|juara|skor kinerja|nilai kinerja|pemenang)'
+notes: |
+  Adjusting any threshold that reduces strictness (e.g., lowering min_similarity) requires DEC per spec Section 12.

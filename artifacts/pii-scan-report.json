@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "status": "PASS",
+  "summary": {
+    "distinctCategories": 2,
+    "totalFindings": 8,
+    "categoryCounts": {
+      "PLATE_ID": 5,
+      "DOB": 2
+    },
+    "highRiskHits": 0
+  },
+  "findings": [
+    {
+      "file": "docs\\roadmap\\roadmap-master-v1.md",
+      "category": "PLATE_ID",
+      "action": "WARN",
+      "sample": "A11Y…#0c3687b8"
+    },
+    {
+      "file": "docs\\roadmap\\roadmap-master-v1.md",
+      "category": "PLATE_ID",
+      "action": "WARN",
+      "sample": "A11Y…#0c3687b8"
+    },
+    {
+      "file": "docs\\privacy\\pii-pattern-library-v1.md",
+      "category": "DOB",
+      "action": "REDACT",
+      "sample": "01/09/…#8bb93f83"
+    },
+    {
+      "file": "docs\\privacy\\pii-pattern-library-v1.md",
+      "category": "DOB",
+      "action": "REDACT",
+      "sample": "02/10/…#2eee8cf8"
+    },
+    {
+      "file": "docs\\privacy\\pii-pattern-library-v1.md",
+      "category": "PLATE_ID",
+      "action": "WARN",
+      "sample": "B 1234…#3cb217a0"
+    },
+    {
+      "file": "docs\\privacy\\pii-pattern-library-v1.md",
+      "code": "MULTI_CATEGORY_ESCALATION",
+      "categories": [
+        "DOB",
+        "PLATE_ID"
+      ],
+      "threshold": 2
+    },
+    {
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "category": "PLATE_ID",
+      "action": "WARN",
+      "sample": "W3C…#362229fe"
+    },
+    {
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "category": "PLATE_ID",
+      "action": "WARN",
+      "sample": "W3C…#362229fe"
+    }
+  ]
+}

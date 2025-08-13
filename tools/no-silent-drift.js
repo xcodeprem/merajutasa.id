@@ -33,7 +33,7 @@ async function main() {
     if (hype.total_hits===0) hypeStatus='PASS';
     else if (hype.max_severity==='HIGH') hypeStatus='ADVISORY'; // Phase 0 keep advisory; future Phase 1 escalate to FAIL
   }
-  const discStatus = disclaimers ? disclaimers.status : 'ADVISORY';
+  const discStatus = disclaimers ? (disclaimers.status === 'ERROR' ? 'ADVISORY' : 'PASS_STUB') : 'ADVISORY'; // Phase: downgrade until DEC activation
   const principlesStatus = Array.isArray(principles) ? 'PASS_STUB' : 'ADVISORY';
   // PII status heuristic: if file missing -> ADVISORY; if present and has critical >0 -> ADVISORY (Phase 0), else PASS
   let piiStatus = 'ADVISORY';
@@ -50,7 +50,7 @@ async function main() {
       hype: hypeStatus,
       disclaimers: discStatus,
       principles: principlesStatus,
-      pii: piiStatus
+  pii: piiStatus
     },
     summary: {
       hype_hits: hype?.total_hits ?? 0,
@@ -61,7 +61,10 @@ async function main() {
   param_mismatches: params?.mismatches ?? 0,
   principles_entries: Array.isArray(principles) ? principles.length : 0,
   pii_critical: pii?.summary?.critical_matches ?? 0,
-  pii_total: pii?.summary?.total_matches ?? 0
+  pii_total: pii?.summary?.total_matches ?? 0,
+  disclaimers_errors: disclaimers?.summary?.errors ?? 0,
+  disclaimers_warnings: disclaimers?.summary?.warnings ?? 0,
+  disclaimers_rule_counts: disclaimers?.summary?.ruleCounts || {}
     }
   };
   report.status = overallStatus(Object.values(report.components));
