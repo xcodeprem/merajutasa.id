@@ -2,8 +2,8 @@
 id: GUIDANCE-DOC-DEC-STYLE-V1
 title: Decision (DEC) Authoring Style Guide v1
 date: 2025-08-13T12:05:00Z
-status: superseded
 class: guidance
+status: superseded
 supersedes: []
 depends_on: []
 hash_of_decision_document: "e1dcff6a2e0558e8335086d83f8a3385c31ef3a3d1f9ee4b66bc5c04ddfafb60"  # canonical SHA256

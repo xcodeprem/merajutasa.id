@@ -1,5 +1,4 @@
 ---
-# markdownlint-disable MD041 MD007 MD032
 id: DEC-20250813-07
 title: Hype Threshold Transition (Segmentation & Hard Gate Alignment)
 date: 2025-08-13T14:00:00Z
@@ -20,10 +19,10 @@ decision_summary: >
 context: >
    Volume medium tinggi menyebabkan noise bila di-hard gate serentak; high sedikit namun sinyal kuat -> segmentasi.
 decision:
-   - Definisikan hype_high (hard=0) & hype_medium (observational). Baseline: high=0-9, medium=116.
-   - Wave 1: gate hanya high; medium dicatat untuk baseline & perencanaan reduksi.
-   - Update gating policy untuk field segmentasi tanpa ubah fairness lainnya.
-   - Hipotesis: zero high mempercepat deteksi regresi.
+   - "Definisikan hype_high (hard=0) & hype_medium (observational). Baseline: high=0-9, medium=116."
+   - "Wave 1: gate hanya high; medium dicatat untuk baseline & perencanaan reduksi."
+   - "Update gating policy untuk field segmentasi tanpa ubah fairness lainnya."
+   - "Hipotesis: zero high mempercepat deteksi regresi."
 rationale:
    - Hindari false urgency.
    - Prioritaskan high-impact terms.
@@ -46,18 +45,22 @@ metrics:
       hype_medium: 40
       directive_usage_lines: 20
 risk_assessment:
-   - id: R-HYPE-01
-      risk: Directive misuse hides real hype
-      mitigation: Sample audit & cap density
-   - id: R-HYPE-02
-      risk: Medium stagnates >100
-      mitigation: Expand lexical patterns; tighten post-review
-   - id: R-HYPE-03
-      risk: False positives remain HIGH
-      mitigation: Negated-context heuristics
-   - id: R-HYPE-04
-      risk: Threshold tightening delayed
-      mitigation: Time-bound review date & successor requirement
+  - item:
+     id: R-HYPE-01
+     risk: Directive misuse hides real hype
+     mitigation: Sample audit & cap density
+  - item:
+     id: R-HYPE-02
+     risk: Medium stagnates >100
+     mitigation: Expand lexical patterns; tighten post-review
+  - item:
+     id: R-HYPE-03
+     risk: False positives remain HIGH
+     mitigation: Negated-context heuristics
+  - item:
+     id: R-HYPE-04
+     risk: Threshold tightening delayed
+     mitigation: Time-bound review date & successor requirement
 implementation_actions:
    - Update gating-policy (hype_high_max & hype_medium tracking fields)
    - Modify hype-lint.js directives parsing

@@ -1,5 +1,4 @@
 ---
-<!-- markdownlint-disable MD041 MD007 MD032 -->
 id: DEC-20250813-05
 title: Wave 1 Gating Policy & Engine Core Governance Adoption
 date: 2025-08-13T12:05:00Z
@@ -23,39 +22,44 @@ decision_summary: >
 context: >
    Wave 1 menambahkan gating policy JSON & ekstraksi core hysteresis engine; keduanya perlu governance agar perubahan threshold / logic tersign-off.
 decision:
-   - Classify gating policy file governed (append-only; threshold change => DEC baru referensi id ini).
-   - Link fairness engine-core extraction ke governance chain (DEC-20250812-02 + DEC ini).
-   - Tambah pipeline checks: param lock hash, fairness unit, spec hash=0 violation, hype HIGH=0, PII critical=0.
-   - Introduce governed change scan script (scan dec_ref untuk file governed).
+   - "Classify gating policy file governed (append-only; threshold change => DEC baru referensi id ini)."
+   - "Link fairness engine-core extraction ke governance chain (DEC-20250812-02 + DEC ini)."
+   - "Tambah pipeline checks: param lock hash, fairness unit, spec hash=0 violation, hype HIGH=0, PII critical=0."
+   - "Introduce governed change scan script (scan dec_ref untuk file governed)."
 rationale:
    - Kurangi risiko silent drift thresholds & logic.
    - Bentuk baseline stabil sebelum Wave 2 gates.
    - Perkuat audit trail lintas artefak.
 scope:
-   - Policy classification & threshold binding
-   - Engine core governance linkage
-   - Governed change scan
-   - Enforcement hash + unit + hype + PII gates
+   - "Policy classification & threshold binding"
+   - "Engine core governance linkage"
+   - "Governed change scan"
+   - "Enforcement hash + unit + hype + PII gates"
 out_of_scope:
    - Medium hype segmentation (transitional DEC lain)
    - Freshness / principles impact gating
    - Privacy pattern expansion
 traceability_matrix:
-   - artifact: spec-hash-diff.json
-      source: spec-hash-diff.js
-      metrics: [violations]
-   - artifact: param-integrity-matrix.json
-      source: param-integrity.js
-      metrics: [param_integrity_status]
-   - artifact: hype-lint.json
-      source: hype-lint.js
-      metrics: [hype_high]
-   - artifact: fairness-engine-unit-tests.json
-      source: jest (future)
-      metrics: [fail_count]
-   - artifact: no-silent-drift-report.json
-      source: no-silent-drift.js
-      metrics: [summary]
+  - artifact:
+     name: spec-hash-diff.json
+     source: spec-hash-diff.js
+     metrics: [violations]
+  - artifact:
+     name: param-integrity-matrix.json
+     source: param-integrity.js
+     metrics: [param_integrity_status]
+  - artifact:
+     name: hype-lint.json
+     source: hype-lint.js
+     metrics: [hype_high]
+  - artifact:
+     name: fairness-engine-unit-tests.json
+     source: jest (future)
+     metrics: [fail_count]
+  - artifact:
+     name: no-silent-drift-report.json
+     source: no-silent-drift.js
+     metrics: [summary]
 metrics:
    baselines:
       spec_hash_violations: 0
@@ -69,18 +73,22 @@ metrics:
       hype_high: 0
       fairness_unit_fail: 0
 risk_assessment:
-   - id: R-GATE-01
-      risk: Threshold tweak tanpa DEC
-      mitigation: Manifest + governed scan gate
-   - id: R-GATE-02
-      risk: CI latency
-      mitigation: Parallel artifact generation & cache
-   - id: R-GATE-03
-      risk: Hype false negative
-      mitigation: Transitional segmentation DEC
-   - id: R-GATE-04
-      risk: Over-reliance manual review
-      mitigation: Aggregated evidence gate
+  - item:
+     id: R-GATE-01
+     risk: Threshold tweak tanpa DEC
+     mitigation: Manifest + governed scan gate
+  - item:
+     id: R-GATE-02
+     risk: CI latency
+     mitigation: Parallel artifact generation & cache
+  - item:
+     id: R-GATE-03
+     risk: Hype false negative
+     mitigation: Transitional segmentation DEC
+  - item:
+     id: R-GATE-04
+     risk: Over-reliance manual review
+     mitigation: Aggregated evidence gate
 implementation_actions:
    - Update manifest dec_ref untuk policy & engine-core
    - Urutan CI: param lock → unit → spec-hash → hype lint → aggregator
@@ -112,4 +120,3 @@ supersede_policy: "Threshold/gate baru memerlukan successor DEC."
 hash_canonicalization_note: "Nilai hash ini diganti placeholder saat canonicalization."
 ---
 Adoption DEC for Wave 1 gating (YAML unified v2 format, normalized indentation).
-

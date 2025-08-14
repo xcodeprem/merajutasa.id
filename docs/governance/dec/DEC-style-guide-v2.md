@@ -2,8 +2,8 @@
 id: GUIDANCE-DEC-STYLE-V2
 title: DEC Authoring Style Guide v2 (Unified YAML-Only)
 date: 2025-08-13T15:25:00Z
-status: adopted
 class: guidance
+status: published
 supersedes: [GUIDANCE-DOC-DEC-STYLE-V1]
 depends_on: []
 hash_of_decision_document: "a62354e51d7e71ab71dbed854fbf3cc67a89e234252602060642386d49b403ad"
@@ -86,6 +86,3 @@ hash_canonicalization_note: "Hash field diganti placeholder saat perhitungan can
 append_only_notice: "Guidance additive; perubahan besar di v3."
 ---
 Unified DEC style guide v2 (YAML-only) – ready for sealing.
-
-
-

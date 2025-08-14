@@ -161,7 +161,7 @@
         "final_state": "CANDIDATE"
       },
       "result": {
-        "final_state": "CANDIDATE",
+        "final_state": "CLEARED",
         "entry_reason": "severe",
         "transitions": [
           {
@@ -178,7 +178,7 @@
         ],
         "detection_delay_snapshots": 0
       },
-      "pass": true
+      "pass": false
     },
     {
       "id": "S8",

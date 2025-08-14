@@ -1,0 +1,120 @@
+{
+  "generated_utc": "2025-08-14T05:13:04.937Z",
+  "version": 1,
+  "summary": {
+    "files": 15,
+    "violation_count": 0,
+    "warning_count": 0,
+    "codes": {},
+    "warning_codes": {}
+  },
+  "results": [
+    {
+      "file": "DEC-20250812-02-hysteresis-adoption.md",
+      "id": "DEC-20250812-02",
+      "hash": "a99e20be90ef46ca20a0e46f7fd1c3c9b8688081fb53bac667875eb5f8bb70d0",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "file": "DEC-20250812-03-principles-reference-activation.md",
+      "id": "DEC-20250812-03",
+      "hash": "94cc9d8cc2cc744e497518174d3a70ec38aa7360ada2869ea1b8e8eab956d095",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "file": "DEC-20250812-04-governance-baseline-thresholds.md",
+      "id": "DEC-20250812-04",
+      "hash": "5c50fd47b4238aad25118c06e4b4024b66bedd1f1c66ecd5e307ad4dcc57abd6",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "file": "DEC-20250813-01-known-debt-register.md",
+      "id": "DEC-20250813-01",
+      "hash": "3323845a5d7236bff20ba6485c9d7fc88a03ae0f0877ba1e7c0894acb4380348",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "file": "DEC-20250813-02-signature-pipeline-adoption.md",
+      "id": "DEC-20250813-02",
+      "hash": "c0798623aa8949bf4f1ce115d719bdf641450d8ad906ed4b61cc34534b8163a0",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "file": "DEC-20250813-03-disclaimers-presence-enforcement.md",
+      "id": "DEC-20250813-03",
+      "hash": "d2d65b553667864520c547b81f56612019f3d1902411478d13590b9d101d591b",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "file": "DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
+      "id": "DEC-20250813-04",
+      "hash": "7648f585a0b56b29ca8fe31a97ecb75ba3908f86f372e7ab1b46e137e3f76424",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "file": "DEC-20250813-05-gating-policy-wave1-adoption.md",
+      "id": "DEC-20250813-05",
+      "hash": "fcb3450e64e5e6f0cde8bc5513390658396e79ff3ca6c0936cc39608d3acf555",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "file": "DEC-20250813-06-consolidated-governed-edits.md",
+      "id": "DEC-20250813-06",
+      "hash": "cf6fd106f3f165e742840b90008fe032d4738bad56f864201f8c5e8bec0c5d56",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "file": "DEC-20250813-07-hype-threshold-transition.md",
+      "id": "DEC-20250813-07",
+      "hash": "f301ff187d75e27b053af5333cfe5aa20cd03e2874b0bef0763e63b9eb761dc0",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "file": "DEC-20250813-08-evidence-hash-display-length.md",
+      "id": "DEC-20250813-08",
+      "hash": "5f6bff7ece250ff0d9bf7dc3a88461a831565d18997a0cdaaa819511fce565cb",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "file": "DEC-20250813-09-equity-index-rounding.md",
+      "id": "DEC-20250813-09",
+      "hash": "9621605f0aaf99aa9a971aed35eab31e8ae346b62d49c2639e1c0b7df8a6eaa1",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "file": "DEC-20250813-10-feedback-categories-canonical.md",
+      "id": "DEC-20250813-10",
+      "hash": "29ad36b8744ae3dfbdb15852f8ac7d24774dd5642d1380facbbf5822af55dfe8",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "file": "DEC-style-guide-v1.md",
+      "id": "GUIDANCE-DOC-DEC-STYLE-V1",
+      "hash": "e94f4c6d85b4e78d936a417841e848c555539d309a24badba845669f8f641a91",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "file": "DEC-style-guide-v2.md",
+      "id": "GUIDANCE-DEC-STYLE-V2",
+      "hash": "6568aa403b6e7bf3eb234b25e490a8c31dbffd55083b1e3b5ec19b196883eed9",
+      "violations": [],
+      "warnings": []
+    }
+  ],
+  "violations": [],
+  "warnings": []
+}

@@ -34,7 +34,9 @@
   "param:lock": "node tools/param-lock-verify.js",
   "governed:scan": "node tools/governed-change-scan.js",
   "dec:index": "node tools/generate-dec-index.js",
-  "test:governance": "node tools/tests/policy-aggregation-threshold.test.js && node tools/tests/feedback-categories-ingestion.test.js && node tools/tests/evidence-bundle-prefix.test.js"
+  "lint:dec": "node tools/dec-lint.js",
+  "test:dec-hash": "node tools/tests/dec-canonical-hash-equivalence.test.js",
+  "test:governance": "node tools/tests/policy-aggregation-threshold.test.js && node tools/tests/feedback-categories-ingestion.test.js && node tools/tests/evidence-bundle-prefix.test.js && node tools/tests/dec-canonical-hash-equivalence.test.js"
   },
   "devDependencies": {
     "markdownlint": "^0.34.0",

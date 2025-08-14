@@ -48,10 +48,8 @@ fail_conditions:
   - PII pattern change & GP1 not Yes (PRIN-REF-009).
 hash_sealing:
   requirements:
-    - spec-hash-manifest-v1.json must have no <PENDING_HASH> for governance & fairness
-      files before Phase 1 escalation.
-    - If hash change detected on file with next_change_requires_dec=true and no new DEC
-      referencing it → CI FAIL (policy: spec.hash.enforce).
+  - "spec-hash-manifest-v1.json must have no <PENDING_HASH> for governance & fairness files before Phase 1 escalation."
+  - "If hash change detected on file with next_change_requires_dec=true and no new DEC referencing it → CI FAIL (policy: spec.hash.enforce)."
   integration_points:
     - tools/spec-hash-diff.js
     - tools/no-silent-drift.js

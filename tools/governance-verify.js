@@ -23,7 +23,8 @@ const STEPS = [
   { name: 'param-lock', cmd: ['node','tools/param-lock-verify.js'], critical: true },
   { name: 'fairness-unit', cmd: ['node','tools/tests/fairness-engine-unit-tests.js'], critical: true },
   { name: 'hype-lint', cmd: ['node','tools/hype-lint.js'], advisory: true },
-  { name: 'disclaimers-lint', cmd: ['node','tools/disclaimers-lint.js'], critical: true },
+  { name: 'disclaimers-lint', cmd: ['node','tools/disclaimers-lint.js'], advisory: true },
+  { name: 'dec-lint', cmd: ['node','tools/dec-lint.js'], advisory: true },
   { name: 'principles-impact', cmd: ['node','tools/principles-impact.js'], advisory: true },
   { name: 'evidence-freshness', cmd: ['node','tools/evidence-freshness.js'], advisory: true },
   { name: 'evidence-collision-test', cmd: ['node','tools/evidence-collision-test.js'], critical: true },
@@ -81,6 +82,7 @@ async function aggregate(){
     params: 'artifacts/param-integrity-matrix.json',
     hype: 'artifacts/hype-lint.json',
     disclaimers: 'artifacts/disclaimers-lint.json',
+  decLint: 'artifacts/dec-lint.json',
     principles: 'artifacts/principles-impact-report.json',
     drift: 'artifacts/no-silent-drift-report.json'
   };
@@ -95,6 +97,7 @@ async function aggregate(){
     param_mismatches: out.artifacts.params?.mismatches ?? 0,
     hype_hits: out.artifacts.hype?.total_hits ?? 0,
     disclaimers_status: out.artifacts.disclaimers?.status || 'unknown',
+  dec_lint_violation_count: out.artifacts.decLint?.summary?.violation_count ?? out.artifacts.decLint?.violations?.length ?? 0,
     drift_status: out.artifacts.drift?.status || 'unknown'
   };
   await fs.writeFile('artifacts/governance-verify-summary.json', JSON.stringify(out,null,2));

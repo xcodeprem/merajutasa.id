@@ -1,8 +1,10 @@
 import { promises as fs } from 'fs';
 import crypto from 'crypto';
 
+// Unify with spec-hash-diff canonicalization token
+const CANON_TOKEN = 'hash_of_decision_document:"<CANON>"';
 function canonical(raw){
-  return raw.replace(/hash_of_decision_document:\s*"[^"]+"/,'hash_of_decision_document: "<HASH_VALUE>"');
+  return raw.replace(/hash_of_decision_document:\s*"[0-9a-f]{64}"/, CANON_TOKEN);
 }
 
 async function main(){
