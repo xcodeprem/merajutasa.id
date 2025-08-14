@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "generated_utc": "2025-08-14T10:44:35.335Z",
+  "generated_utc": "2025-08-14T10:48:06.462Z",
   "principles": [
     {
       "principle": "GP1",
@@ -120,18 +120,18 @@
       "confidence": 0.55,
       "evidence_sample": [
         {
-          "file": "docs\\privacy\\pii-pattern-library-v1.md",
-          "line": 398,
-          "snippet": "| Over-reliance (false sense of safety) | Hidden risk | High | Messaging: “Deteksi bersifat best-effort” in privacy policy |",
-          "pattern": "safety",
-          "changed": false,
-          "domain": "other"
-        },
-        {
           "file": "docs\\roadmap\\roadmap-master-v1.md",
           "line": 318,
           "snippet": "| Public API Access | Rate-limited aggregated metrics API | Governance gating & policy | Abuse risk (scraping misuse) |",
           "pattern": "abuse",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs\\privacy\\pii-pattern-library-v1.md",
+          "line": 398,
+          "snippet": "| Over-reliance (false sense of safety) | Hidden risk | High | Messaging: “Deteksi bersifat best-effort” in privacy policy |",
+          "pattern": "safety",
           "changed": false,
           "domain": "other"
         },
@@ -212,30 +212,6 @@
           "domain": "other"
         },
         {
-          "file": "docs\\privacy\\pii-pattern-library-v1.md",
-          "line": 19,
-          "snippet": "| GP5 Transparency | Kategori PII didokumentasi publik ringkas (FAQ) tanpa detail yang memudahkan penjahat menghindari deteksi. |",
-          "pattern": "transparenc",
-          "changed": false,
-          "domain": "other"
-        },
-        {
-          "file": "docs\\privacy\\pii-pattern-library-v1.md",
-          "line": 417,
-          "snippet": "## 26. PUBLIC TRANSPARENCY (ABRIDGED)",
-          "pattern": "transparenc",
-          "changed": false,
-          "domain": "other"
-        },
-        {
-          "file": "docs\\privacy\\pii-pattern-library-v1.md",
-          "line": 610,
-          "snippet": "Spec ini mempertahankan integritas strategi: menutup gap privasi sebelum skala, menghindari trust theater, mempersiapkan audit trail melalui event schema & governance log, serta tidak membawa ranking ",
-          "pattern": "audit trail",
-          "changed": false,
-          "domain": "other"
-        },
-        {
           "file": "docs\\roadmap\\roadmap-master-v1.md",
           "line": 16,
           "snippet": "- Horizon 2 (Hari 31–60): Governance Depth & Transparency Amplification (changelog excerpt, support matrix, anomaly watchers, revocation placeholder UI, a11y/performance enforcement).",
@@ -247,6 +223,30 @@
           "file": "docs\\roadmap\\roadmap-master-v1.md",
           "line": 44,
           "snippet": "| I Revocation Futureproof | Revocation list endpoint placeholder & schema wiring | Credential Schema revocation section | Lifecycle transparency readiness |",
+          "pattern": "transparenc",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs\\roadmap\\roadmap-master-v1.md",
+          "line": 45,
+          "snippet": "| J Transparency & Education | Methodology narrative, FAQ expansions, disclaimers presence | Master Spec v2.0 & Disclaimers Lint | User comprehension fairness/trust |",
+          "pattern": "transparenc",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs\\roadmap\\roadmap-master-v1.md",
+          "line": 412,
+          "snippet": "## 13. BACKLOG → ROADMAP MAPPING TABLE (TRACEABILITY)",
+          "pattern": "trace",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs\\roadmap\\roadmap-master-v1.md",
+          "line": 463,
+          "snippet": "| Gate 2 – Expanded Transparency | Changelog excerpt live, anomaly detector stable, adoption scanner operational, accessibility automated pass | Mid H2 |",
           "pattern": "transparenc",
           "changed": false,
           "domain": "other"
@@ -504,6 +504,30 @@
           "domain": "other"
         },
         {
+          "file": "docs\\roadmap\\roadmap-master-v1.md",
+          "line": 313,
+          "snippet": "| Revocation Lifecycle | Live revocation events & viewer delta tracking | Simulated tests stable | Misinterpretation as punishment |",
+          "pattern": "misinterpret",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs\\roadmap\\roadmap-master-v1.md",
+          "line": 554,
+          "snippet": "| Hysteresis Methodology Explainer | H1 | Clarify non-ranking fairness |",
+          "pattern": "non-?ranking",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs\\roadmap\\roadmap-master-v1.md",
+          "line": 557,
+          "snippet": "| Hero Non-Ranking Tooltip (conditional) | H2 | If confusion >5% |",
+          "pattern": "non-?ranking",
+          "changed": false,
+          "domain": "other"
+        },
+        {
           "file": "docs\\privacy\\pii-pattern-library-v1.md",
           "line": 6,
           "snippet": "NON-DESTRUCTIVE: Dokumen ini MENAMBAHKAN detail; tidak menghapus strategi/konstraint sebelumnya (GP1 Privacy-by-Architecture, GP6 Outcome Honesty, GP9 Non-Ranking).",
@@ -531,30 +555,6 @@
           "file": "docs\\privacy\\pii-pattern-library-v1.md",
           "line": 21,
           "snippet": "| GP9 Non-Ranking Fairness | Scanner tidak membuat penilaian entitas; hanya sanitasi. |",
-          "pattern": "non-?ranking",
-          "changed": false,
-          "domain": "other"
-        },
-        {
-          "file": "docs\\roadmap\\roadmap-master-v1.md",
-          "line": 313,
-          "snippet": "| Revocation Lifecycle | Live revocation events & viewer delta tracking | Simulated tests stable | Misinterpretation as punishment |",
-          "pattern": "misinterpret",
-          "changed": false,
-          "domain": "other"
-        },
-        {
-          "file": "docs\\roadmap\\roadmap-master-v1.md",
-          "line": 554,
-          "snippet": "| Hysteresis Methodology Explainer | H1 | Clarify non-ranking fairness |",
-          "pattern": "non-?ranking",
-          "changed": false,
-          "domain": "other"
-        },
-        {
-          "file": "docs\\roadmap\\roadmap-master-v1.md",
-          "line": 557,
-          "snippet": "| Hero Non-Ranking Tooltip (conditional) | H2 | If confusion >5% |",
           "pattern": "non-?ranking",
           "changed": false,
           "domain": "other"
@@ -704,14 +704,6 @@
           "domain": "other"
         },
         {
-          "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
-          "line": 64,
-          "snippet": "| GP3 | Federated Mindset | Cegah platform lock-in; integrity portability | Credential JSON-LD minimal; portable verify semantics |",
-          "pattern": "portabil",
-          "changed": false,
-          "domain": "other"
-        },
-        {
           "file": "docs\\integrity\\credential-schema-final-v1.md",
           "line": 23,
           "snippet": "| GP3 Federated Mindset | Format JSON-LD / W3C Verifiable Credential compatible subset → portabilitas lintas platform. |",
@@ -756,6 +748,14 @@
           "line": 652,
           "snippet": "Integrity Credential v1.0 memberikan pondasi portabel, minim, non‑ranking, dan dapat diaudit yang menyelaraskan semua pilar: privacy, fairness, governance, portability, & transition. Tidak ada deviati",
           "pattern": "extensib",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
+          "line": 64,
+          "snippet": "| GP3 | Federated Mindset | Cegah platform lock-in; integrity portability | Credential JSON-LD minimal; portable verify semantics |",
+          "pattern": "portabil",
           "changed": false,
           "domain": "other"
         }
