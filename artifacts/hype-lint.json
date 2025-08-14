@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_utc": "2025-08-14T06:26:37.358Z",
+  "generated_utc": "2025-08-14T06:36:16.045Z",
   "file_count": 59,
   "total_hits": 109,
   "max_severity": "MEDIUM",
@@ -380,7 +380,7 @@
       "rule": "RANKING",
       "severity": "MEDIUM",
       "rationale": "Unsubstantiated ranking claim.",
-      "context_line": "Q: Apakah ini bentuk ranking?  "
+      "context_line": "Q: Apakah ini bentuk ranking? <!-- data-phrase-context=\"disclaimer-explanation\" -->  "
     },
     {
       "file": "docs/faq/faq-fairness-hysteresis-update.md",
@@ -755,12 +755,12 @@
     {
       "file": "docs/integrity/credential-schema-final-v1.md",
       "line": 389,
-      "column": 76,
+      "column": 61,
       "match": "ranking",
       "rule": "RANKING",
       "severity": "MEDIUM",
       "rationale": "Unsubstantiated ranking claim.",
-      "context_line": "3. UI: Org shows “Verification Suspended/Revoked” badge (never converts to ranking penalty; disclaimers emphasise)."
+      "context_line": "3. UI: Org shows “Verification Suspended/Revoked” badge (no ranking penalty is applied; disclaimers emphasise). <!-- data-phrase-context=\"disclaimer-explanation\" -->"
     },
     {
       "file": "docs/integrity/credential-schema-final-v1.md",
@@ -770,7 +770,7 @@
       "rule": "RANKING",
       "severity": "MEDIUM",
       "rationale": "Unsubstantiated ranking claim.",
-      "context_line": "No field promoting ranking or performance scoring allowed. Attempt requires Ethics Board veto procedure (fast reject)."
+      "context_line": "No field promoting ranking or performance scoring allowed. <!-- data-phrase-context=\"disclaimer-explanation\" --> Attempt requires Ethics Board veto procedure (fast reject)."
     },
     {
       "file": "docs/integrity/credential-schema-final-v1.md",

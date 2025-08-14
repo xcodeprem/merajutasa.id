@@ -1,10 +1,10 @@
 {
-  "timestamp_utc": "2025-08-14T06:23:41.463Z",
+  "timestamp_utc": "2025-08-14T06:36:16.939Z",
   "components": {
     "spec_hash": "PASS",
     "params": "PASS",
     "hype": "ADVISORY",
-    "disclaimers": "ADVISORY",
+    "disclaimers": "PASS_STUB",
     "principles": "PASS_STUB",
     "pii": "PASS_STUB",
     "freshness": "ADVISORY"
@@ -23,10 +23,9 @@
     "principles_entries": 10,
     "pii_critical": 0,
     "pii_total": 0,
-    "disclaimers_errors": 3,
+    "disclaimers_errors": 0,
     "disclaimers_warnings": 8,
     "disclaimers_rule_counts": {
-      "DISC-PHRASE-009": 3,
       "DISC-DUPL-005": 2,
       "DISC-SCOPE-006": 6
     },
@@ -66,10 +65,10 @@
       },
       {
         "id": "DISCLAIMERS_PRESENCE",
-        "passed": false,
+        "passed": true,
         "detail": {
           "enforced": true,
-          "errors": 3,
+          "errors": 0,
           "allowed": 0
         }
       },
@@ -173,10 +172,10 @@
       },
       {
         "id": "DISCLAIMERS_PRESENCE",
-        "passed": false,
+        "passed": true,
         "detail": {
           "enforced": true,
-          "errors": 3,
+          "errors": 0,
           "allowed": 0
         }
       },

@@ -1,52 +1,9 @@
 {
   "version": 1,
-  "generated_utc": "2025-08-14T06:23:41.547Z",
-  "changed_count": 28,
-  "governed_impacted": [
-    "docs/governance/dec/DEC-20250812-03-principles-reference-activation.md",
-    "docs/governance/dec/DEC-20250813-03-disclaimers-presence-enforcement.md",
-    "docs/governance/dec/DEC-20250813-05-gating-policy-wave1-adoption.md",
-    "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md",
-    "docs/governance/dec/DEC-20250813-07-hype-threshold-transition.md"
-  ],
-  "dec_files_changed": [
-    "docs/governance/dec/DEC-20250812-03-principles-reference-activation.md",
-    "docs/governance/dec/DEC-20250813-03-disclaimers-presence-enforcement.md",
-    "docs/governance/dec/DEC-20250813-05-gating-policy-wave1-adoption.md",
-    "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md",
-    "docs/governance/dec/DEC-20250813-07-hype-threshold-transition.md"
-  ],
+  "generated_utc": "2025-08-14T06:36:17.021Z",
+  "changed_count": 20,
+  "governed_impacted": [],
+  "dec_files_changed": [],
   "violations": [],
-  "evidence": [
-    {
-      "path": "docs/governance/dec/DEC-20250812-03-principles-reference-activation.md",
-      "referenced_in": [
-        "docs/governance/dec/DEC-20250812-03-principles-reference-activation.md"
-      ]
-    },
-    {
-      "path": "docs/governance/dec/DEC-20250813-03-disclaimers-presence-enforcement.md",
-      "referenced_in": [
-        "docs/governance/dec/DEC-20250813-03-disclaimers-presence-enforcement.md"
-      ]
-    },
-    {
-      "path": "docs/governance/dec/DEC-20250813-05-gating-policy-wave1-adoption.md",
-      "referenced_in": [
-        "docs/governance/dec/DEC-20250813-05-gating-policy-wave1-adoption.md"
-      ]
-    },
-    {
-      "path": "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md",
-      "referenced_in": [
-        "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md"
-      ]
-    },
-    {
-      "path": "docs/governance/dec/DEC-20250813-07-hype-threshold-transition.md",
-      "referenced_in": [
-        "docs/governance/dec/DEC-20250813-07-hype-threshold-transition.md"
-      ]
-    }
-  ]
+  "evidence": []
 }

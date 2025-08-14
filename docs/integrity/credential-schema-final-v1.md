@@ -386,7 +386,7 @@ Revocation Workflow (future):
 
 1. Trigger internal review → logged decision ID.
 2. Revocation list updated → chain event `CREDENTIAL_REVOKED`.
-3. UI: Org shows “Verification Suspended/Revoked” badge (never converts to ranking penalty; disclaimers emphasise).
+3. UI: Org shows “Verification Suspended/Revoked” badge (no ranking penalty is applied; disclaimers emphasise). <!-- data-phrase-context="disclaimer-explanation" -->
 
 ---
 
@@ -436,7 +436,7 @@ Credential-level disclaimersRef & meta.disclaimers hold references to disclaimer
 | Add cryptographic suite | CIC-B | Security evaluation summary |
 | Introduce revocation viewer metrics | CIC-B | Misinterpretation risk memo |
 
-No field promoting ranking or performance scoring allowed. Attempt requires Ethics Board veto procedure (fast reject).
+No field promoting ranking or performance scoring allowed. <!-- data-phrase-context="disclaimer-explanation" --> Attempt requires Ethics Board veto procedure (fast reject).
 
 ---
 
@@ -669,7 +669,7 @@ Integrity Credential v1.0 memberikan pondasi portabel, minim, non‑ranking, dan
 
 ## 37. APPENDIX – PROHIBITED FIELD REGEX LIST (INITIAL)
 
-```
+```regex
 (child(Name|DOB|Date)|case(Id|ID)|address|lat|lng|geo|rating|rank|score|performance|donation|bank|vulnerability|riskScore|numberOfChildren|occupancy|testimonial|story)
 ```
 

@@ -9,7 +9,7 @@ A: Exit membutuhkan pemulihan kuat ≥65% agar sinyal tidak berulang naik-turun 
 Q: Apa arti “severe” dan “consecutive”?  
 A: “Severe” berarti rasio sekali jatuh di bawah 50%. “Consecutive” berarti dua snapshot berturut antara 50% dan <60%.
 
-Q: Apakah ini bentuk ranking?  
+Q: Apakah ini bentuk ranking? <!-- data-phrase-context="disclaimer-explanation" -->  
 A: <span data-disclaimer-id="D1">Equity Index & daftar under‑served bukan ranking kualitas—hanya sinyal pemerataan.</span>
 
 Q: Bagaimana jika data harian hilang?  

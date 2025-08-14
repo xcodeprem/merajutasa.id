@@ -198,7 +198,7 @@ Detail lengkap: docs/roadmap/roadmap-master-v1.md
 
 ---
 
-## 13. Larangan Klaim Peringkat / Ranking <!-- lint-allow-negated-context hype-lint-ignore-line -->
+## 13. Larangan Klaim Peringkat / Ranking <!-- data-phrase-context="disclaimer-explanation" lint-allow-negated-context hype-lint-ignore-line -->
 
 Sistem TIDAK:
 

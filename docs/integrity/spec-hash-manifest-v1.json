@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generation_timestamp_utc": "2025-08-14T06:13:22Z",
+  "generation_timestamp_utc": "2025-08-14T06:35:36Z",
   "generator_note": "Refined manifest: added onboarding & (optional) README, fixed dec_ref placeholders, standardized mutable_policy for adopted lint spec. All existing entries preserved; only additive or metadata corrections before first hash seal.",
   "files": [
     {
@@ -187,7 +187,7 @@
       "path": "docs/faq/faq-fairness-hysteresis-update.md",
       "version": "1.0.0",
       "dec_ref": "DEC-20250812-02 + DEC-20250813-04 + DEC-20250813-06",
-      "hash_sha256": "639a25102f752f7f500cd96b7b1cf95d4cd79496bc85ec67cebdd0bf923b593b",
+      "hash_sha256": "e86d2157b35dbd7693257b8fd5264c8065a56ad2485897663d1fc799ec9fe6d7",
       "integrity_class": "faq",
       "mutable_policy": "append-only",
       "next_change_requires_dec": true,
@@ -217,7 +217,7 @@
       "path": "docs/integrity/credential-schema-final-v1.md",
       "version": "1.0.0",
       "dec_ref": "DEC-20250813-04 + DEC-20250813-06",
-      "hash_sha256": "24d2f7cd42be2eaf96f30ecf9df2ed2151bb48b53ac32e97e44bf005ff021477",
+      "hash_sha256": "248eeaaa54b3262fd469eaf22a9f70c04995befca8cb97ba07ae48c48ce5a900",
       "integrity_class": "schema",
       "mutable_policy": "versioned",
       "next_change_requires_dec": true,
@@ -307,7 +307,7 @@
       "path": "README.md",
       "version": "1.0.0",
       "dec_ref": "DEC-20250813-04 + DEC-20250813-06",
-      "hash_sha256": "b43a8a6c844782b09b860b5053f4ce74b8602d01383852614dd6a86b200b51e3",
+      "hash_sha256": "777bf81573aa5261cab837eeefc2fb1029ed168f8520ec36e0ac78bf4d060389",
       "integrity_class": "repository-readme",
       "mutable_policy": "append-only",
       "next_change_requires_dec": true,

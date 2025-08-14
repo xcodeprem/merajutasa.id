@@ -14,5 +14,21 @@
     "signature": "SmPHrJYtYiV94T5Prm1T4PUk5/iDmYTlkgXZNsomfK7B4krQ1UW9iKAz5oVGejBckoQb1FyrDUUu9ZK/CvXPBA==",
     "canonical": "{\"a\":1,\"b\":2}",
     "ts": "2025-08-13T03:00:16.223Z"
+  },
+  {
+    "seq": 2,
+    "prevHash": "43258cff783fe7036d8a43033f830adfc60ec037382473548ac742b888292777",
+    "contentHash": "9b541b891e61b3d090bcd70ece8932086c91679526f263fe2f19af5b8e684931",
+    "signature": "d8k9mXZemGo2eRDJ20ibediMrfTvWMTRTasnoh5g7JB3AfrI4VLap1FBpYlPVQyKoo3ImtchQPQSbfw6YejyDg==",
+    "canonical": "{\"mode\":\"verify\",\"updated\":[],\"summary\":{\"total_entries\":52,\"updated_count\":0,\"violation_count\":0,\"placeholders_remaining_count\":0}}",
+    "ts": "2025-08-14T06:35:49.879Z"
+  },
+  {
+    "seq": 3,
+    "prevHash": "9b541b891e61b3d090bcd70ece8932086c91679526f263fe2f19af5b8e684931",
+    "contentHash": "9b541b891e61b3d090bcd70ece8932086c91679526f263fe2f19af5b8e684931",
+    "signature": "d8k9mXZemGo2eRDJ20ibediMrfTvWMTRTasnoh5g7JB3AfrI4VLap1FBpYlPVQyKoo3ImtchQPQSbfw6YejyDg==",
+    "canonical": "{\"mode\":\"verify\",\"updated\":[],\"summary\":{\"total_entries\":52,\"updated_count\":0,\"violation_count\":0,\"placeholders_remaining_count\":0}}",
+    "ts": "2025-08-14T06:36:17.069Z"
   }
 ]
