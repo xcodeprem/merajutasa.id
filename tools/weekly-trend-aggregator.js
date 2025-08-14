@@ -91,6 +91,7 @@ async function main(){
   }));
   // Try to attach decision mix (POS/BND/NEG) from latest anomalies run if available
   let decision_mix = null;
+  const weekly_decisions = new Map();
   try {
     const anomaliesTxt = await fs.readFile('artifacts/equity-anomalies.json','utf8');
     const anomalies = JSON.parse(anomaliesTxt);
@@ -111,9 +112,30 @@ async function main(){
         }
       } : { counts: agg, ratios: { POS:0, BND:0, NEG:0 } };
     }
+    // Per-snapshot decision log → aggregate by ISO week
+    try {
+      const dlogTxt = await fs.readFile('artifacts/equity-decision-log.json','utf8');
+      const dlog = JSON.parse(dlogTxt);
+      for (const e of dlog){
+        if (!e?.ts || !e?.region) continue;
+        const wk = isoWeek(new Date(e.ts)).key;
+        const bucket = weekly_decisions.get(wk) || { POS:0, BND:0, NEG:0, total:0 };
+        if (e.region==='POS') bucket.POS++; else if (e.region==='NEG') bucket.NEG++; else bucket.BND++;
+        bucket.total++;
+        weekly_decisions.set(wk, bucket);
+      }
+    } catch {}
   } catch {}
 
-  const result = { version:'1.1.0', generated_utc: new Date().toISOString(), weeks: out, adoption_percent_latest: adoptionPercent, decision_mix };
+  // Attach per-week decision ratios if any
+  const outWithDecisions = out.map(w=>{
+    const dec = weekly_decisions.get(w.week);
+    if (!dec || dec.total===0) return w;
+    const ratios = { POS:+(dec.POS/dec.total).toFixed(3), BND:+(dec.BND/dec.total).toFixed(3), NEG:+(dec.NEG/dec.total).toFixed(3) };
+    return { ...w, decisions: { counts: { POS:dec.POS, BND:dec.BND, NEG:dec.NEG }, ratios } };
+  });
+
+  const result = { version:'1.2.0', generated_utc: new Date().toISOString(), weeks: outWithDecisions, adoption_percent_latest: adoptionPercent, decision_mix };
   await fs.writeFile('artifacts/weekly-trends.json', JSON.stringify(result,null,2));
   const last = out[out.length-1];
   console.log(`[weekly-trends] weeks=${out.length} last_coverage=${last? last.totals.coverage : 'n/a'} last_events=${last? last.totals.events : 0}`);

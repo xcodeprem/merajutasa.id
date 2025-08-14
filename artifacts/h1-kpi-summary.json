@@ -1,6 +1,6 @@
 {
-  "version": "1.0.0",
-  "generated_utc": "2025-08-14T20:09:07.502Z",
+  "version": "1.1.0",
+  "generated_utc": "2025-08-14T22:21:19.998Z",
   "phase": "PHASE_1_ERROR",
   "fairness": {
     "pass": true,
@@ -12,7 +12,7 @@
     "index": 0.98,
     "index_raw": 0.984375,
     "under_served_total": 1,
-    "anomalies_count": 1
+    "anomalies_count": 0
   },
   "adoption": {
     "percent": 100,
@@ -60,6 +60,18 @@
       }
     },
     "coverage_latest": 1,
-    "throughput_latest": 9
+    "throughput_latest": 9,
+    "decision_mix": {
+      "counts": {
+        "POS": 0,
+        "BND": 0,
+        "NEG": 0
+      },
+      "ratios": {
+        "POS": 0,
+        "BND": 0,
+        "NEG": 0
+      }
+    }
   }
 }

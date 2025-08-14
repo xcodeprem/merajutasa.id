@@ -9,6 +9,7 @@ async function main(){
   const underEl = document.getElementById('under-json');
   const weeklyEl = document.getElementById('weekly-json');
   const decisionMixEl = document.getElementById('decision-mix');
+  const decisionSparkEl = document.getElementById('decision-spark');
   const fairnessBadge = document.getElementById('fairness');
   const underBadge = document.getElementById('under');
   const anomsBadge = document.getElementById('anoms');
@@ -38,6 +39,34 @@ async function main(){
     } else if (decisionMixEl) {
       decisionMixEl.textContent = 'decision mix: n/a';
     }
+
+    // Tiny sparkline for per-week decisions if available
+    if (weekly && Array.isArray(weekly.weeks)){
+      const weeks = weekly.weeks.filter(w=>w.decisions && w.decisions.ratios);
+      if (weeks.length > 0){
+        const W = 260, H = 60, pad = 4;
+        const xs = weeks.map((_,i)=> pad + i * ((W-2*pad)/Math.max(1, weeks.length-1)));
+        const toY = (v)=> pad + (1 - v) * (H - 2*pad);
+        const series = {
+          POS: weeks.map(w=>w.decisions.ratios.POS||0),
+          BND: weeks.map(w=>w.decisions.ratios.BND||0),
+          NEG: weeks.map(w=>w.decisions.ratios.NEG||0)
+        };
+        const color = { POS:'#2b8a3e', BND:'#f59f00', NEG:'#e03131' };
+        function pathFor(key){
+          return xs.map((x,i)=> `${i===0? 'M':'L'}${x.toFixed(1)},${toY(series[key][i]).toFixed(1)}`).join(' ');
+        }
+        decisionSparkEl.innerHTML = `
+          <svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+            <rect x="0" y="0" width="${W}" height="${H}" fill="#fafafa" stroke="#eee" />
+            <path d="${pathFor('POS')}" fill="none" stroke="${color.POS}" stroke-width="2" />
+            <path d="${pathFor('BND')}" fill="none" stroke="${color.BND}" stroke-width="2" />
+            <path d="${pathFor('NEG')}" fill="none" stroke="${color.NEG}" stroke-width="2" />
+          </svg>`;
+      } else {
+        decisionSparkEl.textContent = 'sparkline: n/a';
+      }
+    }
   } catch (e){
     fairnessBadge.textContent = 'fairness: n/a';
     underBadge.textContent = 'under-served: n/a';
@@ -49,6 +78,8 @@ async function main(){
   if (weeklyEl2) weeklyEl2.textContent = msg;
   const decisionMixEl2 = document.getElementById('decision-mix');
   if (decisionMixEl2) decisionMixEl2.textContent = msg;
+  const decisionSparkEl2 = document.getElementById('decision-spark');
+  if (decisionSparkEl2) decisionSparkEl2.textContent = msg;
     console.error('[equity-ui] init error', e);
   }
 }

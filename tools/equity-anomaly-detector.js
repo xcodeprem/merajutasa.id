@@ -61,6 +61,11 @@ async function main(){
   // Load persisted phi history (per unit)
   const phiHistoryPath = 'artifacts/equity-phi-history.json';
   const phiHistory = (await readJson(phiHistoryPath)) || {};
+  // Load decision log (per snapshot) to enable weekly aggregation and de-dup across runs
+  const decisionLogPath = 'artifacts/equity-decision-log.json';
+  const decisionLogArr = Array.isArray(await readJson(decisionLogPath)) ? await readJson(decisionLogPath) : [];
+  const decisionLogMap = new Map();
+  for (const e of decisionLogArr){ if (e && e.unit && e.ts) decisionLogMap.set(`${e.unit}__${e.ts}`, e); }
   const byUnit = new Map();
   for (const s of snaps){ if (!byUnit.has(s.unit)) byUnit.set(s.unit, []); byUnit.get(s.unit).push(s); }
 
@@ -100,10 +105,14 @@ async function main(){
         alpha = Math.max(0, Math.min(1, mu - params.alpha_beta_min_gap/2));
         beta  = Math.max(0, Math.min(1, mu + params.alpha_beta_min_gap/2));
       }
-      // region assignment
+  // region assignment
       let region;
       if (phi >= beta) region = 'POS'; else if (phi <= alpha) region = 'NEG'; else region = 'BND';
       regionCounts[region]++;
+
+  // Record per-snapshot decision for weekly aggregation; de-dup by (unit,ts)
+  const key = `${unit}__${curr.ts}`;
+  decisionLogMap.set(key, { unit, ts: curr.ts, region, phi: +phi.toFixed(4), alpha: +alpha.toFixed(4), beta: +beta.toFixed(4) });
 
       // Sliding window guard: drop old anomaly indices
       while (recentAnomalyIdx.length && recentAnomalyIdx[0] <= i - params.guard_window) {
@@ -139,6 +148,10 @@ async function main(){
   await fs.writeFile('artifacts/equity-anomalies.json', JSON.stringify(report,null,2));
   // Persist updated phi history map
   await fs.writeFile(phiHistoryPath, JSON.stringify(phiHistory,null,2));
+  // Persist compacted decision log (keep last 5000 by ts)
+  const merged = Array.from(decisionLogMap.values()).sort((a,b)=> String(a.ts).localeCompare(String(b.ts)));
+  const trimmed = merged.slice(-5000);
+  await fs.writeFile(decisionLogPath, JSON.stringify(trimmed,null,2));
   console.log(`[equity-anomaly] anomalies=${anomalies.length} thr=${params.delta_threshold} min=${params.min_samples} consec=${params.consecutive_required} cool=${params.cooldown_snapshots} phi_window=${params.phi_window} lambda=${params.lambda} guard=${params.guard_max_alerts}/${params.guard_window}`);
 }
 
