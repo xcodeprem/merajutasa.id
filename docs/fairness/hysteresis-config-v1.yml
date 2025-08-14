@@ -11,6 +11,20 @@ parameters:
   stalled_min_ratio: 0.55
   stalled_max_ratio_below_exit: 0.65
   anomaly_delta_threshold_equity_ratio: 0.03   # Referenced; confirm via anomaly DEC if needed
+  anomaly:
+    delta_threshold: 0.03           # magnitude of ratio change to consider
+    min_samples: 5                  # require at least N snapshots before detecting
+    consecutive_required: 2         # require N consecutive deltas above threshold
+    cooldown_snapshots: 3           # suppress alerts for N snapshots after an anomaly
+  smoothing_alpha: 0.3            # EMA smoothing factor (0..1), 0=off if <=0
+  # TWD partitioning config
+  phi_k: 0.01                     # logistic scale for mapping (|delta|-thr)
+  phi_window: 20                  # rolling window size for phi statistics
+  lambda: 1.0                     # dynamic threshold width multiplier (μ±λσ)
+  alpha_beta_min_gap: 0.10        # enforce minimal α/β separation when σ≈0
+  # Toggling guard
+  guard_window: 12                # sliding window length (snapshots)
+  guard_max_alerts: 2             # max anomalies allowed within the window
 state_labels_internal: [NONE, CANDIDATE, ACTIVE, STALLED, CLEARED]
 entry_reasons: [severe, consecutive]
 enforcement:

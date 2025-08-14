@@ -23,7 +23,7 @@ async function main(){
   const scenariosTotal = fairness?.scenarios_total ?? 0;
   const fairnessPass = scenariosTotal>0 && scenariosPass === scenariosTotal;
   const result = {
-    version: '1.0.0',
+  version: '1.1.0',
     generated_utc: new Date().toISOString(),
     phase: phase?.current_phase || null,
     fairness: {
@@ -54,8 +54,9 @@ async function main(){
     weekly: {
       weeks: weekly?.weeks ?? [],
       latest: weekly?.weeks?.length ? weekly.weeks[weekly.weeks.length-1] : null,
-      coverage_latest: weekly?.weeks?.length ? weekly.weeks[weekly.weeks.length-1].totals?.coverage ?? null : null,
-      throughput_latest: weekly?.weeks?.length ? weekly.weeks[weekly.weeks.length-1].totals?.events ?? null : null
+  coverage_latest: weekly?.weeks?.length ? weekly.weeks[weekly.weeks.length-1].totals?.coverage ?? null : null,
+  throughput_latest: weekly?.weeks?.length ? weekly.weeks[weekly.weeks.length-1].totals?.events ?? null : null,
+  decision_mix: weekly?.decision_mix ?? null
     }
   };
   await fs.writeFile('artifacts/h1-kpi-summary.json', JSON.stringify(result,null,2));

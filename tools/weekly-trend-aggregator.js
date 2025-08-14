@@ -89,8 +89,31 @@ async function main(){
     ...w,
     totals: { ...w.totals, coverage: w.totals.events? Number((w.totals.canonical_ok / w.totals.events).toFixed(3)) : 0 }
   }));
+  // Try to attach decision mix (POS/BND/NEG) from latest anomalies run if available
+  let decision_mix = null;
+  try {
+    const anomaliesTxt = await fs.readFile('artifacts/equity-anomalies.json','utf8');
+    const anomalies = JSON.parse(anomaliesTxt);
+    if (anomalies && anomalies.region_stats){
+      // Summarize region counts across units
+      const agg = { POS:0, BND:0, NEG:0 };
+      for (const k of Object.keys(anomalies.region_stats)){
+        const rs = anomalies.region_stats[k]||{};
+        agg.POS += rs.POS||0; agg.BND += rs.BND||0; agg.NEG += rs.NEG||0;
+      }
+      const total = agg.POS + agg.BND + agg.NEG;
+      decision_mix = total>0 ? {
+        counts: agg,
+        ratios: {
+          POS: +(agg.POS/total).toFixed(3),
+          BND: +(agg.BND/total).toFixed(3),
+          NEG: +(agg.NEG/total).toFixed(3)
+        }
+      } : { counts: agg, ratios: { POS:0, BND:0, NEG:0 } };
+    }
+  } catch {}
 
-  const result = { version:'1.0.0', generated_utc: new Date().toISOString(), weeks: out, adoption_percent_latest: adoptionPercent };
+  const result = { version:'1.1.0', generated_utc: new Date().toISOString(), weeks: out, adoption_percent_latest: adoptionPercent, decision_mix };
   await fs.writeFile('artifacts/weekly-trends.json', JSON.stringify(result,null,2));
   const last = out[out.length-1];
   console.log(`[weekly-trends] weeks=${out.length} last_coverage=${last? last.totals.coverage : 'n/a'} last_events=${last? last.totals.events : 0}`);

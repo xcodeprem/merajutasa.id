@@ -1,17 +1,20 @@
 {
-  "version": "1.0.0",
-  "generated_utc": "2025-08-14T20:09:07.294Z",
-  "threshold": 0.03,
-  "anomalies_count": 1,
-  "anomalies": [
-    {
-      "unit": "U2",
-      "prev_ts": "2025-08-14T21:09:07.116Z",
-      "curr_ts": "2025-08-14T22:09:07.116Z",
-      "prev_ratio": 0.51,
-      "curr_ratio": 0.64,
-      "delta": 0.13,
-      "threshold": 0.03
-    }
-  ]
+  "version": "1.2.1",
+  "generated_utc": "2025-08-14T21:52:53.460Z",
+  "params": {
+    "delta_threshold": 0.03,
+    "min_samples": 5,
+    "consecutive_required": 2,
+    "cooldown_snapshots": 3,
+    "smoothing_alpha": 0,
+    "phi_k": 0.01,
+    "phi_window": 20,
+    "lambda": 1,
+    "alpha_beta_min_gap": 0.1,
+    "guard_window": 12,
+    "guard_max_alerts": 2
+  },
+  "anomalies_count": 0,
+  "anomalies": [],
+  "region_stats": {}
 }
