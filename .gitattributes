@@ -1,0 +1,3 @@
+# Ensure shell and Husky hook scripts use LF endings to avoid /usr/bin/env errors on Windows
+.husky/** text eol=lf
+scripts/*.sh text eol=lf
