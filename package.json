@@ -53,7 +53,10 @@
   "equity:snapshot": "node tools/fairness/generate-equity-snapshots.js",
   "collector:smoke": "powershell -c \"$e=@{event_name='pub_hero_view';occurred_at=(Get-Date).ToString('s')+'Z';received_at=(Get-Date).ToString('s')+'Z';meta=@{path='/'}}; $json=$e|ConvertTo-Json -Depth 5; Invoke-RestMethod -Method Post -Uri http://127.0.0.1:4603/ingest -ContentType 'application/json' -Body $json\"",
   "signer:rotate": "curl -s -X POST http://127.0.0.1:%SIGNER_PORT%/rotate || powershell -c \"Invoke-RestMethod -Method Post -Uri http://127.0.0.1:$env:SIGNER_PORT/rotate\"",
-  "verify:cli": "node tools/generate-test-vectors.js"
+  "verify:cli": "node tools/generate-test-vectors.js",
+  "chain:append": "powershell -c \"$s=Start-Job -ScriptBlock { node tools/services/signer.js }; $c=Start-Job -ScriptBlock { node tools/services/chain.js }; Start-Sleep -Seconds 1; node tools/chain-append-from-signer.js; Get-Job | Remove-Job -Force\"",
+  "chain:verify:negative": "powershell -c \"$c=Start-Job -ScriptBlock { node tools/services/chain.js }; Start-Sleep -Seconds 1; node tools/tests/chain-prevhash-negative.test.js; Get-Job | Remove-Job -Force\"",
+  "policy:aggregation:verify": "node tools/policy-aggregation-threshold-verify.js"
   },
   "devDependencies": {
     "markdownlint": "^0.34.0",

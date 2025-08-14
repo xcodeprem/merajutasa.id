@@ -102,5 +102,21 @@
     "signature": "d8k9mXZemGo2eRDJ20ibediMrfTvWMTRTasnoh5g7JB3AfrI4VLap1FBpYlPVQyKoo3ImtchQPQSbfw6YejyDg==",
     "canonical": "{\"mode\":\"verify\",\"updated\":[],\"summary\":{\"total_entries\":52,\"updated_count\":0,\"violation_count\":0,\"placeholders_remaining_count\":0}}",
     "ts": "2025-08-14T07:27:24.491Z"
+  },
+  {
+    "seq": 13,
+    "prevHash": "9b541b891e61b3d090bcd70ece8932086c91679526f263fe2f19af5b8e684931",
+    "contentHash": "d0fab7c7b2126e096a7abb2c3859bf5324051a4cf239497bca2ddb6e734b1631",
+    "signature": "yIdzO/e/GxCmAgg/8JOZ4gGOfYIgyJquQTKNmm9RoYSmTdC6DRY5U9iPm/4zAgHzrcfQcNSPsPAMq0/+WoAXCQ==",
+    "canonical": "{\"id\":\"chain-test-1\",\"purpose\":\"append-seed\",\"ts\":\"2025-08-14T13:08:42.179Z\"}",
+    "ts": "2025-08-14T13:08:42.199Z"
+  },
+  {
+    "seq": 14,
+    "prevHash": "deadbeef",
+    "contentHash": "82d2eb6579c2cdaeb8657ec9b1f279fd33f88ff8211e5866d2786568618bea98",
+    "signature": "Wx10aQWkB0mP3rB0v0JttIbyW8oBLE8iiIobKehi9N/Mq0GiMDrFM4bSY0MuHAG5kDm850yD4ie5BwwYH++lCw==",
+    "canonical": "{\"id\":\"chain-test-2\",\"n\":2,\"purpose\":\"append-seed\",\"ts\":\"2025-08-14T13:08:42.179Z\"}",
+    "ts": "2025-08-14T13:08:42.210Z"
   }
 ]

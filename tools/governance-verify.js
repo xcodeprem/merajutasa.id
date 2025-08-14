@@ -33,6 +33,7 @@ const STEPS = [
   { name: 'events-validate', cmd: ['node','tools/event-validate.js','--file','data/events-sample.ndjson','--rehash'], advisory: true },
   { name: 'collector-integration', cmd: ['node','tools/tests/collector-integration.test.js'], advisory: true },
   { name: 'feedback-smoke', cmd: ['node','tools/feedback-smoke.js'], advisory: true },
+  { name: 'policy-aggregation-threshold', cmd: ['node','tools/policy-aggregation-threshold-verify.js'], advisory: true },
   { name: 'evidence-freshness', cmd: ['node','tools/evidence-freshness.js'], advisory: true },
   { name: 'evidence-collision-test', cmd: ['node','tools/evidence-collision-test.js'], critical: true },
   { name: 'fairness-sim', cmd: ['node','tools/fairness-sim.js'], advisory: true },
@@ -97,7 +98,8 @@ async function aggregate(){
     disclaimers: 'artifacts/disclaimers-lint.json',
   decLint: 'artifacts/dec-lint.json',
     principles: 'artifacts/principles-impact-report.json',
-    drift: 'artifacts/no-silent-drift-report.json'
+  drift: 'artifacts/no-silent-drift-report.json',
+  policyAgg: 'artifacts/policy-aggregation-threshold.json'
   };
   const out = { timestamp: new Date().toISOString(), artifacts: {}, summary: {} };
   for (const [k,p] of Object.entries(artifactPaths)){
@@ -111,7 +113,9 @@ async function aggregate(){
     hype_hits: out.artifacts.hype?.total_hits ?? 0,
     disclaimers_status: out.artifacts.disclaimers?.status || 'unknown',
   dec_lint_violation_count: out.artifacts.decLint?.summary?.violation_count ?? out.artifacts.decLint?.violations?.length ?? 0,
-    drift_status: out.artifacts.drift?.status || 'unknown'
+  drift_status: out.artifacts.drift?.status || 'unknown',
+  policy_aggregation_status: out.artifacts.policyAgg?.status || 'unknown',
+  policy_aggregation_violations: out.artifacts.policyAgg?.violations?.length ?? 0
   };
   await fs.writeFile('artifacts/governance-verify-summary.json', JSON.stringify(out,null,2));
 }

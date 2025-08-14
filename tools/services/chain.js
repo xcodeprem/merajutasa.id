@@ -70,6 +70,12 @@ async function start(){
         res.writeHead(200,{ 'content-type':'application/json' });
         return res.end(JSON.stringify(entry));
       }
+      if (req.method === 'POST' && req.url === '/reload'){
+        // Test helper: reload chain from disk
+        chain = await loadChain();
+        res.writeHead(200,{ 'content-type':'application/json' });
+        return res.end(JSON.stringify({ status:'RELOADED', length: chain.length }));
+      }
       if (req.method === 'POST' && req.url === '/verify'){
         const result = verifyChain(chain);
         res.writeHead(200,{ 'content-type':'application/json' });

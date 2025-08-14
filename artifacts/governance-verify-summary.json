@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-08-14T12:33:51.707Z",
+  "timestamp": "2025-08-14T13:10:12.692Z",
   "artifacts": {
     "specHash": {
       "mode": "verify",
-      "timestamp_utc": "2025-08-14T12:33:46Z",
+      "timestamp_utc": "2025-08-14T13:10:08Z",
       "updated": [],
       "unchanged": [
         "docs/roadmap/roadmap-master-v1.md",
@@ -72,7 +72,7 @@
     },
     "params": {
       "version": 2,
-      "generated_utc": "2025-08-14T12:33:46.263Z",
+      "generated_utc": "2025-08-14T13:10:08.584Z",
       "status": "PASS",
       "summary_counts": {
         "MATCH": 15
@@ -338,7 +338,7 @@
     },
     "hype": {
       "version": 1,
-      "generated_utc": "2025-08-14T12:33:46.558Z",
+      "generated_utc": "2025-08-14T13:10:08.946Z",
       "file_count": 64,
       "total_hits": 109,
       "max_severity": "MEDIUM",
@@ -1525,7 +1525,7 @@
       }
     },
     "decLint": {
-      "generated_utc": "2025-08-14T12:33:47.192Z",
+      "generated_utc": "2025-08-14T13:10:09.631Z",
       "version": 1,
       "summary": {
         "files": 15,
@@ -1646,7 +1646,7 @@
     },
     "principles": {
       "version": 2,
-      "generated_utc": "2025-08-14T12:33:47.366Z",
+      "generated_utc": "2025-08-14T13:10:09.826Z",
       "principles": [
         {
           "principle": "GP1",
@@ -1766,18 +1766,18 @@
           "confidence": 0.55,
           "evidence_sample": [
             {
-              "file": "docs\\privacy\\pii-pattern-library-v1.md",
-              "line": 398,
-              "snippet": "| Over-reliance (false sense of safety) | Hidden risk | High | Messaging: “Deteksi bersifat best-effort” in privacy policy |",
-              "pattern": "safety",
-              "changed": false,
-              "domain": "other"
-            },
-            {
               "file": "docs\\roadmap\\roadmap-master-v1.md",
               "line": 318,
               "snippet": "| Public API Access | Rate-limited aggregated metrics API | Governance gating & policy | Abuse risk (scraping misuse) |",
               "pattern": "abuse",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\privacy\\pii-pattern-library-v1.md",
+              "line": 398,
+              "snippet": "| Over-reliance (false sense of safety) | Hidden risk | High | Messaging: “Deteksi bersifat best-effort” in privacy policy |",
+              "pattern": "safety",
               "changed": false,
               "domain": "other"
             },
@@ -1858,30 +1858,6 @@
               "domain": "other"
             },
             {
-              "file": "docs\\privacy\\pii-pattern-library-v1.md",
-              "line": 19,
-              "snippet": "| GP5 Transparency | Kategori PII didokumentasi publik ringkas (FAQ) tanpa detail yang memudahkan penjahat menghindari deteksi. |",
-              "pattern": "transparenc",
-              "changed": false,
-              "domain": "other"
-            },
-            {
-              "file": "docs\\privacy\\pii-pattern-library-v1.md",
-              "line": 417,
-              "snippet": "## 26. PUBLIC TRANSPARENCY (ABRIDGED)",
-              "pattern": "transparenc",
-              "changed": false,
-              "domain": "other"
-            },
-            {
-              "file": "docs\\privacy\\pii-pattern-library-v1.md",
-              "line": 610,
-              "snippet": "Spec ini mempertahankan integritas strategi: menutup gap privasi sebelum skala, menghindari trust theater, mempersiapkan audit trail melalui event schema & governance log, serta tidak membawa ranking ",
-              "pattern": "audit trail",
-              "changed": false,
-              "domain": "other"
-            },
-            {
               "file": "docs\\roadmap\\roadmap-master-v1.md",
               "line": 16,
               "snippet": "- Horizon 2 (Hari 31–60): Governance Depth & Transparency Amplification (changelog excerpt, support matrix, anomaly watchers, revocation placeholder UI, a11y/performance enforcement).",
@@ -1893,6 +1869,30 @@
               "file": "docs\\roadmap\\roadmap-master-v1.md",
               "line": 44,
               "snippet": "| I Revocation Futureproof | Revocation list endpoint placeholder & schema wiring | Credential Schema revocation section | Lifecycle transparency readiness |",
+              "pattern": "transparenc",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\roadmap\\roadmap-master-v1.md",
+              "line": 45,
+              "snippet": "| J Transparency & Education | Methodology narrative, FAQ expansions, disclaimers presence | Master Spec v2.0 & Disclaimers Lint | User comprehension fairness/trust |",
+              "pattern": "transparenc",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\roadmap\\roadmap-master-v1.md",
+              "line": 412,
+              "snippet": "## 13. BACKLOG → ROADMAP MAPPING TABLE (TRACEABILITY)",
+              "pattern": "trace",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\roadmap\\roadmap-master-v1.md",
+              "line": 463,
+              "snippet": "| Gate 2 – Expanded Transparency | Changelog excerpt live, anomaly detector stable, adoption scanner operational, accessibility automated pass | Mid H2 |",
               "pattern": "transparenc",
               "changed": false,
               "domain": "other"
@@ -2150,38 +2150,6 @@
               "domain": "other"
             },
             {
-              "file": "docs\\privacy\\pii-pattern-library-v1.md",
-              "line": 6,
-              "snippet": "NON-DESTRUCTIVE: Dokumen ini MENAMBAHKAN detail; tidak menghapus strategi/konstraint sebelumnya (GP1 Privacy-by-Architecture, GP6 Outcome Honesty, GP9 Non-Ranking).",
-              "pattern": "outcome honesty",
-              "changed": false,
-              "domain": "other"
-            },
-            {
-              "file": "docs\\privacy\\pii-pattern-library-v1.md",
-              "line": 6,
-              "snippet": "NON-DESTRUCTIVE: Dokumen ini MENAMBAHKAN detail; tidak menghapus strategi/konstraint sebelumnya (GP1 Privacy-by-Architecture, GP6 Outcome Honesty, GP9 Non-Ranking).",
-              "pattern": "non-?ranking",
-              "changed": false,
-              "domain": "other"
-            },
-            {
-              "file": "docs\\privacy\\pii-pattern-library-v1.md",
-              "line": 20,
-              "snippet": "| GP6 Outcome Honesty | Tidak over-claim (pattern “100% akurat”); jelaskan false positive possibility. |",
-              "pattern": "outcome honesty",
-              "changed": false,
-              "domain": "other"
-            },
-            {
-              "file": "docs\\privacy\\pii-pattern-library-v1.md",
-              "line": 21,
-              "snippet": "| GP9 Non-Ranking Fairness | Scanner tidak membuat penilaian entitas; hanya sanitasi. |",
-              "pattern": "non-?ranking",
-              "changed": false,
-              "domain": "other"
-            },
-            {
               "file": "docs\\roadmap\\roadmap-master-v1.md",
               "line": 313,
               "snippet": "| Revocation Lifecycle | Live revocation events & viewer delta tracking | Simulated tests stable | Misinterpretation as punishment |",
@@ -2218,6 +2186,38 @@
               "line": 16,
               "snippet": "| GP6 | Outcome Honesty | Tidak mempresentasikan sinyal sebagai ranking / kualitas; menghindari misframing performa. | Ethical Framing | §14 Fairness Narrative, §30 Equity UI | No “top”, disclaimers R",
               "pattern": "non-?ranking",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\principles\\GP1-GP10-index.md",
+              "line": 19,
+              "snippet": "| GP9 | Non-Ranking Fairness | Label under‑served & equity index tidak memeringkat; hanya sinyal pemerataan dengan hysteresis stabil untuk menekan noise. | Fairness Stability | §14 Fairness, §42 Hyste",
+              "pattern": "non-?ranking",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\privacy\\pii-pattern-library-v1.md",
+              "line": 6,
+              "snippet": "NON-DESTRUCTIVE: Dokumen ini MENAMBAHKAN detail; tidak menghapus strategi/konstraint sebelumnya (GP1 Privacy-by-Architecture, GP6 Outcome Honesty, GP9 Non-Ranking).",
+              "pattern": "outcome honesty",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\privacy\\pii-pattern-library-v1.md",
+              "line": 6,
+              "snippet": "NON-DESTRUCTIVE: Dokumen ini MENAMBAHKAN detail; tidak menghapus strategi/konstraint sebelumnya (GP1 Privacy-by-Architecture, GP6 Outcome Honesty, GP9 Non-Ranking).",
+              "pattern": "non-?ranking",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\privacy\\pii-pattern-library-v1.md",
+              "line": 20,
+              "snippet": "| GP6 Outcome Honesty | Tidak over-claim (pattern “100% akurat”); jelaskan false positive possibility. |",
+              "pattern": "outcome honesty",
               "changed": false,
               "domain": "other"
             }
@@ -2614,9 +2614,9 @@
               "domain": "other"
             },
             {
-              "file": "docs\\integrity\\credential-schema-final-v1.md",
-              "line": 115,
-              "snippet": "| Predictive / Risk | riskScore, vulnerabilityIndex | Ethical hazard, not validated |",
+              "file": "docs\\master-spec\\master-spec-v2.0.md",
+              "line": 44,
+              "snippet": "§35 Ethical & Copy Guidelines (Disclaimers, Anti-Hype – GP5, GP6, GP7)",
               "pattern": "ethic",
               "changed": false,
               "domain": "other"
@@ -2633,7 +2633,7 @@
       }
     },
     "drift": {
-      "timestamp_utc": "2025-08-14T12:33:51.308Z",
+      "timestamp_utc": "2025-08-14T13:10:12.295Z",
       "components": {
         "spec_hash": "PASS",
         "params": "PASS",
@@ -2855,6 +2855,14 @@
         ]
       },
       "status": "ADVISORY"
+    },
+    "policyAgg": {
+      "version": 1,
+      "status": "NO_DATA",
+      "threshold": 20,
+      "source": "artifacts/aggregation-cells.json",
+      "total_cells": 0,
+      "violations": []
     }
   },
   "summary": {
@@ -2863,6 +2871,8 @@
     "hype_hits": 109,
     "disclaimers_status": "PASS",
     "dec_lint_violation_count": 0,
-    "drift_status": "ADVISORY"
+    "drift_status": "ADVISORY",
+    "policy_aggregation_status": "NO_DATA",
+    "policy_aggregation_violations": 0
   }
 }
