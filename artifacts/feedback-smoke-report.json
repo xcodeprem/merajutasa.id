@@ -1,20 +1,24 @@
 {
   "version": 1,
-  "total": 2,
+  "total": 3,
   "results": [
     {
       "status": "OK",
-      "record_id": "62219b8b-f67c-4658-8f59-6d208bc3e47f",
+      "record_id": "e0d14e2b-6906-434f-a062-42345fac2dc3",
       "pii_categories": [
         "CONTACT_EMAIL"
       ]
     },
     {
       "status": "OK",
-      "record_id": "05a2dea4-4650-4f8e-9bf6-f0065a54acee",
+      "record_id": "425e472a-e43f-4800-922d-6c6228309701",
       "pii_categories": [
         "CONTACT_PHONE"
       ]
+    },
+    {
+      "status": "BLOCKED",
+      "reason": "NIK_DETECTED"
     }
   ]
 }

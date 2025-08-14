@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "status": "NO_DATA",
+  "status": "ALLOW",
   "threshold": 20,
-  "source": "artifacts/aggregation-cells.json",
-  "total_cells": 0,
+  "source": "artifacts/aggregation-cells-allow.json",
+  "total_cells": 3,
   "violations": []
 }

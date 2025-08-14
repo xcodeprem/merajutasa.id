@@ -16,6 +16,8 @@ const OUT_REPORT = 'artifacts/feedback-smoke-report.json';
 
 const EMAIL_RE = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi;
 const PHONE_RE = /\b(?:\+?\d[\d\s\-()]{7,}\d)\b/g;
+// Indonesia NIK: 16 digits with contextual keyword or strict length boundaries
+const NIK_RE = /\b(?:(?:NIK|No\.?\s*KTP)\s*[:\-]?)?\s*([0-9]{16})\b/i;
 
 function redact(text){
   let redacted = text.replace(EMAIL_RE, '[email]');
@@ -29,6 +31,8 @@ function detectPiiCategories(text){
   EMAIL_RE.lastIndex = 0;
   if (PHONE_RE.test(text)) cats.add('CONTACT_PHONE');
   PHONE_RE.lastIndex = 0;
+  if (NIK_RE.test(text)) cats.add('IDN_NIK');
+  NIK_RE.lastIndex = 0;
   return [...cats];
 }
 
@@ -41,12 +45,18 @@ async function main(){
 
   const samples = [
     { categories:['product','ux'], text: 'Halo tim, email saya user@example.com, tolong perbaiki.' },
-    { categories:['bug'], text: 'Kontak saya +62 812-3456-7890 bila butuh info lanjut.' }
+    { categories:['bug'], text: 'Kontak saya +62 812-3456-7890 bila butuh info lanjut.' },
+    { categories:['privacy'], text: 'NIK: 1234567890123456 ini tidak boleh tersimpan.' }
   ];
 
   const results = [];
   for (const s of samples){
     const piiCats = detectPiiCategories(s.text);
+    if (piiCats.includes('IDN_NIK')){
+      // Block submission if NIK present
+      results.push({ status:'BLOCKED', reason:'NIK_DETECTED' });
+      continue;
+    }
     const red = redact(s.text);
     const rec = {
       record_id: randomUUID(),

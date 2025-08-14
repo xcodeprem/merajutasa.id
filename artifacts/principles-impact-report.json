@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "generated_utc": "2025-08-14T13:10:09.826Z",
+  "generated_utc": "2025-08-14T13:28:54.518Z",
   "principles": [
     {
       "principle": "GP1",
-      "match_count": 842,
+      "match_count": 843,
       "domains": [
         "other"
       ],
@@ -180,38 +180,6 @@
           "domain": "other"
         },
         {
-          "file": "docs\\status\\README-h0-completion.md",
-          "line": 69,
-          "snippet": "- Optional snapshot for traceability:",
-          "pattern": "trace",
-          "changed": false,
-          "domain": "other"
-        },
-        {
-          "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
-          "line": 64,
-          "snippet": "| Revocation Endpoint & List | Placeholder saja | Revocation transparency nol saat insiden |",
-          "pattern": "transparenc",
-          "changed": false,
-          "domain": "other"
-        },
-        {
-          "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
-          "line": 67,
-          "snippet": "| Governance Decision Log Automation | Belum template DEC populating CI | Traceability manual & rentan lupa |",
-          "pattern": "trace",
-          "changed": false,
-          "domain": "other"
-        },
-        {
-          "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
-          "line": 95,
-          "snippet": "6. Transparency Hardening",
-          "pattern": "transparenc",
-          "changed": false,
-          "domain": "other"
-        },
-        {
           "file": "docs\\roadmap\\roadmap-master-v1.md",
           "line": 16,
           "snippet": "- Horizon 2 (Hari 31–60): Governance Depth & Transparency Amplification (changelog excerpt, support matrix, anomaly watchers, revocation placeholder UI, a11y/performance enforcement).",
@@ -248,6 +216,38 @@
           "line": 463,
           "snippet": "| Gate 2 – Expanded Transparency | Changelog excerpt live, anomaly detector stable, adoption scanner operational, accessibility automated pass | Mid H2 |",
           "pattern": "transparenc",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs\\roadmap\\roadmap-master-v1.md",
+          "line": 497,
+          "snippet": "## 18. DOCUMENTATION & TRACEABILITY BINDINGS",
+          "pattern": "trace",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs\\roadmap\\roadmap-master-v1.md",
+          "line": 544,
+          "snippet": "| H1 | Salt rotation & privacy FAQ | Automated rotation + user transparency |",
+          "pattern": "transparenc",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs\\roadmap\\roadmap-master-v1.md",
+          "line": 554,
+          "snippet": "| Hysteresis Methodology Explainer | H1 | Clarify non-ranking fairness |",
+          "pattern": "explain",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs\\status\\README-h0-completion.md",
+          "line": 69,
+          "snippet": "- Optional snapshot for traceability:",
+          "pattern": "trace",
           "changed": false,
           "domain": "other"
         }
@@ -496,14 +496,6 @@
           "domain": "other"
         },
         {
-          "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
-          "line": 381,
-          "snippet": "Semua jalur tetap konsisten dengan GP1–GP10. Tidak ada penurunan komitmen terhadap non-ranking fairness & privacy. Fokus sekarang = menghapus jurang antara blueprint dan trust primitives nyata. Kecepa",
-          "pattern": "non-?ranking",
-          "changed": false,
-          "domain": "other"
-        },
-        {
           "file": "docs\\roadmap\\roadmap-master-v1.md",
           "line": 313,
           "snippet": "| Revocation Lifecycle | Live revocation events & viewer delta tracking | Simulated tests stable | Misinterpretation as punishment |",
@@ -528,25 +520,9 @@
           "domain": "other"
         },
         {
-          "file": "docs\\principles\\GP1-GP10-index.md",
-          "line": 16,
-          "snippet": "| GP6 | Outcome Honesty | Tidak mempresentasikan sinyal sebagai ranking / kualitas; menghindari misframing performa. | Ethical Framing | §14 Fairness Narrative, §30 Equity UI | No “top”, disclaimers R",
-          "pattern": "outcome honesty",
-          "changed": false,
-          "domain": "other"
-        },
-        {
-          "file": "docs\\principles\\GP1-GP10-index.md",
-          "line": 16,
-          "snippet": "| GP6 | Outcome Honesty | Tidak mempresentasikan sinyal sebagai ranking / kualitas; menghindari misframing performa. | Ethical Framing | §14 Fairness Narrative, §30 Equity UI | No “top”, disclaimers R",
-          "pattern": "non-?ranking",
-          "changed": false,
-          "domain": "other"
-        },
-        {
-          "file": "docs\\principles\\GP1-GP10-index.md",
-          "line": 19,
-          "snippet": "| GP9 | Non-Ranking Fairness | Label under‑served & equity index tidak memeringkat; hanya sinyal pemerataan dengan hysteresis stabil untuk menekan noise. | Fairness Stability | §14 Fairness, §42 Hyste",
+          "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
+          "line": 381,
+          "snippet": "Semua jalur tetap konsisten dengan GP1–GP10. Tidak ada penurunan komitmen terhadap non-ranking fairness & privacy. Fokus sekarang = menghapus jurang antara blueprint dan trust primitives nyata. Kecepa",
           "pattern": "non-?ranking",
           "changed": false,
           "domain": "other"
@@ -572,6 +548,30 @@
           "line": 20,
           "snippet": "| GP6 Outcome Honesty | Tidak over-claim (pattern “100% akurat”); jelaskan false positive possibility. |",
           "pattern": "outcome honesty",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs\\privacy\\pii-pattern-library-v1.md",
+          "line": 21,
+          "snippet": "| GP9 Non-Ranking Fairness | Scanner tidak membuat penilaian entitas; hanya sanitasi. |",
+          "pattern": "non-?ranking",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs\\principles\\GP1-GP10-index.md",
+          "line": 16,
+          "snippet": "| GP6 | Outcome Honesty | Tidak mempresentasikan sinyal sebagai ranking / kualitas; menghindari misframing performa. | Ethical Framing | §14 Fairness Narrative, §30 Equity UI | No “top”, disclaimers R",
+          "pattern": "outcome honesty",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs\\principles\\GP1-GP10-index.md",
+          "line": 16,
+          "snippet": "| GP6 | Outcome Honesty | Tidak mempresentasikan sinyal sebagai ranking / kualitas; menghindari misframing performa. | Ethical Framing | §14 Fairness Narrative, §30 Equity UI | No “top”, disclaimers R",
+          "pattern": "non-?ranking",
           "changed": false,
           "domain": "other"
         }
@@ -912,58 +912,58 @@
           "domain": "other"
         },
         {
-          "file": "docs\\principles\\GP1-GP10-index.md",
-          "line": 15,
-          "snippet": "| GP5 | Transparency | Definisi metrik, disclaimers, metodologi (fairness/hysteresis) dapat diinspeksi publik tanpa dark logic. | Public Clarity | §13 Hero, §35 Ethical Content, Methodology Fragments ",
-          "pattern": "ethic",
-          "changed": false,
-          "domain": "other"
-        },
-        {
-          "file": "docs\\principles\\GP1-GP10-index.md",
-          "line": 15,
-          "snippet": "| GP5 | Transparency | Definisi metrik, disclaimers, metodologi (fairness/hysteresis) dapat diinspeksi publik tanpa dark logic. | Public Clarity | §13 Hero, §35 Ethical Content, Methodology Fragments ",
-          "pattern": "ethical",
-          "changed": false,
-          "domain": "other"
-        },
-        {
-          "file": "docs\\principles\\GP1-GP10-index.md",
-          "line": 16,
-          "snippet": "| GP6 | Outcome Honesty | Tidak mempresentasikan sinyal sebagai ranking / kualitas; menghindari misframing performa. | Ethical Framing | §14 Fairness Narrative, §30 Equity UI | No “top”, disclaimers R",
-          "pattern": "ethic",
-          "changed": false,
-          "domain": "other"
-        },
-        {
-          "file": "docs\\principles\\GP1-GP10-index.md",
-          "line": 16,
-          "snippet": "| GP6 | Outcome Honesty | Tidak mempresentasikan sinyal sebagai ranking / kualitas; menghindari misframing performa. | Ethical Framing | §14 Fairness Narrative, §30 Equity UI | No “top”, disclaimers R",
-          "pattern": "ethical",
-          "changed": false,
-          "domain": "other"
-        },
-        {
-          "file": "docs\\principles\\GP1-GP10-index.md",
-          "line": 17,
-          "snippet": "| GP7 | Anti-Hype & Plain Language | Bahasa pemasaran berlebihan & ambigu (ranking, “revolusioner”) diblok lint demi kejelasan & menghindari overclaim. | Copy Discipline | §35 Ethical Content, Disclai",
-          "pattern": "ethic",
-          "changed": false,
-          "domain": "other"
-        },
-        {
-          "file": "docs\\principles\\GP1-GP10-index.md",
-          "line": 17,
-          "snippet": "| GP7 | Anti-Hype & Plain Language | Bahasa pemasaran berlebihan & ambigu (ranking, “revolusioner”) diblok lint demi kejelasan & menghindari overclaim. | Copy Discipline | §35 Ethical Content, Disclai",
-          "pattern": "ethical",
-          "changed": false,
-          "domain": "other"
-        },
-        {
           "file": "docs\\onboarding\\agent-role-policy-v1.md",
           "line": 166,
           "snippet": "| GP3 Fairness | Parameter only via DEC; prevents silent bias shifts |",
           "pattern": "bias",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs\\principles\\GP1-GP10-index.md",
+          "line": 15,
+          "snippet": "| GP5 | Transparency | Definisi metrik, disclaimers, metodologi (fairness/hysteresis) dapat diinspeksi publik tanpa dark logic. | Public Clarity | §13 Hero, §35 Ethical Content, Methodology Fragments ",
+          "pattern": "ethic",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs\\principles\\GP1-GP10-index.md",
+          "line": 15,
+          "snippet": "| GP5 | Transparency | Definisi metrik, disclaimers, metodologi (fairness/hysteresis) dapat diinspeksi publik tanpa dark logic. | Public Clarity | §13 Hero, §35 Ethical Content, Methodology Fragments ",
+          "pattern": "ethical",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs\\principles\\GP1-GP10-index.md",
+          "line": 16,
+          "snippet": "| GP6 | Outcome Honesty | Tidak mempresentasikan sinyal sebagai ranking / kualitas; menghindari misframing performa. | Ethical Framing | §14 Fairness Narrative, §30 Equity UI | No “top”, disclaimers R",
+          "pattern": "ethic",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs\\principles\\GP1-GP10-index.md",
+          "line": 16,
+          "snippet": "| GP6 | Outcome Honesty | Tidak mempresentasikan sinyal sebagai ranking / kualitas; menghindari misframing performa. | Ethical Framing | §14 Fairness Narrative, §30 Equity UI | No “top”, disclaimers R",
+          "pattern": "ethical",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs\\principles\\GP1-GP10-index.md",
+          "line": 17,
+          "snippet": "| GP7 | Anti-Hype & Plain Language | Bahasa pemasaran berlebihan & ambigu (ranking, “revolusioner”) diblok lint demi kejelasan & menghindari overclaim. | Copy Discipline | §35 Ethical Content, Disclai",
+          "pattern": "ethic",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs\\principles\\GP1-GP10-index.md",
+          "line": 17,
+          "snippet": "| GP7 | Anti-Hype & Plain Language | Bahasa pemasaran berlebihan & ambigu (ranking, “revolusioner”) diblok lint demi kejelasan & menghindari overclaim. | Copy Discipline | §35 Ethical Content, Disclai",
+          "pattern": "ethical",
           "changed": false,
           "domain": "other"
         },

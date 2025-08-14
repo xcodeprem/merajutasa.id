@@ -56,7 +56,12 @@
   "verify:cli": "node tools/generate-test-vectors.js",
   "chain:append": "powershell -c \"$s=Start-Job -ScriptBlock { node tools/services/signer.js }; $c=Start-Job -ScriptBlock { node tools/services/chain.js }; Start-Sleep -Seconds 1; node tools/chain-append-from-signer.js; Get-Job | Remove-Job -Force\"",
   "chain:verify:negative": "powershell -c \"$c=Start-Job -ScriptBlock { node tools/services/chain.js }; Start-Sleep -Seconds 1; node tools/tests/chain-prevhash-negative.test.js; Get-Job | Remove-Job -Force\"",
-  "policy:aggregation:verify": "node tools/policy-aggregation-threshold-verify.js"
+  "policy:aggregation:verify": "node tools/policy-aggregation-threshold-verify.js",
+  "policy:aggregation:enforce:allow": "node tools/policy-aggregation-threshold-enforce.js artifacts/aggregation-cells-allow.json",
+  "policy:aggregation:enforce:deny": "node tools/policy-aggregation-threshold-enforce.js artifacts/aggregation-cells-deny.json",
+  
+  "queries:seeds": "node tools/query-seeds.js",
+  "doc:verify-cli:stub": "powershell -c \"$d='docs/verify-cli.md'; if(!(Test-Path $d)){ New-Item -ItemType File -Path $d -Force | Out-Null }; Set-Content -Path $d -Value '# Verify CLI (Draft)\n\n## Steps\n- Install Node.js\n- Run `npm run verify:cli`\n- Inspect artifacts under `artifacts/` for signatures & hashes.\n\n> Draft: expand with platform-specific instructions.'\""
   },
   "devDependencies": {
     "markdownlint": "^0.34.0",

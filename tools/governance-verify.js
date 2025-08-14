@@ -34,6 +34,8 @@ const STEPS = [
   { name: 'collector-integration', cmd: ['node','tools/tests/collector-integration.test.js'], advisory: true },
   { name: 'feedback-smoke', cmd: ['node','tools/feedback-smoke.js'], advisory: true },
   { name: 'policy-aggregation-threshold', cmd: ['node','tools/policy-aggregation-threshold-verify.js'], advisory: true },
+  // Hard-enforce sample publish gate (default to allow sample; override via POLICY_CELLS_PATH)
+  { name: 'policy-aggregation-enforce', cmd: ['node','tools/policy-aggregation-threshold-enforce.js', process.env.POLICY_CELLS_PATH || 'artifacts/aggregation-cells-allow.json'], critical: true },
   { name: 'evidence-freshness', cmd: ['node','tools/evidence-freshness.js'], advisory: true },
   { name: 'evidence-collision-test', cmd: ['node','tools/evidence-collision-test.js'], critical: true },
   { name: 'fairness-sim', cmd: ['node','tools/fairness-sim.js'], advisory: true },
