@@ -76,22 +76,6 @@
           ]
         },
         {
-          "ruleId": "PLATE_ID",
-          "level": "warning",
-          "message": {
-            "text": "PLATE_ID docs\\public\\ABOUT-PORTAL-PANTI.md"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "docs\\public\\ABOUT-PORTAL-PANTI.md"
-                }
-              }
-            }
-          ]
-        },
-        {
           "ruleId": "IDN_NIK",
           "level": "error",
           "message": {
@@ -694,6 +678,22 @@
               "physicalLocation": {
                 "artifactLocation": {
                   "uri": "docs\\privacy\\corpus\\negative-decoy.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "PLATE_ID",
+          "level": "warning",
+          "message": {
+            "text": "PLATE_ID docs\\public\\ABOUT-PORTAL-PANTI.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\public\\ABOUT-PORTAL-PANTI.md"
                 }
               }
             }

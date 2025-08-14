@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>H1 Equity Dashboard (Minimal)</title>
+  <style>
+    body{ font-family: system-ui, Arial, sans-serif; margin: 20px; }
+    .badge{ display:inline-block; padding: 4px 8px; border-radius: 6px; background: #eef; color:#223; margin-right: 8px; }
+    .grid{ display:grid; grid-template-columns: 1fr 1fr; gap:16px; }
+    pre{ background:#f7f7f7; padding:10px; border-radius:6px; overflow:auto; }
+  </style>
+</head>
+<body>
+  <h1>H1 Equity Dashboard (Minimal)</h1>
+  <p style="margin-top:-8px">
+    <a href="/ui/methodology" target="_blank" rel="noopener">Methodology: Hysteresis & Under-Served</a>
+  </p>
+  <div id="kpi">
+    <span class="badge" id="fairness">fairness: …</span>
+    <span class="badge" id="under">under-served: …</span>
+    <span class="badge" id="anoms">anomalies: …</span>
+  </div>
+
+  <div class="grid" style="margin-top:16px;">
+    <div>
+      <h3>Under-served</h3>
+      <pre id="under-json">loading…</pre>
+    </div>
+    <div>
+      <h3>KPI Summary</h3>
+      <pre id="kpi-json">loading…</pre>
+    </div>
+  </div>
+
+  <div style="margin-top:16px;">
+    <h3>Weekly Trends</h3>
+    <pre id="weekly-json">loading…</pre>
+  </div>
+
+  <script src="/ui/app.js" defer></script>
+</body>
+</html>

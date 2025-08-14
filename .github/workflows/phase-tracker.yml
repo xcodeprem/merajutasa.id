@@ -15,7 +15,7 @@ jobs:
           fetch-depth: 0
       - name: Generate Phase Tracker
         run: |
-          bash scripts/generate-phase-tracker.sh
+          node tools/generate-phase-tracker.js
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:

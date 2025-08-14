@@ -1,0 +1,439 @@
+{
+  "version": "1.0.0",
+  "generated_utc": "2025-08-14T18:39:41.464Z",
+  "old_total": 0,
+  "new_total": 0,
+  "adoptionPercent": 100,
+  "files": [
+    {
+      "file": "docs\\verify-cli.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\ux\\README.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\trust\\trust-page.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\trust\\trust-hysteresis.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\transparency\\methodology-snippet-h0.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\transparency\\changelog-excerpt-phase1.5.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\tests\\hysteresis-test-plan-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\support\\README.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\status\\README-h0-completion.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\status\\progress-recap-wave0-completion-2025-08-13T0819Z.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\security\\README.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\schemas\\README.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\roadmap\\roadmap-master-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\release\\README.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\public\\README.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\public\\ABOUT-PORTAL-PANTI.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\privacy\\README.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\privacy\\pii-scan-fixture.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\privacy\\pii-pattern-library-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\principles\\GP1-GP10-index.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\playbooks\\README.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\onboarding\\agent-role-policy-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\onboarding\\agent-knowledge-baseline-2025-08-14.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\onboarding\\agent-guardrails-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\onboarding\\agent-bootstrap-manifest.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\master-spec-deltas\\delta-master-spec-v2-DEC-20250813-06-event-schema-alignment.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\master-spec-deltas\\delta-master-spec-v2-DEC-20250812-02.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\policies\\README.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\master-spec\\master-spec-v2.0.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\legal\\README.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\integrity\\verify-cli-doc-draft.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\integrity\\hash-excerpt-module.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\integrity\\evidence-minimum-phase1.5-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\integrity\\api-verification-docs.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\feedback\\feedback.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\toolchain-overview.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\todo-post-DEC-20250812-02.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\terminology.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\terminology-banner.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\statement-orientasi-portal-panti.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\signature-pipeline-plan-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\README-decision-log-process.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\policy-index-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\lint-principles-reference-spec-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\handbook-index.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\disclaimers-lint-spec-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\fairness\\hysteresis-state-machine-transitions.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\fairness\\hysteresis-public-methodology-fragment-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\fairness\\equity-under-served-section.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\fairness\\equity-snapshot-pseudocode.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\fairness\\equity-page.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\data\\README.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\audit\\00-rubrik-audit-portal-panti.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\api\\README.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\analytics\\media-digest.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\analytics\\event-schema-canonical-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\analytics\\dashboard-widgets-hysteresis-initial.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\produk\\portal-panti\\02-model-data-minimal-aman.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\produk\\portal-panti\\01-ruang-lingkup-produk.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\produk\\portal-panti\\00-orientasi-komprehensif.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\privacy\\corpus\\negative-decoy.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\trace\\archive-trace-index-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-style-guide-v2.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-style-guide-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250815-01-governed-editorial-maintenance.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250813-10-feedback-categories-canonical.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250813-09-equity-index-rounding.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250813-08-evidence-hash-display-length.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250813-07-hype-threshold-transition.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250813-06-consolidated-governed-edits.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250813-05-gating-policy-wave1-adoption.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250813-03-disclaimers-presence-enforcement.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250813-02-signature-pipeline-adoption.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250813-01-known-debt-register.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250812-04-governance-baseline-thresholds.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250812-03-principles-reference-activation.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250812-02-hysteresis-adoption.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\audit\\README-audit-process.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\audit\\pr-template-line-audit-2025-08-12T0509Z.md",
+      "oldCount": 0,
+      "newCount": 0
+    }
+  ]
+}

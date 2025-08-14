@@ -13,8 +13,8 @@ async function main(){
   const snaps = [
     { unit:'U1', ratio:0.58, ts: mkTs(0) },
     { unit:'U1', ratio:0.59, ts: mkTs(1) },
-    { unit:'U1', ratio:0.61, ts: mkTs(2) },
-    { unit:'U1', ratio:0.66, ts: mkTs(3) },
+  { unit:'U1', ratio:0.61, ts: mkTs(2) },
+  { unit:'U1', ratio:0.62, ts: mkTs(3) },
     { unit:'U2', ratio:0.49, ts: mkTs(0) },
     { unit:'U2', ratio:0.51, ts: mkTs(1) },
     { unit:'U2', ratio:0.64, ts: mkTs(2) },

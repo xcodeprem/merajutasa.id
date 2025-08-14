@@ -80,8 +80,8 @@ function buildScenarios(){
     },
     {
       id:'S7',
-      description:'Exit then borderline after cooldown -> CANDIDATE (cooldown length=1)',
-  sequence:[0.49,0.70,0.57],
+    description:'Exit then one snapshot cooldown, then borderline -> CANDIDATE (cooldown length=1)',
+  sequence:[0.49,0.70,0.70,0.57],
   expected:{ final_state:'CANDIDATE' }
     },
     {

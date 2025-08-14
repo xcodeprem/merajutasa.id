@@ -1,12 +1,12 @@
 {
   "version": "0.1.0",
-  "generated_utc": "2025-08-14T13:26:35.629Z",
+  "generated_utc": "2025-08-14T20:09:07.117Z",
   "buckets": {
-    "U1": 6600,
+    "U1": 6200,
     "U2": 6600
   },
-  "equity_index_raw": 1,
-  "equity_index": 1,
+  "equity_index_raw": 0.984375,
+  "equity_index": 0.98,
   "rounding_decimals": 2,
   "rounding_method": "half_up"
 }

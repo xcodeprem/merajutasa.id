@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "generated_utc": "2025-08-14T17:36:26.542Z",
+  "generated_utc": "2025-08-14T17:49:50.049Z",
   "principles": [
     {
       "principle": "GP1",
@@ -960,10 +960,10 @@
           "domain": "other"
         },
         {
-          "file": "docs\\onboarding\\agent-role-policy-v1.md",
-          "line": 166,
-          "snippet": "| GP3 Fairness | Parameter only via DEC; prevents silent bias shifts |",
-          "pattern": "bias",
+          "file": "docs\\master-spec\\master-spec-v2.0.md",
+          "line": 44,
+          "snippet": "§35 Ethical & Copy Guidelines (Disclaimers, Anti-Hype – GP5, GP6, GP7)",
+          "pattern": "ethic",
           "changed": false,
           "domain": "other"
         },
@@ -971,7 +971,7 @@
           "file": "docs\\master-spec\\master-spec-v2.0.md",
           "line": 44,
           "snippet": "§35 Ethical & Copy Guidelines (Disclaimers, Anti-Hype – GP5, GP6, GP7)",
-          "pattern": "ethic",
+          "pattern": "ethical",
           "changed": false,
           "domain": "other"
         }

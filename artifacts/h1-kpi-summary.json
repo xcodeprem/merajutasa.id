@@ -1,0 +1,65 @@
+{
+  "version": "1.0.0",
+  "generated_utc": "2025-08-14T20:09:07.502Z",
+  "phase": "PHASE_1_ERROR",
+  "fairness": {
+    "pass": true,
+    "scenarios_pass": 10,
+    "scenarios_total": 10,
+    "detection_delay_avg_snapshots": 0.2857142857142857
+  },
+  "equity": {
+    "index": 0.98,
+    "index_raw": 0.984375,
+    "under_served_total": 1,
+    "anomalies_count": 1
+  },
+  "adoption": {
+    "percent": 100,
+    "old_total": 0,
+    "new_total": 0
+  },
+  "feedback": {
+    "ingested": null,
+    "categories": null
+  },
+  "trust": {
+    "hero_badges": [
+      "Decision Pending",
+      "Privacy-Aware"
+    ],
+    "disclaimers_status": "PASS"
+  },
+  "weekly": {
+    "weeks": [
+      {
+        "week": "2025-W33",
+        "start_utc": "2025-08-11",
+        "end_utc": "2025-08-17",
+        "totals": {
+          "events": 9,
+          "canonical_ok": 9,
+          "hero_views": 7,
+          "feedback": 0,
+          "prohibited": 0,
+          "coverage": 1
+        }
+      }
+    ],
+    "latest": {
+      "week": "2025-W33",
+      "start_utc": "2025-08-11",
+      "end_utc": "2025-08-17",
+      "totals": {
+        "events": 9,
+        "canonical_ok": 9,
+        "hero_views": 7,
+        "feedback": 0,
+        "prohibited": 0,
+        "coverage": 1
+      }
+    },
+    "coverage_latest": 1,
+    "throughput_latest": 9
+  }
+}

@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-14T17:36:29.360Z",
+  "generated_utc": "2025-08-14T17:49:52.438Z",
   "sources": {
     "scenarios_present": true,
     "unit_tests_present": true
@@ -12,13 +12,13 @@
   },
   "final_state_distribution": {
     "ACTIVE": 5,
-    "CANDIDATE": 1,
+    "CANDIDATE": 2,
     "NONE": 2,
-    "CLEARED": 2
+    "CLEARED": 1
   },
   "time_in_state_snapshots": {
     "ACTIVE": 14,
-    "CANDIDATE": 4,
+    "CANDIDATE": 5,
     "NONE": 4,
     "CLEARED": 6
   },

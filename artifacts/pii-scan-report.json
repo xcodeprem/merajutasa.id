@@ -47,12 +47,6 @@
       "threshold": 2
     },
     {
-      "file": "docs\\public\\ABOUT-PORTAL-PANTI.md",
-      "category": "PLATE_ID",
-      "action": "WARN",
-      "sample": "W3C…#362229fe"
-    },
-    {
       "file": "docs\\privacy\\pii-scan-fixture.md",
       "category": "IDN_NIK",
       "action": "BLOCK",
@@ -304,6 +298,12 @@
       "category": "GENERIC_16DIGIT",
       "action": "BLOCK",
       "sample": "221122…#57ea6376"
+    },
+    {
+      "file": "docs\\public\\ABOUT-PORTAL-PANTI.md",
+      "category": "PLATE_ID",
+      "action": "WARN",
+      "sample": "W3C…#362229fe"
     }
   ]
 }

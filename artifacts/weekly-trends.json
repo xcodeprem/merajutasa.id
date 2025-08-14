@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0",
+  "generated_utc": "2025-08-14T20:09:07.449Z",
+  "weeks": [
+    {
+      "week": "2025-W33",
+      "start_utc": "2025-08-11",
+      "end_utc": "2025-08-17",
+      "totals": {
+        "events": 9,
+        "canonical_ok": 9,
+        "hero_views": 7,
+        "feedback": 0,
+        "prohibited": 0,
+        "coverage": 1
+      }
+    }
+  ],
+  "adoption_percent_latest": 100
+}
