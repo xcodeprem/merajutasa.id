@@ -45,6 +45,12 @@
     },
     {
       "code": "DISC-SCOPE-006",
+      "page": "governance",
+      "id": "D7",
+      "severity": "WARNING"
+    },
+    {
+      "code": "DISC-SCOPE-006",
       "page": "credential_viewer",
       "id": "D5",
       "severity": "WARNING"
@@ -58,12 +64,6 @@
     {
       "code": "DISC-SCOPE-006",
       "page": "credential_viewer",
-      "id": "D7",
-      "severity": "WARNING"
-    },
-    {
-      "code": "DISC-SCOPE-006",
-      "page": "governance",
       "id": "D7",
       "severity": "WARNING"
     },

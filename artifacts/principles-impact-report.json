@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "generated_utc": "2025-08-14T10:44:11.608Z",
+  "generated_utc": "2025-08-14T10:44:35.335Z",
   "principles": [
     {
       "principle": "GP1",
@@ -704,6 +704,14 @@
           "domain": "other"
         },
         {
+          "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
+          "line": 64,
+          "snippet": "| GP3 | Federated Mindset | Cegah platform lock-in; integrity portability | Credential JSON-LD minimal; portable verify semantics |",
+          "pattern": "portabil",
+          "changed": false,
+          "domain": "other"
+        },
+        {
           "file": "docs\\integrity\\credential-schema-final-v1.md",
           "line": 23,
           "snippet": "| GP3 Federated Mindset | Format JSON-LD / W3C Verifiable Credential compatible subset → portabilitas lintas platform. |",
@@ -748,14 +756,6 @@
           "line": 652,
           "snippet": "Integrity Credential v1.0 memberikan pondasi portabel, minim, non‑ranking, dan dapat diaudit yang menyelaraskan semua pilar: privacy, fairness, governance, portability, & transition. Tidak ada deviati",
           "pattern": "extensib",
-          "changed": false,
-          "domain": "other"
-        },
-        {
-          "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
-          "line": 64,
-          "snippet": "| GP3 | Federated Mindset | Cegah platform lock-in; integrity portability | Credential JSON-LD minimal; portable verify semantics |",
-          "pattern": "portabil",
           "changed": false,
           "domain": "other"
         }

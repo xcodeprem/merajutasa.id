@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-08-14T10:44:12.617Z",
+  "timestamp": "2025-08-14T10:44:36.224Z",
   "artifacts": {
     "specHash": {
       "mode": "verify",
-      "timestamp_utc": "2025-08-14T10:44:10Z",
+      "timestamp_utc": "2025-08-14T10:44:34Z",
       "updated": [],
       "unchanged": [
         "docs/roadmap/roadmap-master-v1.md",
@@ -71,7 +71,7 @@
     },
     "params": {
       "version": 2,
-      "generated_utc": "2025-08-14T10:44:10.786Z",
+      "generated_utc": "2025-08-14T10:44:34.602Z",
       "status": "PASS",
       "summary_counts": {
         "MATCH": 15
@@ -337,7 +337,7 @@
     },
     "hype": {
       "version": 1,
-      "generated_utc": "2025-08-14T10:44:11.070Z",
+      "generated_utc": "2025-08-14T10:44:34.874Z",
       "file_count": 60,
       "total_hits": 109,
       "max_severity": "MEDIUM",
@@ -1489,6 +1489,12 @@
         },
         {
           "code": "DISC-SCOPE-006",
+          "page": "governance",
+          "id": "D7",
+          "severity": "WARNING"
+        },
+        {
+          "code": "DISC-SCOPE-006",
           "page": "credential_viewer",
           "id": "D5",
           "severity": "WARNING"
@@ -1508,12 +1514,6 @@
         {
           "code": "DISC-SCOPE-006",
           "page": "governance",
-          "id": "D7",
-          "severity": "WARNING"
-        },
-        {
-          "code": "DISC-SCOPE-006",
-          "page": "governance",
           "id": "D1",
           "severity": "WARNING"
         }
@@ -1524,7 +1524,7 @@
       }
     },
     "decLint": {
-      "generated_utc": "2025-08-14T10:44:11.400Z",
+      "generated_utc": "2025-08-14T10:44:35.185Z",
       "version": 1,
       "summary": {
         "files": 15,
@@ -1645,7 +1645,7 @@
     },
     "principles": {
       "version": 2,
-      "generated_utc": "2025-08-14T10:44:11.608Z",
+      "generated_utc": "2025-08-14T10:44:35.335Z",
       "principles": [
         {
           "principle": "GP1",
@@ -2349,6 +2349,14 @@
               "domain": "other"
             },
             {
+              "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
+              "line": 64,
+              "snippet": "| GP3 | Federated Mindset | Cegah platform lock-in; integrity portability | Credential JSON-LD minimal; portable verify semantics |",
+              "pattern": "portabil",
+              "changed": false,
+              "domain": "other"
+            },
+            {
               "file": "docs\\integrity\\credential-schema-final-v1.md",
               "line": 23,
               "snippet": "| GP3 Federated Mindset | Format JSON-LD / W3C Verifiable Credential compatible subset → portabilitas lintas platform. |",
@@ -2393,14 +2401,6 @@
               "line": 652,
               "snippet": "Integrity Credential v1.0 memberikan pondasi portabel, minim, non‑ranking, dan dapat diaudit yang menyelaraskan semua pilar: privacy, fairness, governance, portability, & transition. Tidak ada deviati",
               "pattern": "extensib",
-              "changed": false,
-              "domain": "other"
-            },
-            {
-              "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
-              "line": 64,
-              "snippet": "| GP3 | Federated Mindset | Cegah platform lock-in; integrity portability | Credential JSON-LD minimal; portable verify semantics |",
-              "pattern": "portabil",
               "changed": false,
               "domain": "other"
             }
@@ -2632,7 +2632,7 @@
       }
     },
     "drift": {
-      "timestamp_utc": "2025-08-14T10:44:12.182Z",
+      "timestamp_utc": "2025-08-14T10:44:35.856Z",
       "components": {
         "spec_hash": "PASS",
         "params": "PASS",
