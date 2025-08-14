@@ -1,0 +1,71 @@
+{
+  "timestamp_utc": "${ISO_UTC}",
+  "sources": [
+    "README.md",
+    "docs/governance/policy-index-v1.md",
+    "tools/services/chain.js",
+    "tools/spec-hash-diff.js",
+    "tools/no-silent-drift.js"
+  ],
+  "status": {
+    "readme_phase": "PRE-SEAL",
+    "policy_index": "Draft Initialization"
+  },
+  "governance": {
+    "manifest_path": "docs/integrity/spec-hash-manifest-v1.json",
+    "spec_hash": {
+      "modes": ["seal-first", "verify", "report-only", "accept"],
+      "artifacts": {
+        "diff": "artifacts/spec-hash-diff.json",
+        "summary": "artifacts/spec-hash-summary.json",
+        "sarif": "artifacts/spec-hash-diff.sarif.json"
+      }
+    }
+  },
+  "policies_indexed": [
+    {"id": "aggregation.min_cell_threshold", "domain": "Equity Aggregation", "enforcement": "deny"},
+    {"id": "disclaimers.presence", "domain": "Transparency", "enforcement": "deny (planned)"},
+    {"id": "credential.field.prohibited", "domain": "Integrity/Privacy", "enforcement": "deny"},
+    {"id": "hysteresis.params.lock", "domain": "Fairness Governance", "enforcement": "warn→deny"},
+    {"id": "terminology.usage.threshold", "domain": "Transition", "enforcement": "warn"},
+    {"id": "equity.delta.anomaly", "domain": "Fairness Monitoring", "enforcement": "observe"},
+    {"id": "principles.reference", "domain": "Governance", "enforcement": "deny"},
+    {"id": "hype.language", "domain": "Copy Ethics", "enforcement": "deny"},
+    {"id": "pii.patterns.lock", "domain": "Privacy", "enforcement": "warn→deny"}
+  ],
+  "services": {
+    "chain": {
+      "port_env": "CHAIN_PORT",
+      "default_port": 4602,
+      "storage": "artifacts/chain.json",
+      "endpoints": ["POST /append", "GET /chain", "GET /head", "POST /verify", "POST /reload"]
+    }
+  },
+  "gating": {
+    "no_silent_drift": {
+      "inputs": [
+        "artifacts/spec-hash-diff.json",
+        "artifacts/param-integrity-matrix.json",
+        "artifacts/hype-lint.json",
+        "artifacts/disclaimers-lint.json",
+        "artifacts/principles-impact-report.json",
+        "artifacts/pii-scan-report.json",
+        "artifacts/evidence-freshness-report.json",
+        "artifacts/fairness-engine-unit-tests.json"
+      ],
+      "output": "artifacts/no-silent-drift-report.json",
+      "derived_checks": [
+        "SPEC_HASH",
+        "PARAM_INTEGRITY",
+        "HYPE_HIGH",
+        "HYPE_MEDIUM (optional)",
+        "DISCLAIMERS_PRESENCE",
+        "PII_CRITICAL",
+        "FAIRNESS_UNIT (optional)",
+        "EVIDENCE_MINIMUM",
+        "FRESHNESS (optional)",
+        "PRINCIPLES_IMPACT (optional)"
+      ]
+    }
+  }
+}
