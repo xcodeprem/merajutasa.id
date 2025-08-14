@@ -6,7 +6,6 @@
   "description": "Governance & integrity tooling (hash sealing, lint, fairness) for merajutasa.id",
   "license": "UNLICENSED",
   "scripts": {
-    "prepare": "husky",
     "governance:verify": "node tools/governance-verify.js",
     "spec-hash:verify": "node tools/spec-hash-diff.js --mode=verify",
     "spec-hash:seal": "node tools/spec-hash-diff.js --mode=seal-first",
@@ -53,7 +52,6 @@
     "yaml": "^2.4.5",
     "glob": "^10.3.10",
     "ajv": "^8.17.1",
-  "ajv-formats": "^3.0.1",
-    "husky": "^9.0.0"
+  "ajv-formats": "^3.0.1"
   }
 }
