@@ -1,0 +1,11 @@
+{
+  "signed": {
+    "canonical": "{\"foo\":\"bar\",\"n\":1}",
+    "hash_sha256": "4d4ae5983627c0ad946b647dde3a698b835b751c9547d3349546e70d39b480a8",
+    "signature": "OPBRnISYs/JB+a671g9IL9w7cx1wrK0zpYvnTNIj9FA/qDhRxCv3tvkCyuSazjPZUQiqmhp6iMDzy2HWk0q+Cg==",
+    "alg": "Ed25519"
+  },
+  "verify": {
+    "verified": true
+  }
+}

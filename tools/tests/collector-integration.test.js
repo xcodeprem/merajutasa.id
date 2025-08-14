@@ -6,6 +6,7 @@
  * Writes artifacts/collector-integration-report.json
  */
 import { promises as fs } from 'fs';
+import { spawn } from 'child_process';
 
 const BASE = process.env.COLLECTOR_BASE || 'http://127.0.0.1:4603';
 
@@ -39,7 +40,13 @@ async function waitForHealth(timeoutMs=3000){
 
 async function main(){
   await fs.mkdir('artifacts',{recursive:true});
-  const ready = await waitForHealth(3000);
+  let ready = await waitForHealth(1200);
+  let proc;
+  if (!ready){
+    // Try to start collector inline
+    proc = spawn(process.execPath, ['tools/services/collector.js'], { stdio:'ignore' });
+    ready = await waitForHealth(3000);
+  }
   if (!ready){
     await fs.writeFile('artifacts/collector-integration-report.json', JSON.stringify({ version:1, status:'SKIP', reason:'collector not reachable' }, null, 2));
     console.log('[collector-integration] collector not reachable, skipping');

@@ -3,7 +3,7 @@
   "files": 2,
   "precision": 0.7272727272727273,
   "recall": 0.8,
-  "precisionHR": 0.6,
+  "precisionHR": 0.75,
   "recallHR": 1,
   "perFile": [
     {
@@ -11,9 +11,11 @@
       "expected": [
         "(none) -->"
       ],
-      "detected": [],
+      "detected": [
+        "GENERIC_16DIGIT"
+      ],
       "tp": 0,
-      "fp": 0,
+      "fp": 1,
       "fn": 1,
       "tpHR": 0,
       "fpHR": 0,
@@ -34,7 +36,6 @@
       ],
       "detected": [
         "IDN_NIK",
-        "IDN_NKK",
         "CONTACT_EMAIL",
         "CONTACT_PHONE",
         "ADDRESS_STREET",
@@ -46,10 +47,10 @@
         "MULTI_CATEGORY_ESCALATION"
       ],
       "tp": 8,
-      "fp": 3,
+      "fp": 2,
       "fn": 1,
       "tpHR": 3,
-      "fpHR": 2,
+      "fpHR": 1,
       "fnHR": 0
     }
   ]

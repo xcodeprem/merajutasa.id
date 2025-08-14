@@ -2,14 +2,13 @@
   "version": 1,
   "status": "ADVISORY",
   "summary": {
-    "distinctCategories": 11,
-    "totalFindings": 36,
+    "distinctCategories": 10,
+    "totalFindings": 37,
     "categoryCounts": {
       "CONTACT_EMAIL": 3,
       "PLATE_ID": 7,
       "IDN_NIK": 2,
-      "GENERIC_16DIGIT": 1,
-      "IDN_NKK": 2,
+      "GENERIC_16DIGIT": 4,
       "CONTACT_PHONE": 2,
       "ADDRESS_STREET": 5,
       "DOB": 4,
@@ -17,7 +16,7 @@
       "CHILD_NAME_AGE": 2,
       "GEO_FINE": 2
     },
-    "highRiskHits": 10
+    "highRiskHits": 8
   },
   "findings": [
     {
@@ -61,12 +60,6 @@
     },
     {
       "file": "docs\\privacy\\pii-scan-fixture.md",
-      "category": "IDN_NKK",
-      "action": "BLOCK",
-      "sample": "987654…#8589864c"
-    },
-    {
-      "file": "docs\\privacy\\pii-scan-fixture.md",
       "category": "CONTACT_EMAIL",
       "action": "REDACT",
       "sample": "user@e…#6dc8a038"
@@ -99,7 +92,7 @@
       "file": "docs\\privacy\\pii-scan-fixture.md",
       "category": "BANK_ACCOUNT",
       "action": "BLOCK",
-      "sample": "Bank: …#05896834"
+      "sample": "rek 12…#487eaa03"
     },
     {
       "file": "docs\\privacy\\pii-scan-fixture.md",
@@ -125,7 +118,6 @@
       "categories": [
         "IDN_NIK",
         "GENERIC_16DIGIT",
-        "IDN_NKK",
         "CONTACT_EMAIL",
         "CONTACT_PHONE",
         "ADDRESS_STREET",
@@ -191,12 +183,6 @@
     },
     {
       "file": "docs\\privacy\\corpus\\positive-highrisk.md",
-      "category": "IDN_NKK",
-      "action": "BLOCK",
-      "sample": "317501…#799616d4"
-    },
-    {
-      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
       "category": "CONTACT_EMAIL",
       "action": "REDACT",
       "sample": "user@e…#6dc8a038"
@@ -229,7 +215,7 @@
       "file": "docs\\privacy\\corpus\\positive-highrisk.md",
       "category": "BANK_ACCOUNT",
       "action": "BLOCK",
-      "sample": "Bank: …#05896834"
+      "sample": "rek 12…#487eaa03"
     },
     {
       "file": "docs\\privacy\\corpus\\positive-highrisk.md",
@@ -254,7 +240,6 @@
       "code": "MULTI_CATEGORY_ESCALATION",
       "categories": [
         "IDN_NIK",
-        "IDN_NKK",
         "CONTACT_EMAIL",
         "CONTACT_PHONE",
         "ADDRESS_STREET",
@@ -265,6 +250,24 @@
         "GEO_FINE"
       ],
       "threshold": 2
+    },
+    {
+      "file": "docs\\privacy\\corpus\\negative-decoy.md",
+      "category": "GENERIC_16DIGIT",
+      "action": "BLOCK",
+      "sample": "441122…#b657a400"
+    },
+    {
+      "file": "docs\\privacy\\corpus\\negative-decoy.md",
+      "category": "GENERIC_16DIGIT",
+      "action": "BLOCK",
+      "sample": "000000…#7a36e20f"
+    },
+    {
+      "file": "docs\\privacy\\corpus\\negative-decoy.md",
+      "category": "GENERIC_16DIGIT",
+      "action": "BLOCK",
+      "sample": "221122…#57ea6376"
     }
   ]
 }

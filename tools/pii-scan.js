@@ -14,13 +14,14 @@ const VALID_NIK_PREFIX = new Set(['11','12','13','14','15','16','17','18','19','
 
 const CATEGORY_PATTERNS = [
   { code:'IDN_NIK', re:/\b\d{16}\b/g, action:'BLOCK', post:(m)=> VALID_NIK_PREFIX.has(m.slice(0,2)) ? { code:'IDN_NIK', val:m } : { code:'GENERIC_16DIGIT', val:m } },
-  { code:'IDN_NKK', re:/\b\d{16}\b/g, action:'BLOCK', post:(m)=> (!VALID_NIK_PREFIX.has(m.slice(0,2)) ? { code:'IDN_NKK', val:m } : null) },
+  // NKK requires contextual keyword to avoid FPs (only match when labeled)
+  { code:'IDN_NKK', re:/\b(?:NKK|Kartu\s+Keluarga)\b(?:(?![A-Za-z]).){0,25}\b\d{16}\b/gi, action:'BLOCK' },
   { code:'EDU_NISN', re:/\b\d{10}\b/gi, action:'BLOCK' },
   { code:'CONTACT_EMAIL', re:/\b[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}\b/gi, action:'REDACT' },
   { code:'CONTACT_PHONE', re:/\b(?:\+62|62|0)8[1-9][0-9]{6,10}\b/gi, action:'REDACT' },
   { code:'ADDRESS_STREET', re:/(\b(Jl\.?|Jalan)\s+[A-Za-z0-9]+(?:\s+[A-Za-z0-9]+){0,4}(?:\s*No\.?\s*\d+)?\b|\bRT\s*\d{1,3}\/RW\s*\d{1,3}\b)/gi, action:'MASK' },
   { code:'DOB', re:/\b(0?[1-9]|[12][0-9]|3[01])([\/-])(0?[1-9]|1[0-2])\2(19|20)\d{2}\b/gi, action:'REDACT' },
-  { code:'BANK_ACCOUNT', re:/\b(?:bank|rek|rekening)\b.{0,40}\b\d{10,16}\b/gi, action:'BLOCK' },
+  { code:'BANK_ACCOUNT', re:/\b(?:bank|rek|rekening)\b(?:(?![A-Za-z]).){0,25}\b\d{10,16}\b/gi, action:'BLOCK' },
   { code:'PLATE_ID', re:/\b[A-Z]{1,2}\s?\d{1,4}\s?[A-Z]{1,3}\b/g, action:'WARN' },
   { code:'CHILD_NAME_AGE', re:/\b([A-Z][a-z]+(?:\s[A-Z][a-z]+)?)\s*\(\s*(\d{1,2})\s*(th|tahun)\s*\)/g, action:'BLOCK' },
   { code:'GEO_FINE', re:/\b(-?\d{1,2}\.\d{4,}),\s*(-?\d{1,3}\.\d{4,})\b/g, action:'BLOCK' },

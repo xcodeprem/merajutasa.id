@@ -57,16 +57,18 @@ async function tryLoadPipelineHash(){
       return { schema_version, pipeline_hash };
     }
   }catch{}
+  let event_names = [];
   try{
     const doc = await fs.readFile(SCHEMA_DOC,'utf8');
     const versionMatch = doc.match(/Canonical Specification \(v([0-9.]+)\)/);
     if (versionMatch) schema_version = versionMatch[1];
     const eventNames = Array.from(doc.matchAll(/^[-*]\s+(pub|sys)_[a-z0-9_]+/gmi)).map(m=>m[0].replace(/^[-*]\s+/,'').trim());
     const uniqueSorted = [...new Set(eventNames)].sort();
+    event_names = uniqueSorted;
     const schemaHash = sha256Hex(doc);
     pipeline_hash = sha256Hex(`${schema_version}|${uniqueSorted.join(',')}|${schemaHash}`);
   }catch{}
-  return { schema_version, pipeline_hash };
+  return { schema_version, pipeline_hash, event_names };
 }
 
 function redactFeedbackMeta(evt){
@@ -138,6 +140,13 @@ async function start(){
   ensureDefaults(evt, defaults);
   // Compute event_hash before validation because schema requires it
   const { digest } = prepareEvent(evt);
+  // Enforce whitelist when available
+  if (Array.isArray(defaults.event_names) && defaults.event_names.length>0) {
+    if (!defaults.event_names.includes(evt.event_name)){
+      res.writeHead(400,{ 'content-type':'application/json' });
+      return res.end(JSON.stringify({ status:'UNKNOWN_EVENT', event_name: evt.event_name }));
+    }
+  }
   const ok = validate(evt);
         if (!ok){ res.writeHead(400,{ 'content-type':'application/json' }); return res.end(JSON.stringify({ status:'SCHEMA_ERROR', errors: validate.errors })); }
         const metaStr = JSON.stringify(evt.meta||{});

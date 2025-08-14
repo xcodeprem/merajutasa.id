@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-08-14T12:19:56.801Z",
+  "timestamp": "2025-08-14T12:33:51.707Z",
   "artifacts": {
     "specHash": {
       "mode": "verify",
-      "timestamp_utc": "2025-08-14T12:19:54Z",
+      "timestamp_utc": "2025-08-14T12:33:46Z",
       "updated": [],
       "unchanged": [
         "docs/roadmap/roadmap-master-v1.md",
@@ -72,7 +72,7 @@
     },
     "params": {
       "version": 2,
-      "generated_utc": "2025-08-14T12:19:54.970Z",
+      "generated_utc": "2025-08-14T12:33:46.263Z",
       "status": "PASS",
       "summary_counts": {
         "MATCH": 15
@@ -338,8 +338,8 @@
     },
     "hype": {
       "version": 1,
-      "generated_utc": "2025-08-14T12:19:55.238Z",
-      "file_count": 62,
+      "generated_utc": "2025-08-14T12:33:46.558Z",
+      "file_count": 64,
       "total_hits": 109,
       "max_severity": "MEDIUM",
       "severity_counts": {
@@ -1525,7 +1525,7 @@
       }
     },
     "decLint": {
-      "generated_utc": "2025-08-14T12:19:55.655Z",
+      "generated_utc": "2025-08-14T12:33:47.192Z",
       "version": 1,
       "summary": {
         "files": 15,
@@ -1646,11 +1646,11 @@
     },
     "principles": {
       "version": 2,
-      "generated_utc": "2025-08-14T12:19:55.819Z",
+      "generated_utc": "2025-08-14T12:33:47.366Z",
       "principles": [
         {
           "principle": "GP1",
-          "match_count": 841,
+          "match_count": 842,
           "domains": [
             "other"
           ],
@@ -1766,18 +1766,18 @@
           "confidence": 0.55,
           "evidence_sample": [
             {
-              "file": "docs\\roadmap\\roadmap-master-v1.md",
-              "line": 318,
-              "snippet": "| Public API Access | Rate-limited aggregated metrics API | Governance gating & policy | Abuse risk (scraping misuse) |",
-              "pattern": "abuse",
-              "changed": false,
-              "domain": "other"
-            },
-            {
               "file": "docs\\privacy\\pii-pattern-library-v1.md",
               "line": 398,
               "snippet": "| Over-reliance (false sense of safety) | Hidden risk | High | Messaging: “Deteksi bersifat best-effort” in privacy policy |",
               "pattern": "safety",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\roadmap\\roadmap-master-v1.md",
+              "line": 318,
+              "snippet": "| Public API Access | Rate-limited aggregated metrics API | Governance gating & policy | Abuse risk (scraping misuse) |",
+              "pattern": "abuse",
               "changed": false,
               "domain": "other"
             },
@@ -1858,6 +1858,30 @@
               "domain": "other"
             },
             {
+              "file": "docs\\privacy\\pii-pattern-library-v1.md",
+              "line": 19,
+              "snippet": "| GP5 Transparency | Kategori PII didokumentasi publik ringkas (FAQ) tanpa detail yang memudahkan penjahat menghindari deteksi. |",
+              "pattern": "transparenc",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\privacy\\pii-pattern-library-v1.md",
+              "line": 417,
+              "snippet": "## 26. PUBLIC TRANSPARENCY (ABRIDGED)",
+              "pattern": "transparenc",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\privacy\\pii-pattern-library-v1.md",
+              "line": 610,
+              "snippet": "Spec ini mempertahankan integritas strategi: menutup gap privasi sebelum skala, menghindari trust theater, mempersiapkan audit trail melalui event schema & governance log, serta tidak membawa ranking ",
+              "pattern": "audit trail",
+              "changed": false,
+              "domain": "other"
+            },
+            {
               "file": "docs\\roadmap\\roadmap-master-v1.md",
               "line": 16,
               "snippet": "- Horizon 2 (Hari 31–60): Governance Depth & Transparency Amplification (changelog excerpt, support matrix, anomaly watchers, revocation placeholder UI, a11y/performance enforcement).",
@@ -1869,30 +1893,6 @@
               "file": "docs\\roadmap\\roadmap-master-v1.md",
               "line": 44,
               "snippet": "| I Revocation Futureproof | Revocation list endpoint placeholder & schema wiring | Credential Schema revocation section | Lifecycle transparency readiness |",
-              "pattern": "transparenc",
-              "changed": false,
-              "domain": "other"
-            },
-            {
-              "file": "docs\\roadmap\\roadmap-master-v1.md",
-              "line": 45,
-              "snippet": "| J Transparency & Education | Methodology narrative, FAQ expansions, disclaimers presence | Master Spec v2.0 & Disclaimers Lint | User comprehension fairness/trust |",
-              "pattern": "transparenc",
-              "changed": false,
-              "domain": "other"
-            },
-            {
-              "file": "docs\\roadmap\\roadmap-master-v1.md",
-              "line": 412,
-              "snippet": "## 13. BACKLOG → ROADMAP MAPPING TABLE (TRACEABILITY)",
-              "pattern": "trace",
-              "changed": false,
-              "domain": "other"
-            },
-            {
-              "file": "docs\\roadmap\\roadmap-master-v1.md",
-              "line": 463,
-              "snippet": "| Gate 2 – Expanded Transparency | Changelog excerpt live, anomaly detector stable, adoption scanner operational, accessibility automated pass | Mid H2 |",
               "pattern": "transparenc",
               "changed": false,
               "domain": "other"
@@ -2150,30 +2150,6 @@
               "domain": "other"
             },
             {
-              "file": "docs\\roadmap\\roadmap-master-v1.md",
-              "line": 313,
-              "snippet": "| Revocation Lifecycle | Live revocation events & viewer delta tracking | Simulated tests stable | Misinterpretation as punishment |",
-              "pattern": "misinterpret",
-              "changed": false,
-              "domain": "other"
-            },
-            {
-              "file": "docs\\roadmap\\roadmap-master-v1.md",
-              "line": 554,
-              "snippet": "| Hysteresis Methodology Explainer | H1 | Clarify non-ranking fairness |",
-              "pattern": "non-?ranking",
-              "changed": false,
-              "domain": "other"
-            },
-            {
-              "file": "docs\\roadmap\\roadmap-master-v1.md",
-              "line": 557,
-              "snippet": "| Hero Non-Ranking Tooltip (conditional) | H2 | If confusion >5% |",
-              "pattern": "non-?ranking",
-              "changed": false,
-              "domain": "other"
-            },
-            {
               "file": "docs\\privacy\\pii-pattern-library-v1.md",
               "line": 6,
               "snippet": "NON-DESTRUCTIVE: Dokumen ini MENAMBAHKAN detail; tidak menghapus strategi/konstraint sebelumnya (GP1 Privacy-by-Architecture, GP6 Outcome Honesty, GP9 Non-Ranking).",
@@ -2201,6 +2177,30 @@
               "file": "docs\\privacy\\pii-pattern-library-v1.md",
               "line": 21,
               "snippet": "| GP9 Non-Ranking Fairness | Scanner tidak membuat penilaian entitas; hanya sanitasi. |",
+              "pattern": "non-?ranking",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\roadmap\\roadmap-master-v1.md",
+              "line": 313,
+              "snippet": "| Revocation Lifecycle | Live revocation events & viewer delta tracking | Simulated tests stable | Misinterpretation as punishment |",
+              "pattern": "misinterpret",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\roadmap\\roadmap-master-v1.md",
+              "line": 554,
+              "snippet": "| Hysteresis Methodology Explainer | H1 | Clarify non-ranking fairness |",
+              "pattern": "non-?ranking",
+              "changed": false,
+              "domain": "other"
+            },
+            {
+              "file": "docs\\roadmap\\roadmap-master-v1.md",
+              "line": 557,
+              "snippet": "| Hero Non-Ranking Tooltip (conditional) | H2 | If confusion >5% |",
               "pattern": "non-?ranking",
               "changed": false,
               "domain": "other"
@@ -2614,9 +2614,9 @@
               "domain": "other"
             },
             {
-              "file": "docs\\master-spec\\master-spec-v2.0.md",
-              "line": 44,
-              "snippet": "§35 Ethical & Copy Guidelines (Disclaimers, Anti-Hype – GP5, GP6, GP7)",
+              "file": "docs\\integrity\\credential-schema-final-v1.md",
+              "line": 115,
+              "snippet": "| Predictive / Risk | riskScore, vulnerabilityIndex | Ethical hazard, not validated |",
               "pattern": "ethic",
               "changed": false,
               "domain": "other"
@@ -2633,7 +2633,7 @@
       }
     },
     "drift": {
-      "timestamp_utc": "2025-08-14T12:19:56.392Z",
+      "timestamp_utc": "2025-08-14T12:33:51.308Z",
       "components": {
         "spec_hash": "PASS",
         "params": "PASS",
@@ -2641,7 +2641,7 @@
         "disclaimers": "PASS_STUB",
         "principles": "PASS_STUB",
         "pii": "PASS_STUB",
-        "freshness": "ADVISORY"
+        "freshness": "PASS"
       },
       "summary": {
         "hype_hits": 109,
@@ -2663,7 +2663,7 @@
           "DISC-DUPL-005": 2,
           "DISC-SCOPE-006": 6
         },
-        "gate_status": "FAIL",
+        "gate_status": "PASS",
         "gate_checks": [
           {
             "id": "SPEC_HASH",
@@ -2732,9 +2732,9 @@
           },
           {
             "id": "FRESHNESS",
-            "passed": false,
+            "passed": true,
             "detail": {
-              "status": "ADVISORY",
+              "status": "PASS",
               "required": "PASS"
             }
           },
@@ -2770,7 +2770,7 @@
       },
       "gating": {
         "version": "1.0",
-        "status": "FAIL",
+        "status": "PASS",
         "checks": [
           {
             "id": "SPEC_HASH",
@@ -2839,9 +2839,9 @@
           },
           {
             "id": "FRESHNESS",
-            "passed": false,
+            "passed": true,
             "detail": {
-              "status": "ADVISORY",
+              "status": "PASS",
               "required": "PASS"
             }
           },

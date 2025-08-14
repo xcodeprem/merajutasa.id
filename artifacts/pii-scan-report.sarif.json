@@ -108,22 +108,6 @@
           ]
         },
         {
-          "ruleId": "IDN_NKK",
-          "level": "error",
-          "message": {
-            "text": "IDN_NKK docs\\privacy\\pii-scan-fixture.md"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "docs\\privacy\\pii-scan-fixture.md"
-                }
-              }
-            }
-          ]
-        },
-        {
           "ruleId": "CONTACT_EMAIL",
           "level": "note",
           "message": {
@@ -412,22 +396,6 @@
           ]
         },
         {
-          "ruleId": "IDN_NKK",
-          "level": "error",
-          "message": {
-            "text": "IDN_NKK docs\\privacy\\corpus\\positive-highrisk.md"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "docs\\privacy\\corpus\\positive-highrisk.md"
-                }
-              }
-            }
-          ]
-        },
-        {
           "ruleId": "CONTACT_EMAIL",
           "level": "note",
           "message": {
@@ -582,6 +550,54 @@
               "physicalLocation": {
                 "artifactLocation": {
                   "uri": "docs\\privacy\\corpus\\positive-highrisk.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "GENERIC_16DIGIT",
+          "level": "error",
+          "message": {
+            "text": "GENERIC_16DIGIT docs\\privacy\\corpus\\negative-decoy.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\privacy\\corpus\\negative-decoy.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "GENERIC_16DIGIT",
+          "level": "error",
+          "message": {
+            "text": "GENERIC_16DIGIT docs\\privacy\\corpus\\negative-decoy.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\privacy\\corpus\\negative-decoy.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "GENERIC_16DIGIT",
+          "level": "error",
+          "message": {
+            "text": "GENERIC_16DIGIT docs\\privacy\\corpus\\negative-decoy.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\privacy\\corpus\\negative-decoy.md"
                 }
               }
             }
