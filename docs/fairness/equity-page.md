@@ -4,3 +4,5 @@
 </div>
 
 _Equity page placeholder._
+
+Lihat juga: Methodology Snippet (H0) → ../transparency/methodology-snippet-h0.md

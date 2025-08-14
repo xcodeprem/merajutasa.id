@@ -15,8 +15,9 @@ async function main(){
     const res = await fetch(`${BASE}/stats`);
     if (res.ok) stats = await res.json();
   } catch {}
-  const landing = stats.byEvent?.pub_landing_session_start || 0;
-  const hero = stats.byEvent?.pub_hero_view || 0;
+  // Align with canonical taxonomy: count landing impressions and a key hero interaction
+  const landing = (stats.byEvent?.pub_landing_impression) || 0;
+  const hero = (stats.byEvent?.pub_hero_card_cta_click) || (stats.byEvent?.pub_hero_view) || 0;
   const out = { version:1, generated_utc: new Date().toISOString(), total_events: stats.total||0, landing_sessions: landing, hero_interactions: hero };
   await fs.writeFile('artifacts/query-seeds.json', JSON.stringify(out,null,2));
   console.log('[query-seeds] landing_sessions=', landing, 'hero_interactions=', hero);

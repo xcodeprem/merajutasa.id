@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "landing": {
+    "status": 200,
+    "json": {
+      "status": "INGESTED",
+      "event_hash": "464a71c90fd470ad8e692b26ac33dd57511eec0306b539a8d7f66d99a4664b0b",
+      "prohibited_meta": false
+    }
+  },
+  "hero": {
+    "status": 200,
+    "json": {
+      "status": "INGESTED",
+      "event_hash": "6e331d7fd64fcfe076901953bbce503585ecd9b4fca9fbf2ae4943ca0a447064",
+      "prohibited_meta": false
+    }
+  }
+}

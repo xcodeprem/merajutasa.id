@@ -61,6 +61,7 @@
   "policy:aggregation:enforce:deny": "node tools/policy-aggregation-threshold-enforce.js artifacts/aggregation-cells-deny.json",
   
   "queries:seeds": "node tools/query-seeds.js",
+  "events:seed": "node tools/seed-events.js",
   "doc:verify-cli:stub": "node tools/write-verify-cli-stub.js"
   ,
   "hero:prerender": "node tools/hero-prerender.js",

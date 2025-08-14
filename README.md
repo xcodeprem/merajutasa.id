@@ -273,3 +273,7 @@ Tidak ada penghapusan retrospektif dokumen historis (archive) – hanya append t
 Struktur keputusan & parameter fairness sudah solid; tinggal hash seal + evidence gating agar klaim bisa diverifikasi secara kriptografis sebelum enforcement meningkat.
 
 (EOF)
+
+---
+
+Referensi publik: Lihat Methodology Snippet (H0) untuk ringkasan non‑ranking dan privasi → docs/transparency/methodology-snippet-h0.md
