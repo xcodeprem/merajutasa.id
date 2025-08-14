@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2025-08-14T13:28:54.342Z",
+  "generated_utc": "2025-08-14T17:36:26.339Z",
   "version": 1,
   "summary": {
-    "files": 15,
+    "files": 16,
     "violation_count": 0,
     "warning_count": 0,
     "codes": {},
@@ -97,6 +97,13 @@
       "file": "DEC-20250813-10-feedback-categories-canonical.md",
       "id": "DEC-20250813-10",
       "hash": "29ad36b8744ae3dfbdb15852f8ac7d24774dd5642d1380facbbf5822af55dfe8",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "file": "DEC-20250815-01-governed-editorial-maintenance.md",
+      "id": "DEC-20250815-01",
+      "hash": "dd76154a33c2ba8ac6b3381efa70b27c0cd38120b9aa26a2a0fece0542693c1a",
       "violations": [],
       "warnings": []
     },

@@ -50,10 +50,15 @@
     }
   ],
   "nonCodeSummary": {
-    "total": 5,
+    "total": 6,
     "missing_count": 0,
     "not_linked_count": 0,
     "items": [
+      {
+        "path": "docs/produk/portal-panti/00-orientasi-komprehensif.md",
+        "exists": true,
+        "linkedInReadme": true
+      },
       {
         "path": "docs/governance/statement-orientasi-portal-panti.md",
         "exists": true,

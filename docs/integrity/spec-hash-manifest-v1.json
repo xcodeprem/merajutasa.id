@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0",
-  "generation_timestamp_utc": "2025-08-14T11:24:24Z",
+  "generation_timestamp_utc": "2025-08-14T17:35:50Z",
   "generator_note": "Refined manifest: added onboarding & (optional) README, fixed dec_ref placeholders, standardized mutable_policy for adopted lint spec. All existing entries preserved; only additive or metadata corrections before first hash seal.",
   "files": [
     {
       "path": "docs/roadmap/roadmap-master-v1.md",
       "version": "1.0.0",
-      "dec_ref": null,
-      "hash_sha256": "a1a13138ed14026c226a6c16345cb3533b370c9352be712f5495db60b2f979cc",
+      "dec_ref": "DEC-20250815-01",
+      "hash_sha256": "efe2f4f73f5b4716b0704749308259db56409cedad111c77c09b8e55590b2cc7",
       "integrity_class": "roadmap",
       "mutable_policy": "append-only",
       "next_change_requires_dec": true,
@@ -266,8 +266,8 @@
     {
       "path": "docs/governance/policy-index-v1.md",
       "version": "1.0.0",
-      "dec_ref": "DEC-20250812-03 + DEC-20250813-04 + DEC-20250813-06",
-      "hash_sha256": "1f322257e1c94deaebba47e0fbc0cc3ed9f5ff9c0009e821d69b388c3811b308",
+      "dec_ref": "DEC-20250812-03 + DEC-20250813-04 + DEC-20250813-06 + DEC-20250815-01",
+      "hash_sha256": "21bd359ea3e4abbf99b227aa982a30f8f21f9cd8ae6dec1c75a5bf14bee2de0c",
       "integrity_class": "policy-index",
       "mutable_policy": "append-only",
       "next_change_requires_dec": true,
@@ -316,8 +316,8 @@
     {
       "path": "README.md",
       "version": "1.0.0",
-      "dec_ref": "DEC-20250813-04 + DEC-20250813-06",
-      "hash_sha256": "777bf81573aa5261cab837eeefc2fb1029ed168f8520ec36e0ac78bf4d060389",
+      "dec_ref": "DEC-20250813-04 + DEC-20250813-06 + DEC-20250815-01",
+      "hash_sha256": "cfa5ad36a62300327a371d68ece32523e9900bacab0fd991c11e277f3c541198",
       "integrity_class": "repository-readme",
       "mutable_policy": "append-only",
       "next_change_requires_dec": true,
@@ -532,6 +532,16 @@
       "mutable_policy": "append-only",
       "next_change_requires_dec": true,
       "notes": "Draft verification CLI usage instructions."
+    },
+    {
+      "path": "docs/governance/dec/DEC-20250815-01-governed-editorial-maintenance.md",
+      "version": "1.0.0",
+      "dec_ref": "SELF",
+      "hash_sha256": "8bdb770952f6b61d6827a8b61b89c0b4714d841fb6b28cb752e7c1f0c56dddea",
+      "integrity_class": "decision",
+      "mutable_policy": "immutable",
+      "next_change_requires_dec": false,
+      "notes": "Editorial maintenance authorization for README, Roadmap, and Policy Index (2025-08-15)."
     }
   ],
   "integrity_rules": {

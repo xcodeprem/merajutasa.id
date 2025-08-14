@@ -1,6 +1,6 @@
 {
   "mode": "verify",
-  "timestamp_utc": "2025-08-14T13:28:53Z",
+  "timestamp_utc": "2025-08-14T17:36:25Z",
   "updated": [],
   "unchanged": [
     "docs/roadmap/roadmap-master-v1.md",
@@ -55,13 +55,14 @@
     "docs/governance/dec/DEC-20250813-10-feedback-categories-canonical.md",
     "policies/aggregation-min-cell.rego",
     "docs/fairness/equity-snapshot-pseudocode.md",
-    "docs/integrity/verify-cli-doc-draft.md"
+    "docs/integrity/verify-cli-doc-draft.md",
+    "docs/governance/dec/DEC-20250815-01-governed-editorial-maintenance.md"
   ],
   "placeholders_sealed": [],
   "placeholders_remaining": [],
   "violations": [],
   "summary": {
-    "total_entries": 53,
+    "total_entries": 54,
     "updated_count": 0,
     "violation_count": 0,
     "placeholders_remaining_count": 0

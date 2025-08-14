@@ -3,10 +3,10 @@
   "status": "ADVISORY",
   "summary": {
     "distinctCategories": 10,
-    "totalFindings": 37,
+    "totalFindings": 43,
     "categoryCounts": {
       "CONTACT_EMAIL": 3,
-      "PLATE_ID": 7,
+      "PLATE_ID": 13,
       "IDN_NIK": 2,
       "GENERIC_16DIGIT": 4,
       "CONTACT_PHONE": 2,
@@ -45,6 +45,12 @@
         "PLATE_ID"
       ],
       "threshold": 2
+    },
+    {
+      "file": "docs\\public\\ABOUT-PORTAL-PANTI.md",
+      "category": "PLATE_ID",
+      "action": "WARN",
+      "sample": "W3C…#362229fe"
     },
     {
       "file": "docs\\privacy\\pii-scan-fixture.md",
@@ -171,6 +177,36 @@
     },
     {
       "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "category": "PLATE_ID",
+      "action": "WARN",
+      "sample": "W3C…#362229fe"
+    },
+    {
+      "file": "docs\\governance\\statement-orientasi-portal-panti.md",
+      "category": "PLATE_ID",
+      "action": "WARN",
+      "sample": "W3C…#362229fe"
+    },
+    {
+      "file": "docs\\audit\\00-rubrik-audit-portal-panti.md",
+      "category": "PLATE_ID",
+      "action": "WARN",
+      "sample": "W3C…#362229fe"
+    },
+    {
+      "file": "docs\\produk\\portal-panti\\02-model-data-minimal-aman.md",
+      "category": "PLATE_ID",
+      "action": "WARN",
+      "sample": "I18N…#6f4d4cd0"
+    },
+    {
+      "file": "docs\\produk\\portal-panti\\01-ruang-lingkup-produk.md",
+      "category": "PLATE_ID",
+      "action": "WARN",
+      "sample": "W3C…#362229fe"
+    },
+    {
+      "file": "docs\\produk\\portal-panti\\00-orientasi-komprehensif.md",
       "category": "PLATE_ID",
       "action": "WARN",
       "sample": "W3C…#362229fe"

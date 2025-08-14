@@ -1,14 +1,14 @@
 {
   "version": 1,
-  "generated_utc": "2025-08-14T13:28:53.737Z",
-  "file_count": 65,
-  "total_hits": 109,
+  "generated_utc": "2025-08-14T17:36:25.670Z",
+  "file_count": 87,
+  "total_hits": 118,
   "max_severity": "MEDIUM",
   "severity_counts": {
-    "MEDIUM": 109
+    "MEDIUM": 118
   },
   "rule_counts": {
-    "RANKING": 97,
+    "RANKING": 106,
     "TOP": 12
   },
   "findings": [
@@ -41,6 +41,16 @@
       "severity": "MEDIUM",
       "rationale": "Unsubstantiated ranking claim.",
       "context_line": "<p data-disclaimer-id=\"D1\">Equity Index & daftar under‑served bukan ranking kualitas—hanya sinyal pemerataan.</p>"
+    },
+    {
+      "file": "README.md",
+      "line": 285,
+      "column": 70,
+      "match": "ranking",
+      "rule": "RANKING",
+      "severity": "MEDIUM",
+      "rationale": "Unsubstantiated ranking claim.",
+      "context_line": "Referensi publik: Lihat Methodology Snippet (H0) untuk ringkasan non‑ranking dan privasi → docs/transparency/methodology-snippet-h0.md"
     },
     {
       "file": "docs/analytics/event-schema-canonical-v1.md",
@@ -663,6 +673,16 @@
       "context_line": "| PRIN-REF-004 | New potential ranking token added & GP9 not marked Yes | ERROR |"
     },
     {
+      "file": "docs/governance/statement-orientasi-portal-panti.md",
+      "line": 53,
+      "column": 86,
+      "match": "ranking",
+      "rule": "RANKING",
+      "severity": "MEDIUM",
+      "rationale": "Unsubstantiated ranking claim.",
+      "context_line": "- Salah tafsir sebagai peringkat: mitigasi lewat pemisahan modul dan disclaimer anti-ranking (UNCRC-3; ODC-2015)."
+    },
+    {
       "file": "docs/governance/trace/archive-trace-index-v1.md",
       "line": 31,
       "column": 7,
@@ -903,6 +923,26 @@
       "context_line": "Menetapkan batas eksplisit untuk aktivasi awal agen otomatis sehingga integritas (hash ledger), fairness (non‑ranking), privacy (PII minimization), dan anti-hype tetap terjaga saat sebagian kontrol masih dalam fase bootstrap (misal disclaimers lint presence enforcement belum ON penuh)."
     },
     {
+      "file": "docs/onboarding/agent-knowledge-baseline-2025-08-14.md",
+      "line": 12,
+      "column": 28,
+      "match": "ranking",
+      "rule": "RANKING",
+      "severity": "MEDIUM",
+      "rationale": "Unsubstantiated ranking claim.",
+      "context_line": "- GP6 Outcome Honesty: Non‑ranking fairness framing; enforce via disclaimers and hype lint."
+    },
+    {
+      "file": "docs/onboarding/agent-knowledge-baseline-2025-08-14.md",
+      "line": 15,
+      "column": 11,
+      "match": "Ranking",
+      "rule": "RANKING",
+      "severity": "MEDIUM",
+      "rationale": "Unsubstantiated ranking claim.",
+      "context_line": "- GP9 Non‑Ranking Fairness: Hysteresis Option F thresholds; equity index = 1 − Gini; see fairness tools under `tools/fairness/*`."
+    },
+    {
       "file": "docs/onboarding/agent-role-policy-v1.md",
       "line": 13,
       "column": 25,
@@ -951,6 +991,16 @@
       "severity": "MEDIUM",
       "rationale": "Unsubstantiated ranking claim.",
       "context_line": "| GP5 Robustness | Deny config mutation & ranking claims |"
+    },
+    {
+      "file": "docs/policies/README.md",
+      "line": 5,
+      "column": 8,
+      "match": "ranking",
+      "rule": "RANKING",
+      "severity": "MEDIUM",
+      "rationale": "Unsubstantiated ranking claim.",
+      "context_line": "- Anti-ranking & anti-stigma (UNCRC-3; ODC-2015)."
     },
     {
       "file": "docs/principles/GP1-GP10-index.md",
@@ -1023,8 +1073,28 @@
       "context_line": "Spec ini mempertahankan integritas strategi: menutup gap privasi sebelum skala, menghindari trust theater, mempersiapkan audit trail melalui event schema & governance log, serta tidak membawa ranking atau data anak ke permukaan—konsisten dengan semua dokumen sebelumnya."
     },
     {
+      "file": "docs/produk/portal-panti/01-ruang-lingkup-produk.md",
+      "line": 83,
+      "column": 52,
+      "match": "ranking",
+      "rule": "RANKING",
+      "severity": "MEDIUM",
+      "rationale": "Unsubstantiated ranking claim.",
+      "context_line": "- Salah tafsir sebagai peringkat → disclaimer anti-ranking; pemisahan modul (UNCRC-3; ODC-2015)."
+    },
+    {
       "file": "docs/roadmap/roadmap-master-v1.md",
-      "line": 492,
+      "line": 48,
+      "column": 362,
+      "match": "ranking",
+      "rule": "RANKING",
+      "severity": "MEDIUM",
+      "rationale": "Unsubstantiated ranking claim.",
+      "context_line": "| M Portal Panti | Orientasi produk, ruang lingkup, model data minimal aman, About, rubrik audit | docs/governance/statement-orientasi-portal-panti.md; docs/produk/portal-panti/01-ruang-lingkup-produk.md; docs/produk/portal-panti/02-model-data-minimal-aman.md; docs/public/ABOUT-PORTAL-PANTI.md; docs/audit/00-rubrik-audit-portal-panti.md | Discoverability non-ranking & governance guardrails |"
+    },
+    {
+      "file": "docs/roadmap/roadmap-master-v1.md",
+      "line": 493,
       "column": 44,
       "match": "ranking",
       "rule": "RANKING",
@@ -1034,7 +1104,7 @@
     },
     {
       "file": "docs/roadmap/roadmap-master-v1.md",
-      "line": 554,
+      "line": 555,
       "column": 55,
       "match": "ranking",
       "rule": "RANKING",
@@ -1044,7 +1114,7 @@
     },
     {
       "file": "docs/roadmap/roadmap-master-v1.md",
-      "line": 557,
+      "line": 558,
       "column": 12,
       "match": "Ranking",
       "rule": "RANKING",
@@ -1091,6 +1161,26 @@
       "severity": "MEDIUM",
       "rationale": "Unsubstantiated ranking claim.",
       "context_line": "Semua jalur tetap konsisten dengan GP1–GP10. Tidak ada penurunan komitmen terhadap non-ranking fairness & privacy. Fokus sekarang = menghapus jurang antara blueprint dan trust primitives nyata. Kecepatan implementasi 2 minggu pertama akan menentukan kredibilitas eksternal jangka panjang."
+    },
+    {
+      "file": "docs/transparency/methodology-snippet-h0.md",
+      "line": 5,
+      "column": 28,
+      "match": "ranking",
+      "rule": "RANKING",
+      "severity": "MEDIUM",
+      "rationale": "Unsubstantiated ranking claim.",
+      "context_line": "This project applies a non-ranking fairness approach using a hysteresis method (Option F) to avoid churn. The public summary focuses on equity and trust foundations:"
+    },
+    {
+      "file": "docs/transparency/methodology-snippet-h0.md",
+      "line": 7,
+      "column": 7,
+      "match": "ranking",
+      "rule": "RANKING",
+      "severity": "MEDIUM",
+      "rationale": "Unsubstantiated ranking claim.",
+      "context_line": "- Non-ranking: No league tables; only stability around entry/exit using thresholds."
     },
     {
       "file": "docs/trust/trust-hysteresis.md",

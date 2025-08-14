@@ -76,6 +76,22 @@
           ]
         },
         {
+          "ruleId": "PLATE_ID",
+          "level": "warning",
+          "message": {
+            "text": "PLATE_ID docs\\public\\ABOUT-PORTAL-PANTI.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\public\\ABOUT-PORTAL-PANTI.md"
+                }
+              }
+            }
+          ]
+        },
+        {
           "ruleId": "IDN_NIK",
           "level": "error",
           "message": {
@@ -374,6 +390,86 @@
               "physicalLocation": {
                 "artifactLocation": {
                   "uri": "docs\\integrity\\credential-schema-final-v1.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "PLATE_ID",
+          "level": "warning",
+          "message": {
+            "text": "PLATE_ID docs\\governance\\statement-orientasi-portal-panti.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\governance\\statement-orientasi-portal-panti.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "PLATE_ID",
+          "level": "warning",
+          "message": {
+            "text": "PLATE_ID docs\\audit\\00-rubrik-audit-portal-panti.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\audit\\00-rubrik-audit-portal-panti.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "PLATE_ID",
+          "level": "warning",
+          "message": {
+            "text": "PLATE_ID docs\\produk\\portal-panti\\02-model-data-minimal-aman.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\produk\\portal-panti\\02-model-data-minimal-aman.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "PLATE_ID",
+          "level": "warning",
+          "message": {
+            "text": "PLATE_ID docs\\produk\\portal-panti\\01-ruang-lingkup-produk.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\produk\\portal-panti\\01-ruang-lingkup-produk.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "PLATE_ID",
+          "level": "warning",
+          "message": {
+            "text": "PLATE_ID docs\\produk\\portal-panti\\00-orientasi-komprehensif.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\produk\\portal-panti\\00-orientasi-komprehensif.md"
                 }
               }
             }

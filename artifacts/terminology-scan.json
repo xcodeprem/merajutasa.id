@@ -5,17 +5,25 @@
     "stage2_active": false
   },
   "key_token_frequency": {
-    "fairness": 240,
-    "privacy": 122,
-    "hysteresis": 181,
-    "hash": 337,
+    "fairness": 255,
+    "privacy": 138,
+    "hysteresis": 190,
+    "hash": 354,
     "credential": 171,
-    "governance": 280,
+    "governance": 305,
     "revocation": 102
   },
-  "totalKey": 1433,
-  "banned_terms_detected": 129,
+  "totalKey": 1515,
+  "banned_terms_detected": 158,
   "banned_samples": [
+    {
+      "file": "docs\\transparency\\methodology-snippet-h0.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\transparency\\methodology-snippet-h0.md",
+      "term": "ranking"
+    },
     {
       "file": "docs\\trust\\trust-hysteresis.md",
       "term": "ranking"
@@ -46,7 +54,19 @@
     },
     {
       "file": "docs\\roadmap\\roadmap-master-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\roadmap\\roadmap-master-v1.md",
       "term": "Ranking"
+    },
+    {
+      "file": "docs\\roadmap\\roadmap-master-v1.md",
+      "term": "peringkat"
+    },
+    {
+      "file": "docs\\public\\ABOUT-PORTAL-PANTI.md",
+      "term": "peringkat"
     },
     {
       "file": "docs\\privacy\\pii-pattern-library-v1.md",
@@ -81,6 +101,54 @@
       "term": "Ranking"
     },
     {
+      "file": "docs\\policies\\README.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\master-spec\\master-spec-v2.0.md",
+      "term": "Ranking"
+    },
+    {
+      "file": "docs\\master-spec\\master-spec-v2.0.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\master-spec\\master-spec-v2.0.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\master-spec\\master-spec-v2.0.md",
+      "term": "top"
+    },
+    {
+      "file": "docs\\master-spec\\master-spec-v2.0.md",
+      "term": "terbaik"
+    },
+    {
+      "file": "docs\\integrity\\evidence-minimum-phase1.5-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "term": "Ranking"
+    },
+    {
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "term": "top"
+    },
+    {
       "file": "docs\\onboarding\\agent-role-policy-v1.md",
       "term": "ranking"
     },
@@ -99,6 +167,18 @@
     {
       "file": "docs\\onboarding\\agent-role-policy-v1.md",
       "term": "ranking"
+    },
+    {
+      "file": "docs\\onboarding\\agent-knowledge-baseline-2025-08-14.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\onboarding\\agent-knowledge-baseline-2025-08-14.md",
+      "term": "Ranking"
+    },
+    {
+      "file": "docs\\onboarding\\agent-knowledge-baseline-2025-08-14.md",
+      "term": "top"
     },
     {
       "file": "docs\\onboarding\\agent-guardrails-v1.md",
@@ -129,99 +209,23 @@
       "term": "terbaik"
     },
     {
-      "file": "docs\\integrity\\evidence-minimum-phase1.5-v1.md",
-      "term": "ranking"
+      "file": "docs\\governance\\statement-orientasi-portal-panti.md",
+      "term": "peringkat"
     },
     {
-      "file": "docs\\integrity\\credential-schema-final-v1.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\integrity\\credential-schema-final-v1.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\integrity\\credential-schema-final-v1.md",
-      "term": "Ranking"
-    },
-    {
-      "file": "docs\\integrity\\credential-schema-final-v1.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\integrity\\credential-schema-final-v1.md",
-      "term": "top"
-    },
-    {
-      "file": "docs\\master-spec\\master-spec-v2.0.md",
-      "term": "Ranking"
-    },
-    {
-      "file": "docs\\master-spec\\master-spec-v2.0.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\master-spec\\master-spec-v2.0.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\master-spec\\master-spec-v2.0.md",
-      "term": "top"
-    },
-    {
-      "file": "docs\\master-spec\\master-spec-v2.0.md",
+      "file": "docs\\governance\\statement-orientasi-portal-panti.md",
       "term": "terbaik"
     },
     {
-      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
-      "term": "ranking"
+      "file": "docs\\governance\\statement-orientasi-portal-panti.md",
+      "term": "terbaik"
     },
     {
-      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
-      "term": "ranking"
+      "file": "docs\\governance\\statement-orientasi-portal-panti.md",
+      "term": "peringkat"
     },
     {
-      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
-      "term": "Ranking"
-    },
-    {
-      "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
-      "term": "Ranking"
-    },
-    {
-      "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
-      "term": "Ranking"
-    },
-    {
-      "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
+      "file": "docs\\governance\\statement-orientasi-portal-panti.md",
       "term": "ranking"
     },
     {
@@ -281,6 +285,70 @@
       "term": "ranking"
     },
     {
+      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\audit\\00-rubrik-audit-portal-panti.md",
+      "term": "peringkat"
+    },
+    {
+      "file": "docs\\audit\\00-rubrik-audit-portal-panti.md",
+      "term": "peringkat"
+    },
+    {
+      "file": "docs\\audit\\00-rubrik-audit-portal-panti.md",
+      "term": "terbaik"
+    },
+    {
+      "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
+      "term": "Ranking"
+    },
+    {
+      "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
+      "term": "Ranking"
+    },
+    {
+      "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
+      "term": "Ranking"
+    },
+    {
+      "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
+      "term": "ranking"
+    },
+    {
       "file": "docs\\analytics\\media-digest.md",
       "term": "ranking"
     },
@@ -303,6 +371,30 @@
     {
       "file": "docs\\analytics\\event-schema-canonical-v1.md",
       "term": "top"
+    },
+    {
+      "file": "docs\\produk\\portal-panti\\01-ruang-lingkup-produk.md",
+      "term": "Peringkat"
+    },
+    {
+      "file": "docs\\produk\\portal-panti\\01-ruang-lingkup-produk.md",
+      "term": "peringkat"
+    },
+    {
+      "file": "docs\\produk\\portal-panti\\01-ruang-lingkup-produk.md",
+      "term": "peringkat"
+    },
+    {
+      "file": "docs\\produk\\portal-panti\\01-ruang-lingkup-produk.md",
+      "term": "peringkat"
+    },
+    {
+      "file": "docs\\produk\\portal-panti\\01-ruang-lingkup-produk.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\produk\\portal-panti\\00-orientasi-komprehensif.md",
+      "term": "terbaik"
     },
     {
       "file": "docs\\governance\\trace\\archive-trace-index-v1.md",
