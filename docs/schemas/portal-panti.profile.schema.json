@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://merajutasa.id/schemas/portal-panti.profile.schema.json",
+  "title": "Portal Panti — Profil Institusi",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "nama_lembaga": { "type": "string", "minLength": 1 },
+    "wilayah_administratif": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kecamatan": { "type": "string" },
+        "kota": { "type": "string" },
+        "provinsi": { "type": "string" }
+      },
+      "required": ["kota", "provinsi"]
+    },
+    "status_legal_publik": { "type": ["string", "object", "null"] },
+    "kontak_institusional": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "email_resmi": { "type": ["string", "null"], "format": "email" },
+        "telepon_kantor": { "type": ["string", "null"] }
+      }
+    },
+    "tautan_resmi": {
+      "type": "array",
+      "items": { "type": "string", "format": "uri" },
+      "uniqueItems": true
+    },
+    "tanggal_verifikasi": { "type": ["string", "null"], "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "sumber_verifikasi": { "type": ["string", "null"], "maxLength": 500 },
+
+    "alamat_jalan": { "type": ["string", "null"] },
+    "titik_peta_approx": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "lat": { "type": "number", "minimum": -90, "maximum": 90 },
+        "lon": { "type": "number", "minimum": -180, "maximum": 180 }
+      }
+    },
+    "jam_kunjung": { "type": ["string", "null"] },
+    "kanal_donasi_institusi": {
+      "type": "array",
+      "items": { "type": "string", "format": "uri" },
+      "uniqueItems": true
+    },
+    "media_sosial_institusi": {
+      "type": "array",
+      "items": { "type": "string", "format": "uri" },
+      "uniqueItems": true
+    },
+
+    "status_verifikasi": { "type": "string", "enum": ["belum_diverifikasi", "terverifikasi", "kadaluarsa"] },
+    "log_perubahan_ringkas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "tanggal": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+          "ringkasan": { "type": "string", "minLength": 1 }
+        },
+        "required": ["tanggal", "ringkasan"]
+      }
+    }
+  },
+  "required": [
+    "nama_lembaga",
+    "wilayah_administratif",
+    "kontak_institusional"
+  ]
+}

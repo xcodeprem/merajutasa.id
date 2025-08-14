@@ -45,6 +45,7 @@ Setiap horizon memetakan:
 | J Transparency & Education | Methodology narrative, FAQ expansions, disclaimers presence | Master Spec v2.0 & Disclaimers Lint | User comprehension fairness/trust |
 | K Risk & Audit | Anomaly watchers, fairness audit log, chain event mapping | Risk register & fairness methodology | Continuous trust assurance |
 | L Federation & Future | DID portability, external attestation, localization, CBOR | Future expansions in Credential spec | Scalability & portability guardrail |
+| M Portal Panti | Orientasi produk, ruang lingkup, model data minimal aman, About, rubrik audit | docs/governance/statement-orientasi-portal-panti.md; docs/produk/portal-panti/01-ruang-lingkup-produk.md; docs/produk/portal-panti/02-model-data-minimal-aman.md; docs/public/ABOUT-PORTAL-PANTI.md; docs/audit/00-rubrik-audit-portal-panti.md | Discoverability non-ranking & governance guardrails |
 
 ---
 
@@ -246,7 +247,7 @@ Setiap horizon memetakan:
 | H2-B2 | Fairness Audit Quarterly Template + Dry Run | Reconstruct last 30 days entry/exit timeline |
 | H2-C1 | Lint Extension: Hype Language Detection (context near fairness) | Block adjectives marked high risk |
 | H2-D1 | Event Sampling Decision & Configuration (impressions) | Introduce sampling if volume high |
-| H2-D2 | Chain Anchor for Select Events (optional) | Add equity anomaly & fairness entry events -->
+| H2-D2 | Chain Anchor for Select Events (optional) | Add equity anomaly & fairness entry events |
 | H2-E1 | Advanced PII Pattern (IBAN-like detection - optional) | Evaluate region relevance |
 | H2-F1 | Stage 2 Terminology Readiness Assessment | Adoption ≥70%? generate report |
 | H2-G1 | Feedback Monthly Automated Report Published (internal) | Markdown with classification metrics |
@@ -323,7 +324,7 @@ Setiap horizon memetakan:
 
 ## 8. DEPENDENCY GRAPH (SIMPLIFIED)
 
-```
+```text
 Credential Schema -> Signer -> Chain -> Verify CLI -> Key Rotation -> Revocation Simulation -> Multi-Issuer
 Equity Snapshot -> Hysteresis Engine -> Under-Served UI -> Anomaly Detector -> Quarterly Audit -> Parameter Review
 Event Schema -> Event Collector -> KPI Dashboard -> Sampling -> Analytical Quality Tests
@@ -358,7 +359,7 @@ Terminology Scanner -> Adoption Metrics -> Stage 2 Transition
 Pattern: `DEC-YYYYMMDD-XX.md`  
 Fields:
 
-```
+```yaml
 id: DEC-20250812-01
 title: Adopt Credential Schema v1.0
 class: CIC-C
@@ -672,3 +673,208 @@ Pilih langkah lanjut:
 Saya siap melanjutkan tanpa menghapus konteks apapun.
 
 (End of Roadmap & Milestones Master v1.0)
+
+---
+
+## APPENDIX A — Portal Panti Orientation (Verbatim, Non-Redacted)
+
+This appendix embeds the full text of the Portal Panti orientation documents for roadmap traceability. Do not edit here; edit the source docs and re-sync.
+
+### A.1 Pernyataan Orientasi Produk: Portal Panti Asuhan
+
+```markdown
+# Pernyataan Orientasi Produk: Portal Panti Asuhan
+
+Tujuan (LEBIH KOMPREHENSIF LAGI)
+- Menyediakan direktori publik panti asuhan (contoh: wilayah Bandung) agar pengurus panti mudah ditemukan masyarakat.
+- Memfasilitasi transparansi institusional yang aman (info lembaga, dokumen legal publik bila ada, tautan situs panti).
+- Menjaga keselamatan dan martabat anak serta kepatuhan privasi.
+
+Non-Tujuan (LEBIH KOMPREHENSIF LAGI)
+- Tidak memberi peringkat/penilaian “baik/buruk”.
+- Tidak memuat data pribadi anak/pengasuh, foto yang mengidentifikasi anak, atau jadwal anak.
+- Tidak mengaitkan profil panti dengan label “under‑served” sebagai klaim perbandingan.
+
+Prinsip Produk (UTAMANYA KEPENTINGAN TERBAIK PENGURUS)
+- Kepentingan terbaik anak (UNCRC Pasal 3; UU Perlindungan Anak).
+- Privasi by design (UU PDP; GDPR Recital 38 untuk anak sebagai pembanding).
+- Akses informasi publik secara proporsional (UU KIP) dengan pengecualian yang dilindungi.
+- Aksesibilitas dan keterbacaan (UU 8/2016; WCAG 2.1/2.2).
+- Transparansi tanpa hiperbola; bahasa netral dan anti‑stigma.
+
+Audiens Utama
+- Pengurus panti asuhan (pemilik profil).
+- Masyarakat umum (pencari informasi resmi).
+- Komunitas/LSM (pengguna data agregat non‑sensitif).
+
+Hubungan dengan Modul Lain
+- Modul “Portal Panti” berdiri terpisah dari modul kebijakan/analitik lain.
+- Integrasi lintas modul dilakukan melalui tautan dan ringkasan netral.
+
+Rujukan
+- UNCRC (Pasal 2, 3, 16, 17); UU Perlindungan Anak; UU PDP; UU KIP; UU 8/2016; WCAG 2.1/2.2; Perpres 39/2019; Open Data Charter.
+```
+
+### A.2 Ruang Lingkup Produk: Portal Panti Asuhan
+
+```markdown
+# Ruang Lingkup Produk: Portal Panti Asuhan
+
+## Sasaran
+
+- Visibilitas panti asuhan yang terverifikasi.
+- Transparansi institusional yang aman dan mudah dipahami.
+- Database internal panti (hanya admin panti yang bisa login, dengan domain terpisah agar aman, atau cara lain yang tidak kompleks namun sangat aman)
+
+## Cakupan (LEBIH KOMPREHENSIF LAGI)
+
+- Wilayah awal: Bandung (dapat diperluas kemudian).
+- Entitas: lembaga panti (bukan individu).
+- Konten: profil institusi, tautan resmi, dokumen publik (jika ada), status verifikasi dan tanggalnya.
+
+## Batasan (LEBIH KOMPREHENSIF LAGI)
+
+- Tidak menampilkan data/visual yang dapat mengidentifikasi anak.
+- Lokasi presisi (alamat/koordinat) hanya opt‑in eksplisit dari pengurus.
+- Tidak ada peringkat, skor, atau klaim komparatif antar panti.
+
+## Peran (LEBIH KOMPREHENSIF LAGI)
+
+- Pengurus panti: mendaftar/mengklaim profil, mengelola konten, mengajukan pembaruan.
+- Admin verifikasi: memeriksa legitimasi dasar, menyetel status “terverifikasi”.
+- Publik/komunitas: menelusuri profil, mengakses informasi resmi, melaporkan konten bermasalah.
+
+## Artefak Publik (LEBIH BAIK LAGI)
+
+- Halaman profil panti (informasi minimal aman).
+- Laman “About Portal Panti”.
+- Tanda “Terverifikasi” + “Terakhir diverifikasi pada: YYYY‑MM‑DD”.
+- Changelog pembaruan profil (ringkas, non‑teknis).
+
+## Rujukan
+
+- UNCRC; UU PDP; UU KIP; UU 8/2016 & WCAG 2.1/2.2.
+```
+
+### A.3 Model Data Minimal Aman — Portal Panti
+
+```markdown
+# Model Data Minimal Aman — Portal Panti
+
+## 1) Wajib (default aman) (LEBIH KOMPREHENSIF LAGI)
+
+- nama_lembaga (string)
+- wilayah_administratif (kecamatan, kota/kabupaten, provinsi)
+- status_legal_publik (nomor izin/registrasi bila memang informasi publik)
+- kontak_institusional (email resmi, telepon kantor)
+- tautan_resmi (website panti, bila ada)
+- tanggal_verifikasi (YYYY‑MM‑DD)
+- sumber_verifikasi (deskripsi singkat)
+
+## 2) Opsional — Opt‑in eksplisit (LEBIH KOMPREHENSIF LAGI)
+
+- alamat_jalan (string)
+- titik_peta_approx (centroid kecamatan/kota; presisi hanya bila disetujui tertulis)
+- jam_kunjung (string)
+- kanal_donasi_institusi (tautan resmi institusi)
+- media_sosial_institusi (tautan)
+
+## 3) Dilarang (tidak disimpan/ditampilkan)
+
+- PII anak/pengasuh (nama, foto identifiable, tanggal lahir, kesehatan, dsb.)
+- jadwal_kegiatan_anak
+- data_kerentanan/medis
+- koordinat_presisi tanpa persetujuan tertulis
+- berkas yang menampilkan wajah anak tanpa redaksi
+
+## Metadata & Jejak (LEBIH KOMPREHENSIF LAGI)
+
+- id_profil (UUID)
+- dibuat_pada / diubah_pada (timestamp)
+- log_perubahan_ringkas (tanggal + field yang berubah)
+- status_verifikasi (belum diverifikasi | terverifikasi | kadaluarsa)
+- alasan_penolakan (jika ada)
+
+## Pertimbangan Privasi/Akses
+
+- Default granularitas lokasi pada level kecamatan/kota.
+- Dokumen legal hanya bila statusnya memang informasi publik.
+- Portal hanya menautkan; tidak menyalin konten anak dari situs panti.
+
+## Rujukan
+
+- UU PDP (minimalisasi, purpose limitation), UNCRC Pasal 3/16, UU KIP.
+```
+
+### A.4 Tentang Portal Panti (ABOUT)
+
+```markdown
+# Tentang Portal Panti
+
+## Apa ini
+
+- Direktori publik panti asuhan yang menampilkan informasi lembaga dan tautan resmi, agar masyarakat mudah menemukan sumber informasi yang tepat.
+
+## Apa yang ditampilkan
+
+- Nama lembaga, wilayah administratif, kontak institusional, tautan resmi, dan status verifikasi beserta tanggalnya.
+- Alamat lengkap dan titik peta presisi hanya jika pengurus menyetujuinya.
+
+## Apa yang tidak ditampilkan
+
+- Data pribadi anak/pengasuh, foto yang mengidentifikasi anak, jadwal kegiatan anak, atau informasi sensitif.
+
+## Bagaimana verifikasi dilakukan
+
+- Informasi diperiksa kelengkapannya. Bila tersedia, nomor/legalitas yang bersifat publik ditautkan.
+- Tanggal dan sumber verifikasi ditampilkan.
+
+## Bahasa & aksesibilitas
+
+- Konten ditulis sederhana, dapat diakses di perangkat seluler, dan mengikuti pedoman aksesibilitas.
+
+## Catatan penting
+
+- Portal ini bukan sistem peringkat. Tidak ada skor/label membandingkan antar panti.
+- Untuk perubahan informasi atau keberatan, pengurus dapat mengajukan pembaruan atau meminta peninjauan.
+
+## Rujukan singkat
+
+- UNCRC (perlindungan anak), UU PDP (privasi), UU KIP (akses informasi), UU 8/2016 & WCAG (aksesibilitas).
+```
+
+### A.5 Rubrik Audit Kesesuaian Orientasi — Portal Panti
+
+```markdown
+# Rubrik Audit Kesesuaian Orientasi — Portal Panti
+
+## Dimensi Audit
+
+### 1) Struktur & Artefak
+
+- Apakah terdapat dokumen Orientasi, Ruang Lingkup, Model Data, About di docs/?
+- Apakah versi/penandaan waktu konsisten?
+
+### 2) Konten & Bahasa
+
+- Apakah tidak ada klaim peringkat/hiperbola?
+- Apakah pedoman anti‑stigma diterapkan?
+
+### 3) Aksesibilitas
+
+- Apakah halaman publik mengikuti prinsip WCAG?
+- Apakah ada versi low‑bandwidth?
+
+### 4) Tata Kelola & Jejak
+
+- Apakah ada changelog non‑teknis untuk pembaruan profil/halaman?
+- Apakah status verifikasi + tanggal ditampilkan?
+
+### 5) Kepatuhan Kerangka
+
+- Rujukan ke UNCRC, UU PDP, UU KIP, UU 8/2016/WCAG, Perpres 39/2019 tercermin dalam dokumen.
+```
+
+---
+
+End of Appendix A.

@@ -30,6 +30,7 @@ Addendum (Appended after DEC-20250812-03):
 
 These documents guide product orientation and are referenced by governance but are not executable policies:
 
+- docs/produk/portal-panti/00-orientasi-komprehensif.md
 - docs/governance/statement-orientasi-portal-panti.md
 - docs/produk/portal-panti/01-ruang-lingkup-produk.md
 - docs/produk/portal-panti/02-model-data-minimal-aman.md

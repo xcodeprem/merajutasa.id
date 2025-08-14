@@ -1,0 +1,13 @@
+{
+  "nama_lembaga": "Panti Asuhan ABC",
+  "wilayah_administratif": { "kecamatan": "Coblong", "kota": "Bandung", "provinsi": "Jawa Barat" },
+  "kontak_institusional": { "email_resmi": "info@example.org", "telepon_kantor": "+62-22-1234567" },
+  "tautan_resmi": ["https://contoh.org"],
+  "tanggal_verifikasi": "2025-08-10",
+  "sumber_verifikasi": "Dokumen publik dinas sosial (tautan)",
+  "titik_peta_approx": { "lat": -6.889, "lon": 107.610 },
+  "status_verifikasi": "terverifikasi",
+  "log_perubahan_ringkas": [
+    { "tanggal": "2025-08-10", "ringkasan": "Verifikasi awal" }
+  ]
+}
