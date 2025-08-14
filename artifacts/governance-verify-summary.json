@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-08-14T06:13:35.817Z",
+  "timestamp": "2025-08-14T06:23:41.629Z",
   "artifacts": {
     "specHash": {
       "mode": "verify",
-      "timestamp_utc": "2025-08-14T06:13:34Z",
+      "timestamp_utc": "2025-08-14T06:23:40Z",
       "updated": [],
       "unchanged": [
         "docs/roadmap/roadmap-master-v1.md",
@@ -70,15 +70,12 @@
       }
     },
     "params": {
-      "version": 3,
-      "gating_mode": "hard_fail_on_mismatch_or_missing",
-      "generated_utc": "2025-08-14T06:13:34.205Z",
+      "version": 2,
+      "generated_utc": "2025-08-14T06:23:40.309Z",
       "status": "PASS",
       "summary_counts": {
         "MATCH": 15
       },
-      "mismatch_count": 0,
-      "missing_count": 0,
       "rows": [
         {
           "parameter": "T_exit",
@@ -340,7 +337,7 @@
     },
     "hype": {
       "version": 1,
-      "generated_utc": "2025-08-14T06:13:34.770Z",
+      "generated_utc": "2025-08-14T06:23:40.589Z",
       "file_count": 59,
       "total_hits": 109,
       "max_severity": "MEDIUM",
@@ -1550,7 +1547,7 @@
       }
     },
     "decLint": {
-      "generated_utc": "2025-08-14T06:13:35.108Z",
+      "generated_utc": "2025-08-14T06:23:40.907Z",
       "version": 1,
       "summary": {
         "files": 15,
@@ -1671,11 +1668,11 @@
     },
     "principles": {
       "version": 2,
-      "generated_utc": "2025-08-14T06:13:35.284Z",
+      "generated_utc": "2025-08-14T06:23:41.076Z",
       "principles": [
         {
           "principle": "GP1",
-          "match_count": 824,
+          "match_count": 823,
           "domains": [
             "other"
           ],
@@ -2658,7 +2655,7 @@
       }
     },
     "drift": {
-      "timestamp_utc": "2025-08-14T06:13:35.674Z",
+      "timestamp_utc": "2025-08-14T06:23:41.463Z",
       "components": {
         "spec_hash": "PASS",
         "params": "PASS",

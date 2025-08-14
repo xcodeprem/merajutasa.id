@@ -8,7 +8,7 @@ import crypto from 'crypto';
 
 const MANIFEST_PATH = 'docs/integrity/spec-hash-manifest-v1.json';
 const DEC_SELF_CLASS = 'decision';
-const VALID_MODES = new Set(['seal-first','verify','report-only','canonicalize-dec','accept']);
+const VALID_MODES = new Set(['seal-first','verify','report-only','accept']);
 const WRITE_SARIF = process.env.SPEC_HASH_SARIF === '1';
 const SUMMARY_PATH = 'artifacts/spec-hash-summary.json';
 const SARIF_PATH = 'artifacts/spec-hash-diff.sarif.json';
@@ -41,7 +41,7 @@ async function fileExists(p) { try { await fs.access(p); return true; } catch { 
 async function main() {
   const mode = parseArg('mode','report-only');
   if (!VALID_MODES.has(mode)) {
-    console.error(`[spec-hash-diff] ERROR: Invalid mode "${mode}". Use seal-first|verify|report-only|canonicalize-dec.`);
+    console.error(`[spec-hash-diff] ERROR: Invalid mode "${mode}". Use seal-first|verify|report-only|accept.`);
     process.exit(2);
   }
   console.log(`[spec-hash-diff] START mode=${mode}`);
@@ -101,7 +101,7 @@ async function main() {
     if (!isPlaceholder) {
       if (hash_sha256 === currentHash) {
         unchanged.push(fPath);
-      } else if (integrity_class === DEC_SELF_CLASS && (mode === 'canonicalize-dec' || mode === 'accept')) {
+  } else if (integrity_class === DEC_SELF_CLASS && mode === 'accept') {
         // DEC canonical reseal: update manifest to canonical current hash
         entry.hash_sha256 = currentHash;
         manifestModified = true;
@@ -126,11 +126,11 @@ async function main() {
         } else {
           const internal = m[1];
           const canonicalHash = computeDecHash(buf);
-          if (entry.hash_sha256 !== canonicalHash && !(mode === 'canonicalize-dec' || mode === 'accept')) {
+          if (entry.hash_sha256 !== canonicalHash && mode !== 'accept') {
             violations.push({ code: 'DEC_CANONICAL_HASH_MISMATCH', path: fPath, detail: `canonical=${canonicalHash} manifest=${entry.hash_sha256}` });
           }
             if (internal !== canonicalHash) {
-              if (mode === 'canonicalize-dec' || mode === 'accept') {
+              if (mode === 'accept') {
                 const replaced = text.replace(/hash_of_decision_document:\s*"[0-9a-f]{64}"/, `hash_of_decision_document: "${canonicalHash}"`);
                 writeBackDECUpdates.push({ path: fPath, data: replaced });
                 updated.push(fPath);

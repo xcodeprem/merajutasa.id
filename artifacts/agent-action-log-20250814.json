@@ -157,5 +157,219 @@
     "timestamp": "2025-08-14T06:13:35.838Z",
     "action": "aggregate",
     "status": "OK"
+  },
+  {
+    "timestamp": "2025-08-14T06:23:40.217Z",
+    "action": "step",
+    "step": "spec-hash-diff",
+    "cmd": "node tools/spec-hash-diff.js --mode=verify",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 72,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-14T06:23:40.324Z",
+    "action": "step",
+    "step": "param-integrity",
+    "cmd": "node tools/param-integrity.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 108,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-14T06:23:40.381Z",
+    "action": "step",
+    "step": "param-lock",
+    "cmd": "node tools/param-lock-verify.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 57,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-14T06:23:40.487Z",
+    "action": "step",
+    "step": "fairness-unit",
+    "cmd": "node tools/tests/fairness-engine-unit-tests.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 106,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-14T06:23:40.604Z",
+    "action": "step",
+    "step": "hype-lint",
+    "cmd": "node tools/hype-lint.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 118,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-14T06:23:40.777Z",
+    "action": "step",
+    "step": "disclaimers-lint",
+    "cmd": "node tools/disclaimers-lint.js",
+    "exit_code": 1,
+    "status": "ADVISORY",
+    "duration_ms": 172,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-14T06:23:40.927Z",
+    "action": "step",
+    "step": "dec-lint",
+    "cmd": "node tools/dec-lint.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 148,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-14T06:23:41.090Z",
+    "action": "step",
+    "step": "principles-impact",
+    "cmd": "node tools/principles-impact.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 165,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-14T06:23:41.148Z",
+    "action": "step",
+    "step": "evidence-freshness",
+    "cmd": "node tools/evidence-freshness.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 58,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-14T06:23:41.207Z",
+    "action": "step",
+    "step": "evidence-collision-test",
+    "cmd": "node tools/evidence-collision-test.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 57,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-14T06:23:41.315Z",
+    "action": "step",
+    "step": "fairness-sim",
+    "cmd": "node tools/fairness-sim.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 108,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-14T06:23:41.419Z",
+    "action": "step",
+    "step": "fairness-metrics",
+    "cmd": "node tools/fairness/fairness-metrics.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 104,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-14T06:23:41.477Z",
+    "action": "step",
+    "step": "no-silent-drift",
+    "cmd": "node tools/no-silent-drift.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 57,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-14T06:23:41.600Z",
+    "action": "step",
+    "step": "governed-change-scan",
+    "cmd": "node tools/governed-change-scan.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 87,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-14T06:23:41.633Z",
+    "action": "aggregate",
+    "status": "OK"
+  },
+  {
+    "timestamp": "2025-08-14T06:26:36.985Z",
+    "action": "step",
+    "step": "spec-hash-diff",
+    "cmd": "node tools/spec-hash-diff.js --mode=verify",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 74,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-14T06:26:37.092Z",
+    "action": "step",
+    "step": "param-integrity",
+    "cmd": "node tools/param-integrity.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 109,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-14T06:26:37.150Z",
+    "action": "step",
+    "step": "param-lock",
+    "cmd": "node tools/param-lock-verify.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 57,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-14T06:26:37.262Z",
+    "action": "step",
+    "step": "fairness-unit",
+    "cmd": "node tools/tests/fairness-engine-unit-tests.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 111,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-14T06:26:37.371Z",
+    "action": "step",
+    "step": "hype-lint",
+    "cmd": "node tools/hype-lint.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 109,
+    "critical": false,
+    "advisory": true
   }
 ]

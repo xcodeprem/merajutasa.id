@@ -1,24 +1,20 @@
 {
   "version": 1,
-  "generated_utc": "2025-08-14T06:13:35.757Z",
-  "changed_count": 18,
+  "generated_utc": "2025-08-14T06:23:41.547Z",
+  "changed_count": 28,
   "governed_impacted": [
     "docs/governance/dec/DEC-20250812-03-principles-reference-activation.md",
     "docs/governance/dec/DEC-20250813-03-disclaimers-presence-enforcement.md",
     "docs/governance/dec/DEC-20250813-05-gating-policy-wave1-adoption.md",
     "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md",
-    "docs/governance/dec/DEC-20250813-07-hype-threshold-transition.md",
-    "docs/governance/dec/DEC-style-guide-v1.md",
-    "docs/governance/dec/DEC-style-guide-v2.md"
+    "docs/governance/dec/DEC-20250813-07-hype-threshold-transition.md"
   ],
   "dec_files_changed": [
     "docs/governance/dec/DEC-20250812-03-principles-reference-activation.md",
     "docs/governance/dec/DEC-20250813-03-disclaimers-presence-enforcement.md",
     "docs/governance/dec/DEC-20250813-05-gating-policy-wave1-adoption.md",
     "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md",
-    "docs/governance/dec/DEC-20250813-07-hype-threshold-transition.md",
-    "docs/governance/dec/DEC-style-guide-v1.md",
-    "docs/governance/dec/DEC-style-guide-v2.md"
+    "docs/governance/dec/DEC-20250813-07-hype-threshold-transition.md"
   ],
   "violations": [],
   "evidence": [
@@ -50,18 +46,6 @@
       "path": "docs/governance/dec/DEC-20250813-07-hype-threshold-transition.md",
       "referenced_in": [
         "docs/governance/dec/DEC-20250813-07-hype-threshold-transition.md"
-      ]
-    },
-    {
-      "path": "docs/governance/dec/DEC-style-guide-v1.md",
-      "referenced_in": [
-        "docs/governance/dec/DEC-style-guide-v1.md"
-      ]
-    },
-    {
-      "path": "docs/governance/dec/DEC-style-guide-v2.md",
-      "referenced_in": [
-        "docs/governance/dec/DEC-style-guide-v2.md"
       ]
     }
   ]

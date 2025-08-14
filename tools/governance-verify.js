@@ -23,7 +23,7 @@ const STEPS = [
   { name: 'param-lock', cmd: ['node','tools/param-lock-verify.js'], critical: true },
   { name: 'fairness-unit', cmd: ['node','tools/tests/fairness-engine-unit-tests.js'], critical: true },
   { name: 'hype-lint', cmd: ['node','tools/hype-lint.js'], advisory: true },
-  { name: 'disclaimers-lint', cmd: ['node','tools/disclaimers-lint.js'], advisory: true },
+  { name: 'disclaimers-lint', cmd: ['node','tools/disclaimers-lint.js'], critical: true },
   // Promote DEC lint to critical now that violations are 0
   { name: 'dec-lint', cmd: ['node','tools/dec-lint.js'], critical: true },
   { name: 'principles-impact', cmd: ['node','tools/principles-impact.js'], advisory: true },
@@ -119,7 +119,17 @@ async function main(){
       const sig = await signerRes.json();
       const chainRes = await fetch(`http://127.0.0.1:${process.env.CHAIN_PORT||4602}/append`, { method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify({ canonical: sig.canonical, signature: sig.signature, publicKeyPem: (await (await fetch(`http://127.0.0.1:${process.env.SIGNER_PORT||4601}/pubkey`)).json()).publicKeyPem }) });
       if (chainRes.ok) {
-        await logAction({ action:'chain-append', status:'OK' });
+        const entry = await chainRes.json();
+        await fs.writeFile('artifacts/chain-append-latest.json', JSON.stringify({
+          proof_version: 1,
+          appended: {
+            seq: entry.seq,
+            contentHash: entry.contentHash,
+            prevHash: entry.prevHash,
+            ts: entry.ts
+          }
+        }, null, 2));
+        await logAction({ action:'chain-append', status:'OK', seq: entry.seq, contentHash: entry.contentHash });
       } else {
         await logAction({ action:'chain-append', status:'SKIP', reason:'chain not reachable or append failed' });
       }

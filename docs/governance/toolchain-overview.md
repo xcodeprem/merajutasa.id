@@ -7,8 +7,7 @@ This repository enforces integrity and governance through a set of scripts and e
   - Canonicalization for DEC: replace `hash_of_decision_document` 64-hex with "<CANON>" before SHA-256
   - Commands:
     - Verify: `npm run spec-hash:verify`
-    - Reseal DEC/internal + manifest: `node tools/spec-hash-diff.js --mode=canonicalize-dec`
-    - Accept drift (DEC + non-DEC): `node tools/spec-hash-diff.js --mode=accept`
+    - Reseal (DEC canonical + non-DEC): `node tools/spec-hash-diff.js --mode=accept`
 
 - Linters and tests
   - DEC linter (critical): `node tools/dec-lint.js`
