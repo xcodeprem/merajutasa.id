@@ -15,8 +15,7 @@ import crypto from 'crypto';
 
 const PORT = process.env.SIGNER_PORT || 4601;
 const KEY_DIR = '.integrity';
-const PRIV_PATH = `${KEY_DIR}/ed25519_sk.pem`;
-const PUB_PATH = `${KEY_DIR}/ed25519_pk.pem`;
+const KEYS_STATE = `${KEY_DIR}/keys.json`;
 
 function stableStringify(obj){
   if (typeof obj === 'string') return obj;
@@ -35,17 +34,22 @@ function stableSerialize(v){
   }
 }
 
-async function ensureKeypair(){
+async function ensureKeys(){
   await fs.mkdir(KEY_DIR,{recursive:true});
-  const hasPriv = await fs.access(PRIV_PATH).then(()=>true).catch(()=>false);
-  if (!hasPriv){
+  let state = null;
+  try { state = JSON.parse(await fs.readFile(KEYS_STATE,'utf8')); } catch { /* no-op */ }
+  if (!state || !Array.isArray(state.keys) || typeof state.activeIndex !== 'number'){
     const { publicKey, privateKey } = generateKeyPairSync('ed25519');
-    await fs.writeFile(PRIV_PATH, privateKey.export({type:'pkcs8',format:'pem'}));
-    await fs.writeFile(PUB_PATH, publicKey.export({type:'spki',format:'pem'}));
+    state = { activeIndex: 0, keys: [
+      {
+        id: `k-${Date.now()}`,
+        privPem: privateKey.export({type:'pkcs8',format:'pem'}),
+        pubPem: publicKey.export({type:'spki',format:'pem'})
+      }
+    ]};
+    await fs.writeFile(KEYS_STATE, JSON.stringify(state,null,2));
   }
-  const priv = await fs.readFile(PRIV_PATH,'utf8');
-  const pub = await fs.readFile(PUB_PATH,'utf8');
-  return { priv, pub };
+  return state;
 }
 
 function signCanonical(privPem, canonical){
@@ -56,21 +60,36 @@ function verifyCanonical(pubPem, canonical, sigB64){
 }
 
 async function start(){
-  const keys = await ensureKeypair();
+  let state = await ensureKeys();
   const server = http.createServer(async (req,res)=>{
     try {
       if (req.method === 'GET' && req.url === '/pubkey'){
         res.writeHead(200,{ 'content-type':'application/json' });
-        return res.end(JSON.stringify({ publicKeyPem: keys.pub }));
+        const active = state.keys[state.activeIndex];
+        return res.end(JSON.stringify({ publicKeyPem: active.pubPem }));
+      }
+      if (req.method === 'GET' && req.url === '/pubkeys'){
+        res.writeHead(200,{ 'content-type':'application/json' });
+        return res.end(JSON.stringify({ activeIndex: state.activeIndex, keys: state.keys.map(k=>({ id:k.id, publicKeyPem: k.pubPem })) }));
       }
       if (req.method === 'POST' && req.url === '/sign'){
         const body = await readBody(req);
         const { payload = {} } = body;
         const canonical = typeof payload === 'string'? payload : stableStringify(payload);
         const hash = crypto.createHash('sha256').update(canonical).digest('hex');
-        const signature = signCanonical(keys.priv, canonical);
+        const active = state.keys[state.activeIndex];
+        const signature = signCanonical(active.privPem, canonical);
         res.writeHead(200,{ 'content-type':'application/json' });
         return res.end(JSON.stringify({ canonical, hash_sha256: hash, signature, alg: 'Ed25519' }));
+      }
+      if (req.method === 'POST' && req.url === '/rotate'){
+        // generate new key and set active; keep old keys for verify
+        const { publicKey, privateKey } = generateKeyPairSync('ed25519');
+        state.keys.push({ id:`k-${Date.now()}`, privPem: privateKey.export({type:'pkcs8',format:'pem'}), pubPem: publicKey.export({type:'spki',format:'pem'}) });
+        state.activeIndex = state.keys.length - 1;
+        await fs.writeFile(KEYS_STATE, JSON.stringify(state,null,2));
+        res.writeHead(200,{ 'content-type':'application/json' });
+        return res.end(JSON.stringify({ ok:true, activeIndex: state.activeIndex }));
       }
       if (req.method === 'POST' && req.url === '/verify'){
         const body = await readBody(req);
@@ -79,7 +98,8 @@ async function start(){
           res.writeHead(400,{ 'content-type':'application/json' });
           return res.end(JSON.stringify({ error:'canonical & signature required'}));
         }
-        const verified = verifyCanonical(keys.pub, canonical, signature);
+        // try verify with all known keys
+        const verified = state.keys.some(k=> verifyCanonical(k.pubPem, canonical, signature));
         res.writeHead(200,{ 'content-type':'application/json' });
         return res.end(JSON.stringify({ verified }));
       }

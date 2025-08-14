@@ -35,8 +35,15 @@
     "governed:scan": "node tools/governed-change-scan.js",
     "dec:index": "node tools/generate-dec-index.js",
     "lint:dec": "node tools/dec-lint.js",
-    "test:dec-hash": "node tools/tests/dec-canonical-hash-equivalence.test.js",
-    "test:governance": "node tools/tests/policy-aggregation-threshold.test.js && node tools/tests/feedback-categories-ingestion.test.js && node tools/tests/evidence-bundle-prefix.test.js && node tools/tests/dec-canonical-hash-equivalence.test.js"
+  "test:dec-hash": "node tools/tests/dec-canonical-hash-equivalence.test.js",
+  "test:governance": "node tools/tests/policy-aggregation-threshold.test.js && node tools/tests/feedback-categories-ingestion.test.js && node tools/tests/evidence-bundle-prefix.test.js && node tools/tests/dec-canonical-hash-equivalence.test.js",
+  "events:validate": "node tools/event-validate.js --file data/events-sample.ndjson --rehash",
+  "policy:index:verify": "node tools/policy-index-verify.js",
+  "transparency:changelog": "node tools/changelog-excerpt-generate.js",
+  "events:anchor": "node tools/event-anchor-chain.js",
+  "events:pipeline:hash": "node tools/event-pipeline-hash.js",
+  "signer:rotate": "curl -s -X POST http://127.0.0.1:%SIGNER_PORT%/rotate || powershell -c \"Invoke-RestMethod -Method Post -Uri http://127.0.0.1:$env:SIGNER_PORT/rotate\"",
+  "verify:cli": "node tools/generate-test-vectors.js"
   },
   "devDependencies": {
     "markdownlint": "^0.34.0",

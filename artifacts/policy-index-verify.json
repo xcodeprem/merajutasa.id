@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "status": "ADVISORY",
+  "total": 9,
+  "issues": [
+    {
+      "type": "MISSING_IN_MANIFEST",
+      "policyId": "aggregation.min_cell_threshold",
+      "path": "policy/opa/aggregation.rego"
+    },
+    {
+      "type": "MISSING_IN_MANIFEST",
+      "policyId": "disclaimers.presence",
+      "path": "ci/lint/disclaimers.js"
+    },
+    {
+      "type": "MISSING_IN_MANIFEST",
+      "policyId": "credential.field.prohibited",
+      "path": "ci/lint/credential-schema.js"
+    },
+    {
+      "type": "MISSING_IN_MANIFEST",
+      "policyId": "hysteresis.params.lock",
+      "path": "ci/lint/hysteresis-lock.js"
+    },
+    {
+      "type": "MISSING_IN_MANIFEST",
+      "policyId": "terminology.usage.threshold",
+      "path": "ci/lint/terminology.js"
+    },
+    {
+      "type": "MISSING_IN_MANIFEST",
+      "policyId": "equity.delta.anomaly",
+      "path": "analytics/anomaly-detector.js"
+    },
+    {
+      "type": "MISSING_IN_MANIFEST",
+      "policyId": "principles.reference",
+      "path": "ci/lint/principles-reference.js"
+    },
+    {
+      "type": "MISSING_IN_MANIFEST",
+      "policyId": "hype.language",
+      "path": "ci/lint/hype.js"
+    },
+    {
+      "type": "MISSING_IN_MANIFEST",
+      "policyId": "pii.patterns.lock",
+      "path": "ci/lint/pii-patterns.js"
+    }
+  ]
+}

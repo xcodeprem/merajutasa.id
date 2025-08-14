@@ -5,18 +5,22 @@
     "stage2_active": false
   },
   "key_token_frequency": {
-    "fairness": 182,
-    "privacy": 106,
-    "hysteresis": 168,
-    "hash": 215,
-    "credential": 155,
-    "governance": 223,
-    "revocation": 97
+    "fairness": 236,
+    "privacy": 118,
+    "hysteresis": 181,
+    "hash": 334,
+    "credential": 171,
+    "governance": 279,
+    "revocation": 102
   },
-  "totalKey": 1146,
-  "banned_terms_detected": 118,
+  "totalKey": 1421,
+  "banned_terms_detected": 129,
   "banned_samples": [
     {
+      "file": "docs\\trust\\trust-hysteresis.md",
+      "term": "ranking"
+    },
+    {
       "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
       "term": "top"
     },
@@ -97,6 +101,14 @@
       "term": "ranking"
     },
     {
+      "file": "docs\\onboarding\\agent-guardrails-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\onboarding\\agent-guardrails-v1.md",
+      "term": "ranking"
+    },
+    {
       "file": "docs\\onboarding\\agent-bootstrap-manifest.md",
       "term": "Ranking"
     },
@@ -137,6 +149,30 @@
       "term": "terbaik"
     },
     {
+      "file": "docs\\integrity\\evidence-minimum-phase1.5-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "term": "Ranking"
+    },
+    {
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "term": "top"
+    },
+    {
       "file": "docs\\governance\\lint-principles-reference-spec-v1.md",
       "term": "ranking"
     },
@@ -174,26 +210,6 @@
     },
     {
       "file": "docs\\governance\\disclaimers-lint-spec-v1.md",
-      "term": "top"
-    },
-    {
-      "file": "docs\\integrity\\credential-schema-final-v1.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\integrity\\credential-schema-final-v1.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\integrity\\credential-schema-final-v1.md",
-      "term": "Ranking"
-    },
-    {
-      "file": "docs\\integrity\\credential-schema-final-v1.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\integrity\\credential-schema-final-v1.md",
       "term": "top"
     },
     {
@@ -201,12 +217,20 @@
       "term": "ranking"
     },
     {
-      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
+      "file": "docs\\fairness\\hysteresis-public-methodology-fragment-v1.md",
       "term": "ranking"
     },
     {
-      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
-      "term": "peringkat"
+      "file": "docs\\fairness\\equity-under-served-section.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\fairness\\equity-page.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\analytics\\media-digest.md",
+      "term": "ranking"
     },
     {
       "file": "docs\\analytics\\event-schema-canonical-v1.md",
@@ -219,16 +243,28 @@
     {
       "file": "docs\\analytics\\event-schema-canonical-v1.md",
       "term": "ranking"
-    },
-    {
-      "file": "docs\\analytics\\event-schema-canonical-v1.md",
-      "term": "Top"
     },
     {
       "file": "docs\\analytics\\event-schema-canonical-v1.md",
       "term": "top"
     },
     {
+      "file": "docs\\analytics\\event-schema-canonical-v1.md",
+      "term": "top"
+    },
+    {
+      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
+      "term": "ranking"
+    },
+    {
       "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
       "term": "ranking"
     },
@@ -266,6 +302,26 @@
     },
     {
       "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\governance\\trace\\archive-trace-index-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250813-10-feedback-categories-canonical.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
       "term": "ranking"
     },
     {
@@ -278,10 +334,6 @@
     },
     {
       "file": "docs\\governance\\dec\\DEC-20250812-02-hysteresis-adoption.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\governance\\trace\\archive-trace-index-v1.md",
       "term": "ranking"
     }
   ]

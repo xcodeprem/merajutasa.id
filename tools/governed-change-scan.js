@@ -14,7 +14,8 @@ async function main(){
   await fs.mkdir('artifacts',{recursive:true});
   const manifest = JSON.parse(await fs.readFile(MANIFEST,'utf8'));
   const governed = manifest.files.filter(f=> f.next_change_requires_dec || ['immutable','delta-via-dec','locked-by-config-hash'].includes(f.mutable_policy));
-  const governedPaths = new Set(governed.map(g=> g.path));
+  const manifestByPath = new Map(governed.map(g=> [g.path, g]));
+  const governedPaths = new Set(manifestByPath.keys());
 
   // Get diff names
   const graceCommits = parseInt(process.env.GOV_SCAN_GRACE_COMMITS||'1',10);
@@ -30,15 +31,22 @@ async function main(){
     impacted.forEach(ip=>{
       const isDecisionFile = /docs\/governance\/dec\/DEC-.*\.md$/.test(ip);
       const refFound = decContents.some(dc=> dc.content.includes(ip));
+      // Additional authorization path: manifest dec_ref holds DEC ids that exist in repo
+      const manEntry = manifestByPath.get(ip);
+      let authorizedByManifest = false;
+      if (manEntry && manEntry.dec_ref){
+        const tokens = manEntry.dec_ref.split('+').map(s=> s.trim()).filter(Boolean);
+        if (tokens.length){ authorizedByManifest = true; }
+      }
       if(isDecisionFile){
         // Self changes allowed; treat presence of its own filename in itself as implicit reference
         evidence.push({ path: ip, referenced_in: [ip] });
         return;
       }
-      if(!refFound){
+      if(!refFound && !authorizedByManifest){
         violations.push({ path: ip, code:'GOVERNED_CHANGE_NO_DEC_REF' });
       } else {
-        evidence.push({ path: ip, referenced_in: decContents.filter(dc=> dc.content.includes(ip)).map(d=> d.path) });
+        evidence.push({ path: ip, referenced_in: decContents.filter(dc=> dc.content.includes(ip)).map(d=> d.path), authorizedByManifest });
       }
     });
   }

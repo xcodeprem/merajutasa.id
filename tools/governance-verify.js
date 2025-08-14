@@ -27,12 +27,20 @@ const STEPS = [
   // Promote DEC lint to critical now that violations are 0
   { name: 'dec-lint', cmd: ['node','tools/dec-lint.js'], critical: true },
   { name: 'principles-impact', cmd: ['node','tools/principles-impact.js'], advisory: true },
+  // Event schema validator placeholder (advisory; looks for sample file if present)
+  { name: 'events-validate', cmd: ['node','tools/event-validate.js','--file','data/events-sample.ndjson','--rehash'], advisory: true },
   { name: 'evidence-freshness', cmd: ['node','tools/evidence-freshness.js'], advisory: true },
   { name: 'evidence-collision-test', cmd: ['node','tools/evidence-collision-test.js'], critical: true },
   { name: 'fairness-sim', cmd: ['node','tools/fairness-sim.js'], advisory: true },
   { name: 'fairness-metrics', cmd: ['node','tools/fairness/fairness-metrics.js'], advisory: true },
   { name: 'no-silent-drift', cmd: ['node','tools/no-silent-drift.js'], critical: true },
-  { name: 'governed-change-scan', cmd: ['node','tools/governed-change-scan.js'], critical: true }
+  { name: 'governed-change-scan', cmd: ['node','tools/governed-change-scan.js'], critical: true },
+  // Policy index consistency and changelog draft (advisory)
+  { name: 'policy-index-verify', cmd: ['node','tools/policy-index-verify.js'], advisory: true },
+  { name: 'changelog-excerpt', cmd: ['node','tools/changelog-excerpt-generate.js'], advisory: true },
+  // Wave 2 anchors (non-blocking)
+  { name: 'event-anchor', cmd: ['node','tools/event-anchor-chain.js'], advisory: true },
+  { name: 'terminology-scan', cmd: ['node','tools/terminology-scan.js'], advisory: true }
 ];
 
 async function runStep(step){

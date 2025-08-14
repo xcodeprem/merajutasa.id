@@ -1,0 +1,66 @@
+{
+  "$id": "https://schema.merajutasa.id/events/public-event-v1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PublicEventV1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "event_name",
+    "event_id",
+    "occurred_at",
+    "received_at",
+    "session_id",
+    "user_type",
+    "page",
+    "source",
+    "integrity",
+    "privacy"
+  ],
+  "additionalProperties": false,
+  "properties": {
+  "schema_version": { "type": "string", "pattern": "^1\\.0(\\.\\d+)?$" },
+    "event_name": { "type": "string", "pattern": "^(pub|sys)_[a-z0-9_]+$" },
+    "event_id": { "type": "string", "pattern": "^[0-9a-fA-F-]{36}$" },
+    "occurred_at": { "type": "string", "format": "date-time" },
+    "received_at": { "type": "string", "format": "date-time" },
+    "session_id": { "type": "string", "pattern": "^[0-9a-fA-F-]{36}$" },
+    "user_type": { "type": "string", "enum": ["public_anonymous", "internal_observer", "governance_audit"] },
+    "page": { "type": "string", "pattern": "^(landing|registry|unit_profile|equity|trust|media_digest|terminology|feedback|governance|about|faq)$" },
+    "referrer": { "type": "string", "maxLength": 512 },
+    "user_agent_class": { "type": "string", "enum": ["desktop", "mobile", "tablet", "bot_suspect"] },
+    "locale": { "type": "string", "pattern": "^[a-z]{2}-[A-Z]{2}$", "default": "id-ID" },
+    "meta": { "type": "object", "additionalProperties": true },
+    "integrity": {
+      "type": "object",
+      "required": ["pipeline_hash", "event_hash", "schema_version_ack"],
+      "properties": {
+        "pipeline_hash": { "type": "string", "pattern": "^[a-f0-9]{16,64}$" },
+        "event_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "chain_anchor": { "type": "string" },
+  "schema_version_ack": { "type": "string", "pattern": "^1\\.0(\\.\\d+)?$" }
+      },
+      "additionalProperties": false
+    },
+    "privacy": {
+      "type": "object",
+      "required": ["pii_scan_performed", "pii_detected", "raw_payload_scrubbed"],
+      "properties": {
+        "pii_scan_performed": { "type": "boolean" },
+        "pii_detected": { "type": "boolean" },
+        "raw_payload_scrubbed": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "sampling": {
+      "type": "object",
+      "required": ["rate", "reason"],
+      "properties": {
+        "rate": { "type": "number", "minimum": 0, "maximum": 1 },
+        "reason": { "type": "string" },
+        "deterministic_key": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "source": { "type": "string", "enum": ["web_public"] }
+  }
+}
