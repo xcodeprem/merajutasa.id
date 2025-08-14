@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "generated_utc": "2025-08-14T13:53:08.909Z",
+  "equity": {
+    "equity_index": 1,
+    "buckets": {
+      "U1": 6600,
+      "U2": 6600
+    },
+    "ts": "2025-08-14T13:26:35.629Z"
+  },
+  "governance": {
+    "param_mismatches": 0,
+    "disclaimers_status": "PASS"
+  },
+  "hero_copy": {
+    "title": "MerajutASA",
+    "subtitle": "Transparansi & Keadilan—tanpa ranking",
+    "badges": [
+      "Decision Pending",
+      "Privacy-Aware"
+    ]
+  }
+}

@@ -61,7 +61,10 @@
   "policy:aggregation:enforce:deny": "node tools/policy-aggregation-threshold-enforce.js artifacts/aggregation-cells-deny.json",
   
   "queries:seeds": "node tools/query-seeds.js",
-  "doc:verify-cli:stub": "powershell -c \"$d='docs/verify-cli.md'; if(!(Test-Path $d)){ New-Item -ItemType File -Path $d -Force | Out-Null }; Set-Content -Path $d -Value '# Verify CLI (Draft)\n\n## Steps\n- Install Node.js\n- Run `npm run verify:cli`\n- Inspect artifacts under `artifacts/` for signatures & hashes.\n\n> Draft: expand with platform-specific instructions.'\""
+  "doc:verify-cli:stub": "node tools/write-verify-cli-stub.js"
+  ,
+  "hero:prerender": "node tools/hero-prerender.js",
+  "h0:content": "npm run hero:prerender && npm run doc:verify-cli:stub"
   },
   "devDependencies": {
     "markdownlint": "^0.34.0",
