@@ -1,6 +1,11 @@
 #!/bin/sh
 
 echo "[pre-push] Running governance:verify (Wave 0 fail-fast)"
-npm run --silent governance:verify || { echo "[pre-push] governance:verify failed – aborting push"; exit 1; }
+# Call Node script directly to avoid shell/npm portability issues
+if ! command -v node >/dev/null 2>&1; then
+	echo "[pre-push] node not found in PATH"
+	exit 127
+fi
+node tools/governance-verify.js || { echo "[pre-push] governance:verify failed – aborting push"; exit 1; }
 
 echo "[pre-push] Success"
