@@ -25,3 +25,13 @@ Addendum (Appended after DEC-20250812-03):
 
 - Updated DEC Ref disclaimers.presence to DEC-20250812-03 for activation alignment.
 - No prior row removed (immutability preserved).
+
+## Non-code Policy References (Portal Panti)
+
+These documents guide product orientation and are referenced by governance but are not executable policies:
+
+- docs/governance/statement-orientasi-portal-panti.md
+- docs/produk/portal-panti/01-ruang-lingkup-produk.md
+- docs/produk/portal-panti/02-model-data-minimal-aman.md
+- docs/public/ABOUT-PORTAL-PANTI.md
+- docs/audit/00-rubrik-audit-portal-panti.md

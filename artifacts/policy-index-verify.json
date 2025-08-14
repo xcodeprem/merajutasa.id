@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "status": "ADVISORY",
   "total": 9,
   "issues": [
@@ -48,5 +48,37 @@
       "policyId": "pii.patterns.lock",
       "path": "ci/lint/pii-patterns.js"
     }
-  ]
+  ],
+  "nonCodeSummary": {
+    "total": 5,
+    "missing_count": 0,
+    "not_linked_count": 0,
+    "items": [
+      {
+        "path": "docs/governance/statement-orientasi-portal-panti.md",
+        "exists": true,
+        "linkedInReadme": true
+      },
+      {
+        "path": "docs/produk/portal-panti/01-ruang-lingkup-produk.md",
+        "exists": true,
+        "linkedInReadme": true
+      },
+      {
+        "path": "docs/produk/portal-panti/02-model-data-minimal-aman.md",
+        "exists": true,
+        "linkedInReadme": true
+      },
+      {
+        "path": "docs/public/ABOUT-PORTAL-PANTI.md",
+        "exists": true,
+        "linkedInReadme": true
+      },
+      {
+        "path": "docs/audit/00-rubrik-audit-portal-panti.md",
+        "exists": true,
+        "linkedInReadme": true
+      }
+    ]
+  }
 }

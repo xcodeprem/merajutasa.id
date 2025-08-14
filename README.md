@@ -123,6 +123,11 @@ Pasca seal:
 | Archive UX | docs/archive/ux_public-multipage-experience-master-spec-v2.md | Spesifikasi multipage historical |
 | Trace Index | docs/governance/trace/archive-trace-index-v1.md | Peta archive → canonical |
 | PR Template | .github/pull_request_template.md | 37 section governance gating |
+| Portal Panti – Orientasi | docs/governance/statement-orientasi-portal-panti.md | Pernyataan orientasi produk |
+| Portal Panti – Ruang Lingkup | docs/produk/portal-panti/01-ruang-lingkup-produk.md | Ruang lingkup dan batasan |
+| Portal Panti – Model Data | docs/produk/portal-panti/02-model-data-minimal-aman.md | Model data minimal aman |
+| Portal Panti – About (Publik) | docs/public/ABOUT-PORTAL-PANTI.md | Penjelasan publik non-teknis |
+| Portal Panti – Rubrik Audit | docs/audit/00-rubrik-audit-portal-panti.md | Rubrik audit kesesuaian |
 
 ---
 
