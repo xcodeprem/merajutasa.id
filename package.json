@@ -16,6 +16,7 @@
     "chain:append:spec-hash": "node tools/chain-append-spec-hash.js",
   "lint:disclaimers": "node tools/disclaimers-lint.js",
   "privacy:scan": "node tools/pii-scan.js --sarif",
+  "privacy:metrics": "node tools/pii-metrics.js",
     "gen:test-vectors": "node tools/generate-test-vectors.js",
     "test:integrity": "node tools/tests/run-basic-integrity-tests.js",
     "fairness:generate-snapshots": "node tools/fairness/generate-equity-snapshots.js",
@@ -44,6 +45,8 @@
   "transparency:changelog": "node tools/changelog-excerpt-generate.js",
   "events:anchor": "node tools/event-anchor-chain.js",
   "events:pipeline:hash": "node tools/event-pipeline-hash.js",
+  "feedback:smoke": "node tools/feedback-smoke.js",
+  "test:collector": "node tools/tests/collector-integration.test.js",
   "collector:smoke": "powershell -c \"$e=@{event_name='pub_hero_view';occurred_at=(Get-Date).ToString('s')+'Z';received_at=(Get-Date).ToString('s')+'Z';meta=@{path='/'}}; $json=$e|ConvertTo-Json -Depth 5; Invoke-RestMethod -Method Post -Uri http://127.0.0.1:4603/ingest -ContentType 'application/json' -Body $json\"",
   "signer:rotate": "curl -s -X POST http://127.0.0.1:%SIGNER_PORT%/rotate || powershell -c \"Invoke-RestMethod -Method Post -Uri http://127.0.0.1:$env:SIGNER_PORT/rotate\"",
   "verify:cli": "node tools/generate-test-vectors.js"

@@ -394,6 +394,198 @@
               }
             }
           ]
+        },
+        {
+          "ruleId": "IDN_NIK",
+          "level": "error",
+          "message": {
+            "text": "IDN_NIK docs\\privacy\\corpus\\positive-highrisk.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\privacy\\corpus\\positive-highrisk.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "IDN_NKK",
+          "level": "error",
+          "message": {
+            "text": "IDN_NKK docs\\privacy\\corpus\\positive-highrisk.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\privacy\\corpus\\positive-highrisk.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CONTACT_EMAIL",
+          "level": "note",
+          "message": {
+            "text": "CONTACT_EMAIL docs\\privacy\\corpus\\positive-highrisk.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\privacy\\corpus\\positive-highrisk.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CONTACT_PHONE",
+          "level": "note",
+          "message": {
+            "text": "CONTACT_PHONE docs\\privacy\\corpus\\positive-highrisk.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\privacy\\corpus\\positive-highrisk.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "ADDRESS_STREET",
+          "level": "note",
+          "message": {
+            "text": "ADDRESS_STREET docs\\privacy\\corpus\\positive-highrisk.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\privacy\\corpus\\positive-highrisk.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "ADDRESS_STREET",
+          "level": "note",
+          "message": {
+            "text": "ADDRESS_STREET docs\\privacy\\corpus\\positive-highrisk.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\privacy\\corpus\\positive-highrisk.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "DOB",
+          "level": "note",
+          "message": {
+            "text": "DOB docs\\privacy\\corpus\\positive-highrisk.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\privacy\\corpus\\positive-highrisk.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "BANK_ACCOUNT",
+          "level": "error",
+          "message": {
+            "text": "BANK_ACCOUNT docs\\privacy\\corpus\\positive-highrisk.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\privacy\\corpus\\positive-highrisk.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "PLATE_ID",
+          "level": "warning",
+          "message": {
+            "text": "PLATE_ID docs\\privacy\\corpus\\positive-highrisk.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\privacy\\corpus\\positive-highrisk.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CHILD_NAME_AGE",
+          "level": "error",
+          "message": {
+            "text": "CHILD_NAME_AGE docs\\privacy\\corpus\\positive-highrisk.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\privacy\\corpus\\positive-highrisk.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "GEO_FINE",
+          "level": "error",
+          "message": {
+            "text": "GEO_FINE docs\\privacy\\corpus\\positive-highrisk.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\privacy\\corpus\\positive-highrisk.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "MULTI_CATEGORY_ESCALATION",
+          "level": "note",
+          "message": {
+            "text": "MULTI_CATEGORY_ESCALATION docs\\privacy\\corpus\\positive-highrisk.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\privacy\\corpus\\positive-highrisk.md"
+                }
+              }
+            }
+          ]
         }
       ]
     }

@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "total": 2,
+  "results": [
+    {
+      "status": "OK",
+      "record_id": "836c26a4-3dac-414b-9df0-2718250e8df5",
+      "pii_categories": [
+        "CONTACT_EMAIL"
+      ]
+    },
+    {
+      "status": "OK",
+      "record_id": "c4c7a3cf-6bdc-43d9-9895-35b8d3217e39",
+      "pii_categories": [
+        "CONTACT_PHONE"
+      ]
+    }
+  ]
+}

@@ -3,21 +3,21 @@
   "status": "ADVISORY",
   "summary": {
     "distinctCategories": 11,
-    "totalFindings": 24,
+    "totalFindings": 36,
     "categoryCounts": {
-      "CONTACT_EMAIL": 2,
-      "PLATE_ID": 6,
-      "IDN_NIK": 1,
+      "CONTACT_EMAIL": 3,
+      "PLATE_ID": 7,
+      "IDN_NIK": 2,
       "GENERIC_16DIGIT": 1,
-      "IDN_NKK": 1,
-      "CONTACT_PHONE": 1,
-      "ADDRESS_STREET": 3,
-      "DOB": 3,
-      "BANK_ACCOUNT": 1,
-      "CHILD_NAME_AGE": 1,
-      "GEO_FINE": 1
+      "IDN_NKK": 2,
+      "CONTACT_PHONE": 2,
+      "ADDRESS_STREET": 5,
+      "DOB": 4,
+      "BANK_ACCOUNT": 2,
+      "CHILD_NAME_AGE": 2,
+      "GEO_FINE": 2
     },
-    "highRiskHits": 5
+    "highRiskHits": 10
   },
   "findings": [
     {
@@ -182,6 +182,89 @@
       "category": "PLATE_ID",
       "action": "WARN",
       "sample": "W3C…#362229fe"
+    },
+    {
+      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
+      "category": "IDN_NIK",
+      "action": "BLOCK",
+      "sample": "317501…#799616d4"
+    },
+    {
+      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
+      "category": "IDN_NKK",
+      "action": "BLOCK",
+      "sample": "317501…#799616d4"
+    },
+    {
+      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
+      "category": "CONTACT_EMAIL",
+      "action": "REDACT",
+      "sample": "user@e…#6dc8a038"
+    },
+    {
+      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
+      "category": "CONTACT_PHONE",
+      "action": "REDACT",
+      "sample": "628123…#a1c0b027"
+    },
+    {
+      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
+      "category": "ADDRESS_STREET",
+      "action": "MASK",
+      "sample": "Jalan …#b7554715"
+    },
+    {
+      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
+      "category": "ADDRESS_STREET",
+      "action": "MASK",
+      "sample": "RT 01/…#b2198c87"
+    },
+    {
+      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
+      "category": "DOB",
+      "action": "REDACT",
+      "sample": "01/09/…#826b2e9d"
+    },
+    {
+      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
+      "category": "BANK_ACCOUNT",
+      "action": "BLOCK",
+      "sample": "Bank: …#05896834"
+    },
+    {
+      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
+      "category": "PLATE_ID",
+      "action": "WARN",
+      "sample": "B 1234…#15d921c1"
+    },
+    {
+      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
+      "category": "CHILD_NAME_AGE",
+      "action": "BLOCK",
+      "sample": "Adi (7…#e0a661cf"
+    },
+    {
+      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
+      "category": "GEO_FINE",
+      "action": "BLOCK",
+      "sample": "6.2000…#597c4c82"
+    },
+    {
+      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
+      "code": "MULTI_CATEGORY_ESCALATION",
+      "categories": [
+        "IDN_NIK",
+        "IDN_NKK",
+        "CONTACT_EMAIL",
+        "CONTACT_PHONE",
+        "ADDRESS_STREET",
+        "DOB",
+        "BANK_ACCOUNT",
+        "PLATE_ID",
+        "CHILD_NAME_AGE",
+        "GEO_FINE"
+      ],
+      "threshold": 2
     }
   ]
 }

@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "files": 2,
+  "precision": 0.7272727272727273,
+  "recall": 0.8,
+  "precisionHR": 0.6,
+  "recallHR": 1,
+  "perFile": [
+    {
+      "file": "docs/privacy/corpus/negative-decoy.md",
+      "expected": [
+        "(none) -->"
+      ],
+      "detected": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "tpHR": 0,
+      "fpHR": 0,
+      "fnHR": 0
+    },
+    {
+      "file": "docs/privacy/corpus/positive-highrisk.md",
+      "expected": [
+        "CONTACT_EMAIL",
+        "CONTACT_PHONE",
+        "DOB",
+        "ADDRESS_STREET",
+        "PLATE_ID",
+        "BANK_ACCOUNT",
+        "IDN_NIK",
+        "CHILD_NAME_AGE",
+        "GEO_FINE -->"
+      ],
+      "detected": [
+        "IDN_NIK",
+        "IDN_NKK",
+        "CONTACT_EMAIL",
+        "CONTACT_PHONE",
+        "ADDRESS_STREET",
+        "DOB",
+        "BANK_ACCOUNT",
+        "PLATE_ID",
+        "CHILD_NAME_AGE",
+        "GEO_FINE",
+        "MULTI_CATEGORY_ESCALATION"
+      ],
+      "tp": 8,
+      "fp": 3,
+      "fn": 1,
+      "tpHR": 3,
+      "fpHR": 2,
+      "fnHR": 0
+    }
+  ]
+}

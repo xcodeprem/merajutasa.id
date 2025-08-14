@@ -25,11 +25,14 @@ const STEPS = [
   { name: 'hype-lint', cmd: ['node','tools/hype-lint.js'], advisory: true },
   { name: 'disclaimers-lint', cmd: ['node','tools/disclaimers-lint.js'], critical: true },
   { name: 'pii-scan', cmd: ['node','tools/pii-scan.js','--sarif'], advisory: true },
+  { name: 'pii-metrics', cmd: ['node','tools/pii-metrics.js'], advisory: true },
   // Promote DEC lint to critical now that violations are 0
   { name: 'dec-lint', cmd: ['node','tools/dec-lint.js'], critical: true },
   { name: 'principles-impact', cmd: ['node','tools/principles-impact.js'], advisory: true },
   // Event schema validator placeholder (advisory; looks for sample file if present)
   { name: 'events-validate', cmd: ['node','tools/event-validate.js','--file','data/events-sample.ndjson','--rehash'], advisory: true },
+  { name: 'collector-integration', cmd: ['node','tools/tests/collector-integration.test.js'], advisory: true },
+  { name: 'feedback-smoke', cmd: ['node','tools/feedback-smoke.js'], advisory: true },
   { name: 'evidence-freshness', cmd: ['node','tools/evidence-freshness.js'], advisory: true },
   { name: 'evidence-collision-test', cmd: ['node','tools/evidence-collision-test.js'], critical: true },
   { name: 'fairness-sim', cmd: ['node','tools/fairness-sim.js'], advisory: true },
