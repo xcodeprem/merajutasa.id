@@ -1,29 +1,9 @@
 {
   "version": 1,
-  "generated_utc": "2025-08-14T07:27:23.922Z",
-  "changed_count": 22,
-  "governed_impacted": [
-    "README.md",
-    "docs/faq/faq-fairness-hysteresis-update.md",
-    "docs/integrity/credential-schema-final-v1.md"
-  ],
+  "generated_utc": "2025-08-14T10:44:12.275Z",
+  "changed_count": 1,
+  "governed_impacted": [],
   "dec_files_changed": [],
   "violations": [],
-  "evidence": [
-    {
-      "path": "README.md",
-      "referenced_in": [],
-      "authorizedByManifest": true
-    },
-    {
-      "path": "docs/faq/faq-fairness-hysteresis-update.md",
-      "referenced_in": [],
-      "authorizedByManifest": true
-    },
-    {
-      "path": "docs/integrity/credential-schema-final-v1.md",
-      "referenced_in": [],
-      "authorizedByManifest": true
-    }
-  ]
+  "evidence": []
 }

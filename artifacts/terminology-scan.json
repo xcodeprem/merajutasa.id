@@ -5,15 +5,15 @@
     "stage2_active": false
   },
   "key_token_frequency": {
-    "fairness": 236,
+    "fairness": 240,
     "privacy": 118,
     "hysteresis": 181,
-    "hash": 334,
+    "hash": 337,
     "credential": 171,
     "governance": 279,
     "revocation": 102
   },
-  "totalKey": 1421,
+  "totalKey": 1428,
   "banned_terms_detected": 129,
   "banned_samples": [
     {
@@ -129,6 +129,18 @@
       "term": "terbaik"
     },
     {
+      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
+      "term": "ranking"
+    },
+    {
       "file": "docs\\master-spec\\master-spec-v2.0.md",
       "term": "Ranking"
     },
@@ -149,28 +161,20 @@
       "term": "terbaik"
     },
     {
-      "file": "docs\\integrity\\evidence-minimum-phase1.5-v1.md",
+      "file": "docs\\fairness\\hysteresis-public-methodology-fragment-v1.md",
       "term": "ranking"
     },
     {
-      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "file": "docs\\fairness\\hysteresis-public-methodology-fragment-v1.md",
       "term": "ranking"
     },
     {
-      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "file": "docs\\fairness\\equity-under-served-section.md",
       "term": "ranking"
     },
     {
-      "file": "docs\\integrity\\credential-schema-final-v1.md",
-      "term": "Ranking"
-    },
-    {
-      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "file": "docs\\fairness\\equity-page.md",
       "term": "ranking"
-    },
-    {
-      "file": "docs\\integrity\\credential-schema-final-v1.md",
-      "term": "top"
     },
     {
       "file": "docs\\governance\\lint-principles-reference-spec-v1.md",
@@ -213,20 +217,28 @@
       "term": "top"
     },
     {
-      "file": "docs\\fairness\\hysteresis-public-methodology-fragment-v1.md",
+      "file": "docs\\integrity\\evidence-minimum-phase1.5-v1.md",
       "term": "ranking"
     },
     {
-      "file": "docs\\fairness\\hysteresis-public-methodology-fragment-v1.md",
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
       "term": "ranking"
     },
     {
-      "file": "docs\\fairness\\equity-under-served-section.md",
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
       "term": "ranking"
     },
     {
-      "file": "docs\\fairness\\equity-page.md",
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "term": "Ranking"
+    },
+    {
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
       "term": "ranking"
+    },
+    {
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "term": "top"
     },
     {
       "file": "docs\\analytics\\media-digest.md",
@@ -251,18 +263,6 @@
     {
       "file": "docs\\analytics\\event-schema-canonical-v1.md",
       "term": "top"
-    },
-    {
-      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
-      "term": "ranking"
     },
     {
       "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
