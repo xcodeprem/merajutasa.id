@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2025-08-14T05:13:04.937Z",
+  "generated_utc": "2025-08-14T06:13:35.108Z",
   "version": 1,
   "summary": {
     "files": 15,
@@ -19,7 +19,7 @@
     {
       "file": "DEC-20250812-03-principles-reference-activation.md",
       "id": "DEC-20250812-03",
-      "hash": "94cc9d8cc2cc744e497518174d3a70ec38aa7360ada2869ea1b8e8eab956d095",
+      "hash": "6768d18bff8f7891998230cb18673d852409b1e2692e2b2abea384eb705e4b6a",
       "violations": [],
       "warnings": []
     },
@@ -47,7 +47,7 @@
     {
       "file": "DEC-20250813-03-disclaimers-presence-enforcement.md",
       "id": "DEC-20250813-03",
-      "hash": "d2d65b553667864520c547b81f56612019f3d1902411478d13590b9d101d591b",
+      "hash": "925a3c1b73e9e9f61563a90273376846557d6cf9f4206ae59130f9fe2c5aaae9",
       "violations": [],
       "warnings": []
     },
@@ -61,21 +61,21 @@
     {
       "file": "DEC-20250813-05-gating-policy-wave1-adoption.md",
       "id": "DEC-20250813-05",
-      "hash": "fcb3450e64e5e6f0cde8bc5513390658396e79ff3ca6c0936cc39608d3acf555",
+      "hash": "8d98db9891bbae54b575ad65b173f4d773f2ad1fc7dce5c9224f5f01efe34f8c",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250813-06-consolidated-governed-edits.md",
       "id": "DEC-20250813-06",
-      "hash": "cf6fd106f3f165e742840b90008fe032d4738bad56f864201f8c5e8bec0c5d56",
+      "hash": "ea1e6ce3aac7ca95d8a74f15fa6d24d6e2647472f889122ac2a1559a8e3effb5",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250813-07-hype-threshold-transition.md",
       "id": "DEC-20250813-07",
-      "hash": "f301ff187d75e27b053af5333cfe5aa20cd03e2874b0bef0763e63b9eb761dc0",
+      "hash": "41b3c48f1e9afd12a2b98d18438b0badc0c38e9cb0a6f0c18115482ad3c9ad7e",
       "violations": [],
       "warnings": []
     },

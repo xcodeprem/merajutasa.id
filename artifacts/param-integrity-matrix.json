@@ -1,13 +1,10 @@
 {
-  "version": 3,
-  "gating_mode": "hard_fail_on_mismatch_or_missing",
-  "generated_utc": "2025-08-13T11:22:31.418Z",
+  "version": 2,
+  "generated_utc": "2025-08-14T06:15:14.771Z",
   "status": "PASS",
   "summary_counts": {
     "MATCH": 15
   },
-  "mismatch_count": 0,
-  "missing_count": 0,
   "rows": [
     {
       "parameter": "T_exit",

@@ -1,16 +1,16 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-13T13:54:45.306Z",
+  "generated_utc": "2025-08-14T05:17:59.429Z",
   "evidence_phase": "1.5",
   "artifacts": [
     {
       "id": "A1",
       "path": "artifacts/spec-hash-diff.json",
       "exists": true,
-      "size_bytes": 4103,
-      "sha256": "bd520fbdee254f4151a9654467ca4e6d175d21a0270343b50206fbae3d1902a4",
-      "sha256_short": "bd520fbdee254f41",
-      "display_hash_prefix": "bd520fbdee254f41",
+      "size_bytes": 3258,
+      "sha256": "830507851cab20dc1df3c94ef76a2782b6b4e5f597a2a69e3d98c568bf3d53a6",
+      "sha256_short": "830507851cab20dc",
+      "display_hash_prefix": "830507851cab20dc",
       "schema_ref": "spec-hash-diff-v1.json",
       "category": "governance"
     },
@@ -73,10 +73,10 @@
       "id": "A7",
       "path": "artifacts/fairness-sim-scenarios.json",
       "exists": true,
-      "size_bytes": 6295,
-      "sha256": "e2bb2203b850679647972d5251ece539a11e310f144df1248d220a85f6bf0d40",
-      "sha256_short": "e2bb2203b8506796",
-      "display_hash_prefix": "e2bb2203b8506796",
+      "size_bytes": 6294,
+      "sha256": "81c808bb09f314a8ae56369ac4e4ef67af2c4c086b2657ae8f1de512a3333b0c",
+      "sha256_short": "81c808bb09f314a8",
+      "display_hash_prefix": "81c808bb09f314a8",
       "schema_ref": "fairness-sim-scenarios-v1.json",
       "category": "fairness-sim"
     },
@@ -84,10 +84,10 @@
       "id": "A7R",
       "path": "artifacts/fairness-sim-report.json",
       "exists": true,
-      "size_bytes": 303,
-      "sha256": "d6e95723c3d508a301def88fec4bf7a21a81754fb2d368d17c7b5bb31a8b1b64",
-      "sha256_short": "d6e95723c3d508a3",
-      "display_hash_prefix": "d6e95723c3d508a3",
+      "size_bytes": 302,
+      "sha256": "726b3b7b90d64519b1c52c91f0583cb79c720b48cd8ac5b9805a197aff773b70",
+      "sha256_short": "726b3b7b90d64519",
+      "display_hash_prefix": "726b3b7b90d64519",
       "schema_ref": "fairness-sim-report-v1.json",
       "category": "fairness-sim"
     },
@@ -140,7 +140,7 @@
     "total": 12,
     "missing": 0,
     "with_schema": 11,
-    "bundle_hash": "dd454fc9da779d68bfa531ba13242c3a225740c07174605c7c3595941c4a6c08"
+    "bundle_hash": "920d00eb5eafc32befd3881b3d99b39f592bf099ea61327ec984152b0aab47e0"
   },
   "integrity": {
     "hash_algorithm": "SHA256",

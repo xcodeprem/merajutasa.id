@@ -1,0 +1,161 @@
+[
+  {
+    "timestamp": "2025-08-14T06:13:34.110Z",
+    "action": "step",
+    "step": "spec-hash-diff",
+    "cmd": "node tools/spec-hash-diff.js --mode=verify",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 70,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-14T06:13:34.220Z",
+    "action": "step",
+    "step": "param-integrity",
+    "cmd": "node tools/param-integrity.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 111,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-14T06:13:34.278Z",
+    "action": "step",
+    "step": "param-lock",
+    "cmd": "node tools/param-lock-verify.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 57,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-14T06:13:34.383Z",
+    "action": "step",
+    "step": "fairness-unit",
+    "cmd": "node tools/tests/fairness-engine-unit-tests.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 104,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-14T06:13:34.784Z",
+    "action": "step",
+    "step": "hype-lint",
+    "cmd": "node tools/hype-lint.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 401,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-14T06:13:34.982Z",
+    "action": "step",
+    "step": "disclaimers-lint",
+    "cmd": "node tools/disclaimers-lint.js",
+    "exit_code": 1,
+    "status": "ADVISORY",
+    "duration_ms": 196,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-14T06:13:35.127Z",
+    "action": "step",
+    "step": "dec-lint",
+    "cmd": "node tools/dec-lint.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 144,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-14T06:13:35.300Z",
+    "action": "step",
+    "step": "principles-impact",
+    "cmd": "node tools/principles-impact.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 171,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-14T06:13:35.365Z",
+    "action": "step",
+    "step": "evidence-freshness",
+    "cmd": "node tools/evidence-freshness.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 65,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-14T06:13:35.421Z",
+    "action": "step",
+    "step": "evidence-collision-test",
+    "cmd": "node tools/evidence-collision-test.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 58,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-14T06:13:35.528Z",
+    "action": "step",
+    "step": "fairness-sim",
+    "cmd": "node tools/fairness-sim.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 104,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-14T06:13:35.632Z",
+    "action": "step",
+    "step": "fairness-metrics",
+    "cmd": "node tools/fairness/fairness-metrics.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 104,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-14T06:13:35.688Z",
+    "action": "step",
+    "step": "no-silent-drift",
+    "cmd": "node tools/no-silent-drift.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 56,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-14T06:13:35.818Z",
+    "action": "step",
+    "step": "governed-change-scan",
+    "cmd": "node tools/governed-change-scan.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 85,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-14T06:13:35.838Z",
+    "action": "aggregate",
+    "status": "OK"
+  }
+]

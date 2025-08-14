@@ -1,27 +1,50 @@
 {
   "version": 3,
-  "status": "PASS",
+  "status": "ERROR",
   "summary": {
-    "errors": 0,
-    "warnings": 9,
+    "errors": 3,
+    "warnings": 8,
     "metrics": {
       "missingIds": 0,
       "drift": 0,
       "shadow": 0,
-      "bannedNear": 0,
-      "duplicates": 3,
+      "bannedNear": 3,
+      "duplicates": 2,
       "scope": 6,
       "locale": 0
     },
     "versionMismatch": false,
     "computed_hash": "10c03b7fc7c7543399d1c2ce9bf121ec5e7fb46ddee876b286fdadde035089d0",
     "ruleCounts": {
-      "DISC-DUPL-005": 3,
+      "DISC-PHRASE-009": 3,
+      "DISC-DUPL-005": 2,
       "DISC-SCOPE-006": 6
     },
     "presence_enforcement": true
   },
-  "errors": [],
+  "errors": [
+    {
+      "code": "DISC-PHRASE-009",
+      "file": "README.md",
+      "line": 201,
+      "excerpt": "## 13. Larangan Klaim Peringkat / Ranking <!-- lint-allow-negated-context hype-lint-ignore-line -->",
+      "severity": "ERROR"
+    },
+    {
+      "code": "DISC-PHRASE-009",
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "line": 389,
+      "excerpt": "3. UI: Org shows “Verification Suspended/Revoked” badge (never converts to ranking penalty; disclaimers emphasise).",
+      "severity": "ERROR"
+    },
+    {
+      "code": "DISC-PHRASE-009",
+      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
+      "line": 12,
+      "excerpt": "Q: Apakah ini bentuk ranking?",
+      "severity": "ERROR"
+    }
+  ],
   "warnings": [
     {
       "code": "DISC-DUPL-005",
@@ -33,13 +56,6 @@
     {
       "code": "DISC-DUPL-005",
       "page": "landing",
-      "id": "D7",
-      "count": 4,
-      "severity": "WARNING"
-    },
-    {
-      "code": "DISC-DUPL-005",
-      "page": "governance",
       "id": "D7",
       "count": 4,
       "severity": "WARNING"

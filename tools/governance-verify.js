@@ -24,7 +24,8 @@ const STEPS = [
   { name: 'fairness-unit', cmd: ['node','tools/tests/fairness-engine-unit-tests.js'], critical: true },
   { name: 'hype-lint', cmd: ['node','tools/hype-lint.js'], advisory: true },
   { name: 'disclaimers-lint', cmd: ['node','tools/disclaimers-lint.js'], advisory: true },
-  { name: 'dec-lint', cmd: ['node','tools/dec-lint.js'], advisory: true },
+  // Promote DEC lint to critical now that violations are 0
+  { name: 'dec-lint', cmd: ['node','tools/dec-lint.js'], critical: true },
   { name: 'principles-impact', cmd: ['node','tools/principles-impact.js'], advisory: true },
   { name: 'evidence-freshness', cmd: ['node','tools/evidence-freshness.js'], advisory: true },
   { name: 'evidence-collision-test', cmd: ['node','tools/evidence-collision-test.js'], critical: true },
@@ -108,6 +109,24 @@ async function main(){
     console.log(`[governance-verify] Running step: ${step.name}${step.critical?' [CRITICAL]': (step.advisory?' [ADVISORY]':'')}`);
     await runStep(step);
   }
+  // Optional: sign and append spec-hash-diff artifact to chain if services are reachable
+  try {
+    const spec = JSON.parse(await fs.readFile('artifacts/spec-hash-diff.json','utf8'));
+    const canonical = JSON.stringify({ mode: spec.mode, updated: spec.updated, summary: spec.summary });
+    // Call signer
+    const signerRes = await fetch(`http://127.0.0.1:${process.env.SIGNER_PORT||4601}/sign`, { method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify({ payload: canonical }) });
+    if (signerRes.ok){
+      const sig = await signerRes.json();
+      const chainRes = await fetch(`http://127.0.0.1:${process.env.CHAIN_PORT||4602}/append`, { method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify({ canonical: sig.canonical, signature: sig.signature, publicKeyPem: (await (await fetch(`http://127.0.0.1:${process.env.SIGNER_PORT||4601}/pubkey`)).json()).publicKeyPem }) });
+      if (chainRes.ok) {
+        await logAction({ action:'chain-append', status:'OK' });
+      } else {
+        await logAction({ action:'chain-append', status:'SKIP', reason:'chain not reachable or append failed' });
+      }
+    } else {
+      await logAction({ action:'sign-artifact', status:'SKIP', reason:'signer not reachable' });
+    }
+  } catch { /* non-blocking */ }
   await aggregate();
   await logAction({ action: 'aggregate', status: 'OK' });
   console.log('[governance-verify] Completed. See artifacts/governance-verify-summary.json');

@@ -1,15 +1,15 @@
 {
   "version": 1,
-  "generated_utc": "2025-08-13T11:51:03.472Z",
-  "file_count": 52,
-  "total_hits": 101,
+  "generated_utc": "2025-08-14T06:13:34.770Z",
+  "file_count": 59,
+  "total_hits": 109,
   "max_severity": "MEDIUM",
   "severity_counts": {
-    "MEDIUM": 101
+    "MEDIUM": 109
   },
   "rule_counts": {
-    "RANKING": 88,
-    "TOP": 13
+    "RANKING": 97,
+    "TOP": 12
   },
   "findings": [
     {
@@ -374,6 +374,26 @@
     },
     {
       "file": "docs/faq/faq-fairness-hysteresis-update.md",
+      "line": 12,
+      "column": 22,
+      "match": "ranking",
+      "rule": "RANKING",
+      "severity": "MEDIUM",
+      "rationale": "Unsubstantiated ranking claim.",
+      "context_line": "Q: Apakah ini bentuk ranking?  "
+    },
+    {
+      "file": "docs/faq/faq-fairness-hysteresis-update.md",
+      "line": 13,
+      "column": 75,
+      "match": "ranking",
+      "rule": "RANKING",
+      "severity": "MEDIUM",
+      "rationale": "Unsubstantiated ranking claim.",
+      "context_line": "A: <span data-disclaimer-id=\"D1\">Equity Index & daftar under‑served bukan ranking kualitas—hanya sinyal pemerataan.</span>"
+    },
+    {
+      "file": "docs/faq/faq-fairness-hysteresis-update.md",
       "line": 25,
       "column": 69,
       "match": "ranking",
@@ -443,24 +463,14 @@
       "context_line": "      change: Add negative-context wording (no ranking penalty) + disclaimer block alignment"
     },
     {
-      "file": "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md",
-      "line": 18,
-      "column": 63,
+      "file": "docs/governance/dec/DEC-20250813-10-feedback-categories-canonical.md",
+      "line": 60,
+      "column": 26,
       "match": "ranking",
       "rule": "RANKING",
       "severity": "MEDIUM",
       "rationale": "Unsubstantiated ranking claim.",
-      "context_line": "| docs/faq/faq-fairness-hysteresis-update.md | Clarified anti-ranking & negative-context phrasing | Editorial (non-semantic) |"
-    },
-    {
-      "file": "docs/governance/dec/DEC-20250813-07-hype-threshold-transition.md",
-      "line": 33,
-      "column": 53,
-      "match": "Top",
-      "rule": "TOP",
-      "severity": "MEDIUM",
-      "rationale": "Generic superiority claim.",
-      "context_line": "4. Konten disanitasi mengganti frasa non-esensial (\"Top-level\") menjadi padanan netral (\"Root\" / \"Inti\")."
+      "context_line": "  - Tidak memperkenalkan ranking pada feedback."
     },
     {
       "file": "docs/governance/disclaimers-lint-spec-v1.md",
@@ -690,21 +700,21 @@
       "rule": "RANKING",
       "severity": "MEDIUM",
       "rationale": "Unsubstantiated ranking claim.",
-      "context_line": "| GP9 Non-Ranking Fairness | Tidak memuat metrik komparatif kompetitif (tidak melakukan ranking). |"
+      "context_line": "| GP9 Non-Ranking Fairness | Tidak memuat ranking, skor komparatif, ratio fairness detail. |"
     },
     {
       "file": "docs/integrity/credential-schema-final-v1.md",
       "line": 29,
-      "column": 89,
+      "column": 43,
       "match": "ranking",
       "rule": "RANKING",
       "severity": "MEDIUM",
       "rationale": "Unsubstantiated ranking claim.",
-      "context_line": "| GP9 Non-Ranking Fairness | Tidak memuat metrik komparatif kompetitif (tidak melakukan ranking). |"
+      "context_line": "| GP9 Non-Ranking Fairness | Tidak memuat ranking, skor komparatif, ratio fairness detail. |"
     },
     {
       "file": "docs/integrity/credential-schema-final-v1.md",
-      "line": 44,
+      "line": 43,
       "column": 20,
       "match": "top",
       "rule": "TOP",
@@ -714,7 +724,7 @@
     },
     {
       "file": "docs/integrity/credential-schema-final-v1.md",
-      "line": 91,
+      "line": 90,
       "column": 52,
       "match": "ranking",
       "rule": "RANKING",
@@ -724,27 +734,97 @@
     },
     {
       "file": "docs/integrity/credential-schema-final-v1.md",
-      "line": 114,
-      "column": 29,
+      "line": 113,
+      "column": 17,
       "match": "Ranking",
       "rule": "RANKING",
       "severity": "MEDIUM",
       "rationale": "Unsubstantiated ranking claim.",
-      "context_line": "| Performance / Competitive Ranking | ratingScore, rankPosition | Dilarang (bukan tujuan fairness) |"
+      "context_line": "| Performance / Ranking | ratingScore, rankPosition | Violates non-ranking fairness |"
     },
     {
       "file": "docs/integrity/credential-schema-final-v1.md",
-      "line": 594,
+      "line": 113,
+      "column": 68,
+      "match": "ranking",
+      "rule": "RANKING",
+      "severity": "MEDIUM",
+      "rationale": "Unsubstantiated ranking claim.",
+      "context_line": "| Performance / Ranking | ratingScore, rankPosition | Violates non-ranking fairness |"
+    },
+    {
+      "file": "docs/integrity/credential-schema-final-v1.md",
+      "line": 389,
+      "column": 76,
+      "match": "ranking",
+      "rule": "RANKING",
+      "severity": "MEDIUM",
+      "rationale": "Unsubstantiated ranking claim.",
+      "context_line": "3. UI: Org shows “Verification Suspended/Revoked” badge (never converts to ranking penalty; disclaimers emphasise)."
+    },
+    {
+      "file": "docs/integrity/credential-schema-final-v1.md",
+      "line": 439,
+      "column": 20,
+      "match": "ranking",
+      "rule": "RANKING",
+      "severity": "MEDIUM",
+      "rationale": "Unsubstantiated ranking claim.",
+      "context_line": "No field promoting ranking or performance scoring allowed. Attempt requires Ethics Board veto procedure (fast reject)."
+    },
+    {
+      "file": "docs/integrity/credential-schema-final-v1.md",
+      "line": 476,
+      "column": 116,
+      "match": "ranking",
+      "rule": "RANKING",
+      "severity": "MEDIUM",
+      "rationale": "Unsubstantiated ranking claim.",
+      "context_line": "| Scope Misinterpretation | Interpreting credential as performance rating | Embedded disclaimers & UI copy banning ranking |"
+    },
+    {
+      "file": "docs/integrity/credential-schema-final-v1.md",
+      "line": 508,
+      "column": 62,
+      "match": "ranking",
+      "rule": "RANKING",
+      "severity": "MEDIUM",
+      "rationale": "Unsubstantiated ranking claim.",
+      "context_line": "| governanceScore (BAN) | Would rank governance | Rejected – ranking risk |"
+    },
+    {
+      "file": "docs/integrity/credential-schema-final-v1.md",
+      "line": 590,
       "column": 7,
       "match": "Ranking",
       "rule": "RANKING",
       "severity": "MEDIUM",
       "rationale": "Unsubstantiated ranking claim.",
-      "context_line": "| Non-Ranking | Tidak ada field peringkat; disclaimers eksplisit |"
+      "context_line": "| Non-Ranking | No ranking fields; disclaimers explicit |"
     },
     {
       "file": "docs/integrity/credential-schema-final-v1.md",
-      "line": 687,
+      "line": 590,
+      "column": 20,
+      "match": "ranking",
+      "rule": "RANKING",
+      "severity": "MEDIUM",
+      "rationale": "Unsubstantiated ranking claim.",
+      "context_line": "| Non-Ranking | No ranking fields; disclaimers explicit |"
+    },
+    {
+      "file": "docs/integrity/credential-schema-final-v1.md",
+      "line": 652,
+      "column": 67,
+      "match": "ranking",
+      "rule": "RANKING",
+      "severity": "MEDIUM",
+      "rationale": "Unsubstantiated ranking claim.",
+      "context_line": "Integrity Credential v1.0 memberikan pondasi portabel, minim, non‑ranking, dan dapat diaudit yang menyelaraskan semua pilar: privacy, fairness, governance, portability, & transition. Tidak ada deviations dari strategi; struktur mempersiapkan revocation & extensibility tanpa membuka risiko data sensitif. Immediate next step: governance ratification + implement signer & chain to avoid trust theater."
+    },
+    {
+      "file": "docs/integrity/credential-schema-final-v1.md",
+      "line": 682,
       "column": 116,
       "match": "ranking",
       "rule": "RANKING",

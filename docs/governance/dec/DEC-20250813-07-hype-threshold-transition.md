@@ -75,7 +75,7 @@ references:
    - DEC-20250813-05
    - Gating policy JSON
    - Hype lint tool
-hash_of_decision_document: "c9483a189cbe193e8f4b2da52b444ae06e14ce5de3b94d4fc1e240d642903cbc"
+hash_of_decision_document: "56cd40b31dd16c390fbaf8cb061d9a4113372b284fa39a6daa5caa07a772e431"
 hash_canonicalization_note: "Nilai hash digantikan placeholder saat canonical compute."
 append_only_notice: "Immutable setelah hash terpasang."
 signoff:

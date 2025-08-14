@@ -1,50 +1,37 @@
 {
   "version": 1,
-  "generated_utc": "2025-08-13T11:22:32.665Z",
-  "changed_count": 41,
+  "generated_utc": "2025-08-14T06:13:35.757Z",
+  "changed_count": 18,
   "governed_impacted": [
-    "README.md",
-    "content/disclaimers/config.yml",
-    "docs/faq/faq-fairness-hysteresis-update.md",
-    "docs/governance/dec/DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
+    "docs/governance/dec/DEC-20250812-03-principles-reference-activation.md",
+    "docs/governance/dec/DEC-20250813-03-disclaimers-presence-enforcement.md",
     "docs/governance/dec/DEC-20250813-05-gating-policy-wave1-adoption.md",
     "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md",
-    "docs/integrity/credential-schema-final-v1.md",
-    "docs/integrity/gating-policy-v1.json",
-    "tools/fairness/engine-core.js"
+    "docs/governance/dec/DEC-20250813-07-hype-threshold-transition.md",
+    "docs/governance/dec/DEC-style-guide-v1.md",
+    "docs/governance/dec/DEC-style-guide-v2.md"
   ],
   "dec_files_changed": [
-    "docs/governance/dec/DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
+    "docs/governance/dec/DEC-20250812-03-principles-reference-activation.md",
+    "docs/governance/dec/DEC-20250813-03-disclaimers-presence-enforcement.md",
     "docs/governance/dec/DEC-20250813-05-gating-policy-wave1-adoption.md",
-    "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md"
+    "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md",
+    "docs/governance/dec/DEC-20250813-07-hype-threshold-transition.md",
+    "docs/governance/dec/DEC-style-guide-v1.md",
+    "docs/governance/dec/DEC-style-guide-v2.md"
   ],
   "violations": [],
   "evidence": [
     {
-      "path": "README.md",
+      "path": "docs/governance/dec/DEC-20250812-03-principles-reference-activation.md",
       "referenced_in": [
-        "docs/governance/dec/DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
-        "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md"
+        "docs/governance/dec/DEC-20250812-03-principles-reference-activation.md"
       ]
     },
     {
-      "path": "content/disclaimers/config.yml",
+      "path": "docs/governance/dec/DEC-20250813-03-disclaimers-presence-enforcement.md",
       "referenced_in": [
-        "docs/governance/dec/DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
-        "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md"
-      ]
-    },
-    {
-      "path": "docs/faq/faq-fairness-hysteresis-update.md",
-      "referenced_in": [
-        "docs/governance/dec/DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
-        "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md"
-      ]
-    },
-    {
-      "path": "docs/governance/dec/DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
-      "referenced_in": [
-        "docs/governance/dec/DEC-20250813-04-text-normalization-disclaimers-whitelist.md"
+        "docs/governance/dec/DEC-20250813-03-disclaimers-presence-enforcement.md"
       ]
     },
     {
@@ -60,22 +47,21 @@
       ]
     },
     {
-      "path": "docs/integrity/credential-schema-final-v1.md",
+      "path": "docs/governance/dec/DEC-20250813-07-hype-threshold-transition.md",
       "referenced_in": [
-        "docs/governance/dec/DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
-        "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md"
+        "docs/governance/dec/DEC-20250813-07-hype-threshold-transition.md"
       ]
     },
     {
-      "path": "docs/integrity/gating-policy-v1.json",
+      "path": "docs/governance/dec/DEC-style-guide-v1.md",
       "referenced_in": [
-        "docs/governance/dec/DEC-20250813-05-gating-policy-wave1-adoption.md"
+        "docs/governance/dec/DEC-style-guide-v1.md"
       ]
     },
     {
-      "path": "tools/fairness/engine-core.js",
+      "path": "docs/governance/dec/DEC-style-guide-v2.md",
       "referenced_in": [
-        "docs/governance/dec/DEC-20250813-05-gating-policy-wave1-adoption.md"
+        "docs/governance/dec/DEC-style-guide-v2.md"
       ]
     }
   ]

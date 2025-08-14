@@ -1,35 +1,36 @@
 {
-  "timestamp_utc": "2025-08-13T11:51:42.229Z",
+  "timestamp_utc": "2025-08-14T06:13:35.674Z",
   "components": {
     "spec_hash": "PASS",
     "params": "PASS",
     "hype": "ADVISORY",
-    "disclaimers": "PASS_STUB",
+    "disclaimers": "ADVISORY",
     "principles": "PASS_STUB",
     "pii": "PASS_STUB",
-    "freshness": "PASS"
+    "freshness": "ADVISORY"
   },
   "summary": {
-    "hype_hits": 101,
+    "hype_hits": 109,
     "hype_max_severity": "MEDIUM",
     "hype_high": 0,
-    "hype_medium": 101,
+    "hype_medium": 109,
     "hype_rule_counts": {
-      "RANKING": 88,
-      "TOP": 13
+      "RANKING": 97,
+      "TOP": 12
     },
     "hype_medium_max_allowed": 120,
     "param_mismatches": 0,
     "principles_entries": 10,
     "pii_critical": 0,
     "pii_total": 0,
-    "disclaimers_errors": 0,
-    "disclaimers_warnings": 9,
+    "disclaimers_errors": 3,
+    "disclaimers_warnings": 8,
     "disclaimers_rule_counts": {
-      "DISC-DUPL-005": 3,
+      "DISC-PHRASE-009": 3,
+      "DISC-DUPL-005": 2,
       "DISC-SCOPE-006": 6
     },
-    "gate_status": "PASS",
+    "gate_status": "FAIL",
     "gate_checks": [
       {
         "id": "SPEC_HASH",
@@ -59,16 +60,16 @@
         "id": "HYPE_MEDIUM",
         "passed": true,
         "detail": {
-          "medium": 101,
+          "medium": 109,
           "max": 120
         }
       },
       {
         "id": "DISCLAIMERS_PRESENCE",
-        "passed": true,
+        "passed": false,
         "detail": {
           "enforced": true,
-          "errors": 0,
+          "errors": 3,
           "allowed": 0
         }
       },
@@ -98,9 +99,9 @@
       },
       {
         "id": "FRESHNESS",
-        "passed": true,
+        "passed": false,
         "detail": {
-          "status": "PASS",
+          "status": "ADVISORY",
           "required": "PASS"
         }
       },
@@ -136,7 +137,7 @@
   },
   "gating": {
     "version": "1.0",
-    "status": "PASS",
+    "status": "FAIL",
     "checks": [
       {
         "id": "SPEC_HASH",
@@ -166,16 +167,16 @@
         "id": "HYPE_MEDIUM",
         "passed": true,
         "detail": {
-          "medium": 101,
+          "medium": 109,
           "max": 120
         }
       },
       {
         "id": "DISCLAIMERS_PRESENCE",
-        "passed": true,
+        "passed": false,
         "detail": {
           "enforced": true,
-          "errors": 0,
+          "errors": 3,
           "allowed": 0
         }
       },
@@ -205,9 +206,9 @@
       },
       {
         "id": "FRESHNESS",
-        "passed": true,
+        "passed": false,
         "detail": {
-          "status": "PASS",
+          "status": "ADVISORY",
           "required": "PASS"
         }
       },

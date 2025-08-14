@@ -71,7 +71,7 @@ references:
   - DEC-20250812-04
   - Manifest integrity file
   - Trace index
-hash_of_decision_document: "f915ad7693e086dac99de40f98694a022c0ae1360620bf759354146c5e22c43d"
+hash_of_decision_document: "182ea87ccc15e09baec8b91c596c77a83e078b8804f866047c8413a19e748db0"
 hash_canonicalization_note: "Nilai diganti placeholder saat canonical hash computation."
 append_only_notice: "Immutable setelah hash dipasang."
 signoff:

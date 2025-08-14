@@ -125,10 +125,10 @@ async function main(){
   const summaryCounts = rows.reduce((acc,r)=>{ acc[r.status]=(acc[r.status]||0)+1; return acc; },{});
   const mismatchCount = rows.filter(r=>r.status==='MISMATCH').length;
   const missingCount = rows.filter(r=>r.status==='MISSING_ALL' || r.status==='MISSING_OTHERS').length;
-  const overallStatus = (mismatchCount===0 && missingCount===0) ? 'PASS' : 'FAIL';
-  const out = { version: 3, gating_mode: 'hard_fail_on_mismatch_or_missing', generated_utc: new Date().toISOString(), status: overallStatus, summary_counts: summaryCounts, mismatch_count: mismatchCount, missing_count: missingCount, rows };
+  const overallStatusV2 = (mismatchCount===0 && missingCount===0) ? 'PASS' : 'MISMATCH';
+  const out = { version: 2, generated_utc: new Date().toISOString(), status: overallStatusV2, summary_counts: summaryCounts, rows };
   await fs.writeFile('artifacts/param-integrity-matrix.json', JSON.stringify(out,null,2));
-  if (overallStatus !== 'PASS') {
+  if (overallStatusV2 !== 'PASS') {
     console.error('[param-integrity] HARD FAIL – mismatches or missing parameters detected');
     process.exit(10);
   }
