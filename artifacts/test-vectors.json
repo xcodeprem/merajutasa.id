@@ -1,0 +1,17 @@
+{
+  "sample": {
+    "id": "cred-test-001",
+    "subject": "did:example:123",
+    "issuanceDate": "2025-08-13T00:00:00Z",
+    "claim": {
+      "role": "tester",
+      "level": 1
+    }
+  },
+  "signed": {
+    "canonical": "{\"claim\":{\"level\":1,\"role\":\"tester\"},\"id\":\"cred-test-001\",\"issuanceDate\":\"2025-08-13T00:00:00Z\",\"subject\":\"did:example:123\"}",
+    "hash_sha256": "7f508b830a1a139e81b54add69240627a2117d891d714f5a36e753ec16df9c11",
+    "signature": "hJQ1j+3dEawBv6h80OtRiTxbKcMrvOstpygeDcq9fkaHijZI8O9PLwiKIgogHLXd7WI4AwAw8Ns+2dF9jhxaCg==",
+    "alg": "Ed25519"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "timestamp_utc": "2025-08-14T10:35:20.682Z",
+  "artifacts": [
+    {
+      "path": "artifacts/spec-hash-diff.json",
+      "hash": "c40e1131abbe4a9cbc323087aba44cb232553adc7745aa79e43e1246b65c0b93"
+    },
+    {
+      "path": "artifacts/param-integrity-matrix.json",
+      "hash": "b99d97fd1c4c7fd682827d9a2298aef8db1d35ecbee30030965a129a52421beb"
+    },
+    {
+      "path": "artifacts/hype-lint.json",
+      "hash": "95ad7bd5f68c0f9bec252a3e195466f074d6724ae3cc9cd94184c3a32f47ea88"
+    },
+    {
+      "path": "artifacts/disclaimers-lint.json",
+      "hash": "4e2396887751fa279b9c398a8421f2e2a9631e5a1a03797cf2156e7e9553df39"
+    },
+    {
+      "path": "artifacts/principles-impact-report.json",
+      "hash": "172357ba7999395e28b841375f01f20f6948ac05d6ad600e1c0a75a408e6436f"
+    },
+    {
+      "path": "artifacts/pii-scan-report.json",
+      "hash": "c3a9879c5f961c9b97bad27b12ab2540009ddea5218a2ab279d918af2c0d3c9a"
+    },
+    {
+      "path": "artifacts/no-silent-drift-report.json",
+      "hash": "52fba585d101f9bb9c5c72c45ff9010325075dd6567240dc3576839b903f6b15"
+    },
+    {
+      "path": "artifacts/fairness-sim-report.json",
+      "hash": "373c92b2e5696d2ecc1cde828630c1f7ec37e5f8c0a72caeb22dc80bda287eda"
+    },
+    {
+      "path": "artifacts/fairness-engine-runtime-report.json",
+      "hash": "8818a6fa410edefc4c49fdfec25c4d4a8a582bd4f6373cb786e5c69d9f1ad6c3"
+    }
+  ]
+}

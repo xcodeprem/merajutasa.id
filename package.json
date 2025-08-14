@@ -13,6 +13,7 @@
     "lint:md": "markdownlint-cli2 \"**/*.md\"",
     "service:signer": "node tools/services/signer.js",
     "service:chain": "node tools/services/chain.js",
+  "service:collector": "node tools/services/collector.js",
     "chain:append:spec-hash": "node tools/chain-append-spec-hash.js",
     "lint:disclaimers": "node tools/disclaimers-lint.js",
     "gen:test-vectors": "node tools/generate-test-vectors.js",
@@ -42,6 +43,7 @@
   "transparency:changelog": "node tools/changelog-excerpt-generate.js",
   "events:anchor": "node tools/event-anchor-chain.js",
   "events:pipeline:hash": "node tools/event-pipeline-hash.js",
+  "collector:smoke": "powershell -c \"$e=@{event_name='pub_hero_view';occurred_at=(Get-Date).ToString('s')+'Z';received_at=(Get-Date).ToString('s')+'Z';meta=@{path='/'}}; $json=$e|ConvertTo-Json -Depth 5; Invoke-RestMethod -Method Post -Uri http://127.0.0.1:4603/ingest -ContentType 'application/json' -Body $json\"",
   "signer:rotate": "curl -s -X POST http://127.0.0.1:%SIGNER_PORT%/rotate || powershell -c \"Invoke-RestMethod -Method Post -Uri http://127.0.0.1:$env:SIGNER_PORT/rotate\"",
   "verify:cli": "node tools/generate-test-vectors.js"
   },
