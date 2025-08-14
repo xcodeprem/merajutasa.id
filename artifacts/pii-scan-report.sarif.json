@@ -1,0 +1,401 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "pii-scan",
+          "informationUri": "https://example.local/pii-scan",
+          "rules": []
+        }
+      },
+      "results": [
+        {
+          "ruleId": "CONTACT_EMAIL",
+          "level": "note",
+          "message": {
+            "text": "CONTACT_EMAIL docs\\roadmap\\roadmap-master-v1.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\roadmap\\roadmap-master-v1.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "PLATE_ID",
+          "level": "warning",
+          "message": {
+            "text": "PLATE_ID docs\\roadmap\\roadmap-master-v1.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\roadmap\\roadmap-master-v1.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "PLATE_ID",
+          "level": "warning",
+          "message": {
+            "text": "PLATE_ID docs\\roadmap\\roadmap-master-v1.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\roadmap\\roadmap-master-v1.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "MULTI_CATEGORY_ESCALATION",
+          "level": "note",
+          "message": {
+            "text": "MULTI_CATEGORY_ESCALATION docs\\roadmap\\roadmap-master-v1.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\roadmap\\roadmap-master-v1.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "IDN_NIK",
+          "level": "error",
+          "message": {
+            "text": "IDN_NIK docs\\privacy\\pii-scan-fixture.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\privacy\\pii-scan-fixture.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "GENERIC_16DIGIT",
+          "level": "error",
+          "message": {
+            "text": "GENERIC_16DIGIT docs\\privacy\\pii-scan-fixture.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\privacy\\pii-scan-fixture.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "IDN_NKK",
+          "level": "error",
+          "message": {
+            "text": "IDN_NKK docs\\privacy\\pii-scan-fixture.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\privacy\\pii-scan-fixture.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CONTACT_EMAIL",
+          "level": "note",
+          "message": {
+            "text": "CONTACT_EMAIL docs\\privacy\\pii-scan-fixture.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\privacy\\pii-scan-fixture.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CONTACT_PHONE",
+          "level": "note",
+          "message": {
+            "text": "CONTACT_PHONE docs\\privacy\\pii-scan-fixture.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\privacy\\pii-scan-fixture.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "ADDRESS_STREET",
+          "level": "note",
+          "message": {
+            "text": "ADDRESS_STREET docs\\privacy\\pii-scan-fixture.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\privacy\\pii-scan-fixture.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "ADDRESS_STREET",
+          "level": "note",
+          "message": {
+            "text": "ADDRESS_STREET docs\\privacy\\pii-scan-fixture.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\privacy\\pii-scan-fixture.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "DOB",
+          "level": "note",
+          "message": {
+            "text": "DOB docs\\privacy\\pii-scan-fixture.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\privacy\\pii-scan-fixture.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "BANK_ACCOUNT",
+          "level": "error",
+          "message": {
+            "text": "BANK_ACCOUNT docs\\privacy\\pii-scan-fixture.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\privacy\\pii-scan-fixture.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "PLATE_ID",
+          "level": "warning",
+          "message": {
+            "text": "PLATE_ID docs\\privacy\\pii-scan-fixture.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\privacy\\pii-scan-fixture.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CHILD_NAME_AGE",
+          "level": "error",
+          "message": {
+            "text": "CHILD_NAME_AGE docs\\privacy\\pii-scan-fixture.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\privacy\\pii-scan-fixture.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "GEO_FINE",
+          "level": "error",
+          "message": {
+            "text": "GEO_FINE docs\\privacy\\pii-scan-fixture.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\privacy\\pii-scan-fixture.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "MULTI_CATEGORY_ESCALATION",
+          "level": "note",
+          "message": {
+            "text": "MULTI_CATEGORY_ESCALATION docs\\privacy\\pii-scan-fixture.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\privacy\\pii-scan-fixture.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "ADDRESS_STREET",
+          "level": "note",
+          "message": {
+            "text": "ADDRESS_STREET docs\\privacy\\pii-pattern-library-v1.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\privacy\\pii-pattern-library-v1.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "DOB",
+          "level": "note",
+          "message": {
+            "text": "DOB docs\\privacy\\pii-pattern-library-v1.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\privacy\\pii-pattern-library-v1.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "DOB",
+          "level": "note",
+          "message": {
+            "text": "DOB docs\\privacy\\pii-pattern-library-v1.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\privacy\\pii-pattern-library-v1.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "PLATE_ID",
+          "level": "warning",
+          "message": {
+            "text": "PLATE_ID docs\\privacy\\pii-pattern-library-v1.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\privacy\\pii-pattern-library-v1.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "MULTI_CATEGORY_ESCALATION",
+          "level": "note",
+          "message": {
+            "text": "MULTI_CATEGORY_ESCALATION docs\\privacy\\pii-pattern-library-v1.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\privacy\\pii-pattern-library-v1.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "PLATE_ID",
+          "level": "warning",
+          "message": {
+            "text": "PLATE_ID docs\\integrity\\credential-schema-final-v1.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\integrity\\credential-schema-final-v1.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "PLATE_ID",
+          "level": "warning",
+          "message": {
+            "text": "PLATE_ID docs\\integrity\\credential-schema-final-v1.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\integrity\\credential-schema-final-v1.md"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -24,6 +24,7 @@ const STEPS = [
   { name: 'fairness-unit', cmd: ['node','tools/tests/fairness-engine-unit-tests.js'], critical: true },
   { name: 'hype-lint', cmd: ['node','tools/hype-lint.js'], advisory: true },
   { name: 'disclaimers-lint', cmd: ['node','tools/disclaimers-lint.js'], critical: true },
+  { name: 'pii-scan', cmd: ['node','tools/pii-scan.js','--sarif'], advisory: true },
   // Promote DEC lint to critical now that violations are 0
   { name: 'dec-lint', cmd: ['node','tools/dec-lint.js'], critical: true },
   { name: 'principles-impact', cmd: ['node','tools/principles-impact.js'], advisory: true },

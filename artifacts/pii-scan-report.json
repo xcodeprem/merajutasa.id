@@ -1,18 +1,33 @@
 {
   "version": 1,
-  "status": "PASS",
+  "status": "ADVISORY",
   "summary": {
-    "distinctCategories": 2,
-    "totalFindings": 8,
+    "distinctCategories": 11,
+    "totalFindings": 24,
     "categoryCounts": {
-      "PLATE_ID": 5,
-      "DOB": 2
+      "CONTACT_EMAIL": 2,
+      "PLATE_ID": 6,
+      "IDN_NIK": 1,
+      "GENERIC_16DIGIT": 1,
+      "IDN_NKK": 1,
+      "CONTACT_PHONE": 1,
+      "ADDRESS_STREET": 3,
+      "DOB": 3,
+      "BANK_ACCOUNT": 1,
+      "CHILD_NAME_AGE": 1,
+      "GEO_FINE": 1
     },
-    "highRiskHits": 0
+    "highRiskHits": 5
   },
   "findings": [
     {
       "file": "docs\\roadmap\\roadmap-master-v1.md",
+      "category": "CONTACT_EMAIL",
+      "action": "REDACT",
+      "sample": "user@d…#e4dc0428"
+    },
+    {
+      "file": "docs\\roadmap\\roadmap-master-v1.md",
       "category": "PLATE_ID",
       "action": "WARN",
       "sample": "A11Y…#0c3687b8"
@@ -22,6 +37,111 @@
       "category": "PLATE_ID",
       "action": "WARN",
       "sample": "A11Y…#0c3687b8"
+    },
+    {
+      "file": "docs\\roadmap\\roadmap-master-v1.md",
+      "code": "MULTI_CATEGORY_ESCALATION",
+      "categories": [
+        "CONTACT_EMAIL",
+        "PLATE_ID"
+      ],
+      "threshold": 2
+    },
+    {
+      "file": "docs\\privacy\\pii-scan-fixture.md",
+      "category": "IDN_NIK",
+      "action": "BLOCK",
+      "sample": "317501…#799616d4"
+    },
+    {
+      "file": "docs\\privacy\\pii-scan-fixture.md",
+      "category": "GENERIC_16DIGIT",
+      "action": "BLOCK",
+      "sample": "987654…#8589864c"
+    },
+    {
+      "file": "docs\\privacy\\pii-scan-fixture.md",
+      "category": "IDN_NKK",
+      "action": "BLOCK",
+      "sample": "987654…#8589864c"
+    },
+    {
+      "file": "docs\\privacy\\pii-scan-fixture.md",
+      "category": "CONTACT_EMAIL",
+      "action": "REDACT",
+      "sample": "user@e…#6dc8a038"
+    },
+    {
+      "file": "docs\\privacy\\pii-scan-fixture.md",
+      "category": "CONTACT_PHONE",
+      "action": "REDACT",
+      "sample": "628123…#a1c0b027"
+    },
+    {
+      "file": "docs\\privacy\\pii-scan-fixture.md",
+      "category": "ADDRESS_STREET",
+      "action": "MASK",
+      "sample": "Jalan …#b7554715"
+    },
+    {
+      "file": "docs\\privacy\\pii-scan-fixture.md",
+      "category": "ADDRESS_STREET",
+      "action": "MASK",
+      "sample": "RT 01/…#b2198c87"
+    },
+    {
+      "file": "docs\\privacy\\pii-scan-fixture.md",
+      "category": "DOB",
+      "action": "REDACT",
+      "sample": "01/09/…#826b2e9d"
+    },
+    {
+      "file": "docs\\privacy\\pii-scan-fixture.md",
+      "category": "BANK_ACCOUNT",
+      "action": "BLOCK",
+      "sample": "Bank: …#05896834"
+    },
+    {
+      "file": "docs\\privacy\\pii-scan-fixture.md",
+      "category": "PLATE_ID",
+      "action": "WARN",
+      "sample": "B 1234…#15d921c1"
+    },
+    {
+      "file": "docs\\privacy\\pii-scan-fixture.md",
+      "category": "CHILD_NAME_AGE",
+      "action": "BLOCK",
+      "sample": "Adi (7…#e0a661cf"
+    },
+    {
+      "file": "docs\\privacy\\pii-scan-fixture.md",
+      "category": "GEO_FINE",
+      "action": "BLOCK",
+      "sample": "6.2000…#597c4c82"
+    },
+    {
+      "file": "docs\\privacy\\pii-scan-fixture.md",
+      "code": "MULTI_CATEGORY_ESCALATION",
+      "categories": [
+        "IDN_NIK",
+        "GENERIC_16DIGIT",
+        "IDN_NKK",
+        "CONTACT_EMAIL",
+        "CONTACT_PHONE",
+        "ADDRESS_STREET",
+        "DOB",
+        "BANK_ACCOUNT",
+        "PLATE_ID",
+        "CHILD_NAME_AGE",
+        "GEO_FINE"
+      ],
+      "threshold": 2
+    },
+    {
+      "file": "docs\\privacy\\pii-pattern-library-v1.md",
+      "category": "ADDRESS_STREET",
+      "action": "MASK",
+      "sample": "Jalan …#c1d00e43"
     },
     {
       "file": "docs\\privacy\\pii-pattern-library-v1.md",
@@ -45,6 +165,7 @@
       "file": "docs\\privacy\\pii-pattern-library-v1.md",
       "code": "MULTI_CATEGORY_ESCALATION",
       "categories": [
+        "ADDRESS_STREET",
         "DOB",
         "PLATE_ID"
       ],

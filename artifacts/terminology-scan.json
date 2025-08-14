@@ -6,14 +6,14 @@
   },
   "key_token_frequency": {
     "fairness": 240,
-    "privacy": 118,
+    "privacy": 122,
     "hysteresis": 181,
     "hash": 337,
     "credential": 171,
-    "governance": 279,
+    "governance": 280,
     "revocation": 102
   },
-  "totalKey": 1428,
+  "totalKey": 1433,
   "banned_terms_detected": 129,
   "banned_samples": [
     {
@@ -149,106 +149,6 @@
       "term": "terbaik"
     },
     {
-      "file": "docs\\integrity\\evidence-minimum-phase1.5-v1.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\integrity\\credential-schema-final-v1.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\integrity\\credential-schema-final-v1.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\integrity\\credential-schema-final-v1.md",
-      "term": "Ranking"
-    },
-    {
-      "file": "docs\\integrity\\credential-schema-final-v1.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\integrity\\credential-schema-final-v1.md",
-      "term": "top"
-    },
-    {
-      "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
-      "term": "Ranking"
-    },
-    {
-      "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
-      "term": "Ranking"
-    },
-    {
-      "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
-      "term": "Ranking"
-    },
-    {
-      "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\analytics\\media-digest.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\analytics\\event-schema-canonical-v1.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\analytics\\event-schema-canonical-v1.md",
-      "term": "Ranking"
-    },
-    {
-      "file": "docs\\analytics\\event-schema-canonical-v1.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\analytics\\event-schema-canonical-v1.md",
-      "term": "top"
-    },
-    {
-      "file": "docs\\analytics\\event-schema-canonical-v1.md",
-      "term": "top"
-    },
-    {
-      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
-      "term": "ranking"
-    },
-    {
       "file": "docs\\governance\\lint-principles-reference-spec-v1.md",
       "term": "ranking"
     },
@@ -289,6 +189,106 @@
       "term": "top"
     },
     {
+      "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
+      "term": "Ranking"
+    },
+    {
+      "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
+      "term": "Ranking"
+    },
+    {
+      "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
+      "term": "Ranking"
+    },
+    {
+      "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\integrity\\evidence-minimum-phase1.5-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "term": "Ranking"
+    },
+    {
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "term": "top"
+    },
+    {
+      "file": "docs\\analytics\\media-digest.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\analytics\\event-schema-canonical-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\analytics\\event-schema-canonical-v1.md",
+      "term": "Ranking"
+    },
+    {
+      "file": "docs\\analytics\\event-schema-canonical-v1.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\analytics\\event-schema-canonical-v1.md",
+      "term": "top"
+    },
+    {
+      "file": "docs\\analytics\\event-schema-canonical-v1.md",
+      "term": "top"
+    },
+    {
+      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
+      "term": "ranking"
+    },
+    {
       "file": "docs\\fairness\\hysteresis-public-methodology-fragment-v1.md",
       "term": "ranking"
     },
@@ -302,6 +302,10 @@
     },
     {
       "file": "docs\\fairness\\equity-page.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs\\governance\\trace\\archive-trace-index-v1.md",
       "term": "ranking"
     },
     {
@@ -330,10 +334,6 @@
     },
     {
       "file": "docs\\governance\\dec\\DEC-20250812-02-hysteresis-adoption.md",
-      "term": "ranking"
-    },
-    {
-      "file": "docs\\governance\\trace\\archive-trace-index-v1.md",
       "term": "ranking"
     }
   ]

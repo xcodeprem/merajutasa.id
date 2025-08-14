@@ -2630,5 +2630,230 @@
     "timestamp": "2025-08-14T10:48:07.366Z",
     "action": "aggregate",
     "status": "OK"
+  },
+  {
+    "timestamp": "2025-08-14T11:24:24.655Z",
+    "action": "step",
+    "step": "spec-hash-diff",
+    "cmd": "node tools/spec-hash-diff.js --mode=verify",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 82,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-14T11:24:24.782Z",
+    "action": "step",
+    "step": "param-integrity",
+    "cmd": "node tools/param-integrity.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 128,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-14T11:24:24.841Z",
+    "action": "step",
+    "step": "param-lock",
+    "cmd": "node tools/param-lock-verify.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 58,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-14T11:24:24.949Z",
+    "action": "step",
+    "step": "fairness-unit",
+    "cmd": "node tools/tests/fairness-engine-unit-tests.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 110,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-14T11:24:25.069Z",
+    "action": "step",
+    "step": "hype-lint",
+    "cmd": "node tools/hype-lint.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 120,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-14T11:24:25.245Z",
+    "action": "step",
+    "step": "disclaimers-lint",
+    "cmd": "node tools/disclaimers-lint.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 174,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-14T11:24:25.407Z",
+    "action": "step",
+    "step": "pii-scan",
+    "cmd": "node tools/pii-scan.js --sarif",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 159,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-14T11:24:25.563Z",
+    "action": "step",
+    "step": "dec-lint",
+    "cmd": "node tools/dec-lint.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 156,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-14T11:24:25.741Z",
+    "action": "step",
+    "step": "principles-impact",
+    "cmd": "node tools/principles-impact.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 165,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-14T11:24:25.920Z",
+    "action": "step",
+    "step": "events-validate",
+    "cmd": "node tools/event-validate.js --file data/events-sample.ndjson --rehash",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 192,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-14T11:24:25.979Z",
+    "action": "step",
+    "step": "evidence-freshness",
+    "cmd": "node tools/evidence-freshness.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 59,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-14T11:24:26.038Z",
+    "action": "step",
+    "step": "evidence-collision-test",
+    "cmd": "node tools/evidence-collision-test.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 59,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-14T11:24:26.143Z",
+    "action": "step",
+    "step": "fairness-sim",
+    "cmd": "node tools/fairness-sim.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 103,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-14T11:24:26.262Z",
+    "action": "step",
+    "step": "fairness-metrics",
+    "cmd": "node tools/fairness/fairness-metrics.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 119,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-14T11:24:26.319Z",
+    "action": "step",
+    "step": "no-silent-drift",
+    "cmd": "node tools/no-silent-drift.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 58,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-14T11:24:26.406Z",
+    "action": "step",
+    "step": "governed-change-scan",
+    "cmd": "node tools/governed-change-scan.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 86,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-14T11:24:26.459Z",
+    "action": "step",
+    "step": "policy-index-verify",
+    "cmd": "node tools/policy-index-verify.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 53,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-14T11:24:26.513Z",
+    "action": "step",
+    "step": "changelog-excerpt",
+    "cmd": "node tools/changelog-excerpt-generate.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 52,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-14T11:24:26.599Z",
+    "action": "step",
+    "step": "event-anchor",
+    "cmd": "node tools/event-anchor-chain.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 87,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-14T11:24:26.716Z",
+    "action": "step",
+    "step": "terminology-scan",
+    "cmd": "node tools/terminology-scan.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 96,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-14T11:24:26.736Z",
+    "action": "aggregate",
+    "status": "OK"
   }
 ]

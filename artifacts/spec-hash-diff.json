@@ -1,6 +1,6 @@
 {
   "mode": "verify",
-  "timestamp_utc": "2025-08-14T10:48:05Z",
+  "timestamp_utc": "2025-08-14T11:24:24Z",
   "updated": [],
   "unchanged": [
     "docs/roadmap/roadmap-master-v1.md",
@@ -17,6 +17,7 @@
     "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
     ".github/pull_request_template.md",
     "docs/master-spec-deltas/delta-master-spec-v2-DEC-20250812-02.md",
+    "docs/master-spec-deltas/delta-master-spec-v2-DEC-20250813-06-event-schema-alignment.md",
     "docs/principles/GP1-GP10-index.md",
     "docs/privacy/pii-pattern-library-v1.md",
     "docs/analytics/dashboard-widgets-hysteresis-initial.md",
@@ -60,7 +61,7 @@
   "placeholders_remaining": [],
   "violations": [],
   "summary": {
-    "total_entries": 52,
+    "total_entries": 53,
     "updated_count": 0,
     "violation_count": 0,
     "placeholders_remaining_count": 0

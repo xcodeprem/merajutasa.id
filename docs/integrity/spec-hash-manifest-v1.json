@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generation_timestamp_utc": "2025-08-14T06:35:36Z",
+  "generation_timestamp_utc": "2025-08-14T11:24:24Z",
   "generator_note": "Refined manifest: added onboarding & (optional) README, fixed dec_ref placeholders, standardized mutable_policy for adopted lint spec. All existing entries preserved; only additive or metadata corrections before first hash seal.",
   "files": [
     {
@@ -142,6 +142,16 @@
       "mutable_policy": "immutable",
       "next_change_requires_dec": false,
       "notes": "Delta file; new changes create additional delta files."
+    },
+    {
+      "path": "docs/master-spec-deltas/delta-master-spec-v2-DEC-20250813-06-event-schema-alignment.md",
+      "version": "1.0.0",
+      "dec_ref": "DEC-20250813-06",
+      "hash_sha256": "755969c39380c2e56cdf76c656b49de13ed85c155508a601a8eae8dea2399d1d",
+      "integrity_class": "delta",
+      "mutable_policy": "immutable",
+      "next_change_requires_dec": false,
+      "notes": "Aligns Master Spec §27 anchor text with canonical Event Schema v1.0 (editorial)."
     },
     {
       "path": "docs/principles/GP1-GP10-index.md",
