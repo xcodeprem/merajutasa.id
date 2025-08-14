@@ -10,6 +10,7 @@
 import { promises as fs } from 'fs';
 import { createHash } from 'crypto';
 import Ajv2020 from 'ajv/dist/2020.js';
+import addFormats from 'ajv-formats';
 
 const BASE_SCHEMA_PATH = 'schemas/events/public-event-v1.json';
 const OUT_PATH = 'artifacts/event-validate-report.json';
@@ -20,7 +21,7 @@ function canonicalStringify(obj){
   return JSON.stringify(sort(obj));
 }
 
-const PROHIBITED_META_RE = /(ip|email|e[-]?mail|phone|tel|address|lat|lng|geo|ua|string|cookie|fingerprint|sessionSecret|auth|token|child(Name|DOB|Birth)|rank|rating|score)/i;
+const PROHIBITED_META_RE = /\b(ip(address)?|email|e[-_]?mail|phone|tel(ephone)?|address|lat(itude)?|lng|long(itude)?|geo(coordinates)?|user[-_ ]?agent|cookie|fingerprint|session(secret)?|auth|token|child(Name|DOB|Birth)|rank(ing)?|rating|score)\b/i;
 
 async function* readNdjson(file){
   const txt = await fs.readFile(file,'utf8');
@@ -40,6 +41,7 @@ async function main(){
   const baseSchema = JSON.parse(await fs.readFile(BASE_SCHEMA_PATH,'utf8'));
   // Use Ajv2020 to support $schema: 2020-12 declared in the base schema
   const ajv = new Ajv2020({ strict:false, allErrors:true });
+  addFormats(ajv);
   const validate = ajv.compile(baseSchema);
 
   let total=0, valid=0, invalid=0, prohibited=0, hashMismatch=0;

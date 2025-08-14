@@ -60,9 +60,9 @@ Cara: Build orchestrator merge JSON → artifacts/no-silent-drift-report.json.
 Cara: Use git diff parsing (require menambahkan simple git lib / native).  
 3.6 Tambah `disclaimers-lint.js` sesuai spec (Rules DISC-PRES-001..DISC-LOCALE-011, similarity ≥0.90 OverlapCoefficient, banned phrase check) [AI] [DONE - heuristic engine v1 (presence, drift, shadow, banned phrase, version hash) ENFORCED sebagai CRITICAL] ✅  
 Cara: Normalize disclaimers canonical set; compute similarity; output per rule.  
-3.7 Tambah `pii-scan.js` (regex taxonomy categories, classification, action matrix, hashing salt rotation schedule placeholder) [AI]  
+3.7 Tambah `pii-scan.js` (regex taxonomy categories, classification, action matrix, hashing salt rotation schedule placeholder) [AI] [DONE] ✅  
 Cara: Implement category evaluation; produce masking hash stub (salt from config).  
-3.8 Tambah `terminology-scan.js` (sudah ada file): aktifkan Stage 1 (inventory), Stage 2 pending DEC [AI]  
+3.8 Tambah `terminology-scan.js` (sudah ada file): aktifkan Stage 1 (inventory), Stage 2 pending DEC [AI] [DONE] ✅  
 Cara: Output term frequency, flagged terms, stage status.  
 3.6 Tambah `disclaimers-lint.js` sesuai spec (Rules DISC-PRES-001..DISC-LOCALE-011, similarity ≥0.90 OverlapCoefficient, banned phrase check) [AI] [DONE - heuristic engine v1 (presence, drift, shadow, banned phrase, version hash) – HTML extraction & full rule coverage next wave] ✅  
 Cara: Normalize disclaimers canonical set; compute similarity; output per rule.  
@@ -99,7 +99,7 @@ Cara: AI detect diff; open PR template block; manusia approves DEC.
 
 ## 6. Privacy & PII Enforcement
 
-6.1 Implement pattern library engine (regex categories, classification, actions: redact, hash, drop) [AI]  
+6.1 Implement pattern library engine (regex categories, classification, actions: redact, hash, drop) [AI] [DONE] ✅  
 Cara: Build pipeline; produce detection summary JSON (counts per category, multi-category flag).  
 6.2 Multi-category block threshold enforcement (pending DEC confirm value=2) [HYBRID]  
 Cara: AI enforce; manusia confirm chosen threshold.  
@@ -112,7 +112,7 @@ Cara: AI write script; manusia schedule + DEC.
 
 7.1 JSON Schema validators (credential v1, event canonical schema) [AI] [DONE - AJV validators in tools/validate-evidence.js and schema set] ✅  
 Cara: Add AJV-based validator scripts (if Node chosen).  
-7.2 Canonicalization (JCS-like) and event_hash/pipeline_hash computation [AI]  
+7.2 Canonicalization (JCS-like) and event_hash/pipeline_hash computation [AI] [DONE] ✅  
 Cara: Implement deterministic sort & hashing; produce sample test vectors.  
 7.3 Revocation subsystem minimal design DEC (pending) [MANUAL]  
 Cara: Document revocation reason codes, API shape.  
@@ -245,13 +245,13 @@ Cara: AI open PR comment; manusia adjudicate.
 
 ## 28. Changelog & Transparency
 
-28.1 Automate changelog-excerpt generation from artifact deltas & DEC merges [AI]  
+28.1 Automate changelog-excerpt generation from artifact deltas & DEC merges [AI] [DONE] ✅  
 28.2 Validate transparency rules (fields presence, ordering) [AI]  
 
 ## 29. Policy Index Consistency
 
-29.1 Auto-check policy-index cross-references (every policy ID resolves to file & manifest entry) [AI]  
-29.2 Report orphan policies or missing DEC link [AI]  
+29.1 Auto-check policy-index cross-references (every policy ID resolves to file & manifest entry) [AI] [DONE] ✅  
+29.2 Report orphan policies or missing DEC link [AI] [DONE] ✅  
 
 ## 30. Internationalization & Locale Drift (Future)
 
