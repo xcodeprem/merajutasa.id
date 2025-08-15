@@ -44,6 +44,7 @@ jobs:
           GITHUB_EVENT_NAME: ${{ github.event_name }}
           GITHUB_ACTOR: ${{ github.actor }}
           PR_HEAD_REF: ${{ github.head_ref || github.event.pull_request.head.ref || '' }}
+          PERF_ADVISORY: ${{ (github.actor == 'dependabot[bot]') || startsWith(github.head_ref, 'dependabot/') || (github.event.pull_request.head.ref && startsWith(github.event.pull_request.head.ref, 'dependabot/')) }}
 
       - name: Terminology Adoption Enforcement (warning mode)
         continue-on-error: true

@@ -30,12 +30,15 @@ async function main(){
     } catch (e) {
       const actor = (process.env.GITHUB_ACTOR||'').toLowerCase();
       const evt = (process.env.GITHUB_EVENT_NAME||'').toLowerCase();
-  const headRef = (process.env.PR_HEAD_REF||'').toLowerCase();
+      const headRef = (process.env.PR_HEAD_REF||'').toLowerCase();
+      const ghHeadRef = (process.env.GITHUB_HEAD_REF||'').toLowerCase();
+      const refName = (process.env.GITHUB_REF_NAME || process.env.GITHUB_REF || '').toLowerCase();
+      const perfAdvisory = String(process.env.PERF_ADVISORY||'').toLowerCase() === 'true';
       const isDependabot = actor.includes('dependabot');
       const isPRLike = evt === 'pull_request' || evt === 'pull_request_target';
-  const isDependabotBranch = headRef.startsWith('dependabot/') || headRef.includes('/dependabot/');
-  if ((isDependabot && isPRLike) || isDependabotBranch) {
-        console.warn(`[h1-guard] perf-budget failed (${e?.message||'error'}) but treated as ADVISORY for Dependabot (${evt})`);
+      const isDependabotBranch = [headRef, ghHeadRef, refName].some(r => r && (r.startsWith('dependabot/') || r.includes('/dependabot/')));
+      if (perfAdvisory || (isDependabot && isPRLike) || isDependabotBranch) {
+        console.warn(`[h1-guard] perf-budget failed (${e?.message||'error'}) but treated as ADVISORY. ctx actor=${actor} evt=${evt} headRef=${headRef||ghHeadRef||refName}`);
       } else {
         throw e;
       }
