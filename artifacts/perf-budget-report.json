@@ -7,10 +7,10 @@
     "cls_max": 0.8
   },
   "actual": {
-    "perf_score": 0.77,
-    "lcp_ms": 951.2754500000001,
-    "tbt_ms": 0,
-    "cls": 0.7491152426004789
+    "perf_score": 0.88,
+    "lcp_ms": 970.17655,
+    "tbt_ms": 14,
+    "cls": 0.24030010970991755
   },
   "categories": {
     "performance": {
@@ -395,7 +395,7 @@
         }
       ],
       "id": "performance",
-      "score": 0.77
+      "score": 0.88
     },
     "best-practices": {
       "title": "Best Practices",

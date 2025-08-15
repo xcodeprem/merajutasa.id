@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-14T18:39:41.464Z",
+  "generated_utc": "2025-08-15T10:02:17.102Z",
   "old_total": 0,
   "new_total": 0,
   "adoptionPercent": 100,
@@ -26,22 +26,17 @@
       "newCount": 0
     },
     {
+      "file": "docs\\support\\README.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
       "file": "docs\\transparency\\methodology-snippet-h0.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
       "file": "docs\\transparency\\changelog-excerpt-phase1.5.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\tests\\hysteresis-test-plan-v1.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\support\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -61,12 +56,17 @@
       "newCount": 0
     },
     {
+      "file": "docs\\tests\\hysteresis-test-plan-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
       "file": "docs\\security\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs\\schemas\\README.md",
+      "file": "docs\\release\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -76,7 +76,7 @@
       "newCount": 0
     },
     {
-      "file": "docs\\release\\README.md",
+      "file": "docs\\schemas\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -87,6 +87,11 @@
     },
     {
       "file": "docs\\public\\ABOUT-PORTAL-PANTI.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\policies\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -146,11 +151,6 @@
       "newCount": 0
     },
     {
-      "file": "docs\\policies\\README.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
       "file": "docs\\master-spec\\master-spec-v2.0.md",
       "oldCount": 0,
       "newCount": 0
@@ -187,6 +187,11 @@
     },
     {
       "file": "docs\\feedback\\feedback.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -246,11 +251,6 @@
       "newCount": 0
     },
     {
-      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
       "file": "docs\\fairness\\hysteresis-state-machine-transitions.md",
       "oldCount": 0,
       "newCount": 0
@@ -291,6 +291,16 @@
       "newCount": 0
     },
     {
+      "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
       "file": "docs\\analytics\\media-digest.md",
       "oldCount": 0,
       "newCount": 0
@@ -302,16 +312,6 @@
     },
     {
       "file": "docs\\analytics\\dashboard-widgets-hysteresis-initial.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -342,6 +342,16 @@
     },
     {
       "file": "docs\\governance\\trace\\archive-trace-index-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\audit\\README-audit-process.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\audit\\pr-template-line-audit-2025-08-12T0509Z.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -422,16 +432,6 @@
     },
     {
       "file": "docs\\governance\\dec\\DEC-20250812-02-hysteresis-adoption.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\governance\\audit\\README-audit-process.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\governance\\audit\\pr-template-line-audit-2025-08-12T0509Z.md",
       "oldCount": 0,
       "newCount": 0
     }
