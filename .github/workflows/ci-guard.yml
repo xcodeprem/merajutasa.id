@@ -12,10 +12,17 @@ on:
 jobs:
   h1-guard:
     # Run for:
+    # - workflow_dispatch (manual)
     # - push (always)
     # - pull_request (except Dependabot)
     # - pull_request_target (Dependabot only)
-    if: ${{ github.event_name == 'push' || (github.event_name == 'pull_request' && github.actor != 'dependabot[bot]') || (github.event_name == 'pull_request_target' && github.actor == 'dependabot[bot]') }}
+    if: >
+      ${{
+        github.event_name == 'workflow_dispatch' ||
+        github.event_name == 'push' ||
+        (github.event_name == 'pull_request' && github.actor != 'dependabot[bot]') ||
+        (github.event_name == 'pull_request_target' && github.actor == 'dependabot[bot]')
+      }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
