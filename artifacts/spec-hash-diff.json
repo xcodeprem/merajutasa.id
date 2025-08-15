@@ -1,12 +1,11 @@
 {
   "mode": "verify",
-  "timestamp_utc": "2025-08-14T17:49:48Z",
+  "timestamp_utc": "2025-08-15T07:58:38Z",
   "updated": [],
   "unchanged": [
     "docs/roadmap/roadmap-master-v1.md",
     "docs/governance/signature-pipeline-plan-v1.md",
     "docs/governance/dec/DEC-20250813-02-signature-pipeline-adoption.md",
-    "docs/fairness/hysteresis-config-v1.yml",
     "docs/fairness/hysteresis-public-methodology-fragment-v1.md",
     "docs/fairness/hysteresis-state-machine-transitions.md",
     "docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md",
@@ -32,9 +31,7 @@
     "docs/governance/policy-index-v1.md",
     "docs/archive/fairness_equity-hysteresis-options-v1.md",
     "docs/archive/ux_public-multipage-experience-master-spec-v2.md",
-    "docs/governance/trace/archive-trace-index-v1.md",
     "docs/onboarding/agent-bootstrap-manifest.md",
-    "README.md",
     "docs/governance/dec/DEC-20250812-04-governance-baseline-thresholds.md",
     "docs/integrity/evidence-minimum-phase1.5-v1.md",
     "docs/governance/dec/DEC-20250813-01-known-debt-register.md",
@@ -60,11 +57,27 @@
   ],
   "placeholders_sealed": [],
   "placeholders_remaining": [],
-  "violations": [],
+  "violations": [
+    {
+      "code": "HASH_MISMATCH_DEC_REQUIRED",
+      "path": "docs/fairness/hysteresis-config-v1.yml",
+      "detail": "Manifest=c07f4ccc93bd68e18a74c106980a262904d50a59b2ffa25b9e3f899028037825 current=488e520591f6d68c6f56814d53bcae525816e2d9814549132262afa781f589ed"
+    },
+    {
+      "code": "HASH_MISMATCH_DEC_REQUIRED",
+      "path": "docs/governance/trace/archive-trace-index-v1.md",
+      "detail": "Manifest=8f6ad0a235c9d6d13a8c3db6ba09d46d443532b48621978bac564cd4196f4103 current=f03a7e5d2e96427d87a85b17b334b4a3e918f8d3893a88dd83f0ffcc0b976d41"
+    },
+    {
+      "code": "HASH_MISMATCH_DEC_REQUIRED",
+      "path": "README.md",
+      "detail": "Manifest=cfa5ad36a62300327a371d68ece32523e9900bacab0fd991c11e277f3c541198 current=221bdc7c72ee8eb9ad099a6dba790f5bc425091c11ec34886152522483b1b54a"
+    }
+  ],
   "summary": {
     "total_entries": 54,
     "updated_count": 0,
-    "violation_count": 0,
+    "violation_count": 3,
     "placeholders_remaining_count": 0
   }
 }

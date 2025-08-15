@@ -1,5 +1,8 @@
 async function fetchJSON(path){
-  const res = await fetch(path);
+  // If running on GitHub Pages, JSON will be under /data/*
+  const pagesBase = (typeof window !== 'undefined' && /github\.io/.test(location.host)) ? '/data' : '';
+  const url = path.startsWith('/kpi') || path.startsWith('/under') || path.startsWith('/equity') ? `${pagesBase}${path.replace(/^\//,'/')}` : path;
+  const res = await fetch(url);
   if(!res.ok) throw new Error(`${path} ${res.status}`);
   return res.json();
 }
@@ -13,22 +16,27 @@ async function main(){
   const fairnessBadge = document.getElementById('fairness');
   const underBadge = document.getElementById('under');
   const anomsBadge = document.getElementById('anoms');
+  const revocBadge = document.getElementById('revoc');
   try {
-    // Quick health check to surface service not running
-    const health = await fetch('/health');
-    if (!health.ok) throw new Error('equity service is not running');
+    // Best-effort health check (skip on Pages)
+    const onPages = (typeof window !== 'undefined' && /github\.io/.test(location.host));
+    if (!onPages) {
+      const health = await fetch('/health');
+      if (!health.ok) throw new Error('equity service is not running');
+    }
 
     const [kpi, under, weekly] = await Promise.all([
-      fetchJSON('/kpi/h1'),
-      fetchJSON('/under-served'),
+      fetchJSON('/kpi/h1').catch(()=> null),
+      fetchJSON('/under-served').catch(()=> null),
       fetchJSON('/kpi/weekly').catch(()=> null)
     ]);
     fairnessBadge.textContent = `fairness: ${kpi?.fairness?.pass ? 'PASS' : 'FAIL'}`;
     underBadge.textContent = `under-served: ${under?.total ?? 'n/a'}`;
     anomsBadge.textContent = `anomalies: ${kpi?.equity?.anomalies_count ?? 'n/a'}`;
-    kpiEl.textContent = JSON.stringify(kpi ?? { error: 'missing kpi' }, null, 2);
+  kpiEl.textContent = JSON.stringify(kpi ?? { error: 'missing kpi' }, null, 2);
     underEl.textContent = JSON.stringify(under ?? { error: 'missing under-served' }, null, 2);
-    weeklyEl.textContent = JSON.stringify(weekly ?? { note: 'no weekly trends yet' }, null, 2);
+  weeklyEl.textContent = JSON.stringify(weekly ?? { note: 'no weekly trends yet' }, null, 2);
+  if (revocBadge) revocBadge.textContent = 'revocations: 0';
     if (weekly && weekly.decision_mix){
       const dm = weekly.decision_mix;
       decisionMixEl.innerHTML = `
@@ -71,6 +79,7 @@ async function main(){
     fairnessBadge.textContent = 'fairness: n/a';
     underBadge.textContent = 'under-served: n/a';
     anomsBadge.textContent = 'anomalies: n/a';
+  if (revocBadge) revocBadge.textContent = 'revocations: 0';
   const msg = `Error: ${e.message}. Hint: start service and generate artifacts.`;
     kpiEl.textContent = msg;
     underEl.textContent = msg;

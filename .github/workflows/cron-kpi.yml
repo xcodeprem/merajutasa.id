@@ -1,0 +1,31 @@
+name: Scheduled KPI/Weekly
+
+on:
+  schedule:
+    - cron: '5 17 * * *'
+  workflow_dispatch:
+
+jobs:
+  nightly-kpi:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies (CI)
+        run: npm ci
+      - name: Generate weekly + KPI
+        run: |
+          node tools/weekly-trend-aggregator.js
+          node tools/generate-h1-kpi-summary.js
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: nightly-kpi
+          path: |
+            artifacts/weekly-trends.json
+            artifacts/h1-kpi-summary.json

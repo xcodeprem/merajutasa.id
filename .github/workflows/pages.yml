@@ -1,0 +1,58 @@
+name: Deploy Pages (Dashboard Snapshots)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - 'public/equity-ui/**'
+      - 'artifacts/*.json'
+      - '!artifacts/ingested-events.ndjson'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci
+      - name: Prepare static snapshot
+        run: |
+          mkdir -p dist
+          cp -r public/equity-ui/* dist/
+          # publish latest KPI/weekly/anomalies if present
+          mkdir -p dist/data
+          [ -f artifacts/h1-kpi-summary.json ] && cp artifacts/h1-kpi-summary.json dist/data/ || true
+          [ -f artifacts/weekly-trends.json ] && cp artifacts/weekly-trends.json dist/data/ || true
+          [ -f artifacts/equity-anomalies.json ] && cp artifacts/equity-anomalies.json dist/data/ || true
+          [ -f artifacts/under-served.json ] && cp artifacts/under-served.json dist/data/ || true
+          # placeholder revocations snapshot
+          echo "[]" > dist/data/revocations.json
+          # rewrite UI to load /data/*.json if available
+          echo "" > dist/.nojekyll
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

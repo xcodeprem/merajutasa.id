@@ -1,0 +1,47 @@
+name: CI Guard (H1)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  h1-guard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies (CI)
+        run: npm ci
+
+      - name: Run H1 guard (fairness, snapshots, anomalies, KPIs, perf, a11y)
+        run: node tools/h1-verify-guard.js
+
+      - name: Terminology Adoption Enforcement (warning mode)
+        continue-on-error: true
+        run: |
+          ADOPTION_MIN=80 BANNED_MAX=0 node tools/terminology-adoption.js
+
+      - name: npm audit (high severity)
+        run: |
+          npm audit --audit-level=high || echo "npm audit found issues (non-blocking)"
+
+      - name: Upload KPI artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: h1-kpi-artifacts
+          path: |
+            artifacts/h1-kpi-summary.json
+            artifacts/weekly-trends.json
+            artifacts/equity-anomalies.json
+            artifacts/under-served.json
+            artifacts/a11y-smoke-report.json
+            artifacts/perf-budget-report.json

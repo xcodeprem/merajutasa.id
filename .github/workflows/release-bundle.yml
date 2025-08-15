@@ -1,0 +1,41 @@
+name: Release H1 Bundle
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag (e.g., h1-v0.1)'
+        required: true
+
+jobs:
+  bundle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci
+      - name: Generate artifacts
+        run: |
+          node tools/fairness/generate-equity-snapshots.js
+          node tools/derive-under-served-list.js
+          node tools/equity-anomaly-detector.js
+          node tools/weekly-trend-aggregator.js
+          node tools/generate-h1-kpi-summary.js
+      - name: Create bundle
+        run: |
+          mkdir -p _bundle
+          cp -r artifacts _bundle/
+          cp -r public/equity-ui _bundle/ui
+          cp README.md _bundle/README.md || true
+          cd _bundle
+          zip -r ../release-artifacts.zip .
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event.inputs.tag }}
+          name: H1 Snapshot ${{ github.event.inputs.tag }}
+          draft: false
+          prerelease: true
+          files: release-artifacts.zip

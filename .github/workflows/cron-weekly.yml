@@ -1,0 +1,29 @@
+name: Weekly Regeneration
+
+on:
+  schedule:
+    - cron: '10 17 * * 0'
+  workflow_dispatch:
+
+jobs:
+  weekly:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci
+      - name: Recompute trends + KPI + anomalies
+        run: |
+          node tools/equity-anomaly-detector.js
+          node tools/weekly-trend-aggregator.js
+          node tools/generate-h1-kpi-summary.js
+      - name: Upload weekly artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly
+          path: |
+            artifacts/*.json
+            !artifacts/ingested-events.ndjson

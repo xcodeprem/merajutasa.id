@@ -1,4 +1,13 @@
-# Fairness & Integrity Governance Scaffold (Baseline PRE-SEAL)
+# merajutasa-governance
+
+[![CI Guard (H1)](https://github.com/codingxdev/merajutasa.id/actions/workflows/ci-guard.yml/badge.svg)](https://github.com/codingxdev/merajutasa.id/actions/workflows/ci-guard.yml)
+
+## GitHub Pages (Dashboard Snapshots)
+
+- Workflow `Deploy Pages (Dashboard Snapshots)` publishes the minimal equity UI and latest JSON artifacts under GitHub Pages.
+- Node services do not run on Pages; only read-only JSON + UI.
+
+## Fairness & Integrity Governance Scaffold (Baseline PRE-SEAL)
 
 STATUS: PRE-HASH SEAL (Hash baseline belum diisi – proses “seal-first” akan menulis hash real & mengunci konten canonical).  
 Non-Removal Assertion: README ini akan dikelola append-only; perubahan substansial (narasi fairness, klaim integritas, prinsip) memerlukan DEC baru.
