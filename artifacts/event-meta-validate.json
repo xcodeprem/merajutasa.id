@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "required_events": [
+    "pub_landing_impression",
+    "pub_hero_view",
+    "pub_hero_card_cta_click",
+    "sys_fairness_snapshot_written",
+    "sys_fairness_under_served_enter",
+    "sys_fairness_under_served_exit",
+    "sys_equity_anomaly_detected",
+    "sys_kpi_weekly_rollup",
+    "sys_privacy_scan_completed",
+    "sys_governance_spec_hash_verified"
+  ],
+  "issues": []
+}
