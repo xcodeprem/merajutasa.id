@@ -14,12 +14,12 @@
 <body>
   <h1>H1 Equity Dashboard (Minimal)</h1>
   <p style="margin-top:-8px">
-    <a href="ui/methodology" target="_blank" rel="noopener">Methodology: Hysteresis & Under-Served</a>
-    <span style="margin-left:8px"><a href="ui/privacy-faq" target="_blank" rel="noopener">Privacy FAQ</a></span>
+  <a href="ui/methodology" target="_blank" rel="noopener"><span id="link-methodology">Methodology: Hysteresis & Under-Served</span></a>
+  <span style="margin-left:8px"><a href="ui/privacy-faq" target="_blank" rel="noopener"><span id="link-privacy">Privacy FAQ</span></a></span>
   </p>
   <p style="font-size:12px;color:#666;margin-top:-8px">
     Note: On GitHub Pages, data loads from <code>data/*.json</code> snapshots.
-  <span style="margin-left:8px"><a href="snapshots.html">Snapshots index</a></span>
+  <span style="margin-left:8px"><a href="snapshots.html" id="link-snapshots">Snapshots index</a></span>
   </p>
   <div id="kpi">
     <span class="badge" id="fairness">fairness: …</span>
@@ -31,27 +31,47 @@
 
   <div class="grid" style="margin-top:16px;">
     <div>
-      <h3>Under-served</h3>
+  <h3><span id="heading-under">Under-served</span></h3>
       <pre id="under-json">loading…</pre>
     </div>
     <div>
-      <h3>KPI Summary</h3>
+  <h3><span id="heading-kpi">KPI Summary</span></h3>
       <pre id="kpi-json">loading…</pre>
     </div>
   </div>
 
   <div style="margin-top:16px;">
-  <h3>Weekly Trends</h3>
+  <h3><span id="heading-weekly">Weekly Trends</span></h3>
     <pre id="weekly-json">loading…</pre>
   <div id="decision-mix" style="margin-top:8px"></div>
   <div id="decision-spark" style="margin-top:8px"></div>
   </div>
 
   <div style="margin-top:16px;">
-    <h3>Monthly Feedback (dry run)</h3>
+  <h3><span id="heading-monthly">Monthly Feedback (dry run)</span></h3>
     <pre id="monthly-json">loading…</pre>
   </div>
 
+  <script>
+    // Minimal i18n heading/link wiring before app.js renders content
+    (async function(){
+      try{
+        const params = new URLSearchParams(location.search);
+        const lang = (params.get('lang')||'id').toLowerCase();
+        const base = await fetch('ui/i18n/id.json').then(r=>r.json()).catch(()=>({}));
+        const override = lang==='id' ? {} : await fetch(`ui/i18n/${lang}.json`).then(r=>r.json()).catch(()=>({}));
+        const t = { ...base, ...override };
+        function set(id,key){ const el = document.getElementById(id); if (el && t[key]) el.textContent = t[key]; }
+        set('heading-under','heading.under');
+        set('heading-kpi','heading.kpi');
+        set('heading-weekly','heading.weekly');
+        set('heading-monthly','heading.monthly');
+        set('link-methodology','link.methodology');
+        set('link-privacy','link.privacy');
+        set('link-snapshots','snapshots.index');
+      } catch {}
+    })();
+  </script>
   <script src="ui/app.js" defer></script>
 </body>
 </html>

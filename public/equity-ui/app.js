@@ -17,6 +17,17 @@ async function fetchJSON(path){
   return res.json();
 }
 
+async function loadI18n(){
+  try{
+    const params = new URLSearchParams(location.search);
+    const lang = (params.get('lang')||'id').toLowerCase();
+    const base = await fetch('ui/i18n/id.json').then(r=>r.json()).catch(()=>({}));
+    if (lang==='id') return base;
+    const override = await fetch(`ui/i18n/${lang}.json`).then(r=>r.json()).catch(()=>({}));
+    return { ...base, ...override };
+  } catch { return {}; }
+}
+
 async function main(){
   const kpiEl = document.getElementById('kpi-json');
   const underEl = document.getElementById('under-json');
@@ -30,6 +41,7 @@ async function main(){
   const monthlyEl = document.getElementById('monthly-json');
   const updatedEl = document.getElementById('updated');
   try {
+    const t = await loadI18n();
     // Best-effort health check (skip on Pages)
     const onPages = (typeof window !== 'undefined' && /github\.io/.test(location.host));
     if (!onPages) {
@@ -43,13 +55,13 @@ async function main(){
       fetchJSON('/kpi/weekly').catch(()=> null),
       fetchJSON('/feedback/monthly').catch(()=> null)
     ]);
-    fairnessBadge.textContent = `fairness: ${kpi?.fairness?.pass ? 'PASS' : 'FAIL'}`;
-    underBadge.textContent = `under-served: ${under?.total ?? 'n/a'}`;
-    anomsBadge.textContent = `anomalies: ${kpi?.equity?.anomalies_count ?? 'n/a'}`;
+  fairnessBadge.textContent = `${t['badge.fairness']||'fairness'}: ${kpi?.fairness?.pass ? 'PASS' : 'FAIL'}`;
+  underBadge.textContent = `${t['badge.under']||'under-served'}: ${under?.total ?? 'n/a'}`;
+  anomsBadge.textContent = `${t['badge.anoms']||'anomalies'}: ${kpi?.equity?.anomalies_count ?? 'n/a'}`;
     kpiEl.textContent = JSON.stringify(kpi ?? { error: 'missing kpi' }, null, 2);
     if (updatedEl && kpi?.generated_utc){
       const dt = new Date(kpi.generated_utc);
-      updatedEl.textContent = `Last updated: ${dt.toLocaleString()}`;
+      updatedEl.textContent = `${t['label.updated']||'Last updated:'} ${dt.toLocaleString()}`;
     }
     underEl.textContent = JSON.stringify(under ?? { error: 'missing under-served' }, null, 2);
   weeklyEl.textContent = JSON.stringify(weekly ?? { note: 'no weekly trends yet' }, null, 2);
@@ -63,7 +75,7 @@ async function main(){
         <span class="badge">NEG: ${dm.counts.NEG} (${Math.round(dm.ratios.NEG*100)}%)</span>
       `;
     } else if (decisionMixEl) {
-      decisionMixEl.textContent = 'decision mix: n/a';
+      decisionMixEl.textContent = t['decision.mix.na']||'decision mix: n/a';
     }
 
     // Tiny sparkline for per-week decisions if available
@@ -90,7 +102,7 @@ async function main(){
             <path d="${pathFor('NEG')}" fill="none" stroke="${color.NEG}" stroke-width="2" />
           </svg>`;
       } else {
-        decisionSparkEl.textContent = 'sparkline: n/a';
+        decisionSparkEl.textContent = t['spark.na']||'sparkline: n/a';
       }
     }
   } catch (e){
