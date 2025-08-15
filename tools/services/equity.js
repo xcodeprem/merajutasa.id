@@ -9,6 +9,7 @@
  *  - GET /equity/summary -> contents of artifacts/equity-summary.json
  *  - GET /kpi/h1 -> contents of artifacts/h1-kpi-summary.json
  *  - GET /kpi/weekly -> contents of artifacts/weekly-trends.json
+ *  - GET /feedback/monthly -> contents of artifacts/feedback-monthly-rollup.json
  *  - GET /revocations -> [] (placeholder, mirrors revocation service contract)
  */
 import http from 'http';
@@ -80,6 +81,12 @@ async function start(){
       }
       if (req.method==='GET' && req.url==='/kpi/weekly'){
         const data = await readJson('artifacts/weekly-trends.json');
+        if (!data){ res.writeHead(404); return res.end(); }
+        res.writeHead(200,{ 'content-type':'application/json' });
+        return res.end(JSON.stringify(data));
+      }
+      if (req.method==='GET' && req.url==='/feedback/monthly'){
+        const data = await readJson('artifacts/feedback-monthly-rollup.json');
         if (!data){ res.writeHead(404); return res.end(); }
         res.writeHead(200,{ 'content-type':'application/json' });
         return res.end(JSON.stringify(data));

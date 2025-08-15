@@ -27,6 +27,7 @@ async function main(){
   const underBadge = document.getElementById('under');
   const anomsBadge = document.getElementById('anoms');
   const revocBadge = document.getElementById('revoc');
+  const monthlyEl = document.getElementById('monthly-json');
   const updatedEl = document.getElementById('updated');
   try {
     // Best-effort health check (skip on Pages)
@@ -36,10 +37,11 @@ async function main(){
       if (!health.ok) throw new Error('equity service is not running');
     }
 
-    const [kpi, under, weekly] = await Promise.all([
+    const [kpi, under, weekly, monthly] = await Promise.all([
       fetchJSON('/kpi/h1').catch(()=> null),
       fetchJSON('/under-served').catch(()=> null),
-      fetchJSON('/kpi/weekly').catch(()=> null)
+      fetchJSON('/kpi/weekly').catch(()=> null),
+      fetchJSON('/feedback/monthly').catch(()=> null)
     ]);
     fairnessBadge.textContent = `fairness: ${kpi?.fairness?.pass ? 'PASS' : 'FAIL'}`;
     underBadge.textContent = `under-served: ${under?.total ?? 'n/a'}`;
@@ -51,6 +53,7 @@ async function main(){
     }
     underEl.textContent = JSON.stringify(under ?? { error: 'missing under-served' }, null, 2);
   weeklyEl.textContent = JSON.stringify(weekly ?? { note: 'no weekly trends yet' }, null, 2);
+  if (monthlyEl) monthlyEl.textContent = JSON.stringify(monthly ?? { note: 'no monthly roll-up yet' }, null, 2);
   if (revocBadge) revocBadge.textContent = 'revocations: 0';
     if (weekly && weekly.decision_mix){
       const dm = weekly.decision_mix;
@@ -100,6 +103,8 @@ async function main(){
     underEl.textContent = msg;
   const weeklyEl2 = document.getElementById('weekly-json');
   if (weeklyEl2) weeklyEl2.textContent = msg;
+  const monthlyEl2 = document.getElementById('monthly-json');
+  if (monthlyEl2) monthlyEl2.textContent = msg;
   if (updatedEl) updatedEl.textContent = 'Last updated: n/a';
   const decisionMixEl2 = document.getElementById('decision-mix');
   if (decisionMixEl2) decisionMixEl2.textContent = msg;
