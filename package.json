@@ -84,7 +84,7 @@
     "h0:content": "npm run hero:prerender && npm run doc:verify-cli:stub"
   },
   "devDependencies": {
-    "markdownlint": "^0.34.0",
+    "markdownlint": "^0.38.0",
     "markdownlint-cli2": "^0.14.0",
     "yaml": "^2.4.5",
     "glob": "^11.0.3",
