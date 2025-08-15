@@ -5,6 +5,9 @@ on:
     - cron: '7 2 * * *'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   rotate:
     runs-on: ubuntu-latest
@@ -24,3 +27,17 @@ jobs:
         with:
           name: pii-salt-rotation
           path: artifacts/pii-salt-rotation.json
+      - name: Create PR for rotated config
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "chore(privacy): rotate PII hash salt"
+          title: "chore(privacy): rotate PII hash salt"
+          body: |
+            Automated daily rotation of PII hash salt.
+
+            - Updates `tools/config/privacy-policy.json`
+            - Keeps last 7 salts in history
+            - See rotation artifact in the workflow run
+          branch: chore/pii-salt-rotation
+          add-paths: |
+            tools/config/privacy-policy.json
