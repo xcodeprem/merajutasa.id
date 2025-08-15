@@ -81,7 +81,8 @@
     "doc:verify-cli:stub": "node tools/write-verify-cli-stub.js",
     "schema:validate": "node tools/schema-validate.js",
     "hero:prerender": "node tools/hero-prerender.js",
-    "h0:content": "npm run hero:prerender && npm run doc:verify-cli:stub"
+    "h0:content": "npm run hero:prerender && npm run doc:verify-cli:stub",
+    "dec:new": "node tools/dec-template-create.cjs"
   },
   "devDependencies": {
     "markdownlint": "^0.38.0",

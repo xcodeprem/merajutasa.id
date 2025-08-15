@@ -1,0 +1,61 @@
+# Deprecated: Using MD as canonical DEC source. This YAML remains temporarily for transition.
+
+id: DEC-20250815-03
+status: DRAFT
+area: governance
+
+summary: >-
+  Adopt updated archive-trace-index-v1.md content and corresponding hash.
+
+context:
+  problem: >-
+    Trace index changed since last sealed hash; manifest verification flags a DEC-required mismatch.
+  evidence:
+    - link: docs/governance/trace/archive-trace-index-v1.md
+      note: Current file content reflects updated archival mapping.
+
+options:
+  - id: adopt-current
+    description: >-
+      Accept the current content and update the manifest hash under this DEC.
+    pros:
+      - Aligns manifest to repository state
+      - Clears verification failure with governance trace
+    cons:
+      - Requires governance acknowledgment
+  - id: revert
+    description: >-
+      Revert file to sealed content and keep manifest unchanged.
+    pros:
+      - No governance update needed
+    cons:
+      - Discards current edits
+
+decision:
+  chosen: adopt-current
+  rationale: >-
+    Edits are editorial/organizational and improve traceability; adoption is appropriate.
+  principles_alignment:
+    - GP1
+    - GP2
+
+policy_changes:
+  - id: governance.trace.index
+    change: >-
+      Accept updated content and record new hash in integrity manifest.
+
+implementation:
+  owner: governance
+  milestones:
+    - name: Update manifest hash for docs/governance/trace/archive-trace-index-v1.md
+      done: false
+    - name: Verify spec-hash passes with new DEC reference
+      done: false
+
+audit:
+  trace:
+    - artifact: docs/governance/trace/archive-trace-index-v1.md
+      checksum: sha256:f03a7e5d2e96427d87a85b17b334b4a3e918f8d3893a88dd83f0ffcc0b976d41
+  review_window_days: 30
+
+notes: ["Canonical MD: docs/governance/dec/DEC-20250815-03-trace-index-update.md"]

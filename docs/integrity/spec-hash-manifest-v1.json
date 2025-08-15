@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generation_timestamp_utc": "2025-08-14T17:35:50Z",
+  "generation_timestamp_utc": "2025-08-15T00:45:00Z",
   "generator_note": "Refined manifest: added onboarding & (optional) README, fixed dec_ref placeholders, standardized mutable_policy for adopted lint spec. All existing entries preserved; only additive or metadata corrections before first hash seal.",
   "files": [
     {
@@ -36,8 +36,8 @@
     {
       "path": "docs/fairness/hysteresis-config-v1.yml",
       "version": "1.0.0",
-      "dec_ref": "DEC-20250812-02",
-      "hash_sha256": "c07f4ccc93bd68e18a74c106980a262904d50a59b2ffa25b9e3f899028037825",
+      "dec_ref": "DEC-20250815-02",
+      "hash_sha256": "488e520591f6d68c6f56814d53bcae525816e2d9814549132262afa781f589ed",
       "integrity_class": "config",
       "mutable_policy": "locked-by-config-hash",
       "next_change_requires_dec": true,
@@ -266,8 +266,8 @@
     {
       "path": "docs/governance/policy-index-v1.md",
       "version": "1.0.0",
-      "dec_ref": "DEC-20250812-03 + DEC-20250813-04 + DEC-20250813-06 + DEC-20250815-01",
-      "hash_sha256": "21bd359ea3e4abbf99b227aa982a30f8f21f9cd8ae6dec1c75a5bf14bee2de0c",
+  "dec_ref": "DEC-20250812-03 + DEC-20250813-04 + DEC-20250813-06 + DEC-20250815-01",
+  "hash_sha256": "2bee5d6a467a25c1fb51f5a9a93fd2ccd569292499451becbbc7a0f3ad2ca1a9",
       "integrity_class": "policy-index",
       "mutable_policy": "append-only",
       "next_change_requires_dec": true,
@@ -296,8 +296,8 @@
     {
       "path": "docs/governance/trace/archive-trace-index-v1.md",
       "version": "1.0.0",
-      "dec_ref": null,
-      "hash_sha256": "8f6ad0a235c9d6d13a8c3db6ba09d46d443532b48621978bac564cd4196f4103",
+      "dec_ref": "DEC-20250815-03",
+      "hash_sha256": "f03a7e5d2e96427d87a85b17b334b4a3e918f8d3893a88dd83f0ffcc0b976d41",
       "integrity_class": "trace-index",
       "mutable_policy": "append-only",
       "next_change_requires_dec": true,
@@ -317,7 +317,7 @@
       "path": "README.md",
       "version": "1.0.0",
       "dec_ref": "DEC-20250813-04 + DEC-20250813-06 + DEC-20250815-01",
-      "hash_sha256": "cfa5ad36a62300327a371d68ece32523e9900bacab0fd991c11e277f3c541198",
+  "hash_sha256": "f6c59a32d3ac75626b2b364b4c63977adc3e4bb8c309387881e97fd551bb1ba8",
       "integrity_class": "repository-readme",
       "mutable_policy": "append-only",
       "next_change_requires_dec": true,
@@ -542,6 +542,17 @@
       "mutable_policy": "immutable",
       "next_change_requires_dec": false,
       "notes": "Editorial maintenance authorization for README, Roadmap, and Policy Index (2025-08-15)."
+    }
+    ,
+    {
+      "path": "docs/verify-cli.md",
+      "version": "0.2.0",
+      "dec_ref": null,
+      "hash_sha256": "32576ec92b39725c53995580926b5bba2b724b77d5089f445498e48e0b973b30",
+      "integrity_class": "verification-guide",
+      "mutable_policy": "append-only",
+      "next_change_requires_dec": true,
+      "notes": "Public-facing verification guide (CLI). Editorial evolution allowed; semantic policy shifts require DEC."
     }
   ],
   "integrity_rules": {

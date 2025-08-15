@@ -9,7 +9,7 @@ Purpose: Konsolidasi seluruh policy-as-code & lint guardrail agar traceable ke D
 
 | Policy ID | File / Location | Domain | Enforcement Level | DEC Ref (if any) | Principles | Notes |
 |-----------|-----------------|--------|-------------------|------------------|------------|-------|
-| aggregation.min_cell_threshold | policy/opa/aggregation.rego (planned) | Equity Aggregation | deny | DEC-20250812-02 (threshold adoption context) | GP2, GP9 | Blocks publish cells < threshold |
+| aggregation.min_cell_threshold | policies/aggregation-min-cell.rego | Equity Aggregation | deny | DEC-20250812-04 | GP2, GP9 | Blocks publish cells < threshold |
 | disclaimers.presence | ci/lint/disclaimers.js (planned) | Transparency | deny | DEC-20250812-03 (activation alignment) | GP5, GP6, GP7, GP9 | Ensures D1–D7 in required surfaces |
 | credential.field.prohibited | ci/lint/credential-schema.js | Integrity/Privacy | deny | Future DEC | GP1, GP4, GP10 | Guards against unapproved fields |
 | hysteresis.params.lock | ci/lint/hysteresis-lock.js | Fairness Governance | warn→deny | DEC-20250812-02 | GP2, GP9 | Compares code constants vs config |

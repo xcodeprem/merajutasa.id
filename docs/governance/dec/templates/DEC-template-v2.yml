@@ -1,0 +1,61 @@
+# DEC Template v2 (YAML-only)
+# See docs/governance/dec/DEC-style-guide-v2.md for conventions.
+
+id: DEC-YYYYMMDD-XX
+status: DRAFT # DRAFT | APPROVED | SUPERSEDED | REJECTED
+area: governance
+
+summary: >-
+  One-line decision summary.
+
+context:
+  problem: >-
+    Describe the problem and constraints.
+  evidence:
+    - link: URL or path to artifacts supporting the decision
+      note: short note
+
+options:
+  - id: option-a
+    description: >-
+      Describe option A.
+    pros:
+      - point 1
+    cons:
+      - point 1
+  - id: option-b
+    description: >-
+      Describe option B.
+    pros:
+      - point 1
+    cons:
+      - point 1
+
+decision:
+  chosen: option-a
+  rationale: >-
+    Why this option.
+  principles_alignment:
+    - GP1
+    - GP2
+
+policy_changes:
+  - id: policy-id-or-path
+    change: >-
+      What changes (link to policy file if applicable)
+
+implementation:
+  owner: team-or-person
+  milestones:
+    - name: M1
+      done: false
+    - name: M2
+      done: false
+
+audit:
+  trace:
+    - artifact: path/to/file
+      checksum: sha256:...
+  review_window_days: 30
+
+notes: []

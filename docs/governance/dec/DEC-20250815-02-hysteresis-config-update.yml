@@ -1,0 +1,61 @@
+# Deprecated: Using MD as canonical DEC source. This YAML remains temporarily for transition.
+
+id: DEC-20250815-02
+status: DRAFT
+area: fairness
+
+summary: >-
+  Adopt updated hysteresis-config-v1.yml content and corresponding hash.
+
+context:
+  problem: >-
+    Hysteresis config changed since last sealed hash; manifest verification flags a DEC-required mismatch.
+  evidence:
+    - link: docs/fairness/hysteresis-config-v1.yml
+      note: Current file content reflects parameter adjustments/clarifications.
+
+options:
+  - id: adopt-current
+    description: >-
+      Accept the current content and update the manifest hash under this DEC.
+    pros:
+      - Aligns manifest to repository state
+      - Clears verification failure with governance trace
+    cons:
+      - Requires governance acknowledgment
+  - id: revert
+    description: >-
+      Revert file to sealed content and keep manifest unchanged.
+    pros:
+      - No governance update needed
+    cons:
+      - Discards current edits
+
+decision:
+  chosen: adopt-current
+  rationale: >-
+    The changes are intentional and align with roadmap governance; adopting maintains accurate traceability.
+  principles_alignment:
+    - GP1
+    - GP2
+
+policy_changes:
+  - id: fairness.hysteresis.params.lock
+    change: >-
+      Accept updated parameters/content and record new hash in integrity manifest.
+
+implementation:
+  owner: governance
+  milestones:
+    - name: Update manifest hash for docs/fairness/hysteresis-config-v1.yml
+      done: false
+    - name: Verify spec-hash passes with new DEC reference
+      done: false
+
+audit:
+  trace:
+    - artifact: docs/fairness/hysteresis-config-v1.yml
+      checksum: sha256:488e520591f6d68c6f56814d53bcae525816e2d9814549132262afa781f589ed
+  review_window_days: 30
+
+notes: ["Canonical MD: docs/governance/dec/DEC-20250815-02-hysteresis-config-update.md"]
