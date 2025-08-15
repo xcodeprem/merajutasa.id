@@ -2,6 +2,8 @@
 
 [![CI Guard (H1)](https://github.com/codingxdev/merajutasa.id/actions/workflows/ci-guard.yml/badge.svg)](https://github.com/codingxdev/merajutasa.id/actions/workflows/ci-guard.yml)
 
+Live dashboard (GitHub Pages): [codingxdev.github.io/merajutasa.id](https://codingxdev.github.io/merajutasa.id/)
+
 ## GitHub Pages (Dashboard Snapshots)
 
 - Workflow `Deploy Pages (Dashboard Snapshots)` publishes the minimal equity UI and latest JSON artifacts under GitHub Pages.

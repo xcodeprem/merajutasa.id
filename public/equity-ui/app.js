@@ -1,7 +1,17 @@
 async function fetchJSON(path){
-  // If running on GitHub Pages, JSON will be under /data/*
-  const pagesBase = (typeof window !== 'undefined' && /github\.io/.test(location.host)) ? '/data' : '';
-  const url = path.startsWith('/kpi') || path.startsWith('/under') || path.startsWith('/equity') ? `${pagesBase}${path.replace(/^\//,'/')}` : path;
+  const onPages = (typeof window !== 'undefined' && /github\.io/.test(location.host));
+  let url = path;
+  if (onPages){
+    // Map API-like endpoints to project-relative data/*.json
+    const map = {
+      '/kpi/h1': 'data/h1-kpi-summary.json',
+      '/kpi/weekly': 'data/weekly-trends.json',
+      '/under-served': 'data/under-served.json',
+      '/equity/anomalies': 'data/equity-anomalies.json',
+      '/revocations': 'data/revocations.json'
+    };
+    url = map[path] || path;
+  }
   const res = await fetch(url);
   if(!res.ok) throw new Error(`${path} ${res.status}`);
   return res.json();
@@ -17,6 +27,7 @@ async function main(){
   const underBadge = document.getElementById('under');
   const anomsBadge = document.getElementById('anoms');
   const revocBadge = document.getElementById('revoc');
+  const updatedEl = document.getElementById('updated');
   try {
     // Best-effort health check (skip on Pages)
     const onPages = (typeof window !== 'undefined' && /github\.io/.test(location.host));
@@ -33,7 +44,11 @@ async function main(){
     fairnessBadge.textContent = `fairness: ${kpi?.fairness?.pass ? 'PASS' : 'FAIL'}`;
     underBadge.textContent = `under-served: ${under?.total ?? 'n/a'}`;
     anomsBadge.textContent = `anomalies: ${kpi?.equity?.anomalies_count ?? 'n/a'}`;
-  kpiEl.textContent = JSON.stringify(kpi ?? { error: 'missing kpi' }, null, 2);
+    kpiEl.textContent = JSON.stringify(kpi ?? { error: 'missing kpi' }, null, 2);
+    if (updatedEl && kpi?.generated_utc){
+      const dt = new Date(kpi.generated_utc);
+      updatedEl.textContent = `Last updated: ${dt.toLocaleString()}`;
+    }
     underEl.textContent = JSON.stringify(under ?? { error: 'missing under-served' }, null, 2);
   weeklyEl.textContent = JSON.stringify(weekly ?? { note: 'no weekly trends yet' }, null, 2);
   if (revocBadge) revocBadge.textContent = 'revocations: 0';
@@ -85,6 +100,7 @@ async function main(){
     underEl.textContent = msg;
   const weeklyEl2 = document.getElementById('weekly-json');
   if (weeklyEl2) weeklyEl2.textContent = msg;
+  if (updatedEl) updatedEl.textContent = 'Last updated: n/a';
   const decisionMixEl2 = document.getElementById('decision-mix');
   if (decisionMixEl2) decisionMixEl2.textContent = msg;
   const decisionSparkEl2 = document.getElementById('decision-spark');
