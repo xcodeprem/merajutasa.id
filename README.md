@@ -16,12 +16,12 @@ Permanent links:
 - Dashboard: <https://codingxdev.github.io/merajutasa.id/>
 - Snapshots index: <https://codingxdev.github.io/merajutasa.id/snapshots.html>
 - Data JSON (direct):
-	- KPI Summary: <https://codingxdev.github.io/merajutasa.id/data/h1-kpi-summary.json>
-	- Weekly Trends: <https://codingxdev.github.io/merajutasa.id/data/weekly-trends.json>
-	- Under-served: <https://codingxdev.github.io/merajutasa.id/data/under-served.json>
-	- Equity Anomalies: <https://codingxdev.github.io/merajutasa.id/data/equity-anomalies.json>
-	- Monthly Feedback Roll-up: <https://codingxdev.github.io/merajutasa.id/data/feedback-monthly-rollup.json>
-	- Revocations (placeholder): <https://codingxdev.github.io/merajutasa.id/data/revocations.json>
+  - KPI Summary: <https://codingxdev.github.io/merajutasa.id/data/h1-kpi-summary.json>
+  - Weekly Trends: <https://codingxdev.github.io/merajutasa.id/data/weekly-trends.json>
+  - Under-served: <https://codingxdev.github.io/merajutasa.id/data/under-served.json>
+  - Equity Anomalies: <https://codingxdev.github.io/merajutasa.id/data/equity-anomalies.json>
+  - Monthly Feedback Roll-up: <https://codingxdev.github.io/merajutasa.id/data/feedback-monthly-rollup.json>
+  - Revocations (placeholder): <https://codingxdev.github.io/merajutasa.id/data/revocations.json>
 
 ## Fairness & Integrity Governance Scaffold (Baseline PRE-SEAL)
 
