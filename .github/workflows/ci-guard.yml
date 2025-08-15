@@ -1,6 +1,7 @@
 name: CI Guard (H1)
 
 on:
+  workflow_dispatch:
   push:
     branches: [ main ]
   pull_request:
@@ -10,11 +11,11 @@ on:
 
 jobs:
   h1-guard:
-  # Run for:
-  # - push (always)
-  # - pull_request (except Dependabot)
-  # - pull_request_target (Dependabot only)
-  if: ${{ github.event_name == 'push' || (github.event_name == 'pull_request' && github.actor != 'dependabot[bot]') || (github.event_name == 'pull_request_target' && github.actor == 'dependabot[bot]') }}
+    # Run for:
+    # - push (always)
+    # - pull_request (except Dependabot)
+    # - pull_request_target (Dependabot only)
+    if: ${{ github.event_name == 'push' || (github.event_name == 'pull_request' && github.actor != 'dependabot[bot]') || (github.event_name == 'pull_request_target' && github.actor == 'dependabot[bot]') }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -46,10 +47,12 @@ jobs:
           PR_HEAD_REF: ${{ github.head_ref || github.event.pull_request.head.ref || '' }}
           PERF_ADVISORY: ${{ (github.actor == 'dependabot[bot]') || startsWith(github.head_ref, 'dependabot/') || (github.event.pull_request.head.ref && startsWith(github.event.pull_request.head.ref, 'dependabot/')) }}
 
-      - name: Terminology Adoption Enforcement (warning mode)
-        continue-on-error: true
+      - name: Terminology Adoption Enforcement (strict)
         run: |
-          ADOPTION_MIN=80 BANNED_MAX=0 node tools/terminology-adoption.js
+          ADOPTION_MIN=85 BANNED_MAX=0 node tools/terminology-adoption.js
+
+      - name: Event Meta Validators (≥10 types)
+        run: node tools/event-meta-validate.js
 
       - name: npm audit (high severity)
         run: |
@@ -66,3 +69,4 @@ jobs:
             artifacts/under-served.json
             artifacts/a11y-smoke-report.json
             artifacts/perf-budget-report.json
+            artifacts/event-meta-validate.json

@@ -1,0 +1,26 @@
+name: PII Salt Rotation (Daily)
+
+on:
+  schedule:
+    - cron: '7 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  rotate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install deps
+        run: npm ci
+      - name: Rotate PII salt
+        run: node tools/rotate-pii-salt.js
+      - name: Upload rotation artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pii-salt-rotation
+          path: artifacts/pii-salt-rotation.json

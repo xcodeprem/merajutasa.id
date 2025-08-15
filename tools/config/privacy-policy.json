@@ -1,5 +1,9 @@
 {
+  "hash_salt": "3d58e99275ead492d4daabdf2d92c124",
+  "previous_salts": [
+    "dev-salt-placeholder"
+  ],
   "multi_category_block_threshold": 2,
-  "hash_salt": "dev-salt-placeholder",
-  "sample_truncate_chars": 6
+  "sample_truncate_chars": 6,
+  "last_rotated_utc": "2025-08-15T09:54:54.463Z"
 }
