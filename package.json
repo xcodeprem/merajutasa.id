@@ -50,6 +50,7 @@
     "events:anchor": "node tools/event-anchor-chain.js",
     "events:pipeline:hash": "node tools/event-pipeline-hash.js",
     "feedback:smoke": "node tools/feedback-smoke.js",
+  "collector:reliability": "node tools/collector-reliability-smoke.js",
     "test:collector": "node tools/tests/collector-integration.test.js",
     "test:revocation-smoke": "node tools/tests/revocation-smoke.test.js",
     "test:equity-smoke": "node tools/tests/equity-smoke.test.js",

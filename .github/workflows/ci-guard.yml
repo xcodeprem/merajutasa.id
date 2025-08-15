@@ -56,12 +56,21 @@ jobs:
           # Keep strict on manual workflow_dispatch runs.
           PERF_ADVISORY: ${{ github.event_name == 'push' || github.event_name == 'pull_request' || github.event_name == 'pull_request_target' }}
 
+      - name: Disclaimers Lint (strict)
+        run: node tools/disclaimers-lint.js
+
       - name: Terminology Adoption Enforcement (strict)
         run: |
           ADOPTION_MIN=85 BANNED_MAX=0 node tools/terminology-adoption.js
 
       - name: Event Meta Validators (≥10 types)
         run: node tools/event-meta-validate.js
+
+      - name: Collector Reliability (advisory on PR/main)
+        run: |
+          RELIABILITY_ATTEMPTS=40 RELIABILITY_THRESHOLD=98 \
+          RELIABILITY_ADVISORY=${{ github.event_name == 'push' || github.event_name == 'pull_request' || github.event_name == 'pull_request_target' }} \
+          node tools/collector-reliability-smoke.js
 
       - name: npm audit (high severity)
         run: |
@@ -79,6 +88,8 @@ jobs:
             artifacts/a11y-smoke-report.json
             artifacts/perf-budget-report.json
             artifacts/event-meta-validate.json
+            artifacts/disclaimers-lint.json
+            artifacts/collector-reliability.json
 
       - name: Chain Integrity Monitor (advisory)
         run: |
