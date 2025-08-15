@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-15T10:02:17.102Z",
+  "generated_utc": "2025-08-15T14:01:39.280Z",
   "old_total": 0,
   "new_total": 0,
   "adoptionPercent": 100,
@@ -26,17 +26,22 @@
       "newCount": 0
     },
     {
-      "file": "docs\\support\\README.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
       "file": "docs\\transparency\\methodology-snippet-h0.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
       "file": "docs\\transparency\\changelog-excerpt-phase1.5.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\tests\\hysteresis-test-plan-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\support\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -56,17 +61,12 @@
       "newCount": 0
     },
     {
-      "file": "docs\\tests\\hysteresis-test-plan-v1.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
       "file": "docs\\security\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs\\release\\README.md",
+      "file": "docs\\schemas\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -76,7 +76,7 @@
       "newCount": 0
     },
     {
-      "file": "docs\\schemas\\README.md",
+      "file": "docs\\release\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -91,11 +91,6 @@
       "newCount": 0
     },
     {
-      "file": "docs\\policies\\README.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
       "file": "docs\\privacy\\README.md",
       "oldCount": 0,
       "newCount": 0
@@ -106,17 +101,27 @@
       "newCount": 0
     },
     {
+      "file": "docs\\privacy\\pii-rotation-policy.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
       "file": "docs\\privacy\\pii-pattern-library-v1.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs\\principles\\GP1-GP10-index.md",
+      "file": "docs\\policies\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
       "file": "docs\\playbooks\\README.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\principles\\GP1-GP10-index.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -141,6 +146,16 @@
       "newCount": 0
     },
     {
+      "file": "docs\\master-spec\\master-spec-v2.0.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\legal\\README.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
       "file": "docs\\master-spec-deltas\\delta-master-spec-v2-DEC-20250813-06-event-schema-alignment.md",
       "oldCount": 0,
       "newCount": 0
@@ -151,12 +166,7 @@
       "newCount": 0
     },
     {
-      "file": "docs\\master-spec\\master-spec-v2.0.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\legal\\README.md",
+      "file": "docs\\feedback\\feedback.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -186,12 +196,32 @@
       "newCount": 0
     },
     {
-      "file": "docs\\feedback\\feedback.md",
+      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
+      "file": "docs\\fairness\\hysteresis-state-machine-transitions.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\fairness\\hysteresis-public-methodology-fragment-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\fairness\\equity-under-served-section.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\fairness\\equity-snapshot-pseudocode.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\fairness\\equity-page.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -251,31 +281,6 @@
       "newCount": 0
     },
     {
-      "file": "docs\\fairness\\hysteresis-state-machine-transitions.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\fairness\\hysteresis-public-methodology-fragment-v1.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\fairness\\equity-under-served-section.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\fairness\\equity-snapshot-pseudocode.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\fairness\\equity-page.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
       "file": "docs\\data\\README.md",
       "oldCount": 0,
       "newCount": 0
@@ -286,17 +291,17 @@
       "newCount": 0
     },
     {
-      "file": "docs\\api\\README.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
       "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
       "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\api\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -346,12 +351,7 @@
       "newCount": 0
     },
     {
-      "file": "docs\\governance\\audit\\README-audit-process.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\governance\\audit\\pr-template-line-audit-2025-08-12T0509Z.md",
+      "file": "docs\\governance\\dec\\DEC-style-guide-v3.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -362,6 +362,16 @@
     },
     {
       "file": "docs\\governance\\dec\\DEC-style-guide-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250815-03-trace-index-update.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250815-02-hysteresis-config-update.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -432,6 +442,21 @@
     },
     {
       "file": "docs\\governance\\dec\\DEC-20250812-02-hysteresis-adoption.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\audit\\README-audit-process.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\audit\\pr-template-line-audit-2025-08-12T0509Z.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\dec\\templates\\DEC-template-v1.md",
       "oldCount": 0,
       "newCount": 0
     }

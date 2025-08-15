@@ -79,3 +79,14 @@ jobs:
             artifacts/a11y-smoke-report.json
             artifacts/perf-budget-report.json
             artifacts/event-meta-validate.json
+
+      - name: Chain Integrity Monitor (advisory)
+        run: |
+          node tools/chain-monitor.js || echo "chain-monitor failed (advisory)"
+
+      - name: Upload Chain Monitor Artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: chain-monitor
+          path: artifacts/chain-monitor.json

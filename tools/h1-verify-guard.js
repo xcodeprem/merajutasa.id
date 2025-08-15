@@ -17,6 +17,8 @@ async function main(){
   await runNode('tools/derive-under-served-list.js');
   await runNode('tools/equity-anomaly-detector.js');
   await runNode('tools/weekly-trend-aggregator.js');
+  // Include feedback smoke ingestion to surface feedback metrics in H1 KPI
+  await runNode('tools/feedback-smoke.js');
   await runNode('tools/generate-h1-kpi-summary.js');
   // Start equity service for perf/a11y checks
   const svc = spawn(process.execPath, ['tools/services/equity.js'], { env: { ...process.env, EQUITY_PORT: String(process.env.EQUITY_PORT||4620) }, stdio:['ignore','pipe','pipe'] });

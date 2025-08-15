@@ -22,6 +22,7 @@ jobs:
         run: |
           node tools/weekly-trend-aggregator.js
           node tools/generate-h1-kpi-summary.js
+          node tools/monthly-feedback-rollup.js
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -29,3 +30,4 @@ jobs:
           path: |
             artifacts/weekly-trends.json
             artifacts/h1-kpi-summary.json
+            artifacts/feedback-monthly-rollup.json

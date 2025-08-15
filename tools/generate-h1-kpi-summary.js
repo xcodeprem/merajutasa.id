@@ -6,6 +6,12 @@
 import { promises as fs } from 'fs';
 
 async function read(path){ try { return JSON.parse(await fs.readFile(path,'utf8')); } catch { return null; } }
+async function readNdjson(path){
+  try {
+    const txt = await fs.readFile(path,'utf8');
+    return txt.split(/\r?\n/).filter(Boolean).map(l=>{ try { return JSON.parse(l); } catch { return null; } }).filter(Boolean);
+  } catch { return null; }
+}
 
 async function main(){
   await fs.mkdir('artifacts',{recursive:true});
@@ -16,6 +22,7 @@ async function main(){
   const phase = await read('artifacts/phase-tracker.json');
   const adoption = await read('artifacts/terminology-adoption.json');
   const feedback = await read('artifacts/feedback-smoke-report.json');
+  const feedbackRecords = await readNdjson('artifacts/feedback-records.ndjson');
   const hero = await read('artifacts/hero-snapshot.json');
   const weekly = await read('artifacts/weekly-trends.json');
 
@@ -43,10 +50,30 @@ async function main(){
       old_total: adoption?.old_total ?? null,
       new_total: adoption?.new_total ?? null
     },
-    feedback: {
-      ingested: feedback?.ingested ?? null,
-      categories: feedback?.categories ?? null
-    },
+    feedback: (()=>{
+      const out = { ingested: null, categories: null };
+      // Prefer real records if available
+      if (Array.isArray(feedbackRecords) && feedbackRecords.length){
+        out.ingested = feedbackRecords.length;
+        const counts = {};
+        for (const r of feedbackRecords){
+          if (Array.isArray(r.categories)){
+            for (const c of r.categories){
+              const key = String(c).toLowerCase();
+              counts[key] = (counts[key]||0)+1;
+            }
+          }
+        }
+        out.categories = counts;
+        return out;
+      }
+      // Fallback to smoke report if it contains summary-like fields
+      if (feedback){
+        out.ingested = feedback.ingested ?? (Array.isArray(feedback.results)? feedback.results.filter(x=>x.status==='OK').length : null);
+        out.categories = feedback.categories ?? null;
+      }
+      return out;
+    })(),
     trust: {
       hero_badges: hero?.hero_copy?.badges ?? null,
       disclaimers_status: hero?.governance?.disclaimers_status ?? null

@@ -113,18 +113,10 @@
   },
   {
     "seq": 14,
-    "prevHash": "d0fab7c7b2126e096a7abb2c3859bf5324051a4cf239497bca2ddb6e734b1631",
+    "prevHash": "deadbeef",
     "contentHash": "82d2eb6579c2cdaeb8657ec9b1f279fd33f88ff8211e5866d2786568618bea98",
     "signature": "Wx10aQWkB0mP3rB0v0JttIbyW8oBLE8iiIobKehi9N/Mq0GiMDrFM4bSY0MuHAG5kDm850yD4ie5BwwYH++lCw==",
     "canonical": "{\"id\":\"chain-test-2\",\"n\":2,\"purpose\":\"append-seed\",\"ts\":\"2025-08-14T13:08:42.179Z\"}",
     "ts": "2025-08-14T13:08:42.210Z"
-  },
-  {
-    "seq": 15,
-    "prevHash": "82d2eb6579c2cdaeb8657ec9b1f279fd33f88ff8211e5866d2786568618bea98",
-    "contentHash": "a0b209ad49aceb19e0f6615076220485137cfb847cd892ae65e9fa05119b1288",
-    "signature": "MgY8htS4wVyWaxDMOLUPoeD+Vv1qVZqCuaLLqwxSi3LNi9dQSiT9vpPqO0UY4XHOtB0TEzTAzADlUwh2kNieCw==",
-    "canonical": "{\"claims\":{\"level\":\"basic\"},\"id\":\"cred-1755270469620\",\"issued_at\":\"2025-08-15T15:07:49.620Z\",\"subject\":\"user:123\"}",
-    "ts": "2025-08-15T15:07:49.753Z"
   }
 ]

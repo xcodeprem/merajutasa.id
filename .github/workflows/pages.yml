@@ -32,6 +32,7 @@ jobs:
           node tools/equity-anomaly-detector.js || true
           node tools/weekly-trend-aggregator.js || true
           node tools/generate-h1-kpi-summary.js || true
+          node tools/monthly-feedback-rollup.js || true
       - name: Prepare static snapshot
         run: |
           mkdir -p dist
@@ -42,6 +43,7 @@ jobs:
           [ -f artifacts/weekly-trends.json ] && cp artifacts/weekly-trends.json dist/data/ || true
           [ -f artifacts/equity-anomalies.json ] && cp artifacts/equity-anomalies.json dist/data/ || true
           [ -f artifacts/under-served.json ] && cp artifacts/under-served.json dist/data/ || true
+          [ -f artifacts/feedback-monthly-rollup.json ] && cp artifacts/feedback-monthly-rollup.json dist/data/ || true
           # placeholder revocations snapshot
           echo "[]" > dist/data/revocations.json
           # rewrite UI to load /data/*.json if available

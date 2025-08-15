@@ -35,6 +35,7 @@ jobs:
       - name: Rebuild KPI Summary (include adoption)
         run: |
           node tools/generate-h1-kpi-summary.js
+          node tools/monthly-feedback-rollup.js
 
       - name: UI Smoke Test (Equity)
         run: |
@@ -49,3 +50,15 @@ jobs:
             artifacts/equity-summary.json
             artifacts/equity-anomalies.json
             artifacts/under-served.json
+            artifacts/feedback-monthly-rollup.json
+
+      - name: Chain Integrity Monitor (advisory)
+        run: |
+          node tools/chain-monitor.js || echo "chain-monitor failed (advisory)"
+
+      - name: Upload Chain Monitor Artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: chain-monitor
+          path: artifacts/chain-monitor.json

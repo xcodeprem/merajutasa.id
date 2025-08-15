@@ -1,6 +1,6 @@
 {
   "version": "1.1.0",
-  "generated_utc": "2025-08-15T09:56:05.234Z",
+  "generated_utc": "2025-08-15T15:21:03.265Z",
   "phase": "PHASE_1_ERROR",
   "fairness": {
     "pass": true,
@@ -20,8 +20,12 @@
     "new_total": 0
   },
   "feedback": {
-    "ingested": null,
-    "categories": null
+    "ingested": 18,
+    "categories": {
+      "product": 9,
+      "ux": 9,
+      "bug": 9
+    }
   },
   "trust": {
     "hero_badges": [
@@ -37,9 +41,9 @@
         "start_utc": "2025-08-11",
         "end_utc": "2025-08-17",
         "totals": {
-          "events": 9,
-          "canonical_ok": 9,
-          "hero_views": 7,
+          "events": 10,
+          "canonical_ok": 10,
+          "hero_views": 8,
           "feedback": 0,
           "prohibited": 0,
           "coverage": 1
@@ -51,16 +55,16 @@
       "start_utc": "2025-08-11",
       "end_utc": "2025-08-17",
       "totals": {
-        "events": 9,
-        "canonical_ok": 9,
-        "hero_views": 7,
+        "events": 10,
+        "canonical_ok": 10,
+        "hero_views": 8,
         "feedback": 0,
         "prohibited": 0,
         "coverage": 1
       }
     },
     "coverage_latest": 1,
-    "throughput_latest": 9,
+    "throughput_latest": 10,
     "decision_mix": {
       "counts": {
         "POS": 0,
