@@ -24,6 +24,9 @@ jobs:
 
       - name: Run H1 guard (fairness, snapshots, anomalies, KPIs, perf, a11y)
         run: node tools/h1-verify-guard.js
+        env:
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+          GITHUB_ACTOR: ${{ github.actor }}
 
       - name: Terminology Adoption Enforcement (warning mode)
         continue-on-error: true

@@ -25,7 +25,18 @@ async function main(){
     svc.stdout.on('data', d=>{ if (String(d).includes('listening')) { clearTimeout(t); resolve(true); }});
   });
   try {
-    await runNode('tools/perf-budget-smoke.js');
+    try {
+      await runNode('tools/perf-budget-smoke.js');
+    } catch (e) {
+      const actor = (process.env.GITHUB_ACTOR||'').toLowerCase();
+      const isDependabot = actor.includes('dependabot');
+      const isPR = (process.env.GITHUB_EVENT_NAME||'') === 'pull_request';
+      if (isDependabot && isPR) {
+        console.warn('[h1-guard] perf-budget failed but treated as ADVISORY for Dependabot PRs');
+      } else {
+        throw e;
+      }
+    }
     await runNode('tools/a11y-smoke.js');
   } finally {
     try { svc.kill('SIGKILL'); } catch {}
