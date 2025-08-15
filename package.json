@@ -85,7 +85,7 @@
   },
   "devDependencies": {
     "markdownlint": "^0.38.0",
-    "markdownlint-cli2": "^0.14.0",
+    "markdownlint-cli2": "^0.18.1",
     "yaml": "^2.4.5",
     "glob": "^11.0.3",
     "ajv": "^8.17.1",
