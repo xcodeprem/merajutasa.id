@@ -10,8 +10,11 @@ on:
 
 jobs:
   h1-guard:
-    # Run normally for push and pull_request; for pull_request_target, only when actor is Dependabot
-    if: ${{ (github.event_name != 'pull_request_target') || (github.actor == 'dependabot[bot]') }}
+  # Run for:
+  # - push (always)
+  # - pull_request (except Dependabot)
+  # - pull_request_target (Dependabot only)
+  if: ${{ github.event_name == 'push' || (github.event_name == 'pull_request' && github.actor != 'dependabot[bot]') || (github.event_name == 'pull_request_target' && github.actor == 'dependabot[bot]') }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -40,6 +43,7 @@ jobs:
         env:
           GITHUB_EVENT_NAME: ${{ github.event_name }}
           GITHUB_ACTOR: ${{ github.actor }}
+          PR_HEAD_REF: ${{ github.head_ref || github.event.pull_request.head.ref || '' }}
 
       - name: Terminology Adoption Enforcement (warning mode)
         continue-on-error: true

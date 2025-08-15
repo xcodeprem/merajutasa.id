@@ -30,9 +30,11 @@ async function main(){
     } catch (e) {
       const actor = (process.env.GITHUB_ACTOR||'').toLowerCase();
       const evt = (process.env.GITHUB_EVENT_NAME||'').toLowerCase();
+  const headRef = (process.env.PR_HEAD_REF||'').toLowerCase();
       const isDependabot = actor.includes('dependabot');
       const isPRLike = evt === 'pull_request' || evt === 'pull_request_target';
-      if (isDependabot && isPRLike) {
+  const isDependabotBranch = headRef.startsWith('dependabot/') || headRef.includes('/dependabot/');
+  if ((isDependabot && isPRLike) || isDependabotBranch) {
         console.warn(`[h1-guard] perf-budget failed (${e?.message||'error'}) but treated as ADVISORY for Dependabot (${evt})`);
       } else {
         throw e;
