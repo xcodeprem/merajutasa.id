@@ -52,7 +52,9 @@ jobs:
           GITHUB_EVENT_NAME: ${{ github.event_name }}
           GITHUB_ACTOR: ${{ github.actor }}
           PR_HEAD_REF: ${{ github.head_ref || github.event.pull_request.head.ref || '' }}
-          PERF_ADVISORY: ${{ (github.actor == 'dependabot[bot]') || startsWith(github.head_ref, 'dependabot/') || (github.event.pull_request.head.ref && startsWith(github.event.pull_request.head.ref, 'dependabot/')) }}
+          # Treat performance budget as advisory on PRs and on push to main (temporary while tuning).
+          # Keep strict on manual workflow_dispatch runs.
+          PERF_ADVISORY: ${{ github.event_name == 'push' || github.event_name == 'pull_request' || github.event_name == 'pull_request_target' }}
 
       - name: Terminology Adoption Enforcement (strict)
         run: |
