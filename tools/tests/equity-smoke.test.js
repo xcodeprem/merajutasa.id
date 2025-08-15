@@ -32,6 +32,8 @@ async function main(){
     if (anomalies.status!==200 || typeof anomalies.json?.anomalies_count !== 'number') throw new Error('anomalies');
     const summary = await httpGet('/equity/summary');
     if (summary.status!==200 || typeof summary.json?.equity_index !== 'number') throw new Error('summary');
+  const monthly = await httpGet('/feedback/monthly');
+  if (monthly.status===200 && !Array.isArray(monthly.json?.months)) throw new Error('monthly');
     console.log('[equity-smoke] PASS');
   } finally {
     child.kill('SIGKILL');

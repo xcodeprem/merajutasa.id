@@ -41,6 +41,9 @@ async function main(){
   if (under.status!==200 || typeof under.json?.total !== 'number') throw new Error('under');
   const weekly = await httpGetJson('/kpi/weekly');
   if (weekly.status!==200 || !Array.isArray(weekly.json?.weeks)) throw new Error('weekly');
+  // Monthly endpoint is optional in early runs; treat 200 with schema as pass, 404 as ok
+  const monthly = await httpGetJson('/feedback/monthly');
+  if (monthly.status===200 && !Array.isArray(monthly.json?.months)) throw new Error('monthly schema');
     console.log('[equity-ui-smoke] PASS');
   } finally {
     child.kill('SIGKILL');

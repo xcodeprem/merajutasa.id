@@ -8,7 +8,8 @@ async function fetchJSON(path){
       '/kpi/weekly': 'data/weekly-trends.json',
       '/under-served': 'data/under-served.json',
       '/equity/anomalies': 'data/equity-anomalies.json',
-      '/revocations': 'data/revocations.json'
+  '/revocations': 'data/revocations.json',
+  '/feedback/monthly': 'data/feedback-monthly-rollup.json'
     };
     url = map[path] || path;
   }
@@ -39,6 +40,7 @@ async function main(){
   const anomsBadge = document.getElementById('anoms');
   const revocBadge = document.getElementById('revoc');
   const monthlyEl = document.getElementById('monthly-json');
+  const monthlyCard = document.getElementById('monthly-summary');
   const updatedEl = document.getElementById('updated');
   try {
     const t = await loadI18n();
@@ -66,6 +68,20 @@ async function main(){
     underEl.textContent = JSON.stringify(under ?? { error: 'missing under-served' }, null, 2);
   weeklyEl.textContent = JSON.stringify(weekly ?? { note: 'no weekly trends yet' }, null, 2);
   if (monthlyEl) monthlyEl.textContent = JSON.stringify(monthly ?? { note: 'no monthly roll-up yet' }, null, 2);
+  // Render compact monthly summary card for latest month
+  if (monthly && Array.isArray(monthly.months) && monthly.months.length>0 && monthlyCard){
+    const latest = monthly.months[monthly.months.length-1];
+    const cats = latest.categories || {};
+    const pii = latest.pii || {};
+    const fmt = (o)=> Object.keys(o).sort().map(k=> `${k.toUpperCase()}: ${o[k]}`).join(' · ');
+    monthlyCard.innerHTML = `
+      <div><strong>${t['monthly.latest']||'Latest month'}</strong>: ${latest.month}</div>
+      <div>${t['monthly.total']||'Total'}: <strong>${latest.total}</strong> · ${t['monthly.avglen']||'Avg len'}: ${latest.avg_len}</div>
+      <div class="muted">${t['monthly.categories']||'Categories'}: ${fmt(cats) || '—'}</div>
+      <div class="muted">${t['monthly.pii']||'PII'}: ${fmt(pii) || '—'}</div>
+    `;
+    monthlyCard.style.display = 'block';
+  }
   if (revocBadge) revocBadge.textContent = 'revocations: 0';
     if (weekly && weekly.decision_mix){
       const dm = weekly.decision_mix;
