@@ -29,10 +29,11 @@ async function main(){
       await runNode('tools/perf-budget-smoke.js');
     } catch (e) {
       const actor = (process.env.GITHUB_ACTOR||'').toLowerCase();
+      const evt = (process.env.GITHUB_EVENT_NAME||'').toLowerCase();
       const isDependabot = actor.includes('dependabot');
-      const isPR = (process.env.GITHUB_EVENT_NAME||'') === 'pull_request';
-      if (isDependabot && isPR) {
-        console.warn('[h1-guard] perf-budget failed but treated as ADVISORY for Dependabot PRs');
+      const isPRLike = evt === 'pull_request' || evt === 'pull_request_target';
+      if (isDependabot && isPRLike) {
+        console.warn(`[h1-guard] perf-budget failed (${e?.message||'error'}) but treated as ADVISORY for Dependabot (${evt})`);
       } else {
         throw e;
       }

@@ -5,14 +5,27 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  pull_request_target:
+    types: [opened, synchronize, reopened]
 
 jobs:
   h1-guard:
+    # Run normally for push and pull_request; for pull_request_target, only when actor is Dependabot
+    if: ${{ (github.event_name != 'pull_request_target') || (github.actor == 'dependabot[bot]') }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - name: Checkout
+      - name: Checkout (PR/Push)
+        if: ${{ github.event_name != 'pull_request_target' }}
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Checkout base for Dependabot (PR Target)
+        if: ${{ github.event_name == 'pull_request_target' }}
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.base_ref }}
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
