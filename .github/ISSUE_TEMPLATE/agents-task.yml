@@ -1,0 +1,36 @@
+name: Agents Task
+description: Tugas yang siap dikerjakan oleh agents (terstruktur, ber-AC, dan terhubung ke CI)
+title: "[Agents] <judul singkat>"
+labels:
+  - agents-ready
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Mohon isi detil di bawah. Tautkan berkas/skrip/CI terkait agar bisa dieksekusi otomatis.
+  - type: textarea
+    id: context
+    attributes:
+      label: Latar Belakang
+      description: Ringkasan konteks dan mengapa tugas ini perlu.
+      placeholder: Mengapa, file/komponen terkait, referensi DEC/Policy jika ada.
+  - type: textarea
+    id: tasks
+    attributes:
+      label: Checklist
+      description: Rinci langkah-langkah yang harus dilakukan.
+      value: |
+        - [ ] Implement
+        - [ ] Tests/Smoke
+        - [ ] CI guard wiring
+        - [ ] Docs/README note
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria (CI)
+      description: Sinyal CI yang harus hijau untuk dianggap selesai.
+      value: |
+        - [ ] ci-guard: PASS
+        - [ ] test: PASS (terkait)
+        - [ ] artifacts updated (bila relevan)

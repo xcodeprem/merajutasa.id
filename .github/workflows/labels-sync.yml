@@ -1,0 +1,29 @@
+name: Sync labels
+on:
+  workflow_dispatch: {}
+permissions:
+  contents: read
+  issues: write
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const labels = [
+              { name: 'agents-ready', color: '0e8a16', description: 'Siap dikerjakan oleh agents' },
+              { name: 'governance', color: '0366d6', description: 'Governance & policy changes' },
+              { name: 'fairness', color: '5319e7', description: 'Hysteresis/Equity/Fairness engine' },
+              { name: 'integrity', color: 'c2e0c6', description: 'Hashing, evidence, gating' },
+              { name: 'pages', color: '1d76db', description: 'GitHub Pages & UI' },
+              { name: 'security', color: 'd93f0b', description: 'Security/CodeQL/PII' }
+            ];
+            for (const lbl of labels){
+              try {
+                await github.rest.issues.getLabel({ owner: context.repo.owner, repo: context.repo.repo, name: lbl.name });
+                await github.rest.issues.updateLabel({ owner: context.repo.owner, repo: context.repo.repo, name: lbl.name, color: lbl.color, description: lbl.description });
+              } catch {
+                await github.rest.issues.createLabel({ owner: context.repo.owner, repo: context.repo.repo, name: lbl.name, color: lbl.color, description: lbl.description });
+              }
+            }
