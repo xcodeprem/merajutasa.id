@@ -4,58 +4,54 @@ title: DEC Authoring Style Guide v3 (Markdown Canonical with Front Matter)
 date: 2025-08-15T12:00:00Z
 class: guidance
 status: published
-supersedes: [GUIDANCE-DEC-STYLE-V2]
+supersedes:
+  - GUIDANCE-DEC-STYLE-V2
 depends_on: []
-governance_tags: [style, governance]
+governance_tags:
+  - style
+  - governance
 decision_summary: >
-  Menetapkan Markdown (.md) sebagai format kanonik untuk semua DEC baru, dengan front matter YAML sebagai metadata dan isi terstruktur heading.
-canonicalization:
-  algorithm: SHA256
-  front_matter_keys_order:
-    - id
-    - title
-    - date
-    - class
-    - status
-    - supersedes
-    - depends_on
-    - governance_tags
-    - decision_summary
-  body_sections_order:
-    - Summary
-    - Context
-    - Options
-    - Decision
-    - Policy changes
-    - Implementation
-    - Audit
-    - Integrity
-    - Notes
-  hashing_steps:
-    - Replace any explicit hash fields with <PENDING_HASH> in source before hashing
-    - Normalize line endings to LF
-    - Trim trailing whitespace
-    - Hash full bytes of the file
-migration:
-  from_v2_yaml:
-    approach: "Tambahkan file .md baru yang merepresentasikan keputusan yang sama; tautkan di YAML lama bila masih ada; YAML boleh dihapus setelah MD aktif."
-    dec_id_preservation: "ID DEC tetap sama."
-    generator: "Gunakan tools/dec-template-create.cjs (default .md)."
-rationale:
-  - Konsisten dengan konvensi repo lainnya (docs berbasis MD) dan memudahkan pembacaan manusia.
-  - Front matter menjaga determinisme metadata; isi berheading mudah dilint & diindeks.
-  - Mengurangi kebingungan antara .yml vs .md serta meminimalkan friction tooling.
-implementation_actions:
-  - Gunakan pola nama: `DEC-YYYYMMDD-XX.md`.
-  - Gunakan template: `docs/governance/dec/templates/DEC-template-v1.md`.
-  - Generator: `npm run dec:new` (default menghasilkan .md).
-  - Jika sebelumnya ada file .yml untuk DEC yang sama, hapus setelah MD tersedia dan referensi diperbarui.
-review_plan:
-  date_scheduled: 2025-10-01
-  success_criteria:
-    - 100% DEC baru menggunakan .md dengan front matter.
-    - Tidak ada lint error struktural pada DEC baru.
-append_only_notice: "Guidance additive; style perubahan besar selanjutnya di v4."
+  Menetapkan Markdown (.md) sebagai format kanonik untuk semua DEC baru,
+  dengan front matter YAML sebagai metadata dan isi terstruktur heading.
+---
+
+## Canonicalization
+
+- Algorithm: SHA256
+- Front matter keys order: [id, title, date, class, status, supersedes, depends_on, governance_tags, decision_summary]
+- Body sections order: [Summary, Context, Options, Decision, Policy changes, Implementation, Audit, Integrity, Notes]
+- Hashing steps:
+  1) Replace any explicit hash fields with <PENDING_HASH> in source before hashing
+  2) Normalize line endings to LF
+  3) Trim trailing whitespace
+  4) Hash full bytes of the file
+
+## Migration from v2 (.yml)
+
+- Tambahkan file .md baru yang merepresentasikan keputusan yang sama; tautkan di YAML lama bila masih ada; YAML boleh dihapus setelah MD aktif.
+- ID DEC tetap sama.
+- Gunakan generator: tools/dec-template-create.cjs (default .md).
+
+## Rationale
+
+- Konsisten dengan konvensi repo lainnya (docs berbasis MD) dan memudahkan pembacaan manusia.
+- Front matter menjaga determinisme metadata; isi berheading mudah dilint & diindeks.
+- Mengurangi kebingungan antara .yml vs .md serta meminimalkan friction tooling.
+
+## Implementation actions
+
+- Gunakan pola nama: `DEC-YYYYMMDD-XX.md`.
+- Gunakan template: `docs/governance/dec/templates/DEC-template-v1.md`.
+- Generator: `npm run dec:new` (default menghasilkan .md).
+- Jika sebelumnya ada file .yml untuk DEC yang sama, hapus setelah MD tersedia dan referensi diperbarui.
+
+## Review plan
+
+- Tanggal peninjauan: 2025-10-01
+- Sukses jika: 100% DEC baru .md, tanpa lint error struktural.
+
+Append-only notice: Guidance additive; style perubahan besar selanjutnya di v4.
+
 ---
 
 DEC Style Guide v3 ini menetapkan MD sebagai sumber kanonik. Contoh struktur:

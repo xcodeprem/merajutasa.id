@@ -71,6 +71,7 @@
     "terms:adoption": "node tools/terminology-adoption.js",
     "perf:budget": "node tools/perf-budget-smoke.js",
     "a11y:smoke": "node tools/a11y-smoke.js",
+  "gate:1": "node tools/gate1-verify.js",
     "pipeline:credential": "node tools/pipeline-runner.js",
     "chain:reset:dev": "node tools/chain-reset-dev.js",
     "monitor:chain": "node tools/chain-monitor.js",

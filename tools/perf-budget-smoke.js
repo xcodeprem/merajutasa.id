@@ -3,6 +3,7 @@
 import { promises as fs } from 'fs';
 import lighthouse from 'lighthouse';
 import { launch as launchChrome } from 'chrome-launcher';
+import http from 'http';
 
 const PORT = Number(process.env.EQUITY_PORT || 4620);
 const URL = `http://127.0.0.1:${PORT}/`;
@@ -20,6 +21,14 @@ async function runLighthouse(url){
 }
 
 async function main(){
+  // Preflight: wait briefly for /health
+  const check = ()=> new Promise((resolve)=>{
+    const req = http.get({ hostname:'127.0.0.1', port: PORT, path:'/health', timeout:1500 }, res=>{ res.resume(); resolve(res.statusCode && res.statusCode<500); });
+    req.on('error', ()=> resolve(false));
+    req.on('timeout', ()=> { req.destroy(); resolve(false); });
+  });
+  const until = Date.now()+15000; let ok=false; while(Date.now()<until){ ok = await check(); if(ok) break; await new Promise(r=>setTimeout(r,250)); }
+  if(!ok){ console.warn('[perf-budget] service not ready, continuing (advisory context may handle)'); }
   const { chrome, runnerResult } = await runLighthouse(URL);
   const lhr = runnerResult.lhr;
   const audits = lhr.audits || {};

@@ -1,15 +1,15 @@
 {
   "version": "1.2.0",
-  "generated_utc": "2025-08-15T15:08:23.901Z",
+  "generated_utc": "2025-08-16T10:20:39.972Z",
   "weeks": [
     {
       "week": "2025-W33",
       "start_utc": "2025-08-11",
       "end_utc": "2025-08-17",
       "totals": {
-        "events": 10,
-        "canonical_ok": 10,
-        "hero_views": 8,
+        "events": 300,
+        "canonical_ok": 300,
+        "hero_views": 298,
         "feedback": 0,
         "prohibited": 0,
         "coverage": 1

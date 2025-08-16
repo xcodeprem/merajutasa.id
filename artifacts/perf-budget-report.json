@@ -7,10 +7,10 @@
     "cls_max": 0.8
   },
   "actual": {
-    "perf_score": 0.88,
-    "lcp_ms": 1009.6539499999999,
-    "tbt_ms": 46,
-    "cls": 0.24030010970991755
+    "perf_score": 1,
+    "lcp_ms": 755.548,
+    "tbt_ms": 0,
+    "cls": 0
   },
   "categories": {
     "performance": {
@@ -395,7 +395,7 @@
         }
       ],
       "id": "performance",
-      "score": 0.88
+      "score": 1
     },
     "best-practices": {
       "title": "Best Practices",
@@ -560,7 +560,7 @@
         },
         {
           "id": "robots-txt",
-          "weight": 0,
+          "weight": 1,
           "group": "seo-crawl"
         },
         {
@@ -584,7 +584,7 @@
         }
       ],
       "id": "seo",
-      "score": 0.9
+      "score": 0.82
     }
   }
 }

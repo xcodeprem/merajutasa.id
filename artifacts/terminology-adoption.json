@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-16T09:28:37.931Z",
+  "generated_utc": "2025-08-16T10:20:38.826Z",
   "old_total": 0,
   "new_total": 0,
   "adoptionPercent": 100,
@@ -26,27 +26,17 @@
       "newCount": 0
     },
     {
+      "file": "docs\\tests\\hysteresis-test-plan-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
       "file": "docs\\transparency\\methodology-snippet-h0.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
       "file": "docs\\transparency\\changelog-excerpt-phase1.5.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\tests\\hysteresis-test-plan-v1.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\support\\README.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\security\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -71,12 +61,27 @@
       "newCount": 0
     },
     {
+      "file": "docs\\support\\README.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\security\\README.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
       "file": "docs\\schemas\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
       "file": "docs\\roadmap\\roadmap-master-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\release\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -111,12 +116,7 @@
       "newCount": 0
     },
     {
-      "file": "docs\\release\\README.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\principles\\GP1-GP10-index.md",
+      "file": "docs\\playbooks\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -126,7 +126,7 @@
       "newCount": 0
     },
     {
-      "file": "docs\\playbooks\\README.md",
+      "file": "docs\\principles\\GP1-GP10-index.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -161,37 +161,12 @@
       "newCount": 0
     },
     {
-      "file": "docs\\master-spec\\master-spec-v2.0.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
       "file": "docs\\legal\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs\\integrity\\verify-cli-doc-draft.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\integrity\\hash-excerpt-module.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\integrity\\evidence-minimum-phase1.5-v1.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\integrity\\credential-schema-final-v1.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\integrity\\api-verification-docs.md",
+      "file": "docs\\master-spec\\master-spec-v2.0.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -266,7 +241,27 @@
       "newCount": 0
     },
     {
-      "file": "docs\\data\\README.md",
+      "file": "docs\\integrity\\verify-cli-doc-draft.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\integrity\\hash-excerpt-module.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\integrity\\evidence-minimum-phase1.5-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\integrity\\api-verification-docs.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -301,17 +296,22 @@
       "newCount": 0
     },
     {
+      "file": "docs\\data\\README.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\api\\README.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
       "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
       "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\api\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -331,16 +331,6 @@
       "newCount": 0
     },
     {
-      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\privacy\\corpus\\negative-decoy.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
       "file": "docs\\produk\\portal-panti\\02-model-data-minimal-aman.md",
       "oldCount": 0,
       "newCount": 0
@@ -356,7 +346,27 @@
       "newCount": 0
     },
     {
+      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\privacy\\corpus\\negative-decoy.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
       "file": "docs\\governance\\trace\\archive-trace-index-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\audit\\README-audit-process.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\audit\\pr-template-line-audit-2025-08-12T0509Z.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -452,16 +462,6 @@
     },
     {
       "file": "docs\\governance\\dec\\DEC-20250812-02-hysteresis-adoption.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\governance\\audit\\README-audit-process.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\governance\\audit\\pr-template-line-audit-2025-08-12T0509Z.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -588,6 +588,16 @@
       ]
     },
     {
+      "file": "docs\\policies\\README.md",
+      "suggestions": [
+        {
+          "old": "ranking",
+          "new": "tanpa ranking",
+          "count": 1
+        }
+      ]
+    },
+    {
       "file": "docs\\principles\\GP1-GP10-index.md",
       "suggestions": [
         {
@@ -608,16 +618,6 @@
         {
           "old": "user",
           "new": "pengguna",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "file": "docs\\policies\\README.md",
-      "suggestions": [
-        {
-          "old": "ranking",
-          "new": "tanpa ranking",
           "count": 1
         }
       ]
@@ -763,46 +763,6 @@
       ]
     },
     {
-      "file": "docs\\integrity\\evidence-minimum-phase1.5-v1.md",
-      "suggestions": [
-        {
-          "old": "ranking",
-          "new": "tanpa ranking",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "file": "docs\\integrity\\credential-schema-final-v1.md",
-      "suggestions": [
-        {
-          "old": "ranking",
-          "new": "tanpa ranking",
-          "count": 15
-        },
-        {
-          "old": "top",
-          "new": "rekomendasi",
-          "count": 1
-        },
-        {
-          "old": "blacklist",
-          "new": "daftar blokir",
-          "count": 1
-        },
-        {
-          "old": "whitelist",
-          "new": "daftar izin",
-          "count": 1
-        },
-        {
-          "old": "master",
-          "new": "utama",
-          "count": 4
-        }
-      ]
-    },
-    {
       "file": "docs\\governance\\todo-post-DEC-20250812-02.md",
       "suggestions": [
         {
@@ -914,6 +874,46 @@
           "old": "ranking",
           "new": "tanpa ranking",
           "count": 3
+        }
+      ]
+    },
+    {
+      "file": "docs\\integrity\\evidence-minimum-phase1.5-v1.md",
+      "suggestions": [
+        {
+          "old": "ranking",
+          "new": "tanpa ranking",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "suggestions": [
+        {
+          "old": "ranking",
+          "new": "tanpa ranking",
+          "count": 15
+        },
+        {
+          "old": "top",
+          "new": "rekomendasi",
+          "count": 1
+        },
+        {
+          "old": "blacklist",
+          "new": "daftar blokir",
+          "count": 1
+        },
+        {
+          "old": "whitelist",
+          "new": "daftar izin",
+          "count": 1
+        },
+        {
+          "old": "master",
+          "new": "utama",
+          "count": 4
         }
       ]
     },
@@ -1048,26 +1048,6 @@
       ]
     },
     {
-      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
-      "suggestions": [
-        {
-          "old": "user",
-          "new": "pengguna",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "file": "docs\\privacy\\corpus\\negative-decoy.md",
-      "suggestions": [
-        {
-          "old": "user",
-          "new": "pengguna",
-          "count": 1
-        }
-      ]
-    },
-    {
       "file": "docs\\produk\\portal-panti\\01-ruang-lingkup-produk.md",
       "suggestions": [
         {
@@ -1093,6 +1073,26 @@
       ]
     },
     {
+      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs\\privacy\\corpus\\negative-decoy.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 1
+        }
+      ]
+    },
+    {
       "file": "docs\\governance\\trace\\archive-trace-index-v1.md",
       "suggestions": [
         {
@@ -1104,6 +1104,16 @@
           "old": "master",
           "new": "utama",
           "count": 6
+        }
+      ]
+    },
+    {
+      "file": "docs\\governance\\audit\\pr-template-line-audit-2025-08-12T0509Z.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 1
         }
       ]
     },
@@ -1198,16 +1208,6 @@
         {
           "old": "master",
           "new": "utama",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "file": "docs\\governance\\audit\\pr-template-line-audit-2025-08-12T0509Z.md",
-      "suggestions": [
-        {
-          "old": "user",
-          "new": "pengguna",
           "count": 1
         }
       ]

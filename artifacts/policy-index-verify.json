@@ -5,11 +5,6 @@
   "issues": [
     {
       "type": "MISSING_IN_MANIFEST",
-      "policyId": "aggregation.min_cell_threshold",
-      "path": "policy/opa/aggregation.rego"
-    },
-    {
-      "type": "MISSING_IN_MANIFEST",
       "policyId": "disclaimers.presence",
       "path": "ci/lint/disclaimers.js"
     },

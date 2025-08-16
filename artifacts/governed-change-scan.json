@@ -1,20 +1,9 @@
 {
   "version": 1,
-  "generated_utc": "2025-08-14T17:49:52.578Z",
-  "changed_count": 27,
-  "governed_impacted": [
-    "docs/governance/dec/DEC-20250815-01-governed-editorial-maintenance.md"
-  ],
-  "dec_files_changed": [
-    "docs/governance/dec/DEC-20250815-01-governed-editorial-maintenance.md"
-  ],
+  "generated_utc": "2025-08-16T10:20:38.319Z",
+  "changed_count": 12,
+  "governed_impacted": [],
+  "dec_files_changed": [],
   "violations": [],
-  "evidence": [
-    {
-      "path": "docs/governance/dec/DEC-20250815-01-governed-editorial-maintenance.md",
-      "referenced_in": [
-        "docs/governance/dec/DEC-20250815-01-governed-editorial-maintenance.md"
-      ]
-    }
-  ]
+  "evidence": []
 }

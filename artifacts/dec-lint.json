@@ -1,14 +1,11 @@
 {
-  "generated_utc": "2025-08-16T09:18:00.971Z",
+  "generated_utc": "2025-08-16T10:20:34.622Z",
   "version": 1,
   "summary": {
     "files": 19,
-    "violation_count": 6,
+    "violation_count": 0,
     "warning_count": 0,
-    "codes": {
-      "DL5_PARSE_ERROR": 1,
-      "DL1_MISSING_KEY": 5
-    },
+    "codes": {},
     "warning_codes": {}
   },
   "results": [
@@ -140,68 +137,12 @@
     },
     {
       "file": "DEC-style-guide-v3.md",
-      "id": null,
-      "hash": "c513b36040f16a3e395889f01cc875308ecc5efff32ebe695bfda9476ccc8084",
-      "violations": [
-        {
-          "code": "DL5_PARSE_ERROR",
-          "message": "BAD_SCALAR_START"
-        },
-        {
-          "code": "DL1_MISSING_KEY",
-          "key": "id"
-        },
-        {
-          "code": "DL1_MISSING_KEY",
-          "key": "title"
-        },
-        {
-          "code": "DL1_MISSING_KEY",
-          "key": "date"
-        },
-        {
-          "code": "DL1_MISSING_KEY",
-          "key": "class"
-        },
-        {
-          "code": "DL1_MISSING_KEY",
-          "key": "status"
-        }
-      ],
+      "id": "GUIDANCE-DEC-STYLE-V3",
+      "hash": "c4b998f16eee370a5f14cfa5964ee9640578e16a9a91b4bd91221336cfeb9c87",
+      "violations": [],
       "warnings": []
     }
   ],
-  "violations": [
-    {
-      "file": "DEC-style-guide-v3.md",
-      "code": "DL5_PARSE_ERROR",
-      "message": "BAD_SCALAR_START"
-    },
-    {
-      "file": "DEC-style-guide-v3.md",
-      "code": "DL1_MISSING_KEY",
-      "key": "id"
-    },
-    {
-      "file": "DEC-style-guide-v3.md",
-      "code": "DL1_MISSING_KEY",
-      "key": "title"
-    },
-    {
-      "file": "DEC-style-guide-v3.md",
-      "code": "DL1_MISSING_KEY",
-      "key": "date"
-    },
-    {
-      "file": "DEC-style-guide-v3.md",
-      "code": "DL1_MISSING_KEY",
-      "key": "class"
-    },
-    {
-      "file": "DEC-style-guide-v3.md",
-      "code": "DL1_MISSING_KEY",
-      "key": "status"
-    }
-  ],
+  "violations": [],
   "warnings": []
 }

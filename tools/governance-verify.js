@@ -75,6 +75,7 @@ const STEPS = [
   { name: 'changelog-excerpt', cmd: ['node','tools/changelog-excerpt-generate.js'], advisory: true },
   // Wave 2 anchors (non-blocking)
   { name: 'event-anchor', cmd: ['node','tools/event-anchor-chain.js'], advisory: true },
+  { name: 'terminology-adoption', cmd: ['node','tools/terminology-adoption.js'], advisory: true },
   { name: 'terminology-scan', cmd: ['node','tools/terminology-scan.js'], advisory: true }
 ];
 
@@ -129,7 +130,8 @@ async function aggregate(){
   decLint: 'artifacts/dec-lint.json',
     principles: 'artifacts/principles-impact-report.json',
   drift: 'artifacts/no-silent-drift-report.json',
-  policyAgg: 'artifacts/policy-aggregation-threshold.json'
+  policyAgg: 'artifacts/policy-aggregation-threshold.json',
+  terminologyAdoption: 'artifacts/terminology-adoption.json'
   };
   const out = { timestamp: new Date().toISOString(), artifacts: {}, summary: {} };
   for (const [k,p] of Object.entries(artifactPaths)){
@@ -145,7 +147,10 @@ async function aggregate(){
   dec_lint_violation_count: out.artifacts.decLint?.summary?.violation_count ?? out.artifacts.decLint?.violations?.length ?? 0,
   drift_status: out.artifacts.drift?.status || 'unknown',
   policy_aggregation_status: out.artifacts.policyAgg?.status || 'unknown',
-  policy_aggregation_violations: out.artifacts.policyAgg?.violations?.length ?? 0
+  policy_aggregation_violations: out.artifacts.policyAgg?.violations?.length ?? 0,
+  terminology_adoption_percent: out.artifacts.terminologyAdoption?.adoptionPercent ?? null,
+  terminology_old_total: out.artifacts.terminologyAdoption?.old_total ?? null,
+  terminology_new_total: out.artifacts.terminologyAdoption?.new_total ?? null
   };
   await fs.writeFile('artifacts/governance-verify-summary.json', JSON.stringify(out,null,2));
 }

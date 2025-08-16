@@ -270,18 +270,10 @@ Daftar gating (sementara):
 - Anomaly DEC
 - Parameter drift escalation policy
 - Evidence completeness threshold
-- Terminology adoption threshold
-- Revocation model baseline
-
+ 
 ---
 
-## 16. Status Hash (Dinamis)
-
-- Mode Saat Ini: PRE-SEAL
-- Commit Baseline Hash (nanti): <TO_BE_FILLED_POST_SEAL_COMMIT_HASH>
 - Tag (opsional): hash-seal-baseline-v1
-
----
 
 ## 17. Lisensi & Privasi (Placeholder)
 
