@@ -66,5 +66,7 @@ This note maps `docs/integrity/gating-policy-v1.json` fields to their governance
 
 Notes:
 
+- **A8 (No-Silent-Drift) Aggregator Enforcement**: The `no-silent-drift` aggregator runs in all CI workflows and prevents merges when gate status is FAIL. See `artifacts/no-silent-drift-report.json` for detailed gate check results.
 - No-Silent-Drift aggregator composes component statuses and gate checks; see `artifacts/no-silent-drift-report.json`.
 - Post-sunset: hype_high_max updated to 0 per DEC-20250813-07 ratification.
+- **CI Gate Enforcement**: All workflows (ci-guard, pages, h1-guard) run the A8 aggregator to ensure consistent gating across CI entrypoints.

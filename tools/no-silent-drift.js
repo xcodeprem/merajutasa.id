@@ -128,5 +128,11 @@ async function main() {
   };
   report.status = overallStatus(Object.values(report.components));
   await fs.writeFile('artifacts/no-silent-drift-report.json', JSON.stringify(report,null,2));
+  
+  // Gate enforcement: exit with error code if gate status is FAIL
+  if (gateStatus === 'FAIL') {
+    console.error('[no-silent-drift] GATE FAIL - preventing merge');
+    process.exit(1);
+  }
 }
 main().catch(e=>{ console.error('no-silent-drift error', e); process.exit(2); });

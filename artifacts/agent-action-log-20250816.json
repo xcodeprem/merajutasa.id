@@ -4391,5 +4391,27 @@
     "duration_ms": 70,
     "critical": true,
     "advisory": false
+  },
+  {
+    "timestamp": "2025-08-16T17:13:28.996Z",
+    "action": "step",
+    "step": "spec-hash-diff",
+    "cmd": "node tools/spec-hash-diff.js --mode=verify",
+    "exit_code": 1,
+    "status": "ERROR",
+    "duration_ms": 70,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-16T17:15:42.383Z",
+    "action": "step",
+    "step": "spec-hash-diff",
+    "cmd": "node tools/spec-hash-diff.js --mode=verify",
+    "exit_code": 1,
+    "status": "ERROR",
+    "duration_ms": 70,
+    "critical": true,
+    "advisory": false
   }
 ]

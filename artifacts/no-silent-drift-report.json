@@ -1,7 +1,7 @@
 {
-  "timestamp_utc": "2025-08-16T15:51:29.048Z",
+  "timestamp_utc": "2025-08-16T17:19:27.123Z",
   "components": {
-    "spec_hash": "PASS",
+    "spec_hash": "FAIL",
     "params": "PASS",
     "hype": "ADVISORY",
     "disclaimers": "PASS_STUB",
@@ -29,13 +29,13 @@
       "DISC-DUPL-005": 2,
       "DISC-SCOPE-006": 6
     },
-    "gate_status": "PASS",
+    "gate_status": "FAIL",
     "gate_checks": [
       {
         "id": "SPEC_HASH",
-        "passed": true,
+        "passed": false,
         "detail": {
-          "violations": 0,
+          "violations": 3,
           "allowed": 0
         }
       },
@@ -52,7 +52,7 @@
         "passed": true,
         "detail": {
           "high": 0,
-          "max": 1
+          "max": 0
         }
       },
       {
@@ -113,7 +113,7 @@
       }
     ],
     "thresholds": {
-      "hype_high_max": 1,
+      "hype_high_max": 0,
       "hype_medium_max": 120,
       "disclaimers_errors_allowed": 0,
       "param_integrity_status": "PASS",
@@ -136,13 +136,13 @@
   },
   "gating": {
     "version": "1.0",
-    "status": "PASS",
+    "status": "FAIL",
     "checks": [
       {
         "id": "SPEC_HASH",
-        "passed": true,
+        "passed": false,
         "detail": {
-          "violations": 0,
+          "violations": 3,
           "allowed": 0
         }
       },
@@ -159,7 +159,7 @@
         "passed": true,
         "detail": {
           "high": 0,
-          "max": 1
+          "max": 0
         }
       },
       {
@@ -220,5 +220,5 @@
       }
     ]
   },
-  "status": "ADVISORY"
+  "status": "FAIL"
 }

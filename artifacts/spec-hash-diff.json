@@ -1,6 +1,6 @@
 {
   "mode": "verify",
-  "timestamp_utc": "2025-08-16T16:24:19Z",
+  "timestamp_utc": "2025-08-16T17:15:42Z",
   "updated": [],
   "unchanged": [
     "docs/roadmap/roadmap-master-v1.md",
@@ -25,7 +25,6 @@
     "docs/status/progress-recap-latest-2025-08-12T035901Z.md",
     "docs/governance/disclaimers-lint-spec-v1.md",
     "docs/integrity/credential-schema-final-v1.md",
-    "docs/analytics/event-schema-canonical-v1.md",
     "docs/master-spec/master-spec-v2.0.md",
     "docs/transparency/changelog-excerpt-phase1.5.md",
     "docs/governance/policy-index-v1.md",
@@ -67,6 +66,11 @@
     },
     {
       "code": "HASH_MISMATCH_DEC_REQUIRED",
+      "path": "docs/analytics/event-schema-canonical-v1.md",
+      "detail": "Manifest=6ab5269fc6e27ed4f26c761ff62ce0c6882bf3d945a882070b47b4d60b709dc3 current=b33cf1a9b6425f3da5d0b61184ac1818dcd196369fba11755406551235eef2b7"
+    },
+    {
+      "code": "HASH_MISMATCH_DEC_REQUIRED",
       "path": "README.md",
       "detail": "Manifest=6b889ef6071454476a2cb710c3c83b5e476bcaae1b117e6ad79be57661ea6b44 current=421ca79a58e9ea8d239614f0353070def4bc0a620f4e56674adb68feb998514d"
     }
@@ -74,7 +78,7 @@
   "summary": {
     "total_entries": 55,
     "updated_count": 0,
-    "violation_count": 2,
+    "violation_count": 3,
     "placeholders_remaining_count": 0
   }
 }

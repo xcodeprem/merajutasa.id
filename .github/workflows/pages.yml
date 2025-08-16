@@ -24,7 +24,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - run: npm ci
+      - run: PUPPETEER_SKIP_DOWNLOAD=true npm ci
+      - name: Run A8 (no-silent-drift) aggregator
+        run: node tools/no-silent-drift.js
       - name: Generate latest snapshots (H1)
         run: |
           node tools/fairness/generate-equity-snapshots.js || true

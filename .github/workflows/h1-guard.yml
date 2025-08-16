@@ -27,6 +27,9 @@ jobs:
         run: |
           npm ls yaml || npm i yaml@^2.4.5 --no-audit --no-fund
 
+      - name: Run A8 (no-silent-drift) aggregator
+        run: node tools/no-silent-drift.js
+
       - name: Run H1 Guard
         run: |
           node tools/h1-verify-guard.js
