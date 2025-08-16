@@ -91,10 +91,12 @@ async function main(){
       const idMatch = line.match(idPattern);
     Object.entries(canonicalMap).forEach(([id,text])=>{
         if(trimmed.includes(text.slice(0,20)) || (idMatch && trimmed.includes(id))){
-          // Improve similarity accuracy: if HTML tag with data-disclaimer-id present, strip tags for similarity purposes
+          // Improve similarity accuracy: if HTML tag with data-disclaimer-id present, safely neutralize angle brackets
+          // Avoid regex tag-stripping which can trigger incomplete multi-character sanitization alerts.
+          // We only use this for textual similarity (not rendering), so replace potentially dangerous chars with spaces.
           let normalized = trimmed;
           if(/data-disclaimer-id=/.test(trimmed)){
-            normalized = trimmed.replace(/<[^>]+>/g,'').trim();
+            normalized = trimmed.replace(/[<>]/g, ' ').trim();
           }
       const pageName = mapPageName(f);
       const dupeKey = pageName+'|'+id+'|'+f;

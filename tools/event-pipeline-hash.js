@@ -13,7 +13,7 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 import crypto from 'crypto';
-import { execSync } from 'child_process';
+import { execFileSync } from 'child_process';
 
 const MD_SPEC_PATH = path.resolve('docs/analytics/event-schema-canonical-v1.md');
 const JSON_SCHEMA_PATH = path.resolve('schemas/events/public-event-v1.json');
@@ -25,7 +25,10 @@ async function readText(p){ return fs.readFile(p, 'utf8'); }
 
 function tryGitCommitHash(filePath){
   try {
-    const out = execSync(`git --no-pager log -n 1 --pretty=format:%H -- ${filePath}` , { stdio: ['ignore','pipe','ignore'] }).toString().trim();
+    // Use execFileSync to avoid shell parsing and interpolation
+    const out = execFileSync('git', ['--no-pager', 'log', '-n', '1', '--pretty=format:%H', '--', filePath], { stdio: ['ignore','pipe','ignore'] })
+      .toString()
+      .trim();
     return out || null;
   } catch { return null; }
 }
