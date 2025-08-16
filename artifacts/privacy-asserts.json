@@ -1,0 +1,25 @@
+{
+  "status": "ok",
+  "ts": "2025-08-16T15:51:27.810Z",
+  "config_path": "tools/config/privacy-policy.json",
+  "checks": {
+    "retention": {
+      "cap": 14,
+      "length": 3,
+      "ok": true
+    },
+    "format": {
+      "hash_salt_valid": true,
+      "invalid_previous_count": 1,
+      "sample_invalid": [
+        "dev-salt-placeholder"
+      ]
+    },
+    "freshness": {
+      "last_rotated_utc": "2025-08-16T09:28:46.064Z",
+      "age_hours": 6.378262777777778,
+      "ok": true
+    }
+  },
+  "violations": []
+}

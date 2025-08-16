@@ -13,7 +13,7 @@ spec_reference:
   - docs/roadmap/roadmap-master-v1.md
 related_principles: [GP1, GP5, GP6, GP9, GP10]
 impacted_components: [equity_snapshot_job, hysteresis_state_machine, equity_page, trust_page_methodology, hero_equity_card, analytics_events(sys_fairness_*), risk_dashboard]
-hash_of_decision_document: "e32cb525cdc8109bf80ed9d92b7239191539b2e7e1dd04707508734721f8fe11"   # sealed SHA256
+hash_of_decision_document: "009825b624cca02c93e2ad500bafcdebf3ffc3adbf5a98c7cdbbde5334a79e38"   # sealed SHA256
 non_removal_assertion: "Tidak menghapus strategi sebelumnya; hanya memilih Option F parameter set."
 append_only_notice: "File immutable; perubahan memerlukan DEC penerus referensi id ini."
 decision:

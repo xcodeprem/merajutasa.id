@@ -111,14 +111,7 @@ async function analyzeImplementationGaps(gaps) {
   for (const file of progressFiles) {
     const content = await fs.readFile(file, 'utf8');
     
-    // Look for sections indicating missing implementations
-    if (content.includes('Belum ada') || content.includes('Belum diimplementasi') || content.includes('Placeholder saja')) {
-      const lines = content.split('\n');
-      const missingItems = lines.filter(line => 
-        line.includes('Belum ada') || 
-        line.includes('Belum diimplementasi') || 
-        line.includes('Placeholder saja') ||
-        line.includes('Belum') ||
+    // Look for sections indicating missing implementations  
     if (IMPLEMENTATION_GAP_KEYWORDS.some(keyword => content.includes(keyword))) {
       const lines = content.split('\n');
       const missingItems = lines.filter(line =>
