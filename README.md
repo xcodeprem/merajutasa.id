@@ -7,6 +7,10 @@
 
 Live dashboard (GitHub Pages): [codingxdev.github.io/merajutasa.id](https://codingxdev.github.io/merajutasa.id/)
 
+## Operator docs
+
+- Phase Tracker PR automation: see `docs/governance/phase-tracker-ops.md` for PAT setup and skip behavior.
+
 ## GitHub Pages (Dashboard Snapshots)
 
 - Workflow `Deploy Pages (Dashboard Snapshots)` publishes the minimal equity UI and latest JSON artifacts under GitHub Pages.
