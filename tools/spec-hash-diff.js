@@ -40,6 +40,8 @@ async function fileExists(p) { try { await fs.access(p); return true; } catch { 
 
 async function main() {
   const mode = parseArg('mode','report-only');
+  const includeArg = parseArg('include', '');
+  const includeSet = new Set(includeArg ? includeArg.split(',').map(s=>s.trim()).filter(Boolean) : []);
   if (!VALID_MODES.has(mode)) {
     console.error(`[spec-hash-diff] ERROR: Invalid mode "${mode}". Use seal-first|verify|report-only|accept.`);
     process.exit(2);
@@ -101,12 +103,12 @@ async function main() {
     if (!isPlaceholder) {
       if (hash_sha256 === currentHash) {
         unchanged.push(fPath);
-  } else if (integrity_class === DEC_SELF_CLASS && mode === 'accept') {
+  } else if (integrity_class === DEC_SELF_CLASS && mode === 'accept' && (includeSet.size===0 || includeSet.has(fPath))) {
         // DEC canonical reseal: update manifest to canonical current hash
         entry.hash_sha256 = currentHash;
         manifestModified = true;
         updated.push(fPath);
-      } else if (mode === 'accept') {
+      } else if (mode === 'accept' && (includeSet.size===0 || includeSet.has(fPath))) {
         // Accept drift for non-DEC entries by updating manifest to current content hash
         entry.hash_sha256 = currentHash;
         manifestModified = true;

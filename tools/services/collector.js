@@ -15,6 +15,7 @@ import { promises as fs } from 'fs';
 import { createHash, randomUUID } from 'crypto';
 import Ajv2020 from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
+import { compileMetaValidators } from '../event-meta-schemas.js';
 
 const PORT = Number(process.env.COLLECTOR_PORT || 4603);
 const BASE_SCHEMA_PATH = 'schemas/events/public-event-v1.json';
@@ -116,6 +117,7 @@ function ensureDefaults(evt, defaults){
 async function start(){
   const validate = await loadValidator();
   const defaults = await tryLoadPipelineHash();
+  const { validators: metaValidators } = compileMetaValidators();
   const server = http.createServer(async (req,res)=>{
     try{
       if (req.method==='GET' && req.url==='/health'){
@@ -134,7 +136,7 @@ async function start(){
         res.writeHead(200,{ 'content-type':'application/json' });
         return res.end(JSON.stringify({ total: lines.length, byEvent }));
       }
-      if (req.method==='POST' && req.url==='/ingest'){
+  if (req.method==='POST' && req.url==='/ingest'){
   const body = await readJson(req);
   const evt = body.event || body; // allow raw event
   ensureDefaults(evt, defaults);
@@ -151,12 +153,19 @@ async function start(){
         if (!ok){ res.writeHead(400,{ 'content-type':'application/json' }); return res.end(JSON.stringify({ status:'SCHEMA_ERROR', errors: validate.errors })); }
         const metaStr = JSON.stringify(evt.meta||{});
         const prohibited = PROHIBITED_META_RE.test(metaStr);
+        // per-event meta validation (advisory)
+        let meta_valid = true; let meta_errors = undefined;
+        const mv = metaValidators.get(evt.event_name);
+        if (mv){
+          meta_valid = mv(evt.meta || {});
+          if (!meta_valid) meta_errors = mv.errors;
+        }
         if (/feedback/i.test(evt.event_name||'') || /feedback|message|text/i.test(metaStr)){
           redactFeedbackMeta(evt);
         }
         await appendNdjson(evt);
         res.writeHead(200,{ 'content-type':'application/json' });
-        return res.end(JSON.stringify({ status:'INGESTED', event_hash: digest, prohibited_meta: !!prohibited }));
+        return res.end(JSON.stringify({ status:'INGESTED', event_hash: digest, prohibited_meta: !!prohibited, meta_valid, meta_errors }));
       }
     if (req.method==='POST' && req.url==='/ingest-batch'){
         const raw = await readRaw(req);

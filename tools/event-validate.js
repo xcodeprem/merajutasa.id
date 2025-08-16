@@ -11,6 +11,7 @@ import { promises as fs } from 'fs';
 import { createHash } from 'crypto';
 import Ajv2020 from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
+import { compileMetaValidators } from './event-meta-schemas.js';
 
 const BASE_SCHEMA_PATH = 'schemas/events/public-event-v1.json';
 const OUT_PATH = 'artifacts/event-validate-report.json';
@@ -43,8 +44,9 @@ async function main(){
   const ajv = new Ajv2020({ strict:false, allErrors:true });
   addFormats(ajv);
   const validate = ajv.compile(baseSchema);
+  const { validators: metaValidators } = compileMetaValidators(ajv);
 
-  let total=0, valid=0, invalid=0, prohibited=0, hashMismatch=0;
+  let total=0, valid=0, invalid=0, prohibited=0, hashMismatch=0, metaInvalid=0;
   const results = [];
   for await (const evt of readNdjson(file)){
     total++;
@@ -66,6 +68,12 @@ async function main(){
     // prohibited field scan
     const metaStr = JSON.stringify(evt.meta||{});
     if (PROHIBITED_META_RE.test(metaStr)){ prohibited++; results.push({ status:'PROHIBITED_META', event_id: evt.event_id }); }
+    // per-event meta validation (advisory in Wave 1.5)
+    const mv = metaValidators.get(evt.event_name);
+    if (mv){
+      const okMeta = mv(evt.meta || {});
+      if (!okMeta){ metaInvalid++; results.push({ status:'META_SCHEMA_ERROR', event_id: evt.event_id, event_name: evt.event_name, errors: mv.errors }); }
+    }
     // rehash
     if (rehash){
       const clone = JSON.parse(JSON.stringify(evt));
@@ -79,7 +87,7 @@ async function main(){
     if (ok) valid++;
   }
 
-  const report = { version:1, summary:{ total, valid, invalid, prohibited, hashMismatch }, results };
+  const report = { version:1, summary:{ total, valid, invalid, prohibited, hashMismatch, metaInvalid }, results };
   await fs.writeFile(OUT_PATH, JSON.stringify(report,null,2));
   const exitCode = invalid>0 ? 2 : 0; // advisory for prohibited/hashMismatch in Wave 1.5
   process.exit(exitCode);

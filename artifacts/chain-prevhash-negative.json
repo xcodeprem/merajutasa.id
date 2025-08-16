@@ -2,11 +2,11 @@
   "ok": false,
   "issues": [
     {
-      "seq": 14,
+      "seq": 15,
       "code": "PREV_HASH_MISMATCH",
-      "expectedPrev": "d0fab7c7b2126e096a7abb2c3859bf5324051a4cf239497bca2ddb6e734b1631",
+      "expectedPrev": "82d2eb6579c2cdaeb8657ec9b1f279fd33f88ff8211e5866d2786568618bea98",
       "actual": "deadbeef"
     }
   ],
-  "length": 15
+  "length": 16
 }

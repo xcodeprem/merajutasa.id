@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "generated_utc": "2025-08-14T17:49:49.238Z",
-  "file_count": 87,
+  "generated_utc": "2025-08-16T09:17:59.532Z",
+  "file_count": 94,
   "total_hits": 118,
   "max_severity": "MEDIUM",
   "severity_counts": {
@@ -14,7 +14,7 @@
   "findings": [
     {
       "file": "README.md",
-      "line": 45,
+      "line": 76,
       "column": 83,
       "match": "ranking",
       "rule": "RANKING",
@@ -24,7 +24,7 @@
     },
     {
       "file": "README.md",
-      "line": 58,
+      "line": 89,
       "column": 38,
       "match": "Ranking",
       "rule": "RANKING",
@@ -34,7 +34,7 @@
     },
     {
       "file": "README.md",
-      "line": 85,
+      "line": 116,
       "column": 69,
       "match": "ranking",
       "rule": "RANKING",
@@ -44,7 +44,7 @@
     },
     {
       "file": "README.md",
-      "line": 285,
+      "line": 316,
       "column": 70,
       "match": "ranking",
       "rule": "RANKING",
@@ -684,7 +684,7 @@
     },
     {
       "file": "docs/governance/trace/archive-trace-index-v1.md",
-      "line": 31,
+      "line": 37,
       "column": 7,
       "match": "ranking",
       "rule": "RANKING",

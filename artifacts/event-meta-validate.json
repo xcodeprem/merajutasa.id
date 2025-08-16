@@ -1,16 +1,81 @@
 {
   "version": 1,
-  "required_events": [
-    "pub_landing_impression",
-    "pub_hero_view",
-    "pub_hero_card_cta_click",
-    "sys_fairness_snapshot_written",
-    "sys_fairness_under_served_enter",
-    "sys_fairness_under_served_exit",
-    "sys_equity_anomaly_detected",
-    "sys_kpi_weekly_rollup",
-    "sys_privacy_scan_completed",
-    "sys_governance_spec_hash_verified"
+  "registryCount": 10,
+  "schemas": [
+    {
+      "event_name": "pub_landing_impression",
+      "required": [
+        "path"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "event_name": "pub_hero_view",
+      "required": [
+        "path"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "event_name": "pub_hero_card_cta_click",
+      "required": [
+        "card_id",
+        "cta_id"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "event_name": "sys_fairness_snapshot_written",
+      "required": [
+        "snapshot_ts",
+        "entry_count"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "event_name": "sys_fairness_under_served_enter",
+      "required": [
+        "unit_id"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "event_name": "sys_fairness_under_served_exit",
+      "required": [
+        "unit_id"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "event_name": "sys_equity_anomaly_detected",
+      "required": [
+        "anomaly_type",
+        "delta"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "event_name": "sys_kpi_weekly_rollup",
+      "required": [
+        "week_start"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "event_name": "sys_privacy_scan_completed",
+      "required": [
+        "scanned_count",
+        "pii_detected_count"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "event_name": "sys_governance_spec_hash_verified",
+      "required": [
+        "spec_hash"
+      ],
+      "additionalProperties": true
+    }
   ],
   "issues": []
 }

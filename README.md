@@ -3,6 +3,7 @@
 [![CI Guard (H1)](https://github.com/codingxdev/merajutasa.id/actions/workflows/ci-guard.yml/badge.svg)](https://github.com/codingxdev/merajutasa.id/actions/workflows/ci-guard.yml)
 [![H1 Guard & KPI](https://github.com/codingxdev/merajutasa.id/actions/workflows/h1-guard.yml/badge.svg)](https://github.com/codingxdev/merajutasa.id/actions/workflows/h1-guard.yml)
 [![Deploy Pages (Dashboard Snapshots)](https://github.com/codingxdev/merajutasa.id/actions/workflows/pages.yml/badge.svg)](https://github.com/codingxdev/merajutasa.id/actions/workflows/pages.yml)
+[![Changelog Excerpt](https://img.shields.io/badge/changelog-excerpt-blue)](https://codingxdev.github.io/merajutasa.id/changelog.html)
 
 Live dashboard (GitHub Pages): [codingxdev.github.io/merajutasa.id](https://codingxdev.github.io/merajutasa.id/)
 
@@ -22,6 +23,11 @@ Permanent links:
   - Equity Anomalies: <https://codingxdev.github.io/merajutasa.id/data/equity-anomalies.json>
   - Monthly Feedback Roll-up: <https://codingxdev.github.io/merajutasa.id/data/feedback-monthly-rollup.json>
   - Revocations (placeholder): <https://codingxdev.github.io/merajutasa.id/data/revocations.json>
+  - Risk Digest (stub): <https://codingxdev.github.io/merajutasa.id/data/risk-digest.json>
+
+Transparency:
+
+- Changelog Excerpt (draft): <https://codingxdev.github.io/merajutasa.id/changelog.html>
 
 ## Fairness & Integrity Governance Scaffold (Baseline PRE-SEAL)
 

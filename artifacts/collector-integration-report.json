@@ -4,8 +4,9 @@
     "status": 200,
     "json": {
       "status": "INGESTED",
-      "event_hash": "93e173d7effe2b9430f76ff403d0679fa33e55ad020807067f065370a74a35f0",
-      "prohibited_meta": false
+      "event_hash": "b9b8d66fc766f79b1a73f1e52e10235540b75f06a18b51b005dae51772129ccd",
+      "prohibited_meta": false,
+      "meta_valid": true
     }
   },
   "invalid": {

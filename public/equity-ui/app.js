@@ -9,7 +9,8 @@ async function fetchJSON(path){
       '/under-served': 'data/under-served.json',
       '/equity/anomalies': 'data/equity-anomalies.json',
   '/revocations': 'data/revocations.json',
-  '/feedback/monthly': 'data/feedback-monthly-rollup.json'
+  '/feedback/monthly': 'data/feedback-monthly-rollup.json',
+  '/risk/digest': 'data/risk-digest.json'
     };
     url = map[path] || path;
   }
@@ -41,6 +42,7 @@ async function main(){
   const revocBadge = document.getElementById('revoc');
   const monthlyEl = document.getElementById('monthly-json');
   const monthlyCard = document.getElementById('monthly-summary');
+  const riskCard = document.getElementById('risk-card');
   const updatedEl = document.getElementById('updated');
   try {
     const t = await loadI18n();
@@ -51,11 +53,12 @@ async function main(){
       if (!health.ok) throw new Error('equity service is not running');
     }
 
-    const [kpi, under, weekly, monthly] = await Promise.all([
+    const [kpi, under, weekly, monthly, risk] = await Promise.all([
       fetchJSON('/kpi/h1').catch(()=> null),
       fetchJSON('/under-served').catch(()=> null),
       fetchJSON('/kpi/weekly').catch(()=> null),
-      fetchJSON('/feedback/monthly').catch(()=> null)
+      fetchJSON('/feedback/monthly').catch(()=> null),
+      fetchJSON('/risk/digest').catch(()=> null)
     ]);
   fairnessBadge.textContent = `${t['badge.fairness']||'fairness'}: ${kpi?.fairness?.pass ? 'PASS' : 'FAIL'}`;
   underBadge.textContent = `${t['badge.under']||'under-served'}: ${under?.total ?? 'n/a'}`;
@@ -81,6 +84,16 @@ async function main(){
       <div class="muted">${t['monthly.pii']||'PII'}: ${fmt(pii) || '—'}</div>
     `;
     monthlyCard.style.display = 'block';
+  }
+  // Render small risk digest card if available
+  if (risk && riskCard){
+    const c = risk.collector || {}; const ch = risk.chain || {}; const p = risk.privacy || {};
+    riskCard.innerHTML = `
+      <div><strong>Collector</strong>: ${c.status||'n/a'} ${c.success_rate_pct!=null? `(${c.success_rate_pct}% success)` : ''}</div>
+      <div><strong>Chain</strong>: ${ch.status||'n/a'} ${ch.mismatches!=null? `(mismatches: ${ch.mismatches})` : ''}</div>
+      <div><strong>Privacy</strong>: ${p.status||'n/a'} ${p.pii_high_risk_hits!=null? `(high-risk: ${p.pii_high_risk_hits})` : ''}</div>
+    `;
+    riskCard.style.display = 'block';
   }
   if (revocBadge) revocBadge.textContent = 'revocations: 0';
     if (weekly && weekly.decision_mix){

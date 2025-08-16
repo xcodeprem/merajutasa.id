@@ -33,6 +33,8 @@ jobs:
           node tools/weekly-trend-aggregator.js || true
           node tools/generate-h1-kpi-summary.js || true
           node tools/monthly-feedback-rollup.js || true
+          node tools/changelog-excerpt-generate.js || true
+          node tools/risk-digest.js || true
       - name: Prepare static snapshot
         run: |
           mkdir -p dist
@@ -44,10 +46,18 @@ jobs:
           [ -f artifacts/equity-anomalies.json ] && cp artifacts/equity-anomalies.json dist/data/ || true
           [ -f artifacts/under-served.json ] && cp artifacts/under-served.json dist/data/ || true
           [ -f artifacts/feedback-monthly-rollup.json ] && cp artifacts/feedback-monthly-rollup.json dist/data/ || true
+          [ -f artifacts/changelog-excerpt.json ] && cp artifacts/changelog-excerpt.json dist/data/ || true
+          [ -f artifacts/risk-digest.json ] && cp artifacts/risk-digest.json dist/data/ || true
           # placeholder revocations snapshot
           echo "[]" > dist/data/revocations.json
           # rewrite UI to load /data/*.json if available
           echo "" > dist/.nojekyll
+          # generate minimal changelog page if draft exists
+          if [ -f artifacts/changelog-excerpt-draft.md ]; then \
+            printf '<!doctype html><html><head><meta charset="utf-8"><title>Changelog</title></head><body><pre>' > dist/changelog.html; \
+            sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g' artifacts/changelog-excerpt-draft.md >> dist/changelog.html; \
+            printf '</pre></body></html>' >> dist/changelog.html; \
+          fi
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

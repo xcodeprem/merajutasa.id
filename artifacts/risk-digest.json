@@ -1,0 +1,18 @@
+{
+  "ts": "2025-08-15T20:54:33.595Z",
+  "collector": {
+    "success_rate_pct": null,
+    "total_events": null,
+    "status": "N/A"
+  },
+  "chain": {
+    "mismatches": 0,
+    "last_seq": null,
+    "status": "PASS"
+  },
+  "privacy": {
+    "pii_high_risk_hits": 8,
+    "blocks": null,
+    "status": "WARN"
+  }
+}

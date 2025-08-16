@@ -1,0 +1,90 @@
+[
+  {
+    "timestamp": "2025-08-16T09:17:56.271Z",
+    "action": "step",
+    "step": "spec-hash-diff",
+    "cmd": "node tools/spec-hash-diff.js --mode=verify",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 140,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-16T09:17:58.363Z",
+    "action": "step",
+    "step": "param-integrity",
+    "cmd": "node tools/param-integrity.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 2092,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-16T09:17:58.459Z",
+    "action": "step",
+    "step": "param-lock",
+    "cmd": "node tools/param-lock-verify.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 100,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-16T09:17:58.615Z",
+    "action": "step",
+    "step": "fairness-unit",
+    "cmd": "node tools/tests/fairness-engine-unit-tests.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 155,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-16T09:17:59.557Z",
+    "action": "step",
+    "step": "hype-lint",
+    "cmd": "node tools/hype-lint.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 940,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-16T09:17:59.903Z",
+    "action": "step",
+    "step": "disclaimers-lint",
+    "cmd": "node tools/disclaimers-lint.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 346,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-16T09:18:00.207Z",
+    "action": "step",
+    "step": "pii-scan",
+    "cmd": "node tools/pii-scan.js --sarif",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 302,
+    "critical": false,
+    "advisory": true
+  },
+  {
+    "timestamp": "2025-08-16T09:18:00.573Z",
+    "action": "step",
+    "step": "pii-metrics",
+    "cmd": "node tools/pii-metrics.js",
+    "exit_code": 0,
+    "status": "OK",
+    "duration_ms": 367,
+    "critical": false,
+    "advisory": true
+  }
+]
