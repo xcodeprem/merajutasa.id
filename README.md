@@ -270,7 +270,7 @@ Daftar gating (sementara):
 - Anomaly DEC
 - Parameter drift escalation policy
 - Evidence completeness threshold
- 
+
 ---
 
 - Tag (opsional): hash-seal-baseline-v1

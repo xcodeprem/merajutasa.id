@@ -28,17 +28,10 @@ jobs:
         with:
           name: pii-salt-rotation
           path: artifacts/pii-salt-rotation.json
-      - name: Check PAT availability
-        id: pat_check
-        shell: bash
-        run: |
-          if [ -n "${{ secrets.PAT_ROTATION }}" ]; then
-            echo "has_pat=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "has_pat=false" >> "$GITHUB_OUTPUT"
-          fi
       - name: Create PR for rotated config
-        if: ${{ steps.pat_check.outputs.has_pat == 'false' }}
+        env:
+          PAT_ROTATION: ${{ secrets.PAT_ROTATION }}
+        if: ${{ env.PAT_ROTATION == '' }}
         id: cpr_gh
         continue-on-error: true
         uses: peter-evans/create-pull-request@v6
@@ -49,14 +42,16 @@ jobs:
             Automated daily rotation of PII hash salt.
 
             - Updates `tools/config/privacy-policy.json`
-            - Keeps last 7 salts in history
+            - Keeps last 14 salts in history
             - See rotation artifact in the workflow run
           branch: chore/pii-salt-rotation
           base: main
           add-paths: |
             tools/config/privacy-policy.json
       - name: Create PR for rotated config (using PAT)
-        if: ${{ steps.pat_check.outputs.has_pat == 'true' }}
+        env:
+          PAT_ROTATION: ${{ secrets.PAT_ROTATION }}
+        if: ${{ env.PAT_ROTATION != '' }}
         id: cpr_pat
         uses: peter-evans/create-pull-request@v6
         with:
@@ -67,7 +62,7 @@ jobs:
             Automated daily rotation of PII hash salt.
 
             - Updates `tools/config/privacy-policy.json`
-            - Keeps last 7 salts in history
+            - Keeps last 14 salts in history
             - See rotation artifact in the workflow run
           branch: chore/pii-salt-rotation
           base: main

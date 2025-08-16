@@ -30,7 +30,7 @@ Operational Notes
 
 - Do not commit salts manually—prefer running the rotation workflow (manual dispatch permitted)
 - If PR is not created, check workflow summary for guidance (likely missing PAT permissions)
-- Keep retention window at 7 unless privacy review approves change
+- Keep retention window at 14 (aligned with code and workflow); any change requires privacy review approval
 
 
 Security Guidance

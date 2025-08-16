@@ -9,6 +9,8 @@ import crypto from 'crypto';
 
 const CONFIG_PATH = 'tools/config/privacy-policy.json';
 const HISTORY_MAX = 14; // keep last 14 salts for analysis
+const SALT_HEX_LEN = 32; // 16 bytes hex
+function isHex(str, len){ return typeof str === 'string' && /^[0-9a-f]+$/i.test(str) && (len? str.length === len : true); }
 
 async function safeReadJSON(p){ try { return JSON.parse(await fs.readFile(p,'utf8')); } catch { return null; } }
 function randSalt(){ return crypto.randomBytes(16).toString('hex'); }
@@ -17,10 +19,11 @@ async function main(){
   await fs.mkdir('artifacts',{recursive:true});
   const cfg = await safeReadJSON(CONFIG_PATH) || {};
   const now = new Date().toISOString();
-  const prev = cfg.hash_salt || 'salt';
+  const prev = cfg.hash_salt;
   const history = Array.isArray(cfg.previous_salts) ? cfg.previous_salts : [];
   const next = randSalt();
-  const nextCfg = { ...cfg, hash_salt: next, previous_salts: [prev, ...history].slice(0,HISTORY_MAX), last_rotated_utc: now };
+  const prevList = isHex(prev, SALT_HEX_LEN) ? [prev, ...history] : history;
+  const nextCfg = { ...cfg, hash_salt: next, previous_salts: prevList.slice(0,HISTORY_MAX), last_rotated_utc: now };
   await fs.mkdir('tools/config',{recursive:true});
   await fs.writeFile(CONFIG_PATH, JSON.stringify(nextCfg,null,2));
   const report = { rotated_at: now, new_salt_len: next.length, history_count: nextCfg.previous_salts.length };

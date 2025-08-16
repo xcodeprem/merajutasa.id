@@ -17,7 +17,7 @@ PII detection
 Salt rotation
 
 - Hashing salt for any privacy-related hashing rotates daily (automated).
-- Last 7 salts are retained for short analysis windows only.
+- Last 14 salts are retained for short analysis windows only.
 
 User rights
 

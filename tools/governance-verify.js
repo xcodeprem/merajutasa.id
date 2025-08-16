@@ -54,6 +54,7 @@ const STEPS = [
   { name: 'disclaimers-lint', cmd: ['node','tools/disclaimers-lint.js'], critical: true },
   { name: 'pii-scan', cmd: ['node','tools/pii-scan.js','--sarif'], advisory: true },
   { name: 'pii-metrics', cmd: ['node','tools/pii-metrics.js'], advisory: true },
+  { name: 'privacy-asserts', cmd: ['node','tools/privacy-asserts.js'], critical: true },
   // Promote DEC lint to critical now that violations are 0
   { name: 'dec-lint', cmd: ['node','tools/dec-lint.js'], critical: true },
   { name: 'principles-impact', cmd: ['node','tools/principles-impact.js'], advisory: true },
@@ -133,6 +134,8 @@ async function aggregate(){
   policyAgg: 'artifacts/policy-aggregation-threshold.json',
   terminologyAdoption: 'artifacts/terminology-adoption.json'
   };
+  // add privacy asserts
+  artifactPaths.privacyAsserts = 'artifacts/privacy-asserts.json';
   const out = { timestamp: new Date().toISOString(), artifacts: {}, summary: {} };
   for (const [k,p] of Object.entries(artifactPaths)){
     try { out.artifacts[k] = JSON.parse(await fs.readFile(p,'utf8')); }
@@ -152,6 +155,12 @@ async function aggregate(){
   terminology_old_total: out.artifacts.terminologyAdoption?.old_total ?? null,
   terminology_new_total: out.artifacts.terminologyAdoption?.new_total ?? null
   };
+  // privacy asserts summary
+  const pa = out.artifacts.privacyAsserts || {};
+  out.summary.privacy_retention_ok = pa?.checks?.retention?.ok ?? null;
+  out.summary.privacy_retention_len = pa?.checks?.retention?.length ?? null;
+  out.summary.privacy_format_invalid_prev = pa?.checks?.format?.invalid_previous_count ?? null;
+  out.summary.privacy_freshness_ok = pa?.checks?.freshness?.ok ?? null;
   await fs.writeFile('artifacts/governance-verify-summary.json', JSON.stringify(out,null,2));
 }
 

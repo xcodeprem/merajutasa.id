@@ -20,6 +20,7 @@
     "lint:disclaimers": "node tools/disclaimers-lint.js",
     "privacy:scan": "node tools/pii-scan.js --sarif",
     "privacy:metrics": "node tools/pii-metrics.js",
+  "privacy:asserts": "node tools/privacy-asserts.js",
     "gen:test-vectors": "node tools/generate-test-vectors.js",
     "test:integrity": "node tools/tests/run-basic-integrity-tests.js",
     "fairness:generate-snapshots": "node tools/fairness/generate-equity-snapshots.js",
