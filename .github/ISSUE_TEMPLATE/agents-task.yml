@@ -1,36 +1,257 @@
 name: Agents Task
-description: Tugas yang siap dikerjakan oleh agents (terstruktur, ber-AC, dan terhubung ke CI)
+description: Tugas yang siap dikerjakan oleh agents (terstruktur, ber-AC, ber-DEC bila perlu, dan terhubung ke CI/gates)
 title: "[Agents] <judul singkat>"
 labels:
   - agents-ready
+  - governance
+  - integrity
+  - security
 assignees: []
 body:
   - type: markdown
     attributes:
       value: |
-        Mohon isi detil di bawah. Tautkan berkas/skrip/CI terkait agar bisa dieksekusi otomatis.
+        Panduan ini selaras dengan:
+        - .github/pull_request_template.md (Sections 1–37 + AUTO markers)
+        - tools/governance-verify.js (A8 gate & langkah-langkah verifikasi)
+        - .github/workflows/h1-guard.yml (guard & KPI)
+        - README.md (status publik + markers STATUS:BEGIN/END)
+
+        Harap:
+        - Gunakan PR template penuh (jangan hapus marker AUTO).
+        - Siapkan DEC untuk perubahan canonical/spec & update manifest hash.
+        - Hasilkan artifacts deterministik (stable JSON); log volatile diupload via Actions, bukan di-commit.
+        - Tambahkan observability metadata (git.sha, run.id, actor, pr.number) ke artifacts kunci.
+
+  - type: input
+    id: related_pr
+    attributes:
+      label: PR Terkait (opsional)
+      description: URL atau nomor PR yang akan/baru dibuat untuk tugas ini.
+      placeholder: https://github.com/codingxdev0/merajutasa.id/pull/XX
+    validations:
+      required: false
+
+  - type: dropdown
+    id: change_type
+    attributes:
+      label: Jenis Perubahan (sesuai Section 2 PR template)
+      options:
+        - Policy-as-code / Lint / Governance automation
+        - Keamanan / Privasi (PII)
+        - Instrumentation / Event schema update
+        - Dokumentasi saja
+        - Refactor internal (tanpa perubahan perilaku eksternal)
+        - Fitur baru (pengembangan sesuai roadmap)
+        - Perubahan integritas (signer / chain / credential)
+        - Perubahan fairness (equity snapshot / hysteresis / under-served logic)
+        - Performa / A11y
+        - Lainnya
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: impacted_routes
+    attributes:
+      label: Area/Route Terdampak (mapping ke policy routes dan scope repo)
+      description: Pilih semua yang relevan
+      options:
+        - label: docs/analytics/event-schema-canonical-*.md (canonical spec & manifest hash)
+        - label: docs/** (narasi/disclaimers/terminology)
+        - label: tools/** (governance tools, validators, tests)
+        - label: .github/workflows/** (CI & guard wiring)
+        - label: README.md (markers & status publik)
+        - label: Lainnya (sebutkan di konteks)
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: gates_expected
+    attributes:
+      label: Gates yang harus PASS (A8 fail-fast + policy-as-code)
+      description: Status PASS diwajibkan untuk merge
+      options:
+        - label: spec-hash-diff (gating; DEC wajib untuk canonical change)
+        - label: dec-lint (gating; zero violation)
+        - label: disclaimers-lint (gating bila diaktifkan; minimal presence bootstrap)
+        - label: security-patterns-smoke (gating HIGH=0; MEDIUM/LOW advisory)
+        - label: param-integrity / param-lock (critical; matrix terbangun dan konsisten)
+        - label: no-silent-drift aggregator (critical; tidak ada drift)
+        - label: principles-impact (advisory; author verification Section 37)
+    validations:
+      required: true
+
   - type: textarea
     id: context
     attributes:
       label: Latar Belakang
-      description: Ringkasan konteks dan mengapa tugas ini perlu.
-      placeholder: Mengapa, file/komponen terkait, referensi DEC/Policy jika ada.
+      description: Ringkas konteks, masalah/target, file/komponen terkait, dan referensi dokumen.
+      placeholder: Mengapa tugas ini perlu; file terkait; referensi DEC/Policy; kaitan ke Section 1 & 3 PR template.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: dec_required
+    attributes:
+      label: Apakah membutuhkan DEC? (Section 12)
+      options:
+        - Ya
+        - Tidak
+    validations:
+      required: true
+
+  - type: textarea
+    id: dec_details
+    attributes:
+      label: Detail DEC (jika Ya)
+      description: "Isi ID, path, ringkasan dampak, dan perubahan yang TIDAK dilakukan (non-removal assertion)."
+      placeholder: |
+        - DEC ID: DEC-YYYYMMDD-XX
+        - Path: docs/dec/DEC-YYYYMMDD-XX-<slug>.md
+        - Alasan & dampak:
+        - Non-removal (apa yang tidak diubah):
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: pr_template_alignment
+    attributes:
+      label: Kesesuaian PR Template (manual sections)
+      description: Centang bagian manual minimal yang akan diisi di PR
+      options:
+        - label: Section 1 Ringkasan & Tujuan
+        - label: Section 4 Integrity Impact
+        - label: Section 5 Fairness/Hysteresis Impact
+        - label: Section 6 Privacy/PII
+        - label: Section 7 Disclaimers & Copy Guardrails
+        - label: Section 8 Policy-as-code & Lint Status
+        - label: Section 10 Test & Quality
+        - label: Section 11 Risk Assessment
+        - label: Section 12 Decisions (DEC)
+        - label: Section 13 Rollback Plan
+        - label: Section 14 Post-Merge Actions
+        - label: Section 22 Non-Removal Confirmation
+        - label: Section 25 Catatan Tambahan
+    validations:
+      required: true
+
   - type: textarea
     id: tasks
     attributes:
-      label: Checklist
-      description: Rinci langkah-langkah yang harus dilakukan.
+      label: Checklist Tindakan (runtut & dapat dieksekusi)
+      description: Buat langkah konkrit, singkat, dan dapat dijalankan.
       value: |
-        - [ ] Implement
-        - [ ] Tests/Smoke
-        - [ ] CI guard wiring
-        - [ ] Docs/README note
+        - [ ] Implement perubahan (kode/policy/docs) sesuai scope
+        - [ ] Tambah/Update tests (unit/integration/lint sesuai perubahan)
+        - [ ] Wire CI guards (A8 di awal; h1-guard bila relevan)
+        - [ ] Hasilkan artifacts stabil (stable JSON) + metadata observabilitas
+        - [ ] Pisahkan logs volatile (upload Actions; jangan commit)
+        - [ ] (Jika perlu) Buat DEC dan update manifest hash
+        - [ ] Update README status (marker STATUS:BEGIN/END; idempotent)
+        - [ ] Isi PR template (Sections 1–25) + pastikan AUTO markers hadir (26–37)
+        - [ ] Self-check final (no-silent-drift checklist; Section 36)
+    validations:
+      required: true
+
+  - type: textarea
+    id: artifacts_expected
+    attributes:
+      label: Artifacts yang Dihasilkan (stable evidence)
+      description: Daftar minimal artifacts untuk verifikasi governance.
+      value: |
+        - artifacts/spec-hash-diff.json
+        - artifacts/no-silent-drift-report.json
+        - artifacts/security-patterns-smoke.json
+        - artifacts/param-integrity-matrix.json
+        - artifacts/disclaimers-lint.json
+        - artifacts/hype-lint.json
+        - artifacts/principles-impact-report.json
+        - artifacts/phase-tracker.json
+    validations:
+      required: true
+
   - type: textarea
     id: acceptance
     attributes:
-      label: Acceptance Criteria (CI)
-      description: Sinyal CI yang harus hijau untuk dianggap selesai.
+      label: Acceptance Criteria (CI/Gates)
+      description: Jelaskan sinyal PASS/WARN/FAIL yang menentukan selesai.
       value: |
-        - [ ] ci-guard: PASS
-        - [ ] test: PASS (terkait)
-        - [ ] artifacts updated (bila relevan)
+        - [ ] A8 (no-silent-drift) PASS (aggregator status = PASS)
+        - [ ] spec-hash-diff PASS; tidak ada HASH_MISMATCH_DEC_REQUIRED
+        - [ ] dec-lint zero violation
+        - [ ] security-patterns-smoke: HIGH = 0 (gating)
+        - [ ] README status sinkron dengan artifacts (gate di protected branch)
+        - [ ] Artifacts stabil + metadata (git.sha, run.id, actor, pr.number)
+        - [ ] Tests relevan PASS (governance + unit/integration)
+        - [ ] H1 Guard (bila relevan) tidak memicu error blocking
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: observability
+    attributes:
+      label: Observabilitas & Bukti
+      options:
+        - label: Tambahkan metadata (git.sha, run.id, actor, pr.number) ke artifacts kunci
+        - label: Upload logs volatile via Actions (tidak di-commit)
+        - label: Tautkan run CI & artifacts di komentar PR/issue
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: readme_status
+    attributes:
+      label: Sinkronisasi README
+      options:
+        - label: README memiliki markers <!-- STATUS:BEGIN --> ... <!-- STATUS:END -->
+        - label: Script tools/status/update-readme-status.js dijalankan pasca governance checks
+        - label: Perbedaan status memicu FAIL di protected branch
+    validations:
+      required: true
+
+  - type: textarea
+    id: risks
+    attributes:
+      label: Risiko & Rollback
+      description: Cantumkan risiko utama, mitigasi, dan langkah rollback singkat.
+      value: |
+        - Risiko: False positive security smoke (HIGH). Mitigasi: allowlist scoped via policy.json (time-boxed).
+        - Risiko: Drift README vs artifacts. Mitigasi: auto-sync + gating protected branch.
+        - Rollback: Turunkan gating HIGH → advisory sementara; nonaktifkan composite A8 sementara; revert manifest hash bila DEC batal.
+    validations:
+      required: true
+
+  - type: input
+    id: branch_naming
+    attributes:
+      label: Konvensi Branch
+      description: Nama branch fitur (disarankan: agents/<scoped-topic>-<short-slug>)
+      placeholder: agents/a8-governance-hash-fix
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: non_removal
+    attributes:
+      label: Non-Removal Assertion
+      options:
+        - label: Tidak menghapus prinsip GP1–GP10 / disclaimers / histori (konfirmasi Section 22 PR)
+    validations:
+      required: true
+
+  - type: textarea
+    id: refs
+    attributes:
+      label: Referensi Skrip/Files
+      description: Tautkan skrip & file relevan untuk eksekusi otomatis.
+      value: |
+        - tools/governance-verify.js
+        - tools/no-silent-drift.js
+        - tools/spec-hash-diff.js
+        - tools/tests/security-patterns-smoke.js
+        - tools/disclaimers-lint.js
+        - tools/hype-lint.js
+        - .github/workflows/h1-guard.yml
+        - README.md
+    validations:
+      required: true
