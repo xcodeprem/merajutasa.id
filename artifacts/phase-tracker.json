@@ -1,12 +1,12 @@
 {
-  "generated_utc": "2025-08-14T17:49:18.276Z",
+  "generated_utc": "2025-08-16T15:33:02.556Z",
   "dec_file": "docs/governance/dec/DEC-20250812-03-principles-reference-activation.md",
   "phase0_start_utc": "2025-08-14T06:19:53.000Z",
   "phase1_start_utc": "2025-08-16T06:19:53.000Z",
   "phase2_start_utc": "2025-08-21T06:19:53.000Z",
   "current_phase": "PHASE_1_ERROR",
   "seconds_until_phase1": 0,
-  "seconds_until_phase2": 563435,
+  "seconds_until_phase2": 398811,
   "policy": {
     "phase0": "WARN (informational only)",
     "phase1": "ERROR (blocks merges unless override)",
