@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 /**
  * fairness-engine-unit-tests.js
- * Minimal Wave 1 scaffold executing core decide() over UT1–UT3 sequences.
- * UT4–UT6 pending STALLED & cooldown nuanced logic coverage (will report PENDING).
+ * Unit tests for fairness engine core decide() function executing UT1–UT10 sequences.
+ * UT1–UT6: Original tests (severe, consecutive, false start, stall detection, stall break, cooldown)
+ * UT7–UT10: Boundary tests for exact thresholds (0.50/0.60/0.65) and cooldown interactions
  */
 import { promises as fs } from 'fs';
 import yaml from 'yaml';
@@ -96,6 +97,48 @@ async function main(){
     assert(r.final==='CLEARED','UT6 should remain CLEARED (cooldown)');
     results.push({id:'UT6',status:'PASS'});
   } catch(e){ results.push({id:'UT6',status:'FAIL',error:e.message}); }
+  // UT7 Exact severe threshold boundary (r==0.50) - should be borderline, NOT severe
+  try {
+    const seq=[0.50,0.59,0.66];
+    const r=runSequence(p,seq);
+    const enter=r.events.find(e=>e.type==='ENTER');
+    assert(enter && enter.reason==='consecutive','UT7 expected consecutive ENTER for r==0.50');
+    const exit=r.events.find(e=>e.type==='EXIT');
+    assert(exit,'UT7 expected EXIT event');
+    results.push({id:'UT7',status:'PASS'});
+  } catch(e){ results.push({id:'UT7',status:'FAIL',error:e.message}); }
+  // UT8 Exact candidate threshold boundary (r==0.60) - should exit candidate to NONE
+  try {
+    const seq=[0.58,0.60];
+    const r=runSequence(p,seq);
+    const enter=r.events.find(e=>e.type==='ENTER');
+    assert(!enter,'UT8 should not ENTER when second ratio is exactly 0.60');
+    assert(r.final==='NONE','UT8 should end in NONE state');
+    results.push({id:'UT8',status:'PASS'});
+  } catch(e){ results.push({id:'UT8',status:'FAIL',error:e.message}); }
+  // UT9 Exact exit threshold boundary (r==0.65) - should trigger exit immediately
+  try {
+    const seq=[0.47,0.65];
+    const r=runSequence(p,seq);
+    const enter=r.events.find(e=>e.type==='ENTER');
+    assert(enter && enter.reason==='severe','UT9 expected severe ENTER');
+    const exit=r.events.find(e=>e.type==='EXIT');
+    assert(exit,'UT9 expected EXIT event at r==0.65');
+    assert(r.final==='CLEARED','UT9 should end in CLEARED state');
+    results.push({id:'UT9',status:'PASS'});
+  } catch(e){ results.push({id:'UT9',status:'FAIL',error:e.message}); }
+  // UT10 Cooldown interaction with exact thresholds - test boundary cooldown behavior
+  try {
+    const seq=[0.47,0.65,0.50]; // severe entry, exact exit, exact borderline during cooldown
+    const r=runSequence(p,seq);
+    const enter=r.events.find(e=>e.type==='ENTER');
+    assert(enter && enter.reason==='severe','UT10 expected severe ENTER');
+    const exit=r.events.find(e=>e.type==='EXIT');
+    assert(exit,'UT10 expected EXIT event');
+    // Should remain CLEARED due to cooldown, not transition to CANDIDATE
+    assert(r.final==='CLEARED','UT10 should remain CLEARED during cooldown');
+    results.push({id:'UT10',status:'PASS'});
+  } catch(e){ results.push({id:'UT10',status:'FAIL',error:e.message}); }
   const summary={ total:results.length, pass:results.filter(r=>r.status==='PASS').length, fail:results.filter(r=>r.status==='FAIL').length, pending:results.filter(r=>r.status==='PENDING').length };
   const report={ version:1, generated_utc:new Date().toISOString(), summary, results };
   await fs.mkdir('artifacts',{recursive:true});
