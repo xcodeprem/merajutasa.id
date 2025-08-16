@@ -19,6 +19,9 @@ import path from 'path';
 
 const PORT = Number(process.env.EQUITY_PORT || 4620);
 
+// Absolute path to the UI root directory
+const UI_ROOT = path.resolve('public/equity-ui');
+
 async function readJson(path){
   try { return JSON.parse(await fs.readFile(path,'utf8')); }
   catch { return null; }
@@ -45,11 +48,23 @@ async function start(){
       }
       if (req.method==='GET' && req.url.startsWith('/ui/')){
         const file = req.url.replace('/ui/','');
-        const p = path.resolve('public/equity-ui', file);
-        const ext = path.extname(p);
+        const p = path.resolve(UI_ROOT, file);
+        let realPath;
+        try {
+          realPath = await fs.realpath(p);
+        } catch (e) {
+          res.writeHead(404);
+          return res.end();
+        }
+        // Ensure the resolved path is within the UI root directory
+        if (!realPath.startsWith(UI_ROOT + path.sep)) {
+          res.writeHead(403);
+          return res.end();
+        }
+        const ext = path.extname(realPath);
         const type = ext==='.js' ? 'application/javascript' : 'text/plain';
         res.writeHead(200, { 'content-type': type });
-        return createReadStream(p).pipe(res);
+        return createReadStream(realPath).pipe(res);
       }
       if (req.method==='GET' && req.url==='/health'){
         res.writeHead(200,{ 'content-type':'application/json' });
