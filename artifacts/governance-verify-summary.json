@@ -4288,6 +4288,604 @@
         }
       },
       "violations": []
+    },
+    "perf": {
+      "url": "http://127.0.0.1:4620/",
+      "budgets": {
+        "perf_score_min": 0.6,
+        "lcp_ms": 2500,
+        "tbt_ms": 300,
+        "cls_max": 0.8
+      },
+      "actual": {
+        "perf_score": 1,
+        "lcp_ms": 911.1356000000001,
+        "tbt_ms": 0,
+        "cls": 0
+      },
+      "categories": {
+        "performance": {
+          "title": "Performance",
+          "supportedModes": [
+            "navigation",
+            "timespan",
+            "snapshot"
+          ],
+          "auditRefs": [
+            {
+              "id": "first-contentful-paint",
+              "weight": 10,
+              "group": "metrics",
+              "acronym": "FCP"
+            },
+            {
+              "id": "largest-contentful-paint",
+              "weight": 25,
+              "group": "metrics",
+              "acronym": "LCP"
+            },
+            {
+              "id": "total-blocking-time",
+              "weight": 30,
+              "group": "metrics",
+              "acronym": "TBT"
+            },
+            {
+              "id": "cumulative-layout-shift",
+              "weight": 25,
+              "group": "metrics",
+              "acronym": "CLS"
+            },
+            {
+              "id": "speed-index",
+              "weight": 10,
+              "group": "metrics",
+              "acronym": "SI"
+            },
+            {
+              "id": "cache-insight",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "cls-culprits-insight",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "document-latency-insight",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "dom-size-insight",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "duplicated-javascript-insight",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "font-display-insight",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "forced-reflow-insight",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "image-delivery-insight",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "inp-breakdown-insight",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "lcp-breakdown-insight",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "lcp-discovery-insight",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "legacy-javascript-insight",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "modern-http-insight",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "network-dependency-tree-insight",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "render-blocking-insight",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "third-parties-insight",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "viewport-insight",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "interactive",
+              "weight": 0,
+              "group": "hidden",
+              "acronym": "TTI"
+            },
+            {
+              "id": "max-potential-fid",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "first-meaningful-paint",
+              "weight": 0,
+              "acronym": "FMP",
+              "group": "hidden"
+            },
+            {
+              "id": "render-blocking-resources",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "uses-responsive-images",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "offscreen-images",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "unminified-css",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "unminified-javascript",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "unused-css-rules",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "unused-javascript",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "uses-optimized-images",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "modern-image-formats",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "uses-text-compression",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "uses-rel-preconnect",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "server-response-time",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "redirects",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "uses-http2",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "efficient-animated-content",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "duplicated-javascript",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "legacy-javascript",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "prioritize-lcp-image",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "total-byte-weight",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "uses-long-cache-ttl",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "dom-size",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "critical-request-chains",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "user-timings",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "bootup-time",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "mainthread-work-breakdown",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "font-display",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "third-party-summary",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "third-party-facades",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "largest-contentful-paint-element",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "lcp-lazy-loaded",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "layout-shifts",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "uses-passive-event-listeners",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "no-document-write",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "long-tasks",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "non-composited-animations",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "unsized-images",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "viewport",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "bf-cache",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "network-requests",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "network-rtt",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "network-server-latency",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "main-thread-tasks",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "diagnostics",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "metrics",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "screenshot-thumbnails",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "final-screenshot",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "script-treemap-data",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "resource-summary",
+              "weight": 0,
+              "group": "hidden"
+            }
+          ],
+          "id": "performance",
+          "score": 1
+        },
+        "best-practices": {
+          "title": "Best Practices",
+          "supportedModes": [
+            "navigation",
+            "timespan",
+            "snapshot"
+          ],
+          "auditRefs": [
+            {
+              "id": "is-on-https",
+              "weight": 5,
+              "group": "best-practices-trust-safety"
+            },
+            {
+              "id": "redirects-http",
+              "weight": 0,
+              "group": "best-practices-trust-safety"
+            },
+            {
+              "id": "geolocation-on-start",
+              "weight": 1,
+              "group": "best-practices-trust-safety"
+            },
+            {
+              "id": "notification-on-start",
+              "weight": 1,
+              "group": "best-practices-trust-safety"
+            },
+            {
+              "id": "csp-xss",
+              "weight": 0,
+              "group": "best-practices-trust-safety"
+            },
+            {
+              "id": "has-hsts",
+              "weight": 0,
+              "group": "best-practices-trust-safety"
+            },
+            {
+              "id": "origin-isolation",
+              "weight": 0,
+              "group": "best-practices-trust-safety"
+            },
+            {
+              "id": "clickjacking-mitigation",
+              "weight": 0,
+              "group": "best-practices-trust-safety"
+            },
+            {
+              "id": "trusted-types-xss",
+              "weight": 0,
+              "group": "best-practices-trust-safety"
+            },
+            {
+              "id": "paste-preventing-inputs",
+              "weight": 3,
+              "group": "best-practices-ux"
+            },
+            {
+              "id": "image-aspect-ratio",
+              "weight": 1,
+              "group": "best-practices-ux"
+            },
+            {
+              "id": "image-size-responsive",
+              "weight": 1,
+              "group": "best-practices-ux"
+            },
+            {
+              "id": "viewport",
+              "weight": 1,
+              "group": "best-practices-ux"
+            },
+            {
+              "id": "font-size",
+              "weight": 1,
+              "group": "best-practices-ux"
+            },
+            {
+              "id": "doctype",
+              "weight": 1,
+              "group": "best-practices-browser-compat"
+            },
+            {
+              "id": "charset",
+              "weight": 1,
+              "group": "best-practices-browser-compat"
+            },
+            {
+              "id": "js-libraries",
+              "weight": 0,
+              "group": "best-practices-general"
+            },
+            {
+              "id": "deprecations",
+              "weight": 5,
+              "group": "best-practices-general"
+            },
+            {
+              "id": "third-party-cookies",
+              "weight": 5,
+              "group": "best-practices-general"
+            },
+            {
+              "id": "errors-in-console",
+              "weight": 1,
+              "group": "best-practices-general"
+            },
+            {
+              "id": "valid-source-maps",
+              "weight": 0,
+              "group": "best-practices-general"
+            },
+            {
+              "id": "inspector-issues",
+              "weight": 1,
+              "group": "best-practices-general"
+            }
+          ],
+          "id": "best-practices",
+          "score": 0.96
+        },
+        "seo": {
+          "title": "SEO",
+          "description": "These checks ensure that your page is following basic search engine optimization advice. There are many additional factors Lighthouse does not score here that may affect your search ranking, including performance on [Core Web Vitals](https://web.dev/explore/vitals). [Learn more about Google Search Essentials](https://support.google.com/webmasters/answer/35769).",
+          "manualDescription": "Run these additional validators on your site to check additional SEO best practices.",
+          "supportedModes": [
+            "navigation",
+            "snapshot"
+          ],
+          "auditRefs": [
+            {
+              "id": "is-crawlable",
+              "weight": 4.043478260869565,
+              "group": "seo-crawl"
+            },
+            {
+              "id": "document-title",
+              "weight": 1,
+              "group": "seo-content"
+            },
+            {
+              "id": "meta-description",
+              "weight": 1,
+              "group": "seo-content"
+            },
+            {
+              "id": "http-status-code",
+              "weight": 1,
+              "group": "seo-crawl"
+            },
+            {
+              "id": "link-text",
+              "weight": 1,
+              "group": "seo-content"
+            },
+            {
+              "id": "crawlable-anchors",
+              "weight": 1,
+              "group": "seo-crawl"
+            },
+            {
+              "id": "robots-txt",
+              "weight": 0,
+              "group": "seo-crawl"
+            },
+            {
+              "id": "image-alt",
+              "weight": 0,
+              "group": "seo-content"
+            },
+            {
+              "id": "hreflang",
+              "weight": 1,
+              "group": "seo-content"
+            },
+            {
+              "id": "canonical",
+              "weight": 0,
+              "group": "seo-content"
+            },
+            {
+              "id": "structured-data",
+              "weight": 0
+            }
+          ],
+          "id": "seo",
+          "score": 0.9
+        }
+      }
+    },
+    "a11y": {
+      "url": "http://127.0.0.1:4620/",
+      "counts": {
+        "total": 0,
+        "serious": 0
+      },
+      "issues": []
     }
   },
   "summary": {
@@ -4305,6 +4903,31 @@
     "privacy_retention_ok": true,
     "privacy_retention_len": 3,
     "privacy_format_invalid_prev": 1,
-    "privacy_freshness_ok": true
+    "privacy_freshness_ok": true,
+    "perf": {
+      "url": "http://127.0.0.1:4620/",
+      "actual": {
+        "perf_score": 1,
+        "lcp_ms": 911.1356000000001,
+        "tbt_ms": 0,
+        "cls": 0
+      },
+      "budgets": {
+        "perf_score_min": 0.6,
+        "lcp_ms": 2500,
+        "tbt_ms": 300,
+        "cls_max": 0.8
+      },
+      "pass": true,
+      "violations": []
+    },
+    "a11y": {
+      "url": "http://127.0.0.1:4620/",
+      "counts": {
+        "total": 0,
+        "serious": 0
+      },
+      "pass": true
+    }
   }
 }

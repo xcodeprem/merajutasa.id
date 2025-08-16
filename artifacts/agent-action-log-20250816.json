@@ -4369,5 +4369,27 @@
     "timestamp": "2025-08-16T15:51:29.529Z",
     "action": "aggregate",
     "status": "OK"
+  },
+  {
+    "timestamp": "2025-08-16T16:22:19.360Z",
+    "action": "step",
+    "step": "spec-hash-diff",
+    "cmd": "node tools/spec-hash-diff.js --mode=verify",
+    "exit_code": 1,
+    "status": "ERROR",
+    "duration_ms": 71,
+    "critical": true,
+    "advisory": false
+  },
+  {
+    "timestamp": "2025-08-16T16:24:19.895Z",
+    "action": "step",
+    "step": "spec-hash-diff",
+    "cmd": "node tools/spec-hash-diff.js --mode=verify",
+    "exit_code": 1,
+    "status": "ERROR",
+    "duration_ms": 70,
+    "critical": true,
+    "advisory": false
   }
 ]

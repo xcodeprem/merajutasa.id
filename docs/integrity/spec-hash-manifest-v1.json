@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generation_timestamp_utc": "2025-08-16T15:50:57Z",
+  "generation_timestamp_utc": "2025-08-16T16:23:52Z",
   "generator_note": "Refined manifest: added onboarding & (optional) README, fixed dec_ref placeholders, standardized mutable_policy for adopted lint spec. All existing entries preserved; only additive or metadata corrections before first hash seal.",
   "files": [
     {
@@ -417,7 +417,7 @@
       "path": "docs/integrity/gating-policy-v1.json",
       "version": "1.0.0",
       "dec_ref": "DEC-20250812-04 + DEC-20250813-05 + DEC-20250813-07",
-      "hash_sha256": "98350cfb49c3278b13c14d351cfa83b5c799fc8e81eb5aaa72e190174a35ee36",
+      "hash_sha256": "ec038c5c51747836c13b455b183a9ecf7fb90a7de2e1cbc92d777c25eb3ab836",
       "integrity_class": "gating-policy",
       "mutable_policy": "append-only",
       "next_change_requires_dec": true,

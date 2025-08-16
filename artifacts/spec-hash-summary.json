@@ -1,7 +1,10 @@
 {
   "updated_count": 0,
-  "violations": [],
-  "violation_count": 0,
+  "violations": [
+    "HASH_MISMATCH",
+    "HASH_MISMATCH_DEC_REQUIRED"
+  ],
+  "violation_count": 2,
   "remaining_placeholders": 0,
   "dec_ref_inconsistencies": 0
 }
