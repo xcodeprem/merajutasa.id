@@ -5,6 +5,10 @@ on:
     - cron: '0 8 * * *'
   workflow_dispatch:
 
+concurrency:
+  group: pii-salt-rotation
+  cancel-in-progress: true
+
 permissions:
   contents: write
   pull-requests: write
@@ -38,6 +42,7 @@ jobs:
         with:
           commit-message: "chore(privacy): rotate PII hash salt"
           title: "chore(privacy): rotate PII hash salt"
+          labels: "automation,privacy,security"
           body: |
             Automated daily rotation of PII hash salt.
 
@@ -58,6 +63,7 @@ jobs:
           token: ${{ secrets.PAT_ROTATION }}
           commit-message: "chore(privacy): rotate PII hash salt"
           title: "chore(privacy): rotate PII hash salt"
+          labels: "automation,privacy,security"
           body: |
             Automated daily rotation of PII hash salt.
 
