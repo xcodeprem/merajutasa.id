@@ -5,7 +5,7 @@
  * derived from DEC-20250812-03 schedule or default windows.
  */
 import { promises as fs } from 'fs';
-import { execSync } from 'child_process';
+import { execFileSync } from 'child_process';
 
 const DEC_FILE = process.env.DEC_FILE || 'docs/governance/dec/DEC-20250812-03-principles-reference-activation.md';
 const NOW_OVERRIDE = process.env.NOW;
@@ -48,9 +48,11 @@ async function main(){
   let { phase0, phase1, phase2 } = parseScheduleFromDec(decText);
 
   if(!phase0){
-    // derive from git commit timestamp if available
+    // derive from git commit timestamp if available (no shell interpolation)
     try {
-      const out = execSync(`git log -1 --format=%cI -- "${DEC_FILE}"`, { stdio:['ignore','pipe','ignore'] }).toString().trim();
+      const out = execFileSync('git', ['log', '-1', '--format=%cI', '--', DEC_FILE], { stdio:['ignore','pipe','ignore'] })
+        .toString()
+        .trim();
       if (out) phase0 = out;
     } catch { /* ignore */ }
     if(!phase0){
