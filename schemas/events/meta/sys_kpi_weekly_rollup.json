@@ -1,0 +1,17 @@
+{
+  "$id": "https://schema.merajutasa.id/events/meta/sys_kpi_weekly_rollup.json",
+  "type": "object",
+  "properties": {
+    "week_start": {
+      "type": "string"
+    },
+    "generated_ts": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "week_start"
+  ],
+  "additionalProperties": true,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

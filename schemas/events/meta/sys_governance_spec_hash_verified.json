@@ -1,0 +1,19 @@
+{
+  "$id": "https://schema.merajutasa.id/events/meta/sys_governance_spec_hash_verified.json",
+  "type": "object",
+  "properties": {
+    "spec_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "diff_count": {
+      "type": "number",
+      "minimum": 0
+    }
+  },
+  "required": [
+    "spec_hash"
+  ],
+  "additionalProperties": true,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

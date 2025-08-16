@@ -6,29 +6,13 @@
     "invalid": 0,
     "prohibited": 0,
     "hashMismatch": 0,
-    "metaInvalid": 1
+    "metaInvalid": 0
   },
   "results": [
     {
       "status": "HASH_FILLED",
       "event_id": "9e9f2c6e-4b1b-4fd0-8201-9d9c9a7117ea",
       "event_hash": "e27fe76a060fa22c2a2cf98d0381056f53bc063c587c875277a2ccf124c971ca"
-    },
-    {
-      "status": "META_SCHEMA_ERROR",
-      "event_id": "9e9f2c6e-4b1b-4fd0-8201-9d9c9a7117ea",
-      "event_name": "pub_hero_card_cta_click",
-      "errors": [
-        {
-          "instancePath": "",
-          "schemaPath": "#/required",
-          "keyword": "required",
-          "params": {
-            "missingProperty": "cta_id"
-          },
-          "message": "must have required property 'cta_id'"
-        }
-      ]
     },
     {
       "status": "HASH_FILLED",

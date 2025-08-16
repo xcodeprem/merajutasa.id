@@ -1,0 +1,17 @@
+{
+  "$id": "https://schema.merajutasa.id/events/meta/pub_terminology_page_view.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "stage": {
+      "type": "string"
+    },
+    "adoption_percent": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    }
+  },
+  "required": ["stage"],
+  "additionalProperties": true
+}

@@ -1,0 +1,21 @@
+{
+  "$id": "https://schema.merajutasa.id/events/meta/sys_equity_anomaly_detected.json",
+  "type": "object",
+  "properties": {
+    "anomaly_type": {
+      "type": "string"
+    },
+    "delta": {
+      "type": "number"
+    },
+    "window": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "anomaly_type",
+    "delta"
+  ],
+  "additionalProperties": true,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

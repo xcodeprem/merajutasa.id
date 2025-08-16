@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "registryCount": 10,
+  "registryCount": 15,
   "schemas": [
     {
       "event_name": "pub_landing_impression",
@@ -19,10 +19,9 @@
     {
       "event_name": "pub_hero_card_cta_click",
       "required": [
-        "card_id",
-        "cta_id"
+        "card_id"
       ],
-      "additionalProperties": true
+      "additionalProperties": false
     },
     {
       "event_name": "sys_fairness_snapshot_written",
@@ -73,6 +72,41 @@
       "event_name": "sys_governance_spec_hash_verified",
       "required": [
         "spec_hash"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "event_name": "pub_equity_under_served_click",
+      "required": [
+        "unit_id"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "event_name": "pub_feedback_submit",
+      "required": [
+        "category"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "event_name": "pub_hash_verify_click",
+      "required": [
+        "result"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "event_name": "pub_trust_metric_tooltip_open",
+      "required": [
+        "metric_id"
+      ],
+      "additionalProperties": true
+    },
+    {
+      "event_name": "pub_terminology_page_view",
+      "required": [
+        "stage"
       ],
       "additionalProperties": true
     }

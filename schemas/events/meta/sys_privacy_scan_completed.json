@@ -1,0 +1,20 @@
+{
+  "$id": "https://schema.merajutasa.id/events/meta/sys_privacy_scan_completed.json",
+  "type": "object",
+  "properties": {
+    "scanned_count": {
+      "type": "number",
+      "minimum": 0
+    },
+    "pii_detected_count": {
+      "type": "number",
+      "minimum": 0
+    }
+  },
+  "required": [
+    "scanned_count",
+    "pii_detected_count"
+  ],
+  "additionalProperties": true,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

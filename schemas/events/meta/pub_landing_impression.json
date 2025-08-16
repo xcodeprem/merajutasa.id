@@ -1,0 +1,18 @@
+{
+  "$id": "https://schema.merajutasa.id/events/meta/pub_landing_impression.json",
+  "type": "object",
+  "properties": {
+    "path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "referrer": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "path"
+  ],
+  "additionalProperties": true,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

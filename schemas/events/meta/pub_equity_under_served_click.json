@@ -1,0 +1,21 @@
+{
+  "$id": "https://schema.merajutasa.id/events/meta/pub_equity_under_served_click.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "unit_id": {
+      "type": "string"
+    },
+    "entry_reason": {
+      "type": "string",
+      "enum": ["severe", "consecutive"]
+    },
+    "ratio": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    }
+  },
+  "required": ["unit_id"],
+  "additionalProperties": true
+}

@@ -715,15 +715,23 @@ Event Schema v1.0 memberikan fondasi observability yang selaras dengan etos: ver
 
 ## 33. APPENDIX – META SUB-SCHEMA INDEX (REFERENCE)
 
-| Event | Sub-Schema ID |
-|-------|---------------|
-| pub_hero_card_cta_click | meta/pub_hero_card_cta_click.json |
-| pub_equity_under_served_click | meta/pub_equity_under_served_click.json |
-| pub_feedback_submit | meta/pub_feedback_submit.json |
-| pub_hash_verify_click | meta/pub_hash_verify_click.json |
-| pub_trust_metric_tooltip_open | meta/pub_trust_metric_tooltip_open.json |
-| pub_terminology_page_view | meta/pub_terminology_page_view.json |
-| (others incremental) | ... |
+| Event | Sub-Schema File |
+|-------|-----------------|
+| pub_hero_card_cta_click | [meta/pub_hero_card_cta_click.json](../../schemas/events/meta/pub_hero_card_cta_click.json) |
+| pub_equity_under_served_click | [meta/pub_equity_under_served_click.json](../../schemas/events/meta/pub_equity_under_served_click.json) |
+| pub_feedback_submit | [meta/pub_feedback_submit.json](../../schemas/events/meta/pub_feedback_submit.json) |
+| pub_hash_verify_click | [meta/pub_hash_verify_click.json](../../schemas/events/meta/pub_hash_verify_click.json) |
+| pub_trust_metric_tooltip_open | [meta/pub_trust_metric_tooltip_open.json](../../schemas/events/meta/pub_trust_metric_tooltip_open.json) |
+| pub_terminology_page_view | [meta/pub_terminology_page_view.json](../../schemas/events/meta/pub_terminology_page_view.json) |
+| pub_hero_view | [meta/pub_hero_view.json](../../schemas/events/meta/pub_hero_view.json) |
+| pub_landing_impression | [meta/pub_landing_impression.json](../../schemas/events/meta/pub_landing_impression.json) |
+| sys_equity_anomaly_detected | [meta/sys_equity_anomaly_detected.json](../../schemas/events/meta/sys_equity_anomaly_detected.json) |
+| sys_fairness_snapshot_written | [meta/sys_fairness_snapshot_written.json](../../schemas/events/meta/sys_fairness_snapshot_written.json) |
+| sys_fairness_under_served_enter | [meta/sys_fairness_under_served_enter.json](../../schemas/events/meta/sys_fairness_under_served_enter.json) |
+| sys_fairness_under_served_exit | [meta/sys_fairness_under_served_exit.json](../../schemas/events/meta/sys_fairness_under_served_exit.json) |
+| sys_governance_spec_hash_verified | [meta/sys_governance_spec_hash_verified.json](../../schemas/events/meta/sys_governance_spec_hash_verified.json) |
+| sys_kpi_weekly_rollup | [meta/sys_kpi_weekly_rollup.json](../../schemas/events/meta/sys_kpi_weekly_rollup.json) |
+| sys_privacy_scan_completed | [meta/sys_privacy_scan_completed.json](../../schemas/events/meta/sys_privacy_scan_completed.json) |
 
 ---
 

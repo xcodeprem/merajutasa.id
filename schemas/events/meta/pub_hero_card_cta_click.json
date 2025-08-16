@@ -1,0 +1,30 @@
+{
+  "$id": "https://schema.merajutasa.id/events/meta/pub_hero_card_cta_click.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "card_id": {
+      "type": "string",
+      "pattern": "^C[1-7]$"
+    },
+    "cta_id": {
+      "type": "string"
+    },
+    "classification": {
+      "type": "string",
+      "enum": ["Healthy", "Monitoring", "Imbalance"]
+    },
+    "position_index": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 6
+    },
+    "path": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "card_id"
+  ],
+  "additionalProperties": false
+}

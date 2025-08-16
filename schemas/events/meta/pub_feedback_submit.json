@@ -1,0 +1,19 @@
+{
+  "$id": "https://schema.merajutasa.id/events/meta/pub_feedback_submit.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "category": {
+      "type": "string"
+    },
+    "contains_pii": {
+      "type": "boolean"
+    },
+    "length": {
+      "type": "number",
+      "minimum": 0
+    }
+  },
+  "required": ["category"],
+  "additionalProperties": true
+}

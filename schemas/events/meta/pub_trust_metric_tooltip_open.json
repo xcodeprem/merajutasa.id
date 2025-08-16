@@ -1,0 +1,13 @@
+{
+  "$id": "https://schema.merajutasa.id/events/meta/pub_trust_metric_tooltip_open.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "metric_id": {
+      "type": "string",
+      "enum": ["coverage", "verified_percent", "equity_index", "incident_free_days"]
+    }
+  },
+  "required": ["metric_id"],
+  "additionalProperties": true
+}
