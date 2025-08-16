@@ -2502,5 +2502,16 @@
     "timestamp": "2025-08-16T10:20:39.035Z",
     "action": "aggregate",
     "status": "OK"
+  },
+  {
+    "timestamp": "2025-08-16T14:55:23.248Z",
+    "action": "step",
+    "step": "spec-hash-diff",
+    "cmd": "node tools/spec-hash-diff.js --mode=verify",
+    "exit_code": 1,
+    "status": "ERROR",
+    "duration_ms": 76,
+    "critical": true,
+    "advisory": false
   }
 ]

@@ -1,7 +1,7 @@
 {
-  "timestamp_utc": "2025-08-16T10:20:38.177Z",
+  "timestamp_utc": "2025-08-16T14:55:35.980Z",
   "components": {
-    "spec_hash": "PASS",
+    "spec_hash": "FAIL",
     "params": "PASS",
     "hype": "ADVISORY",
     "disclaimers": "PASS_STUB",
@@ -33,9 +33,9 @@
     "gate_checks": [
       {
         "id": "SPEC_HASH",
-        "passed": true,
+        "passed": false,
         "detail": {
-          "violations": 0,
+          "violations": 75,
           "allowed": 0
         }
       },
@@ -140,9 +140,9 @@
     "checks": [
       {
         "id": "SPEC_HASH",
-        "passed": true,
+        "passed": false,
         "detail": {
-          "violations": 0,
+          "violations": 75,
           "allowed": 0
         }
       },
@@ -220,5 +220,5 @@
       }
     ]
   },
-  "status": "ADVISORY"
+  "status": "FAIL"
 }

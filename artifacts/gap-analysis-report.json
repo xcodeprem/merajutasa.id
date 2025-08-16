@@ -1,0 +1,185 @@
+{
+  "version": "1.0.0",
+  "generated_utc": "2025-08-16T14:59:29.278Z",
+  "summary": {
+    "total_gaps": 11,
+    "by_severity": {
+      "critical": 1,
+      "high": 6,
+      "medium": 4,
+      "low": 0
+    },
+    "by_category": {
+      "integrity": 1,
+      "implementation": 3,
+      "documentation": 1,
+      "services": 3,
+      "testing": 2,
+      "configuration": 1
+    },
+    "has_gaps": true,
+    "system_readiness": "NOT_READY"
+  },
+  "gaps": {
+    "integrity": [
+      {
+        "category": "HASH_VIOLATIONS",
+        "severity": "HIGH",
+        "count": 75,
+        "description": "75 files have hash mismatches indicating content drift",
+        "impact": "Governance integrity compromised, documents changed without proper versioning",
+        "files": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "recommendation": "Run spec-hash-diff.js --mode=seal-first to update hashes after reviewing changes"
+      }
+    ],
+    "implementation": [
+      {
+        "category": "PLANNED_NOT_IMPLEMENTED",
+        "severity": "HIGH",
+        "source": "docs/status/progress-recap-wave0-completion-2025-08-13T0819Z.md",
+        "count": 5,
+        "description": "Features documented but not implemented",
+        "items": [
+          "| Governance DEC | Belum diratifikasi formal | 4 DEC adopted + 2 draft | 12-02,12-03,12-04,13-01 adopted; 13-02,13-03 draft |",
+          "| Fairness Sim | Belum ada | fairness-sim v1 (scenarios) | Coverage baseline disiapkan |",
+          "| Terminology Scan | Belum ada | terminology-scan stage1 inventory | Stage2 trigger DB-06 (future) |",
+          "| Evidence Bundle | Belum terdefinisi | evidence-bundle + schema validation | Bundle hash derivation siap |",
+          "| R-DISC-03 | Missing disclaimers critical pages | Lint heuristic (advisory) | Turn presence_enforcement true + DEC-13-03 activation |"
+        ],
+        "impact": "Core functionality missing, system incomplete",
+        "recommendation": "Prioritize implementation of critical missing features"
+      },
+      {
+        "category": "PLANNED_NOT_IMPLEMENTED",
+        "severity": "HIGH",
+        "source": "docs/status/progress-recap-latest-2025-08-12T035901Z.md",
+        "count": 33,
+        "description": "Features documented but not implemented",
+        "items": [
+          "| Policy-as-Code (aggregation, disclaimers presence) | Belum dikerjakan (hanya definisi awal) | No change |",
+          "| Terminology Adoption Scanner | Belum ada script; definisi metrik jelas | No change |",
+          "| Performance / A11y Hardening | Belum dijalankan | No change |",
+          "| Analytics Dashboard | Belum implement query | Menunggu event collector |",
+          "| Signing Service (credential) | Belum ada service & key management | “Trust theater” (UI tanpa kriptografi) |"
+        ],
+        "impact": "Core functionality missing, system incomplete",
+        "recommendation": "Prioritize implementation of critical missing features"
+      },
+      {
+        "category": "MISSING_CRITICAL_SERVICE",
+        "severity": "CRITICAL",
+        "path": "tools/policy-as-code-enforcer.js",
+        "feature": "Policy enforcement engine",
+        "description": "Policy enforcement engine does not exist",
+        "impact": "Core system functionality missing",
+        "recommendation": "Implement critical service from scratch"
+      }
+    ],
+    "documentation": [
+      {
+        "category": "INCOMPLETE_DOCUMENTATION",
+        "severity": "MEDIUM",
+        "path": "README.md",
+        "feature": "Main project documentation",
+        "description": "Documentation exists but appears incomplete",
+        "size": 14135,
+        "impact": "Users may not understand how to use the system",
+        "recommendation": "Complete documentation"
+      }
+    ],
+    "services": [
+      {
+        "category": "SERVICE_QUALITY_ISSUES",
+        "severity": "MEDIUM",
+        "service": "signer.js",
+        "issues": [
+          "No health check endpoint"
+        ],
+        "description": "Service missing production readiness features",
+        "impact": "Reliability and monitoring concerns",
+        "recommendation": "Add missing production features"
+      },
+      {
+        "category": "MINIMAL_SERVICE",
+        "severity": "HIGH",
+        "service": "chain-mysql.js",
+        "description": "Service appears to be minimal placeholder",
+        "size": 0,
+        "impact": "Service may not be production ready",
+        "recommendation": "Expand service implementation"
+      },
+      {
+        "category": "SERVICE_QUALITY_ISSUES",
+        "severity": "MEDIUM",
+        "service": "chain-mysql.js",
+        "issues": [
+          "No health check endpoint",
+          "No error handling",
+          "No logging"
+        ],
+        "description": "Service missing production readiness features",
+        "impact": "Reliability and monitoring concerns",
+        "recommendation": "Add missing production features"
+      }
+    ],
+    "testing": [
+      {
+        "category": "LOW_TEST_COVERAGE",
+        "severity": "HIGH",
+        "testFiles": 15,
+        "toolFiles": 73,
+        "coverage": 21,
+        "description": "Insufficient test coverage for tools",
+        "impact": "Risk of regressions and bugs",
+        "recommendation": "Increase test coverage to at least 50%"
+      },
+      {
+        "category": "NO_TEST_SCRIPT",
+        "severity": "MEDIUM",
+        "description": "No npm test script configured",
+        "impact": "Tests cannot be run easily",
+        "recommendation": "Add npm test script"
+      }
+    ],
+    "configuration": [
+      {
+        "category": "MISSING_CONFIG",
+        "severity": "HIGH",
+        "path": ".env.example",
+        "description": "Required configuration file missing",
+        "impact": "System cannot be configured properly",
+        "recommendation": "Create required configuration file"
+      }
+    ]
+  },
+  "recommendations": [
+    {
+      "priority": "IMMEDIATE",
+      "action": "Address critical gaps before any production deployment",
+      "items": [
+        "MISSING_CRITICAL_SERVICE"
+      ]
+    },
+    {
+      "priority": "HIGH",
+      "action": "Fix hash integrity violations to restore governance",
+      "command": "npm run spec-hash:seal"
+    },
+    {
+      "priority": "HIGH",
+      "action": "Complete critical service implementations",
+      "focus": "signer, chain, collector services"
+    }
+  ]
+}
