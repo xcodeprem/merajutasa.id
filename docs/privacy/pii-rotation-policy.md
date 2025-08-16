@@ -10,7 +10,6 @@ Overview
 - Source of truth: privacy-policy.json in repository
 - Automation: GitHub Actions workflow `.github/workflows/pii-salt-rotation.yml`
 
-
 Workflow Behavior
 
 - Rotates hash_salt and updates last_rotated_utc (UTC ISO8601)
@@ -18,13 +17,11 @@ Workflow Behavior
 - Opens/updates PR to `main`
 - Uploads artifact `pii-salt-rotation.json` into the workflow run
 
-
 Authentication
 
 - Uses `GITHUB_TOKEN` by default
 - Falls back to `PAT_ROTATION` (repo secret) for PR creation when org policy blocks GITHUB_TOKEN-initiated PRs
 - Recommended PAT scope: Fine-grained, repository-limited; permissions: Contents (Read/Write), Pull requests (Read/Write)
-
 
 Operational Notes
 
@@ -32,13 +29,11 @@ Operational Notes
 - If PR is not created, check workflow summary for guidance (likely missing PAT permissions)
 - Keep retention window at 14 (aligned with code and workflow); any change requires privacy review approval
 
-
 Security Guidance
 
 - Treat salts as sensitive configuration
 - Rotate immediately if suspected exposure; verify PR created and merged
 - Validate that `previous_salts` does not contain developer placeholders in production
-
 
 References
 

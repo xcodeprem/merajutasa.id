@@ -3,6 +3,8 @@
  * generate-equity-snapshots.js
  * Creates synthetic equity ratio snapshots AND derives an equity summary
  * using computeEquityIndex (DEC-20250813-09 rounding rules).
+ * NOTE: This is a synthetic generator for demo/tests. In production, buckets
+ *       come from 24h event aggregation per unit (see Equity Snapshot Pseudocode).
  */
 import { promises as fs } from 'fs';
 import { computeEquityIndex } from './rounding-util.js';

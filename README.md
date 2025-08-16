@@ -33,6 +33,16 @@ Transparency:
 
 - Changelog Excerpt (draft): <https://codingxdev0.github.io/merajutasa.id/changelog.html>
 
+### Event pipeline_hash (per Spec v1.0)
+
+- Utility: `npm run events:pipeline:hash` writes `artifacts/event-pipeline-hash.json`.
+- Definition: SHA-256 of (schema_version + sorted event_name list + schema commit hash).
+- Purpose: detect schema drift and taxonomy changes across deployments.
+
+### Equity snapshots methodology (note)
+
+- The script `tools/fairness/generate-equity-snapshots.js` is synthetic for demos/tests. In production, snapshot buckets come from 24h aggregation of public events per unit, then equity_index computed as 1 − Gini (see `docs/fairness/equity-snapshot-pseudocode.md`).
+
 ## Fairness & Integrity Governance Scaffold (Baseline PRE-SEAL)
 
 STATUS: PRE-HASH SEAL (Hash baseline belum diisi – proses “seal-first” akan menulis hash real & mengunci konten canonical).  
