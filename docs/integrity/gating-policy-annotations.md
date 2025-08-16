@@ -8,8 +8,8 @@ This note maps `docs/integrity/gating-policy-v1.json` fields to their governance
 - thresholds.param_integrity_status = "PASS"
   - DEC: DEC-20250813-05
   - Evidence: artifacts/param-integrity-matrix.json (status)
-- thresholds.hype_high_max = 1 (transitional)
-  - DEC: Transitional DEC-20250813-07 (sunset; target 0 per DEC-20250813-05 targets)
+- thresholds.hype_high_max = 0
+  - DEC: DEC-20250813-07 (post-sunset; ratified Evidence Minimum)
   - Evidence: artifacts/hype-lint.json (severity_counts.HIGH)
 - thresholds.hype_medium_max = 120
   - DEC: Transitional segmentation (companion DEC; advisory tuning)
@@ -39,8 +39,8 @@ This note maps `docs/integrity/gating-policy-v1.json` fields to their governance
 - thresholds.param_integrity_status = "PASS"
   - DEC: DEC-20250813-05
   - Evidence: artifacts/param-integrity-matrix.json (status)
-- thresholds.hype_high_max = 1 (transitional)
-  - DEC: Transitional DEC-20250813-07 (sunset; target 0 per DEC-20250813-05 targets)
+- thresholds.hype_high_max = 0
+  - DEC: DEC-20250813-07 (post-sunset; ratified Evidence Minimum)
   - Evidence: artifacts/hype-lint.json (severity_counts.HIGH)
 - thresholds.hype_medium_max = 120
   - DEC: Transitional segmentation (companion DEC; advisory tuning)
@@ -67,4 +67,4 @@ This note maps `docs/integrity/gating-policy-v1.json` fields to their governance
 Notes:
 
 - No-Silent-Drift aggregator composes component statuses and gate checks; see `artifacts/no-silent-drift-report.json`.
-- After sunset, update hype_high_max to 0 and remove transitional DEC reference.
+- Post-sunset: hype_high_max updated to 0 per DEC-20250813-07 ratification.

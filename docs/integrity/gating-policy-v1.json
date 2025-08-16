@@ -3,7 +3,7 @@
   "wave": "1",
   "generated_utc": "2025-08-13T12:12:00Z",
   "thresholds": {
-  "hype_high_max": 1,
+  "hype_high_max": 0,
   "hype_medium_max": 120,
     "disclaimers_errors_allowed": 0,
     "param_integrity_status": "PASS",
@@ -28,7 +28,7 @@
   },
   "notes": [
     "Wave 1 gating: strict zero tolerance for param mismatches & spec hash violations.",
-  "Transitional DEC-20250813-07 sets hype_high_max=1 (sunset review).",
+  "DEC-20250813-07 ratified hype_high_max=0 (post-sunset Evidence Minimum).",
   "Medium severity segmentation introduced (hype_medium_max).",
     "PII scanner critical matches escalate to fail in Wave 1."
   ]

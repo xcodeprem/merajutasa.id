@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "timestamp_utc": "2025-08-16T16:28:26.034Z",
+  "focus": "hype_high_max sunset validation",
+  "policy_change": "DEC-20250813-07 ratification",
+  "validation": {
+    "hype_high_threshold": 0,
+    "hype_high_actual": 0,
+    "compliant": true,
+    "evidence_file": "artifacts/hype-lint.json"
+  },
+  "summary": "Evidence Minimum post-sunset implemented successfully"
+}
