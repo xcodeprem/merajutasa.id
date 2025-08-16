@@ -43,12 +43,12 @@ jobs:
       - name: Perf Smoke (advisory)
         continue-on-error: true
         run: |
-          node tools/perf-budget-smoke.js || echo "perf-budget failed (advisory)"
+          node tools/perf-budget-smoke.js || true
 
       - name: A11y Smoke (advisory here; strict covered in H1 Guard)
         continue-on-error: true
         run: |
-          node tools/a11y-smoke.js || echo "a11y smoke failed (advisory in this step)"
+          node tools/a11y-smoke.js || true
 
       - name: Rebuild KPI Summary (include adoption)
         run: |
