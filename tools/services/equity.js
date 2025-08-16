@@ -47,7 +47,34 @@ async function start(){
         return res.end(html);
       }
       if (req.method==='GET' && req.url.startsWith('/ui/')){
-        const file = req.url.replace('/ui/','');
+        // Sanitize user-provided path strictly before resolving
+        let file;
+        try {
+          file = decodeURIComponent(req.url.replace('/ui/',''));
+        } catch {
+          res.writeHead(400); return res.end();
+        }
+        // Reject absolute paths, backslashes, parent traversal, or suspicious chars
+        if (file.startsWith('/') || file.includes('..') || file.includes('\\') || /[\0]/.test(file)){
+          res.writeHead(400); return res.end();
+        }
+        // Allowlist conservative charset for segments
+        const SAFE_RE = /^[a-zA-Z0-9._\/-]+$/;
+        if (!SAFE_RE.test(file)) { res.writeHead(400); return res.end(); }
+        // Extension whitelist and content types
+        const ext = path.extname(file).toLowerCase();
+        const types = {
+          '.html': 'text/html; charset=utf-8',
+          '.js': 'application/javascript',
+          '.css': 'text/css',
+          '.svg': 'image/svg+xml',
+          '.png': 'image/png',
+          '.ico': 'image/x-icon',
+          '.map': 'application/json',
+          '.json': 'application/json',
+          '.txt': 'text/plain'
+        };
+        if (!types[ext]) { res.writeHead(415); return res.end(); }
         const p = path.resolve(UI_ROOT, file);
         let realPath;
         try {
@@ -61,8 +88,7 @@ async function start(){
           res.writeHead(403);
           return res.end();
         }
-        const ext = path.extname(realPath);
-        const type = ext==='.js' ? 'application/javascript' : 'text/plain';
+  const type = types[ext] || 'application/octet-stream';
         res.writeHead(200, { 'content-type': type });
         return createReadStream(realPath).pipe(res);
       }
