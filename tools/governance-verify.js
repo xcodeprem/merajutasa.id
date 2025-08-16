@@ -28,10 +28,15 @@ async function runSpecHashWithAutoSeal(){
       const diffRaw = await fs.readFile('artifacts/spec-hash-diff.json','utf8').catch(()=>null);
       const diff = diffRaw? JSON.parse(diffRaw): null;
       const violations = diff?.violations || [];
-      const readmeOnly = violations.length>0 && violations.every(v=>v.path==='README.md' && v.code.startsWith('HASH_MISMATCH'));
-      if (readmeOnly){
-        console.warn('[governance-verify] Auto-seal README editorial drift (authorized): running accept for README.md');
-        await runStep({ name: 'spec-hash-auto-seal-readme', cmd: ['node','tools/spec-hash-diff.js','--mode=accept','--include=README.md'], critical: true });
+      const allowRaw = await fs.readFile('docs/integrity/auto-seal-allowlist.json','utf8').catch(()=>null);
+      const allow = allowRaw? JSON.parse(allowRaw): { allowed_paths: ['README.md'], allowed_integrity_classes: [] };
+      const onlyHashMismatch = violations.length>0 && violations.every(v=> v.code.startsWith('HASH_MISMATCH'));
+      const violPaths = new Set(violations.map(v=>v.path));
+      const allAllowed = Array.from(violPaths).every(p=> allow.allowed_paths.includes(p));
+      if (onlyHashMismatch && allAllowed){
+        const includeArg = Array.from(violPaths).join(',');
+        console.warn(`[governance-verify] Auto-seal editorial drift (authorized): ${includeArg}`);
+        await runStep({ name: 'spec-hash-auto-seal-allowlist', cmd: ['node','tools/spec-hash-diff.js','--mode=accept',`--include=${includeArg}`], critical: true });
         await runStep({ name: 'spec-hash-diff', cmd: ['node','tools/spec-hash-diff.js','--mode=verify'], critical: true });
         return;
       }

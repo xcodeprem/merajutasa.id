@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "allowed_paths": [
+    "README.md",
+    "docs/roadmap/roadmap-master-v1.md",
+    "docs/governance/policy-index-v1.md"
+  ],
+  "allowed_integrity_classes": [
+    "repository-readme",
+    "roadmap",
+    "policy-index"
+  ],
+  "notes": "Files authorized for non-breaking editorial auto-seal under DEC-20250815-01. Only hash mismatches are auto-accepted; other violations still fail."
+}

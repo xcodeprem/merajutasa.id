@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "notes": "Seed old→new terminology pairs for lint/adoption. Stage1 advisory only; updates may follow DEC.",
+  "pairs": [
+    { "old": "ranking", "new": "tanpa ranking" },
+    { "old": "peringkat", "new": "tanpa peringkat" },
+    { "old": "top", "new": "rekomendasi" },
+    { "old": "terbaik", "new": "sesuai kebutuhan" },
+    { "old": "blacklist", "new": "daftar blokir" },
+    { "old": "whitelist", "new": "daftar izin" },
+    { "old": "master", "new": "utama" },
+    { "old": "slave", "new": "sekunder" },
+    { "old": "user", "new": "pengguna" },
+    { "old": "AI fairness", "new": "keadilan (equity)" }
+  ]
+}

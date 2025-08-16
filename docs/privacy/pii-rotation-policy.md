@@ -5,8 +5,8 @@ Scope: tools/config/privacy-policy.json (hash_salt, previous_salts[], last_rotat
 
 Overview
 
-- Frequency: Daily (cron) with manual trigger allowed
-- Retention: Keep last 7 salts in previous_salts
+- Frequency: Daily at 08:00 UTC (cron) with manual trigger allowed
+- Retention: Keep last 14 salts in previous_salts
 - Source of truth: privacy-policy.json in repository
 - Automation: GitHub Actions workflow `.github/workflows/pii-salt-rotation.yml`
 

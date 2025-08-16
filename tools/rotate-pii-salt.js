@@ -8,7 +8,7 @@ import { promises as fs } from 'fs';
 import crypto from 'crypto';
 
 const CONFIG_PATH = 'tools/config/privacy-policy.json';
-const HISTORY_MAX = 7; // keep last 7 salts for analysis
+const HISTORY_MAX = 14; // keep last 14 salts for analysis
 
 async function safeReadJSON(p){ try { return JSON.parse(await fs.readFile(p,'utf8')); } catch { return null; } }
 function randSalt(){ return crypto.randomBytes(16).toString('hex'); }

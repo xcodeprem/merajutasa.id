@@ -16,18 +16,32 @@ function countOccurrences(text, terms){
 async function main(){
   await fs.mkdir('artifacts',{recursive:true});
   const mapping = JSON.parse(await fs.readFile('docs/principles/terminology-mapping.json','utf8'));
+  // Optional extended dictionary with explicit old->new pairs
+  let dictPairs = [];
+  try {
+    const dict = JSON.parse(await fs.readFile('docs/principles/terminology-dictionary.json','utf8'));
+    if (Array.isArray(dict.pairs)) dictPairs = dict.pairs;
+  } catch {}
   const files = await glob('{docs,README.md}/**/*.md', { nodir:true, strict:false });
-  let oldTotal=0, newTotal=0; const fileBreakdown=[]; let bannedHits=0;
+  let oldTotal=0, newTotal=0; const fileBreakdown=[]; let bannedHits=0; const suggestions=[];
   for (const f of files){
     let txt=''; try { txt = await fs.readFile(f,'utf8'); } catch {}
     const { total: oldCount } = countOccurrences(txt, mapping.old_terms);
     const { total: newCount } = countOccurrences(txt, mapping.new_terms);
     oldTotal += oldCount; newTotal += newCount;
     bannedHits += oldCount;
+    // Build suggestions per dictionary pairs
+    const fileSuggestions = [];
+    for (const p of dictPairs){
+      const rx = new RegExp(`\\b${p.old.replace(/[-\/\\^$*+?.()|[\]{}]/g,'\\$&')}\\b`,'gi');
+      const m = txt.match(rx) || [];
+      if (m.length){ fileSuggestions.push({ old: p.old, new: p.new, count: m.length }); }
+    }
+    if (fileSuggestions.length){ suggestions.push({ file: f, suggestions: fileSuggestions }); }
     fileBreakdown.push({ file: f, oldCount, newCount });
   }
   const adoptionPercent = (newTotal + oldTotal) ? +( (newTotal / (newTotal + oldTotal)) * 100 ).toFixed(2) : 100;
-  const report = { version:'1.0.0', generated_utc: new Date().toISOString(), old_total: oldTotal, new_total: newTotal, adoptionPercent, files: fileBreakdown };
+  const report = { version:'1.0.0', generated_utc: new Date().toISOString(), old_total: oldTotal, new_total: newTotal, adoptionPercent, files: fileBreakdown, suggestions };
   await fs.writeFile('artifacts/terminology-adoption.json', JSON.stringify(report,null,2));
   const threshold = Number(process.env.ADOPTION_MIN || '0');
   const bannedMax = Number(process.env.BANNED_MAX || '0');
