@@ -12,6 +12,7 @@ Live dashboard (GitHub Pages): [codingxdev0.github.io/merajutasa.id](https://cod
 ## Quick Start
 
 ### Prerequisites
+
 - Node.js LTS (v18+)
 - npm or yarn
 
@@ -67,17 +68,20 @@ npm run fairness:sim        # Fairness simulation
 ## Architecture
 
 ### Core Services
+
 - **Signer Service** (4601) - Ed25519 cryptographic signing
 - **Chain Service** (4602) - Hash chain integrity management  
 - **Event Collector** (4603) - Event ingestion and validation
 
 ### Governance Tools
+
 - **Hash Integrity** - Content drift detection and sealing
 - **Parameter Integrity** - Governance parameter consistency
 - **DEC Lint** - Decision document validation
 - **Evidence Validation** - Artifact integrity verification
 
 ### Quality Assurance
+
 - **Test Coverage** - 27 test files covering critical functionality
 - **Gap Analysis** - Automated system readiness assessment  
 - **Continuous Integration** - Automated governance verification
