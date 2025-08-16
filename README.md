@@ -1,4 +1,4 @@
-# merajutasa-governancereplace the key with a new no‑passphrase key and add it to GitHub; say the word and I’ll set it up.
+# merajutasa-governance
 
 [![CI Guard (H1)](https://github.com/codingxdev0/merajutasa.id/actions/workflows/ci-guard.yml/badge.svg)](https://github.com/codingxdev0/merajutasa.id/actions/workflows/ci-guard.yml)
 [![H1 Guard & KPI](https://github.com/codingxdev0/merajutasa.id/actions/workflows/h1-guard.yml/badge.svg)](https://github.com/codingxdev0/merajutasa.id/actions/workflows/h1-guard.yml)
@@ -6,10 +6,6 @@
 [![Changelog Excerpt](https://img.shields.io/badge/changelog-excerpt-blue)](https://codingxdev0.github.io/merajutasa.id/changelog.html)
 
 Live dashboard (GitHub Pages): [codingxdev0.github.io/merajutasa.id](https://codingxdev0.github.io/merajutasa.id/)
-
-## Operator docs
-
-- Phase Tracker PR automation: see `docs/governance/phase-tracker-ops.md` for PAT setup and skip behavior.
 
 ## Operator docs
 
