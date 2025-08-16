@@ -1,4 +1,4 @@
-# merajutasa-governance
+# merajutasa-governancereplace the key with a new no‑passphrase key and add it to GitHub; say the word and I’ll set it up.
 
 [![CI Guard (H1)](https://github.com/codingxdev0/merajutasa.id/actions/workflows/ci-guard.yml/badge.svg)](https://github.com/codingxdev0/merajutasa.id/actions/workflows/ci-guard.yml)
 [![H1 Guard & KPI](https://github.com/codingxdev0/merajutasa.id/actions/workflows/h1-guard.yml/badge.svg)](https://github.com/codingxdev0/merajutasa.id/actions/workflows/h1-guard.yml)
