@@ -42,9 +42,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'
 
       - name: Install dependencies (CI)
-        run: npm ci
+        run: |
+          npm ci || npm i --no-audit --no-fund
+      - name: Ensure yaml present (safety net)
+        run: |
+          npm ls yaml || npm i yaml@^2.4.5 --no-audit --no-fund
 
       - name: Run H1 guard (fairness, snapshots, anomalies, KPIs, perf, a11y)
         run: node tools/h1-verify-guard.js
