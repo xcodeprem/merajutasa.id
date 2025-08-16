@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2025-08-16T10:20:34.622Z",
+  "generated_utc": "2025-08-16T15:51:27.970Z",
   "version": 1,
   "summary": {
     "files": 19,
@@ -12,14 +12,14 @@
     {
       "file": "DEC-20250812-02-hysteresis-adoption.md",
       "id": "DEC-20250812-02",
-      "hash": "a99e20be90ef46ca20a0e46f7fd1c3c9b8688081fb53bac667875eb5f8bb70d0",
+      "hash": "590cdd8be80eba519d52aa5a825b129aca6ddf8e2a5b32683a2e19f73d978fd1",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250812-03-principles-reference-activation.md",
       "id": "DEC-20250812-03",
-      "hash": "6768d18bff8f7891998230cb18673d852409b1e2692e2b2abea384eb705e4b6a",
+      "hash": "e8cb894bbd99eebefbab7ca30824785c88dee8f3d72d814af4d318c8ff1b28b1",
       "violations": [],
       "warnings": []
     },
@@ -40,91 +40,91 @@
     {
       "file": "DEC-20250813-02-signature-pipeline-adoption.md",
       "id": "DEC-20250813-02",
-      "hash": "c0798623aa8949bf4f1ce115d719bdf641450d8ad906ed4b61cc34534b8163a0",
+      "hash": "a59dc9b0161686d061abd35e9b7d0d0630dcc06bb947a62f2e1ed15dbe0c6ea5",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250813-03-disclaimers-presence-enforcement.md",
       "id": "DEC-20250813-03",
-      "hash": "925a3c1b73e9e9f61563a90273376846557d6cf9f4206ae59130f9fe2c5aaae9",
+      "hash": "229f1158fe860c0fbd35015f10630d15b59d1b744e0457d385a73b31d958d231",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
       "id": "DEC-20250813-04",
-      "hash": "7648f585a0b56b29ca8fe31a97ecb75ba3908f86f372e7ab1b46e137e3f76424",
+      "hash": "61b36f68b2bd1688252261746abb622d8b7c4c025405414a2baebff06bda07fe",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250813-05-gating-policy-wave1-adoption.md",
       "id": "DEC-20250813-05",
-      "hash": "8d98db9891bbae54b575ad65b173f4d773f2ad1fc7dce5c9224f5f01efe34f8c",
+      "hash": "4ff94ec39e6ffe51f599b77b492476883af6c5696070b9a3fb99dfa3b64793c7",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250813-06-consolidated-governed-edits.md",
       "id": "DEC-20250813-06",
-      "hash": "ea1e6ce3aac7ca95d8a74f15fa6d24d6e2647472f889122ac2a1559a8e3effb5",
+      "hash": "54b52a3a570726287087b5aaf10c79c7982dc776e62c0da0a26ed1b2f5b495f3",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250813-07-hype-threshold-transition.md",
       "id": "DEC-20250813-07",
-      "hash": "41b3c48f1e9afd12a2b98d18438b0badc0c38e9cb0a6f0c18115482ad3c9ad7e",
+      "hash": "0950440708e7af21d15100a336d8ba65898ba47a0cd312e5fc400f4de8fc6093",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250813-08-evidence-hash-display-length.md",
       "id": "DEC-20250813-08",
-      "hash": "5f6bff7ece250ff0d9bf7dc3a88461a831565d18997a0cdaaa819511fce565cb",
+      "hash": "34ad1c883c52a0ff1d0b729b371a35ff1f0a0fe680257caf2f2bce241bad630d",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250813-09-equity-index-rounding.md",
       "id": "DEC-20250813-09",
-      "hash": "9621605f0aaf99aa9a971aed35eab31e8ae346b62d49c2639e1c0b7df8a6eaa1",
+      "hash": "38ec9bc31e1976f95d5d534e7d9e93e75f07534c04f35a480bbca8c1798f3fd9",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250813-10-feedback-categories-canonical.md",
       "id": "DEC-20250813-10",
-      "hash": "29ad36b8744ae3dfbdb15852f8ac7d24774dd5642d1380facbbf5822af55dfe8",
+      "hash": "a73118b5211e44ba3c8da47ed761c7101423edba18d999f69efdc3db5d364a30",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250815-01-governed-editorial-maintenance.md",
       "id": "DEC-20250815-01",
-      "hash": "dd76154a33c2ba8ac6b3381efa70b27c0cd38120b9aa26a2a0fece0542693c1a",
+      "hash": "1dae67aab19daaee75c00ef7ca173666729c8baddc6a09f8a9fede6a78fff43e",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250815-02-hysteresis-config-update.md",
       "id": "DEC-20250815-02",
-      "hash": "bc79fb1a532e3193015189de07ef102488f811780f3c74d5076a98ac223f1ca5",
+      "hash": "c039b400269d0003c1d07524c340d05329235c8e77a1f9fcc9dfa1e6672b560d",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250815-03-trace-index-update.md",
       "id": "DEC-20250815-03",
-      "hash": "3e3015873238259fb761b5db41bcd7f55d14d0229ebaa7fe3711ef715872351d",
+      "hash": "5e841450ada5fb19d493535ad4b82f8804e609d32c68d60f4f73cb06aca33c98",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-style-guide-v1.md",
       "id": "GUIDANCE-DOC-DEC-STYLE-V1",
-      "hash": "e94f4c6d85b4e78d936a417841e848c555539d309a24badba845669f8f641a91",
+      "hash": "55c77fb8c21f4cf0474e5923268268d64e8fc13ac95bd392066e290d3a0a3441",
       "violations": [],
       "warnings": []
     },
@@ -138,7 +138,7 @@
     {
       "file": "DEC-style-guide-v3.md",
       "id": "GUIDANCE-DEC-STYLE-V3",
-      "hash": "c4b998f16eee370a5f14cfa5964ee9640578e16a9a91b4bd91221336cfeb9c87",
+      "hash": "fa6ca1309615f42d5c4fb64de9dd3cb1c76e6c788a57108937b14c598feb733c",
       "violations": [],
       "warnings": []
     }

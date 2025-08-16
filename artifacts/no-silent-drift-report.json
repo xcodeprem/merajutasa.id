@@ -1,13 +1,13 @@
 {
-  "timestamp_utc": "2025-08-16T14:55:35.980Z",
+  "timestamp_utc": "2025-08-16T15:51:29.048Z",
   "components": {
-    "spec_hash": "FAIL",
+    "spec_hash": "PASS",
     "params": "PASS",
     "hype": "ADVISORY",
     "disclaimers": "PASS_STUB",
     "principles": "PASS_STUB",
     "pii": "PASS_STUB",
-    "freshness": "ADVISORY"
+    "freshness": "PASS"
   },
   "summary": {
     "hype_hits": 118,
@@ -29,13 +29,13 @@
       "DISC-DUPL-005": 2,
       "DISC-SCOPE-006": 6
     },
-    "gate_status": "FAIL",
+    "gate_status": "PASS",
     "gate_checks": [
       {
         "id": "SPEC_HASH",
-        "passed": false,
+        "passed": true,
         "detail": {
-          "violations": 75,
+          "violations": 0,
           "allowed": 0
         }
       },
@@ -98,9 +98,9 @@
       },
       {
         "id": "FRESHNESS",
-        "passed": false,
+        "passed": true,
         "detail": {
-          "status": "ADVISORY",
+          "status": "PASS",
           "required": "PASS"
         }
       },
@@ -136,13 +136,13 @@
   },
   "gating": {
     "version": "1.0",
-    "status": "FAIL",
+    "status": "PASS",
     "checks": [
       {
         "id": "SPEC_HASH",
-        "passed": false,
+        "passed": true,
         "detail": {
-          "violations": 75,
+          "violations": 0,
           "allowed": 0
         }
       },
@@ -205,9 +205,9 @@
       },
       {
         "id": "FRESHNESS",
-        "passed": false,
+        "passed": true,
         "detail": {
-          "status": "ADVISORY",
+          "status": "PASS",
           "required": "PASS"
         }
       },
@@ -220,5 +220,5 @@
       }
     ]
   },
-  "status": "FAIL"
+  "status": "ADVISORY"
 }

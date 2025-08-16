@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_utc": "2025-08-16T15:23:25.977Z",
+  "generated_utc": "2025-08-16T15:46:01.589Z",
   "spec_doc": "docs/analytics/event-schema-canonical-v1.md",
   "schema_file": "schemas/events/public-event-v1.json",
   "taxonomy_file": "schemas/events/event-taxonomy-v1.json",
@@ -45,5 +45,5 @@
     "sys_fairness_under_served_enter",
     "sys_fairness_under_served_exit"
   ],
-  "pipeline_hash": "70274d9152a4ea6e8e4ba56d6bc725889a3e400238be78fa863615579f663d18"
+  "pipeline_hash": "4388d4fab4e5be8234d9be2029b64c58a39bb3cea866fcdfb40b9b65c2d1002a"
 }

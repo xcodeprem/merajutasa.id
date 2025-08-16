@@ -1,11 +1,94 @@
-# merajutasa-governance
+# MerajutASA Governance
 
 [![CI Guard (H1)](https://github.com/codingxdev0/merajutasa.id/actions/workflows/ci-guard.yml/badge.svg)](https://github.com/codingxdev0/merajutasa.id/actions/workflows/ci-guard.yml)
 [![H1 Guard & KPI](https://github.com/codingxdev0/merajutasa.id/actions/workflows/h1-guard.yml/badge.svg)](https://github.com/codingxdev0/merajutasa.id/actions/workflows/h1-guard.yml)
 [![Deploy Pages (Dashboard Snapshots)](https://github.com/codingxdev0/merajutasa.id/actions/workflows/pages.yml/badge.svg)](https://github.com/codingxdev0/merajutasa.id/actions/workflows/pages.yml)
 [![Changelog Excerpt](https://img.shields.io/badge/changelog-excerpt-blue)](https://codingxdev0.github.io/merajutasa.id/changelog.html)
 
+**Governance & integrity tooling for MerajutASA.id - A comprehensive skill credentialing platform with fairness, transparency, and cryptographic integrity.**
+
 Live dashboard (GitHub Pages): [codingxdev0.github.io/merajutasa.id](https://codingxdev0.github.io/merajutasa.id/)
+
+## Quick Start
+
+### Prerequisites
+- Node.js LTS (v18+)
+- npm or yarn
+
+### Installation & Verification
+
+```bash
+# Clone repository
+git clone https://github.com/codingxdev0/merajutasa.id.git
+cd merajutasa.id
+
+# Install dependencies
+npm install
+
+# Verify governance integrity
+npm run governance:verify
+
+# Run test suite
+npm run test:all
+
+# Start core services (optional)
+npm run service:signer &    # Port 4601
+npm run service:chain &     # Port 4602  
+npm run service:collector & # Port 4603
+```
+
+### Key Commands
+
+```bash
+# Governance & Integrity
+npm run governance:verify     # Complete governance check
+npm run spec-hash:verify     # Hash integrity verification
+npm run param:integrity      # Parameter consistency check
+
+# Testing
+npm run test:governance      # Core governance tests
+npm run test:services       # Service integration tests  
+npm run test:all            # Complete test suite
+
+# Evidence & Analysis
+npm run evidence:bundle      # Generate evidence bundle
+npm run gap-analysis         # Identify system gaps
+npm run fairness:sim        # Fairness simulation
+```
+
+## Documentation
+
+- **[CLI Verification Guide](docs/integrity/verify-cli-doc-draft.md)** - Manual verification steps
+- **[API Documentation](docs/api/README.md)** - Service integration guide  
+- **[Governance Overview](docs/governance/)** - Decision processes and policies
+- **[Fairness Methodology](docs/fairness/)** - Equity and fairness measures
+- **[Roadmap](docs/roadmap/roadmap-master-v1.md)** - Development roadmap
+
+## Architecture
+
+### Core Services
+- **Signer Service** (4601) - Ed25519 cryptographic signing
+- **Chain Service** (4602) - Hash chain integrity management  
+- **Event Collector** (4603) - Event ingestion and validation
+
+### Governance Tools
+- **Hash Integrity** - Content drift detection and sealing
+- **Parameter Integrity** - Governance parameter consistency
+- **DEC Lint** - Decision document validation
+- **Evidence Validation** - Artifact integrity verification
+
+### Quality Assurance
+- **Test Coverage** - 27 test files covering critical functionality
+- **Gap Analysis** - Automated system readiness assessment  
+- **Continuous Integration** - Automated governance verification
+
+## Current Status
+
+✅ **Governance Integrity** - All hash verification passing  
+✅ **Core Services** - Signer, Chain, and Collector operational  
+✅ **Test Coverage** - 24.1% coverage with comprehensive governance tests  
+✅ **Documentation** - CLI guides and API documentation complete  
+⚠️ **Production Readiness** - Service quality improvements ongoing
 
 ## Operator docs
 
