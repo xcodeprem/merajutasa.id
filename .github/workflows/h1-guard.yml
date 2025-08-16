@@ -30,6 +30,11 @@ jobs:
       - name: Run H1 Guard
         run: |
           node tools/h1-verify-guard.js
+        env:
+          PERF_ADVISORY: 'true'
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+          GITHUB_ACTOR: ${{ github.actor }}
+          PR_HEAD_REF: ${{ github.head_ref || '' }}
 
       - name: Terminology Adoption Enforcement
         run: |
