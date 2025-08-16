@@ -38,6 +38,7 @@ Transparency:
 - Utility: `npm run events:pipeline:hash` writes `artifacts/event-pipeline-hash.json`.
 - Definition: SHA-256 of (schema_version + sorted event_name list + schema commit hash).
 - Purpose: detect schema drift and taxonomy changes across deployments.
+- Canonical events list source (JSON): `schemas/events/event-taxonomy-v1.json` (subset-tested vs doc taxonomy).
 
 ### Equity snapshots methodology (note)
 

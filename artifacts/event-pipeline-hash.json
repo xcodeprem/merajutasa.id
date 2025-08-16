@@ -1,9 +1,9 @@
 {
   "version": "1.0",
-  "generated_utc": "2025-08-16T15:02:25.552Z",
+  "generated_utc": "2025-08-16T15:05:23.498Z",
   "spec_doc": "docs/analytics/event-schema-canonical-v1.md",
   "schema_file": "schemas/events/public-event-v1.json",
-  "taxonomy_file": null,
+  "taxonomy_file": "schemas/events/event-taxonomy-v1.json",
   "schema_commit_source": "git:schemas/events/public-event-v1.json",
   "schema_version": "1.0",
   "event_count": 36,

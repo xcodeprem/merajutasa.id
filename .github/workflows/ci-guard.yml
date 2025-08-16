@@ -51,6 +51,15 @@ jobs:
         run: |
           npm ls yaml || npm i yaml@^2.4.5 --no-audit --no-fund
 
+      - name: Event Taxonomy Consistency
+        run: npm run test:event-taxonomy
+
+      - name: Fairness Engine Unit Tests
+        run: npm run test:fairness-unit
+
+      - name: No-Silent-Drift Aggregator
+        run: node tools/no-silent-drift.js
+
       - name: Run H1 guard (fairness, snapshots, anomalies, KPIs, perf, a11y)
         run: node tools/h1-verify-guard.js
         env:
