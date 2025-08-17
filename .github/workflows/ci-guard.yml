@@ -83,6 +83,15 @@ jobs:
         run: |
           ADOPTION_MIN=85 BANNED_MAX=0 node tools/terminology-adoption.js
 
+      - name: Generate Terminology Trend Report (Gate 2)
+        run: node tools/terminology-adoption-trend.js
+
+      - name: Changelog Presence Check (Gate 2)
+        run: node tools/changelog-presence-check.js
+
+      - name: Equity Anomaly Annotation Coverage (Gate 2)
+        run: node tools/equity-anomaly-annotate.js
+
       - name: Event Meta Validators (≥10 types)
         run: node tools/event-meta-validate.js
 
@@ -110,6 +119,11 @@ jobs:
             artifacts/event-meta-validate.json
             artifacts/disclaimers-lint.json
             artifacts/collector-reliability.json
+            artifacts/terminology-adoption-trend.json
+            artifacts/terminology-adoption-trend.ndjson
+            artifacts/changelog-presence-check.json
+            artifacts/equity-anomaly-coverage.json
+            artifacts/equity-anomaly-annotations.json
 
       - name: Chain Integrity Monitor (advisory)
         run: |

@@ -55,6 +55,10 @@ npm run test:all            # Complete test suite
 npm run evidence:bundle      # Generate evidence bundle
 npm run gap-analysis         # Identify system gaps
 npm run fairness:sim        # Fairness simulation
+
+# Gate Verification (Roadmap Milestones)
+npm run gate:1              # Gate 1 verification (Public Soft Launch)
+npm run gate:2              # Gate 2 verification (Expanded Transparency)
 ```
 
 ## Documentation

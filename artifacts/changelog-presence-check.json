@@ -1,0 +1,43 @@
+{
+  "version": "1.0.0",
+  "generated_utc": "2025-08-17T13:30:27.256Z",
+  "checks": [
+    {
+      "check": "changelog_draft_exists",
+      "status": "PASS",
+      "size": 285,
+      "content_preview": "# Transparency – Changelog Excerpt (Draft)\n\nTime: 2025-08-17T13:30:27.203Z\n\n- Spec hash changes: 0\n-..."
+    },
+    {
+      "check": "changelog_json_exists",
+      "status": "PASS",
+      "data": {
+        "ts": "2025-08-17T13:30:27.203Z",
+        "files_changed": 0,
+        "dec_impacts": [],
+        "pii_high_risk_hits": 8,
+        "disclaimers_status": "PASS",
+        "fairness_scenarios": 0
+      }
+    },
+    {
+      "check": "changelog_generator_exists",
+      "status": "PASS"
+    },
+    {
+      "check": "pages_workflow_includes_changelog",
+      "status": "PASS",
+      "details": "changelog route found in pages workflow"
+    },
+    {
+      "check": "changelog_built_artifact_exists",
+      "status": "ADVISORY",
+      "details": "built artifact not found (acceptable if pages not yet built)"
+    }
+  ],
+  "summary": {
+    "total": 5,
+    "passed": 4,
+    "failed": 0
+  }
+}

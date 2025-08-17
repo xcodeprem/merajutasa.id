@@ -41,6 +41,8 @@ jobs:
           node tools/generate-h1-kpi-summary.js || true
           node tools/monthly-feedback-rollup.js || true
           node tools/changelog-excerpt-generate.js || true
+          node tools/terminology-adoption.js || true
+          node tools/terminology-adoption-trend.js || true
           node tools/risk-digest.js || true
       - name: Prepare static snapshot
         run: |
@@ -54,6 +56,7 @@ jobs:
           [ -f artifacts/under-served.json ] && cp artifacts/under-served.json dist/data/ || true
           [ -f artifacts/feedback-monthly-rollup.json ] && cp artifacts/feedback-monthly-rollup.json dist/data/ || true
           [ -f artifacts/changelog-excerpt.json ] && cp artifacts/changelog-excerpt.json dist/data/ || true
+          [ -f artifacts/terminology-adoption-trend.json ] && cp artifacts/terminology-adoption-trend.json dist/data/ || true
           [ -f artifacts/risk-digest.json ] && cp artifacts/risk-digest.json dist/data/ || true
           # placeholder revocations snapshot
           echo "[]" > dist/data/revocations.json

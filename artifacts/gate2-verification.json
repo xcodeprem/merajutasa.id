@@ -1,0 +1,63 @@
+{
+  "version": "1.0.0",
+  "generated_utc": "2025-08-17T13:30:27.150Z",
+  "gate": "Gate 2 - Expanded Transparency",
+  "status": "PASS",
+  "requirements": [
+    {
+      "requirement": "H2-J1: Changelog Excerpt page live",
+      "status": "PASS",
+      "details": {
+        "route_accessible": true,
+        "summarizes_changes": true,
+        "ci_monitoring": true,
+        "checks_passed": 4,
+        "checks_total": 5
+      }
+    },
+    {
+      "requirement": "H1-B3: Equity Anomaly Detector stability",
+      "status": "PASS",
+      "details": {
+        "delta_threshold": 0.03,
+        "delta_threshold_ok": true,
+        "min_samples": 5,
+        "cooldown_snapshots": 3,
+        "annotation_coverage_percent": 100,
+        "annotation_coverage_ok": true,
+        "anomalies_detected": 0
+      }
+    },
+    {
+      "requirement": "H1-F1, H1-C1: Terminology Adoption Scanner + Policy-as-Code",
+      "status": "PASS",
+      "details": {
+        "adoption_percent": 100,
+        "adoption_persisted": true,
+        "trend_entries": 8,
+        "trend_report_generated": true,
+        "ci_policy_enabled": true,
+        "old_terms_total": 0,
+        "suggestions_count": 47
+      }
+    },
+    {
+      "requirement": "H1-H2: Accessibility automated scan PASS",
+      "status": "PASS",
+      "details": {
+        "critical_violations": 0,
+        "serious_violations": 0,
+        "total_issues": 1,
+        "artifact_saved": true,
+        "ci_integrated": true,
+        "scanned_url": "http://127.0.0.1:4620/"
+      }
+    }
+  ],
+  "summary": {
+    "total_requirements": 4,
+    "passed": 4,
+    "failed": 0,
+    "gate2_closure_ready": true
+  }
+}
