@@ -4,6 +4,11 @@ on:
 permissions:
   contents: read
   issues: write
+
+concurrency:
+  group: labels-sync-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   sync:
     runs-on: ubuntu-latest

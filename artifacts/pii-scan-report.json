@@ -2,9 +2,10 @@
   "version": 1,
   "status": "ADVISORY",
   "summary": {
-    "distinctCategories": 10,
-    "totalFindings": 43,
+    "distinctCategories": 11,
+    "totalFindings": 48,
     "categoryCounts": {
+      "EMAIL_IN_NAME": 5,
       "CONTACT_EMAIL": 3,
       "PLATE_ID": 13,
       "IDN_NIK": 2,
@@ -19,6 +20,36 @@
     "highRiskHits": 8
   },
   "findings": [
+    {
+      "file": "docs/agent-context-pack.md",
+      "category": "EMAIL_IN_NAME",
+      "action": "REDACT",
+      "sample": "checko…#425ec7f5"
+    },
+    {
+      "file": "docs/agent-context-pack.md",
+      "category": "EMAIL_IN_NAME",
+      "action": "REDACT",
+      "sample": "checko…#425ec7f5"
+    },
+    {
+      "file": "docs/agent-context-pack.md",
+      "category": "EMAIL_IN_NAME",
+      "action": "REDACT",
+      "sample": "action…#fbad9c94"
+    },
+    {
+      "file": "docs/agent-context-pack.md",
+      "category": "EMAIL_IN_NAME",
+      "action": "REDACT",
+      "sample": "checko…#425ec7f5"
+    },
+    {
+      "file": "docs/agent-context-pack.md",
+      "category": "EMAIL_IN_NAME",
+      "action": "REDACT",
+      "sample": "checko…#425ec7f5"
+    },
     {
       "file": "docs/roadmap/roadmap-master-v1.md",
       "category": "CONTACT_EMAIL",

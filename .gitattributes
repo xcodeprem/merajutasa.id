@@ -1,3 +1,41 @@
+# Git attributes for cross-platform consistency
+# Set default line ending normalization
+* text=auto
+
 # Ensure shell and Husky hook scripts use LF endings to avoid /usr/bin/env errors on Windows
 .husky/** text eol=lf
 scripts/*.sh text eol=lf
+.github/scripts/*.sh text eol=lf
+
+# Binary files (mark as binary to avoid line ending changes)
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.tar.gz binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+
+# Documentation and configuration files (ensure consistent line endings)
+*.md text
+*.json text
+*.yml text
+*.yaml text
+*.toml text
+*.txt text
+
+# Source code files (ensure consistent line endings)
+*.js text
+*.mjs text
+*.ts text
+*.css text
+*.html text
+*.xml text
+
+# Shell scripts (force LF for cross-platform compatibility)
+*.sh text eol=lf

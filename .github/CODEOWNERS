@@ -1,0 +1,30 @@
+# CODEOWNERS - Workflow Governance and Critical Infrastructure
+# This file enforces review requirements for sensitive areas of the repository
+
+# Workflow governance - require review for any changes to CI/CD infrastructure
+/.github/workflows/ @codingxdev0
+/.github/actions/ @codingxdev0  
+/.github/scripts/ @codingxdev0
+/.github/actions-allowlist.json @codingxdev0
+/.github/CODEOWNERS @codingxdev0
+
+# Policy and governance configuration
+/tools/policy/ @codingxdev0
+/tools/governance-verify.js @codingxdev0
+/tools/lib/security-validators.js @codingxdev0
+/tools/lib/json-stable.js @codingxdev0
+
+# Security and privacy critical files
+/SECURITY.md @codingxdev0
+/docs/privacy/ @codingxdev0
+/docs/governance/dec/ @codingxdev0
+
+# Core governance and fairness logic
+/tools/fairness/ @codingxdev0
+/tools/h1-verify-guard.js @codingxdev0
+/tools/no-silent-drift.js @codingxdev0
+/tools/spec-hash-diff.js @codingxdev0
+
+# Agent context and documentation
+/docs/agent-context-pack.md @codingxdev0
+/docs/onboarding/agent-bootstrap-manifest.md @codingxdev0

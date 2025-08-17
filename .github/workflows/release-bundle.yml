@@ -10,6 +10,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: release-bundle-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   bundle:
     runs-on: ubuntu-latest

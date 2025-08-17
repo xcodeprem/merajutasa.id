@@ -7,6 +7,11 @@ on:
     types:
       - completed
 
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
 concurrency:
   group: pages-smoke-test-${{ github.event.workflow_run.head_branch }}
   cancel-in-progress: true
@@ -29,6 +34,8 @@ jobs:
 
       - name: Run A8 governance guard
         uses: ./.github/actions/run-a8
+        with:
+          policy-path: tools/policy/policy.json
 
       - name: Wait for deployment to be ready
         run: sleep 60
@@ -66,8 +73,7 @@ jobs:
                     echo "⚠️ $name: Wrong Content-Type (attempt $attempt)"
                     if [ $attempt -eq 5 ]; then
                       echo "❌ $name: FAILED - Content-Type mismatch"
-                      FAILED_ENDPOINTS="$FAILED_ENDPOINTS\n- $name ($url)"
-                      FAILED_ENDPOINTS="$FAILED_ENDPOINTS - Content-Type mismatch"
+                      FAILED_ENDPOINTS="$FAILED_ENDPOINTS\n- $name ($url) - Content-Type mismatch"
                       return 1
                     fi
                   fi

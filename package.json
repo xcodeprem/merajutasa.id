@@ -5,7 +5,16 @@
   "private": true,
   "description": "Governance & integrity tooling (hash sealing, lint, fairness) for merajutasa.id",
   "license": "UNLICENSED",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "packageManager": "npm@9.8.1",
   "scripts": {
+    "lint": "npm run lint:md && npm run lint:dec",
+    "test": "npm run test:governance && npm run test:services",
+    "format": "echo 'Formatting tools not configured - using markdownlint for markdown'",
+    "governance:check": "npm run governance:verify && ./.github/scripts/check-actions-pinning.sh && npm run schema:validate && node tools/validate-policy.js",
     "governance:verify": "node tools/governance-verify.js",
     "spec-hash:verify": "node tools/spec-hash-diff.js --mode=verify",
     "spec-hash:seal": "node tools/spec-hash-diff.js --mode=seal-first",
@@ -44,7 +53,7 @@
     "dec:index": "node tools/generate-dec-index.js",
     "lint:dec": "node tools/dec-lint.js",
     "test:dec-hash": "node tools/tests/dec-canonical-hash-equivalence.test.js",
-    "test:governance": "node tools/tests/policy-aggregation-threshold.test.js && node tools/tests/feedback-categories-ingestion.test.js && node tools/tests/evidence-bundle-prefix.test.js && node tools/tests/dec-canonical-hash-equivalence.test.js && node tools/tests/governance-verify.test.js && node tools/tests/spec-hash-diff.test.js && node tools/tests/param-integrity.test.js && node tools/tests/gap-analysis.test.js && node tools/tests/dec-lint.test.js",
+    "test:governance": "node tools/tests/policy-aggregation-threshold.test.js && node tools/tests/feedback-categories-ingestion.test.js && node tools/tests/evidence-bundle-prefix.test.js && node tools/tests/dec-canonical-hash-equivalence.test.js && node tools/tests/governance-verify.test.js && node tools/tests/spec-hash-diff.test.js && node tools/tests/param-integrity.test.js && node tools/tests/gap-analysis.test.js && node tools/tests/dec-lint.test.js && node tools/tests/json-stable.test.js && node tools/tests/check-actions-pinning.test.js",
     "test:services": "node tools/tests/services-integration.test.js && node tools/tests/privacy-tools.test.js && node tools/tests/evidence-validation.test.js && node tools/tests/lint-tools.test.js && node tools/tests/events-processing.test.js",
     "test:all": "npm run test:governance && npm run test:services && npm run test:pii",
     "test:pii": "node tools/tests/pii-scan.test.js",

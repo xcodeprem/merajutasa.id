@@ -1,0 +1,186 @@
+name: Workflow Governance Guard
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/**'
+      - '.github/actions/**'
+      - '.github/scripts/**'
+      - '.github/actions-allowlist.json'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/**'
+      - '.github/actions/**'
+      - '.github/scripts/**'
+      - '.github/actions-allowlist.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: workflow-guard-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  governance-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.1.7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+        env:
+          PUPPETEER_SKIP_DOWNLOAD: 'true'
+
+      - name: Check Actions Pinning
+        run: ./.github/scripts/check-actions-pinning.sh
+
+      - name: Check Workflow Concurrency
+        run: |
+          echo "Checking for cancel-in-progress in workflow concurrency..."
+          violations=0
+          
+          for workflow in .github/workflows/*.yml .github/workflows/*.yaml; do
+            [[ ! -f "$workflow" ]] && continue
+            
+            filename=$(basename "$workflow")
+            echo "Checking $filename..."
+            
+            # Check if concurrency block exists
+            if ! grep -q "^concurrency:" "$workflow"; then
+              echo "❌ $filename: Missing concurrency block"
+              ((violations++))
+              continue
+            fi
+            
+            # Check if cancel-in-progress is present and set to true
+            if ! grep -A5 "^concurrency:" "$workflow" | grep -q "cancel-in-progress:.*true"; then
+              echo "❌ $filename: Missing or false cancel-in-progress"
+              ((violations++))
+            else
+              echo "✅ $filename: Has proper concurrency with cancel-in-progress"
+            fi
+          done
+          
+          if [[ $violations -gt 0 ]]; then
+            echo "❌ Found $violations concurrency violations"
+            exit 1
+          else
+            echo "✅ All workflows have proper concurrency configuration"
+          fi
+
+      - name: Check run-a8 Usage
+        run: |
+          echo "Checking for run-a8 usage with policy-path..."
+          violations=0
+          warnings=0
+          
+          for workflow in .github/workflows/*.yml .github/workflows/*.yaml; do
+            [[ ! -f "$workflow" ]] && continue
+            
+            filename=$(basename "$workflow")
+            
+            # Skip workflow-guard.yml itself
+            [[ "$filename" == "workflow-guard.yml" ]] && continue
+            
+            # Check if workflow uses run-a8
+            if grep -q "uses:.*run-a8" "$workflow"; then
+              echo "Checking $filename for run-a8 configuration..."
+              
+              # Check if policy-path is specified
+              if ! grep -A10 "uses:.*run-a8" "$workflow" | grep -q "policy-path:"; then
+                echo "❌ $filename: run-a8 used without explicit policy-path"
+                ((violations++))
+              else
+                echo "✅ $filename: run-a8 has policy-path specified"
+              fi
+            else
+              echo "⚠️  $filename: No run-a8 governance guard (consider adding)"
+              ((warnings++))
+            fi
+          done
+          
+          echo "Summary: $violations violations, $warnings warnings"
+          
+          if [[ $violations -gt 0 ]]; then
+            echo "❌ Found run-a8 policy violations"
+            exit 1
+          else
+            echo "✅ All workflows using run-a8 have proper configuration"
+          fi
+
+      - name: Validate Actions Allowlist
+        run: |
+          echo "Validating actions allowlist format..."
+          node -e "
+            const fs = require('fs');
+            try {
+              const allowlist = JSON.parse(fs.readFileSync('.github/actions-allowlist.json', 'utf8'));
+              
+              // Check required fields
+              if (!allowlist.version) throw new Error('Missing version field');
+              if (!allowlist.allowed_actions) throw new Error('Missing allowed_actions field');
+              if (!Array.isArray(allowlist.allowed_actions)) throw new Error('allowed_actions must be an array');
+              
+              // Validate each entry
+              allowlist.allowed_actions.forEach((entry, i) => {
+                if (!entry.action) throw new Error(\`Entry \${i}: missing action field\`);
+                if (!entry.allowed_shas) throw new Error(\`Entry \${i}: missing allowed_shas field\`);
+                if (!Array.isArray(entry.allowed_shas)) throw new Error(\`Entry \${i}: allowed_shas must be an array\`);
+                
+                // Validate SHA format (40 hex chars)
+                entry.allowed_shas.forEach(sha => {
+                  if (!/^[a-f0-9]{40}$/.test(sha)) {
+                    throw new Error(\`Entry \${i}: invalid SHA format: \${sha}\`);
+                  }
+                });
+              });
+              
+              console.log('✅ Actions allowlist is valid');
+            } catch (error) {
+              console.error('❌ Actions allowlist validation failed:', error.message);
+              process.exit(1);
+            }
+          "
+
+  policy-compliance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.1.7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+        env:
+          PUPPETEER_SKIP_DOWNLOAD: 'true'
+
+      - name: Run A8 governance guard
+        uses: ./.github/actions/run-a8
+        with:
+          policy-path: tools/policy/policy.json
+
+      - name: Upload governance artifacts
+        if: always()
+        uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
+        with:
+          name: workflow-governance-artifacts-${{ github.run_id }}
+          path: |
+            artifacts/governance-verify-summary.json
+            artifacts/no-silent-drift-report.json
+          retention-days: 7

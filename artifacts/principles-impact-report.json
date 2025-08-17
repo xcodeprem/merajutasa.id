@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "generated_utc": "2025-08-16T20:01:03.383Z",
+  "generated_utc": "2025-08-17T10:19:18.453Z",
   "principles": [
     {
       "principle": "GP1",
-      "match_count": 997,
+      "match_count": 998,
       "domains": [
         "other",
         "privacy",
@@ -157,7 +157,7 @@
     },
     {
       "principle": "GP3",
-      "match_count": 106,
+      "match_count": 110,
       "domains": [
         "other",
         "privacy",
@@ -220,6 +220,14 @@
           "domain": "other"
         },
         {
+          "file": "docs/agent-context-pack.md",
+          "line": 274,
+          "snippet": "3. **Explain changes:** Provide clear justification for any deviations",
+          "pattern": "explain",
+          "changed": false,
+          "domain": "other"
+        },
+        {
           "file": "docs/trust/trust-page.md",
           "line": 9,
           "snippet": "Lihat juga: Methodology Snippet (H0) → ../transparency/methodology-snippet-h0.md",
@@ -258,21 +266,13 @@
           "pattern": "trace",
           "changed": false,
           "domain": "other"
-        },
-        {
-          "file": "docs/roadmap/roadmap-master-v1.md",
-          "line": 16,
-          "snippet": "- Horizon 2 (Hari 31–60): Governance Depth & Transparency Amplification (changelog excerpt, support matrix, anomaly watchers, revocation placeholder UI, a11y/performance enforcement).",
-          "pattern": "transparenc",
-          "changed": false,
-          "domain": "other"
         }
       ],
       "evidence_truncated": true
     },
     {
       "principle": "GP4",
-      "match_count": 600,
+      "match_count": 628,
       "domains": [
         "other",
         "privacy",

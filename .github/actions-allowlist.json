@@ -1,0 +1,92 @@
+{
+  "version": "1.0",
+  "description": "Allowlist of approved GitHub Actions and their commit SHAs for CI governance",
+  "allowed_actions": [
+    {
+      "action": "actions/checkout",
+      "allowed_shas": [
+        "11bd71901bbe5b1630ceea73d27597364c9af683",
+        "692973e3d937129bcbf40652eb9f2f61becf3332"
+      ],
+      "description": "Official GitHub checkout action"
+    },
+    {
+      "action": "actions/setup-node", 
+      "allowed_shas": [
+        "1e60f620b9541d16bece96c5465dc8ee9832be0b"
+      ],
+      "description": "Official GitHub Node.js setup action"
+    },
+    {
+      "action": "actions/upload-pages-artifact",
+      "allowed_shas": [
+        "56afc609e74202658d3ffba0e8f6dda462b719fa"
+      ],
+      "description": "Official GitHub Pages artifact upload action"
+    },
+    {
+      "action": "actions/deploy-pages",
+      "allowed_shas": [
+        "d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e"
+      ],
+      "description": "Official GitHub Pages deployment action"
+    },
+    {
+      "action": "actions/upload-artifact",
+      "allowed_shas": [
+        "50769540e7f4bd5e21e526ee35c689e35e0d6874"
+      ],
+      "description": "Official GitHub artifact upload action"
+    },
+    {
+      "action": "actions/github-script",
+      "allowed_shas": [
+        "60a0d83039c74a4aee543508d2ffcb1c3799cdea"
+      ],
+      "description": "Official GitHub script action"
+    },
+    {
+      "action": "peter-evans/create-pull-request",
+      "allowed_shas": [
+        "5e914681df9dc83aa4e4905692ca88beb2f9e91f"
+      ],
+      "description": "Third-party create pull request action (v6.1.0)"
+    },
+    {
+      "action": "github/codeql-action/init",
+      "allowed_shas": [
+        "e2b3eafc8d227b0241d48be5f425d47c2d750a13"
+      ],
+      "description": "Official GitHub CodeQL init action"
+    },
+    {
+      "action": "github/codeql-action/autobuild",
+      "allowed_shas": [
+        "e2b3eafc8d227b0241d48be5f425d47c2d750a13"
+      ],
+      "description": "Official GitHub CodeQL autobuild action"
+    },
+    {
+      "action": "github/codeql-action/analyze",
+      "allowed_shas": [
+        "e2b3eafc8d227b0241d48be5f425d47c2d750a13"
+      ],
+      "description": "Official GitHub CodeQL analyze action"
+    },
+    {
+      "action": "softprops/action-gh-release",
+      "allowed_shas": [
+        "c062e08bd532815e2082a85e87e3ef29c3e6d191"
+      ],
+      "description": "Third-party GitHub release action (v2.0.8)"
+    }
+  ],
+  "local_actions": [
+    "./.github/actions/run-a8"
+  ],
+  "metadata": {
+    "created": "2025-08-17",
+    "author": "ci-governance-hardening",
+    "note": "SHAs extracted from existing workflows in repository"
+  }
+}

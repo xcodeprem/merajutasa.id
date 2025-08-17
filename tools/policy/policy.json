@@ -83,7 +83,6 @@
     "allow_advisory_continue": true,
     "max_violations": {
       "HIGH": 0,
-      "MEDIUM": 999,
       "MEDIUM": "unlimited",
       "LOW": "unlimited"
     }

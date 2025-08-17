@@ -33,14 +33,10 @@ function sortKeys(obj) {
 /**
  * Stable JSON stringification with sorted keys and consistent formatting
  * @param {any} obj - Object to stringify
- * @param {number} space - Number of spaces for indentation (default: 2)
- * @returns {string} Stable JSON string with trailing newline
- */
-export function stableStringify(obj, space = 2) {
-  const sorted = sortKeys(obj);
  * @param {function|null|Array} replacer - Replacer function or array (default: null)
  * @param {number} space - Number of spaces for indentation (default: 2)
  * @returns {string} Stable JSON string with trailing newline
+ */
 export function stableStringify(obj, replacer = null, space = 2) {
   const sorted = sortKeys(obj);
   return JSON.stringify(sorted, replacer, space) + '\n';

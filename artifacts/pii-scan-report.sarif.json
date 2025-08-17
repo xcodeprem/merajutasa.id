@@ -12,6 +12,86 @@
       },
       "results": [
         {
+          "ruleId": "EMAIL_IN_NAME",
+          "level": "note",
+          "message": {
+            "text": "EMAIL_IN_NAME docs/agent-context-pack.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/agent-context-pack.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "EMAIL_IN_NAME",
+          "level": "note",
+          "message": {
+            "text": "EMAIL_IN_NAME docs/agent-context-pack.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/agent-context-pack.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "EMAIL_IN_NAME",
+          "level": "note",
+          "message": {
+            "text": "EMAIL_IN_NAME docs/agent-context-pack.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/agent-context-pack.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "EMAIL_IN_NAME",
+          "level": "note",
+          "message": {
+            "text": "EMAIL_IN_NAME docs/agent-context-pack.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/agent-context-pack.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "EMAIL_IN_NAME",
+          "level": "note",
+          "message": {
+            "text": "EMAIL_IN_NAME docs/agent-context-pack.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/agent-context-pack.md"
+                }
+              }
+            }
+          ]
+        },
+        {
           "ruleId": "CONTACT_EMAIL",
           "level": "note",
           "message": {

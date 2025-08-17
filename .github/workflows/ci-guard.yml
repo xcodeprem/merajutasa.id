@@ -76,6 +76,9 @@ jobs:
       - name: Disclaimers Lint (strict)
         run: node tools/disclaimers-lint.js
 
+      - name: Markdown Lint (advisory)
+        run: npm run lint:md || echo "Markdown linting found issues (advisory mode)"
+
       - name: Terminology Adoption Enforcement (strict)
         run: |
           ADOPTION_MIN=85 BANNED_MAX=0 node tools/terminology-adoption.js

@@ -1,0 +1,163 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://merajutasa.id/schemas/policy.json",
+  "title": "A8 Policy Configuration Schema",
+  "description": "Schema for A8 (no-silent-drift) gating policy configuration",
+  "type": "object",
+  "required": ["version", "description", "checks", "routes", "enforcement", "metadata"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$",
+      "description": "Policy version in semver format (major.minor)"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 10,
+      "description": "Human-readable description of the policy"
+    },
+    "checks": {
+      "type": "object",
+      "description": "Available checks and their configuration",
+      "patternProperties": {
+        "^[a-z0-9-]+$": {
+          "type": "object",
+          "properties": {
+            "gating": {
+              "oneOf": [
+                {"type": "boolean"},
+                {
+                  "type": "object",
+                  "properties": {
+                    "HIGH": {"type": "boolean"},
+                    "MEDIUM": {"type": "boolean"},
+                    "LOW": {"type": "boolean"}
+                  },
+                  "additionalProperties": false
+                }
+              ],
+              "description": "Whether this check is gating (blocks on failure) or advisory"
+            },
+            "description": {
+              "type": "string",
+              "minLength": 5,
+              "description": "Human-readable description of what this check does"
+            }
+          },
+          "required": ["gating", "description"],
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "routes": {
+      "type": "array",
+      "description": "File patterns and their required checks",
+      "items": {
+        "type": "object",
+        "properties": {
+          "pattern": {
+            "type": "string",
+            "minLength": 1,
+            "description": "File pattern (glob syntax)"
+          },
+          "requires": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "List of check names required for this pattern"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 5,
+            "description": "Human-readable description of this route"
+          }
+        },
+        "required": ["pattern", "requires", "description"],
+        "additionalProperties": false
+      }
+    },
+    "enforcement": {
+      "type": "object",
+      "description": "Global enforcement settings",
+      "properties": {
+        "fail_fast": {
+          "type": "boolean",
+          "description": "Whether to stop on first failure or collect all failures"
+        },
+        "allow_advisory_continue": {
+          "type": "boolean",
+          "description": "Whether advisory checks can continue even if they fail"
+        },
+        "max_violations": {
+          "type": "object",
+          "description": "Maximum allowed violations by severity",
+          "properties": {
+            "HIGH": {
+              "oneOf": [
+                {"type": "integer", "minimum": 0},
+                {"type": "string", "enum": ["unlimited"]}
+              ]
+            },
+            "MEDIUM": {
+              "oneOf": [
+                {"type": "integer", "minimum": 0},
+                {"type": "string", "enum": ["unlimited"]}
+              ]
+            },
+            "LOW": {
+              "oneOf": [
+                {"type": "integer", "minimum": 0},
+                {"type": "string", "enum": ["unlimited"]}
+              ]
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": ["fail_fast", "allow_advisory_continue"],
+      "additionalProperties": false
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Policy metadata for tracking and auditing",
+      "properties": {
+        "created": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when policy was created (YYYY-MM-DD)"
+        },
+        "author": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Author or system that created this policy"
+        },
+        "version_history": {
+          "type": "array",
+          "description": "History of policy changes",
+          "items": {
+            "type": "object",
+            "properties": {
+              "version": {
+                "type": "string",
+                "pattern": "^\\d+\\.\\d+$"
+              },
+              "date": {
+                "type": "string",
+                "format": "date"
+              },
+              "changes": {
+                "type": "string",
+                "minLength": 5
+              }
+            },
+            "required": ["version", "date", "changes"],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": ["created", "author"],
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
