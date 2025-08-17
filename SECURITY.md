@@ -13,12 +13,14 @@ The following patterns have been identified as potential security risks and are 
 **Risk Level:** HIGH
 
 **Pattern:** Using `execSync()` with template literals or string interpolation
+
 ```javascript
 // ❌ RISKY - Shell injection vulnerability
 const result = execSync(`git log -1 --format=%cI -- "${userFile}"`);
 ```
 
 **Safe Alternatives:**
+
 ```javascript
 // ✅ SAFE - Use execFileSync with array arguments
 import { execFileSync } from 'child_process';
@@ -37,12 +39,14 @@ const result = execSync('git log -1 --format=%H');
 **Risk Level:** HIGH
 
 **Pattern:** Using `path.resolve()` directly with user-provided input
+
 ```javascript
 // ❌ RISKY - Directory traversal vulnerability
 const filePath = path.resolve(process.argv[2]);
 ```
 
 **Safe Alternatives:**
+
 ```javascript
 // ✅ SAFE - Validate input path
 const userPath = process.argv[2];
@@ -64,12 +68,14 @@ const filePath = path.join(basePath, path.basename(process.argv[2]));
 **Risk Level:** MEDIUM
 
 **Pattern:** Using simple regex to strip HTML tags
+
 ```javascript
 // ❌ RISKY - Incomplete sanitization
 const clean = dirty.replace(/<[^>]+>/g, '');
 ```
 
 **Safe Alternatives:**
+
 ```javascript
 // ✅ SAFE - Character-based replacement for known safe contexts
 const clean = content.replace(/[<>]/g, ' ').trim();
@@ -86,6 +92,7 @@ const clean = DOMPurify.sanitize(dirty);
 ### Automated Security Smoke Tests
 
 Run security pattern detection:
+
 ```bash
 node tools/tests/security-patterns-smoke.js
 ```
@@ -95,6 +102,7 @@ This test scans all JavaScript files in the `tools/` directory for the risky pat
 ### Integration with CI
 
 Security patterns are automatically checked as part of the governance verification process:
+
 ```bash
 npm run governance:verify
 ```
