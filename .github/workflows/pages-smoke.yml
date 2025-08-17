@@ -1,0 +1,256 @@
+---
+name: Pages Smoke Test
+
+on:
+  workflow_run:
+    workflows: ["Deploy Pages (Dashboard Snapshots)"]
+    types:
+      - completed
+
+concurrency:
+  group: pages-smoke-test-${{ github.event.workflow_run.head_branch }}
+  cancel-in-progress: true
+
+jobs:
+  smoke-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: github.event.workflow_run.conclusion == 'success'
+    permissions:
+      contents: read
+    outputs:
+      success_count: ${{ steps.test-endpoints.outputs.success_count }}
+      total_count: ${{ steps.test-endpoints.outputs.total_count }}
+      failed_endpoints: ${{ steps.test-endpoints.outputs.failed_endpoints }}
+      ui_status: ${{ steps.test-ui.outputs.ui_status }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+
+      - name: Run A8 governance guard
+        uses: ./.github/actions/run-a8
+
+      - name: Wait for deployment to be ready
+        run: sleep 60
+
+      - name: Test Pages endpoints
+        id: test-endpoints
+        run: |
+          BASE_URL="https://${{ github.repository_owner }}.github.io"
+          BASE_URL="$BASE_URL/${{ github.event.workflow_run.repository.name }}"
+          FAILED_ENDPOINTS=""
+          SUCCESS_COUNT=0
+          TOTAL_COUNT=0
+
+          # Function to test endpoint with retry and Content-Type validation
+          test_endpoint() {
+            local url="$1"
+            local name="$2"
+            local expected_content_type="$3"
+            TOTAL_COUNT=$((TOTAL_COUNT + 1))
+
+            echo "Testing $name: $url"
+
+            # Retry with exponential backoff
+            for attempt in 1 2 3 4 5; do
+              if response=$(curl -f -s -I --retry 3 --retry-delay 2 \
+                --retry-connrefused "$url" 2>&1); then
+                # Check Content-Type if specified
+                if [ -n "$expected_content_type" ]; then
+                  if echo "$response" | grep -i "content-type:" | \
+                    grep -q "$expected_content_type"; then
+                    echo "✅ $name: OK (attempt $attempt)"
+                    SUCCESS_COUNT=$((SUCCESS_COUNT + 1))
+                    return 0
+                  else
+                    echo "⚠️ $name: Wrong Content-Type (attempt $attempt)"
+                    if [ $attempt -eq 5 ]; then
+                      echo "❌ $name: FAILED - Content-Type mismatch"
+                      FAILED_ENDPOINTS="$FAILED_ENDPOINTS\n- $name ($url)"
+                      FAILED_ENDPOINTS="$FAILED_ENDPOINTS - Content-Type mismatch"
+                      return 1
+                    fi
+                  fi
+                else
+                  echo "✅ $name: OK (attempt $attempt)"
+                  SUCCESS_COUNT=$((SUCCESS_COUNT + 1))
+                  return 0
+                fi
+              else
+                echo "⚠️ $name: Failed attempt $attempt"
+                if [ $attempt -eq 5 ]; then
+                  echo "❌ $name: FAILED"
+                  FAILED_ENDPOINTS="$FAILED_ENDPOINTS\n- $name ($url)"
+                  return 1
+                fi
+              fi
+              sleep $((attempt * 2))
+            done
+          }
+
+          # Test main UI
+          test_endpoint "$BASE_URL/" "Main Dashboard" ""
+          test_endpoint "$BASE_URL/snapshots.html" "Snapshots Index" ""
+
+          # Test data endpoints with JSON content type validation
+          test_endpoint "$BASE_URL/data/h1-kpi-summary.json" \
+            "KPI Summary" "application/json"
+          test_endpoint "$BASE_URL/data/weekly-trends.json" \
+            "Weekly Trends" "application/json"
+          test_endpoint "$BASE_URL/data/under-served.json" \
+            "Under-served Data" "application/json"
+          test_endpoint "$BASE_URL/data/equity-anomalies.json" \
+            "Equity Anomalies" "application/json"
+          test_endpoint "$BASE_URL/data/revocations.json" \
+            "Revocations" "application/json"
+          test_endpoint "$BASE_URL/data/feedback-monthly-rollup.json" \
+            "Monthly Feedback" "application/json"
+          test_endpoint "$BASE_URL/data/risk-digest.json" \
+            "Risk Digest" "application/json"
+
+          # Test UI assets
+          test_endpoint "$BASE_URL/app.js" "Main App JS" ""
+
+          # Set outputs
+          echo "success_count=$SUCCESS_COUNT" >> $GITHUB_OUTPUT
+          echo "total_count=$TOTAL_COUNT" >> $GITHUB_OUTPUT
+          echo "failed_endpoints<<EOF" >> $GITHUB_OUTPUT
+          echo -e "$FAILED_ENDPOINTS" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+          echo "📊 Smoke test completed: $SUCCESS_COUNT/$TOTAL_COUNT"
+          echo "endpoints passed"
+
+          # Exit with error if any test failed
+          if [ $SUCCESS_COUNT -ne $TOTAL_COUNT ]; then
+            echo "❌ Pages smoke test failed"
+            exit 1
+          else
+            echo "✅ All endpoints passed"
+          fi
+
+      - name: Test UI functionality
+        id: test-ui
+        run: |
+          BASE_URL="https://${{ github.repository_owner }}.github.io"
+          BASE_URL="$BASE_URL/${{ github.event.workflow_run.repository.name }}"
+
+          # Test that main page contains expected content
+          echo "Testing UI content..."
+          MAIN_PAGE=$(curl -f -s --retry 3 --retry-delay 2 "$BASE_URL/")
+
+          if echo "$MAIN_PAGE" | grep -q "H1 Equity Dashboard"; then
+            echo "✅ UI title found"
+            UI_STATUS="✅ UI loads with expected title"
+          else
+            echo "❌ UI title not found"
+            UI_STATUS="❌ UI title missing"
+          fi
+
+          # Test that data endpoints are accessible via fetch
+          if echo "$MAIN_PAGE" | grep -q "data/.*\.json"; then
+            echo "✅ Data endpoint references found in UI"
+            UI_STATUS="$UI_STATUS\n✅ Data endpoint references found"
+          else
+            echo "❌ Data endpoint references not found"
+            UI_STATUS="$UI_STATUS\n❌ Data endpoint references missing"
+          fi
+
+          echo "ui_status<<EOF" >> $GITHUB_OUTPUT
+          echo -e "$UI_STATUS" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+  report-pr:
+    needs: smoke-test
+    runs-on: ubuntu-latest
+    if: always() && github.event.workflow_run.event == 'pull_request'
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Comment on PR
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea
+        with:
+          script: |
+            const success_count = '${{ needs.smoke-test.outputs.success_count }}';
+            const total_count = '${{ needs.smoke-test.outputs.total_count }}';
+            const failed_endpoints = 
+              `${{ needs.smoke-test.outputs.failed_endpoints }}`;
+            const ui_status = `${{ needs.smoke-test.outputs.ui_status }}`;
+
+            let status_emoji = success_count == total_count ? '✅' : '❌';
+            let title = `${status_emoji} Pages Smoke Test Results`;
+
+            let body = `## ${title}\n\n`;
+            body += `**Endpoints:** ${success_count}/${total_count} passed\n\n`;
+
+            if (failed_endpoints.trim()) {
+              body += `### ❌ Failed Endpoints\n${failed_endpoints}\n\n`;
+            }
+
+            body += `### UI Functionality\n${ui_status}\n\n`;
+            body += `**Deployment URL:** `;
+            body += `https://${{ github.repository_owner }}.github.io/`;
+            body += `${{ github.event.workflow_run.repository.name }}/\n`;
+            body += `**Test run:** ${context.runId}`;
+
+            // Get the PR number from the workflow_run
+            const pulls = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              head: `${context.payload.workflow_run.head_repository.owner.login}:${context.payload.workflow_run.head_branch}`,
+              state: 'open'
+            });
+
+            if (pulls.data.length > 0) {
+              const prNumber = pulls.data[0].number;
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                body: body
+              });
+            }
+
+  report-main:
+    needs: smoke-test
+    runs-on: ubuntu-latest
+    if: always() && github.event.workflow_run.head_branch == 'main'
+    permissions:
+      issues: write
+    steps:
+      - name: Create issue comment for main branch
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea
+        with:
+          script: |
+            const success_count = '${{ needs.smoke-test.outputs.success_count }}';
+            const total_count = '${{ needs.smoke-test.outputs.total_count }}';
+            const failed_endpoints = 
+              `${{ needs.smoke-test.outputs.failed_endpoints }}`;
+            const ui_status = `${{ needs.smoke-test.outputs.ui_status }}`;
+
+            let status_emoji = success_count == total_count ? '✅' : '❌';
+            let title = 
+              `${status_emoji} Pages Smoke Test Results (main deploy)`;
+
+            let body = `## ${title}\n\n`;
+            body += `**Endpoints:** ${success_count}/${total_count} passed\n\n`;
+
+            if (failed_endpoints.trim()) {
+              body += `### ❌ Failed Endpoints\n${failed_endpoints}\n\n`;
+            }
+
+            body += `### UI Functionality\n${ui_status}\n\n`;
+            body += `**Deployment URL:** `;
+            body += `https://${{ github.repository_owner }}.github.io/`;
+            body += `${{ github.event.repository.name }}/\n`;
+            body += `**Commit:** `;
+            body += `${context.payload.workflow_run.head_sha.substring(0, 7)}\n`;
+            body += `**Test run:** ${context.runId}`;
+
+            // Post comment on the issue #10
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: 10,
+              body: body
+            });
