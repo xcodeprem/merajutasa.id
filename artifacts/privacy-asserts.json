@@ -1,6 +1,6 @@
 {
   "status": "ok",
-  "ts": "2025-08-17T11:10:38.229Z",
+  "ts": "2025-08-17T11:12:42.347Z",
   "config_path": "tools/config/privacy-policy.json",
   "checks": {
     "retention": {
@@ -17,7 +17,7 @@
     },
     "freshness": {
       "last_rotated_utc": "2025-08-17T08:48:00.682Z",
-      "age_hours": 2.377096388888889,
+      "age_hours": 2.4115736111111112,
       "ok": true
     }
   },

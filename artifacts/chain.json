@@ -258,25 +258,17 @@
   {
     "seq": 32,
     "prevHash": "625c58baf882a51aa2eadecf0891c6d2a7d63c0e00ec6433e224c033afc92c5a",
-    "contentHash": "43258cff783fe7036d8a43033f830adfc60ec037382473548ac742b888292777",
-    "signature": "UKFeXkAjYzrqMN8JdUi/Mr/fhZMZGvvxg1AIhAcB4CnCOVk2J5kb6zuU4HIx2N8hSv7rEKdklIhCaU3PcVjKDg==",
-    "canonical": "{\"a\":1,\"b\":2}",
-    "ts": "2025-08-16T15:04:47.295Z"
+    "contentHash": "14c234435e93f39ff1cb25a4890dea636ce59c213e1e1d93d733dfb196ad47cc",
+    "signature": "lu2hJMTrzBjcW5HHvfqH48RW+OKDjViafBSAElw8pzYZ545ygH9foPIptsu4GNRUTt9VrCRdO+fCVeYNoKGuDg==",
+    "canonical": "{\"id\":\"chain-test-1\",\"purpose\":\"append-seed\",\"ts\":\"2025-08-17T11:13:33.148Z\"}",
+    "ts": "2025-08-17T11:13:33.175Z"
   },
   {
     "seq": 33,
-    "prevHash": "43258cff783fe7036d8a43033f830adfc60ec037382473548ac742b888292777",
-    "contentHash": "184534c0a326063deb498cc8407af70b5cb7c947f3962c798fe76d9a1c6ce2e7",
-    "signature": "qGIKUGAqJ5Xm3dsT+RxSqCcrtOpjVf45oKxQfK4XeBkfAsTGX8fKEQ37QHEz9Fr/K9sUQw912LUOqeYxljHCDA==",
-    "canonical": "{\"id\":\"chain-test-1\",\"purpose\":\"append-seed\",\"ts\":\"2025-08-16T16:22:36.534Z\"}",
-    "ts": "2025-08-16T16:22:36.540Z"
-  },
-  {
-    "seq": 34,
-    "prevHash": "184534c0a326063deb498cc8407af70b5cb7c947f3962c798fe76d9a1c6ce2e7",
-    "contentHash": "0c34ec126e58ec8d56887efd5c998cb04b8f875eff2528eb679c93300aa8e2d7",
-    "signature": "PA1WNiwJq9kxUFVPLm0iD27W/vZ/99WUUFJtA9QjNtgSTLgQnsF9VRs2uJq+1nZDpJhw/pP9W8n3eHIs9sgRBw==",
-    "canonical": "{\"id\":\"chain-test-2\",\"n\":2,\"purpose\":\"append-seed\",\"ts\":\"2025-08-16T16:22:36.534Z\"}",
-    "ts": "2025-08-16T16:22:36.545Z"
+    "prevHash": "14c234435e93f39ff1cb25a4890dea636ce59c213e1e1d93d733dfb196ad47cc",
+    "contentHash": "d3428d4a4e68df791c3f4516063229c74ec1139ce5efe8288a12faaa0b918205",
+    "signature": "F4xkyGSTS9S81HhXuVa5YT/DtdocXFiAkJg4VPPt+EUtafA6mJn/foqUep25R+fy79HYgXZe7aKvaEhQ+F/MBA==",
+    "canonical": "{\"id\":\"chain-test-2\",\"n\":2,\"purpose\":\"append-seed\",\"ts\":\"2025-08-17T11:13:33.149Z\"}",
+    "ts": "2025-08-17T11:13:33.195Z"
   }
 ]

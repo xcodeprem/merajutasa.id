@@ -1,81 +1,86 @@
 {
-  "version": "1.1.0",
-  "generated_utc": "2025-08-16T16:27:23.600Z",
-  "phase": "PHASE_1_ERROR",
-  "fairness": {
-    "pass": true,
-    "scenarios_pass": 10,
-    "scenarios_total": 10,
-    "detection_delay_avg_snapshots": 0.2857142857142857
-  },
-  "equity": {
-    "index": 0.98,
-    "index_raw": 0.984375,
-    "under_served_total": 1,
-    "anomalies_count": 0
+  "_metadata": {
+    "generated_at": "2025-08-17T11:12:48.362Z",
+    "generator": "generate-h1-kpi-summary.js",
+    "version": "1.0"
   },
   "adoption": {
-    "percent": 100,
+    "new_total": 0,
     "old_total": 0,
-    "new_total": 0
+    "percent": 100
+  },
+  "equity": {
+    "anomalies_count": 0,
+    "index": 0.98,
+    "index_raw": 0.984375,
+    "under_served_total": 1
+  },
+  "fairness": {
+    "detection_delay_avg_snapshots": 0.2857142857142857,
+    "pass": true,
+    "scenarios_pass": 10,
+    "scenarios_total": 10
   },
   "feedback": {
-    "ingested": 68,
     "categories": {
-      "product": 34,
-      "ux": 34,
-      "bug": 34
-    }
+      "bug": 49,
+      "product": 49,
+      "ux": 49
+    },
+    "ingested": 98
   },
+  "generated_utc": "2025-08-17T11:12:48.361Z",
+  "phase": "PHASE_0_WARN",
   "trust": {
+    "disclaimers_status": "PASS",
     "hero_badges": [
       "Decision Pending",
       "Privacy-Aware"
-    ],
-    "disclaimers_status": "PASS"
+    ]
   },
+  "version": "1.1.0",
   "weekly": {
-    "weeks": [
-      {
-        "week": "2025-W33",
-        "start_utc": "2025-08-11",
-        "end_utc": "2025-08-17",
-        "totals": {
-          "events": 386,
-          "canonical_ok": 386,
-          "hero_views": 384,
-          "feedback": 0,
-          "prohibited": 0,
-          "coverage": 1
-        }
-      }
-    ],
-    "latest": {
-      "week": "2025-W33",
-      "start_utc": "2025-08-11",
-      "end_utc": "2025-08-17",
-      "totals": {
-        "events": 386,
-        "canonical_ok": 386,
-        "hero_views": 384,
-        "feedback": 0,
-        "prohibited": 0,
-        "coverage": 1
-      }
-    },
     "coverage_latest": 1,
-    "throughput_latest": 386,
     "decision_mix": {
       "counts": {
-        "POS": 0,
         "BND": 0,
-        "NEG": 0
+        "NEG": 0,
+        "POS": 0
       },
       "ratios": {
-        "POS": 0,
         "BND": 0,
-        "NEG": 0
+        "NEG": 0,
+        "POS": 0
       }
-    }
+    },
+    "latest": {
+      "end_utc": "2025-08-17",
+      "start_utc": "2025-08-11",
+      "totals": {
+        "canonical_ok": 400,
+        "coverage": 1,
+        "events": 400,
+        "feedback": 0,
+        "hero_views": 398,
+        "prohibited": 0
+      },
+      "week": "2025-W33"
+    },
+    "throughput_latest": 400,
+    "weeks": [
+      {
+        "end_utc": "2025-08-17",
+        "start_utc": "2025-08-11",
+        "totals": {
+          "canonical_ok": 400,
+          "coverage": 1,
+          "events": 400,
+          "feedback": 0,
+          "hero_views": 398,
+          "prohibited": 0
+        },
+        "week": "2025-W33"
+      }
+    ]
   }
 }

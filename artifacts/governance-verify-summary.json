@@ -1,35 +1,27 @@
 {
   "_metadata": {
-    "actor": "copilot-swe-agent[bot]",
-    "generated_at": "2025-08-16T20:01:04.972Z",
+    "generated_at": "2025-08-17T11:12:46.918Z",
     "generator": "governance-verify-aggregator",
-    "git_ref": "refs/heads/copilot/fix-2406172e-c001-496e-8407-176c0346325f",
-    "git_sha": "aa777f4f25414e6da3fa5045288cfd1aabf80bb1",
-    "run_id": "17012248082",
     "version": "1.0"
   },
   "artifacts": {
     "decLint": {
       "_metadata": {
-        "actor": "copilot-swe-agent[bot]",
-        "generated_at": "2025-08-16T20:01:03.205Z",
+        "generated_at": "2025-08-17T11:12:42.590Z",
         "generator": "dec-lint.js",
-        "git_ref": "refs/heads/copilot/fix-2406172e-c001-496e-8407-176c0346325f",
-        "git_sha": "aa777f4f25414e6da3fa5045288cfd1aabf80bb1",
-        "run_id": "17012248082",
         "version": "1.0"
       },
       "results": [
         {
           "file": "DEC-20250812-02-hysteresis-adoption.md",
-          "hash": "590cdd8be80eba519d52aa5a825b129aca6ddf8e2a5b32683a2e19f73d978fd1",
+          "hash": "a99e20be90ef46ca20a0e46f7fd1c3c9b8688081fb53bac667875eb5f8bb70d0",
           "id": "DEC-20250812-02",
           "violations": [],
           "warnings": []
         },
         {
           "file": "DEC-20250812-03-principles-reference-activation.md",
-          "hash": "e8cb894bbd99eebefbab7ca30824785c88dee8f3d72d814af4d318c8ff1b28b1",
+          "hash": "6768d18bff8f7891998230cb18673d852409b1e2692e2b2abea384eb705e4b6a",
           "id": "DEC-20250812-03",
           "violations": [],
           "warnings": []
@@ -50,98 +42,98 @@
         },
         {
           "file": "DEC-20250813-02-signature-pipeline-adoption.md",
-          "hash": "a59dc9b0161686d061abd35e9b7d0d0630dcc06bb947a62f2e1ed15dbe0c6ea5",
+          "hash": "c0798623aa8949bf4f1ce115d719bdf641450d8ad906ed4b61cc34534b8163a0",
           "id": "DEC-20250813-02",
           "violations": [],
           "warnings": []
         },
         {
           "file": "DEC-20250813-03-disclaimers-presence-enforcement.md",
-          "hash": "229f1158fe860c0fbd35015f10630d15b59d1b744e0457d385a73b31d958d231",
+          "hash": "925a3c1b73e9e9f61563a90273376846557d6cf9f4206ae59130f9fe2c5aaae9",
           "id": "DEC-20250813-03",
           "violations": [],
           "warnings": []
         },
         {
           "file": "DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
-          "hash": "61b36f68b2bd1688252261746abb622d8b7c4c025405414a2baebff06bda07fe",
+          "hash": "7648f585a0b56b29ca8fe31a97ecb75ba3908f86f372e7ab1b46e137e3f76424",
           "id": "DEC-20250813-04",
           "violations": [],
           "warnings": []
         },
         {
           "file": "DEC-20250813-05-gating-policy-wave1-adoption.md",
-          "hash": "4ff94ec39e6ffe51f599b77b492476883af6c5696070b9a3fb99dfa3b64793c7",
+          "hash": "8d98db9891bbae54b575ad65b173f4d773f2ad1fc7dce5c9224f5f01efe34f8c",
           "id": "DEC-20250813-05",
           "violations": [],
           "warnings": []
         },
         {
           "file": "DEC-20250813-06-consolidated-governed-edits.md",
-          "hash": "54b52a3a570726287087b5aaf10c79c7982dc776e62c0da0a26ed1b2f5b495f3",
+          "hash": "ea1e6ce3aac7ca95d8a74f15fa6d24d6e2647472f889122ac2a1559a8e3effb5",
           "id": "DEC-20250813-06",
           "violations": [],
           "warnings": []
         },
         {
           "file": "DEC-20250813-07-hype-threshold-transition.md",
-          "hash": "0950440708e7af21d15100a336d8ba65898ba47a0cd312e5fc400f4de8fc6093",
+          "hash": "41b3c48f1e9afd12a2b98d18438b0badc0c38e9cb0a6f0c18115482ad3c9ad7e",
           "id": "DEC-20250813-07",
           "violations": [],
           "warnings": []
         },
         {
           "file": "DEC-20250813-08-evidence-hash-display-length.md",
-          "hash": "34ad1c883c52a0ff1d0b729b371a35ff1f0a0fe680257caf2f2bce241bad630d",
+          "hash": "5f6bff7ece250ff0d9bf7dc3a88461a831565d18997a0cdaaa819511fce565cb",
           "id": "DEC-20250813-08",
           "violations": [],
           "warnings": []
         },
         {
           "file": "DEC-20250813-09-equity-index-rounding.md",
-          "hash": "38ec9bc31e1976f95d5d534e7d9e93e75f07534c04f35a480bbca8c1798f3fd9",
+          "hash": "9621605f0aaf99aa9a971aed35eab31e8ae346b62d49c2639e1c0b7df8a6eaa1",
           "id": "DEC-20250813-09",
           "violations": [],
           "warnings": []
         },
         {
           "file": "DEC-20250813-10-feedback-categories-canonical.md",
-          "hash": "a73118b5211e44ba3c8da47ed761c7101423edba18d999f69efdc3db5d364a30",
+          "hash": "29ad36b8744ae3dfbdb15852f8ac7d24774dd5642d1380facbbf5822af55dfe8",
           "id": "DEC-20250813-10",
           "violations": [],
           "warnings": []
         },
         {
           "file": "DEC-20250815-01-governed-editorial-maintenance.md",
-          "hash": "1dae67aab19daaee75c00ef7ca173666729c8baddc6a09f8a9fede6a78fff43e",
+          "hash": "dd76154a33c2ba8ac6b3381efa70b27c0cd38120b9aa26a2a0fece0542693c1a",
           "id": "DEC-20250815-01",
           "violations": [],
           "warnings": []
         },
         {
           "file": "DEC-20250815-02-hysteresis-config-update.md",
-          "hash": "c039b400269d0003c1d07524c340d05329235c8e77a1f9fcc9dfa1e6672b560d",
+          "hash": "bc79fb1a532e3193015189de07ef102488f811780f3c74d5076a98ac223f1ca5",
           "id": "DEC-20250815-02",
           "violations": [],
           "warnings": []
         },
         {
           "file": "DEC-20250815-03-trace-index-update.md",
-          "hash": "5e841450ada5fb19d493535ad4b82f8804e609d32c68d60f4f73cb06aca33c98",
+          "hash": "3e3015873238259fb761b5db41bcd7f55d14d0229ebaa7fe3711ef715872351d",
           "id": "DEC-20250815-03",
           "violations": [],
           "warnings": []
         },
         {
           "file": "DEC-20250816-01-governance-pipeline-security-enhancement.md",
-          "hash": "618b54742d15b37aaf6236a363f2c694ecb9ede35eac9fc8662d311687ef6609",
+          "hash": "8b1236de1c6c27c6a5da74ff49fc10ab34d6f76d5f9723aab026894925d8e93b",
           "id": "DEC-20250816-01",
           "violations": [],
           "warnings": []
         },
         {
           "file": "DEC-style-guide-v1.md",
-          "hash": "55c77fb8c21f4cf0474e5923268268d64e8fc13ac95bd392066e290d3a0a3441",
+          "hash": "e94f4c6d85b4e78d936a417841e848c555539d309a24badba845669f8f641a91",
           "id": "GUIDANCE-DOC-DEC-STYLE-V1",
           "violations": [],
           "warnings": []
@@ -155,7 +147,7 @@
         },
         {
           "file": "DEC-style-guide-v3.md",
-          "hash": "fa6ca1309615f42d5c4fb64de9dd3cb1c76e6c788a57108937b14c598feb733c",
+          "hash": "c4b998f16eee370a5f14cfa5964ee9640578e16a9a91b4bd91221336cfeb9c87",
           "id": "GUIDANCE-DEC-STYLE-V3",
           "violations": [],
           "warnings": []
@@ -223,6 +215,12 @@
         },
         {
           "code": "DISC-SCOPE-006",
+          "id": "D7",
+          "page": "governance",
+          "severity": "WARNING"
+        },
+        {
+          "code": "DISC-SCOPE-006",
           "id": "D5",
           "page": "credential_viewer",
           "severity": "WARNING"
@@ -237,12 +235,6 @@
           "code": "DISC-SCOPE-006",
           "id": "D7",
           "page": "credential_viewer",
-          "severity": "WARNING"
-        },
-        {
-          "code": "DISC-SCOPE-006",
-          "id": "D7",
-          "page": "governance",
           "severity": "WARNING"
         },
         {
@@ -475,10 +467,10 @@
           "spec_hash_violation_count": 0
         }
       },
-      "timestamp_utc": "2025-08-16T20:01:04.403Z"
+      "timestamp_utc": "2025-08-17T11:12:46.150Z"
     },
     "hype": {
-      "file_count": 97,
+      "file_count": 99,
       "findings": [
         {
           "column": 83,
@@ -1661,7 +1653,7 @@
           "severity": "MEDIUM"
         }
       ],
-      "generated_utc": "2025-08-16T20:01:02.398Z",
+      "generated_utc": "2025-08-17T11:12:41.576Z",
       "max_severity": "MEDIUM",
       "rule_counts": {
         "RANKING": 106,
@@ -1675,7 +1667,7 @@
       "version": 1
     },
     "params": {
-      "generated_utc": "2025-08-16T20:01:01.979Z",
+      "generated_utc": "2025-08-17T11:12:41.009Z",
       "rows": [
         {
           "aliases": {
@@ -1949,19 +1941,12 @@
       "violations": []
     },
     "principles": {
-      "generated_utc": "2025-08-16T20:01:03.383Z",
+      "generated_utc": "2025-08-17T11:12:42.847Z",
       "principles": [
         {
           "confidence": 0.9,
           "domains": [
-            "other",
-            "privacy",
-            "principles",
-            "onboarding",
-            "integrity",
-            "governance",
-            "fairness",
-            "analytics"
+            "other"
           ],
           "evidence_sample": [
             {
@@ -2063,37 +2048,35 @@
           ],
           "evidence_truncated": true,
           "inferredImpact": true,
-          "match_count": 997,
+          "match_count": 1002,
           "principle": "GP1"
         },
         {
-          "confidence": 0.6,
+          "confidence": 0.55,
           "domains": [
-            "other",
-            "privacy",
-            "analytics"
+            "other"
           ],
           "evidence_sample": [
             {
               "changed": false,
               "domain": "other",
-              "file": "docs/roadmap/roadmap-master-v1.md",
+              "file": "docs\\roadmap\\roadmap-master-v1.md",
               "line": 319,
               "pattern": "abuse",
               "snippet": "| Public API Access | Rate-limited aggregated metrics API | Governance gating & policy | Abuse risk (scraping misuse) |"
             },
             {
               "changed": false,
-              "domain": "privacy",
-              "file": "docs/privacy/pii-pattern-library-v1.md",
+              "domain": "other",
+              "file": "docs\\privacy\\pii-pattern-library-v1.md",
               "line": 398,
               "pattern": "safety",
               "snippet": "| Over-reliance (false sense of safety) | Hidden risk | High | Messaging: “Deteksi bersifat best-effort” in privacy policy |"
             },
             {
               "changed": false,
-              "domain": "analytics",
-              "file": "docs/analytics/event-schema-canonical-v1.md",
+              "domain": "other",
+              "file": "docs\\analytics\\event-schema-canonical-v1.md",
               "line": 554,
               "pattern": "abuse",
               "snippet": "| PII leakage attempt in meta | PII scanner + reject + block event_name if repeated abuse |"
@@ -2107,14 +2090,7 @@
         {
           "confidence": 0.9,
           "domains": [
-            "other",
-            "privacy",
-            "principles",
-            "onboarding",
-            "integrity",
-            "governance",
-            "fairness",
-            "analytics"
+            "other"
           ],
           "evidence_sample": [
             {
@@ -2168,7 +2144,15 @@
             {
               "changed": false,
               "domain": "other",
-              "file": "docs/trust/trust-page.md",
+              "file": "docs\\agent-context-pack.md",
+              "line": 274,
+              "pattern": "explain",
+              "snippet": "3. **Explain changes:** Provide clear justification for any deviations"
+            },
+            {
+              "changed": false,
+              "domain": "other",
+              "file": "docs\\trust\\trust-page.md",
               "line": 9,
               "pattern": "transparenc",
               "snippet": "Lihat juga: Methodology Snippet (H0) → ../transparency/methodology-snippet-h0.md"
@@ -2176,31 +2160,7 @@
             {
               "changed": false,
               "domain": "other",
-              "file": "docs/status/progress-recap-latest-2025-08-12T035901Z.md",
-              "line": 64,
-              "pattern": "transparenc",
-              "snippet": "| Revocation Endpoint & List | Placeholder saja | Revocation transparency nol saat insiden |"
-            },
-            {
-              "changed": false,
-              "domain": "other",
-              "file": "docs/status/progress-recap-latest-2025-08-12T035901Z.md",
-              "line": 67,
-              "pattern": "trace",
-              "snippet": "| Governance Decision Log Automation | Belum template DEC populating CI | Traceability manual & rentan lupa |"
-            },
-            {
-              "changed": false,
-              "domain": "other",
-              "file": "docs/status/progress-recap-latest-2025-08-12T035901Z.md",
-              "line": 95,
-              "pattern": "transparenc",
-              "snippet": "6. Transparency Hardening"
-            },
-            {
-              "changed": false,
-              "domain": "other",
-              "file": "docs/status/README-h0-completion.md",
+              "file": "docs\\status\\README-h0-completion.md",
               "line": 69,
               "pattern": "trace",
               "snippet": "- Optional snapshot for traceability:"
@@ -2208,28 +2168,37 @@
             {
               "changed": false,
               "domain": "other",
-              "file": "docs/roadmap/roadmap-master-v1.md",
-              "line": 16,
+              "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
+              "line": 64,
               "pattern": "transparenc",
-              "snippet": "- Horizon 2 (Hari 31–60): Governance Depth & Transparency Amplification (changelog excerpt, support matrix, anomaly watchers, revocation placeholder UI, a11y/performance enforcement)."
+              "snippet": "| Revocation Endpoint & List | Placeholder saja | Revocation transparency nol saat insiden |"
+            },
+            {
+              "changed": false,
+              "domain": "other",
+              "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
+              "line": 67,
+              "pattern": "trace",
+              "snippet": "| Governance Decision Log Automation | Belum template DEC populating CI | Traceability manual & rentan lupa |"
+            },
+            {
+              "changed": false,
+              "domain": "other",
+              "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
+              "line": 95,
+              "pattern": "transparenc",
+              "snippet": "6. Transparency Hardening"
             }
           ],
           "evidence_truncated": true,
           "inferredImpact": true,
-          "match_count": 106,
+          "match_count": 110,
           "principle": "GP3"
         },
         {
           "confidence": 0.9,
           "domains": [
-            "other",
-            "privacy",
-            "principles",
-            "onboarding",
-            "integrity",
-            "governance",
-            "fairness",
-            "analytics"
+            "other"
           ],
           "evidence_sample": [
             {
@@ -2331,20 +2300,13 @@
           ],
           "evidence_truncated": true,
           "inferredImpact": true,
-          "match_count": 600,
+          "match_count": 632,
           "principle": "GP4"
         },
         {
           "confidence": 0.9,
           "domains": [
-            "other",
-            "privacy",
-            "principles",
-            "onboarding",
-            "integrity",
-            "governance",
-            "fairness",
-            "analytics"
+            "other"
           ],
           "evidence_sample": [
             {
@@ -2452,13 +2414,7 @@
         {
           "confidence": 0.9,
           "domains": [
-            "other",
-            "privacy",
-            "principles",
-            "onboarding",
-            "integrity",
-            "governance",
-            "analytics"
+            "other"
           ],
           "evidence_sample": [
             {
@@ -2480,7 +2436,7 @@
             {
               "changed": false,
               "domain": "other",
-              "file": "docs/transparency/methodology-snippet-h0.md",
+              "file": "docs\\transparency\\methodology-snippet-h0.md",
               "line": 5,
               "pattern": "non-?ranking",
               "snippet": "This project applies a non-ranking fairness approach using a hysteresis method (Option F) to avoid churn. The public summary focuses on equity and trust foundations:"
@@ -2488,7 +2444,7 @@
             {
               "changed": false,
               "domain": "other",
-              "file": "docs/transparency/methodology-snippet-h0.md",
+              "file": "docs\\transparency\\methodology-snippet-h0.md",
               "line": 7,
               "pattern": "non-?ranking",
               "snippet": "- Non-ranking: No league tables; only stability around entry/exit using thresholds."
@@ -2496,7 +2452,7 @@
             {
               "changed": false,
               "domain": "other",
-              "file": "docs/status/progress-recap-latest-2025-08-12T035901Z.md",
+              "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
               "line": 381,
               "pattern": "non-?ranking",
               "snippet": "Semua jalur tetap konsisten dengan GP1–GP10. Tidak ada penurunan komitmen terhadap non-ranking fairness & privacy. Fokus sekarang = menghapus jurang antara blueprint dan trust primitives nyata. Kecepa"
@@ -2504,7 +2460,7 @@
             {
               "changed": false,
               "domain": "other",
-              "file": "docs/roadmap/roadmap-master-v1.md",
+              "file": "docs\\roadmap\\roadmap-master-v1.md",
               "line": 48,
               "pattern": "non-?ranking",
               "snippet": "| M Portal Panti | Orientasi produk, ruang lingkup, model data minimal aman, About, rubrik audit | docs/governance/statement-orientasi-portal-panti.md; docs/produk/portal-panti/01-ruang-lingkup-produk"
@@ -2512,7 +2468,7 @@
             {
               "changed": false,
               "domain": "other",
-              "file": "docs/roadmap/roadmap-master-v1.md",
+              "file": "docs\\roadmap\\roadmap-master-v1.md",
               "line": 314,
               "pattern": "misinterpret",
               "snippet": "| Revocation Lifecycle | Live revocation events & viewer delta tracking | Simulated tests stable | Misinterpretation as punishment |"
@@ -2520,7 +2476,7 @@
             {
               "changed": false,
               "domain": "other",
-              "file": "docs/roadmap/roadmap-master-v1.md",
+              "file": "docs\\roadmap\\roadmap-master-v1.md",
               "line": 555,
               "pattern": "non-?ranking",
               "snippet": "| Hysteresis Methodology Explainer | H1 | Clarify non-ranking fairness |"
@@ -2528,31 +2484,31 @@
             {
               "changed": false,
               "domain": "other",
-              "file": "docs/roadmap/roadmap-master-v1.md",
+              "file": "docs\\roadmap\\roadmap-master-v1.md",
               "line": 558,
               "pattern": "non-?ranking",
               "snippet": "| Hero Non-Ranking Tooltip (conditional) | H2 | If confusion >5% |"
             },
             {
               "changed": false,
-              "domain": "privacy",
-              "file": "docs/privacy/pii-pattern-library-v1.md",
+              "domain": "other",
+              "file": "docs\\privacy\\pii-pattern-library-v1.md",
               "line": 6,
               "pattern": "outcome honesty",
               "snippet": "NON-DESTRUCTIVE: Dokumen ini MENAMBAHKAN detail; tidak menghapus strategi/konstraint sebelumnya (GP1 Privacy-by-Architecture, GP6 Outcome Honesty, GP9 Non-Ranking)."
             },
             {
               "changed": false,
-              "domain": "privacy",
-              "file": "docs/privacy/pii-pattern-library-v1.md",
+              "domain": "other",
+              "file": "docs\\privacy\\pii-pattern-library-v1.md",
               "line": 6,
               "pattern": "non-?ranking",
               "snippet": "NON-DESTRUCTIVE: Dokumen ini MENAMBAHKAN detail; tidak menghapus strategi/konstraint sebelumnya (GP1 Privacy-by-Architecture, GP6 Outcome Honesty, GP9 Non-Ranking)."
             },
             {
               "changed": false,
-              "domain": "privacy",
-              "file": "docs/privacy/pii-pattern-library-v1.md",
+              "domain": "other",
+              "file": "docs\\privacy\\pii-pattern-library-v1.md",
               "line": 20,
               "pattern": "outcome honesty",
               "snippet": "| GP6 Outcome Honesty | Tidak over-claim (pattern “100% akurat”); jelaskan false positive possibility. |"
@@ -2566,12 +2522,7 @@
         {
           "confidence": 0.9,
           "domains": [
-            "other",
-            "principles",
-            "onboarding",
-            "integrity",
-            "governance",
-            "analytics"
+            "other"
           ],
           "evidence_sample": [
             {
@@ -2673,68 +2624,67 @@
           ],
           "evidence_truncated": true,
           "inferredImpact": true,
-          "match_count": 205,
+          "match_count": 206,
           "principle": "GP7"
         },
         {
           "confidence": 0.9,
           "domains": [
-            "other",
-            "integrity"
+            "other"
           ],
           "evidence_sample": [
             {
               "changed": false,
               "domain": "other",
-              "file": "docs/roadmap/roadmap-master-v1.md",
+              "file": "docs\\roadmap\\roadmap-master-v1.md",
               "line": 47,
               "pattern": "portabil",
               "snippet": "| L Federation & Future | DID portability, external attestation, localization, CBOR | Future expansions in Credential spec | Scalability & portability guardrail |"
             },
             {
               "changed": false,
-              "domain": "integrity",
-              "file": "docs/integrity/credential-schema-final-v1.md",
+              "domain": "other",
+              "file": "docs\\integrity\\credential-schema-final-v1.md",
               "line": 23,
               "pattern": "portabil",
               "snippet": "| GP3 Federated Mindset | Format JSON-LD / W3C Verifiable Credential compatible subset → portabilitas lintas platform. |"
             },
             {
               "changed": false,
-              "domain": "integrity",
-              "file": "docs/integrity/credential-schema-final-v1.md",
+              "domain": "other",
+              "file": "docs\\integrity\\credential-schema-final-v1.md",
               "line": 93,
               "pattern": "portabil",
               "snippet": "| country | string | Optional | “ID” default | For portability |"
             },
             {
               "changed": false,
-              "domain": "integrity",
-              "file": "docs/integrity/credential-schema-final-v1.md",
+              "domain": "other",
+              "file": "docs\\integrity\\credential-schema-final-v1.md",
               "line": 499,
               "pattern": "portabil",
               "snippet": "Credential uses canonical English tokens for portability; UI localizes labels. Do not localize field keys. Terminology object stage enumerations remain English-coded identifiers."
             },
             {
               "changed": false,
-              "domain": "integrity",
-              "file": "docs/integrity/credential-schema-final-v1.md",
+              "domain": "other",
+              "file": "docs\\integrity\\credential-schema-final-v1.md",
               "line": 594,
               "pattern": "portabil",
               "snippet": "| Portability | JSON-LD + DID method |"
             },
             {
               "changed": false,
-              "domain": "integrity",
-              "file": "docs/integrity/credential-schema-final-v1.md",
+              "domain": "other",
+              "file": "docs\\integrity\\credential-schema-final-v1.md",
               "line": 652,
               "pattern": "portabil",
               "snippet": "Integrity Credential v1.0 memberikan pondasi portabel, minim, non‑ranking, dan dapat diaudit yang menyelaraskan semua pilar: privacy, fairness, governance, portability, & transition. Tidak ada deviati"
             },
             {
               "changed": false,
-              "domain": "integrity",
-              "file": "docs/integrity/credential-schema-final-v1.md",
+              "domain": "other",
+              "file": "docs\\integrity\\credential-schema-final-v1.md",
               "line": 652,
               "pattern": "extensib",
               "snippet": "Integrity Credential v1.0 memberikan pondasi portabel, minim, non‑ranking, dan dapat diaudit yang menyelaraskan semua pilar: privacy, fairness, governance, portability, & transition. Tidak ada deviati"
@@ -2742,7 +2692,7 @@
             {
               "changed": false,
               "domain": "other",
-              "file": "docs/archive/ux_public-multipage-experience-master-spec-v2.md",
+              "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
               "line": 64,
               "pattern": "portabil",
               "snippet": "| GP3 | Federated Mindset | Cegah platform lock-in; integrity portability | Credential JSON-LD minimal; portable verify semantics |"
@@ -2756,14 +2706,7 @@
         {
           "confidence": 0.9,
           "domains": [
-            "other",
-            "privacy",
-            "principles",
-            "onboarding",
-            "integrity",
-            "governance",
-            "fairness",
-            "analytics"
+            "other"
           ],
           "evidence_sample": [
             {
@@ -2871,18 +2814,13 @@
         {
           "confidence": 0.9,
           "domains": [
-            "other",
-            "principles",
-            "onboarding",
-            "integrity",
-            "governance",
-            "analytics"
+            "other"
           ],
           "evidence_sample": [
             {
               "changed": false,
               "domain": "other",
-              "file": "docs/roadmap/roadmap-master-v1.md",
+              "file": "docs\\roadmap\\roadmap-master-v1.md",
               "line": 274,
               "pattern": "bias",
               "snippet": "| Sampling biases KPI interpretasi | Document weighting & apply expansion factors |"
@@ -2890,7 +2828,7 @@
             {
               "changed": false,
               "domain": "other",
-              "file": "docs/roadmap/roadmap-master-v1.md",
+              "file": "docs\\roadmap\\roadmap-master-v1.md",
               "line": 320,
               "pattern": "ethic",
               "snippet": "| Community Action | Ethical contribution micro guidance | Support page matured | Scope creep activism |"
@@ -2898,7 +2836,7 @@
             {
               "changed": false,
               "domain": "other",
-              "file": "docs/roadmap/roadmap-master-v1.md",
+              "file": "docs\\roadmap\\roadmap-master-v1.md",
               "line": 320,
               "pattern": "ethical",
               "snippet": "| Community Action | Ethical contribution micro guidance | Support page matured | Scope creep activism |"
@@ -2906,73 +2844,73 @@
             {
               "changed": false,
               "domain": "other",
-              "file": "docs/roadmap/roadmap-master-v1.md",
+              "file": "docs\\roadmap\\roadmap-master-v1.md",
               "line": 452,
               "pattern": "ethic",
               "snippet": "| Ethics / Privacy | Bi-weekly | PII metrics, blocked attempts, drift attempts |"
             },
             {
               "changed": false,
-              "domain": "principles",
-              "file": "docs/principles/GP1-GP10-index.md",
+              "domain": "other",
+              "file": "docs\\principles\\GP1-GP10-index.md",
               "line": 15,
               "pattern": "ethic",
               "snippet": "| GP5 | Transparency | Definisi metrik, disclaimers, metodologi (fairness/hysteresis) dapat diinspeksi publik tanpa dark logic. | Public Clarity | §13 Hero, §35 Ethical Content, Methodology Fragments "
-            },
-            {
-              "changed": false,
-              "domain": "principles",
-              "file": "docs/principles/GP1-GP10-index.md",
-              "line": 15,
-              "pattern": "ethical",
-              "snippet": "| GP5 | Transparency | Definisi metrik, disclaimers, metodologi (fairness/hysteresis) dapat diinspeksi publik tanpa dark logic. | Public Clarity | §13 Hero, §35 Ethical Content, Methodology Fragments "
-            },
-            {
-              "changed": false,
-              "domain": "principles",
-              "file": "docs/principles/GP1-GP10-index.md",
-              "line": 16,
-              "pattern": "ethic",
-              "snippet": "| GP6 | Outcome Honesty | Tidak mempresentasikan sinyal sebagai ranking / kualitas; menghindari misframing performa. | Ethical Framing | §14 Fairness Narrative, §30 Equity UI | No “top”, disclaimers R"
-            },
-            {
-              "changed": false,
-              "domain": "principles",
-              "file": "docs/principles/GP1-GP10-index.md",
-              "line": 16,
-              "pattern": "ethical",
-              "snippet": "| GP6 | Outcome Honesty | Tidak mempresentasikan sinyal sebagai ranking / kualitas; menghindari misframing performa. | Ethical Framing | §14 Fairness Narrative, §30 Equity UI | No “top”, disclaimers R"
-            },
-            {
-              "changed": false,
-              "domain": "principles",
-              "file": "docs/principles/GP1-GP10-index.md",
-              "line": 17,
-              "pattern": "ethic",
-              "snippet": "| GP7 | Anti-Hype & Plain Language | Bahasa pemasaran berlebihan & ambigu (ranking, “revolusioner”) diblok lint demi kejelasan & menghindari overclaim. | Copy Discipline | §35 Ethical Content, Disclai"
-            },
-            {
-              "changed": false,
-              "domain": "principles",
-              "file": "docs/principles/GP1-GP10-index.md",
-              "line": 17,
-              "pattern": "ethical",
-              "snippet": "| GP7 | Anti-Hype & Plain Language | Bahasa pemasaran berlebihan & ambigu (ranking, “revolusioner”) diblok lint demi kejelasan & menghindari overclaim. | Copy Discipline | §35 Ethical Content, Disclai"
-            },
-            {
-              "changed": false,
-              "domain": "onboarding",
-              "file": "docs/onboarding/agent-role-policy-v1.md",
-              "line": 166,
-              "pattern": "bias",
-              "snippet": "| GP3 Fairness | Parameter only via DEC; prevents silent bias shifts |"
             },
             {
               "changed": false,
               "domain": "other",
-              "file": "docs/master-spec/master-spec-v2.0.md",
+              "file": "docs\\principles\\GP1-GP10-index.md",
+              "line": 15,
+              "pattern": "ethical",
+              "snippet": "| GP5 | Transparency | Definisi metrik, disclaimers, metodologi (fairness/hysteresis) dapat diinspeksi publik tanpa dark logic. | Public Clarity | §13 Hero, §35 Ethical Content, Methodology Fragments "
+            },
+            {
+              "changed": false,
+              "domain": "other",
+              "file": "docs\\principles\\GP1-GP10-index.md",
+              "line": 16,
+              "pattern": "ethic",
+              "snippet": "| GP6 | Outcome Honesty | Tidak mempresentasikan sinyal sebagai ranking / kualitas; menghindari misframing performa. | Ethical Framing | §14 Fairness Narrative, §30 Equity UI | No “top”, disclaimers R"
+            },
+            {
+              "changed": false,
+              "domain": "other",
+              "file": "docs\\principles\\GP1-GP10-index.md",
+              "line": 16,
+              "pattern": "ethical",
+              "snippet": "| GP6 | Outcome Honesty | Tidak mempresentasikan sinyal sebagai ranking / kualitas; menghindari misframing performa. | Ethical Framing | §14 Fairness Narrative, §30 Equity UI | No “top”, disclaimers R"
+            },
+            {
+              "changed": false,
+              "domain": "other",
+              "file": "docs\\principles\\GP1-GP10-index.md",
+              "line": 17,
+              "pattern": "ethic",
+              "snippet": "| GP7 | Anti-Hype & Plain Language | Bahasa pemasaran berlebihan & ambigu (ranking, “revolusioner”) diblok lint demi kejelasan & menghindari overclaim. | Copy Discipline | §35 Ethical Content, Disclai"
+            },
+            {
+              "changed": false,
+              "domain": "other",
+              "file": "docs\\principles\\GP1-GP10-index.md",
+              "line": 17,
+              "pattern": "ethical",
+              "snippet": "| GP7 | Anti-Hype & Plain Language | Bahasa pemasaran berlebihan & ambigu (ranking, “revolusioner”) diblok lint demi kejelasan & menghindari overclaim. | Copy Discipline | §35 Ethical Content, Disclai"
+            },
+            {
+              "changed": false,
+              "domain": "other",
+              "file": "docs\\master-spec\\master-spec-v2.0.md",
               "line": 44,
               "pattern": "ethic",
+              "snippet": "§35 Ethical & Copy Guidelines (Disclaimers, Anti-Hype – GP5, GP6, GP7)"
+            },
+            {
+              "changed": false,
+              "domain": "other",
+              "file": "docs\\master-spec\\master-spec-v2.0.md",
+              "line": 44,
+              "pattern": "ethical",
               "snippet": "§35 Ethical & Copy Guidelines (Disclaimers, Anti-Hype – GP5, GP6, GP7)"
             }
           ],
@@ -3000,23 +2938,23 @@
           ]
         },
         "freshness": {
-          "age_hours": 10.538041111111111,
-          "last_rotated_utc": "2025-08-16T09:28:46.064Z",
+          "age_hours": 2.4115736111111112,
+          "last_rotated_utc": "2025-08-17T08:48:00.682Z",
           "ok": true
         },
         "retention": {
           "cap": 14,
-          "length": 3,
+          "length": 4,
           "ok": true
         }
       },
       "config_path": "tools/config/privacy-policy.json",
       "status": "ok",
-      "ts": "2025-08-16T20:01:03.012Z",
+      "ts": "2025-08-17T11:12:42.347Z",
       "violations": []
     },
     "securitySmoke": {
-      "files_scanned": 117,
+      "files_scanned": 120,
       "summary": {
         "by_severity": {
           "HIGH": 0,
@@ -3025,7 +2963,7 @@
         },
         "total_violations": 0
       },
-      "timestamp": "2025-08-16T20:01:02.268Z",
+      "timestamp": "2025-08-17T11:12:41.398Z",
       "violations": []
     },
     "specHash": {
@@ -3038,7 +2976,7 @@
         "updated_count": 0,
         "violation_count": 0
       },
-      "timestamp_utc": "2025-08-16T20:01:01Z",
+      "timestamp_utc": "2025-08-17T11:12:40Z",
       "unchanged": [
         "docs/roadmap/roadmap-master-v1.md",
         "docs/governance/signature-pipeline-plan-v1.md",
@@ -3103,492 +3041,502 @@
       "adoptionPercent": 100,
       "files": [
         {
-          "file": "docs/verify-cli.md",
+          "file": "docs\\verify-cli.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/ux/README.md",
+          "file": "docs\\agent-context-pack.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/trust/trust-page.md",
+          "file": "docs\\ux\\README.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/trust/trust-hysteresis.md",
+          "file": "docs\\trust\\trust-page.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/tests/hysteresis-test-plan-v1.md",
+          "file": "docs\\trust\\trust-hysteresis.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/transparency/methodology-snippet-h0.md",
+          "file": "docs\\support\\README.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/transparency/changelog-excerpt-phase1.5.md",
+          "file": "docs\\transparency\\methodology-snippet-h0.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/support/README.md",
+          "file": "docs\\transparency\\changelog-excerpt-phase1.5.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/status/progress-recap-wave0-completion-2025-08-13T0819Z.md",
+          "file": "docs\\tests\\hysteresis-test-plan-v1.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/status/progress-recap-latest-2025-08-12T035901Z.md",
+          "file": "docs\\status\\README-h0-completion.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/status/README-h0-completion.md",
+          "file": "docs\\status\\progress-recap-wave0-completion-2025-08-13T0819Z.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/status/GATE-1-CHECKLIST.md",
+          "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/security/README.md",
+          "file": "docs\\status\\GATE-1-CHECKLIST.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/schemas/README.md",
+          "file": "docs\\security\\README.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/roadmap/roadmap-master-v1.md",
+          "file": "docs\\schemas\\README.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/release/README.md",
+          "file": "docs\\roadmap\\roadmap-master-v1.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/public/README.md",
+          "file": "docs\\release\\README.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/public/ABOUT-PORTAL-PANTI.md",
+          "file": "docs\\public\\README.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/privacy/pii-scan-fixture.md",
+          "file": "docs\\public\\ABOUT-PORTAL-PANTI.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/privacy/pii-rotation-policy.md",
+          "file": "docs\\privacy\\README.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/privacy/pii-pattern-library-v1.md",
+          "file": "docs\\privacy\\pii-scan-fixture.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/privacy/README.md",
+          "file": "docs\\privacy\\pii-rotation-policy.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/principles/GP1-GP10-index.md",
+          "file": "docs\\privacy\\pii-pattern-library-v1.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/policies/README.md",
+          "file": "docs\\principles\\GP1-GP10-index.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/playbooks/README.md",
+          "file": "docs\\policies\\README.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/onboarding/agent-role-policy-v1.md",
+          "file": "docs\\playbooks\\README.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/onboarding/agent-knowledge-baseline-2025-08-14.md",
+          "file": "docs\\onboarding\\agent-role-policy-v1.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/onboarding/agent-guardrails-v1.md",
+          "file": "docs\\onboarding\\agent-knowledge-baseline-2025-08-14.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/onboarding/agent-bootstrap-manifest.md",
+          "file": "docs\\onboarding\\agent-guardrails-v1.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/master-spec-deltas/delta-master-spec-v2-DEC-20250813-06-event-schema-alignment.md",
+          "file": "docs\\onboarding\\agent-bootstrap-manifest.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/master-spec-deltas/delta-master-spec-v2-DEC-20250812-02.md",
+          "file": "docs\\master-spec-deltas\\delta-master-spec-v2-DEC-20250813-06-event-schema-alignment.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/master-spec/master-spec-v2.0.md",
+          "file": "docs\\master-spec-deltas\\delta-master-spec-v2-DEC-20250812-02.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/legal/README.md",
+          "file": "docs\\master-spec\\master-spec-v2.0.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/integrity/verify-cli-doc-draft.md",
+          "file": "docs\\legal\\README.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/integrity/hash-excerpt-module.md",
+          "file": "docs\\integrity\\verify-cli-doc-draft.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/integrity/gating-policy-annotations.md",
+          "file": "docs\\integrity\\hash-excerpt-module.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/integrity/evidence-minimum-phase1.5-v1.md",
+          "file": "docs\\integrity\\gating-policy-annotations.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/integrity/credential-schema-final-v1.md",
+          "file": "docs\\integrity\\evidence-minimum-phase1.5-v1.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/integrity/api-verification-docs.md",
+          "file": "docs\\integrity\\credential-schema-final-v1.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/toolchain-overview.md",
+          "file": "docs\\integrity\\api-verification-docs.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/todo-post-DEC-20250812-02.md",
+          "file": "docs\\feedback\\feedback.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/terminology.md",
+          "file": "docs\\governance\\toolchain-overview.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/terminology-banner.md",
+          "file": "docs\\governance\\todo-post-DEC-20250812-02.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/statement-orientasi-portal-panti.md",
+          "file": "docs\\governance\\terminology.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/signature-pipeline-plan-v1.md",
+          "file": "docs\\governance\\terminology-banner.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/policy-index-v1.md",
+          "file": "docs\\governance\\statement-orientasi-portal-panti.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/phase-tracker-ops.md",
+          "file": "docs\\governance\\signature-pipeline-plan-v1.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/lint-principles-reference-spec-v1.md",
+          "file": "docs\\governance\\README-decision-log-process.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/handbook-index.md",
+          "file": "docs\\governance\\policy-index-v1.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/disclaimers-lint-spec-v1.md",
+          "file": "docs\\governance\\phase-tracker-ops.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/README-decision-log-process.md",
+          "file": "docs\\governance\\lint-principles-reference-spec-v1.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/feedback/feedback.md",
+          "file": "docs\\governance\\handbook-index.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/faq/privacy-faq-abridged.md",
+          "file": "docs\\governance\\disclaimers-lint-spec-v1.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/faq/faq-fairness-hysteresis-update.md",
+          "file": "docs\\governance\\allowlist-management-sop.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/fairness/hysteresis-state-machine-transitions.md",
+          "file": "docs\\faq\\privacy-faq-abridged.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/fairness/hysteresis-public-methodology-fragment-v1.md",
+          "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/fairness/equity-under-served-section.md",
+          "file": "docs\\fairness\\hysteresis-state-machine-transitions.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/fairness/equity-snapshot-pseudocode.md",
+          "file": "docs\\fairness\\hysteresis-public-methodology-fragment-v1.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/fairness/equity-page.md",
+          "file": "docs\\fairness\\equity-under-served-section.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/data/README.md",
+          "file": "docs\\fairness\\equity-snapshot-pseudocode.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/audit/00-rubrik-audit-portal-panti.md",
+          "file": "docs\\fairness\\equity-page.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/archive/ux_public-multipage-experience-master-spec-v2.md",
+          "file": "docs\\audit\\00-rubrik-audit-portal-panti.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/archive/fairness_equity-hysteresis-options-v1.md",
+          "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/api/README.md",
+          "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/analytics/media-digest.md",
+          "file": "docs\\api\\README.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/analytics/event-schema-canonical-v1.md",
+          "file": "docs\\analytics\\media-digest.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/analytics/dashboard-widgets-hysteresis-initial.md",
+          "file": "docs\\analytics\\event-schema-canonical-v1.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/produk/portal-panti/02-model-data-minimal-aman.md",
+          "file": "docs\\analytics\\dashboard-widgets-hysteresis-initial.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/produk/portal-panti/01-ruang-lingkup-produk.md",
+          "file": "docs\\data\\README.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/produk/portal-panti/00-orientasi-komprehensif.md",
+          "file": "docs\\produk\\portal-panti\\02-model-data-minimal-aman.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/privacy/corpus/positive-highrisk.md",
+          "file": "docs\\produk\\portal-panti\\01-ruang-lingkup-produk.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/privacy/corpus/negative-decoy.md",
+          "file": "docs\\produk\\portal-panti\\00-orientasi-komprehensif.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/trace/archive-trace-index-v1.md",
+          "file": "docs\\privacy\\corpus\\positive-highrisk.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/dec/DEC-style-guide-v3.md",
+          "file": "docs\\privacy\\corpus\\negative-decoy.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/dec/DEC-style-guide-v2.md",
+          "file": "docs\\governance\\trace\\archive-trace-index-v1.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/dec/DEC-style-guide-v1.md",
+          "file": "docs\\governance\\audit\\README-audit-process.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/dec/DEC-20250816-01-governance-pipeline-security-enhancement.md",
+          "file": "docs\\governance\\audit\\pr-template-line-audit-2025-08-12T0509Z.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/dec/DEC-20250815-03-trace-index-update.md",
+          "file": "docs\\governance\\dec\\DEC-style-guide-v3.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/dec/DEC-20250815-02-hysteresis-config-update.md",
+          "file": "docs\\governance\\dec\\DEC-style-guide-v2.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/dec/DEC-20250815-01-governed-editorial-maintenance.md",
+          "file": "docs\\governance\\dec\\DEC-style-guide-v1.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/dec/DEC-20250813-10-feedback-categories-canonical.md",
+          "file": "docs\\governance\\dec\\DEC-20250816-01-governance-pipeline-security-enhancement.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/dec/DEC-20250813-09-equity-index-rounding.md",
+          "file": "docs\\governance\\dec\\DEC-20250815-03-trace-index-update.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/dec/DEC-20250813-08-evidence-hash-display-length.md",
+          "file": "docs\\governance\\dec\\DEC-20250815-02-hysteresis-config-update.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/dec/DEC-20250813-07-hype-threshold-transition.md",
+          "file": "docs\\governance\\dec\\DEC-20250815-01-governed-editorial-maintenance.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md",
+          "file": "docs\\governance\\dec\\DEC-20250813-10-feedback-categories-canonical.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/dec/DEC-20250813-05-gating-policy-wave1-adoption.md",
+          "file": "docs\\governance\\dec\\DEC-20250813-09-equity-index-rounding.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/dec/DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
+          "file": "docs\\governance\\dec\\DEC-20250813-08-evidence-hash-display-length.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/dec/DEC-20250813-03-disclaimers-presence-enforcement.md",
+          "file": "docs\\governance\\dec\\DEC-20250813-07-hype-threshold-transition.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/dec/DEC-20250813-02-signature-pipeline-adoption.md",
+          "file": "docs\\governance\\dec\\DEC-20250813-06-consolidated-governed-edits.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/dec/DEC-20250813-01-known-debt-register.md",
+          "file": "docs\\governance\\dec\\DEC-20250813-05-gating-policy-wave1-adoption.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/dec/DEC-20250812-04-governance-baseline-thresholds.md",
+          "file": "docs\\governance\\dec\\DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/dec/DEC-20250812-03-principles-reference-activation.md",
+          "file": "docs\\governance\\dec\\DEC-20250813-03-disclaimers-presence-enforcement.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md",
+          "file": "docs\\governance\\dec\\DEC-20250813-02-signature-pipeline-adoption.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
+          "file": "docs\\governance\\dec\\DEC-20250813-01-known-debt-register.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/audit/README-audit-process.md",
+          "file": "docs\\governance\\dec\\DEC-20250812-04-governance-baseline-thresholds.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/governance/dec/templates/DEC-template-v1.md",
+          "file": "docs\\governance\\dec\\DEC-20250812-03-principles-reference-activation.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs\\governance\\dec\\DEC-20250812-02-hysteresis-adoption.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs\\governance\\dec\\templates\\DEC-template-v1.md",
           "newCount": 0,
           "oldCount": 0
         }
       ],
-      "generated_utc": "2025-08-16T20:01:04.815Z",
+      "generated_utc": "2025-08-17T11:12:46.739Z",
       "new_total": 0,
       "old_total": 0,
       "suggestions": [
         {
-          "file": "docs/trust/trust-hysteresis.md",
+          "file": "docs\\trust\\trust-hysteresis.md",
           "suggestions": [
             {
               "count": 1,
@@ -3598,7 +3546,7 @@
           ]
         },
         {
-          "file": "docs/transparency/methodology-snippet-h0.md",
+          "file": "docs\\transparency\\methodology-snippet-h0.md",
           "suggestions": [
             {
               "count": 2,
@@ -3608,7 +3556,7 @@
           ]
         },
         {
-          "file": "docs/status/progress-recap-latest-2025-08-12T035901Z.md",
+          "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
           "suggestions": [
             {
               "count": 1,
@@ -3633,7 +3581,7 @@
           ]
         },
         {
-          "file": "docs/roadmap/roadmap-master-v1.md",
+          "file": "docs\\roadmap\\roadmap-master-v1.md",
           "suggestions": [
             {
               "count": 4,
@@ -3663,7 +3611,7 @@
           ]
         },
         {
-          "file": "docs/public/ABOUT-PORTAL-PANTI.md",
+          "file": "docs\\public\\ABOUT-PORTAL-PANTI.md",
           "suggestions": [
             {
               "count": 1,
@@ -3673,7 +3621,7 @@
           ]
         },
         {
-          "file": "docs/privacy/pii-scan-fixture.md",
+          "file": "docs\\privacy\\pii-scan-fixture.md",
           "suggestions": [
             {
               "count": 1,
@@ -3683,7 +3631,7 @@
           ]
         },
         {
-          "file": "docs/privacy/pii-pattern-library-v1.md",
+          "file": "docs\\privacy\\pii-pattern-library-v1.md",
           "suggestions": [
             {
               "count": 3,
@@ -3703,7 +3651,7 @@
           ]
         },
         {
-          "file": "docs/principles/GP1-GP10-index.md",
+          "file": "docs\\principles\\GP1-GP10-index.md",
           "suggestions": [
             {
               "count": 4,
@@ -3728,7 +3676,7 @@
           ]
         },
         {
-          "file": "docs/policies/README.md",
+          "file": "docs\\policies\\README.md",
           "suggestions": [
             {
               "count": 1,
@@ -3738,7 +3686,7 @@
           ]
         },
         {
-          "file": "docs/onboarding/agent-role-policy-v1.md",
+          "file": "docs\\onboarding\\agent-role-policy-v1.md",
           "suggestions": [
             {
               "count": 4,
@@ -3753,7 +3701,7 @@
           ]
         },
         {
-          "file": "docs/onboarding/agent-knowledge-baseline-2025-08-14.md",
+          "file": "docs\\onboarding\\agent-knowledge-baseline-2025-08-14.md",
           "suggestions": [
             {
               "count": 2,
@@ -3773,7 +3721,7 @@
           ]
         },
         {
-          "file": "docs/onboarding/agent-guardrails-v1.md",
+          "file": "docs\\onboarding\\agent-guardrails-v1.md",
           "suggestions": [
             {
               "count": 2,
@@ -3788,7 +3736,7 @@
           ]
         },
         {
-          "file": "docs/onboarding/agent-bootstrap-manifest.md",
+          "file": "docs\\onboarding\\agent-bootstrap-manifest.md",
           "suggestions": [
             {
               "count": 2,
@@ -3823,7 +3771,7 @@
           ]
         },
         {
-          "file": "docs/master-spec-deltas/delta-master-spec-v2-DEC-20250813-06-event-schema-alignment.md",
+          "file": "docs\\master-spec-deltas\\delta-master-spec-v2-DEC-20250813-06-event-schema-alignment.md",
           "suggestions": [
             {
               "count": 1,
@@ -3838,7 +3786,7 @@
           ]
         },
         {
-          "file": "docs/master-spec-deltas/delta-master-spec-v2-DEC-20250812-02.md",
+          "file": "docs\\master-spec-deltas\\delta-master-spec-v2-DEC-20250812-02.md",
           "suggestions": [
             {
               "count": 3,
@@ -3848,7 +3796,7 @@
           ]
         },
         {
-          "file": "docs/master-spec/master-spec-v2.0.md",
+          "file": "docs\\master-spec\\master-spec-v2.0.md",
           "suggestions": [
             {
               "count": 3,
@@ -3878,7 +3826,7 @@
           ]
         },
         {
-          "file": "docs/integrity/evidence-minimum-phase1.5-v1.md",
+          "file": "docs\\integrity\\evidence-minimum-phase1.5-v1.md",
           "suggestions": [
             {
               "count": 1,
@@ -3888,7 +3836,7 @@
           ]
         },
         {
-          "file": "docs/integrity/credential-schema-final-v1.md",
+          "file": "docs\\integrity\\credential-schema-final-v1.md",
           "suggestions": [
             {
               "count": 15,
@@ -3918,7 +3866,7 @@
           ]
         },
         {
-          "file": "docs/governance/todo-post-DEC-20250812-02.md",
+          "file": "docs\\governance\\todo-post-DEC-20250812-02.md",
           "suggestions": [
             {
               "count": 1,
@@ -3928,7 +3876,7 @@
           ]
         },
         {
-          "file": "docs/governance/statement-orientasi-portal-panti.md",
+          "file": "docs\\governance\\statement-orientasi-portal-panti.md",
           "suggestions": [
             {
               "count": 1,
@@ -3948,7 +3896,7 @@
           ]
         },
         {
-          "file": "docs/governance/lint-principles-reference-spec-v1.md",
+          "file": "docs\\governance\\lint-principles-reference-spec-v1.md",
           "suggestions": [
             {
               "count": 4,
@@ -3978,7 +3926,7 @@
           ]
         },
         {
-          "file": "docs/governance/disclaimers-lint-spec-v1.md",
+          "file": "docs\\governance\\disclaimers-lint-spec-v1.md",
           "suggestions": [
             {
               "count": 13,
@@ -4013,7 +3961,7 @@
           ]
         },
         {
-          "file": "docs/faq/privacy-faq-abridged.md",
+          "file": "docs\\faq\\privacy-faq-abridged.md",
           "suggestions": [
             {
               "count": 1,
@@ -4023,7 +3971,7 @@
           ]
         },
         {
-          "file": "docs/faq/faq-fairness-hysteresis-update.md",
+          "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
           "suggestions": [
             {
               "count": 3,
@@ -4033,7 +3981,7 @@
           ]
         },
         {
-          "file": "docs/fairness/hysteresis-public-methodology-fragment-v1.md",
+          "file": "docs\\fairness\\hysteresis-public-methodology-fragment-v1.md",
           "suggestions": [
             {
               "count": 2,
@@ -4043,7 +3991,7 @@
           ]
         },
         {
-          "file": "docs/fairness/equity-under-served-section.md",
+          "file": "docs\\fairness\\equity-under-served-section.md",
           "suggestions": [
             {
               "count": 1,
@@ -4053,7 +4001,7 @@
           ]
         },
         {
-          "file": "docs/fairness/equity-page.md",
+          "file": "docs\\fairness\\equity-page.md",
           "suggestions": [
             {
               "count": 1,
@@ -4063,7 +4011,7 @@
           ]
         },
         {
-          "file": "docs/audit/00-rubrik-audit-portal-panti.md",
+          "file": "docs\\audit\\00-rubrik-audit-portal-panti.md",
           "suggestions": [
             {
               "count": 2,
@@ -4078,7 +4026,7 @@
           ]
         },
         {
-          "file": "docs/archive/ux_public-multipage-experience-master-spec-v2.md",
+          "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
           "suggestions": [
             {
               "count": 14,
@@ -4103,7 +4051,7 @@
           ]
         },
         {
-          "file": "docs/archive/fairness_equity-hysteresis-options-v1.md",
+          "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
           "suggestions": [
             {
               "count": 6,
@@ -4123,7 +4071,7 @@
           ]
         },
         {
-          "file": "docs/analytics/media-digest.md",
+          "file": "docs\\analytics\\media-digest.md",
           "suggestions": [
             {
               "count": 1,
@@ -4133,7 +4081,7 @@
           ]
         },
         {
-          "file": "docs/analytics/event-schema-canonical-v1.md",
+          "file": "docs\\analytics\\event-schema-canonical-v1.md",
           "suggestions": [
             {
               "count": 6,
@@ -4163,7 +4111,7 @@
           ]
         },
         {
-          "file": "docs/produk/portal-panti/01-ruang-lingkup-produk.md",
+          "file": "docs\\produk\\portal-panti\\01-ruang-lingkup-produk.md",
           "suggestions": [
             {
               "count": 1,
@@ -4178,7 +4126,7 @@
           ]
         },
         {
-          "file": "docs/produk/portal-panti/00-orientasi-komprehensif.md",
+          "file": "docs\\produk\\portal-panti\\00-orientasi-komprehensif.md",
           "suggestions": [
             {
               "count": 1,
@@ -4188,7 +4136,7 @@
           ]
         },
         {
-          "file": "docs/privacy/corpus/positive-highrisk.md",
+          "file": "docs\\privacy\\corpus\\positive-highrisk.md",
           "suggestions": [
             {
               "count": 1,
@@ -4198,7 +4146,7 @@
           ]
         },
         {
-          "file": "docs/privacy/corpus/negative-decoy.md",
+          "file": "docs\\privacy\\corpus\\negative-decoy.md",
           "suggestions": [
             {
               "count": 1,
@@ -4208,7 +4156,7 @@
           ]
         },
         {
-          "file": "docs/governance/trace/archive-trace-index-v1.md",
+          "file": "docs\\governance\\trace\\archive-trace-index-v1.md",
           "suggestions": [
             {
               "count": 1,
@@ -4223,7 +4171,17 @@
           ]
         },
         {
-          "file": "docs/governance/dec/DEC-20250816-01-governance-pipeline-security-enhancement.md",
+          "file": "docs\\governance\\audit\\pr-template-line-audit-2025-08-12T0509Z.md",
+          "suggestions": [
+            {
+              "count": 1,
+              "new": "pengguna",
+              "old": "user"
+            }
+          ]
+        },
+        {
+          "file": "docs\\governance\\dec\\DEC-20250816-01-governance-pipeline-security-enhancement.md",
           "suggestions": [
             {
               "count": 2,
@@ -4233,7 +4191,7 @@
           ]
         },
         {
-          "file": "docs/governance/dec/DEC-20250815-01-governed-editorial-maintenance.md",
+          "file": "docs\\governance\\dec\\DEC-20250815-01-governed-editorial-maintenance.md",
           "suggestions": [
             {
               "count": 2,
@@ -4243,7 +4201,7 @@
           ]
         },
         {
-          "file": "docs/governance/dec/DEC-20250813-10-feedback-categories-canonical.md",
+          "file": "docs\\governance\\dec\\DEC-20250813-10-feedback-categories-canonical.md",
           "suggestions": [
             {
               "count": 1,
@@ -4258,7 +4216,7 @@
           ]
         },
         {
-          "file": "docs/governance/dec/DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
+          "file": "docs\\governance\\dec\\DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
           "suggestions": [
             {
               "count": 3,
@@ -4273,7 +4231,7 @@
           ]
         },
         {
-          "file": "docs/governance/dec/DEC-20250813-03-disclaimers-presence-enforcement.md",
+          "file": "docs\\governance\\dec\\DEC-20250813-03-disclaimers-presence-enforcement.md",
           "suggestions": [
             {
               "count": 1,
@@ -4283,7 +4241,7 @@
           ]
         },
         {
-          "file": "docs/governance/dec/DEC-20250813-01-known-debt-register.md",
+          "file": "docs\\governance\\dec\\DEC-20250813-01-known-debt-register.md",
           "suggestions": [
             {
               "count": 1,
@@ -4293,7 +4251,7 @@
           ]
         },
         {
-          "file": "docs/governance/dec/DEC-20250812-04-governance-baseline-thresholds.md",
+          "file": "docs\\governance\\dec\\DEC-20250812-04-governance-baseline-thresholds.md",
           "suggestions": [
             {
               "count": 4,
@@ -4303,7 +4261,7 @@
           ]
         },
         {
-          "file": "docs/governance/dec/DEC-20250812-03-principles-reference-activation.md",
+          "file": "docs\\governance\\dec\\DEC-20250812-03-principles-reference-activation.md",
           "suggestions": [
             {
               "count": 1,
@@ -4313,7 +4271,7 @@
           ]
         },
         {
-          "file": "docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md",
+          "file": "docs\\governance\\dec\\DEC-20250812-02-hysteresis-adoption.md",
           "suggestions": [
             {
               "count": 2,
@@ -4326,19 +4284,618 @@
               "old": "master"
             }
           ]
-        },
-        {
-          "file": "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
-          "suggestions": [
-            {
-              "count": 1,
-              "new": "pengguna",
-              "old": "user"
-            }
-          ]
         }
       ],
       "version": "1.0.0"
+    },
+    "perf": {
+      "url": "http://127.0.0.1:4620/",
+      "budgets": {
+        "perf_score_min": 0.6,
+        "lcp_ms": 2500,
+        "tbt_ms": 300,
+        "cls_max": 0.8
+      },
+      "actual": {
+        "perf_score": 1,
+        "lcp_ms": 912.153,
+        "tbt_ms": 0,
+        "cls": 0
+      },
+      "categories": {
+        "performance": {
+          "title": "Performance",
+          "supportedModes": [
+            "navigation",
+            "timespan",
+            "snapshot"
+          ],
+          "auditRefs": [
+            {
+              "id": "first-contentful-paint",
+              "weight": 10,
+              "group": "metrics",
+              "acronym": "FCP"
+            },
+            {
+              "id": "largest-contentful-paint",
+              "weight": 25,
+              "group": "metrics",
+              "acronym": "LCP"
+            },
+            {
+              "id": "total-blocking-time",
+              "weight": 30,
+              "group": "metrics",
+              "acronym": "TBT"
+            },
+            {
+              "id": "cumulative-layout-shift",
+              "weight": 25,
+              "group": "metrics",
+              "acronym": "CLS"
+            },
+            {
+              "id": "speed-index",
+              "weight": 10,
+              "group": "metrics",
+              "acronym": "SI"
+            },
+            {
+              "id": "cache-insight",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "cls-culprits-insight",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "document-latency-insight",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "dom-size-insight",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "duplicated-javascript-insight",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "font-display-insight",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "forced-reflow-insight",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "image-delivery-insight",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "inp-breakdown-insight",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "lcp-breakdown-insight",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "lcp-discovery-insight",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "legacy-javascript-insight",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "modern-http-insight",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "network-dependency-tree-insight",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "render-blocking-insight",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "third-parties-insight",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "viewport-insight",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "interactive",
+              "weight": 0,
+              "group": "hidden",
+              "acronym": "TTI"
+            },
+            {
+              "id": "max-potential-fid",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "first-meaningful-paint",
+              "weight": 0,
+              "acronym": "FMP",
+              "group": "hidden"
+            },
+            {
+              "id": "render-blocking-resources",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "uses-responsive-images",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "offscreen-images",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "unminified-css",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "unminified-javascript",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "unused-css-rules",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "unused-javascript",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "uses-optimized-images",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "modern-image-formats",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "uses-text-compression",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "uses-rel-preconnect",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "server-response-time",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "redirects",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "uses-http2",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "efficient-animated-content",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "duplicated-javascript",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "legacy-javascript",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "prioritize-lcp-image",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "total-byte-weight",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "uses-long-cache-ttl",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "dom-size",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "critical-request-chains",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "user-timings",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "bootup-time",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "mainthread-work-breakdown",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "font-display",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "third-party-summary",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "third-party-facades",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "largest-contentful-paint-element",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "lcp-lazy-loaded",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "layout-shifts",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "uses-passive-event-listeners",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "no-document-write",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "long-tasks",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "non-composited-animations",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "unsized-images",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "viewport",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "bf-cache",
+              "weight": 0,
+              "group": "diagnostics"
+            },
+            {
+              "id": "network-requests",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "network-rtt",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "network-server-latency",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "main-thread-tasks",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "diagnostics",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "metrics",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "screenshot-thumbnails",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "final-screenshot",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "script-treemap-data",
+              "weight": 0,
+              "group": "hidden"
+            },
+            {
+              "id": "resource-summary",
+              "weight": 0,
+              "group": "hidden"
+            }
+          ],
+          "id": "performance",
+          "score": 1
+        },
+        "best-practices": {
+          "title": "Best Practices",
+          "supportedModes": [
+            "navigation",
+            "timespan",
+            "snapshot"
+          ],
+          "auditRefs": [
+            {
+              "id": "is-on-https",
+              "weight": 5,
+              "group": "best-practices-trust-safety"
+            },
+            {
+              "id": "redirects-http",
+              "weight": 0,
+              "group": "best-practices-trust-safety"
+            },
+            {
+              "id": "geolocation-on-start",
+              "weight": 1,
+              "group": "best-practices-trust-safety"
+            },
+            {
+              "id": "notification-on-start",
+              "weight": 1,
+              "group": "best-practices-trust-safety"
+            },
+            {
+              "id": "csp-xss",
+              "weight": 0,
+              "group": "best-practices-trust-safety"
+            },
+            {
+              "id": "has-hsts",
+              "weight": 0,
+              "group": "best-practices-trust-safety"
+            },
+            {
+              "id": "origin-isolation",
+              "weight": 0,
+              "group": "best-practices-trust-safety"
+            },
+            {
+              "id": "clickjacking-mitigation",
+              "weight": 0,
+              "group": "best-practices-trust-safety"
+            },
+            {
+              "id": "trusted-types-xss",
+              "weight": 0,
+              "group": "best-practices-trust-safety"
+            },
+            {
+              "id": "paste-preventing-inputs",
+              "weight": 3,
+              "group": "best-practices-ux"
+            },
+            {
+              "id": "image-aspect-ratio",
+              "weight": 1,
+              "group": "best-practices-ux"
+            },
+            {
+              "id": "image-size-responsive",
+              "weight": 1,
+              "group": "best-practices-ux"
+            },
+            {
+              "id": "viewport",
+              "weight": 1,
+              "group": "best-practices-ux"
+            },
+            {
+              "id": "font-size",
+              "weight": 1,
+              "group": "best-practices-ux"
+            },
+            {
+              "id": "doctype",
+              "weight": 1,
+              "group": "best-practices-browser-compat"
+            },
+            {
+              "id": "charset",
+              "weight": 1,
+              "group": "best-practices-browser-compat"
+            },
+            {
+              "id": "js-libraries",
+              "weight": 0,
+              "group": "best-practices-general"
+            },
+            {
+              "id": "deprecations",
+              "weight": 5,
+              "group": "best-practices-general"
+            },
+            {
+              "id": "third-party-cookies",
+              "weight": 5,
+              "group": "best-practices-general"
+            },
+            {
+              "id": "errors-in-console",
+              "weight": 1,
+              "group": "best-practices-general"
+            },
+            {
+              "id": "valid-source-maps",
+              "weight": 0,
+              "group": "best-practices-general"
+            },
+            {
+              "id": "inspector-issues",
+              "weight": 1,
+              "group": "best-practices-general"
+            }
+          ],
+          "id": "best-practices",
+          "score": 0.96
+        },
+        "seo": {
+          "title": "SEO",
+          "description": "These checks ensure that your page is following basic search engine optimization advice. There are many additional factors Lighthouse does not score here that may affect your search ranking, including performance on [Core Web Vitals](https://web.dev/explore/vitals). [Learn more about Google Search Essentials](https://support.google.com/webmasters/answer/35769).",
+          "manualDescription": "Run these additional validators on your site to check additional SEO best practices.",
+          "supportedModes": [
+            "navigation",
+            "snapshot"
+          ],
+          "auditRefs": [
+            {
+              "id": "is-crawlable",
+              "weight": 4.043478260869565,
+              "group": "seo-crawl"
+            },
+            {
+              "id": "document-title",
+              "weight": 1,
+              "group": "seo-content"
+            },
+            {
+              "id": "meta-description",
+              "weight": 1,
+              "group": "seo-content"
+            },
+            {
+              "id": "http-status-code",
+              "weight": 1,
+              "group": "seo-crawl"
+            },
+            {
+              "id": "link-text",
+              "weight": 1,
+              "group": "seo-content"
+            },
+            {
+              "id": "crawlable-anchors",
+              "weight": 1,
+              "group": "seo-crawl"
+            },
+            {
+              "id": "robots-txt",
+              "weight": 0,
+              "group": "seo-crawl"
+            },
+            {
+              "id": "image-alt",
+              "weight": 0,
+              "group": "seo-content"
+            },
+            {
+              "id": "hreflang",
+              "weight": 1,
+              "group": "seo-content"
+            },
+            {
+              "id": "canonical",
+              "weight": 0,
+              "group": "seo-content"
+            },
+            {
+              "id": "structured-data",
+              "weight": 0
+            }
+          ],
+          "id": "seo",
+          "score": 0.9
+        }
+      }
+    },
+    "a11y": {
+      "url": "http://127.0.0.1:4620/",
+      "counts": {
+        "total": 1,
+        "serious": 0
+      },
+      "issues": [
+        {
+          "code": "WCAG2AA.Principle3.Guideline3_1.3_1_1.H57.2",
+          "type": "error",
+          "typeCode": 1,
+          "message": "The html element should have a lang or xml:lang attribute which describes the language of the document.",
+          "context": "<html><head><meta charset=\"utf-8\"><ti...</html>",
+          "selector": "html",
+          "runner": "htmlcs",
+          "runnerExtras": {}
+        }
+      ]
     }
   },
   "summary": {
@@ -4353,7 +4910,7 @@
     "policy_aggregation_violations": 0,
     "privacy_format_invalid_prev": 1,
     "privacy_freshness_ok": true,
-    "privacy_retention_len": 3,
+    "privacy_retention_len": 4,
     "privacy_retention_ok": true,
     "security_high_count": 0,
     "security_medium_count": 0,
@@ -4368,7 +4925,32 @@
     "terminology_adoption_percent": 100,
     "terminology_new_total": 0,
     "terminology_old_total": 0,
-    "total_param_checks": 15
+    "total_param_checks": 15,
+    "perf": {
+      "url": "http://127.0.0.1:4620/",
+      "actual": {
+        "perf_score": 1,
+        "lcp_ms": 912.153,
+        "tbt_ms": 0,
+        "cls": 0
+      },
+      "budgets": {
+        "perf_score_min": 0.6,
+        "lcp_ms": 2500,
+        "tbt_ms": 300,
+        "cls_max": 0.8
+      },
+      "pass": true,
+      "violations": []
+    },
+    "a11y": {
+      "url": "http://127.0.0.1:4620/",
+      "counts": {
+        "total": 1,
+        "serious": 0
+      },
+      "pass": true
+    }
   },
-  "timestamp": "2025-08-16T20:01:04.968Z"
+  "timestamp": "2025-08-17T11:12:46.912Z"
 }

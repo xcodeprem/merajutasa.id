@@ -1,16 +1,108 @@
 {
   "version": 1,
-  "generated_utc": "2025-08-17T11:10:44.969Z",
-  "changed_count": 2,
+  "generated_utc": "2025-08-17T11:12:46.299Z",
+  "changed_count": 38,
   "governed_impacted": [
-    "docs/integrity/verify-cli-doc-draft.md"
+    "docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md",
+    "docs/governance/dec/DEC-20250812-03-principles-reference-activation.md",
+    "docs/governance/dec/DEC-20250813-02-signature-pipeline-adoption.md",
+    "docs/governance/dec/DEC-20250813-03-disclaimers-presence-enforcement.md",
+    "docs/governance/dec/DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
+    "docs/governance/dec/DEC-20250813-05-gating-policy-wave1-adoption.md",
+    "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md",
+    "docs/governance/dec/DEC-20250813-07-hype-threshold-transition.md",
+    "docs/governance/dec/DEC-20250813-08-evidence-hash-display-length.md",
+    "docs/governance/dec/DEC-20250813-09-equity-index-rounding.md",
+    "docs/governance/dec/DEC-20250813-10-feedback-categories-canonical.md",
+    "docs/governance/dec/DEC-20250815-01-governed-editorial-maintenance.md"
   ],
-  "dec_files_changed": [],
-  "violations": [
+  "dec_files_changed": [
+    "docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md",
+    "docs/governance/dec/DEC-20250812-03-principles-reference-activation.md",
+    "docs/governance/dec/DEC-20250813-02-signature-pipeline-adoption.md",
+    "docs/governance/dec/DEC-20250813-03-disclaimers-presence-enforcement.md",
+    "docs/governance/dec/DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
+    "docs/governance/dec/DEC-20250813-05-gating-policy-wave1-adoption.md",
+    "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md",
+    "docs/governance/dec/DEC-20250813-07-hype-threshold-transition.md",
+    "docs/governance/dec/DEC-20250813-08-evidence-hash-display-length.md",
+    "docs/governance/dec/DEC-20250813-09-equity-index-rounding.md",
+    "docs/governance/dec/DEC-20250813-10-feedback-categories-canonical.md",
+    "docs/governance/dec/DEC-20250815-01-governed-editorial-maintenance.md"
+  ],
+  "violations": [],
+  "evidence": [
     {
-      "path": "docs/integrity/verify-cli-doc-draft.md",
-      "code": "GOVERNED_CHANGE_NO_DEC_REF"
+      "path": "docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md",
+      "referenced_in": [
+        "docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md"
+      ]
+    },
+    {
+      "path": "docs/governance/dec/DEC-20250812-03-principles-reference-activation.md",
+      "referenced_in": [
+        "docs/governance/dec/DEC-20250812-03-principles-reference-activation.md"
+      ]
+    },
+    {
+      "path": "docs/governance/dec/DEC-20250813-02-signature-pipeline-adoption.md",
+      "referenced_in": [
+        "docs/governance/dec/DEC-20250813-02-signature-pipeline-adoption.md"
+      ]
+    },
+    {
+      "path": "docs/governance/dec/DEC-20250813-03-disclaimers-presence-enforcement.md",
+      "referenced_in": [
+        "docs/governance/dec/DEC-20250813-03-disclaimers-presence-enforcement.md"
+      ]
+    },
+    {
+      "path": "docs/governance/dec/DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
+      "referenced_in": [
+        "docs/governance/dec/DEC-20250813-04-text-normalization-disclaimers-whitelist.md"
+      ]
+    },
+    {
+      "path": "docs/governance/dec/DEC-20250813-05-gating-policy-wave1-adoption.md",
+      "referenced_in": [
+        "docs/governance/dec/DEC-20250813-05-gating-policy-wave1-adoption.md"
+      ]
+    },
+    {
+      "path": "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md",
+      "referenced_in": [
+        "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md"
+      ]
+    },
+    {
+      "path": "docs/governance/dec/DEC-20250813-07-hype-threshold-transition.md",
+      "referenced_in": [
+        "docs/governance/dec/DEC-20250813-07-hype-threshold-transition.md"
+      ]
+    },
+    {
+      "path": "docs/governance/dec/DEC-20250813-08-evidence-hash-display-length.md",
+      "referenced_in": [
+        "docs/governance/dec/DEC-20250813-08-evidence-hash-display-length.md"
+      ]
+    },
+    {
+      "path": "docs/governance/dec/DEC-20250813-09-equity-index-rounding.md",
+      "referenced_in": [
+        "docs/governance/dec/DEC-20250813-09-equity-index-rounding.md"
+      ]
+    },
+    {
+      "path": "docs/governance/dec/DEC-20250813-10-feedback-categories-canonical.md",
+      "referenced_in": [
+        "docs/governance/dec/DEC-20250813-10-feedback-categories-canonical.md"
+      ]
+    },
+    {
+      "path": "docs/governance/dec/DEC-20250815-01-governed-editorial-maintenance.md",
+      "referenced_in": [
+        "docs/governance/dec/DEC-20250815-01-governed-editorial-maintenance.md"
+      ]
     }
-  ],
-  "evidence": []
+  ]
 }

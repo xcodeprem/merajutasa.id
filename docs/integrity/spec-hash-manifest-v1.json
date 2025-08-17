@@ -526,7 +526,7 @@
     {
       "path": "docs/integrity/verify-cli-doc-draft.md",
       "version": "0.1.0",
-      "dec_ref": null,
+  "dec_ref": "DEC-20250815-01",
       "hash_sha256": "29a6d422ec8c16c97e75dbcab337910ee4620916d2b93d1ab6fe034e11770f6e",
       "integrity_class": "doc-draft",
       "mutable_policy": "append-only",
