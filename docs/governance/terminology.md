@@ -3,6 +3,6 @@
 <p data-disclaimer-id="D2">Tidak ada data pribadi anak dikumpulkan / ditampilkan.</p>
 </div>
 
-dec_ref: DEC-TERM-09
+dec_ref: DEC-20250817-09
 
 _Terminology page updated for Stage 2._

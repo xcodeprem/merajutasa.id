@@ -29,7 +29,7 @@ async function main(){
     disclaimers_status: disclaimers?.status ?? 'unknown',
     fairness_scenarios: fairnessSim?.summary?.total ?? fairnessSim?.scenarios?.length ?? 0,
     stage2_terminology: terms ? {
-      dec_ref: 'DEC-TERM-09',
+      dec_ref: 'DEC-20250817-09',
       adoption_percent: terms.adoptionPercent,
       suggestions_count: Array.isArray(terms.suggestions) ? terms.suggestions.length : 0,
       trend_entries: trend?.entries_count ?? 0
@@ -48,7 +48,7 @@ async function main(){
   '',
   '## Stage 2 Terminology Transition',
   '',
-  terms ? `- DEC: DEC-TERM-09 — adoption ${terms.adoptionPercent}% (suggestions: ${(terms.suggestions||[]).length}, trend entries: ${trend?.entries_count ?? 0})` : '- DEC: DEC-TERM-09 — adoption n/a',
+  terms ? `- DEC: DEC-20250817-09 — adoption ${terms.adoptionPercent}% (suggestions: ${(terms.suggestions||[]).length}, trend entries: ${trend?.entries_count ?? 0})` : '- DEC: DEC-20250817-09 — adoption n/a',
     'This is an automatically generated draft. See artifacts JSON for details.'
   ];
   await fs.writeFile('artifacts/changelog-excerpt-draft.md', lines.join('\n'));

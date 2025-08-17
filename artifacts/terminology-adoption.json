@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-17T14:07:02.476Z",
+  "generated_utc": "2025-08-17T14:35:07.314Z",
   "old_total": 0,
   "new_total": 0,
   "adoptionPercent": 100,
@@ -46,11 +46,6 @@
       "newCount": 0
     },
     {
-      "file": "docs\\support\\README.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
       "file": "docs\\status\\README-h0-completion.md",
       "oldCount": 0,
       "newCount": 0
@@ -81,12 +76,22 @@
       "newCount": 0
     },
     {
+      "file": "docs\\support\\README.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
       "file": "docs\\security\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
       "file": "docs\\schemas\\README.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\release\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -106,37 +111,12 @@
       "newCount": 0
     },
     {
-      "file": "docs\\public\\README.md",
+      "file": "docs\\principles\\GP1-GP10-index.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs\\public\\ABOUT-PORTAL-PANTI.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\privacy\\README.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\privacy\\pii-scan-fixture.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\privacy\\pii-rotation-policy.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\privacy\\pii-pattern-library-v1.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\release\\README.md",
+      "file": "docs\\policies\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -176,7 +156,12 @@
       "newCount": 0
     },
     {
-      "file": "docs\\legal\\README.md",
+      "file": "docs\\public\\README.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\public\\ABOUT-PORTAL-PANTI.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -186,42 +171,7 @@
       "newCount": 0
     },
     {
-      "file": "docs\\integrity\\verify-cli-doc-draft.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\integrity\\hash-excerpt-module.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\integrity\\gating-policy-annotations.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\integrity\\evidence-minimum-phase1.5-v1.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\integrity\\credential-schema-final-v1.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\integrity\\api-verification-docs.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\principles\\GP1-GP10-index.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\policies\\README.md",
+      "file": "docs\\legal\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -296,12 +246,62 @@
       "newCount": 0
     },
     {
+      "file": "docs\\privacy\\README.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\privacy\\pii-scan-fixture.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\privacy\\pii-rotation-policy.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\privacy\\pii-pattern-library-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
       "file": "docs\\faq\\privacy-faq-abridged.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
       "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\integrity\\verify-cli-doc-draft.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\integrity\\hash-excerpt-module.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\integrity\\gating-policy-annotations.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\integrity\\evidence-minimum-phase1.5-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\integrity\\api-verification-docs.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -331,22 +331,17 @@
       "newCount": 0
     },
     {
-      "file": "docs\\audit\\00-rubrik-audit-portal-panti.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
       "file": "docs\\data\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
+      "file": "docs\\api\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
+      "file": "docs\\audit\\00-rubrik-audit-portal-panti.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -366,7 +361,12 @@
       "newCount": 0
     },
     {
-      "file": "docs\\api\\README.md",
+      "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -382,16 +382,6 @@
     },
     {
       "file": "docs\\produk\\portal-panti\\00-orientasi-komprehensif.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\privacy\\corpus\\negative-decoy.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -417,6 +407,11 @@
     },
     {
       "file": "docs\\governance\\dec\\DEC-style-guide-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250817-09-stage2-terminology-transition.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -512,6 +507,16 @@
     },
     {
       "file": "docs\\governance\\audit\\pr-template-line-audit-2025-08-12T0509Z.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\privacy\\corpus\\negative-decoy.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -618,42 +623,37 @@
       ]
     },
     {
-      "file": "docs\\public\\ABOUT-PORTAL-PANTI.md",
-      "suggestions": [
-        {
-          "old": "peringkat",
-          "new": "tanpa peringkat",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "file": "docs\\privacy\\pii-scan-fixture.md",
-      "suggestions": [
-        {
-          "old": "user",
-          "new": "pengguna",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "file": "docs\\privacy\\pii-pattern-library-v1.md",
+      "file": "docs\\principles\\GP1-GP10-index.md",
       "suggestions": [
         {
           "old": "ranking",
           "new": "tanpa ranking",
-          "count": 3
+          "count": 4
+        },
+        {
+          "old": "top",
+          "new": "rekomendasi",
+          "count": 1
         },
         {
           "old": "master",
           "new": "utama",
-          "count": 1
+          "count": 12
         },
         {
           "old": "user",
           "new": "pengguna",
-          "count": 5
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs\\policies\\README.md",
+      "suggestions": [
+        {
+          "old": "ranking",
+          "new": "tanpa ranking",
+          "count": 1
         }
       ]
     },
@@ -768,6 +768,16 @@
       ]
     },
     {
+      "file": "docs\\public\\ABOUT-PORTAL-PANTI.md",
+      "suggestions": [
+        {
+          "old": "peringkat",
+          "new": "tanpa peringkat",
+          "count": 1
+        }
+      ]
+    },
+    {
       "file": "docs\\master-spec\\master-spec-v2.0.md",
       "suggestions": [
         {
@@ -794,81 +804,6 @@
           "old": "master",
           "new": "utama",
           "count": 5
-        }
-      ]
-    },
-    {
-      "file": "docs\\integrity\\evidence-minimum-phase1.5-v1.md",
-      "suggestions": [
-        {
-          "old": "ranking",
-          "new": "tanpa ranking",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "file": "docs\\integrity\\credential-schema-final-v1.md",
-      "suggestions": [
-        {
-          "old": "ranking",
-          "new": "tanpa ranking",
-          "count": 15
-        },
-        {
-          "old": "top",
-          "new": "rekomendasi",
-          "count": 1
-        },
-        {
-          "old": "blacklist",
-          "new": "daftar blokir",
-          "count": 1
-        },
-        {
-          "old": "whitelist",
-          "new": "daftar izin",
-          "count": 1
-        },
-        {
-          "old": "master",
-          "new": "utama",
-          "count": 4
-        }
-      ]
-    },
-    {
-      "file": "docs\\principles\\GP1-GP10-index.md",
-      "suggestions": [
-        {
-          "old": "ranking",
-          "new": "tanpa ranking",
-          "count": 4
-        },
-        {
-          "old": "top",
-          "new": "rekomendasi",
-          "count": 1
-        },
-        {
-          "old": "master",
-          "new": "utama",
-          "count": 12
-        },
-        {
-          "old": "user",
-          "new": "pengguna",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "file": "docs\\policies\\README.md",
-      "suggestions": [
-        {
-          "old": "ranking",
-          "new": "tanpa ranking",
-          "count": 1
         }
       ]
     },
@@ -968,6 +903,36 @@
       ]
     },
     {
+      "file": "docs\\privacy\\pii-scan-fixture.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs\\privacy\\pii-pattern-library-v1.md",
+      "suggestions": [
+        {
+          "old": "ranking",
+          "new": "tanpa ranking",
+          "count": 3
+        },
+        {
+          "old": "master",
+          "new": "utama",
+          "count": 1
+        },
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 5
+        }
+      ]
+    },
+    {
       "file": "docs\\faq\\privacy-faq-abridged.md",
       "suggestions": [
         {
@@ -984,6 +949,46 @@
           "old": "ranking",
           "new": "tanpa ranking",
           "count": 3
+        }
+      ]
+    },
+    {
+      "file": "docs\\integrity\\evidence-minimum-phase1.5-v1.md",
+      "suggestions": [
+        {
+          "old": "ranking",
+          "new": "tanpa ranking",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "suggestions": [
+        {
+          "old": "ranking",
+          "new": "tanpa ranking",
+          "count": 15
+        },
+        {
+          "old": "top",
+          "new": "rekomendasi",
+          "count": 1
+        },
+        {
+          "old": "blacklist",
+          "new": "daftar blokir",
+          "count": 1
+        },
+        {
+          "old": "whitelist",
+          "new": "daftar izin",
+          "count": 1
+        },
+        {
+          "old": "master",
+          "new": "utama",
+          "count": 4
         }
       ]
     },
@@ -1033,6 +1038,46 @@
       ]
     },
     {
+      "file": "docs\\analytics\\media-digest.md",
+      "suggestions": [
+        {
+          "old": "ranking",
+          "new": "tanpa ranking",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs\\analytics\\event-schema-canonical-v1.md",
+      "suggestions": [
+        {
+          "old": "ranking",
+          "new": "tanpa ranking",
+          "count": 6
+        },
+        {
+          "old": "top",
+          "new": "rekomendasi",
+          "count": 1
+        },
+        {
+          "old": "whitelist",
+          "new": "daftar izin",
+          "count": 1
+        },
+        {
+          "old": "master",
+          "new": "utama",
+          "count": 3
+        },
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 5
+        }
+      ]
+    },
+    {
       "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
       "suggestions": [
         {
@@ -1078,46 +1123,6 @@
       ]
     },
     {
-      "file": "docs\\analytics\\media-digest.md",
-      "suggestions": [
-        {
-          "old": "ranking",
-          "new": "tanpa ranking",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "file": "docs\\analytics\\event-schema-canonical-v1.md",
-      "suggestions": [
-        {
-          "old": "ranking",
-          "new": "tanpa ranking",
-          "count": 6
-        },
-        {
-          "old": "top",
-          "new": "rekomendasi",
-          "count": 1
-        },
-        {
-          "old": "whitelist",
-          "new": "daftar izin",
-          "count": 1
-        },
-        {
-          "old": "master",
-          "new": "utama",
-          "count": 3
-        },
-        {
-          "old": "user",
-          "new": "pengguna",
-          "count": 5
-        }
-      ]
-    },
-    {
       "file": "docs\\produk\\portal-panti\\01-ruang-lingkup-produk.md",
       "suggestions": [
         {
@@ -1143,26 +1148,6 @@
       ]
     },
     {
-      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
-      "suggestions": [
-        {
-          "old": "user",
-          "new": "pengguna",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "file": "docs\\privacy\\corpus\\negative-decoy.md",
-      "suggestions": [
-        {
-          "old": "user",
-          "new": "pengguna",
-          "count": 1
-        }
-      ]
-    },
-    {
       "file": "docs\\governance\\trace\\archive-trace-index-v1.md",
       "suggestions": [
         {
@@ -1179,6 +1164,56 @@
     },
     {
       "file": "docs\\governance\\dec\\DEC-TERM-09-stage2-terminology-transition.md",
+      "suggestions": [
+        {
+          "old": "ranking",
+          "new": "tanpa ranking",
+          "count": 8
+        },
+        {
+          "old": "peringkat",
+          "new": "tanpa peringkat",
+          "count": 1
+        },
+        {
+          "old": "top",
+          "new": "rekomendasi",
+          "count": 1
+        },
+        {
+          "old": "terbaik",
+          "new": "sesuai kebutuhan",
+          "count": 1
+        },
+        {
+          "old": "blacklist",
+          "new": "daftar blokir",
+          "count": 1
+        },
+        {
+          "old": "whitelist",
+          "new": "daftar izin",
+          "count": 1
+        },
+        {
+          "old": "master",
+          "new": "utama",
+          "count": 2
+        },
+        {
+          "old": "slave",
+          "new": "sekunder",
+          "count": 1
+        },
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250817-09-stage2-terminology-transition.md",
       "suggestions": [
         {
           "old": "ranking",
@@ -1334,6 +1369,26 @@
     },
     {
       "file": "docs\\governance\\audit\\pr-template-line-audit-2025-08-12T0509Z.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs\\privacy\\corpus\\negative-decoy.md",
       "suggestions": [
         {
           "old": "user",

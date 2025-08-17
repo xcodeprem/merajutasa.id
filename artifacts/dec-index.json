@@ -1,6 +1,6 @@
 {
-  "generated_utc": "2025-08-17T14:06:52.241Z",
-  "count": 21,
+  "generated_utc": "2025-08-17T14:35:50.087Z",
+  "count": 22,
   "decisions": [
     {
       "file": "DEC-20250812-02-hysteresis-adoption.md",
@@ -187,6 +187,17 @@
       "hash_field": "4c2147f1569bfe8466a3ead4a72a3fbb107aafac150ead9d3e08a6e9a76e028c",
       "content_sha256": "8b1236de1c6c27c6a5da74ff49fc10ab34d6f76d5f9723aab026894925d8e93b",
       "canonicalization_note": null,
+      "parse_error": null
+    },
+    {
+      "file": "DEC-20250817-09-stage2-terminology-transition.md",
+      "id": "DEC-20250817-09",
+      "title": "Stage 2 Terminology Transition — Adoption Policy and Public Copy Updates",
+      "class": "terminology",
+      "status": "proposed",
+      "hash_field": null,
+      "content_sha256": "dd3439a2211d4478cf42e945670454bd85386a9bbcb312dc7edeaa7f86f4602a",
+      "canonicalization_note": "Canonicalization uses normalized LF and trimmed trailing spaces before hashing.",
       "parse_error": null
     },
     {
