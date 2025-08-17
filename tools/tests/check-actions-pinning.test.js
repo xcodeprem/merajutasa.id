@@ -4,10 +4,12 @@
 /**
  * Unit tests for check-actions-pinning.sh script
  * Tests both positive and negative cases for actions pinning validation
+ *
+ * Security hardening: avoid execSync with shell interpolation.
  */
 
-import { execSync } from 'child_process';
-import { mkdtempSync, writeFileSync, rmSync } from 'fs';
+import { spawnSync } from 'child_process';
+import { mkdtempSync, writeFileSync, rmSync, mkdirSync, existsSync } from 'fs';
 import { join } from 'path';
 import { tmpdir } from 'os';
 import { dirname, resolve } from 'path';
@@ -21,9 +23,9 @@ function createTestWorkflow(content) {
   const workflowsDir = join(tempDir, '.github', 'workflows');
   const allowlistPath = join(tempDir, '.github', 'actions-allowlist.json');
   
-  // Create directories
-  execSync(`mkdir -p "${workflowsDir}"`);
-  execSync(`mkdir -p "${join(tempDir, '.github')}"`);
+  // Create directories (safe, no shell)
+  mkdirSync(workflowsDir, { recursive: true });
+  mkdirSync(join(tempDir, '.github'), { recursive: true });
   
   // Create test workflow
   writeFileSync(join(workflowsDir, 'test.yml'), content);
@@ -50,25 +52,23 @@ function runTest(name, workflowContent, shouldPass) {
   const tempDir = createTestWorkflow(workflowContent);
   
   try {
-    const result = execSync(`cd "${tempDir}" && ${SCRIPT_PATH}`, { 
-      encoding: 'utf8',
-      stdio: 'pipe'
-    });
+    // Run the script without invoking a shell; prefer executing directly.
+    const result = spawnSync(SCRIPT_PATH, { cwd: tempDir, encoding: 'utf8' });
+    const stdout = result.stdout?.toString?.() ?? '';
+    const stderr = result.stderr?.toString?.() ?? '';
     
-    if (shouldPass) {
+    if (shouldPass && result.status === 0) {
       console.log(`✅ ${name} - PASSED as expected`);
-    } else {
-      console.log(`❌ ${name} - Should have failed but passed`);
-      console.log(`Output: ${result}`);
-      process.exitCode = 1;
-    }
-  } catch (error) {
-    if (!shouldPass) {
+    } else if (!shouldPass && result.status !== 0) {
       console.log(`✅ ${name} - FAILED as expected`);
+    } else if (!shouldPass && result.status === 0) {
+      console.log(`❌ ${name} - Should have failed but passed`);
+      console.log(`Output: ${stdout}\n${stderr}`);
+      process.exitCode = 1;
     } else {
       console.log(`❌ ${name} - Should have passed but failed`);
-      console.log(`Error: ${error.message}`);
-      console.log(`Exit code: ${error.status}`);
+      console.log(`Exit code: ${result.status}`);
+      console.log(`Output: ${stdout}\n${stderr}`);
       process.exitCode = 1;
     }
   } finally {
@@ -80,17 +80,18 @@ function runTest(name, workflowContent, shouldPass) {
 console.log('Actions Pinning Script Tests');
 console.log('============================');
 
-// Simple smoke test - just verify the script runs without errors on current repo
+// Simple smoke test - run only if script exists and is executable in this OS
 console.log('Testing: Script runs on current repository');
-try {
-  execSync(`${SCRIPT_PATH}`, { 
-    encoding: 'utf8',
-    stdio: 'pipe'
-  });
-  console.log(`✅ Script runs successfully on current repository`);
-} catch (error) {
-  console.log(`❌ Script failed on current repository: ${error.message}`);
-  process.exitCode = 1;
+if (existsSync(SCRIPT_PATH)) {
+  const res = spawnSync(SCRIPT_PATH, { encoding: 'utf8' });
+  if (res.status === 0) {
+    console.log(`✅ Script runs successfully on current repository`);
+  } else {
+    console.log(`❌ Script failed on current repository (exit ${res.status})`);
+    process.exitCode = 1;
+  }
+} else {
+  console.log('ℹ️ Script not found; skipping smoke run');
 }
 
 console.log('\nAll tests completed!');

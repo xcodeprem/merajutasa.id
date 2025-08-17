@@ -1,85 +1,12 @@
 {
-  "timestamp": "2025-08-17T10:19:17.375Z",
+  "timestamp": "2025-08-17T11:10:37.282Z",
   "files_scanned": 120,
-  "violations": [
-    {
-      "file": "tools/tests/check-actions-pinning.test.js",
-      "line": 25,
-      "pattern": "EXEC_SYNC_STRING",
-      "severity": "HIGH",
-      "description": "execSync with template literal interpolation (shell injection risk)",
-      "match": "execSync(`mkdir -p \"${workflowsDir}\"`",
-      "context": "execSync(`mkdir -p \"${workflowsDir}\"`);"
-    },
-    {
-      "file": "tools/tests/check-actions-pinning.test.js",
-      "line": 26,
-      "pattern": "EXEC_SYNC_STRING",
-      "severity": "HIGH",
-      "description": "execSync with template literal interpolation (shell injection risk)",
-      "match": "execSync(`mkdir -p \"${join(tempDir, '.github')}\"`",
-      "context": "execSync(`mkdir -p \"${join(tempDir, '.github')}\"`);"
-    },
-    {
-      "file": "tools/tests/check-actions-pinning.test.js",
-      "line": 53,
-      "pattern": "EXEC_SYNC_STRING",
-      "severity": "HIGH",
-      "description": "execSync with template literal interpolation (shell injection risk)",
-      "match": "execSync(`cd \"${tempDir}\" && ${SCRIPT_PATH}`",
-      "context": "const result = execSync(`cd \"${tempDir}\" && ${SCRIPT_PATH}`, {"
-    },
-    {
-      "file": "tools/tests/check-actions-pinning.test.js",
-      "line": 86,
-      "pattern": "EXEC_SYNC_STRING",
-      "severity": "HIGH",
-      "description": "execSync with template literal interpolation (shell injection risk)",
-      "match": "execSync(`${SCRIPT_PATH}`",
-      "context": "execSync(`${SCRIPT_PATH}`, {"
-    },
-    {
-      "file": "tools/tests/check-actions-pinning.test.js",
-      "line": 25,
-      "pattern": "EXEC_SYNC_USAGE",
-      "severity": "MEDIUM",
-      "description": "execSync usage - consider execFileSync for better security",
-      "match": "execSync(",
-      "context": "execSync(`mkdir -p \"${workflowsDir}\"`);"
-    },
-    {
-      "file": "tools/tests/check-actions-pinning.test.js",
-      "line": 26,
-      "pattern": "EXEC_SYNC_USAGE",
-      "severity": "MEDIUM",
-      "description": "execSync usage - consider execFileSync for better security",
-      "match": "execSync(",
-      "context": "execSync(`mkdir -p \"${join(tempDir, '.github')}\"`);"
-    },
-    {
-      "file": "tools/tests/check-actions-pinning.test.js",
-      "line": 53,
-      "pattern": "EXEC_SYNC_USAGE",
-      "severity": "MEDIUM",
-      "description": "execSync usage - consider execFileSync for better security",
-      "match": "execSync(",
-      "context": "const result = execSync(`cd \"${tempDir}\" && ${SCRIPT_PATH}`, {"
-    },
-    {
-      "file": "tools/tests/check-actions-pinning.test.js",
-      "line": 86,
-      "pattern": "EXEC_SYNC_USAGE",
-      "severity": "MEDIUM",
-      "description": "execSync usage - consider execFileSync for better security",
-      "match": "execSync(",
-      "context": "execSync(`${SCRIPT_PATH}`, {"
-    }
-  ],
+  "violations": [],
   "summary": {
-    "total_violations": 8,
+    "total_violations": 0,
     "by_severity": {
-      "HIGH": 4,
-      "MEDIUM": 4,
+      "HIGH": 0,
+      "MEDIUM": 0,
       "LOW": 0
     }
   }

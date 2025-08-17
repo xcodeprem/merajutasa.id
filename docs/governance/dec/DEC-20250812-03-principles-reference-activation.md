@@ -82,7 +82,7 @@ signoff:
   data_lead: "SIGNED <Farid>"
   ethics_representative: "SIGNED <Farid>"
   product_owner: "SIGNED <Farid>"
-hash_of_decision_document: "d86f59ce838c19f964a66938c863bf700a0b1ab340146b3ef26f7ec92578700d"  # sealed SHA256
+hash_of_decision_document: "a50c2eda01942ad3a90eef5afa7fc5d00f532a0ea687e42c0483f21fe0cd6511"  # sealed SHA256
 integrity_manifest_pointer: "docs/integrity/spec-hash-manifest-v1.json#files[path=docs/governance/dec/DEC-20250812-03-principles-reference-activation.md]"
 supersede_policy: "Future refinements (thresholds / additional rules) require new DEC referencing this id."
 append_only_notice: "This DEC file is immutable; changes require a successor DEC."

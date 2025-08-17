@@ -1,9 +1,16 @@
 {
   "version": 1,
-  "generated_utc": "2025-08-16T20:01:04.476Z",
-  "changed_count": 24,
-  "governed_impacted": [],
+  "generated_utc": "2025-08-17T11:10:44.969Z",
+  "changed_count": 2,
+  "governed_impacted": [
+    "docs/integrity/verify-cli-doc-draft.md"
+  ],
   "dec_files_changed": [],
-  "violations": [],
+  "violations": [
+    {
+      "path": "docs/integrity/verify-cli-doc-draft.md",
+      "code": "GOVERNED_CHANGE_NO_DEC_REF"
+    }
+  ],
   "evidence": []
 }

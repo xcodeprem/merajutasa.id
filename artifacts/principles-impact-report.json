@@ -1,19 +1,12 @@
 {
   "version": 2,
-  "generated_utc": "2025-08-17T10:19:18.453Z",
+  "generated_utc": "2025-08-17T11:10:38.693Z",
   "principles": [
     {
       "principle": "GP1",
-      "match_count": 998,
+      "match_count": 1002,
       "domains": [
-        "other",
-        "privacy",
-        "principles",
-        "onboarding",
-        "integrity",
-        "governance",
-        "fairness",
-        "analytics"
+        "other"
       ],
       "inferredImpact": true,
       "confidence": 0.9,
@@ -121,15 +114,13 @@
       "principle": "GP2",
       "match_count": 3,
       "domains": [
-        "other",
-        "privacy",
-        "analytics"
+        "other"
       ],
       "inferredImpact": true,
-      "confidence": 0.6,
+      "confidence": 0.55,
       "evidence_sample": [
         {
-          "file": "docs/roadmap/roadmap-master-v1.md",
+          "file": "docs\\roadmap\\roadmap-master-v1.md",
           "line": 319,
           "snippet": "| Public API Access | Rate-limited aggregated metrics API | Governance gating & policy | Abuse risk (scraping misuse) |",
           "pattern": "abuse",
@@ -137,20 +128,20 @@
           "domain": "other"
         },
         {
-          "file": "docs/privacy/pii-pattern-library-v1.md",
+          "file": "docs\\privacy\\pii-pattern-library-v1.md",
           "line": 398,
           "snippet": "| Over-reliance (false sense of safety) | Hidden risk | High | Messaging: “Deteksi bersifat best-effort” in privacy policy |",
           "pattern": "safety",
           "changed": false,
-          "domain": "privacy"
+          "domain": "other"
         },
         {
-          "file": "docs/analytics/event-schema-canonical-v1.md",
+          "file": "docs\\analytics\\event-schema-canonical-v1.md",
           "line": 554,
           "snippet": "| PII leakage attempt in meta | PII scanner + reject + block event_name if repeated abuse |",
           "pattern": "abuse",
           "changed": false,
-          "domain": "analytics"
+          "domain": "other"
         }
       ],
       "evidence_truncated": false
@@ -159,14 +150,7 @@
       "principle": "GP3",
       "match_count": 110,
       "domains": [
-        "other",
-        "privacy",
-        "principles",
-        "onboarding",
-        "integrity",
-        "governance",
-        "fairness",
-        "analytics"
+        "other"
       ],
       "inferredImpact": true,
       "confidence": 0.9,
@@ -220,7 +204,7 @@
           "domain": "other"
         },
         {
-          "file": "docs/agent-context-pack.md",
+          "file": "docs\\agent-context-pack.md",
           "line": 274,
           "snippet": "3. **Explain changes:** Provide clear justification for any deviations",
           "pattern": "explain",
@@ -228,7 +212,7 @@
           "domain": "other"
         },
         {
-          "file": "docs/trust/trust-page.md",
+          "file": "docs\\trust\\trust-page.md",
           "line": 9,
           "snippet": "Lihat juga: Methodology Snippet (H0) → ../transparency/methodology-snippet-h0.md",
           "pattern": "transparenc",
@@ -236,7 +220,15 @@
           "domain": "other"
         },
         {
-          "file": "docs/status/progress-recap-latest-2025-08-12T035901Z.md",
+          "file": "docs\\status\\README-h0-completion.md",
+          "line": 69,
+          "snippet": "- Optional snapshot for traceability:",
+          "pattern": "trace",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
           "line": 64,
           "snippet": "| Revocation Endpoint & List | Placeholder saja | Revocation transparency nol saat insiden |",
           "pattern": "transparenc",
@@ -244,7 +236,7 @@
           "domain": "other"
         },
         {
-          "file": "docs/status/progress-recap-latest-2025-08-12T035901Z.md",
+          "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
           "line": 67,
           "snippet": "| Governance Decision Log Automation | Belum template DEC populating CI | Traceability manual & rentan lupa |",
           "pattern": "trace",
@@ -252,18 +244,10 @@
           "domain": "other"
         },
         {
-          "file": "docs/status/progress-recap-latest-2025-08-12T035901Z.md",
+          "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
           "line": 95,
           "snippet": "6. Transparency Hardening",
           "pattern": "transparenc",
-          "changed": false,
-          "domain": "other"
-        },
-        {
-          "file": "docs/status/README-h0-completion.md",
-          "line": 69,
-          "snippet": "- Optional snapshot for traceability:",
-          "pattern": "trace",
           "changed": false,
           "domain": "other"
         }
@@ -272,16 +256,9 @@
     },
     {
       "principle": "GP4",
-      "match_count": 628,
+      "match_count": 632,
       "domains": [
-        "other",
-        "privacy",
-        "principles",
-        "onboarding",
-        "integrity",
-        "governance",
-        "fairness",
-        "analytics"
+        "other"
       ],
       "inferredImpact": true,
       "confidence": 0.9,
@@ -389,14 +366,7 @@
       "principle": "GP5",
       "match_count": 359,
       "domains": [
-        "other",
-        "privacy",
-        "principles",
-        "onboarding",
-        "integrity",
-        "governance",
-        "fairness",
-        "analytics"
+        "other"
       ],
       "inferredImpact": true,
       "confidence": 0.9,
@@ -504,13 +474,7 @@
       "principle": "GP6",
       "match_count": 58,
       "domains": [
-        "other",
-        "privacy",
-        "principles",
-        "onboarding",
-        "integrity",
-        "governance",
-        "analytics"
+        "other"
       ],
       "inferredImpact": true,
       "confidence": 0.9,
@@ -532,7 +496,7 @@
           "domain": "other"
         },
         {
-          "file": "docs/transparency/methodology-snippet-h0.md",
+          "file": "docs\\transparency\\methodology-snippet-h0.md",
           "line": 5,
           "snippet": "This project applies a non-ranking fairness approach using a hysteresis method (Option F) to avoid churn. The public summary focuses on equity and trust foundations:",
           "pattern": "non-?ranking",
@@ -540,7 +504,7 @@
           "domain": "other"
         },
         {
-          "file": "docs/transparency/methodology-snippet-h0.md",
+          "file": "docs\\transparency\\methodology-snippet-h0.md",
           "line": 7,
           "snippet": "- Non-ranking: No league tables; only stability around entry/exit using thresholds.",
           "pattern": "non-?ranking",
@@ -548,7 +512,7 @@
           "domain": "other"
         },
         {
-          "file": "docs/status/progress-recap-latest-2025-08-12T035901Z.md",
+          "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
           "line": 381,
           "snippet": "Semua jalur tetap konsisten dengan GP1–GP10. Tidak ada penurunan komitmen terhadap non-ranking fairness & privacy. Fokus sekarang = menghapus jurang antara blueprint dan trust primitives nyata. Kecepa",
           "pattern": "non-?ranking",
@@ -556,7 +520,7 @@
           "domain": "other"
         },
         {
-          "file": "docs/roadmap/roadmap-master-v1.md",
+          "file": "docs\\roadmap\\roadmap-master-v1.md",
           "line": 48,
           "snippet": "| M Portal Panti | Orientasi produk, ruang lingkup, model data minimal aman, About, rubrik audit | docs/governance/statement-orientasi-portal-panti.md; docs/produk/portal-panti/01-ruang-lingkup-produk",
           "pattern": "non-?ranking",
@@ -564,7 +528,7 @@
           "domain": "other"
         },
         {
-          "file": "docs/roadmap/roadmap-master-v1.md",
+          "file": "docs\\roadmap\\roadmap-master-v1.md",
           "line": 314,
           "snippet": "| Revocation Lifecycle | Live revocation events & viewer delta tracking | Simulated tests stable | Misinterpretation as punishment |",
           "pattern": "misinterpret",
@@ -572,7 +536,7 @@
           "domain": "other"
         },
         {
-          "file": "docs/roadmap/roadmap-master-v1.md",
+          "file": "docs\\roadmap\\roadmap-master-v1.md",
           "line": 555,
           "snippet": "| Hysteresis Methodology Explainer | H1 | Clarify non-ranking fairness |",
           "pattern": "non-?ranking",
@@ -580,7 +544,7 @@
           "domain": "other"
         },
         {
-          "file": "docs/roadmap/roadmap-master-v1.md",
+          "file": "docs\\roadmap\\roadmap-master-v1.md",
           "line": 558,
           "snippet": "| Hero Non-Ranking Tooltip (conditional) | H2 | If confusion >5% |",
           "pattern": "non-?ranking",
@@ -588,42 +552,37 @@
           "domain": "other"
         },
         {
-          "file": "docs/privacy/pii-pattern-library-v1.md",
+          "file": "docs\\privacy\\pii-pattern-library-v1.md",
           "line": 6,
           "snippet": "NON-DESTRUCTIVE: Dokumen ini MENAMBAHKAN detail; tidak menghapus strategi/konstraint sebelumnya (GP1 Privacy-by-Architecture, GP6 Outcome Honesty, GP9 Non-Ranking).",
           "pattern": "outcome honesty",
           "changed": false,
-          "domain": "privacy"
+          "domain": "other"
         },
         {
-          "file": "docs/privacy/pii-pattern-library-v1.md",
+          "file": "docs\\privacy\\pii-pattern-library-v1.md",
           "line": 6,
           "snippet": "NON-DESTRUCTIVE: Dokumen ini MENAMBAHKAN detail; tidak menghapus strategi/konstraint sebelumnya (GP1 Privacy-by-Architecture, GP6 Outcome Honesty, GP9 Non-Ranking).",
           "pattern": "non-?ranking",
           "changed": false,
-          "domain": "privacy"
+          "domain": "other"
         },
         {
-          "file": "docs/privacy/pii-pattern-library-v1.md",
+          "file": "docs\\privacy\\pii-pattern-library-v1.md",
           "line": 20,
           "snippet": "| GP6 Outcome Honesty | Tidak over-claim (pattern “100% akurat”); jelaskan false positive possibility. |",
           "pattern": "outcome honesty",
           "changed": false,
-          "domain": "privacy"
+          "domain": "other"
         }
       ],
       "evidence_truncated": true
     },
     {
       "principle": "GP7",
-      "match_count": 205,
+      "match_count": 206,
       "domains": [
-        "other",
-        "principles",
-        "onboarding",
-        "integrity",
-        "governance",
-        "analytics"
+        "other"
       ],
       "inferredImpact": true,
       "confidence": 0.9,
@@ -731,14 +690,13 @@
       "principle": "GP8",
       "match_count": 8,
       "domains": [
-        "other",
-        "integrity"
+        "other"
       ],
       "inferredImpact": true,
       "confidence": 0.9,
       "evidence_sample": [
         {
-          "file": "docs/roadmap/roadmap-master-v1.md",
+          "file": "docs\\roadmap\\roadmap-master-v1.md",
           "line": 47,
           "snippet": "| L Federation & Future | DID portability, external attestation, localization, CBOR | Future expansions in Credential spec | Scalability & portability guardrail |",
           "pattern": "portabil",
@@ -746,55 +704,55 @@
           "domain": "other"
         },
         {
-          "file": "docs/integrity/credential-schema-final-v1.md",
+          "file": "docs\\integrity\\credential-schema-final-v1.md",
           "line": 23,
           "snippet": "| GP3 Federated Mindset | Format JSON-LD / W3C Verifiable Credential compatible subset → portabilitas lintas platform. |",
           "pattern": "portabil",
           "changed": false,
-          "domain": "integrity"
+          "domain": "other"
         },
         {
-          "file": "docs/integrity/credential-schema-final-v1.md",
+          "file": "docs\\integrity\\credential-schema-final-v1.md",
           "line": 93,
           "snippet": "| country | string | Optional | “ID” default | For portability |",
           "pattern": "portabil",
           "changed": false,
-          "domain": "integrity"
+          "domain": "other"
         },
         {
-          "file": "docs/integrity/credential-schema-final-v1.md",
+          "file": "docs\\integrity\\credential-schema-final-v1.md",
           "line": 499,
           "snippet": "Credential uses canonical English tokens for portability; UI localizes labels. Do not localize field keys. Terminology object stage enumerations remain English-coded identifiers.",
           "pattern": "portabil",
           "changed": false,
-          "domain": "integrity"
+          "domain": "other"
         },
         {
-          "file": "docs/integrity/credential-schema-final-v1.md",
+          "file": "docs\\integrity\\credential-schema-final-v1.md",
           "line": 594,
           "snippet": "| Portability | JSON-LD + DID method |",
           "pattern": "portabil",
           "changed": false,
-          "domain": "integrity"
+          "domain": "other"
         },
         {
-          "file": "docs/integrity/credential-schema-final-v1.md",
+          "file": "docs\\integrity\\credential-schema-final-v1.md",
           "line": 652,
           "snippet": "Integrity Credential v1.0 memberikan pondasi portabel, minim, non‑ranking, dan dapat diaudit yang menyelaraskan semua pilar: privacy, fairness, governance, portability, & transition. Tidak ada deviati",
           "pattern": "portabil",
           "changed": false,
-          "domain": "integrity"
+          "domain": "other"
         },
         {
-          "file": "docs/integrity/credential-schema-final-v1.md",
+          "file": "docs\\integrity\\credential-schema-final-v1.md",
           "line": 652,
           "snippet": "Integrity Credential v1.0 memberikan pondasi portabel, minim, non‑ranking, dan dapat diaudit yang menyelaraskan semua pilar: privacy, fairness, governance, portability, & transition. Tidak ada deviati",
           "pattern": "extensib",
           "changed": false,
-          "domain": "integrity"
+          "domain": "other"
         },
         {
-          "file": "docs/archive/ux_public-multipage-experience-master-spec-v2.md",
+          "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
           "line": 64,
           "snippet": "| GP3 | Federated Mindset | Cegah platform lock-in; integrity portability | Credential JSON-LD minimal; portable verify semantics |",
           "pattern": "portabil",
@@ -808,14 +766,7 @@
       "principle": "GP9",
       "match_count": 402,
       "domains": [
-        "other",
-        "privacy",
-        "principles",
-        "onboarding",
-        "integrity",
-        "governance",
-        "fairness",
-        "analytics"
+        "other"
       ],
       "inferredImpact": true,
       "confidence": 0.9,
@@ -923,18 +874,13 @@
       "principle": "GP10",
       "match_count": 58,
       "domains": [
-        "other",
-        "principles",
-        "onboarding",
-        "integrity",
-        "governance",
-        "analytics"
+        "other"
       ],
       "inferredImpact": true,
       "confidence": 0.9,
       "evidence_sample": [
         {
-          "file": "docs/roadmap/roadmap-master-v1.md",
+          "file": "docs\\roadmap\\roadmap-master-v1.md",
           "line": 274,
           "snippet": "| Sampling biases KPI interpretasi | Document weighting & apply expansion factors |",
           "pattern": "bias",
@@ -942,7 +888,7 @@
           "domain": "other"
         },
         {
-          "file": "docs/roadmap/roadmap-master-v1.md",
+          "file": "docs\\roadmap\\roadmap-master-v1.md",
           "line": 320,
           "snippet": "| Community Action | Ethical contribution micro guidance | Support page matured | Scope creep activism |",
           "pattern": "ethic",
@@ -950,7 +896,7 @@
           "domain": "other"
         },
         {
-          "file": "docs/roadmap/roadmap-master-v1.md",
+          "file": "docs\\roadmap\\roadmap-master-v1.md",
           "line": 320,
           "snippet": "| Community Action | Ethical contribution micro guidance | Support page matured | Scope creep activism |",
           "pattern": "ethical",
@@ -958,7 +904,7 @@
           "domain": "other"
         },
         {
-          "file": "docs/roadmap/roadmap-master-v1.md",
+          "file": "docs\\roadmap\\roadmap-master-v1.md",
           "line": 452,
           "snippet": "| Ethics / Privacy | Bi-weekly | PII metrics, blocked attempts, drift attempts |",
           "pattern": "ethic",
@@ -966,66 +912,66 @@
           "domain": "other"
         },
         {
-          "file": "docs/principles/GP1-GP10-index.md",
+          "file": "docs\\principles\\GP1-GP10-index.md",
           "line": 15,
           "snippet": "| GP5 | Transparency | Definisi metrik, disclaimers, metodologi (fairness/hysteresis) dapat diinspeksi publik tanpa dark logic. | Public Clarity | §13 Hero, §35 Ethical Content, Methodology Fragments ",
           "pattern": "ethic",
           "changed": false,
-          "domain": "principles"
+          "domain": "other"
         },
         {
-          "file": "docs/principles/GP1-GP10-index.md",
+          "file": "docs\\principles\\GP1-GP10-index.md",
           "line": 15,
           "snippet": "| GP5 | Transparency | Definisi metrik, disclaimers, metodologi (fairness/hysteresis) dapat diinspeksi publik tanpa dark logic. | Public Clarity | §13 Hero, §35 Ethical Content, Methodology Fragments ",
           "pattern": "ethical",
           "changed": false,
-          "domain": "principles"
+          "domain": "other"
         },
         {
-          "file": "docs/principles/GP1-GP10-index.md",
+          "file": "docs\\principles\\GP1-GP10-index.md",
           "line": 16,
           "snippet": "| GP6 | Outcome Honesty | Tidak mempresentasikan sinyal sebagai ranking / kualitas; menghindari misframing performa. | Ethical Framing | §14 Fairness Narrative, §30 Equity UI | No “top”, disclaimers R",
           "pattern": "ethic",
           "changed": false,
-          "domain": "principles"
+          "domain": "other"
         },
         {
-          "file": "docs/principles/GP1-GP10-index.md",
+          "file": "docs\\principles\\GP1-GP10-index.md",
           "line": 16,
           "snippet": "| GP6 | Outcome Honesty | Tidak mempresentasikan sinyal sebagai ranking / kualitas; menghindari misframing performa. | Ethical Framing | §14 Fairness Narrative, §30 Equity UI | No “top”, disclaimers R",
           "pattern": "ethical",
           "changed": false,
-          "domain": "principles"
+          "domain": "other"
         },
         {
-          "file": "docs/principles/GP1-GP10-index.md",
+          "file": "docs\\principles\\GP1-GP10-index.md",
           "line": 17,
           "snippet": "| GP7 | Anti-Hype & Plain Language | Bahasa pemasaran berlebihan & ambigu (ranking, “revolusioner”) diblok lint demi kejelasan & menghindari overclaim. | Copy Discipline | §35 Ethical Content, Disclai",
           "pattern": "ethic",
           "changed": false,
-          "domain": "principles"
+          "domain": "other"
         },
         {
-          "file": "docs/principles/GP1-GP10-index.md",
+          "file": "docs\\principles\\GP1-GP10-index.md",
           "line": 17,
           "snippet": "| GP7 | Anti-Hype & Plain Language | Bahasa pemasaran berlebihan & ambigu (ranking, “revolusioner”) diblok lint demi kejelasan & menghindari overclaim. | Copy Discipline | §35 Ethical Content, Disclai",
           "pattern": "ethical",
           "changed": false,
-          "domain": "principles"
+          "domain": "other"
         },
         {
-          "file": "docs/onboarding/agent-role-policy-v1.md",
-          "line": 166,
-          "snippet": "| GP3 Fairness | Parameter only via DEC; prevents silent bias shifts |",
-          "pattern": "bias",
-          "changed": false,
-          "domain": "onboarding"
-        },
-        {
-          "file": "docs/master-spec/master-spec-v2.0.md",
+          "file": "docs\\master-spec\\master-spec-v2.0.md",
           "line": 44,
           "snippet": "§35 Ethical & Copy Guidelines (Disclaimers, Anti-Hype – GP5, GP6, GP7)",
           "pattern": "ethic",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs\\master-spec\\master-spec-v2.0.md",
+          "line": 44,
+          "snippet": "§35 Ethical & Copy Guidelines (Disclaimers, Anti-Hype – GP5, GP6, GP7)",
+          "pattern": "ethical",
           "changed": false,
           "domain": "other"
         }

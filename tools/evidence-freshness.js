@@ -16,14 +16,15 @@ const ARTIFACTS = [
   'artifacts/pii-scan-report.json',
   'artifacts/fairness-sim-scenarios.json',
   'artifacts/fairness-sim-report.json',
-  'artifacts/no-silent-drift-report.json',
+  // Exclude self-referential aggregator to avoid circular stale status in A8
+  // 'artifacts/no-silent-drift-report.json',
   'artifacts/evidence-bundle.json'
 ];
 
 const DEFAULT_THRESHOLD_HOURS = 24;
 const THRESHOLDS = {
   'artifacts/spec-hash-diff.json': 24,
-  'artifacts/no-silent-drift-report.json': 6,
+  // 'artifacts/no-silent-drift-report.json': 6,
   'artifacts/evidence-bundle.json': 6
 };
 
