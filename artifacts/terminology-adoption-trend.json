@@ -1,14 +1,14 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-17T13:30:27.607Z",
-  "entries_count": 8,
+  "generated_utc": "2025-08-17T13:49:40.442Z",
+  "entries_count": 9,
   "current": {
-    "timestamp": "2025-08-17T13:30:27.607Z",
+    "timestamp": "2025-08-17T13:49:40.442Z",
     "adoptionPercent": 100,
     "old_total": 0,
     "new_total": 0,
-    "files_scanned": 100,
-    "suggestions_count": 47
+    "files_scanned": 102,
+    "suggestions_count": 49
   },
   "history": [
     {
@@ -74,11 +74,19 @@
       "new_total": 0,
       "files_scanned": 100,
       "suggestions_count": 47
+    },
+    {
+      "timestamp": "2025-08-17T13:49:40.442Z",
+      "adoptionPercent": 100,
+      "old_total": 0,
+      "new_total": 0,
+      "files_scanned": 102,
+      "suggestions_count": 49
     }
   ],
   "trend_analysis": {
     "latest_adoption": 100,
     "avg_adoption_last_7": 100,
-    "suggestion_reduction": 0
+    "suggestion_reduction": -2
   }
 }

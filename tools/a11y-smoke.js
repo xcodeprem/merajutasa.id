@@ -56,10 +56,21 @@ async function main(){
   const resMain = await runWithRetry(URL, 3);
   const resExtra = await Promise.all(EXTRA.map(u=> runWithRetry(u,2)).map(p=>p.catch(()=>({ issues:[] }))));
   const issues = [...(resMain.issues||[]), ...resExtra.flatMap(r=>r.issues||[])];
-  const serious = issues.filter(i=> ['serious','critical'].includes(i.severity));
+  // Map Pa11y issue types to severity buckets; Pa11y exposes type: 'error' | 'warning' | 'notice'
+  const criticalCount = issues.filter(i => String(i.type).toLowerCase() === 'error').length;
+  const warningCount  = issues.filter(i => String(i.type).toLowerCase() === 'warning').length;
+  const noticeCount   = issues.filter(i => String(i.type).toLowerCase() === 'notice').length;
+  // Backward-compat: keep 'serious' as warnings bucket for prior readers
+  const counts = {
+    total: issues.length,
+    critical: criticalCount,
+    serious: warningCount,
+    warnings: warningCount,
+    notices: noticeCount
+  };
   await fs.mkdir('artifacts',{recursive:true});
-  await fs.writeFile('artifacts/a11y-smoke-report.json', JSON.stringify({ url: URL, counts:{ total: issues.length, serious: serious.length }, issues }, null, 2));
-  if (serious.length>0){ console.error('[a11y] FAIL', { serious: serious.length }); process.exit(1); }
+  await fs.writeFile('artifacts/a11y-smoke-report.json', JSON.stringify({ url: URL, counts, issues }, null, 2));
+  if (criticalCount>0){ console.error('[a11y] FAIL', { critical: criticalCount }); process.exit(1); }
   console.log('[a11y] PASS');
 }
 
