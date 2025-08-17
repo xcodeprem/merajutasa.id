@@ -1,24 +1,33 @@
 {
-  "version": 1,
-  "total": 3,
+  "_metadata": {
+    "actor": "copilot-swe-agent[bot]",
+    "generated_at": "2025-08-16T20:01:03.893Z",
+    "generator": "feedback-smoke.js",
+    "git_ref": "refs/heads/copilot/fix-2406172e-c001-496e-8407-176c0346325f",
+    "git_sha": "aa777f4f25414e6da3fa5045288cfd1aabf80bb1",
+    "run_id": "17012248082",
+    "version": "1.0"
+  },
   "results": [
     {
-      "status": "OK",
-      "record_id": "5d423c0c-0a4f-4a6f-b8f6-30c29be60489",
       "pii_categories": [
         "CONTACT_EMAIL"
-      ]
+      ],
+      "record_id": "9b11f136-103a-4f82-b372-6af408de2577",
+      "status": "OK"
     },
     {
-      "status": "OK",
-      "record_id": "46ebf2e1-25a7-4663-9d26-a59fd03af9c1",
       "pii_categories": [
         "CONTACT_PHONE"
-      ]
+      ],
+      "record_id": "3dffa0ab-9180-4b3b-b11e-321520a51ea7",
+      "status": "OK"
     },
     {
-      "status": "BLOCKED",
-      "reason": "NIK_DETECTED"
+      "reason": "NIK_DETECTED",
+      "status": "BLOCKED"
     }
-  ]
+  ],
+  "total": 3,
+  "version": 1
 }

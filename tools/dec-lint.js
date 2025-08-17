@@ -3,6 +3,7 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import yaml from 'yaml';
 import crypto from 'crypto';
+import { stableStringify, addMetadata } from './lib/json-stable.js';
 
 const DEC_DIR = 'docs/governance/dec';
 const OUT = 'artifacts/dec-lint.json';
@@ -25,5 +26,5 @@ async function lint(file){ const full=path.join(DEC_DIR,file); let raw=''; try{ 
   if(parsed.class==='guidance' && /adopted|draft/.test(status)) warnings.push({code:'DL7_CLASS_STATUS_MISMATCH',detail:'guidance doc carries decision status'});
   return { file, id: parsed.id||null, hash: sha256(raw), violations, warnings };
 }
-async function main(){ await fs.mkdir('artifacts',{recursive:true}); const files=await list(); const results=await Promise.all(files.map(lint)); const idSet=new Map(); results.forEach(r=>{ if(r.id){ if(idSet.has(r.id)) r.violations.push({code:'DL6_DUPLICATE_ID',detail:`duplicate with ${idSet.get(r.id)}`}); else idSet.set(r.id,r.file); } }); const violations=results.flatMap(r=>r.violations.map(v=>({file:r.file,...v}))); const warnings=results.flatMap(r=>r.warnings.map(v=>({file:r.file,...v}))); const codeCounts = violations.reduce((a,v)=>{a[v.code]=(a[v.code]||0)+1;return a;},{}); const warningCounts = warnings.reduce((a,v)=>{a[v.code]=(a[v.code]||0)+1;return a;},{}); const summary={ files:results.length, violation_count:violations.length, warning_count:warnings.length, codes:codeCounts, warning_codes:warningCounts }; await fs.writeFile(OUT, JSON.stringify({generated_utc:new Date().toISOString(),version:1,summary,results,violations,warnings},null,2)); console.log(`[dec-lint] files=${results.length} violations=${violations.length} warnings=${warnings.length}`); if(violations.length) process.exit(30); }
+async function main(){ await fs.mkdir('artifacts',{recursive:true}); const files=await list(); const results=await Promise.all(files.map(lint)); const idSet=new Map(); results.forEach(r=>{ if(r.id){ if(idSet.has(r.id)) r.violations.push({code:'DL6_DUPLICATE_ID',detail:`duplicate with ${idSet.get(r.id)}`}); else idSet.set(r.id,r.file); } }); const violations=results.flatMap(r=>r.violations.map(v=>({file:r.file,...v}))); const warnings=results.flatMap(r=>r.warnings.map(v=>({file:r.file,...v}))); const codeCounts = violations.reduce((a,v)=>{a[v.code]=(a[v.code]||0)+1;return a;},{}); const warningCounts = warnings.reduce((a,v)=>{a[v.code]=(a[v.code]||0)+1;return a;},{}); const summary={ files:results.length, violation_count:violations.length, warning_count:warnings.length, codes:codeCounts, warning_codes:warningCounts }; const resultWithMetadata = addMetadata({version:1,summary,results,violations,warnings}, { generator: 'dec-lint.js' }); await fs.writeFile(OUT, stableStringify(resultWithMetadata)); console.log(`[dec-lint] files=${results.length} violations=${violations.length} warnings=${warnings.length}`); if(violations.length) process.exit(30); }
 main().catch(e=>{ console.error('dec-lint error',e); process.exit(2); });

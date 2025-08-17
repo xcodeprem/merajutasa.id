@@ -1,148 +1,163 @@
 {
-  "generated_utc": "2025-08-16T15:51:27.970Z",
-  "version": 1,
-  "summary": {
-    "files": 19,
-    "violation_count": 0,
-    "warning_count": 0,
-    "codes": {},
-    "warning_codes": {}
+  "_metadata": {
+    "actor": "copilot-swe-agent[bot]",
+    "generated_at": "2025-08-16T20:01:03.205Z",
+    "generator": "dec-lint.js",
+    "git_ref": "refs/heads/copilot/fix-2406172e-c001-496e-8407-176c0346325f",
+    "git_sha": "aa777f4f25414e6da3fa5045288cfd1aabf80bb1",
+    "run_id": "17012248082",
+    "version": "1.0"
   },
   "results": [
     {
       "file": "DEC-20250812-02-hysteresis-adoption.md",
-      "id": "DEC-20250812-02",
       "hash": "590cdd8be80eba519d52aa5a825b129aca6ddf8e2a5b32683a2e19f73d978fd1",
+      "id": "DEC-20250812-02",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250812-03-principles-reference-activation.md",
-      "id": "DEC-20250812-03",
       "hash": "e8cb894bbd99eebefbab7ca30824785c88dee8f3d72d814af4d318c8ff1b28b1",
+      "id": "DEC-20250812-03",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250812-04-governance-baseline-thresholds.md",
-      "id": "DEC-20250812-04",
       "hash": "5c50fd47b4238aad25118c06e4b4024b66bedd1f1c66ecd5e307ad4dcc57abd6",
+      "id": "DEC-20250812-04",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250813-01-known-debt-register.md",
-      "id": "DEC-20250813-01",
       "hash": "3323845a5d7236bff20ba6485c9d7fc88a03ae0f0877ba1e7c0894acb4380348",
+      "id": "DEC-20250813-01",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250813-02-signature-pipeline-adoption.md",
-      "id": "DEC-20250813-02",
       "hash": "a59dc9b0161686d061abd35e9b7d0d0630dcc06bb947a62f2e1ed15dbe0c6ea5",
+      "id": "DEC-20250813-02",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250813-03-disclaimers-presence-enforcement.md",
-      "id": "DEC-20250813-03",
       "hash": "229f1158fe860c0fbd35015f10630d15b59d1b744e0457d385a73b31d958d231",
+      "id": "DEC-20250813-03",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
-      "id": "DEC-20250813-04",
       "hash": "61b36f68b2bd1688252261746abb622d8b7c4c025405414a2baebff06bda07fe",
+      "id": "DEC-20250813-04",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250813-05-gating-policy-wave1-adoption.md",
-      "id": "DEC-20250813-05",
       "hash": "4ff94ec39e6ffe51f599b77b492476883af6c5696070b9a3fb99dfa3b64793c7",
+      "id": "DEC-20250813-05",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250813-06-consolidated-governed-edits.md",
-      "id": "DEC-20250813-06",
       "hash": "54b52a3a570726287087b5aaf10c79c7982dc776e62c0da0a26ed1b2f5b495f3",
+      "id": "DEC-20250813-06",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250813-07-hype-threshold-transition.md",
-      "id": "DEC-20250813-07",
       "hash": "0950440708e7af21d15100a336d8ba65898ba47a0cd312e5fc400f4de8fc6093",
+      "id": "DEC-20250813-07",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250813-08-evidence-hash-display-length.md",
-      "id": "DEC-20250813-08",
       "hash": "34ad1c883c52a0ff1d0b729b371a35ff1f0a0fe680257caf2f2bce241bad630d",
+      "id": "DEC-20250813-08",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250813-09-equity-index-rounding.md",
-      "id": "DEC-20250813-09",
       "hash": "38ec9bc31e1976f95d5d534e7d9e93e75f07534c04f35a480bbca8c1798f3fd9",
+      "id": "DEC-20250813-09",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250813-10-feedback-categories-canonical.md",
-      "id": "DEC-20250813-10",
       "hash": "a73118b5211e44ba3c8da47ed761c7101423edba18d999f69efdc3db5d364a30",
+      "id": "DEC-20250813-10",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250815-01-governed-editorial-maintenance.md",
-      "id": "DEC-20250815-01",
       "hash": "1dae67aab19daaee75c00ef7ca173666729c8baddc6a09f8a9fede6a78fff43e",
+      "id": "DEC-20250815-01",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250815-02-hysteresis-config-update.md",
-      "id": "DEC-20250815-02",
       "hash": "c039b400269d0003c1d07524c340d05329235c8e77a1f9fcc9dfa1e6672b560d",
+      "id": "DEC-20250815-02",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250815-03-trace-index-update.md",
-      "id": "DEC-20250815-03",
       "hash": "5e841450ada5fb19d493535ad4b82f8804e609d32c68d60f4f73cb06aca33c98",
+      "id": "DEC-20250815-03",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "file": "DEC-20250816-01-governance-pipeline-security-enhancement.md",
+      "hash": "618b54742d15b37aaf6236a363f2c694ecb9ede35eac9fc8662d311687ef6609",
+      "id": "DEC-20250816-01",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-style-guide-v1.md",
-      "id": "GUIDANCE-DOC-DEC-STYLE-V1",
       "hash": "55c77fb8c21f4cf0474e5923268268d64e8fc13ac95bd392066e290d3a0a3441",
+      "id": "GUIDANCE-DOC-DEC-STYLE-V1",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-style-guide-v2.md",
-      "id": "GUIDANCE-DEC-STYLE-V2",
       "hash": "6568aa403b6e7bf3eb234b25e490a8c31dbffd55083b1e3b5ec19b196883eed9",
+      "id": "GUIDANCE-DEC-STYLE-V2",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-style-guide-v3.md",
-      "id": "GUIDANCE-DEC-STYLE-V3",
       "hash": "fa6ca1309615f42d5c4fb64de9dd3cb1c76e6c788a57108937b14c598feb733c",
+      "id": "GUIDANCE-DEC-STYLE-V3",
       "violations": [],
       "warnings": []
     }
   ],
+  "summary": {
+    "codes": {},
+    "files": 20,
+    "violation_count": 0,
+    "warning_codes": {},
+    "warning_count": 0
+  },
+  "version": 1,
   "violations": [],
   "warnings": []
 }

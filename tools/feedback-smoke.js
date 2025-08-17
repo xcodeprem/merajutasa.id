@@ -9,6 +9,7 @@ import { promises as fs } from 'fs';
 import { randomUUID } from 'crypto';
 import Ajv2020 from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
+import { stableStringify, addMetadata } from './lib/json-stable.js';
 
 const FEEDBACK_SCHEMA_PATH = 'schemas/feedback/feedback-record-v1.json';
 const OUT_NDJSON = 'artifacts/feedback-records.ndjson';
@@ -75,7 +76,8 @@ async function main(){
       results.push({ status:'OK', record_id: rec.record_id, pii_categories: piiCats });
     }
   }
-  await fs.writeFile(OUT_REPORT, JSON.stringify({ version:1, total: samples.length, results }, null, 2));
+  const reportWithMetadata = addMetadata({ version:1, total: samples.length, results }, { generator: 'feedback-smoke.js' });
+  await fs.writeFile(OUT_REPORT, stableStringify(reportWithMetadata));
   console.log('[feedback-smoke] wrote', samples.length, 'records');
 }
 

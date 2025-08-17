@@ -1,0 +1,55 @@
+name: 'Run A8 (no-silent-drift) fail-fast'
+description: 'Composite action to run integrity gates early and consistently'
+inputs:
+  policy-path:
+    description: 'Path to policy.json file'
+    required: false
+    default: 'tools/policy/policy.json'
+  working-directory:
+    description: 'Working directory for the action'
+    required: false
+    default: '.'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
+      with:
+        node-version: '20'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: |
+        if [ -f package-lock.json ]; then
+          npm ci
+        elif [ -f pnpm-lock.yaml ]; then
+          npm install -g pnpm && pnpm install --frozen-lockfile
+        elif [ -f yarn.lock ]; then
+          npm install -g yarn && yarn install --frozen-lockfile
+        else
+          npm install
+        fi
+
+    - name: Run A8 gate (no-silent-drift)
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: |
+        echo "::group::A8 Gate Execution"
+        echo "Running governance verification with policy: ${{ inputs.policy-path }}"
+        node tools/governance-verify.js --policy ${{ inputs.policy-path }} --a8
+        echo "::endgroup::"
+
+    - name: Upload A8 artifacts
+      if: always()
+      uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
+      with:
+        name: a8-governance-artifacts-${{ github.run_id }}
+        path: |
+          artifacts/no-silent-drift-report.json
+          artifacts/governance-verify-summary.json
+          artifacts/security-patterns-smoke.json
+          artifacts/spec-hash-diff.json
+        retention-days: 30

@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-16T15:51:29.387Z",
+  "generated_utc": "2025-08-16T20:01:04.815Z",
   "old_total": 0,
   "new_total": 0,
   "adoptionPercent": 100,
@@ -26,17 +26,17 @@
       "newCount": 0
     },
     {
+      "file": "docs/tests/hysteresis-test-plan-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
       "file": "docs/transparency/methodology-snippet-h0.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
       "file": "docs/transparency/changelog-excerpt-phase1.5.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs/tests/hysteresis-test-plan-v1.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -371,16 +371,6 @@
       "newCount": 0
     },
     {
-      "file": "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs/governance/audit/README-audit-process.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
       "file": "docs/governance/dec/DEC-style-guide-v3.md",
       "oldCount": 0,
       "newCount": 0
@@ -392,6 +382,11 @@
     },
     {
       "file": "docs/governance/dec/DEC-style-guide-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/governance/dec/DEC-20250816-01-governance-pipeline-security-enhancement.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -472,6 +467,16 @@
     },
     {
       "file": "docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/governance/audit/README-audit-process.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -1118,12 +1123,12 @@
       ]
     },
     {
-      "file": "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
+      "file": "docs/governance/dec/DEC-20250816-01-governance-pipeline-security-enhancement.md",
       "suggestions": [
         {
           "old": "user",
           "new": "pengguna",
-          "count": 1
+          "count": 2
         }
       ]
     },
@@ -1218,6 +1223,16 @@
         {
           "old": "master",
           "new": "utama",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
           "count": 1
         }
       ]

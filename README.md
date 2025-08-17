@@ -88,11 +88,16 @@ npm run fairness:sim        # Fairness simulation
 
 ## Current Status
 
-✅ **Governance Integrity** - Evidence-driven status; gates enforce spec-hash, parameters, and A8 (no-silent-drift). If artifacts indicate FAIL (e.g., pending DEC or manifest update), CI will block until resolved.  
-✅ **Core Services** - Signer, Chain, and Collector operational  
-✅ **Test Coverage** - 24.1% coverage with comprehensive governance tests  
-✅ **Documentation** - CLI guides and API documentation complete  
-⚠️ **Production Readiness** - Service quality improvements ongoing; canonical changes require DEC and manifest updates to restore green gates
+<!-- STATUS:BEGIN -->
+
+- **A8 (no-silent-drift)**: ADVISORY
+- **Spec Hash**: PASS
+- **Security Smoke**: PASS
+- **Overall Governance**: PASS
+
+*Last updated: 2025-08-16T18:38:20.476Z*
+
+<!-- STATUS:END -->
 
 ## Operator docs
 

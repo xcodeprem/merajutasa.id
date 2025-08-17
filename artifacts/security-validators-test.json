@@ -1,0 +1,18 @@
+{
+  "test_suite": "security-validators",
+  "status": "PASS",
+  "tests_run": 3,
+  "attack_vectors_tested": 10,
+  "coverage": {
+    "path_traversal": "PASS",
+    "url_encoding": "PASS",
+    "unicode_homoglyphs": "PASS",
+    "null_byte_injection": "PASS",
+    "mixed_separators": "PASS",
+    "directory_escape": "PASS"
+  },
+  "timestamp": "2025-08-16T19:59:58.190Z",
+  "git_sha": "aa777f4f25414e6da3fa5045288cfd1aabf80bb1",
+  "run_id": "17012248082",
+  "details": "Comprehensive path validation security tests passed including advanced attack vectors"
+}

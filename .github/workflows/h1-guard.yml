@@ -5,30 +5,33 @@ on:
     branches: [ main ]
   workflow_dispatch: {}
 
+permissions:
+  contents: read
+
+concurrency:
+  group: h1-guard-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   h1-guard:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:
           fetch-depth: 0
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
         with:
           node-version: '20'
           cache: 'npm'
 
-      - name: Install deps
-        run: |
-          npm ci || npm i --no-audit --no-fund
-      - name: Ensure yaml present (safety net)
-        run: |
-          npm ls yaml || npm i yaml@^2.4.5 --no-audit --no-fund
-
-      - name: Run A8 (no-silent-drift) aggregator
-        run: node tools/no-silent-drift.js
+      - name: Run A8 (no-silent-drift) Gates
+        uses: ./.github/actions/run-a8
+        with:
+          policy-path: 'tools/policy/policy.json'
 
       - name: Run H1 Guard
         run: |
@@ -63,7 +66,7 @@ jobs:
           node tools/tests/equity-ui-smoke.test.js
 
       - name: Upload KPI & Equity Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
         with:
           name: h1-kpi
           path: |
@@ -79,7 +82,7 @@ jobs:
 
       - name: Upload Chain Monitor Artifact
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
         with:
           name: chain-monitor
           path: artifacts/chain-monitor.json

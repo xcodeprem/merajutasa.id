@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generation_timestamp_utc": "2025-08-16T16:23:52Z",
+  "generation_timestamp_utc": "2025-08-16T18:39:13Z",
   "generator_note": "Refined manifest: added onboarding & (optional) README, fixed dec_ref placeholders, standardized mutable_policy for adopted lint spec. All existing entries preserved; only additive or metadata corrections before first hash seal.",
   "files": [
     {
@@ -186,8 +186,8 @@
     {
       "path": "docs/tests/hysteresis-test-plan-v1.md",
       "version": "1.0.0",
-      "dec_ref": "DEC-20250812-02",
-      "hash_sha256": "87b4a17575228ad068f0d39bafe8063d2960a9628d4d13f713bf37fca25f52de",
+      "dec_ref": "DEC-20250812-02 + DEC-20250816-01",
+      "hash_sha256": "0e13b0ef1f2c9f1c3a9ba346a4cad260b1f331521c98e077c10cc8cae6a7d2ca",
       "integrity_class": "test-plan",
       "mutable_policy": "append-only",
       "next_change_requires_dec": false,
@@ -236,8 +236,8 @@
     {
       "path": "docs/analytics/event-schema-canonical-v1.md",
       "version": "1.0.0",
-      "dec_ref": null,
-      "hash_sha256": "6ab5269fc6e27ed4f26c761ff62ce0c6882bf3d945a882070b47b4d60b709dc3",
+      "dec_ref": "DEC-20250816-01",
+      "hash_sha256": "b33cf1a9b6425f3da5d0b61184ac1818dcd196369fba11755406551235eef2b7",
       "integrity_class": "schema",
       "mutable_policy": "versioned",
       "next_change_requires_dec": true,
@@ -316,8 +316,8 @@
     {
       "path": "README.md",
       "version": "1.0.0",
-      "dec_ref": "DEC-20250813-04 + DEC-20250813-06 + DEC-20250815-01",
-      "hash_sha256": "6b889ef6071454476a2cb710c3c83b5e476bcaae1b117e6ad79be57661ea6b44",
+      "dec_ref": "DEC-20250813-04 + DEC-20250813-06 + DEC-20250815-01 + DEC-20250816-01",
+      "hash_sha256": "037e4c39ad66608051212de96eb0bd28f11eca1bdd5570220f932b88537b3bfc",
       "integrity_class": "repository-readme",
       "mutable_policy": "append-only",
       "next_change_requires_dec": true,

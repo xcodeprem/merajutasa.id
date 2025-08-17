@@ -1,6 +1,6 @@
 {
   "mode": "verify",
-  "timestamp_utc": "2025-08-16T17:34:36Z",
+  "timestamp_utc": "2025-08-16T20:01:01Z",
   "updated": [],
   "unchanged": [
     "docs/roadmap/roadmap-master-v1.md",
@@ -21,10 +21,12 @@
     "docs/principles/GP1-GP10-index.md",
     "docs/privacy/pii-pattern-library-v1.md",
     "docs/analytics/dashboard-widgets-hysteresis-initial.md",
+    "docs/tests/hysteresis-test-plan-v1.md",
     "docs/faq/faq-fairness-hysteresis-update.md",
     "docs/status/progress-recap-latest-2025-08-12T035901Z.md",
     "docs/governance/disclaimers-lint-spec-v1.md",
     "docs/integrity/credential-schema-final-v1.md",
+    "docs/analytics/event-schema-canonical-v1.md",
     "docs/master-spec/master-spec-v2.0.md",
     "docs/transparency/changelog-excerpt-phase1.5.md",
     "docs/governance/policy-index-v1.md",
@@ -32,6 +34,7 @@
     "docs/archive/ux_public-multipage-experience-master-spec-v2.md",
     "docs/governance/trace/archive-trace-index-v1.md",
     "docs/onboarding/agent-bootstrap-manifest.md",
+    "README.md",
     "docs/governance/dec/DEC-20250812-04-governance-baseline-thresholds.md",
     "docs/integrity/evidence-minimum-phase1.5-v1.md",
     "docs/governance/dec/DEC-20250813-01-known-debt-register.md",
@@ -58,27 +61,11 @@
   ],
   "placeholders_sealed": [],
   "placeholders_remaining": [],
-  "violations": [
-    {
-      "code": "HASH_MISMATCH",
-      "path": "docs/tests/hysteresis-test-plan-v1.md",
-      "detail": "Manifest=87b4a17575228ad068f0d39bafe8063d2960a9628d4d13f713bf37fca25f52de current=0e13b0ef1f2c9f1c3a9ba346a4cad260b1f331521c98e077c10cc8cae6a7d2ca"
-    },
-    {
-      "code": "HASH_MISMATCH_DEC_REQUIRED",
-      "path": "docs/analytics/event-schema-canonical-v1.md",
-      "detail": "Manifest=6ab5269fc6e27ed4f26c761ff62ce0c6882bf3d945a882070b47b4d60b709dc3 current=b33cf1a9b6425f3da5d0b61184ac1818dcd196369fba11755406551235eef2b7"
-    },
-    {
-      "code": "HASH_MISMATCH_DEC_REQUIRED",
-      "path": "README.md",
-      "detail": "Manifest=6b889ef6071454476a2cb710c3c83b5e476bcaae1b117e6ad79be57661ea6b44 current=421ca79a58e9ea8d239614f0353070def4bc0a620f4e56674adb68feb998514d"
-    }
-  ],
+  "violations": [],
   "summary": {
     "total_entries": 55,
     "updated_count": 0,
-    "violation_count": 3,
+    "violation_count": 0,
     "placeholders_remaining_count": 0
   }
 }

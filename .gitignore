@@ -41,5 +41,10 @@ desktop.ini
 # Do NOT ignore artifacts/ directory: evidence & integrity JSON meant to be committed post-seal.
 # If specific large transient files appear later, add targeted patterns instead of excluding the whole folder.
 
+# Volatile logs and debugging artifacts (uploaded as GitHub Actions artifacts)
+artifacts/logs/
+artifacts/debug/
+artifacts/volatile/
+
 # Local integrity keys (private material – never commit)
 .integrity/

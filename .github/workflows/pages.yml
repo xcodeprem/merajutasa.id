@@ -13,20 +13,25 @@ permissions:
   id-token: write
 
 concurrency:
-  group: 'pages'
+  group: pages-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
         with:
           node-version: '20'
-      - run: PUPPETEER_SKIP_DOWNLOAD=true npm ci
-      - name: Run A8 (no-silent-drift) aggregator
-        run: node tools/no-silent-drift.js
+          cache: 'npm'
+      - name: Run A8 (no-silent-drift) Gates
+        uses: ./.github/actions/run-a8
+        with:
+          policy-path: 'tools/policy/policy.json'
+        env:
+          PUPPETEER_SKIP_DOWNLOAD: 'true'
       - name: Generate latest snapshots (H1)
         run: |
           node tools/fairness/generate-equity-snapshots.js || true
@@ -61,7 +66,7 @@ jobs:
             printf '</pre></body></html>' >> dist/changelog.html; \
           fi
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
         with:
           path: ./dist
 
@@ -70,8 +75,9 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     needs: build
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5

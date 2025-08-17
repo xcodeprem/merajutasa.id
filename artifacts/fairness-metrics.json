@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-16T15:51:28.992Z",
+  "generated_utc": "2025-08-16T20:01:04.337Z",
   "sources": {
     "scenarios_present": true,
     "unit_tests_present": true
@@ -24,13 +24,13 @@
   },
   "scenario_count": 10,
   "unit_tests": {
-    "total": 6,
-    "pass": 6,
+    "total": 10,
+    "pass": 10,
     "fail": 0,
     "pending": 0
   },
   "quality": {
     "unit_fail": 0,
-    "unit_pass": 6
+    "unit_pass": 10
   }
 }

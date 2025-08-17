@@ -9,6 +9,14 @@ on:
   pull_request_target:
     types: [opened, synchronize, reopened]
 
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: ci-guard-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   h1-guard:
     # Run for:
@@ -28,37 +36,32 @@ jobs:
     steps:
       - name: Checkout (PR/Push)
         if: ${{ github.event_name != 'pull_request_target' }}
-        uses: actions/checkout@v4
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:
           fetch-depth: 0
       - name: Checkout base for Dependabot (PR Target)
         if: ${{ github.event_name == 'pull_request_target' }}
-        uses: actions/checkout@v4
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:
           ref: ${{ github.base_ref }}
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
         with:
           node-version: '20'
           cache: 'npm'
 
-      - name: Install dependencies (CI)
-        run: |
-          npm ci || npm i --no-audit --no-fund
-      - name: Ensure yaml present (safety net)
-        run: |
-          npm ls yaml || npm i yaml@^2.4.5 --no-audit --no-fund
+      - name: Run A8 (no-silent-drift) Gates
+        uses: ./.github/actions/run-a8
+        with:
+          policy-path: 'tools/policy/policy.json'
 
       - name: Event Taxonomy Consistency
         run: npm run test:event-taxonomy
 
       - name: Fairness Engine Unit Tests
         run: npm run test:fairness-unit
-
-      - name: No-Silent-Drift Aggregator
-        run: node tools/no-silent-drift.js
 
       - name: Run H1 guard (fairness, snapshots, anomalies, KPIs, perf, a11y)
         run: node tools/h1-verify-guard.js
@@ -91,7 +94,7 @@ jobs:
           npm audit --audit-level=high || echo "npm audit found issues (non-blocking)"
 
       - name: Upload KPI artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
         with:
           name: h1-kpi-artifacts
           path: |
@@ -111,7 +114,7 @@ jobs:
 
       - name: Upload Chain Monitor Artifact
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
         with:
           name: chain-monitor
           path: artifacts/chain-monitor.json

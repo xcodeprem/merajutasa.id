@@ -5,13 +5,20 @@ on:
     - cron: '10 17 * * 0'
   workflow_dispatch:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: cron-weekly-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   weekly:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
         with:
           node-version: '20'
       - run: npm ci
@@ -21,7 +28,7 @@ jobs:
           node tools/weekly-trend-aggregator.js
           node tools/generate-h1-kpi-summary.js
       - name: Upload weekly artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
         with:
           name: weekly
           path: |

@@ -1,0 +1,102 @@
+{
+  "version": "1.0",
+  "description": "A8 (no-silent-drift) gating policy configuration",
+  "checks": {
+    "dec-lint": {
+      "gating": true,
+      "description": "DEC (Decision record) lint validation"
+    },
+    "spec-hash-diff": {
+      "gating": true,
+      "description": "Specification hash integrity verification"
+    },
+    "security-smoke": {
+      "gating": {
+        "HIGH": true,
+        "MEDIUM": false,
+        "LOW": false
+      },
+      "description": "Security patterns smoke test with severity-based gating"
+    },
+    "hype-lint": {
+      "gating": true,
+      "description": "Hype language detection and enforcement"
+    },
+    "disclaimer-lint": {
+      "gating": true,
+      "description": "Disclaimer compliance verification"
+    },
+    "param-integrity": {
+      "gating": true,
+      "description": "Parameter integrity matrix validation"
+    },
+    "fairness-unit": {
+      "gating": true,
+      "description": "Fairness engine unit tests"
+    },
+    "privacy-asserts": {
+      "gating": true,
+      "description": "Privacy assertion validation"
+    },
+    "evidence-collision": {
+      "gating": true,
+      "description": "Evidence hash collision detection"
+    },
+    "no-silent-drift": {
+      "gating": true,
+      "description": "Silent drift aggregator check"
+    },
+    "governed-change-scan": {
+      "gating": true,
+      "description": "Governed file change detection"
+    }
+  },
+  "routes": [
+    {
+      "pattern": "docs/analytics/event-schema-canonical-*.md",
+      "requires": ["dec-lint", "spec-hash-diff"],
+      "description": "Canonical event schema requires DEC and hash validation"
+    },
+    {
+      "pattern": "docs/**/*.md",
+      "requires": ["hype-lint", "disclaimer-lint"],
+      "description": "Documentation requires language compliance checks"
+    },
+    {
+      "pattern": "tools/**/*.js",
+      "requires": ["security-smoke"],
+      "description": "Tools require security pattern validation"
+    },
+    {
+      "pattern": "docs/governance/dec/**/*.md",
+      "requires": ["dec-lint"],
+      "description": "DEC files must pass lint validation"
+    },
+    {
+      "pattern": "artifacts/spec-hash-manifest.json",
+      "requires": ["spec-hash-diff"],
+      "description": "Hash manifest changes require validation"
+    }
+  ],
+  "enforcement": {
+    "fail_fast": true,
+    "allow_advisory_continue": true,
+    "max_violations": {
+      "HIGH": 0,
+      "MEDIUM": 999,
+      "MEDIUM": "unlimited",
+      "LOW": "unlimited"
+    }
+  },
+  "metadata": {
+    "created": "2025-08-16",
+    "author": "governance-pipeline-automation",
+    "version_history": [
+      {
+        "version": "1.0",
+        "date": "2025-08-16",
+        "changes": "Initial policy definition for A8 gating"
+      }
+    ]
+  }
+}

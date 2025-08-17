@@ -1,40 +1,12 @@
 {
-  "timestamp": "2025-08-16T17:37:10.595Z",
-  "files_scanned": 113,
-  "violations": [
-    {
-      "file": "tools/schema-validate.js",
-      "line": 9,
-      "pattern": "PATH_RESOLVE_USER",
-      "severity": "HIGH",
-      "description": "path.resolve with user input (directory traversal risk)",
-      "match": "path.resolve(process.argv[2])",
-      "context": "const dataPath = process.argv[2] ? path.resolve(process.argv[2]) : path.join(root, 'docs', 'data', 'portal-panti-sample.json');"
-    },
-    {
-      "file": "tools/generate-phase-tracker.js",
-      "line": 53,
-      "pattern": "EXEC_SYNC_STRING",
-      "severity": "HIGH",
-      "description": "execSync with template literal interpolation (shell injection risk)",
-      "match": "execSync(`git log -1 --format=%cI -- \"${DEC_FILE}\"`",
-      "context": "const out = execSync(`git log -1 --format=%cI -- \"${DEC_FILE}\"`, { stdio:['ignore','pipe','ignore'] }).toString().trim();"
-    },
-    {
-      "file": "tools/generate-phase-tracker.js",
-      "line": 53,
-      "pattern": "EXEC_SYNC_USAGE",
-      "severity": "MEDIUM",
-      "description": "execSync usage - consider execFileSync for better security",
-      "match": "execSync(",
-      "context": "const out = execSync(`git log -1 --format=%cI -- \"${DEC_FILE}\"`, { stdio:['ignore','pipe','ignore'] }).toString().trim();"
-    }
-  ],
+  "timestamp": "2025-08-16T20:01:02.268Z",
+  "files_scanned": 117,
+  "violations": [],
   "summary": {
-    "total_violations": 3,
+    "total_violations": 0,
     "by_severity": {
-      "HIGH": 2,
-      "MEDIUM": 1,
+      "HIGH": 0,
+      "MEDIUM": 0,
       "LOW": 0
     }
   }

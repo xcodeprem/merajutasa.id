@@ -12,6 +12,7 @@ permissions:
 jobs:
   phase-tracker:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     env:
       PHASE_TRACKER_TOKEN: ${{ secrets.PHASE_TRACKER_TOKEN }}
     permissions:
@@ -19,19 +20,19 @@ jobs:
       pull-requests: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:
           fetch-depth: 0
           persist-credentials: false
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
         with:
           node-version: '20'
       - name: Generate Phase Tracker
         run: |
           node tools/generate-phase-tracker.js
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
         with:
           name: phase-tracker
           path: artifacts/phase-tracker.json
@@ -49,7 +50,7 @@ jobs:
           echo "To enable automated PRs, add a repo secret named PHASE_TRACKER_TOKEN with a Fine-grained PAT (Contents: Read and write; Pull requests)."
       - name: Create PR for phase tracker update (using PAT)
         if: ${{ !cancelled() && env.PHASE_TRACKER_TOKEN != '' }}
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@5e914681df9dc83aa4e4905692ca88beb2f9e91f # v6.1.0
         with:
           commit-message: "chore: update phase-tracker"
           title: "chore: update phase-tracker"

@@ -4,6 +4,7 @@
  * Aggregates fairness and equity artifacts into a simple KPI summary for UI.
  */
 import { promises as fs } from 'fs';
+import { stableStringify, addMetadata } from './lib/json-stable.js';
 
 async function read(path){ try { return JSON.parse(await fs.readFile(path,'utf8')); } catch { return null; } }
 async function readNdjson(path){
@@ -86,7 +87,8 @@ async function main(){
   decision_mix: weekly?.decision_mix ?? null
     }
   };
-  await fs.writeFile('artifacts/h1-kpi-summary.json', JSON.stringify(result,null,2));
+  const resultWithMetadata = addMetadata(result, { generator: 'generate-h1-kpi-summary.js' });
+  await fs.writeFile('artifacts/h1-kpi-summary.json', stableStringify(resultWithMetadata));
   console.log(`[h1-kpi] fairness_pass=${result.fairness.pass} under_served=${result.equity.under_served_total} anomalies=${result.equity.anomalies_count}`);
 }
 

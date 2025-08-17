@@ -16,6 +16,52 @@
 import { spawn } from 'child_process';
 import { promises as fs } from 'fs';
 import path from 'path';
+import { stableStringify, addMetadata } from './lib/json-stable.js';
+
+/**
+ * Load and validate policy configuration
+ */
+async function loadPolicy(policyPath = 'tools/policy/policy.json') {
+  try {
+    const content = await fs.readFile(policyPath, 'utf8');
+    const policy = JSON.parse(content);
+    console.log(`[governance-verify] Loaded policy from ${policyPath}`);
+    return policy;
+  } catch (error) {
+    console.warn(`[governance-verify] Warning: Could not load policy from ${policyPath}: ${error.message}`);
+    return null;
+  }
+}
+
+/**
+ * Check security patterns smoke results and apply gating policy
+ */
+async function checkSecurityGating(policy) {
+  try {
+    const securityReport = await fs.readFile('artifacts/security-patterns-smoke.json', 'utf8');
+    const security = JSON.parse(securityReport);
+    
+    const highCount = security.high_severity_count || 0;
+    const mediumCount = security.medium_severity_count || 0;
+    
+    // Apply policy gating rules
+    const secPolicy = policy?.checks?.['security-smoke']?.gating;
+    if (secPolicy && secPolicy.HIGH && highCount > 0) {
+      console.error(`[governance-verify] SECURITY GATE FAILURE: ${highCount} HIGH severity security violations detected`);
+      console.error('[governance-verify] HIGH security violations are now gating (FAIL)');
+      return false;
+    }
+    
+    if (highCount > 0 || mediumCount > 0) {
+      console.warn(`[governance-verify] Security violations detected: ${highCount}H/${mediumCount}M`);
+    }
+    
+    return true;
+  } catch (error) {
+    console.warn(`[governance-verify] Warning: Could not check security patterns: ${error.message}`);
+    return true; // Don't fail if security check is missing
+  }
+}
 
 async function runSpecHashWithAutoSeal(){
   // First attempt strict verify
@@ -116,8 +162,9 @@ async function logAction(entry){
     const p = currentLogPath();
     let arr = [];
     try { arr = JSON.parse(await fs.readFile(p,'utf8')); if(!Array.isArray(arr)) arr=[]; } catch {/*ignore*/}
-    arr.push({ timestamp: new Date().toISOString(), ...entry });
-    await fs.writeFile(p, JSON.stringify(arr,null,2));
+    const logEntry = addMetadata({ timestamp: new Date().toISOString(), ...entry }, { generator: 'governance-verify' });
+    arr.push(logEntry);
+    await fs.writeFile(p, stableStringify(arr));
   } catch (e){
     console.error('[governance-verify] Failed to write action log', e);
   }
@@ -133,7 +180,8 @@ async function aggregate(){
     principles: 'artifacts/principles-impact-report.json',
   drift: 'artifacts/no-silent-drift-report.json',
   policyAgg: 'artifacts/policy-aggregation-threshold.json',
-  terminologyAdoption: 'artifacts/terminology-adoption.json'
+  terminologyAdoption: 'artifacts/terminology-adoption.json',
+  securitySmoke: 'artifacts/security-patterns-smoke.json'
   };
   // add privacy asserts
   artifactPaths.privacyAsserts = 'artifacts/privacy-asserts.json';
@@ -154,7 +202,10 @@ async function aggregate(){
   policy_aggregation_violations: out.artifacts.policyAgg?.violations?.length ?? 0,
   terminology_adoption_percent: out.artifacts.terminologyAdoption?.adoptionPercent ?? null,
   terminology_old_total: out.artifacts.terminologyAdoption?.old_total ?? null,
-  terminology_new_total: out.artifacts.terminologyAdoption?.new_total ?? null
+  terminology_new_total: out.artifacts.terminologyAdoption?.new_total ?? null,
+  security_high_count: out.artifacts.securitySmoke?.high_severity_count ?? 0,
+  security_medium_count: out.artifacts.securitySmoke?.medium_severity_count ?? 0,
+  security_summary: out.artifacts.securitySmoke?.summary || 'unknown'
   };
   // privacy asserts summary
   const pa = out.artifacts.privacyAsserts || {};
@@ -162,21 +213,65 @@ async function aggregate(){
   out.summary.privacy_retention_len = pa?.checks?.retention?.length ?? null;
   out.summary.privacy_format_invalid_prev = pa?.checks?.format?.invalid_previous_count ?? null;
   out.summary.privacy_freshness_ok = pa?.checks?.freshness?.ok ?? null;
-  await fs.writeFile('artifacts/governance-verify-summary.json', JSON.stringify(out,null,2));
+  
+  // Determine overall status
+  const criticalFailures = [];
+  if (out.summary.param_mismatches > 0) criticalFailures.push('param-mismatches');
+  if (out.summary.dec_lint_violation_count > 0) criticalFailures.push('dec-violations');
+  if (out.summary.security_high_count > 0) criticalFailures.push('high-security');
+  if (out.summary.drift_status === 'FAIL') criticalFailures.push('drift-detected');
+  
+  out.summary.overall_status = criticalFailures.length > 0 ? 'FAIL' : 'PASS';
+  out.summary.critical_failures = criticalFailures;
+  
+  // Add metadata
+  const enhancedOut = addMetadata(out, { generator: 'governance-verify-aggregator' });
+  
+  await fs.writeFile('artifacts/governance-verify-summary.json', stableStringify(enhancedOut));
 }
 
 async function main(){
+  // Parse command line arguments
+  const args = process.argv.slice(2);
+  const policyFlag = args.findIndex(arg => arg === '--policy');
+  const policyPath = policyFlag >= 0 && args[policyFlag + 1] ? args[policyFlag + 1] : 'tools/policy/policy.json';
+  const isA8Mode = args.includes('--a8');
+  
+  // Load policy configuration
+  const policy = await loadPolicy(policyPath);
+  
   // Special handling for the first step: mimic run but via helper
   if (process.argv[2] === '__internal_spechash__'){
     await runSpecHashWithAutoSeal();
     return;
   }
+  
+  let securityGatingPassed = true;
+  
   for (const step of STEPS){
     console.log(`[governance-verify] Running step: ${step.name}${step.critical?' [CRITICAL]': (step.advisory?' [ADVISORY]':'')}`);
     if (step.name === 'spec-hash-diff-strict-or-autoseal'){
       await runSpecHashWithAutoSeal();
     } else {
       await runStep(step);
+    }
+    
+    // Check security gating after security-patterns-smoke step
+    if (step.name === 'security-patterns-smoke' && policy) {
+      securityGatingPassed = await checkSecurityGating(policy);
+      if (!securityGatingPassed && !step.advisory) {
+        console.error('[governance-verify] Security gating failure - aborting pipeline');
+        process.exit(1);
+      }
+    }
+  }
+  
+  // Final security gating check if not done during steps
+  if (policy && securityGatingPassed) {
+    securityGatingPassed = await checkSecurityGating(policy);
+    if (!securityGatingPassed) {
+      console.error('[governance-verify] Final security gate check failed');
+      process.exit(1);
     }
   }
   // Optional: sign and append spec-hash-diff artifact to chain if services are reachable
