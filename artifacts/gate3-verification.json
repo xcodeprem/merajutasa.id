@@ -1,0 +1,45 @@
+{
+  "version": "1.0.0",
+  "generated_utc": "2025-08-17T16:18:38.902Z",
+  "gate": "Gate 3 - Stage 2 Terminology",
+  "status": "FAIL",
+  "requirements": [
+    {
+      "requirement": "Stage 2: Adoption >=70 and 0 banned (ranking terms)",
+      "status": "PASS",
+      "details": {
+        "adoptionPercent": 100,
+        "banned": 0
+      }
+    },
+    {
+      "requirement": "Stage 2 DEC present (proposed/adopted)",
+      "status": "PASS",
+      "details": {
+        "path": "docs/governance/dec/DEC-20250817-09-stage2-terminology-transition.md",
+        "status": "proposed"
+      }
+    },
+    {
+      "requirement": "Disclaimers updated and lint PASS",
+      "status": "FAIL",
+      "details": {
+        "disc_status": "PASS",
+        "d1_text": "Equity Index & daftar under‑served bukan ranking kualitas—hanya sinyal pemerataan.",
+        "d6_text": "Terminologi dalam fase transisi terbuka; adopsi dipantau publik."
+      }
+    },
+    {
+      "requirement": "Terminology trend artifacts present",
+      "status": "PASS",
+      "details": {
+        "entries": 11
+      }
+    }
+  ],
+  "summary": {
+    "total_requirements": 4,
+    "passed": 3,
+    "failed": 1
+  }
+}

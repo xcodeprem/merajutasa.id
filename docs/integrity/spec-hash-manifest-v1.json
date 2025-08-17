@@ -553,6 +553,17 @@
       "next_change_requires_dec": true,
       "notes": "Public-facing verification guide (CLI). Editorial evolution allowed; semantic policy shifts require DEC."
     }
+    ,
+    {
+      "path": "docs/public/ABOUT-PORTAL-PANTI.md",
+      "version": "1.0.0",
+      "dec_ref": "DEC-20250817-09",
+      "hash_sha256": "<PENDING_HASH>",
+      "integrity_class": "public-copy",
+      "mutable_policy": "append-only",
+      "next_change_requires_dec": true,
+      "notes": "Orientation copy bound under Stage 2 terminology DEC; seal hash on accept."
+    }
   ],
   "integrity_rules": {
     "immutable": "File content must never change; new adjustments require new file.",

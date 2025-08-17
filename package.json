@@ -90,6 +90,7 @@
     "equity:annotate": "node tools/equity-anomaly-annotate.js",
     "gate:1": "node tools/gate1-verify.js",
     "gate:2": "node tools/gate2-verify.js",
+  "gate:3": "node tools/gate3-verify.js",
     "pipeline:credential": "node tools/pipeline-runner.js",
     "chain:reset:dev": "node tools/chain-reset-dev.js",
     "monitor:chain": "node tools/chain-monitor.js",

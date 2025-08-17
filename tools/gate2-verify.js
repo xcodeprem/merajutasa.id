@@ -152,6 +152,29 @@ async function main() {
       error: e.message
     });
   }
+
+  // Gate 2 Requirement 5: Disclaimers lint PASS (governance critical)
+  console.log('[gate2-verify] Checking disclaimers lint...');
+  try {
+    const disc = await readJson('artifacts/disclaimers-lint.json');
+    const pass = disc?.status === 'PASS' && (disc?.summary?.errors || 0) === 0;
+    results.push({
+      requirement: 'Governance: Disclaimers Lint PASS',
+      status: pass ? 'PASS' : 'FAIL',
+      details: {
+        status: disc?.status,
+        errors: disc?.summary?.errors || 0,
+        warnings: disc?.summary?.warnings || 0,
+        computed_hash: disc?.summary?.computed_hash
+      }
+    });
+  } catch (e) {
+    results.push({
+      requirement: 'Governance: Disclaimers Lint PASS',
+      status: 'FAIL',
+      error: e.message
+    });
+  }
   
   // Generate final report
   const passedCount = results.filter(r => r.status === 'PASS').length;
