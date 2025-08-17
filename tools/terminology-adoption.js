@@ -24,9 +24,12 @@ async function main(){
   } catch {}
   const files = await glob('{docs,README.md}/**/*.md', { nodir:true, strict:false });
   let oldTotal=0, newTotal=0; const fileBreakdown=[]; let bannedHits=0; const suggestions=[];
+  // Build a unified set of old terms = mapping.old_terms ∪ dictionary.pairs[].old
+  const dictOld = dictPairs.map(p=> p.old).filter(Boolean);
+  const unifiedOld = Array.from(new Set([...(mapping.old_terms||[]), ...dictOld]));
   for (const f of files){
     let txt=''; try { txt = await fs.readFile(f,'utf8'); } catch {}
-    const { total: oldCount } = countOccurrences(txt, mapping.old_terms);
+  const { total: oldCount } = countOccurrences(txt, unifiedOld);
     const { total: newCount } = countOccurrences(txt, mapping.new_terms);
     oldTotal += oldCount; newTotal += newCount;
     bannedHits += oldCount;

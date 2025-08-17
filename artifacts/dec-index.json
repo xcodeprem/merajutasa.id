@@ -1,6 +1,6 @@
 {
-  "generated_utc": "2025-08-13T13:54:26.223Z",
-  "count": 15,
+  "generated_utc": "2025-08-17T14:06:52.241Z",
+  "count": 21,
   "decisions": [
     {
       "file": "DEC-20250812-02-hysteresis-adoption.md",
@@ -19,10 +19,10 @@
       "title": "Activation of principles.reference Lint & Hash Sealing Enforcement Phase 1",
       "class": "CIC-A",
       "status": "adopted",
-      "hash_field": "6f8089ffae66751df193e0a4ef7606f0a0a02a0097ddb049d11f845fc4f25c17\"  # sealed SHA256",
-      "content_sha256": "2b130509be258ce212ffc2e32dac9713e85f6eb0b6ccc989cd08cb4419580f2c",
+      "hash_field": "a50c2eda01942ad3a90eef5afa7fc5d00f532a0ea687e42c0483f21fe0cd6511",
+      "content_sha256": "6768d18bff8f7891998230cb18673d852409b1e2692e2b2abea384eb705e4b6a",
       "canonicalization_note": null,
-      "parse_error": "MULTILINE_IMPLICIT_KEY"
+      "parse_error": null
     },
     {
       "file": "DEC-20250812-04-governance-baseline-thresholds.md",
@@ -63,8 +63,8 @@
       "title": "Disclaimers Presence Enforcement Activation (Phase 2 Trigger)",
       "class": "CIC-A",
       "status": "draft",
-      "hash_field": "ab74f55133a1381f49e609243f490b6ffc4ca790efc04465152d8c12fc00c3a5",
-      "content_sha256": "47cd481b4ed82add3e37851f8ccb5aa60147c5a54d2ceb9c7f5b6c225c8ad2c7",
+      "hash_field": "8bf0f05cfa58004cac4decbc30639a10093a3dc7af1e63157b5e5c11e7dbee88",
+      "content_sha256": "925a3c1b73e9e9f61563a90273376846557d6cf9f4206ae59130f9fe2c5aaae9",
       "canonicalization_note": null,
       "parse_error": null
     },
@@ -85,10 +85,10 @@
       "title": "Wave 1 Gating Policy & Engine Core Governance Adoption",
       "class": "CIC-C",
       "status": "adopted",
-      "hash_field": "3a1531d53017473182648eaecb7b00ebba451e7487f591d141c12493b8651ae4",
-      "content_sha256": "64dd6ca471fe6768ce8a633295a9aa39a3390b0d3c943c52806b9c3a50d24076",
-      "canonicalization_note": null,
-      "parse_error": "MULTILINE_IMPLICIT_KEY"
+      "hash_field": "64aa3f0f4c29b45ed6e85140ec8a569de99c5a40fe48aaa9f6ea8d64e82c99ed",
+      "content_sha256": "8d98db9891bbae54b575ad65b173f4d773f2ad1fc7dce5c9224f5f01efe34f8c",
+      "canonicalization_note": "Nilai hash ini diganti placeholder saat canonicalization.",
+      "parse_error": null
     },
     {
       "file": "DEC-20250813-06-consolidated-governed-edits.md",
@@ -96,8 +96,8 @@
       "title": "Consolidated Governed Editorial & Integrity Edits",
       "class": "CIC-C",
       "status": "adopted",
-      "hash_field": "f915ad7693e086dac99de40f98694a022c0ae1360620bf759354146c5e22c43d",
-      "content_sha256": "9d046ec0c5dea3eba0369a3de25b713de4f32e0cd2aff5d071a7bb5f0a10020b",
+      "hash_field": "182ea87ccc15e09baec8b91c596c77a83e078b8804f866047c8413a19e748db0",
+      "content_sha256": "ea1e6ce3aac7ca95d8a74f15fa6d24d6e2647472f889122ac2a1559a8e3effb5",
       "canonicalization_note": "Nilai diganti placeholder saat canonical hash computation.",
       "parse_error": null
     },
@@ -107,10 +107,10 @@
       "title": "Hype Threshold Transition (Segmentation & Hard Gate Alignment)",
       "class": "CIC-C",
       "status": "adopted",
-      "hash_field": "c9483a189cbe193e8f4b2da52b444ae06e14ce5de3b94d4fc1e240d642903cbc",
-      "content_sha256": "db127caee34415e9046289967d84800a12bb75634eca44be5ea0afd5c4b2480d",
-      "canonicalization_note": null,
-      "parse_error": "BLOCK_AS_IMPLICIT_KEY"
+      "hash_field": "56cd40b31dd16c390fbaf8cb061d9a4113372b284fa39a6daa5caa07a772e431",
+      "content_sha256": "41b3c48f1e9afd12a2b98d18438b0badc0c38e9cb0a6f0c18115482ad3c9ad7e",
+      "canonicalization_note": "Nilai hash digantikan placeholder saat canonical compute.",
+      "parse_error": null
     },
     {
       "file": "DEC-20250813-08-evidence-hash-display-length.md",
@@ -146,13 +146,68 @@
       "parse_error": null
     },
     {
+      "file": "DEC-20250815-01-governed-editorial-maintenance.md",
+      "id": "DEC-20250815-01",
+      "title": "Governed Editorial Maintenance (README, Roadmap, Policy Index)",
+      "class": "decision",
+      "status": "adopted",
+      "hash_field": "8bdb770952f6b61d6827a8b61b89c0b4714d841fb6b28cb752e7c1f0c56dddea",
+      "content_sha256": "dd76154a33c2ba8ac6b3381efa70b27c0cd38120b9aa26a2a0fece0542693c1a",
+      "canonicalization_note": null,
+      "parse_error": null
+    },
+    {
+      "file": "DEC-20250815-02-hysteresis-config-update.md",
+      "id": "DEC-20250815-02",
+      "title": "Hysteresis Config Hash Adoption",
+      "class": "CIC-C",
+      "status": "draft",
+      "hash_field": null,
+      "content_sha256": "bc79fb1a532e3193015189de07ef102488f811780f3c74d5076a98ac223f1ca5",
+      "canonicalization_note": null,
+      "parse_error": null
+    },
+    {
+      "file": "DEC-20250815-03-trace-index-update.md",
+      "id": "DEC-20250815-03",
+      "title": "Trace Index Hash Adoption",
+      "class": "CIC-C",
+      "status": "draft",
+      "hash_field": null,
+      "content_sha256": "3e3015873238259fb761b5db41bcd7f55d14d0229ebaa7fe3711ef715872351d",
+      "canonicalization_note": null,
+      "parse_error": null
+    },
+    {
+      "file": "DEC-20250816-01-governance-pipeline-security-enhancement.md",
+      "id": "DEC-20250816-01",
+      "title": "Governance Pipeline Security Enhancement & Canonical Spec Updates",
+      "class": "CIC-B",
+      "status": "adopted",
+      "hash_field": "4c2147f1569bfe8466a3ead4a72a3fbb107aafac150ead9d3e08a6e9a76e028c",
+      "content_sha256": "8b1236de1c6c27c6a5da74ff49fc10ab34d6f76d5f9723aab026894925d8e93b",
+      "canonicalization_note": null,
+      "parse_error": null
+    },
+    {
+      "file": "DEC-TERM-09-stage2-terminology-transition.md",
+      "id": "DEC-TERM-09",
+      "title": "Stage 2 Terminology Transition — Adoption Policy and Public Copy Updates",
+      "class": "terminology",
+      "status": "proposed",
+      "hash_field": null,
+      "content_sha256": "2877f0eeebfb4387c6ef0902cd8464471a01806a3ed7491eb28f94720808e1ac",
+      "canonicalization_note": "Canonicalization uses normalized LF and trimmed trailing spaces before hashing.",
+      "parse_error": null
+    },
+    {
       "file": "DEC-style-guide-v1.md",
       "id": "GUIDANCE-DOC-DEC-STYLE-V1",
       "title": "Decision (DEC) Authoring Style Guide v1",
       "class": "guidance",
       "status": "superseded",
       "hash_field": "e1dcff6a2e0558e8335086d83f8a3385c31ef3a3d1f9ee4b66bc5c04ddfafb60",
-      "content_sha256": "99e5419636ca95a248f14a6de69a01018c112dfe7dba4951a30dd7c06b7c45ca",
+      "content_sha256": "e94f4c6d85b4e78d936a417841e848c555539d309a24badba845669f8f641a91",
       "canonicalization_note": null,
       "parse_error": null
     },
@@ -161,10 +216,21 @@
       "id": "GUIDANCE-DEC-STYLE-V2",
       "title": "DEC Authoring Style Guide v2 (Unified YAML-Only)",
       "class": "guidance",
-      "status": "adopted",
+      "status": "published",
       "hash_field": "a62354e51d7e71ab71dbed854fbf3cc67a89e234252602060642386d49b403ad",
-      "content_sha256": "1c76360fd35171e9866254fe31fe9609c6a52f19cccf438b96317033b0223445",
+      "content_sha256": "6568aa403b6e7bf3eb234b25e490a8c31dbffd55083b1e3b5ec19b196883eed9",
       "canonicalization_note": "Hash field diganti placeholder saat perhitungan canonical.",
+      "parse_error": null
+    },
+    {
+      "file": "DEC-style-guide-v3.md",
+      "id": "GUIDANCE-DEC-STYLE-V3",
+      "title": "DEC Authoring Style Guide v3 (Markdown Canonical with Front Matter)",
+      "class": "guidance",
+      "status": "published",
+      "hash_field": null,
+      "content_sha256": "c4b998f16eee370a5f14cfa5964ee9640578e16a9a91b4bd91221336cfeb9c87",
+      "canonicalization_note": null,
       "parse_error": null
     }
   ]

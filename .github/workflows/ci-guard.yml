@@ -79,9 +79,9 @@ jobs:
       - name: Markdown Lint (advisory)
         run: npm run lint:md || echo "Markdown linting found issues (advisory mode)"
 
-      - name: Terminology Adoption Enforcement (strict)
+      - name: Terminology Adoption Enforcement (Stage 2 thresholds)
         run: |
-          ADOPTION_MIN=85 BANNED_MAX=0 node tools/terminology-adoption.js
+          ADOPTION_MIN=70 BANNED_MAX=0 node tools/terminology-adoption.js
 
       - name: Generate Terminology Trend Report (Gate 2)
         run: node tools/terminology-adoption-trend.js

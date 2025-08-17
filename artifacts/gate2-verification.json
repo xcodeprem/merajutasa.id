@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-17T13:49:39.639Z",
+  "generated_utc": "2025-08-17T14:07:01.560Z",
   "gate": "Gate 2 - Expanded Transparency",
   "status": "PASS",
   "requirements": [
@@ -34,11 +34,11 @@
       "details": {
         "adoption_percent": 100,
         "adoption_persisted": true,
-        "trend_entries": 9,
+        "trend_entries": 10,
         "trend_report_generated": true,
         "ci_policy_enabled": true,
         "old_terms_total": 0,
-        "suggestions_count": 49
+        "suggestions_count": 50
       }
     },
     {

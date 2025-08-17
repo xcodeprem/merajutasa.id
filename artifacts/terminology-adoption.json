@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-17T13:49:40.349Z",
+  "generated_utc": "2025-08-17T14:07:02.476Z",
   "old_total": 0,
   "new_total": 0,
   "adoptionPercent": 100,
@@ -41,6 +41,11 @@
       "newCount": 0
     },
     {
+      "file": "docs\\tests\\hysteresis-test-plan-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
       "file": "docs\\support\\README.md",
       "oldCount": 0,
       "newCount": 0
@@ -72,11 +77,6 @@
     },
     {
       "file": "docs\\status\\GATE-1-CHECKLIST.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\tests\\hysteresis-test-plan-v1.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -116,11 +116,6 @@
       "newCount": 0
     },
     {
-      "file": "docs\\release\\README.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
       "file": "docs\\privacy\\README.md",
       "oldCount": 0,
       "newCount": 0
@@ -141,12 +136,7 @@
       "newCount": 0
     },
     {
-      "file": "docs\\principles\\GP1-GP10-index.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\policies\\README.md",
+      "file": "docs\\release\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -186,12 +176,12 @@
       "newCount": 0
     },
     {
-      "file": "docs\\master-spec\\master-spec-v2.0.md",
+      "file": "docs\\legal\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs\\legal\\README.md",
+      "file": "docs\\master-spec\\master-spec-v2.0.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -226,17 +216,17 @@
       "newCount": 0
     },
     {
+      "file": "docs\\principles\\GP1-GP10-index.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\policies\\README.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
       "file": "docs\\feedback\\feedback.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\faq\\privacy-faq-abridged.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -306,6 +296,16 @@
       "newCount": 0
     },
     {
+      "file": "docs\\faq\\privacy-faq-abridged.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
       "file": "docs\\fairness\\hysteresis-state-machine-transitions.md",
       "oldCount": 0,
       "newCount": 0
@@ -327,6 +327,16 @@
     },
     {
       "file": "docs\\fairness\\equity-page.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\audit\\00-rubrik-audit-portal-panti.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\data\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -356,27 +366,7 @@
       "newCount": 0
     },
     {
-      "file": "docs\\data\\README.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\audit\\00-rubrik-audit-portal-panti.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
       "file": "docs\\api\\README.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\privacy\\corpus\\negative-decoy.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -392,6 +382,26 @@
     },
     {
       "file": "docs\\produk\\portal-panti\\00-orientasi-komprehensif.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\privacy\\corpus\\negative-decoy.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\trace\\archive-trace-index-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-TERM-09-stage2-terminology-transition.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -502,11 +512,6 @@
     },
     {
       "file": "docs\\governance\\audit\\pr-template-line-audit-2025-08-12T0509Z.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs\\governance\\trace\\archive-trace-index-v1.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -649,41 +654,6 @@
           "old": "user",
           "new": "pengguna",
           "count": 5
-        }
-      ]
-    },
-    {
-      "file": "docs\\principles\\GP1-GP10-index.md",
-      "suggestions": [
-        {
-          "old": "ranking",
-          "new": "tanpa ranking",
-          "count": 4
-        },
-        {
-          "old": "top",
-          "new": "rekomendasi",
-          "count": 1
-        },
-        {
-          "old": "master",
-          "new": "utama",
-          "count": 12
-        },
-        {
-          "old": "user",
-          "new": "pengguna",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "file": "docs\\policies\\README.md",
-      "suggestions": [
-        {
-          "old": "ranking",
-          "new": "tanpa ranking",
-          "count": 1
         }
       ]
     },
@@ -868,8 +838,23 @@
       ]
     },
     {
-      "file": "docs\\faq\\privacy-faq-abridged.md",
+      "file": "docs\\principles\\GP1-GP10-index.md",
       "suggestions": [
+        {
+          "old": "ranking",
+          "new": "tanpa ranking",
+          "count": 4
+        },
+        {
+          "old": "top",
+          "new": "rekomendasi",
+          "count": 1
+        },
+        {
+          "old": "master",
+          "new": "utama",
+          "count": 12
+        },
         {
           "old": "user",
           "new": "pengguna",
@@ -878,12 +863,12 @@
       ]
     },
     {
-      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
+      "file": "docs\\policies\\README.md",
       "suggestions": [
         {
           "old": "ranking",
           "new": "tanpa ranking",
-          "count": 3
+          "count": 1
         }
       ]
     },
@@ -983,6 +968,26 @@
       ]
     },
     {
+      "file": "docs\\faq\\privacy-faq-abridged.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
+      "suggestions": [
+        {
+          "old": "ranking",
+          "new": "tanpa ranking",
+          "count": 3
+        }
+      ]
+    },
+    {
       "file": "docs\\fairness\\hysteresis-public-methodology-fragment-v1.md",
       "suggestions": [
         {
@@ -1008,6 +1013,21 @@
         {
           "old": "ranking",
           "new": "tanpa ranking",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs\\audit\\00-rubrik-audit-portal-panti.md",
+      "suggestions": [
+        {
+          "old": "peringkat",
+          "new": "tanpa peringkat",
+          "count": 2
+        },
+        {
+          "old": "terbaik",
+          "new": "sesuai kebutuhan",
           "count": 1
         }
       ]
@@ -1098,13 +1118,23 @@
       ]
     },
     {
-      "file": "docs\\audit\\00-rubrik-audit-portal-panti.md",
+      "file": "docs\\produk\\portal-panti\\01-ruang-lingkup-produk.md",
       "suggestions": [
+        {
+          "old": "ranking",
+          "new": "tanpa ranking",
+          "count": 1
+        },
         {
           "old": "peringkat",
           "new": "tanpa peringkat",
-          "count": 2
-        },
+          "count": 4
+        }
+      ]
+    },
+    {
+      "file": "docs\\produk\\portal-panti\\00-orientasi-komprehensif.md",
+      "suggestions": [
         {
           "old": "terbaik",
           "new": "sesuai kebutuhan",
@@ -1133,7 +1163,7 @@
       ]
     },
     {
-      "file": "docs\\produk\\portal-panti\\01-ruang-lingkup-produk.md",
+      "file": "docs\\governance\\trace\\archive-trace-index-v1.md",
       "suggestions": [
         {
           "old": "ranking",
@@ -1141,18 +1171,58 @@
           "count": 1
         },
         {
-          "old": "peringkat",
-          "new": "tanpa peringkat",
-          "count": 4
+          "old": "master",
+          "new": "utama",
+          "count": 6
         }
       ]
     },
     {
-      "file": "docs\\produk\\portal-panti\\00-orientasi-komprehensif.md",
+      "file": "docs\\governance\\dec\\DEC-TERM-09-stage2-terminology-transition.md",
       "suggestions": [
+        {
+          "old": "ranking",
+          "new": "tanpa ranking",
+          "count": 8
+        },
+        {
+          "old": "peringkat",
+          "new": "tanpa peringkat",
+          "count": 1
+        },
+        {
+          "old": "top",
+          "new": "rekomendasi",
+          "count": 1
+        },
         {
           "old": "terbaik",
           "new": "sesuai kebutuhan",
+          "count": 1
+        },
+        {
+          "old": "blacklist",
+          "new": "daftar blokir",
+          "count": 1
+        },
+        {
+          "old": "whitelist",
+          "new": "daftar izin",
+          "count": 1
+        },
+        {
+          "old": "master",
+          "new": "utama",
+          "count": 2
+        },
+        {
+          "old": "slave",
+          "new": "sekunder",
+          "count": 1
+        },
+        {
+          "old": "user",
+          "new": "pengguna",
           "count": 1
         }
       ]
@@ -1269,21 +1339,6 @@
           "old": "user",
           "new": "pengguna",
           "count": 1
-        }
-      ]
-    },
-    {
-      "file": "docs\\governance\\trace\\archive-trace-index-v1.md",
-      "suggestions": [
-        {
-          "old": "ranking",
-          "new": "tanpa ranking",
-          "count": 1
-        },
-        {
-          "old": "master",
-          "new": "utama",
-          "count": 6
         }
       ]
     }
