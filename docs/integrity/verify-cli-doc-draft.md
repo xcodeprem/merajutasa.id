@@ -136,9 +136,17 @@ If parameter integrity fails:
 If services fail to start:
 
 1. **Check port conflicts:**
-   ```bash
-   lsof -i :4601 -i :4602 -i :4603
-   ```
+    - macOS/Linux:
+
+       ```bash
+       lsof -i :4601 -i :4602 -i :4603
+       ```
+
+    - Windows (PowerShell):
+
+       ```powershell
+       Get-NetTCPConnection -LocalPort 4601,4602,4603 | Format-Table -AutoSize
+       ```
 
 2. **Review service logs** in stdout/stderr
 3. **Verify dependencies** are installed
@@ -169,6 +177,80 @@ const result = await new Promise((resolve) => {
 console.log(`Governance status: ${result ? 'PASS' : 'FAIL'}`);
 ```
 
+## Windows PowerShell quick recipes
+
+Use these end-to-end snippets on Windows (PowerShell v5+). They spin up ephemeral jobs, run checks, and then clean up.
+
+- Governance verify (core):
+
+   ```powershell
+   npm run governance:verify
+   ```
+
+- Signer + Chain: append a signed canonical item, verify chain, and cleanup:
+
+   ```powershell
+   npm run chain:append
+   ```
+
+- Collector smoke: start collector, ingest one sample event, then stop:
+
+   ```powershell
+   $c = Start-Job -ScriptBlock { node tools/services/collector.js }
+   Start-Sleep -Seconds 1
+   npm run collector:smoke
+   Get-Job | Remove-Job -Force
+   ```
+
+- Equity UI + Perf/A11y smoke (serves <http://127.0.0.1:4620/>):
+
+   ```powershell
+   $e = Start-Job -ScriptBlock { node tools/services/equity.js }
+   Start-Sleep -Seconds 1
+   npm run perf:budget
+   npm run a11y:smoke
+   Start-Process http://127.0.0.1:4620/
+   Get-Job | Remove-Job -Force
+   ```
+
+- Gate 1 verification summary and artifact snapshot:
+
+   ```powershell
+   npm run gate:1
+   npm run snapshot:artifacts
+   ```
+
+- Spec hash + parameter integrity (artifacts: spec-hash-diff.json, param-integrity-matrix.json):
+
+   ```powershell
+   npm run spec-hash:verify; npm run param:integrity
+   ```
+
+## Bash equivalents (optional)
+
+If you’re on macOS/Linux:
+
+```bash
+# Governance verify
+npm run governance:verify
+
+# Signer + Chain append (same as PowerShell one-liner)
+npm run chain:append
+
+# Collector smoke
+(node tools/services/collector.js &); sleep 1; npm run collector:smoke; kill %1 || true
+
+# Equity UI + Perf/A11y
+(node tools/services/equity.js &); sleep 1; npm run perf:budget; npm run a11y:smoke; kill %1 || true
+
+# Gate 1 and snapshot
+npm run gate:1
+npm run snapshot:artifacts
+
+# Hash and params
+npm run spec-hash:verify && npm run param:integrity
+```
+
 ## Exit Codes
 
 - `0` - Verification passed
@@ -197,6 +279,6 @@ Algorithm: SHA-256 over canonical JSON (sorted keys, UTF-8, LF line endings).
 
 ## 6. Next
 
-- Provide script examples (bash, powershell) once tooling stabilized.
+- Expand automation examples (CI snippets) after stabilizing H1 guard and dashboard assets.
 
 > Draft; finalize after signer & chain MVP live.

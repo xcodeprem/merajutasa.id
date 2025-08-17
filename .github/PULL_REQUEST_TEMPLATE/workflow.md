@@ -1,12 +1,13 @@
 # Workflow Changes - CI Governance Checklist
 
 > **This PR template is specifically for changes to GitHub Actions workflows, scripts, or CI governance.**
-> 
+>
 > If your PR does not modify files in `.github/workflows/`, `.github/actions/`, `.github/scripts/`, or related governance files, please use the main PR template instead.
 
 ## Overview
 
 **Type of workflow change:**
+
 - [ ] New workflow
 - [ ] Modify existing workflow  
 - [ ] New composite action
@@ -21,29 +22,34 @@
 ## Governance Compliance Checklist
 
 ### Actions Pinning ✅
+
 - [ ] All GitHub Actions are pinned to commit SHA (not tags or branches)
 - [ ] All action SHAs are present in `.github/actions-allowlist.json`
 - [ ] No new actions introduced without proper justification
 - [ ] Local actions (starting with `./`) are allowed without SHA pinning
 
 ### Workflow Security 🔒
+
 - [ ] Workflow has appropriate `permissions` block (principle of least privilege)
 - [ ] No secrets exposed in logs or outputs
 - [ ] Input validation is present where needed
 - [ ] Third-party actions are from trusted sources only
 
 ### Concurrency Configuration ⚡
+
 - [ ] Workflow includes `concurrency` block with meaningful group name
 - [ ] `cancel-in-progress: true` is set (unless job needs to complete)
 - [ ] Concurrency group is scoped appropriately (per branch/PR)
 
 ### A8 Governance Integration 🛡️
+
 - [ ] Workflow includes `run-a8` composite action (if appropriate)
 - [ ] `policy-path: tools/policy/policy.json` is explicitly specified
 - [ ] Governance checks run before main workflow logic
 - [ ] Artifacts are uploaded for audit trail
 
 ### Testing & Validation 🧪
+
 - [ ] Workflow tested in fork/draft PR
 - [ ] Actions pinning linter passes: `./.github/scripts/check-actions-pinning.sh`
 - [ ] No workflow syntax errors (GitHub Actions tab shows no issues)
@@ -58,6 +64,7 @@
 | | | | [ ] Reviewed |
 
 **New action security checklist:**
+
 - [ ] Action is from verified publisher or well-known organization
 - [ ] Action source code reviewed for security concerns
 - [ ] Action has good security track record (no recent CVEs)
@@ -70,6 +77,7 @@
 <!-- List workflows that will be impacted by this change -->
 
 **Breaking changes:**
+
 - [ ] No breaking changes
 - [ ] Breaking changes (explain mitigation below)
 
@@ -86,6 +94,7 @@
 ## Testing Evidence
 
 **Local testing:**
+
 ```
 # Paste output of governance checks
 $ ./.github/scripts/check-actions-pinning.sh
@@ -106,6 +115,7 @@ $ ./.github/scripts/check-actions-pinning.sh
 ## Security Considerations
 
 **For security-sensitive changes:**
+
 - [ ] Security team notified
 - [ ] Change has security review approval
 - [ ] No new attack vectors introduced
