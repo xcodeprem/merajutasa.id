@@ -9,6 +9,7 @@ Developer guide for integrating with MerajutASA governance and integrity service
 **Endpoint:** `http://localhost:4601` (default)
 
 #### POST /sign
+
 Sign data with Ed25519 key.
 
 ```bash
@@ -18,6 +19,7 @@ curl -X POST http://localhost:4601/sign \
 ```
 
 **Response:**
+
 ```json
 {
   "signature": "base64-encoded-signature",
@@ -27,6 +29,7 @@ curl -X POST http://localhost:4601/sign \
 ```
 
 #### POST /rotate
+
 Rotate signing key (authorized operations only).
 
 ```bash
@@ -38,6 +41,7 @@ curl -X POST http://localhost:4601/rotate
 **Endpoint:** `http://localhost:4602` (default)
 
 #### POST /append
+
 Append new entry to hash chain.
 
 ```bash
@@ -50,6 +54,7 @@ curl -X POST http://localhost:4602/append \
 ```
 
 **Response:**
+
 ```json
 {
   "seq": 123,
@@ -60,6 +65,7 @@ curl -X POST http://localhost:4602/append \
 ```
 
 #### GET /chain
+
 Retrieve chain entries.
 
 ```bash
@@ -75,6 +81,7 @@ curl http://localhost:4602/chain?from_seq=100&limit=50
 **Endpoint:** `http://localhost:4603` (default)
 
 #### POST /ingest
+
 Ingest event data for analysis.
 
 ```bash
@@ -91,6 +98,7 @@ curl -X POST http://localhost:4603/ingest \
 ```
 
 **Response:**
+
 ```json
 {
   "status": "accepted",
@@ -296,8 +304,9 @@ def send_event(event_name, meta=None, base_url="http://localhost:4603"):
 ### Service Configuration Files
 
 Services read configuration from:
+
 - `config/signer.yml`
-- `config/chain.yml` 
+- `config/chain.yml`
 - `config/collector.yml`
 
 ## Security
@@ -305,6 +314,7 @@ Services read configuration from:
 ### Authentication
 
 Currently services use basic port-based access control. Production deployments should add:
+
 - API key authentication
 - Rate limiting
 - IP allowlisting
