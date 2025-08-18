@@ -70,7 +70,6 @@
     "test:revocation-smoke": "node tools/tests/revocation-smoke.test.js",
     "test:equity-smoke": "node tools/tests/equity-smoke.test.js",
     "test:equity-ui-smoke": "node tools/tests/equity-ui-smoke.test.js",
-    "test:frontend-setup": "node tools/tests/frontend-setup-validation.test.js validate",
     "test:events-pipeline-hash": "node tools/tests/event-pipeline-hash.test.js",
     "test:event-taxonomy": "node tools/tests/event-taxonomy-consistency.test.js",
     "ci:governance-with-collector": "powershell -c \"$job=Start-Job -ScriptBlock { node tools/services/collector.js }; Start-Sleep -Seconds 1; node tools/governance-verify.js; Get-Job | Remove-Job -Force\"",
@@ -205,12 +204,11 @@
     "audit:start": "node infrastructure/compliance/audit-system.js --start",
     "audit:flush": "node infrastructure/compliance/audit-system.js --flush",
     "audit:report": "node infrastructure/compliance/audit-system.js --report",
-    "frontend:performance-test": "node tools/performance/frontend-performance-test.js test",
-    "frontend:lighthouse": "node tools/performance/frontend-metrics.js audit || node tools/performance/frontend-performance-test.js test",
-    "cache:stats": "node tools/performance/cache-stats.js stats",
-    "cache:monitor": "node tools/performance/cache-stats.js monitor",
-    "frontend:summary": "node tools/performance/frontend-summary.js dashboard",
-    "frontend:summary:json": "node tools/performance/frontend-summary.js json"
+    "integration:platform-start": "node -e \"import('./infrastructure/integration/infrastructure-integration-platform.js').then(m => m.getInfrastructureIntegrationPlatform().initialize().then(r => console.log('Platform initialized:', JSON.stringify(r, null, 2))))\"",
+    "integration:platform-status": "node -e \"import('./infrastructure/integration/infrastructure-integration-platform.js').then(m => m.getInfrastructureIntegrationPlatform().getSystemStatus().then(s => console.log('System Status:', JSON.stringify(s, null, 2))))\"",
+    "integration:dependency-analysis": "node -e \"import('./infrastructure/integration/component-dependency-analyzer.js').then(m => m.getComponentDependencyAnalyzer().initialize().then(r => console.log('Analysis completed:', JSON.stringify(r, null, 2))))\"",
+    "integration:startup-order": "node -e \"import('./infrastructure/integration/infrastructure-integration-platform.js').then(m => { const p = m.getInfrastructureIntegrationPlatform(); return p.initialize().then(() => console.log('Startup Order:', JSON.stringify(p.getStartupOrderDocumentation(), null, 2))); })\"",
+    "integration:health-check": "node -e \"import('./infrastructure/integration/infrastructure-integration-platform.js').then(m => m.getInfrastructureIntegrationPlatform().healthCheck().then(h => console.log('Health:', JSON.stringify(h, null, 2))))\""
   },
   "devDependencies": {
     "ajv": "^8.17.1",
