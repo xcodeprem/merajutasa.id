@@ -1,0 +1,200 @@
+{
+  "metadata": {
+    "timestamp": "2025-08-18T18:36:30.388Z",
+    "version": "1.0.0",
+    "config": {
+      "baseUrl": "http://localhost:4620",
+      "uiPath": "/ui/",
+      "apiEndpoints": [
+        "/health",
+        "/kpi/h1",
+        "/under-served",
+        "/weekly-trends",
+        "/monthly-rollup"
+      ],
+      "maxResponseTime": 500,
+      "maxApiResponseTime": 200,
+      "minApiSuccessRate": 95,
+      "iterations": 5,
+      "timeout": 5000,
+      "userAgent": "MerajutASA-PerformanceTest/1.0",
+      "outputPath": "artifacts/frontend-performance",
+      "saveReports": true
+    },
+    "testType": "lightweight_frontend_performance"
+  },
+  "ui": {
+    "accessible": false,
+    "error": "fetch failed",
+    "responseTime": 58
+  },
+  "api": {
+    "endpoints": {
+      "/health": {
+        "endpoint": "/health",
+        "success": false,
+        "successRate": 0,
+        "avgResponseTime": 2,
+        "minResponseTime": 2,
+        "maxResponseTime": 2,
+        "responseTimes": [
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "errors": [
+          "fetch failed",
+          "fetch failed",
+          "fetch failed",
+          "fetch failed",
+          "fetch failed"
+        ],
+        "performance": {
+          "grade": "A+",
+          "withinThreshold": true
+        }
+      },
+      "/kpi/h1": {
+        "endpoint": "/kpi/h1",
+        "success": false,
+        "successRate": 0,
+        "avgResponseTime": 2,
+        "minResponseTime": 1,
+        "maxResponseTime": 2,
+        "responseTimes": [
+          2,
+          2,
+          2,
+          2,
+          1
+        ],
+        "errors": [
+          "fetch failed",
+          "fetch failed",
+          "fetch failed",
+          "fetch failed",
+          "fetch failed"
+        ],
+        "performance": {
+          "grade": "A+",
+          "withinThreshold": true
+        }
+      },
+      "/under-served": {
+        "endpoint": "/under-served",
+        "success": false,
+        "successRate": 0,
+        "avgResponseTime": 2,
+        "minResponseTime": 1,
+        "maxResponseTime": 2,
+        "responseTimes": [
+          2,
+          1,
+          2,
+          2,
+          1
+        ],
+        "errors": [
+          "fetch failed",
+          "fetch failed",
+          "fetch failed",
+          "fetch failed",
+          "fetch failed"
+        ],
+        "performance": {
+          "grade": "A+",
+          "withinThreshold": true
+        }
+      },
+      "/weekly-trends": {
+        "endpoint": "/weekly-trends",
+        "success": false,
+        "successRate": 0,
+        "avgResponseTime": 2,
+        "minResponseTime": 1,
+        "maxResponseTime": 3,
+        "responseTimes": [
+          1,
+          1,
+          2,
+          1,
+          3
+        ],
+        "errors": [
+          "fetch failed",
+          "fetch failed",
+          "fetch failed",
+          "fetch failed",
+          "fetch failed"
+        ],
+        "performance": {
+          "grade": "A+",
+          "withinThreshold": true
+        }
+      },
+      "/monthly-rollup": {
+        "endpoint": "/monthly-rollup",
+        "success": false,
+        "successRate": 0,
+        "avgResponseTime": 1,
+        "minResponseTime": 1,
+        "maxResponseTime": 1,
+        "responseTimes": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "errors": [
+          "fetch failed",
+          "fetch failed",
+          "fetch failed",
+          "fetch failed",
+          "fetch failed"
+        ],
+        "performance": {
+          "grade": "A+",
+          "withinThreshold": true
+        }
+      }
+    },
+    "summary": {
+      "totalEndpoints": 5,
+      "successfulEndpoints": 0,
+      "successRate": 0,
+      "avgResponseTime": 0,
+      "performance": {
+        "grade": "F",
+        "meetsThresholds": false
+      }
+    }
+  },
+  "assets": {
+    "/ui/app.js": {
+      "accessible": false,
+      "error": "fetch failed",
+      "responseTime": 1
+    },
+    "/ui/index.html": {
+      "accessible": false,
+      "error": "fetch failed",
+      "responseTime": 1
+    }
+  },
+  "summary": {
+    "overallGrade": "F",
+    "recommendations": [
+      {
+        "type": "api_reliability",
+        "priority": "critical",
+        "message": "API success rate (0%) is below threshold (95%)",
+        "action": "Investigate API failures and improve error handling"
+      }
+    ],
+    "status": "FAIL"
+  },
+  "errors": []
+}

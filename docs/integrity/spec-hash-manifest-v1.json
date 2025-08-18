@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0",
-  "generation_timestamp_utc": "2025-08-18T09:48:23Z",
+  "generation_timestamp_utc": "2025-08-18T18:26:06Z",
   "generator_note": "Refined manifest: added onboarding & (optional) README, fixed dec_ref placeholders, standardized mutable_policy for adopted lint spec. All existing entries preserved; only additive or metadata corrections before first hash seal.",
   "files": [
     {
       "path": "docs/roadmap/roadmap-master-v1.md",
       "version": "1.0.0",
       "dec_ref": "DEC-20250815-01",
-      "hash_sha256": "10a48752eb09ccf77cd9efb4dd04c4bc59ec9caf611343d1e585ee6f36ddc0a6",
+      "hash_sha256": "47e2422ec217c15b4530dba9952543f05ac36d57b09d38eb6970ce65c9a68aa6",
       "integrity_class": "roadmap",
       "mutable_policy": "append-only",
       "next_change_requires_dec": true,
@@ -317,7 +317,7 @@
       "path": "README.md",
       "version": "1.0.0",
       "dec_ref": "DEC-20250813-04 + DEC-20250813-06 + DEC-20250815-01 + DEC-20250816-01",
-      "hash_sha256": "9159cb86ba26a16217e8ac323474dfb1df64a70259438dbb558515b4c7b6ad99",
+      "hash_sha256": "848148342463e740ed85ea80c4553a029de7ccebf4999c4b25ff68ecb2cc90b2",
       "integrity_class": "repository-readme",
       "mutable_policy": "append-only",
       "next_change_requires_dec": true,

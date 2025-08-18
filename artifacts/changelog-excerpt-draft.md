@@ -1,6 +1,6 @@
 # Transparency – Changelog Excerpt (Draft)
 
-Time: 2025-08-18T15:34:04.490Z
+Time: 2025-08-18T18:36:48.693Z
 
 - Spec hash changes: 0
 - Principles impacted: 
@@ -10,5 +10,5 @@ Time: 2025-08-18T15:34:04.490Z
 
 ## Stage 2 Terminology Transition
 
-- DEC: DEC-20250817-09 — adoption 100% (suggestions: 66, trend entries: 24)
+- DEC: DEC-20250817-09 — adoption 100% (suggestions: 74, trend entries: 24)
 This is an automatically generated draft. See artifacts JSON for details.

@@ -348,6 +348,22 @@
           ]
         },
         {
+          "ruleId": "PLATE_ID",
+          "level": "warning",
+          "message": {
+            "text": "PLATE_ID docs/roadmap/roadmap-next-phase-v2.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/roadmap/roadmap-next-phase-v2.md"
+                }
+              }
+            }
+          ]
+        },
+        {
           "ruleId": "CONTACT_EMAIL",
           "level": "note",
           "message": {
@@ -406,6 +422,86 @@
               "physicalLocation": {
                 "artifactLocation": {
                   "uri": "docs/roadmap/roadmap-master-v1.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CONTACT_EMAIL",
+          "level": "note",
+          "message": {
+            "text": "CONTACT_EMAIL docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-6.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-6.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CONTACT_EMAIL",
+          "level": "note",
+          "message": {
+            "text": "CONTACT_EMAIL docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-6.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-6.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CONTACT_EMAIL",
+          "level": "note",
+          "message": {
+            "text": "CONTACT_EMAIL docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-6.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-6.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "EMAIL_IN_NAME",
+          "level": "note",
+          "message": {
+            "text": "EMAIL_IN_NAME docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-6.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-6.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "MULTI_CATEGORY_ESCALATION",
+          "level": "note",
+          "message": {
+            "text": "MULTI_CATEGORY_ESCALATION docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-6.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-6.md"
                 }
               }
             }
