@@ -1,0 +1,35 @@
+{
+  "category": "integrations",
+  "totalComponents": 2,
+  "healthyComponents": 2,
+  "unhealthyComponents": 0,
+  "components": [
+    {
+      "component": "component-dependency-analyzer",
+      "path": "infrastructure/integration/component-dependency-analyzer.js",
+      "status": "healthy",
+      "message": "Component loadable, no explicit health check",
+      "responseTime": 2,
+      "timestamp": "2025-08-18T22:25:17.134Z",
+      "details": {
+        "status": "healthy",
+        "message": "Component loadable, no explicit health check",
+        "loadable": true
+      }
+    },
+    {
+      "component": "infrastructure-integration-platform",
+      "path": "infrastructure/integration/infrastructure-integration-platform.js",
+      "status": "healthy",
+      "message": "Component loadable, no explicit health check",
+      "responseTime": 3,
+      "timestamp": "2025-08-18T22:25:17.135Z",
+      "details": {
+        "status": "healthy",
+        "message": "Component loadable, no explicit health check",
+        "loadable": true
+      }
+    }
+  ],
+  "timestamp": "2025-08-18T22:25:17.135Z"
+}

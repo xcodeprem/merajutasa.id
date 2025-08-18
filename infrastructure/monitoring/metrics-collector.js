@@ -247,7 +247,7 @@ metrics.set('equity_score', equityMetricsCalculated);
 /**
  * HTTP Request tracking middleware
  */
-export function createMetricsMiddleware(serviceName) {
+function createMetricsMiddleware(serviceName) {
   return function metricsMiddleware(req, res, next) {
     const start = performance.now();
     
@@ -328,28 +328,28 @@ function collectSystemMetrics() {
 /**
  * Application-specific metrics tracking
  */
-export function trackSigningOperation(operation, status) {
+function trackSigningOperation(operation, status) {
   signingOperationsTotal.inc({
     operation: operation,
     status: status
   });
 }
 
-export function trackChainOperation(operation, status) {
+function trackChainOperation(operation, status) {
   chainOperationsTotal.inc({
     operation: operation,
     status: status
   });
 }
 
-export function trackEventIngestion(eventType, status) {
+function trackEventIngestion(eventType, status) {
   eventsIngestedTotal.inc({
     event_type: eventType,
     status: status
   });
 }
 
-export function updateEquityScore(metricType, score) {
+function updateEquityScore(metricType, score) {
   equityMetricsCalculated.set({
     metric_type: metricType
   }, score);

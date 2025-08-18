@@ -1,0 +1,62 @@
+{
+  "category": "compliance",
+  "totalComponents": 4,
+  "healthyComponents": 4,
+  "unhealthyComponents": 0,
+  "unknownComponents": 0,
+  "components": [
+    {
+      "component": "audit-system",
+      "path": "infrastructure/compliance/audit-system.js",
+      "status": "healthy",
+      "message": "Component loadable, no explicit health check",
+      "responseTime": 6,
+      "timestamp": "2025-08-18T22:27:37.799Z",
+      "details": {
+        "status": "healthy",
+        "message": "Component loadable, no explicit health check",
+        "loadable": true
+      }
+    },
+    {
+      "component": "compliance-automation",
+      "path": "infrastructure/compliance/compliance-automation.js",
+      "status": "healthy",
+      "message": "Component loadable, no explicit health check",
+      "responseTime": 7,
+      "timestamp": "2025-08-18T22:27:37.801Z",
+      "details": {
+        "status": "healthy",
+        "message": "Component loadable, no explicit health check",
+        "loadable": true
+      }
+    },
+    {
+      "component": "compliance-orchestrator",
+      "path": "infrastructure/compliance/compliance-orchestrator.js",
+      "status": "healthy",
+      "message": "Component loadable, no explicit health check",
+      "responseTime": 13,
+      "timestamp": "2025-08-18T22:27:37.807Z",
+      "details": {
+        "status": "healthy",
+        "message": "Component loadable, no explicit health check",
+        "loadable": true
+      }
+    },
+    {
+      "component": "privacy-rights-management",
+      "path": "infrastructure/compliance/privacy-rights-management.js",
+      "status": "healthy",
+      "message": "Component loadable, no explicit health check",
+      "responseTime": 10,
+      "timestamp": "2025-08-18T22:27:37.804Z",
+      "details": {
+        "status": "healthy",
+        "message": "Component loadable, no explicit health check",
+        "loadable": true
+      }
+    }
+  ],
+  "timestamp": "2025-08-18T22:27:37.807Z"
+}

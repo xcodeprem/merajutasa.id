@@ -1,0 +1,63 @@
+{
+  "_metadata": {
+    "actor": "copilot-swe-agent[bot]",
+    "generated_at": "2025-08-18T22:40:19.646Z",
+    "generator": "infra-health-check-all",
+    "git_ref": "refs/heads/copilot/fix-59",
+    "git_sha": "b04c9b610d95311381d46a86ed0c40db6df4e827",
+    "run_id": "17054171227",
+    "version": "1.0"
+  },
+  "category": "compliance",
+  "components": [
+    {
+      "category": "compliance",
+      "component": "audit-system",
+      "metrics": {
+        "loadable": true,
+        "message": "Component loadable, no explicit health check",
+        "responseTime": 6,
+        "status": "healthy"
+      },
+      "status": "HEALTHY",
+      "ts": "2025-08-18T22:40:19.637Z"
+    },
+    {
+      "category": "compliance",
+      "component": "compliance-automation",
+      "metrics": {
+        "loadable": true,
+        "message": "Component loadable, no explicit health check",
+        "responseTime": 8,
+        "status": "healthy"
+      },
+      "status": "HEALTHY",
+      "ts": "2025-08-18T22:40:19.639Z"
+    },
+    {
+      "category": "compliance",
+      "component": "compliance-orchestrator",
+      "metrics": {
+        "loadable": true,
+        "message": "Component loadable, no explicit health check",
+        "responseTime": 14,
+        "status": "healthy"
+      },
+      "status": "HEALTHY",
+      "ts": "2025-08-18T22:40:19.645Z"
+    },
+    {
+      "category": "compliance",
+      "component": "privacy-rights-management",
+      "metrics": {
+        "loadable": true,
+        "message": "Component loadable, no explicit health check",
+        "responseTime": 10,
+        "status": "healthy"
+      },
+      "status": "HEALTHY",
+      "ts": "2025-08-18T22:40:19.642Z"
+    }
+  ],
+  "totalComponents": 4
+}

@@ -1,0 +1,49 @@
+{
+  "category": "security",
+  "totalComponents": 3,
+  "healthyComponents": 3,
+  "unhealthyComponents": 0,
+  "unknownComponents": 0,
+  "components": [
+    {
+      "component": "security-hardening",
+      "path": "infrastructure/security/enhanced/security-hardening.js",
+      "status": "healthy",
+      "message": "Component loadable, no explicit health check",
+      "responseTime": 9,
+      "timestamp": "2025-08-18T22:27:37.596Z",
+      "details": {
+        "status": "healthy",
+        "message": "Component loadable, no explicit health check",
+        "loadable": true
+      }
+    },
+    {
+      "component": "input-validator",
+      "path": "infrastructure/security/input-validator.js",
+      "status": "healthy",
+      "message": "Component loadable, no explicit health check",
+      "responseTime": 4,
+      "timestamp": "2025-08-18T22:27:37.591Z",
+      "details": {
+        "status": "healthy",
+        "message": "Component loadable, no explicit health check",
+        "loadable": true
+      }
+    },
+    {
+      "component": "rate-limiter",
+      "path": "infrastructure/security/rate-limiter.js",
+      "status": "healthy",
+      "message": "Component loadable, no explicit health check",
+      "responseTime": 5,
+      "timestamp": "2025-08-18T22:27:37.592Z",
+      "details": {
+        "status": "healthy",
+        "message": "Component loadable, no explicit health check",
+        "loadable": true
+      }
+    }
+  ],
+  "timestamp": "2025-08-18T22:27:37.596Z"
+}

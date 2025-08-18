@@ -1,0 +1,101 @@
+{
+  "category": "performance",
+  "totalComponents": 7,
+  "healthyComponents": 7,
+  "unhealthyComponents": 0,
+  "unknownComponents": 0,
+  "components": [
+    {
+      "component": "performance-monitor",
+      "path": "infrastructure/performance/monitoring/performance-monitor.js",
+      "status": "healthy",
+      "message": "Component loadable, no explicit health check",
+      "responseTime": 5,
+      "timestamp": "2025-08-18T22:26:16.329Z",
+      "details": {
+        "status": "healthy",
+        "message": "Component loadable, no explicit health check",
+        "loadable": true
+      }
+    },
+    {
+      "component": "sla-monitor",
+      "path": "infrastructure/performance/monitoring/sla-monitor.js",
+      "status": "healthy",
+      "message": "Component loadable, no explicit health check",
+      "responseTime": 5,
+      "timestamp": "2025-08-18T22:26:16.329Z",
+      "details": {
+        "status": "healthy",
+        "message": "Component loadable, no explicit health check",
+        "loadable": true
+      }
+    },
+    {
+      "component": "cache-strategies",
+      "path": "infrastructure/performance/cache/cache-strategies.js",
+      "status": "healthy",
+      "message": "Component loadable, no explicit health check",
+      "responseTime": 6,
+      "timestamp": "2025-08-18T22:26:16.330Z",
+      "details": {
+        "status": "healthy",
+        "message": "Component loadable, no explicit health check",
+        "loadable": true
+      }
+    },
+    {
+      "component": "redis-manager",
+      "path": "infrastructure/performance/cache/redis-manager.js",
+      "status": "healthy",
+      "message": "Component loadable, no explicit health check",
+      "responseTime": 6,
+      "timestamp": "2025-08-18T22:26:16.330Z",
+      "details": {
+        "status": "healthy",
+        "message": "Component loadable, no explicit health check",
+        "loadable": true
+      }
+    },
+    {
+      "component": "enhanced-signer",
+      "path": "infrastructure/performance/services/enhanced-signer.js",
+      "status": "healthy",
+      "message": "Component loadable, no explicit health check",
+      "responseTime": 8,
+      "timestamp": "2025-08-18T22:26:16.333Z",
+      "details": {
+        "status": "healthy",
+        "message": "Component loadable, no explicit health check",
+        "loadable": true
+      }
+    },
+    {
+      "component": "response-compression",
+      "path": "infrastructure/performance/optimization/response-compression.js",
+      "status": "healthy",
+      "message": "Component loadable, no explicit health check",
+      "responseTime": 8,
+      "timestamp": "2025-08-18T22:26:16.333Z",
+      "details": {
+        "status": "healthy",
+        "message": "Component loadable, no explicit health check",
+        "loadable": true
+      }
+    },
+    {
+      "component": "connection-pool",
+      "path": "infrastructure/performance/optimization/connection-pool.js",
+      "status": "healthy",
+      "message": "Component loadable, no explicit health check",
+      "responseTime": 8,
+      "timestamp": "2025-08-18T22:26:16.333Z",
+      "details": {
+        "status": "healthy",
+        "message": "Component loadable, no explicit health check",
+        "loadable": true
+      }
+    }
+  ],
+  "timestamp": "2025-08-18T22:26:16.333Z"
+}

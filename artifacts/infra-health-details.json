@@ -1,0 +1,226 @@
+{
+  "_metadata": {
+    "actor": "copilot-swe-agent[bot]",
+    "generated_at": "2025-08-18T22:47:49.431Z",
+    "generator": "infra-health-check-all",
+    "git_ref": "refs/heads/copilot/fix-59",
+    "git_sha": "648f3b5b2612c310b356c773ab0fd1a5bf52512e",
+    "run_id": "17054360234",
+    "version": "1.0"
+  },
+  "category": "all",
+  "components": [
+    {
+      "category": "observability",
+      "component": "advanced-observability-system",
+      "error": {
+        "code": "ERR_MODULE_NOT_FOUND",
+        "message": "Cannot find package '@opentelemetry/auto-instrumentations-node' imported from /home/runner/work/merajutasa.id/merajutasa.id/infrastructure/observability/tracing/distributed-tracing.js"
+      },
+      "status": "FAILED",
+      "ts": "2025-08-18T22:47:49.303Z"
+    },
+    {
+      "category": "performance",
+      "component": "sla-monitor",
+      "metrics": {
+        "loadable": true,
+        "message": "Component loadable, no explicit health check",
+        "responseTime": 10,
+        "status": "healthy"
+      },
+      "status": "HEALTHY",
+      "ts": "2025-08-18T22:47:49.271Z"
+    },
+    {
+      "category": "performance",
+      "component": "cache-strategies",
+      "metrics": {
+        "loadable": true,
+        "message": "Component loadable, no explicit health check",
+        "responseTime": 42,
+        "status": "healthy"
+      },
+      "status": "HEALTHY",
+      "ts": "2025-08-18T22:47:49.303Z"
+    },
+    {
+      "category": "api-gateway",
+      "component": "api-gateway-orchestrator",
+      "metrics": {
+        "loadable": true,
+        "message": "Component loadable, no explicit health check",
+        "responseTime": 169,
+        "status": "healthy"
+      },
+      "status": "HEALTHY",
+      "ts": "2025-08-18T22:47:49.430Z"
+    },
+    {
+      "category": "api-gateway",
+      "component": "service-mesh",
+      "metrics": {
+        "loadable": true,
+        "message": "Component loadable, no explicit health check",
+        "responseTime": 13,
+        "status": "healthy"
+      },
+      "status": "HEALTHY",
+      "ts": "2025-08-18T22:47:49.274Z"
+    },
+    {
+      "category": "high-availability",
+      "component": "ha-orchestrator",
+      "metrics": {
+        "loadable": true,
+        "message": "Component loadable, no explicit health check",
+        "responseTime": 46,
+        "status": "healthy"
+      },
+      "status": "HEALTHY",
+      "ts": "2025-08-18T22:47:49.308Z"
+    },
+    {
+      "category": "high-availability",
+      "component": "health-monitoring",
+      "metrics": {
+        "loadable": true,
+        "message": "Component loadable, no explicit health check",
+        "responseTime": 13,
+        "status": "healthy"
+      },
+      "status": "HEALTHY",
+      "ts": "2025-08-18T22:47:49.275Z"
+    },
+    {
+      "category": "high-availability",
+      "component": "auto-scaling",
+      "metrics": {
+        "loadable": true,
+        "message": "Component loadable, no explicit health check",
+        "responseTime": 13,
+        "status": "healthy"
+      },
+      "status": "HEALTHY",
+      "ts": "2025-08-18T22:47:49.275Z"
+    },
+    {
+      "category": "compliance",
+      "component": "audit-system",
+      "metrics": {
+        "loadable": true,
+        "message": "Component loadable, no explicit health check",
+        "responseTime": 17,
+        "status": "healthy"
+      },
+      "status": "HEALTHY",
+      "ts": "2025-08-18T22:47:49.279Z"
+    },
+    {
+      "category": "compliance",
+      "component": "compliance-automation",
+      "metrics": {
+        "loadable": true,
+        "message": "Component loadable, no explicit health check",
+        "responseTime": 19,
+        "status": "healthy"
+      },
+      "status": "HEALTHY",
+      "ts": "2025-08-18T22:47:49.281Z"
+    },
+    {
+      "category": "compliance",
+      "component": "compliance-orchestrator",
+      "metrics": {
+        "loadable": true,
+        "message": "Component loadable, no explicit health check",
+        "responseTime": 23,
+        "status": "healthy"
+      },
+      "status": "HEALTHY",
+      "ts": "2025-08-18T22:47:49.286Z"
+    },
+    {
+      "category": "compliance",
+      "component": "privacy-rights-management",
+      "metrics": {
+        "loadable": true,
+        "message": "Component loadable, no explicit health check",
+        "responseTime": 21,
+        "status": "healthy"
+      },
+      "status": "HEALTHY",
+      "ts": "2025-08-18T22:47:49.284Z"
+    },
+    {
+      "category": "security",
+      "component": "security-hardening",
+      "metrics": {
+        "loadable": true
+      },
+      "status": "HEALTHY",
+      "ts": "2025-08-18T22:47:49.286Z"
+    },
+    {
+      "category": "monitoring",
+      "component": "metrics-collector",
+      "metrics": {
+        "loadable": true,
+        "message": "Component loadable, no explicit health check",
+        "responseTime": 25,
+        "status": "healthy"
+      },
+      "status": "HEALTHY",
+      "ts": "2025-08-18T22:47:49.289Z"
+    },
+    {
+      "category": "monitoring",
+      "component": "structured-logger",
+      "metrics": {
+        "loadable": true,
+        "message": "Component loadable, no explicit health check",
+        "responseTime": 25,
+        "status": "healthy"
+      },
+      "status": "HEALTHY",
+      "ts": "2025-08-18T22:47:49.289Z"
+    },
+    {
+      "category": "integrations",
+      "component": "component-dependency-analyzer",
+      "metrics": {
+        "loadable": true,
+        "message": "Component loadable, no explicit health check",
+        "responseTime": 25,
+        "status": "healthy"
+      },
+      "status": "HEALTHY",
+      "ts": "2025-08-18T22:47:49.290Z"
+    },
+    {
+      "category": "integrations",
+      "component": "infrastructure-integration-platform",
+      "metrics": {
+        "loadable": true,
+        "message": "Component loadable, no explicit health check",
+        "responseTime": 26,
+        "status": "healthy"
+      },
+      "status": "HEALTHY",
+      "ts": "2025-08-18T22:47:49.291Z"
+    },
+    {
+      "category": "dependencies",
+      "component": "component-dependency-analyzer",
+      "metrics": {
+        "loadable": true,
+        "message": "Component loadable, no explicit health check",
+        "responseTime": 25,
+        "status": "healthy"
+      },
+      "status": "HEALTHY",
+      "ts": "2025-08-18T22:47:49.290Z"
+    }
+  ],
+  "totalComponents": 18
+}

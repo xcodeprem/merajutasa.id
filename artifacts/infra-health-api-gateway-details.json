@@ -1,0 +1,39 @@
+{
+  "_metadata": {
+    "actor": "copilot-swe-agent[bot]",
+    "generated_at": "2025-08-18T22:48:00.214Z",
+    "generator": "infra-health-check-all",
+    "git_ref": "refs/heads/copilot/fix-59",
+    "git_sha": "648f3b5b2612c310b356c773ab0fd1a5bf52512e",
+    "run_id": "17054360234",
+    "version": "1.0"
+  },
+  "category": "api-gateway",
+  "components": [
+    {
+      "category": "api-gateway",
+      "component": "api-gateway-orchestrator",
+      "metrics": {
+        "loadable": true,
+        "message": "Component loadable, no explicit health check",
+        "responseTime": 111,
+        "status": "healthy"
+      },
+      "status": "HEALTHY",
+      "ts": "2025-08-18T22:48:00.213Z"
+    },
+    {
+      "category": "api-gateway",
+      "component": "service-mesh",
+      "metrics": {
+        "loadable": true,
+        "message": "Component loadable, no explicit health check",
+        "responseTime": 4,
+        "status": "healthy"
+      },
+      "status": "HEALTHY",
+      "ts": "2025-08-18T22:48:00.106Z"
+    }
+  ],
+  "totalComponents": 2
+}

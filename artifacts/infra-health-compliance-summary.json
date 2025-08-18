@@ -1,0 +1,23 @@
+{
+  "_metadata": {
+    "actor": "copilot-swe-agent[bot]",
+    "generated_at": "2025-08-18T22:40:19.647Z",
+    "generator": "infra-health-check-all",
+    "git_ref": "refs/heads/copilot/fix-59",
+    "git_sha": "b04c9b610d95311381d46a86ed0c40db6df4e827",
+    "run_id": "17054171227",
+    "version": "1.0"
+  },
+  "byCategory": {
+    "compliance": {
+      "degraded": 0,
+      "failed": 0,
+      "ok": 4
+    }
+  },
+  "degraded": 0,
+  "failed": 0,
+  "ok": 4,
+  "total": 4,
+  "ts": "2025-08-18T22:40:19.647Z"
+}

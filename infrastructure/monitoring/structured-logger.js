@@ -401,7 +401,7 @@ class StructuredLogger {
 /**
  * Create Express middleware for request logging
  */
-export function createLoggingMiddleware(logger) {
+function createLoggingMiddleware(logger) {
   return function loggingMiddleware(req, res, next) {
     const requestId = req.headers['x-request-id'] || logger.generateCorrelationId();
     const startTime = performance.now();

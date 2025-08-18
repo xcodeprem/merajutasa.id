@@ -1,0 +1,63 @@
+{
+  "category": "observability",
+  "totalComponents": 6,
+  "healthyComponents": 1,
+  "unhealthyComponents": 5,
+  "unknownComponents": 0,
+  "components": [
+    {
+      "component": "advanced-observability-system",
+      "path": "infrastructure/observability/advanced-observability-system.js",
+      "status": "unhealthy",
+      "message": "Cannot find module '/home/runner/work/merajutasa.id/merajutasa.id/infrastructure/observability/logs/log-aggregation.js' imported from /home/runner/work/merajutasa.id/merajutasa.id/infrastructure/observability/advanced-observability-system.js",
+      "error": "ERR_MODULE_NOT_FOUND",
+      "timestamp": "2025-08-18T22:24:51.776Z"
+    },
+    {
+      "component": "intelligent-alerting",
+      "path": "infrastructure/observability/alerting/intelligent-alerting.js",
+      "status": "unhealthy",
+      "message": "Cannot find package 'nodemailer' imported from /home/runner/work/merajutasa.id/merajutasa.id/infrastructure/observability/alerting/intelligent-alerting.js",
+      "error": "ERR_MODULE_NOT_FOUND",
+      "timestamp": "2025-08-18T22:24:51.781Z"
+    },
+    {
+      "component": "anomaly-detection",
+      "path": "infrastructure/observability/anomaly/anomaly-detection.js",
+      "status": "healthy",
+      "message": "Component loadable, no explicit health check",
+      "responseTime": 54,
+      "timestamp": "2025-08-18T22:24:51.824Z",
+      "details": {
+        "status": "healthy",
+        "message": "Component loadable, no explicit health check",
+        "loadable": true
+      }
+    },
+    {
+      "component": "real-time-dashboards",
+      "path": "infrastructure/observability/dashboards/real-time-dashboards.js",
+      "status": "unhealthy",
+      "message": "Cannot find package 'socket.io' imported from /home/runner/work/merajutasa.id/merajutasa.id/infrastructure/observability/dashboards/real-time-dashboards.js",
+      "error": "ERR_MODULE_NOT_FOUND",
+      "timestamp": "2025-08-18T22:24:51.786Z"
+    },
+    {
+      "component": "advanced-metrics-collector",
+      "path": "infrastructure/observability/metrics/advanced-metrics-collector.js",
+      "status": "unhealthy",
+      "message": "Cannot find package 'prom-client' imported from /home/runner/work/merajutasa.id/merajutasa.id/infrastructure/observability/metrics/advanced-metrics-collector.js",
+      "error": "ERR_MODULE_NOT_FOUND",
+      "timestamp": "2025-08-18T22:24:51.788Z"
+    },
+    {
+      "component": "distributed-tracing",
+      "path": "infrastructure/observability/tracing/distributed-tracing.js",
+      "status": "unhealthy",
+      "message": "Cannot find package '@opentelemetry/auto-instrumentations-node' imported from /home/runner/work/merajutasa.id/merajutasa.id/infrastructure/observability/tracing/distributed-tracing.js",
+      "error": "ERR_MODULE_NOT_FOUND",
+      "timestamp": "2025-08-18T22:24:51.790Z"
+    }
+  ],
+  "timestamp": "2025-08-18T22:24:51.824Z"
+}

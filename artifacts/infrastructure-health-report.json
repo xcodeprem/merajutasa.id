@@ -1,0 +1,570 @@
+{
+  "overall": {
+    "status": "degraded",
+    "totalComponents": 37,
+    "healthyComponents": 30,
+    "unhealthyComponents": 7,
+    "unknownComponents": 0,
+    "healthyPercentage": 81,
+    "duration": 169,
+    "timestamp": "2025-08-18T22:26:23.575Z"
+  },
+  "categories": {
+    "api-gateway": {
+      "category": "api-gateway",
+      "totalComponents": 4,
+      "healthyComponents": 4,
+      "unhealthyComponents": 0,
+      "unknownComponents": 0,
+      "components": [
+        {
+          "component": "api-gateway-core",
+          "path": "infrastructure/api-gateway/api-gateway-core.js",
+          "status": "healthy",
+          "message": "Component loadable, no explicit health check",
+          "responseTime": 111,
+          "timestamp": "2025-08-18T22:26:23.517Z",
+          "details": {
+            "status": "healthy",
+            "message": "Component loadable, no explicit health check",
+            "loadable": true
+          }
+        },
+        {
+          "component": "api-gateway-orchestrator",
+          "path": "infrastructure/api-gateway/api-gateway-orchestrator.js",
+          "status": "healthy",
+          "message": "Component loadable, no explicit health check",
+          "responseTime": 111,
+          "timestamp": "2025-08-18T22:26:23.517Z",
+          "details": {
+            "status": "healthy",
+            "message": "Component loadable, no explicit health check",
+            "loadable": true
+          }
+        },
+        {
+          "component": "openapi-documentation",
+          "path": "infrastructure/api-gateway/openapi-documentation.js",
+          "status": "healthy",
+          "message": "Component loadable, no explicit health check",
+          "responseTime": 10,
+          "timestamp": "2025-08-18T22:26:23.416Z",
+          "details": {
+            "status": "healthy",
+            "message": "Component loadable, no explicit health check",
+            "loadable": true
+          }
+        },
+        {
+          "component": "service-mesh",
+          "path": "infrastructure/api-gateway/service-mesh.js",
+          "status": "healthy",
+          "message": "Component loadable, no explicit health check",
+          "responseTime": 10,
+          "timestamp": "2025-08-18T22:26:23.416Z",
+          "details": {
+            "status": "healthy",
+            "message": "Component loadable, no explicit health check",
+            "loadable": true
+          }
+        }
+      ],
+      "timestamp": "2025-08-18T22:26:23.517Z"
+    },
+    "auth": {
+      "category": "auth",
+      "totalComponents": 1,
+      "healthyComponents": 1,
+      "unhealthyComponents": 0,
+      "unknownComponents": 0,
+      "components": [
+        {
+          "component": "auth-middleware",
+          "path": "infrastructure/auth/auth-middleware.js",
+          "status": "healthy",
+          "message": "Component loadable, no explicit health check",
+          "responseTime": 1,
+          "timestamp": "2025-08-18T22:26:23.518Z",
+          "details": {
+            "status": "healthy",
+            "message": "Component loadable, no explicit health check",
+            "loadable": true
+          }
+        }
+      ],
+      "timestamp": "2025-08-18T22:26:23.518Z"
+    },
+    "backup": {
+      "category": "backup",
+      "totalComponents": 1,
+      "healthyComponents": 1,
+      "unhealthyComponents": 0,
+      "unknownComponents": 0,
+      "components": [
+        {
+          "component": "backup-service",
+          "path": "infrastructure/backup/backup-service.js",
+          "status": "healthy",
+          "message": "Component loadable, no explicit health check",
+          "responseTime": 1,
+          "timestamp": "2025-08-18T22:26:23.520Z",
+          "details": {
+            "status": "healthy",
+            "message": "Component loadable, no explicit health check",
+            "loadable": true
+          }
+        }
+      ],
+      "timestamp": "2025-08-18T22:26:23.520Z"
+    },
+    "cicd": {
+      "category": "cicd",
+      "totalComponents": 1,
+      "healthyComponents": 1,
+      "unhealthyComponents": 0,
+      "unknownComponents": 0,
+      "components": [
+        {
+          "component": "pipeline-manager",
+          "path": "infrastructure/cicd/pipeline-manager.js",
+          "status": "healthy",
+          "message": "Component loadable, no explicit health check",
+          "responseTime": 0,
+          "timestamp": "2025-08-18T22:26:23.520Z",
+          "details": {
+            "status": "healthy",
+            "message": "Component loadable, no explicit health check",
+            "loadable": true
+          }
+        }
+      ],
+      "timestamp": "2025-08-18T22:26:23.520Z"
+    },
+    "compliance": {
+      "category": "compliance",
+      "totalComponents": 4,
+      "healthyComponents": 4,
+      "unhealthyComponents": 0,
+      "unknownComponents": 0,
+      "components": [
+        {
+          "component": "audit-system",
+          "path": "infrastructure/compliance/audit-system.js",
+          "status": "healthy",
+          "message": "Component loadable, no explicit health check",
+          "responseTime": 2,
+          "timestamp": "2025-08-18T22:26:23.523Z",
+          "details": {
+            "status": "healthy",
+            "message": "Component loadable, no explicit health check",
+            "loadable": true
+          }
+        },
+        {
+          "component": "compliance-automation",
+          "path": "infrastructure/compliance/compliance-automation.js",
+          "status": "healthy",
+          "message": "Component loadable, no explicit health check",
+          "responseTime": 4,
+          "timestamp": "2025-08-18T22:26:23.525Z",
+          "details": {
+            "status": "healthy",
+            "message": "Component loadable, no explicit health check",
+            "loadable": true
+          }
+        },
+        {
+          "component": "compliance-orchestrator",
+          "path": "infrastructure/compliance/compliance-orchestrator.js",
+          "status": "healthy",
+          "message": "Component loadable, no explicit health check",
+          "responseTime": 9,
+          "timestamp": "2025-08-18T22:26:23.530Z",
+          "details": {
+            "status": "healthy",
+            "message": "Component loadable, no explicit health check",
+            "loadable": true
+          }
+        },
+        {
+          "component": "privacy-rights-management",
+          "path": "infrastructure/compliance/privacy-rights-management.js",
+          "status": "healthy",
+          "message": "Component loadable, no explicit health check",
+          "responseTime": 6,
+          "timestamp": "2025-08-18T22:26:23.527Z",
+          "details": {
+            "status": "healthy",
+            "message": "Component loadable, no explicit health check",
+            "loadable": true
+          }
+        }
+      ],
+      "timestamp": "2025-08-18T22:26:23.530Z"
+    },
+    "governance": {
+      "category": "governance",
+      "totalComponents": 2,
+      "healthyComponents": 2,
+      "unhealthyComponents": 0,
+      "unknownComponents": 0,
+      "components": [
+        {
+          "component": "component-dependency-analyzer",
+          "path": "infrastructure/integration/component-dependency-analyzer.js",
+          "status": "healthy",
+          "message": "Component loadable, no explicit health check",
+          "responseTime": 2,
+          "timestamp": "2025-08-18T22:26:23.532Z",
+          "details": {
+            "status": "healthy",
+            "message": "Component loadable, no explicit health check",
+            "loadable": true
+          }
+        },
+        {
+          "component": "infrastructure-integration-platform",
+          "path": "infrastructure/integration/infrastructure-integration-platform.js",
+          "status": "healthy",
+          "message": "Component loadable, no explicit health check",
+          "responseTime": 1,
+          "timestamp": "2025-08-18T22:26:23.532Z",
+          "details": {
+            "status": "healthy",
+            "message": "Component loadable, no explicit health check",
+            "loadable": true
+          }
+        }
+      ],
+      "timestamp": "2025-08-18T22:26:23.532Z"
+    },
+    "high-availability": {
+      "category": "high-availability",
+      "totalComponents": 6,
+      "healthyComponents": 6,
+      "unhealthyComponents": 0,
+      "unknownComponents": 0,
+      "components": [
+        {
+          "component": "auto-scaling",
+          "path": "infrastructure/high-availability/auto-scaling.js",
+          "status": "healthy",
+          "message": "Component loadable, no explicit health check",
+          "responseTime": 3,
+          "timestamp": "2025-08-18T22:26:23.535Z",
+          "details": {
+            "status": "healthy",
+            "message": "Component loadable, no explicit health check",
+            "loadable": true
+          }
+        },
+        {
+          "component": "disaster-recovery",
+          "path": "infrastructure/high-availability/disaster-recovery.js",
+          "status": "healthy",
+          "message": "Component loadable, no explicit health check",
+          "responseTime": 4,
+          "timestamp": "2025-08-18T22:26:23.536Z",
+          "details": {
+            "status": "healthy",
+            "message": "Component loadable, no explicit health check",
+            "loadable": true
+          }
+        },
+        {
+          "component": "fault-tolerance",
+          "path": "infrastructure/high-availability/fault-tolerance.js",
+          "status": "healthy",
+          "message": "Component loadable, no explicit health check",
+          "responseTime": 5,
+          "timestamp": "2025-08-18T22:26:23.537Z",
+          "details": {
+            "status": "healthy",
+            "message": "Component loadable, no explicit health check",
+            "loadable": true
+          }
+        },
+        {
+          "component": "ha-orchestrator",
+          "path": "infrastructure/high-availability/ha-orchestrator.js",
+          "status": "healthy",
+          "message": "Component loadable, no explicit health check",
+          "responseTime": 5,
+          "timestamp": "2025-08-18T22:26:23.538Z",
+          "details": {
+            "status": "healthy",
+            "message": "Component loadable, no explicit health check",
+            "loadable": true
+          }
+        },
+        {
+          "component": "health-monitoring",
+          "path": "infrastructure/high-availability/health-monitoring.js",
+          "status": "healthy",
+          "message": "Component loadable, no explicit health check",
+          "responseTime": 4,
+          "timestamp": "2025-08-18T22:26:23.537Z",
+          "details": {
+            "status": "healthy",
+            "message": "Component loadable, no explicit health check",
+            "loadable": true
+          }
+        },
+        {
+          "component": "multi-region-deployment",
+          "path": "infrastructure/high-availability/multi-region-deployment.js",
+          "status": "healthy",
+          "message": "Component loadable, no explicit health check",
+          "responseTime": 5,
+          "timestamp": "2025-08-18T22:26:23.538Z",
+          "details": {
+            "status": "healthy",
+            "message": "Component loadable, no explicit health check",
+            "loadable": true
+          }
+        }
+      ],
+      "timestamp": "2025-08-18T22:26:23.538Z"
+    },
+    "monitoring": {
+      "category": "monitoring",
+      "totalComponents": 2,
+      "healthyComponents": 0,
+      "unhealthyComponents": 2,
+      "unknownComponents": 0,
+      "components": [
+        {
+          "component": "metrics-collector",
+          "path": "infrastructure/monitoring/metrics-collector.js",
+          "status": "unhealthy",
+          "message": "Duplicate export of 'updateEquityScore'",
+          "error": "SyntaxError",
+          "timestamp": "2025-08-18T22:26:23.539Z"
+        },
+        {
+          "component": "structured-logger",
+          "path": "infrastructure/monitoring/structured-logger.js",
+          "status": "unhealthy",
+          "message": "Duplicate export of 'createLoggingMiddleware'",
+          "error": "SyntaxError",
+          "timestamp": "2025-08-18T22:26:23.539Z"
+        }
+      ],
+      "timestamp": "2025-08-18T22:26:23.539Z"
+    },
+    "observability": {
+      "category": "observability",
+      "totalComponents": 6,
+      "healthyComponents": 1,
+      "unhealthyComponents": 5,
+      "unknownComponents": 0,
+      "components": [
+        {
+          "component": "advanced-observability-system",
+          "path": "infrastructure/observability/advanced-observability-system.js",
+          "status": "unhealthy",
+          "message": "Cannot find module '/home/runner/work/merajutasa.id/merajutasa.id/infrastructure/observability/logs/log-aggregation.js' imported from /home/runner/work/merajutasa.id/merajutasa.id/infrastructure/observability/advanced-observability-system.js",
+          "error": "ERR_MODULE_NOT_FOUND",
+          "timestamp": "2025-08-18T22:26:23.542Z"
+        },
+        {
+          "component": "intelligent-alerting",
+          "path": "infrastructure/observability/alerting/intelligent-alerting.js",
+          "status": "unhealthy",
+          "message": "Cannot find package 'nodemailer' imported from /home/runner/work/merajutasa.id/merajutasa.id/infrastructure/observability/alerting/intelligent-alerting.js",
+          "error": "ERR_MODULE_NOT_FOUND",
+          "timestamp": "2025-08-18T22:26:23.544Z"
+        },
+        {
+          "component": "anomaly-detection",
+          "path": "infrastructure/observability/anomaly/anomaly-detection.js",
+          "status": "healthy",
+          "message": "Component loadable, no explicit health check",
+          "responseTime": 3,
+          "timestamp": "2025-08-18T22:26:23.543Z",
+          "details": {
+            "status": "healthy",
+            "message": "Component loadable, no explicit health check",
+            "loadable": true
+          }
+        },
+        {
+          "component": "real-time-dashboards",
+          "path": "infrastructure/observability/dashboards/real-time-dashboards.js",
+          "status": "unhealthy",
+          "message": "Cannot find package 'socket.io' imported from /home/runner/work/merajutasa.id/merajutasa.id/infrastructure/observability/dashboards/real-time-dashboards.js",
+          "error": "ERR_MODULE_NOT_FOUND",
+          "timestamp": "2025-08-18T22:26:23.545Z"
+        },
+        {
+          "component": "advanced-metrics-collector",
+          "path": "infrastructure/observability/metrics/advanced-metrics-collector.js",
+          "status": "unhealthy",
+          "message": "Cannot find package 'prom-client' imported from /home/runner/work/merajutasa.id/merajutasa.id/infrastructure/observability/metrics/advanced-metrics-collector.js",
+          "error": "ERR_MODULE_NOT_FOUND",
+          "timestamp": "2025-08-18T22:26:23.549Z"
+        },
+        {
+          "component": "distributed-tracing",
+          "path": "infrastructure/observability/tracing/distributed-tracing.js",
+          "status": "unhealthy",
+          "message": "Cannot find package '@opentelemetry/auto-instrumentations-node' imported from /home/runner/work/merajutasa.id/merajutasa.id/infrastructure/observability/tracing/distributed-tracing.js",
+          "error": "ERR_MODULE_NOT_FOUND",
+          "timestamp": "2025-08-18T22:26:23.548Z"
+        }
+      ],
+      "timestamp": "2025-08-18T22:26:23.549Z"
+    },
+    "performance": {
+      "category": "performance",
+      "totalComponents": 7,
+      "healthyComponents": 7,
+      "unhealthyComponents": 0,
+      "unknownComponents": 0,
+      "components": [
+        {
+          "component": "performance-monitor",
+          "path": "infrastructure/performance/monitoring/performance-monitor.js",
+          "status": "healthy",
+          "message": "Component loadable, no explicit health check",
+          "responseTime": 16,
+          "timestamp": "2025-08-18T22:26:23.565Z",
+          "details": {
+            "status": "healthy",
+            "message": "Component loadable, no explicit health check",
+            "loadable": true
+          }
+        },
+        {
+          "component": "sla-monitor",
+          "path": "infrastructure/performance/monitoring/sla-monitor.js",
+          "status": "healthy",
+          "message": "Component loadable, no explicit health check",
+          "responseTime": 17,
+          "timestamp": "2025-08-18T22:26:23.566Z",
+          "details": {
+            "status": "healthy",
+            "message": "Component loadable, no explicit health check",
+            "loadable": true
+          }
+        },
+        {
+          "component": "cache-strategies",
+          "path": "infrastructure/performance/cache/cache-strategies.js",
+          "status": "healthy",
+          "message": "Component loadable, no explicit health check",
+          "responseTime": 18,
+          "timestamp": "2025-08-18T22:26:23.567Z",
+          "details": {
+            "status": "healthy",
+            "message": "Component loadable, no explicit health check",
+            "loadable": true
+          }
+        },
+        {
+          "component": "redis-manager",
+          "path": "infrastructure/performance/cache/redis-manager.js",
+          "status": "healthy",
+          "message": "Component loadable, no explicit health check",
+          "responseTime": 18,
+          "timestamp": "2025-08-18T22:26:23.567Z",
+          "details": {
+            "status": "healthy",
+            "message": "Component loadable, no explicit health check",
+            "loadable": true
+          }
+        },
+        {
+          "component": "enhanced-signer",
+          "path": "infrastructure/performance/services/enhanced-signer.js",
+          "status": "healthy",
+          "message": "Component loadable, no explicit health check",
+          "responseTime": 18,
+          "timestamp": "2025-08-18T22:26:23.568Z",
+          "details": {
+            "status": "healthy",
+            "message": "Component loadable, no explicit health check",
+            "loadable": true
+          }
+        },
+        {
+          "component": "response-compression",
+          "path": "infrastructure/performance/optimization/response-compression.js",
+          "status": "healthy",
+          "message": "Component loadable, no explicit health check",
+          "responseTime": 18,
+          "timestamp": "2025-08-18T22:26:23.568Z",
+          "details": {
+            "status": "healthy",
+            "message": "Component loadable, no explicit health check",
+            "loadable": true
+          }
+        },
+        {
+          "component": "connection-pool",
+          "path": "infrastructure/performance/optimization/connection-pool.js",
+          "status": "healthy",
+          "message": "Component loadable, no explicit health check",
+          "responseTime": 19,
+          "timestamp": "2025-08-18T22:26:23.569Z",
+          "details": {
+            "status": "healthy",
+            "message": "Component loadable, no explicit health check",
+            "loadable": true
+          }
+        }
+      ],
+      "timestamp": "2025-08-18T22:26:23.569Z"
+    },
+    "security": {
+      "category": "security",
+      "totalComponents": 3,
+      "healthyComponents": 3,
+      "unhealthyComponents": 0,
+      "unknownComponents": 0,
+      "components": [
+        {
+          "component": "security-hardening",
+          "path": "infrastructure/security/enhanced/security-hardening.js",
+          "status": "healthy",
+          "message": "Component loadable, no explicit health check",
+          "responseTime": 1,
+          "timestamp": "2025-08-18T22:26:23.570Z",
+          "details": {
+            "status": "healthy",
+            "message": "Component loadable, no explicit health check",
+            "loadable": true
+          }
+        },
+        {
+          "component": "input-validator",
+          "path": "infrastructure/security/input-validator.js",
+          "status": "healthy",
+          "message": "Component loadable, no explicit health check",
+          "responseTime": 5,
+          "timestamp": "2025-08-18T22:26:23.574Z",
+          "details": {
+            "status": "healthy",
+            "message": "Component loadable, no explicit health check",
+            "loadable": true
+          }
+        },
+        {
+          "component": "rate-limiter",
+          "path": "infrastructure/security/rate-limiter.js",
+          "status": "healthy",
+          "message": "Component loadable, no explicit health check",
+          "responseTime": 4,
+          "timestamp": "2025-08-18T22:26:23.574Z",
+          "details": {
+            "status": "healthy",
+            "message": "Component loadable, no explicit health check",
+            "loadable": true
+          }
+        }
+      ],
+      "timestamp": "2025-08-18T22:26:23.574Z"
+    }
+  }
+}

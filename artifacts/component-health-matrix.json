@@ -1,0 +1,273 @@
+{
+  "matrix": {
+    "api-gateway": {
+      "totalComponents": 4,
+      "healthyComponents": 4,
+      "unhealthyComponents": 0,
+      "healthyPercentage": 100,
+      "components": [
+        {
+          "name": "api-gateway-core",
+          "status": "healthy",
+          "responseTime": 111
+        },
+        {
+          "name": "api-gateway-orchestrator",
+          "status": "healthy",
+          "responseTime": 111
+        },
+        {
+          "name": "openapi-documentation",
+          "status": "healthy",
+          "responseTime": 10
+        },
+        {
+          "name": "service-mesh",
+          "status": "healthy",
+          "responseTime": 10
+        }
+      ]
+    },
+    "auth": {
+      "totalComponents": 1,
+      "healthyComponents": 1,
+      "unhealthyComponents": 0,
+      "healthyPercentage": 100,
+      "components": [
+        {
+          "name": "auth-middleware",
+          "status": "healthy",
+          "responseTime": 1
+        }
+      ]
+    },
+    "backup": {
+      "totalComponents": 1,
+      "healthyComponents": 1,
+      "unhealthyComponents": 0,
+      "healthyPercentage": 100,
+      "components": [
+        {
+          "name": "backup-service",
+          "status": "healthy",
+          "responseTime": 1
+        }
+      ]
+    },
+    "cicd": {
+      "totalComponents": 1,
+      "healthyComponents": 1,
+      "unhealthyComponents": 0,
+      "healthyPercentage": 100,
+      "components": [
+        {
+          "name": "pipeline-manager",
+          "status": "healthy",
+          "responseTime": 0
+        }
+      ]
+    },
+    "compliance": {
+      "totalComponents": 4,
+      "healthyComponents": 4,
+      "unhealthyComponents": 0,
+      "healthyPercentage": 100,
+      "components": [
+        {
+          "name": "audit-system",
+          "status": "healthy",
+          "responseTime": 2
+        },
+        {
+          "name": "compliance-automation",
+          "status": "healthy",
+          "responseTime": 4
+        },
+        {
+          "name": "compliance-orchestrator",
+          "status": "healthy",
+          "responseTime": 9
+        },
+        {
+          "name": "privacy-rights-management",
+          "status": "healthy",
+          "responseTime": 6
+        }
+      ]
+    },
+    "governance": {
+      "totalComponents": 2,
+      "healthyComponents": 2,
+      "unhealthyComponents": 0,
+      "healthyPercentage": 100,
+      "components": [
+        {
+          "name": "component-dependency-analyzer",
+          "status": "healthy",
+          "responseTime": 2
+        },
+        {
+          "name": "infrastructure-integration-platform",
+          "status": "healthy",
+          "responseTime": 1
+        }
+      ]
+    },
+    "high-availability": {
+      "totalComponents": 6,
+      "healthyComponents": 6,
+      "unhealthyComponents": 0,
+      "healthyPercentage": 100,
+      "components": [
+        {
+          "name": "auto-scaling",
+          "status": "healthy",
+          "responseTime": 3
+        },
+        {
+          "name": "disaster-recovery",
+          "status": "healthy",
+          "responseTime": 4
+        },
+        {
+          "name": "fault-tolerance",
+          "status": "healthy",
+          "responseTime": 5
+        },
+        {
+          "name": "ha-orchestrator",
+          "status": "healthy",
+          "responseTime": 5
+        },
+        {
+          "name": "health-monitoring",
+          "status": "healthy",
+          "responseTime": 4
+        },
+        {
+          "name": "multi-region-deployment",
+          "status": "healthy",
+          "responseTime": 5
+        }
+      ]
+    },
+    "monitoring": {
+      "totalComponents": 2,
+      "healthyComponents": 0,
+      "unhealthyComponents": 2,
+      "healthyPercentage": 0,
+      "components": [
+        {
+          "name": "metrics-collector",
+          "status": "unhealthy"
+        },
+        {
+          "name": "structured-logger",
+          "status": "unhealthy"
+        }
+      ]
+    },
+    "observability": {
+      "totalComponents": 6,
+      "healthyComponents": 1,
+      "unhealthyComponents": 5,
+      "healthyPercentage": 17,
+      "components": [
+        {
+          "name": "advanced-observability-system",
+          "status": "unhealthy"
+        },
+        {
+          "name": "intelligent-alerting",
+          "status": "unhealthy"
+        },
+        {
+          "name": "anomaly-detection",
+          "status": "healthy",
+          "responseTime": 3
+        },
+        {
+          "name": "real-time-dashboards",
+          "status": "unhealthy"
+        },
+        {
+          "name": "advanced-metrics-collector",
+          "status": "unhealthy"
+        },
+        {
+          "name": "distributed-tracing",
+          "status": "unhealthy"
+        }
+      ]
+    },
+    "performance": {
+      "totalComponents": 7,
+      "healthyComponents": 7,
+      "unhealthyComponents": 0,
+      "healthyPercentage": 100,
+      "components": [
+        {
+          "name": "performance-monitor",
+          "status": "healthy",
+          "responseTime": 16
+        },
+        {
+          "name": "sla-monitor",
+          "status": "healthy",
+          "responseTime": 17
+        },
+        {
+          "name": "cache-strategies",
+          "status": "healthy",
+          "responseTime": 18
+        },
+        {
+          "name": "redis-manager",
+          "status": "healthy",
+          "responseTime": 18
+        },
+        {
+          "name": "enhanced-signer",
+          "status": "healthy",
+          "responseTime": 18
+        },
+        {
+          "name": "response-compression",
+          "status": "healthy",
+          "responseTime": 18
+        },
+        {
+          "name": "connection-pool",
+          "status": "healthy",
+          "responseTime": 19
+        }
+      ]
+    },
+    "security": {
+      "totalComponents": 3,
+      "healthyComponents": 3,
+      "unhealthyComponents": 0,
+      "healthyPercentage": 100,
+      "components": [
+        {
+          "name": "security-hardening",
+          "status": "healthy",
+          "responseTime": 1
+        },
+        {
+          "name": "input-validator",
+          "status": "healthy",
+          "responseTime": 5
+        },
+        {
+          "name": "rate-limiter",
+          "status": "healthy",
+          "responseTime": 4
+        }
+      ]
+    }
+  },
+  "generatedAt": "2025-08-18T22:26:23.576Z",
+  "totalComponents": 37,
+  "overallHealth": 81
+}
