@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "generated_utc": "2025-08-18T17:51:25.175Z",
+  "generated_utc": "2025-08-18T20:32:39.637Z",
   "principles": [
     {
       "principle": "GP1",
-      "match_count": 1181,
+      "match_count": 1183,
       "domains": [
         "other",
         "privacy",
@@ -130,7 +130,7 @@
       "evidence_sample": [
         {
           "file": "docs/strategic-analysis/STRATEGIC-IMPLEMENTATION-ANALYSIS.md",
-          "line": 310,
+          "line": 336,
           "snippet": "- [ ] **Rate limiting** prevents abuse",
           "pattern": "abuse",
           "changed": false,
@@ -296,7 +296,7 @@
     },
     {
       "principle": "GP4",
-      "match_count": 818,
+      "match_count": 820,
       "domains": [
         "other",
         "privacy",

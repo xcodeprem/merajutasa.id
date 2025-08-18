@@ -1,0 +1,166 @@
+{
+  "assessment_id": "assessment_1755547979948_3ry9zvtbk",
+  "assessed_at": "2025-08-18T20:12:59.948Z",
+  "frameworks_assessed": 1,
+  "overall_score": 85,
+  "compliance_status": "compliant",
+  "frameworks": {
+    "sox": {
+      "framework": "sox",
+      "framework_name": "Sarbanes-Oxley Act",
+      "assessed_at": "2025-08-18T20:12:59.947Z",
+      "requirements": {
+        "internal_controls": {
+          "category": "internal_controls",
+          "weight": 30,
+          "rules_assessed": 3,
+          "rules_compliant": 3,
+          "score": 100,
+          "violations": [],
+          "recommendations": []
+        },
+        "audit_trails": {
+          "category": "audit_trails",
+          "weight": 25,
+          "rules_assessed": 3,
+          "rules_compliant": 3,
+          "score": 100,
+          "violations": [],
+          "recommendations": []
+        },
+        "segregation_of_duties": {
+          "category": "segregation_of_duties",
+          "weight": 20,
+          "rules_assessed": 3,
+          "rules_compliant": 2,
+          "score": 67,
+          "violations": [
+            {
+              "rule": "role_separation",
+              "category": "segregation_of_duties",
+              "severity": "medium",
+              "description": "Assessment for rule: role_separation",
+              "remediation": "Implement required controls and procedures"
+            }
+          ],
+          "recommendations": [
+            {
+              "rule": "role_separation",
+              "priority": "medium",
+              "action": "Implement required controls and procedures",
+              "deadline": "2025-11-16T20:12:59.948Z"
+            }
+          ]
+        },
+        "management_certification": {
+          "category": "management_certification",
+          "weight": 15,
+          "rules_assessed": 3,
+          "rules_compliant": 2,
+          "score": 67,
+          "violations": [
+            {
+              "rule": "annual_assessment",
+              "category": "management_certification",
+              "severity": "medium",
+              "description": "Assessment for rule: annual_assessment",
+              "remediation": "Implement required controls and procedures"
+            }
+          ],
+          "recommendations": [
+            {
+              "rule": "annual_assessment",
+              "priority": "medium",
+              "action": "Implement required controls and procedures",
+              "deadline": "2025-11-16T20:12:59.948Z"
+            }
+          ]
+        },
+        "external_audits": {
+          "category": "external_audits",
+          "weight": 10,
+          "rules_assessed": 3,
+          "rules_compliant": 2,
+          "score": 67,
+          "violations": [
+            {
+              "rule": "management_letter",
+              "category": "external_audits",
+              "severity": "medium",
+              "description": "Assessment for rule: management_letter",
+              "remediation": "Implement required controls and procedures"
+            }
+          ],
+          "recommendations": [
+            {
+              "rule": "management_letter",
+              "priority": "medium",
+              "action": "Implement required controls and procedures",
+              "deadline": "2025-11-16T20:12:59.948Z"
+            }
+          ]
+        }
+      },
+      "overall_score": 85,
+      "weighted_score": 8515,
+      "status": "substantially_compliant",
+      "violations": [
+        {
+          "rule": "role_separation",
+          "category": "segregation_of_duties",
+          "severity": "medium",
+          "description": "Assessment for rule: role_separation",
+          "remediation": "Implement required controls and procedures"
+        },
+        {
+          "rule": "annual_assessment",
+          "category": "management_certification",
+          "severity": "medium",
+          "description": "Assessment for rule: annual_assessment",
+          "remediation": "Implement required controls and procedures"
+        },
+        {
+          "rule": "management_letter",
+          "category": "external_audits",
+          "severity": "medium",
+          "description": "Assessment for rule: management_letter",
+          "remediation": "Implement required controls and procedures"
+        }
+      ],
+      "recommendations": [
+        {
+          "rule": "role_separation",
+          "priority": "medium",
+          "action": "Implement required controls and procedures",
+          "deadline": "2025-11-16T20:12:59.948Z"
+        },
+        {
+          "rule": "annual_assessment",
+          "priority": "medium",
+          "action": "Implement required controls and procedures",
+          "deadline": "2025-11-16T20:12:59.948Z"
+        },
+        {
+          "rule": "management_letter",
+          "priority": "medium",
+          "action": "Implement required controls and procedures",
+          "deadline": "2025-11-16T20:12:59.948Z"
+        }
+      ]
+    }
+  },
+  "summary": {
+    "fully_compliant": 0,
+    "substantially_compliant": 1,
+    "partially_compliant": 0,
+    "non_compliant": 0
+  },
+  "total_violations": 3,
+  "critical_violations": 0,
+  "recommendations": [],
+  "metadata": {
+    "system_version": "unknown",
+    "assessment_tool": "merajutasa-compliance-automation",
+    "assessment_methodology": "automated_rules_engine"
+  }
+}

@@ -1,429 +1,72 @@
 {
   "mode": "verify",
-  "timestamp_utc": "2025-08-18T19:31:46Z",
+  "timestamp_utc": "2025-08-18T20:32:38Z",
   "updated": [],
   "unchanged": [
+    "docs/roadmap/roadmap-master-v1.md",
+    "docs/governance/signature-pipeline-plan-v1.md",
+    "docs/governance/dec/DEC-20250813-02-signature-pipeline-adoption.md",
+    "docs/fairness/hysteresis-config-v1.yml",
+    "docs/fairness/hysteresis-public-methodology-fragment-v1.md",
+    "docs/fairness/hysteresis-state-machine-transitions.md",
+    "docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md",
+    "docs/governance/dec/DEC-20250812-03-principles-reference-activation.md",
+    "docs/governance/README-decision-log-process.md",
+    "docs/governance/lint-principles-reference-spec-v1.md",
+    "docs/governance/todo-post-DEC-20250812-02.md",
+    "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
+    ".github/pull_request_template.md",
+    "docs/master-spec-deltas/delta-master-spec-v2-DEC-20250812-02.md",
+    "docs/master-spec-deltas/delta-master-spec-v2-DEC-20250813-06-event-schema-alignment.md",
+    "docs/principles/GP1-GP10-index.md",
+    "docs/privacy/pii-pattern-library-v1.md",
+    "docs/analytics/dashboard-widgets-hysteresis-initial.md",
+    "docs/tests/hysteresis-test-plan-v1.md",
+    "docs/faq/faq-fairness-hysteresis-update.md",
+    "docs/status/progress-recap-latest-2025-08-12T035901Z.md",
+    "docs/governance/disclaimers-lint-spec-v1.md",
+    "docs/integrity/credential-schema-final-v1.md",
+    "docs/analytics/event-schema-canonical-v1.md",
+    "docs/master-spec/master-spec-v2.0.md",
+    "docs/transparency/changelog-excerpt-phase1.5.md",
+    "docs/governance/policy-index-v1.md",
+    "docs/archive/fairness_equity-hysteresis-options-v1.md",
+    "docs/archive/ux_public-multipage-experience-master-spec-v2.md",
+    "docs/governance/trace/archive-trace-index-v1.md",
+    "docs/onboarding/agent-bootstrap-manifest.md",
+    "README.md",
+    "docs/governance/dec/DEC-20250812-04-governance-baseline-thresholds.md",
+    "docs/integrity/evidence-minimum-phase1.5-v1.md",
+    "docs/governance/dec/DEC-20250813-01-known-debt-register.md",
+    "docs/onboarding/agent-role-policy-v1.md",
+    "docs/onboarding/agent-guardrails-v1.md",
+    "docs/governance/dec/DEC-20250813-03-disclaimers-presence-enforcement.md",
+    "docs/governance/dec/DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
+    "content/disclaimers/config.yml",
+    "tools/fairness/engine-core.js",
+    "docs/integrity/gating-policy-v1.json",
+    "docs/governance/dec/DEC-20250813-07-hype-threshold-transition.md",
+    "docs/governance/dec/DEC-style-guide-v1.md",
     "docs/governance/dec/DEC-style-guide-v2.md",
-    "docs/verify-cli.md"
+    "docs/governance/dec/DEC-20250813-05-gating-policy-wave1-adoption.md",
+    "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md",
+    "docs/governance/dec/DEC-20250813-08-evidence-hash-display-length.md",
+    "docs/governance/dec/DEC-20250813-09-equity-index-rounding.md",
+    "docs/governance/dec/DEC-20250813-10-feedback-categories-canonical.md",
+    "policies/aggregation-min-cell.rego",
+    "docs/fairness/equity-snapshot-pseudocode.md",
+    "docs/integrity/verify-cli-doc-draft.md",
+    "docs/governance/dec/DEC-20250815-01-governed-editorial-maintenance.md",
+    "docs/verify-cli.md",
+    "docs/public/ABOUT-PORTAL-PANTI.md"
   ],
   "placeholders_sealed": [],
   "placeholders_remaining": [],
-  "violations": [
-    {
-      "code": "HASH_MISMATCH_DEC_REQUIRED",
-      "path": "docs/roadmap/roadmap-master-v1.md",
-      "detail": "Manifest=47e2422ec217c15b4530dba9952543f05ac36d57b09d38eb6970ce65c9a68aa6 current=b43ef6b51c6b657564b11a4d5010062e12ac9430647a8a96938f1662a3035800"
-    },
-    {
-      "code": "HASH_MISMATCH_DEC_REQUIRED",
-      "path": "docs/governance/signature-pipeline-plan-v1.md",
-      "detail": "Manifest=2b673d3ae845a6f68f3c7e4d093aa27d1e61e837fb28a9637d3052e07ddf396f current=b6448924edeb23970ecefa3dd5c37bf5f27616349a918615612e0e21bcda9225"
-    },
-    {
-      "code": "HASH_MISMATCH",
-      "path": "docs/governance/dec/DEC-20250813-02-signature-pipeline-adoption.md",
-      "detail": "Manifest=d1a2c7e22462e2376367e510dd971461f5403541d5e6980d36bb873ddfc27604 current=0ca785fe0c26e8053b644cc0c582abb461c851e7aafb621d5d6364729db66ff0"
-    },
-    {
-      "code": "DEC_CANONICAL_HASH_MISMATCH",
-      "path": "docs/governance/dec/DEC-20250813-02-signature-pipeline-adoption.md",
-      "detail": "canonical=0ca785fe0c26e8053b644cc0c582abb461c851e7aafb621d5d6364729db66ff0 manifest=d1a2c7e22462e2376367e510dd971461f5403541d5e6980d36bb873ddfc27604"
-    },
-    {
-      "code": "DEC_INTERNAL_HASH_DIFFERS",
-      "path": "docs/governance/dec/DEC-20250813-02-signature-pipeline-adoption.md",
-      "detail": "internal=d1a2c7e22462e2376367e510dd971461f5403541d5e6980d36bb873ddfc27604 canonical=0ca785fe0c26e8053b644cc0c582abb461c851e7aafb621d5d6364729db66ff0"
-    },
-    {
-      "code": "HASH_MISMATCH_DEC_REQUIRED",
-      "path": "docs/fairness/hysteresis-config-v1.yml",
-      "detail": "Manifest=9e82b96bdbd336b225e44c829fc3e0ef4b620d8362a51862d66526570151fbf0 current=488e520591f6d68c6f56814d53bcae525816e2d9814549132262afa781f589ed"
-    },
-    {
-      "code": "HASH_MISMATCH_DEC_REQUIRED",
-      "path": "docs/fairness/hysteresis-public-methodology-fragment-v1.md",
-      "detail": "Manifest=5d7e72d48a753f568c87dee24bd139c705d6066e32cc1753aab9cdb7d1829a1f current=855e4a1e98d970ce40a4190468eb2575d2c16a897f21dea4a1af784bbafdd5bd"
-    },
-    {
-      "code": "HASH_MISMATCH_DEC_REQUIRED",
-      "path": "docs/fairness/hysteresis-state-machine-transitions.md",
-      "detail": "Manifest=c6eb0fe8da6d7e6fe5e1de3524ba834a2cb290fa9bb85ab6d614198b31ba3af9 current=47063d5efaffe67363b0c0e7711e2df31e6332679243bfe365d27a7f8812b65f"
-    },
-    {
-      "code": "HASH_MISMATCH",
-      "path": "docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md",
-      "detail": "Manifest=009825b624cca02c93e2ad500bafcdebf3ffc3adbf5a98c7cdbbde5334a79e38 current=e32cb525cdc8109bf80ed9d92b7239191539b2e7e1dd04707508734721f8fe11"
-    },
-    {
-      "code": "DEC_CANONICAL_HASH_MISMATCH",
-      "path": "docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md",
-      "detail": "canonical=e32cb525cdc8109bf80ed9d92b7239191539b2e7e1dd04707508734721f8fe11 manifest=009825b624cca02c93e2ad500bafcdebf3ffc3adbf5a98c7cdbbde5334a79e38"
-    },
-    {
-      "code": "DEC_INTERNAL_HASH_DIFFERS",
-      "path": "docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md",
-      "detail": "internal=009825b624cca02c93e2ad500bafcdebf3ffc3adbf5a98c7cdbbde5334a79e38 canonical=e32cb525cdc8109bf80ed9d92b7239191539b2e7e1dd04707508734721f8fe11"
-    },
-    {
-      "code": "HASH_MISMATCH",
-      "path": "docs/governance/dec/DEC-20250812-03-principles-reference-activation.md",
-      "detail": "Manifest=d86f59ce838c19f964a66938c863bf700a0b1ab340146b3ef26f7ec92578700d current=a50c2eda01942ad3a90eef5afa7fc5d00f532a0ea687e42c0483f21fe0cd6511"
-    },
-    {
-      "code": "DEC_CANONICAL_HASH_MISMATCH",
-      "path": "docs/governance/dec/DEC-20250812-03-principles-reference-activation.md",
-      "detail": "canonical=a50c2eda01942ad3a90eef5afa7fc5d00f532a0ea687e42c0483f21fe0cd6511 manifest=d86f59ce838c19f964a66938c863bf700a0b1ab340146b3ef26f7ec92578700d"
-    },
-    {
-      "code": "DEC_INTERNAL_HASH_DIFFERS",
-      "path": "docs/governance/dec/DEC-20250812-03-principles-reference-activation.md",
-      "detail": "internal=d86f59ce838c19f964a66938c863bf700a0b1ab340146b3ef26f7ec92578700d canonical=a50c2eda01942ad3a90eef5afa7fc5d00f532a0ea687e42c0483f21fe0cd6511"
-    },
-    {
-      "code": "HASH_MISMATCH_DEC_REQUIRED",
-      "path": "docs/governance/README-decision-log-process.md",
-      "detail": "Manifest=874720bd571fabb9c77f7f09cff8d613b17694966c5ea5dfe22c2ae0652f2282 current=b6c76fc8b87cb0eaad8631965cbc9d89c184f9feae3c6a511d1568883e9c3458"
-    },
-    {
-      "code": "HASH_MISMATCH_DEC_REQUIRED",
-      "path": "docs/governance/lint-principles-reference-spec-v1.md",
-      "detail": "Manifest=902c9687e756516c99a127264b3a308b294b6f0aa0689fd58be823ac3e8ff765 current=1b7fb71ce4f9c62bed10029b0eddd0b82ec0a4244dc2e0a605d1168922754a71"
-    },
-    {
-      "code": "HASH_MISMATCH",
-      "path": "docs/governance/todo-post-DEC-20250812-02.md",
-      "detail": "Manifest=a0ddcd6c86236320b438cc844ec96bac1ac6fb516c2f6f99628cf8903c02ebcd current=52cb6ac1c41f9a09a756ddea21d3abaecbe974b92ec18b0a2b46b7559b45f943"
-    },
-    {
-      "code": "HASH_MISMATCH",
-      "path": "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
-      "detail": "Manifest=d58b84e4ff4fda71fa332832f67a7d86795c16897016ba374470ffb19a0083b0 current=149e52910f231af13037634982866de47a30069fd60685d08dcc311af17a9a48"
-    },
-    {
-      "code": "HASH_MISMATCH_DEC_REQUIRED",
-      "path": ".github/pull_request_template.md",
-      "detail": "Manifest=e86cc749ff0b9046b2cfee679e7843f2beeb83a34e99b05fbb79a97cdc41baf6 current=e3e65f549d2bc05b18a923f28e49f5449533fc47514bc9de8697a50322466a69"
-    },
-    {
-      "code": "HASH_MISMATCH",
-      "path": "docs/master-spec-deltas/delta-master-spec-v2-DEC-20250812-02.md",
-      "detail": "Manifest=93c6f7b2ee54176794cc838c89c2a66b020b08489f633f3610671d143d708d3e current=baaca9f07b452f956205d475292f9e0c72ae93637352793aec1cd7e07b2726d1"
-    },
-    {
-      "code": "HASH_MISMATCH",
-      "path": "docs/master-spec-deltas/delta-master-spec-v2-DEC-20250813-06-event-schema-alignment.md",
-      "detail": "Manifest=8888305712149d6944d0e7cf8dc862692cd6467b1f8941bc9b75b4323c25cb5f current=23d8365abd7ed1ed6d35cc5dbf23c465327f5657c8bfb31be0f3adf568797f78"
-    },
-    {
-      "code": "HASH_MISMATCH_DEC_REQUIRED",
-      "path": "docs/principles/GP1-GP10-index.md",
-      "detail": "Manifest=c85a58ce07f4ef4287bd08a3522c1317b4662302278144bef5f6b9b900d140b0 current=83f05ebaed2c9e4f694f14f271df8a3be350adce2361cf48b3fdcf12944434a5"
-    },
-    {
-      "code": "HASH_MISMATCH_DEC_REQUIRED",
-      "path": "docs/privacy/pii-pattern-library-v1.md",
-      "detail": "Manifest=bd47dc637362529a6f6bd9243468e6374ea25eaacfee5e9d21380b3a2e18c3ed current=6f25acca2c25622bafadb53e6b3a9fb93b883b8de2074a8eaa650f681b184a76"
-    },
-    {
-      "code": "HASH_MISMATCH",
-      "path": "docs/analytics/dashboard-widgets-hysteresis-initial.md",
-      "detail": "Manifest=0d411afe729a8f5894c00811fca70da23cbb9a43123b549292e9df2db7f24a5b current=05de95e0b290f9efabb5f997c864e8d1daef5d6a23447474a8f0520ba06f974a"
-    },
-    {
-      "code": "HASH_MISMATCH",
-      "path": "docs/tests/hysteresis-test-plan-v1.md",
-      "detail": "Manifest=0e13b0ef1f2c9f1c3a9ba346a4cad260b1f331521c98e077c10cc8cae6a7d2ca current=c46b14cbf87e9c82873049227a2df7fae6573465d5b01d0e386bd84b53d6937a"
-    },
-    {
-      "code": "HASH_MISMATCH_DEC_REQUIRED",
-      "path": "docs/faq/faq-fairness-hysteresis-update.md",
-      "detail": "Manifest=abf20dade62bb4c984606fd4aed226fae2bb0f4d08d01fdb04e6c8d12f096418 current=e86d2157b35dbd7693257b8fd5264c8065a56ad2485897663d1fc799ec9fe6d7"
-    },
-    {
-      "code": "HASH_MISMATCH",
-      "path": "docs/status/progress-recap-latest-2025-08-12T035901Z.md",
-      "detail": "Manifest=0152dc85a667d7811aaa57421ac4b4344171dc97b405a2f9bc0c20ea5f6521e4 current=da8c50fe9be2c1cda03341567b4a6237e95f2b6e8de225e7c59a87b985aa955e"
-    },
-    {
-      "code": "HASH_MISMATCH_DEC_REQUIRED",
-      "path": "docs/governance/disclaimers-lint-spec-v1.md",
-      "detail": "Manifest=3773753191747535c79d1fde5723b7b21c0d3a5136f3fd47aa52e898760b8ad7 current=15b711bd5e48438f22f4eef5b0dc36d65e1043963ef8c12522427b30eaf8a29b"
-    },
-    {
-      "code": "HASH_MISMATCH_DEC_REQUIRED",
-      "path": "docs/integrity/credential-schema-final-v1.md",
-      "detail": "Manifest=15022b2bea20e1d009c869d935bc27f87b1084f55be5e1e4d49543ec75911b5f current=6df638a752f3401365a7fcb7ed15a6750f5df277a47fbb732e532107097dbb36"
-    },
-    {
-      "code": "HASH_MISMATCH_DEC_REQUIRED",
-      "path": "docs/analytics/event-schema-canonical-v1.md",
-      "detail": "Manifest=01c256c709ef5277fcaba44e249613715e98122c0a5a5fa40bf5a70e18d13223 current=5d24bd1a6785e7e79fac26f79b5d9d7b53bb349029b8ed82f0d6ed1186fe1958"
-    },
-    {
-      "code": "HASH_MISMATCH_DEC_REQUIRED",
-      "path": "docs/master-spec/master-spec-v2.0.md",
-      "detail": "Manifest=dbeb805f37e763b9aebae9811fb1064793b4b6da97c9fa7a37558eb4ffad1fdf current=510521a0b318de32353cd96eddff21b859def784fa9246593ee4707c722fb95e"
-    },
-    {
-      "code": "HASH_MISMATCH",
-      "path": "docs/transparency/changelog-excerpt-phase1.5.md",
-      "detail": "Manifest=48aaa087b8a605c62f27d3e3a189388289d2443fff5c5d5326165ed89b4671d5 current=6c2c9d77ae57d18e5b458150ff987c47c2aa6ec0161cc4e86433bb5e47268447"
-    },
-    {
-      "code": "HASH_MISMATCH_DEC_REQUIRED",
-      "path": "docs/governance/policy-index-v1.md",
-      "detail": "Manifest=4db33c5334268c832ed8b56a525ffc2deb287bf8eb82e80f4601f6fa5b92c1db current=2bee5d6a467a25c1fb51f5a9a93fd2ccd569292499451becbbc7a0f3ad2ca1a9"
-    },
-    {
-      "code": "HASH_MISMATCH",
-      "path": "docs/archive/fairness_equity-hysteresis-options-v1.md",
-      "detail": "Manifest=e988850b5663904b4e34b536966f425552d406893704a78a28021bf9985a7173 current=a331041f32c7d117caedbeffce3fcb94f63b3c36fe0cc0d008cd2cd03d7cd71d"
-    },
-    {
-      "code": "HASH_MISMATCH",
-      "path": "docs/archive/ux_public-multipage-experience-master-spec-v2.md",
-      "detail": "Manifest=3fb016e10840408407feaa54fa3d424cd93d8551a759ea4b4655b749598bd226 current=9e70675840cf23d35c989b6edc5328f3400cc7c91d827d5d448f951022054e5e"
-    },
-    {
-      "code": "HASH_MISMATCH_DEC_REQUIRED",
-      "path": "docs/governance/trace/archive-trace-index-v1.md",
-      "detail": "Manifest=9f0f3fda88804c0a1766cf77eed09ab466d1783a52e6640479e17125e1fe69e4 current=f03a7e5d2e96427d87a85b17b334b4a3e918f8d3893a88dd83f0ffcc0b976d41"
-    },
-    {
-      "code": "HASH_MISMATCH",
-      "path": "docs/onboarding/agent-bootstrap-manifest.md",
-      "detail": "Manifest=f5901a7855b84548ac7a80b4c8bd649b6b76091368ce51509c134d0b7991e57a current=dd0a12209c63eaa5fc53eb2fdb20f025016e5ab199445d9cdc3b79c7d41eb56a"
-    },
-    {
-      "code": "HASH_MISMATCH_DEC_REQUIRED",
-      "path": "README.md",
-      "detail": "Manifest=848148342463e740ed85ea80c4553a029de7ccebf4999c4b25ff68ecb2cc90b2 current=8b467a852eb08ecb19570d2fd1783a00dab427e8ce3d68a85db7a5b44874f84c"
-    },
-    {
-      "code": "HASH_MISMATCH",
-      "path": "docs/governance/dec/DEC-20250812-04-governance-baseline-thresholds.md",
-      "detail": "Manifest=b1f53ab6b83476329e4c8cf7e48d826df8a28bdf8b02a9ef66fc580159b0d8cb current=fce2c9404bfa4401cd67761649c7829b586acbeda5a7330b67e7f4f1cb566ef2"
-    },
-    {
-      "code": "DEC_CANONICAL_HASH_MISMATCH",
-      "path": "docs/governance/dec/DEC-20250812-04-governance-baseline-thresholds.md",
-      "detail": "canonical=fce2c9404bfa4401cd67761649c7829b586acbeda5a7330b67e7f4f1cb566ef2 manifest=b1f53ab6b83476329e4c8cf7e48d826df8a28bdf8b02a9ef66fc580159b0d8cb"
-    },
-    {
-      "code": "DEC_INTERNAL_HASH_DIFFERS",
-      "path": "docs/governance/dec/DEC-20250812-04-governance-baseline-thresholds.md",
-      "detail": "internal=b1f53ab6b83476329e4c8cf7e48d826df8a28bdf8b02a9ef66fc580159b0d8cb canonical=fce2c9404bfa4401cd67761649c7829b586acbeda5a7330b67e7f4f1cb566ef2"
-    },
-    {
-      "code": "HASH_MISMATCH_DEC_REQUIRED",
-      "path": "docs/integrity/evidence-minimum-phase1.5-v1.md",
-      "detail": "Manifest=d2be6452ff04d67d7072a7889b0fdf0daf969773c794679e057fa03a257fb08a current=998e93104ad8a74f26da1468515bbbee09244edaf8559fc3ba51734cd72ba59b"
-    },
-    {
-      "code": "HASH_MISMATCH",
-      "path": "docs/governance/dec/DEC-20250813-01-known-debt-register.md",
-      "detail": "Manifest=3bef87356b11ab86b5e87f62dd50bcf1dfe2da5c6a560534c6b8d22e603b4ef9 current=15b4eb65659e5f484035a3bceeb85c381b7b0a3027c09c79b74565f82c608075"
-    },
-    {
-      "code": "DEC_CANONICAL_HASH_MISMATCH",
-      "path": "docs/governance/dec/DEC-20250813-01-known-debt-register.md",
-      "detail": "canonical=15b4eb65659e5f484035a3bceeb85c381b7b0a3027c09c79b74565f82c608075 manifest=3bef87356b11ab86b5e87f62dd50bcf1dfe2da5c6a560534c6b8d22e603b4ef9"
-    },
-    {
-      "code": "DEC_INTERNAL_HASH_DIFFERS",
-      "path": "docs/governance/dec/DEC-20250813-01-known-debt-register.md",
-      "detail": "internal=3bef87356b11ab86b5e87f62dd50bcf1dfe2da5c6a560534c6b8d22e603b4ef9 canonical=15b4eb65659e5f484035a3bceeb85c381b7b0a3027c09c79b74565f82c608075"
-    },
-    {
-      "code": "HASH_MISMATCH_DEC_REQUIRED",
-      "path": "docs/onboarding/agent-role-policy-v1.md",
-      "detail": "Manifest=54c8e6f8accadec136e63d8bc01a3a49bdc37ae82853d7821bdf22d83b1c9ec0 current=6b9ea6453bcce37a6260681227f3a0e3f406eeaa18efe781dd3a463da05ba06a"
-    },
-    {
-      "code": "HASH_MISMATCH_DEC_REQUIRED",
-      "path": "docs/onboarding/agent-guardrails-v1.md",
-      "detail": "Manifest=b2fb489583990747158cd165cb38073b912e09eafa724f43bb87de6fc901ad7d current=1c2de1f87a2808a064b4cdd030f6c3827e5971953852b86edb35565488148be9"
-    },
-    {
-      "code": "HASH_MISMATCH",
-      "path": "docs/governance/dec/DEC-20250813-03-disclaimers-presence-enforcement.md",
-      "detail": "Manifest=d82cb3f360fdbc944284fb98666d7d7acb7ac2a1702a33f11d1d26016415d7cb current=8bf0f05cfa58004cac4decbc30639a10093a3dc7af1e63157b5e5c11e7dbee88"
-    },
-    {
-      "code": "DEC_CANONICAL_HASH_MISMATCH",
-      "path": "docs/governance/dec/DEC-20250813-03-disclaimers-presence-enforcement.md",
-      "detail": "canonical=8bf0f05cfa58004cac4decbc30639a10093a3dc7af1e63157b5e5c11e7dbee88 manifest=d82cb3f360fdbc944284fb98666d7d7acb7ac2a1702a33f11d1d26016415d7cb"
-    },
-    {
-      "code": "DEC_INTERNAL_HASH_DIFFERS",
-      "path": "docs/governance/dec/DEC-20250813-03-disclaimers-presence-enforcement.md",
-      "detail": "internal=d82cb3f360fdbc944284fb98666d7d7acb7ac2a1702a33f11d1d26016415d7cb canonical=8bf0f05cfa58004cac4decbc30639a10093a3dc7af1e63157b5e5c11e7dbee88"
-    },
-    {
-      "code": "HASH_MISMATCH",
-      "path": "docs/governance/dec/DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
-      "detail": "Manifest=e6f4abe53178c6dcac31b9fba5b53c6f822f36f949fce8b6df934007af9770bd current=f331424d73e1cd7cbecc89548365e2581a7c8dd16b3e8d72843e5693bfda1c39"
-    },
-    {
-      "code": "DEC_CANONICAL_HASH_MISMATCH",
-      "path": "docs/governance/dec/DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
-      "detail": "canonical=f331424d73e1cd7cbecc89548365e2581a7c8dd16b3e8d72843e5693bfda1c39 manifest=e6f4abe53178c6dcac31b9fba5b53c6f822f36f949fce8b6df934007af9770bd"
-    },
-    {
-      "code": "DEC_INTERNAL_HASH_DIFFERS",
-      "path": "docs/governance/dec/DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
-      "detail": "internal=e6f4abe53178c6dcac31b9fba5b53c6f822f36f949fce8b6df934007af9770bd canonical=f331424d73e1cd7cbecc89548365e2581a7c8dd16b3e8d72843e5693bfda1c39"
-    },
-    {
-      "code": "HASH_MISMATCH_DEC_REQUIRED",
-      "path": "content/disclaimers/config.yml",
-      "detail": "Manifest=410994c10012167398154ef473c804213a6a3c2b5c69f01de2c384582476a25a current=4f586fbb813b2d09dd70f046d881ba63daafd8e8628daa257ef61f9f806975b9"
-    },
-    {
-      "code": "HASH_MISMATCH_DEC_REQUIRED",
-      "path": "tools/fairness/engine-core.js",
-      "detail": "Manifest=082aa01b00eb14d52105af45361bd2cd1a5aafdde2c815f0d37dcda39129fd1d current=1d027b7fd7ed25b1b63e29bed6ef402d5f02d87edb15d2000b1402bcc40b12a4"
-    },
-    {
-      "code": "HASH_MISMATCH_DEC_REQUIRED",
-      "path": "docs/integrity/gating-policy-v1.json",
-      "detail": "Manifest=ec038c5c51747836c13b455b183a9ecf7fb90a7de2e1cbc92d777c25eb3ab836 current=d601099e8caafdbae8226c0c9801204bcb7fe80b75786452e15d2d7ca67af81b"
-    },
-    {
-      "code": "HASH_MISMATCH",
-      "path": "docs/governance/dec/DEC-20250813-07-hype-threshold-transition.md",
-      "detail": "Manifest=578782e6bc0c71a62eea7b1c905deb3fd0e77fa54fe3510a8ad5d198a34541a2 current=56cd40b31dd16c390fbaf8cb061d9a4113372b284fa39a6daa5caa07a772e431"
-    },
-    {
-      "code": "DEC_CANONICAL_HASH_MISMATCH",
-      "path": "docs/governance/dec/DEC-20250813-07-hype-threshold-transition.md",
-      "detail": "canonical=56cd40b31dd16c390fbaf8cb061d9a4113372b284fa39a6daa5caa07a772e431 manifest=578782e6bc0c71a62eea7b1c905deb3fd0e77fa54fe3510a8ad5d198a34541a2"
-    },
-    {
-      "code": "DEC_INTERNAL_HASH_DIFFERS",
-      "path": "docs/governance/dec/DEC-20250813-07-hype-threshold-transition.md",
-      "detail": "internal=578782e6bc0c71a62eea7b1c905deb3fd0e77fa54fe3510a8ad5d198a34541a2 canonical=56cd40b31dd16c390fbaf8cb061d9a4113372b284fa39a6daa5caa07a772e431"
-    },
-    {
-      "code": "HASH_MISMATCH",
-      "path": "docs/governance/dec/DEC-style-guide-v1.md",
-      "detail": "Manifest=55c77fb8c21f4cf0474e5923268268d64e8fc13ac95bd392066e290d3a0a3441 current=e94f4c6d85b4e78d936a417841e848c555539d309a24badba845669f8f641a91"
-    },
-    {
-      "code": "HASH_MISMATCH",
-      "path": "docs/governance/dec/DEC-20250813-05-gating-policy-wave1-adoption.md",
-      "detail": "Manifest=2576903a6abe7e53f3efb2167721f6c1de049f2f163ed9e3b09f90cfd846da15 current=64aa3f0f4c29b45ed6e85140ec8a569de99c5a40fe48aaa9f6ea8d64e82c99ed"
-    },
-    {
-      "code": "DEC_CANONICAL_HASH_MISMATCH",
-      "path": "docs/governance/dec/DEC-20250813-05-gating-policy-wave1-adoption.md",
-      "detail": "canonical=64aa3f0f4c29b45ed6e85140ec8a569de99c5a40fe48aaa9f6ea8d64e82c99ed manifest=2576903a6abe7e53f3efb2167721f6c1de049f2f163ed9e3b09f90cfd846da15"
-    },
-    {
-      "code": "DEC_INTERNAL_HASH_DIFFERS",
-      "path": "docs/governance/dec/DEC-20250813-05-gating-policy-wave1-adoption.md",
-      "detail": "internal=2576903a6abe7e53f3efb2167721f6c1de049f2f163ed9e3b09f90cfd846da15 canonical=64aa3f0f4c29b45ed6e85140ec8a569de99c5a40fe48aaa9f6ea8d64e82c99ed"
-    },
-    {
-      "code": "HASH_MISMATCH",
-      "path": "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md",
-      "detail": "Manifest=db9faef0665c73072e5a3e5dea9104c0c6beaa8ec536d3c8ca32e8808683bcf4 current=182ea87ccc15e09baec8b91c596c77a83e078b8804f866047c8413a19e748db0"
-    },
-    {
-      "code": "DEC_CANONICAL_HASH_MISMATCH",
-      "path": "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md",
-      "detail": "canonical=182ea87ccc15e09baec8b91c596c77a83e078b8804f866047c8413a19e748db0 manifest=db9faef0665c73072e5a3e5dea9104c0c6beaa8ec536d3c8ca32e8808683bcf4"
-    },
-    {
-      "code": "DEC_INTERNAL_HASH_DIFFERS",
-      "path": "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md",
-      "detail": "internal=db9faef0665c73072e5a3e5dea9104c0c6beaa8ec536d3c8ca32e8808683bcf4 canonical=182ea87ccc15e09baec8b91c596c77a83e078b8804f866047c8413a19e748db0"
-    },
-    {
-      "code": "HASH_MISMATCH",
-      "path": "docs/governance/dec/DEC-20250813-08-evidence-hash-display-length.md",
-      "detail": "Manifest=4f6e69897f7059acac0282537e0f1a97e13cebf7731be6344b8bea14331034b9 current=923da62bad7eebca7ea9df99d1481b043f9d58395cdb1a56f9009390de5dab14"
-    },
-    {
-      "code": "DEC_CANONICAL_HASH_MISMATCH",
-      "path": "docs/governance/dec/DEC-20250813-08-evidence-hash-display-length.md",
-      "detail": "canonical=923da62bad7eebca7ea9df99d1481b043f9d58395cdb1a56f9009390de5dab14 manifest=4f6e69897f7059acac0282537e0f1a97e13cebf7731be6344b8bea14331034b9"
-    },
-    {
-      "code": "DEC_INTERNAL_HASH_DIFFERS",
-      "path": "docs/governance/dec/DEC-20250813-08-evidence-hash-display-length.md",
-      "detail": "internal=4f6e69897f7059acac0282537e0f1a97e13cebf7731be6344b8bea14331034b9 canonical=923da62bad7eebca7ea9df99d1481b043f9d58395cdb1a56f9009390de5dab14"
-    },
-    {
-      "code": "HASH_MISMATCH",
-      "path": "docs/governance/dec/DEC-20250813-09-equity-index-rounding.md",
-      "detail": "Manifest=0485aec829b32e77a144d085a0b388c8fc5b74620dfe978874702df7723da698 current=94a2843dfa86cf991d5e8e673c719470ad5f21c6b8995e6f09a9f9d440ad06ca"
-    },
-    {
-      "code": "DEC_CANONICAL_HASH_MISMATCH",
-      "path": "docs/governance/dec/DEC-20250813-09-equity-index-rounding.md",
-      "detail": "canonical=94a2843dfa86cf991d5e8e673c719470ad5f21c6b8995e6f09a9f9d440ad06ca manifest=0485aec829b32e77a144d085a0b388c8fc5b74620dfe978874702df7723da698"
-    },
-    {
-      "code": "DEC_INTERNAL_HASH_DIFFERS",
-      "path": "docs/governance/dec/DEC-20250813-09-equity-index-rounding.md",
-      "detail": "internal=0485aec829b32e77a144d085a0b388c8fc5b74620dfe978874702df7723da698 canonical=94a2843dfa86cf991d5e8e673c719470ad5f21c6b8995e6f09a9f9d440ad06ca"
-    },
-    {
-      "code": "HASH_MISMATCH",
-      "path": "docs/governance/dec/DEC-20250813-10-feedback-categories-canonical.md",
-      "detail": "Manifest=c209daae774250fa94bc04f95e8bfe9a30b9059b109fcd48c0f5faed3c0f4545 current=98bf229f5d6cc9f4c64496f0cb4fe7567a2e0ea55f5e919f328300460886ffe7"
-    },
-    {
-      "code": "DEC_CANONICAL_HASH_MISMATCH",
-      "path": "docs/governance/dec/DEC-20250813-10-feedback-categories-canonical.md",
-      "detail": "canonical=98bf229f5d6cc9f4c64496f0cb4fe7567a2e0ea55f5e919f328300460886ffe7 manifest=c209daae774250fa94bc04f95e8bfe9a30b9059b109fcd48c0f5faed3c0f4545"
-    },
-    {
-      "code": "DEC_INTERNAL_HASH_DIFFERS",
-      "path": "docs/governance/dec/DEC-20250813-10-feedback-categories-canonical.md",
-      "detail": "internal=c209daae774250fa94bc04f95e8bfe9a30b9059b109fcd48c0f5faed3c0f4545 canonical=98bf229f5d6cc9f4c64496f0cb4fe7567a2e0ea55f5e919f328300460886ffe7"
-    },
-    {
-      "code": "HASH_MISMATCH_DEC_REQUIRED",
-      "path": "policies/aggregation-min-cell.rego",
-      "detail": "Manifest=175fd1a42be113f392ce7f129072bc74ea1bb88a13453e8fbd51e01f1651a313 current=27dfbfa0909e72c6f0a5183d0104915ecf8b458cbe8dcd63ffbb5470e0c6c636"
-    },
-    {
-      "code": "HASH_MISMATCH_DEC_REQUIRED",
-      "path": "docs/fairness/equity-snapshot-pseudocode.md",
-      "detail": "Manifest=74f6718c08e779626ee095d1f46f5aa53cb641d3719f9e79a82aaf8fbf71129e current=a5c06427d7d33520241d4dd7d7caed5dc557e0081569f8e1b46756e5f229ba18"
-    },
-    {
-      "code": "HASH_MISMATCH_DEC_REQUIRED",
-      "path": "docs/integrity/verify-cli-doc-draft.md",
-      "detail": "Manifest=153e30448191c2a0bdbc92d53b1cd52b07263961e35338799d44c9868baada7f current=0ba60616c9d148eba3619850a93a6076ed6f433b9053e416933364af3fdd2d68"
-    },
-    {
-      "code": "HASH_MISMATCH",
-      "path": "docs/governance/dec/DEC-20250815-01-governed-editorial-maintenance.md",
-      "detail": "Manifest=3adde01d4a97546ce058eeb62f098d88a4aabb8f7e505c7a3e754669c742f10e current=8bdb770952f6b61d6827a8b61b89c0b4714d841fb6b28cb752e7c1f0c56dddea"
-    },
-    {
-      "code": "DEC_CANONICAL_HASH_MISMATCH",
-      "path": "docs/governance/dec/DEC-20250815-01-governed-editorial-maintenance.md",
-      "detail": "canonical=8bdb770952f6b61d6827a8b61b89c0b4714d841fb6b28cb752e7c1f0c56dddea manifest=3adde01d4a97546ce058eeb62f098d88a4aabb8f7e505c7a3e754669c742f10e"
-    },
-    {
-      "code": "DEC_INTERNAL_HASH_DIFFERS",
-      "path": "docs/governance/dec/DEC-20250815-01-governed-editorial-maintenance.md",
-      "detail": "internal=3adde01d4a97546ce058eeb62f098d88a4aabb8f7e505c7a3e754669c742f10e canonical=8bdb770952f6b61d6827a8b61b89c0b4714d841fb6b28cb752e7c1f0c56dddea"
-    },
-    {
-      "code": "HASH_MISMATCH_DEC_REQUIRED",
-      "path": "docs/public/ABOUT-PORTAL-PANTI.md",
-      "detail": "Manifest=c7e5ea5c15854a1e9bdcc462be914b49fc77a14046eeff03842dddc487a49019 current=a24478fd168f06777325db6698c66d7c562419fd1410b2e7832e0b01bb2d54a0"
-    }
-  ],
+  "violations": [],
   "summary": {
     "total_entries": 56,
     "updated_count": 0,
-    "violation_count": 82,
+    "violation_count": 0,
     "placeholders_remaining_count": 0
   }
 }

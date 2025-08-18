@@ -1,0 +1,132 @@
+{
+  "report_id": "regulatory_gdpr_1755547979939",
+  "generated_at": "2025-08-18T20:12:59.939Z",
+  "framework": "gdpr",
+  "period": "quarterly",
+  "reporting_entity": "MerajutASA.id",
+  "framework_details": {
+    "name": "General Data Protection Regulation",
+    "jurisdiction": "EU",
+    "requirements": {
+      "consent_management": {
+        "weight": 20,
+        "rules": [
+          "explicit_consent",
+          "consent_withdrawal",
+          "consent_records"
+        ]
+      },
+      "data_subject_rights": {
+        "weight": 25,
+        "rules": [
+          "right_to_access",
+          "right_to_rectification",
+          "right_to_erasure",
+          "data_portability"
+        ]
+      },
+      "privacy_by_design": {
+        "weight": 15,
+        "rules": [
+          "data_minimization",
+          "purpose_limitation",
+          "storage_limitation"
+        ]
+      },
+      "security_measures": {
+        "weight": 20,
+        "rules": [
+          "encryption_at_rest",
+          "encryption_in_transit",
+          "access_controls"
+        ]
+      },
+      "breach_notification": {
+        "weight": 10,
+        "rules": [
+          "72_hour_notification",
+          "breach_register",
+          "impact_assessment"
+        ]
+      },
+      "documentation": {
+        "weight": 10,
+        "rules": [
+          "processing_records",
+          "privacy_policy",
+          "dpia_completion"
+        ]
+      }
+    },
+    "penalties": {
+      "minor": 10000000,
+      "major": 20000000
+    }
+  },
+  "executive_summary": {
+    "overall_compliance_score": 93,
+    "compliance_status": "unknown",
+    "total_requirements_assessed": 0,
+    "violations_identified": 0,
+    "critical_issues": 0,
+    "remediation_deadline": "2025-11-16T20:12:59.941Z"
+  },
+  "compliance_status": {
+    "requirements_breakdown": {},
+    "violation_summary": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "trend_analysis": {
+      "score_trend": "improving",
+      "violation_trend": "decreasing",
+      "assessment_frequency": "monthly",
+      "last_significant_change": "2024-08-01"
+    },
+    "peer_benchmarking": {
+      "industry_average": 78,
+      "peer_comparison": "above_average",
+      "ranking_percentile": 85
+    }
+  },
+  "audit_findings": {
+    "assessment_methodology": "Automated compliance scanning with manual validation",
+    "evidence_collected": {
+      "audit_logs_reviewed": 1000,
+      "policies_verified": 25,
+      "controls_tested": 50,
+      "interviews_conducted": 5
+    },
+    "control_effectiveness": {
+      "effective_controls": 45,
+      "partially_effective": 5,
+      "ineffective_controls": 0,
+      "not_tested": 2
+    },
+    "management_responses": {
+      "responses_received": 8,
+      "action_plans_submitted": 6,
+      "remediation_committed": true
+    }
+  },
+  "remediation_actions": {
+    "immediate_actions": [],
+    "planned_improvements": [],
+    "long_term_initiatives": [
+      {
+        "initiative": "Enhanced monitoring system",
+        "timeline": "6 months",
+        "investment": 50000
+      }
+    ],
+    "investment_requirements": {
+      "immediate": 25000,
+      "annual": 100000,
+      "technology": 75000,
+      "personnel": 150000
+    }
+  },
+  "attestations": {}
+}

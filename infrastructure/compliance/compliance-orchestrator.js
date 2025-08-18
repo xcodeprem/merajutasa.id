@@ -146,7 +146,7 @@ export class ComplianceOrchestrator extends EventEmitter {
       correlateEvents: async (newEvent) => {
         const correlations = [];
         
-        for (const [ruleName, rule] of Object.entries(this.correlationRules)) {
+        for (const [ruleName, rule] of Object.entries(this.eventCorrelator.correlationRules || {})) {
           const correlation = await this.checkCorrelationRule(newEvent, rule, ruleName);
           if (correlation) {
             correlations.push(correlation);
@@ -193,7 +193,7 @@ export class ComplianceOrchestrator extends EventEmitter {
         let totalWeightedRisk = 0;
         let totalWeight = 0;
         
-        for (const [factorName, factor] of Object.entries(this.riskFactors)) {
+        for (const [factorName, factor] of Object.entries(this.riskAnalyzer.riskFactors || {})) {
           const factorRisk = await this.assessRiskFactor(factorName, factor);
           riskAssessment.risk_factors[factorName] = factorRisk;
           

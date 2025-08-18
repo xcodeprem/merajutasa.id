@@ -21,7 +21,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import crypto from 'crypto';
 import { EventEmitter } from 'events';
-import { auditSystem } from '../compliance/audit-system.js';
+import { auditSystem } from '../../compliance/audit-system.js';
 
 export class SecurityHardening extends EventEmitter {
   constructor(options = {}) {

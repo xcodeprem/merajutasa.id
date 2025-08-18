@@ -1,0 +1,147 @@
+{
+  "assessment_id": "assessment_1755547871659_l0ofzhiia",
+  "assessed_at": "2025-08-18T20:11:11.659Z",
+  "frameworks_assessed": 1,
+  "overall_score": 93,
+  "compliance_status": "compliant",
+  "frameworks": {
+    "gdpr": {
+      "framework": "gdpr",
+      "framework_name": "General Data Protection Regulation",
+      "assessed_at": "2025-08-18T20:11:11.658Z",
+      "requirements": {
+        "consent_management": {
+          "category": "consent_management",
+          "weight": 20,
+          "rules_assessed": 3,
+          "rules_compliant": 3,
+          "score": 100,
+          "violations": [],
+          "recommendations": []
+        },
+        "data_subject_rights": {
+          "category": "data_subject_rights",
+          "weight": 25,
+          "rules_assessed": 4,
+          "rules_compliant": 4,
+          "score": 100,
+          "violations": [],
+          "recommendations": []
+        },
+        "privacy_by_design": {
+          "category": "privacy_by_design",
+          "weight": 15,
+          "rules_assessed": 3,
+          "rules_compliant": 3,
+          "score": 100,
+          "violations": [],
+          "recommendations": []
+        },
+        "security_measures": {
+          "category": "security_measures",
+          "weight": 20,
+          "rules_assessed": 3,
+          "rules_compliant": 3,
+          "score": 100,
+          "violations": [],
+          "recommendations": []
+        },
+        "breach_notification": {
+          "category": "breach_notification",
+          "weight": 10,
+          "rules_assessed": 3,
+          "rules_compliant": 2,
+          "score": 67,
+          "violations": [
+            {
+              "rule": "72_hour_notification",
+              "category": "breach_notification",
+              "severity": "medium",
+              "description": "Assessment for rule: 72_hour_notification",
+              "remediation": "Implement required controls and procedures"
+            }
+          ],
+          "recommendations": [
+            {
+              "rule": "72_hour_notification",
+              "priority": "medium",
+              "action": "Implement required controls and procedures",
+              "deadline": "2025-11-16T20:11:11.658Z"
+            }
+          ]
+        },
+        "documentation": {
+          "category": "documentation",
+          "weight": 10,
+          "rules_assessed": 3,
+          "rules_compliant": 2,
+          "score": 67,
+          "violations": [
+            {
+              "rule": "processing_records",
+              "category": "documentation",
+              "severity": "medium",
+              "description": "Assessment for rule: processing_records",
+              "remediation": "Implement required controls and procedures"
+            }
+          ],
+          "recommendations": [
+            {
+              "rule": "processing_records",
+              "priority": "medium",
+              "action": "Implement required controls and procedures",
+              "deadline": "2025-11-16T20:11:11.658Z"
+            }
+          ]
+        }
+      },
+      "overall_score": 93,
+      "weighted_score": 9340,
+      "status": "fully_compliant",
+      "violations": [
+        {
+          "rule": "72_hour_notification",
+          "category": "breach_notification",
+          "severity": "medium",
+          "description": "Assessment for rule: 72_hour_notification",
+          "remediation": "Implement required controls and procedures"
+        },
+        {
+          "rule": "processing_records",
+          "category": "documentation",
+          "severity": "medium",
+          "description": "Assessment for rule: processing_records",
+          "remediation": "Implement required controls and procedures"
+        }
+      ],
+      "recommendations": [
+        {
+          "rule": "72_hour_notification",
+          "priority": "medium",
+          "action": "Implement required controls and procedures",
+          "deadline": "2025-11-16T20:11:11.658Z"
+        },
+        {
+          "rule": "processing_records",
+          "priority": "medium",
+          "action": "Implement required controls and procedures",
+          "deadline": "2025-11-16T20:11:11.658Z"
+        }
+      ]
+    }
+  },
+  "summary": {
+    "fully_compliant": 1,
+    "substantially_compliant": 0,
+    "partially_compliant": 0,
+    "non_compliant": 0
+  },
+  "total_violations": 2,
+  "critical_violations": 0,
+  "recommendations": [],
+  "metadata": {
+    "system_version": "unknown",
+    "assessment_tool": "merajutasa-compliance-automation",
+    "assessment_methodology": "automated_rules_engine"
+  }
+}

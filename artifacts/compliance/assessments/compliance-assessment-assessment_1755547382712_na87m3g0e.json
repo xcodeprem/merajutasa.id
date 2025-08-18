@@ -1,0 +1,119 @@
+{
+  "assessment_id": "assessment_1755547382712_na87m3g0e",
+  "assessed_at": "2025-08-18T20:03:02.712Z",
+  "frameworks_assessed": 1,
+  "overall_score": 97,
+  "compliance_status": "compliant",
+  "frameworks": {
+    "gdpr": {
+      "framework": "gdpr",
+      "framework_name": "General Data Protection Regulation",
+      "assessed_at": "2025-08-18T20:03:02.711Z",
+      "requirements": {
+        "consent_management": {
+          "category": "consent_management",
+          "weight": 20,
+          "rules_assessed": 3,
+          "rules_compliant": 3,
+          "score": 100,
+          "violations": [],
+          "recommendations": []
+        },
+        "data_subject_rights": {
+          "category": "data_subject_rights",
+          "weight": 25,
+          "rules_assessed": 4,
+          "rules_compliant": 4,
+          "score": 100,
+          "violations": [],
+          "recommendations": []
+        },
+        "privacy_by_design": {
+          "category": "privacy_by_design",
+          "weight": 15,
+          "rules_assessed": 3,
+          "rules_compliant": 3,
+          "score": 100,
+          "violations": [],
+          "recommendations": []
+        },
+        "security_measures": {
+          "category": "security_measures",
+          "weight": 20,
+          "rules_assessed": 3,
+          "rules_compliant": 3,
+          "score": 100,
+          "violations": [],
+          "recommendations": []
+        },
+        "breach_notification": {
+          "category": "breach_notification",
+          "weight": 10,
+          "rules_assessed": 3,
+          "rules_compliant": 2,
+          "score": 67,
+          "violations": [
+            {
+              "rule": "impact_assessment",
+              "category": "breach_notification",
+              "severity": "medium",
+              "description": "Assessment for rule: impact_assessment",
+              "remediation": "Implement required controls and procedures"
+            }
+          ],
+          "recommendations": [
+            {
+              "rule": "impact_assessment",
+              "priority": "medium",
+              "action": "Implement required controls and procedures",
+              "deadline": "2025-11-16T20:03:02.711Z"
+            }
+          ]
+        },
+        "documentation": {
+          "category": "documentation",
+          "weight": 10,
+          "rules_assessed": 3,
+          "rules_compliant": 3,
+          "score": 100,
+          "violations": [],
+          "recommendations": []
+        }
+      },
+      "overall_score": 97,
+      "weighted_score": 9670,
+      "status": "fully_compliant",
+      "violations": [
+        {
+          "rule": "impact_assessment",
+          "category": "breach_notification",
+          "severity": "medium",
+          "description": "Assessment for rule: impact_assessment",
+          "remediation": "Implement required controls and procedures"
+        }
+      ],
+      "recommendations": [
+        {
+          "rule": "impact_assessment",
+          "priority": "medium",
+          "action": "Implement required controls and procedures",
+          "deadline": "2025-11-16T20:03:02.711Z"
+        }
+      ]
+    }
+  },
+  "summary": {
+    "fully_compliant": 1,
+    "substantially_compliant": 0,
+    "partially_compliant": 0,
+    "non_compliant": 0
+  },
+  "total_violations": 1,
+  "critical_violations": 0,
+  "recommendations": [],
+  "metadata": {
+    "system_version": "unknown",
+    "assessment_tool": "merajutasa-compliance-automation",
+    "assessment_methodology": "automated_rules_engine"
+  }
+}

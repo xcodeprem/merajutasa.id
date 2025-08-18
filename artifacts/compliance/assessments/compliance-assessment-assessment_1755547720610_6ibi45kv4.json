@@ -1,0 +1,147 @@
+{
+  "assessment_id": "assessment_1755547720610_6ibi45kv4",
+  "assessed_at": "2025-08-18T20:08:40.610Z",
+  "frameworks_assessed": 1,
+  "overall_score": 92,
+  "compliance_status": "compliant",
+  "frameworks": {
+    "gdpr": {
+      "framework": "gdpr",
+      "framework_name": "General Data Protection Regulation",
+      "assessed_at": "2025-08-18T20:08:40.609Z",
+      "requirements": {
+        "consent_management": {
+          "category": "consent_management",
+          "weight": 20,
+          "rules_assessed": 3,
+          "rules_compliant": 3,
+          "score": 100,
+          "violations": [],
+          "recommendations": []
+        },
+        "data_subject_rights": {
+          "category": "data_subject_rights",
+          "weight": 25,
+          "rules_assessed": 4,
+          "rules_compliant": 4,
+          "score": 100,
+          "violations": [],
+          "recommendations": []
+        },
+        "privacy_by_design": {
+          "category": "privacy_by_design",
+          "weight": 15,
+          "rules_assessed": 3,
+          "rules_compliant": 2,
+          "score": 67,
+          "violations": [
+            {
+              "rule": "data_minimization",
+              "category": "privacy_by_design",
+              "severity": "medium",
+              "description": "Assessment for rule: data_minimization",
+              "remediation": "Implement required controls and procedures"
+            }
+          ],
+          "recommendations": [
+            {
+              "rule": "data_minimization",
+              "priority": "medium",
+              "action": "Implement required controls and procedures",
+              "deadline": "2025-11-16T20:08:40.609Z"
+            }
+          ]
+        },
+        "security_measures": {
+          "category": "security_measures",
+          "weight": 20,
+          "rules_assessed": 3,
+          "rules_compliant": 3,
+          "score": 100,
+          "violations": [],
+          "recommendations": []
+        },
+        "breach_notification": {
+          "category": "breach_notification",
+          "weight": 10,
+          "rules_assessed": 3,
+          "rules_compliant": 3,
+          "score": 100,
+          "violations": [],
+          "recommendations": []
+        },
+        "documentation": {
+          "category": "documentation",
+          "weight": 10,
+          "rules_assessed": 3,
+          "rules_compliant": 2,
+          "score": 67,
+          "violations": [
+            {
+              "rule": "privacy_policy",
+              "category": "documentation",
+              "severity": "medium",
+              "description": "Assessment for rule: privacy_policy",
+              "remediation": "Implement required controls and procedures"
+            }
+          ],
+          "recommendations": [
+            {
+              "rule": "privacy_policy",
+              "priority": "medium",
+              "action": "Implement required controls and procedures",
+              "deadline": "2025-11-16T20:08:40.609Z"
+            }
+          ]
+        }
+      },
+      "overall_score": 92,
+      "weighted_score": 9175,
+      "status": "fully_compliant",
+      "violations": [
+        {
+          "rule": "data_minimization",
+          "category": "privacy_by_design",
+          "severity": "medium",
+          "description": "Assessment for rule: data_minimization",
+          "remediation": "Implement required controls and procedures"
+        },
+        {
+          "rule": "privacy_policy",
+          "category": "documentation",
+          "severity": "medium",
+          "description": "Assessment for rule: privacy_policy",
+          "remediation": "Implement required controls and procedures"
+        }
+      ],
+      "recommendations": [
+        {
+          "rule": "data_minimization",
+          "priority": "medium",
+          "action": "Implement required controls and procedures",
+          "deadline": "2025-11-16T20:08:40.609Z"
+        },
+        {
+          "rule": "privacy_policy",
+          "priority": "medium",
+          "action": "Implement required controls and procedures",
+          "deadline": "2025-11-16T20:08:40.609Z"
+        }
+      ]
+    }
+  },
+  "summary": {
+    "fully_compliant": 1,
+    "substantially_compliant": 0,
+    "partially_compliant": 0,
+    "non_compliant": 0
+  },
+  "total_violations": 2,
+  "critical_violations": 0,
+  "recommendations": [],
+  "metadata": {
+    "system_version": "unknown",
+    "assessment_tool": "merajutasa-compliance-automation",
+    "assessment_methodology": "automated_rules_engine"
+  }
+}

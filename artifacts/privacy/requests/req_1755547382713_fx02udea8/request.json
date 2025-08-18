@@ -1,0 +1,116 @@
+{
+  "id": "req_1755547382713_fx02udea8",
+  "type": "access",
+  "user_id": "test_user",
+  "jurisdiction": "gdpr",
+  "details": {},
+  "status": "completed",
+  "created_at": "2025-08-18T20:03:02.713Z",
+  "deadline": "2025-09-17T20:03:02.713Z",
+  "automated_processing": true,
+  "steps_completed": [
+    "data_collection",
+    "report_generation"
+  ],
+  "files_generated": [
+    "access-report.json"
+  ],
+  "completed_at": "2025-08-18T20:03:03.717Z",
+  "result": {
+    "request_id": "req_1755547382713_fx02udea8",
+    "user_id": "test_user",
+    "generated_at": "2025-08-18T20:03:03.717Z",
+    "jurisdiction": "gdpr",
+    "data_summary": {
+      "total_data_points": 310,
+      "categories_found": 3,
+      "sources": 5
+    },
+    "personal_data": {
+      "personal_identifiers": [
+        "sample_data",
+        "sample_data",
+        "sample_data",
+        "sample_data",
+        "sample_data",
+        "sample_data",
+        "sample_data",
+        "sample_data"
+      ],
+      "demographic_data": [
+        "sample_data",
+        "sample_data",
+        "sample_data",
+        "sample_data"
+      ],
+      "behavioral_data": [
+        "sample_data",
+        "sample_data",
+        "sample_data",
+        "sample_data",
+        "sample_data",
+        "sample_data",
+        "sample_data",
+        "sample_data",
+        "sample_data",
+        "sample_data",
+        "sample_data",
+        "sample_data",
+        "sample_data",
+        "sample_data"
+      ]
+    },
+    "data_sources": [
+      {
+        "source": "user_accounts",
+        "system": "merajutasa-core",
+        "database": "primary",
+        "tables": [
+          "user_accounts_table"
+        ]
+      },
+      {
+        "source": "audit_logs",
+        "system": "merajutasa-core",
+        "database": "primary",
+        "tables": [
+          "audit_logs_table"
+        ]
+      },
+      {
+        "source": "session_data",
+        "system": "merajutasa-core",
+        "database": "primary",
+        "tables": [
+          "session_data_table"
+        ]
+      },
+      {
+        "source": "preferences",
+        "system": "merajutasa-core",
+        "database": "primary",
+        "tables": [
+          "preferences_table"
+        ]
+      },
+      {
+        "source": "communications",
+        "system": "merajutasa-core",
+        "database": "primary",
+        "tables": [
+          "communications_table"
+        ]
+      }
+    ],
+    "consent_records": [],
+    "retention_information": {
+      "policy_version": "1.0",
+      "default_retention": "7 years",
+      "category_specific": {
+        "personal_identifiers": "7 years after account closure",
+        "behavioral_data": "2 years from last activity",
+        "technical_data": "1 year from collection"
+      }
+    }
+  }
+}

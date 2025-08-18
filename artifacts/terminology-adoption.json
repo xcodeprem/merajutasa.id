@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-18T17:51:27.946Z",
+  "generated_utc": "2025-08-18T20:32:40.960Z",
   "old_total": 0,
   "new_total": 0,
   "adoptionPercent": 100,
@@ -506,6 +506,16 @@
       "newCount": 0
     },
     {
+      "file": "docs/architecture/LEAD-INFRASTRUCTURE-ARCHITECT-SUMMARY.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/architecture/INFRASTRUCTURE-ARCHITECTURE-OVERVIEW.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
       "file": "docs/api/README.md",
       "oldCount": 0,
       "newCount": 0
@@ -557,16 +567,6 @@
     },
     {
       "file": "docs/governance/trace/archive-trace-index-v1.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs/governance/audit/README-audit-process.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -672,6 +672,16 @@
     },
     {
       "file": "docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/governance/audit/README-audit-process.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -1563,16 +1573,6 @@
       ]
     },
     {
-      "file": "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
-      "suggestions": [
-        {
-          "old": "user",
-          "new": "pengguna",
-          "count": 1
-        }
-      ]
-    },
-    {
       "file": "docs/governance/dec/DEC-20250817-09-stage2-terminology-transition.md",
       "suggestions": [
         {
@@ -1718,6 +1718,16 @@
         {
           "old": "master",
           "new": "utama",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
           "count": 1
         }
       ]

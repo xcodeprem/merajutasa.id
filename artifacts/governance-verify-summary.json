@@ -1,22 +1,22 @@
 {
   "_metadata": {
     "actor": "copilot-swe-agent[bot]",
-    "generated_at": "2025-08-18T17:51:28.113Z",
+    "generated_at": "2025-08-18T20:32:41.122Z",
     "generator": "governance-verify-aggregator",
-    "git_ref": "refs/heads/copilot/fix-49",
-    "git_sha": "742960e3407a4d022b325b9aa7d5da39afd5a32e",
-    "run_id": "17048236322",
+    "git_ref": "refs/heads/copilot/fix-56",
+    "git_sha": "fd483fd582144ff6dca40f822632323a514657e6",
+    "run_id": "17051473775",
     "version": "1.0"
   },
   "artifacts": {
     "decLint": {
       "_metadata": {
         "actor": "copilot-swe-agent[bot]",
-        "generated_at": "2025-08-18T17:51:24.915Z",
+        "generated_at": "2025-08-18T20:32:39.416Z",
         "generator": "dec-lint.js",
-        "git_ref": "refs/heads/copilot/fix-49",
-        "git_sha": "742960e3407a4d022b325b9aa7d5da39afd5a32e",
-        "run_id": "17048236322",
+        "git_ref": "refs/heads/copilot/fix-56",
+        "git_sha": "fd483fd582144ff6dca40f822632323a514657e6",
+        "run_id": "17051473775",
         "version": "1.0"
       },
       "results": [
@@ -488,10 +488,10 @@
           "spec_hash_violation_count": 0
         }
       },
-      "timestamp_utc": "2025-08-18T17:51:27.564Z"
+      "timestamp_utc": "2025-08-18T20:32:40.591Z"
     },
     "hype": {
-      "file_count": 59,
+      "file_count": 61,
       "findings": [
         {
           "column": 9,
@@ -614,7 +614,7 @@
           "severity": "MEDIUM"
         }
       ],
-      "generated_utc": "2025-08-18T17:51:24.060Z",
+      "generated_utc": "2025-08-18T20:32:38.565Z",
       "max_severity": "MEDIUM",
       "rule_counts": {
         "RANKING": 6,
@@ -628,7 +628,7 @@
       "version": 1
     },
     "params": {
-      "generated_utc": "2025-08-18T17:51:23.652Z",
+      "generated_utc": "2025-08-18T20:32:38.149Z",
       "rows": [
         {
           "aliases": {
@@ -902,7 +902,7 @@
       "violations": []
     },
     "principles": {
-      "generated_utc": "2025-08-18T17:51:25.175Z",
+      "generated_utc": "2025-08-18T20:32:39.637Z",
       "principles": [
         {
           "confidence": 0.9,
@@ -1016,7 +1016,7 @@
           ],
           "evidence_truncated": true,
           "inferredImpact": true,
-          "match_count": 1181,
+          "match_count": 1183,
           "principle": "GP1"
         },
         {
@@ -1031,7 +1031,7 @@
               "changed": false,
               "domain": "other",
               "file": "docs/strategic-analysis/STRATEGIC-IMPLEMENTATION-ANALYSIS.md",
-              "line": 310,
+              "line": 336,
               "pattern": "abuse",
               "snippet": "- [ ] **Rate limiting** prevents abuse"
             },
@@ -1308,7 +1308,7 @@
           ],
           "evidence_truncated": true,
           "inferredImpact": true,
-          "match_count": 818,
+          "match_count": 820,
           "principle": "GP4"
         },
         {
@@ -2009,7 +2009,7 @@
           ]
         },
         "freshness": {
-          "age_hours": 8.91382861111111,
+          "age_hours": 11.601191111111111,
           "last_rotated_utc": "2025-08-18T08:56:34.958Z",
           "ok": true
         },
@@ -2021,11 +2021,11 @@
       },
       "config_path": "tools/config/privacy-policy.json",
       "status": "ok",
-      "ts": "2025-08-18T17:51:24.741Z",
+      "ts": "2025-08-18T20:32:39.246Z",
       "violations": []
     },
     "securitySmoke": {
-      "files_scanned": 146,
+      "files_scanned": 156,
       "summary": {
         "by_severity": {
           "HIGH": 0,
@@ -2034,7 +2034,7 @@
         },
         "total_violations": 0
       },
-      "timestamp": "2025-08-18T17:51:23.928Z",
+      "timestamp": "2025-08-18T20:32:38.428Z",
       "violations": []
     },
     "specHash": {
@@ -2047,7 +2047,7 @@
         "updated_count": 0,
         "violation_count": 0
       },
-      "timestamp_utc": "2025-08-18T17:51:23Z",
+      "timestamp_utc": "2025-08-18T20:32:38Z",
       "unchanged": [
         "docs/roadmap/roadmap-master-v1.md",
         "docs/governance/signature-pipeline-plan-v1.md",
@@ -2613,6 +2613,16 @@
           "oldCount": 0
         },
         {
+          "file": "docs/architecture/LEAD-INFRASTRUCTURE-ARCHITECT-SUMMARY.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/architecture/INFRASTRUCTURE-ARCHITECTURE-OVERVIEW.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
           "file": "docs/api/README.md",
           "newCount": 0,
           "oldCount": 0
@@ -2664,16 +2674,6 @@
         },
         {
           "file": "docs/governance/trace/archive-trace-index-v1.md",
-          "newCount": 0,
-          "oldCount": 0
-        },
-        {
-          "file": "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
-          "newCount": 0,
-          "oldCount": 0
-        },
-        {
-          "file": "docs/governance/audit/README-audit-process.md",
           "newCount": 0,
           "oldCount": 0
         },
@@ -2783,12 +2783,22 @@
           "oldCount": 0
         },
         {
+          "file": "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/governance/audit/README-audit-process.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
           "file": "docs/governance/dec/templates/DEC-template-v1.md",
           "newCount": 0,
           "oldCount": 0
         }
       ],
-      "generated_utc": "2025-08-18T17:51:27.946Z",
+      "generated_utc": "2025-08-18T20:32:40.960Z",
       "new_total": 0,
       "old_total": 0,
       "suggestions": [
@@ -3673,16 +3683,6 @@
           ]
         },
         {
-          "file": "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
-          "suggestions": [
-            {
-              "count": 1,
-              "new": "pengguna",
-              "old": "user"
-            }
-          ]
-        },
-        {
           "file": "docs/governance/dec/DEC-20250817-09-stage2-terminology-transition.md",
           "suggestions": [
             {
@@ -3831,6 +3831,16 @@
               "old": "master"
             }
           ]
+        },
+        {
+          "file": "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
+          "suggestions": [
+            {
+              "count": 1,
+              "new": "pengguna",
+              "old": "user"
+            }
+          ]
         }
       ],
       "version": "1.0.0"
@@ -3865,5 +3875,5 @@
     "terminology_old_total": 0,
     "total_param_checks": 15
   },
-  "timestamp": "2025-08-18T17:51:28.109Z"
+  "timestamp": "2025-08-18T20:32:41.116Z"
 }

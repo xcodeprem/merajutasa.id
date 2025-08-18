@@ -1,6 +1,6 @@
 {
   "user_id": "test_user",
-  "mapped_at": "2025-08-18T15:34:14.580Z",
+  "mapped_at": "2025-08-18T20:11:12.663Z",
   "data_sources": {
     "user_accounts": {
       "source": "user_accounts",
@@ -9,16 +9,22 @@
       "tables": [
         "user_accounts_table"
       ],
-      "total_items": 54,
+      "total_items": 17,
       "categories": {
         "personal_identifiers": [
           "sample_data",
+          "sample_data",
+          "sample_data",
           "sample_data"
         ],
-        "demographic_data": [
-          "sample_data"
-        ],
+        "demographic_data": [],
         "behavioral_data": [
+          "sample_data",
+          "sample_data",
+          "sample_data",
+          "sample_data",
+          "sample_data",
+          "sample_data",
           "sample_data"
         ]
       }
@@ -30,17 +36,17 @@
       "tables": [
         "audit_logs_table"
       ],
-      "total_items": 89,
+      "total_items": 26,
       "categories": {
         "personal_identifiers": [
           "sample_data",
-          "sample_data"
-        ],
-        "demographic_data": [
           "sample_data",
           "sample_data"
         ],
+        "demographic_data": [],
         "behavioral_data": [
+          "sample_data",
+          "sample_data",
           "sample_data",
           "sample_data",
           "sample_data",
@@ -55,15 +61,17 @@
       "tables": [
         "session_data_table"
       ],
-      "total_items": 86,
+      "total_items": 35,
       "categories": {
         "personal_identifiers": [
           "sample_data",
-          "sample_data",
           "sample_data"
         ],
-        "demographic_data": [],
+        "demographic_data": [
+          "sample_data"
+        ],
         "behavioral_data": [
+          "sample_data",
           "sample_data",
           "sample_data",
           "sample_data",
@@ -80,22 +88,13 @@
       "tables": [
         "preferences_table"
       ],
-      "total_items": 44,
+      "total_items": 31,
       "categories": {
         "personal_identifiers": [
           "sample_data"
         ],
         "demographic_data": [],
-        "behavioral_data": [
-          "sample_data",
-          "sample_data",
-          "sample_data",
-          "sample_data",
-          "sample_data",
-          "sample_data",
-          "sample_data",
-          "sample_data"
-        ]
+        "behavioral_data": []
       }
     },
     "communications": {
@@ -105,17 +104,18 @@
       "tables": [
         "communications_table"
       ],
-      "total_items": 20,
+      "total_items": 75,
       "categories": {
         "personal_identifiers": [
           "sample_data",
           "sample_data",
+          "sample_data",
           "sample_data"
         ],
-        "demographic_data": [
-          "sample_data"
-        ],
+        "demographic_data": [],
         "behavioral_data": [
+          "sample_data",
+          "sample_data",
           "sample_data",
           "sample_data",
           "sample_data",
@@ -137,15 +137,18 @@
       "sample_data",
       "sample_data",
       "sample_data",
+      "sample_data",
+      "sample_data",
+      "sample_data",
       "sample_data"
     ],
     "demographic_data": [
-      "sample_data",
-      "sample_data",
-      "sample_data",
       "sample_data"
     ],
     "behavioral_data": [
+      "sample_data",
+      "sample_data",
+      "sample_data",
       "sample_data",
       "sample_data",
       "sample_data",
@@ -174,5 +177,5 @@
   },
   "retention_schedules": {},
   "sharing_arrangements": {},
-  "total_data_points": 293
+  "total_data_points": 184
 }
