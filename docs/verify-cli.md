@@ -1,6 +1,7 @@
 # Verify CLI (Draft)
 
 ## Steps
+
 - Install Node.js 18+
 - Run npm run verify:cli
 - Inspect artifacts under artifacts/ for signatures & hashes.

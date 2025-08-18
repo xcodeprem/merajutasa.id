@@ -3,6 +3,7 @@
 ## Essential Commands 🚀
 
 ### System Status & Health
+
 ```bash
 npm run week5:status          # Comprehensive HA system validation (77/100 score)
 npm run week5:demo           # Interactive 12-step HA demonstration
@@ -11,6 +12,7 @@ npm run ha:system-health     # Real-time system health assessment
 ```
 
 ### High Availability Orchestrator
+
 ```bash
 npm run ha:orchestrator-start    # Start centralized HA orchestration system
 npm run ha:orchestrator-status   # Get detailed orchestrator status and metrics
@@ -19,21 +21,25 @@ npm run ha:demo-full            # Complete demonstration of HA capabilities
 ```
 
 ### Multi-Region Deployment
+
 ```bash
 npm run ha:multi-region-deploy  # Execute multi-region deployment (blue-green strategy)
 ```
 
 ### Disaster Recovery Operations
+
 ```bash
 npm run ha:disaster-recovery-backup  # Create full system backup for disaster recovery
 ```
 
 ### Auto-Scaling Management
+
 ```bash
 npm run ha:auto-scaling-status      # Check auto-scaling system status and metrics
 ```
 
 ### Fault Tolerance & Monitoring
+
 ```bash
 npm run ha:fault-tolerance-status    # Review fault tolerance component health
 npm run ha:health-monitoring-status  # Monitor system health check status
@@ -43,6 +49,7 @@ npm run ha:emergency-response-test   # Test emergency response procedures
 ## High Availability Endpoints 🌐
 
 ### HA Orchestrator API
+
 | Endpoint | Method | Purpose | Example |
 |----------|--------|---------|---------|
 | `/health` | GET | Orchestrator health check | `curl http://localhost:8090/health` |
@@ -51,6 +58,7 @@ npm run ha:emergency-response-test   # Test emergency response procedures
 | `/components` | GET | Component health status | `curl http://localhost:8090/components` |
 
 ### Component Health Endpoints
+
 | Component | Port | Health Endpoint | Purpose |
 |-----------|------|----------------|---------|
 | **Multi-Region** | 8095 | `/health` | Region deployment status |
@@ -62,6 +70,7 @@ npm run ha:emergency-response-test   # Test emergency response procedures
 ## Component Configuration 🔧
 
 ### Multi-Region Deployment
+
 ```javascript
 // Deploy to multiple regions with blue-green strategy
 const deployment = getMultiRegionDeployment();
@@ -74,6 +83,7 @@ await deployment.deployToRegions({
 ```
 
 ### Disaster Recovery
+
 ```javascript
 // Configure automated backup with cross-region replication
 const drSystem = getDisasterRecoverySystem();
@@ -86,6 +96,7 @@ await drSystem.createFullBackup({
 ```
 
 ### Auto-Scaling
+
 ```javascript
 // Register service for intelligent auto-scaling
 const autoScaler = getAutoScalingSystem();
@@ -100,6 +111,7 @@ await autoScaler.registerService('api-gateway', {
 ```
 
 ### Fault Tolerance
+
 ```javascript
 // Configure circuit breaker for external service
 const faultTolerance = getFaultToleranceSystem();
@@ -112,6 +124,7 @@ await faultTolerance.registerCircuitBreaker('payment-service', {
 ```
 
 ### Health Monitoring
+
 ```javascript
 // Register custom health check
 const healthMonitor = getHealthMonitoringSystem();
@@ -127,6 +140,7 @@ await healthMonitor.registerHealthCheck('database-connection', {
 ## Status Codes & Health Levels 📊
 
 ### Component Health Status
+
 | Status | Code | Description | Action Required |
 |--------|------|-------------|----------------|
 | **Healthy** | 100 | ✅ Fully operational | None |
@@ -137,6 +151,7 @@ await healthMonitor.registerHealthCheck('database-connection', {
 | **Unknown** | -1 | ❓ Status unavailable | Check connectivity |
 
 ### System Health Indicators
+
 ```bash
 # Overall system health levels
 77/100 - Good operational status
@@ -148,6 +163,7 @@ await healthMonitor.registerHealthCheck('database-connection', {
 ## Deployment Strategies 🚀
 
 ### Blue-Green Deployment
+
 ```bash
 # Execute blue-green deployment across regions
 npm run ha:multi-region-deploy
@@ -160,6 +176,7 @@ npm run ha:multi-region-deploy
 ```
 
 ### Rolling Deployment
+
 ```javascript
 // Configure rolling deployment
 await deployment.deployToRegions({
@@ -171,6 +188,7 @@ await deployment.deployToRegions({
 ```
 
 ### Canary Deployment
+
 ```javascript
 // Configure canary deployment
 await deployment.deployToRegions({
@@ -184,6 +202,7 @@ await deployment.deployToRegions({
 ## Auto-Scaling Triggers 📈
 
 ### CPU-Based Scaling
+
 ```bash
 # Trigger: CPU > 70% for 2 minutes
 # Action: Scale up by 2 instances
@@ -191,6 +210,7 @@ await deployment.deployToRegions({
 ```
 
 ### Memory-Based Scaling
+
 ```bash
 # Trigger: Memory > 80% for 3 minutes
 # Action: Scale up by 1 instance
@@ -198,6 +218,7 @@ await deployment.deployToRegions({
 ```
 
 ### Custom Metrics Scaling
+
 ```bash
 # Request rate > 1000 req/min
 # Response time > 500ms
@@ -205,6 +226,7 @@ await deployment.deployToRegions({
 ```
 
 ### Predictive Scaling
+
 ```bash
 # Machine learning-based demand prediction
 # Scales 5 minutes before anticipated load
@@ -214,6 +236,7 @@ await deployment.deployToRegions({
 ## Disaster Recovery Procedures 💾
 
 ### Backup Types
+
 | Type | Frequency | Retention | Recovery Time |
 |------|-----------|-----------|---------------|
 | **Full Backup** | Daily | 30 days | 5 minutes |
@@ -221,6 +244,7 @@ await deployment.deployToRegions({
 | **Transaction Log** | Real-time | 24 hours | 1 minute |
 
 ### Recovery Point Objectives (RPO)
+
 ```bash
 Critical Data: 15 minutes
 User Data: 1 hour
@@ -229,6 +253,7 @@ Logs: 24 hours
 ```
 
 ### Recovery Time Objectives (RTO)
+
 ```bash
 Critical Services: 5 minutes
 Standard Services: 15 minutes
@@ -236,6 +261,7 @@ Non-Critical: 1 hour
 ```
 
 ### Failover Procedures
+
 ```bash
 # Automatic failover triggers:
 # - Primary region unavailable > 3 minutes
@@ -249,6 +275,7 @@ npm run ha:disaster-recovery-backup --failover --target-region=us-west-2
 ## Circuit Breaker States 🛡️
 
 ### Circuit Breaker Lifecycle
+
 ```bash
 CLOSED    → Normal operation, requests flow through
 OPEN      → Failure threshold reached, requests fail fast
@@ -256,6 +283,7 @@ HALF_OPEN → Testing if service recovered, limited requests
 ```
 
 ### Configuration Parameters
+
 ```javascript
 // Circuit breaker settings
 {
@@ -267,6 +295,7 @@ HALF_OPEN → Testing if service recovered, limited requests
 ```
 
 ### Failure Detection
+
 ```bash
 # Triggers for circuit breaker:
 # - HTTP 5xx responses
@@ -278,6 +307,7 @@ HALF_OPEN → Testing if service recovered, limited requests
 ## Monitoring & Alerting 📡
 
 ### Alert Levels
+
 | Level | Threshold | Response Time | Escalation |
 |-------|-----------|---------------|------------|
 | **Info** | 90% health | 1 hour | Email |
@@ -286,6 +316,7 @@ HALF_OPEN → Testing if service recovered, limited requests
 | **Emergency** | 25% health | Immediate | PagerDuty |
 
 ### Key Metrics to Monitor
+
 ```bash
 # System Health Metrics
 - Overall system health percentage
@@ -302,6 +333,7 @@ HALF_OPEN → Testing if service recovered, limited requests
 ```
 
 ### Health Check Endpoints
+
 ```bash
 # System-wide health
 curl http://localhost:8090/health
@@ -317,6 +349,7 @@ curl http://localhost:8099/health  # Health monitoring
 ## Performance Benchmarks 🏃‍♂️
 
 ### Response Time Targets
+
 ```bash
 Health Checks: < 100ms
 Component Status: < 500ms
@@ -326,6 +359,7 @@ Failover Procedures: < 5 minutes
 ```
 
 ### Throughput Targets
+
 ```bash
 Health Check Requests: 1000/second
 Status API Calls: 500/second
@@ -334,6 +368,7 @@ Backup Operations: 1/hour
 ```
 
 ### Resource Utilization
+
 ```bash
 HA Orchestrator: < 2% CPU, < 256MB RAM
 Multi-Region: < 1% CPU, < 128MB RAM
@@ -348,6 +383,7 @@ Health Monitoring: < 1% CPU, < 128MB RAM
 ### Common Issues & Solutions
 
 #### HA Orchestrator Not Responding
+
 ```bash
 # Check process status
 ps aux | grep ha-orchestrator
@@ -358,6 +394,7 @@ npm run ha:orchestrator-start
 ```
 
 #### Multi-Region Deployment Failing
+
 ```bash
 # Verify cloud credentials
 aws sts get-caller-identity
@@ -372,6 +409,7 @@ npm run ha:multi-region-deploy
 ```
 
 #### Auto-Scaling Not Triggering
+
 ```bash
 # Check Kubernetes connection
 kubectl cluster-info
@@ -386,6 +424,7 @@ npm run ha:auto-scaling-status
 ```
 
 #### Health Monitoring Alerts Not Working
+
 ```bash
 # Check health monitoring service
 npm run ha:health-monitoring-status
@@ -400,6 +439,7 @@ npm run ha:start-all
 ## Emergency Procedures 🚨
 
 ### Emergency Response Checklist
+
 ```bash
 1. □ Assess impact scope and severity
 2. □ Check system health: npm run ha:system-health
@@ -412,6 +452,7 @@ npm run ha:start-all
 ```
 
 ### Emergency Contacts
+
 ```bash
 # 24/7 DevOps On-Call
 Phone: +62-xxx-xxx-xxxx
@@ -423,6 +464,7 @@ Infrastructure Lead: infra@merajutasa.id
 ```
 
 ### Disaster Recovery Activation
+
 ```bash
 # Full disaster recovery activation
 npm run ha:disaster-recovery-backup --emergency --activate-dr
@@ -437,6 +479,7 @@ npm run ha:multi-region-deploy --rollback --version=previous
 ## Environment Variables Quick Reference 📝
 
 ### Core Configuration
+
 ```bash
 HA_ORCHESTRATOR_PORT=8090
 HA_ORCHESTRATOR_NAME=merajutasa-ha-orchestrator
@@ -446,6 +489,7 @@ DEPLOYMENT_STRATEGY=blue-green
 ```
 
 ### Auto-Scaling Settings
+
 ```bash
 AUTO_SCALING_MIN_INSTANCES=2
 AUTO_SCALING_MAX_INSTANCES=20
@@ -454,6 +498,7 @@ AUTO_SCALING_TARGET_MEMORY=80
 ```
 
 ### Health Monitoring
+
 ```bash
 HEALTH_CHECK_INTERVAL=30000
 HEALTH_CHECK_TIMEOUT=5000
@@ -461,6 +506,7 @@ ALERT_COOLDOWN_PERIOD=300000
 ```
 
 ### Disaster Recovery
+
 ```bash
 DR_BACKUP_SCHEDULE="0 2 * * *"  # Daily at 2 AM
 DR_RETENTION_DAYS=30
@@ -470,6 +516,7 @@ DR_CROSS_REGION_REPLICATION=true
 ## File Locations 📁
 
 ### Core Components
+
 ```bash
 infrastructure/high-availability/ha-orchestrator.js       # Central coordination (28KB)
 infrastructure/high-availability/multi-region-deployment.js  # Multi-region (16KB)
@@ -480,6 +527,7 @@ infrastructure/high-availability/health-monitoring.js    # Health monitoring (23
 ```
 
 ### Documentation
+
 ```bash
 docs/phase-2/PHASE-2-WEEK-5-DELIVERY-DOCUMENTATION.md    # Complete delivery guide
 docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-5.md     # Team setup instructions
@@ -487,6 +535,7 @@ docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md  # This quick reference
 ```
 
 ### Artifacts & Status
+
 ```bash
 artifacts/phase2-week5-status.json   # Real-time status data
 tools/phase2-week5-status.js        # Status check script
@@ -497,6 +546,7 @@ tools/phase2-week5-test.js          # Component testing
 ## Integration Points 🔗
 
 ### With Previous Phases
+
 ```bash
 # Phase 1: Security, Observability, Backup
 - Integrates with existing observability stack
@@ -520,6 +570,7 @@ tools/phase2-week5-test.js          # Component testing
 ```
 
 ### External Integrations
+
 ```bash
 # Cloud Providers
 - AWS: Multi-region deployment, Auto Scaling Groups
@@ -540,6 +591,7 @@ tools/phase2-week5-test.js          # Component testing
 ## Success Metrics Dashboard 📊
 
 ### Real-Time Health Status
+
 ```bash
 # Overall System Health: 77/100
 ├── Multi-Region Deployment: 100/100 ✅
@@ -551,6 +603,7 @@ tools/phase2-week5-test.js          # Component testing
 ```
 
 ### Key Performance Indicators
+
 ```bash
 System Availability: 99.95%
 Recovery Point Objective: 15 minutes

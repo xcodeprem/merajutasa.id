@@ -17,6 +17,7 @@ This document outlines the Standard Operating Procedures (SOPs) for managing the
 #### 1. Security Review
 
 **For new actions:**
+
 - [ ] Verify the action is from a trusted publisher (GitHub official, verified organization, or well-established maintainer)
 - [ ] Review the action's source code for security issues
 - [ ] Check for any reported security vulnerabilities
@@ -24,6 +25,7 @@ This document outlines the Standard Operating Procedures (SOPs) for managing the
 - [ ] Document the business justification for adding this action
 
 **For existing action updates:**
+
 - [ ] Review the changelog between old and new SHA
 - [ ] Verify no breaking changes or security issues in the new version
 - [ ] Test the new version in a fork/branch if significant changes
@@ -45,6 +47,7 @@ echo "SHA_HERE" | grep -E '^[a-f0-9]{40}$'
 #### 3. Update Process
 
 1. **Create feature branch:**
+
    ```bash
    git checkout -b feat/allowlist-update-action-name
    ```
@@ -59,6 +62,7 @@ echo "SHA_HERE" | grep -E '^[a-f0-9]{40}$'
    - Ensure SHA matches exactly what's in the allowlist
 
 4. **Test validation:**
+
    ```bash
    # Run actions pinning check
    ./.github/scripts/check-actions-pinning.sh
@@ -94,6 +98,7 @@ echo "SHA_HERE" | grep -E '^[a-f0-9]{40}$'
 If issues are discovered after merge:
 
 1. **Immediate action:**
+
    ```bash
    # Revert to previous working SHA
    git checkout main

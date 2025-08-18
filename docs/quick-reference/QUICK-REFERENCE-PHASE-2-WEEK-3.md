@@ -3,6 +3,7 @@
 ## Essential Commands 🚀
 
 ### System Operations
+
 ```bash
 # Complete system management
 npm run observability:start              # Start unified observability system
@@ -16,6 +17,7 @@ npm run week3:demo                       # Interactive 10-step demonstration
 ```
 
 ### Component Operations
+
 ```bash
 # Individual component management
 npm run tracing:start                    # Initialize distributed tracing
@@ -30,19 +32,22 @@ npm run dashboards:open                  # Open dashboard in browser
 ## Key URLs & Endpoints 🌐
 
 ### Dashboards
-- **Main Dashboard**: http://localhost:3000/
-- **System Overview**: http://localhost:3000/ (default view)
-- **API Status**: http://localhost:3000/api/dashboards
-- **Health Check**: http://localhost:3000/health
+
+- **Main Dashboard**: <http://localhost:3000/>
+- **System Overview**: <http://localhost:3000/> (default view)
+- **API Status**: <http://localhost:3000/api/dashboards>
+- **Health Check**: <http://localhost:3000/health>
 
 ### External Integrations (Optional)
-- **Jaeger UI**: http://localhost:16686/ (if Jaeger running)
-- **Prometheus Metrics**: http://localhost:3000/metrics
-- **API Documentation**: http://localhost:3000/api/
+
+- **Jaeger UI**: <http://localhost:16686/> (if Jaeger running)
+- **Prometheus Metrics**: <http://localhost:3000/metrics>
+- **API Documentation**: <http://localhost:3000/api/>
 
 ## Quick Integration Patterns 🔧
 
 ### 1. Trace Business Operations
+
 ```javascript
 import { getAdvancedObservabilitySystem } from './infrastructure/observability/advanced-observability-system.js';
 
@@ -56,6 +61,7 @@ await observability.traceBusinessOperation('user_action', async (span) => {
 ```
 
 ### 2. Record Custom Metrics
+
 ```javascript
 // Quick metric recording
 observability.recordUnifiedMetric('custom_event', 1, {
@@ -66,6 +72,7 @@ observability.recordUnifiedMetric('custom_event', 1, {
 ```
 
 ### 3. Structured Logging
+
 ```javascript
 const logging = observability.components.get('logging');
 
@@ -76,6 +83,7 @@ logging.security('login_attempt', 'medium', 'Failed login', { ip, attempts });
 ```
 
 ### 4. Create Custom Alerts
+
 ```javascript
 observability.createUnifiedAlert(
   'custom_alert_name',
@@ -111,6 +119,7 @@ observability.createUnifiedAlert(
 ## Metric Types Reference 📊
 
 ### System Metrics
+
 - `http_requests_total` - HTTP request counter
 - `http_request_duration` - Request latency histogram
 - `error_rate` - Current error rate percentage
@@ -118,6 +127,7 @@ observability.createUnifiedAlert(
 - `memory_usage_percent` - Memory utilization
 
 ### Business Metrics
+
 - `signing_operations_total` - Document signing operations
 - `chain_integrity_score` - Blockchain integrity percentage
 - `governance_verifications_total` - Governance checks
@@ -125,6 +135,7 @@ observability.createUnifiedAlert(
 - `policy_compliance_score` - Policy compliance percentage
 
 ### Performance Metrics
+
 - `cache_hit_ratio` - Cache effectiveness
 - `database_connections_active` - DB connection pool
 - `response_time_p95` - 95th percentile response time
@@ -142,6 +153,7 @@ observability.createUnifiedAlert(
 ## Log Levels & Types 📝
 
 ### Log Levels
+
 - `error` - Error conditions requiring attention
 - `warn` - Warning conditions, degraded performance
 - `info` - Informational messages, normal operations
@@ -149,6 +161,7 @@ observability.createUnifiedAlert(
 - `trace` - Very detailed tracing information
 
 ### Log Types
+
 - `application` - Standard application logs
 - `audit` - Governance and compliance events
 - `access` - HTTP request/response logs
@@ -158,6 +171,7 @@ observability.createUnifiedAlert(
 ## Dashboard Widget Types 📱
 
 ### Available Widgets
+
 - **Gauge** - System health scores, percentages
 - **Line Chart** - Time-series trends and patterns
 - **Bar Chart** - Categorical data comparison
@@ -167,6 +181,7 @@ observability.createUnifiedAlert(
 - **Number Display** - Single metric values
 
 ### Dashboard Types
+
 1. **System Overview** - High-level health and performance
 2. **Business Metrics** - KPIs and governance metrics
 3. **Performance Analysis** - Detailed performance trends
@@ -175,12 +190,14 @@ observability.createUnifiedAlert(
 ## Environment Variables 🔧
 
 ### Required (Optional with defaults)
+
 ```bash
 NODE_ENV=development                     # Environment mode
 DASHBOARD_PORT=3000                      # Dashboard server port
 ```
 
 ### External Integrations (Optional)
+
 ```bash
 # Distributed Tracing
 JAEGER_ENDPOINT=http://localhost:14268/api/traces
@@ -206,6 +223,7 @@ PAGERDUTY_INTEGRATION_KEY=your-integration-key
 ## Performance Benchmarks ⚡
 
 ### Expected Performance (Local Development)
+
 | Component | Throughput | Latency P95 | Memory Usage |
 |-----------|------------|-------------|--------------|
 | Metrics Collection | 2,000 ops/sec | 2ms | 15MB |
@@ -216,6 +234,7 @@ PAGERDUTY_INTEGRATION_KEY=your-integration-key
 | Dashboard Updates | 400 ops/sec | 3ms | 25MB |
 
 ### Production Scaling
+
 - **Horizontal Scaling**: All components support distributed deployment
 - **Resource Requirements**: 2-4 CPU cores, 4-8GB RAM per instance
 - **Storage**: 10GB+ for logs and metrics retention
@@ -224,6 +243,7 @@ PAGERDUTY_INTEGRATION_KEY=your-integration-key
 ## Health Check Indicators 🏥
 
 ### System Health Status
+
 ```bash
 # Quick health check
 npm run observability:health-check
@@ -243,6 +263,7 @@ npm run observability:health-check
 ```
 
 ### Component Health Indicators
+
 - ✅ **Green**: All systems operational
 - 🟡 **Yellow**: Degraded performance, non-critical
 - 🔴 **Red**: Critical failure, immediate attention required
@@ -252,6 +273,7 @@ npm run observability:health-check
 ### Common Issues & Solutions
 
 #### Port Conflicts
+
 ```bash
 # Check port usage
 lsof -i :3000
@@ -262,6 +284,7 @@ npm run dashboards:start
 ```
 
 #### High Memory Usage
+
 ```bash
 # Increase Node.js memory
 export NODE_OPTIONS="--max-old-space-size=4096"
@@ -271,6 +294,7 @@ node -e "setInterval(() => console.log('Memory:', Math.round(process.memoryUsage
 ```
 
 #### Component Not Starting
+
 ```bash
 # Check dependencies
 npm ci
@@ -283,6 +307,7 @@ npm run observability:start
 ```
 
 #### Dashboard Not Loading
+
 ```bash
 # Verify dashboard server
 curl http://localhost:3000/health
@@ -295,6 +320,7 @@ curl http://localhost:3000/health
 ## File Locations 📁
 
 ### Core Implementation
+
 ```
 infrastructure/observability/
 ├── advanced-observability-system.js    # Main orchestrator (28.4KB)
@@ -307,6 +333,7 @@ infrastructure/observability/
 ```
 
 ### Tools & Utilities
+
 ```
 tools/
 ├── phase2-week3-status.js              # Status validation (23.4KB)
@@ -315,6 +342,7 @@ tools/
 ```
 
 ### Documentation
+
 ```
 docs/
 ├── phase-2/PHASE-2-WEEK-3-DELIVERY-DOCUMENTATION.md
@@ -325,17 +353,20 @@ docs/
 ## Support & Resources 🆘
 
 ### Getting Help
+
 1. **Team Chat**: #observability-support
 2. **Documentation**: `/docs/phase-2/` directory
 3. **Code Examples**: `/tools/` directory demos
 4. **Issue Tracking**: GitHub issues
 
 ### Useful Links
-- **OpenTelemetry Docs**: https://opentelemetry.io/docs/
-- **Prometheus Docs**: https://prometheus.io/docs/
-- **Socket.IO Docs**: https://socket.io/docs/
+
+- **OpenTelemetry Docs**: <https://opentelemetry.io/docs/>
+- **Prometheus Docs**: <https://prometheus.io/docs/>
+- **Socket.IO Docs**: <https://socket.io/docs/>
 
 ### Emergency Commands
+
 ```bash
 # Stop all observability components
 pkill -f "observability"

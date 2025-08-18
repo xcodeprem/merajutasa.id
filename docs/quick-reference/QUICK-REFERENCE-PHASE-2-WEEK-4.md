@@ -3,6 +3,7 @@
 ## Essential Commands 🚀
 
 ### System Status & Health
+
 ```bash
 npm run week4:status          # Comprehensive system validation (95/100 score)
 npm run week4:demo           # Interactive 10-step demonstration
@@ -11,6 +12,7 @@ npm run api-gateway:metrics  # Real-time performance metrics
 ```
 
 ### API Gateway Operations
+
 ```bash
 npm run api-gateway:start    # Start unified API Gateway system
 npm run api-gateway:stop     # Gracefully stop API Gateway
@@ -19,12 +21,14 @@ npm run service-mesh:topology # View service topology
 ```
 
 ### CI/CD & Deployment
+
 ```bash
 npm run cicd:deploy         # Execute deployment pipeline
 npm run cicd:status         # Check CI/CD system health
 ```
 
 ### Documentation
+
 ```bash
 npm run docs:generate       # Generate comprehensive API docs
 npm run docs:summary        # View documentation summary
@@ -33,6 +37,7 @@ npm run docs:summary        # View documentation summary
 ## API Gateway Endpoints 🌐
 
 ### Core Gateway Endpoints
+
 | Endpoint | Method | Purpose | Example |
 |----------|--------|---------|---------|
 | `/health` | GET | Gateway health check | `curl http://localhost:8080/health` |
@@ -41,6 +46,7 @@ npm run docs:summary        # View documentation summary
 | `/docs` | GET | OpenAPI specification | `curl http://localhost:8080/docs` |
 
 ### Service Proxy Routes
+
 | Route | Target Service | Purpose |
 |-------|---------------|---------|
 | `/api/v1/signer/*` | Signer Service (4601) | Digital signature operations |
@@ -48,12 +54,14 @@ npm run docs:summary        # View documentation summary
 | `/api/v1/collector/*` | Collector Service (4603) | Event data collection |
 
 ### Interactive Documentation
-- **Swagger UI**: http://localhost:8080/docs (after starting gateway)
+
+- **Swagger UI**: <http://localhost:8080/docs> (after starting gateway)
 - **Generated Files**: `docs/api/index.html` (after `npm run docs:generate`)
 
 ## Component Architecture 🏗️
 
 ### Core Components
+
 ```
 API Gateway Orchestrator
 ├── API Gateway Core (12.2KB)
@@ -75,6 +83,7 @@ API Gateway Orchestrator
 ```
 
 ### File Locations
+
 ```
 infrastructure/
 ├── api-gateway/
@@ -89,6 +98,7 @@ infrastructure/
 ## Configuration Examples ⚙️
 
 ### Basic API Gateway Setup
+
 ```javascript
 import { getAPIGateway } from './infrastructure/api-gateway/api-gateway-core.js';
 
@@ -107,6 +117,7 @@ await gateway.start();
 ```
 
 ### Service Mesh Configuration
+
 ```javascript
 import { getServiceMesh } from './infrastructure/api-gateway/service-mesh.js';
 
@@ -124,6 +135,7 @@ serviceMesh.registerService('collector', {
 ```
 
 ### CI/CD Pipeline Example
+
 ```javascript
 import { getCICDManager } from './infrastructure/cicd/pipeline-manager.js';
 
@@ -142,6 +154,7 @@ await cicd.executePipeline(pipeline);
 ## Performance Metrics 📊
 
 ### Gateway Performance
+
 | Metric | Target | Current |
 |--------|--------|---------|
 | Request Capacity | 1000+/min | ✅ 1250/min |
@@ -150,6 +163,7 @@ await cicd.executePipeline(pipeline);
 | Error Rate | <1% | ✅ 0.5% |
 
 ### Service Mesh Metrics
+
 | Metric | Target | Current |
 |--------|--------|---------|
 | Service Discovery | Auto | ✅ 3 services |
@@ -158,6 +172,7 @@ await cicd.executePipeline(pipeline);
 | Health Checks | 30s interval | ✅ Automated |
 
 ### CI/CD Performance
+
 | Metric | Target | Current |
 |--------|--------|---------|
 | Pipeline Execution | <60s | ✅ ~10s |
@@ -170,6 +185,7 @@ await cicd.executePipeline(pipeline);
 ### Common Issues
 
 #### 1. Port 8080 Already in Use
+
 ```bash
 # Check what's using the port
 lsof -i :8080  # macOS/Linux
@@ -181,6 +197,7 @@ npm run api-gateway:start
 ```
 
 #### 2. Module Import Errors
+
 ```bash
 # Reinstall dependencies
 npm install
@@ -190,6 +207,7 @@ node --version
 ```
 
 #### 3. Status Check Failures
+
 ```bash
 # Run detailed diagnostics
 npm run week4:status
@@ -201,6 +219,7 @@ npm run cicd:status
 ```
 
 #### 4. High Memory Usage
+
 ```bash
 # Monitor memory usage
 npm run api-gateway:metrics
@@ -211,6 +230,7 @@ npm run api-gateway:start
 ```
 
 ### Debug Commands
+
 ```bash
 # Enable debug logging
 export DEBUG=api-gateway:*
@@ -224,16 +244,19 @@ npm run api-gateway:metrics | jq '.'
 ## Load Balancing Algorithms 🔄
 
 ### Round Robin
+
 - **Use Case**: Equal distribution across all instances
 - **Configuration**: `loadBalancing: 'round-robin'`
 - **Best For**: Homogeneous service instances
 
 ### Weighted
+
 - **Use Case**: Distribute based on instance capacity
 - **Configuration**: `loadBalancing: 'weighted'`
 - **Best For**: Heterogeneous hardware configurations
 
 ### Least Connections
+
 - **Use Case**: Route to least busy instance
 - **Configuration**: `loadBalancing: 'least-connections'`
 - **Best For**: Variable request processing times
@@ -241,11 +264,13 @@ npm run api-gateway:metrics | jq '.'
 ## Circuit Breaker States 🔌
 
 ### State Transitions
+
 ```
 CLOSED → OPEN → HALF-OPEN → CLOSED
 ```
 
 ### State Behaviors
+
 | State | Behavior | Trigger |
 |-------|----------|---------|
 | CLOSED | Normal operation | < 5 failures |
@@ -253,6 +278,7 @@ CLOSED → OPEN → HALF-OPEN → CLOSED
 | HALF-OPEN | Test recovery | After 60s timeout |
 
 ### Configuration
+
 ```javascript
 circuitBreaker: {
   threshold: 5,        // Failures to trigger open
@@ -263,18 +289,21 @@ circuitBreaker: {
 ## Deployment Strategies 🚀
 
 ### Rolling Deployment
+
 - **Zero Downtime**: ✅ Yes
 - **Resource Usage**: Low
 - **Rollback**: Gradual
 - **Best For**: Regular updates
 
 ### Blue-Green Deployment
+
 - **Zero Downtime**: ✅ Yes
 - **Resource Usage**: High (2x)
 - **Rollback**: Instant
 - **Best For**: Major releases
 
 ### Canary Deployment
+
 - **Zero Downtime**: ✅ Yes
 - **Resource Usage**: Medium
 - **Rollback**: Risk-minimized
@@ -283,6 +312,7 @@ circuitBreaker: {
 ## Rate Limiting Configuration 🚦
 
 ### Global Rate Limiting
+
 ```javascript
 rateLimit: {
   windowMs: 15 * 60 * 1000,  // 15 minutes
@@ -292,6 +322,7 @@ rateLimit: {
 ```
 
 ### Service-Specific Limits
+
 ```javascript
 serviceLimiter: {
   windowMs: 15 * 60 * 1000,  // 15 minutes
@@ -303,12 +334,14 @@ serviceLimiter: {
 ## Security Headers 🔒
 
 ### Helmet Configuration
+
 - **Content Security Policy**: Prevents XSS attacks
 - **HSTS**: Forces HTTPS connections
 - **X-Frame-Options**: Prevents clickjacking
 - **X-Content-Type-Options**: Prevents MIME sniffing
 
 ### CORS Settings
+
 ```javascript
 cors: {
   origin: ['http://localhost:3000', 'https://merajutasa.id'],
@@ -320,18 +353,21 @@ cors: {
 ## Daily Operations Checklist ✅
 
 ### Morning Checklist
+
 - [ ] Run system status: `npm run week4:status`
 - [ ] Check gateway health: `npm run api-gateway:status`
 - [ ] Review metrics: `npm run api-gateway:metrics`
 - [ ] Verify service mesh: `npm run service-mesh:health`
 
 ### Development Workflow
+
 - [ ] Start API Gateway: `npm run api-gateway:start`
 - [ ] Validate changes: `npm run week4:demo`
 - [ ] Update documentation: `npm run docs:generate`
 - [ ] Test integrations: `npm run test:infrastructure`
 
 ### Deployment Workflow
+
 - [ ] Execute pipeline: `npm run cicd:deploy`
 - [ ] Monitor deployment: `npm run cicd:status`
 - [ ] Validate health: `npm run api-gateway:status`
@@ -340,6 +376,7 @@ cors: {
 ## Monitoring & Alerting 📈
 
 ### Key Metrics to Watch
+
 - **Request Rate**: Should be < 1000/minute for rate limiting
 - **Error Rate**: Should be < 1%
 - **Latency**: P95 < 150ms, P99 < 300ms
@@ -347,6 +384,7 @@ cors: {
 - **Service Health**: All services should be healthy
 
 ### Alert Thresholds
+
 - **High Error Rate**: > 5%
 - **High Latency**: P95 > 200ms
 - **Circuit Breaker Open**: Any service
@@ -356,6 +394,7 @@ cors: {
 ## Integration Patterns 🔗
 
 ### Service Registration Pattern
+
 ```javascript
 // Auto-register services on startup
 const orchestrator = getAPIGatewayOrchestrator({
@@ -368,6 +407,7 @@ const orchestrator = getAPIGatewayOrchestrator({
 ```
 
 ### Health Check Pattern
+
 ```javascript
 // Implement health endpoint in services
 app.get('/health', (req, res) => {
@@ -379,6 +419,7 @@ app.get('/health', (req, res) => {
 ```
 
 ### Retry Pattern
+
 ```javascript
 // Circuit breaker with retry logic
 await serviceMesh.callService('collector', async (instance) => {

@@ -26,31 +26,38 @@ npm run infra:health-dependencies
 ## Component Categories
 
 ### API Gateway (4 components)
+
 - `api-gateway-core` - Core gateway functionality
 - `api-gateway-orchestrator` - Gateway orchestration
 - `openapi-documentation` - API documentation system
 - `service-mesh` - Service mesh implementation
 
 ### Auth (1 component)
+
 - `auth-middleware` - Authentication middleware
 
 ### Backup (1 component)
+
 - `backup-service` - Backup and recovery service
 
 ### CI/CD (1 component)
+
 - `pipeline-manager` - CI/CD pipeline management
 
 ### Compliance (4 components)
+
 - `audit-system` - Enterprise audit system
 - `compliance-automation` - Compliance automation
 - `compliance-orchestrator` - Compliance orchestration
 - `privacy-rights-management` - Privacy rights management
 
 ### Governance (2 components)
+
 - `component-dependency-analyzer` - Dependency analysis
 - `infrastructure-integration-platform` - Platform integration
 
 ### High Availability (6 components)
+
 - `auto-scaling` - Auto-scaling system
 - `disaster-recovery` - Disaster recovery
 - `fault-tolerance` - Fault tolerance system
@@ -59,10 +66,12 @@ npm run infra:health-dependencies
 - `multi-region-deployment` - Multi-region deployment
 
 ### Monitoring (2 components)
+
 - `metrics-collector` - Metrics collection
 - `structured-logger` - Structured logging
 
 ### Observability (6 components)
+
 - `advanced-observability-system` - Advanced observability
 - `intelligent-alerting` - Intelligent alerting
 - `anomaly-detection` - Anomaly detection
@@ -71,6 +80,7 @@ npm run infra:health-dependencies
 - `distributed-tracing` - Distributed tracing
 
 ### Performance (7 components)
+
 - `performance-monitor` - Performance monitoring
 - `sla-monitor` - SLA monitoring
 - `cache-strategies` - Cache strategies
@@ -80,6 +90,7 @@ npm run infra:health-dependencies
 - `connection-pool` - Connection pooling
 
 ### Security (3 components)
+
 - `security-hardening` - Security hardening
 - `input-validator` - Input validation
 - `rate-limiter` - Rate limiting
@@ -87,6 +98,7 @@ npm run infra:health-dependencies
 ## Health Check Features
 
 ### Automated Discovery
+
 - Automatically discovers and registers all infrastructure components
 - Supports multiple health check patterns:
   - `healthCheck()` method
@@ -94,18 +106,22 @@ npm run infra:health-dependencies
   - Component loadability check (fallback)
 
 ### Health Status Types
+
 - **Healthy**: Component is functioning normally
 - **Unhealthy**: Component has issues requiring attention
 - **Unknown**: Component status cannot be determined
 - **Error**: Component failed to load or threw an error
 
 ### Response Time Monitoring
+
 - Tracks health check response times
 - Configurable timeout (default: 5 seconds)
 - Retry logic for failed checks
 
 ### Report Generation
+
 Health checks generate JSON reports in the `artifacts/` directory:
+
 - `infrastructure-health-report.json` - Complete health report
 - `component-health-matrix.json` - Health matrix for dashboard
 - `{category}-health-report.json` - Category-specific reports
@@ -119,6 +135,7 @@ npm run infra:health-dashboard
 ```
 
 ### Features
+
 - ASCII table showing health status by category
 - Detailed breakdown of unhealthy components
 - Recommendations for fixing issues
@@ -126,6 +143,7 @@ npm run infra:health-dashboard
 - Recent report caching (5-minute threshold)
 
 ### Sample Output
+
 ```
 🏥 INFRASTRUCTURE HEALTH DASHBOARD
 ================================================================================
@@ -147,18 +165,22 @@ Health Score: 81%
 ## Integration Health Checks
 
 ### Component Dependencies
+
 ```bash
 npm run infra:health-dependencies
 ```
+
 - Analyzes component dependencies using the Component Dependency Analyzer
 - Detects circular dependencies
 - Provides dependency documentation
 - Maps critical paths
 
 ### Integration Components
+
 ```bash
 npm run infra:health-integrations
 ```
+
 - Checks integration platform components
 - Validates cross-component communication
 - Monitors integration health
@@ -166,6 +188,7 @@ npm run infra:health-integrations
 ## Configuration
 
 ### Health Monitor Configuration
+
 ```javascript
 const config = {
   checkInterval: 30000,    // Health check interval (ms)
@@ -175,7 +198,9 @@ const config = {
 ```
 
 ### Component Categories
+
 Components are automatically categorized based on their file paths:
+
 - `infrastructure/api-gateway/*` → api-gateway
 - `infrastructure/security/*` → security
 - `infrastructure/performance/*` → performance
@@ -184,8 +209,10 @@ Components are automatically categorized based on their file paths:
 ## Best Practices
 
 ### For Component Developers
+
 1. **Implement Health Checks**: Add a `healthCheck()` method to your components
 2. **Return Structured Status**: Use consistent health status format:
+
    ```javascript
    {
      status: 'healthy|unhealthy|degraded',
@@ -193,10 +220,12 @@ Components are automatically categorized based on their file paths:
      details: { /* additional info */ }
    }
    ```
+
 3. **Include Dependencies**: Check external dependencies in health checks
 4. **Timeout Handling**: Implement proper timeout handling
 
 ### For Operations Teams
+
 1. **Regular Monitoring**: Run `npm run infra:health-dashboard` regularly
 2. **Category Focus**: Use category-specific checks for troubleshooting
 3. **Trend Analysis**: Monitor health reports over time
@@ -207,22 +236,29 @@ Components are automatically categorized based on their file paths:
 ### Common Issues
 
 #### Missing Dependencies
+
 Some components may show as unhealthy due to missing packages:
+
 ```bash
 npm install nodemailer socket.io prom-client @opentelemetry/auto-instrumentations-node
 ```
 
 #### Duplicate Exports
+
 Components with duplicate exports need code fixes:
+
 - Check for conflicting export statements
 - Ensure unique export names
 
 #### Module Not Found
+
 Components referencing non-existent modules:
+
 - Verify file paths in import statements
 - Check if referenced modules exist
 
 ### Debug Commands
+
 ```bash
 # Check specific category in detail
 npm run infra:health-observability
@@ -237,6 +273,7 @@ cat artifacts/infrastructure-health-report.json | jq
 ## API Reference
 
 ### UnifiedHealthMonitor Class
+
 ```javascript
 import { getUnifiedHealthMonitor } from './infrastructure/integration/unified-health-monitor.js';
 
@@ -256,6 +293,7 @@ const matrix = monitor.getComponentHealthMatrix();
 ```
 
 ### Health Report Structure
+
 ```json
 {
   "overall": {
@@ -282,6 +320,7 @@ const matrix = monitor.getComponentHealthMatrix();
 ## Integration with CI/CD
 
 ### GitHub Actions
+
 ```yaml
 - name: Infrastructure Health Check
   run: npm run infra:health-check-all
@@ -294,6 +333,7 @@ const matrix = monitor.getComponentHealthMatrix();
 ```
 
 ### Monitoring Integration
+
 Health reports can be integrated with monitoring systems like Prometheus, Grafana, or custom dashboards by parsing the JSON reports in `artifacts/`.
 
 ## Metrics and KPIs
@@ -306,6 +346,7 @@ Health reports can be integrated with monitoring systems like Prometheus, Grafan
 ## Support
 
 For issues or questions about the health monitoring system:
+
 1. Check the troubleshooting section above
 2. Run category-specific health checks for detailed diagnostics
 3. Review component-specific logs and error messages

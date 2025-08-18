@@ -7,7 +7,9 @@ The package.json scripts have been reorganized from 202 scripts into 200 well-or
 ## Script Categories
 
 ### 1. Core Development & Validation
+
 Essential development workflow scripts:
+
 - `lint` - Run all linting (markdown + DEC files)
 - `test` - Run all tests (governance + services + infrastructure)
 - `format` - Code formatting (placeholder - uses markdownlint for markdown)
@@ -15,22 +17,28 @@ Essential development workflow scripts:
 - `governance:verify` - Core governance verification pipeline
 
 ### 2. Spec Hash & Integrity  
+
 Hash-based integrity verification:
+
 - `spec-hash:verify` - Verify specification hash integrity
 - `spec-hash:seal` - Seal specification hashes
 - `param:integrity` - Parameter integrity verification
 - `evidence:validate` - Evidence validation
 
 ### 3. Core Services
+
 Main service components:
+
 - `service:signer` - Ed25519 signing service (port 4601)
-- `service:chain` - Hash chain service (port 4602) 
+- `service:chain` - Hash chain service (port 4602)
 - `service:collector` - Event collector service (port 4603)
 - `service:revocation` - Revocation service
 - `service:equity` - Equity calculation service
 
 ### 4. Privacy & PII Tools
+
 Privacy and PII handling:
+
 - `privacy:scan` - PII scanning with SARIF output
 - `privacy:metrics` - Privacy metrics generation
 - `privacy:asserts` - Privacy assertions validation
@@ -38,14 +46,18 @@ Privacy and PII handling:
 - `privacy:validate` - **NEW** - Complete privacy validation pipeline
 
 ### 5. Fairness & Equity
+
 Fairness calculation and equity tracking:
+
 - `fairness:generate-snapshots` - Generate equity snapshots
 - `fairness:hysteresis-run` - Run hysteresis engine
 - `fairness:sim` - Fairness simulation
 - `equity:snapshot` - Create equity snapshots
 
 ### 6. Infrastructure Management
+
 Core infrastructure operations:
+
 - `infra:nginx` - Start nginx reverse proxy
 - `infra:generate-certs` - Generate SSL certificates
 - `infra:metrics` - Start metrics collector (port 9090)
@@ -53,41 +65,53 @@ Core infrastructure operations:
 - `infra:start-all` - Start all infrastructure services
 
 ### 7. Docker & Container Management
+
 Docker containerization:
+
 - `docker:build-all` - Build all Docker images
 - `docker:deploy-dev/prod/test` - Deploy to environments
 - `docker:status` - Check container status
 - `docker:health-check` - Container health verification
 
 ### 8. Kubernetes Operations
+
 Kubernetes orchestration:
+
 - `k8s:deploy` - Deploy to Kubernetes
 - `k8s:status` - Check pod/service status
 - `k8s:logs` - View application logs
 
 ### 9. Performance & Monitoring
+
 Performance optimization:
+
 - `performance:start` - Start performance monitoring stack
 - `performance:benchmark` - Run performance benchmarks
 - `cache:redis-start` - Start Redis cache manager
 - `sla:monitor-start` - Start SLA monitoring
 
 ### 10. Observability & Metrics
+
 Advanced observability:
+
 - `observability:start` - Start observability system
 - `tracing:start` - Start distributed tracing
 - `metrics:start` - Start metrics collection
 - `dashboards:start` - Start monitoring dashboards
 
 ### 11. High Availability
+
 Multi-region and fault tolerance:
+
 - `ha:orchestrator-start` - Start HA orchestrator
 - `ha:multi-region-deploy` - Deploy across regions
 - `ha:system-health` - System health check
 - `ha:start-all` - Start all HA components
 
 ### 12. Compliance & Security
+
 **Enhanced with Week 6 components:**
+
 - `compliance:orchestrator` - Start compliance orchestrator
 - `compliance:audit` - Enterprise audit system
 - `security:hardening` - Security hardening system
@@ -95,7 +119,9 @@ Multi-region and fault tolerance:
 - `compliance:start-all` - **NEW** - Start all compliance services
 
 ### 13. Week Status & Demos
+
 Phase 2 week tracking:
+
 - `week6:status` - Week 6 component status
 - `week6:validate` - **NEW** - Complete Week 6 validation
 - `week6:health-check` - **NEW** - Week 6 health check demo
@@ -139,6 +165,7 @@ Added 6 new scripts for Week 6 compliance and security integration:
 ## Quick Start Commands
 
 ### Development Workflow
+
 ```bash
 npm run lint                    # Lint all files
 npm run test                    # Run all tests
@@ -146,6 +173,7 @@ npm run governance:verify       # Verify governance integrity
 ```
 
 ### Infrastructure Operations
+
 ```bash
 npm run infra:start-all         # Start core infrastructure
 npm run week6:validate          # Validate Week 6 components
@@ -153,6 +181,7 @@ npm run compliance:start-all    # Start compliance services
 ```
 
 ### Status Checks
+
 ```bash
 npm run phase1:status           # Phase 1 status
 npm run week6:status            # Week 6 component status  
@@ -160,6 +189,7 @@ npm run week6:health-check      # Week 6 health demo
 ```
 
 ### Testing
+
 ```bash
 npm run test:governance         # Governance tests
 npm run test:infrastructure     # Infrastructure tests
@@ -169,6 +199,7 @@ npm run week6:integration-test  # Week 6 integration tests
 ## Dependencies
 
 Added dependencies:
+
 - `concurrently` - For running multiple scripts simultaneously
 
 ## Script Organization Benefits

@@ -1,4 +1,5 @@
 # Phase 1 Implementation Guide - Incremental Enhancement
+
 **Target:** Transform MerajutASA.id to production-ready without major restructuring  
 **Duration:** 4 weeks  
 **Approach:** Progressive enhancement of existing architecture
@@ -23,14 +24,17 @@ Current Architecture (PRESERVE):          Enhanced Architecture (ADD):
 
 ### Day 1-3: HTTPS & Reverse Proxy Setup
 
-#### Create infrastructure directory structure:
+#### Create infrastructure directory structure
+
 ```bash
 mkdir -p infrastructure/{reverse-proxy,auth,security}
 mkdir -p infrastructure/reverse-proxy/{config,ssl-certs}
 ```
 
 #### 1. Reverse Proxy Configuration
+
 **File:** `infrastructure/reverse-proxy/nginx.conf`
+
 ```nginx
 upstream signer_service {
     server 127.0.0.1:4601;
@@ -92,7 +96,9 @@ server {
 ```
 
 #### 2. SSL Certificate Generation
+
 **File:** `infrastructure/reverse-proxy/generate-certs.sh`
+
 ```bash
 #!/bin/bash
 cd infrastructure/reverse-proxy/ssl-certs/
@@ -109,7 +115,9 @@ echo "SSL certificates generated successfully"
 ### Day 4-6: Authentication Middleware
 
 #### 1. JWT Authentication Middleware
+
 **File:** `infrastructure/auth/auth-middleware.js`
+
 ```javascript
 import jwt from 'jsonwebtoken';
 import { createHash, randomBytes } from 'crypto';
@@ -171,7 +179,9 @@ export class AuthMiddleware {
 ```
 
 #### 2. Integrate Auth into Existing Services
+
 **File:** `infrastructure/auth/service-enhancer.js`
+
 ```javascript
 import express from 'express';
 import { AuthMiddleware } from './auth-middleware.js';
@@ -206,7 +216,9 @@ export function enhanceServiceWithAuth(app, serviceName) {
 ### Day 7-10: Input Validation & Rate Limiting
 
 #### 1. Input Validation Middleware
+
 **File:** `infrastructure/security/input-validator.js`
+
 ```javascript
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
@@ -309,7 +321,9 @@ export class InputValidator {
 ### Day 11-14: Security Integration & Testing
 
 #### 1. Enhance Existing Services (Minimal Changes)
+
 **Example: Enhanced Signer Service**
+
 ```javascript
 // Add to beginning of tools/services/signer.js
 import { enhanceServiceWithAuth } from '../../infrastructure/auth/service-enhancer.js';
@@ -334,7 +348,9 @@ app.post('/sign',
 ```
 
 #### 2. Security Testing Scripts
+
 **File:** `infrastructure/security/security-test.js`
+
 ```javascript
 #!/usr/bin/env node
 /**
@@ -434,7 +450,9 @@ if (import.meta.url === `file://${process.argv[1]}`) {
 ### Day 1-3: Metrics Collection
 
 #### 1. Prometheus Metrics Integration
+
 **File:** `observability/metrics/prometheus-metrics.js`
+
 ```javascript
 import client from 'prom-client';
 
@@ -533,7 +551,9 @@ export function startMetricsServer(port = 9090) {
 ```
 
 #### 2. Service Enhancement with Metrics
+
 **File:** `observability/metrics/service-metrics-enhancer.js`
+
 ```javascript
 import { metrics } from './prometheus-metrics.js';
 
@@ -581,7 +601,9 @@ export function enhanceServiceWithMetrics(serviceName) {
 ### Day 4-6: Structured Logging
 
 #### 1. Structured Logger Implementation
+
 **File:** `observability/logging/structured-logger.js`
+
 ```javascript
 import winston from 'winston';
 import path from 'path';
@@ -680,7 +702,9 @@ export const log = {
 ### Day 7-10: Monitoring Dashboard
 
 #### 1. Prometheus Configuration
+
 **File:** `observability/monitoring/prometheus.yml`
+
 ```yaml
 global:
   scrape_interval: 15s
@@ -719,7 +743,9 @@ scrape_configs:
 ```
 
 #### 2. Grafana Dashboard
+
 **File:** `observability/monitoring/grafana-dashboard.json`
+
 ```json
 {
   "dashboard": {
@@ -837,30 +863,35 @@ Add these scripts to support the new infrastructure:
 ### Daily Testing Checklist
 
 **Day 1-3:**
+
 - [ ] HTTPS termination working
 - [ ] HTTP to HTTPS redirect functioning
 - [ ] SSL certificates valid
 - [ ] Reverse proxy routing correctly
 
 **Day 4-6:**
+
 - [ ] Authentication middleware blocking unauthorized requests
 - [ ] JWT token validation working
 - [ ] API key validation working
 - [ ] Auth endpoints responding correctly
 
 **Day 7-10:**
+
 - [ ] Input validation catching malformed requests
 - [ ] Rate limiting preventing abuse
 - [ ] XSS protection working
 - [ ] Security headers present
 
 **Day 11-14:**
+
 - [ ] All services enhanced with security
 - [ ] End-to-end authentication flow
 - [ ] Security testing passing
 - [ ] Performance impact acceptable
 
 **Week 2-3:**
+
 - [ ] Metrics collection working
 - [ ] Structured logging operational
 - [ ] Monitoring dashboard displaying data
@@ -873,18 +904,21 @@ Add these scripts to support the new infrastructure:
 After Phase 1A+1B completion:
 
 ### Security Achievements
+
 - ✅ **100% HTTPS enforcement** with proper TLS configuration
 - ✅ **Authentication required** for all sensitive operations
 - ✅ **Input validation** preventing injection attacks
 - ✅ **Rate limiting** preventing abuse and DoS
 
 ### Observability Achievements  
+
 - ✅ **Real-time metrics** for all services and operations
 - ✅ **Structured logging** for debugging and audit trails
 - ✅ **Visual dashboards** showing system health
 - ✅ **Alerting** for critical issues
 
 ### Architecture Benefits
+
 - ✅ **Existing services preserved** - no major restructuring
 - ✅ **Incremental enhancement** - low risk deployment
 - ✅ **Production readiness** - meets industry standards
