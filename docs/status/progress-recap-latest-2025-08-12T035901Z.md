@@ -35,7 +35,7 @@ Kategori di bawah = “Design Final & Siap Implement” (bisa langsung masuk ke 
 1. Master Spec v2.0 (Hero Constellation) – konsolidasi A–D + governance, fairness, disclaimers library, event mapping.
 2. Integrity Credential Schema v1.0 – JSON-LD, JSON Schema, canonicalization, revocation placeholder, lint & policy hooks.
 3. Hysteresis Options Decision Pack v1.0 – Opsi A/E/F; rekomendasi F (Hybrid) + parameter baseline (0.50 / 0.60 / 0.65).
-4. Event Schema Canonical v1.0 – Struktur top-level, taxonomy event, meta sub-schema strategy, integrity hashing, governance change control.
+4. Event Schema Canonical v1.0 – Struktur level-utama, taxonomy event, meta sub-schema strategy, integrity hashing, governance change control.
 5. Disclaimers Presence & Integrity Lint Spec v1.0 – Mapping halaman → ID D1–D7, drift detection, similarity threshold 0.90, banned phrase net.
 6. PII Pattern Library & Detection Framework v1.0 – Kategori, regex, decision tree, redaction strategy, hashing salts, metrics.
 7. Governance & risk articulation di bagian-bagian pendukung (risk register fairness, privacy threat model).
@@ -176,7 +176,7 @@ Legend: G = Good (design + not risky), A = Amber (design done, implement pending
 
 ---
 
-## 7. GAP & RISIKO PRIORITAS (TOP 6)
+## 7. GAP & RISIKO PRIORITAS (Kunci 6)
 
 | Risiko | Mengapa Penting | Mitigasi Segera |
 |--------|-----------------|-----------------|
@@ -189,7 +189,7 @@ Legend: G = Good (design + not risky), A = Amber (design done, implement pending
 
 ---
 
-## 8. DIRECT ACTION LIST (TOP 15 – URUT EKSEKUSI)
+## 8. DIRECT ACTION LIST (Prioritas 15 – URUT EKSEKUSI)
 
 1. KEPUTUSAN: Hysteresis Option F + parameter (konfirmasi).
 2. KEPUTUSAN: Credential schema open decisions (expiration timing, evidence hash length).
@@ -378,6 +378,6 @@ Perintah contoh:
 
 ## 19. PENUTUP
 
-Semua jalur tetap konsisten dengan GP1–GP10. Tidak ada penurunan komitmen terhadap non-ranking fairness & privacy. Fokus sekarang = menghapus jurang antara blueprint dan trust primitives nyata. Kecepatan implementasi 2 minggu pertama akan menentukan kredibilitas eksternal jangka panjang.
+Semua jalur tetap konsisten dengan GP1–GP10. Tidak ada penurunan komitmen terhadap non-scoring fairness & privacy. Fokus sekarang = menghapus jurang antara blueprint dan trust primitives nyata. Kecepatan implementasi 2 minggu pertama akan menentukan kredibilitas eksternal jangka panjang.
 
 (End of Progress Recap – Latest)

@@ -90,7 +90,7 @@
     "equity:annotate": "node tools/equity-anomaly-annotate.js",
     "gate:1": "node tools/gate1-verify.js",
     "gate:2": "node tools/gate2-verify.js",
-  "gate:3": "node tools/gate3-verify.js",
+    "gate:3": "node tools/gate3-verify.js",
     "pipeline:credential": "node tools/pipeline-runner.js",
     "chain:reset:dev": "node tools/chain-reset-dev.js",
     "monitor:chain": "node tools/chain-monitor.js",
@@ -111,16 +111,16 @@
     "dec:new": "node tools/dec-template-create.cjs"
   },
   "devDependencies": {
-    "markdownlint": "^0.38.0",
-    "markdownlint-cli2": "^0.18.1",
-    "glob": "^11.0.3",
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
-    "lighthouse": "^12.0.0",
     "chrome-launcher": "^1.0.0",
+    "glob": "^11.0.3",
+    "lighthouse": "^12.0.0",
+    "markdownlint": "^0.38.0",
+    "markdownlint-cli2": "^0.18.1",
     "pa11y": "^9.0.0"
   },
   "dependencies": {
-    "yaml": "^2.4.5"
+    "yaml": "^2.8.1"
   }
 }

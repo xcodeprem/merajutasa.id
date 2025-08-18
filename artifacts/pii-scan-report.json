@@ -3,9 +3,9 @@
   "status": "ADVISORY",
   "summary": {
     "distinctCategories": 11,
-    "totalFindings": 48,
+    "totalFindings": 51,
     "categoryCounts": {
-      "EMAIL_IN_NAME": 5,
+      "EMAIL_IN_NAME": 8,
       "CONTACT_EMAIL": 3,
       "PLATE_ID": 13,
       "IDN_NIK": 2,
@@ -21,55 +21,73 @@
   },
   "findings": [
     {
-      "file": "docs\\agent-context-pack.md",
+      "file": "docs/agent-context-pack.md",
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
       "sample": "checko…#23160779"
     },
     {
-      "file": "docs\\agent-context-pack.md",
+      "file": "docs/agent-context-pack.md",
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
       "sample": "checko…#23160779"
     },
     {
-      "file": "docs\\agent-context-pack.md",
+      "file": "docs/agent-context-pack.md",
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
       "sample": "action…#e393f6bd"
     },
     {
-      "file": "docs\\agent-context-pack.md",
+      "file": "docs/agent-context-pack.md",
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
       "sample": "checko…#23160779"
     },
     {
-      "file": "docs\\agent-context-pack.md",
+      "file": "docs/agent-context-pack.md",
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
       "sample": "checko…#23160779"
     },
     {
-      "file": "docs\\roadmap\\roadmap-master-v1.md",
+      "file": "docs/status/gate1-verification-2025-08-17.md",
+      "category": "EMAIL_IN_NAME",
+      "action": "REDACT",
+      "sample": "checko…#23160779"
+    },
+    {
+      "file": "docs/status/gate1-verification-2025-08-17.md",
+      "category": "EMAIL_IN_NAME",
+      "action": "REDACT",
+      "sample": "artifa…#3b13f71f"
+    },
+    {
+      "file": "docs/status/gate1-verification-2025-08-17.md",
+      "category": "EMAIL_IN_NAME",
+      "action": "REDACT",
+      "sample": "pages@…#c4ebecf8"
+    },
+    {
+      "file": "docs/roadmap/roadmap-master-v1.md",
       "category": "CONTACT_EMAIL",
       "action": "REDACT",
       "sample": "user@d…#86eda8ae"
     },
     {
-      "file": "docs\\roadmap\\roadmap-master-v1.md",
+      "file": "docs/roadmap/roadmap-master-v1.md",
       "category": "PLATE_ID",
       "action": "WARN",
       "sample": "A11Y…#a4b4e0d0"
     },
     {
-      "file": "docs\\roadmap\\roadmap-master-v1.md",
+      "file": "docs/roadmap/roadmap-master-v1.md",
       "category": "PLATE_ID",
       "action": "WARN",
       "sample": "A11Y…#a4b4e0d0"
     },
     {
-      "file": "docs\\roadmap\\roadmap-master-v1.md",
+      "file": "docs/roadmap/roadmap-master-v1.md",
       "code": "MULTI_CATEGORY_ESCALATION",
       "categories": [
         "CONTACT_EMAIL",
@@ -78,73 +96,79 @@
       "threshold": 2
     },
     {
-      "file": "docs\\privacy\\pii-scan-fixture.md",
+      "file": "docs/public/ABOUT-PORTAL-PANTI.md",
+      "category": "PLATE_ID",
+      "action": "WARN",
+      "sample": "W3C…#9e32039e"
+    },
+    {
+      "file": "docs/privacy/pii-scan-fixture.md",
       "category": "IDN_NIK",
       "action": "BLOCK",
       "sample": "317501…#24c79ee9"
     },
     {
-      "file": "docs\\privacy\\pii-scan-fixture.md",
+      "file": "docs/privacy/pii-scan-fixture.md",
       "category": "GENERIC_16DIGIT",
       "action": "BLOCK",
       "sample": "987654…#add2b942"
     },
     {
-      "file": "docs\\privacy\\pii-scan-fixture.md",
+      "file": "docs/privacy/pii-scan-fixture.md",
       "category": "CONTACT_EMAIL",
       "action": "REDACT",
       "sample": "user@e…#568eb535"
     },
     {
-      "file": "docs\\privacy\\pii-scan-fixture.md",
+      "file": "docs/privacy/pii-scan-fixture.md",
       "category": "CONTACT_PHONE",
       "action": "REDACT",
       "sample": "628123…#4d26dfcf"
     },
     {
-      "file": "docs\\privacy\\pii-scan-fixture.md",
+      "file": "docs/privacy/pii-scan-fixture.md",
       "category": "ADDRESS_STREET",
       "action": "MASK",
       "sample": "Jalan …#6f1db8a4"
     },
     {
-      "file": "docs\\privacy\\pii-scan-fixture.md",
+      "file": "docs/privacy/pii-scan-fixture.md",
       "category": "ADDRESS_STREET",
       "action": "MASK",
       "sample": "RT 01/…#89491eac"
     },
     {
-      "file": "docs\\privacy\\pii-scan-fixture.md",
+      "file": "docs/privacy/pii-scan-fixture.md",
       "category": "DOB",
       "action": "REDACT",
       "sample": "01/09/…#449bd341"
     },
     {
-      "file": "docs\\privacy\\pii-scan-fixture.md",
+      "file": "docs/privacy/pii-scan-fixture.md",
       "category": "BANK_ACCOUNT",
       "action": "BLOCK",
       "sample": "rek 12…#a38c7d7d"
     },
     {
-      "file": "docs\\privacy\\pii-scan-fixture.md",
+      "file": "docs/privacy/pii-scan-fixture.md",
       "category": "PLATE_ID",
       "action": "WARN",
       "sample": "B 1234…#cb9bfdb4"
     },
     {
-      "file": "docs\\privacy\\pii-scan-fixture.md",
+      "file": "docs/privacy/pii-scan-fixture.md",
       "category": "CHILD_NAME_AGE",
       "action": "BLOCK",
       "sample": "Adi (7…#1ed31b78"
     },
     {
-      "file": "docs\\privacy\\pii-scan-fixture.md",
+      "file": "docs/privacy/pii-scan-fixture.md",
       "category": "GEO_FINE",
       "action": "BLOCK",
       "sample": "6.2000…#767582e8"
     },
     {
-      "file": "docs\\privacy\\pii-scan-fixture.md",
+      "file": "docs/privacy/pii-scan-fixture.md",
       "code": "MULTI_CATEGORY_ESCALATION",
       "categories": [
         "IDN_NIK",
@@ -161,31 +185,31 @@
       "threshold": 2
     },
     {
-      "file": "docs\\privacy\\pii-pattern-library-v1.md",
+      "file": "docs/privacy/pii-pattern-library-v1.md",
       "category": "ADDRESS_STREET",
       "action": "MASK",
       "sample": "Jalan …#7f57a675"
     },
     {
-      "file": "docs\\privacy\\pii-pattern-library-v1.md",
+      "file": "docs/privacy/pii-pattern-library-v1.md",
       "category": "DOB",
       "action": "REDACT",
       "sample": "01/09/…#1cb92d5e"
     },
     {
-      "file": "docs\\privacy\\pii-pattern-library-v1.md",
+      "file": "docs/privacy/pii-pattern-library-v1.md",
       "category": "DOB",
       "action": "REDACT",
       "sample": "02/10/…#952f865d"
     },
     {
-      "file": "docs\\privacy\\pii-pattern-library-v1.md",
+      "file": "docs/privacy/pii-pattern-library-v1.md",
       "category": "PLATE_ID",
       "action": "WARN",
       "sample": "B 1234…#f3f07db5"
     },
     {
-      "file": "docs\\privacy\\pii-pattern-library-v1.md",
+      "file": "docs/privacy/pii-pattern-library-v1.md",
       "code": "MULTI_CATEGORY_ESCALATION",
       "categories": [
         "ADDRESS_STREET",
@@ -195,115 +219,109 @@
       "threshold": 2
     },
     {
-      "file": "docs\\public\\ABOUT-PORTAL-PANTI.md",
+      "file": "docs/integrity/credential-schema-final-v1.md",
       "category": "PLATE_ID",
       "action": "WARN",
       "sample": "W3C…#9e32039e"
     },
     {
-      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "file": "docs/integrity/credential-schema-final-v1.md",
       "category": "PLATE_ID",
       "action": "WARN",
       "sample": "W3C…#9e32039e"
     },
     {
-      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "file": "docs/governance/statement-orientasi-portal-panti.md",
       "category": "PLATE_ID",
       "action": "WARN",
       "sample": "W3C…#9e32039e"
     },
     {
-      "file": "docs\\governance\\statement-orientasi-portal-panti.md",
+      "file": "docs/audit/00-rubrik-audit-portal-panti.md",
       "category": "PLATE_ID",
       "action": "WARN",
       "sample": "W3C…#9e32039e"
     },
     {
-      "file": "docs\\audit\\00-rubrik-audit-portal-panti.md",
-      "category": "PLATE_ID",
-      "action": "WARN",
-      "sample": "W3C…#9e32039e"
-    },
-    {
-      "file": "docs\\produk\\portal-panti\\02-model-data-minimal-aman.md",
+      "file": "docs/produk/portal-panti/02-model-data-minimal-aman.md",
       "category": "PLATE_ID",
       "action": "WARN",
       "sample": "I18N…#4cbf13f3"
     },
     {
-      "file": "docs\\produk\\portal-panti\\01-ruang-lingkup-produk.md",
+      "file": "docs/produk/portal-panti/01-ruang-lingkup-produk.md",
       "category": "PLATE_ID",
       "action": "WARN",
       "sample": "W3C…#9e32039e"
     },
     {
-      "file": "docs\\produk\\portal-panti\\00-orientasi-komprehensif.md",
+      "file": "docs/produk/portal-panti/00-orientasi-komprehensif.md",
       "category": "PLATE_ID",
       "action": "WARN",
       "sample": "W3C…#9e32039e"
     },
     {
-      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
+      "file": "docs/privacy/corpus/positive-highrisk.md",
       "category": "IDN_NIK",
       "action": "BLOCK",
       "sample": "317501…#24c79ee9"
     },
     {
-      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
+      "file": "docs/privacy/corpus/positive-highrisk.md",
       "category": "CONTACT_EMAIL",
       "action": "REDACT",
       "sample": "user@e…#568eb535"
     },
     {
-      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
+      "file": "docs/privacy/corpus/positive-highrisk.md",
       "category": "CONTACT_PHONE",
       "action": "REDACT",
       "sample": "628123…#4d26dfcf"
     },
     {
-      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
+      "file": "docs/privacy/corpus/positive-highrisk.md",
       "category": "ADDRESS_STREET",
       "action": "MASK",
       "sample": "Jalan …#6f1db8a4"
     },
     {
-      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
+      "file": "docs/privacy/corpus/positive-highrisk.md",
       "category": "ADDRESS_STREET",
       "action": "MASK",
       "sample": "RT 01/…#89491eac"
     },
     {
-      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
+      "file": "docs/privacy/corpus/positive-highrisk.md",
       "category": "DOB",
       "action": "REDACT",
       "sample": "01/09/…#449bd341"
     },
     {
-      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
+      "file": "docs/privacy/corpus/positive-highrisk.md",
       "category": "BANK_ACCOUNT",
       "action": "BLOCK",
       "sample": "rek 12…#a38c7d7d"
     },
     {
-      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
+      "file": "docs/privacy/corpus/positive-highrisk.md",
       "category": "PLATE_ID",
       "action": "WARN",
       "sample": "B 1234…#cb9bfdb4"
     },
     {
-      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
+      "file": "docs/privacy/corpus/positive-highrisk.md",
       "category": "CHILD_NAME_AGE",
       "action": "BLOCK",
       "sample": "Adi (7…#1ed31b78"
     },
     {
-      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
+      "file": "docs/privacy/corpus/positive-highrisk.md",
       "category": "GEO_FINE",
       "action": "BLOCK",
       "sample": "6.2000…#767582e8"
     },
     {
-      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
+      "file": "docs/privacy/corpus/positive-highrisk.md",
       "code": "MULTI_CATEGORY_ESCALATION",
       "categories": [
         "IDN_NIK",
@@ -319,19 +337,19 @@
       "threshold": 2
     },
     {
-      "file": "docs\\privacy\\corpus\\negative-decoy.md",
+      "file": "docs/privacy/corpus/negative-decoy.md",
       "category": "GENERIC_16DIGIT",
       "action": "BLOCK",
       "sample": "441122…#fd801b14"
     },
     {
-      "file": "docs\\privacy\\corpus\\negative-decoy.md",
+      "file": "docs/privacy/corpus/negative-decoy.md",
       "category": "GENERIC_16DIGIT",
       "action": "BLOCK",
       "sample": "000000…#b3a851d4"
     },
     {
-      "file": "docs\\privacy\\corpus\\negative-decoy.md",
+      "file": "docs/privacy/corpus/negative-decoy.md",
       "category": "GENERIC_16DIGIT",
       "action": "BLOCK",
       "sample": "221122…#a456b768"

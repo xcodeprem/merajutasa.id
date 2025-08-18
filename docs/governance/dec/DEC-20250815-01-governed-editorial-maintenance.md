@@ -4,7 +4,7 @@ title: Governed Editorial Maintenance (README, Roadmap, Policy Index)
 date: 2025-08-15T00:00:00Z
 class: decision
 status: adopted
-hash_of_decision_document: "8bdb770952f6b61d6827a8b61b89c0b4714d841fb6b28cb752e7c1f0c56dddea"
+hash_of_decision_document: "3adde01d4a97546ce058eeb62f098d88a4aabb8f7e505c7a3e754669c742f10e"
 related_files:
   - README.md
   - docs/roadmap/roadmap-master-v1.md

@@ -222,7 +222,7 @@ Scene 3: Cards settle into grid (static; reduces motion after initial reveal).
 | Element | Must Include | Must Avoid |
 |---------|--------------|------------|
 | Credential Card | Hash truncated, issuer DID | Value adjectives (“premium credential”) |
-| Equity Card | Classification (Healthy/Monitoring/Imbalance) | “Top” or “best” |
+| Equity Card | Classification (Healthy/Monitoring/Imbalance) | “Unggulan” or “best” |
 | Under-Served | Criteria mention | “Critical emergency” (unless verified event) |
 | Terminology | Stage & percent | Shaming phrasing |
 | Feedback | Month context | “Speak now or lose chance” urgency framing |

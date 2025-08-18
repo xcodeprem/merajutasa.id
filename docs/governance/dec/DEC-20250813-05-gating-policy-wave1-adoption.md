@@ -113,7 +113,7 @@ signoff:
    data_lead: "SIGNED <Farid>"
    ethics_representative: "SIGNED <Farid>"
    product_owner: "SIGNED <Farid>"
-hash_of_decision_document: "64aa3f0f4c29b45ed6e85140ec8a569de99c5a40fe48aaa9f6ea8d64e82c99ed"
+hash_of_decision_document: "2576903a6abe7e53f3efb2167721f6c1de049f2f163ed9e3b09f90cfd846da15"
 integrity_manifest_pointer: "docs/integrity/spec-hash-manifest-v1.json#files[path=docs/governance/dec/DEC-20250813-05-gating-policy-wave1-adoption.md]"
 append_only_notice: "Expanded; treat immutable pasca hash."
 supersede_policy: "Threshold/gate baru memerlukan successor DEC."

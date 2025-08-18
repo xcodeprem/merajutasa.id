@@ -1,18 +1,18 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-17T14:35:06.648Z",
+  "generated_utc": "2025-08-17T16:19:55.104Z",
   "checks": [
     {
       "check": "changelog_draft_exists",
       "status": "PASS",
       "size": 396,
-      "content_preview": "# Transparency – Changelog Excerpt (Draft)\n\nTime: 2025-08-17T14:35:06.558Z\n\n- Spec hash changes: 0\n-..."
+      "content_preview": "# Transparency – Changelog Excerpt (Draft)\n\nTime: 2025-08-17T16:19:55.054Z\n\n- Spec hash changes: 0\n-..."
     },
     {
       "check": "changelog_json_exists",
       "status": "PASS",
       "data": {
-        "ts": "2025-08-17T14:35:06.558Z",
+        "ts": "2025-08-17T16:19:55.054Z",
         "files_changed": 0,
         "dec_impacts": [],
         "pii_high_risk_hits": 8,
@@ -22,7 +22,7 @@
           "dec_ref": "DEC-20250817-09",
           "adoption_percent": 100,
           "suggestions_count": 51,
-          "trend_entries": 10
+          "trend_entries": 22
         }
       }
     },

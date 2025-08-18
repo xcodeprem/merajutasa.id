@@ -125,7 +125,34 @@ async function main() {
     });
   }
   
-  // Gate 2 Requirement 4: Accessibility automated scan PASS (H1-H2)
+  // Gate 2 Requirement 4: Disclaimers Lint PASS (critical governance requirement)
+  console.log('[gate2-verify] Checking disclaimers lint...');
+  try {
+    const disclaimersLint = await readJson('artifacts/disclaimers-lint.json');
+    
+    const lintPassed = disclaimersLint?.status === 'PASS';
+    const errorsCount = disclaimersLint?.summary?.errors || 0;
+    
+    results.push({
+      requirement: 'Disclaimers Lint PASS (critical governance)',
+      status: lintPassed ? 'PASS' : 'FAIL',
+      details: {
+        lint_status: disclaimersLint?.status,
+        errors_count: errorsCount,
+        warnings_count: disclaimersLint?.summary?.warnings || 0,
+        artifact_exists: disclaimersLint !== null,
+        presence_enforcement: disclaimersLint?.summary?.presence_enforcement
+      }
+    });
+  } catch (e) {
+    results.push({
+      requirement: 'Disclaimers Lint PASS (critical governance)',
+      status: 'FAIL',
+      error: e.message
+    });
+  }
+  
+  // Gate 2 Requirement 5: Accessibility automated scan PASS (H1-H2)
   console.log('[gate2-verify] Checking accessibility scan...');
   try {
     const a11yReport = await readJson('artifacts/a11y-smoke-report.json');

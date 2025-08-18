@@ -1,9 +1,15 @@
 ---
 id: DEC-20250817-09
 title: Stage 2 Terminology Transition — Adoption Policy and Public Copy Updates
+date: 2025-08-17
 class: terminology
-status: proposed
+status: adopted
 decided_at: 2025-08-17
+signoffs:
+  - role: governance-lead
+    name: system
+    date: 2025-08-17
+hash_of_decision_document: 7684037007a31d53cc204abb5cf58a18a0d1418010f17dc0a5e030d7dd7524a5
 hash_canonicalization_note: Canonicalization uses normalized LF and trimmed trailing spaces before hashing.
 references:
   - docs/roadmap/roadmap-master-v1.md#gate-3-stage-2-terminology
@@ -27,7 +33,7 @@ This DEC approves the transition to Stage 2 Terminology with policy-as-code thre
 ## Scope
 
 - Terms in scope for Stage 2 enforcement (category: ranking):
-  - "ranking", "peringkat", "top", "terbaik" (and localized variants)
+  - "ranking", "peringkat", "utama", "terbaik" (and localized variants)
 - Terms tracked for visibility (category: inclusive; advisory in Stage 2):
   - "whitelist" ➜ "daftar izin", "blacklist" ➜ "daftar blokir", "master" ➜ "utama", "slave" ➜ "sekunder", "user" ➜ "pengguna"
 

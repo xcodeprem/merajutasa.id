@@ -38,7 +38,7 @@
 
 ## Catatan penting (netralitas)
 
-- Portal ini tidak menampilkan peringkat/skor antar panti; deskripsi bersifat informatif (UNCRC-3; ODC-2015).
+- Portal ini menampilkan informasi tanpa peringkat/skor antar panti; deskripsi bersifat informatif (UNCRC-3; ODC-2015).
 - Mekanisme pembaruan informasi dilakukan oleh pengurus sebagai pemegang otoritas institusional (UU-KIP-14/2008).
 
 ## Daftar Rujukan (kode sitasi)

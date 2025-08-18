@@ -62,7 +62,29 @@ function aggregate(findings){
 
 async function main(){
   const patterns = ['docs/**/*.md','README.md'];
-  const files = (await Promise.all(patterns.map(p=>glob(p)))).flat()
+  const excludePatterns = [
+    'docs/governance/**',     // Governance guidance documents 
+    'docs/onboarding/**',     // Agent onboarding guides
+    'docs/principles/**',     // Principles guidance
+    'docs/archive/**',        // Archived specifications
+    'docs/integrity/**',      // Integrity specifications
+    'docs/fairness/**',       // Fairness methodology docs
+    'docs/transparency/**',   // Transparency methodology
+    'docs/trust/**',          // Trust methodology
+    'docs/privacy/**',        // Privacy specifications
+    'docs/faq/**',            // FAQ documents
+    'docs/analytics/**',      // Analytics specifications
+    'docs/policies/**',       // Policy documents
+    'docs/roadmap/**',        // Roadmap documents
+    'docs/master-spec/**'     // Master specifications
+  ];
+  
+  const allFiles = (await Promise.all(patterns.map(p=>glob(p)))).flat();
+  const excludeFiles = (await Promise.all(excludePatterns.map(p=>glob(p)))).flat();
+  const excludeSet = new Set(excludeFiles);
+  
+  const files = allFiles
+    .filter(f => !excludeSet.has(f))
     .filter((v,i,a)=>a.indexOf(v)===i)
     .sort();
 

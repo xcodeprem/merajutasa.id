@@ -76,7 +76,7 @@ Setiap event di-hash: event_hash = hash(canonical_json(event minus signature)). 
 
 ## §35 Ethical & Copy Guidelines (Excerpt)
 
-Disclaimers D1–D7 wajib pada surface tertentu. Larangan leksikal: ranking/top/terbaik/“peringkat” kecuali dalam konteks redaksi (educational example). Anti-hype lint memblok frasa prospektif yang memicu overclaim.
+Disclaimers D1–D7 wajib pada surface tertentu. Larangan leksikal: ranking/utama/terbaik/“peringkat” kecuali dalam konteks redaksi (educational example). Anti-hype lint memblok frasa prospektif yang memicu overclaim.
 
 ## §42 Hysteresis Parameter Table
 

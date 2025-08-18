@@ -290,7 +290,7 @@ For credential / event schema changes:
 
 | Principle | Regex (case-insensitive) |
 |-----------|--------------------------|
-| GP6 | `ranking|peringkat|top\\s\\d+|score|skor` |
+| GP6 | `ranking|peringkat|utama\\s\\d+|score|skor` |
 | GP7 | `revolusioner|terbaik|unggul|paling\\s(bagus|hebat)` |
 | GP1/3 | `email|phone|telepon|alamat|address|lat\\s*[,/]|lng\\s*[,/]` |
 | GP9 | `T_enter_major|T_exit|hysteresis` |

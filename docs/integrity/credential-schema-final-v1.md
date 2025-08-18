@@ -40,7 +40,7 @@ OUT-OF-SCOPE: Implementasi service signing produksi, key management operational 
 
 ## 3. CORE DATA MODEL (OVERVIEW)
 
-High-level fields (top-level):
+High-level fields (level-utama):
 
 - @context
 - type

@@ -1,97 +1,174 @@
 #!/usr/bin/env node
-/**
- * gate3-verify.js (Gate 3 Verification)
- * Verifies Stage 2 Terminology requirements:
- * - adoption >= 70, banned == 0
- * - DEC present (status proposed/adopted) and referenced
- * - disclaimers lint PASS and D1/D6 updated language
- * - trend artifacts present with entries > 0
- */
-import { promises as fs } from 'fs';
 
-async function readJson(path) {
+// Gate 3 — Stage 2 Terminology Verification
+// Check if Stage 2 requirements are met
+
+import { spawn } from 'node:child_process';
+import { readFile } from 'fs/promises';
+
+async function runCommand(cmd, args, env = {}) {
+  return new Promise((resolve, reject) => {
+    const proc = spawn(cmd, args, {
+      env: { ...process.env, ...env },
+      stdio: ['inherit', 'pipe', 'pipe']
+    });
+    
+    let stdout = '';
+    let stderr = '';
+    
+    proc.stdout.on('data', (data) => stdout += data.toString());
+    proc.stderr.on('data', (data) => stderr += data.toString());
+    
+    proc.on('close', (code) => {
+      if (code === 0) {
+        resolve({ stdout, stderr });
+      } else {
+        reject(new Error(`Command failed with code ${code}: ${stderr}`));
+      }
+    });
+  });
+}
+
+async function checkDisclaimersUpdated() {
+  console.log('[gate3-verify] Checking disclaimers updated...');
   try {
-    return JSON.parse(await fs.readFile(path, 'utf8'));
-  } catch {
-    return null;
+    // Check disclaimers-lint status
+    const disclaimersLint = JSON.parse(await readFile('artifacts/disclaimers-lint.json', 'utf8'));
+    const lintStatus = disclaimersLint.status === 'PASS';
+    
+    // Check D1 text reflects Stage 2 terminology
+    const disclaimers = JSON.parse(await readFile('content/disclaimers/master.json', 'utf8'));
+    const d1Text = disclaimers.disclaimers.find(d => d.id === 'D1')?.text || '';
+    const d1HasStage2 = d1Text.includes('tanpa peringkat') || d1Text.includes('bukan ranking');
+    
+    // Check D6 text reflects Stage 2 terminology
+    const d6Text = disclaimers.disclaimers.find(d => d.id === 'D6')?.text || '';
+    const d6HasStage2 = d6Text.includes('Stage 2');
+    
+    return {
+      status: lintStatus && d1HasStage2 && d6HasStage2 ? 'PASS' : 'FAIL',
+      requirement: 'Disclaimers updated for Stage 2',
+      details: {
+        disclaimers_lint_status: disclaimersLint.status,
+        d1_stage2_terminology: d1HasStage2,
+        d6_stage2_terminology: d6HasStage2,
+        errors_count: disclaimersLint.summary?.errors || 0
+      }
+    };
+  } catch (error) {
+    return {
+      status: 'FAIL',
+      requirement: 'Disclaimers updated for Stage 2',
+      error: error.message
+    };
   }
 }
 
-async function readText(path) {
+async function checkTerminologyAdoption() {
+  console.log('[gate3-verify] Checking Stage 2 terminology adoption...');
   try {
-    return await fs.readFile(path, 'utf8');
-  } catch {
-    return null;
+    await runCommand('node', ['tools/terminology-adoption.js'], {
+      ADOPTION_MIN: '70',
+      BANNED_MAX: '0'
+    });
+    
+    const adoption = JSON.parse(await readFile('artifacts/terminology-adoption.json', 'utf8'));
+    const adoptionPercent = adoption.adoptionPercent;
+    const oldTotal = adoption.old_total;
+    
+    console.log(`[gate3-verify]   Adoption: ${adoptionPercent}% (required: ≥70%)`);
+    console.log(`[gate3-verify]   Banned terms: ${oldTotal} (required: 0)`);
+    
+    return {
+      status: adoptionPercent >= 70 && oldTotal === 0 ? 'PASS' : 'FAIL',
+      adoptionPercent,
+      oldTotal,
+      requirement: 'Stage 2 Terminology Adoption (≥70%, banned=0)'
+    };
+  } catch (error) {
+    return {
+      status: 'FAIL',
+      error: error.message,
+      requirement: 'Stage 2 Terminology Adoption (≥70%, banned=0)'
+    };
+  }
+}
+
+async function checkDECReference() {
+  console.log('[gate3-verify] Checking DEC reference...');
+  try {
+    const decExists = await readFile('docs/governance/dec/DEC-20250817-09-stage2-terminology-transition.md', 'utf8');
+    const hasStage2 = decExists.includes('Stage 2');
+    
+    return {
+      status: hasStage2 ? 'PASS' : 'FAIL',
+      requirement: 'DEC Stage 2 Transition present',
+      details: hasStage2 ? 'DEC-20250817-09 exists and references Stage 2' : 'Missing Stage 2 reference'
+    };
+  } catch (error) {
+    return {
+      status: 'FAIL',
+      requirement: 'DEC Stage 2 Transition present',
+      error: error.message
+    };
+  }
+}
+
+async function checkTrendArtifacts() {
+  console.log('[gate3-verify] Checking terminology trend artifacts...');
+  try {
+    await runCommand('node', ['tools/terminology-adoption-trend.js']);
+    
+    const trend = JSON.parse(await readFile('artifacts/terminology-adoption-trend.json', 'utf8'));
+    const entriesCount = trend.history?.length || 0;
+    
+    return {
+      status: entriesCount > 0 ? 'PASS' : 'FAIL',
+      requirement: 'Terminology trend artifacts updated',
+      details: `${entriesCount} trend entries`
+    };
+  } catch (error) {
+    return {
+      status: 'FAIL',
+      requirement: 'Terminology trend artifacts updated',
+      error: error.message
+    };
   }
 }
 
 async function main() {
+  console.log('[gate3-verify] Starting Gate 3 — Stage 2 Terminology verification...\n');
+  
   const results = [];
-  const timestamp = new Date().toISOString();
-
-  console.log('[gate3-verify] Starting Gate 3 verification (Stage 2 Terminology)...');
-
-  // Requirement 1: Adoption thresholds
-  const adoption = await readJson('artifacts/terminology-adoption.json');
-  const banned = adoption?.banned_total ?? 0;
-  const adoptionPercent = adoption?.adoptionPercent ?? 0;
-  const adoptionOk = adoptionPercent >= 70 && banned === 0;
-  results.push({
-    requirement: 'Stage 2: Adoption >=70 and 0 banned (ranking terms)',
-    status: adoptionOk ? 'PASS' : 'FAIL',
-    details: { adoptionPercent, banned }
-  });
-
-  // Requirement 2: DEC presence
-  const decPath = 'docs/governance/dec/DEC-20250817-09-stage2-terminology-transition.md';
-  const decText = await readText(decPath);
-  const decPresent = !!decText;
-  const statusMatch = decText?.match(/status:\s*(.*)/);
-  const decStatus = statusMatch ? statusMatch[1].trim() : null;
-  results.push({
-    requirement: 'Stage 2 DEC present (proposed/adopted)',
-    status: decPresent ? 'PASS' : 'FAIL',
-    details: { path: decPath, status: decStatus }
-  });
-
-  // Requirement 3: Disclaimers lint PASS and wording checks
-  const disc = await readJson('artifacts/disclaimers-lint.json');
-  const master = await readJson('content/disclaimers/master.json');
-  const d1 = master?.disclaimers?.find(d => d.id === 'D1')?.text || '';
-  const d6 = master?.disclaimers?.find(d => d.id === 'D6')?.text || '';
-  const d1Ok = /(bukan\s+ranking|tanpa\s+peringkat|non-?ranking)/i.test(d1);
-  const d6Ok = /(Stage\s*2|tahap\s*2)/i.test(d6);
-  const discPass = disc?.status === 'PASS' && (disc?.summary?.errors || 0) === 0;
-  results.push({
-    requirement: 'Disclaimers updated and lint PASS',
-    status: discPass && d1Ok && d6Ok ? 'PASS' : 'FAIL',
-    details: { disc_status: disc?.status, d1_text: d1, d6_text: d6 }
-  });
-
-  // Requirement 4: Trend artifacts exist
-  const trend = await readJson('artifacts/terminology-adoption-trend.json');
-  const entries = trend?.history?.length || trend?.entries_count || 0;
-  results.push({
-    requirement: 'Terminology trend artifacts present',
-    status: entries > 0 ? 'PASS' : 'FAIL',
-    details: { entries }
-  });
-
-  const passed = results.filter(r => r.status === 'PASS').length;
-  const total = results.length;
-  const status = passed === total ? 'PASS' : 'FAIL';
-  const report = {
-    version: '1.0.0',
-    generated_utc: timestamp,
-    gate: 'Gate 3 - Stage 2 Terminology',
-    status,
-    requirements: results,
-    summary: { total_requirements: total, passed, failed: total - passed }
-  };
-
-  await fs.writeFile('artifacts/gate3-verification.json', JSON.stringify(report, null, 2));
-  console.log(`[gate3-verify] Gate 3 Status: ${status} (${passed}/${total})`);
-  if (status !== 'PASS') process.exit(1);
+  
+  // Check Stage 2 requirements
+  results.push(await checkTerminologyAdoption());
+  results.push(await checkDECReference());
+  results.push(await checkDisclaimersUpdated());
+  results.push(await checkTrendArtifacts());
+  
+  console.log('\n[gate3-verify] Gate 3 Results:');
+  
+  let passCount = 0;
+  for (const result of results) {
+    const icon = result.status === 'PASS' ? '✅' : '❌';
+    console.log(`  ${icon} ${result.requirement}: ${result.status}`);
+    if (result.details) console.log(`     ${result.details}`);
+    if (result.error) console.log(`     Error: ${result.error}`);
+    if (result.status === 'PASS') passCount++;
+  }
+  
+  const overallStatus = passCount === results.length ? 'PASS' : 'FAIL';
+  console.log(`\n[gate3-verify] Gate 3 Status: ${overallStatus}`);
+  console.log(`[gate3-verify] Requirements: ${passCount}/${results.length} PASSED`);
+  
+  if (overallStatus === 'PASS') {
+    console.log('\n🎉 Gate 3 — Stage 2 Terminology PASSED - Ready for closure');
+  } else {
+    console.log(`\n❌ Gate 3 — Stage 2 Terminology FAILED - ${results.length - passCount} requirements need attention`);
+  }
+  
+  process.exit(overallStatus === 'PASS' ? 0 : 1);
 }
 
-main().catch(e => { console.error('[gate3-verify] error', e); process.exit(2); });
+main().catch(console.error);

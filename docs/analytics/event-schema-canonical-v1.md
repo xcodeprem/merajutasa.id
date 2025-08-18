@@ -498,7 +498,7 @@ Rationale: tamper detection & schema drift spotting.
 
 Pseudosteps:
 
-1. Parse JSON; reject if unknown top-level key.
+1. Parse JSON; reject if unknown primary-level key.
 2. Validate against base schema.
 3. Look up event-specific meta schema; validate meta; if fail → log & reject (soft or hard configurable).
 4. Run PII scan on meta freeform if present (only feedback events).

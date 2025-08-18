@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-17T14:35:06.450Z",
+  "generated_utc": "2025-08-17T16:19:55.002Z",
   "gate": "Gate 2 - Expanded Transparency",
   "status": "PASS",
   "requirements": [
@@ -34,11 +34,22 @@
       "details": {
         "adoption_percent": 100,
         "adoption_persisted": true,
-        "trend_entries": 11,
+        "trend_entries": 23,
         "trend_report_generated": true,
         "ci_policy_enabled": true,
         "old_terms_total": 0,
         "suggestions_count": 51
+      }
+    },
+    {
+      "requirement": "Disclaimers Lint PASS (critical governance)",
+      "status": "PASS",
+      "details": {
+        "lint_status": "PASS",
+        "errors_count": 0,
+        "warnings_count": 8,
+        "artifact_exists": true,
+        "presence_enforcement": true
       }
     },
     {
@@ -55,8 +66,8 @@
     }
   ],
   "summary": {
-    "total_requirements": 4,
-    "passed": 4,
+    "total_requirements": 5,
+    "passed": 5,
     "failed": 0,
     "gate2_closure_ready": true
   }

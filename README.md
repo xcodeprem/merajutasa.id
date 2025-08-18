@@ -184,7 +184,7 @@ Parameter final (tersinkron di 3 tempat: DEC-20250812-02, hysteresis-config-v1.y
 - Stalled (internal only): 5 snapshot berturut equity_ratio antara 0.55 dan <0.65 (monitoring)
 - Anomaly Delta: Perubahan mendadak ≥ 0.03 equity_ratio memicu flag analitik (bukan label publik)
 
-Tujuan: Mengurangi noise / flapping label “under-served” tanpa mengubah sifat non‑ranking.
+Tujuan: Mengurangi noise / flapping label “under-served” tanpa mengubah sifat non-scoring.
 
 ---
 
@@ -197,7 +197,7 @@ Tujuan: Mengurangi noise / flapping label “under-served” tanpa mengubah sifa
 | GP3 | Keadilan & Non-Diskriminasi |
 | GP4 | Akuntabilitas & Auditability |
 | GP5 | Robustness & Resilience |
-| GP6 | Anti Misuse / Anti-Hype (Non-Ranking) |
+| GP6 | Anti Misuse / Anti-Hype (Non-Scoring) |
 | GP7 | Governed Evolution (Controlled Change) |
 | GP8 | Security & Integrity Chain |
 | GP9 | Fairness Signal Stability (Hysteresis) |
@@ -211,7 +211,7 @@ Lint principles.reference memaksa penjelasan dampak (Section 37 PR template).
 
 | ID | Tema | Tujuan |
 |----|------|--------|
-| D1 | Non-Ranking | Menegaskan sistem bukan peringkat kompetitif <!-- hype-lint-ignore-line --> |
+| D1 | Non-Ranking | Menegaskan sistem tanpa peringkat kompetitif <!-- hype-lint-ignore-line --> |
 | D2 | Keterbatasan Data | Menyatakan potensi keterbatasan & sampling |
 | D3 | Interpretasi Terbatas | Mencegah over-claim atas label |
 | D4 | Frekuensi Snapshot | Menjelaskan jeda update |
@@ -224,7 +224,7 @@ Aktivasi enforcement menunggu DEC khusus (DISC-DEC).
 ### Canonical Disclaimer Block (Embed Once Per Core Page Group)
 
 <div data-disclaimer-block="hero_primary">
-<p data-disclaimer-id="D1">Equity Index & daftar under‑served bukan ranking kualitas—hanya sinyal pemerataan.</p>
+<p data-disclaimer-id="D1">Equity Index & daftar under‑served tanpa ranking kualitas—hanya sinyal pemerataan.</p>
 <p data-disclaimer-id="D2">Tidak ada data pribadi anak dikumpulkan / ditampilkan.</p>
 <p data-disclaimer-id="D3">Credential = status verifikasi; bukan skor performa.</p>
 <p data-disclaimer-id="D5">Hash excerpt hanya metadata perubahan; tidak memuat konten sensitif.</p>

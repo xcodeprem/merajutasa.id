@@ -56,7 +56,7 @@ Menetapkan standar otomatis (lint + policy-as-code) untuk memastikan setiap hala
 | Landing Hero (disclaimer block) | D1, D2, D3, D5 (D7 optional if confusion flagged) | Menjamin orientasi awal |
 | Equity Page (main) | D1, D2 | Fairness + privacy |
 | Equity Under‑Served Section | D1 | Anti-ranking emphasis |
-| Trust Page (top) | D2, D3, D5 | Privacy + credential + hash scope |
+| Trust Page (atas) | D2, D3, D5 | Privacy + credential + hash scope |
 | Trust Page (methodology/hysteresis subsection) | D1 | Clarify fairness logic |
 | Governance Page | D5 (metadata boundaries) | Scope of chain excerpt |
 | Terminology Page | D6, D2 | Transition + privacy reinforcement |
