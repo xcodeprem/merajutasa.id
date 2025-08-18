@@ -1,6 +1,7 @@
 {
-  "hash_salt": "acb0f8a3e5468210ae2dd2a437551a81",
+  "hash_salt": "c886875c5797cfcdbe872399551b6ade",
   "previous_salts": [
+    "acb0f8a3e5468210ae2dd2a437551a81",
     "cb098a12b5fd2c327d522ba048c16b40",
     "8588258e2114b3177631d1ad42c05605",
     "3d58e99275ead492d4daabdf2d92c124",
@@ -8,5 +9,5 @@
   ],
   "multi_category_block_threshold": 2,
   "sample_truncate_chars": 6,
-  "last_rotated_utc": "2025-08-17T08:48:00.682Z"
+  "last_rotated_utc": "2025-08-18T08:56:34.958Z"
 }
