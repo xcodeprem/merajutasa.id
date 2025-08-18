@@ -204,11 +204,10 @@
     "audit:start": "node infrastructure/compliance/audit-system.js --start",
     "audit:flush": "node infrastructure/compliance/audit-system.js --flush",
     "audit:report": "node infrastructure/compliance/audit-system.js --report",
-    "integration:platform-start": "node -e \"import('./infrastructure/integration/infrastructure-integration-platform.js').then(m => m.getInfrastructureIntegrationPlatform().initialize().then(r => console.log('Platform initialized:', JSON.stringify(r, null, 2))))\"",
-    "integration:platform-status": "node -e \"import('./infrastructure/integration/infrastructure-integration-platform.js').then(m => m.getInfrastructureIntegrationPlatform().getSystemStatus().then(s => console.log('System Status:', JSON.stringify(s, null, 2))))\"",
-    "integration:dependency-analysis": "node -e \"import('./infrastructure/integration/component-dependency-analyzer.js').then(m => m.getComponentDependencyAnalyzer().initialize().then(r => console.log('Analysis completed:', JSON.stringify(r, null, 2))))\"",
-    "integration:startup-order": "node -e \"import('./infrastructure/integration/infrastructure-integration-platform.js').then(m => { const p = m.getInfrastructureIntegrationPlatform(); return p.initialize().then(() => console.log('Startup Order:', JSON.stringify(p.getStartupOrderDocumentation(), null, 2))); })\"",
-    "integration:health-check": "node -e \"import('./infrastructure/integration/infrastructure-integration-platform.js').then(m => m.getInfrastructureIntegrationPlatform().healthCheck().then(h => console.log('Health:', JSON.stringify(h, null, 2))))\""
+    "equity-ui-v2:dev": "cd public/equity-ui-v2 && npm run dev",
+    "equity-ui-v2:build": "cd public/equity-ui-v2 && npm run build",
+    "equity-ui-v2:preview": "cd public/equity-ui-v2 && npm run preview",
+    "equity-ui-v2:install": "cd public/equity-ui-v2 && npm install"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
