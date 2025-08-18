@@ -1,26 +1,24 @@
 {
   "U1": {
-    "state": "CLEARED",
-    "consecutive": 2,
-    "cooldownLeft": 1,
-    "events": [
-      {
-        "type": "EXIT"
-      }
-    ],
-    "lastRatio": 0.66,
-    "lastTs": "2025-08-13T06:01:30.523Z"
+    "state": "NONE",
+    "consecutive": 0,
+    "cooldownLeft": 0,
+    "stallConsec": 0,
+    "events": [],
+    "lastRatio": 0.62,
+    "lastTs": "2025-08-19T00:35:03.230Z"
   },
   "U2": {
     "state": "CLEARED",
     "consecutive": 0,
     "cooldownLeft": 1,
+    "stallConsec": 0,
     "events": [
       {
         "type": "EXIT"
       }
     ],
     "lastRatio": 0.66,
-    "lastTs": "2025-08-13T06:01:30.523Z"
+    "lastTs": "2025-08-19T00:35:03.230Z"
   }
 }

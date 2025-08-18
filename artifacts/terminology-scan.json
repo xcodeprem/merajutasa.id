@@ -6,14 +6,14 @@
   },
   "key_token_frequency": {
     "fairness": 279,
-    "privacy": 291,
+    "privacy": 293,
     "hysteresis": 207,
     "hash": 450,
     "credential": 171,
-    "governance": 541,
+    "governance": 550,
     "revocation": 105
   },
-  "totalKey": 2044,
+  "totalKey": 2055,
   "banned_terms_detected": 207,
   "banned_samples": [
     {

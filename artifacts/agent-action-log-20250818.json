@@ -8292,5 +8292,3469 @@
     "action": "aggregate",
     "status": "OK",
     "timestamp": "2025-08-18T20:32:41.125Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:29:17.003Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/spec-hash-diff.js --mode=verify",
+    "critical": true,
+    "duration_ms": 70,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "spec-hash-diff",
+    "timestamp": "2025-08-18T21:29:17.003Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:28.808Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/spec-hash-diff.js --mode=verify",
+    "critical": true,
+    "duration_ms": 73,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "spec-hash-diff",
+    "timestamp": "2025-08-18T21:34:28.808Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:28.907Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/param-integrity.js",
+    "critical": true,
+    "duration_ms": 99,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "param-integrity",
+    "timestamp": "2025-08-18T21:34:28.907Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:28.966Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/param-lock-verify.js",
+    "critical": true,
+    "duration_ms": 60,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "param-lock",
+    "timestamp": "2025-08-18T21:34:28.966Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:29.064Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/tests/fairness-engine-unit-tests.js",
+    "critical": true,
+    "duration_ms": 97,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "fairness-unit",
+    "timestamp": "2025-08-18T21:34:29.064Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:29.185Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/tests/security-patterns-smoke.js",
+    "critical": false,
+    "duration_ms": 121,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "security-patterns-smoke",
+    "timestamp": "2025-08-18T21:34:29.184Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:29.318Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/hype-lint.js",
+    "critical": false,
+    "duration_ms": 133,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "hype-lint",
+    "timestamp": "2025-08-18T21:34:29.318Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:29.570Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/disclaimers-lint.js",
+    "critical": true,
+    "duration_ms": 251,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "disclaimers-lint",
+    "timestamp": "2025-08-18T21:34:29.570Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:29.731Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/pii-scan.js --sarif",
+    "critical": false,
+    "duration_ms": 161,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "pii-scan",
+    "timestamp": "2025-08-18T21:34:29.731Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:29.951Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/pii-metrics.js",
+    "critical": false,
+    "duration_ms": 219,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "pii-metrics",
+    "timestamp": "2025-08-18T21:34:29.951Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:30.006Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/privacy-asserts.js",
+    "critical": true,
+    "duration_ms": 54,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "privacy-asserts",
+    "timestamp": "2025-08-18T21:34:30.006Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:30.187Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/dec-lint.js",
+    "critical": true,
+    "duration_ms": 180,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "dec-lint",
+    "timestamp": "2025-08-18T21:34:30.187Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:30.413Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/principles-impact.js",
+    "critical": false,
+    "duration_ms": 225,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "principles-impact",
+    "timestamp": "2025-08-18T21:34:30.413Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:30.578Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/event-validate.js --file data/events-sample.ndjson --rehash",
+    "critical": false,
+    "duration_ms": 165,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "events-validate",
+    "timestamp": "2025-08-18T21:34:30.578Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:32.162Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/tests/collector-integration.test.js",
+    "critical": false,
+    "duration_ms": 1583,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "collector-integration",
+    "timestamp": "2025-08-18T21:34:32.162Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:32.312Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/feedback-smoke.js",
+    "critical": false,
+    "duration_ms": 150,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "feedback-smoke",
+    "timestamp": "2025-08-18T21:34:32.312Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:32.364Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/policy-aggregation-threshold-verify.js",
+    "critical": false,
+    "duration_ms": 52,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "policy-aggregation-threshold",
+    "timestamp": "2025-08-18T21:34:32.364Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:32.417Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/policy-aggregation-threshold-enforce.js artifacts/aggregation-cells-allow.json",
+    "critical": true,
+    "duration_ms": 52,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "policy-aggregation-enforce",
+    "timestamp": "2025-08-18T21:34:32.417Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:32.474Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/evidence-freshness.js",
+    "critical": false,
+    "duration_ms": 57,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "evidence-freshness",
+    "timestamp": "2025-08-18T21:34:32.474Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:32.532Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/evidence-collision-test.js",
+    "critical": true,
+    "duration_ms": 58,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "evidence-collision-test",
+    "timestamp": "2025-08-18T21:34:32.532Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:32.628Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/fairness-sim.js",
+    "critical": false,
+    "duration_ms": 96,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "fairness-sim",
+    "timestamp": "2025-08-18T21:34:32.628Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:32.730Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/fairness/fairness-metrics.js",
+    "critical": false,
+    "duration_ms": 101,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "fairness-metrics",
+    "timestamp": "2025-08-18T21:34:32.730Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:32.787Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/no-silent-drift.js",
+    "critical": true,
+    "duration_ms": 57,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "no-silent-drift",
+    "timestamp": "2025-08-18T21:34:32.787Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:32.850Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/governed-change-scan.js",
+    "critical": true,
+    "duration_ms": 62,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "governed-change-scan",
+    "timestamp": "2025-08-18T21:34:32.850Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:32.905Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/policy-index-verify.js",
+    "critical": false,
+    "duration_ms": 55,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "policy-index-verify",
+    "timestamp": "2025-08-18T21:34:32.905Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:32.959Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/changelog-excerpt-generate.js",
+    "critical": false,
+    "duration_ms": 54,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "changelog-excerpt",
+    "timestamp": "2025-08-18T21:34:32.959Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:33.044Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/event-anchor-chain.js",
+    "critical": false,
+    "duration_ms": 84,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "event-anchor",
+    "timestamp": "2025-08-18T21:34:33.044Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:33.181Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/terminology-adoption.js",
+    "critical": false,
+    "duration_ms": 136,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "terminology-adoption",
+    "timestamp": "2025-08-18T21:34:33.181Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:33.298Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/terminology-scan.js",
+    "critical": false,
+    "duration_ms": 119,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "terminology-scan",
+    "timestamp": "2025-08-18T21:34:33.298Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:33.334Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "aggregate",
+    "status": "OK",
+    "timestamp": "2025-08-18T21:34:33.334Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:48.716Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/spec-hash-diff.js --mode=verify",
+    "critical": true,
+    "duration_ms": 73,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "spec-hash-diff",
+    "timestamp": "2025-08-18T21:34:48.716Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:48.819Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/param-integrity.js",
+    "critical": true,
+    "duration_ms": 103,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "param-integrity",
+    "timestamp": "2025-08-18T21:34:48.819Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:48.879Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/param-lock-verify.js",
+    "critical": true,
+    "duration_ms": 60,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "param-lock",
+    "timestamp": "2025-08-18T21:34:48.879Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:48.981Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/tests/fairness-engine-unit-tests.js",
+    "critical": true,
+    "duration_ms": 102,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "fairness-unit",
+    "timestamp": "2025-08-18T21:34:48.981Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:49.104Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/tests/security-patterns-smoke.js",
+    "critical": false,
+    "duration_ms": 123,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "security-patterns-smoke",
+    "timestamp": "2025-08-18T21:34:49.104Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:49.249Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/hype-lint.js",
+    "critical": false,
+    "duration_ms": 144,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "hype-lint",
+    "timestamp": "2025-08-18T21:34:49.249Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:49.511Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/disclaimers-lint.js",
+    "critical": true,
+    "duration_ms": 261,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "disclaimers-lint",
+    "timestamp": "2025-08-18T21:34:49.511Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:49.684Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/pii-scan.js --sarif",
+    "critical": false,
+    "duration_ms": 173,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "pii-scan",
+    "timestamp": "2025-08-18T21:34:49.684Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:49.906Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/pii-metrics.js",
+    "critical": false,
+    "duration_ms": 221,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "pii-metrics",
+    "timestamp": "2025-08-18T21:34:49.906Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:49.962Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/privacy-asserts.js",
+    "critical": true,
+    "duration_ms": 56,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "privacy-asserts",
+    "timestamp": "2025-08-18T21:34:49.962Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:50.142Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/dec-lint.js",
+    "critical": true,
+    "duration_ms": 179,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "dec-lint",
+    "timestamp": "2025-08-18T21:34:50.142Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:50.369Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/principles-impact.js",
+    "critical": false,
+    "duration_ms": 227,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "principles-impact",
+    "timestamp": "2025-08-18T21:34:50.369Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:50.535Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/event-validate.js --file data/events-sample.ndjson --rehash",
+    "critical": false,
+    "duration_ms": 166,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "events-validate",
+    "timestamp": "2025-08-18T21:34:50.535Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:50.701Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/tests/collector-integration.test.js",
+    "critical": false,
+    "duration_ms": 166,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "collector-integration",
+    "timestamp": "2025-08-18T21:34:50.701Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:50.855Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/feedback-smoke.js",
+    "critical": false,
+    "duration_ms": 153,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "feedback-smoke",
+    "timestamp": "2025-08-18T21:34:50.855Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:50.909Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/policy-aggregation-threshold-verify.js",
+    "critical": false,
+    "duration_ms": 54,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "policy-aggregation-threshold",
+    "timestamp": "2025-08-18T21:34:50.909Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:50.964Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/policy-aggregation-threshold-enforce.js artifacts/aggregation-cells-allow.json",
+    "critical": true,
+    "duration_ms": 55,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "policy-aggregation-enforce",
+    "timestamp": "2025-08-18T21:34:50.964Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:51.025Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/evidence-freshness.js",
+    "critical": false,
+    "duration_ms": 60,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "evidence-freshness",
+    "timestamp": "2025-08-18T21:34:51.025Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:51.084Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/evidence-collision-test.js",
+    "critical": true,
+    "duration_ms": 59,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "evidence-collision-test",
+    "timestamp": "2025-08-18T21:34:51.084Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:51.188Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/fairness-sim.js",
+    "critical": false,
+    "duration_ms": 104,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "fairness-sim",
+    "timestamp": "2025-08-18T21:34:51.188Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:51.292Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/fairness/fairness-metrics.js",
+    "critical": false,
+    "duration_ms": 104,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "fairness-metrics",
+    "timestamp": "2025-08-18T21:34:51.292Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:51.350Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/no-silent-drift.js",
+    "critical": true,
+    "duration_ms": 58,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "no-silent-drift",
+    "timestamp": "2025-08-18T21:34:51.350Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:51.413Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/governed-change-scan.js",
+    "critical": true,
+    "duration_ms": 63,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "governed-change-scan",
+    "timestamp": "2025-08-18T21:34:51.413Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:51.466Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/policy-index-verify.js",
+    "critical": false,
+    "duration_ms": 53,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "policy-index-verify",
+    "timestamp": "2025-08-18T21:34:51.466Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:51.521Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/changelog-excerpt-generate.js",
+    "critical": false,
+    "duration_ms": 55,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "changelog-excerpt",
+    "timestamp": "2025-08-18T21:34:51.521Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:51.607Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/event-anchor-chain.js",
+    "critical": false,
+    "duration_ms": 86,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "event-anchor",
+    "timestamp": "2025-08-18T21:34:51.607Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:51.743Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/terminology-adoption.js",
+    "critical": false,
+    "duration_ms": 136,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "terminology-adoption",
+    "timestamp": "2025-08-18T21:34:51.743Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:51.891Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/terminology-scan.js",
+    "critical": false,
+    "duration_ms": 124,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "terminology-scan",
+    "timestamp": "2025-08-18T21:34:51.891Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:51.904Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "aggregate",
+    "status": "OK",
+    "timestamp": "2025-08-18T21:34:51.904Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:54.549Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/spec-hash-diff.js --mode=verify",
+    "critical": true,
+    "duration_ms": 72,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "spec-hash-diff",
+    "timestamp": "2025-08-18T21:34:54.549Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:54.650Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/param-integrity.js",
+    "critical": true,
+    "duration_ms": 101,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "param-integrity",
+    "timestamp": "2025-08-18T21:34:54.650Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:54.712Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/param-lock-verify.js",
+    "critical": true,
+    "duration_ms": 61,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "param-lock",
+    "timestamp": "2025-08-18T21:34:54.712Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:54.810Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/tests/fairness-engine-unit-tests.js",
+    "critical": true,
+    "duration_ms": 100,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "fairness-unit",
+    "timestamp": "2025-08-18T21:34:54.810Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:54.936Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/tests/security-patterns-smoke.js",
+    "critical": false,
+    "duration_ms": 125,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "security-patterns-smoke",
+    "timestamp": "2025-08-18T21:34:54.936Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:55.083Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/hype-lint.js",
+    "critical": false,
+    "duration_ms": 147,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "hype-lint",
+    "timestamp": "2025-08-18T21:34:55.083Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:55.346Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/disclaimers-lint.js",
+    "critical": true,
+    "duration_ms": 261,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "disclaimers-lint",
+    "timestamp": "2025-08-18T21:34:55.346Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:55.509Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/pii-scan.js --sarif",
+    "critical": false,
+    "duration_ms": 165,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "pii-scan",
+    "timestamp": "2025-08-18T21:34:55.509Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:55.729Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/pii-metrics.js",
+    "critical": false,
+    "duration_ms": 219,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "pii-metrics",
+    "timestamp": "2025-08-18T21:34:55.729Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:55.784Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/privacy-asserts.js",
+    "critical": true,
+    "duration_ms": 55,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "privacy-asserts",
+    "timestamp": "2025-08-18T21:34:55.784Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:55.964Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/dec-lint.js",
+    "critical": true,
+    "duration_ms": 180,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "dec-lint",
+    "timestamp": "2025-08-18T21:34:55.964Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:56.192Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/principles-impact.js",
+    "critical": false,
+    "duration_ms": 229,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "principles-impact",
+    "timestamp": "2025-08-18T21:34:56.192Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:56.359Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/event-validate.js --file data/events-sample.ndjson --rehash",
+    "critical": false,
+    "duration_ms": 166,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "events-validate",
+    "timestamp": "2025-08-18T21:34:56.359Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:56.526Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/tests/collector-integration.test.js",
+    "critical": false,
+    "duration_ms": 166,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "collector-integration",
+    "timestamp": "2025-08-18T21:34:56.526Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:56.680Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/feedback-smoke.js",
+    "critical": false,
+    "duration_ms": 153,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "feedback-smoke",
+    "timestamp": "2025-08-18T21:34:56.680Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:56.735Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/policy-aggregation-threshold-verify.js",
+    "critical": false,
+    "duration_ms": 56,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "policy-aggregation-threshold",
+    "timestamp": "2025-08-18T21:34:56.735Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:56.791Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/policy-aggregation-threshold-enforce.js artifacts/aggregation-cells-allow.json",
+    "critical": true,
+    "duration_ms": 55,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "policy-aggregation-enforce",
+    "timestamp": "2025-08-18T21:34:56.791Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:56.850Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/evidence-freshness.js",
+    "critical": false,
+    "duration_ms": 58,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "evidence-freshness",
+    "timestamp": "2025-08-18T21:34:56.850Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:56.911Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/evidence-collision-test.js",
+    "critical": true,
+    "duration_ms": 60,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "evidence-collision-test",
+    "timestamp": "2025-08-18T21:34:56.911Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:57.010Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/fairness-sim.js",
+    "critical": false,
+    "duration_ms": 99,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "fairness-sim",
+    "timestamp": "2025-08-18T21:34:57.010Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:57.114Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/fairness/fairness-metrics.js",
+    "critical": false,
+    "duration_ms": 104,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "fairness-metrics",
+    "timestamp": "2025-08-18T21:34:57.114Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:57.173Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/no-silent-drift.js",
+    "critical": true,
+    "duration_ms": 59,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "no-silent-drift",
+    "timestamp": "2025-08-18T21:34:57.173Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:57.234Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/governed-change-scan.js",
+    "critical": true,
+    "duration_ms": 61,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "governed-change-scan",
+    "timestamp": "2025-08-18T21:34:57.234Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:57.286Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/policy-index-verify.js",
+    "critical": false,
+    "duration_ms": 51,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "policy-index-verify",
+    "timestamp": "2025-08-18T21:34:57.286Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:57.338Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/changelog-excerpt-generate.js",
+    "critical": false,
+    "duration_ms": 53,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "changelog-excerpt",
+    "timestamp": "2025-08-18T21:34:57.338Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:57.423Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/event-anchor-chain.js",
+    "critical": false,
+    "duration_ms": 84,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "event-anchor",
+    "timestamp": "2025-08-18T21:34:57.423Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:57.556Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/terminology-adoption.js",
+    "critical": false,
+    "duration_ms": 132,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "terminology-adoption",
+    "timestamp": "2025-08-18T21:34:57.556Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:57.704Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/terminology-scan.js",
+    "critical": false,
+    "duration_ms": 121,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "terminology-scan",
+    "timestamp": "2025-08-18T21:34:57.704Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:34:57.715Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "aggregate",
+    "status": "OK",
+    "timestamp": "2025-08-18T21:34:57.715Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:08.329Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/spec-hash-diff.js --mode=verify",
+    "critical": true,
+    "duration_ms": 71,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "spec-hash-diff",
+    "timestamp": "2025-08-18T21:35:08.329Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:08.427Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/param-integrity.js",
+    "critical": true,
+    "duration_ms": 98,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "param-integrity",
+    "timestamp": "2025-08-18T21:35:08.427Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:08.485Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/param-lock-verify.js",
+    "critical": true,
+    "duration_ms": 58,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "param-lock",
+    "timestamp": "2025-08-18T21:35:08.485Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:08.582Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/tests/fairness-engine-unit-tests.js",
+    "critical": true,
+    "duration_ms": 98,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "fairness-unit",
+    "timestamp": "2025-08-18T21:35:08.582Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:08.702Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/tests/security-patterns-smoke.js",
+    "critical": false,
+    "duration_ms": 120,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "security-patterns-smoke",
+    "timestamp": "2025-08-18T21:35:08.702Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:08.843Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/hype-lint.js",
+    "critical": false,
+    "duration_ms": 139,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "hype-lint",
+    "timestamp": "2025-08-18T21:35:08.843Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:09.106Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/disclaimers-lint.js",
+    "critical": true,
+    "duration_ms": 262,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "disclaimers-lint",
+    "timestamp": "2025-08-18T21:35:09.106Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:09.272Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/pii-scan.js --sarif",
+    "critical": false,
+    "duration_ms": 165,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "pii-scan",
+    "timestamp": "2025-08-18T21:35:09.272Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:09.492Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/pii-metrics.js",
+    "critical": false,
+    "duration_ms": 219,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "pii-metrics",
+    "timestamp": "2025-08-18T21:35:09.492Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:09.547Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/privacy-asserts.js",
+    "critical": true,
+    "duration_ms": 55,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "privacy-asserts",
+    "timestamp": "2025-08-18T21:35:09.547Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:09.722Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/dec-lint.js",
+    "critical": true,
+    "duration_ms": 175,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "dec-lint",
+    "timestamp": "2025-08-18T21:35:09.722Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:09.946Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/principles-impact.js",
+    "critical": false,
+    "duration_ms": 224,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "principles-impact",
+    "timestamp": "2025-08-18T21:35:09.946Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:10.117Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/event-validate.js --file data/events-sample.ndjson --rehash",
+    "critical": false,
+    "duration_ms": 170,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "events-validate",
+    "timestamp": "2025-08-18T21:35:10.117Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:10.286Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/tests/collector-integration.test.js",
+    "critical": false,
+    "duration_ms": 169,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "collector-integration",
+    "timestamp": "2025-08-18T21:35:10.286Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:10.436Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/feedback-smoke.js",
+    "critical": false,
+    "duration_ms": 149,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "feedback-smoke",
+    "timestamp": "2025-08-18T21:35:10.436Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:10.489Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/policy-aggregation-threshold-verify.js",
+    "critical": false,
+    "duration_ms": 53,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "policy-aggregation-threshold",
+    "timestamp": "2025-08-18T21:35:10.489Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:10.543Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/policy-aggregation-threshold-enforce.js artifacts/aggregation-cells-allow.json",
+    "critical": true,
+    "duration_ms": 53,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "policy-aggregation-enforce",
+    "timestamp": "2025-08-18T21:35:10.543Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:10.600Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/evidence-freshness.js",
+    "critical": false,
+    "duration_ms": 57,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "evidence-freshness",
+    "timestamp": "2025-08-18T21:35:10.600Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:10.657Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/evidence-collision-test.js",
+    "critical": true,
+    "duration_ms": 56,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "evidence-collision-test",
+    "timestamp": "2025-08-18T21:35:10.657Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:10.755Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/fairness-sim.js",
+    "critical": false,
+    "duration_ms": 98,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "fairness-sim",
+    "timestamp": "2025-08-18T21:35:10.755Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:10.854Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/fairness/fairness-metrics.js",
+    "critical": false,
+    "duration_ms": 98,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "fairness-metrics",
+    "timestamp": "2025-08-18T21:35:10.854Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:10.911Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/no-silent-drift.js",
+    "critical": true,
+    "duration_ms": 58,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "no-silent-drift",
+    "timestamp": "2025-08-18T21:35:10.911Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:10.971Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/governed-change-scan.js",
+    "critical": true,
+    "duration_ms": 60,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "governed-change-scan",
+    "timestamp": "2025-08-18T21:35:10.971Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:11.024Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/policy-index-verify.js",
+    "critical": false,
+    "duration_ms": 53,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "policy-index-verify",
+    "timestamp": "2025-08-18T21:35:11.024Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:11.078Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/changelog-excerpt-generate.js",
+    "critical": false,
+    "duration_ms": 53,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "changelog-excerpt",
+    "timestamp": "2025-08-18T21:35:11.078Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:11.163Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/event-anchor-chain.js",
+    "critical": false,
+    "duration_ms": 85,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "event-anchor",
+    "timestamp": "2025-08-18T21:35:11.163Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:11.300Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/terminology-adoption.js",
+    "critical": false,
+    "duration_ms": 136,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "terminology-adoption",
+    "timestamp": "2025-08-18T21:35:11.300Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:11.444Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/terminology-scan.js",
+    "critical": false,
+    "duration_ms": 121,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "terminology-scan",
+    "timestamp": "2025-08-18T21:35:11.444Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:11.458Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "aggregate",
+    "status": "OK",
+    "timestamp": "2025-08-18T21:35:11.458Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:20.090Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/spec-hash-diff.js --mode=verify",
+    "critical": true,
+    "duration_ms": 74,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "spec-hash-diff",
+    "timestamp": "2025-08-18T21:35:20.090Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:20.191Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/param-integrity.js",
+    "critical": true,
+    "duration_ms": 101,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "param-integrity",
+    "timestamp": "2025-08-18T21:35:20.191Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:20.252Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/param-lock-verify.js",
+    "critical": true,
+    "duration_ms": 61,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "param-lock",
+    "timestamp": "2025-08-18T21:35:20.252Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:20.351Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/tests/fairness-engine-unit-tests.js",
+    "critical": true,
+    "duration_ms": 98,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "fairness-unit",
+    "timestamp": "2025-08-18T21:35:20.351Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:20.470Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/tests/security-patterns-smoke.js",
+    "critical": false,
+    "duration_ms": 119,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "security-patterns-smoke",
+    "timestamp": "2025-08-18T21:35:20.470Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:20.616Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/hype-lint.js",
+    "critical": false,
+    "duration_ms": 145,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "hype-lint",
+    "timestamp": "2025-08-18T21:35:20.616Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:20.880Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/disclaimers-lint.js",
+    "critical": true,
+    "duration_ms": 264,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "disclaimers-lint",
+    "timestamp": "2025-08-18T21:35:20.880Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:21.044Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/pii-scan.js --sarif",
+    "critical": false,
+    "duration_ms": 164,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "pii-scan",
+    "timestamp": "2025-08-18T21:35:21.044Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:21.263Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/pii-metrics.js",
+    "critical": false,
+    "duration_ms": 219,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "pii-metrics",
+    "timestamp": "2025-08-18T21:35:21.263Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:21.319Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/privacy-asserts.js",
+    "critical": true,
+    "duration_ms": 55,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "privacy-asserts",
+    "timestamp": "2025-08-18T21:35:21.319Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:21.501Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/dec-lint.js",
+    "critical": true,
+    "duration_ms": 183,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "dec-lint",
+    "timestamp": "2025-08-18T21:35:21.501Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:21.729Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/principles-impact.js",
+    "critical": false,
+    "duration_ms": 227,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "principles-impact",
+    "timestamp": "2025-08-18T21:35:21.729Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:21.896Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/event-validate.js --file data/events-sample.ndjson --rehash",
+    "critical": false,
+    "duration_ms": 166,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "events-validate",
+    "timestamp": "2025-08-18T21:35:21.896Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:22.069Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/tests/collector-integration.test.js",
+    "critical": false,
+    "duration_ms": 172,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "collector-integration",
+    "timestamp": "2025-08-18T21:35:22.069Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:22.222Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/feedback-smoke.js",
+    "critical": false,
+    "duration_ms": 153,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "feedback-smoke",
+    "timestamp": "2025-08-18T21:35:22.222Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:22.275Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/policy-aggregation-threshold-verify.js",
+    "critical": false,
+    "duration_ms": 53,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "policy-aggregation-threshold",
+    "timestamp": "2025-08-18T21:35:22.275Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:22.329Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/policy-aggregation-threshold-enforce.js artifacts/aggregation-cells-allow.json",
+    "critical": true,
+    "duration_ms": 54,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "policy-aggregation-enforce",
+    "timestamp": "2025-08-18T21:35:22.329Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:22.388Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/evidence-freshness.js",
+    "critical": false,
+    "duration_ms": 59,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "evidence-freshness",
+    "timestamp": "2025-08-18T21:35:22.388Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:22.446Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/evidence-collision-test.js",
+    "critical": true,
+    "duration_ms": 58,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "evidence-collision-test",
+    "timestamp": "2025-08-18T21:35:22.446Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:22.545Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/fairness-sim.js",
+    "critical": false,
+    "duration_ms": 100,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "fairness-sim",
+    "timestamp": "2025-08-18T21:35:22.545Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:22.644Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/fairness/fairness-metrics.js",
+    "critical": false,
+    "duration_ms": 98,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "fairness-metrics",
+    "timestamp": "2025-08-18T21:35:22.644Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:22.701Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/no-silent-drift.js",
+    "critical": true,
+    "duration_ms": 56,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "no-silent-drift",
+    "timestamp": "2025-08-18T21:35:22.701Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:22.763Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/governed-change-scan.js",
+    "critical": true,
+    "duration_ms": 62,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "governed-change-scan",
+    "timestamp": "2025-08-18T21:35:22.763Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:22.816Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/policy-index-verify.js",
+    "critical": false,
+    "duration_ms": 52,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "policy-index-verify",
+    "timestamp": "2025-08-18T21:35:22.816Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:22.869Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/changelog-excerpt-generate.js",
+    "critical": false,
+    "duration_ms": 54,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "changelog-excerpt",
+    "timestamp": "2025-08-18T21:35:22.869Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:22.953Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/event-anchor-chain.js",
+    "critical": false,
+    "duration_ms": 83,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "event-anchor",
+    "timestamp": "2025-08-18T21:35:22.953Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:23.092Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/terminology-adoption.js",
+    "critical": false,
+    "duration_ms": 138,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "terminology-adoption",
+    "timestamp": "2025-08-18T21:35:23.092Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:23.241Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/terminology-scan.js",
+    "critical": false,
+    "duration_ms": 122,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "terminology-scan",
+    "timestamp": "2025-08-18T21:35:23.241Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:35:23.254Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "aggregate",
+    "status": "OK",
+    "timestamp": "2025-08-18T21:35:23.254Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:36:56.548Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/spec-hash-diff.js --mode=verify",
+    "critical": true,
+    "duration_ms": 69,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "spec-hash-diff",
+    "timestamp": "2025-08-18T21:36:56.548Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:36:56.644Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/param-integrity.js",
+    "critical": true,
+    "duration_ms": 96,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "param-integrity",
+    "timestamp": "2025-08-18T21:36:56.644Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:36:56.703Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/param-lock-verify.js",
+    "critical": true,
+    "duration_ms": 58,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "param-lock",
+    "timestamp": "2025-08-18T21:36:56.703Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:36:56.803Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/tests/fairness-engine-unit-tests.js",
+    "critical": true,
+    "duration_ms": 100,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "fairness-unit",
+    "timestamp": "2025-08-18T21:36:56.803Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:36:56.921Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/tests/security-patterns-smoke.js",
+    "critical": false,
+    "duration_ms": 119,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "security-patterns-smoke",
+    "timestamp": "2025-08-18T21:36:56.921Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:36:57.062Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/hype-lint.js",
+    "critical": false,
+    "duration_ms": 140,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "hype-lint",
+    "timestamp": "2025-08-18T21:36:57.062Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:36:57.315Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/disclaimers-lint.js",
+    "critical": true,
+    "duration_ms": 253,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "disclaimers-lint",
+    "timestamp": "2025-08-18T21:36:57.315Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:36:57.473Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/pii-scan.js --sarif",
+    "critical": false,
+    "duration_ms": 158,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "pii-scan",
+    "timestamp": "2025-08-18T21:36:57.473Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:36:57.691Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/pii-metrics.js",
+    "critical": false,
+    "duration_ms": 217,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "pii-metrics",
+    "timestamp": "2025-08-18T21:36:57.691Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:36:57.744Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/privacy-asserts.js",
+    "critical": true,
+    "duration_ms": 53,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "privacy-asserts",
+    "timestamp": "2025-08-18T21:36:57.744Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:36:57.918Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/dec-lint.js",
+    "critical": true,
+    "duration_ms": 174,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "dec-lint",
+    "timestamp": "2025-08-18T21:36:57.918Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:36:58.141Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/principles-impact.js",
+    "critical": false,
+    "duration_ms": 223,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "principles-impact",
+    "timestamp": "2025-08-18T21:36:58.141Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:36:58.303Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/event-validate.js --file data/events-sample.ndjson --rehash",
+    "critical": false,
+    "duration_ms": 162,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "events-validate",
+    "timestamp": "2025-08-18T21:36:58.303Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:36:58.464Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/tests/collector-integration.test.js",
+    "critical": false,
+    "duration_ms": 161,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "collector-integration",
+    "timestamp": "2025-08-18T21:36:58.464Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:36:58.613Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/feedback-smoke.js",
+    "critical": false,
+    "duration_ms": 148,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "feedback-smoke",
+    "timestamp": "2025-08-18T21:36:58.613Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:36:58.666Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/policy-aggregation-threshold-verify.js",
+    "critical": false,
+    "duration_ms": 53,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "policy-aggregation-threshold",
+    "timestamp": "2025-08-18T21:36:58.666Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:36:58.719Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/policy-aggregation-threshold-enforce.js artifacts/aggregation-cells-allow.json",
+    "critical": true,
+    "duration_ms": 53,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "policy-aggregation-enforce",
+    "timestamp": "2025-08-18T21:36:58.719Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:36:58.776Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/evidence-freshness.js",
+    "critical": false,
+    "duration_ms": 57,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "evidence-freshness",
+    "timestamp": "2025-08-18T21:36:58.776Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:36:58.832Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/evidence-collision-test.js",
+    "critical": true,
+    "duration_ms": 57,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "evidence-collision-test",
+    "timestamp": "2025-08-18T21:36:58.832Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:36:58.934Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/fairness-sim.js",
+    "critical": false,
+    "duration_ms": 101,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "fairness-sim",
+    "timestamp": "2025-08-18T21:36:58.934Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:36:59.034Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/fairness/fairness-metrics.js",
+    "critical": false,
+    "duration_ms": 100,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "fairness-metrics",
+    "timestamp": "2025-08-18T21:36:59.034Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:36:59.090Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/no-silent-drift.js",
+    "critical": true,
+    "duration_ms": 55,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "no-silent-drift",
+    "timestamp": "2025-08-18T21:36:59.090Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:36:59.150Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/governed-change-scan.js",
+    "critical": true,
+    "duration_ms": 59,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "governed-change-scan",
+    "timestamp": "2025-08-18T21:36:59.150Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:36:59.201Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/policy-index-verify.js",
+    "critical": false,
+    "duration_ms": 51,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "policy-index-verify",
+    "timestamp": "2025-08-18T21:36:59.201Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:36:59.252Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/changelog-excerpt-generate.js",
+    "critical": false,
+    "duration_ms": 52,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "changelog-excerpt",
+    "timestamp": "2025-08-18T21:36:59.252Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:36:59.335Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/event-anchor-chain.js",
+    "critical": false,
+    "duration_ms": 83,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "event-anchor",
+    "timestamp": "2025-08-18T21:36:59.335Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:36:59.470Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/terminology-adoption.js",
+    "critical": false,
+    "duration_ms": 133,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "terminology-adoption",
+    "timestamp": "2025-08-18T21:36:59.470Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:36:59.612Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": true,
+    "cmd": "node tools/terminology-scan.js",
+    "critical": false,
+    "duration_ms": 116,
+    "exit_code": 0,
+    "status": "OK",
+    "step": "terminology-scan",
+    "timestamp": "2025-08-18T21:36:59.612Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-18T21:36:59.624Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-58",
+      "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+      "run_id": "17052958409",
+      "version": "1.0"
+    },
+    "action": "aggregate",
+    "status": "OK",
+    "timestamp": "2025-08-18T21:36:59.624Z"
   }
 ]

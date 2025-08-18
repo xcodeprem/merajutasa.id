@@ -1,0 +1,36 @@
+{
+  "data_categories": [
+    "personal_info",
+    "profile_data"
+  ],
+  "estimated_completion_days": 15,
+  "legal_basis": "Article 16 GDPR - Right to rectification",
+  "processed_at": "2025-08-18T22:10:14.442Z",
+  "processing_time_ms": 156,
+  "request_id": "req_1755555014286_6jfvlzvzi",
+  "request_type": "data_rectification",
+  "response_data": {
+    "status": "processed"
+  },
+  "status": "success",
+  "submitted_at": "2025-08-18T22:10:14.286Z",
+  "user_id": "user_ph358p1iw",
+  "verification_required": true,
+  "verification_steps": [
+    {
+      "completed_at": "2025-08-18T22:10:14.442Z",
+      "status": "completed",
+      "step": "identity_verification"
+    },
+    {
+      "completed_at": "2025-08-18T22:10:14.442Z",
+      "status": "completed",
+      "step": "request_validation"
+    },
+    {
+      "completed_at": "2025-08-18T22:10:14.442Z",
+      "status": "completed",
+      "step": "data_location"
+    }
+  ]
+}

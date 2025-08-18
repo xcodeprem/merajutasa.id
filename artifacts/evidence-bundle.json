@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-18T20:18:50.360Z",
+  "generated_utc": "2025-08-18T21:35:30.024Z",
   "evidence_phase": "1.5",
   "artifacts": [
     {
@@ -8,9 +8,9 @@
       "path": "artifacts/spec-hash-diff.json",
       "exists": true,
       "size_bytes": 3501,
-      "sha256": "8a9fd79c2597c0a8691204be0f1f40b26ffd29e48b71c6ed2cf83e8b22e0dc93",
-      "sha256_short": "8a9fd79c2597c0a8",
-      "display_hash_prefix": "8a9fd79c2597c0a8",
+      "sha256": "20d35b10db17c490ace9a4aee90a7b762c19032c8003f15d8845d91f1149351c",
+      "sha256_short": "20d35b10db17c490",
+      "display_hash_prefix": "20d35b10db17c490",
       "schema_ref": "spec-hash-diff-v1.json",
       "category": "governance"
     },
@@ -19,9 +19,9 @@
       "path": "artifacts/param-integrity-matrix.json",
       "exists": true,
       "size_bytes": 5496,
-      "sha256": "55bdde0cee2b648d102f613c55ef9707c9e260e8006818d78eb91746cc6886c5",
-      "sha256_short": "55bdde0cee2b648d",
-      "display_hash_prefix": "55bdde0cee2b648d",
+      "sha256": "12f3eabe8f5976dd821362402a9c2aa69be9d7b7050a3c96a759d58d8357f10c",
+      "sha256_short": "12f3eabe8f5976dd",
+      "display_hash_prefix": "12f3eabe8f5976dd",
       "schema_ref": "param-integrity-v1.json",
       "category": "fairness"
     },
@@ -30,9 +30,9 @@
       "path": "artifacts/principles-impact-report.json",
       "exists": true,
       "size_bytes": 37883,
-      "sha256": "3bb0310caa492eba84e854384894763d19fec7a1a5cf86c3104855f209842369",
-      "sha256_short": "3bb0310caa492eba",
-      "display_hash_prefix": "3bb0310caa492eba",
+      "sha256": "33c55cb88d9acefc627473af642c93d6c33c3f6fceeb1c1b84cf7627e00e7594",
+      "sha256_short": "33c55cb88d9acefc",
+      "display_hash_prefix": "33c55cb88d9acefc",
       "schema_ref": "principles-impact-v2.json",
       "category": "principles"
     },
@@ -41,9 +41,9 @@
       "path": "artifacts/hype-lint.json",
       "exists": true,
       "size_bytes": 4028,
-      "sha256": "78637cbabc0006f60072e108a50b482ada327ba0c17fcbf9c4a25f432728e3f9",
-      "sha256_short": "78637cbabc0006f6",
-      "display_hash_prefix": "78637cbabc0006f6",
+      "sha256": "fb29806c864902df708133f3b7d6dcdb9f13c40bfcf72b7284a056ed62e5ad13",
+      "sha256_short": "fb29806c864902df",
+      "display_hash_prefix": "fb29806c864902df",
       "schema_ref": "hype-lint-v1.json",
       "category": "language"
     },
@@ -85,9 +85,9 @@
       "path": "artifacts/fairness-sim-report.json",
       "exists": true,
       "size_bytes": 303,
-      "sha256": "2e7381030350301401c93fb91ba7106cdd4c491e754431e390a9324562771016",
-      "sha256_short": "2e73810303503014",
-      "display_hash_prefix": "2e73810303503014",
+      "sha256": "2a767a404a8e0ffdc0f26eb570aaa314330ecd50f119fcfecdbfb795bc608daa",
+      "sha256_short": "2a767a404a8e0ffd",
+      "display_hash_prefix": "2a767a404a8e0ffd",
       "schema_ref": "fairness-sim-report-v1.json",
       "category": "fairness-sim"
     },
@@ -96,9 +96,9 @@
       "path": "artifacts/no-silent-drift-report.json",
       "exists": true,
       "size_bytes": 4670,
-      "sha256": "a17297e2fe87afebf7ced22c0a1f7d2a0b87b9519ce1b60f06103731cd870778",
-      "sha256_short": "a17297e2fe87afeb",
-      "display_hash_prefix": "a17297e2fe87afeb",
+      "sha256": "1864a87908812d282ff9bee945c5e7452930a60de0b5122258ca6770ea1426f5",
+      "sha256_short": "1864a87908812d28",
+      "display_hash_prefix": "1864a87908812d28",
       "schema_ref": "no-silent-drift-v1.json",
       "category": "aggregator"
     },
@@ -107,9 +107,9 @@
       "path": "artifacts/fairness-engine-runtime-report.json",
       "exists": true,
       "size_bytes": 899,
-      "sha256": "8818a6fa410edefc4c49fdfec25c4d4a8a582bd4f6373cb786e5c69d9f1ad6c3",
-      "sha256_short": "8818a6fa410edefc",
-      "display_hash_prefix": "8818a6fa410edefc",
+      "sha256": "627a43599d1174ee75aa4c0c286b144d8a5a00de32d192a3605510a4e5e9d2d7",
+      "sha256_short": "627a43599d1174ee",
+      "display_hash_prefix": "627a43599d1174ee",
       "schema_ref": "fairness-engine-runtime-v1.json",
       "category": "fairness-runtime"
     },
@@ -118,9 +118,9 @@
       "path": "artifacts/evidence-collision-test.json",
       "exists": true,
       "size_bytes": 163,
-      "sha256": "15d2f7aac06d4562c014096414c18e89c1a6b9e69d128c56954f44bf406bedb8",
-      "sha256_short": "15d2f7aac06d4562",
-      "display_hash_prefix": "15d2f7aac06d4562",
+      "sha256": "a99168e989529aa2f4474f9537e1094aaf160886a39498c542e38b81e21a5608",
+      "sha256_short": "a99168e989529aa2",
+      "display_hash_prefix": "a99168e989529aa2",
       "schema_ref": "evidence-collision-test-v1.json",
       "category": "governance"
     },
@@ -129,9 +129,9 @@
       "path": "artifacts/evidence-schema-validation.json",
       "exists": true,
       "size_bytes": 1192,
-      "sha256": "61453b7a39c0f341674e238342098bf322b59f7a5c287bfbda3d25e4ca7378e4",
-      "sha256_short": "61453b7a39c0f341",
-      "display_hash_prefix": "61453b7a39c0f341",
+      "sha256": "f3b1195613087480bc5d20f018d7a9760222a281647d3f652de380a48ee1ea2d",
+      "sha256_short": "f3b1195613087480",
+      "display_hash_prefix": "f3b1195613087480",
       "schema_ref": null,
       "category": "meta"
     }
@@ -140,7 +140,7 @@
     "total": 12,
     "missing": 0,
     "with_schema": 11,
-    "bundle_hash": "e54babed688e38cce7f2928055c4872a393eaf93993f9ce87a9bfb58134159a8"
+    "bundle_hash": "e03ee1caaef7ba5539cf9eb927a745c15af97c9c930bd031452ffc179f3e30ad"
   },
   "integrity": {
     "hash_algorithm": "SHA256",

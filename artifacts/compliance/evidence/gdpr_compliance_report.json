@@ -1,0 +1,108 @@
+{
+  "assessed_controls": [
+    {
+      "assessment_score": 53,
+      "category": "data_protection",
+      "compliance_status": "non_compliant",
+      "control_id": "gdpr_article_25",
+      "evidence_references": [
+        {
+          "file_name": "privacy_policy.pdf",
+          "file_type": "pdf",
+          "last_updated": "2025-08-03",
+          "location": "evidence/data_protection/privacy_policy.pdf"
+        },
+        {
+          "file_name": "data_flow_diagram.png",
+          "file_type": "png",
+          "last_updated": "2025-07-21",
+          "location": "evidence/data_protection/data_flow_diagram.png"
+        }
+      ],
+      "findings": [
+        "Purpose limitation controls insufficient"
+      ],
+      "required_controls": [
+        "privacy_impact_assessment",
+        "data_minimization",
+        "purpose_limitation"
+      ],
+      "risk_level": "high",
+      "title": "Data Protection by Design and by Default"
+    },
+    {
+      "assessment_score": 90,
+      "category": "security",
+      "compliance_status": "compliant",
+      "control_id": "gdpr_article_32",
+      "evidence_references": [
+        {
+          "file_name": "security_policy.pdf",
+          "file_type": "pdf",
+          "last_updated": "2025-07-19",
+          "location": "evidence/security/security_policy.pdf"
+        },
+        {
+          "file_name": "access_control_matrix.xlsx",
+          "file_type": "xlsx",
+          "last_updated": "2025-07-23",
+          "location": "evidence/security/access_control_matrix.xlsx"
+        }
+      ],
+      "findings": [],
+      "required_controls": [
+        "encryption",
+        "access_controls",
+        "security_monitoring"
+      ],
+      "risk_level": "high",
+      "title": "Security of Processing"
+    },
+    {
+      "assessment_score": 67,
+      "category": "data_governance",
+      "compliance_status": "non_compliant",
+      "control_id": "gdpr_article_5",
+      "evidence_references": [
+        {
+          "file_name": "control_documentation.pdf",
+          "file_type": "pdf",
+          "last_updated": "2025-08-06",
+          "location": "evidence/data_governance/control_documentation.pdf"
+        }
+      ],
+      "findings": [
+        "Control implementation gap identified"
+      ],
+      "required_controls": [
+        "lawfulness",
+        "fairness",
+        "transparency",
+        "accuracy"
+      ],
+      "risk_level": "critical",
+      "title": "Principles Relating to Processing"
+    }
+  ],
+  "compliance_score": 33,
+  "framework": "GDPR",
+  "risk_breakdown": {
+    "critical": {
+      "compliant": 0,
+      "total": 1
+    },
+    "high": {
+      "compliant": 1,
+      "total": 2
+    },
+    "low": {
+      "compliant": 0,
+      "total": 0
+    },
+    "medium": {
+      "compliant": 0,
+      "total": 0
+    }
+  },
+  "total_controls": 3
+}

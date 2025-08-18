@@ -1,0 +1,1168 @@
+{
+  "backupId": "backup-2025-08-18T21-37-25-837Z-rrvv48",
+  "timestamp": "2025-08-18T21:37:25.838Z",
+  "version": "1.0.0",
+  "type": "full",
+  "status": "completed",
+  "files": [
+    {
+      "path": "./artifacts/DEC-20250812-02-original.txt",
+      "relativePath": "DEC-20250812-02-original.txt",
+      "size": 8632,
+      "mtime": "2025-08-18T21:28:27.956Z"
+    },
+    {
+      "path": "./artifacts/a11y-smoke-report.json",
+      "relativePath": "a11y-smoke-report.json",
+      "size": 496,
+      "mtime": "2025-08-18T21:28:27.956Z"
+    },
+    {
+      "path": "./artifacts/agent-trend-summary.json",
+      "relativePath": "agent-trend-summary.json",
+      "size": 4195,
+      "mtime": "2025-08-18T21:35:05.859Z"
+    },
+    {
+      "path": "./artifacts/aggregation-cells-allow.json",
+      "relativePath": "aggregation-cells-allow.json",
+      "size": 91,
+      "mtime": "2025-08-18T21:28:27.958Z"
+    },
+    {
+      "path": "./artifacts/aggregation-cells-deny.json",
+      "relativePath": "aggregation-cells-deny.json",
+      "size": 90,
+      "mtime": "2025-08-18T21:28:27.958Z"
+    },
+    {
+      "path": "./artifacts/audit/audit-2025-08-18-1755529654787.ndjson",
+      "relativePath": "audit/audit-2025-08-18-1755529654787.ndjson",
+      "size": 2708,
+      "mtime": "2025-08-18T21:28:27.958Z"
+    },
+    {
+      "path": "./artifacts/audit/audit-2025-08-18-1755531069211.ndjson",
+      "relativePath": "audit/audit-2025-08-18-1755531069211.ndjson",
+      "size": 2708,
+      "mtime": "2025-08-18T21:28:27.958Z"
+    },
+    {
+      "path": "./artifacts/audit/audit-2025-08-18-1755531283566.ndjson",
+      "relativePath": "audit/audit-2025-08-18-1755531283566.ndjson",
+      "size": 6263,
+      "mtime": "2025-08-18T21:28:27.958Z"
+    },
+    {
+      "path": "./artifacts/audit/audit-2025-08-18-1755532067598.ndjson",
+      "relativePath": "audit/audit-2025-08-18-1755532067598.ndjson",
+      "size": 2709,
+      "mtime": "2025-08-18T21:28:27.958Z"
+    },
+    {
+      "path": "./artifacts/audit/audit-2025-08-18-1755532966581.ndjson",
+      "relativePath": "audit/audit-2025-08-18-1755532966581.ndjson",
+      "size": 2709,
+      "mtime": "2025-08-18T21:28:27.958Z"
+    },
+    {
+      "path": "./artifacts/audit/audit-2025-08-18-1755547412706.ndjson",
+      "relativePath": "audit/audit-2025-08-18-1755547412706.ndjson",
+      "size": 7213,
+      "mtime": "2025-08-18T21:28:27.958Z"
+    },
+    {
+      "path": "./artifacts/audit/audit-2025-08-18-1755547750599.ndjson",
+      "relativePath": "audit/audit-2025-08-18-1755547750599.ndjson",
+      "size": 9102,
+      "mtime": "2025-08-18T21:28:27.959Z"
+    },
+    {
+      "path": "./artifacts/audit/audit-2025-08-18-1755547901655.ndjson",
+      "relativePath": "audit/audit-2025-08-18-1755547901655.ndjson",
+      "size": 8153,
+      "mtime": "2025-08-18T21:28:27.959Z"
+    },
+    {
+      "path": "./artifacts/audit/audit-2025-08-18-1755552673503.ndjson",
+      "relativePath": "audit/audit-2025-08-18-1755552673503.ndjson",
+      "size": 2704,
+      "mtime": "2025-08-18T21:31:13.504Z"
+    },
+    {
+      "path": "./artifacts/baseline/wave0-baseline-1755073165103.json",
+      "relativePath": "baseline/wave0-baseline-1755073165103.json",
+      "size": 662,
+      "mtime": "2025-08-18T21:28:27.959Z"
+    },
+    {
+      "path": "./artifacts/baseline/wave0-baseline-1755552906250.json",
+      "relativePath": "baseline/wave0-baseline-1755552906250.json",
+      "size": 662,
+      "mtime": "2025-08-18T21:35:06.249Z"
+    },
+    {
+      "path": "./artifacts/baseline-artifacts-snapshot-1755167720682.json",
+      "relativePath": "baseline-artifacts-snapshot-1755167720682.json",
+      "size": 1400,
+      "mtime": "2025-08-18T21:28:27.959Z"
+    },
+    {
+      "path": "./artifacts/baseline-artifacts-snapshot-1755552904700.json",
+      "relativePath": "baseline-artifacts-snapshot-1755552904700.json",
+      "size": 1400,
+      "mtime": "2025-08-18T21:35:04.700Z"
+    },
+    {
+      "path": "./artifacts/cache-statistics/cache-stats-2025-08-18T18-31-58.json",
+      "relativePath": "cache-statistics/cache-stats-2025-08-18T18-31-58.json",
+      "size": 4009,
+      "mtime": "2025-08-18T21:28:27.959Z"
+    },
+    {
+      "path": "./artifacts/cache-statistics/cache-stats-2025-08-18T18-36-12.json",
+      "relativePath": "cache-statistics/cache-stats-2025-08-18T18-36-12.json",
+      "size": 3851,
+      "mtime": "2025-08-18T21:28:27.959Z"
+    },
+    {
+      "path": "./artifacts/cache-statistics/cache-stats-2025-08-18T18-36-30.json",
+      "relativePath": "cache-statistics/cache-stats-2025-08-18T18-36-30.json",
+      "size": 3851,
+      "mtime": "2025-08-18T21:28:27.959Z"
+    },
+    {
+      "path": "./artifacts/cache-statistics/latest-cache-stats.json",
+      "relativePath": "cache-statistics/latest-cache-stats.json",
+      "size": 3851,
+      "mtime": "2025-08-18T21:28:27.959Z"
+    },
+    {
+      "path": "./artifacts/chain-append-latest.json",
+      "relativePath": "chain-append-latest.json",
+      "size": 268,
+      "mtime": "2025-08-18T21:28:27.959Z"
+    },
+    {
+      "path": "./artifacts/chain-append-report.json",
+      "relativePath": "chain-append-report.json",
+      "size": 446,
+      "mtime": "2025-08-18T21:37:15.326Z"
+    },
+    {
+      "path": "./artifacts/chain-archive-2025-08-15T14-27-29-740Z.json",
+      "relativePath": "chain-archive-2025-08-15T14-27-29-740Z.json",
+      "size": 6908,
+      "mtime": "2025-08-18T21:28:27.959Z"
+    },
+    {
+      "path": "./artifacts/chain-archive-2025-08-18T21-37-20-886Z.json",
+      "relativePath": "chain-archive-2025-08-18T21-37-20-886Z.json",
+      "size": 17431,
+      "mtime": "2025-08-18T21:37:20.887Z"
+    },
+    {
+      "path": "./artifacts/chain-head.json",
+      "relativePath": "chain-head.json",
+      "size": 476,
+      "mtime": "2025-08-18T21:37:16.828Z"
+    },
+    {
+      "path": "./artifacts/chain-monitor.json",
+      "relativePath": "chain-monitor.json",
+      "size": 102,
+      "mtime": "2025-08-18T21:37:21.070Z"
+    },
+    {
+      "path": "./artifacts/chain-prevhash-negative.json",
+      "relativePath": "chain-prevhash-negative.json",
+      "size": 234,
+      "mtime": "2025-08-18T21:28:27.959Z"
+    },
+    {
+      "path": "./artifacts/chain.json",
+      "relativePath": "chain.json",
+      "size": 3,
+      "mtime": "2025-08-18T21:37:20.890Z"
+    },
+    {
+      "path": "./artifacts/chain.ndjson",
+      "relativePath": "chain.ndjson",
+      "size": 2778,
+      "mtime": "2025-08-18T21:37:16.827Z"
+    },
+    {
+      "path": "./artifacts/collector-integration-report.json",
+      "relativePath": "collector-integration-report.json",
+      "size": 1223,
+      "mtime": "2025-08-18T21:36:58.393Z"
+    },
+    {
+      "path": "./artifacts/collector-reliability.json",
+      "relativePath": "collector-reliability.json",
+      "size": 119,
+      "mtime": "2025-08-18T21:37:14.434Z"
+    },
+    {
+      "path": "./artifacts/compliance/assessments/compliance-assessment-assessment_1755531253575_x0t90zcqw.json",
+      "relativePath": "compliance/assessments/compliance-assessment-assessment_1755531253575_x0t90zcqw.json",
+      "size": 2466,
+      "mtime": "2025-08-18T21:28:27.959Z"
+    },
+    {
+      "path": "./artifacts/compliance/assessments/compliance-assessment-assessment_1755547382712_na87m3g0e.json",
+      "relativePath": "compliance/assessments/compliance-assessment-assessment_1755547382712_na87m3g0e.json",
+      "size": 3510,
+      "mtime": "2025-08-18T21:28:27.959Z"
+    },
+    {
+      "path": "./artifacts/compliance/assessments/compliance-assessment-assessment_1755547720610_6ibi45kv4.json",
+      "relativePath": "compliance/assessments/compliance-assessment-assessment_1755547720610_6ibi45kv4.json",
+      "size": 4509,
+      "mtime": "2025-08-18T21:28:27.959Z"
+    },
+    {
+      "path": "./artifacts/compliance/assessments/compliance-assessment-assessment_1755547871659_l0ofzhiia.json",
+      "relativePath": "compliance/assessments/compliance-assessment-assessment_1755547871659_l0ofzhiia.json",
+      "size": 4555,
+      "mtime": "2025-08-18T21:28:27.960Z"
+    },
+    {
+      "path": "./artifacts/compliance/assessments/compliance-assessment-assessment_1755547979926_f64rnavxf.json",
+      "relativePath": "compliance/assessments/compliance-assessment-assessment_1755547979926_f64rnavxf.json",
+      "size": 4555,
+      "mtime": "2025-08-18T21:28:27.960Z"
+    },
+    {
+      "path": "./artifacts/compliance/assessments/compliance-assessment-assessment_1755547979940_n0636kgf1.json",
+      "relativePath": "compliance/assessments/compliance-assessment-assessment_1755547979940_n0636kgf1.json",
+      "size": 3494,
+      "mtime": "2025-08-18T21:28:27.960Z"
+    },
+    {
+      "path": "./artifacts/compliance/assessments/compliance-assessment-assessment_1755547979947_z2in6i97g.json",
+      "relativePath": "compliance/assessments/compliance-assessment-assessment_1755547979947_z2in6i97g.json",
+      "size": 2468,
+      "mtime": "2025-08-18T21:28:27.960Z"
+    },
+    {
+      "path": "./artifacts/compliance/assessments/compliance-assessment-assessment_1755547979948_3ry9zvtbk.json",
+      "relativePath": "compliance/assessments/compliance-assessment-assessment_1755547979948_3ry9zvtbk.json",
+      "size": 5310,
+      "mtime": "2025-08-18T21:28:27.960Z"
+    },
+    {
+      "path": "./artifacts/compliance/assessments/compliance-assessment-assessment_1755547979949_si6mjjt67.json",
+      "relativePath": "compliance/assessments/compliance-assessment-assessment_1755547979949_si6mjjt67.json",
+      "size": 2507,
+      "mtime": "2025-08-18T21:28:27.960Z"
+    },
+    {
+      "path": "./artifacts/compliance/regulatory/regulatory-report-gdpr-quarterly-1755547979942.json",
+      "relativePath": "compliance/regulatory/regulatory-report-gdpr-quarterly-1755547979942.json",
+      "size": 3253,
+      "mtime": "2025-08-18T21:28:27.960Z"
+    },
+    {
+      "path": "./artifacts/credential-pipeline.json",
+      "relativePath": "credential-pipeline.json",
+      "size": 683,
+      "mtime": "2025-08-18T21:37:16.830Z"
+    },
+    {
+      "path": "./artifacts/dec-index.json",
+      "relativePath": "dec-index.json",
+      "size": 10395,
+      "mtime": "2025-08-18T21:35:07.198Z"
+    },
+    {
+      "path": "./artifacts/dec-lint.json",
+      "relativePath": "dec-lint.json",
+      "size": 5391,
+      "mtime": "2025-08-18T21:36:57.905Z"
+    },
+    {
+      "path": "./artifacts/disclaimers-lint.json",
+      "relativePath": "disclaimers-lint.json",
+      "size": 1726,
+      "mtime": "2025-08-18T21:36:57.306Z"
+    },
+    {
+      "path": "./artifacts/disclaimers-lint.sarif.json",
+      "relativePath": "disclaimers-lint.sarif.json",
+      "size": 7739,
+      "mtime": "2025-08-18T21:28:27.960Z"
+    },
+    {
+      "path": "./artifacts/equity-anomalies.json",
+      "relativePath": "equity-anomalies.json",
+      "size": 431,
+      "mtime": "2025-08-18T21:37:15.837Z"
+    },
+    {
+      "path": "./artifacts/equity-anomaly-annotations.json",
+      "relativePath": "equity-anomaly-annotations.json",
+      "size": 2,
+      "mtime": "2025-08-18T21:37:15.892Z"
+    },
+    {
+      "path": "./artifacts/equity-anomaly-coverage.json",
+      "relativePath": "equity-anomaly-coverage.json",
+      "size": 501,
+      "mtime": "2025-08-18T21:37:15.892Z"
+    },
+    {
+      "path": "./artifacts/equity-phi-history.json",
+      "relativePath": "equity-phi-history.json",
+      "size": 2,
+      "mtime": "2025-08-18T21:37:15.838Z"
+    },
+    {
+      "path": "./artifacts/equity-snapshots.json",
+      "relativePath": "equity-snapshots.json",
+      "size": 666,
+      "mtime": "2025-08-18T21:36:59.825Z"
+    },
+    {
+      "path": "./artifacts/equity-summary.json",
+      "relativePath": "equity-summary.json",
+      "size": 236,
+      "mtime": "2025-08-18T21:36:59.826Z"
+    },
+    {
+      "path": "./artifacts/event-anchor-latest.json",
+      "relativePath": "event-anchor-latest.json",
+      "size": 49,
+      "mtime": "2025-08-18T21:36:59.327Z"
+    },
+    {
+      "path": "./artifacts/event-meta-validate.json",
+      "relativePath": "event-meta-validate.json",
+      "size": 2324,
+      "mtime": "2025-08-18T21:35:32.132Z"
+    },
+    {
+      "path": "./artifacts/event-pipeline-hash.json",
+      "relativePath": "event-pipeline-hash.json",
+      "size": 1619,
+      "mtime": "2025-08-18T21:35:50.508Z"
+    },
+    {
+      "path": "./artifacts/event-validate-report.json",
+      "relativePath": "event-validate-report.json",
+      "size": 550,
+      "mtime": "2025-08-18T21:36:58.295Z"
+    },
+    {
+      "path": "./artifacts/evidence-bundle-status.json",
+      "relativePath": "evidence-bundle-status.json",
+      "size": 832,
+      "mtime": "2025-08-18T21:35:30.025Z"
+    },
+    {
+      "path": "./artifacts/evidence-bundle.json",
+      "relativePath": "evidence-bundle.json",
+      "size": 5065,
+      "mtime": "2025-08-18T21:35:30.025Z"
+    },
+    {
+      "path": "./artifacts/evidence-collision-report.json",
+      "relativePath": "evidence-collision-report.json",
+      "size": 199,
+      "mtime": "2025-08-18T21:28:27.961Z"
+    },
+    {
+      "path": "./artifacts/evidence-collision-test.json",
+      "relativePath": "evidence-collision-test.json",
+      "size": 163,
+      "mtime": "2025-08-18T21:36:58.822Z"
+    },
+    {
+      "path": "./artifacts/evidence-freshness-report.json",
+      "relativePath": "evidence-freshness-report.json",
+      "size": 2052,
+      "mtime": "2025-08-18T21:36:58.765Z"
+    },
+    {
+      "path": "./artifacts/evidence-schema-validation.json",
+      "relativePath": "evidence-schema-validation.json",
+      "size": 1192,
+      "mtime": "2025-08-18T21:35:29.954Z"
+    },
+    {
+      "path": "./artifacts/fairness-engine-harness-report.json",
+      "relativePath": "fairness-engine-harness-report.json",
+      "size": 139,
+      "mtime": "2025-08-18T21:28:27.961Z"
+    },
+    {
+      "path": "./artifacts/fairness-engine-runtime-report.json",
+      "relativePath": "fairness-engine-runtime-report.json",
+      "size": 899,
+      "mtime": "2025-08-18T21:35:03.927Z"
+    },
+    {
+      "path": "./artifacts/fairness-engine-unit-tests.json",
+      "relativePath": "fairness-engine-unit-tests.json",
+      "size": 720,
+      "mtime": "2025-08-18T21:36:56.792Z"
+    },
+    {
+      "path": "./artifacts/fairness-metrics.json",
+      "relativePath": "fairness-metrics.json",
+      "size": 609,
+      "mtime": "2025-08-18T21:36:59.024Z"
+    },
+    {
+      "path": "./artifacts/fairness-sim-report.json",
+      "relativePath": "fairness-sim-report.json",
+      "size": 303,
+      "mtime": "2025-08-18T21:36:59.772Z"
+    },
+    {
+      "path": "./artifacts/fairness-sim-scenarios.json",
+      "relativePath": "fairness-sim-scenarios.json",
+      "size": 6321,
+      "mtime": "2025-08-18T21:36:59.771Z"
+    },
+    {
+      "path": "./artifacts/feedback-monthly-rollup.json",
+      "relativePath": "feedback-monthly-rollup.json",
+      "size": 385,
+      "mtime": "2025-08-18T21:36:13.027Z"
+    },
+    {
+      "path": "./artifacts/feedback-records.ndjson",
+      "relativePath": "feedback-records.ndjson",
+      "size": 44538,
+      "mtime": "2025-08-18T21:37:00.348Z"
+    },
+    {
+      "path": "./artifacts/feedback-smoke-report.json",
+      "relativePath": "feedback-smoke-report.json",
+      "size": 727,
+      "mtime": "2025-08-18T21:37:00.348Z"
+    },
+    {
+      "path": "./artifacts/frontend-performance/frontend-performance-test-2025-08-18T18-34-29.json",
+      "relativePath": "frontend-performance/frontend-performance-test-2025-08-18T18-34-29.json",
+      "size": 4411,
+      "mtime": "2025-08-18T21:28:27.961Z"
+    },
+    {
+      "path": "./artifacts/frontend-performance/frontend-performance-test-2025-08-18T18-36-12.json",
+      "relativePath": "frontend-performance/frontend-performance-test-2025-08-18T18-36-12.json",
+      "size": 4411,
+      "mtime": "2025-08-18T21:28:27.961Z"
+    },
+    {
+      "path": "./artifacts/frontend-performance/frontend-performance-test-2025-08-18T18-36-30.json",
+      "relativePath": "frontend-performance/frontend-performance-test-2025-08-18T18-36-30.json",
+      "size": 4411,
+      "mtime": "2025-08-18T21:28:27.961Z"
+    },
+    {
+      "path": "./artifacts/frontend-performance/frontend-performance-test-2025-08-18T18-36-37.json",
+      "relativePath": "frontend-performance/frontend-performance-test-2025-08-18T18-36-37.json",
+      "size": 4411,
+      "mtime": "2025-08-18T21:28:27.961Z"
+    },
+    {
+      "path": "./artifacts/frontend-performance/latest-frontend-performance-test.json",
+      "relativePath": "frontend-performance/latest-frontend-performance-test.json",
+      "size": 4411,
+      "mtime": "2025-08-18T21:28:27.961Z"
+    },
+    {
+      "path": "./artifacts/gap-analysis-enhanced.json",
+      "relativePath": "gap-analysis-enhanced.json",
+      "size": 19381,
+      "mtime": "2025-08-18T21:28:27.961Z"
+    },
+    {
+      "path": "./artifacts/gap-analysis-report.json",
+      "relativePath": "gap-analysis-report.json",
+      "size": 5524,
+      "mtime": "2025-08-18T21:35:23.759Z"
+    },
+    {
+      "path": "./artifacts/gate1-report.json",
+      "relativePath": "gate1-report.json",
+      "size": 581,
+      "mtime": "2025-08-18T21:37:15.380Z"
+    },
+    {
+      "path": "./artifacts/gate2-verification.json",
+      "relativePath": "gate2-verification.json",
+      "size": 2215,
+      "mtime": "2025-08-18T21:37:16.086Z"
+    },
+    {
+      "path": "./artifacts/gate3-verification.json",
+      "relativePath": "gate3-verification.json",
+      "size": 1169,
+      "mtime": "2025-08-18T21:28:27.962Z"
+    },
+    {
+      "path": "./artifacts/governance-verify-summary.json",
+      "relativePath": "governance-verify-summary.json",
+      "size": 135462,
+      "mtime": "2025-08-18T21:37:15.380Z"
+    },
+    {
+      "path": "./artifacts/governed-change-scan.json",
+      "relativePath": "governed-change-scan.json",
+      "size": 179,
+      "mtime": "2025-08-18T21:36:59.140Z"
+    },
+    {
+      "path": "./artifacts/h1-kpi-summary.json",
+      "relativePath": "h1-kpi-summary.json",
+      "size": 2175,
+      "mtime": "2025-08-18T21:37:00.407Z"
+    },
+    {
+      "path": "./artifacts/hero-snapshot.json",
+      "relativePath": "hero-snapshot.json",
+      "size": 467,
+      "mtime": "2025-08-18T21:37:23.493Z"
+    },
+    {
+      "path": "./artifacts/hype-lint.json",
+      "relativePath": "hype-lint.json",
+      "size": 4028,
+      "mtime": "2025-08-18T21:36:57.053Z"
+    },
+    {
+      "path": "./artifacts/hype-sunset-validation.json",
+      "relativePath": "hype-sunset-validation.json",
+      "size": 383,
+      "mtime": "2025-08-18T21:28:27.962Z"
+    },
+    {
+      "path": "./artifacts/hysteresis-events.json",
+      "relativePath": "hysteresis-events.json",
+      "size": 702,
+      "mtime": "2025-08-18T21:35:03.464Z"
+    },
+    {
+      "path": "./artifacts/hysteresis-state.json",
+      "relativePath": "hysteresis-state.json",
+      "size": 419,
+      "mtime": "2025-08-18T21:35:03.464Z"
+    },
+    {
+      "path": "./artifacts/infrastructure-test-report.json",
+      "relativePath": "infrastructure-test-report.json",
+      "size": 847,
+      "mtime": "2025-08-18T21:34:41.417Z"
+    },
+    {
+      "path": "./artifacts/ingested-events.ndjson",
+      "relativePath": "ingested-events.ndjson",
+      "size": 339348,
+      "mtime": "2025-08-18T21:37:22.358Z"
+    },
+    {
+      "path": "./artifacts/no-silent-drift-report.json",
+      "relativePath": "no-silent-drift-report.json",
+      "size": 4670,
+      "mtime": "2025-08-18T21:36:59.083Z"
+    },
+    {
+      "path": "./artifacts/param-integrity-matrix.json",
+      "relativePath": "param-integrity-matrix.json",
+      "size": 5496,
+      "mtime": "2025-08-18T21:36:56.636Z"
+    },
+    {
+      "path": "./artifacts/param-lock-status.json",
+      "relativePath": "param-lock-status.json",
+      "size": 307,
+      "mtime": "2025-08-18T21:36:56.692Z"
+    },
+    {
+      "path": "./artifacts/perf-budget-report.json",
+      "relativePath": "perf-budget-report.json",
+      "size": 13770,
+      "mtime": "2025-08-18T21:37:07.911Z"
+    },
+    {
+      "path": "./artifacts/phase-tracker.json",
+      "relativePath": "phase-tracker.json",
+      "size": 674,
+      "mtime": "2025-08-18T21:35:04.367Z"
+    },
+    {
+      "path": "./artifacts/phase1-implementation-report.json",
+      "relativePath": "phase1-implementation-report.json",
+      "size": 3001,
+      "mtime": "2025-08-18T21:30:34.704Z"
+    },
+    {
+      "path": "./artifacts/phase2-week1-status.json",
+      "relativePath": "phase2-week1-status.json",
+      "size": 1836,
+      "mtime": "2025-08-18T21:28:27.963Z"
+    },
+    {
+      "path": "./artifacts/phase2-week2-status.json",
+      "relativePath": "phase2-week2-status.json",
+      "size": 4968,
+      "mtime": "2025-08-18T21:28:27.964Z"
+    },
+    {
+      "path": "./artifacts/phase2-week3-status.json",
+      "relativePath": "phase2-week3-status.json",
+      "size": 9523,
+      "mtime": "2025-08-18T21:28:27.964Z"
+    },
+    {
+      "path": "./artifacts/phase2-week4-status.json",
+      "relativePath": "phase2-week4-status.json",
+      "size": 7548,
+      "mtime": "2025-08-18T21:28:27.964Z"
+    },
+    {
+      "path": "./artifacts/phase2-week5-status.json",
+      "relativePath": "phase2-week5-status.json",
+      "size": 5985,
+      "mtime": "2025-08-18T21:28:27.964Z"
+    },
+    {
+      "path": "./artifacts/phase2-week6-status.json",
+      "relativePath": "phase2-week6-status.json",
+      "size": 6967,
+      "mtime": "2025-08-18T21:30:43.516Z"
+    },
+    {
+      "path": "./artifacts/pii-metrics.json",
+      "relativePath": "pii-metrics.json",
+      "size": 1074,
+      "mtime": "2025-08-18T21:36:57.681Z"
+    },
+    {
+      "path": "./artifacts/pii-salt-rotation.json",
+      "relativePath": "pii-salt-rotation.json",
+      "size": 90,
+      "mtime": "2025-08-18T21:28:27.964Z"
+    },
+    {
+      "path": "./artifacts/pii-scan-report.json",
+      "relativePath": "pii-scan-report.json",
+      "size": 16377,
+      "mtime": "2025-08-18T21:36:57.673Z"
+    },
+    {
+      "path": "./artifacts/pii-scan-report.sarif.json",
+      "relativePath": "pii-scan-report.sarif.json",
+      "size": 39944,
+      "mtime": "2025-08-18T21:36:57.674Z"
+    },
+    {
+      "path": "./artifacts/policy-aggregation-threshold.json",
+      "relativePath": "policy-aggregation-threshold.json",
+      "size": 204,
+      "mtime": "2025-08-18T21:37:21.829Z"
+    },
+    {
+      "path": "./artifacts/policy-index-verify.json",
+      "relativePath": "policy-index-verify.json",
+      "size": 2098,
+      "mtime": "2025-08-18T21:36:59.195Z"
+    },
+    {
+      "path": "./artifacts/pr-label-recommendations.json",
+      "relativePath": "pr-label-recommendations.json",
+      "size": 181,
+      "mtime": "2025-08-18T21:35:06.054Z"
+    },
+    {
+      "path": "./artifacts/principles-impact-report.json",
+      "relativePath": "principles-impact-report.json",
+      "size": 37883,
+      "mtime": "2025-08-18T21:36:58.132Z"
+    },
+    {
+      "path": "./artifacts/privacy/data-map/user-demo_user_001-datamap.json",
+      "relativePath": "privacy/data-map/user-demo_user_001-datamap.json",
+      "size": 4174,
+      "mtime": "2025-08-18T21:28:27.964Z"
+    },
+    {
+      "path": "./artifacts/privacy/data-map/user-test_user-datamap.json",
+      "relativePath": "privacy/data-map/user-test_user-datamap.json",
+      "size": 3985,
+      "mtime": "2025-08-18T21:28:27.964Z"
+    },
+    {
+      "path": "./artifacts/privacy/requests/req_1755531253577_otk7iopra/access-report.json",
+      "relativePath": "privacy/requests/req_1755531253577_otk7iopra/access-report.json",
+      "size": 2357,
+      "mtime": "2025-08-18T21:28:27.965Z"
+    },
+    {
+      "path": "./artifacts/privacy/requests/req_1755531253577_otk7iopra/request.json",
+      "relativePath": "privacy/requests/req_1755531253577_otk7iopra/request.json",
+      "size": 3036,
+      "mtime": "2025-08-18T21:28:27.965Z"
+    },
+    {
+      "path": "./artifacts/privacy/requests/req_1755547382713_fx02udea8/access-report.json",
+      "relativePath": "privacy/requests/req_1755547382713_fx02udea8/access-report.json",
+      "size": 2084,
+      "mtime": "2025-08-18T21:28:27.965Z"
+    },
+    {
+      "path": "./artifacts/privacy/requests/req_1755547382713_fx02udea8/request.json",
+      "relativePath": "privacy/requests/req_1755547382713_fx02udea8/request.json",
+      "size": 2737,
+      "mtime": "2025-08-18T21:28:27.965Z"
+    },
+    {
+      "path": "./artifacts/privacy/requests/req_1755547720613_1skr5b9yn/access-report.json",
+      "relativePath": "privacy/requests/req_1755547720613_1skr5b9yn/access-report.json",
+      "size": 2567,
+      "mtime": "2025-08-18T21:28:27.965Z"
+    },
+    {
+      "path": "./artifacts/privacy/requests/req_1755547720613_1skr5b9yn/request.json",
+      "relativePath": "privacy/requests/req_1755547720613_1skr5b9yn/request.json",
+      "size": 3266,
+      "mtime": "2025-08-18T21:28:27.965Z"
+    },
+    {
+      "path": "./artifacts/privacy/requests/req_1755547871661_hwxn3qu9f/access-report.json",
+      "relativePath": "privacy/requests/req_1755547871661_hwxn3qu9f/access-report.json",
+      "size": 2420,
+      "mtime": "2025-08-18T21:28:27.965Z"
+    },
+    {
+      "path": "./artifacts/privacy/requests/req_1755547871661_hwxn3qu9f/request.json",
+      "relativePath": "privacy/requests/req_1755547871661_hwxn3qu9f/request.json",
+      "size": 3105,
+      "mtime": "2025-08-18T21:28:27.965Z"
+    },
+    {
+      "path": "./artifacts/privacy/requests/req_1755547979934_qmvdeh502/request.json",
+      "relativePath": "privacy/requests/req_1755547979934_qmvdeh502/request.json",
+      "size": 323,
+      "mtime": "2025-08-18T21:28:27.965Z"
+    },
+    {
+      "path": "./artifacts/privacy/requests/req_1755547979944_xj5jlh4m0/access-report.json",
+      "relativePath": "privacy/requests/req_1755547979944_xj5jlh4m0/access-report.json",
+      "size": 2508,
+      "mtime": "2025-08-18T21:28:27.965Z"
+    },
+    {
+      "path": "./artifacts/privacy/requests/req_1755547979944_xj5jlh4m0/request.json",
+      "relativePath": "privacy/requests/req_1755547979944_xj5jlh4m0/request.json",
+      "size": 3270,
+      "mtime": "2025-08-18T21:28:27.965Z"
+    },
+    {
+      "path": "./artifacts/privacy-asserts.json",
+      "relativePath": "privacy-asserts.json",
+      "size": 516,
+      "mtime": "2025-08-18T21:36:57.734Z"
+    },
+    {
+      "path": "./artifacts/query-seeds.json",
+      "relativePath": "query-seeds.json",
+      "size": 139,
+      "mtime": "2025-08-18T21:37:22.450Z"
+    },
+    {
+      "path": "./artifacts/repo-knowledge-summary.json",
+      "relativePath": "repo-knowledge-summary.json",
+      "size": 2587,
+      "mtime": "2025-08-18T21:28:27.965Z"
+    },
+    {
+      "path": "./artifacts/risk-digest.json",
+      "relativePath": "risk-digest.json",
+      "size": 308,
+      "mtime": "2025-08-18T21:35:33.015Z"
+    },
+    {
+      "path": "./artifacts/schema-validation.json",
+      "relativePath": "schema-validation.json",
+      "size": 304,
+      "mtime": "2025-08-18T21:37:22.985Z"
+    },
+    {
+      "path": "./artifacts/security/scans/security-scan-scan_1755547720611_wm8vagxi4.json",
+      "relativePath": "security/scans/security-scan-scan_1755547720611_wm8vagxi4.json",
+      "size": 244,
+      "mtime": "2025-08-18T21:28:27.965Z"
+    },
+    {
+      "path": "./artifacts/security/scans/security-scan-scan_1755547871660_0ylj80u4c.json",
+      "relativePath": "security/scans/security-scan-scan_1755547871660_0ylj80u4c.json",
+      "size": 244,
+      "mtime": "2025-08-18T21:28:27.965Z"
+    },
+    {
+      "path": "./artifacts/security/scans/security-scan-scan_1755547979930_4mmdybr4s.json",
+      "relativePath": "security/scans/security-scan-scan_1755547979930_4mmdybr4s.json",
+      "size": 244,
+      "mtime": "2025-08-18T21:28:27.965Z"
+    },
+    {
+      "path": "./artifacts/security-patterns-smoke.json",
+      "relativePath": "security-patterns-smoke.json",
+      "size": 214,
+      "mtime": "2025-08-18T21:36:56.914Z"
+    },
+    {
+      "path": "./artifacts/security-validators-test.json",
+      "relativePath": "security-validators-test.json",
+      "size": 550,
+      "mtime": "2025-08-18T21:28:27.965Z"
+    },
+    {
+      "path": "./artifacts/seed-events-report.json",
+      "relativePath": "seed-events-report.json",
+      "size": 479,
+      "mtime": "2025-08-18T21:37:22.359Z"
+    },
+    {
+      "path": "./artifacts/signer-e2e.json",
+      "relativePath": "signer-e2e.json",
+      "size": 324,
+      "mtime": "2025-08-18T21:28:27.966Z"
+    },
+    {
+      "path": "./artifacts/spec-hash-diff-post-dec-20250813-04-pass2.txt",
+      "relativePath": "spec-hash-diff-post-dec-20250813-04-pass2.txt",
+      "size": 478,
+      "mtime": "2025-08-18T21:28:27.966Z"
+    },
+    {
+      "path": "./artifacts/spec-hash-diff-post-dec-20250813-04-pass3.txt",
+      "relativePath": "spec-hash-diff-post-dec-20250813-04-pass3.txt",
+      "size": 478,
+      "mtime": "2025-08-18T21:28:27.966Z"
+    },
+    {
+      "path": "./artifacts/spec-hash-diff-post-dec-20250813-04-pass4.txt",
+      "relativePath": "spec-hash-diff-post-dec-20250813-04-pass4.txt",
+      "size": 476,
+      "mtime": "2025-08-18T21:28:27.966Z"
+    },
+    {
+      "path": "./artifacts/spec-hash-diff-post-dec-20250813-04-pass5.txt",
+      "relativePath": "spec-hash-diff-post-dec-20250813-04-pass5.txt",
+      "size": 476,
+      "mtime": "2025-08-18T21:28:27.966Z"
+    },
+    {
+      "path": "./artifacts/spec-hash-diff-post-dec-20250813-04.txt",
+      "relativePath": "spec-hash-diff-post-dec-20250813-04.txt",
+      "size": 478,
+      "mtime": "2025-08-18T21:28:27.966Z"
+    },
+    {
+      "path": "./artifacts/spec-hash-diff.json",
+      "relativePath": "spec-hash-diff.json",
+      "size": 3496,
+      "mtime": "2025-08-18T21:36:56.540Z"
+    },
+    {
+      "path": "./artifacts/spec-hash-summary.json",
+      "relativePath": "spec-hash-summary.json",
+      "size": 131,
+      "mtime": "2025-08-18T21:36:56.540Z"
+    },
+    {
+      "path": "./artifacts/test-vectors.json",
+      "relativePath": "test-vectors.json",
+      "size": 589,
+      "mtime": "2025-08-18T21:28:27.966Z"
+    },
+    {
+      "path": "./artifacts/under-served.json",
+      "relativePath": "under-served.json",
+      "size": 230,
+      "mtime": "2025-08-18T21:36:59.928Z"
+    },
+    {
+      "path": "./artifacts/week6-component-contracts-test.json",
+      "relativePath": "week6-component-contracts-test.json",
+      "size": 1354,
+      "mtime": "2025-08-18T21:35:42.725Z"
+    },
+    {
+      "path": "./artifacts/week6-component-imports-test.json",
+      "relativePath": "week6-component-imports-test.json",
+      "size": 1089,
+      "mtime": "2025-08-18T21:35:42.511Z"
+    },
+    {
+      "path": "./artifacts/week6-component-smoke-test.json",
+      "relativePath": "week6-component-smoke-test.json",
+      "size": 1377,
+      "mtime": "2025-08-18T21:35:49.454Z"
+    },
+    {
+      "path": "./artifacts/weekly-trends.json",
+      "relativePath": "weekly-trends.json",
+      "size": 839,
+      "mtime": "2025-08-18T21:37:00.200Z"
+    },
+    {
+      "path": "./docs/governance/allowlist-management-sop.md",
+      "relativePath": "allowlist-management-sop.md",
+      "size": 4944,
+      "mtime": "2025-08-18T21:28:27.969Z"
+    },
+    {
+      "path": "./docs/governance/audit/README-audit-process.md",
+      "relativePath": "audit/README-audit-process.md",
+      "size": 1696,
+      "mtime": "2025-08-18T21:28:27.969Z"
+    },
+    {
+      "path": "./docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
+      "relativePath": "audit/pr-template-line-audit-2025-08-12T0509Z.md",
+      "size": 4192,
+      "mtime": "2025-08-18T21:28:27.969Z"
+    },
+    {
+      "path": "./docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md",
+      "relativePath": "dec/DEC-20250812-02-hysteresis-adoption.md",
+      "size": 4226,
+      "mtime": "2025-08-18T21:28:27.969Z"
+    },
+    {
+      "path": "./docs/governance/dec/DEC-20250812-03-principles-reference-activation.md",
+      "relativePath": "dec/DEC-20250812-03-principles-reference-activation.md",
+      "size": 4612,
+      "mtime": "2025-08-18T21:28:27.969Z"
+    },
+    {
+      "path": "./docs/governance/dec/DEC-20250812-04-governance-baseline-thresholds.md",
+      "relativePath": "dec/DEC-20250812-04-governance-baseline-thresholds.md",
+      "size": 9941,
+      "mtime": "2025-08-18T21:28:27.969Z"
+    },
+    {
+      "path": "./docs/governance/dec/DEC-20250813-01-known-debt-register.md",
+      "relativePath": "dec/DEC-20250813-01-known-debt-register.md",
+      "size": 7852,
+      "mtime": "2025-08-18T21:28:27.969Z"
+    },
+    {
+      "path": "./docs/governance/dec/DEC-20250813-02-signature-pipeline-adoption.md",
+      "relativePath": "dec/DEC-20250813-02-signature-pipeline-adoption.md",
+      "size": 1923,
+      "mtime": "2025-08-18T21:28:27.969Z"
+    },
+    {
+      "path": "./docs/governance/dec/DEC-20250813-03-disclaimers-presence-enforcement.md",
+      "relativePath": "dec/DEC-20250813-03-disclaimers-presence-enforcement.md",
+      "size": 4551,
+      "mtime": "2025-08-18T21:28:27.969Z"
+    },
+    {
+      "path": "./docs/governance/dec/DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
+      "relativePath": "dec/DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
+      "size": 3428,
+      "mtime": "2025-08-18T21:28:27.969Z"
+    },
+    {
+      "path": "./docs/governance/dec/DEC-20250813-05-gating-policy-wave1-adoption.md",
+      "relativePath": "dec/DEC-20250813-05-gating-policy-wave1-adoption.md",
+      "size": 4642,
+      "mtime": "2025-08-18T21:28:27.969Z"
+    },
+    {
+      "path": "./docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md",
+      "relativePath": "dec/DEC-20250813-06-consolidated-governed-edits.md",
+      "size": 3109,
+      "mtime": "2025-08-18T21:28:27.969Z"
+    },
+    {
+      "path": "./docs/governance/dec/DEC-20250813-07-hype-threshold-transition.md",
+      "relativePath": "dec/DEC-20250813-07-hype-threshold-transition.md",
+      "size": 3032,
+      "mtime": "2025-08-18T21:28:27.969Z"
+    },
+    {
+      "path": "./docs/governance/dec/DEC-20250813-08-evidence-hash-display-length.md",
+      "relativePath": "dec/DEC-20250813-08-evidence-hash-display-length.md",
+      "size": 3237,
+      "mtime": "2025-08-18T21:28:27.969Z"
+    },
+    {
+      "path": "./docs/governance/dec/DEC-20250813-09-equity-index-rounding.md",
+      "relativePath": "dec/DEC-20250813-09-equity-index-rounding.md",
+      "size": 2948,
+      "mtime": "2025-08-18T21:28:27.970Z"
+    },
+    {
+      "path": "./docs/governance/dec/DEC-20250813-10-feedback-categories-canonical.md",
+      "relativePath": "dec/DEC-20250813-10-feedback-categories-canonical.md",
+      "size": 2749,
+      "mtime": "2025-08-18T21:28:27.970Z"
+    },
+    {
+      "path": "./docs/governance/dec/DEC-20250815-01-governed-editorial-maintenance.md",
+      "relativePath": "dec/DEC-20250815-01-governed-editorial-maintenance.md",
+      "size": 1544,
+      "mtime": "2025-08-18T21:28:27.970Z"
+    },
+    {
+      "path": "./docs/governance/dec/DEC-20250815-01.yml",
+      "relativePath": "dec/DEC-20250815-01.yml",
+      "size": 1085,
+      "mtime": "2025-08-18T21:28:27.970Z"
+    },
+    {
+      "path": "./docs/governance/dec/DEC-20250815-02-hysteresis-config-update.md",
+      "relativePath": "dec/DEC-20250815-02-hysteresis-config-update.md",
+      "size": 2019,
+      "mtime": "2025-08-18T21:28:27.970Z"
+    },
+    {
+      "path": "./docs/governance/dec/DEC-20250815-02-hysteresis-config-update.yml",
+      "relativePath": "dec/DEC-20250815-02-hysteresis-config-update.yml",
+      "size": 1842,
+      "mtime": "2025-08-18T21:28:27.970Z"
+    },
+    {
+      "path": "./docs/governance/dec/DEC-20250815-03-trace-index-update.md",
+      "relativePath": "dec/DEC-20250815-03-trace-index-update.md",
+      "size": 1983,
+      "mtime": "2025-08-18T21:28:27.970Z"
+    },
+    {
+      "path": "./docs/governance/dec/DEC-20250815-03-trace-index-update.yml",
+      "relativePath": "dec/DEC-20250815-03-trace-index-update.yml",
+      "size": 1809,
+      "mtime": "2025-08-18T21:28:27.970Z"
+    },
+    {
+      "path": "./docs/governance/dec/DEC-20250816-01-governance-pipeline-security-enhancement.md",
+      "relativePath": "dec/DEC-20250816-01-governance-pipeline-security-enhancement.md",
+      "size": 7880,
+      "mtime": "2025-08-18T21:28:27.970Z"
+    },
+    {
+      "path": "./docs/governance/dec/DEC-style-guide-v1.md",
+      "relativePath": "dec/DEC-style-guide-v1.md",
+      "size": 3915,
+      "mtime": "2025-08-18T21:28:27.970Z"
+    },
+    {
+      "path": "./docs/governance/dec/DEC-style-guide-v2.md",
+      "relativePath": "dec/DEC-style-guide-v2.md",
+      "size": 2582,
+      "mtime": "2025-08-18T21:28:27.970Z"
+    },
+    {
+      "path": "./docs/governance/dec/DEC-style-guide-v3.md",
+      "relativePath": "dec/DEC-style-guide-v3.md",
+      "size": 2817,
+      "mtime": "2025-08-18T21:28:27.970Z"
+    },
+    {
+      "path": "./docs/governance/dec/templates/DEC-template-v1.md",
+      "relativePath": "dec/templates/DEC-template-v1.md",
+      "size": 1070,
+      "mtime": "2025-08-18T21:28:27.970Z"
+    },
+    {
+      "path": "./docs/governance/dec/templates/DEC-template-v2.yml",
+      "relativePath": "dec/templates/DEC-template-v2.yml",
+      "size": 1086,
+      "mtime": "2025-08-18T21:28:27.970Z"
+    },
+    {
+      "path": "./docs/governance/disclaimers-lint-spec-v1.md",
+      "relativePath": "disclaimers-lint-spec-v1.md",
+      "size": 23476,
+      "mtime": "2025-08-18T21:28:27.970Z"
+    },
+    {
+      "path": "./docs/governance/handbook-index.md",
+      "relativePath": "handbook-index.md",
+      "size": 1238,
+      "mtime": "2025-08-18T21:28:27.970Z"
+    },
+    {
+      "path": "./docs/governance/lint-principles-reference-spec-v1.md",
+      "relativePath": "lint-principles-reference-spec-v1.md",
+      "size": 4694,
+      "mtime": "2025-08-18T21:28:27.970Z"
+    },
+    {
+      "path": "./docs/governance/phase-tracker-ops.md",
+      "relativePath": "phase-tracker-ops.md",
+      "size": 1761,
+      "mtime": "2025-08-18T21:28:27.970Z"
+    },
+    {
+      "path": "./docs/governance/policy-index-v1.md",
+      "relativePath": "policy-index-v1.md",
+      "size": 2617,
+      "mtime": "2025-08-18T21:28:27.970Z"
+    },
+    {
+      "path": "./docs/governance/signature-pipeline-plan-v1.md",
+      "relativePath": "signature-pipeline-plan-v1.md",
+      "size": 6617,
+      "mtime": "2025-08-18T21:28:27.971Z"
+    },
+    {
+      "path": "./docs/governance/statement-orientasi-portal-panti.md",
+      "relativePath": "statement-orientasi-portal-panti.md",
+      "size": 5884,
+      "mtime": "2025-08-18T21:28:27.971Z"
+    },
+    {
+      "path": "./docs/governance/todo-post-DEC-20250812-02.md",
+      "relativePath": "todo-post-DEC-20250812-02.md",
+      "size": 1511,
+      "mtime": "2025-08-18T21:28:27.971Z"
+    },
+    {
+      "path": "./docs/governance/toolchain-overview.md",
+      "relativePath": "toolchain-overview.md",
+      "size": 1466,
+      "mtime": "2025-08-18T21:28:27.971Z"
+    },
+    {
+      "path": "./docs/governance/trace/archive-trace-index-v1.md",
+      "relativePath": "trace/archive-trace-index-v1.md",
+      "size": 3195,
+      "mtime": "2025-08-18T21:28:27.971Z"
+    },
+    {
+      "path": "./.integrity/keys.json",
+      "relativePath": "keys.json",
+      "size": 360,
+      "mtime": "2025-08-18T21:34:36.344Z"
+    },
+    {
+      "path": "./data/events-sample.ndjson",
+      "relativePath": "events-sample.ndjson",
+      "size": 1162,
+      "mtime": "2025-08-18T21:28:27.967Z"
+    },
+    {
+      "path": "./policies/aggregation-min-cell.rego",
+      "relativePath": "aggregation-min-cell.rego",
+      "size": 709,
+      "mtime": "2025-08-18T21:28:27.984Z"
+    }
+  ],
+  "totalSize": 1142943,
+  "compressedSize": 205449,
+  "checksums": {},
+  "duration": 47,
+  "errors": [],
+  "archiveChecksum": "61734d4b83f2c10a34e4c8048fa391b9ad1e671a3841175668e4e42ff1ef2477",
+  "compressionRatio": 82.02
+}

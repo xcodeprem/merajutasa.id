@@ -1,6 +1,6 @@
 {
-  "mode": "verify",
-  "timestamp_utc": "2025-08-18T20:32:38Z",
+  "mode": "seal-first",
+  "timestamp_utc": "2025-08-18T21:54:35Z",
   "updated": [],
   "unchanged": [
     "docs/roadmap/roadmap-master-v1.md",
@@ -57,16 +57,21 @@
     "docs/fairness/equity-snapshot-pseudocode.md",
     "docs/integrity/verify-cli-doc-draft.md",
     "docs/governance/dec/DEC-20250815-01-governed-editorial-maintenance.md",
-    "docs/verify-cli.md",
     "docs/public/ABOUT-PORTAL-PANTI.md"
   ],
   "placeholders_sealed": [],
   "placeholders_remaining": [],
-  "violations": [],
+  "violations": [
+    {
+      "code": "HASH_MISMATCH_DEC_REQUIRED",
+      "path": "docs/verify-cli.md",
+      "detail": "Manifest=32576ec92b39725c53995580926b5bba2b724b77d5089f445498e48e0b973b30 current=c3bcf7d2a6120aee87c0e97333fc695e875710ceb606d23d4b8050b3becdea57"
+    }
+  ],
   "summary": {
     "total_entries": 56,
     "updated_count": 0,
-    "violation_count": 0,
+    "violation_count": 1,
     "placeholders_remaining_count": 0
   }
 }

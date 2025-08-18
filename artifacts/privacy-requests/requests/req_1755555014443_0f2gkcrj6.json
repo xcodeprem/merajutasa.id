@@ -1,0 +1,36 @@
+{
+  "data_categories": [
+    "marketing_data",
+    "analytics_data"
+  ],
+  "estimated_completion_days": 7,
+  "legal_basis": "Article 18 GDPR - Right to restriction",
+  "processed_at": "2025-08-18T22:10:14.629Z",
+  "processing_time_ms": 186,
+  "request_id": "req_1755555014443_0f2gkcrj6",
+  "request_type": "processing_restriction",
+  "response_data": {
+    "status": "processed"
+  },
+  "status": "success",
+  "submitted_at": "2025-08-18T22:10:14.443Z",
+  "user_id": "user_zkybgyahq",
+  "verification_required": true,
+  "verification_steps": [
+    {
+      "completed_at": "2025-08-18T22:10:14.629Z",
+      "status": "completed",
+      "step": "identity_verification"
+    },
+    {
+      "completed_at": "2025-08-18T22:10:14.629Z",
+      "status": "completed",
+      "step": "request_validation"
+    },
+    {
+      "completed_at": "2025-08-18T22:10:14.629Z",
+      "status": "completed",
+      "step": "data_location"
+    }
+  ]
+}

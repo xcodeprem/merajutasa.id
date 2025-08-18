@@ -1,11 +1,11 @@
 {
   "_metadata": {
     "actor": "copilot-swe-agent[bot]",
-    "generated_at": "2025-08-17T15:07:39.486Z",
+    "generated_at": "2025-08-18T21:37:00.407Z",
     "generator": "generate-h1-kpi-summary.js",
-    "git_ref": "refs/heads/copilot/fix-39",
-    "git_sha": "a37486a09d0e93378e5f4e2928620f7d7cf67bab",
-    "run_id": "17022422016",
+    "git_ref": "refs/heads/copilot/fix-58",
+    "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
+    "run_id": "17052958409",
     "version": "1.0"
   },
   "adoption": {
@@ -27,13 +27,13 @@
   },
   "feedback": {
     "categories": {
-      "bug": 50,
-      "product": 50,
-      "ux": 50
+      "bug": 78,
+      "product": 78,
+      "ux": 78
     },
-    "ingested": 100
+    "ingested": 156
   },
-  "generated_utc": "2025-08-17T15:07:39.486Z",
+  "generated_utc": "2025-08-18T21:37:00.407Z",
   "phase": "PHASE_0_WARN",
   "trust": {
     "disclaimers_status": "PASS",
@@ -58,32 +58,45 @@
       }
     },
     "latest": {
-      "end_utc": "2025-08-17",
-      "start_utc": "2025-08-11",
+      "end_utc": "2025-08-24",
+      "start_utc": "2025-08-18",
       "totals": {
-        "canonical_ok": 440,
+        "canonical_ok": 62,
         "coverage": 1,
-        "events": 440,
+        "events": 62,
         "feedback": 0,
-        "hero_views": 438,
+        "hero_views": 62,
         "prohibited": 0
       },
-      "week": "2025-W33"
+      "week": "2025-W34"
     },
-    "throughput_latest": 440,
+    "throughput_latest": 62,
     "weeks": [
       {
         "end_utc": "2025-08-17",
         "start_utc": "2025-08-11",
         "totals": {
-          "canonical_ok": 440,
+          "canonical_ok": 444,
           "coverage": 1,
-          "events": 440,
+          "events": 444,
           "feedback": 0,
-          "hero_views": 438,
+          "hero_views": 442,
           "prohibited": 0
         },
         "week": "2025-W33"
+      },
+      {
+        "end_utc": "2025-08-24",
+        "start_utc": "2025-08-18",
+        "totals": {
+          "canonical_ok": 62,
+          "coverage": 1,
+          "events": 62,
+          "feedback": 0,
+          "hero_views": 62,
+          "prohibited": 0
+        },
+        "week": "2025-W34"
       }
     ]
   }

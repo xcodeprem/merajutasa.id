@@ -1,0 +1,44 @@
+{
+  "data_categories": [
+    "personal_info",
+    "activity_logs",
+    "cached_data"
+  ],
+  "estimated_completion_days": 30,
+  "legal_basis": "Article 17 GDPR - Right to erasure",
+  "processed_at": "2025-08-18T22:10:13.959Z",
+  "processing_time_ms": 546,
+  "request_id": "req_1755555013413_3tcpukw8f",
+  "request_type": "data_deletion",
+  "response_data": {
+    "deleted_categories": [
+      "personal_info",
+      "activity_logs"
+    ],
+    "deletion_completed_at": "2025-08-18T22:10:13.960Z",
+    "retention_period_data": [
+      "legal_compliance_records"
+    ]
+  },
+  "status": "success",
+  "submitted_at": "2025-08-18T22:10:13.413Z",
+  "user_id": "user_bf6uax589",
+  "verification_required": true,
+  "verification_steps": [
+    {
+      "completed_at": "2025-08-18T22:10:13.959Z",
+      "status": "completed",
+      "step": "identity_verification"
+    },
+    {
+      "completed_at": "2025-08-18T22:10:13.959Z",
+      "status": "completed",
+      "step": "request_validation"
+    },
+    {
+      "completed_at": "2025-08-18T22:10:13.959Z",
+      "status": "completed",
+      "step": "data_location"
+    }
+  ]
+}

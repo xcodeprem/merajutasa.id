@@ -1,0 +1,40 @@
+{
+  "data_categories": [
+    "personal_info",
+    "user_content",
+    "preferences"
+  ],
+  "estimated_completion_days": 30,
+  "legal_basis": "Article 20 GDPR - Right to data portability",
+  "processed_at": "2025-08-18T22:10:14.284Z",
+  "processing_time_ms": 323,
+  "request_id": "req_1755555013961_t6l4fwlax",
+  "request_type": "data_portability",
+  "response_data": {
+    "download_link": "https://secure.example.com/export/user_data.json",
+    "expiry_date": "2025-08-25T22:10:14.284Z",
+    "export_format": "JSON",
+    "file_size_bytes": 1024768
+  },
+  "status": "success",
+  "submitted_at": "2025-08-18T22:10:13.961Z",
+  "user_id": "user_c14rlr3tu",
+  "verification_required": true,
+  "verification_steps": [
+    {
+      "completed_at": "2025-08-18T22:10:14.284Z",
+      "status": "completed",
+      "step": "identity_verification"
+    },
+    {
+      "completed_at": "2025-08-18T22:10:14.284Z",
+      "status": "completed",
+      "step": "request_validation"
+    },
+    {
+      "completed_at": "2025-08-18T22:10:14.284Z",
+      "status": "completed",
+      "step": "data_location"
+    }
+  ]
+}

@@ -1,8 +1,13 @@
 {
   "version": 1,
-  "status": "ALLOW",
+  "status": "DENY",
   "threshold": 20,
-  "source": "artifacts/aggregation-cells-allow.json",
+  "source": "artifacts/aggregation-cells-deny.json",
   "total_cells": 3,
-  "violations": []
+  "violations": [
+    {
+      "cell": "hero",
+      "count": 3
+    }
+  ]
 }

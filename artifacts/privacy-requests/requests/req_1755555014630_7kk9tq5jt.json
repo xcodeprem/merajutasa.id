@@ -1,0 +1,36 @@
+{
+  "data_categories": [
+    "marketing_data",
+    "profiling_data"
+  ],
+  "estimated_completion_days": 7,
+  "legal_basis": "Article 21 GDPR - Right to object",
+  "processed_at": "2025-08-18T22:10:14.935Z",
+  "processing_time_ms": 305,
+  "request_id": "req_1755555014630_7kk9tq5jt",
+  "request_type": "objection_to_processing",
+  "response_data": {
+    "status": "processed"
+  },
+  "status": "success",
+  "submitted_at": "2025-08-18T22:10:14.630Z",
+  "user_id": "user_omlqola94",
+  "verification_required": true,
+  "verification_steps": [
+    {
+      "completed_at": "2025-08-18T22:10:14.935Z",
+      "status": "completed",
+      "step": "identity_verification"
+    },
+    {
+      "completed_at": "2025-08-18T22:10:14.935Z",
+      "status": "completed",
+      "step": "request_validation"
+    },
+    {
+      "completed_at": "2025-08-18T22:10:14.935Z",
+      "status": "completed",
+      "step": "data_location"
+    }
+  ]
+}

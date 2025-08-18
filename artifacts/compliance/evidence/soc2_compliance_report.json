@@ -1,0 +1,79 @@
+{
+  "assessed_controls": [
+    {
+      "assessment_score": 67,
+      "category": "access_control",
+      "compliance_status": "non_compliant",
+      "control_id": "soc2_cc6_1",
+      "evidence_references": [
+        {
+          "file_name": "iam_configuration.json",
+          "file_type": "json",
+          "last_updated": "2025-08-05",
+          "location": "evidence/access_control/iam_configuration.json"
+        },
+        {
+          "file_name": "auth_logs.json",
+          "file_type": "json",
+          "last_updated": "2025-08-16",
+          "location": "evidence/access_control/auth_logs.json"
+        }
+      ],
+      "findings": [
+        "Control implementation gap identified"
+      ],
+      "required_controls": [
+        "identity_management",
+        "authentication",
+        "authorization"
+      ],
+      "risk_level": "high",
+      "title": "Logical and Physical Access Controls"
+    },
+    {
+      "assessment_score": 60,
+      "category": "data_security",
+      "compliance_status": "non_compliant",
+      "control_id": "soc2_cc6_7",
+      "evidence_references": [
+        {
+          "file_name": "control_documentation.pdf",
+          "file_type": "pdf",
+          "last_updated": "2025-07-27",
+          "location": "evidence/data_security/control_documentation.pdf"
+        }
+      ],
+      "findings": [
+        "Control implementation gap identified"
+      ],
+      "required_controls": [
+        "encryption_in_transit",
+        "secure_disposal",
+        "data_classification"
+      ],
+      "risk_level": "medium",
+      "title": "Data Transmission and Disposal"
+    }
+  ],
+  "compliance_score": 0,
+  "framework": "SOC2",
+  "risk_breakdown": {
+    "critical": {
+      "compliant": 0,
+      "total": 0
+    },
+    "high": {
+      "compliant": 0,
+      "total": 1
+    },
+    "low": {
+      "compliant": 0,
+      "total": 0
+    },
+    "medium": {
+      "compliant": 0,
+      "total": 1
+    }
+  },
+  "total_controls": 2
+}
