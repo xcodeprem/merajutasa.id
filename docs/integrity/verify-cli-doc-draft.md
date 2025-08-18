@@ -38,6 +38,7 @@ cat artifacts/spec-hash-diff.json
 ```
 
 **Expected Output:**
+
 - `violations=0` indicates all files match their hashes
 - Any violations indicate files changed without proper governance
 
@@ -54,6 +55,7 @@ cat artifacts/param-integrity-matrix.json
 ```
 
 **Expected Output:**
+
 - Status: `PASS`
 - All parameters show `MATCH` status
 
@@ -104,17 +106,20 @@ node tools/evidence-freshness.js
 If `spec-hash:verify` fails with violations:
 
 1. **Check what changed:**
+
    ```bash
    node tools/spec-hash-diff.js --mode=report-only
    cat artifacts/spec-hash-diff.json
    ```
 
 2. **For authorized changes**, seal new hashes:
+
    ```bash
    npm run spec-hash:seal
    ```
 
 3. **For README-only changes**, use auto-seal:
+
    ```bash
    npm run spec-hash:auto-seal-readme
    ```
@@ -124,6 +129,7 @@ If `spec-hash:verify` fails with violations:
 If parameter integrity fails:
 
 1. **Check specific mismatches:**
+
    ```bash
    cat artifacts/param-integrity-matrix.json | jq '.parameters[] | select(.status != "MATCH")'
    ```
