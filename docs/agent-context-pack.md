@@ -17,12 +17,14 @@ This document provides essential context for AI agents, developers, and workflow
 **Why:** Tags and branches can be moved/compromised, introducing supply chain attacks.
 
 **✅ Correct:**
+
 ```yaml
 - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.1.7
 - uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
 ```
 
 **❌ Incorrect:**
+
 ```yaml  
 - uses: actions/checkout@v4
 - uses: actions/setup-node@main
@@ -30,6 +32,7 @@ This document provides essential context for AI agents, developers, and workflow
 ```
 
 **Exception:** Local actions (starting with `./`) don't require SHA pinning:
+
 ```yaml
 - uses: ./.github/actions/run-a8  # ✅ OK
 ```
@@ -39,11 +42,13 @@ This document provides essential context for AI agents, developers, and workflow
 **Rule:** All external actions MUST be present in `.github/actions-allowlist.json` with approved SHAs.
 
 **Process for new actions:**
+
 1. Add action + SHA to allowlist with justification
 2. Security review of action source code
 3. CODEOWNERS approval for allowlist changes
 
 **Allowlist structure:**
+
 ```json
 {
   "allowed_actions": [
@@ -61,6 +66,7 @@ This document provides essential context for AI agents, developers, and workflow
 **Rule:** All workflows MUST include concurrency with `cancel-in-progress: true`.
 
 **Standard pattern:**
+
 ```yaml
 concurrency:
   group: workflow-name-${{ github.ref }}
@@ -68,6 +74,7 @@ concurrency:
 ```
 
 **For PR-specific patterns:**
+
 ```yaml
 concurrency:
   group: workflow-name-${{ github.event.pull_request.number || github.ref }}
@@ -79,6 +86,7 @@ concurrency:
 **Rule:** Workflows that modify code/config MUST include A8 governance checks.
 
 **Standard integration:**
+
 ```yaml
 - name: Run A8 governance guard
   uses: ./.github/actions/run-a8
@@ -87,12 +95,14 @@ concurrency:
 ```
 
 **When A8 is required:**
+
 - Code changes
 - Configuration updates  
 - Governance file modifications
 - Policy changes
 
 **When A8 may be skipped:**
+
 - Pure documentation workflows
 - External API calls only
 - Read-only operations
@@ -102,12 +112,14 @@ concurrency:
 **Rule:** Use principle of least privilege for `permissions` blocks.
 
 **Default safe permissions:**
+
 ```yaml
 permissions:
   contents: read
 ```
 
 **Common permission patterns:**
+
 ```yaml
 # For PR comments
 permissions:
@@ -245,6 +257,7 @@ node -e "JSON.parse(require('fs').readFileSync('.github/actions-allowlist.json',
 ### Automated Checks
 
 The `workflow-guard.yml` workflow automatically validates:
+
 - Actions pinning to approved SHAs
 - Concurrency configuration
 - A8 governance integration  
@@ -261,6 +274,7 @@ The `workflow-guard.yml` workflow automatically validates:
 ### Emergency Overrides
 
 In critical situations, temporary overrides may be granted:
+
 - Set `SECURITY_GATING_DISABLED=true` to bypass A8 checks
 - Use workflow dispatch to run specific jobs
 - Manual intervention via repository settings
