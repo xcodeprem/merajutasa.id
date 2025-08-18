@@ -699,8 +699,8 @@ Daftar gating (sementara):
 
 ## 18. Kontak / Escalation
 
-- Governance Owner: (Isi)
-- Integrity Maintainer: (Isi)
+- Governance Owner: Farid
+- Integrity Maintainer: Farid
 - Untuk proposal DEC baru: buat issue “[DEC-PROPOSAL] <judul>”
 - Insiden integritas (hash mismatch): label issue “integrity-incident” PRIORITY:HIGH
 
