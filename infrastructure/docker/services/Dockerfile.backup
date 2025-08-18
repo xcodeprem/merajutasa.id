@@ -1,0 +1,58 @@
+# Dockerfile for MerajutASA Backup Service
+# Production-ready containerization with backup automation
+
+FROM node:18-alpine AS builder
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies with production optimizations
+RUN npm ci --only=production --no-audit --no-fund
+
+# Production stage
+FROM node:18-alpine AS runtime
+
+# Create non-root user for security
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S merajutasa -u 1001 -G nodejs
+
+# Install required system utilities for backup operations
+RUN apk add --no-cache curl tar gzip
+
+# Set working directory
+WORKDIR /app
+
+# Copy dependencies from builder stage
+COPY --from=builder --chown=merajutasa:nodejs /app/node_modules ./node_modules
+
+# Copy application code
+COPY --chown=merajutasa:nodejs . .
+
+# Create directories for backup operations
+RUN mkdir -p /app/backups /app/temp && chown -R merajutasa:nodejs /app/backups /app/temp
+
+# Switch to non-root user
+USER merajutasa
+
+# Expose backup service port (if HTTP interface needed)
+EXPOSE 4605
+
+# Add health check
+HEALTHCHECK --interval=60s --timeout=15s --start-period=10s --retries=2 \
+  CMD node -e "import('./infrastructure/backup/backup-service.js').then(m => m.default.healthCheck().then(() => process.exit(0)).catch(() => process.exit(1)))"
+
+# Set environment variables
+ENV NODE_ENV=production
+ENV BACKUP_PORT=4605
+ENV BACKUP_HOST=0.0.0.0
+ENV BACKUP_DIR=/app/backups
+ENV BACKUP_TEMP_DIR=/app/temp
+
+# Create volumes for backup storage
+VOLUME ["/app/backups", "/app/temp"]
+
+# Start backup service
+CMD ["node", "infrastructure/backup/backup-service.js"]

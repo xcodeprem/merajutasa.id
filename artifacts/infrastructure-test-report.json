@@ -1,0 +1,47 @@
+{
+  "timestamp": "2025-08-18T13:58:04.806Z",
+  "summary": {
+    "total": 7,
+    "passed": 7,
+    "failed": 0,
+    "success_rate": 100,
+    "total_duration": 14
+  },
+  "results": [
+    {
+      "name": "Directory Structure",
+      "status": "PASSED",
+      "duration": 1
+    },
+    {
+      "name": "Docker Build Scripts",
+      "status": "PASSED",
+      "duration": 7
+    },
+    {
+      "name": "Docker Compose Files",
+      "status": "PASSED",
+      "duration": 1
+    },
+    {
+      "name": "Dockerfiles",
+      "status": "PASSED",
+      "duration": 1
+    },
+    {
+      "name": "Kubernetes Manifests",
+      "status": "PASSED",
+      "duration": 2
+    },
+    {
+      "name": "Terraform Configuration",
+      "status": "PASSED",
+      "duration": 0
+    },
+    {
+      "name": "NPM Scripts",
+      "status": "PASSED",
+      "duration": 1
+    }
+  ]
+}

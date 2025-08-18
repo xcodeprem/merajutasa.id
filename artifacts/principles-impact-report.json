@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "generated_utc": "2025-08-18T07:47:29.781Z",
+  "generated_utc": "2025-08-18T15:34:01.933Z",
   "principles": [
     {
       "principle": "GP1",
-      "match_count": 1020,
+      "match_count": 1057,
       "domains": [
         "other",
         "privacy",
@@ -119,15 +119,23 @@
     },
     {
       "principle": "GP2",
-      "match_count": 3,
+      "match_count": 6,
       "domains": [
         "other",
         "privacy",
         "analytics"
       ],
       "inferredImpact": true,
-      "confidence": 0.6,
+      "confidence": 0.8,
       "evidence_sample": [
+        {
+          "file": "docs/strategic-analysis/STRATEGIC-IMPLEMENTATION-ANALYSIS.md",
+          "line": 310,
+          "snippet": "- [ ] **Rate limiting** prevents abuse",
+          "pattern": "abuse",
+          "changed": false,
+          "domain": "other"
+        },
         {
           "file": "docs/roadmap/roadmap-master-v1.md",
           "line": 319,
@@ -145,6 +153,22 @@
           "domain": "privacy"
         },
         {
+          "file": "docs/phase-1/PHASE-1-IMPLEMENTATION-GUIDE.md",
+          "line": 853,
+          "snippet": "- [ ] Rate limiting preventing abuse",
+          "pattern": "abuse",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs/phase-1/PHASE-1-IMPLEMENTATION-GUIDE.md",
+          "line": 879,
+          "snippet": "- ✅ **Rate limiting** preventing abuse and DoS",
+          "pattern": "abuse",
+          "changed": false,
+          "domain": "other"
+        },
+        {
           "file": "docs/analytics/event-schema-canonical-v1.md",
           "line": 554,
           "snippet": "| PII leakage attempt in meta | PII scanner + reject + block event_name if repeated abuse |",
@@ -157,7 +181,7 @@
     },
     {
       "principle": "GP3",
-      "match_count": 119,
+      "match_count": 167,
       "domains": [
         "other",
         "privacy",
@@ -244,26 +268,26 @@
           "domain": "other"
         },
         {
-          "file": "docs/status/progress-recap-latest-2025-08-12T035901Z.md",
-          "line": 64,
-          "snippet": "| Revocation Endpoint & List | Placeholder saja | Revocation transparency nol saat insiden |",
-          "pattern": "transparenc",
-          "changed": false,
-          "domain": "other"
-        },
-        {
-          "file": "docs/status/progress-recap-latest-2025-08-12T035901Z.md",
-          "line": 67,
-          "snippet": "| Governance Decision Log Automation | Belum template DEC populating CI | Traceability manual & rentan lupa |",
+          "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-3.md",
+          "line": 117,
+          "snippet": "export JAEGER_ENDPOINT=http://localhost:14268/api/traces",
           "pattern": "trace",
           "changed": false,
           "domain": "other"
         },
         {
-          "file": "docs/status/progress-recap-latest-2025-08-12T035901Z.md",
-          "line": 95,
-          "snippet": "6. Transparency Hardening",
-          "pattern": "transparenc",
+          "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-3.md",
+          "line": 333,
+          "snippet": "// Trace business operations",
+          "pattern": "trace",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-3.md",
+          "line": 335,
+          "snippet": "await observability.traceBusinessOperation('document_signing', async (span) => {",
+          "pattern": "trace",
           "changed": false,
           "domain": "other"
         }
@@ -272,7 +296,7 @@
     },
     {
       "principle": "GP4",
-      "match_count": 657,
+      "match_count": 737,
       "domains": [
         "other",
         "privacy",
@@ -387,7 +411,7 @@
     },
     {
       "principle": "GP5",
-      "match_count": 377,
+      "match_count": 432,
       "domains": [
         "other",
         "privacy",
@@ -616,7 +640,7 @@
     },
     {
       "principle": "GP7",
-      "match_count": 200,
+      "match_count": 236,
       "domains": [
         "other",
         "principles",
@@ -729,7 +753,7 @@
     },
     {
       "principle": "GP8",
-      "match_count": 8,
+      "match_count": 13,
       "domains": [
         "other",
         "integrity"
@@ -742,6 +766,22 @@
           "line": 47,
           "snippet": "| L Federation & Future | DID portability, external attestation, localization, CBOR | Future expansions in Credential spec | Scalability & portability guardrail |",
           "pattern": "portabil",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs/phase-2/PHASE-2-WEEK-3-DELIVERY-DOCUMENTATION.md",
+          "line": 372,
+          "snippet": "### 3. Integration & Extensibility 🔧",
+          "pattern": "extensib",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs/phase-2/PHASE-2-WEEK-3-DELIVERY-DOCUMENTATION.md",
+          "line": 375,
+          "snippet": "- **Plugin Architecture**: Extensible alert channels and data sources",
+          "pattern": "extensib",
           "changed": false,
           "domain": "other"
         },
@@ -794,19 +834,35 @@
           "domain": "integrity"
         },
         {
-          "file": "docs/archive/ux_public-multipage-experience-master-spec-v2.md",
-          "line": 64,
-          "snippet": "| GP3 | Federated Mindset | Cegah platform lock-in; integrity portability | Credential JSON-LD minimal; portable verify semantics |",
-          "pattern": "portabil",
+          "file": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
+          "line": 26,
+          "snippet": "| **Kubernetes** | Governance model, policy enforcement, hash-based integrity | Multi-layer security, policy-as-code, extensible architecture |",
+          "pattern": "extensib",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
+          "line": 342,
+          "snippet": "##### **3.3.3 Interoperability Gaps**",
+          "pattern": "interoperab",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
+          "line": 605,
+          "snippet": "3. **Platform Excellence** - Developer experience, extensibility, ecosystem",
+          "pattern": "extensib",
           "changed": false,
           "domain": "other"
         }
       ],
-      "evidence_truncated": false
+      "evidence_truncated": true
     },
     {
       "principle": "GP9",
-      "match_count": 403,
+      "match_count": 406,
       "domains": [
         "other",
         "privacy",
@@ -1036,7 +1092,7 @@
   "summary": {
     "total_principles": 10,
     "impacted": 10,
-    "average_confidence": 0.87,
+    "average_confidence": 0.89,
     "max_confidence": 0.9
   }
 }

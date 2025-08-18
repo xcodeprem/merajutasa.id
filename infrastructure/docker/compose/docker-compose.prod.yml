@@ -1,0 +1,316 @@
+# MerajutASA.id Production Environment
+# Docker Compose configuration for production deployment
+
+version: '3.8'
+
+services:
+  # Core Services - Production Configuration
+  signer:
+    image: merajutasa/signer:${VERSION:-latest}
+    container_name: merajutasa-signer-prod
+    ports:
+      - "4601:4601"
+    environment:
+      - NODE_ENV=production
+      - SIGNER_PORT=4601
+      - SIGNER_HOST=0.0.0.0
+      - LOG_LEVEL=info
+    volumes:
+      - signer_logs:/app/logs
+    networks:
+      - merajutasa-network
+    restart: always
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4601/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  chain:
+    image: merajutasa/chain:${VERSION:-latest}
+    container_name: merajutasa-chain-prod
+    ports:
+      - "4602:4602"
+    environment:
+      - NODE_ENV=production
+      - CHAIN_PORT=4602
+      - CHAIN_HOST=0.0.0.0
+      - CHAIN_DATA_DIR=/app/artifacts
+      - LOG_LEVEL=info
+    volumes:
+      - chain_data:/app/artifacts
+      - chain_logs:/app/logs
+    networks:
+      - merajutasa-network
+    restart: always
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4602/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  collector:
+    image: merajutasa/collector:${VERSION:-latest}
+    container_name: merajutasa-collector-prod
+    ports:
+      - "4603:4603"
+    environment:
+      - NODE_ENV=production
+      - COLLECTOR_PORT=4603
+      - COLLECTOR_HOST=0.0.0.0
+      - EVENTS_DATA_DIR=/app/data
+      - LOG_LEVEL=info
+    volumes:
+      - collector_data:/app/data
+      - collector_logs:/app/logs
+    networks:
+      - merajutasa-network
+    restart: always
+    deploy:
+      replicas: 3
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4603/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  monitoring:
+    image: merajutasa/monitoring:${VERSION:-latest}
+    container_name: merajutasa-monitoring-prod
+    ports:
+      - "4604:4604"
+    environment:
+      - NODE_ENV=production
+      - MONITORING_PORT=4604
+      - MONITORING_HOST=0.0.0.0
+      - METRICS_DIR=/app/metrics
+      - LOGS_DIR=/app/logs
+      - LOG_LEVEL=info
+    volumes:
+      - monitoring_metrics:/app/metrics
+      - monitoring_logs:/app/logs
+    networks:
+      - merajutasa-network
+    restart: always
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4604/metrics"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  backup:
+    image: merajutasa/backup:${VERSION:-latest}
+    container_name: merajutasa-backup-prod
+    environment:
+      - NODE_ENV=production
+      - BACKUP_PORT=4605
+      - BACKUP_HOST=0.0.0.0
+      - BACKUP_DIR=/app/backups
+      - BACKUP_TEMP_DIR=/app/temp
+      - LOG_LEVEL=info
+      - BACKUP_SCHEDULE=${BACKUP_SCHEDULE:-0 2 * * *}  # Daily at 2 AM
+      - BACKUP_RETENTION_DAYS=${BACKUP_RETENTION_DAYS:-30}
+    volumes:
+      - backup_storage:/app/backups
+      - backup_temp:/app/temp
+      - chain_data:/app/artifacts:ro
+      - collector_data:/app/data:ro
+      - backup_logs:/app/logs
+    networks:
+      - merajutasa-network
+    restart: always
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    depends_on:
+      - chain
+      - collector
+
+  # Infrastructure Services
+  reverse-proxy:
+    image: nginx:alpine
+    container_name: merajutasa-nginx-prod
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - NGINX_HOST=${NGINX_HOST:-merajutasa.id}
+    volumes:
+      - ../configs/nginx-docker.conf:/etc/nginx/nginx.conf:ro
+      - ssl_certs:/etc/nginx/certs:ro
+      - nginx_logs:/var/log/nginx
+    networks:
+      - merajutasa-network
+    restart: always
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 256M
+        reservations:
+          cpus: '0.1'
+          memory: 128M
+    depends_on:
+      - signer
+      - chain
+      - collector
+      - monitoring
+
+  # External Dependencies
+  redis:
+    image: redis:7-alpine
+    container_name: merajutasa-redis-prod
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+      - redis_logs:/var/log/redis
+    networks:
+      - merajutasa-network
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 256M
+        reservations:
+          cpus: '0.1'
+          memory: 128M
+    command: redis-server --appendonly yes --maxmemory 200mb --maxmemory-policy allkeys-lru
+
+# Networks
+networks:
+  merajutasa-network:
+    driver: overlay
+    attachable: true
+    ipam:
+      config:
+        - subnet: 172.30.0.0/16
+
+# Volumes
+volumes:
+  chain_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /var/lib/merajutasa/chain
+  collector_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /var/lib/merajutasa/collector
+  monitoring_metrics:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /var/lib/merajutasa/metrics
+  monitoring_logs:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /var/log/merajutasa/monitoring
+  backup_storage:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /var/lib/merajutasa/backups
+  backup_temp:
+    driver: local
+  backup_logs:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /var/log/merajutasa/backup
+  signer_logs:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /var/log/merajutasa/signer
+  chain_logs:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /var/log/merajutasa/chain
+  collector_logs:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /var/log/merajutasa/collector
+  ssl_certs:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /etc/ssl/merajutasa
+  nginx_logs:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /var/log/nginx
+  redis_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /var/lib/redis
+  redis_logs:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /var/log/redis

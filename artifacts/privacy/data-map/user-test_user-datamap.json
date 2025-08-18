@@ -1,0 +1,178 @@
+{
+  "user_id": "test_user",
+  "mapped_at": "2025-08-18T15:34:14.580Z",
+  "data_sources": {
+    "user_accounts": {
+      "source": "user_accounts",
+      "system": "merajutasa-core",
+      "database": "primary",
+      "tables": [
+        "user_accounts_table"
+      ],
+      "total_items": 54,
+      "categories": {
+        "personal_identifiers": [
+          "sample_data",
+          "sample_data"
+        ],
+        "demographic_data": [
+          "sample_data"
+        ],
+        "behavioral_data": [
+          "sample_data"
+        ]
+      }
+    },
+    "audit_logs": {
+      "source": "audit_logs",
+      "system": "merajutasa-core",
+      "database": "primary",
+      "tables": [
+        "audit_logs_table"
+      ],
+      "total_items": 89,
+      "categories": {
+        "personal_identifiers": [
+          "sample_data",
+          "sample_data"
+        ],
+        "demographic_data": [
+          "sample_data",
+          "sample_data"
+        ],
+        "behavioral_data": [
+          "sample_data",
+          "sample_data",
+          "sample_data",
+          "sample_data"
+        ]
+      }
+    },
+    "session_data": {
+      "source": "session_data",
+      "system": "merajutasa-core",
+      "database": "primary",
+      "tables": [
+        "session_data_table"
+      ],
+      "total_items": 86,
+      "categories": {
+        "personal_identifiers": [
+          "sample_data",
+          "sample_data",
+          "sample_data"
+        ],
+        "demographic_data": [],
+        "behavioral_data": [
+          "sample_data",
+          "sample_data",
+          "sample_data",
+          "sample_data",
+          "sample_data",
+          "sample_data"
+        ]
+      }
+    },
+    "preferences": {
+      "source": "preferences",
+      "system": "merajutasa-core",
+      "database": "primary",
+      "tables": [
+        "preferences_table"
+      ],
+      "total_items": 44,
+      "categories": {
+        "personal_identifiers": [
+          "sample_data"
+        ],
+        "demographic_data": [],
+        "behavioral_data": [
+          "sample_data",
+          "sample_data",
+          "sample_data",
+          "sample_data",
+          "sample_data",
+          "sample_data",
+          "sample_data",
+          "sample_data"
+        ]
+      }
+    },
+    "communications": {
+      "source": "communications",
+      "system": "merajutasa-core",
+      "database": "primary",
+      "tables": [
+        "communications_table"
+      ],
+      "total_items": 20,
+      "categories": {
+        "personal_identifiers": [
+          "sample_data",
+          "sample_data",
+          "sample_data"
+        ],
+        "demographic_data": [
+          "sample_data"
+        ],
+        "behavioral_data": [
+          "sample_data",
+          "sample_data",
+          "sample_data",
+          "sample_data",
+          "sample_data"
+        ]
+      }
+    }
+  },
+  "categories": {
+    "personal_identifiers": [
+      "sample_data",
+      "sample_data",
+      "sample_data",
+      "sample_data",
+      "sample_data",
+      "sample_data",
+      "sample_data",
+      "sample_data",
+      "sample_data",
+      "sample_data",
+      "sample_data"
+    ],
+    "demographic_data": [
+      "sample_data",
+      "sample_data",
+      "sample_data",
+      "sample_data"
+    ],
+    "behavioral_data": [
+      "sample_data",
+      "sample_data",
+      "sample_data",
+      "sample_data",
+      "sample_data",
+      "sample_data",
+      "sample_data",
+      "sample_data",
+      "sample_data",
+      "sample_data",
+      "sample_data",
+      "sample_data",
+      "sample_data",
+      "sample_data",
+      "sample_data",
+      "sample_data",
+      "sample_data",
+      "sample_data",
+      "sample_data",
+      "sample_data",
+      "sample_data",
+      "sample_data",
+      "sample_data",
+      "sample_data"
+    ]
+  },
+  "retention_schedules": {},
+  "sharing_arrangements": {},
+  "total_data_points": 293
+}

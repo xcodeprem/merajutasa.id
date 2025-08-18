@@ -1,0 +1,152 @@
+# Kubernetes Deployment for MerajutASA Chain Service
+# Stateful deployment with persistent storage
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: merajutasa-chain
+  labels:
+    app: merajutasa-chain
+    component: chain-service
+    tier: backend
+    version: v1
+spec:
+  serviceName: merajutasa-chain
+  replicas: 2
+  updateStrategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: merajutasa-chain
+  template:
+    metadata:
+      labels:
+        app: merajutasa-chain
+        component: chain-service
+        tier: backend
+        version: v1
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "4602"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: merajutasa-chain
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
+        fsGroup: 1001
+      containers:
+      - name: chain
+        image: merajutasa/chain:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 4602
+          name: http
+          protocol: TCP
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: CHAIN_PORT
+          value: "4602"
+        - name: CHAIN_HOST
+          value: "0.0.0.0"
+        - name: CHAIN_DATA_DIR
+          value: "/app/artifacts"
+        - name: LOG_LEVEL
+          valueFrom:
+            configMapKeyRef:
+              name: merajutasa-config
+              key: log_level
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 4602
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 4602
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+        startupProbe:
+          httpGet:
+            path: /health
+            port: 4602
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 30
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - name: chain-data
+          mountPath: /app/artifacts
+        - name: tmp
+          mountPath: /tmp
+        - name: logs
+          mountPath: /app/logs
+      volumes:
+      - name: tmp
+        emptyDir: {}
+      - name: logs
+        emptyDir: {}
+      nodeSelector:
+        kubernetes.io/os: linux
+      tolerations:
+      - key: "node.kubernetes.io/not-ready"
+        operator: "Exists"
+        effect: "NoExecute"
+        tolerationSeconds: 300
+      - key: "node.kubernetes.io/unreachable"
+        operator: "Exists"
+        effect: "NoExecute"
+        tolerationSeconds: 300
+  volumeClaimTemplates:
+  - metadata:
+      name: chain-data
+      labels:
+        app: merajutasa-chain
+    spec:
+      accessModes: 
+      - ReadWriteOnce
+      storageClassName: fast-ssd
+      resources:
+        requests:
+          storage: 10Gi
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: merajutasa-chain
+  labels:
+    app: merajutasa-chain
+    component: chain-service
+
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: merajutasa-chain-pdb
+spec:
+  selector:
+    matchLabels:
+      app: merajutasa-chain
+  maxUnavailable: 1

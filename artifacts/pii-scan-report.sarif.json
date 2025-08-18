@@ -92,6 +92,214 @@
           ]
         },
         {
+          "ruleId": "EDU_NISN",
+          "level": "error",
+          "message": {
+            "text": "EDU_NISN docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-5.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-5.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "EDU_NISN",
+          "level": "error",
+          "message": {
+            "text": "EDU_NISN docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-5.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-5.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CONTACT_EMAIL",
+          "level": "note",
+          "message": {
+            "text": "CONTACT_EMAIL docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-5.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-5.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "EMAIL_IN_NAME",
+          "level": "note",
+          "message": {
+            "text": "EMAIL_IN_NAME docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-5.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-5.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "MULTI_CATEGORY_ESCALATION",
+          "level": "note",
+          "message": {
+            "text": "MULTI_CATEGORY_ESCALATION docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-5.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-5.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CONTACT_EMAIL",
+          "level": "note",
+          "message": {
+            "text": "CONTACT_EMAIL docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-4.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-4.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "EMAIL_IN_NAME",
+          "level": "note",
+          "message": {
+            "text": "EMAIL_IN_NAME docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-4.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-4.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "MULTI_CATEGORY_ESCALATION",
+          "level": "note",
+          "message": {
+            "text": "MULTI_CATEGORY_ESCALATION docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-4.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-4.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CONTACT_EMAIL",
+          "level": "note",
+          "message": {
+            "text": "CONTACT_EMAIL docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-3.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-3.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CONTACT_EMAIL",
+          "level": "note",
+          "message": {
+            "text": "CONTACT_EMAIL docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-3.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-3.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "EMAIL_IN_NAME",
+          "level": "note",
+          "message": {
+            "text": "EMAIL_IN_NAME docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-3.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-3.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "EMAIL_IN_NAME",
+          "level": "note",
+          "message": {
+            "text": "EMAIL_IN_NAME docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-3.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-3.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "MULTI_CATEGORY_ESCALATION",
+          "level": "note",
+          "message": {
+            "text": "MULTI_CATEGORY_ESCALATION docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-3.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-3.md"
+                }
+              }
+            }
+          ]
+        },
+        {
           "ruleId": "EMAIL_IN_NAME",
           "level": "note",
           "message": {
@@ -198,6 +406,182 @@
               "physicalLocation": {
                 "artifactLocation": {
                   "uri": "docs/roadmap/roadmap-master-v1.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CONTACT_EMAIL",
+          "level": "note",
+          "message": {
+            "text": "CONTACT_EMAIL docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CONTACT_EMAIL",
+          "level": "note",
+          "message": {
+            "text": "CONTACT_EMAIL docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CONTACT_EMAIL",
+          "level": "note",
+          "message": {
+            "text": "CONTACT_EMAIL docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "EMAIL_IN_NAME",
+          "level": "note",
+          "message": {
+            "text": "EMAIL_IN_NAME docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "EMAIL_IN_NAME",
+          "level": "note",
+          "message": {
+            "text": "EMAIL_IN_NAME docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "MULTI_CATEGORY_ESCALATION",
+          "level": "note",
+          "message": {
+            "text": "MULTI_CATEGORY_ESCALATION docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CONTACT_EMAIL",
+          "level": "note",
+          "message": {
+            "text": "CONTACT_EMAIL docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-3.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-3.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CONTACT_EMAIL",
+          "level": "note",
+          "message": {
+            "text": "CONTACT_EMAIL docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-3.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-3.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "EMAIL_IN_NAME",
+          "level": "note",
+          "message": {
+            "text": "EMAIL_IN_NAME docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-3.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-3.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "EMAIL_IN_NAME",
+          "level": "note",
+          "message": {
+            "text": "EMAIL_IN_NAME docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-3.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-3.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "MULTI_CATEGORY_ESCALATION",
+          "level": "note",
+          "message": {
+            "text": "MULTI_CATEGORY_ESCALATION docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-3.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-3.md"
                 }
               }
             }
@@ -492,6 +876,86 @@
           ]
         },
         {
+          "ruleId": "EMAIL_IN_NAME",
+          "level": "note",
+          "message": {
+            "text": "EMAIL_IN_NAME docs/phase-2/PHASE-2-IMPLEMENTATION-GUIDE.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/phase-2/PHASE-2-IMPLEMENTATION-GUIDE.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "EMAIL_IN_NAME",
+          "level": "note",
+          "message": {
+            "text": "EMAIL_IN_NAME docs/phase-2/PHASE-2-IMPLEMENTATION-GUIDE.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/phase-2/PHASE-2-IMPLEMENTATION-GUIDE.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "EMAIL_IN_NAME",
+          "level": "note",
+          "message": {
+            "text": "EMAIL_IN_NAME docs/phase-2/PHASE-2-IMPLEMENTATION-GUIDE.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/phase-2/PHASE-2-IMPLEMENTATION-GUIDE.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "EMAIL_IN_NAME",
+          "level": "note",
+          "message": {
+            "text": "EMAIL_IN_NAME docs/phase-2/PHASE-2-IMPLEMENTATION-GUIDE.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/phase-2/PHASE-2-IMPLEMENTATION-GUIDE.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "EMAIL_IN_NAME",
+          "level": "note",
+          "message": {
+            "text": "EMAIL_IN_NAME docs/phase-2/PHASE-2-IMPLEMENTATION-GUIDE.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/phase-2/PHASE-2-IMPLEMENTATION-GUIDE.md"
+                }
+              }
+            }
+          ]
+        },
+        {
           "ruleId": "PLATE_ID",
           "level": "warning",
           "message": {
@@ -534,6 +998,54 @@
               "physicalLocation": {
                 "artifactLocation": {
                   "uri": "docs/governance/statement-orientasi-portal-panti.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "PLATE_ID",
+          "level": "warning",
+          "message": {
+            "text": "PLATE_ID docs/gap-analysis/JAWABAN-GAP-ANALYSIS.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/gap-analysis/JAWABAN-GAP-ANALYSIS.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "EMAIL_IN_NAME",
+          "level": "note",
+          "message": {
+            "text": "EMAIL_IN_NAME docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "EMAIL_IN_NAME",
+          "level": "note",
+          "message": {
+            "text": "EMAIL_IN_NAME docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md"
                 }
               }
             }

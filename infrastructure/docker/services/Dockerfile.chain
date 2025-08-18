@@ -1,0 +1,57 @@
+# Dockerfile for MerajutASA Chain Service
+# Production-ready containerization with data persistence
+
+FROM node:18-alpine AS builder
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies with production optimizations
+RUN npm ci --only=production --no-audit --no-fund
+
+# Production stage
+FROM node:18-alpine AS runtime
+
+# Create non-root user for security
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S merajutasa -u 1001 -G nodejs
+
+# Install curl for health checks
+RUN apk add --no-cache curl
+
+# Set working directory
+WORKDIR /app
+
+# Copy dependencies from builder stage
+COPY --from=builder --chown=merajutasa:nodejs /app/node_modules ./node_modules
+
+# Copy application code
+COPY --chown=merajutasa:nodejs . .
+
+# Create data directory for chain persistence
+RUN mkdir -p /app/artifacts && chown -R merajutasa:nodejs /app/artifacts
+
+# Switch to non-root user
+USER merajutasa
+
+# Expose chain service port
+EXPOSE 4602
+
+# Add health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:4602/health || exit 1
+
+# Set environment variables
+ENV NODE_ENV=production
+ENV CHAIN_PORT=4602
+ENV CHAIN_HOST=0.0.0.0
+ENV CHAIN_DATA_DIR=/app/artifacts
+
+# Create volume for persistent chain data
+VOLUME ["/app/artifacts"]
+
+# Start chain service
+CMD ["node", "tools/services/chain.js"]

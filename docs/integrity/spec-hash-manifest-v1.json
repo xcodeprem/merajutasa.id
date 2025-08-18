@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generation_timestamp_utc": "2025-08-18T06:49:19Z",
+  "generation_timestamp_utc": "2025-08-18T09:48:23Z",
   "generator_note": "Refined manifest: added onboarding & (optional) README, fixed dec_ref placeholders, standardized mutable_policy for adopted lint spec. All existing entries preserved; only additive or metadata corrections before first hash seal.",
   "files": [
     {
@@ -527,7 +527,7 @@
       "path": "docs/integrity/verify-cli-doc-draft.md",
       "version": "0.1.0",
       "dec_ref": "DEC-20250815-01",
-      "hash_sha256": "9723c1086840ab3197090f9833eb07189135e3a9ca51eb9454ea20a9db0ea4e0",
+      "hash_sha256": "153e30448191c2a0bdbc92d53b1cd52b07263961e35338799d44c9868baada7f",
       "integrity_class": "doc-draft",
       "mutable_policy": "append-only",
       "next_change_requires_dec": true,

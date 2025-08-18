@@ -9,6 +9,27 @@ import { execSync } from 'child_process';
 import { glob } from 'glob';
 import { createHash } from 'crypto';
 
+// Configuration constants for gap analysis
+const IMPLEMENTATION_GAP_KEYWORDS = [
+  'TODO', 'FIXME', 'not implemented', 'placeholder', 'missing', 'needs implementation',
+  'Implement', 'implement', 'coming soon', 'under development'
+];
+
+const CRITICAL_SERVICE_PLACEHOLDER_LENGTH_THRESHOLD = 500; // bytes
+const MINIMAL_SERVICE_CONTENT_LENGTH_THRESHOLD = 1000; // bytes
+
+const GAP_ANALYSIS_CONFIG = {
+  configFileDetectionPatterns: ['TODO', 'FIXME', 'placeholder', 'EXAMPLE'],
+  configFileMinLength: 100
+};
+
+const INCOMPLETE_DOC_KEYWORDS = [
+  'TODO', 'FIXME', 'TBD', 'placeholder', 'coming soon', 'under construction',
+  'not yet implemented', 'draft', 'incomplete', 'missing'
+];
+
+const INCOMPLETE_DOC_LENGTH_THRESHOLD = 200; // bytes
+
 async function main() {
   console.log('[gap-analysis] Starting comprehensive gap analysis...');
   

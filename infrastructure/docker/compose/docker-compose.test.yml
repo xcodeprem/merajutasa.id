@@ -1,0 +1,213 @@
+# MerajutASA.id Testing Environment
+# Docker Compose configuration for testing and CI/CD
+
+version: '3.8'
+
+services:
+  # Core Services - Testing Configuration
+  signer-test:
+    build:
+      context: ../..
+      dockerfile: infrastructure/docker/services/Dockerfile.signer
+      target: runtime
+    container_name: merajutasa-signer-test
+    ports:
+      - "14601:4601"
+    environment:
+      - NODE_ENV=test
+      - SIGNER_PORT=4601
+      - SIGNER_HOST=0.0.0.0
+      - DEBUG=merajutasa:*
+      - LOG_LEVEL=debug
+    volumes:
+      - test_data:/app/test-data
+    networks:
+      - merajutasa-test-network
+    restart: "no"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4601/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+  chain-test:
+    build:
+      context: ../..
+      dockerfile: infrastructure/docker/services/Dockerfile.chain
+      target: runtime
+    container_name: merajutasa-chain-test
+    ports:
+      - "14602:4602"
+    environment:
+      - NODE_ENV=test
+      - CHAIN_PORT=4602
+      - CHAIN_HOST=0.0.0.0
+      - CHAIN_DATA_DIR=/app/artifacts
+      - DEBUG=merajutasa:*
+      - LOG_LEVEL=debug
+    volumes:
+      - test_chain_data:/app/artifacts
+      - test_data:/app/test-data
+    networks:
+      - merajutasa-test-network
+    restart: "no"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4602/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+  collector-test:
+    build:
+      context: ../..
+      dockerfile: infrastructure/docker/services/Dockerfile.collector
+      target: runtime
+    container_name: merajutasa-collector-test
+    ports:
+      - "14603:4603"
+    environment:
+      - NODE_ENV=test
+      - COLLECTOR_PORT=4603
+      - COLLECTOR_HOST=0.0.0.0
+      - EVENTS_DATA_DIR=/app/data
+      - DEBUG=merajutasa:*
+      - LOG_LEVEL=debug
+    volumes:
+      - test_collector_data:/app/data
+      - test_data:/app/test-data
+      - ../../schemas:/app/schemas:ro
+    networks:
+      - merajutasa-test-network
+    restart: "no"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4603/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+  monitoring-test:
+    build:
+      context: ../..
+      dockerfile: infrastructure/docker/services/Dockerfile.monitoring
+      target: runtime
+    container_name: merajutasa-monitoring-test
+    ports:
+      - "14604:4604"
+    environment:
+      - NODE_ENV=test
+      - MONITORING_PORT=4604
+      - MONITORING_HOST=0.0.0.0
+      - METRICS_DIR=/app/metrics
+      - LOGS_DIR=/app/logs
+      - DEBUG=merajutasa:*
+      - LOG_LEVEL=debug
+    volumes:
+      - test_monitoring_metrics:/app/metrics
+      - test_monitoring_logs:/app/logs
+      - test_data:/app/test-data
+    networks:
+      - merajutasa-test-network
+    restart: "no"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4604/metrics"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+  backup-test:
+    build:
+      context: ../..
+      dockerfile: infrastructure/docker/services/Dockerfile.backup
+      target: runtime
+    container_name: merajutasa-backup-test
+    environment:
+      - NODE_ENV=test
+      - BACKUP_PORT=4605
+      - BACKUP_HOST=0.0.0.0
+      - BACKUP_DIR=/app/backups
+      - BACKUP_TEMP_DIR=/app/temp
+      - DEBUG=merajutasa:*
+      - LOG_LEVEL=debug
+    volumes:
+      - test_backup_storage:/app/backups
+      - test_backup_temp:/app/temp
+      - test_chain_data:/app/artifacts:ro
+      - test_collector_data:/app/data:ro
+      - test_data:/app/test-data
+    networks:
+      - merajutasa-test-network
+    restart: "no"
+    depends_on:
+      - chain-test
+      - collector-test
+
+  # Test Infrastructure
+  test-runner:
+    build:
+      context: ../..
+      dockerfile: infrastructure/docker/services/Dockerfile.signer
+      target: runtime
+    container_name: merajutasa-test-runner
+    environment:
+      - NODE_ENV=test
+      - DEBUG=merajutasa:*
+      - LOG_LEVEL=debug
+      - SIGNER_URL=http://signer-test:4601
+      - CHAIN_URL=http://chain-test:4602
+      - COLLECTOR_URL=http://collector-test:4603
+      - MONITORING_URL=http://monitoring-test:4604
+    volumes:
+      - test_results:/app/test-results
+      - test_data:/app/test-data
+      - ../../:/app/source:ro
+    networks:
+      - merajutasa-test-network
+    restart: "no"
+    command: ["sh", "-c", "sleep 30 && npm run test:infrastructure"]
+    depends_on:
+      - signer-test
+      - chain-test
+      - collector-test
+      - monitoring-test
+
+  # Redis for testing
+  redis-test:
+    image: redis:7-alpine
+    container_name: merajutasa-redis-test
+    ports:
+      - "16379:6379"
+    networks:
+      - merajutasa-test-network
+    restart: "no"
+    command: redis-server --save "" --appendonly no --maxmemory 64mb
+
+# Networks
+networks:
+  merajutasa-test-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16
+
+# Volumes - Temporary for testing
+volumes:
+  test_data:
+    driver: local
+  test_chain_data:
+    driver: local
+  test_collector_data:
+    driver: local
+  test_monitoring_metrics:
+    driver: local
+  test_monitoring_logs:
+    driver: local
+  test_backup_storage:
+    driver: local
+  test_backup_temp:
+    driver: local
+  test_results:
+    driver: local

@@ -1,0 +1,57 @@
+# Dockerfile for MerajutASA Collector Service  
+# Production-ready containerization with event processing
+
+FROM node:18-alpine AS builder
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies with production optimizations
+RUN npm ci --only=production --no-audit --no-fund
+
+# Production stage
+FROM node:18-alpine AS runtime
+
+# Create non-root user for security
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S merajutasa -u 1001 -G nodejs
+
+# Install curl for health checks
+RUN apk add --no-cache curl
+
+# Set working directory
+WORKDIR /app
+
+# Copy dependencies from builder stage
+COPY --from=builder --chown=merajutasa:nodejs /app/node_modules ./node_modules
+
+# Copy application code
+COPY --chown=merajutasa:nodejs . .
+
+# Create directories for event processing
+RUN mkdir -p /app/data /app/schemas && chown -R merajutasa:nodejs /app/data /app/schemas
+
+# Switch to non-root user
+USER merajutasa
+
+# Expose collector service port
+EXPOSE 4603
+
+# Add health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:4603/health || exit 1
+
+# Set environment variables
+ENV NODE_ENV=production
+ENV COLLECTOR_PORT=4603
+ENV COLLECTOR_HOST=0.0.0.0
+ENV EVENTS_DATA_DIR=/app/data
+
+# Create volumes for persistent event data
+VOLUME ["/app/data", "/app/schemas"]
+
+# Start collector service
+CMD ["node", "tools/services/collector.js"]

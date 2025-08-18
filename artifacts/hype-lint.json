@@ -1,14 +1,15 @@
 {
   "version": 1,
-  "generated_utc": "2025-08-18T07:47:28.823Z",
-  "file_count": 29,
-  "total_hits": 3,
+  "generated_utc": "2025-08-18T15:34:00.854Z",
+  "file_count": 53,
+  "total_hits": 8,
   "max_severity": "MEDIUM",
   "severity_counts": {
-    "MEDIUM": 3
+    "MEDIUM": 8
   },
   "rule_counts": {
-    "RANKING": 3
+    "RANKING": 3,
+    "TOP": 5
   },
   "findings": [
     {
@@ -40,6 +41,56 @@
       "severity": "MEDIUM",
       "rationale": "Unsubstantiated ranking claim.",
       "context_line": "- Salah tafsir sebagai peringkat → disclaimer anti-ranking; pemisahan modul (UNCRC-3; ODC-2015)."
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-2.md",
+      "line": 250,
+      "column": 9,
+      "match": "top",
+      "rule": "TOP",
+      "severity": "MEDIUM",
+      "rationale": "Generic superiority claim.",
+      "context_line": "kubectl top pods"
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md",
+      "line": 381,
+      "column": 9,
+      "match": "top",
+      "rule": "TOP",
+      "severity": "MEDIUM",
+      "rationale": "Generic superiority claim.",
+      "context_line": "kubectl top nodes"
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md",
+      "line": 382,
+      "column": 9,
+      "match": "top",
+      "rule": "TOP",
+      "severity": "MEDIUM",
+      "rationale": "Generic superiority claim.",
+      "context_line": "kubectl top pods"
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-2.md",
+      "line": 236,
+      "column": 9,
+      "match": "top",
+      "rule": "TOP",
+      "severity": "MEDIUM",
+      "rationale": "Generic superiority claim.",
+      "context_line": "kubectl top nodes"
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-2.md",
+      "line": 237,
+      "column": 9,
+      "match": "top",
+      "rule": "TOP",
+      "severity": "MEDIUM",
+      "rationale": "Generic superiority claim.",
+      "context_line": "kubectl top pods"
     }
   ],
   "truncated": false

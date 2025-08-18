@@ -1,22 +1,22 @@
 {
   "_metadata": {
     "actor": "copilot-swe-agent[bot]",
-    "generated_at": "2025-08-18T07:47:32.647Z",
+    "generated_at": "2025-08-18T15:34:04.856Z",
     "generator": "governance-verify-aggregator",
-    "git_ref": "refs/heads/copilot/fix-39",
-    "git_sha": "c397c038a9705d285bbe76182602d3cfc265c469",
-    "run_id": "17034345056",
+    "git_ref": "refs/heads/copilot/fix-e2080343-dc67-4a8b-991e-d60d1597c173",
+    "git_sha": "b37a0adc1d93f5fe1985fb9c09c1a93b17fa968c",
+    "run_id": "17045077253",
     "version": "1.0"
   },
   "artifacts": {
     "decLint": {
       "_metadata": {
         "actor": "copilot-swe-agent[bot]",
-        "generated_at": "2025-08-18T07:47:29.591Z",
+        "generated_at": "2025-08-18T15:34:01.689Z",
         "generator": "dec-lint.js",
-        "git_ref": "refs/heads/copilot/fix-39",
-        "git_sha": "c397c038a9705d285bbe76182602d3cfc265c469",
-        "run_id": "17034345056",
+        "git_ref": "refs/heads/copilot/fix-e2080343-dc67-4a8b-991e-d60d1597c173",
+        "git_sha": "b37a0adc1d93f5fe1985fb9c09c1a93b17fa968c",
+        "run_id": "17045077253",
         "version": "1.0"
       },
       "results": [
@@ -305,7 +305,7 @@
           {
             "detail": {
               "max": 120,
-              "medium": 3
+              "medium": 8
             },
             "id": "HYPE_MEDIUM",
             "passed": true
@@ -398,7 +398,7 @@
           {
             "detail": {
               "max": 120,
-              "medium": 3
+              "medium": 8
             },
             "id": "HYPE_MEDIUM",
             "passed": true
@@ -455,12 +455,13 @@
         "gate_status": "PASS",
         "gating_policy_version": 1,
         "hype_high": 0,
-        "hype_hits": 3,
+        "hype_hits": 8,
         "hype_max_severity": "MEDIUM",
-        "hype_medium": 3,
+        "hype_medium": 8,
         "hype_medium_max_allowed": 120,
         "hype_rule_counts": {
-          "RANKING": 3
+          "RANKING": 3,
+          "TOP": 5
         },
         "param_mismatches": 0,
         "pii_critical": 0,
@@ -487,10 +488,10 @@
           "spec_hash_violation_count": 0
         }
       },
-      "timestamp_utc": "2025-08-18T07:47:32.148Z"
+      "timestamp_utc": "2025-08-18T15:34:04.325Z"
     },
     "hype": {
-      "file_count": 29,
+      "file_count": 53,
       "findings": [
         {
           "column": 69,
@@ -521,22 +522,73 @@
           "rationale": "Unsubstantiated ranking claim.",
           "rule": "RANKING",
           "severity": "MEDIUM"
+        },
+        {
+          "column": 9,
+          "context_line": "kubectl top pods",
+          "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-2.md",
+          "line": 250,
+          "match": "top",
+          "rationale": "Generic superiority claim.",
+          "rule": "TOP",
+          "severity": "MEDIUM"
+        },
+        {
+          "column": 9,
+          "context_line": "kubectl top nodes",
+          "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md",
+          "line": 381,
+          "match": "top",
+          "rationale": "Generic superiority claim.",
+          "rule": "TOP",
+          "severity": "MEDIUM"
+        },
+        {
+          "column": 9,
+          "context_line": "kubectl top pods",
+          "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md",
+          "line": 382,
+          "match": "top",
+          "rationale": "Generic superiority claim.",
+          "rule": "TOP",
+          "severity": "MEDIUM"
+        },
+        {
+          "column": 9,
+          "context_line": "kubectl top nodes",
+          "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-2.md",
+          "line": 236,
+          "match": "top",
+          "rationale": "Generic superiority claim.",
+          "rule": "TOP",
+          "severity": "MEDIUM"
+        },
+        {
+          "column": 9,
+          "context_line": "kubectl top pods",
+          "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-2.md",
+          "line": 237,
+          "match": "top",
+          "rationale": "Generic superiority claim.",
+          "rule": "TOP",
+          "severity": "MEDIUM"
         }
       ],
-      "generated_utc": "2025-08-18T07:47:28.823Z",
+      "generated_utc": "2025-08-18T15:34:00.854Z",
       "max_severity": "MEDIUM",
       "rule_counts": {
-        "RANKING": 3
+        "RANKING": 3,
+        "TOP": 5
       },
       "severity_counts": {
-        "MEDIUM": 3
+        "MEDIUM": 8
       },
-      "total_hits": 3,
+      "total_hits": 8,
       "truncated": false,
       "version": 1
     },
     "params": {
-      "generated_utc": "2025-08-18T07:47:28.446Z",
+      "generated_utc": "2025-08-18T15:34:00.458Z",
       "rows": [
         {
           "aliases": {
@@ -810,7 +862,7 @@
       "violations": []
     },
     "principles": {
-      "generated_utc": "2025-08-18T07:47:29.781Z",
+      "generated_utc": "2025-08-18T15:34:01.933Z",
       "principles": [
         {
           "confidence": 0.9,
@@ -924,17 +976,25 @@
           ],
           "evidence_truncated": true,
           "inferredImpact": true,
-          "match_count": 1020,
+          "match_count": 1057,
           "principle": "GP1"
         },
         {
-          "confidence": 0.6,
+          "confidence": 0.8,
           "domains": [
             "other",
             "privacy",
             "analytics"
           ],
           "evidence_sample": [
+            {
+              "changed": false,
+              "domain": "other",
+              "file": "docs/strategic-analysis/STRATEGIC-IMPLEMENTATION-ANALYSIS.md",
+              "line": 310,
+              "pattern": "abuse",
+              "snippet": "- [ ] **Rate limiting** prevents abuse"
+            },
             {
               "changed": false,
               "domain": "other",
@@ -953,6 +1013,22 @@
             },
             {
               "changed": false,
+              "domain": "other",
+              "file": "docs/phase-1/PHASE-1-IMPLEMENTATION-GUIDE.md",
+              "line": 853,
+              "pattern": "abuse",
+              "snippet": "- [ ] Rate limiting preventing abuse"
+            },
+            {
+              "changed": false,
+              "domain": "other",
+              "file": "docs/phase-1/PHASE-1-IMPLEMENTATION-GUIDE.md",
+              "line": 879,
+              "pattern": "abuse",
+              "snippet": "- ✅ **Rate limiting** preventing abuse and DoS"
+            },
+            {
+              "changed": false,
               "domain": "analytics",
               "file": "docs/analytics/event-schema-canonical-v1.md",
               "line": 554,
@@ -962,7 +1038,7 @@
           ],
           "evidence_truncated": false,
           "inferredImpact": true,
-          "match_count": 3,
+          "match_count": 6,
           "principle": "GP2"
         },
         {
@@ -1053,31 +1129,31 @@
             {
               "changed": false,
               "domain": "other",
-              "file": "docs/status/progress-recap-latest-2025-08-12T035901Z.md",
-              "line": 64,
-              "pattern": "transparenc",
-              "snippet": "| Revocation Endpoint & List | Placeholder saja | Revocation transparency nol saat insiden |"
-            },
-            {
-              "changed": false,
-              "domain": "other",
-              "file": "docs/status/progress-recap-latest-2025-08-12T035901Z.md",
-              "line": 67,
+              "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-3.md",
+              "line": 117,
               "pattern": "trace",
-              "snippet": "| Governance Decision Log Automation | Belum template DEC populating CI | Traceability manual & rentan lupa |"
+              "snippet": "export JAEGER_ENDPOINT=http://localhost:14268/api/traces"
             },
             {
               "changed": false,
               "domain": "other",
-              "file": "docs/status/progress-recap-latest-2025-08-12T035901Z.md",
-              "line": 95,
-              "pattern": "transparenc",
-              "snippet": "6. Transparency Hardening"
+              "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-3.md",
+              "line": 333,
+              "pattern": "trace",
+              "snippet": "// Trace business operations"
+            },
+            {
+              "changed": false,
+              "domain": "other",
+              "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-3.md",
+              "line": 335,
+              "pattern": "trace",
+              "snippet": "await observability.traceBusinessOperation('document_signing', async (span) => {"
             }
           ],
           "evidence_truncated": true,
           "inferredImpact": true,
-          "match_count": 119,
+          "match_count": 167,
           "principle": "GP3"
         },
         {
@@ -1192,7 +1268,7 @@
           ],
           "evidence_truncated": true,
           "inferredImpact": true,
-          "match_count": 657,
+          "match_count": 737,
           "principle": "GP4"
         },
         {
@@ -1307,7 +1383,7 @@
           ],
           "evidence_truncated": true,
           "inferredImpact": true,
-          "match_count": 377,
+          "match_count": 432,
           "principle": "GP5"
         },
         {
@@ -1534,7 +1610,7 @@
           ],
           "evidence_truncated": true,
           "inferredImpact": true,
-          "match_count": 200,
+          "match_count": 236,
           "principle": "GP7"
         },
         {
@@ -1551,6 +1627,22 @@
               "line": 47,
               "pattern": "portabil",
               "snippet": "| L Federation & Future | DID portability, external attestation, localization, CBOR | Future expansions in Credential spec | Scalability & portability guardrail |"
+            },
+            {
+              "changed": false,
+              "domain": "other",
+              "file": "docs/phase-2/PHASE-2-WEEK-3-DELIVERY-DOCUMENTATION.md",
+              "line": 372,
+              "pattern": "extensib",
+              "snippet": "### 3. Integration & Extensibility 🔧"
+            },
+            {
+              "changed": false,
+              "domain": "other",
+              "file": "docs/phase-2/PHASE-2-WEEK-3-DELIVERY-DOCUMENTATION.md",
+              "line": 375,
+              "pattern": "extensib",
+              "snippet": "- **Plugin Architecture**: Extensible alert channels and data sources"
             },
             {
               "changed": false,
@@ -1603,15 +1695,31 @@
             {
               "changed": false,
               "domain": "other",
-              "file": "docs/archive/ux_public-multipage-experience-master-spec-v2.md",
-              "line": 64,
-              "pattern": "portabil",
-              "snippet": "| GP3 | Federated Mindset | Cegah platform lock-in; integrity portability | Credential JSON-LD minimal; portable verify semantics |"
+              "file": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
+              "line": 26,
+              "pattern": "extensib",
+              "snippet": "| **Kubernetes** | Governance model, policy enforcement, hash-based integrity | Multi-layer security, policy-as-code, extensible architecture |"
+            },
+            {
+              "changed": false,
+              "domain": "other",
+              "file": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
+              "line": 342,
+              "pattern": "interoperab",
+              "snippet": "##### **3.3.3 Interoperability Gaps**"
+            },
+            {
+              "changed": false,
+              "domain": "other",
+              "file": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
+              "line": 605,
+              "pattern": "extensib",
+              "snippet": "3. **Platform Excellence** - Developer experience, extensibility, ecosystem"
             }
           ],
-          "evidence_truncated": false,
+          "evidence_truncated": true,
           "inferredImpact": true,
-          "match_count": 8,
+          "match_count": 13,
           "principle": "GP8"
         },
         {
@@ -1726,7 +1834,7 @@
           ],
           "evidence_truncated": true,
           "inferredImpact": true,
-          "match_count": 403,
+          "match_count": 406,
           "principle": "GP9"
         },
         {
@@ -1844,7 +1952,7 @@
         }
       ],
       "summary": {
-        "average_confidence": 0.87,
+        "average_confidence": 0.89,
         "impacted": 10,
         "max_confidence": 0.9,
         "total_principles": 10
@@ -1861,7 +1969,7 @@
           ]
         },
         "freshness": {
-          "age_hours": 22.991315555555556,
+          "age_hours": 30.766897222222223,
           "last_rotated_utc": "2025-08-17T08:48:00.682Z",
           "ok": true
         },
@@ -1873,11 +1981,11 @@
       },
       "config_path": "tools/config/privacy-policy.json",
       "status": "ok",
-      "ts": "2025-08-18T07:47:29.418Z",
+      "ts": "2025-08-18T15:34:01.512Z",
       "violations": []
     },
     "securitySmoke": {
-      "files_scanned": 125,
+      "files_scanned": 146,
       "summary": {
         "by_severity": {
           "HIGH": 0,
@@ -1886,7 +1994,7 @@
         },
         "total_violations": 0
       },
-      "timestamp": "2025-08-18T07:47:28.720Z",
+      "timestamp": "2025-08-18T15:34:00.730Z",
       "violations": []
     },
     "specHash": {
@@ -1899,7 +2007,7 @@
         "updated_count": 0,
         "violation_count": 0
       },
-      "timestamp_utc": "2025-08-18T07:47:28Z",
+      "timestamp_utc": "2025-08-18T15:34:00Z",
       "unchanged": [
         "docs/roadmap/roadmap-master-v1.md",
         "docs/governance/signature-pipeline-plan-v1.md",
@@ -1990,6 +2098,11 @@
           "oldCount": 0
         },
         {
+          "file": "docs/tests/hysteresis-test-plan-v1.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
           "file": "docs/transparency/methodology-snippet-h0.md",
           "newCount": 0,
           "oldCount": 0
@@ -2000,12 +2113,37 @@
           "oldCount": 0
         },
         {
-          "file": "docs/tests/hysteresis-test-plan-v1.md",
+          "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-5.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-4.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-3.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-2.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-1.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
           "file": "docs/support/README.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/strategic-analysis/STRATEGIC-IMPLEMENTATION-ANALYSIS.md",
           "newCount": 0,
           "oldCount": 0
         },
@@ -2075,6 +2213,31 @@
           "oldCount": 0
         },
         {
+          "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-4.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-3.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-2.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-1.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
           "file": "docs/public/README.md",
           "newCount": 0,
           "oldCount": 0
@@ -2116,6 +2279,51 @@
         },
         {
           "file": "docs/playbooks/README.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/phase-2/PHASE-2-WEEK-5-DELIVERY-DOCUMENTATION.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/phase-2/PHASE-2-WEEK-4-DELIVERY-DOCUMENTATION.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/phase-2/PHASE-2-WEEK-3-DELIVERY-DOCUMENTATION.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/phase-2/PHASE-2-WEEK-2-STRATEGIC-ANALYSIS.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/phase-2/PHASE-2-WEEK-2-DELIVERY-DOCUMENTATION.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/phase-2/PHASE-2-WEEK-1-DELIVERY-DOCUMENTATION.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/phase-2/PHASE-2-IMPLEMENTATION-GUIDE.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/phase-1/PHASE-1-IMPLEMENTATION-GUIDE.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/phase-1/PHASE-1-IMPLEMENTATION-COMPLETE.md",
           "newCount": 0,
           "oldCount": 0
         },
@@ -2190,6 +2398,11 @@
           "oldCount": 0
         },
         {
+          "file": "docs/implementation/README.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
           "file": "docs/governance/toolchain-overview.md",
           "newCount": 0,
           "oldCount": 0
@@ -2251,6 +2464,21 @@
         },
         {
           "file": "docs/governance/README-decision-log-process.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/gap-analysis/JAWABAN-GAP-ANALYSIS.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/gap-analysis/GAP-ANALYSIS-SUMMARY.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
           "newCount": 0,
           "oldCount": 0
         },
@@ -2485,7 +2713,7 @@
           "oldCount": 0
         }
       ],
-      "generated_utc": "2025-08-18T07:47:32.501Z",
+      "generated_utc": "2025-08-18T15:34:04.700Z",
       "new_total": 0,
       "old_total": 0,
       "suggestions": [
@@ -2506,6 +2734,66 @@
               "count": 2,
               "new": "tanpa ranking",
               "old": "ranking"
+            }
+          ]
+        },
+        {
+          "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-5.md",
+          "suggestions": [
+            {
+              "count": 1,
+              "new": "pengguna",
+              "old": "user"
+            }
+          ]
+        },
+        {
+          "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-4.md",
+          "suggestions": [
+            {
+              "count": 2,
+              "new": "pengguna",
+              "old": "user"
+            }
+          ]
+        },
+        {
+          "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-3.md",
+          "suggestions": [
+            {
+              "count": 6,
+              "new": "pengguna",
+              "old": "user"
+            }
+          ]
+        },
+        {
+          "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-2.md",
+          "suggestions": [
+            {
+              "count": 2,
+              "new": "rekomendasi",
+              "old": "top"
+            }
+          ]
+        },
+        {
+          "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-1.md",
+          "suggestions": [
+            {
+              "count": 4,
+              "new": "pengguna",
+              "old": "user"
+            }
+          ]
+        },
+        {
+          "file": "docs/strategic-analysis/STRATEGIC-IMPLEMENTATION-ANALYSIS.md",
+          "suggestions": [
+            {
+              "count": 1,
+              "new": "pengguna",
+              "old": "user"
             }
           ]
         },
@@ -2590,6 +2878,41 @@
           ]
         },
         {
+          "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md",
+          "suggestions": [
+            {
+              "count": 2,
+              "new": "rekomendasi",
+              "old": "top"
+            },
+            {
+              "count": 2,
+              "new": "pengguna",
+              "old": "user"
+            }
+          ]
+        },
+        {
+          "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-3.md",
+          "suggestions": [
+            {
+              "count": 1,
+              "new": "pengguna",
+              "old": "user"
+            }
+          ]
+        },
+        {
+          "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-2.md",
+          "suggestions": [
+            {
+              "count": 1,
+              "new": "rekomendasi",
+              "old": "top"
+            }
+          ]
+        },
+        {
           "file": "docs/public/ABOUT-PORTAL-PANTI.md",
           "suggestions": [
             {
@@ -2661,6 +2984,71 @@
               "count": 1,
               "new": "tanpa ranking",
               "old": "ranking"
+            }
+          ]
+        },
+        {
+          "file": "docs/phase-2/PHASE-2-WEEK-3-DELIVERY-DOCUMENTATION.md",
+          "suggestions": [
+            {
+              "count": 3,
+              "new": "pengguna",
+              "old": "user"
+            }
+          ]
+        },
+        {
+          "file": "docs/phase-2/PHASE-2-WEEK-2-STRATEGIC-ANALYSIS.md",
+          "suggestions": [
+            {
+              "count": 1,
+              "new": "pengguna",
+              "old": "user"
+            }
+          ]
+        },
+        {
+          "file": "docs/phase-2/PHASE-2-WEEK-2-DELIVERY-DOCUMENTATION.md",
+          "suggestions": [
+            {
+              "count": 3,
+              "new": "pengguna",
+              "old": "user"
+            }
+          ]
+        },
+        {
+          "file": "docs/phase-2/PHASE-2-WEEK-1-DELIVERY-DOCUMENTATION.md",
+          "suggestions": [
+            {
+              "count": 1,
+              "new": "pengguna",
+              "old": "user"
+            }
+          ]
+        },
+        {
+          "file": "docs/phase-2/PHASE-2-IMPLEMENTATION-GUIDE.md",
+          "suggestions": [
+            {
+              "count": 1,
+              "new": "utama",
+              "old": "master"
+            },
+            {
+              "count": 1,
+              "new": "pengguna",
+              "old": "user"
+            }
+          ]
+        },
+        {
+          "file": "docs/phase-1/PHASE-1-IMPLEMENTATION-GUIDE.md",
+          "suggestions": [
+            {
+              "count": 3,
+              "new": "pengguna",
+              "old": "user"
             }
           ]
         },
@@ -2921,6 +3309,26 @@
               "count": 3,
               "new": "pengguna",
               "old": "user"
+            }
+          ]
+        },
+        {
+          "file": "docs/gap-analysis/JAWABAN-GAP-ANALYSIS.md",
+          "suggestions": [
+            {
+              "count": 1,
+              "new": "pengguna",
+              "old": "user"
+            }
+          ]
+        },
+        {
+          "file": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
+          "suggestions": [
+            {
+              "count": 2,
+              "new": "utama",
+              "old": "master"
             }
           ]
         },
@@ -3293,7 +3701,7 @@
     "dec_lint_violation_count": 0,
     "disclaimers_status": "PASS",
     "drift_status": "ADVISORY",
-    "hype_hits": 3,
+    "hype_hits": 8,
     "overall_status": "PASS",
     "param_mismatches": 0,
     "policy_aggregation_status": "ALLOW",
@@ -3317,5 +3725,5 @@
     "terminology_old_total": 0,
     "total_param_checks": 15
   },
-  "timestamp": "2025-08-18T07:47:32.644Z"
+  "timestamp": "2025-08-18T15:34:04.853Z"
 }

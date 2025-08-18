@@ -5,16 +5,16 @@
     "stage2_active": false
   },
   "key_token_frequency": {
-    "fairness": 267,
-    "privacy": 148,
-    "hysteresis": 203,
-    "hash": 433,
-    "credential": 170,
-    "governance": 406,
-    "revocation": 102
+    "fairness": 270,
+    "privacy": 158,
+    "hysteresis": 207,
+    "hash": 449,
+    "credential": 171,
+    "governance": 481,
+    "revocation": 105
   },
-  "totalKey": 1729,
-  "banned_terms_detected": 162,
+  "totalKey": 1841,
+  "banned_terms_detected": 206,
   "banned_samples": [
     {
       "file": "docs/trust/trust-hysteresis.md",
@@ -27,6 +27,54 @@
     {
       "file": "docs/transparency/methodology-snippet-h0.md",
       "term": "ranking"
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-5.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-5.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-4.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-4.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-2.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-2.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-2.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-1.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-1.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-1.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-1.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-1.md",
+      "term": "top"
     },
     {
       "file": "docs/status/gate3-verification-2025-08-17.md",
@@ -59,6 +107,62 @@
     {
       "file": "docs/roadmap/roadmap-master-v1.md",
       "term": "peringkat"
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-4.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-4.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-4.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-3.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-2.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-2.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-2.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-2.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-2.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-1.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-1.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-1.md",
+      "term": "top"
     },
     {
       "file": "docs/public/ABOUT-PORTAL-PANTI.md",
@@ -99,6 +203,22 @@
     {
       "file": "docs/policies/README.md",
       "term": "ranking"
+    },
+    {
+      "file": "docs/phase-2/PHASE-2-WEEK-2-DELIVERY-DOCUMENTATION.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/phase-2/PHASE-2-WEEK-2-DELIVERY-DOCUMENTATION.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/phase-2/PHASE-2-WEEK-1-DELIVERY-DOCUMENTATION.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/phase-2/PHASE-2-WEEK-1-DELIVERY-DOCUMENTATION.md",
+      "term": "top"
     },
     {
       "file": "docs/onboarding/agent-role-policy-v1.md",

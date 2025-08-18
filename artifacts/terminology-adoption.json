@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-18T07:47:32.501Z",
+  "generated_utc": "2025-08-18T15:34:04.700Z",
   "old_total": 0,
   "new_total": 0,
   "adoptionPercent": 100,
@@ -31,6 +31,11 @@
       "newCount": 0
     },
     {
+      "file": "docs/tests/hysteresis-test-plan-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
       "file": "docs/transparency/methodology-snippet-h0.md",
       "oldCount": 0,
       "newCount": 0
@@ -41,12 +46,37 @@
       "newCount": 0
     },
     {
-      "file": "docs/tests/hysteresis-test-plan-v1.md",
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-5.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-4.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-3.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-2.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-1.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
       "file": "docs/support/README.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/strategic-analysis/STRATEGIC-IMPLEMENTATION-ANALYSIS.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -116,6 +146,31 @@
       "newCount": 0
     },
     {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-4.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-3.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-2.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
       "file": "docs/public/README.md",
       "oldCount": 0,
       "newCount": 0
@@ -157,6 +212,51 @@
     },
     {
       "file": "docs/playbooks/README.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/phase-2/PHASE-2-WEEK-5-DELIVERY-DOCUMENTATION.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/phase-2/PHASE-2-WEEK-4-DELIVERY-DOCUMENTATION.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/phase-2/PHASE-2-WEEK-3-DELIVERY-DOCUMENTATION.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/phase-2/PHASE-2-WEEK-2-STRATEGIC-ANALYSIS.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/phase-2/PHASE-2-WEEK-2-DELIVERY-DOCUMENTATION.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/phase-2/PHASE-2-WEEK-1-DELIVERY-DOCUMENTATION.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/phase-2/PHASE-2-IMPLEMENTATION-GUIDE.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/phase-1/PHASE-1-IMPLEMENTATION-GUIDE.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/phase-1/PHASE-1-IMPLEMENTATION-COMPLETE.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -231,6 +331,11 @@
       "newCount": 0
     },
     {
+      "file": "docs/implementation/README.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
       "file": "docs/governance/toolchain-overview.md",
       "oldCount": 0,
       "newCount": 0
@@ -292,6 +397,21 @@
     },
     {
       "file": "docs/governance/README-decision-log-process.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/gap-analysis/JAWABAN-GAP-ANALYSIS.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/gap-analysis/GAP-ANALYSIS-SUMMARY.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -548,6 +668,66 @@
       ]
     },
     {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-5.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-4.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-3.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-2.md",
+      "suggestions": [
+        {
+          "old": "top",
+          "new": "rekomendasi",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-1.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "file": "docs/strategic-analysis/STRATEGIC-IMPLEMENTATION-ANALYSIS.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 1
+        }
+      ]
+    },
+    {
       "file": "docs/status/progress-recap-latest-2025-08-12T035901Z.md",
       "suggestions": [
         {
@@ -628,6 +808,41 @@
       ]
     },
     {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md",
+      "suggestions": [
+        {
+          "old": "top",
+          "new": "rekomendasi",
+          "count": 2
+        },
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-3.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-2.md",
+      "suggestions": [
+        {
+          "old": "top",
+          "new": "rekomendasi",
+          "count": 1
+        }
+      ]
+    },
+    {
       "file": "docs/public/ABOUT-PORTAL-PANTI.md",
       "suggestions": [
         {
@@ -699,6 +914,71 @@
           "old": "ranking",
           "new": "tanpa ranking",
           "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs/phase-2/PHASE-2-WEEK-3-DELIVERY-DOCUMENTATION.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "file": "docs/phase-2/PHASE-2-WEEK-2-STRATEGIC-ANALYSIS.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs/phase-2/PHASE-2-WEEK-2-DELIVERY-DOCUMENTATION.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "file": "docs/phase-2/PHASE-2-WEEK-1-DELIVERY-DOCUMENTATION.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs/phase-2/PHASE-2-IMPLEMENTATION-GUIDE.md",
+      "suggestions": [
+        {
+          "old": "master",
+          "new": "utama",
+          "count": 1
+        },
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs/phase-1/PHASE-1-IMPLEMENTATION-GUIDE.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 3
         }
       ]
     },
@@ -959,6 +1239,26 @@
           "old": "user",
           "new": "pengguna",
           "count": 3
+        }
+      ]
+    },
+    {
+      "file": "docs/gap-analysis/JAWABAN-GAP-ANALYSIS.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
+      "suggestions": [
+        {
+          "old": "master",
+          "new": "utama",
+          "count": 2
         }
       ]
     },

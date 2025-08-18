@@ -1,0 +1,138 @@
+# Kubernetes Deployment for MerajutASA Signer Service
+# Production-ready deployment with auto-scaling and security
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: merajutasa-signer
+  labels:
+    app: merajutasa-signer
+    component: signing-service
+    tier: backend
+    version: v1
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: merajutasa-signer
+  template:
+    metadata:
+      labels:
+        app: merajutasa-signer
+        component: signing-service
+        tier: backend
+        version: v1
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "4601"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: merajutasa-signer
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
+        fsGroup: 1001
+      containers:
+      - name: signer
+        image: merajutasa/signer:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 4601
+          name: http
+          protocol: TCP
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: SIGNER_PORT
+          value: "4601"
+        - name: SIGNER_HOST
+          value: "0.0.0.0"
+        - name: LOG_LEVEL
+          valueFrom:
+            configMapKeyRef:
+              name: merajutasa-config
+              key: log_level
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 4601
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 4601
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+        startupProbe:
+          httpGet:
+            path: /health
+            port: 4601
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 30
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+        - name: logs
+          mountPath: /app/logs
+      volumes:
+      - name: tmp
+        emptyDir: {}
+      - name: logs
+        emptyDir: {}
+      nodeSelector:
+        kubernetes.io/os: linux
+      tolerations:
+      - key: "node.kubernetes.io/not-ready"
+        operator: "Exists"
+        effect: "NoExecute"
+        tolerationSeconds: 300
+      - key: "node.kubernetes.io/unreachable"
+        operator: "Exists"
+        effect: "NoExecute"
+        tolerationSeconds: 300
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: merajutasa-signer
+  labels:
+    app: merajutasa-signer
+    component: signing-service
+
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: merajutasa-signer-pdb
+spec:
+  selector:
+    matchLabels:
+      app: merajutasa-signer
+  maxUnavailable: 1

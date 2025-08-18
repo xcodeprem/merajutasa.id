@@ -1,0 +1,58 @@
+# Dockerfile for MerajutASA Monitoring Stack
+# Production-ready containerization with metrics collection
+
+FROM node:18-alpine AS builder
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies with production optimizations
+RUN npm ci --only=production --no-audit --no-fund
+
+# Production stage
+FROM node:18-alpine AS runtime
+
+# Create non-root user for security
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S merajutasa -u 1001 -G nodejs
+
+# Install curl for health checks
+RUN apk add --no-cache curl
+
+# Set working directory
+WORKDIR /app
+
+# Copy dependencies from builder stage
+COPY --from=builder --chown=merajutasa:nodejs /app/node_modules ./node_modules
+
+# Copy application code
+COPY --chown=merajutasa:nodejs . .
+
+# Create directories for monitoring data
+RUN mkdir -p /app/metrics /app/logs && chown -R merajutasa:nodejs /app/metrics /app/logs
+
+# Switch to non-root user
+USER merajutasa
+
+# Expose monitoring service port
+EXPOSE 4604
+
+# Add health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:4604/metrics || exit 1
+
+# Set environment variables
+ENV NODE_ENV=production
+ENV MONITORING_PORT=4604
+ENV MONITORING_HOST=0.0.0.0
+ENV METRICS_DIR=/app/metrics
+ENV LOGS_DIR=/app/logs
+
+# Create volumes for monitoring data persistence
+VOLUME ["/app/metrics", "/app/logs"]
+
+# Start monitoring service
+CMD ["node", "infrastructure/monitoring/metrics-collector.js"]

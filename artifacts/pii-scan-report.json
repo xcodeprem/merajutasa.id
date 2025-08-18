@@ -2,12 +2,13 @@
   "version": 1,
   "status": "ADVISORY",
   "summary": {
-    "distinctCategories": 11,
-    "totalFindings": 51,
+    "distinctCategories": 12,
+    "totalFindings": 83,
     "categoryCounts": {
-      "EMAIL_IN_NAME": 8,
-      "CONTACT_EMAIL": 3,
-      "PLATE_ID": 13,
+      "EMAIL_IN_NAME": 31,
+      "EDU_NISN": 2,
+      "CONTACT_EMAIL": 12,
+      "PLATE_ID": 14,
       "IDN_NIK": 2,
       "GENERIC_16DIGIT": 4,
       "CONTACT_PHONE": 2,
@@ -51,6 +52,94 @@
       "sample": "checko…#23160779"
     },
     {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-5.md",
+      "category": "EDU_NISN",
+      "action": "BLOCK",
+      "sample": "123456…#239b332f"
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-5.md",
+      "category": "EDU_NISN",
+      "action": "BLOCK",
+      "sample": "123456…#239b332f"
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-5.md",
+      "category": "CONTACT_EMAIL",
+      "action": "REDACT",
+      "sample": "devops…#a2f0afba"
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-5.md",
+      "category": "EMAIL_IN_NAME",
+      "action": "REDACT",
+      "sample": "devops…#eef4a212"
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-5.md",
+      "code": "MULTI_CATEGORY_ESCALATION",
+      "categories": [
+        "EDU_NISN",
+        "CONTACT_EMAIL",
+        "EMAIL_IN_NAME"
+      ],
+      "threshold": 2
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-4.md",
+      "category": "CONTACT_EMAIL",
+      "action": "REDACT",
+      "sample": "your.e…#09229309"
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-4.md",
+      "category": "EMAIL_IN_NAME",
+      "action": "REDACT",
+      "sample": "email@…#d414346a"
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-4.md",
+      "code": "MULTI_CATEGORY_ESCALATION",
+      "categories": [
+        "CONTACT_EMAIL",
+        "EMAIL_IN_NAME"
+      ],
+      "threshold": 2
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-3.md",
+      "category": "CONTACT_EMAIL",
+      "action": "REDACT",
+      "sample": "your-e…#f5122173"
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-3.md",
+      "category": "CONTACT_EMAIL",
+      "action": "REDACT",
+      "sample": "alerts…#620743d8"
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-3.md",
+      "category": "EMAIL_IN_NAME",
+      "action": "REDACT",
+      "sample": "email@…#d414346a"
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-3.md",
+      "category": "EMAIL_IN_NAME",
+      "action": "REDACT",
+      "sample": "alerts…#be7b0ae3"
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-3.md",
+      "code": "MULTI_CATEGORY_ESCALATION",
+      "categories": [
+        "CONTACT_EMAIL",
+        "EMAIL_IN_NAME"
+      ],
+      "threshold": 2
+    },
+    {
       "file": "docs/status/gate1-verification-2025-08-17.md",
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
@@ -92,6 +181,78 @@
       "categories": [
         "CONTACT_EMAIL",
         "PLATE_ID"
+      ],
+      "threshold": 2
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md",
+      "category": "CONTACT_EMAIL",
+      "action": "REDACT",
+      "sample": "devops…#1da3beeb"
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md",
+      "category": "CONTACT_EMAIL",
+      "action": "REDACT",
+      "sample": "cto@me…#a6e5d607"
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md",
+      "category": "CONTACT_EMAIL",
+      "action": "REDACT",
+      "sample": "infra@…#d26a5a7f"
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md",
+      "category": "EMAIL_IN_NAME",
+      "action": "REDACT",
+      "sample": "oncall…#0160b4e2"
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md",
+      "category": "EMAIL_IN_NAME",
+      "action": "REDACT",
+      "sample": "infra@…#885098c2"
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md",
+      "code": "MULTI_CATEGORY_ESCALATION",
+      "categories": [
+        "CONTACT_EMAIL",
+        "EMAIL_IN_NAME"
+      ],
+      "threshold": 2
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-3.md",
+      "category": "CONTACT_EMAIL",
+      "action": "REDACT",
+      "sample": "your-e…#f5122173"
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-3.md",
+      "category": "CONTACT_EMAIL",
+      "action": "REDACT",
+      "sample": "alerts…#620743d8"
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-3.md",
+      "category": "EMAIL_IN_NAME",
+      "action": "REDACT",
+      "sample": "email@…#d414346a"
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-3.md",
+      "category": "EMAIL_IN_NAME",
+      "action": "REDACT",
+      "sample": "alerts…#be7b0ae3"
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-3.md",
+      "code": "MULTI_CATEGORY_ESCALATION",
+      "categories": [
+        "CONTACT_EMAIL",
+        "EMAIL_IN_NAME"
       ],
       "threshold": 2
     },
@@ -219,6 +380,36 @@
       "threshold": 2
     },
     {
+      "file": "docs/phase-2/PHASE-2-IMPLEMENTATION-GUIDE.md",
+      "category": "EMAIL_IN_NAME",
+      "action": "REDACT",
+      "sample": "checko…#23160779"
+    },
+    {
+      "file": "docs/phase-2/PHASE-2-IMPLEMENTATION-GUIDE.md",
+      "category": "EMAIL_IN_NAME",
+      "action": "REDACT",
+      "sample": "action…#e393f6bd"
+    },
+    {
+      "file": "docs/phase-2/PHASE-2-IMPLEMENTATION-GUIDE.md",
+      "category": "EMAIL_IN_NAME",
+      "action": "REDACT",
+      "sample": "checko…#23160779"
+    },
+    {
+      "file": "docs/phase-2/PHASE-2-IMPLEMENTATION-GUIDE.md",
+      "category": "EMAIL_IN_NAME",
+      "action": "REDACT",
+      "sample": "action…#e393f6bd"
+    },
+    {
+      "file": "docs/phase-2/PHASE-2-IMPLEMENTATION-GUIDE.md",
+      "category": "EMAIL_IN_NAME",
+      "action": "REDACT",
+      "sample": "sarif@…#7c2dad48"
+    },
+    {
       "file": "docs/integrity/credential-schema-final-v1.md",
       "category": "PLATE_ID",
       "action": "WARN",
@@ -235,6 +426,24 @@
       "category": "PLATE_ID",
       "action": "WARN",
       "sample": "W3C…#9e32039e"
+    },
+    {
+      "file": "docs/gap-analysis/JAWABAN-GAP-ANALYSIS.md",
+      "category": "PLATE_ID",
+      "action": "WARN",
+      "sample": "E2E…#e2cc8ef1"
+    },
+    {
+      "file": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
+      "category": "EMAIL_IN_NAME",
+      "action": "REDACT",
+      "sample": "checko…#23160779"
+    },
+    {
+      "file": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
+      "category": "EMAIL_IN_NAME",
+      "action": "REDACT",
+      "sample": "artifa…#3b13f71f"
     },
     {
       "file": "docs/audit/00-rubrik-audit-portal-panti.md",
