@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-18T15:34:04.700Z",
+  "generated_utc": "2025-08-18T18:36:48.903Z",
   "old_total": 0,
   "new_total": 0,
   "adoptionPercent": 100,
@@ -31,17 +31,22 @@
       "newCount": 0
     },
     {
-      "file": "docs/tests/hysteresis-test-plan-v1.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
       "file": "docs/transparency/methodology-snippet-h0.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
       "file": "docs/transparency/changelog-excerpt-phase1.5.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/tests/hysteresis-test-plan-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-6.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -126,6 +131,11 @@
       "newCount": 0
     },
     {
+      "file": "docs/roadmap/roadmap-next-phase-v2.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
       "file": "docs/roadmap/roadmap-master-v1.md",
       "oldCount": 0,
       "newCount": 0
@@ -142,6 +152,11 @@
     },
     {
       "file": "docs/release/README.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-6.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -212,6 +227,21 @@
     },
     {
       "file": "docs/playbooks/README.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/planning/STRATEGIC-PLANNING-INDEX.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/planning/IMMEDIATE-ACTION-PLAN-WEEK-1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/phase-2/PHASE-2-WEEK-6-DELIVERY-DOCUMENTATION.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -496,6 +526,11 @@
       "newCount": 0
     },
     {
+      "file": "docs/analysis/INFRASTRUCTURE-UPDATE-ANALYSIS-V1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
       "file": "docs/produk/portal-panti/02-model-data-minimal-aman.md",
       "oldCount": 0,
       "newCount": 0
@@ -522,6 +557,16 @@
     },
     {
       "file": "docs/governance/trace/archive-trace-index-v1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/governance/audit/README-audit-process.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -631,16 +676,6 @@
       "newCount": 0
     },
     {
-      "file": "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs/governance/audit/README-audit-process.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
       "file": "docs/governance/dec/templates/DEC-template-v1.md",
       "oldCount": 0,
       "newCount": 0
@@ -664,6 +699,16 @@
           "old": "ranking",
           "new": "tanpa ranking",
           "count": 2
+        }
+      ]
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-6.md",
+      "suggestions": [
+        {
+          "old": "top",
+          "new": "rekomendasi",
+          "count": 1
         }
       ]
     },
@@ -758,6 +803,16 @@
       ]
     },
     {
+      "file": "docs/roadmap/roadmap-next-phase-v2.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 7
+        }
+      ]
+    },
+    {
       "file": "docs/roadmap/roadmap-master-v1.md",
       "suggestions": [
         {
@@ -804,6 +859,16 @@
           "old": "master",
           "new": "utama",
           "count": 5
+        }
+      ]
+    },
+    {
+      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-6.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 4
         }
       ]
     },
@@ -914,6 +979,31 @@
           "old": "ranking",
           "new": "tanpa ranking",
           "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs/planning/STRATEGIC-PLANNING-INDEX.md",
+      "suggestions": [
+        {
+          "old": "master",
+          "new": "utama",
+          "count": 1
+        },
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "file": "docs/planning/IMMEDIATE-ACTION-PLAN-WEEK-1.md",
+      "suggestions": [
+        {
+          "old": "master",
+          "new": "utama",
+          "count": 2
         }
       ]
     },
@@ -1403,6 +1493,16 @@
       ]
     },
     {
+      "file": "docs/analysis/INFRASTRUCTURE-UPDATE-ANALYSIS-V1.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 9
+        }
+      ]
+    },
+    {
       "file": "docs/produk/portal-panti/01-ruang-lingkup-produk.md",
       "suggestions": [
         {
@@ -1459,6 +1559,16 @@
           "old": "master",
           "new": "utama",
           "count": 6
+        }
+      ]
+    },
+    {
+      "file": "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 1
         }
       ]
     },
@@ -1608,16 +1718,6 @@
         {
           "old": "master",
           "new": "utama",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "file": "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
-      "suggestions": [
-        {
-          "old": "user",
-          "new": "pengguna",
           "count": 1
         }
       ]

@@ -5,16 +5,16 @@
     "stage2_active": false
   },
   "key_token_frequency": {
-    "fairness": 270,
-    "privacy": 158,
+    "fairness": 279,
+    "privacy": 289,
     "hysteresis": 207,
-    "hash": 449,
+    "hash": 450,
     "credential": 171,
-    "governance": 481,
+    "governance": 539,
     "revocation": 105
   },
-  "totalKey": 1841,
-  "banned_terms_detected": 206,
+  "totalKey": 2040,
+  "banned_terms_detected": 207,
   "banned_samples": [
     {
       "file": "docs/trust/trust-hysteresis.md",
@@ -27,6 +27,10 @@
     {
       "file": "docs/transparency/methodology-snippet-h0.md",
       "term": "ranking"
+    },
+    {
+      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-6.md",
+      "term": "top"
     },
     {
       "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-5.md",

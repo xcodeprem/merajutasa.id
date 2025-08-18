@@ -1,0 +1,170 @@
+{
+  "timestamp": "2025-08-18T18:31:58.175Z",
+  "health": {
+    "status": "healthy",
+    "memory": true,
+    "redis": false,
+    "stats": {
+      "memoryHits": 0,
+      "memoryMisses": 0,
+      "redisHits": 0,
+      "redisMisses": 0,
+      "writeThrough": 0,
+      "writeBehind": 0,
+      "errors": 0,
+      "compressions": 0,
+      "memoryHitRate": 0,
+      "redisHitRate": 0,
+      "overallHitRate": 0,
+      "cacheHealth": {
+        "memoryEnabled": true,
+        "redisEnabled": false,
+        "memoryKeys": 0
+      }
+    }
+  },
+  "performance": {
+    "memory": {
+      "layer": "memory",
+      "hits": 186,
+      "misses": 80,
+      "size": 281,
+      "maxSize": 2000,
+      "utilizationPercent": 84,
+      "avgResponseTime": 2,
+      "evictions": 6,
+      "status": "healthy"
+    },
+    "redis": {
+      "layer": "redis",
+      "hits": 83,
+      "misses": 118,
+      "connections": 12,
+      "maxConnections": 20,
+      "memoryUsage": 279,
+      "maxMemory": 500,
+      "utilizationPercent": 41,
+      "avgResponseTime": 23,
+      "networkLatency": 2,
+      "status": "healthy"
+    },
+    "hybrid": {
+      "layer": "hybrid",
+      "hits": 154,
+      "misses": 92,
+      "l1Hits": 130,
+      "l2Hits": 20,
+      "promotions": 18,
+      "demotions": 4,
+      "avgResponseTime": 15,
+      "strategyEfficiency": 81,
+      "status": "healthy"
+    },
+    "overall": {
+      "totalRequests": 713,
+      "totalHits": 423,
+      "totalMisses": 290,
+      "hitRate": 59,
+      "missRate": 41,
+      "avgResponseTime": 11
+    }
+  },
+  "patterns": {
+    "topKeys": [
+      {
+        "key": "/health",
+        "hits": 409,
+        "lastAccess": "2025-08-18T18:31:58.180Z"
+      },
+      {
+        "key": "/kpi/h1",
+        "hits": 259,
+        "lastAccess": "2025-08-18T18:31:58.180Z"
+      },
+      {
+        "key": "/under-served",
+        "hits": 161,
+        "lastAccess": "2025-08-18T18:31:58.180Z"
+      },
+      {
+        "key": "/weekly-trends",
+        "hits": 127,
+        "lastAccess": "2025-08-18T18:31:58.180Z"
+      },
+      {
+        "key": "/monthly-rollup",
+        "hits": 79,
+        "lastAccess": "2025-08-18T18:31:58.180Z"
+      }
+    ],
+    "accessPatterns": {
+      "peakHours": [
+        "09:00-12:00",
+        "14:00-17:00"
+      ],
+      "lowTrafficHours": [
+        "00:00-06:00",
+        "22:00-24:00"
+      ],
+      "dailyTrend": "increasing",
+      "weeklyTrend": "stable",
+      "seasonality": "business_hours"
+    },
+    "hotspots": [
+      {
+        "type": "high_frequency_key",
+        "key": "/health",
+        "issue": "Extremely high access frequency",
+        "impact": "medium",
+        "recommendation": "Consider longer TTL or edge caching"
+      },
+      {
+        "type": "large_value",
+        "key": "/monthly-rollup",
+        "issue": "Large response size causing memory pressure",
+        "impact": "high",
+        "recommendation": "Implement response compression or pagination"
+      }
+    ],
+    "recommendations": [
+      {
+        "type": "ttl_optimization",
+        "message": "Adjust TTL for /kpi/h1 based on access patterns",
+        "priority": "medium",
+        "expectedImprovement": "15% hit rate increase"
+      },
+      {
+        "type": "preload_strategy",
+        "message": "Implement cache preloading for morning peak hours",
+        "priority": "low",
+        "expectedImprovement": "5% response time decrease"
+      }
+    ]
+  },
+  "efficiency": {
+    "efficiency": {
+      "overall": 59,
+      "grade": "D",
+      "trend": "insufficient_data",
+      "improvement": "high"
+    },
+    "performance": {
+      "responseTime": 11,
+      "grade": "A",
+      "comparison": "much_better"
+    },
+    "resource": {
+      "memoryEfficiency": "underutilized",
+      "networkEfficiency": "excellent",
+      "costEffectiveness": "fair"
+    }
+  },
+  "alerts": [
+    {
+      "type": "low_hit_rate",
+      "severity": "warning",
+      "message": "Cache hit rate (59%) is below threshold (70%)",
+      "action": "Review cache strategies and TTL settings"
+    }
+  ]
+}

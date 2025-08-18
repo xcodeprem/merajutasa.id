@@ -1,5 +1,5 @@
 {
-  "timestamp_utc": "2025-08-18T15:34:04.325Z",
+  "timestamp_utc": "2025-08-18T18:36:48.533Z",
   "components": {
     "spec_hash": "PASS",
     "params": "PASS",
@@ -10,13 +10,13 @@
     "freshness": "PASS"
   },
   "summary": {
-    "hype_hits": 8,
+    "hype_hits": 12,
     "hype_max_severity": "MEDIUM",
     "hype_high": 0,
-    "hype_medium": 8,
+    "hype_medium": 12,
     "hype_rule_counts": {
-      "RANKING": 3,
-      "TOP": 5
+      "RANKING": 6,
+      "TOP": 6
     },
     "hype_medium_max_allowed": 120,
     "param_mismatches": 0,
@@ -59,7 +59,7 @@
         "id": "HYPE_MEDIUM",
         "passed": true,
         "detail": {
-          "medium": 8,
+          "medium": 12,
           "max": 120
         }
       },
@@ -166,7 +166,7 @@
         "id": "HYPE_MEDIUM",
         "passed": true,
         "detail": {
-          "medium": 8,
+          "medium": 12,
           "max": 120
         }
       },

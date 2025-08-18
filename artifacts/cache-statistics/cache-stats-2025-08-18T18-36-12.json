@@ -1,0 +1,165 @@
+{
+  "timestamp": "2025-08-18T18:36:12.979Z",
+  "health": {
+    "status": "healthy",
+    "memory": true,
+    "redis": true,
+    "stats": {
+      "memoryHits": 0,
+      "memoryMisses": 0,
+      "redisHits": 0,
+      "redisMisses": 0,
+      "writeThrough": 0,
+      "writeBehind": 0,
+      "errors": 0,
+      "compressions": 0,
+      "memoryHitRate": 0,
+      "redisHitRate": 0,
+      "overallHitRate": 0,
+      "cacheHealth": {
+        "memoryEnabled": true,
+        "redisEnabled": true,
+        "memoryKeys": 0
+      }
+    },
+    "redisStatus": "healthy",
+    "redisLatency": 0
+  },
+  "performance": {
+    "memory": {
+      "layer": "memory",
+      "hits": 348,
+      "misses": 56,
+      "size": 904,
+      "maxSize": 2000,
+      "utilizationPercent": 84,
+      "avgResponseTime": 5,
+      "evictions": 4,
+      "status": "healthy"
+    },
+    "redis": {
+      "layer": "redis",
+      "hits": 343,
+      "misses": 166,
+      "connections": 14,
+      "maxConnections": 20,
+      "memoryUsage": 189,
+      "maxMemory": 500,
+      "utilizationPercent": 58,
+      "avgResponseTime": 12,
+      "networkLatency": 4,
+      "status": "healthy"
+    },
+    "hybrid": {
+      "layer": "hybrid",
+      "hits": 172,
+      "misses": 56,
+      "l1Hits": 72,
+      "l2Hits": 44,
+      "promotions": 8,
+      "demotions": 14,
+      "avgResponseTime": 19,
+      "strategyEfficiency": 90,
+      "status": "healthy"
+    },
+    "overall": {
+      "totalRequests": 1141,
+      "totalHits": 863,
+      "totalMisses": 278,
+      "hitRate": 76,
+      "missRate": 24,
+      "avgResponseTime": 11
+    }
+  },
+  "patterns": {
+    "topKeys": [
+      {
+        "key": "/health",
+        "hits": 396,
+        "lastAccess": "2025-08-18T18:36:12.980Z"
+      },
+      {
+        "key": "/kpi/h1",
+        "hits": 200,
+        "lastAccess": "2025-08-18T18:36:12.980Z"
+      },
+      {
+        "key": "/under-served",
+        "hits": 181,
+        "lastAccess": "2025-08-18T18:36:12.980Z"
+      },
+      {
+        "key": "/weekly-trends",
+        "hits": 122,
+        "lastAccess": "2025-08-18T18:36:12.980Z"
+      },
+      {
+        "key": "/monthly-rollup",
+        "hits": 51,
+        "lastAccess": "2025-08-18T18:36:12.980Z"
+      }
+    ],
+    "accessPatterns": {
+      "peakHours": [
+        "09:00-12:00",
+        "14:00-17:00"
+      ],
+      "lowTrafficHours": [
+        "00:00-06:00",
+        "22:00-24:00"
+      ],
+      "dailyTrend": "increasing",
+      "weeklyTrend": "stable",
+      "seasonality": "business_hours"
+    },
+    "hotspots": [
+      {
+        "type": "high_frequency_key",
+        "key": "/health",
+        "issue": "Extremely high access frequency",
+        "impact": "medium",
+        "recommendation": "Consider longer TTL or edge caching"
+      },
+      {
+        "type": "large_value",
+        "key": "/monthly-rollup",
+        "issue": "Large response size causing memory pressure",
+        "impact": "high",
+        "recommendation": "Implement response compression or pagination"
+      }
+    ],
+    "recommendations": [
+      {
+        "type": "ttl_optimization",
+        "message": "Adjust TTL for /kpi/h1 based on access patterns",
+        "priority": "medium",
+        "expectedImprovement": "15% hit rate increase"
+      },
+      {
+        "type": "preload_strategy",
+        "message": "Implement cache preloading for morning peak hours",
+        "priority": "low",
+        "expectedImprovement": "5% response time decrease"
+      }
+    ]
+  },
+  "efficiency": {
+    "efficiency": {
+      "overall": 76,
+      "grade": "C",
+      "trend": "insufficient_data",
+      "improvement": "high"
+    },
+    "performance": {
+      "responseTime": 11,
+      "grade": "A",
+      "comparison": "much_better"
+    },
+    "resource": {
+      "memoryEfficiency": "optimal",
+      "networkEfficiency": "good",
+      "costEffectiveness": "good"
+    }
+  },
+  "alerts": []
+}
