@@ -5,29 +5,34 @@ This directory contains the modernized React version of the equity-ui dashboard,
 ## 🚀 Features Implemented
 
 ### ✅ Modern Frontend Framework
+
 - **React 19** with modern hooks and functional components
 - **Vite** for fast development and optimized builds
 - **ES6 modules** with tree-shaking for optimal bundle size
 
 ### ✅ Real-time Data Integration
+
 - **Live API connectivity** to equity service (port 4620)
 - **Automatic refresh** every 30 seconds via React Query
 - **Error handling** with retry mechanisms
 - **Health check** integration
 
 ### ✅ Advanced Visualization
+
 - **Chart.js integration** for interactive charts and graphs
 - **Decision trends visualization** with line charts
 - **KPI bar charts** for equity metrics
 - **Interactive data exploration** with collapsible sections
 
 ### ✅ Mobile Responsiveness
+
 - **Fully responsive design** using CSS Grid and Flexbox
 - **Mobile-first approach** with touch-friendly interactions
 - **Adaptive layouts** for tablet and desktop views
 - **Optimized touch targets** (44px minimum)
 
 ### ✅ Accessibility Compliance (WCAG 2.1 AA)
+
 - **Semantic HTML** with proper ARIA labels
 - **Keyboard navigation** support
 - **Screen reader compatibility** with role attributes
@@ -37,6 +42,7 @@ This directory contains the modernized React version of the equity-ui dashboard,
 - **Reduced motion** preferences respected
 
 ### ✅ Multi-language Support (i18n)
+
 - **React i18next** integration
 - **Indonesian (ID)** and **English (EN)** languages
 - **URL parameter** based language switching (`?lang=en`)
@@ -79,6 +85,7 @@ public/equity-ui-v2/
 ## 🚦 Getting Started
 
 ### Development
+
 ```bash
 # From project root
 npm run equity-ui-v2:install  # Install dependencies
@@ -90,12 +97,14 @@ npm run dev
 ```
 
 ### Production Build
+
 ```bash
 npm run equity-ui-v2:build    # Build for production
 npm run equity-ui-v2:preview  # Preview build locally
 ```
 
 ### Integration with Equity Service
+
 ```bash
 # Start equity service (required for data)
 npm run service:equity         # Port 4620
@@ -134,10 +143,12 @@ The React app connects to the existing equity service endpoints:
 ## 🌐 Internationalization
 
 ### Supported Languages
+
 - **Indonesian (ID)** - Default
 - **English (EN)** - Secondary
 
 ### Adding New Languages
+
 1. Add translation object to `src/services/i18n.js`
 2. Update language toggle options in `Header.jsx`
 3. Test with `?lang=<code>` URL parameter
@@ -154,12 +165,14 @@ The React app connects to the existing equity service endpoints:
 The new React dashboard maintains API compatibility with the existing equity service while providing enhanced features:
 
 ### Backward Compatibility
+
 - ✅ Same API endpoints and data formats
 - ✅ Existing i18n translations supported
 - ✅ Similar UI layout and information hierarchy
 - ✅ Links to methodology and privacy pages preserved
 
 ### New Features
+
 - ⚡ Real-time data updates (30s intervals)
 - 📊 Interactive charts and visualizations
 - 🎨 Dark/light theme switching

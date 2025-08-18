@@ -1,12 +1,12 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-18T17:51:27.249Z",
+  "generated_utc": "2025-08-18T19:32:20.412Z",
   "default_threshold_hours": 24,
   "items": [
     {
       "path": "artifacts/spec-hash-diff.json",
       "exists": true,
-      "age_hours": 0,
+      "age_hours": 0.01,
       "threshold_hours": 24,
       "status": "PASS",
       "source_timestamp_type": "internal"
@@ -14,7 +14,7 @@
     {
       "path": "artifacts/param-integrity-matrix.json",
       "exists": true,
-      "age_hours": 0,
+      "age_hours": 1.68,
       "threshold_hours": 24,
       "status": "PASS",
       "source_timestamp_type": "internal"
@@ -22,7 +22,7 @@
     {
       "path": "artifacts/principles-impact-report.json",
       "exists": true,
-      "age_hours": 0,
+      "age_hours": 1.68,
       "threshold_hours": 24,
       "status": "PASS",
       "source_timestamp_type": "internal"
@@ -30,7 +30,7 @@
     {
       "path": "artifacts/hype-lint.json",
       "exists": true,
-      "age_hours": 0,
+      "age_hours": 1.68,
       "threshold_hours": 24,
       "status": "PASS",
       "source_timestamp_type": "internal"
@@ -38,7 +38,7 @@
     {
       "path": "artifacts/disclaimers-lint.json",
       "exists": true,
-      "age_hours": 0,
+      "age_hours": 11.61,
       "threshold_hours": 24,
       "status": "PASS",
       "source_timestamp_type": "mtime"
@@ -54,15 +54,15 @@
     {
       "path": "artifacts/fairness-sim-scenarios.json",
       "exists": true,
-      "age_hours": 0.03,
+      "age_hours": 32.33,
       "threshold_hours": 24,
-      "status": "PASS",
+      "status": "STALE",
       "source_timestamp_type": "mtime"
     },
     {
       "path": "artifacts/fairness-sim-report.json",
       "exists": true,
-      "age_hours": 0.03,
+      "age_hours": 0.09,
       "threshold_hours": 24,
       "status": "PASS",
       "source_timestamp_type": "mtime"
@@ -78,9 +78,9 @@
   ],
   "summary": {
     "total": 9,
-    "pass": 9,
-    "stale": 0,
+    "pass": 8,
+    "stale": 1,
     "missing": 0,
-    "overall_status": "PASS"
+    "overall_status": "ADVISORY"
   }
 }
