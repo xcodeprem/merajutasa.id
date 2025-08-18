@@ -8,6 +8,7 @@ Big picture
 Core services (local)
 - Signer 4601: `npm run service:signer` → GET `/pubkey`, POST `/sign { payload }` → `{ canonical, hash_sha256, signature }`.
 - Chain 4602: `npm run service:chain` → POST `/append { canonical, signature, publicKeyPem }` (idempotent by content hash); persists `artifacts/chain.ndjson/json/head.json`.
+- Chain 4602: `npm run service:chain` → POST `/append { canonical, signature, publicKeyPem }` (idempotent by content hash); persists `artifacts/chain.ndjson`, `artifacts/chain.json`, `artifacts/chain-head.json`.
 - Collector 4603: `npm run service:collector` → POST `/ingest`; validates `schemas/events/public-event-v1.json`, computes `integrity.event_hash`, redacts feedback PII, enforces taxonomy from `docs/analytics/event-schema-canonical-v1.md`.
 
 Governance pipeline (code-derived)
@@ -50,3 +51,52 @@ Environment toggles
 
 Key artifacts
 - `artifacts/spec-hash-diff.json`, `param-integrity-matrix.json`, `disclaimers-lint.json`, `privacy-asserts.json`, `policy-aggregation-threshold.json`, `no-silent-drift-report.json`, `governance-verify-summary.json`.
+
+Health endpoints
+- Signer: GET `/pubkey`, `/pubkeys`
+- Chain: GET `/health`, `/head`, `/chain`
+- Collector: GET `/health`, `/stats`
+
+Service ports (override via env)
+- `SIGNER_PORT=4601`, `CHAIN_PORT=4602`, `COLLECTOR_PORT=4603`
+
+Artifacts map (common outputs)
+- Chain: `artifacts/chain.json`, `artifacts/chain.ndjson`, `artifacts/chain-head.json`
+- Events: `artifacts/ingested-events.ndjson`, pipeline hash: `artifacts/event-pipeline-hash.json`
+- Compliance Week 6: assessments in `artifacts/compliance/assessments/*.json`, audit trail in `artifacts/audit/*.ndjson`
+- Week 6 tests: `artifacts/week6-component-{imports,contracts,smoke}-test.json`
+- Phase trackers/status: `artifacts/phase*-*.json`
+
+Quick start recipes
+- Core trio smoke:
+	1) Append via signer→chain: `npm run chain:append`
+	2) Start collector then ingest: run `npm run service:collector` (separate shell), then `npm run collector:smoke`
+- Governance E2E: `npm run governance:verify` → check `artifacts/governance-verify-summary.json`
+- Policy aggregation enforce: `npm run policy:aggregation:enforce:allow` (deny variant available)
+
+Phase 2 Week 6 – Compliance & Security flows
+- Orchestrator: `npm run compliance:orchestrator`
+- Audit System: `npm run audit:start` → run flows → `npm run audit:report` → `npm run audit:flush` (optional)
+- Compliance Automation: `npm run compliance:automation` (add `--generate-report` to emit assessments)
+- Privacy Rights: `npm run privacy:rights` (flags: `--process-request`, `--generate-report`)
+- Security Hardening: `npm run security:scan` (or `npm run security:threats`)
+
+Observability, performance, HA, API gateway
+- Observability: `npm run observability:start`; health: `npm run observability:health-check`; metrics/tracing/alerting/anomaly/dashboards via respective `*:start`
+- Performance: `npm run performance:start`; health/report: `npm run performance:health-check` / `npm run performance:report`
+- HA: `npm run ha:start-all` (or individual status scripts); DR/multi-region helpers available
+- API Gateway: `npm run api-gateway:start`; status: `npm run api-gateway:status`; metrics: `npm run api-gateway:metrics`
+
+Docker/Kubernetes & reverse proxy
+- Docker: build/deploy/status via `docker:*` scripts under `infrastructure/docker/scripts/*`
+- Kubernetes: apply/delete/status/logs via `k8s:*` (manifests in `infrastructure/kubernetes/**`)
+- Reverse proxy: `npm run infra:generate-certs` then `npm run infra:nginx`
+
+Public UI (equity-ui-v2)
+- From repo root: `npm run equity-ui-v2:install` → `npm run equity-ui-v2:dev` (or `:build`/`:preview`); smoke: `npm run test:equity-ui-smoke`
+
+Troubleshooting
+- If ports busy, stop prior jobs or override `*_PORT` envs
+- If `security:scan` fails, inspect output from `infrastructure/security/enhanced/security-hardening.js` and recent `artifacts/audit/*.ndjson`
+- If collector rejects events (UNKNOWN_EVENT), ensure schema doc whitelist and `artifacts/event-pipeline-hash.json` exist; run `npm run events:pipeline:hash`
+- Observability logs module is optional; if `logs:start` isn’t available, proceed with metrics/tracing/alerting/anomaly/dashboards
