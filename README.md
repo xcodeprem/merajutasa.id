@@ -14,11 +14,13 @@
 MerajutASA.id is a comprehensive enterprise platform that combines governance excellence with sophisticated infrastructure capabilities:
 
 ### 🏛️ Governance Foundation
+
 - **Fairness & Integrity**: Cryptographic integrity with hash chain verification
 - **Transparency**: Open methodology with public decision processes (DEC chain)
 - **Non-Ranking**: Equity indicators without competitive scoring
 
 ### 🏗️ Enterprise Infrastructure
+
 - **Security**: Multi-layer protection with enterprise audit systems and compliance automation
 - **High Availability**: Multi-region deployment with 99.95% uptime targets
 - **Performance**: 450x cache improvements and 84.9% bandwidth optimization
@@ -73,6 +75,7 @@ npm run ha:system-health
 ## 💻 Enterprise Operations
 
 ### Core Governance Commands
+
 ```bash
 # Governance & Integrity
 npm run governance:verify     # Complete governance check
@@ -92,6 +95,7 @@ npm run fairness:sim        # Fairness simulation
 ```
 
 ### Enterprise Infrastructure Commands
+
 ```bash
 # High Availability Operations
 npm run ha:orchestrator-start        # Start HA orchestration
@@ -131,18 +135,21 @@ npm run k8s:logs                    # Application logs
 ## 📚 Documentation
 
 ### Getting Started
+
 - **[Phase 1 Implementation](docs/phase-1/PHASE-1-IMPLEMENTATION-COMPLETE.md)** - Security, observability, backup (100% complete)
 - **[Phase 2 Implementation Guide](docs/phase-2/PHASE-2-IMPLEMENTATION-GUIDE.md)** - Enterprise scalability roadmap
 - **[Team Setup Guides](docs/team-guides/)** - Step-by-step setup for all infrastructure components
 - **[Quick Reference Cards](docs/quick-reference/)** - Daily operation commands for each system
 
 ### Infrastructure Documentation
+
 - **[Implementation Status](docs/implementation/README.md)** - Complete implementation overview with metrics
 - **[High Availability Guide](docs/phase-2/PHASE-2-WEEK-5-DELIVERY-DOCUMENTATION.md)** - Multi-region deployment and disaster recovery
 - **[Compliance & Security](docs/phase-2/PHASE-2-WEEK-6-DELIVERY-DOCUMENTATION.md)** - Enterprise compliance automation and security hardening
 - **[API Documentation](docs/api/README.md)** - Service integration guide  
 
 ### Governance & Fairness
+
 - **[Governance Overview](docs/governance/)** - Decision processes and policies
 - **[Fairness Methodology](docs/fairness/)** - Equity and fairness measures
 - **[CLI Verification Guide](docs/integrity/verify-cli-doc-draft.md)** - Manual verification steps
@@ -153,6 +160,7 @@ npm run k8s:logs                    # Application logs
 ### Enterprise Infrastructure (648KB+ Production Code)
 
 #### Phase 1: Security & Observability Foundation (133KB) - ✅ 100% Complete
+
 - **🔒 Security**: HTTPS/TLS, authentication middleware, input validation, rate limiting
 - **📊 Observability**: Advanced metrics collection, structured logging, distributed tracing
 - **💾 Backup & Recovery**: Automated backup systems with integrity verification
@@ -160,41 +168,48 @@ npm run k8s:logs                    # Application logs
 #### Phase 2: Enterprise Scalability & Operations (515KB) - ✅ 67-100% Complete
 
 **Week 1: Container Orchestration (31.4KB) - 87% Complete**
+
 - **🐳 Docker**: Multi-service containerization with production-ready Dockerfiles
 - **☸️ Kubernetes**: Complete orchestration manifests with auto-scaling
 - **🏗️ Infrastructure as Code**: Terraform AWS EKS configurations
 
 **Week 2: Performance Optimization (94.7KB) - 75% Complete**
+
 - **⚡ Multi-Layer Caching**: 450x performance improvement with Redis strategies
 - **🗜️ Response Compression**: 84.9% bandwidth reduction
 - **📈 SLA Monitoring**: Real-time service level tracking with alerting
 - **🔍 Performance Analytics**: P95/P99 latency monitoring
 
 **Week 3: Advanced Monitoring (156.3KB) - 100% Complete**
+
 - **📊 Distributed Tracing**: OpenTelemetry/Jaeger integration
 - **🚨 Intelligent Alerting**: Context-aware anomaly detection
 - **📋 Real-time Dashboards**: Socket.IO streaming dashboards
 - **🤖 Log Aggregation**: Centralized log processing and analysis
 
 **Week 4: API Gateway & Management (65.2KB) - 100% Complete**
+
 - **🌐 Enterprise API Gateway**: Centralized routing and rate limiting
 - **🕸️ Service Mesh**: Load balancing with circuit breaker protection
 - **🔄 Advanced CI/CD**: Multi-stage deployment automation
 - **📖 OpenAPI Documentation**: Auto-generated comprehensive API docs
 
 **Week 5: High Availability (139.7KB) - 77% Complete**
+
 - **🌍 Multi-Region Deployment**: Blue-green, rolling, and canary strategies
 - **🆘 Disaster Recovery**: Automated backup with 15min RPO, 5min RTO
 - **📈 Intelligent Auto-Scaling**: Predictive analytics with 30% cost optimization
 - **🛡️ Advanced Fault Tolerance**: Circuit breakers, retry mechanisms, bulkheads
 
 **Week 6: Compliance & Security (145.3KB) - 67% Complete**
+
 - **🔐 Enterprise Audit System**: GDPR/SOX/ISO27001/PCI compliance tracking
 - **🏛️ Compliance Automation**: 92% compliance scoring with automated reporting
 - **🛡️ Security Hardening**: Advanced threat detection and incident response
 - **🔒 Privacy Rights Management**: Multi-jurisdiction data rights automation (GDPR/CCPA/PIPEDA/LGPD)
 
 ### Core Governance Services
+
 - **🔑 Signer Service** (Port 4601) - Ed25519 cryptographic signing with key rotation
 - **⛓️ Chain Service** (Port 4602) - Immutable hash chain integrity management
 - **📥 Event Collector** (Port 4603) - Event ingestion with schema validation
@@ -202,6 +217,7 @@ npm run k8s:logs                    # Application logs
 - **⚖️ Equity Service** - Fairness calculation and under-served detection
 
 ### Advanced Quality Assurance
+
 - **🧪 Comprehensive Testing**: 200+ test files covering all infrastructure components
 - **🔍 Gap Analysis**: Automated enterprise readiness assessment
 - **🚀 Continuous Integration**: Multi-stage governance and infrastructure validation
@@ -210,6 +226,7 @@ npm run k8s:logs                    # Application logs
 ## 📊 Current Platform Status
 
 ### Enterprise Infrastructure Health
+
 ```
 Phase 1 (Security & Observability): ✅ 100% Operational
 Phase 2 Week 1 (Containers):        ⚠️  87%  Operational
@@ -233,6 +250,7 @@ Phase 2 Week 6 (Compliance):        ⚠️  67%  Operational
 <!-- STATUS:END -->
 
 ### Key Performance Metrics
+
 - **🚀 Performance**: 450x cache improvement, 84.9% compression optimization
 - **📈 Scalability**: 10x capacity increase with intelligent auto-scaling
 - **🔒 Reliability**: 99.95% availability target with multi-region failover
@@ -240,6 +258,7 @@ Phase 2 Week 6 (Compliance):        ⚠️  67%  Operational
 - **💰 Cost Efficiency**: 35% infrastructure cost reduction through optimization
 
 ### Operational Commands
+
 ```bash
 # Quick health checks
 npm run phase1:status          # Security & observability status
@@ -256,6 +275,7 @@ npm run observability:benchmark # Performance benchmarking
 ## 🚀 Enterprise Deployment Options
 
 ### Development Environment
+
 ```bash
 # Local development with core services
 npm install
@@ -266,6 +286,7 @@ npm run governance:verify
 ```
 
 ### Docker Containerized Deployment
+
 ```bash
 # Development stack
 npm run docker:build-all
@@ -278,6 +299,7 @@ npm run docker:health-check
 ```
 
 ### Kubernetes Enterprise Deployment
+
 ```bash
 # Deploy to Kubernetes cluster
 npm run k8s:deploy
@@ -289,6 +311,7 @@ npm run k8s:describe
 ```
 
 ### High Availability Production
+
 ```bash
 # Start enterprise HA stack
 npm run ha:orchestrator-start
@@ -304,6 +327,7 @@ npm run api-gateway:start
 ## 🔧 Enterprise Features
 
 ### 🔒 Security & Compliance
+
 - **Multi-framework compliance**: GDPR, SOX, ISO27001, PCI DSS
 - **Automated audit trails**: 7+ year retention with cryptographic integrity
 - **Advanced threat detection**: Behavioral anomaly analysis and automated response
@@ -311,6 +335,7 @@ npm run api-gateway:start
 - **Zero-trust architecture**: Policy enforcement with configurable security rules
 
 ### 🌍 High Availability & Resilience  
+
 - **Multi-region deployment**: Blue-green, rolling, and canary strategies across 4 regions
 - **Disaster recovery**: 15-minute RPO, 5-minute RTO with automated failover
 - **Intelligent auto-scaling**: Predictive analytics reducing costs by 30%
@@ -318,6 +343,7 @@ npm run api-gateway:start
 - **99.95% uptime targets**: Enterprise-grade reliability guarantees
 
 ### ⚡ Performance & Monitoring
+
 - **450x cache performance**: Multi-layer Redis caching strategies
 - **84.9% bandwidth optimization**: Advanced compression and CDN integration  
 - **Real-time observability**: Distributed tracing with OpenTelemetry/Jaeger
@@ -325,6 +351,7 @@ npm run api-gateway:start
 - **SLA compliance tracking**: P95/P99 latency monitoring with intelligent alerting
 
 ### 🌐 API Gateway & Integration
+
 - **Enterprise API gateway**: Centralized routing, rate limiting, and authentication
 - **Service mesh**: Load balancing with circuit breaker protection
 - **Auto-generated documentation**: OpenAPI 3.0 with interactive exploration
@@ -336,17 +363,20 @@ npm run api-gateway:start
 MerajutASA.id's governance system ensures fairness, transparency, and integrity through cryptographic verification and open decision processes.
 
 ### Core Principles
+
 - **GP1-GP10**: Comprehensive governance principles covering privacy, transparency, fairness, security, and accountability
 - **Non-Ranking System**: Equity indicators without competitive scoring or performance ranking
 - **Hysteresis-Based Fairness**: Stable "under-served" detection using Option F parameters
 - **Cryptographic Integrity**: Hash chain verification with immutable audit trails
 
 ### Decision Process (DEC Chain)
+
 - **Formal Decisions**: All significant changes documented through Decision (DEC) process
 - **Parameter Integrity**: Governance parameters verified across code, configuration, and documentation
 - **Evidence-Based**: All claims backed by verifiable artifacts and testing
 
 ### Key Governance Features
+
 ```bash
 # Governance verification
 npm run governance:verify      # Complete governance integrity check
@@ -361,6 +391,7 @@ npm run equity:anomaly        # Detect equity anomalies
 ```
 
 For detailed governance documentation, see:
+
 - **[Governance Overview](docs/governance/)** - Decision processes and DEC chain
 - **[Fairness Methodology](docs/fairness/)** - Equity calculation and hysteresis
 - **[Integrity Verification](docs/integrity/)** - Hash verification and evidence requirements
@@ -370,11 +401,13 @@ For detailed governance documentation, see:
 The platform provides comprehensive transparency through GitHub Pages with real-time dashboard snapshots and governance artifacts.
 
 ### Live Dashboard Links
+
 - **Main Dashboard**: <https://codingxdev0.github.io/merajutasa.id/>
 - **Snapshots Index**: <https://codingxdev0.github.io/merajutasa.id/snapshots.html>
 - **Changelog**: <https://codingxdev0.github.io/merajutasa.id/changelog.html>
 
 ### Real-Time Data Endpoints
+
 - **KPI Summary**: <https://codingxdev0.github.io/merajutasa.id/data/h1-kpi-summary.json>
 - **Weekly Trends**: <https://codingxdev0.github.io/merajutasa.id/data/weekly-trends.json>
 - **Under-served Analysis**: <https://codingxdev0.github.io/merajutasa.id/data/under-served.json>
@@ -384,21 +417,25 @@ The platform provides comprehensive transparency through GitHub Pages with real-
 ## 🤝 Support & Contributing
 
 ### For Enterprise Users
+
 - **[Team Setup Guides](docs/team-guides/)** - Complete onboarding for all infrastructure components (30-45 min setup per phase)
 - **[Quick Reference Cards](docs/quick-reference/)** - Daily operation commands and troubleshooting
 - **[Implementation Status](docs/implementation/README.md)** - Current capabilities and known limitations
 
 ### For Developers
+
 - **Infrastructure Tests**: `npm run test:infrastructure` - Validate all enterprise components
 - **Governance Tests**: `npm run test:governance` - Verify governance integrity
 - **Gap Analysis**: `npm run gap:enhanced` - Identify system readiness gaps
 
 ### For Contributors
+
 - **[PR Guidelines](docs/governance/)** - Governance requirements for code contributions
 - **Security**: See [SECURITY.md](SECURITY.md) for vulnerability reporting
 - **DEC Process**: Use `[DEC-PROPOSAL]` format for significant changes
 
 ### Enterprise Support
+
 - **Monitoring**: All systems include comprehensive health checks and status commands
 - **Documentation**: 250K+ characters of implementation documentation across all phases
 - **Compliance**: Automated regulatory reporting and audit trail generation
@@ -427,14 +464,14 @@ Menyediakan kerangka (scaffold) governance, fairness, dan integrity untuk sistem
 
 ## 2. Keputusan Formal (DEC Chain)
 
-| DEC ID | Judul | Fungsi | Status |
-|--------|-------|--------|--------|
-| DEC-20250812-02 | Hysteresis Adoption Option F | Mengunci parameter fairness (T_enter_major=0.50, T_enter_standard=0.60, consecutive_required_standard=2, T_exit=0.65, cooldown=1 snapshot, stalled window 5 (0.55–<0.65), anomaly delta 0.03) | Adopted |
-| DEC-20250812-03 | Principles Reference Activation | Mengaktifkan lint principles.reference (Phase 0 WARN → +48h Phase 1 ERROR → +7d Phase 2 DENY) | Adopted |
-| (Planned) DISC-DEC | Disclaimers Activation | Mengaktifkan presence rules disclaimers (D1–D7) | Draft Pending |
-| (Planned) ANOM-DEC | Anomaly Equity Delta Policy | Mengunci perubahan anomaly_delta_threshold_equity_ratio | Draft Pending |
-| (Planned) REVOC-DEC | Credential Revocation Placeholder | Siklus hidup credential & future revocation state | Planned |
-| (Planned) TERM-DEC | Terminology Stage Escalation | Mengangkat adopsi terminologi baru ke Stage 2 | Planned |
+| DEC ID              | Judul                             | Fungsi                                                                                                                                                                                        | Status        |
+| ------------------- | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| DEC-20250812-02     | Hysteresis Adoption Option F      | Mengunci parameter fairness (T_enter_major=0.50, T_enter_standard=0.60, consecutive_required_standard=2, T_exit=0.65, cooldown=1 snapshot, stalled window 5 (0.55–<0.65), anomaly delta 0.03) | Adopted       |
+| DEC-20250812-03     | Principles Reference Activation   | Mengaktifkan lint principles.reference (Phase 0 WARN → +48h Phase 1 ERROR → +7d Phase 2 DENY)                                                                                                 | Adopted       |
+| (Planned) DISC-DEC  | Disclaimers Activation            | Mengaktifkan presence rules disclaimers (D1–D7)                                                                                                                                               | Draft Pending |
+| (Planned) ANOM-DEC  | Anomaly Equity Delta Policy       | Mengunci perubahan anomaly_delta_threshold_equity_ratio                                                                                                                                       | Draft Pending |
+| (Planned) REVOC-DEC | Credential Revocation Placeholder | Siklus hidup credential & future revocation state                                                                                                                                             | Planned       |
+| (Planned) TERM-DEC  | Terminology Stage Escalation      | Mengangkat adopsi terminologi baru ke Stage 2                                                                                                                                                 | Planned       |
 
 Catatan: Hash masing-masing DEC akan dimasukkan ke field hash_of_decision_document setelah seal.
 
@@ -457,18 +494,18 @@ Tujuan: Mengurangi noise / flapping label “under-served” tanpa mengubah sifa
 
 ## 4. Prinsip (GP1–GP10) (Ringkas)
 
-| Kode | Fokus (Ringkas) |
-|------|-----------------|
-| GP1 | Privasi & Minimasi Data |
-| GP2 | Transparansi Metodologi |
-| GP3 | Keadilan & Non-Diskriminasi |
-| GP4 | Akuntabilitas & Auditability |
-| GP5 | Robustness & Resilience |
-| GP6 | Anti Misuse / Anti-Hype (Non-Scoring) |
-| GP7 | Governed Evolution (Controlled Change) |
-| GP8 | Security & Integrity Chain |
-| GP9 | Fairness Signal Stability (Hysteresis) |
-| GP10 | Data & Event Schema Consistency |
+| Kode | Fokus (Ringkas)                        |
+| ---- | -------------------------------------- |
+| GP1  | Privasi & Minimasi Data                |
+| GP2  | Transparansi Metodologi                |
+| GP3  | Keadilan & Non-Diskriminasi            |
+| GP4  | Akuntabilitas & Auditability           |
+| GP5  | Robustness & Resilience                |
+| GP6  | Anti Misuse / Anti-Hype (Non-Scoring)  |
+| GP7  | Governed Evolution (Controlled Change) |
+| GP8  | Security & Integrity Chain             |
+| GP9  | Fairness Signal Stability (Hysteresis) |
+| GP10 | Data & Event Schema Consistency        |
 
 Lint principles.reference memaksa penjelasan dampak (Section 37 PR template).
 
@@ -476,15 +513,15 @@ Lint principles.reference memaksa penjelasan dampak (Section 37 PR template).
 
 ## 5. Disclaimers (D1–D7) (Draft Canonical)
 
-| ID | Tema | Tujuan |
-|----|------|--------|
-| D1 | Non-Ranking | Menegaskan sistem tanpa peringkat kompetitif <!-- hype-lint-ignore-line --> |
-| D2 | Keterbatasan Data | Menyatakan potensi keterbatasan & sampling |
-| D3 | Interpretasi Terbatas | Mencegah over-claim atas label |
-| D4 | Frekuensi Snapshot | Menjelaskan jeda update |
-| D5 | Sinyal Bukan Nilai Mutlak | Menegaskan label indikatif |
-| D6 | Evolusi Metodologi | Notifikasi potensi perubahan via DEC |
-| D7 | Privasi & Agregasi | Menjelaskan agregasi & minimasi identitas |
+| ID  | Tema                      | Tujuan                                                                      |
+| --- | ------------------------- | --------------------------------------------------------------------------- |
+| D1  | Non-Ranking               | Menegaskan sistem tanpa peringkat kompetitif <!-- hype-lint-ignore-line --> |
+| D2  | Keterbatasan Data         | Menyatakan potensi keterbatasan & sampling                                  |
+| D3  | Interpretasi Terbatas     | Mencegah over-claim atas label                                              |
+| D4  | Frekuensi Snapshot        | Menjelaskan jeda update                                                     |
+| D5  | Sinyal Bukan Nilai Mutlak | Menegaskan label indikatif                                                  |
+| D6  | Evolusi Metodologi        | Notifikasi potensi perubahan via DEC                                        |
+| D7  | Privasi & Agregasi        | Menjelaskan agregasi & minimasi identitas                                   |
 
 Aktivasi enforcement menunggu DEC khusus (DISC-DEC).
 
@@ -516,28 +553,28 @@ Pasca seal:
 
 ## 7. Struktur Dokumen Penting
 
-| Domain | File Utama | Peran |
-|--------|------------|-------|
-| Fairness Config | docs/fairness/hysteresis-config-v1.yml | Parameter runtime |
-| Narrative Publik | docs/fairness/hysteresis-public-methodology-fragment-v1.md | Penjelasan mekanisme & disclaimers |
-| State Machine | docs/fairness/hysteresis-state-machine-transitions.md | Transisi label |
-| Test Plan | docs/tests/hysteresis-test-plan-v1.md | Kasus T01–T10 |
-| DEC Hysteresis | docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md | Sumber adopsi final |
-| DEC Principles | docs/governance/dec/DEC-20250812-03-principles-reference-activation.md | Enforcement fase |
-| Disclaimers Spec | docs/governance/disclaimers-lint-spec-v1.md | Canonical disclaimers & rule codes |
-| Manifest | docs/integrity/spec-hash-manifest-v1.json | Anchor hash integritas |
-| Credential Schema | docs/integrity/credential-schema-final-v1.md | Struktur credential |
-| Event Schema | docs/analytics/event-schema-canonical-v1.md | Event fairness & envelope |
-| Archive Options | docs/archive/fairness_equity-hysteresis-options-v1.md | Opsi A–F historis |
-| Archive UX | docs/archive/ux_public-multipage-experience-master-spec-v2.md | Spesifikasi multipage historical |
-| Trace Index | docs/governance/trace/archive-trace-index-v1.md | Peta archive → canonical |
-| PR Template | .github/pull_request_template.md | 37 section governance gating |
-| Portal Panti – Orientasi | docs/governance/statement-orientasi-portal-panti.md | Pernyataan orientasi produk |
-| Portal Panti – Orientasi Komprehensif | docs/produk/portal-panti/00-orientasi-komprehensif.md | Konsolidasi referensi hukum/standar |
-| Portal Panti – Ruang Lingkup | docs/produk/portal-panti/01-ruang-lingkup-produk.md | Ruang lingkup dan batasan |
-| Portal Panti – Model Data | docs/produk/portal-panti/02-model-data-minimal-aman.md | Model data minimal aman |
-| Portal Panti – About (Publik) | docs/public/ABOUT-PORTAL-PANTI.md | Penjelasan publik non-teknis |
-| Portal Panti – Rubrik Audit | docs/audit/00-rubrik-audit-portal-panti.md | Rubrik audit kesesuaian |
+| Domain                                | File Utama                                                             | Peran                               |
+| ------------------------------------- | ---------------------------------------------------------------------- | ----------------------------------- |
+| Fairness Config                       | docs/fairness/hysteresis-config-v1.yml                                 | Parameter runtime                   |
+| Narrative Publik                      | docs/fairness/hysteresis-public-methodology-fragment-v1.md             | Penjelasan mekanisme & disclaimers  |
+| State Machine                         | docs/fairness/hysteresis-state-machine-transitions.md                  | Transisi label                      |
+| Test Plan                             | docs/tests/hysteresis-test-plan-v1.md                                  | Kasus T01–T10                       |
+| DEC Hysteresis                        | docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md             | Sumber adopsi final                 |
+| DEC Principles                        | docs/governance/dec/DEC-20250812-03-principles-reference-activation.md | Enforcement fase                    |
+| Disclaimers Spec                      | docs/governance/disclaimers-lint-spec-v1.md                            | Canonical disclaimers & rule codes  |
+| Manifest                              | docs/integrity/spec-hash-manifest-v1.json                              | Anchor hash integritas              |
+| Credential Schema                     | docs/integrity/credential-schema-final-v1.md                           | Struktur credential                 |
+| Event Schema                          | docs/analytics/event-schema-canonical-v1.md                            | Event fairness & envelope           |
+| Archive Options                       | docs/archive/fairness_equity-hysteresis-options-v1.md                  | Opsi A–F historis                   |
+| Archive UX                            | docs/archive/ux_public-multipage-experience-master-spec-v2.md          | Spesifikasi multipage historical    |
+| Trace Index                           | docs/governance/trace/archive-trace-index-v1.md                        | Peta archive → canonical            |
+| PR Template                           | .github/pull_request_template.md                                       | 37 section governance gating        |
+| Portal Panti – Orientasi              | docs/governance/statement-orientasi-portal-panti.md                    | Pernyataan orientasi produk         |
+| Portal Panti – Orientasi Komprehensif | docs/produk/portal-panti/00-orientasi-komprehensif.md                  | Konsolidasi referensi hukum/standar |
+| Portal Panti – Ruang Lingkup          | docs/produk/portal-panti/01-ruang-lingkup-produk.md                    | Ruang lingkup dan batasan           |
+| Portal Panti – Model Data             | docs/produk/portal-panti/02-model-data-minimal-aman.md                 | Model data minimal aman             |
+| Portal Panti – About (Publik)         | docs/public/ABOUT-PORTAL-PANTI.md                                      | Penjelasan publik non-teknis        |
+| Portal Panti – Rubrik Audit           | docs/audit/00-rubrik-audit-portal-panti.md                             | Rubrik audit kesesuaian             |
 
 ---
 
@@ -570,18 +607,18 @@ Gunakan framing “indikator stabil fairness” bukan “peringkat”.
 
 Phase 1.5 Evidence Minimum Set didefinisikan di `docs/integrity/evidence-minimum-phase1.5-v1.md`.
 
-| Artifact | File | Phase 1.5 Minimum? | Status (Current) |
-|----------|------|-------------------|------------------|
-| spec-hash-diff report | artifacts/spec-hash-diff.json | Yes | Active |
-| param-integrity matrix | artifacts/param-integrity-matrix.json | Yes | Active |
-| principles impact report | artifacts/principles-impact-report.json | Yes | Active |
-| hype lint report | artifacts/hype-lint.json | Yes | Active |
-| disclaimers lint report | artifacts/disclaimers-lint.json | Yes | Active (bootstrap presence) |
-| pii scan summary | artifacts/pii-scan-report.json | Yes | Active |
-| fairness sim scenario list | artifacts/fairness-sim-scenarios.json | Yes | Pending (stub) |
-| no-silent-drift aggregator | artifacts/no-silent-drift-report.json | Yes | Active (partial gating) |
-| observability metrics | artifacts/observability-metrics.json | No (Phase 2) | Pending |
-| audit replay | artifacts/audit-replay.json | No (Phase 2) | Stub |
+| Artifact                   | File                                    | Phase 1.5 Minimum? | Status (Current)            |
+| -------------------------- | --------------------------------------- | ------------------ | --------------------------- |
+| spec-hash-diff report      | artifacts/spec-hash-diff.json           | Yes                | Active                      |
+| param-integrity matrix     | artifacts/param-integrity-matrix.json   | Yes                | Active                      |
+| principles impact report   | artifacts/principles-impact-report.json | Yes                | Active                      |
+| hype lint report           | artifacts/hype-lint.json                | Yes                | Active                      |
+| disclaimers lint report    | artifacts/disclaimers-lint.json         | Yes                | Active (bootstrap presence) |
+| pii scan summary           | artifacts/pii-scan-report.json          | Yes                | Active                      |
+| fairness sim scenario list | artifacts/fairness-sim-scenarios.json   | Yes                | Pending (stub)              |
+| no-silent-drift aggregator | artifacts/no-silent-drift-report.json   | Yes                | Active (partial gating)     |
+| observability metrics      | artifacts/observability-metrics.json    | No (Phase 2)       | Pending                     |
+| audit replay               | artifacts/audit-replay.json             | No (Phase 2)       | Stub                        |
 
 Kriteria PASS/WARN/FAIL rinci & freshness: lihat file definisi Phase 1.5.
 
@@ -589,11 +626,11 @@ Kriteria PASS/WARN/FAIL rinci & freshness: lihat file definisi Phase 1.5.
 
 ## 11. Roadmap Milestone (Ringkas)
 
-| Horizon | Sasaran Inti |
-|---------|--------------|
-| 7 hari | Hash seal, minimal test T01–T05, param-integrity real, bukti awal |
-| 30 hari | Disclaimers activation DEC, anomaly DEC, observability non-null, changelog entry |
-| 60 hari | Phase 2 readiness, terminologi baseline, revocation placeholder DEC |
+| Horizon | Sasaran Inti                                                                        |
+| ------- | ----------------------------------------------------------------------------------- |
+| 7 hari  | Hash seal, minimal test T01–T05, param-integrity real, bukti awal                   |
+| 30 hari | Disclaimers activation DEC, anomaly DEC, observability non-null, changelog entry    |
+| 60 hari | Phase 2 readiness, terminologi baseline, revocation placeholder DEC                 |
 | 90 hari | Full evidence gating tiap PR, credential signing demo, matured changelog (≥5 entri) |
 
 Detail lengkap: docs/roadmap/roadmap-master-v1.md
