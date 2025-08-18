@@ -1,0 +1,36 @@
+{
+  "tool": "obsolete-detector",
+  "version": "1.0.0",
+  "generated_at": "2025-08-18T22:15:35.624Z",
+  "summary": {
+    "total_candidates": 3,
+    "powershell_dependent": 0,
+    "consistently_failing": 0,
+    "unreferenced": 0,
+    "duplicate_functionality": 3,
+    "deprecated_patterns": 0
+  },
+  "candidates": {
+    "powershell_dependent": [],
+    "consistently_failing": [],
+    "unreferenced": [],
+    "duplicate_functionality": [
+      {
+        "name": "equity:snapshot",
+        "command": "node tools/fairness/generate-equity-snapshots.js",
+        "reason": "Duplicate of: fairness:generate-snapshots"
+      },
+      {
+        "name": "phase1:demo",
+        "command": "node tools/phase1-status.js",
+        "reason": "Duplicate of: phase1:status"
+      },
+      {
+        "name": "verify:cli",
+        "command": "node tools/generate-test-vectors.js",
+        "reason": "Duplicate of: gen:test-vectors"
+      }
+    ],
+    "deprecated_patterns": []
+  }
+}

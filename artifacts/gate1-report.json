@@ -1,31 +1,31 @@
 {
   "version": 1,
-  "timestamp_utc": "2025-08-17T11:13:33.363Z",
-  "pass": true,
+  "timestamp_utc": "2025-08-18T21:37:15.380Z",
+  "pass": false,
   "criteria": {
     "governance_verify_pass": true,
-    "h1_guard_pass": true,
+    "h1_guard_pass": false,
     "collector_reliability_pass": true,
     "signer_chain_append_and_verify_pass": true
   },
   "details": {
     "governance": {
       "code": 0,
-      "ms": 6259
+      "ms": 3210
     },
     "h1_guard": {
-      "code": 0,
-      "ms": 42311
+      "code": 1,
+      "ms": 14234
     },
     "collector_reliability": {
       "code": 0,
-      "ms": 2875
+      "ms": 571
     },
     "signer_chain": {
       "ok": true,
       "append_code": 0,
       "verify_ok": true,
-      "length": 34
+      "length": 37
     }
   }
 }

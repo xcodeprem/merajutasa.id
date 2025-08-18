@@ -1,0 +1,60 @@
+{
+  "timestamp": "2025-08-18T21:44:01.535Z",
+  "period": "last_hour",
+  "summary": {
+    "totalRequests": 0,
+    "slowRequests": 0,
+    "averageResponseTime": 0,
+    "p95ResponseTime": 0,
+    "p99ResponseTime": 0,
+    "errorRate": 0,
+    "throughput": 0,
+    "lastSample": null
+  },
+  "currentLoad": {
+    "timestamp": 1755553436830,
+    "memory": {
+      "rss": 47833088,
+      "heapTotal": 4956160,
+      "heapUsed": 4409664,
+      "external": 1889064,
+      "arrayBuffers": 172159
+    },
+    "cpu": {
+      "user": 86027,
+      "system": 21375
+    },
+    "uptime": 355.363593002,
+    "activeRequests": 0,
+    "eventLoopDelay": 0.072595999983605
+  },
+  "trends": {
+    "memory": {
+      "direction": "increasing",
+      "change": "0.82"
+    }
+  },
+  "alerts": [
+    {
+      "type": "memory_usage",
+      "severity": "warning",
+      "message": "High memory usage: 88.97%",
+      "value": 0.8897339876033058,
+      "threshold": 0.8
+    }
+  ],
+  "recommendations": [
+    {
+      "type": "memory",
+      "priority": "medium",
+      "message": "Consider increasing heap size or implementing memory optimization",
+      "details": "High memory usage may lead to garbage collection pressure"
+    },
+    {
+      "type": "throughput",
+      "priority": "low",
+      "message": "Low request throughput - monitor for traffic patterns",
+      "details": "Consistently low throughput may indicate system underutilization"
+    }
+  ]
+}

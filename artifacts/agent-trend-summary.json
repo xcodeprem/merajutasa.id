@@ -1,12 +1,12 @@
 {
-  "generated_utc": "2025-08-13T07:42:38.492Z",
+  "generated_utc": "2025-08-18T21:35:05.860Z",
   "days": [
     {
       "day": "20250813",
       "actions": {
-        "total": 8,
-        "OK": 7,
-        "ADVISORY": 1
+        "total": 93,
+        "OK": 88,
+        "ADVISORY": 5
       },
       "steps": [
         "spec-hash-diff",
@@ -15,14 +15,164 @@
         "disclaimers-lint",
         "principles-impact",
         "evidence-freshness",
-        "no-silent-drift"
+        "no-silent-drift",
+        "evidence-collision-test",
+        "param-lock",
+        "fairness-unit",
+        "fairness-sim",
+        "fairness-metrics",
+        "governed-change-scan"
+      ]
+    },
+    {
+      "day": "20250814",
+      "actions": {
+        "total": 425,
+        "OK": 418,
+        "ADVISORY": 7
+      },
+      "steps": [
+        "spec-hash-diff",
+        "param-integrity",
+        "param-lock",
+        "fairness-unit",
+        "hype-lint",
+        "disclaimers-lint",
+        "dec-lint",
+        "principles-impact",
+        "evidence-freshness",
+        "evidence-collision-test",
+        "fairness-sim",
+        "fairness-metrics",
+        "no-silent-drift",
+        "governed-change-scan",
+        "events-validate",
+        "policy-index-verify",
+        "changelog-excerpt",
+        "event-anchor",
+        "terminology-scan",
+        "pii-scan",
+        "pii-metrics",
+        "collector-integration",
+        "feedback-smoke",
+        "policy-aggregation-threshold",
+        "policy-aggregation-enforce"
+      ]
+    },
+    {
+      "day": "20250816",
+      "actions": {
+        "total": 632,
+        "OK": 617,
+        "ERROR": 15
+      },
+      "steps": [
+        "spec-hash-diff",
+        "param-integrity",
+        "param-lock",
+        "fairness-unit",
+        "hype-lint",
+        "disclaimers-lint",
+        "pii-scan",
+        "pii-metrics",
+        "dec-lint",
+        "principles-impact",
+        "events-validate",
+        "collector-integration",
+        "feedback-smoke",
+        "policy-aggregation-threshold",
+        "policy-aggregation-enforce",
+        "evidence-freshness",
+        "evidence-collision-test",
+        "fairness-sim",
+        "fairness-metrics",
+        "no-silent-drift",
+        "governed-change-scan",
+        "policy-index-verify",
+        "changelog-excerpt",
+        "event-anchor",
+        "terminology-scan",
+        "terminology-adoption",
+        "privacy-asserts",
+        "security-patterns-smoke",
+        "spec-hash-auto-seal-allowlist"
+      ]
+    },
+    {
+      "day": "20250817",
+      "actions": {
+        "total": 93,
+        "ERROR": 5,
+        "OK": 88
+      },
+      "steps": [
+        "spec-hash-diff",
+        "param-integrity",
+        "param-lock",
+        "fairness-unit",
+        "security-patterns-smoke",
+        "hype-lint",
+        "disclaimers-lint",
+        "pii-scan",
+        "pii-metrics",
+        "privacy-asserts",
+        "dec-lint",
+        "principles-impact",
+        "events-validate",
+        "collector-integration",
+        "feedback-smoke",
+        "policy-aggregation-threshold",
+        "policy-aggregation-enforce",
+        "evidence-freshness",
+        "evidence-collision-test",
+        "fairness-sim",
+        "fairness-metrics"
+      ]
+    },
+    {
+      "day": "20250818",
+      "actions": {
+        "total": 506,
+        "OK": 500,
+        "ERROR": 6
+      },
+      "steps": [
+        "spec-hash-diff",
+        "param-integrity",
+        "param-lock",
+        "fairness-unit",
+        "security-patterns-smoke",
+        "hype-lint",
+        "disclaimers-lint",
+        "pii-scan",
+        "pii-metrics",
+        "privacy-asserts",
+        "dec-lint",
+        "principles-impact",
+        "events-validate",
+        "collector-integration",
+        "feedback-smoke",
+        "policy-aggregation-threshold",
+        "policy-aggregation-enforce",
+        "evidence-freshness",
+        "evidence-collision-test",
+        "fairness-sim",
+        "fairness-metrics",
+        "no-silent-drift",
+        "governed-change-scan",
+        "policy-index-verify",
+        "changelog-excerpt",
+        "event-anchor",
+        "terminology-adoption",
+        "terminology-scan",
+        "spec-hash-auto-seal-allowlist"
       ]
     }
   ],
   "totals": {
-    "total": 8,
-    "OK": 7,
-    "ADVISORY": 1,
-    "ERROR": 0
+    "total": 1749,
+    "OK": 1711,
+    "ADVISORY": 12,
+    "ERROR": 26
   }
 }

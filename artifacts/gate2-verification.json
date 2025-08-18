@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-17T16:19:55.002Z",
+  "generated_utc": "2025-08-18T21:37:15.630Z",
   "gate": "Gate 2 - Expanded Transparency",
   "status": "PASS",
   "requirements": [
@@ -34,11 +34,11 @@
       "details": {
         "adoption_percent": 100,
         "adoption_persisted": true,
-        "trend_entries": 23,
+        "trend_entries": 26,
         "trend_report_generated": true,
         "ci_policy_enabled": true,
         "old_terms_total": 0,
-        "suggestions_count": 51
+        "suggestions_count": 74
       }
     },
     {
@@ -47,7 +47,7 @@
       "details": {
         "lint_status": "PASS",
         "errors_count": 0,
-        "warnings_count": 8,
+        "warnings_count": 9,
         "artifact_exists": true,
         "presence_enforcement": true
       }
@@ -63,11 +63,21 @@
         "ci_integrated": true,
         "scanned_url": "http://127.0.0.1:4620/"
       }
+    },
+    {
+      "requirement": "Governance: Disclaimers Lint PASS",
+      "status": "PASS",
+      "details": {
+        "status": "PASS",
+        "errors": 0,
+        "warnings": 9,
+        "computed_hash": "55ed6a0cc3b99a73296dfd0a88470f33510436b54e5bbd90a6cb2fa1c8364158"
+      }
     }
   ],
   "summary": {
-    "total_requirements": 5,
-    "passed": 5,
+    "total_requirements": 6,
+    "passed": 6,
     "failed": 0,
     "gate2_closure_ready": true
   }

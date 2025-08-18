@@ -955,3 +955,52 @@ export class SecurityHardening extends EventEmitter {
 export const securityHardening = new SecurityHardening();
 
 export default SecurityHardening;
+
+// CLI interface for npm script execution
+if (import.meta.url === `file://${process.argv[1]}`) {
+  const args = process.argv.slice(2);
+  
+  async function main() {
+    try {
+      if (args.includes('--scan')) {
+        console.log('🔍 Running security scan...');
+        
+        // Perform comprehensive security scan
+        const scanResult = await securityHardening.performSecurityScan('full');
+        
+        console.log(`📊 Security scan completed:`);
+        console.log(`  - Vulnerabilities found: ${scanResult.vulnerabilities.length}`);
+        console.log(`  - Threats detected: ${scanResult.threats.length}`);
+        console.log(`  - Configuration issues: ${scanResult.configuration_issues.length}`);
+        console.log(`  - Overall security score: ${scanResult.overall_score}/100`);
+        
+        // Exit with appropriate code
+        if (scanResult.overall_score < 70) {
+          console.log('⚠️ Security score below acceptable threshold (70)');
+          process.exit(1);
+        }
+        
+        console.log('✅ Security scan passed');
+        process.exit(0);
+        
+      } else if (args.includes('--status')) {
+        const status = securityHardening.getSecurityStatus();
+        console.log('🛡️ Security Status:', JSON.stringify(status, null, 2));
+        process.exit(0);
+        
+      } else {
+        console.log('📖 Security Hardening CLI');
+        console.log('Usage:');
+        console.log('  --scan    Run comprehensive security scan');
+        console.log('  --status  Show current security status');
+        process.exit(0);
+      }
+      
+    } catch (error) {
+      console.error('❌ Security operation failed:', error.message);
+      process.exit(1);
+    }
+  }
+  
+  main();
+}

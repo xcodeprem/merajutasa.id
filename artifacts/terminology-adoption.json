@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-18T20:32:40.960Z",
+  "generated_utc": "2025-08-18T21:37:16.396Z",
   "old_total": 0,
   "new_total": 0,
   "adoptionPercent": 100,
@@ -357,6 +357,11 @@
     },
     {
       "file": "docs/integrity/api-verification-docs.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/infrastructure/week6-component-integration-guide.md",
       "oldCount": 0,
       "newCount": 0
     },

@@ -1,12 +1,12 @@
 {
-  "timestamp": "2025-08-18T20:34:33.888Z",
+  "timestamp": "2025-08-18T22:13:27.492Z",
   "test_suite": "Week 6 Component Contract Tests",
   "summary": {
     "total": 7,
     "passed": 7,
     "failed": 0,
     "success_rate": 100,
-    "total_duration": 31
+    "total_duration": 27
   },
   "results": [
     {
@@ -22,7 +22,7 @@
     {
       "name": "Orchestrator Event Handling",
       "status": "PASSED",
-      "duration": 2
+      "duration": 1
     },
     {
       "name": "Cross-Component Integration",
@@ -37,12 +37,12 @@
     {
       "name": "Error Handling Contracts",
       "status": "PASSED",
-      "duration": 3
+      "duration": 2
     },
     {
       "name": "Minimal Audit Event Flow",
       "status": "PASSED",
-      "duration": 1
+      "duration": 0
     }
   ],
   "contract_validation": {

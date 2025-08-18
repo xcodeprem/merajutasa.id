@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "generated_utc": "2025-08-14T13:53:08.909Z",
+  "generated_utc": "2025-08-18T21:37:23.492Z",
   "equity": {
-    "equity_index": 1,
+    "equity_index": 0.98,
     "buckets": {
-      "U1": 6600,
+      "U1": 6200,
       "U2": 6600
     },
-    "ts": "2025-08-14T13:26:35.629Z"
+    "ts": "2025-08-18T21:36:59.826Z"
   },
   "governance": {
     "param_mismatches": 0,

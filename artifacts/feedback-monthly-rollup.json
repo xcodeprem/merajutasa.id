@@ -1,20 +1,20 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-15T16:47:24.265Z",
-  "source_records": 18,
+  "generated_utc": "2025-08-18T21:36:13.026Z",
+  "source_records": 152,
   "blocked_hint": 1,
   "months": [
     {
       "month": "2025-08",
-      "total": 18,
+      "total": 152,
       "categories": {
-        "product": 9,
-        "ux": 9,
-        "bug": 9
+        "product": 76,
+        "ux": 76,
+        "bug": 76
       },
       "pii": {
-        "CONTACT_EMAIL": 9,
-        "CONTACT_PHONE": 9
+        "CONTACT_EMAIL": 76,
+        "CONTACT_PHONE": 76
       },
       "avg_len": 54
     }

@@ -4,16 +4,18 @@
     "status": 200,
     "json": {
       "status": "INGESTED",
-      "event_hash": "464a71c90fd470ad8e692b26ac33dd57511eec0306b539a8d7f66d99a4664b0b",
-      "prohibited_meta": false
+      "event_hash": "cac2de09217ddb6ebcdeb0448243ffd24bf308f8ed8a1650fd6b1e4019992438",
+      "prohibited_meta": false,
+      "meta_valid": true
     }
   },
   "hero": {
     "status": 200,
     "json": {
       "status": "INGESTED",
-      "event_hash": "6e331d7fd64fcfe076901953bbce503585ecd9b4fca9fbf2ae4943ca0a447064",
-      "prohibited_meta": false
+      "event_hash": "eee8d655d9d2aa63eb9cc0e4d2f61b3b6864f66bdf3e7ee2ae6257b8719c113e",
+      "prohibited_meta": false,
+      "meta_valid": true
     }
   }
 }

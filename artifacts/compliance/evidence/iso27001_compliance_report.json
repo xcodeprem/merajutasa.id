@@ -1,0 +1,86 @@
+{
+  "assessed_controls": [
+    {
+      "assessment_score": 60,
+      "category": "governance",
+      "compliance_status": "non_compliant",
+      "control_id": "iso27001_a5_1_1",
+      "evidence_references": [
+        {
+          "file_name": "governance_framework.pdf",
+          "file_type": "pdf",
+          "last_updated": "2025-08-01",
+          "location": "evidence/governance/governance_framework.pdf"
+        },
+        {
+          "file_name": "board_minutes.pdf",
+          "file_type": "pdf",
+          "last_updated": "2025-08-15",
+          "location": "evidence/governance/board_minutes.pdf"
+        }
+      ],
+      "findings": [
+        "Policy communication not tracked",
+        "Management approval not documented"
+      ],
+      "required_controls": [
+        "policy_framework",
+        "management_commitment",
+        "policy_communication"
+      ],
+      "risk_level": "high",
+      "title": "Information Security Policy"
+    },
+    {
+      "assessment_score": 48,
+      "category": "asset_management",
+      "compliance_status": "non_compliant",
+      "control_id": "iso27001_a8_2_3",
+      "evidence_references": [
+        {
+          "file_name": "asset_inventory.xlsx",
+          "file_type": "xlsx",
+          "last_updated": "2025-08-11",
+          "location": "evidence/asset_management/asset_inventory.xlsx"
+        },
+        {
+          "file_name": "classification_scheme.pdf",
+          "file_type": "pdf",
+          "last_updated": "2025-07-23",
+          "location": "evidence/asset_management/classification_scheme.pdf"
+        }
+      ],
+      "findings": [
+        "Control implementation gap identified"
+      ],
+      "required_controls": [
+        "asset_inventory",
+        "asset_classification",
+        "handling_procedures"
+      ],
+      "risk_level": "medium",
+      "title": "Handling of Assets"
+    }
+  ],
+  "compliance_score": 0,
+  "framework": "ISO27001",
+  "risk_breakdown": {
+    "critical": {
+      "compliant": 0,
+      "total": 0
+    },
+    "high": {
+      "compliant": 0,
+      "total": 1
+    },
+    "low": {
+      "compliant": 0,
+      "total": 0
+    },
+    "medium": {
+      "compliant": 0,
+      "total": 1
+    }
+  },
+  "total_controls": 2
+}

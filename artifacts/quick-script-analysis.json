@@ -1,0 +1,1710 @@
+{
+  "total": 203,
+  "categories": {
+    "lint": {
+      "count": 5,
+      "scripts": [
+        {
+          "name": "lint",
+          "command": "npm run lint:md && npm run lint:dec",
+          "issues": [],
+          "type": "composite"
+        },
+        {
+          "name": "lint:md",
+          "command": "markdownlint-cli2 \"**/*.md\"",
+          "issues": [],
+          "type": "unknown"
+        },
+        {
+          "name": "lint:dec",
+          "command": "node tools/dec-lint.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "lint:disclaimers",
+          "command": "node tools/disclaimers-lint.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "lint:imports",
+          "command": "node tools/import-dependency-check.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "test": {
+      "count": 19,
+      "scripts": [
+        {
+          "name": "test",
+          "command": "npm run test:governance && npm run test:services && npm run test:infrastructure",
+          "issues": [],
+          "type": "composite"
+        },
+        {
+          "name": "test:governance",
+          "command": "node tools/tests/policy-aggregation-threshold.test.js && node tools/tests/feedback-categories-ingestion.test.js && node tools/tests/evidence-bundle-prefix.test.js && node tools/tests/dec-canonical-hash-equivalence.test.js && node tools/tests/governance-verify.test.js && node tools/tests/spec-hash-diff.test.js && node tools/tests/param-integrity.test.js && node tools/tests/gap-analysis.test.js && node tools/tests/dec-lint.test.js && node tools/tests/json-stable.test.js && node tools/tests/check-actions-pinning.test.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "test:services",
+          "command": "node tools/tests/services-integration.test.js && node tools/tests/privacy-tools.test.js && node tools/tests/evidence-validation.test.js && node tools/tests/lint-tools.test.js && node tools/tests/events-processing.test.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "test:infrastructure",
+          "command": "node tools/tests/infrastructure-integration.test.js && node tools/tests/week6-component-imports.test.js && node tools/tests/week6-component-contracts.test.js && node tools/tests/week6-component-smoke.test.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "test:all",
+          "command": "npm run test:governance && npm run test:services && npm run test:pii",
+          "issues": [],
+          "type": "composite"
+        },
+        {
+          "name": "test:integrity",
+          "command": "node tools/tests/run-basic-integrity-tests.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "test:fairness-unit",
+          "command": "node tools/tests/fairness-engine-unit-tests.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "test:pii",
+          "command": "node tools/tests/pii-scan.test.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "test:collector",
+          "command": "node tools/tests/collector-integration.test.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "test:revocation-smoke",
+          "command": "node tools/tests/revocation-smoke.test.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "test:week6-imports",
+          "command": "node tools/tests/week6-component-imports.test.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "test:week6-contracts",
+          "command": "node tools/tests/week6-component-contracts.test.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "test:week6-smoke",
+          "command": "node tools/tests/week6-component-smoke.test.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "test:week6",
+          "command": "npm run test:week6-imports && npm run test:week6-contracts && npm run test:week6-smoke",
+          "issues": [],
+          "type": "composite"
+        },
+        {
+          "name": "test:equity-smoke",
+          "command": "node tools/tests/equity-smoke.test.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "test:equity-ui-smoke",
+          "command": "node tools/tests/equity-ui-smoke.test.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "test:events-pipeline-hash",
+          "command": "node tools/tests/event-pipeline-hash.test.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "test:event-taxonomy",
+          "command": "node tools/tests/event-taxonomy-consistency.test.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "test:dec-hash",
+          "command": "node tools/tests/dec-canonical-hash-equivalence.test.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "format": {
+      "count": 1,
+      "scripts": [
+        {
+          "name": "format",
+          "command": "echo 'Formatting tools not configured - using markdownlint for markdown'",
+          "issues": [],
+          "type": "placeholder"
+        }
+      ],
+      "issues": 0
+    },
+    "governance": {
+      "count": 2,
+      "scripts": [
+        {
+          "name": "governance:check",
+          "command": "npm run governance:verify && ./.github/scripts/check-actions-pinning.sh && npm run schema:validate && node tools/validate-policy.js",
+          "issues": [],
+          "type": "composite"
+        },
+        {
+          "name": "governance:verify",
+          "command": "node tools/governance-verify.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "spec-hash": {
+      "count": 3,
+      "scripts": [
+        {
+          "name": "spec-hash:verify",
+          "command": "node tools/spec-hash-diff.js --mode=verify",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "spec-hash:seal",
+          "command": "node tools/spec-hash-diff.js --mode=seal-first",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "spec-hash:auto-seal-readme",
+          "command": "node tools/spec-hash-diff.js --mode=accept --include=README.md",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "param": {
+      "count": 2,
+      "scripts": [
+        {
+          "name": "param:integrity",
+          "command": "node tools/param-integrity.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "param:lock",
+          "command": "node tools/param-lock-verify.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "evidence": {
+      "count": 3,
+      "scripts": [
+        {
+          "name": "evidence:validate",
+          "command": "node tools/validate-evidence.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "evidence:bundle",
+          "command": "node tools/evidence-bundle.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "evidence:collision",
+          "command": "node tools/evidence-collision-test.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "service": {
+      "count": 5,
+      "scripts": [
+        {
+          "name": "service:signer",
+          "command": "node tools/services/signer.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "service:chain",
+          "command": "node tools/services/chain.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "service:collector",
+          "command": "node tools/services/collector.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "service:revocation",
+          "command": "node tools/services/revocation.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "service:equity",
+          "command": "node tools/services/equity.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "privacy": {
+      "count": 7,
+      "scripts": [
+        {
+          "name": "privacy:scan",
+          "command": "node tools/pii-scan.js --sarif",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "privacy:metrics",
+          "command": "node tools/pii-metrics.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "privacy:asserts",
+          "command": "node tools/privacy-asserts.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "privacy:rights",
+          "command": "node infrastructure/compliance/privacy-rights-management.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "privacy:request",
+          "command": "node infrastructure/compliance/privacy-rights-management.js --process-request",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "privacy:report",
+          "command": "node infrastructure/compliance/privacy-rights-management.js --generate-report",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "privacy:validate",
+          "command": "npm run privacy:rights && npm run privacy:request && npm run privacy:report",
+          "issues": [],
+          "type": "composite"
+        }
+      ],
+      "issues": 0
+    },
+    "fairness": {
+      "count": 5,
+      "scripts": [
+        {
+          "name": "fairness:generate-snapshots",
+          "command": "node tools/fairness/generate-equity-snapshots.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "fairness:hysteresis-run",
+          "command": "node tools/fairness/hysteresis-engine.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "fairness:sim",
+          "command": "node tools/fairness-sim.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "fairness:engine",
+          "command": "node tools/fairness-engine-runtime.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "fairness:metrics",
+          "command": "node tools/fairness/fairness-metrics.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "equity": {
+      "count": 4,
+      "scripts": [
+        {
+          "name": "equity:snapshot",
+          "command": "node tools/fairness/generate-equity-snapshots.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "equity:anomaly",
+          "command": "node tools/equity-anomaly-detector.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "equity:under-served",
+          "command": "node tools/derive-under-served-list.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "equity:annotate",
+          "command": "node tools/equity-anomaly-annotate.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "infra": {
+      "count": 8,
+      "scripts": [
+        {
+          "name": "infra:nginx",
+          "command": "nginx -c $(pwd)/infrastructure/reverse-proxy/nginx.conf -g 'daemon off;'",
+          "issues": [],
+          "type": "unknown"
+        },
+        {
+          "name": "infra:generate-certs",
+          "command": "./infrastructure/reverse-proxy/generate-certs.sh",
+          "issues": [],
+          "type": "shell_script"
+        },
+        {
+          "name": "infra:metrics",
+          "command": "node infrastructure/monitoring/metrics-collector.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "infra:backup",
+          "command": "node infrastructure/backup/backup-service.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "infra:backup:create",
+          "command": "node -e \"import('./infrastructure/backup/backup-service.js').then(m => m.default.initialize().then(() => m.default.createBackup()).then(console.log))\"",
+          "issues": [],
+          "type": "unknown"
+        },
+        {
+          "name": "infra:backup:list",
+          "command": "node -e \"import('./infrastructure/backup/backup-service.js').then(m => m.default.listBackups().then(b => console.log(JSON.stringify(b, null, 2))))\"",
+          "issues": [],
+          "type": "unknown"
+        },
+        {
+          "name": "infra:backup:cleanup",
+          "command": "node -e \"import('./infrastructure/backup/backup-service.js').then(m => m.default.cleanupOldBackups().then(console.log))\"",
+          "issues": [],
+          "type": "unknown"
+        },
+        {
+          "name": "infra:start-all",
+          "command": "concurrently \"npm run service:signer\" \"npm run service:chain\" \"npm run service:collector\" \"npm run infra:metrics\"",
+          "issues": [
+            "Obsolete pattern: concurrently"
+          ],
+          "type": "composite"
+        }
+      ],
+      "issues": 1
+    },
+    "docker": {
+      "count": 9,
+      "scripts": [
+        {
+          "name": "docker:build-all",
+          "command": "./infrastructure/docker/scripts/build-all.sh",
+          "issues": [],
+          "type": "docker"
+        },
+        {
+          "name": "docker:deploy-dev",
+          "command": "ENVIRONMENT=development ./infrastructure/docker/scripts/deploy-stack.sh deploy",
+          "issues": [],
+          "type": "docker"
+        },
+        {
+          "name": "docker:deploy-prod",
+          "command": "ENVIRONMENT=production ./infrastructure/docker/scripts/deploy-stack.sh deploy",
+          "issues": [],
+          "type": "docker"
+        },
+        {
+          "name": "docker:deploy-test",
+          "command": "ENVIRONMENT=test ./infrastructure/docker/scripts/deploy-stack.sh deploy",
+          "issues": [],
+          "type": "docker"
+        },
+        {
+          "name": "docker:stop",
+          "command": "./infrastructure/docker/scripts/deploy-stack.sh stop",
+          "issues": [],
+          "type": "docker"
+        },
+        {
+          "name": "docker:restart",
+          "command": "./infrastructure/docker/scripts/deploy-stack.sh restart",
+          "issues": [],
+          "type": "docker"
+        },
+        {
+          "name": "docker:status",
+          "command": "./infrastructure/docker/scripts/deploy-stack.sh status",
+          "issues": [],
+          "type": "docker"
+        },
+        {
+          "name": "docker:logs",
+          "command": "./infrastructure/docker/scripts/deploy-stack.sh logs",
+          "issues": [],
+          "type": "docker"
+        },
+        {
+          "name": "docker:health-check",
+          "command": "./infrastructure/docker/scripts/health-check.sh",
+          "issues": [],
+          "type": "docker"
+        }
+      ],
+      "issues": 0
+    },
+    "k8s": {
+      "count": 5,
+      "scripts": [
+        {
+          "name": "k8s:deploy",
+          "command": "kubectl apply -f infrastructure/kubernetes/ -R",
+          "issues": [],
+          "type": "kubernetes"
+        },
+        {
+          "name": "k8s:delete",
+          "command": "kubectl delete -f infrastructure/kubernetes/ -R",
+          "issues": [],
+          "type": "kubernetes"
+        },
+        {
+          "name": "k8s:status",
+          "command": "kubectl get pods,services,deployments -l app.kubernetes.io/part-of=merajutasa",
+          "issues": [],
+          "type": "kubernetes"
+        },
+        {
+          "name": "k8s:logs",
+          "command": "kubectl logs -l app.kubernetes.io/part-of=merajutasa --tail=100",
+          "issues": [],
+          "type": "kubernetes"
+        },
+        {
+          "name": "k8s:describe",
+          "command": "kubectl describe deployments,services,pods -l app.kubernetes.io/part-of=merajutasa",
+          "issues": [],
+          "type": "kubernetes"
+        }
+      ],
+      "issues": 0
+    },
+    "performance": {
+      "count": 6,
+      "scripts": [
+        {
+          "name": "performance:start",
+          "command": "concurrently \"npm run cache:redis-start\" \"npm run sla:monitor-start\" \"npm run performance:monitor\"",
+          "issues": [
+            "Obsolete pattern: concurrently"
+          ],
+          "type": "composite"
+        },
+        {
+          "name": "performance:cache-demo",
+          "command": "node -e \"import('./infrastructure/performance/cache/cache-strategies.js').then(m => console.log('Cache demo - implement as needed'))\"",
+          "issues": [],
+          "type": "unknown"
+        },
+        {
+          "name": "performance:monitor",
+          "command": "node -e \"import('./infrastructure/performance/monitoring/performance-monitor.js').then(m => m.getPerformanceMonitor().startMonitoring?.() || console.log('Performance monitoring ready'))\"",
+          "issues": [],
+          "type": "unknown"
+        },
+        {
+          "name": "performance:health-check",
+          "command": "node -e \"Promise.all([import('./infrastructure/performance/cache/cache-strategies.js'), import('./infrastructure/performance/monitoring/sla-monitor.js')]).then(([cache, sla]) => Promise.all([cache.getCacheStrategies().healthCheck(), sla.getSLAMonitor().healthCheck()])).then(results => console.log('Health:', results))\"",
+          "issues": [],
+          "type": "unknown"
+        },
+        {
+          "name": "performance:report",
+          "command": "node -e \"import('./infrastructure/performance/monitoring/performance-monitor.js').then(m => m.getPerformanceMonitor().generatePerformanceReport?.().then(r => console.log('Report generated:', r?.timestamp)) || console.log('Performance report ready'))\"",
+          "issues": [],
+          "type": "unknown"
+        },
+        {
+          "name": "performance:benchmark",
+          "command": "node tools/performance-benchmark.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 1
+    },
+    "cache": {
+      "count": 2,
+      "scripts": [
+        {
+          "name": "cache:redis-start",
+          "command": "echo 'Redis cache manager ready - configure Redis server if needed'",
+          "issues": [],
+          "type": "placeholder"
+        },
+        {
+          "name": "cache:clear-all",
+          "command": "node -e \"import('./infrastructure/performance/cache/cache-strategies.js').then(m => m.getCacheStrategies().clear?.().then(() => console.log('All caches cleared')))\"",
+          "issues": [],
+          "type": "unknown"
+        }
+      ],
+      "issues": 0
+    },
+    "sla": {
+      "count": 2,
+      "scripts": [
+        {
+          "name": "sla:monitor-start",
+          "command": "node -e \"import('./infrastructure/performance/monitoring/sla-monitor.js').then(m => m.getSLAMonitor().startMonitoring?.() || console.log('SLA monitoring ready'))\"",
+          "issues": [],
+          "type": "unknown"
+        },
+        {
+          "name": "sla:status",
+          "command": "node -e \"import('./infrastructure/performance/monitoring/sla-monitor.js').then(m => m.getSLAMonitor().getCurrentStatus().then(s => console.log('SLA Status:', JSON.stringify(s, null, 2))))\"",
+          "issues": [],
+          "type": "unknown"
+        }
+      ],
+      "issues": 0
+    },
+    "observability": {
+      "count": 4,
+      "scripts": [
+        {
+          "name": "observability:start",
+          "command": "node -e \"import('./infrastructure/observability/advanced-observability-system.js').then(m => m.initializeObservability('merajutasa-service')).then(() => console.log('Observability system started'))\"",
+          "issues": [],
+          "type": "unknown"
+        },
+        {
+          "name": "observability:health-check",
+          "command": "node -e \"import('./infrastructure/observability/advanced-observability-system.js').then(m => m.getAdvancedObservabilitySystem().getSystemStatus().then(s => console.log(JSON.stringify(s, null, 2))))\"",
+          "issues": [],
+          "type": "unknown"
+        },
+        {
+          "name": "observability:benchmark",
+          "command": "node tools/observability-benchmark.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "observability:export",
+          "command": "node -e \"import('./infrastructure/observability/advanced-observability-system.js').then(m => m.getAdvancedObservabilitySystem().exportObservabilityData().then(d => console.log(JSON.stringify(d, null, 2))))\"",
+          "issues": [],
+          "type": "unknown"
+        }
+      ],
+      "issues": 0
+    },
+    "tracing": {
+      "count": 1,
+      "scripts": [
+        {
+          "name": "tracing:start",
+          "command": "node -e \"import('./infrastructure/observability/tracing/distributed-tracing.js').then(m => m.getDistributedTracing({ serviceName: 'merajutasa-service' }).healthCheck().then(h => console.log('Tracing:', h)))\"",
+          "issues": [],
+          "type": "unknown"
+        }
+      ],
+      "issues": 0
+    },
+    "metrics": {
+      "count": 1,
+      "scripts": [
+        {
+          "name": "metrics:start",
+          "command": "node -e \"import('./infrastructure/observability/metrics/advanced-metrics-collector.js').then(m => m.getAdvancedMetricsCollector({ serviceName: 'merajutasa-service' }).healthCheck().then(h => console.log('Metrics:', h)))\"",
+          "issues": [],
+          "type": "unknown"
+        }
+      ],
+      "issues": 0
+    },
+    "alerting": {
+      "count": 1,
+      "scripts": [
+        {
+          "name": "alerting:start",
+          "command": "node -e \"import('./infrastructure/observability/alerting/intelligent-alerting.js').then(m => m.getIntelligentAlertingSystem({ serviceName: 'merajutasa-service' }).healthCheck().then(h => console.log('Alerting:', h)))\"",
+          "issues": [],
+          "type": "unknown"
+        }
+      ],
+      "issues": 0
+    },
+    "logs": {
+      "count": 1,
+      "scripts": [
+        {
+          "name": "logs:start",
+          "command": "node -e \"import('./infrastructure/observability/logs/log-aggregation.js').then(m => m.getLogAggregationSystem({ serviceName: 'merajutasa-service' }).healthCheck().then(h => console.log('Logs:', h)))\"",
+          "issues": [],
+          "type": "unknown"
+        }
+      ],
+      "issues": 0
+    },
+    "anomaly": {
+      "count": 1,
+      "scripts": [
+        {
+          "name": "anomaly:start",
+          "command": "node -e \"import('./infrastructure/observability/anomaly/anomaly-detection.js').then(m => m.getAnomalyDetectionSystem({ serviceName: 'merajutasa-service' }).healthCheck().then(h => console.log('Anomaly Detection:', h)))\"",
+          "issues": [],
+          "type": "unknown"
+        }
+      ],
+      "issues": 0
+    },
+    "dashboards": {
+      "count": 2,
+      "scripts": [
+        {
+          "name": "dashboards:start",
+          "command": "node -e \"import('./infrastructure/observability/dashboards/real-time-dashboards.js').then(m => m.getRealTimeMonitoringDashboards({ serviceName: 'merajutasa-service', port: 3000 }).healthCheck().then(h => console.log('Dashboards:', h)))\"",
+          "issues": [],
+          "type": "unknown"
+        },
+        {
+          "name": "dashboards:open",
+          "command": "echo 'Opening dashboards at http://localhost:3000' && start http://localhost:3000 || open http://localhost:3000 || xdg-open http://localhost:3000",
+          "issues": [],
+          "type": "placeholder"
+        }
+      ],
+      "issues": 0
+    },
+    "api-gateway": {
+      "count": 4,
+      "scripts": [
+        {
+          "name": "api-gateway:start",
+          "command": "node -e \"import('./infrastructure/api-gateway/api-gateway-orchestrator.js').then(m => m.getAPIGatewayOrchestrator().start().then(() => console.log('API Gateway system started')))\"",
+          "issues": [],
+          "type": "unknown"
+        },
+        {
+          "name": "api-gateway:stop",
+          "command": "node -e \"import('./infrastructure/api-gateway/api-gateway-orchestrator.js').then(m => m.getAPIGatewayOrchestrator().stop().then(() => console.log('API Gateway system stopped')))\"",
+          "issues": [],
+          "type": "unknown"
+        },
+        {
+          "name": "api-gateway:status",
+          "command": "node -e \"import('./infrastructure/api-gateway/api-gateway-orchestrator.js').then(m => m.getAPIGatewayOrchestrator().getSystemStatus().then(s => console.log(JSON.stringify(s, null, 2))))\"",
+          "issues": [],
+          "type": "unknown"
+        },
+        {
+          "name": "api-gateway:metrics",
+          "command": "node -e \"import('./infrastructure/api-gateway/api-gateway-orchestrator.js').then(m => m.getAPIGatewayOrchestrator().getUnifiedMetrics().then(m => console.log(JSON.stringify(m, null, 2))))\"",
+          "issues": [],
+          "type": "unknown"
+        }
+      ],
+      "issues": 0
+    },
+    "service-mesh": {
+      "count": 2,
+      "scripts": [
+        {
+          "name": "service-mesh:health",
+          "command": "node -e \"import('./infrastructure/api-gateway/service-mesh.js').then(m => m.getServiceMesh().healthCheck().then(h => console.log('Service Mesh:', JSON.stringify(h, null, 2))))\"",
+          "issues": [],
+          "type": "unknown"
+        },
+        {
+          "name": "service-mesh:topology",
+          "command": "node -e \"import('./infrastructure/api-gateway/service-mesh.js').then(m => console.log('Service Topology:', JSON.stringify(m.getServiceMesh().getServiceTopology(), null, 2)))\"",
+          "issues": [],
+          "type": "unknown"
+        }
+      ],
+      "issues": 0
+    },
+    "ha": {
+      "count": 11,
+      "scripts": [
+        {
+          "name": "ha:orchestrator-start",
+          "command": "node -e \"import('./infrastructure/high-availability/ha-orchestrator.js').then(m => m.getHighAvailabilityOrchestrator().initialize().then(() => console.log('HA Orchestrator started')))\"",
+          "issues": [],
+          "type": "unknown"
+        },
+        {
+          "name": "ha:orchestrator-status",
+          "command": "node -e \"import('./infrastructure/high-availability/ha-orchestrator.js').then(m => m.getHighAvailabilityOrchestrator().getSystemStatus().then(s => console.log(JSON.stringify(s, null, 2))))\"",
+          "issues": [],
+          "type": "unknown"
+        },
+        {
+          "name": "ha:multi-region-deploy",
+          "command": "node -e \"import('./infrastructure/high-availability/multi-region-deployment.js').then(m => m.getMultiRegionDeployment().deployToRegions({strategy: 'blue-green', version: 'v1.0.0'}).then(d => console.log('Deployment:', d.id)))\"",
+          "issues": [],
+          "type": "unknown"
+        },
+        {
+          "name": "ha:disaster-recovery-backup",
+          "command": "node -e \"import('./infrastructure/high-availability/disaster-recovery.js').then(m => m.getDisasterRecoverySystem().createFullBackup().then(b => console.log('Backup:', b.id)))\"",
+          "issues": [],
+          "type": "unknown"
+        },
+        {
+          "name": "ha:auto-scaling-status",
+          "command": "node -e \"import('./infrastructure/high-availability/auto-scaling.js').then(m => m.getAutoScalingSystem().getScalingStatus().then(s => console.log(JSON.stringify(s, null, 2))))\"",
+          "issues": [],
+          "type": "unknown"
+        },
+        {
+          "name": "ha:fault-tolerance-status",
+          "command": "node -e \"import('./infrastructure/high-availability/fault-tolerance.js').then(m => m.getFaultToleranceSystem().getFaultToleranceStatus().then(s => console.log(JSON.stringify(s, null, 2))))\"",
+          "issues": [],
+          "type": "unknown"
+        },
+        {
+          "name": "ha:health-monitoring-status",
+          "command": "node -e \"import('./infrastructure/high-availability/health-monitoring.js').then(m => m.getHealthMonitoringSystem().getHealthStatus().then(s => console.log(JSON.stringify(s, null, 2))))\"",
+          "issues": [],
+          "type": "unknown"
+        },
+        {
+          "name": "ha:emergency-response-test",
+          "command": "node -e \"console.log('Emergency response system ready - use ha:orchestrator-start to enable')\"",
+          "issues": [],
+          "type": "unknown"
+        },
+        {
+          "name": "ha:system-health",
+          "command": "node -e \"import('./infrastructure/high-availability/ha-orchestrator.js').then(m => m.getHighAvailabilityOrchestrator().healthCheck().then(h => console.log('System Health:', JSON.stringify(h, null, 2))))\"",
+          "issues": [],
+          "type": "unknown"
+        },
+        {
+          "name": "ha:start-all",
+          "command": "concurrently \"npm run ha:orchestrator-start\" \"npm run ha:health-monitoring-status\" \"npm run ha:auto-scaling-status\"",
+          "issues": [
+            "Obsolete pattern: concurrently"
+          ],
+          "type": "composite"
+        },
+        {
+          "name": "ha:demo-full",
+          "command": "npm run week5:demo",
+          "issues": [],
+          "type": "composite"
+        }
+      ],
+      "issues": 1
+    },
+    "compliance": {
+      "count": 5,
+      "scripts": [
+        {
+          "name": "compliance:audit",
+          "command": "node infrastructure/compliance/audit-system.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "compliance:automation",
+          "command": "node infrastructure/compliance/compliance-automation.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "compliance:orchestrator",
+          "command": "node infrastructure/compliance/compliance-orchestrator.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "compliance:report",
+          "command": "node infrastructure/compliance/compliance-automation.js --generate-report",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "compliance:start-all",
+          "command": "concurrently \"npm run compliance:orchestrator\" \"npm run security:hardening\" \"npm run audit:start\"",
+          "issues": [
+            "Obsolete pattern: concurrently"
+          ],
+          "type": "composite"
+        }
+      ],
+      "issues": 1
+    },
+    "security": {
+      "count": 4,
+      "scripts": [
+        {
+          "name": "security:hardening",
+          "command": "node infrastructure/security/enhanced/security-hardening.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "security:scan",
+          "command": "node infrastructure/security/enhanced/security-hardening.js --scan",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "security:threats",
+          "command": "node infrastructure/security/enhanced/security-hardening.js --detect-threats",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "security:monitor",
+          "command": "npm run security:hardening && npm run security:threats",
+          "issues": [],
+          "type": "composite"
+        }
+      ],
+      "issues": 0
+    },
+    "audit": {
+      "count": 3,
+      "scripts": [
+        {
+          "name": "audit:start",
+          "command": "node infrastructure/compliance/audit-system.js --start",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "audit:flush",
+          "command": "node infrastructure/compliance/audit-system.js --flush",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "audit:report",
+          "command": "node infrastructure/compliance/audit-system.js --report",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "week2": {
+      "count": 2,
+      "scripts": [
+        {
+          "name": "week2:status",
+          "command": "node tools/phase2-week2-status.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "week2:demo",
+          "command": "node tools/phase2-week2-demo.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "week3": {
+      "count": 2,
+      "scripts": [
+        {
+          "name": "week3:status",
+          "command": "node tools/phase2-week3-status.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "week3:demo",
+          "command": "node tools/phase2-week3-demo.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "week4": {
+      "count": 2,
+      "scripts": [
+        {
+          "name": "week4:status",
+          "command": "node tools/phase2-week4-status.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "week4:demo",
+          "command": "node tools/phase2-week4-demo.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "week5": {
+      "count": 3,
+      "scripts": [
+        {
+          "name": "week5:status",
+          "command": "node tools/phase2-week5-status.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "week5:demo",
+          "command": "node tools/phase2-week5-demo.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "week5:test",
+          "command": "node tools/phase2-week5-test.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "week6": {
+      "count": 6,
+      "scripts": [
+        {
+          "name": "week6:status",
+          "command": "node tools/phase2-week6-status.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "week6:test",
+          "command": "node tools/phase2-week6-test.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "week6:demo",
+          "command": "node tools/phase2-week6-demo.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "week6:validate",
+          "command": "npm run test:week6 && npm run compliance:orchestrator",
+          "issues": [],
+          "type": "composite"
+        },
+        {
+          "name": "week6:health-check",
+          "command": "node -e \"import('./tools/phase2-week6-status.js').then(m => m.runWeek6Demo())\"",
+          "issues": [],
+          "type": "unknown"
+        },
+        {
+          "name": "week6:integration-test",
+          "command": "npm run compliance:audit && npm run security:scan && npm run privacy:rights",
+          "issues": [],
+          "type": "composite"
+        }
+      ],
+      "issues": 0
+    },
+    "phase1": {
+      "count": 2,
+      "scripts": [
+        {
+          "name": "phase1:status",
+          "command": "node tools/phase1-status.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "phase1:demo",
+          "command": "node tools/phase1-status.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "phase2": {
+      "count": 2,
+      "scripts": [
+        {
+          "name": "phase2:status",
+          "command": "node tools/phase2-status.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "phase2:week1-demo",
+          "command": "node tools/phase2-week1-demo.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "cicd": {
+      "count": 2,
+      "scripts": [
+        {
+          "name": "cicd:deploy",
+          "command": "node -e \"import('./infrastructure/cicd/pipeline-manager.js').then(m => m.getCICDManager().executePipeline({name: 'Development Deployment'}).then(r => console.log('Pipeline:', JSON.stringify(r, null, 2))))\"",
+          "issues": [],
+          "type": "unknown"
+        },
+        {
+          "name": "cicd:status",
+          "command": "node -e \"import('./infrastructure/cicd/pipeline-manager.js').then(m => m.getCICDManager().healthCheck().then(h => console.log('CI/CD:', JSON.stringify(h, null, 2))))\"",
+          "issues": [],
+          "type": "unknown"
+        }
+      ],
+      "issues": 0
+    },
+    "docs": {
+      "count": 2,
+      "scripts": [
+        {
+          "name": "docs:generate",
+          "command": "node -e \"import('./infrastructure/api-gateway/openapi-documentation.js').then(m => m.getOpenAPISystem().generateDocumentation().then(d => console.log('Documentation:', JSON.stringify(d, null, 2))))\"",
+          "issues": [],
+          "type": "unknown"
+        },
+        {
+          "name": "docs:summary",
+          "command": "node -e \"import('./infrastructure/api-gateway/openapi-documentation.js').then(m => console.log('Documentation Summary:', JSON.stringify(m.getOpenAPISystem().getDocumentationSummary(), null, 2)))\"",
+          "issues": [],
+          "type": "unknown"
+        }
+      ],
+      "issues": 0
+    },
+    "gap": {
+      "count": 1,
+      "scripts": [
+        {
+          "name": "gap:enhanced",
+          "command": "node tools/gap-analysis-enhanced.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "phase": {
+      "count": 1,
+      "scripts": [
+        {
+          "name": "phase:tracker",
+          "command": "node tools/generate-phase-tracker.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "transparency": {
+      "count": 1,
+      "scripts": [
+        {
+          "name": "transparency:changelog",
+          "command": "node tools/changelog-excerpt-generate.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "risk": {
+      "count": 1,
+      "scripts": [
+        {
+          "name": "risk:digest",
+          "command": "node tools/risk-digest.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "agent": {
+      "count": 1,
+      "scripts": [
+        {
+          "name": "agent:trend",
+          "command": "node tools/agent-trend-summary.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "pr": {
+      "count": 1,
+      "scripts": [
+        {
+          "name": "pr:labels",
+          "command": "node tools/pr-label-advisor.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "events": {
+      "count": 5,
+      "scripts": [
+        {
+          "name": "events:meta",
+          "command": "node tools/event-meta-validate.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "events:validate",
+          "command": "node tools/event-validate.js --file data/events-sample.ndjson --rehash",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "events:anchor",
+          "command": "node tools/event-anchor-chain.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "events:pipeline:hash",
+          "command": "node tools/event-pipeline-hash.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "events:seed",
+          "command": "node tools/seed-events.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "feedback": {
+      "count": 2,
+      "scripts": [
+        {
+          "name": "feedback:smoke",
+          "command": "node tools/feedback-smoke.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "feedback:monthly",
+          "command": "node tools/monthly-feedback-rollup.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "collector": {
+      "count": 1,
+      "scripts": [
+        {
+          "name": "collector:reliability",
+          "command": "node tools/collector-reliability-smoke.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "policy": {
+      "count": 4,
+      "scripts": [
+        {
+          "name": "policy:aggregation:verify",
+          "command": "node tools/policy-aggregation-threshold-verify.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "policy:aggregation:enforce:allow",
+          "command": "node tools/policy-aggregation-threshold-enforce.js artifacts/aggregation-cells-allow.json",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "policy:aggregation:enforce:deny",
+          "command": "node tools/policy-aggregation-threshold-enforce.js artifacts/aggregation-cells-deny.json",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "policy:index:verify",
+          "command": "node tools/policy-index-verify.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "governed": {
+      "count": 1,
+      "scripts": [
+        {
+          "name": "governed:scan",
+          "command": "node tools/governed-change-scan.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "dec": {
+      "count": 2,
+      "scripts": [
+        {
+          "name": "dec:index",
+          "command": "node tools/generate-dec-index.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "dec:new",
+          "command": "node tools/dec-template-create.cjs",
+          "issues": [],
+          "type": "unknown"
+        }
+      ],
+      "issues": 0
+    },
+    "gen": {
+      "count": 1,
+      "scripts": [
+        {
+          "name": "gen:test-vectors",
+          "command": "node tools/generate-test-vectors.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "snapshot": {
+      "count": 1,
+      "scripts": [
+        {
+          "name": "snapshot:artifacts",
+          "command": "node tools/snapshot-artifacts-baseline.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "baseline": {
+      "count": 1,
+      "scripts": [
+        {
+          "name": "baseline:snapshot",
+          "command": "node tools/snapshot-governance-baseline.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "queries": {
+      "count": 1,
+      "scripts": [
+        {
+          "name": "queries:seeds",
+          "command": "node tools/query-seeds.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "doc": {
+      "count": 1,
+      "scripts": [
+        {
+          "name": "doc:verify-cli:stub",
+          "command": "node tools/write-verify-cli-stub.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "schema": {
+      "count": 1,
+      "scripts": [
+        {
+          "name": "schema:validate",
+          "command": "node tools/schema-validate.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "hero": {
+      "count": 1,
+      "scripts": [
+        {
+          "name": "hero:prerender",
+          "command": "node tools/hero-prerender.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "h0": {
+      "count": 1,
+      "scripts": [
+        {
+          "name": "h0:content",
+          "command": "npm run hero:prerender && npm run doc:verify-cli:stub",
+          "issues": [],
+          "type": "composite"
+        }
+      ],
+      "issues": 0
+    },
+    "verify": {
+      "count": 1,
+      "scripts": [
+        {
+          "name": "verify:cli",
+          "command": "node tools/generate-test-vectors.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "monitor": {
+      "count": 1,
+      "scripts": [
+        {
+          "name": "monitor:chain",
+          "command": "node tools/chain-monitor.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "chain": {
+      "count": 2,
+      "scripts": [
+        {
+          "name": "chain:reset:dev",
+          "command": "node tools/chain-reset-dev.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "chain:append:spec-hash",
+          "command": "node tools/chain-append-spec-hash.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "equity-ui-v2": {
+      "count": 4,
+      "scripts": [
+        {
+          "name": "equity-ui-v2:dev",
+          "command": "cd public/equity-ui-v2 && npm run dev",
+          "issues": [],
+          "type": "composite"
+        },
+        {
+          "name": "equity-ui-v2:build",
+          "command": "cd public/equity-ui-v2 && npm run build",
+          "issues": [],
+          "type": "composite"
+        },
+        {
+          "name": "equity-ui-v2:preview",
+          "command": "cd public/equity-ui-v2 && npm run preview",
+          "issues": [],
+          "type": "composite"
+        },
+        {
+          "name": "equity-ui-v2:install",
+          "command": "cd public/equity-ui-v2 && npm install",
+          "issues": [],
+          "type": "unknown"
+        }
+      ],
+      "issues": 0
+    },
+    "h1": {
+      "count": 2,
+      "scripts": [
+        {
+          "name": "h1:kpi",
+          "command": "node tools/generate-h1-kpi-summary.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "h1:guard",
+          "command": "node tools/h1-verify-guard.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "kpi": {
+      "count": 1,
+      "scripts": [
+        {
+          "name": "kpi:weekly",
+          "command": "node tools/weekly-trend-aggregator.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "terms": {
+      "count": 2,
+      "scripts": [
+        {
+          "name": "terms:adoption",
+          "command": "node tools/terminology-adoption.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "terms:trend",
+          "command": "node tools/terminology-adoption-trend.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "perf": {
+      "count": 1,
+      "scripts": [
+        {
+          "name": "perf:budget",
+          "command": "node tools/perf-budget-smoke.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "a11y": {
+      "count": 1,
+      "scripts": [
+        {
+          "name": "a11y:smoke",
+          "command": "node tools/a11y-smoke.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "changelog": {
+      "count": 1,
+      "scripts": [
+        {
+          "name": "changelog:presence",
+          "command": "node tools/changelog-presence-check.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "gate": {
+      "count": 3,
+      "scripts": [
+        {
+          "name": "gate:1",
+          "command": "node tools/gate1-verify.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "gate:2",
+          "command": "node tools/gate2-verify.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "gate:3",
+          "command": "node tools/gate3-verify.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "pipeline": {
+      "count": 1,
+      "scripts": [
+        {
+          "name": "pipeline:credential",
+          "command": "node tools/pipeline-runner.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    },
+    "scripts": {
+      "count": 3,
+      "scripts": [
+        {
+          "name": "scripts:validate",
+          "command": "node tools/scripts-validation.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "scripts:analyze",
+          "command": "node tools/quick-script-analysis.js",
+          "issues": [],
+          "type": "node_script"
+        },
+        {
+          "name": "scripts:organize",
+          "command": "node tools/organize-scripts.js",
+          "issues": [],
+          "type": "node_script"
+        }
+      ],
+      "issues": 0
+    }
+  },
+  "issues": [
+    {
+      "name": "infra:start-all",
+      "command": "concurrently \"npm run service:signer\" \"npm run service:chain\" \"npm run service:collector\" \"npm run infra:metrics\"",
+      "issues": [
+        "Obsolete pattern: concurrently"
+      ],
+      "type": "composite"
+    },
+    {
+      "name": "performance:start",
+      "command": "concurrently \"npm run cache:redis-start\" \"npm run sla:monitor-start\" \"npm run performance:monitor\"",
+      "issues": [
+        "Obsolete pattern: concurrently"
+      ],
+      "type": "composite"
+    },
+    {
+      "name": "ha:start-all",
+      "command": "concurrently \"npm run ha:orchestrator-start\" \"npm run ha:health-monitoring-status\" \"npm run ha:auto-scaling-status\"",
+      "issues": [
+        "Obsolete pattern: concurrently"
+      ],
+      "type": "composite"
+    },
+    {
+      "name": "compliance:start-all",
+      "command": "concurrently \"npm run compliance:orchestrator\" \"npm run security:hardening\" \"npm run audit:start\"",
+      "issues": [
+        "Obsolete pattern: concurrently"
+      ],
+      "type": "composite"
+    }
+  ],
+  "obsolete": [
+    "infra:start-all",
+    "performance:start",
+    "ha:start-all",
+    "compliance:start-all"
+  ],
+  "missing_files": [],
+  "summary": {
+    "totalIssues": 4,
+    "obsoleteScripts": 4,
+    "missingFiles": 0,
+    "healthyScripts": 199
+  }
+}
