@@ -17,9 +17,6 @@ jobs:
         with:
           github-token: ${{ secrets.GH_PROJECT_TOKEN }}
           script: |
-            const core = require('@actions/core');
-            const { context } = require('@actions/github');
-
             const ownerLogin = 'Andhika-Rey';
             const projectTitle = 'MerajutASA Program Board';
 

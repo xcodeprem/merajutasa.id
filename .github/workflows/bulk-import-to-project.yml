@@ -27,7 +27,6 @@ jobs:
         with:
           github-token: ${{ secrets.GH_PROJECT_TOKEN }}
           script: |
-            const core = require('@actions/core');
             const ownerLogin = core.getInput('owner');
             const projectTitle = core.getInput('project_title');
             const labelQuery = core.getInput('label_query');
