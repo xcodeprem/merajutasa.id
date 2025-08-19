@@ -127,6 +127,42 @@ jobs:
               console.log(`Created field "${name}"`);
             }
 
+            async function ensureSingleSelectOptions(name, optionsArr){
+              // If field exists and is SINGLE_SELECT, add any missing options
+              const fieldsResp2 = await github.graphql(`
+                query($projectId: ID!) {
+                  node(id: $projectId) {
+                    ... on ProjectV2 {
+                      fields(first: 50) {
+                        nodes {
+                          __typename
+                          ... on ProjectV2SingleSelectField { id name options { id name color description } }
+                        }
+                      }
+                    }
+                  }
+                }
+              `, { projectId: project.id });
+              const nodes = fieldsResp2.node?.fields?.nodes || [];
+              const f = nodes.find(n => n?.name === name && n.__typename === 'ProjectV2SingleSelectField');
+              if (!f) return;
+              const existingNames = new Set((f.options||[]).map(o=>o.name));
+              const missing = optionsArr.filter(o => !existingNames.has(o.name));
+              if (!missing.length) return;
+              try {
+                const all = [...(f.options||[]).map(o=>({ id:o.id, name:o.name, color:o.color, description:o.description })), ...missing];
+                const m = `
+                  mutation($projectId: ID!, $fieldId: ID!, $opts: [ProjectV2SingleSelectFieldOptionInput!]!) {
+                    updateProjectV2Field(input:{ projectId:$projectId, fieldId:$fieldId, singleSelectOptions:$opts }) { projectV2Field { ... on ProjectV2FieldCommon { id name } } }
+                  }
+                `;
+                await github.graphql(m, { projectId: project.id, fieldId: f.id, opts: all });
+                console.log(`Updated options for field "${name}": added ${missing.map(m=>m.name).join(', ')}`);
+              } catch (e) {
+                core.warning(`Could not update options for '${name}': ${e?.message || e}`);
+              }
+            }
+
             async function createTyped(name, dataType) {
               if (fieldMapping[name]) { console.log(`Field "${name}" exists, skipping`); return; }
               const m = `
@@ -150,6 +186,7 @@ jobs:
             ]);
 
             await createSingleSelect('Area', [
+              opt('Infrastructure','GRAY','Infra & platform'),
               opt('Security','PURPLE','Security domain'),
               opt('Compliance','BLUE','Compliance & governance'),
               opt('Observability','BLUE','Monitoring & observability'),
@@ -170,6 +207,9 @@ jobs:
               opt('Mobile API','BLUE','Mobile endpoints'),
               opt('Integration','GRAY','Cross-component integration')
             ]);
+
+            // Ensure critical options exist even on existing boards
+            await ensureSingleSelectOptions('Area', [ opt('Infrastructure','GRAY','Infra & platform') ]);
 
             await createSingleSelect('Phase', [
               opt('Phase 1','GRAY','Foundation'),

@@ -143,13 +143,14 @@ jobs:
             function getField(name){ return fields.find(f => f.name === name); }
             async function setSingleSelect(fieldName, optionName){
               const f = getField(fieldName);
-              if (!f || f.dataType !== 'SINGLE_SELECT') return;
+              if (!f || f.dataType !== 'SINGLE_SELECT') return false;
               const opt = (f.options || []).find(o => o.name.toLowerCase() === optionName.toLowerCase());
-              if (!opt) return;
+              if (!opt) return false;
               const m = `mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $optionId: String!) {
                 updateProjectV2ItemFieldValue(input:{ projectId:$projectId, itemId:$itemId, fieldId:$fieldId, value:{ singleSelectOptionId:$optionId }}) { projectV2Item { id } }
               }`;
               await github.graphql(m, { projectId, itemId, fieldId: f.id, optionId: opt.id });
+              return true;
             }
             async function setDate(fieldName, value){
               const f = getField(fieldName); if (!f || f.dataType !== 'DATE') return;
@@ -181,7 +182,17 @@ jobs:
             else if (labels.has('P3') || labels.has('planned')) await setSingleSelect('Priority', 'P3');
 
             const areaLabel = Array.from(labels).find(l => l.toLowerCase().startsWith('area:'));
-            if (areaLabel) await setSingleSelect('Area', areaLabel.slice('area:'.length).replace(/-/g,' '));
+            if (areaLabel) {
+              const desired = areaLabel.slice('area:'.length).replace(/-/g,' ');
+              const ok = await setSingleSelect('Area', desired);
+              if (!ok) {
+                // Fallback: if any label matches an existing Area option, use it
+                const areaField = getField('Area');
+                const labelSetLc = new Set(Array.from(labels).map(s=>s.toLowerCase()));
+                const hit = (areaField?.options || []).find(o => labelSetLc.has(o.name.toLowerCase()));
+                if (hit) await setSingleSelect('Area', hit.name);
+              }
+            }
 
             const phaseLabel = Array.from(labels).find(l => l.toLowerCase().startsWith('phase:'));
             if (phaseLabel) {
