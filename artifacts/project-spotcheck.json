@@ -1,0 +1,67 @@
+{
+  "kind": "project_spotcheck",
+  "notes": {
+    "guidance": "If mismatches exist, consider re-running auto-add/bulk-import or manually syncing fields."
+  },
+  "owner": "Andhika-Rey",
+  "project": {
+    "number": 2,
+    "title": "MerajutASA Program Board"
+  },
+  "repo": "merajutasa.id",
+  "results": [
+    {
+      "expected": {
+        "Area": "Infrastructure",
+        "Phase": "2 Week 6",
+        "Priority": "Medium",
+        "Status": "Todo"
+      },
+      "issue": {
+        "number": 98,
+        "title": "[PR-4] Infra Health Triage Runbook: Status, Dependencies, Recommendations"
+      },
+      "labels": [
+        "area:infrastructure",
+        "integration",
+        "medium",
+        "operations",
+        "phase:2-week-6",
+        "status:todo"
+      ],
+      "mismatches": [
+        {
+          "actual": "P2",
+          "expected": "Medium",
+          "field": "Priority"
+        },
+        {
+          "actual": null,
+          "expected": "Infrastructure",
+          "field": "Area"
+        },
+        {
+          "actual": "Phase 2 W6",
+          "expected": "2 Week 6",
+          "field": "Phase"
+        },
+        {
+          "actual": null,
+          "expected": "Todo",
+          "field": "Status"
+        }
+      ],
+      "project": {
+        "number": 2,
+        "title": "MerajutASA Program Board"
+      },
+      "projectFields": {
+        "Owner (text)": "codingxdev0",
+        "Phase": "Phase 2 W6",
+        "Priority": "P2",
+        "Title": "[PR-4] Infra Health Triage Runbook: Status, Dependencies, Recommendations"
+      }
+    }
+  ],
+  "ts": "2025-08-19T21:37:14.098Z"
+}
