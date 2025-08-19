@@ -224,6 +224,7 @@
     "scripts:validate": "node tools/scripts-validator.js",
     "scripts:analyze": "node tools/scripts-inventory.js",
     "scripts:organize": "node tools/organize-scripts.js",
+    "scripts:docs-metrics": "node scripts/calculate-docs-metrics.js",
     "compliance:assess": "node tools/compliance-assessment.js",
     "compliance:orchestrator:test": "node tools/compliance-orchestrator-test.js",
     "privacy:request:simulate": "node tools/privacy-request-simulator.js",
