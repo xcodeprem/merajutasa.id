@@ -29,11 +29,11 @@ jobs:
               console.log('Comment contains "+project" command, proceeding');
             }
             
-            // Project selection: use repository variables if available, fallback to constants
+            // Project selection
             const ownerLogin = process.env.PROJECT_OWNER || '${{ vars.PROJECT_OWNER }}' || 'Andhika-Rey';
             const projectTitle = process.env.PROJECT_TITLE || '${{ vars.PROJECT_TITLE }}' || 'MerajutASA Program Board';
 
-            // 1) Cari Project using repositoryOwner to avoid NOT_FOUND errors
+            // 1) Cari Project using repositoryOwner (fix union selection in fields)
             let project;
             try {
               const findProjectQuery = `
@@ -45,7 +45,8 @@ jobs:
                           id title 
                           fields(first: 50) {
                             nodes {
-                              id name dataType
+                              __typename
+                              ... on ProjectV2FieldCommon { id name dataType }
                               ... on ProjectV2SingleSelectField { options { id name } }
                             }
                           }
@@ -67,7 +68,8 @@ jobs:
                           id title 
                           fields(first: 50) {
                             nodes {
-                              id name dataType
+                              __typename
+                              ... on ProjectV2FieldCommon { id name dataType }
                               ... on ProjectV2SingleSelectField { options { id name } }
                             }
                           }
@@ -113,14 +115,16 @@ jobs:
               query($owner:String!, $repo:String!, $number:Int!) {
                 repository(owner:$owner, name:$repo) {
                   issue(number:$number) { 
-                    id number title 
+                    id number title body
                     labels(first:50){ nodes { name } }
                     milestone { title dueOn }
+                    assignees(first: 10) { nodes { login } }
                   }
                   pullRequest(number:$number) { 
-                    id number title 
+                    id number title body merged
                     labels(first:50){ nodes { name } }
                     milestone { title dueOn }
+                    assignees(first: 10) { nodes { login } }
                   }
                 }
               }
@@ -196,9 +200,10 @@ jobs:
               `;
               await github.graphql(m, { projectId, itemId, fieldId: f.id, numberValue });
             }
-            async function setText(fieldName, textValue) {
+            async function setText(fieldName, textValue, { overwrite = true } = {}) {
               const f = getField(fieldName);
               if (!f || f.dataType !== 'TEXT') return;
+              if (!overwrite && (!textValue || !String(textValue).trim())) return;
               const m = `
                 mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $textValue: String!) {
                   updateProjectV2ItemFieldValue(input:{
@@ -210,23 +215,16 @@ jobs:
               await github.graphql(m, { projectId, itemId, fieldId: f.id, textValue });
             }
 
-            // 4) Comprehensive field mapping
-            
-            // Priority mapping
+            // 4) Comprehensive field mapping (sama seperti sebelumnya)
             if (labels.has('P0') || labels.has('urgent')) await setSingleSelect('Priority', 'P0');
             else if (labels.has('P1') || labels.has('high-priority')) await setSingleSelect('Priority', 'P1');
             else if (labels.has('P2') || labels.has('medium')) await setSingleSelect('Priority', 'P2');
             else if (labels.has('P3') || labels.has('planned')) await setSingleSelect('Priority', 'P3');
 
-            // Area mapping
             const areaPrefix = 'area:';
             const areaLabel = Array.from(labels).find(l => l.toLowerCase().startsWith(areaPrefix));
-            if (areaLabel) {
-              const val = areaLabel.slice(areaPrefix.length).replace(/-/g, ' ');
-              await setSingleSelect('Area', val);
-            }
+            if (areaLabel) await setSingleSelect('Area', areaLabel.slice(areaPrefix.length).replace(/-/g, ' '));
 
-            // Phase mapping
             const phasePrefix = 'phase:';
             const phaseLabel = Array.from(labels).find(l => l.toLowerCase().startsWith(phasePrefix));
             if (phaseLabel) {
@@ -243,64 +241,48 @@ jobs:
               const target = map.get(raw);
               if (target) await setSingleSelect('Phase', target);
             }
-            
-            // Risk mapping
+
             if (labels.has('risk:low')) await setSingleSelect('Risk', 'Low');
             else if (labels.has('risk:medium')) await setSingleSelect('Risk', 'Medium');
             else if (labels.has('risk:high')) await setSingleSelect('Risk', 'High');
-            
-            // Status mapping with auto-setting based on events
+
             if (labels.has('status:todo')) await setSingleSelect('Status', 'To Do');
-            else if (labels.has('status:in-progress')) await setSingleSelect('Status', 'In Progress');  
+            else if (labels.has('status:in-progress')) await setSingleSelect('Status', 'In Progress');
             else if (labels.has('status:in-review')) await setSingleSelect('Status', 'In Review');
             else if (labels.has('status:blocked')) await setSingleSelect('Status', 'Blocked');
             else if (labels.has('status:done')) await setSingleSelect('Status', 'Done');
             else {
-              // Auto-set status based on events
-              if (context.payload.action === 'opened' && !labels.has('status:in-progress') && !labels.has('status:in-review') && !labels.has('status:blocked') && !labels.has('status:done')) {
-                await setSingleSelect('Status', 'To Do');
-              } else if (labels.has('in-progress')) {
-                await setSingleSelect('Status', 'In Progress');
-              } else if ((context.payload.action === 'closed' && context.payload.issue?.state === 'closed') || 
-                         (context.payload.action === 'closed' && context.payload.pull_request?.merged)) {
+              if (context.payload.action === 'opened') await setSingleSelect('Status', 'To Do');
+              if (context.payload.action === 'closed' && (context.payload.issue?.state === 'closed' || context.payload.pull_request?.merged)) {
                 await setSingleSelect('Status', 'Done');
               }
             }
-            
-            // Date parsing from labels (start:YYYY-MM-DD, due:YYYY-MM-DD)
+
             const startDateLabel = Array.from(labels).find(l => l.startsWith('start:'));
             if (startDateLabel) {
               const dateStr = startDateLabel.slice('start:'.length);
-              if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
-                await setDate('Start date', dateStr);
-              }
+              if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) await setDate('Start date', dateStr);
             }
-            
+
             const dueDateLabel = Array.from(labels).find(l => l.startsWith('due:'));
             if (dueDateLabel) {
               const dateStr = dueDateLabel.slice('due:'.length);
-              if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
-                await setDate('Target date', dateStr);
-              }
+              if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) await setDate('Target date', dateStr);
             } else if (content.milestone?.dueOn) {
-              // Use milestone due date if no label provided
-              const milestoneDate = content.milestone.dueOn.split('T')[0]; // Get YYYY-MM-DD part
-              await setDate('Target date', milestoneDate);
+              await setDate('Target date', content.milestone.dueOn.split('T')[0]);
             }
-            
-            // Estimate parsing from labels (est:h:XX)
+
             const estimateLabel = Array.from(labels).find(l => l.startsWith('est:h:'));
             if (estimateLabel) {
-              const hoursStr = estimateLabel.slice('est:h:'.length);
-              const hours = parseFloat(hoursStr);
-              if (!isNaN(hours) && hours > 0) {
-                await setNumber('Estimate (h)', hours);
-              }
+              const hours = parseFloat(estimateLabel.slice('est:h:'.length));
+              if (!isNaN(hours) && hours > 0) await setNumber('Estimate (h)', hours);
             }
-            
-            // Set milestone text field if milestone exists
-            if (content.milestone?.title) {
-              await setText('Milestone', content.milestone.title);
-            }
+
+            // Owner (text) + Links
+            const firstAssignee = content.assignees?.nodes?.[0]?.login;
+            if (firstAssignee) await setText('Owner (text)', firstAssignee);
+            const body = content.body || '';
+            const urlMatch = body.match(/https?:\/\/\S+/);
+            if (urlMatch) await setText('Links', urlMatch[0], { overwrite: false });
 
             console.log(`Updated fields for ${isIssue ? 'issue' : 'PR'} #${number} in project "${projectTitle}".`);
