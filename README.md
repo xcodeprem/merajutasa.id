@@ -1,13 +1,13 @@
 # MerajutASA.id Enterprise Platform
 
-[![CI Guard (H1)](https://github.com/codingxdev0/merajutasa.id/actions/workflows/ci-guard.yml/badge.svg)](https://github.com/codingxdev0/merajutasa.id/actions/workflows/ci-guard.yml)
-[![H1 Guard & KPI](https://github.com/codingxdev0/merajutasa.id/actions/workflows/h1-guard.yml/badge.svg)](https://github.com/codingxdev0/merajutasa.id/actions/workflows/h1-guard.yml)
-[![Deploy Pages (Dashboard Snapshots)](https://github.com/codingxdev0/merajutasa.id/actions/workflows/pages.yml/badge.svg)](https://github.com/codingxdev0/merajutasa.id/actions/workflows/pages.yml)
-[![Changelog Excerpt](https://img.shields.io/badge/changelog-excerpt-blue)](https://codingxdev0.github.io/merajutasa.id/changelog.html)
+[![CI Guard (H1)](https://github.com/Andhika-Rey/merajutasa.id/actions/workflows/ci-guard.yml/badge.svg)](https://github.com/Andhika-Rey/merajutasa.id/actions/workflows/ci-guard.yml)
+[![H1 Guard & KPI](https://github.com/Andhika-Rey/merajutasa.id/actions/workflows/h1-guard.yml/badge.svg)](https://github.com/Andhika-Rey/merajutasa.id/actions/workflows/h1-guard.yml)
+[![Deploy Pages (Dashboard Snapshots)](https://github.com/Andhika-Rey/merajutasa.id/actions/workflows/pages.yml/badge.svg)](https://github.com/Andhika-Rey/merajutasa.id/actions/workflows/pages.yml)
+[![Changelog Excerpt](https://img.shields.io/badge/changelog-excerpt-blue)](https://Andhika-Rey.github.io/merajutasa.id/changelog.html)
 
 **Enterprise-grade skill credentialing platform with comprehensive governance, high availability, security, and compliance infrastructure - featuring 648KB+ of production-ready code across 35+ enterprise components.**
 
-🚀 **Live Dashboard**: [codingxdev0.github.io/merajutasa.id](https://codingxdev0.github.io/merajutasa.id/)
+🚀 **Live Dashboard**: [Andhika-Rey.github.io/merajutasa.id](https://Andhika-Rey.github.io/merajutasa.id/)
 
 ## 🎯 Platform Overview
 
@@ -40,7 +40,7 @@ MerajutASA.id is a comprehensive enterprise platform that combines governance ex
 
 ```bash
 # Clone repository
-git clone https://github.com/codingxdev0/merajutasa.id.git
+git clone https://github.com/Andhika-Rey/merajutasa.id.git
 cd merajutasa.id
 
 # Install dependencies
@@ -402,17 +402,17 @@ The platform provides comprehensive transparency through GitHub Pages with real-
 
 ### Live Dashboard Links
 
-- **Main Dashboard**: <https://codingxdev0.github.io/merajutasa.id/>
-- **Snapshots Index**: <https://codingxdev0.github.io/merajutasa.id/snapshots.html>
-- **Changelog**: <https://codingxdev0.github.io/merajutasa.id/changelog.html>
+- **Main Dashboard**: <https://Andhika-Rey.github.io/merajutasa.id/>
+- **Snapshots Index**: <https://Andhika-Rey.github.io/merajutasa.id/snapshots.html>
+- **Changelog**: <https://Andhika-Rey.github.io/merajutasa.id/changelog.html>
 
 ### Real-Time Data Endpoints
 
-- **KPI Summary**: <https://codingxdev0.github.io/merajutasa.id/data/h1-kpi-summary.json>
-- **Weekly Trends**: <https://codingxdev0.github.io/merajutasa.id/data/weekly-trends.json>
-- **Under-served Analysis**: <https://codingxdev0.github.io/merajutasa.id/data/under-served.json>
-- **Equity Anomalies**: <https://codingxdev0.github.io/merajutasa.id/data/equity-anomalies.json>
-- **Governance Risk**: <https://codingxdev0.github.io/merajutasa.id/data/risk-digest.json>
+- **KPI Summary**: <https://Andhika-Rey.github.io/merajutasa.id/data/h1-kpi-summary.json>
+- **Weekly Trends**: <https://Andhika-Rey.github.io/merajutasa.id/data/weekly-trends.json>
+- **Under-served Analysis**: <https://Andhika-Rey.github.io/merajutasa.id/data/under-served.json>
+- **Equity Anomalies**: <https://Andhika-Rey.github.io/merajutasa.id/data/equity-anomalies.json>
+- **Governance Risk**: <https://Andhika-Rey.github.io/merajutasa.id/data/risk-digest.json>
 
 ## 🤝 Support & Contributing
 
