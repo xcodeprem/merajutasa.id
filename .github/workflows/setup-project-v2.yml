@@ -29,6 +29,9 @@ jobs:
           # Alternatif (tidak disarankan untuk akun personal):
           # permissions di job + github-token: ${{ github.token }}
           script: |
+            const ownerLogin = core.getInput('owner');
+            const title = core.getInput('project_title');
+            const isPublic = core.getInput('public') === 'true';
             const ownerLogin = '${{ inputs.owner }}';
             const title = '${{ inputs.project_title }}';
             const isPublic = '${{ inputs.public }}' === 'true';
