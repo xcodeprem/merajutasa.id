@@ -83,10 +83,23 @@ jobs:
             const fields = project.fields.nodes;
             const existingItems = project.items.nodes;
 
-            const [repoOwner, repoName] = process.env.GITHUB_REPOSITORY.split('/');
-            // Determine if the target is a PR or Issue (issue_comment on PR includes issue.pull_request)
-            const isPRContext = !!context.payload.pull_request || (!!context.payload.issue && !!context.payload.issue.pull_request);
-            const number = isPRContext ? (context.payload.pull_request?.number || context.payload.issue.number) : context.payload.issue.number;
+            // Derive repo owner/name and number consistently across events
+            const repoOwner = context.payload.repository?.owner?.login || process.env.GITHUB_REPOSITORY.split('/')[0];
+            const repoName = context.payload.repository?.name || process.env.GITHUB_REPOSITORY.split('/')[1];
+            let isPRContext = false;
+            let number = undefined;
+            if (context.eventName === 'pull_request') {
+              isPRContext = true; number = context.payload.pull_request.number;
+            } else if (context.eventName === 'issues') {
+              isPRContext = false; number = context.payload.issue.number;
+            } else if (context.eventName === 'issue_comment') {
+              isPRContext = !!context.payload.issue?.pull_request; // PRs are issues with pull_request link
+              number = context.payload.issue?.number;
+            } else {
+              // Fallback: treat as issue
+              isPRContext = false; number = context.payload.issue?.number || context.payload.pull_request?.number;
+            }
+            if (!number) { console.log('No issue/PR number detected; exiting'); return; }
 
             // Build a query that asks ONLY for the relevant node to avoid GraphQL errors
             const contentQuery = isPRContext
@@ -221,4 +234,4 @@ jobs:
             const urlMatch = (content.body || '').match(/https?:\/\/\S+/);
             if (urlMatch) await setText('Links', urlMatch[0], { overwrite: false });
 
-            console.log(`Updated fields for ${isIssue ? 'issue' : 'PR'} #${number} in project "${projectTitle}".`);
+            console.log(`Updated fields for ${isPRContext ? 'PR' : 'issue'} #${number} in project "${projectTitle}".`);
