@@ -29,36 +29,54 @@ jobs:
           # Alternatif (tidak disarankan untuk akun personal):
           # permissions di job + github-token: ${{ github.token }}
           script: |
-            const core = require('@actions/core');
-            const ownerLogin = core.getInput('owner');
-            const title = core.getInput('project_title');
-            const isPublic = core.getInput('public') === 'true';
+            const ownerLogin = '${{ inputs.owner }}';
+            const title = '${{ inputs.project_title }}';
+            const isPublic = '${{ inputs.public }}' === 'true';
 
             // 1) Resolve owner (user atau org)
             const ownerQuery = `
               query($login: String!) {
-                user(login: $login) { id, login }
-                organization(login: $login) { id, login }
+                user(login: $login) { 
+                  id, login
+                  projectsV2(first: 50) {
+                    nodes { id title url public }
+                  }
+                }
+                organization(login: $login) { 
+                  id, login
+                  projectsV2(first: 50) {
+                    nodes { id title url public }
+                  }
+                }
               }
             `;
             const ownerResp = await github.graphql(ownerQuery, { login: ownerLogin });
             const ownerId = ownerResp.user?.id || ownerResp.organization?.id;
+            const existingProjects = [...(ownerResp.user?.projectsV2?.nodes || []), ...(ownerResp.organization?.projectsV2?.nodes || [])];
+            
             if (!ownerId) {
-              core.setFailed(\`Owner not found: \${ownerLogin}\`);
+              core.setFailed(`Owner not found: ${ownerLogin}`);
               return;
             }
 
-            // 2) Buat Project v2
-            const createProjectMutation = `
-              mutation($ownerId: ID!, $title: String!) {
-                createProjectV2(input: {ownerId: $ownerId, title: $title}) {
-                  projectV2 { id number title url public }
+            // 2) Check if project exists (idempotent behavior)
+            let project = existingProjects.find(p => p.title === title);
+            
+            if (project) {
+              console.log('Project already exists, reusing:', project);
+            } else {
+              // Create new project
+              const createProjectMutation = `
+                mutation($ownerId: ID!, $title: String!) {
+                  createProjectV2(input: {ownerId: $ownerId, title: $title}) {
+                    projectV2 { id number title url public }
+                  }
                 }
-              }
-            `;
-            const createResp = await github.graphql(createProjectMutation, { ownerId, title });
-            const project = createResp.createProjectV2.projectV2;
-            console.log('Project created:', project);
+              `;
+              const createResp = await github.graphql(createProjectMutation, { ownerId, title });
+              project = createResp.createProjectV2.projectV2;
+              console.log('Project created:', project);
+            }
 
             // 3) Update visibility bila berbeda
             if (project.public !== isPublic) {
@@ -72,8 +90,38 @@ jobs:
               await github.graphql(updateProjectMutation, { projectId: project.id, public: isPublic });
             }
 
-            // Helpers membuat fields
+            // Get existing fields to avoid duplicates
+            const fieldsQuery = `
+              query($projectId: ID!) {
+                node(id: $projectId) {
+                  ... on ProjectV2 {
+                    fields(first: 50) {
+                      nodes {
+                        id name dataType
+                        ... on ProjectV2SingleSelectField { 
+                          options { id name } 
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            `;
+            const fieldsResp = await github.graphql(fieldsQuery, { projectId: project.id });
+            const existingFields = fieldsResp.node.fields.nodes;
+            const fieldMapping = {};
+            
+            // Track existing fields
+            for (const field of existingFields) {
+              fieldMapping[field.name] = field.id;
+            }
+
+            // Helpers membuat fields (idempotent)
             async function createSingleSelect(name, options) {
+              if (fieldMapping[name]) {
+                console.log(`Field "${name}" already exists, skipping`);
+                return;
+              }
               const m = `
                 mutation($projectId: ID!) {
                   createProjectV2Field(
@@ -86,9 +134,15 @@ jobs:
                   ) { projectV2Field { id name } }
                 }
               `;
-              return github.graphql(m, { projectId: project.id });
+              const result = await github.graphql(m, { projectId: project.id });
+              fieldMapping[name] = result.createProjectV2Field.projectV2Field.id;
+              console.log(`Created field "${name}"`);
             }
             async function createDate(name) {
+              if (fieldMapping[name]) {
+                console.log(`Field "${name}" already exists, skipping`);
+                return;
+              }
               const m = `
                 mutation($projectId: ID!) {
                   createProjectV2Field(input: {
@@ -96,9 +150,15 @@ jobs:
                   }) { projectV2Field { id name } }
                 }
               `;
-              return github.graphql(m, { projectId: project.id });
+              const result = await github.graphql(m, { projectId: project.id });
+              fieldMapping[name] = result.createProjectV2Field.projectV2Field.id;
+              console.log(`Created field "${name}"`);
             }
             async function createNumber(name) {
+              if (fieldMapping[name]) {
+                console.log(`Field "${name}" already exists, skipping`);
+                return;
+              }
               const m = `
                 mutation($projectId: ID!) {
                   createProjectV2Field(input: {
@@ -106,9 +166,15 @@ jobs:
                   }) { projectV2Field { id name } }
                 }
               `;
-              return github.graphql(m, { projectId: project.id });
+              const result = await github.graphql(m, { projectId: project.id });
+              fieldMapping[name] = result.createProjectV2Field.projectV2Field.id;
+              console.log(`Created field "${name}"`);
             }
             async function createText(name) {
+              if (fieldMapping[name]) {
+                console.log(`Field "${name}" already exists, skipping`);
+                return;
+              }
               const m = `
                 mutation($projectId: ID!) {
                   createProjectV2Field(input: {
@@ -116,7 +182,9 @@ jobs:
                   }) { projectV2Field { id name } }
                 }
               `;
-              return github.graphql(m, { projectId: project.id });
+              const result = await github.graphql(m, { projectId: project.id });
+              fieldMapping[name] = result.createProjectV2Field.projectV2Field.id;
+              console.log(`Created field "${name}"`);
             }
 
             // 4) Field custom (selaras docs/analysis & docs/roadmap)
@@ -132,10 +200,44 @@ jobs:
               'Phase 2 W7','Phase 2 W8','Phase 3 Q1','Phase 3 Q2','Phase 3 Q3','Phase 3 Q4'
             ]);
             await createSingleSelect('Risk', ['Low','Medium','High']);
+            await createSingleSelect('Status', ['To Do','In Progress','In Review','Blocked','Done']);
+            await createDate('Start date');
             await createDate('Target date');
             await createNumber('Estimate (h)');
             await createText('Owner (text)');
+            await createText('Links');
+            await createText('Milestone');
 
-            core.setOutput('project_url', project.url);
-            core.setOutput('project_id', project.id);
+            // 5) Upload artifact with field mappings for debugging
+            const fs = await import('fs');
+            const path = await import('path');
+            const artifactDir = path.join(process.env.GITHUB_WORKSPACE || process.cwd(), 'artifacts');
+            try {
+              await fs.promises.mkdir(artifactDir, { recursive: true });
+              const fieldMappingFile = path.join(artifactDir, 'project-fields.json');
+              await fs.promises.writeFile(fieldMappingFile, JSON.stringify({
+                project_id: project.id,
+                project_url: project.url,
+                project_title: project.title,
+                field_mappings: fieldMapping,
+                generated_at: new Date().toISOString()
+              }, null, 2));
+              console.log('Field mappings saved to artifacts/project-fields.json');
+            } catch (error) {
+              console.warn('Could not save field mappings artifact:', error.message);
+            }
+
+            // Set outputs using GitHub Actions
+            console.log(`::set-output name=project_url::${project.url}`);
+            console.log(`::set-output name=project_id::${project.id}`);
+            console.log(`::set-output name=field_mappings::${JSON.stringify(fieldMapping)}`);
             console.log('Project URL:', project.url);
+            console.log('Project ID:', project.id);
+            console.log('Field mappings:', fieldMapping);
+      
+      - name: Upload project fields artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: project-fields
+          path: artifacts/project-fields.json
+          if-no-files-found: warn

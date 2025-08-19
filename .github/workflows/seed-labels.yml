@@ -63,6 +63,29 @@ jobs:
               { name: 'phase:3-q2', color: 'ededed' },
               { name: 'phase:3-q3', color: 'ededed' },
               { name: 'phase:3-q4', color: 'ededed' },
+
+              // Risk labels
+              { name: 'risk:low', color: '0e8a16', description: 'Low risk' },
+              { name: 'risk:medium', color: 'fbca04', description: 'Medium risk' },
+              { name: 'risk:high', color: 'd93f0b', description: 'High risk' },
+
+              // Status labels
+              { name: 'status:todo', color: 'ededed', description: 'To Do' },
+              { name: 'status:in-progress', color: '0e8a16', description: 'In Progress' },
+              { name: 'status:in-review', color: 'fbca04', description: 'In Review' },
+              { name: 'status:blocked', color: 'd93f0b', description: 'Blocked' },
+              { name: 'status:done', color: '1d76db', description: 'Done' },
+
+              // Helper labels for date parsing (examples)
+              { name: 'start:2025-01-20', color: 'c5def5', description: 'Start date example - use start:YYYY-MM-DD format' },
+              { name: 'due:2025-01-27', color: 'c5def5', description: 'Due date example - use due:YYYY-MM-DD format' },
+
+              // Helper labels for estimate parsing (examples)  
+              { name: 'est:h:8', color: 'c5def5', description: 'Estimate example - use est:h:XX format' },
+              { name: 'est:h:16', color: 'c5def5', description: 'Estimate example - use est:h:XX format' },
+
+              // Additional helper labels for better workflow triggers
+              { name: 'in-progress', color: '0e8a16', description: 'Legacy in-progress label (auto-maps to Status)' },
             ];
 
             async function upsert(label) {

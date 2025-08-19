@@ -37,9 +37,27 @@ jobs:
               query($owner:String!) {
                 user(login: $owner) { projectsV2(first: 50) { nodes { id title fields(first: 50) {
                   nodes { id name dataType ... on ProjectV2SingleSelectField { options { id name } } }
+                }
+                items(first: 100) {
+                  nodes { 
+                    id 
+                    content { 
+                      ... on Issue { id number }
+                      ... on PullRequest { id number }
+                    }
+                  }
                 }}}}
                 organization(login: $owner) { projectsV2(first: 50) { nodes { id title fields(first: 50) {
                   nodes { id name dataType ... on ProjectV2SingleSelectField { options { id name } } }
+                }
+                items(first: 100) {
+                  nodes { 
+                    id 
+                    content { 
+                      ... on Issue { id number }
+                      ... on PullRequest { id number }
+                    }
+                  }
                 }}}}
               }
             `;
@@ -48,12 +66,22 @@ jobs:
               ...(projResp.user?.projectsV2?.nodes || []),
               ...(projResp.organization?.projectsV2?.nodes || []),
             ].find(p => p.title === projectTitle);
-            if (!project) { core.setFailed('Project not found'); return; }
+            if (!project) { console.log('Project not found'); return; }
             const projectId = project.id;
             const fields = project.fields.nodes;
+            const existingItems = project.items.nodes;
 
-            // Helpers
+            // Helpers (idempotent adding)
             async function addToProject(contentId) {
+              // Check if item already exists
+              const existingItem = existingItems.find(item => 
+                item.content && item.content.id === contentId
+              );
+              if (existingItem) {
+                console.log(`Item already exists in project, reusing`);
+                return existingItem.id;
+              }
+              
               const m = `
                 mutation($projectId: ID!, $contentId: ID!) {
                   addProjectV2ItemById(input:{projectId:$projectId, contentId:$contentId}) { item { id } }
@@ -77,12 +105,55 @@ jobs:
               `;
               await github.graphql(m, { projectId, itemId, fieldId: f.id, optionId: opt.id });
             }
+            async function setDate(itemId, fieldName, dateValue) {
+              const f = fields.find(x => x.name === fieldName && x.dataType === 'DATE');
+              if (!f) return;
+              const m = `
+                mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $dateValue: Date!) {
+                  updateProjectV2ItemFieldValue(input:{
+                    projectId:$projectId, itemId:$itemId, fieldId:$fieldId,
+                    value:{ date: $dateValue }
+                  }) { projectV2Item { id } }
+                }
+              `;
+              await github.graphql(m, { projectId, itemId, fieldId: f.id, dateValue });
+            }
+            async function setNumber(itemId, fieldName, numberValue) {
+              const f = fields.find(x => x.name === fieldName && x.dataType === 'NUMBER');
+              if (!f) return;
+              const m = `
+                mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $numberValue: Float!) {
+                  updateProjectV2ItemFieldValue(input:{
+                    projectId:$projectId, itemId:$itemId, fieldId:$fieldId,
+                    value:{ number: $numberValue }
+                  }) { projectV2Item { id } }
+                }
+              `;
+              await github.graphql(m, { projectId, itemId, fieldId: f.id, numberValue });
+            }
+            async function setText(itemId, fieldName, textValue) {
+              const f = fields.find(x => x.name === fieldName && x.dataType === 'TEXT');
+              if (!f) return;
+              const m = `
+                mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $textValue: String!) {
+                  updateProjectV2ItemFieldValue(input:{
+                    projectId:$projectId, itemId:$itemId, fieldId:$fieldId,
+                    value:{ text: $textValue }
+                  }) { projectV2Item { id } }
+                }
+              `;
+              await github.graphql(m, { projectId, itemId, fieldId: f.id, textValue });
+            }
 
             // 2) Cari issue berdasarkan query label
             const searchQuery = `
               query($q:String!) {
                 search(query:$q, type:ISSUE, first:100) {
-                  nodes { ... on Issue { id number title url labels(first:50){ nodes { name } } } }
+                  nodes { ... on Issue { 
+                    id number title url 
+                    labels(first:50){ nodes { name } }
+                    milestone { title dueOn }
+                  } }
                 }
               }
             `;
@@ -90,22 +161,25 @@ jobs:
             const items = result.search.nodes || [];
             console.log('Found issues:', items.length);
 
-            // 3) Import + set field
+            // 3) Import + enhanced field mapping
+            let importedCount = 0;
+            let skippedCount = 0;
+            
             for (const issue of items) {
               const itemId = await addToProject(issue.id);
               const labels = new Set((issue.labels?.nodes || []).map(l => l.name));
 
-              // Priority
+              // Priority mapping
               if (labels.has('P0') || labels.has('urgent')) await setSingleSelect(itemId, 'Priority', 'P0');
               else if (labels.has('P1') || labels.has('high-priority')) await setSingleSelect(itemId, 'Priority', 'P1');
               else if (labels.has('P2') || labels.has('medium')) await setSingleSelect(itemId, 'Priority', 'P2');
               else if (labels.has('P3') || labels.has('planned')) await setSingleSelect(itemId, 'Priority', 'P3');
 
-              // Area
+              // Area mapping
               const area = Array.from(labels).find(l => l.toLowerCase().startsWith('area:'));
               if (area) await setSingleSelect(itemId, 'Area', area.slice('area:'.length).replace(/-/g,' '));
 
-              // Phase
+              // Phase mapping
               const phase = Array.from(labels).find(l => l.toLowerCase().startsWith('phase:'));
               const map = new Map([
                 ['1', 'Phase 1'], ['2-week-1','Phase 2 W1'], ['2-week-2','Phase 2 W2'],
@@ -117,5 +191,55 @@ jobs:
                 const target = map.get(phase.slice('phase:'.length).toLowerCase());
                 if (target) await setSingleSelect(itemId, 'Phase', target);
               }
+              
+              // Risk mapping
+              if (labels.has('risk:low')) await setSingleSelect(itemId, 'Risk', 'Low');
+              else if (labels.has('risk:medium')) await setSingleSelect(itemId, 'Risk', 'Medium');
+              else if (labels.has('risk:high')) await setSingleSelect(itemId, 'Risk', 'High');
+              
+              // Status mapping
+              if (labels.has('status:todo')) await setSingleSelect(itemId, 'Status', 'To Do');
+              else if (labels.has('status:in-progress')) await setSingleSelect(itemId, 'Status', 'In Progress');  
+              else if (labels.has('status:in-review')) await setSingleSelect(itemId, 'Status', 'In Review');
+              else if (labels.has('status:blocked')) await setSingleSelect(itemId, 'Status', 'Blocked');
+              else if (labels.has('status:done')) await setSingleSelect(itemId, 'Status', 'Done');
+              else await setSingleSelect(itemId, 'Status', 'To Do'); // Default for bulk import
+              
+              // Date parsing from labels
+              const startDateLabel = Array.from(labels).find(l => l.startsWith('start:'));
+              if (startDateLabel) {
+                const dateStr = startDateLabel.slice('start:'.length);
+                if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+                  await setDate(itemId, 'Start date', dateStr);
+                }
+              }
+              
+              const dueDateLabel = Array.from(labels).find(l => l.startsWith('due:'));
+              if (dueDateLabel) {
+                const dateStr = dueDateLabel.slice('due:'.length);
+                if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+                  await setDate(itemId, 'Target date', dateStr);
+                }
+              } else if (issue.milestone?.dueOn) {
+                const milestoneDate = issue.milestone.dueOn.split('T')[0];
+                await setDate(itemId, 'Target date', milestoneDate);
+              }
+              
+              // Estimate parsing
+              const estimateLabel = Array.from(labels).find(l => l.startsWith('est:h:'));
+              if (estimateLabel) {
+                const hoursStr = estimateLabel.slice('est:h:'.length);
+                const hours = parseFloat(hoursStr);
+                if (!isNaN(hours) && hours > 0) {
+                  await setNumber(itemId, 'Estimate (h)', hours);
+                }
+              }
+              
+              // Milestone text
+              if (issue.milestone?.title) {
+                await setText(itemId, 'Milestone', issue.milestone.title);
+              }
+              
+              importedCount++;
             }
-            console.log('Bulk import done.');
+            console.log(`Bulk import completed. Processed: ${importedCount} items.`);
