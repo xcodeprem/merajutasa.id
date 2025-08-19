@@ -33,51 +33,67 @@ jobs:
             const ownerLogin = process.env.PROJECT_OWNER || '${{ vars.PROJECT_OWNER }}' || 'Andhika-Rey';
             const projectTitle = process.env.PROJECT_TITLE || '${{ vars.PROJECT_TITLE }}' || 'MerajutASA Program Board';
 
-            // 1) Cari Project
-            const findProjectQuery = `
-              query($owner:String!) {
-                user(login: $owner) {
-                  projectsV2(first: 50) { nodes { id title fields(first: 50) {
-                    nodes {
-                      id name dataType
-                      ... on ProjectV2SingleSelectField { options { id name } }
-                    }
-                  }
-                  items(first: 100) {
-                    nodes { 
-                      id 
-                      content { 
-                        ... on Issue { id number }
-                        ... on PullRequest { id number }
+            // 1) Cari Project using repositoryOwner to avoid NOT_FOUND errors
+            let project;
+            try {
+              const findProjectQuery = `
+                query($owner: String!) {
+                  repositoryOwner(login: $owner) {
+                    ... on User {
+                      projectsV2(first: 50) { 
+                        nodes { 
+                          id title 
+                          fields(first: 50) {
+                            nodes {
+                              id name dataType
+                              ... on ProjectV2SingleSelectField { options { id name } }
+                            }
+                          }
+                          items(first: 100) {
+                            nodes { 
+                              id 
+                              content { 
+                                ... on Issue { id number }
+                                ... on PullRequest { id number }
+                              }
+                            }
+                          }
+                        }
                       }
                     }
-                  }}}
-                }
-                organization(login: $owner) {
-                  projectsV2(first: 50) { nodes { id title fields(first: 50) {
-                    nodes {
-                      id name dataType
-                      ... on ProjectV2SingleSelectField { options { id name } }
-                    }
-                  }
-                  items(first: 100) {
-                    nodes { 
-                      id 
-                      content { 
-                        ... on Issue { id number }
-                        ... on PullRequest { id number }
+                    ... on Organization {
+                      projectsV2(first: 50) { 
+                        nodes { 
+                          id title 
+                          fields(first: 50) {
+                            nodes {
+                              id name dataType
+                              ... on ProjectV2SingleSelectField { options { id name } }
+                            }
+                          }
+                          items(first: 100) {
+                            nodes { 
+                              id 
+                              content { 
+                                ... on Issue { id number }
+                                ... on PullRequest { id number }
+                              }
+                            }
+                          }
+                        }
                       }
                     }
-                  }}}
+                  }
                 }
-              }
-            `;
-            const projResp = await github.graphql(findProjectQuery, { owner: ownerLogin });
-            const nodes = [
-              ...(projResp.user?.projectsV2?.nodes || []),
-              ...(projResp.organization?.projectsV2?.nodes || []),
-            ];
-            const project = nodes.find(p => p.title === projectTitle);
+              `;
+              const projResp = await github.graphql(findProjectQuery, { owner: ownerLogin });
+              const projects = projResp.repositoryOwner?.projectsV2?.nodes || [];
+              project = projects.find(p => p.title === projectTitle);
+            } catch (error) {
+              core.warning(`Could not resolve repositoryOwner for project lookup: ${error.message}`);
+              console.log(`Project "${projectTitle}" not found under ${ownerLogin}.`);
+              return;
+            }
             if (!project) {
               console.log(`Project "${projectTitle}" not found under ${ownerLogin}.`);
               return;
