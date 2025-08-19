@@ -19,8 +19,6 @@ jobs:
         with:
           github-token: ${{ secrets.GH_PROJECT_TOKEN }}
           script: |
-            const ownerLogin = 'Andhika-Rey';
-            const projectTitle = 'MerajutASA Program Board';
             // Check for comment command trigger
             if (context.eventName === 'issue_comment') {
               const comment = context.payload.comment.body.trim().toLowerCase();
