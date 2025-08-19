@@ -31,16 +31,16 @@ jobs:
             const projectTitle = core.getInput('project_title');
             const labelQuery = core.getInput('label_query');
 
-            // 1) Cari Project using repositoryOwner (fix union selection in fields)
+            // 1) Project lookup (fields via interface fragment)
             let project;
             try {
-              const findProjectQuery = `
+              const q = `
                 query($owner: String!) {
                   repositoryOwner(login: $owner) {
                     ... on User {
-                      projectsV2(first: 50) { 
-                        nodes { 
-                          id title 
+                      projectsV2(first: 50) {
+                        nodes {
+                          id title
                           fields(first: 50) {
                             nodes {
                               __typename
@@ -49,21 +49,15 @@ jobs:
                             }
                           }
                           items(first: 100) {
-                            nodes { 
-                              id 
-                              content { 
-                                ... on Issue { id number }
-                                ... on PullRequest { id number }
-                              }
-                            }
+                            nodes { id content { ... on Issue { id number } ... on PullRequest { id number } } }
                           }
                         }
                       }
                     }
                     ... on Organization {
-                      projectsV2(first: 50) { 
-                        nodes { 
-                          id title 
+                      projectsV2(first: 50) {
+                        nodes {
+                          id title
                           fields(first: 50) {
                             nodes {
                               __typename
@@ -72,13 +66,7 @@ jobs:
                             }
                           }
                           items(first: 100) {
-                            nodes { 
-                              id 
-                              content { 
-                                ... on Issue { id number }
-                                ... on PullRequest { id number }
-                              }
-                            }
+                            nodes { id content { ... on Issue { id number } ... on PullRequest { id number } } }
                           }
                         }
                       }
@@ -86,108 +74,76 @@ jobs:
                   }
                 }
               `;
-              const projResp = await github.graphql(findProjectQuery, { owner: ownerLogin });
-              const projects = projResp.repositoryOwner?.projectsV2?.nodes || [];
-              project = projects.find(p => p.title === projectTitle);
-            } catch (error) {
-              core.warning(`Could not resolve repositoryOwner for project lookup: ${error.message}`);
+              const resp = await github.graphql(q, { owner: ownerLogin });
+              const nodes = resp.repositoryOwner?.projectsV2?.nodes || [];
+              project = nodes.find(p => p.title === projectTitle);
+            } catch (e) {
+              core.warning(`Project lookup failed: ${e.message}`);
               console.log('Project not found'); 
               return;
             }
-            if (!project) { 
-              console.log('Project not found'); 
-              return; 
-            }
+            if (!project) { console.log('Project not found'); return; }
+
             const projectId = project.id;
             const fields = project.fields.nodes;
             const existingItems = project.items.nodes;
 
-            // Helpers (idempotent adding)
-            async function addToProject(contentId) {
-              const existingItem = existingItems.find(item => item.content && item.content.id === contentId);
-              if (existingItem) {
-                console.log(`Item already exists in project, reusing`);
-                return existingItem.id;
-              }
-              const m = `
-                mutation($projectId: ID!, $contentId: ID!) {
-                  addProjectV2ItemById(input:{projectId:$projectId, contentId:$contentId}) { item { id } }
-                }
-              `;
+            async function addToProject(contentId){
+              const existingItem = existingItems.find(i => i.content && i.content.id === contentId);
+              if (existingItem) return existingItem.id;
+              const m = `mutation($projectId: ID!, $contentId: ID!) {
+                addProjectV2ItemById(input:{projectId:$projectId, contentId:$contentId}) { item { id } }
+              }`;
               const r = await github.graphql(m, { projectId, contentId });
               return r.addProjectV2ItemById.item.id;
             }
-            async function setSingleSelect(itemId, fieldName, optionName) {
+            async function setSingleSelect(itemId, fieldName, optionName){
               const f = fields.find(x => x.name === fieldName && x.dataType === 'SINGLE_SELECT');
               if (!f) return;
               const opt = (f.options || []).find(o => o.name.toLowerCase() === optionName.toLowerCase());
               if (!opt) return;
-              const m = `
-                mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $optionId: String!) {
-                  updateProjectV2ItemFieldValue(input:{
-                    projectId:$projectId, itemId:$itemId, fieldId:$fieldId,
-                    value:{ singleSelectOptionId:$optionId }
-                  }) { projectV2Item { id } }
-                }
-              `;
+              const m = `mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $optionId: String!) {
+                updateProjectV2ItemFieldValue(input:{ projectId:$projectId, itemId:$itemId, fieldId:$fieldId, value:{ singleSelectOptionId:$optionId }}) { projectV2Item { id } }
+              }`;
               await github.graphql(m, { projectId, itemId, fieldId: f.id, optionId: opt.id });
             }
-            async function setDate(itemId, fieldName, dateValue) {
+            async function setDate(itemId, fieldName, value){
               const f = fields.find(x => x.name === fieldName && x.dataType === 'DATE');
               if (!f) return;
-              const m = `
-                mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $dateValue: Date!) {
-                  updateProjectV2ItemFieldValue(input:{
-                    projectId:$projectId, itemId:$itemId, fieldId:$fieldId,
-                    value:{ date: $dateValue }
-                  }) { projectV2Item { id } }
-                }
-              `;
-              await github.graphql(m, { projectId, itemId, fieldId: f.id, dateValue });
+              const m = `mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $v: Date!) {
+                updateProjectV2ItemFieldValue(input:{ projectId:$projectId, itemId:$itemId, fieldId:$fieldId, value:{ date:$v }}) { projectV2Item { id } }
+              }`;
+              await github.graphql(m, { projectId, itemId, fieldId: f.id, v: value });
             }
-            async function setNumber(itemId, fieldName, numberValue) {
+            async function setNumber(itemId, fieldName, value){
               const f = fields.find(x => x.name === fieldName && x.dataType === 'NUMBER');
               if (!f) return;
-              const m = `
-                mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $numberValue: Float!) {
-                  updateProjectV2ItemFieldValue(input:{
-                    projectId:$projectId, itemId:$itemId, fieldId:$fieldId,
-                    value:{ number: $numberValue }
-                  }) { projectV2Item { id } }
-                }
-              `;
-              await github.graphql(m, { projectId, itemId, fieldId: f.id, numberValue });
+              const m = `mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $v: Float!) {
+                updateProjectV2ItemFieldValue(input:{ projectId:$projectId, itemId:$itemId, fieldId:$fieldId, value:{ number:$v }}) { projectV2Item { id } }
+              }`;
+              await github.graphql(m, { projectId, itemId, fieldId: f.id, v: value });
             }
-            async function setText(itemId, fieldName, textValue) {
+            async function setText(itemId, fieldName, value){
               const f = fields.find(x => x.name === fieldName && x.dataType === 'TEXT');
               if (!f) return;
-              const m = `
-                mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $textValue: String!) {
-                  updateProjectV2ItemFieldValue(input:{
-                    projectId:$projectId, itemId:$itemId, fieldId:$fieldId,
-                    value:{ text: $textValue }
-                  }) { projectV2Item { id } }
-                }
-              `;
-              await github.graphql(m, { projectId, itemId, fieldId: f.id, textValue });
+              const m = `mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $v: String!) {
+                updateProjectV2ItemFieldValue(input:{ projectId:$projectId, itemId:$itemId, fieldId:$fieldId, value:{ text:$v }}) { projectV2Item { id } }
+              }`;
+              await github.graphql(m, { projectId, itemId, fieldId: f.id, v: value });
             }
 
-            // 2) Cari issue berdasarkan query label
+            // 2) Search issues (first 100; can rerun with refined queries)
             const searchQuery = `
               query($q:String!) {
                 search(query:$q, type:ISSUE, first:100) {
-                  nodes { ... on Issue { 
-                    id number title url 
-                    labels(first:50){ nodes { name } }
-                    milestone { title dueOn }
-                  } }
+                  nodes { ... on Issue { id number title url labels(first:50){ nodes { name } } milestone { title dueOn } } }
                 }
               }
             `;
             const result = await github.graphql(searchQuery, { q: labelQuery });
             const items = result.search.nodes || [];
             console.log('Found issues:', items.length);
-            if (items.length === 0) { console.log('No issues found matching the query, exiting gracefully'); return; }
+            if (items.length === 0) { console.log('No issues found, exit'); return; }
 
             // 3) Import + mapping
             let importedCount = 0;
@@ -205,10 +161,9 @@ jobs:
 
               const phase = Array.from(labels).find(l => l.toLowerCase().startsWith('phase:'));
               const map = new Map([
-                ['1', 'Phase 1'], ['2-week-1','Phase 2 W1'], ['2-week-2','Phase 2 W2'],
-                ['2-week-3','Phase 2 W3'], ['2-week-4','Phase 2 W4'], ['2-week-5','Phase 2 W5'],
-                ['2-week-6','Phase 2 W6'], ['2-week-7','Phase 2 W7'], ['2-week-8','Phase 2 W8'],
-                ['3-q1','Phase 3 Q1'], ['3-q2','Phase 3 Q2'], ['3-q3','Phase 3 Q3'], ['3-q4','Phase 3 Q4'],
+                ['1','Phase 1'],['2-week-1','Phase 2 W1'],['2-week-2','Phase 2 W2'],['2-week-3','Phase 2 W3'],
+                ['2-week-4','Phase 2 W4'],['2-week-5','Phase 2 W5'],['2-week-6','Phase 2 W6'],['2-week-7','Phase 2 W7'],
+                ['2-week-8','Phase 2 W8'],['3-q1','Phase 3 Q1'],['3-q2','Phase 3 Q2'],['3-q3','Phase 3 Q3'],['3-q4','Phase 3 Q4'],
               ]);
               if (phase) {
                 const target = map.get(phase.slice('phase:'.length).toLowerCase());
@@ -246,7 +201,6 @@ jobs:
               }
 
               if (issue.milestone?.title) await setText(itemId, 'Milestone', issue.milestone.title);
-
               importedCount++;
             }
             console.log(`Bulk import completed. Processed: ${importedCount} items.`);
