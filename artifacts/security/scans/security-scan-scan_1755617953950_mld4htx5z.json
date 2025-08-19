@@ -1,0 +1,62 @@
+{
+  "scan_id": "scan_1755617953950_mld4htx5z",
+  "scan_type": "full",
+  "started_at": "2025-08-19T15:39:13.950Z",
+  "vulnerabilities": [
+    {
+      "type": "dependency_vulnerability",
+      "severity": "critical",
+      "package": "uuid",
+      "version": "^9.0.1",
+      "description": "Vulnerability found in uuid@^9.0.1",
+      "cvss_score": "7.1",
+      "cve_id": "CVE-2024-7726"
+    },
+    {
+      "type": "dependency_vulnerability",
+      "severity": "medium",
+      "package": "yaml",
+      "version": "^2.8.1",
+      "description": "Vulnerability found in yaml@^2.8.1",
+      "cvss_score": "2.8",
+      "cve_id": "CVE-2024-2103"
+    },
+    {
+      "type": "dependency_vulnerability",
+      "severity": "medium",
+      "package": "glob",
+      "version": "^11.0.3",
+      "description": "Vulnerability found in glob@^11.0.3",
+      "cvss_score": "2.7",
+      "cve_id": "CVE-2024-8165"
+    },
+    {
+      "type": "dependency_vulnerability",
+      "severity": "low",
+      "package": "markdownlint",
+      "version": "^0.38.0",
+      "description": "Vulnerability found in markdownlint@^0.38.0",
+      "cvss_score": "2.8",
+      "cve_id": "CVE-2024-7508"
+    }
+  ],
+  "threats": [],
+  "configuration_issues": [],
+  "overall_score": 68,
+  "recommendations": [
+    {
+      "priority": "critical",
+      "category": "vulnerability_management",
+      "title": "Address Critical Vulnerabilities",
+      "description": "1 critical vulnerabilities require immediate attention",
+      "action": "Patch or mitigate all critical vulnerabilities within 24 hours"
+    },
+    {
+      "priority": "high",
+      "category": "overall_security",
+      "title": "Improve Overall Security Posture",
+      "description": "Security score is 68/100",
+      "action": "Implement comprehensive security improvements"
+    }
+  ]
+}

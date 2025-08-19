@@ -34,6 +34,7 @@ export class ComplianceOrchestrator extends EventEmitter {
       orchestrationInterval: options.orchestrationInterval || 3600000, // 1 hour
       reportingDir: options.reportingDir || 'artifacts/compliance-orchestration',
       enableRealTimeCorrelation: options.enableRealTimeCorrelation !== false,
+      autoStartPeriodicOrchestration: options.autoStartPeriodicOrchestration !== false,
       riskThresholds: {
         critical: 90,
         high: 70,
@@ -60,7 +61,10 @@ export class ComplianceOrchestrator extends EventEmitter {
     this.reportAggregator = this.initializeReportAggregator();
     
     this.setupEventListeners();
-    this.setupPeriodicOrchestration();
+    
+    if (this.options.autoStartPeriodicOrchestration) {
+      this.setupPeriodicOrchestration();
+    }
     
     console.log('🎼 Compliance & Security Orchestrator initialized');
     console.log(`⚡ Real-time correlation: ${this.options.enableRealTimeCorrelation ? 'Enabled' : 'Disabled'}`);
@@ -864,3 +868,75 @@ export function getComplianceOrchestrator(options = {}) {
 }
 
 export default ComplianceOrchestrator;
+
+// CLI interface for npm script execution
+if (import.meta.url === `file://${process.argv[1]}`) {
+  const args = process.argv.slice(2);
+  
+  async function main() {
+    try {
+      if (args.includes('--once')) {
+        console.log('🎼 Running compliance orchestrator in one-shot mode...');
+        
+        // Create orchestrator instance without auto-starting periodic orchestration
+        const orchestrator = new ComplianceOrchestrator({ 
+          autoStartPeriodicOrchestration: false 
+        });
+        
+        // Perform single orchestration cycle
+        await orchestrator.performOrchestration();
+        
+        // Get final status and determine exit code
+        const status = orchestrator.getOrchestrationStatus();
+        const healthScore = orchestrator.calculateHealthScore(status);
+        
+        console.log(`📊 Orchestration completed:`);
+        console.log(`  - Health score: ${healthScore}/100`);
+        console.log(`  - Status: ${status.status}`);
+        console.log(`  - Active components: ${Object.keys(status.components).length}`);
+        
+        // Shutdown gracefully
+        await orchestrator.shutdown();
+        
+        // Exit with appropriate code based on health score
+        if (healthScore < 50) {
+          console.log('⚠️ Health score below acceptable threshold (50)');
+          process.exit(1);
+        }
+        
+        console.log('✅ Compliance orchestration completed successfully');
+        process.exit(0);
+        
+      } else {
+        console.log('📖 Compliance Orchestrator CLI');
+        console.log('Usage:');
+        console.log('  --once    Run single orchestration cycle and exit');
+        console.log('  (no args) Run continuous orchestration (default)');
+        
+        // Default behavior: start continuous orchestration
+        const orchestrator = new ComplianceOrchestrator();
+        console.log('🎼 Starting continuous orchestration mode...');
+        console.log('Press Ctrl+C to stop');
+        
+        // Handle graceful shutdown
+        process.on('SIGINT', async () => {
+          console.log('\n🛑 Received shutdown signal...');
+          await orchestrator.shutdown();
+          process.exit(0);
+        });
+        
+        process.on('SIGTERM', async () => {
+          console.log('\n🛑 Received termination signal...');
+          await orchestrator.shutdown();
+          process.exit(0);
+        });
+      }
+      
+    } catch (error) {
+      console.error('❌ Compliance orchestrator failed:', error.message);
+      process.exit(1);
+    }
+  }
+  
+  main();
+}

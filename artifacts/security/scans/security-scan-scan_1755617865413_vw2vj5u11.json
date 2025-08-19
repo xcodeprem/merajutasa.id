@@ -1,0 +1,53 @@
+{
+  "scan_id": "scan_1755617865413_vw2vj5u11",
+  "scan_type": "full",
+  "started_at": "2025-08-19T15:37:45.413Z",
+  "vulnerabilities": [
+    {
+      "type": "dependency_vulnerability",
+      "severity": "critical",
+      "package": "cors",
+      "version": "^2.8.5",
+      "description": "Vulnerability found in cors@^2.8.5",
+      "cvss_score": "7.0",
+      "cve_id": "CVE-2024-8462"
+    },
+    {
+      "type": "dependency_vulnerability",
+      "severity": "critical",
+      "package": "http-proxy-middleware",
+      "version": "^2.0.6",
+      "description": "Vulnerability found in http-proxy-middleware@^2.0.6",
+      "cvss_score": "8.6",
+      "cve_id": "CVE-2024-9875"
+    },
+    {
+      "type": "dependency_vulnerability",
+      "severity": "low",
+      "package": "glob",
+      "version": "^11.0.3",
+      "description": "Vulnerability found in glob@^11.0.3",
+      "cvss_score": "0.2",
+      "cve_id": "CVE-2024-8790"
+    }
+  ],
+  "threats": [],
+  "configuration_issues": [],
+  "overall_score": 58,
+  "recommendations": [
+    {
+      "priority": "critical",
+      "category": "vulnerability_management",
+      "title": "Address Critical Vulnerabilities",
+      "description": "2 critical vulnerabilities require immediate attention",
+      "action": "Patch or mitigate all critical vulnerabilities within 24 hours"
+    },
+    {
+      "priority": "high",
+      "category": "overall_security",
+      "title": "Improve Overall Security Posture",
+      "description": "Security score is 58/100",
+      "action": "Implement comprehensive security improvements"
+    }
+  ]
+}

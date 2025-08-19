@@ -1048,11 +1048,47 @@ if (import.meta.url === `file://${process.argv[1]}`) {
         console.log('🛡️ Security Status:', JSON.stringify(status, null, 2));
         process.exit(0);
         
+      } else if (args.includes('--detect-threats')) {
+        console.log('🔍 Detecting threats...');
+        
+        // Get current threat status
+        const status = securityHardening.getSecurityStatus();
+        const activeThreats = status.activeThreats || [];
+        const threatLevel = status.threatLevel || 'medium';
+        
+        console.log(`📊 Threat detection completed:`);
+        console.log(`  - Active threats: ${activeThreats.length}`);
+        console.log(`  - Current threat level: ${threatLevel}`);
+        console.log(`  - Security score: ${status.securityScore}/100`);
+        
+        if (activeThreats.length > 0) {
+          console.log(`🚨 Active threats detected:`);
+          activeThreats.slice(0, 5).forEach((threat, index) => {
+            console.log(`  ${index + 1}. ${threat.type || 'Unknown'} (${threat.severity || 'unknown'}) - ${threat.description || 'No description'}`);
+          });
+          
+          if (activeThreats.length > 5) {
+            console.log(`  ... and ${activeThreats.length - 5} more threats`);
+          }
+        } else {
+          console.log('✅ No active threats detected');
+        }
+        
+        // Exit with appropriate code based on threat level
+        if (activeThreats.some(t => t.severity === 'critical')) {
+          console.log('⚠️ Critical threats detected');
+          process.exit(1);
+        }
+        
+        console.log('✅ Threat detection completed');
+        process.exit(0);
+        
       } else {
         console.log('📖 Security Hardening CLI');
         console.log('Usage:');
-        console.log('  --scan    Run comprehensive security scan');
-        console.log('  --status  Show current security status');
+        console.log('  --scan          Run comprehensive security scan');
+        console.log('  --status        Show current security status');
+        console.log('  --detect-threats Detect and analyze security threats');
         process.exit(0);
       }
       
