@@ -13,9 +13,9 @@
     {
       "expected": {
         "Area": "Infrastructure",
-        "Phase": "2 Week 6",
-        "Priority": "Medium",
-        "Status": "Todo"
+        "Phase": "Phase 2 W6",
+        "Priority": "P2",
+        "Status": "To Do"
       },
       "issue": {
         "number": 98,
@@ -31,23 +31,13 @@
       ],
       "mismatches": [
         {
-          "actual": "P2",
-          "expected": "Medium",
-          "field": "Priority"
-        },
-        {
           "actual": null,
           "expected": "Infrastructure",
           "field": "Area"
         },
         {
-          "actual": "Phase 2 W6",
-          "expected": "2 Week 6",
-          "field": "Phase"
-        },
-        {
           "actual": null,
-          "expected": "Todo",
+          "expected": "To Do",
           "field": "Status"
         }
       ],
@@ -63,5 +53,5 @@
       }
     }
   ],
-  "ts": "2025-08-19T21:43:41.560Z"
+  "ts": "2025-08-19T22:13:21.131Z"
 }
