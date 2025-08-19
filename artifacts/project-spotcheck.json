@@ -5,8 +5,8 @@
   },
   "owner": "Andhika-Rey",
   "project": {
-    "number": 2,
-    "title": "MerajutASA Program Board"
+    "number": 3,
+    "title": "MerajutASA Roadmap"
   },
   "repo": "merajutasa.id",
   "results": [
@@ -32,8 +32,18 @@
       "mismatches": [
         {
           "actual": null,
+          "expected": "P2",
+          "field": "Priority"
+        },
+        {
+          "actual": null,
           "expected": "Infrastructure",
           "field": "Area"
+        },
+        {
+          "actual": null,
+          "expected": "Phase 2 W6",
+          "field": "Phase"
         },
         {
           "actual": null,
@@ -42,16 +52,11 @@
         }
       ],
       "project": {
-        "number": 2,
-        "title": "MerajutASA Program Board"
+        "number": 3,
+        "title": "MerajutASA Roadmap"
       },
-      "projectFields": {
-        "Owner (text)": "codingxdev0",
-        "Phase": "Phase 2 W6",
-        "Priority": "P2",
-        "Title": "[PR-4] Infra Health Triage Runbook: Status, Dependencies, Recommendations"
-      }
+      "projectFields": {}
     }
   ],
-  "ts": "2025-08-19T23:20:03.048Z"
+  "ts": "2025-08-19T23:25:24.467Z"
 }
