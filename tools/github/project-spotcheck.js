@@ -50,6 +50,7 @@ const TOKEN = (process.env.GH_PROJECT_TOKEN || process.env.GITHUB_TOKEN || '').t
 
 if (!TOKEN) {
   console.error('Missing GH_PROJECT_TOKEN or GITHUB_TOKEN in environment.');
+  process.exit(2);
 }
 if (!OWNER || !REPO) {
   console.error('Usage: node tools/github/project-spotcheck.js --owner=<owner> --repo=<repo> [--issues=1,2] [--projectTitle=...]');
@@ -95,17 +96,33 @@ async function ghGraphQL(query, variables) {
 }
 
 async function resolveProjectByTitle(login, title) {
-  const q = `
+  // Try as user first; if not found, try as organization. Avoid combined query to prevent GraphQL partial errors.
+  const qUser = `
     query($login:String!){
       user(login:$login){ projectsV2(first:50){ nodes{ id number title } } }
+    }
+  `;
+  const qOrg = `
+    query($login:String!){
       organization(login:$login){ projectsV2(first:50){ nodes{ id number title } } }
     }
   `;
-  const d = await ghGraphQL(q, { login });
-  const nodes = [
-    ...(d.user?.projectsV2?.nodes || []),
-    ...(d.organization?.projectsV2?.nodes || []),
-  ];
+  let nodes = [];
+  try {
+    const du = await ghGraphQL(qUser, { login });
+    nodes = [...(du.user?.projectsV2?.nodes || [])];
+  } catch (e) {
+    // Ignore and fall back to org query
+  }
+  if (!nodes.length) {
+    try {
+      const do_ = await ghGraphQL(qOrg, { login });
+      nodes = [...(do_.organization?.projectsV2?.nodes || [])];
+    } catch (e) {
+      // If both fail, bubble up the error
+      throw e;
+    }
+  }
   const match = nodes.find(n => n.title === title) || nodes.find(n => n.title?.toLowerCase() === title.toLowerCase());
   if (!match) throw new Error(`Project titled '${title}' not found under ${login}`);
   return { id: match.id, number: match.number, title: match.title };
