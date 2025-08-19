@@ -179,52 +179,64 @@ jobs:
 
             // 5) Create fields
             await createSingleSelect('Priority', [
-              opt('P0','RED','Urgent'),
-              opt('P1','ORANGE','High'),
-              opt('P2','YELLOW','Medium'),
-              opt('P3','GREEN','Planned/Low')
+              opt('P0','RED','🚨 URGENT - Complete within 7 days'),
+              opt('P1','ORANGE','⚡ HIGH PRIORITY - Complete within 30 days'),
+              opt('P2','YELLOW','📋 MEDIUM PRIORITY - Complete within 90 days'),
+              opt('P3','GREEN','🔄 PLANNED - Next 6 months')
             ]);
 
             await createSingleSelect('Area', [
-              opt('Infrastructure','GRAY','Infra & platform'),
-              opt('Security','PURPLE','Security domain'),
-              opt('Compliance','BLUE','Compliance & governance'),
-              opt('Observability','BLUE','Monitoring & observability'),
-              opt('Performance','GREEN','Performance optimization'),
-              opt('High Availability','GRAY','HA & resilience'),
-              opt('API Gateway','BLUE','Gateway & service mesh'),
+              // 15 Infrastructure Domains from Lead Infrastructure Architect Summary
+              opt('Security Layer','PURPLE','Security hardening, auth, rate limiting (3 components)'),
+              opt('Monitoring & Observability','BLUE','Metrics, tracing, alerting (8 components)'),
+              opt('Performance Optimization','GREEN','Caching, compression, monitoring (7 components)'),
+              opt('High Availability','GRAY','Auto-scaling, disaster recovery (6 components)'),
+              opt('Compliance & Governance','ORANGE','Audit, privacy, automation (4 components)'),
+              opt('API Gateway & Services','CYAN','Orchestration, mesh, docs (4 components)'),
+              opt('CI/CD Pipeline','YELLOW','Automated deployment (1 component)'),
+              opt('Container Orchestration','GRAY','Docker and Kubernetes infrastructure'),
+              opt('Data Management','BLUE','Backup and storage systems'),
+              opt('Integration Platform','PINK','Platform, analyzer (2 components)'),
+              opt('AI/ML Integration','GREEN','Anomaly detection, analytics, decision support'),
+              opt('Executive Dashboard','YELLOW','KPI visualization, reporting engine'),
+              opt('Infrastructure Modernization','GRAY','Component upgrades, optimization'),
+              opt('Developer Experience','ORANGE','Tools, documentation, automation'),
+              opt('Advanced Enterprise','PURPLE','Federation, zero-trust, localization'),
+              
+              // Legacy categories for backward compatibility
               opt('Equity UI','YELLOW','UI modernization'),
               opt('Docs','GRAY','Documentation'),
-              opt('CI/CD','ORANGE','Pipelines & automation'),
               opt('Configuration','GRAY','Configs & env'),
-              opt('Logging','PURPLE','Unified logging'),
-              opt('Error Handling','ORANGE','Error handling'),
               opt('Testing','YELLOW','Testing & QA'),
-              opt('Backup','GRAY','Backup & recovery'),
-              opt('Load Testing','YELLOW','Load testing'),
-              opt('Security Audit','PURPLE','Security audits'),
-              opt('Data Pipeline','BLUE','Data pipelines'),
-              opt('Mobile API','BLUE','Mobile endpoints'),
-              opt('Integration','GRAY','Cross-component integration')
+              opt('Mobile API','BLUE','Mobile endpoints')
             ]);
 
             // Ensure critical options exist even on existing boards
             await ensureSingleSelectOptions('Area', [ opt('Infrastructure','GRAY','Infra & platform') ]);
 
             await createSingleSelect('Phase', [
-              opt('Phase 1','GRAY','Foundation'),
-              opt('Phase 2 W1','GRAY','Week 1'),
-              opt('Phase 2 W2','GRAY','Week 2'),
-              opt('Phase 2 W3','GRAY','Week 3'),
-              opt('Phase 2 W4','GRAY','Week 4'),
-              opt('Phase 2 W5','GRAY','Week 5'),
-              opt('Phase 2 W6','GRAY','Week 6'),
-              opt('Phase 2 W7','GRAY','Week 7'),
-              opt('Phase 2 W8','GRAY','Week 8'),
-              opt('Phase 3 Q1','GRAY','Quarter 1'),
-              opt('Phase 3 Q2','GRAY','Quarter 2'),
-              opt('Phase 3 Q3','GRAY','Quarter 3'),
-              opt('Phase 3 Q4','GRAY','Quarter 4')
+              // Phase 1 - Foundation (Completed)
+              opt('Phase 1','GREEN','Foundation - Security, Observability, Backup (100%)'),
+              
+              // Phase 2 - Infrastructure Expansion (In Progress)
+              opt('Phase 2 W1','BLUE','Docker & Kubernetes (87/100 - 71.3KB)'),
+              opt('Phase 2 W2','BLUE','Performance optimization (75/100 - 89.2KB)'),
+              opt('Phase 2 W3','GREEN','Advanced monitoring (100/100 - 91.1KB)'),
+              opt('Phase 2 W4','GREEN','API Gateway & Management (100/100 - 94.5KB)'),
+              opt('Phase 2 W5','YELLOW','High Availability & Resilience (77/100 - 139.7KB)'),
+              opt('Phase 2 W6','ORANGE','Compliance & Security Enhancement (67/100 - 145.5KB)'),
+              opt('Phase 2 W7','GRAY','AI/ML Integration & Advanced Analytics (Planned - 120-140KB)'),
+              opt('Phase 2 W8','GRAY','Executive Dashboard & Advanced Reporting (Planned - 150-170KB)'),
+              
+              // Phase 3 - Advanced Enterprise Features (Planned)
+              opt('Phase 3 Q1','GRAY','Advanced Enterprise Features - Federation, Zero Trust, Localization'),
+              opt('Phase 3 Q2','GRAY','AI-Driven Governance - Intelligent Automation, Fairness AI, NLP'),
+              opt('Phase 3 Q3','GRAY','Ecosystem Expansion - External Integration, Analytics, Community'),
+              opt('Phase 3 Q4','GRAY','Next-Gen Platform - Quantum Security, Edge Computing, Emerging Tech'),
+              
+              // Maintenance & Modernization Phases
+              opt('Infrastructure Modernization','PURPLE','Component upgrades and optimization'),
+              opt('Developer Experience','ORANGE','Tools, documentation, automation improvements')
             ]);
 
             await createSingleSelect('Risk', [
@@ -238,7 +250,129 @@ jobs:
               opt('In Progress','BLUE','In progress'),
               opt('In Review','YELLOW','In review'),
               opt('Blocked','RED','Blocked'),
-              opt('Done','GREEN','Done')
+              opt('Done','GREEN','Done'),
+              opt('Testing','PURPLE','Testing phase'),
+              opt('Deployed','CYAN','Deployed to production')
+            ]);
+
+            // New enhanced fields for enterprise tracking
+            await createSingleSelect('Component', [
+              // Security Layer (3 components)
+              opt('Security Hardening','PURPLE','Enhanced security measures and threat detection'),
+              opt('Authentication','PURPLE','User authentication and authorization'),
+              opt('Rate Limiting','PURPLE','API rate limiting and throttling'),
+              
+              // Monitoring & Observability (8 components)
+              opt('Metrics Collection','BLUE','System metrics and performance monitoring'),
+              opt('Distributed Tracing','BLUE','Request tracing across services'),
+              opt('Alerting System','BLUE','Alert management and notification'),
+              opt('Log Aggregation','BLUE','Centralized log collection and analysis'),
+              opt('Health Monitoring','BLUE','Component health and status monitoring'),
+              opt('Anomaly Detection','BLUE','AI-powered anomaly detection'),
+              opt('Performance Dashboards','BLUE','Real-time performance visualization'),
+              opt('Error Tracking','BLUE','Error collection and analysis'),
+              
+              // Performance Optimization (7 components)
+              opt('Caching Layer','GREEN','Multi-level caching strategy'),
+              opt('Content Compression','GREEN','Response compression optimization'),
+              opt('Database Optimization','GREEN','Query and index optimization'),
+              opt('Load Balancing','GREEN','Traffic distribution optimization'),
+              opt('CDN Integration','GREEN','Content delivery network'),
+              opt('Resource Optimization','GREEN','CPU, memory, and I/O optimization'),
+              opt('Performance Testing','GREEN','Load and stress testing'),
+              
+              // High Availability (6 components)
+              opt('Auto Scaling','GRAY','Automatic horizontal/vertical scaling'),
+              opt('Disaster Recovery','GRAY','Backup and recovery procedures'),
+              opt('Failover Systems','GRAY','Automatic failover mechanisms'),
+              opt('Multi-Region Deployment','GRAY','Geographic distribution'),
+              opt('Circuit Breakers','GRAY','Service protection patterns'),
+              opt('Health Checks','GRAY','Service health validation'),
+              
+              // Compliance & Governance (4 components)
+              opt('Audit Trail','ORANGE','Comprehensive audit logging'),
+              opt('Privacy Management','ORANGE','Data privacy and protection'),
+              opt('Compliance Automation','ORANGE','Automated compliance checking'),
+              opt('Policy Enforcement','ORANGE','Governance policy automation'),
+              
+              // API Gateway & Services (4 components)
+              opt('API Gateway','CYAN','Unified API access point'),
+              opt('Service Mesh','CYAN','Inter-service communication'),
+              opt('API Documentation','CYAN','Auto-generated API docs'),
+              opt('Service Discovery','CYAN','Dynamic service registration'),
+              
+              // Infrastructure Components
+              opt('CI/CD Pipeline','YELLOW','Automated deployment pipeline'),
+              opt('Container Orchestration','GRAY','Docker and Kubernetes'),
+              opt('Data Management','BLUE','Backup and storage systems'),
+              opt('Integration Platform','PINK','Cross-component integration'),
+              
+              // Enterprise Features
+              opt('Executive Dashboard','YELLOW','Leadership KPI visualization'),
+              opt('Advanced Reporting','YELLOW','Automated report generation'),
+              opt('AI/ML Engine','GREEN','Machine learning capabilities'),
+              opt('Federation Support','PURPLE','Multi-organization governance'),
+              
+              // UI/UX Components
+              opt('Equity UI v2','YELLOW','Modern frontend dashboard'),
+              opt('Mobile Interface','YELLOW','Mobile-responsive design'),
+              opt('Accessibility Framework','YELLOW','WCAG compliance implementation')
+            ]);
+
+            await createSingleSelect('Team Assignment', [
+              // Core Infrastructure Team
+              opt('Lead Infrastructure Architect','PURPLE','System design and integration'),
+              opt('Backend Systems Developer','BLUE','APIs, databases, core services'),
+              opt('DevOps Engineer','ORANGE','Deployment, monitoring, automation'),
+              opt('Security Specialist','RED','Security hardening and compliance'),
+              opt('Quality Assurance Engineer','GREEN','Testing and validation'),
+              
+              // Frontend & Experience Team
+              opt('Frontend Lead','YELLOW','UI/UX development and modernization'),
+              opt('UX/UI Designer','YELLOW','User experience optimization'),
+              opt('Accessibility Specialist','YELLOW','Inclusive design and WCAG compliance'),
+              
+              // Data & Analytics Team
+              opt('Data Engineer','CYAN','Analytics pipelines and processing'),
+              opt('ML Engineer','CYAN','AI/ML integration and models'),
+              opt('Business Intelligence','CYAN','Reporting and dashboard development'),
+              
+              // External/Unassigned
+              opt('External Consultant','GRAY','External specialist or consultant'),
+              opt('Community Contributor','GREEN','Community member contribution'),
+              opt('Unassigned','GRAY','Not yet assigned to team member')
+            ]);
+
+            await createSingleSelect('Health Score', [
+              opt('100/100','GREEN','Complete - Production ready'),
+              opt('90-99/100','GREEN','Nearly complete - Minor polish needed'),
+              opt('75-89/100','BLUE','Substantial progress - On track'),
+              opt('50-74/100','YELLOW','Moderate progress - Some concerns'),
+              opt('25-49/100','ORANGE','Limited progress - Needs attention'),
+              opt('0-24/100','RED','Minimal progress - Requires intervention'),
+              opt('Not Applicable','GRAY','Health scoring not applicable')
+            ]);
+
+            await createSingleSelect('Implementation Size', [
+              opt('< 10KB','GREEN','Small component or feature'),
+              opt('10-25KB','GREEN','Medium component'),
+              opt('25-50KB','BLUE','Large component'),
+              opt('50-100KB','YELLOW','Very large component'),
+              opt('100KB+','ORANGE','Major infrastructure component'),
+              opt('Enterprise Scale','RED','Multi-component system'),
+              opt('Not Applicable','GRAY','Size not applicable')
+            ]);
+
+            await createSingleSelect('Iteration', [
+              opt('Sprint 1','BLUE','Week 1-2 iteration'),
+              opt('Sprint 2','BLUE','Week 3-4 iteration'),
+              opt('Sprint 3','BLUE','Week 5-6 iteration'),
+              opt('Sprint 4','BLUE','Week 7-8 iteration'),
+              opt('Sprint 5','BLUE','Week 9-10 iteration'),
+              opt('Sprint 6','BLUE','Week 11-12 iteration'),
+              opt('Epic','PURPLE','Multi-sprint epic work'),
+              opt('Maintenance','GRAY','Ongoing maintenance work'),
+              opt('Research','ORANGE','Research and discovery phase')
             ]);
 
             await createTyped('Start date', 'DATE');
@@ -247,6 +381,16 @@ jobs:
             await createTyped('Owner (text)', 'TEXT');
             await createTyped('Links', 'TEXT');
             await createTyped('Milestone', 'TEXT');
+            
+            // Enhanced fields for enterprise tracking
+            await createTyped('Dependencies', 'TEXT');
+            await createTyped('Architecture Impact', 'TEXT');
+            await createTyped('Integration Points', 'TEXT');
+            await createTyped('Performance Impact', 'TEXT');
+            await createTyped('Security Considerations', 'TEXT');
+            await createTyped('Documentation Links', 'TEXT');
+            await createTyped('Testing Strategy', 'TEXT');
+            await createTyped('Rollback Plan', 'TEXT');
 
             // 6) Upload artifact mapping (best-effort)
             const fs = await import('fs');
