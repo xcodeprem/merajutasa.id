@@ -33,71 +33,59 @@ jobs:
             const title = '${{ inputs.project_title }}';
             const isPublic = '${{ inputs.public }}' === 'true';
 
-            // 1) Resolve owner (User/Org) via repositoryOwner untuk hindari NOT_FOUND
-            let ownerId, existingProjects;
+            // 1) Resolve owner (User/Org)
+            let ownerId, existingProjects = [];
             try {
-              const ownerQuery = `
+              const ownerResp = await github.graphql(`
                 query($login: String!) {
                   repositoryOwner(login: $login) {
                     id
-                    ... on User { 
-                      login
-                      projectsV2(first: 50) { nodes { id title url public } }
-                    }
-                    ... on Organization { 
-                      login
-                      projectsV2(first: 50) { nodes { id title url public } }
-                    }
+                    ... on User { projectsV2(first: 50) { nodes { id title url public } } }
+                    ... on Organization { projectsV2(first: 50) { nodes { id title url public } } }
                   }
                 }
-              `;
-              const ownerResp = await github.graphql(ownerQuery, { login: ownerLogin });
+              `, { login: ownerLogin });
               ownerId = ownerResp.repositoryOwner?.id;
               existingProjects = ownerResp.repositoryOwner?.projectsV2?.nodes || [];
             } catch (error) {
               core.setFailed(`Owner not found: ${ownerLogin} (${error.message})`);
               return;
             }
-            if (!ownerId) {
-              core.setFailed(`Owner not found: ${ownerLogin}`);
-              return;
-            }
+            if (!ownerId) { core.setFailed(`Owner not found: ${ownerLogin}`); return; }
 
-            // 2) Idempotent: reuse project jika sudah ada; kalau belum buat
+            // 2) Idempotent project create
             let project = existingProjects.find(p => p.title === title);
-            if (project) {
-              console.log('Project exists:', project.url);
-            } else {
-              const createProjectMutation = `
+            if (!project) {
+              const createResp = await github.graphql(`
                 mutation($ownerId: ID!, $title: String!) {
-                  createProjectV2(input: {ownerId: $ownerId, title: $title}) {
+                  createProjectV2(input: { ownerId: $ownerId, title: $title }) {
                     projectV2 { id number title url public }
                   }
                 }
-              `;
-              const createResp = await github.graphql(createProjectMutation, { ownerId, title });
+              `, { ownerId, title });
               project = createResp.createProjectV2.projectV2;
               console.log('Project created:', project.url);
+            } else {
+              console.log('Project exists:', project.url);
             }
 
-            // 3) Update visibility (best-effort; jangan fail keras)
+            // 3) Update visibility (best-effort)
             try {
               if (typeof project.public === 'boolean' && project.public !== isPublic) {
-                const updateProjectMutation = `
+                await github.graphql(`
                   mutation($projectId: ID!, $public: Boolean!) {
-                    updateProjectV2(input: {projectId: $projectId, public: $public}) {
-                      projectV2 { id title url public }
+                    updateProjectV2(input: { projectId: $projectId, public: $public }) {
+                      projectV2 { id public }
                     }
                   }
-                `;
-                await github.graphql(updateProjectMutation, { projectId: project.id, public: isPublic });
+                `, { projectId: project.id, public: isPublic });
               }
             } catch (e) {
               core.warning('Skipping visibility update: ' + (e?.message || e));
             }
 
-            // 4) Ambil fields (gunakan fragment interface untuk union)
-            const fieldsQuery = `
+            // 4) Fetch fields
+            const fieldsResp = await github.graphql(`
               query($projectId: ID!) {
                 node(id: $projectId) {
                   ... on ProjectV2 {
@@ -105,76 +93,32 @@ jobs:
                       nodes {
                         __typename
                         ... on ProjectV2FieldCommon { id name dataType }
-                        ... on ProjectV2SingleSelectField { options { id name } }
+                        ... on ProjectV2SingleSelectField { id name options { id name } }
                       }
                     }
                   }
                 }
               }
-            `;
-            const fieldsResp = await github.graphql(fieldsQuery, { projectId: project.id });
+            `, { projectId: project.id });
             const existingFields = fieldsResp.node?.fields?.nodes || [];
             const fieldMapping = {};
-            for (const f of existingFields) {
-              if (f?.name && f?.id) fieldMapping[f.name] = f.id;
-            }
+            for (const f of existingFields) if (f?.name && f?.id) fieldMapping[f.name] = f.id;
 
-            // Helpers: render options dengan enum color + description
-            // NOTE: pass color sebagai string 'RED', 'ORANGE', dst. agar tidak ReferenceError di JS
+            // Helpers to build SINGLE_SELECT options
             const opt = (name, color, description) => ({ name, color, description });
-            const gqlOptions = (arr) =>
-              arr.map(o => `{name:"${o.name}", color:${o.color}, description:"${o.description}"}`).join(',');
+            const gqlOptions = (arr) => arr.map(o => `{name:"${o.name}", color:${o.color}, description:"${o.description}"}`).join(',');
 
-            async function createSingleSelect(name, options) {
-              if (fieldMapping[name]) { console.log(`Field "${name}" already exists, skipping`); return; }
+            async function createSingleSelect(name, optionsArr) {
+              if (fieldMapping[name]) { console.log(`Field "${name}" exists, skipping`); return; }
               const m = `
                 mutation($projectId: ID!) {
-                  createProjectV2Field(
-                    input: {
-                      projectId: $projectId,
-                      dataType: SINGLE_SELECT,
-                      name: "${name}",
-                      singleSelectOptions: [${gqlOptions(options)}]
-                    }
-                  ) { projectV2Field { id name } }
-                }
-              `;
-              const r = await github.graphql(m, { projectId: project.id });
-              fieldMapping[name] = r.createProjectV2Field.projectV2Field.id;
-              console.log(`Created field "${name}"`);
-            }
-            async function createDate(name) {
-              if (fieldMapping[name]) { console.log(`Field "${name}" already exists, skipping`); return; }
-              const m = `
-                mutation($projectId: ID!) {
-                  createProjectV2Field(input:{ projectId:$projectId, dataType: DATE, name:"${name}" }) {
-                    projectV2Field { id name }
-                  }
-                }
-              `;
-              const r = await github.graphql(m, { projectId: project.id });
-              fieldMapping[name] = r.createProjectV2Field.projectV2Field.id;
-              console.log(`Created field "${name}"`);
-            }
-            async function createNumber(name) {
-              if (fieldMapping[name]) { console.log(`Field "${name}" already exists, skipping`); return; }
-              const m = `
-                mutation($projectId: ID!) {
-                  createProjectV2Field(input:{ projectId:$projectId, dataType: NUMBER, name:"${name}" }) {
-                    projectV2Field { id name }
-                  }
-                }
-              `;
-              const r = await github.graphql(m, { projectId: project.id });
-              fieldMapping[name] = r.createProjectV2Field.projectV2Field.id;
-              console.log(`Created field "${name}"`);
-            }
-            async function createText(name) {
-              if (fieldMapping[name]) { console.log(`Field "${name}" already exists, skipping`); return; }
-              const m = `
-                mutation($projectId: ID!) {
-                  createProjectV2Field(input:{ projectId:$projectId, dataType: TEXT, name:"${name}" }) {
-                    projectV2Field { id name }
+                  createProjectV2Field(input:{
+                    projectId:$projectId,
+                    dataType:SINGLE_SELECT,
+                    name:"${name}",
+                    singleSelectOptions:[${gqlOptions(optionsArr)}]
+                  }) {
+                    projectV2Field { ... on ProjectV2FieldCommon { id name } }
                   }
                 }
               `;
@@ -183,72 +127,86 @@ jobs:
               console.log(`Created field "${name}"`);
             }
 
-            // 5) Buat fields dengan color + description diwajibkan untuk SINGLE_SELECT
+            async function createTyped(name, dataType) {
+              if (fieldMapping[name]) { console.log(`Field "${name}" exists, skipping`); return; }
+              const m = `
+                mutation($projectId: ID!) {
+                  createProjectV2Field(input:{ projectId:$projectId, dataType:${dataType}, name:"${name}" }) {
+                    projectV2Field { ... on ProjectV2FieldCommon { id name } }
+                  }
+                }
+              `;
+              const r = await github.graphql(m, { projectId: project.id });
+              fieldMapping[name] = r.createProjectV2Field.projectV2Field.id;
+              console.log(`Created field "${name}"`);
+            }
+
+            // 5) Create fields
             await createSingleSelect('Priority', [
-              opt('P0', 'RED', 'Urgent'),
-              opt('P1', 'ORANGE', 'High'),
-              opt('P2', 'YELLOW', 'Medium'),
-              opt('P3', 'GREEN', 'Planned/Low')
+              opt('P0','RED','Urgent'),
+              opt('P1','ORANGE','High'),
+              opt('P2','YELLOW','Medium'),
+              opt('P3','GREEN','Planned/Low')
             ]);
 
             await createSingleSelect('Area', [
-              opt('Security', 'PURPLE', 'Security domain'),
-              opt('Compliance', 'BLUE', 'Compliance & governance'),
-              opt('Observability', 'BLUE', 'Monitoring & observability'),
-              opt('Performance', 'GREEN', 'Performance optimization'),
-              opt('High Availability', 'GRAY', 'HA & resilience'),
-              opt('API Gateway', 'BLUE', 'Gateway & service mesh'),
-              opt('Equity UI', 'YELLOW', 'UI modernization'),
-              opt('Docs', 'GRAY', 'Documentation'),
-              opt('CI/CD', 'ORANGE', 'Pipelines & automation'),
-              opt('Configuration', 'GRAY', 'Configs & env'),
-              opt('Logging', 'PURPLE', 'Unified logging'),
-              opt('Error Handling', 'ORANGE', 'Error handling'),
-              opt('Testing', 'YELLOW', 'Testing & QA'),
-              opt('Backup', 'GRAY', 'Backup & recovery'),
-              opt('Load Testing', 'YELLOW', 'Load testing'),
-              opt('Security Audit', 'PURPLE', 'Security audits'),
-              opt('Data Pipeline', 'BLUE', 'Data pipelines'),
-              opt('Mobile API', 'BLUE', 'Mobile endpoints'),
-              opt('Integration', 'GRAY', 'Cross-component integration')
+              opt('Security','PURPLE','Security domain'),
+              opt('Compliance','BLUE','Compliance & governance'),
+              opt('Observability','BLUE','Monitoring & observability'),
+              opt('Performance','GREEN','Performance optimization'),
+              opt('High Availability','GRAY','HA & resilience'),
+              opt('API Gateway','BLUE','Gateway & service mesh'),
+              opt('Equity UI','YELLOW','UI modernization'),
+              opt('Docs','GRAY','Documentation'),
+              opt('CI/CD','ORANGE','Pipelines & automation'),
+              opt('Configuration','GRAY','Configs & env'),
+              opt('Logging','PURPLE','Unified logging'),
+              opt('Error Handling','ORANGE','Error handling'),
+              opt('Testing','YELLOW','Testing & QA'),
+              opt('Backup','GRAY','Backup & recovery'),
+              opt('Load Testing','YELLOW','Load testing'),
+              opt('Security Audit','PURPLE','Security audits'),
+              opt('Data Pipeline','BLUE','Data pipelines'),
+              opt('Mobile API','BLUE','Mobile endpoints'),
+              opt('Integration','GRAY','Cross-component integration')
             ]);
 
             await createSingleSelect('Phase', [
-              opt('Phase 1', 'GRAY', 'Foundation'),
-              opt('Phase 2 W1', 'GRAY', 'Week 1'),
-              opt('Phase 2 W2', 'GRAY', 'Week 2'),
-              opt('Phase 2 W3', 'GRAY', 'Week 3'),
-              opt('Phase 2 W4', 'GRAY', 'Week 4'),
-              opt('Phase 2 W5', 'GRAY', 'Week 5'),
-              opt('Phase 2 W6', 'GRAY', 'Week 6'),
-              opt('Phase 2 W7', 'GRAY', 'Week 7'),
-              opt('Phase 2 W8', 'GRAY', 'Week 8'),
-              opt('Phase 3 Q1', 'GRAY', 'Quarter 1'),
-              opt('Phase 3 Q2', 'GRAY', 'Quarter 2'),
-              opt('Phase 3 Q3', 'GRAY', 'Quarter 3'),
-              opt('Phase 3 Q4', 'GRAY', 'Quarter 4')
+              opt('Phase 1','GRAY','Foundation'),
+              opt('Phase 2 W1','GRAY','Week 1'),
+              opt('Phase 2 W2','GRAY','Week 2'),
+              opt('Phase 2 W3','GRAY','Week 3'),
+              opt('Phase 2 W4','GRAY','Week 4'),
+              opt('Phase 2 W5','GRAY','Week 5'),
+              opt('Phase 2 W6','GRAY','Week 6'),
+              opt('Phase 2 W7','GRAY','Week 7'),
+              opt('Phase 2 W8','GRAY','Week 8'),
+              opt('Phase 3 Q1','GRAY','Quarter 1'),
+              opt('Phase 3 Q2','GRAY','Quarter 2'),
+              opt('Phase 3 Q3','GRAY','Quarter 3'),
+              opt('Phase 3 Q4','GRAY','Quarter 4')
             ]);
 
             await createSingleSelect('Risk', [
-              opt('Low', 'GREEN', 'Low risk'),
-              opt('Medium', 'YELLOW', 'Medium risk'),
-              opt('High', 'RED', 'High risk')
+              opt('Low','GREEN','Low risk'),
+              opt('Medium','YELLOW','Medium risk'),
+              opt('High','RED','High risk')
             ]);
 
             await createSingleSelect('Status', [
-              opt('To Do', 'GRAY', 'To do'),
-              opt('In Progress', 'BLUE', 'In progress'),
-              opt('In Review', 'YELLOW', 'In review'),
-              opt('Blocked', 'RED', 'Blocked'),
-              opt('Done', 'GREEN', 'Done')
+              opt('To Do','GRAY','To do'),
+              opt('In Progress','BLUE','In progress'),
+              opt('In Review','YELLOW','In review'),
+              opt('Blocked','RED','Blocked'),
+              opt('Done','GREEN','Done')
             ]);
 
-            await createDate('Start date');
-            await createDate('Target date');
-            await createNumber('Estimate (h)');
-            await createText('Owner (text)');
-            await createText('Links');
-            await createText('Milestone');
+            await createTyped('Start date', 'DATE');
+            await createTyped('Target date', 'DATE');
+            await createTyped('Estimate (h)', 'NUMBER');
+            await createTyped('Owner (text)', 'TEXT');
+            await createTyped('Links', 'TEXT');
+            await createTyped('Milestone', 'TEXT');
 
             // 6) Upload artifact mapping (best-effort)
             const fs = await import('fs');
