@@ -670,3 +670,82 @@ export const auditEvents = {
 };
 
 export default AuditSystem;
+
+// CLI interface for npm script execution
+if (import.meta.url === `file://${process.argv[1]}`) {
+  const args = process.argv.slice(2);
+  
+  async function main() {
+    try {
+      if (args.includes('--audit')) {
+        console.log('🔐 Running audit system in one-shot mode...');
+        
+        // Create audit system instance without periodic flush
+        const auditSystemInstance = new AuditSystem({ 
+          flushInterval: 0 // Disable periodic flush
+        });
+        
+        // Record a sample audit event to test the system
+        await auditSystemInstance.recordEvent(
+          'system_operation',
+          'audit_system_test',
+          { test_run: true, timestamp: new Date().toISOString() },
+          { source: 'npm_script' }
+        );
+        
+        // Manually flush events
+        await auditSystemInstance.flushEvents();
+        
+        // Get final statistics
+        const stats = auditSystemInstance.getStatistics();
+        const healthScore = auditSystemInstance.calculateHealthScore(stats);
+        
+        console.log(`📊 Audit system test completed:`);
+        console.log(`  - Events recorded: ${stats.totalEvents}`);
+        console.log(`  - Health score: ${healthScore}/100`);
+        console.log(`  - Compliance mode: ${auditSystemInstance.options.complianceMode}`);
+        
+        // Shutdown gracefully
+        await auditSystemInstance.shutdown();
+        
+        // Exit with appropriate code based on health score
+        if (healthScore < 50) {
+          console.log('⚠️ Audit system health score below acceptable threshold (50)');
+          process.exit(1);
+        }
+        
+        console.log('✅ Audit system test completed successfully');
+        process.exit(0);
+        
+      } else {
+        console.log('📖 Audit System CLI');
+        console.log('Usage:');
+        console.log('  --audit   Run audit system test and exit');
+        console.log('  (no args) Start continuous audit system (default)');
+        
+        // Default behavior: start continuous audit system
+        console.log('🔐 Starting continuous audit system mode...');
+        console.log('Press Ctrl+C to stop');
+        
+        // Handle graceful shutdown
+        process.on('SIGINT', async () => {
+          console.log('\n🛑 Received shutdown signal...');
+          await auditSystem.shutdown();
+          process.exit(0);
+        });
+        
+        process.on('SIGTERM', async () => {
+          console.log('\n🛑 Received termination signal...');
+          await auditSystem.shutdown();
+          process.exit(0);
+        });
+      }
+      
+    } catch (error) {
+      console.error('❌ Audit system failed:', error.message);
+      process.exit(1);
+    }
+  }
+  
+  main();
+}

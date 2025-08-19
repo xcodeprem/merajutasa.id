@@ -1,0 +1,20 @@
+{
+  "scan_id": "scan_1755627712131_rovnpfrhh",
+  "scan_type": "full",
+  "started_at": "2025-08-19T18:21:52.131Z",
+  "vulnerabilities": [
+    {
+      "type": "dependency_vulnerability",
+      "severity": "medium",
+      "package": "glob",
+      "version": "^11.0.3",
+      "description": "Vulnerability found in glob@^11.0.3",
+      "cvss_score": "3.3",
+      "cve_id": "CVE-2024-3726"
+    }
+  ],
+  "threats": [],
+  "configuration_issues": [],
+  "overall_score": 95,
+  "recommendations": []
+}
