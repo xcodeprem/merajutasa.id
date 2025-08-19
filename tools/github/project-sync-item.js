@@ -80,10 +80,32 @@ const resolveProjectByTitle = async (login, title) => {
 };
 
 const getProjectFields = async (projectId) => {
-  const q = `query($id:ID!){ node(id:$id){ ... on ProjectV2 { fields(first:100){ nodes { __typename id name ... on ProjectV2SingleSelectField { options { id name } } } } } } }`;
+  // Query field configurations safely: fetch common props via interface, and options only for single-select fields.
+  const q = `
+    query($id:ID!){
+      node(id:$id){
+        ... on ProjectV2 {
+          fields(first:100){
+            nodes {
+              __typename
+              ... on ProjectV2FieldCommon { id name }
+              ... on ProjectV2SingleSelectField { options { id name } }
+            }
+          }
+        }
+      }
+    }
+  `;
   const d = await gql(q, { id: projectId });
-  const nodes = d.node?.fields?.nodes || [];
-  const byName = new Map(nodes.map(n => [n.name, n]));
+  const rawNodes = d.node?.fields?.nodes?.filter(Boolean) || [];
+  // Normalize nodes so callers can rely on { id, name, options?, __typename }
+  const nodes = rawNodes.map(n => ({
+    __typename: n.__typename,
+    id: n.id,
+    name: n.name,
+    options: Array.isArray(n.options) ? n.options : undefined,
+  }));
+  const byName = new Map(nodes.filter(n => n && n.name).map(n => [n.name, n]));
   return { nodes, byName };
 };
 
@@ -138,7 +160,7 @@ const upsertItemAndSetFields = async (project, fields, issueNumber) => {
   }).catch(()=>null);
   const itemId = addRes?.addProjectV2ItemById?.item?.id || null;
   // To find item ID even if it already exists, query items by content
-  const qItems = `query($pid:ID!,$cid:ID!){ node(id:$pid){ ... on ProjectV2 { items(first:50, query:"repo:${OWNER}/${REPO} is:open is:issue ${issueNumber}"){ nodes { id content { ... on Issue { number } ... on PullRequest { number } } } } } } }`;
+  const qItems = `query($pid:ID!,$cid:ID!){ node(id:$pid){ ... on ProjectV2 { items(first:50, query:"repo:${OWNER}/${REPO} is:issue ${issueNumber}"){ nodes { id content { ... on Issue { number } ... on PullRequest { number } } } } } } }`;
   const di = await gql(qItems, { pid: project.id, cid: issue.node_id });
   const item = (di.node?.items?.nodes || []).find(n => n.content?.number === issueNumber);
   const finalItemId = item?.id || itemId;

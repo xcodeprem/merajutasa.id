@@ -1,6 +1,12 @@
 name: Auto-add to Project
 
 on:
+  workflow_dispatch:
+    inputs:
+      number:
+        description: Issue/PR number to add/update
+        required: false
+        default: ""
   issues:
     types: [opened, labeled, unlabeled, reopened, edited, closed]
   pull_request:
@@ -25,7 +31,7 @@ jobs:
               console.log('Trigger via +project');
             }
             const ownerLogin = process.env.PROJECT_OWNER || '${{ vars.PROJECT_OWNER }}' || 'Andhika-Rey';
-            const projectTitle = process.env.PROJECT_TITLE || '${{ vars.PROJECT_TITLE }}' || 'MerajutASA Program Board';
+            const projectTitle = process.env.PROJECT_TITLE || '${{ vars.PROJECT_TITLE }}' || 'MerajutASA Roadmap';
 
             // Project lookup (fields via interface fragment)
             let project;
@@ -73,6 +79,10 @@ jobs:
               const resp = await github.graphql(q, { owner: ownerLogin });
               const nodes = resp.repositoryOwner?.projectsV2?.nodes || [];
               project = nodes.find(p => p.title === projectTitle);
+              // Fallback: if default points to new board but not found, try legacy title
+              if (!project && projectTitle !== 'MerajutASA Program Board') {
+                project = nodes.find(p => p.title === 'MerajutASA Program Board');
+              }
             } catch (e) {
               core.warning(`Project lookup failed: ${e.message}`);
               return;
@@ -88,6 +98,11 @@ jobs:
             const repoName = context.payload.repository?.name || process.env.GITHUB_REPOSITORY.split('/')[1];
             let isPRContext = false;
             let number = undefined;
+            // Manual dispatch support
+            if (context.eventName === 'workflow_dispatch') {
+              const inputNum = (context.payload?.inputs?.number || '').trim();
+              if (inputNum) number = parseInt(inputNum, 10);
+            }
             if (context.eventName === 'pull_request') {
               isPRContext = true; number = context.payload.pull_request.number;
             } else if (context.eventName === 'issues') {
