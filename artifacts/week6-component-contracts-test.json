@@ -1,18 +1,18 @@
 {
-  "timestamp": "2025-08-19T08:36:10.447Z",
+  "timestamp": "2025-08-19T14:17:02.058Z",
   "test_suite": "Week 6 Component Contract Tests",
   "summary": {
     "total": 7,
     "passed": 7,
     "failed": 0,
     "success_rate": 100,
-    "total_duration": 30
+    "total_duration": 31
   },
   "results": [
     {
       "name": "Orchestrator Boot with Audit System",
       "status": "PASSED",
-      "duration": 14
+      "duration": 15
     },
     {
       "name": "Audit System Call Contract",
@@ -42,7 +42,7 @@
     {
       "name": "Minimal Audit Event Flow",
       "status": "PASSED",
-      "duration": 1
+      "duration": 0
     }
   ],
   "contract_validation": {
