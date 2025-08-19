@@ -149,7 +149,7 @@ async function getIssueProjectValues(owner, repo, number) {
                 nodes{
                   ... on ProjectV2ItemFieldSingleSelectValue{
                     field{ ... on ProjectV2FieldCommon{ name } }
-                    option{ name }
+                    name
                   }
                   ... on ProjectV2ItemFieldTextValue{
                     field{ ... on ProjectV2FieldCommon{ name } }
@@ -226,7 +226,7 @@ function extractProjectFields(fieldValues) {
     else if (typeof fv.date === 'string') rv[fieldName] = fv.date;
     else if (typeof fv.number === 'number') rv[fieldName] = String(fv.number);
     else if (typeof fv.title === 'string') rv[fieldName] = fv.title;
-    else if (fv.option && typeof fv.option.name === 'string') rv[fieldName] = fv.option.name;
+  else if (typeof fv.name === 'string') rv[fieldName] = fv.name; // single-select value
   }
   return rv;
 }
