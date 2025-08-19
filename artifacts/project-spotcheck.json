@@ -51,49 +51,7 @@
         "Priority": "P2",
         "Title": "[PR-4] Infra Health Triage Runbook: Status, Dependencies, Recommendations"
       }
-    },
-    {
-      "expected": {
-        "Area": "Infrastructure",
-        "Phase": "Phase 2 W6",
-        "Priority": "P2",
-        "Status": "To Do"
-      },
-      "issue": {
-        "number": 97,
-        "title": "[PR-3] Infrastructure Health Bundle: Deterministic End-to-end Runs"
-      },
-      "labels": [
-        "area:infrastructure",
-        "integration",
-        "medium",
-        "operations",
-        "phase:2-week-6",
-        "status:todo"
-      ],
-      "mismatches": [
-        {
-          "actual": null,
-          "expected": "Infrastructure",
-          "field": "Area"
-        },
-        {
-          "actual": null,
-          "expected": "To Do",
-          "field": "Status"
-        }
-      ],
-      "project": {
-        "number": 2,
-        "title": "MerajutASA Program Board"
-      },
-      "projectFields": {
-        "Owner (text)": "codingxdev0",
-        "Phase": "Phase 2 W6",
-        "Priority": "P2",
-        "Title": "[PR-3] Infrastructure Health Bundle: Deterministic End-to-end Runs"
-      }
     }
   ],
-  "ts": "2025-08-19T22:36:45.085Z"
+  "ts": "2025-08-19T22:41:09.745Z"
 }
