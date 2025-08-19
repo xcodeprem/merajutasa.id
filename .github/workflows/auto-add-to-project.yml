@@ -88,19 +88,30 @@ jobs:
             const isPRContext = !!context.payload.pull_request || (!!context.payload.issue && !!context.payload.issue.pull_request);
             const number = isPRContext ? (context.payload.pull_request?.number || context.payload.issue.number) : context.payload.issue.number;
 
-            const contentQuery = `
-              query($owner:String!, $repo:String!, $number:Int!) {
-                repository(owner:$owner, name:$repo) {
-                  issue(number:$number) { id number title body labels(first:50){ nodes { name } } milestone { title dueOn } assignees(first:10){nodes{login}} }
-                  pullRequest(number:$number) { id number title body merged labels(first:50){ nodes { name } } milestone { title dueOn } assignees(first:10){nodes{login}} }
-                }
-              }
-            `;
+            // Build a query that asks ONLY for the relevant node to avoid GraphQL errors
+            const contentQuery = isPRContext
+              ? `query($owner:String!, $repo:String!, $number:Int!) {
+                   repository(owner:$owner, name:$repo) {
+                     pullRequest(number:$number) {
+                       id number title body merged
+                       labels(first:50){ nodes { name } }
+                       milestone { title dueOn }
+                       assignees(first:10){nodes{login}}
+                     }
+                   }
+                 }`
+              : `query($owner:String!, $repo:String!, $number:Int!) {
+                   repository(owner:$owner, name:$repo) {
+                     issue(number:$number) {
+                       id number title body
+                       labels(first:50){ nodes { name } }
+                       milestone { title dueOn }
+                       assignees(first:10){nodes{login}}
+                     }
+                   }
+                 }`;
             const contentResp = await github.graphql(contentQuery, { owner: repoOwner, repo: repoName, number });
-            // Prefer based on context, but fall back to whichever exists to avoid NOT_FOUND when commenting on PRs
-            const content = (isPRContext ? contentResp.repository.pullRequest : contentResp.repository.issue)
-              || contentResp.repository.pullRequest
-              || contentResp.repository.issue;
+            const content = isPRContext ? contentResp.repository.pullRequest : contentResp.repository.issue;
             if (!content) { console.log(`Content not found for #${number}`); return; }
             const contentId = content.id;
             const labels = new Set((content.labels?.nodes || []).map(l => l.name));
