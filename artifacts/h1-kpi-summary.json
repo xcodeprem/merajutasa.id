@@ -1,11 +1,11 @@
 {
   "_metadata": {
     "actor": "copilot-swe-agent[bot]",
-    "generated_at": "2025-08-18T21:37:00.407Z",
+    "generated_at": "2025-08-19T07:39:30.868Z",
     "generator": "generate-h1-kpi-summary.js",
-    "git_ref": "refs/heads/copilot/fix-58",
-    "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
-    "run_id": "17052958409",
+    "git_ref": "refs/heads/copilot/fix-65",
+    "git_sha": "658620b2f49fcd0fbcfb7463b1d31b2135a5517e",
+    "run_id": "17062783257",
     "version": "1.0"
   },
   "adoption": {
@@ -27,13 +27,13 @@
   },
   "feedback": {
     "categories": {
-      "bug": 78,
-      "product": 78,
-      "ux": 78
+      "bug": 81,
+      "product": 81,
+      "ux": 81
     },
-    "ingested": 156
+    "ingested": 162
   },
-  "generated_utc": "2025-08-18T21:37:00.407Z",
+  "generated_utc": "2025-08-19T07:39:30.868Z",
   "phase": "PHASE_0_WARN",
   "trust": {
     "disclaimers_status": "PASS",
@@ -61,16 +61,16 @@
       "end_utc": "2025-08-24",
       "start_utc": "2025-08-18",
       "totals": {
-        "canonical_ok": 62,
+        "canonical_ok": 105,
         "coverage": 1,
-        "events": 62,
+        "events": 105,
         "feedback": 0,
-        "hero_views": 62,
+        "hero_views": 103,
         "prohibited": 0
       },
       "week": "2025-W34"
     },
-    "throughput_latest": 62,
+    "throughput_latest": 105,
     "weeks": [
       {
         "end_utc": "2025-08-17",
@@ -89,11 +89,11 @@
         "end_utc": "2025-08-24",
         "start_utc": "2025-08-18",
         "totals": {
-          "canonical_ok": 62,
+          "canonical_ok": 105,
           "coverage": 1,
-          "events": 62,
+          "events": 105,
           "feedback": 0,
-          "hero_views": 62,
+          "hero_views": 103,
           "prohibited": 0
         },
         "week": "2025-W34"

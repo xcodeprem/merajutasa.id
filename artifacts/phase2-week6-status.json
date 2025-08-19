@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-08-18T21:30:43.487Z",
+  "timestamp": "2025-08-19T07:41:27.585Z",
   "phase": "Phase 2 Week 6",
   "title": "Compliance & Security Enhancement",
   "components": {
@@ -22,7 +22,7 @@
       "loading_test": {
         "loaded": true,
         "functional": true,
-        "test_event_id": "audit_mehmpt4a_121bf98d4fe1",
+        "test_event_id": "audit_mei8j7vw_77c4488bdaf2",
         "features_tested": [
           "event_recording",
           "compliance_tagging",
@@ -50,7 +50,7 @@
       "loading_test": {
         "loaded": true,
         "functional": true,
-        "assessment_score": 100,
+        "assessment_score": 82,
         "frameworks_tested": [
           "gdpr"
         ],
@@ -65,8 +65,8 @@
     "Security Hardening": {
       "file": "infrastructure/security/enhanced/security-hardening.js",
       "exists": true,
-      "size": "32KB",
-      "sizeBytes": 32750,
+      "size": "33.7KB",
+      "sizeBytes": 34490,
       "expectedSize": "29KB",
       "sizeScore": 100,
       "features": [
@@ -110,7 +110,7 @@
       "loading_test": {
         "loaded": true,
         "functional": true,
-        "request_id": "req_1755552643511_jjpl6hrxg",
+        "request_id": "req_1755589287611_dnsbgsp4q",
         "jurisdictions_tested": [
           "gdpr"
         ],
@@ -158,8 +158,8 @@
     "total_files": 5,
     "files_found": 5,
     "files_missing": 0,
-    "total_size": "145.4KB",
-    "total_size_bytes": 148878
+    "total_size": "147.1KB",
+    "total_size_bytes": 150618
   },
   "integrationTests": {
     "Audit System → Compliance Automation": {

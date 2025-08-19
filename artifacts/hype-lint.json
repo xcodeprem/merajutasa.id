@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "generated_utc": "2025-08-18T21:36:57.053Z",
-  "file_count": 62,
+  "generated_utc": "2025-08-19T07:47:15.107Z",
+  "file_count": 66,
   "total_hits": 12,
   "max_severity": "MEDIUM",
   "severity_counts": {
@@ -74,7 +74,7 @@
     },
     {
       "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-2.md",
-      "line": 250,
+      "line": 267,
       "column": 9,
       "match": "top",
       "rule": "TOP",
@@ -84,7 +84,7 @@
     },
     {
       "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md",
-      "line": 381,
+      "line": 419,
       "column": 9,
       "match": "top",
       "rule": "TOP",
@@ -94,7 +94,7 @@
     },
     {
       "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md",
-      "line": 382,
+      "line": 420,
       "column": 9,
       "match": "top",
       "rule": "TOP",

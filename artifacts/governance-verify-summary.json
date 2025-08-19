@@ -1,22 +1,22 @@
 {
   "_metadata": {
     "actor": "copilot-swe-agent[bot]",
-    "generated_at": "2025-08-18T21:36:59.620Z",
+    "generated_at": "2025-08-19T07:40:12.720Z",
     "generator": "governance-verify-aggregator",
-    "git_ref": "refs/heads/copilot/fix-58",
-    "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
-    "run_id": "17052958409",
+    "git_ref": "refs/heads/copilot/fix-65",
+    "git_sha": "658620b2f49fcd0fbcfb7463b1d31b2135a5517e",
+    "run_id": "17062783257",
     "version": "1.0"
   },
   "artifacts": {
     "decLint": {
       "_metadata": {
         "actor": "copilot-swe-agent[bot]",
-        "generated_at": "2025-08-18T21:36:57.905Z",
+        "generated_at": "2025-08-19T07:40:11.006Z",
         "generator": "dec-lint.js",
-        "git_ref": "refs/heads/copilot/fix-58",
-        "git_sha": "41194c9bd9e6a7206e32a2ab2d8557eef98d1754",
-        "run_id": "17052958409",
+        "git_ref": "refs/heads/copilot/fix-65",
+        "git_sha": "658620b2f49fcd0fbcfb7463b1d31b2135a5517e",
+        "run_id": "17062783257",
         "version": "1.0"
       },
       "results": [
@@ -488,10 +488,10 @@
           "spec_hash_violation_count": 0
         }
       },
-      "timestamp_utc": "2025-08-18T21:36:59.083Z"
+      "timestamp_utc": "2025-08-19T07:40:12.180Z"
     },
     "hype": {
-      "file_count": 62,
+      "file_count": 66,
       "findings": [
         {
           "column": 9,
@@ -557,7 +557,7 @@
           "column": 9,
           "context_line": "kubectl top pods",
           "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-2.md",
-          "line": 250,
+          "line": 267,
           "match": "top",
           "rationale": "Generic superiority claim.",
           "rule": "TOP",
@@ -567,7 +567,7 @@
           "column": 9,
           "context_line": "kubectl top nodes",
           "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md",
-          "line": 381,
+          "line": 419,
           "match": "top",
           "rationale": "Generic superiority claim.",
           "rule": "TOP",
@@ -577,7 +577,7 @@
           "column": 9,
           "context_line": "kubectl top pods",
           "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md",
-          "line": 382,
+          "line": 420,
           "match": "top",
           "rationale": "Generic superiority claim.",
           "rule": "TOP",
@@ -614,7 +614,7 @@
           "severity": "MEDIUM"
         }
       ],
-      "generated_utc": "2025-08-18T21:36:57.053Z",
+      "generated_utc": "2025-08-19T07:40:10.129Z",
       "max_severity": "MEDIUM",
       "rule_counts": {
         "RANKING": 6,
@@ -628,7 +628,7 @@
       "version": 1
     },
     "params": {
-      "generated_utc": "2025-08-18T21:36:56.636Z",
+      "generated_utc": "2025-08-19T07:40:09.719Z",
       "rows": [
         {
           "aliases": {
@@ -902,7 +902,7 @@
       "violations": []
     },
     "principles": {
-      "generated_utc": "2025-08-18T21:36:58.132Z",
+      "generated_utc": "2025-08-19T07:40:11.237Z",
       "principles": [
         {
           "confidence": 0.9,
@@ -1016,11 +1016,11 @@
           ],
           "evidence_truncated": true,
           "inferredImpact": true,
-          "match_count": 1185,
+          "match_count": 1226,
           "principle": "GP1"
         },
         {
-          "confidence": 0.8,
+          "confidence": 0.9,
           "domains": [
             "other",
             "privacy",
@@ -1055,7 +1055,7 @@
               "changed": false,
               "domain": "other",
               "file": "docs/phase-1/PHASE-1-IMPLEMENTATION-GUIDE.md",
-              "line": 853,
+              "line": 882,
               "pattern": "abuse",
               "snippet": "- [ ] Rate limiting preventing abuse"
             },
@@ -1063,9 +1063,41 @@
               "changed": false,
               "domain": "other",
               "file": "docs/phase-1/PHASE-1-IMPLEMENTATION-GUIDE.md",
-              "line": 879,
+              "line": 911,
               "pattern": "abuse",
               "snippet": "- ✅ **Rate limiting** preventing abuse and DoS"
+            },
+            {
+              "changed": false,
+              "domain": "other",
+              "file": "docs/development/scripts.md",
+              "line": 205,
+              "pattern": "safety",
+              "snippet": "- `scripts:validate` - Validate scripts for safety and compatibility"
+            },
+            {
+              "changed": false,
+              "domain": "other",
+              "file": "docs/development/scripts.md",
+              "line": 317,
+              "pattern": "safety",
+              "snippet": "### Safety Guidelines"
+            },
+            {
+              "changed": false,
+              "domain": "other",
+              "file": "docs/development/scripts.md",
+              "line": 337,
+              "pattern": "safety",
+              "snippet": "1. **Safety Classification** - No prohibited patterns"
+            },
+            {
+              "changed": false,
+              "domain": "other",
+              "file": "docs/development/scripts.md",
+              "line": 346,
+              "pattern": "safety",
+              "snippet": "- Automated safety classification"
             },
             {
               "changed": false,
@@ -1078,7 +1110,7 @@
           ],
           "evidence_truncated": false,
           "inferredImpact": true,
-          "match_count": 6,
+          "match_count": 10,
           "principle": "GP2"
         },
         {
@@ -1193,7 +1225,7 @@
           ],
           "evidence_truncated": true,
           "inferredImpact": true,
-          "match_count": 191,
+          "match_count": 192,
           "principle": "GP3"
         },
         {
@@ -1308,7 +1340,7 @@
           ],
           "evidence_truncated": true,
           "inferredImpact": true,
-          "match_count": 827,
+          "match_count": 848,
           "principle": "GP4"
         },
         {
@@ -1423,7 +1455,7 @@
           ],
           "evidence_truncated": true,
           "inferredImpact": true,
-          "match_count": 448,
+          "match_count": 450,
           "principle": "GP5"
         },
         {
@@ -1650,7 +1682,7 @@
           ],
           "evidence_truncated": true,
           "inferredImpact": true,
-          "match_count": 238,
+          "match_count": 239,
           "principle": "GP7"
         },
         {
@@ -1672,7 +1704,7 @@
               "changed": false,
               "domain": "other",
               "file": "docs/phase-2/PHASE-2-WEEK-6-DELIVERY-DOCUMENTATION.md",
-              "line": 84,
+              "line": 96,
               "pattern": "portabil",
               "snippet": "- **Automated data subject request processing** for access, erasure, and portability requests"
             },
@@ -1680,7 +1712,7 @@
               "changed": false,
               "domain": "other",
               "file": "docs/phase-2/PHASE-2-WEEK-3-DELIVERY-DOCUMENTATION.md",
-              "line": 372,
+              "line": 399,
               "pattern": "extensib",
               "snippet": "### 3. Integration & Extensibility 🔧"
             },
@@ -1688,7 +1720,7 @@
               "changed": false,
               "domain": "other",
               "file": "docs/phase-2/PHASE-2-WEEK-3-DELIVERY-DOCUMENTATION.md",
-              "line": 375,
+              "line": 403,
               "pattern": "extensib",
               "snippet": "- **Plugin Architecture**: Extensible alert channels and data sources"
             },
@@ -1744,7 +1776,7 @@
               "changed": false,
               "domain": "other",
               "file": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
-              "line": 26,
+              "line": 27,
               "pattern": "extensib",
               "snippet": "| **Kubernetes** | Governance model, policy enforcement, hash-based integrity | Multi-layer security, policy-as-code, extensible architecture |"
             },
@@ -1752,14 +1784,14 @@
               "changed": false,
               "domain": "other",
               "file": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
-              "line": 342,
+              "line": 368,
               "pattern": "interoperab",
               "snippet": "##### **3.3.3 Interoperability Gaps**"
             }
           ],
           "evidence_truncated": true,
           "inferredImpact": true,
-          "match_count": 14,
+          "match_count": 16,
           "principle": "GP8"
         },
         {
@@ -1874,7 +1906,7 @@
           ],
           "evidence_truncated": true,
           "inferredImpact": true,
-          "match_count": 426,
+          "match_count": 437,
           "principle": "GP9"
         },
         {
@@ -1992,7 +2024,7 @@
         }
       ],
       "summary": {
-        "average_confidence": 0.89,
+        "average_confidence": 0.9,
         "impacted": 10,
         "max_confidence": 0.9,
         "total_principles": 10
@@ -2009,7 +2041,7 @@
           ]
         },
         "freshness": {
-          "age_hours": 12.672993055555555,
+          "age_hours": 22.72663138888889,
           "last_rotated_utc": "2025-08-18T08:56:34.958Z",
           "ok": true
         },
@@ -2021,11 +2053,11 @@
       },
       "config_path": "tools/config/privacy-policy.json",
       "status": "ok",
-      "ts": "2025-08-18T21:36:57.733Z",
+      "ts": "2025-08-19T07:40:10.831Z",
       "violations": []
     },
     "securitySmoke": {
-      "files_scanned": 157,
+      "files_scanned": 168,
       "summary": {
         "by_severity": {
           "HIGH": 0,
@@ -2034,7 +2066,7 @@
         },
         "total_violations": 0
       },
-      "timestamp": "2025-08-18T21:36:56.913Z",
+      "timestamp": "2025-08-19T07:40:09.994Z",
       "violations": []
     },
     "specHash": {
@@ -2047,7 +2079,7 @@
         "updated_count": 0,
         "violation_count": 0
       },
-      "timestamp_utc": "2025-08-18T21:36:56Z",
+      "timestamp_utc": "2025-08-19T07:40:09Z",
       "unchanged": [
         "docs/roadmap/roadmap-master-v1.md",
         "docs/governance/signature-pipeline-plan-v1.md",
@@ -2229,6 +2261,11 @@
         },
         {
           "file": "docs/security/README.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/scripts/NPM-SCRIPTS-ORGANIZATION.md",
           "newCount": 0,
           "oldCount": 0
         },
@@ -2473,6 +2510,11 @@
           "oldCount": 0
         },
         {
+          "file": "docs/infrastructure/health-monitoring.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
           "file": "docs/implementation/README.md",
           "newCount": 0,
           "oldCount": 0
@@ -2598,6 +2640,11 @@
           "oldCount": 0
         },
         {
+          "file": "docs/development/scripts.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
           "file": "docs/data/README.md",
           "newCount": 0,
           "oldCount": 0
@@ -2629,6 +2676,11 @@
         },
         {
           "file": "docs/api/README.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/api/API_DOCUMENTATION.md",
           "newCount": 0,
           "oldCount": 0
         },
@@ -2803,7 +2855,7 @@
           "oldCount": 0
         }
       ],
-      "generated_utc": "2025-08-18T21:36:59.457Z",
+      "generated_utc": "2025-08-19T07:40:12.556Z",
       "new_total": 0,
       "old_total": 0,
       "suggestions": [
@@ -3363,6 +3415,31 @@
           ]
         },
         {
+          "file": "docs/infrastructure/health-monitoring.md",
+          "suggestions": [
+            {
+              "count": 1,
+              "new": "utama",
+              "old": "master"
+            }
+          ]
+        },
+        {
+          "file": "docs/implementation/README.md",
+          "suggestions": [
+            {
+              "count": 2,
+              "new": "utama",
+              "old": "master"
+            },
+            {
+              "count": 2,
+              "new": "pengguna",
+              "old": "user"
+            }
+          ]
+        },
+        {
           "file": "docs/governance/todo-post-DEC-20250812-02.md",
           "suggestions": [
             {
@@ -3849,615 +3926,6 @@
         }
       ],
       "version": "1.0.0"
-    },
-    "perf": {
-      "url": "http://127.0.0.1:4620/",
-      "budgets": {
-        "perf_score_min": 0.6,
-        "lcp_ms": 2500,
-        "tbt_ms": 300,
-        "cls_max": 0.8
-      },
-      "actual": {
-        "perf_score": 1,
-        "lcp_ms": 907.6822,
-        "tbt_ms": 0,
-        "cls": 0
-      },
-      "categories": {
-        "performance": {
-          "title": "Performance",
-          "supportedModes": [
-            "navigation",
-            "timespan",
-            "snapshot"
-          ],
-          "auditRefs": [
-            {
-              "id": "first-contentful-paint",
-              "weight": 10,
-              "group": "metrics",
-              "acronym": "FCP"
-            },
-            {
-              "id": "largest-contentful-paint",
-              "weight": 25,
-              "group": "metrics",
-              "acronym": "LCP"
-            },
-            {
-              "id": "total-blocking-time",
-              "weight": 30,
-              "group": "metrics",
-              "acronym": "TBT"
-            },
-            {
-              "id": "cumulative-layout-shift",
-              "weight": 25,
-              "group": "metrics",
-              "acronym": "CLS"
-            },
-            {
-              "id": "speed-index",
-              "weight": 10,
-              "group": "metrics",
-              "acronym": "SI"
-            },
-            {
-              "id": "cache-insight",
-              "weight": 0,
-              "group": "hidden"
-            },
-            {
-              "id": "cls-culprits-insight",
-              "weight": 0,
-              "group": "hidden"
-            },
-            {
-              "id": "document-latency-insight",
-              "weight": 0,
-              "group": "hidden"
-            },
-            {
-              "id": "dom-size-insight",
-              "weight": 0,
-              "group": "hidden"
-            },
-            {
-              "id": "duplicated-javascript-insight",
-              "weight": 0,
-              "group": "hidden"
-            },
-            {
-              "id": "font-display-insight",
-              "weight": 0,
-              "group": "hidden"
-            },
-            {
-              "id": "forced-reflow-insight",
-              "weight": 0,
-              "group": "hidden"
-            },
-            {
-              "id": "image-delivery-insight",
-              "weight": 0,
-              "group": "hidden"
-            },
-            {
-              "id": "inp-breakdown-insight",
-              "weight": 0,
-              "group": "hidden"
-            },
-            {
-              "id": "lcp-breakdown-insight",
-              "weight": 0,
-              "group": "hidden"
-            },
-            {
-              "id": "lcp-discovery-insight",
-              "weight": 0,
-              "group": "hidden"
-            },
-            {
-              "id": "legacy-javascript-insight",
-              "weight": 0,
-              "group": "hidden"
-            },
-            {
-              "id": "modern-http-insight",
-              "weight": 0,
-              "group": "hidden"
-            },
-            {
-              "id": "network-dependency-tree-insight",
-              "weight": 0,
-              "group": "hidden"
-            },
-            {
-              "id": "render-blocking-insight",
-              "weight": 0,
-              "group": "hidden"
-            },
-            {
-              "id": "third-parties-insight",
-              "weight": 0,
-              "group": "hidden"
-            },
-            {
-              "id": "viewport-insight",
-              "weight": 0,
-              "group": "hidden"
-            },
-            {
-              "id": "interactive",
-              "weight": 0,
-              "group": "hidden",
-              "acronym": "TTI"
-            },
-            {
-              "id": "max-potential-fid",
-              "weight": 0,
-              "group": "hidden"
-            },
-            {
-              "id": "first-meaningful-paint",
-              "weight": 0,
-              "acronym": "FMP",
-              "group": "hidden"
-            },
-            {
-              "id": "render-blocking-resources",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "uses-responsive-images",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "offscreen-images",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "unminified-css",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "unminified-javascript",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "unused-css-rules",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "unused-javascript",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "uses-optimized-images",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "modern-image-formats",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "uses-text-compression",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "uses-rel-preconnect",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "server-response-time",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "redirects",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "uses-http2",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "efficient-animated-content",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "duplicated-javascript",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "legacy-javascript",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "prioritize-lcp-image",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "total-byte-weight",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "uses-long-cache-ttl",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "dom-size",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "critical-request-chains",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "user-timings",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "bootup-time",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "mainthread-work-breakdown",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "font-display",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "third-party-summary",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "third-party-facades",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "largest-contentful-paint-element",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "lcp-lazy-loaded",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "layout-shifts",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "uses-passive-event-listeners",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "no-document-write",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "long-tasks",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "non-composited-animations",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "unsized-images",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "viewport",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "bf-cache",
-              "weight": 0,
-              "group": "diagnostics"
-            },
-            {
-              "id": "network-requests",
-              "weight": 0,
-              "group": "hidden"
-            },
-            {
-              "id": "network-rtt",
-              "weight": 0,
-              "group": "hidden"
-            },
-            {
-              "id": "network-server-latency",
-              "weight": 0,
-              "group": "hidden"
-            },
-            {
-              "id": "main-thread-tasks",
-              "weight": 0,
-              "group": "hidden"
-            },
-            {
-              "id": "diagnostics",
-              "weight": 0,
-              "group": "hidden"
-            },
-            {
-              "id": "metrics",
-              "weight": 0,
-              "group": "hidden"
-            },
-            {
-              "id": "screenshot-thumbnails",
-              "weight": 0,
-              "group": "hidden"
-            },
-            {
-              "id": "final-screenshot",
-              "weight": 0,
-              "group": "hidden"
-            },
-            {
-              "id": "script-treemap-data",
-              "weight": 0,
-              "group": "hidden"
-            },
-            {
-              "id": "resource-summary",
-              "weight": 0,
-              "group": "hidden"
-            }
-          ],
-          "id": "performance",
-          "score": 1
-        },
-        "best-practices": {
-          "title": "Best Practices",
-          "supportedModes": [
-            "navigation",
-            "timespan",
-            "snapshot"
-          ],
-          "auditRefs": [
-            {
-              "id": "is-on-https",
-              "weight": 5,
-              "group": "best-practices-trust-safety"
-            },
-            {
-              "id": "redirects-http",
-              "weight": 0,
-              "group": "best-practices-trust-safety"
-            },
-            {
-              "id": "geolocation-on-start",
-              "weight": 1,
-              "group": "best-practices-trust-safety"
-            },
-            {
-              "id": "notification-on-start",
-              "weight": 1,
-              "group": "best-practices-trust-safety"
-            },
-            {
-              "id": "csp-xss",
-              "weight": 0,
-              "group": "best-practices-trust-safety"
-            },
-            {
-              "id": "has-hsts",
-              "weight": 0,
-              "group": "best-practices-trust-safety"
-            },
-            {
-              "id": "origin-isolation",
-              "weight": 0,
-              "group": "best-practices-trust-safety"
-            },
-            {
-              "id": "clickjacking-mitigation",
-              "weight": 0,
-              "group": "best-practices-trust-safety"
-            },
-            {
-              "id": "trusted-types-xss",
-              "weight": 0,
-              "group": "best-practices-trust-safety"
-            },
-            {
-              "id": "paste-preventing-inputs",
-              "weight": 3,
-              "group": "best-practices-ux"
-            },
-            {
-              "id": "image-aspect-ratio",
-              "weight": 1,
-              "group": "best-practices-ux"
-            },
-            {
-              "id": "image-size-responsive",
-              "weight": 1,
-              "group": "best-practices-ux"
-            },
-            {
-              "id": "viewport",
-              "weight": 1,
-              "group": "best-practices-ux"
-            },
-            {
-              "id": "font-size",
-              "weight": 1,
-              "group": "best-practices-ux"
-            },
-            {
-              "id": "doctype",
-              "weight": 1,
-              "group": "best-practices-browser-compat"
-            },
-            {
-              "id": "charset",
-              "weight": 1,
-              "group": "best-practices-browser-compat"
-            },
-            {
-              "id": "js-libraries",
-              "weight": 0,
-              "group": "best-practices-general"
-            },
-            {
-              "id": "deprecations",
-              "weight": 5,
-              "group": "best-practices-general"
-            },
-            {
-              "id": "third-party-cookies",
-              "weight": 5,
-              "group": "best-practices-general"
-            },
-            {
-              "id": "errors-in-console",
-              "weight": 1,
-              "group": "best-practices-general"
-            },
-            {
-              "id": "valid-source-maps",
-              "weight": 0,
-              "group": "best-practices-general"
-            },
-            {
-              "id": "inspector-issues",
-              "weight": 1,
-              "group": "best-practices-general"
-            }
-          ],
-          "id": "best-practices",
-          "score": 0.96
-        },
-        "seo": {
-          "title": "SEO",
-          "description": "These checks ensure that your page is following basic search engine optimization advice. There are many additional factors Lighthouse does not score here that may affect your search ranking, including performance on [Core Web Vitals](https://web.dev/explore/vitals). [Learn more about Google Search Essentials](https://support.google.com/webmasters/answer/35769).",
-          "manualDescription": "Run these additional validators on your site to check additional SEO best practices.",
-          "supportedModes": [
-            "navigation",
-            "snapshot"
-          ],
-          "auditRefs": [
-            {
-              "id": "is-crawlable",
-              "weight": 4.043478260869565,
-              "group": "seo-crawl"
-            },
-            {
-              "id": "document-title",
-              "weight": 1,
-              "group": "seo-content"
-            },
-            {
-              "id": "meta-description",
-              "weight": 1,
-              "group": "seo-content"
-            },
-            {
-              "id": "http-status-code",
-              "weight": 1,
-              "group": "seo-crawl"
-            },
-            {
-              "id": "link-text",
-              "weight": 1,
-              "group": "seo-content"
-            },
-            {
-              "id": "crawlable-anchors",
-              "weight": 1,
-              "group": "seo-crawl"
-            },
-            {
-              "id": "robots-txt",
-              "weight": 0,
-              "group": "seo-crawl"
-            },
-            {
-              "id": "image-alt",
-              "weight": 0,
-              "group": "seo-content"
-            },
-            {
-              "id": "hreflang",
-              "weight": 1,
-              "group": "seo-content"
-            },
-            {
-              "id": "canonical",
-              "weight": 0,
-              "group": "seo-content"
-            },
-            {
-              "id": "structured-data",
-              "weight": 0
-            }
-          ],
-          "id": "seo",
-          "score": 0.9
-        }
-      }
-    },
-    "a11y": {
-      "url": "http://127.0.0.1:4620/",
-      "counts": {
-        "total": 1,
-        "serious": 0
-      },
-      "issues": [
-        {
-          "code": "WCAG2AA.Principle3.Guideline3_1.3_1_1.H57.2",
-          "type": "error",
-          "typeCode": 1,
-          "message": "The html element should have a lang or xml:lang attribute which describes the language of the document.",
-          "context": "<html><head><meta charset=\"utf-8\"><ti...</html>",
-          "selector": "html",
-          "runner": "htmlcs",
-          "runnerExtras": {}
-        }
-      ]
     }
   },
   "summary": {
@@ -4487,32 +3955,7 @@
     "terminology_adoption_percent": 100,
     "terminology_new_total": 0,
     "terminology_old_total": 0,
-    "total_param_checks": 15,
-    "perf": {
-      "url": "http://127.0.0.1:4620/",
-      "actual": {
-        "perf_score": 1,
-        "lcp_ms": 907.6822,
-        "tbt_ms": 0,
-        "cls": 0
-      },
-      "budgets": {
-        "perf_score_min": 0.6,
-        "lcp_ms": 2500,
-        "tbt_ms": 300,
-        "cls_max": 0.8
-      },
-      "pass": true,
-      "violations": []
-    },
-    "a11y": {
-      "url": "http://127.0.0.1:4620/",
-      "counts": {
-        "total": 1,
-        "serious": 0
-      },
-      "pass": true
-    }
+    "total_param_checks": 15
   },
-  "timestamp": "2025-08-18T21:36:59.611Z"
+  "timestamp": "2025-08-19T07:40:12.716Z"
 }

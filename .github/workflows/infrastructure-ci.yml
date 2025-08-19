@@ -1,0 +1,261 @@
+---
+name: Infrastructure CI & Component Testing
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: infrastructure-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  governance-gates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332  # v4.1.7
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b  # v4.0.3
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run A8 governance guard
+        uses: ./.github/actions/run-a8
+        with:
+          policy-path: tools/policy/policy.json
+
+      - name: Governance verification
+        run: npm run governance:verify
+
+      - name: Spec hash verification
+        run: npm run spec-hash:verify
+
+      - name: Parameter integrity check
+        run: npm run param:integrity
+
+      - name: Upload governance artifacts
+        if: always()
+        uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874  # v4.4.0
+        with:
+          name: governance-artifacts
+          path: |
+            artifacts/governance-verify-summary.json
+            artifacts/spec-hash-diff.json
+            artifacts/param-integrity-matrix.json
+
+  test-suite:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      matrix:
+        test-group: [governance, services, infrastructure]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332  # v4.1.7
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b  # v4.0.3
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run test suite - ${{ matrix.test-group }}
+        run: npm run test:${{ matrix.test-group }}
+
+      - name: Upload test artifacts
+        if: always()
+        uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874  # v4.4.0
+        with:
+          name: test-artifacts-${{ matrix.test-group }}
+          path: |
+            artifacts/week6-component-*.json
+            artifacts/*-test.json
+            artifacts/import-dependency-check.json
+
+  security-compliance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      matrix:
+        check-type: [security, compliance, privacy]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332  # v4.1.7
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b  # v4.0.3
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run security scan
+        if: matrix.check-type == 'security'
+        run: npm run security:scan
+        continue-on-error: true
+
+      - name: Run compliance audit
+        if: matrix.check-type == 'compliance'
+        run: npm run compliance:audit
+        continue-on-error: true
+
+      - name: Run privacy rights check
+        if: matrix.check-type == 'privacy'
+        run: npm run privacy:rights
+        continue-on-error: true
+
+      - name: Upload security/compliance artifacts
+        if: always()
+        uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874  # v4.4.0
+        with:
+          name: security-compliance-artifacts-${{ matrix.check-type }}
+          path: |
+            artifacts/audit/*.ndjson
+            artifacts/compliance/assessments/*.json
+            artifacts/privacy-*.json
+            artifacts/security-*.json
+
+  build-integration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332  # v4.1.7
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b  # v4.0.3
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate documentation
+        run: |
+          npm run docs:generate || echo "Documentation generation completed with warnings"
+        continue-on-error: true
+
+      - name: Build Docker images
+        run: npm run docker:build-all
+        continue-on-error: true
+
+      - name: Check Docker status
+        run: npm run docker:status
+        continue-on-error: true
+
+      - name: Upload build artifacts
+        if: always()
+        uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874  # v4.4.0
+        with:
+          name: build-artifacts
+          path: |
+            artifacts/docs-*.json
+            artifacts/docker-*.json
+
+  operational-health:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
+    strategy:
+      matrix:
+        health-check: [phase1, week6, ha-system]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332  # v4.1.7
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b  # v4.0.3
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Phase 1 status check
+        if: matrix.health-check == 'phase1'
+        run: npm run phase1:status
+        continue-on-error: true
+
+      - name: Run Week 6 status check
+        if: matrix.health-check == 'week6'
+        run: npm run week6:status
+        continue-on-error: true
+
+      - name: Run HA system health check
+        if: matrix.health-check == 'ha-system'
+        run: npm run ha:system-health
+        continue-on-error: true
+
+      - name: Upload health check artifacts
+        if: always()
+        uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874  # v4.4.0
+        with:
+          name: health-check-artifacts-${{ matrix.health-check }}
+          path: |
+            artifacts/phase*-*.json
+            artifacts/week6-*.json
+            artifacts/ha-*.json
+
+  week6-integration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332  # v4.1.7
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b  # v4.0.3
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Week 6 comprehensive tests
+        run: npm run test:week6
+
+      - name: Run Week 6 component demo
+        run: npm run week6:demo
+        continue-on-error: true
+
+      - name: Upload Week 6 artifacts
+        if: always()
+        uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874  # v4.4.0
+        with:
+          name: week6-integration-artifacts
+          path: |
+            artifacts/week6-component-*.json
+            artifacts/compliance/assessments/*.json
+            artifacts/audit/*.ndjson

@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "generated_utc": "2025-08-18T21:36:58.132Z",
+  "generated_utc": "2025-08-19T07:40:11.237Z",
   "principles": [
     {
       "principle": "GP1",
-      "match_count": 1185,
+      "match_count": 1226,
       "domains": [
         "other",
         "privacy",
@@ -119,14 +119,14 @@
     },
     {
       "principle": "GP2",
-      "match_count": 6,
+      "match_count": 10,
       "domains": [
         "other",
         "privacy",
         "analytics"
       ],
       "inferredImpact": true,
-      "confidence": 0.8,
+      "confidence": 0.9,
       "evidence_sample": [
         {
           "file": "docs/strategic-analysis/STRATEGIC-IMPLEMENTATION-ANALYSIS.md",
@@ -154,7 +154,7 @@
         },
         {
           "file": "docs/phase-1/PHASE-1-IMPLEMENTATION-GUIDE.md",
-          "line": 853,
+          "line": 882,
           "snippet": "- [ ] Rate limiting preventing abuse",
           "pattern": "abuse",
           "changed": false,
@@ -162,9 +162,41 @@
         },
         {
           "file": "docs/phase-1/PHASE-1-IMPLEMENTATION-GUIDE.md",
-          "line": 879,
+          "line": 911,
           "snippet": "- ✅ **Rate limiting** preventing abuse and DoS",
           "pattern": "abuse",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs/development/scripts.md",
+          "line": 205,
+          "snippet": "- `scripts:validate` - Validate scripts for safety and compatibility",
+          "pattern": "safety",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs/development/scripts.md",
+          "line": 317,
+          "snippet": "### Safety Guidelines",
+          "pattern": "safety",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs/development/scripts.md",
+          "line": 337,
+          "snippet": "1. **Safety Classification** - No prohibited patterns",
+          "pattern": "safety",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs/development/scripts.md",
+          "line": 346,
+          "snippet": "- Automated safety classification",
+          "pattern": "safety",
           "changed": false,
           "domain": "other"
         },
@@ -181,7 +213,7 @@
     },
     {
       "principle": "GP3",
-      "match_count": 191,
+      "match_count": 192,
       "domains": [
         "other",
         "privacy",
@@ -296,7 +328,7 @@
     },
     {
       "principle": "GP4",
-      "match_count": 827,
+      "match_count": 848,
       "domains": [
         "other",
         "privacy",
@@ -411,7 +443,7 @@
     },
     {
       "principle": "GP5",
-      "match_count": 448,
+      "match_count": 450,
       "domains": [
         "other",
         "privacy",
@@ -640,7 +672,7 @@
     },
     {
       "principle": "GP7",
-      "match_count": 238,
+      "match_count": 239,
       "domains": [
         "other",
         "principles",
@@ -753,7 +785,7 @@
     },
     {
       "principle": "GP8",
-      "match_count": 14,
+      "match_count": 16,
       "domains": [
         "other",
         "integrity"
@@ -771,7 +803,7 @@
         },
         {
           "file": "docs/phase-2/PHASE-2-WEEK-6-DELIVERY-DOCUMENTATION.md",
-          "line": 84,
+          "line": 96,
           "snippet": "- **Automated data subject request processing** for access, erasure, and portability requests",
           "pattern": "portabil",
           "changed": false,
@@ -779,7 +811,7 @@
         },
         {
           "file": "docs/phase-2/PHASE-2-WEEK-3-DELIVERY-DOCUMENTATION.md",
-          "line": 372,
+          "line": 399,
           "snippet": "### 3. Integration & Extensibility 🔧",
           "pattern": "extensib",
           "changed": false,
@@ -787,7 +819,7 @@
         },
         {
           "file": "docs/phase-2/PHASE-2-WEEK-3-DELIVERY-DOCUMENTATION.md",
-          "line": 375,
+          "line": 403,
           "snippet": "- **Plugin Architecture**: Extensible alert channels and data sources",
           "pattern": "extensib",
           "changed": false,
@@ -843,7 +875,7 @@
         },
         {
           "file": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
-          "line": 26,
+          "line": 27,
           "snippet": "| **Kubernetes** | Governance model, policy enforcement, hash-based integrity | Multi-layer security, policy-as-code, extensible architecture |",
           "pattern": "extensib",
           "changed": false,
@@ -851,7 +883,7 @@
         },
         {
           "file": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
-          "line": 342,
+          "line": 368,
           "snippet": "##### **3.3.3 Interoperability Gaps**",
           "pattern": "interoperab",
           "changed": false,
@@ -862,7 +894,7 @@
     },
     {
       "principle": "GP9",
-      "match_count": 426,
+      "match_count": 437,
       "domains": [
         "other",
         "privacy",
@@ -1092,7 +1124,7 @@
   "summary": {
     "total_principles": 10,
     "impacted": 10,
-    "average_confidence": 0.89,
+    "average_confidence": 0.9,
     "max_confidence": 0.9
   }
 }

@@ -351,6 +351,22 @@
           "ruleId": "PLATE_ID",
           "level": "warning",
           "message": {
+            "text": "PLATE_ID docs/scripts/NPM-SCRIPTS-ORGANIZATION.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/scripts/NPM-SCRIPTS-ORGANIZATION.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "PLATE_ID",
+          "level": "warning",
+          "message": {
             "text": "PLATE_ID docs/roadmap/roadmap-next-phase-v2.md"
           },
           "locations": [
@@ -1084,6 +1100,22 @@
           ]
         },
         {
+          "ruleId": "EMAIL_IN_NAME",
+          "level": "note",
+          "message": {
+            "text": "EMAIL_IN_NAME docs/infrastructure/health-monitoring.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/infrastructure/health-monitoring.md"
+                }
+              }
+            }
+          ]
+        },
+        {
           "ruleId": "PLATE_ID",
           "level": "warning",
           "message": {
@@ -1158,6 +1190,22 @@
               "physicalLocation": {
                 "artifactLocation": {
                   "uri": "docs/audit/00-rubrik-audit-portal-panti.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CONTACT_EMAIL",
+          "level": "note",
+          "message": {
+            "text": "CONTACT_EMAIL docs/api/API_DOCUMENTATION.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/api/API_DOCUMENTATION.md"
                 }
               }
             }

@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-18T21:37:16.396Z",
+  "generated_utc": "2025-08-19T07:40:12.556Z",
   "old_total": 0,
   "new_total": 0,
   "adoptionPercent": 100,
@@ -122,6 +122,11 @@
     },
     {
       "file": "docs/security/README.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/scripts/NPM-SCRIPTS-ORGANIZATION.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -366,6 +371,11 @@
       "newCount": 0
     },
     {
+      "file": "docs/infrastructure/health-monitoring.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
       "file": "docs/implementation/README.md",
       "oldCount": 0,
       "newCount": 0
@@ -491,6 +501,11 @@
       "newCount": 0
     },
     {
+      "file": "docs/development/scripts.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
       "file": "docs/data/README.md",
       "oldCount": 0,
       "newCount": 0
@@ -522,6 +537,11 @@
     },
     {
       "file": "docs/api/README.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/api/API_DOCUMENTATION.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -1249,6 +1269,31 @@
           "old": "master",
           "new": "utama",
           "count": 4
+        }
+      ]
+    },
+    {
+      "file": "docs/infrastructure/health-monitoring.md",
+      "suggestions": [
+        {
+          "old": "master",
+          "new": "utama",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs/implementation/README.md",
+      "suggestions": [
+        {
+          "old": "master",
+          "new": "utama",
+          "count": 2
+        },
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 2
         }
       ]
     },

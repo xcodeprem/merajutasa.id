@@ -5,15 +5,15 @@
     "stage2_active": false
   },
   "key_token_frequency": {
-    "fairness": 279,
-    "privacy": 293,
-    "hysteresis": 207,
-    "hash": 450,
+    "fairness": 293,
+    "privacy": 333,
+    "hysteresis": 209,
+    "hash": 461,
     "credential": 171,
-    "governance": 550,
-    "revocation": 105
+    "governance": 579,
+    "revocation": 109
   },
-  "totalKey": 2055,
+  "totalKey": 2155,
   "banned_terms_detected": 207,
   "banned_samples": [
     {

@@ -3,12 +3,12 @@
   "status": "ADVISORY",
   "summary": {
     "distinctCategories": 12,
-    "totalFindings": 89,
+    "totalFindings": 92,
     "categoryCounts": {
-      "EMAIL_IN_NAME": 32,
+      "EMAIL_IN_NAME": 33,
       "EDU_NISN": 2,
-      "CONTACT_EMAIL": 15,
-      "PLATE_ID": 15,
+      "CONTACT_EMAIL": 16,
+      "PLATE_ID": 16,
       "IDN_NIK": 2,
       "GENERIC_16DIGIT": 4,
       "CONTACT_PHONE": 2,
@@ -156,6 +156,12 @@
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
       "sample": "pages@…#9d6852ad"
+    },
+    {
+      "file": "docs/scripts/NPM-SCRIPTS-ORGANIZATION.md",
+      "category": "PLATE_ID",
+      "action": "WARN",
+      "sample": "E2E…#cb6200bf"
     },
     {
       "file": "docs/roadmap/roadmap-next-phase-v2.md",
@@ -461,6 +467,12 @@
       "sample": "W3C…#dcac438e"
     },
     {
+      "file": "docs/infrastructure/health-monitoring.md",
+      "category": "EMAIL_IN_NAME",
+      "action": "REDACT",
+      "sample": "artifa…#ee16e5d0"
+    },
+    {
       "file": "docs/governance/statement-orientasi-portal-panti.md",
       "category": "PLATE_ID",
       "action": "WARN",
@@ -489,6 +501,12 @@
       "category": "PLATE_ID",
       "action": "WARN",
       "sample": "W3C…#dcac438e"
+    },
+    {
+      "file": "docs/api/API_DOCUMENTATION.md",
+      "category": "CONTACT_EMAIL",
+      "action": "REDACT",
+      "sample": "api@me…#2f12fd5c"
     },
     {
       "file": "docs/produk/portal-panti/02-model-data-minimal-aman.md",
