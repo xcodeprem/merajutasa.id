@@ -1,22 +1,22 @@
 {
   "_metadata": {
     "actor": "copilot-swe-agent[bot]",
-    "generated_at": "2025-08-19T08:29:00.456Z",
+    "generated_at": "2025-08-19T18:00:00.329Z",
     "generator": "governance-verify-aggregator",
-    "git_ref": "refs/heads/copilot/fix-67",
-    "git_sha": "17e725e18d8e4885aad86c1f862cd0df0f0b4f69",
-    "run_id": "17063650148",
+    "git_ref": "refs/heads/copilot/fix-777ed08f-128d-4c03-99f3-bbdcfc05c52a",
+    "git_sha": "0bb2d3c368d7ea8a8b299174bff1b4142e94f1cf",
+    "run_id": "17077656561",
     "version": "1.0"
   },
   "artifacts": {
     "decLint": {
       "_metadata": {
         "actor": "copilot-swe-agent[bot]",
-        "generated_at": "2025-08-19T08:28:58.669Z",
+        "generated_at": "2025-08-19T17:59:58.590Z",
         "generator": "dec-lint.js",
-        "git_ref": "refs/heads/copilot/fix-67",
-        "git_sha": "17e725e18d8e4885aad86c1f862cd0df0f0b4f69",
-        "run_id": "17063650148",
+        "git_ref": "refs/heads/copilot/fix-777ed08f-128d-4c03-99f3-bbdcfc05c52a",
+        "git_sha": "0bb2d3c368d7ea8a8b299174bff1b4142e94f1cf",
+        "run_id": "17077656561",
         "version": "1.0"
       },
       "results": [
@@ -488,7 +488,7 @@
           "spec_hash_violation_count": 0
         }
       },
-      "timestamp_utc": "2025-08-19T08:28:59.897Z"
+      "timestamp_utc": "2025-08-19T17:59:59.776Z"
     },
     "hype": {
       "file_count": 66,
@@ -607,14 +607,14 @@
           "column": 1,
           "context_line": "top -p $PID",
           "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-6.md",
-          "line": 481,
+          "line": 525,
           "match": "top",
           "rationale": "Generic superiority claim.",
           "rule": "TOP",
           "severity": "MEDIUM"
         }
       ],
-      "generated_utc": "2025-08-19T08:28:57.770Z",
+      "generated_utc": "2025-08-19T17:59:57.712Z",
       "max_severity": "MEDIUM",
       "rule_counts": {
         "RANKING": 6,
@@ -628,7 +628,7 @@
       "version": 1
     },
     "params": {
-      "generated_utc": "2025-08-19T08:28:57.341Z",
+      "generated_utc": "2025-08-19T17:59:57.296Z",
       "rows": [
         {
           "aliases": {
@@ -902,7 +902,7 @@
       "violations": []
     },
     "principles": {
-      "generated_utc": "2025-08-19T08:28:58.906Z",
+      "generated_utc": "2025-08-19T17:59:58.822Z",
       "principles": [
         {
           "confidence": 0.9,
@@ -1016,7 +1016,7 @@
           ],
           "evidence_truncated": true,
           "inferredImpact": true,
-          "match_count": 1227,
+          "match_count": 1232,
           "principle": "GP1"
         },
         {
@@ -2041,7 +2041,7 @@
           ]
         },
         "freshness": {
-          "age_hours": 23.539869166666666,
+          "age_hours": 33.05651611111111,
           "last_rotated_utc": "2025-08-18T08:56:34.958Z",
           "ok": true
         },
@@ -2053,11 +2053,11 @@
       },
       "config_path": "tools/config/privacy-policy.json",
       "status": "ok",
-      "ts": "2025-08-19T08:28:58.487Z",
+      "ts": "2025-08-19T17:59:58.416Z",
       "violations": []
     },
     "securitySmoke": {
-      "files_scanned": 168,
+      "files_scanned": 171,
       "summary": {
         "by_severity": {
           "HIGH": 0,
@@ -2066,7 +2066,7 @@
         },
         "total_violations": 0
       },
-      "timestamp": "2025-08-19T08:28:57.627Z",
+      "timestamp": "2025-08-19T17:59:57.579Z",
       "violations": []
     },
     "specHash": {
@@ -2079,7 +2079,7 @@
         "updated_count": 0,
         "violation_count": 0
       },
-      "timestamp_utc": "2025-08-19T08:28:57Z",
+      "timestamp_utc": "2025-08-19T17:59:57Z",
       "unchanged": [
         "docs/roadmap/roadmap-master-v1.md",
         "docs/governance/signature-pipeline-plan-v1.md",
@@ -2170,17 +2170,17 @@
           "oldCount": 0
         },
         {
+          "file": "docs/tests/hysteresis-test-plan-v1.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
           "file": "docs/transparency/methodology-snippet-h0.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
           "file": "docs/transparency/changelog-excerpt-phase1.5.md",
-          "newCount": 0,
-          "oldCount": 0
-        },
-        {
-          "file": "docs/tests/hysteresis-test-plan-v1.md",
           "newCount": 0,
           "oldCount": 0
         },
@@ -2431,6 +2431,11 @@
         },
         {
           "file": "docs/phase-1/PHASE-1-IMPLEMENTATION-COMPLETE.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/onboarding/startup-dependencies-guide.md",
           "newCount": 0,
           "oldCount": 0
         },
@@ -2740,16 +2745,6 @@
           "oldCount": 0
         },
         {
-          "file": "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
-          "newCount": 0,
-          "oldCount": 0
-        },
-        {
-          "file": "docs/governance/audit/README-audit-process.md",
-          "newCount": 0,
-          "oldCount": 0
-        },
-        {
           "file": "docs/governance/dec/DEC-style-guide-v3.md",
           "newCount": 0,
           "oldCount": 0
@@ -2855,12 +2850,22 @@
           "oldCount": 0
         },
         {
+          "file": "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/governance/audit/README-audit-process.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
           "file": "docs/governance/dec/templates/DEC-template-v1.md",
           "newCount": 0,
           "oldCount": 0
         }
       ],
-      "generated_utc": "2025-08-19T08:29:00.290Z",
+      "generated_utc": "2025-08-19T18:00:00.163Z",
       "new_total": 0,
       "old_total": 0,
       "suggestions": [
@@ -3780,16 +3785,6 @@
           ]
         },
         {
-          "file": "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
-          "suggestions": [
-            {
-              "count": 1,
-              "new": "pengguna",
-              "old": "user"
-            }
-          ]
-        },
-        {
           "file": "docs/governance/dec/DEC-20250817-09-stage2-terminology-transition.md",
           "suggestions": [
             {
@@ -3938,6 +3933,16 @@
               "old": "master"
             }
           ]
+        },
+        {
+          "file": "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
+          "suggestions": [
+            {
+              "count": 1,
+              "new": "pengguna",
+              "old": "user"
+            }
+          ]
         }
       ],
       "version": "1.0.0"
@@ -3972,5 +3977,5 @@
     "terminology_old_total": 0,
     "total_param_checks": 15
   },
-  "timestamp": "2025-08-19T08:29:00.453Z"
+  "timestamp": "2025-08-19T18:00:00.326Z"
 }

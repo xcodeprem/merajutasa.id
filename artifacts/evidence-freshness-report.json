@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-19T17:13:42.166Z",
+  "generated_utc": "2025-08-19T17:59:59.465Z",
   "default_threshold_hours": 24,
   "items": [
     {
@@ -54,7 +54,7 @@
     {
       "path": "artifacts/fairness-sim-scenarios.json",
       "exists": true,
-      "age_hours": 0.06,
+      "age_hours": 0.03,
       "threshold_hours": 24,
       "status": "PASS",
       "source_timestamp_type": "mtime"
@@ -62,7 +62,7 @@
     {
       "path": "artifacts/fairness-sim-report.json",
       "exists": true,
-      "age_hours": 0.06,
+      "age_hours": 0.03,
       "threshold_hours": 24,
       "status": "PASS",
       "source_timestamp_type": "mtime"
@@ -70,17 +70,17 @@
     {
       "path": "artifacts/evidence-bundle.json",
       "exists": true,
-      "age_hours": 9.44,
+      "age_hours": 0,
       "threshold_hours": 6,
-      "status": "STALE",
+      "status": "PASS",
       "source_timestamp_type": "internal"
     }
   ],
   "summary": {
     "total": 9,
-    "pass": 8,
-    "stale": 1,
+    "pass": 9,
+    "stale": 0,
     "missing": 0,
-    "overall_status": "ADVISORY"
+    "overall_status": "PASS"
   }
 }

@@ -33,26 +33,37 @@ jobs:
             const title = '${{ inputs.project_title }}';
             const isPublic = '${{ inputs.public }}' === 'true';
 
-            // 1) Resolve owner (user atau org)
-            const ownerQuery = `
-              query($login: String!) {
-                user(login: $login) { 
-                  id, login
-                  projectsV2(first: 50) {
-                    nodes { id title url public }
+            // 1) Resolve owner (user atau org) using repositoryOwner to avoid NOT_FOUND errors
+            let ownerId, existingProjects;
+            
+            try {
+              const ownerQuery = `
+                query($login: String!) {
+                  repositoryOwner(login: $login) {
+                    id
+                    ... on User { 
+                      login
+                      projectsV2(first: 50) {
+                        nodes { id title url public }
+                      }
+                    }
+                    ... on Organization { 
+                      login
+                      projectsV2(first: 50) {
+                        nodes { id title url public }
+                      }
+                    }
                   }
                 }
-                organization(login: $login) { 
-                  id, login
-                  projectsV2(first: 50) {
-                    nodes { id title url public }
-                  }
-                }
-              }
-            `;
-            const ownerResp = await github.graphql(ownerQuery, { login: ownerLogin });
-            const ownerId = ownerResp.user?.id || ownerResp.organization?.id;
-            const existingProjects = [...(ownerResp.user?.projectsV2?.nodes || []), ...(ownerResp.organization?.projectsV2?.nodes || [])];
+              `;
+              const ownerResp = await github.graphql(ownerQuery, { login: ownerLogin });
+              ownerId = ownerResp.repositoryOwner?.id;
+              existingProjects = ownerResp.repositoryOwner?.projectsV2?.nodes || [];
+            } catch (error) {
+              core.warning(`Could not resolve repositoryOwner for ${ownerLogin}: ${error.message}`);
+              core.setFailed(`Owner not found: ${ownerLogin}`);
+              return;
+            }
             
             if (!ownerId) {
               core.setFailed(`Owner not found: ${ownerLogin}`);
@@ -228,9 +239,9 @@ jobs:
             }
 
             // Set outputs using GitHub Actions
-            console.log(`::set-output name=project_url::${project.url}`);
-            console.log(`::set-output name=project_id::${project.id}`);
-            console.log(`::set-output name=field_mappings::${JSON.stringify(fieldMapping)}`);
+            core.setOutput('project_url', project.url);
+            core.setOutput('project_id', project.id);
+            core.setOutput('field_mappings', JSON.stringify(fieldMapping));
             console.log('Project URL:', project.url);
             console.log('Project ID:', project.id);
             console.log('Field mappings:', fieldMapping);

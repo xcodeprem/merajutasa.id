@@ -31,41 +31,65 @@ jobs:
             const projectTitle = core.getInput('project_title');
             const labelQuery = core.getInput('label_query');
 
-            // 1) Cari Project
-            const findProjectQuery = `
-              query($owner:String!) {
-                user(login: $owner) { projectsV2(first: 50) { nodes { id title fields(first: 50) {
-                  nodes { id name dataType ... on ProjectV2SingleSelectField { options { id name } } }
-                }
-                items(first: 100) {
-                  nodes { 
-                    id 
-                    content { 
-                      ... on Issue { id number }
-                      ... on PullRequest { id number }
+            // 1) Cari Project using repositoryOwner to avoid NOT_FOUND errors
+            let project;
+            try {
+              const findProjectQuery = `
+                query($owner: String!) {
+                  repositoryOwner(login: $owner) {
+                    ... on User {
+                      projectsV2(first: 50) { 
+                        nodes { 
+                          id title 
+                          fields(first: 50) {
+                            nodes { id name dataType ... on ProjectV2SingleSelectField { options { id name } } }
+                          }
+                          items(first: 100) {
+                            nodes { 
+                              id 
+                              content { 
+                                ... on Issue { id number }
+                                ... on PullRequest { id number }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                    ... on Organization {
+                      projectsV2(first: 50) { 
+                        nodes { 
+                          id title 
+                          fields(first: 50) {
+                            nodes { id name dataType ... on ProjectV2SingleSelectField { options { id name } } }
+                          }
+                          items(first: 100) {
+                            nodes { 
+                              id 
+                              content { 
+                                ... on Issue { id number }
+                                ... on PullRequest { id number }
+                              }
+                            }
+                          }
+                        }
+                      }
                     }
                   }
-                }}}}
-                organization(login: $owner) { projectsV2(first: 50) { nodes { id title fields(first: 50) {
-                  nodes { id name dataType ... on ProjectV2SingleSelectField { options { id name } } }
                 }
-                items(first: 100) {
-                  nodes { 
-                    id 
-                    content { 
-                      ... on Issue { id number }
-                      ... on PullRequest { id number }
-                    }
-                  }
-                }}}}
-              }
-            `;
-            const projResp = await github.graphql(findProjectQuery, { owner: ownerLogin });
-            const project = [
-              ...(projResp.user?.projectsV2?.nodes || []),
-              ...(projResp.organization?.projectsV2?.nodes || []),
-            ].find(p => p.title === projectTitle);
-            if (!project) { console.log('Project not found'); return; }
+              `;
+              const projResp = await github.graphql(findProjectQuery, { owner: ownerLogin });
+              const projects = projResp.repositoryOwner?.projectsV2?.nodes || [];
+              project = projects.find(p => p.title === projectTitle);
+            } catch (error) {
+              core.warning(`Could not resolve repositoryOwner for project lookup: ${error.message}`);
+              console.log('Project not found'); 
+              return;
+            }
+            if (!project) { 
+              console.log('Project not found'); 
+              return; 
+            }
             const projectId = project.id;
             const fields = project.fields.nodes;
             const existingItems = project.items.nodes;
@@ -159,6 +183,11 @@ jobs:
             const result = await github.graphql(searchQuery, { q: labelQuery });
             const items = result.search.nodes || [];
             console.log('Found issues:', items.length);
+            
+            if (items.length === 0) {
+              console.log('No issues found matching the query, exiting gracefully');
+              return;
+            }
 
             // 3) Import + enhanced field mapping
             let importedCount = 0;
