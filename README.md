@@ -398,11 +398,12 @@ For detailed governance documentation, see:
 
 ## 🧩 Project Automation on GitHub.com (Projects v2)
 
-This repo includes four GitHub.com–compatible workflows to automate a Project v2 board:
+This repo includes five GitHub.com–compatible workflows to automate a Project v2 board:
 
 - Seed Labels (Project v2)
 - Setup Project V2
 - Auto-add to Project (event-driven for issues/PRs and "+project" comments)
+- **Auto-add Project YAML (Personal Account Optimized)** - Enhanced IT leader-friendly version
 - Bulk Import to Project
 
 Configuration (once):
@@ -418,6 +419,7 @@ Notes:
 
 - Fields are created idempotently using GraphQL Projects v2 API (Single-select, Date, Number, Text)
 - Auto-add maps labels to fields (Priority/Area/Phase/Risk/Status, dates, estimate, owner, links)
+- **Auto-add Project YAML**: Enhanced version with comprehensive IT leader features, detailed logging, dry-run mode, and enterprise-grade error handling
 - Works on GitHub.com (no GHE-specific APIs)
 
 ## 🌐 GitHub Pages & Transparency

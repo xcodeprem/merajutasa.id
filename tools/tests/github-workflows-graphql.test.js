@@ -139,6 +139,14 @@ class WorkflowGraphQLTests {
       shouldHandleProjectNotFound: false
     });
 
+    // Test auto-add-project.yaml (new personal account optimized workflow)
+    await this.testWorkflowFile(`${workflowDir}/auto-add-project.yaml`, {
+      shouldUseRepositoryOwner: true,
+      shouldHaveErrorHandling: true,
+      shouldUseNewOutput: false,
+      shouldHandleProjectNotFound: true
+    });
+
     return this.generateReport();
   }
 
