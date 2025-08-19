@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-19T18:00:00.163Z",
+  "generated_utc": "2025-08-19T23:34:01.542Z",
   "old_total": 0,
   "new_total": 0,
   "adoptionPercent": 100,
@@ -12,6 +12,11 @@
     },
     {
       "file": "docs/agent-context-pack.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/workflows/auto-add-project-yaml-guide.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -31,17 +36,17 @@
       "newCount": 0
     },
     {
-      "file": "docs/tests/hysteresis-test-plan-v1.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
       "file": "docs/transparency/methodology-snippet-h0.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
       "file": "docs/transparency/changelog-excerpt-phase1.5.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/tests/hysteresis-test-plan-v1.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -727,6 +732,16 @@
     }
   ],
   "suggestions": [
+    {
+      "file": "docs/workflows/auto-add-project-yaml-guide.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 2
+        }
+      ]
+    },
     {
       "file": "docs/trust/trust-hysteresis.md",
       "suggestions": [
