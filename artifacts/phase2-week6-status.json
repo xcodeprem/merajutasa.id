@@ -1,13 +1,13 @@
 {
-  "timestamp": "2025-08-19T07:41:27.585Z",
+  "timestamp": "2025-08-19T08:51:41.379Z",
   "phase": "Phase 2 Week 6",
   "title": "Compliance & Security Enhancement",
   "components": {
     "Enterprise Audit System": {
       "file": "infrastructure/compliance/audit-system.js",
       "exists": true,
-      "size": "19.9KB",
-      "sizeBytes": 20357,
+      "size": "21.4KB",
+      "sizeBytes": 21962,
       "expectedSize": "20KB",
       "sizeScore": 100,
       "features": [
@@ -22,7 +22,7 @@
       "loading_test": {
         "loaded": true,
         "functional": true,
-        "test_event_id": "audit_mei8j7vw_77c4488bdaf2",
+        "test_event_id": "audit_meib1j9q_f40f5f84a6c4",
         "features_tested": [
           "event_recording",
           "compliance_tagging",
@@ -34,10 +34,10 @@
     "Compliance Automation": {
       "file": "infrastructure/compliance/compliance-automation.js",
       "exists": true,
-      "size": "33.2KB",
-      "sizeBytes": 33977,
+      "size": "36KB",
+      "sizeBytes": 36879,
       "expectedSize": "29KB",
-      "sizeScore": 100,
+      "sizeScore": 80,
       "features": [
         "Automated compliance assessment and scoring",
         "Real-time compliance monitoring and alerting",
@@ -50,7 +50,7 @@
       "loading_test": {
         "loaded": true,
         "functional": true,
-        "assessment_score": 82,
+        "assessment_score": 90,
         "frameworks_tested": [
           "gdpr"
         ],
@@ -60,15 +60,15 @@
           "reporting"
         ]
       },
-      "score": 85
+      "score": 81
     },
     "Security Hardening": {
       "file": "infrastructure/security/enhanced/security-hardening.js",
       "exists": true,
-      "size": "33.7KB",
-      "sizeBytes": 34490,
+      "size": "35.6KB",
+      "sizeBytes": 36444,
       "expectedSize": "29KB",
-      "sizeScore": 100,
+      "sizeScore": 80,
       "features": [
         "Advanced threat detection and prevention",
         "Automated security scanning and vulnerability assessment",
@@ -89,13 +89,13 @@
           "security_scoring"
         ]
       },
-      "score": 85
+      "score": 81
     },
     "Privacy Rights Management": {
       "file": "infrastructure/compliance/privacy-rights-management.js",
       "exists": true,
-      "size": "34.9KB",
-      "sizeBytes": 35710,
+      "size": "36.8KB",
+      "sizeBytes": 37717,
       "expectedSize": "34KB",
       "sizeScore": 100,
       "features": [
@@ -110,7 +110,7 @@
       "loading_test": {
         "loaded": true,
         "functional": true,
-        "request_id": "req_1755589287611_dnsbgsp4q",
+        "request_id": "req_1755593501404_48l079azg",
         "jurisdictions_tested": [
           "gdpr"
         ],
@@ -125,8 +125,8 @@
     "Compliance Orchestrator": {
       "file": "infrastructure/compliance/compliance-orchestrator.js",
       "exists": true,
-      "size": "25.5KB",
-      "sizeBytes": 26084,
+      "size": "27.6KB",
+      "sizeBytes": 28303,
       "expectedSize": "24KB",
       "sizeScore": 100,
       "features": [
@@ -152,14 +152,14 @@
       "score": 85
     }
   },
-  "overallScore": 85,
+  "overallScore": 83,
   "overallStatus": "good",
   "filesSummary": {
     "total_files": 5,
     "files_found": 5,
     "files_missing": 0,
-    "total_size": "147.1KB",
-    "total_size_bytes": 150618
+    "total_size": "157.5KB",
+    "total_size_bytes": 161305
   },
   "integrationTests": {
     "Audit System → Compliance Automation": {

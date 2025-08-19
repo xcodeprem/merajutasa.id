@@ -582,6 +582,52 @@ export class AuditSystem extends EventEmitter {
   }
 
   /**
+   * Get health status of the audit system
+   */
+  async getHealthStatus() {
+    const stats = this.getStatistics();
+    const health_score = this.calculateHealthScore(stats);
+    
+    return {
+      name: 'Enterprise Audit System',
+      status: health_score > 80 ? 'healthy' : health_score > 50 ? 'warning' : 'critical',
+      health_score,
+      last_check: new Date().toISOString(),
+      details: {
+        total_events: stats.totalEvents,
+        buffer_size: stats.buffer_size,
+        uptime: stats.uptime,
+        compliance_violations: stats.complianceViolations,
+        storage_path: this.options.storage_path,
+        compliance_mode: this.options.compliance_mode
+      }
+    };
+  }
+
+  /**
+   * Calculate health score based on system metrics
+   */
+  calculateHealthScore(stats) {
+    let score = 100;
+    
+    // Deduct for high buffer utilization
+    const maxBufferSize = 100; // Default buffer size
+    const bufferUtilization = (stats.buffer_size / maxBufferSize) * 100;
+    if (bufferUtilization > 80) score -= 30;
+    else if (bufferUtilization > 60) score -= 15;
+    
+    // Deduct for compliance violations
+    if (stats.complianceViolations > 10) score -= 25;
+    else if (stats.complianceViolations > 5) score -= 10;
+    else if (stats.complianceViolations > 0) score -= 5;
+    
+    // Deduct for low activity (might indicate problems)
+    if (stats.totalEvents === 0 && stats.uptime > 60) score -= 20;
+    
+    return Math.max(0, score);
+  }
+
+  /**
    * Graceful shutdown
    */
   async shutdown() {
@@ -607,6 +653,11 @@ export class AuditSystem extends EventEmitter {
 
 // Export singleton instance
 export const auditSystem = new AuditSystem();
+
+// Factory function for creating new instances
+export function getAuditSystem(options = {}) {
+  return new AuditSystem(options);
+}
 
 // Convenience methods for common audit events
 export const auditEvents = {

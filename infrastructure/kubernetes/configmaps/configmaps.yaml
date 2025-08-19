@@ -13,6 +13,40 @@ data:
   log_level: "info"
   node_env: "production"
   
+  # Core Services Ports
+  signer_port: "4601"
+  chain_port: "4602"
+  collector_port: "4603"
+  
+  # High Availability Configuration (Week 5)
+  ha_orchestrator_port: "8090"
+  ha_orchestrator_name: "merajutasa-ha-orchestrator"
+  primary_region: "us-east-1"
+  secondary_regions: "us-west-2,eu-west-1,ap-southeast-1"
+  deployment_strategy: "blue-green"
+  auto_scaling_min_instances: "2"
+  auto_scaling_max_instances: "20"
+  auto_scaling_target_cpu: "70"
+  
+  # Observability Stack (Week 3)
+  observability_port: "8080"
+  metrics_port: "8081"
+  tracing_port: "8082"
+  logs_port: "8083"
+  anomaly_port: "8084"
+  dashboards_port: "8085"
+  
+  # API Gateway Configuration (Week 4)
+  api_gateway_port: "8086"
+  service_mesh_port: "8087"
+  
+  # Compliance & Security (Week 6)
+  compliance_orchestrator_port: "9000"
+  audit_system_port: "9001"
+  compliance_automation_port: "9002"
+  privacy_rights_port: "9003"
+  security_hardening_port: "9004"
+  
   # Redis Configuration
   redis_host: "redis-cluster"
   redis_port: "6379"
@@ -37,6 +71,13 @@ data:
   worker_processes: "auto"
   connection_timeout: "30"
   keepalive_timeout: "65"
+  
+  # Feature Flags
+  feature_ha_enabled: "true"
+  feature_observability_enabled: "true"
+  feature_compliance_enabled: "true"
+  feature_api_gateway_enabled: "true"
+  feature_performance_monitoring_enabled: "true"
 
 ---
 apiVersion: v1
@@ -169,6 +210,151 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
+  name: high-availability-config
+  labels:
+    app: merajutasa-ha
+    component: high-availability
+data:
+  orchestrator.yaml: |
+    ha_orchestrator:
+      port: 8090
+      name: "merajutasa-ha-orchestrator"
+      coordination_interval: 30000
+      health_check_interval: 60000
+      metrics_retention_period: 86400000
+      alert_cooldown_period: 300000
+      emergency_response_enabled: true
+    
+    multi_region:
+      port: 8095
+      primary_region: "us-east-1"
+      secondary_regions: ["us-west-2", "eu-west-1", "ap-southeast-1"]
+      deployment_strategy: "blue-green"
+      
+    disaster_recovery:
+      port: 8096
+      backup_schedule: "0 2 * * *"
+      retention_days: 30
+      cross_region_replication: true
+      
+    auto_scaling:
+      port: 8097
+      min_instances: 2
+      max_instances: 20
+      target_cpu: 70
+      scale_up_cooldown: 300
+      scale_down_cooldown: 600
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: compliance-config
+  labels:
+    app: merajutasa-compliance
+    component: compliance
+data:
+  compliance.yaml: |
+    compliance_orchestrator:
+      port: 9000
+      host: "0.0.0.0"
+      audit_retention_days: 90
+      assessment_schedule: "0 6 * * 1"  # Weekly Monday 6 AM
+      
+    audit_system:
+      port: 9001
+      host: "0.0.0.0"
+      real_time_monitoring: true
+      alert_thresholds:
+        critical: 5
+        warning: 15
+        
+    privacy_rights:
+      port: 9003
+      host: "0.0.0.0"
+      request_timeout: 30
+      data_retention_days: 30
+      
+    security_hardening:
+      port: 9004
+      host: "0.0.0.0"
+      scan_interval: 3600
+      threat_detection: true
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: observability-config
+  labels:
+    app: merajutasa-observability
+    component: observability
+data:
+  observability.yaml: |
+    system:
+      port: 8080
+      host: "0.0.0.0"
+      health_check_interval: 60000
+      metrics_update_interval: 10000
+      
+    metrics:
+      port: 8081
+      host: "0.0.0.0"
+      collection_interval: 15
+      retention_period: 86400
+      
+    tracing:
+      port: 8082
+      host: "0.0.0.0"
+      jaeger_endpoint: "http://jaeger:14268/api/traces"
+      sampling_rate: 0.1
+      
+    logs:
+      port: 8083
+      host: "0.0.0.0"
+      aggregation_window: 60
+      retention_days: 7
+      
+    dashboards:
+      port: 8085
+      host: "0.0.0.0"
+      refresh_interval: 30
+      real_time_updates: true
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-gateway-config
+  labels:
+    app: merajutasa-api-gateway
+    component: api-gateway
+data:
+  gateway.yaml: |
+    api_gateway:
+      port: 8086
+      host: "0.0.0.0"
+      timeout: 30000
+      rate_limiting:
+        window: 60
+        max_requests: 100
+      upstream_services:
+        signer: "http://merajutasa-signer:4601"
+        chain: "http://merajutasa-chain:4602"
+        collector: "http://merajutasa-collector:4603"
+        
+    service_mesh:
+      port: 8087
+      host: "0.0.0.0"
+      circuit_breaker:
+        failure_threshold: 5
+        timeout: 60000
+        reset_timeout: 30000
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
   name: prometheus-config
   labels:
     app: prometheus
@@ -203,3 +389,21 @@ data:
       - targets: ['merajutasa-monitoring:4604']
       metrics_path: /metrics
       scrape_interval: 30s
+      
+    - job_name: 'merajutasa-ha-orchestrator'
+      static_configs:
+      - targets: ['merajutasa-ha-orchestrator:8090']
+      metrics_path: /metrics
+      scrape_interval: 30s
+      
+    - job_name: 'merajutasa-api-gateway'
+      static_configs:
+      - targets: ['merajutasa-api-gateway:8086']
+      metrics_path: /metrics
+      scrape_interval: 30s
+      
+    - job_name: 'merajutasa-compliance'
+      static_configs:
+      - targets: ['merajutasa-compliance:9000']
+      metrics_path: /metrics
+      scrape_interval: 60s

@@ -979,6 +979,86 @@ export class ComplianceAutomation extends EventEmitter {
   }
 
   /**
+   * Get health status of the compliance automation system
+   */
+  async getHealthStatus() {
+    const stats = this.getStatistics();
+    const health_score = this.calculateHealthScore(stats);
+    
+    return {
+      name: 'Compliance Automation',
+      status: health_score > 80 ? 'healthy' : health_score > 50 ? 'warning' : 'critical',
+      health_score,
+      last_check: new Date().toISOString(),
+      details: {
+        is_running: this.options.real_time_monitoring,
+        frameworks_active: this.options.frameworks.length,
+        total_assessments: Object.keys(this.complianceState.assessments).length,
+        active_alerts: this.complianceState.activeAlerts.length,
+        average_compliance_score: this.calculateAverageComplianceScore(),
+        uptime: (Date.now() - this.startTime) / 1000
+      }
+    };
+  }
+
+  /**
+   * Calculate health score based on system metrics
+   */
+  calculateHealthScore(stats) {
+    let score = 100;
+    
+    // Deduct for low compliance scores
+    const avgCompliance = this.calculateAverageComplianceScore();
+    if (avgCompliance < 50) score -= 40;
+    else if (avgCompliance < 70) score -= 20;
+    else if (avgCompliance < 85) score -= 10;
+    
+    // Deduct for active alerts
+    const alertCount = this.complianceState.activeAlerts.length;
+    if (alertCount > 10) score -= 30;
+    else if (alertCount > 5) score -= 15;
+    else if (alertCount > 2) score -= 5;
+    
+    // Deduct if not monitoring
+    if (!this.options.real_time_monitoring) score -= 10;
+    
+    return Math.max(0, score);
+  }
+
+  /**
+   * Calculate average compliance score across all frameworks
+   */
+  calculateAverageComplianceScore() {
+    const scores = Object.values(this.complianceState.scores);
+    if (scores.length === 0) return 85; // Default score if no assessments yet
+    
+    const validScores = scores.filter(score => !isNaN(score) && score >= 0);
+    if (validScores.length === 0) return 85;
+    
+    return validScores.reduce((sum, score) => sum + score, 0) / validScores.length;
+  }
+
+  /**
+   * Get comprehensive statistics
+   */
+  getStatistics() {
+    return {
+      total_assessments: Object.keys(this.complianceState.assessments).length,
+      frameworks_monitored: this.options.frameworks.length,
+      active_alerts: this.complianceState.activeAlerts.length,
+      compliance_scores: this.complianceState.scores,
+      average_compliance_score: this.calculateAverageComplianceScore(),
+      uptime: (Date.now() - this.startTime) / 1000,
+      monitoring_active: this.options.real_time_monitoring,
+      configuration: {
+        frameworks: this.options.frameworks,
+        real_time_monitoring: this.options.real_time_monitoring,
+        reporting_directory: this.options.reportingDir
+      }
+    };
+  }
+
+  /**
    * Graceful shutdown
    */
   async shutdown() {
@@ -1004,5 +1084,10 @@ export class ComplianceAutomation extends EventEmitter {
 
 // Export singleton instance
 export const complianceAutomation = new ComplianceAutomation();
+
+// Factory function for creating new instances
+export function getComplianceAutomation(options = {}) {
+  return new ComplianceAutomation(options);
+}
 
 export default ComplianceAutomation;

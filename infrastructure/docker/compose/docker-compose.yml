@@ -11,11 +11,11 @@ services:
       dockerfile: infrastructure/docker/services/Dockerfile.signer
     container_name: merajutasa-signer-dev
     ports:
-      - "4601:4601"
+      - "${SIGNER_PORT:-4601}:4601"
     environment:
       - NODE_ENV=development
-      - SIGNER_PORT=4601
-      - SIGNER_HOST=0.0.0.0
+      - SIGNER_PORT=${SIGNER_PORT:-4601}
+      - SIGNER_HOST=${SIGNER_HOST:-0.0.0.0}
       - DEBUG=merajutasa:*
     volumes:
       - ../../:/app:ro
@@ -36,12 +36,12 @@ services:
       dockerfile: infrastructure/docker/services/Dockerfile.chain
     container_name: merajutasa-chain-dev
     ports:
-      - "4602:4602"
+      - "${CHAIN_PORT:-4602}:4602"
     environment:
       - NODE_ENV=development
-      - CHAIN_PORT=4602
-      - CHAIN_HOST=0.0.0.0
-      - CHAIN_DATA_DIR=/app/artifacts
+      - CHAIN_PORT=${CHAIN_PORT:-4602}
+      - CHAIN_HOST=${CHAIN_HOST:-0.0.0.0}
+      - CHAIN_DATA_DIR=${CHAIN_DATA_DIR:-/app/artifacts}
       - DEBUG=merajutasa:*
     volumes:
       - ../../:/app:ro
@@ -63,12 +63,12 @@ services:
       dockerfile: infrastructure/docker/services/Dockerfile.collector
     container_name: merajutasa-collector-dev
     ports:
-      - "4603:4603"
+      - "${COLLECTOR_PORT:-4603}:4603"
     environment:
       - NODE_ENV=development
-      - COLLECTOR_PORT=4603
-      - COLLECTOR_HOST=0.0.0.0
-      - EVENTS_DATA_DIR=/app/data
+      - COLLECTOR_PORT=${COLLECTOR_PORT:-4603}
+      - COLLECTOR_HOST=${COLLECTOR_HOST:-0.0.0.0}
+      - EVENTS_DATA_DIR=${EVENTS_DATA_DIR:-/app/data}
       - DEBUG=merajutasa:*
     volumes:
       - ../../:/app:ro
@@ -140,6 +140,155 @@ services:
       - signer
       - collector
 
+  # High Availability Orchestrator (Week 5)
+  ha-orchestrator:
+    build:
+      context: ../..
+      dockerfile: infrastructure/docker/services/Dockerfile.ha-orchestrator
+    container_name: merajutasa-ha-orchestrator-dev
+    ports:
+      - "${HA_ORCHESTRATOR_PORT:-8090}:8090"
+    environment:
+      - NODE_ENV=development
+      - HA_ORCHESTRATOR_PORT=8090
+      - HA_ORCHESTRATOR_HOST=0.0.0.0
+      - HA_ORCHESTRATOR_NAME=merajutasa-ha-orchestrator
+      - PRIMARY_REGION=${PRIMARY_REGION:-us-east-1}
+      - SECONDARY_REGIONS=${SECONDARY_REGIONS:-us-west-2,eu-west-1}
+      - DEPLOYMENT_STRATEGY=${DEPLOYMENT_STRATEGY:-blue-green}
+      - AUTO_SCALING_MIN_INSTANCES=${AUTO_SCALING_MIN_INSTANCES:-2}
+      - AUTO_SCALING_MAX_INSTANCES=${AUTO_SCALING_MAX_INSTANCES:-20}
+      - DEBUG=merajutasa:ha:*
+    volumes:
+      - ../../:/app:ro
+      - node_modules:/app/node_modules
+    networks:
+      - merajutasa-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8090/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # Observability Stack (Week 3)
+  observability:
+    build:
+      context: ../..
+      dockerfile: infrastructure/docker/services/Dockerfile.observability
+    container_name: merajutasa-observability-dev
+    ports:
+      - "${OBSERVABILITY_PORT:-8080}:8080"
+      - "${METRICS_PORT:-8081}:8081"
+      - "${TRACING_PORT:-8082}:8082"
+    environment:
+      - NODE_ENV=development
+      - OBSERVABILITY_PORT=8080
+      - METRICS_PORT=8081
+      - TRACING_PORT=8082
+      - JAEGER_ENDPOINT=${JAEGER_ENDPOINT:-http://jaeger:14268/api/traces}
+      - REDIS_HOST=${REDIS_HOST:-redis}
+      - REDIS_PORT=${REDIS_PORT:-6379}
+      - DEBUG=merajutasa:observability:*
+    volumes:
+      - ../../:/app:ro
+      - node_modules:/app/node_modules
+      - observability_data:/app/data
+    networks:
+      - merajutasa-network
+    restart: unless-stopped
+    depends_on:
+      - redis
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # API Gateway (Week 4)
+  api-gateway:
+    build:
+      context: ../..
+      dockerfile: infrastructure/docker/services/Dockerfile.api-gateway
+    container_name: merajutasa-api-gateway-dev
+    ports:
+      - "${API_GATEWAY_PORT:-8086}:8086"
+    environment:
+      - NODE_ENV=development
+      - API_GATEWAY_PORT=8086
+      - API_GATEWAY_HOST=0.0.0.0
+      - SIGNER_URL=http://signer:4601
+      - CHAIN_URL=http://chain:4602
+      - COLLECTOR_URL=http://collector:4603
+      - RATE_LIMIT_WINDOW=${RATE_LIMIT_WINDOW:-60}
+      - RATE_LIMIT_MAX_REQUESTS=${RATE_LIMIT_MAX_REQUESTS:-100}
+      - DEBUG=merajutasa:gateway:*
+    volumes:
+      - ../../:/app:ro
+      - node_modules:/app/node_modules
+    networks:
+      - merajutasa-network
+    restart: unless-stopped
+    depends_on:
+      - signer
+      - chain
+      - collector
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8086/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # Compliance Orchestrator (Week 6)
+  compliance:
+    build:
+      context: ../..
+      dockerfile: infrastructure/docker/services/Dockerfile.compliance
+    container_name: merajutasa-compliance-dev
+    ports:
+      - "${COMPLIANCE_ORCHESTRATOR_PORT:-9000}:9000"
+      - "${AUDIT_SYSTEM_PORT:-9001}:9001"
+    environment:
+      - NODE_ENV=development
+      - COMPLIANCE_ORCHESTRATOR_PORT=9000
+      - AUDIT_SYSTEM_PORT=9001
+      - COMPLIANCE_ORCHESTRATOR_HOST=0.0.0.0
+      - DEBUG=merajutasa:compliance:*
+    volumes:
+      - ../../:/app:ro
+      - node_modules:/app/node_modules
+      - compliance_data:/app/compliance_data
+    networks:
+      - merajutasa-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # Redis Cache (Performance enhancement)
+  redis:
+    image: redis:7-alpine
+    container_name: merajutasa-redis-dev
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    networks:
+      - merajutasa-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
   # Infrastructure Services
   reverse-proxy:
     image: nginx:alpine
@@ -158,6 +307,7 @@ services:
       - chain
       - collector
       - monitoring
+      - api-gateway
 
 # Networks
 networks:
@@ -182,4 +332,10 @@ volumes:
   backup_storage:
     driver: local
   backup_temp:
+    driver: local
+  observability_data:
+    driver: local
+  compliance_data:
+    driver: local
+  redis_data:
     driver: local

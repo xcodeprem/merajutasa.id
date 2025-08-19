@@ -1,4 +1,4 @@
-# MerajutASA.id API
+# MerajutASA.id API Gateway
 
 Enterprise API for MerajutASA.id governance and integrity platform
 

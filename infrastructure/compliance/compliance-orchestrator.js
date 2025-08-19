@@ -776,6 +776,65 @@ export class ComplianceOrchestrator extends EventEmitter {
   }
 
   /**
+   * Get health status of the compliance orchestrator
+   */
+  async getHealthStatus() {
+    const status = this.getOrchestrationStatus();
+    const health_score = this.calculateHealthScore(status);
+    
+    return {
+      name: 'Compliance Orchestrator',
+      status: health_score > 80 ? 'healthy' : health_score > 50 ? 'warning' : 'critical',
+      health_score,
+      last_check: new Date().toISOString(),
+      details: {
+        orchestration_status: status.status,
+        component_count: Object.keys(status.components).length,
+        healthy_components: Object.values(status.components).filter(c => c.status === 'healthy').length,
+        active_alerts: status.alerts?.length || 0,
+        risk_level: status.riskAssessment?.risk_level,
+        uptime: status.uptime,
+        real_time_correlation: status.configuration?.real_time_correlation
+      }
+    };
+  }
+
+  /**
+   * Calculate health score based on orchestration metrics
+   */
+  calculateHealthScore(status) {
+    let score = 100;
+    
+    // Deduct for unhealthy components
+    const totalComponents = Object.keys(status.components).length;
+    const healthyComponents = Object.values(status.components).filter(c => c.status === 'healthy').length;
+    
+    if (totalComponents > 0) {
+      const healthyRatio = healthyComponents / totalComponents;
+      if (healthyRatio < 0.5) score -= 40;
+      else if (healthyRatio < 0.7) score -= 25;
+      else if (healthyRatio < 0.9) score -= 10;
+    }
+    
+    // Deduct for active alerts
+    const alertCount = status.alerts?.length || 0;
+    if (alertCount > 5) score -= 20;
+    else if (alertCount > 2) score -= 10;
+    else if (alertCount > 0) score -= 5;
+    
+    // Deduct for high risk level
+    const riskLevel = status.riskAssessment?.risk_level;
+    if (riskLevel === 'critical') score -= 30;
+    else if (riskLevel === 'high') score -= 20;
+    else if (riskLevel === 'medium') score -= 10;
+    
+    // Bonus for real-time correlation
+    if (status.configuration?.real_time_correlation) score += 5;
+    
+    return Math.max(0, score);
+  }
+
+  /**
    * Graceful shutdown
    */
   async shutdown() {
@@ -798,5 +857,10 @@ export class ComplianceOrchestrator extends EventEmitter {
 
 // Export singleton instance
 export const complianceOrchestrator = new ComplianceOrchestrator();
+
+// Factory function for creating new instances
+export function getComplianceOrchestrator(options = {}) {
+  return new ComplianceOrchestrator(options);
+}
 
 export default ComplianceOrchestrator;

@@ -931,6 +931,61 @@ export class SecurityHardening extends EventEmitter {
   }
 
   /**
+   * Get health status of the security hardening system
+   */
+  async getHealthStatus() {
+    const status = this.getSecurityStatus();
+    const health_score = this.calculateHealthScore(status);
+    
+    return {
+      name: 'Security Hardening',
+      status: health_score > 80 ? 'healthy' : health_score > 50 ? 'warning' : 'critical',
+      health_score,
+      last_check: new Date().toISOString(),
+      details: {
+        security_score: status.securityScore,
+        threat_level: status.threatLevel,
+        active_threats: status.activeThreats.length,
+        vulnerabilities: status.vulnerabilities.length,
+        incidents: status.incidents.length,
+        monitoring_active: status.monitoring_active,
+        automated_response: status.automated_response_enabled,
+        uptime: status.uptime
+      }
+    };
+  }
+
+  /**
+   * Calculate health score based on security metrics
+   */
+  calculateHealthScore(status) {
+    let score = status.securityScore || 100;
+    
+    // Deduct for active threats
+    const threatCount = status.activeThreats?.length || 0;
+    if (threatCount > 5) score -= 30;
+    else if (threatCount > 2) score -= 15;
+    else if (threatCount > 0) score -= 5;
+    
+    // Deduct for vulnerabilities
+    const vulnCount = status.vulnerabilities?.length || 0;
+    if (vulnCount > 10) score -= 25;
+    else if (vulnCount > 5) score -= 10;
+    else if (vulnCount > 0) score -= 5;
+    
+    // Deduct for unresolved incidents
+    const incidentCount = status.incidents?.length || 0;
+    if (incidentCount > 3) score -= 20;
+    else if (incidentCount > 1) score -= 10;
+    
+    // Bonus for monitoring and automated response
+    if (status.monitoring_active) score += 5;
+    if (status.automated_response_enabled) score += 5;
+    
+    return Math.max(0, Math.min(100, score));
+  }
+
+  /**
    * Graceful shutdown
    */
   async shutdown() {
@@ -953,6 +1008,11 @@ export class SecurityHardening extends EventEmitter {
 
 // Export singleton instance
 export const securityHardening = new SecurityHardening();
+
+// Factory function for creating new instances
+export function getSecurityHardening(options = {}) {
+  return new SecurityHardening(options);
+}
 
 export default SecurityHardening;
 

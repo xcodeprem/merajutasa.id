@@ -1,12 +1,12 @@
 {
-  "timestamp": "2025-08-19T07:47:34.582Z",
+  "timestamp": "2025-08-19T08:36:08.099Z",
   "test_suite": "Week 6 Component Smoke Tests",
   "summary": {
     "total": 6,
     "passed": 6,
     "failed": 0,
     "success_rate": 100,
-    "total_duration": 6545
+    "total_duration": 6543
   },
   "results": [
     {
@@ -27,12 +27,12 @@
     {
       "name": "Cross-Component Event Correlation",
       "status": "PASSED",
-      "duration": 1502
+      "duration": 1503
     },
     {
       "name": "System Integration Under Load",
       "status": "PASSED",
-      "duration": 2005
+      "duration": 2003
     },
     {
       "name": "Error Recovery Flow",

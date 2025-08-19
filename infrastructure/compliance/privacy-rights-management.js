@@ -1008,6 +1008,59 @@ export class PrivacyRightsManagement extends EventEmitter {
   }
 
   /**
+   * Get health status of the privacy rights management system
+   */
+  async getHealthStatus() {
+    const status = this.getPrivacyStatus();
+    const health_score = this.calculateHealthScore(status);
+    
+    return {
+      name: 'Privacy Rights Management',
+      status: health_score > 80 ? 'healthy' : health_score > 50 ? 'warning' : 'critical',
+      health_score,
+      last_check: new Date().toISOString(),
+      details: {
+        pending_requests: status.pendingRequests.length,
+        completed_requests: status.completedRequests.length,
+        total_requests: status.totalRequests,
+        average_response_time: status.averageResponseTime,
+        jurisdictions_supported: status.jurisdictions_supported.length,
+        automated_processing: status.automated_processing_enabled,
+        uptime: status.uptime
+      }
+    };
+  }
+
+  /**
+   * Calculate health score based on privacy metrics
+   */
+  calculateHealthScore(status) {
+    let score = 100;
+    
+    // Deduct for high pending request backlog
+    const pendingCount = status.pendingRequests?.length || 0;
+    if (pendingCount > 50) score -= 30;
+    else if (pendingCount > 20) score -= 15;
+    else if (pendingCount > 10) score -= 5;
+    
+    // Deduct for slow response times
+    const avgResponseTime = status.averageResponseTime || 0;
+    if (avgResponseTime > 25) score -= 25; // > 25 days
+    else if (avgResponseTime > 20) score -= 15; // > 20 days
+    else if (avgResponseTime > 15) score -= 5; // > 15 days
+    
+    // Deduct for low jurisdiction coverage
+    const jurisdictionCount = status.jurisdictions_supported?.length || 0;
+    if (jurisdictionCount < 2) score -= 20;
+    else if (jurisdictionCount < 4) score -= 10;
+    
+    // Bonus for automated processing
+    if (status.automated_processing_enabled) score += 10;
+    
+    return Math.max(0, score);
+  }
+
+  /**
    * Graceful shutdown
    */
   async shutdown() {
@@ -1030,5 +1083,10 @@ export class PrivacyRightsManagement extends EventEmitter {
 
 // Export singleton instance
 export const privacyRightsManagement = new PrivacyRightsManagement();
+
+// Factory function for creating new instances
+export function getPrivacyRightsManagement(options = {}) {
+  return new PrivacyRightsManagement(options);
+}
 
 export default PrivacyRightsManagement;
