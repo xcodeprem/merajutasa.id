@@ -1,0 +1,60 @@
+name: Project Spot-Check
+
+on:
+  workflow_dispatch:
+    inputs:
+      issues:
+        description: Comma-separated issue numbers to check (optional)
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  spotcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run spot-check
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_PROJECT_TOKEN: ${{ secrets.GH_PROJECT_TOKEN }}
+          PROJECT_OWNER: ${{ vars.PROJECT_OWNER || github.repository_owner }}
+          PROJECT_TITLE: ${{ vars.PROJECT_TITLE || 'MerajutASA Program Board' }}
+          REPO_NAME: ${{ github.event.repository.name }}
+          ISSUES_INPUT: ${{ inputs.issues || '' }}
+        run: |
+          set -euo pipefail
+          OWNER="${PROJECT_OWNER:-${GITHUB_REPOSITORY%/*}}"
+          REPO="${REPO_NAME:-${GITHUB_REPOSITORY#*/}}"
+          CMD="node tools/github/project-spotcheck.js --owner=$OWNER --repo=$REPO"
+          if [ -n "$ISSUES_INPUT" ]; then CMD="$CMD --issues=$ISSUES_INPUT"; fi
+          echo "Running: $CMD"
+          $CMD
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: project-spotcheck
+          path: artifacts/project-spotcheck.json
+
+      - name: Commit JSON to repo (optional)
+        run: |
+          set -e
+          if git status --porcelain | grep -q "artifacts/project-spotcheck.json"; then
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git config user.name "github-actions[bot]"
+            git add artifacts/project-spotcheck.json
+            git commit -m "chore(project): add project spot-check report"
+            git push
+          else
+            echo "No changes to commit."
+          fi

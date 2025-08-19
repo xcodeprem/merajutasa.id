@@ -11,6 +11,7 @@
   },
   "packageManager": "npm@9.8.1",
   "scripts": {
+  "project:spotcheck": "node tools/github/project-spotcheck.js --owner=Andhika-Rey --repo=merajutasa.id",
     "lint": "npm run lint:md && npm run lint:dec",
     "lint:md": "markdownlint-cli2 \"**/*.md\"",
     "lint:dec": "node tools/dec-lint.js",
