@@ -159,11 +159,40 @@ const upsertItemAndSetFields = async (project, fields, issueNumber) => {
     contentId: issue.node_id,
   }).catch(()=>null);
   const itemId = addRes?.addProjectV2ItemById?.item?.id || null;
-  // To find item ID even if it already exists, query items by content
-  const qItems = `query($pid:ID!,$cid:ID!){ node(id:$pid){ ... on ProjectV2 { items(first:50, query:"repo:${OWNER}/${REPO} is:issue ${issueNumber}"){ nodes { id content { ... on Issue { number } ... on PullRequest { number } } } } } } }`;
-  const di = await gql(qItems, { pid: project.id, cid: issue.node_id });
-  const item = (di.node?.items?.nodes || []).find(n => n.content?.number === issueNumber);
-  const finalItemId = item?.id || itemId;
+  // 2b) Resolve item id by paginating items and matching content
+  const findItemId = async () => {
+    let cursor = null;
+    for (let page = 0; page < 40; page++) { // up to ~2000 items if needed
+      const data = await gql(`
+        query($pid:ID!,$after:String){
+          node(id:$pid){
+            ... on ProjectV2 {
+              items(first:50, after:$after){
+                nodes {
+                  id
+                  content {
+                    __typename
+                    ... on Issue { id number }
+                    ... on PullRequest { id number }
+                  }
+                }
+                pageInfo { hasNextPage endCursor }
+              }
+            }
+          }
+        }
+      `, { pid: project.id, after: cursor });
+      const conn = data?.node?.items;
+      const nodes = conn?.nodes || [];
+      const hit = nodes.find(n => n.content && n.content.number === issueNumber);
+      if (hit) return hit.id;
+      if (!conn?.pageInfo?.hasNextPage) return null;
+      cursor = conn.pageInfo.endCursor;
+    }
+    return null;
+  };
+  const existingItemId = await findItemId();
+  const finalItemId = existingItemId || itemId;
   if (!finalItemId) throw new Error(`Cannot resolve project item for #${issueNumber}`);
 
   // 3) derive expected values
