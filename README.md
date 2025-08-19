@@ -396,6 +396,30 @@ For detailed governance documentation, see:
 - **[Fairness Methodology](docs/fairness/)** - Equity calculation and hysteresis
 - **[Integrity Verification](docs/integrity/)** - Hash verification and evidence requirements
 
+## 🧩 Project Automation on GitHub.com (Projects v2)
+
+This repo includes four GitHub.com–compatible workflows to automate a Project v2 board:
+
+- Seed Labels (Project v2)
+- Setup Project V2
+- Auto-add to Project (event-driven for issues/PRs and "+project" comments)
+- Bulk Import to Project
+
+Configuration (once):
+
+- Secrets: GH_PROJECT_TOKEN (classic PAT with repo, project, and admin:org scopes)
+- Repo variables (optional): PROJECT_OWNER (default: Andhika-Rey), PROJECT_TITLE (default: MerajutASA Program Board)
+
+Run order:
+
+1) Seed Labels → 2) Setup Project V2 → 3) Create/label issues or PRs (or comment "+project") → 4) Optional Bulk Import by label query.
+
+Notes:
+
+- Fields are created idempotently using GraphQL Projects v2 API (Single-select, Date, Number, Text)
+- Auto-add maps labels to fields (Priority/Area/Phase/Risk/Status, dates, estimate, owner, links)
+- Works on GitHub.com (no GHE-specific APIs)
+
 ## 🌐 GitHub Pages & Transparency
 
 The platform provides comprehensive transparency through GitHub Pages with real-time dashboard snapshots and governance artifacts.
