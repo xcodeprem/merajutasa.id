@@ -1,0 +1,141 @@
+name: Setup Project V2
+
+on:
+  workflow_dispatch:
+    inputs:
+      owner:
+        description: 'User/Org owner (contoh: Andhika-Rey)'
+        required: true
+        default: 'Andhika-Rey'
+      project_title:
+        description: 'Judul Project'
+        required: true
+        default: 'MerajutASA Program Board'
+      public:
+        description: 'Public? (true/false)'
+        required: true
+        default: 'false'
+
+jobs:
+  create-project:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Project V2 and fields
+        uses: actions/github-script@v7
+        env:
+          GH_TOKEN: ${{ secrets.GH_PROJECT_TOKEN }} # Classic PAT (repo, project)
+        with:
+          github-token: ${{ secrets.GH_PROJECT_TOKEN }}
+          # Alternatif (tidak disarankan untuk akun personal):
+          # permissions di job + github-token: ${{ github.token }}
+          script: |
+            const core = require('@actions/core');
+            const ownerLogin = core.getInput('owner');
+            const title = core.getInput('project_title');
+            const isPublic = core.getInput('public') === 'true';
+
+            // 1) Resolve owner (user atau org)
+            const ownerQuery = `
+              query($login: String!) {
+                user(login: $login) { id, login }
+                organization(login: $login) { id, login }
+              }
+            `;
+            const ownerResp = await github.graphql(ownerQuery, { login: ownerLogin });
+            const ownerId = ownerResp.user?.id || ownerResp.organization?.id;
+            if (!ownerId) {
+              core.setFailed(\`Owner not found: \${ownerLogin}\`);
+              return;
+            }
+
+            // 2) Buat Project v2
+            const createProjectMutation = `
+              mutation($ownerId: ID!, $title: String!) {
+                createProjectV2(input: {ownerId: $ownerId, title: $title}) {
+                  projectV2 { id number title url public }
+                }
+              }
+            `;
+            const createResp = await github.graphql(createProjectMutation, { ownerId, title });
+            const project = createResp.createProjectV2.projectV2;
+            console.log('Project created:', project);
+
+            // 3) Update visibility bila berbeda
+            if (project.public !== isPublic) {
+              const updateProjectMutation = `
+                mutation($projectId: ID!, $public: Boolean!) {
+                  updateProjectV2(input: {projectId: $projectId, public: $public}) {
+                    projectV2 { id title url public }
+                  }
+                }
+              `;
+              await github.graphql(updateProjectMutation, { projectId: project.id, public: isPublic });
+            }
+
+            // Helpers membuat fields
+            async function createSingleSelect(name, options) {
+              const m = `
+                mutation($projectId: ID!) {
+                  createProjectV2Field(
+                    input: {
+                      projectId: $projectId,
+                      dataType: SINGLE_SELECT,
+                      name: "${name}",
+                      singleSelectOptions: [${options.map(o => `{name:"${o}"}`).join(',')}]
+                    }
+                  ) { projectV2Field { id name } }
+                }
+              `;
+              return github.graphql(m, { projectId: project.id });
+            }
+            async function createDate(name) {
+              const m = `
+                mutation($projectId: ID!) {
+                  createProjectV2Field(input: {
+                    projectId: $projectId, dataType: DATE, name: "${name}"
+                  }) { projectV2Field { id name } }
+                }
+              `;
+              return github.graphql(m, { projectId: project.id });
+            }
+            async function createNumber(name) {
+              const m = `
+                mutation($projectId: ID!) {
+                  createProjectV2Field(input: {
+                    projectId: $projectId, dataType: NUMBER, name: "${name}"
+                  }) { projectV2Field { id name } }
+                }
+              `;
+              return github.graphql(m, { projectId: project.id });
+            }
+            async function createText(name) {
+              const m = `
+                mutation($projectId: ID!) {
+                  createProjectV2Field(input: {
+                    projectId: $projectId, dataType: TEXT, name: "${name}"
+                  }) { projectV2Field { id name } }
+                }
+              `;
+              return github.graphql(m, { projectId: project.id });
+            }
+
+            // 4) Field custom (selaras docs/analysis & docs/roadmap)
+            await createSingleSelect('Priority', ['P0','P1','P2','P3']);
+            await createSingleSelect('Area', [
+              'Security','Compliance','Observability','Performance','High Availability',
+              'API Gateway','Equity UI','Docs','CI/CD','Configuration',
+              'Logging','Error Handling','Testing','Backup','Load Testing',
+              'Security Audit','Data Pipeline','Mobile API','Integration'
+            ]);
+            await createSingleSelect('Phase', [
+              'Phase 1','Phase 2 W1','Phase 2 W2','Phase 2 W3','Phase 2 W4','Phase 2 W5','Phase 2 W6',
+              'Phase 2 W7','Phase 2 W8','Phase 3 Q1','Phase 3 Q2','Phase 3 Q3','Phase 3 Q4'
+            ]);
+            await createSingleSelect('Risk', ['Low','Medium','High']);
+            await createDate('Target date');
+            await createNumber('Estimate (h)');
+            await createText('Owner (text)');
+
+            core.setOutput('project_url', project.url);
+            core.setOutput('project_id', project.id);
+            console.log('Project URL:', project.url);

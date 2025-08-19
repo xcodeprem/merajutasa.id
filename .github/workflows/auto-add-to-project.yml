@@ -1,0 +1,145 @@
+name: Auto-add to Project
+
+on:
+  issues:
+    types: [opened, labeled, reopened]
+  pull_request:
+    types: [opened, labeled, reopened]
+
+jobs:
+  add-to-project:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add item and set fields
+        uses: actions/github-script@v7
+        env:
+          GH_TOKEN: ${{ secrets.GH_PROJECT_TOKEN }} # Classic PAT
+        with:
+          github-token: ${{ secrets.GH_PROJECT_TOKEN }}
+          script: |
+            const core = require('@actions/core');
+            const { context } = require('@actions/github');
+
+            const ownerLogin = 'Andhika-Rey';
+            const projectTitle = 'MerajutASA Program Board';
+
+            // 1) Cari Project
+            const findProjectQuery = `
+              query($owner:String!) {
+                user(login: $owner) {
+                  projectsV2(first: 50) { nodes { id title fields(first: 50) {
+                    nodes {
+                      id name dataType
+                      ... on ProjectV2SingleSelectField { options { id name } }
+                    }
+                  }}}
+                }
+                organization(login: $owner) {
+                  projectsV2(first: 50) { nodes { id title fields(first: 50) {
+                    nodes {
+                      id name dataType
+                      ... on ProjectV2SingleSelectField { options { id name } }
+                    }
+                  }}}
+                }
+              }
+            `;
+            const projResp = await github.graphql(findProjectQuery, { owner: ownerLogin });
+            const nodes = [
+              ...(projResp.user?.projectsV2?.nodes || []),
+              ...(projResp.organization?.projectsV2?.nodes || []),
+            ];
+            const project = nodes.find(p => p.title === projectTitle);
+            if (!project) {
+              core.warning(`Project "${projectTitle}" not found under ${ownerLogin}.`);
+              return;
+            }
+            const projectId = project.id;
+            const fields = project.fields.nodes;
+
+            // 2) Ambil Issue/PR dari event
+            const [repoOwner, repoName] = process.env.GITHUB_REPOSITORY.split('/');
+            const isIssue = !!context.payload.issue;
+            const number = isIssue ? context.payload.issue.number : context.payload.pull_request.number;
+
+            const contentQuery = `
+              query($owner:String!, $repo:String!, $number:Int!) {
+                repository(owner:$owner, name:$repo) {
+                  issue(number:$number) { id number title labels(first:50){ nodes { name } } }
+                  pullRequest(number:$number) { id number title labels(first:50){ nodes { name } } }
+                }
+              }
+            `;
+            const contentResp = await github.graphql(contentQuery, { owner: repoOwner, repo: repoName, number });
+            const content = isIssue ? contentResp.repository.issue : contentResp.repository.pullRequest;
+            const contentId = content.id;
+            const labels = new Set((content.labels?.nodes || []).map(l => l.name));
+
+            // 3) Tambahkan ke Project
+            const addItemMutation = `
+              mutation($projectId: ID!, $contentId: ID!) {
+                addProjectV2ItemById(input:{projectId:$projectId, contentId:$contentId}) {
+                  item { id }
+                }
+              }
+            `;
+            const addResp = await github.graphql(addItemMutation, { projectId, contentId });
+            const itemId = addResp.addProjectV2ItemById.item.id;
+
+            // Helpers
+            function getField(name) { return fields.find(f => f.name === name); }
+            async function setSingleSelect(fieldName, optionName) {
+              const f = getField(fieldName);
+              if (!f || f.dataType !== 'SINGLE_SELECT') return;
+              const opt = (f.options || []).find(o => o.name.toLowerCase() === optionName.toLowerCase());
+              if (!opt) return;
+              const m = `
+                mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $optionId: String!) {
+                  updateProjectV2ItemFieldValue(input:{
+                    projectId:$projectId, itemId:$itemId, fieldId:$fieldId,
+                    value:{ singleSelectOptionId:$optionId }
+                  }) { projectV2Item { id } }
+                }
+              `;
+              await github.graphql(m, { projectId, itemId, fieldId: f.id, optionId: opt.id });
+            }
+
+            // 4) Priority
+            if (labels.has('P0') || labels.has('urgent')) await setSingleSelect('Priority', 'P0');
+            else if (labels.has('P1') || labels.has('high-priority')) await setSingleSelect('Priority', 'P1');
+            else if (labels.has('P2') || labels.has('medium')) await setSingleSelect('Priority', 'P2');
+            else if (labels.has('P3') || labels.has('planned')) await setSingleSelect('Priority', 'P3');
+
+            // 5) Area
+            const areaPrefix = 'area:';
+            const areaLabel = Array.from(labels).find(l => l.toLowerCase().startsWith(areaPrefix));
+            if (areaLabel) {
+              const val = areaLabel.slice(areaPrefix.length).replace(/-/g, ' ');
+              await setSingleSelect('Area', val);
+            }
+
+            // 6) Phase
+            const phasePrefix = 'phase:';
+            const phaseLabel = Array.from(labels).find(l => l.toLowerCase().startsWith(phasePrefix));
+            if (phaseLabel) {
+              const raw = phaseLabel.slice(phasePrefix.length).toLowerCase();
+              const map = new Map([
+                ['1', 'Phase 1'],
+                ['2-week-1', 'Phase 2 W1'],
+                ['2-week-2', 'Phase 2 W2'],
+                ['2-week-3', 'Phase 2 W3'],
+                ['2-week-4', 'Phase 2 W4'],
+                ['2-week-5', 'Phase 2 W5'],
+                ['2-week-6', 'Phase 2 W6'],
+                ['2-week-7', 'Phase 2 W7'],
+                ['2-week-8', 'Phase 2 W8'],
+                ['3-q1', 'Phase 3 Q1'],
+                ['3-q2', 'Phase 3 Q2'],
+                ['3-q3', 'Phase 3 Q3'],
+                ['3-q4', 'Phase 3 Q4'],
+              ]);
+              const target = map.get(raw);
+              if (target) await setSingleSelect('Phase', target);
+            }
+
+            console.log(`Added ${isIssue ? 'issue' : 'PR'} #${number} to project "${projectTitle}".`);

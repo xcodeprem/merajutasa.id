@@ -1,0 +1,83 @@
+name: Seed Labels (Project v2)
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  seed:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create/update labels
+        uses: actions/github-script@v7
+        env:
+          GH_TOKEN: ${{ secrets.GH_PROJECT_TOKEN }} # Classic PAT
+        with:
+          github-token: ${{ secrets.GH_PROJECT_TOKEN }}
+          script: |
+            const owner = process.env.GITHUB_REPOSITORY.split('/')[0];
+            const repo = process.env.GITHUB_REPOSITORY.split('/')[1];
+
+            const labels = [
+              // Priority
+              { name: 'P0', color: 'b60205', description: 'Urgent' },
+              { name: 'P1', color: 'd93f0b', description: 'High' },
+              { name: 'P2', color: 'fbca04', description: 'Medium' },
+              { name: 'P3', color: '0e8a16', description: 'Planned/Low' },
+              { name: 'urgent', color: 'b60205', description: 'Alias to P0' },
+              { name: 'high-priority', color: 'd93f0b', description: 'Alias to P1' },
+              { name: 'medium', color: 'fbca04', description: 'Alias to P2' },
+              { name: 'planned', color: '0e8a16', description: 'Alias to P3' },
+
+              // Area (selaras dokumen)
+              { name: 'area:security', color: '5319e7' },
+              { name: 'area:compliance', color: '1d76db' },
+              { name: 'area:observability', color: '0052cc' },
+              { name: 'area:performance', color: '0e8a16' },
+              { name: 'area:high-availability', color: 'c2e0c6' },
+              { name: 'area:api-gateway', color: 'bfdadc' },
+              { name: 'area:equity-ui', color: 'fef2c0' },
+              { name: 'area:docs', color: 'c5def5' },
+              { name: 'area:ci-cd', color: 'e99695' },
+              { name: 'area:configuration', color: 'c2e0c6' },
+              { name: 'area:logging', color: 'c5def5' },
+              { name: 'area:error-handling', color: 'c5def5' },
+              { name: 'area:testing', color: 'fbca04' },
+              { name: 'area:backup', color: 'c2e0c6' },
+              { name: 'area:load-testing', color: 'fbca04' },
+              { name: 'area:security-audit', color: '5319e7' },
+              { name: 'area:data-pipeline', color: '0052cc' },
+              { name: 'area:mobile-api', color: 'bfdadc' },
+              { name: 'area:integration', color: 'c5def5' },
+
+              // Phase
+              { name: 'phase:1', color: 'ededed' },
+              { name: 'phase:2-week-1', color: 'ededed' },
+              { name: 'phase:2-week-2', color: 'ededed' },
+              { name: 'phase:2-week-3', color: 'ededed' },
+              { name: 'phase:2-week-4', color: 'ededed' },
+              { name: 'phase:2-week-5', color: 'ededed' },
+              { name: 'phase:2-week-6', color: 'ededed' },
+              { name: 'phase:2-week-7', color: 'ededed' },
+              { name: 'phase:2-week-8', color: 'ededed' },
+              { name: 'phase:3-q1', color: 'ededed' },
+              { name: 'phase:3-q2', color: 'ededed' },
+              { name: 'phase:3-q3', color: 'ededed' },
+              { name: 'phase:3-q4', color: 'ededed' },
+            ];
+
+            async function upsert(label) {
+              try {
+                // Try update first
+                await github.rest.issues.updateLabel({ owner, repo, name: label.name, new_name: label.name, color: label.color, description: label.description || '' });
+                console.log('Updated label:', label.name);
+              } catch (e) {
+                if (e.status === 404) {
+                  await github.rest.issues.createLabel({ owner, repo, name: label.name, color: label.color, description: label.description || '' });
+                  console.log('Created label:', label.name);
+                } else {
+                  throw e;
+                }
+              }
+            }
+            for (const l of labels) { await upsert(l); }
+            console.log('Labels seeded/updated.');
