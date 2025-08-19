@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_utc": "2025-08-19T08:28:57.770Z",
+  "generated_utc": "2025-08-19T17:13:39.005Z",
   "file_count": 66,
   "total_hits": 12,
   "max_severity": "MEDIUM",
@@ -124,7 +124,7 @@
     },
     {
       "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-6.md",
-      "line": 481,
+      "line": 525,
       "column": 1,
       "match": "top",
       "rule": "TOP",
