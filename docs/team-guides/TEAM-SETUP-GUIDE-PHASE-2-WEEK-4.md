@@ -7,18 +7,21 @@ This guide provides step-by-step instructions for team members to set up and wor
 ## Prerequisites 📋
 
 ### Required Software
+
 - **Node.js**: Version 18.0.0 or higher
 - **npm**: Version 8.0.0 or higher  
 - **Git**: Latest version for repository management
 - **Code Editor**: VS Code, WebStorm, or equivalent with JavaScript/Node.js support
 
 ### Optional Tools (Recommended)
+
 - **Docker Desktop**: For containerized testing and deployment
 - **Postman/Insomnia**: For API testing and exploration
 - **kubectl**: For Kubernetes cluster management (if using K8s)
 - **curl**: For command-line API testing
 
 ### Development Environment
+
 - **Operating System**: Windows 10+, macOS 10.15+, or Ubuntu 18.04+
 - **RAM**: Minimum 8GB (16GB recommended)
 - **Storage**: 5GB free space for dependencies and artifacts
@@ -27,12 +30,14 @@ This guide provides step-by-step instructions for team members to set up and wor
 ## Quick Start (5 Minutes) 🚀
 
 ### 1. Clone Repository
+
 ```bash
 git clone https://github.com/codingxdev0/merajutasa.id.git
 cd merajutasa.id
 ```
 
 ### 2. Install Dependencies
+
 ```bash
 # Install all dependencies (including new API Gateway packages)
 npm install
@@ -42,6 +47,7 @@ npm run week4:status
 ```
 
 ### 3. Validate Setup
+
 ```bash
 # Run comprehensive status check
 npm run week4:status
@@ -50,6 +56,7 @@ npm run week4:status
 ```
 
 ### 4. Quick Demo
+
 ```bash
 # Run interactive demonstration
 npm run week4:demo
@@ -62,6 +69,7 @@ npm run week4:demo
 ### Step 1: Environment Preparation
 
 #### Install Node.js and npm
+
 ```bash
 # Check current versions
 node --version  # Should be >= 18.0.0
@@ -76,6 +84,7 @@ node --version && npm --version
 ```
 
 #### Configure Git (if not already done)
+
 ```bash
 git config --global user.name "Your Name"
 git config --global user.email "your.email@company.com"
@@ -84,6 +93,7 @@ git config --global user.email "your.email@company.com"
 ### Step 2: Repository Setup
 
 #### Clone and Navigate
+
 ```bash
 # Clone the repository
 git clone https://github.com/codingxdev0/merajutasa.id.git
@@ -95,6 +105,7 @@ git status
 ```
 
 #### Install Dependencies
+
 ```bash
 # Install all project dependencies
 npm install
@@ -112,11 +123,13 @@ npm install
 ### Step 3: Validate Installation
 
 #### Run Status Check
+
 ```bash
 npm run week4:status
 ```
 
 **Expected Output**:
+
 ```
 📊 PHASE 2 WEEK 4 STATUS SUMMARY
 ================================
@@ -137,11 +150,13 @@ Performance & Capabilities: 5/5 (100%)
 ```
 
 #### Run Interactive Demo
+
 ```bash
 npm run week4:demo
 ```
 
 **Expected Output**:
+
 ```
 🚀 Phase 2 Week 4: API Gateway & Management Demo
 ================================================
@@ -160,6 +175,7 @@ npm run week4:demo
 ### Step 4: Development Environment Configuration
 
 #### VS Code Setup (Recommended)
+
 ```bash
 # Install VS Code extensions (optional but recommended)
 code --install-extension ms-vscode.vscode-node-debugger
@@ -168,6 +184,7 @@ code --install-extension ms-vscode.vscode-eslint
 ```
 
 #### Environment Variables (Optional)
+
 ```bash
 # Create .env file for local development (optional)
 cat > .env << EOL
@@ -182,6 +199,7 @@ EOL
 ### Frontend Developers
 
 #### Primary Focus: API Integration
+
 ```bash
 # Test API Gateway endpoints
 npm run api-gateway:start &
@@ -198,12 +216,14 @@ npm run docs:generate
 open docs/api/index.html  # Opens interactive Swagger UI
 ```
 
-#### Key Files to Understand:
+#### Key Files to Understand
+
 - `infrastructure/api-gateway/api-gateway-core.js` - Main gateway routing
 - `infrastructure/api-gateway/openapi-documentation.js` - API documentation system
 - `docs/api/` - Generated API documentation
 
-#### Daily Commands:
+#### Daily Commands
+
 ```bash
 npm run api-gateway:status    # Check gateway health
 npm run docs:generate         # Regenerate API docs
@@ -213,6 +233,7 @@ npm run week4:status         # Validate system status
 ### Backend Developers
 
 #### Primary Focus: Service Integration & API Design
+
 ```bash
 # Test service mesh integration
 npm run service-mesh:health
@@ -224,12 +245,14 @@ npm run service-mesh:topology
 npm run week4:demo  # Watch circuit breaker simulation in step 6
 ```
 
-#### Key Files to Understand:
+#### Key Files to Understand
+
 - `infrastructure/api-gateway/service-mesh.js` - Service discovery and load balancing
 - `infrastructure/api-gateway/api-gateway-orchestrator.js` - System coordination
 - `infrastructure/cicd/pipeline-manager.js` - Deployment automation
 
-#### Daily Commands:
+#### Daily Commands
+
 ```bash
 npm run service-mesh:health   # Check service mesh status
 npm run api-gateway:metrics   # View performance metrics  
@@ -239,6 +262,7 @@ npm run cicd:status          # Check CI/CD system
 ### DevOps Engineers
 
 #### Primary Focus: Deployment & Infrastructure
+
 ```bash
 # Test CI/CD pipeline execution
 npm run cicd:deploy
@@ -250,12 +274,14 @@ npm run api-gateway:metrics
 npm run week4:demo  # Watch CI/CD simulation in step 8
 ```
 
-#### Key Files to Understand:
+#### Key Files to Understand
+
 - `infrastructure/cicd/pipeline-manager.js` - CI/CD automation
 - `infrastructure/api-gateway/api-gateway-orchestrator.js` - System orchestration
 - `package.json` - npm scripts for automation
 
-#### Daily Commands:
+#### Daily Commands
+
 ```bash
 npm run cicd:deploy          # Execute deployment pipeline
 npm run api-gateway:start    # Start API Gateway system
@@ -265,6 +291,7 @@ npm run week4:status        # Comprehensive system check
 ### QA Engineers
 
 #### Primary Focus: Testing & Validation
+
 ```bash
 # Run comprehensive status validation
 npm run week4:status
@@ -278,13 +305,15 @@ npm run service-mesh:health
 npm run cicd:status
 ```
 
-#### Key Testing Areas:
+#### Key Testing Areas
+
 - **API Gateway**: Request routing, rate limiting, error handling
 - **Service Mesh**: Load balancing, circuit breaker, health checks
 - **CI/CD**: Pipeline execution, deployment strategies, rollback
 - **Documentation**: API documentation accuracy and completeness
 
-#### Daily Commands:
+#### Daily Commands
+
 ```bash
 npm run week4:status         # Full system validation
 npm run week4:demo          # End-to-end functionality test
@@ -294,6 +323,7 @@ npm run test:infrastructure  # Integration tests
 ## Common Development Tasks 🛠️
 
 ### Starting the API Gateway System
+
 ```bash
 # Start all components
 npm run api-gateway:start
@@ -306,6 +336,7 @@ npm run api-gateway:metrics
 ```
 
 ### Testing API Endpoints
+
 ```bash
 # Start gateway (if not running)
 npm run api-gateway:start &
@@ -324,6 +355,7 @@ curl http://localhost:8080/docs
 ```
 
 ### Running Tests and Validation
+
 ```bash
 # Comprehensive status check
 npm run week4:status
@@ -339,6 +371,7 @@ npm run test:governance
 ```
 
 ### Documentation Generation
+
 ```bash
 # Generate API documentation
 npm run docs:generate
@@ -357,6 +390,7 @@ xdg-open docs/api/index.html # Linux
 ### Common Issues and Solutions
 
 #### 1. Dependency Installation Issues
+
 ```bash
 # Clear npm cache and reinstall
 npm cache clean --force
@@ -365,6 +399,7 @@ npm install
 ```
 
 #### 2. Port Conflicts
+
 ```bash
 # Check if port 8080 is in use
 lsof -i :8080  # macOS/Linux
@@ -376,6 +411,7 @@ npm run api-gateway:start
 ```
 
 #### 3. Module Import Errors
+
 ```bash
 # Verify Node.js version
 node --version  # Must be >= 18.0.0
@@ -386,6 +422,7 @@ npm install
 ```
 
 #### 4. Status Check Failures
+
 ```bash
 # Run detailed diagnostics
 npm run week4:status
@@ -399,6 +436,7 @@ npm run cicd:status
 ### Performance Issues
 
 #### High Memory Usage
+
 ```bash
 # Monitor memory usage
 npm run api-gateway:metrics
@@ -409,6 +447,7 @@ npm run api-gateway:start
 ```
 
 #### Slow Response Times
+
 ```bash
 # Check system load
 npm run week4:status
@@ -423,12 +462,14 @@ npm run api-gateway:restart
 ## Team Collaboration Guidelines 📝
 
 ### Development Workflow
+
 1. **Always run status check** before starting work: `npm run week4:status`
 2. **Validate changes** with demo: `npm run week4:demo`
 3. **Update documentation** when modifying APIs
 4. **Test integrations** before committing changes
 
 ### Code Review Checklist
+
 - [ ] API Gateway components properly imported
 - [ ] Service mesh integration tested
 - [ ] CI/CD pipeline configurations validated
@@ -436,6 +477,7 @@ npm run api-gateway:restart
 - [ ] Status checks passing (95+ score)
 
 ### Daily Standup Items
+
 - **What worked**: Share successful API Gateway operations
 - **What didn't work**: Report any system issues or failures
 - **What's next**: Plan integration and testing activities
@@ -444,6 +486,7 @@ npm run api-gateway:restart
 ## Advanced Configuration ⚙️
 
 ### Custom API Gateway Configuration
+
 ```javascript
 // Example: Custom gateway configuration
 const gateway = getAPIGateway({
@@ -460,6 +503,7 @@ const gateway = getAPIGateway({
 ```
 
 ### Service Mesh Customization
+
 ```javascript
 // Example: Custom service mesh configuration
 const serviceMesh = getServiceMesh({
@@ -470,6 +514,7 @@ const serviceMesh = getServiceMesh({
 ```
 
 ### CI/CD Pipeline Customization
+
 ```javascript
 // Example: Custom CI/CD pipeline
 const pipeline = {
@@ -486,11 +531,13 @@ const pipeline = {
 ## Support and Resources 📚
 
 ### Documentation Links
+
 - **Delivery Documentation**: `docs/phase-2/PHASE-2-WEEK-4-DELIVERY-DOCUMENTATION.md`
 - **Quick Reference**: `docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-4.md`
 - **API Documentation**: Generated in `docs/api/` after running `npm run docs:generate`
 
 ### Key Commands Reference
+
 ```bash
 # System Management
 npm run week4:status          # Comprehensive status check
@@ -509,6 +556,7 @@ npm run api-gateway:metrics  # Performance metrics
 ```
 
 ### Getting Help
+
 1. **Run diagnostics**: `npm run week4:status` for detailed system analysis
 2. **Check logs**: Component logs provide detailed error information
 3. **Review documentation**: Comprehensive guides in `docs/` directory

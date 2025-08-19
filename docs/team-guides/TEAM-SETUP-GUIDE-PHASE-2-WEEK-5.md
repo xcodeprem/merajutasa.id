@@ -7,24 +7,28 @@ This guide provides step-by-step instructions for team members to set up and wor
 ## Prerequisites 📋
 
 ### Required Software
+
 - **Node.js**: Version 18.0.0 or higher
 - **npm**: Version 8.0.0 or higher  
 - **Git**: Latest version for repository management
 - **Code Editor**: VS Code, WebStorm, or equivalent with JavaScript/Node.js support
 
 ### High Availability Specific Tools
+
 - **Docker Desktop**: Required for containerized multi-region testing
 - **kubectl**: Kubernetes CLI for auto-scaling and deployment operations
 - **Cloud CLI**: AWS CLI, gcloud, or Azure CLI for multi-region operations
 - **curl/httpie**: For health check and API testing
 
 ### Optional Tools (Recommended)
+
 - **Postman/Insomnia**: For comprehensive API testing across regions
 - **Grafana**: For advanced HA metrics visualization
 - **Terraform**: For infrastructure as code management
 - **Helm**: For Kubernetes deployment management
 
 ### Development Environment
+
 - **Operating System**: Windows 10+, macOS 10.15+, or Ubuntu 18.04+
 - **RAM**: Minimum 16GB (32GB recommended for multi-region testing)
 - **Storage**: 10GB free space for HA components and artifacts
@@ -33,12 +37,14 @@ This guide provides step-by-step instructions for team members to set up and wor
 ## Quick Start (5 Minutes) 🚀
 
 ### 1. Clone Repository
+
 ```bash
 git clone https://github.com/codingxdev0/merajutasa.id.git
 cd merajutasa.id
 ```
 
 ### 2. Install Dependencies
+
 ```bash
 # Install all dependencies (including new HA packages)
 npm install
@@ -48,6 +54,7 @@ npm run week5:status
 ```
 
 ### 3. Validate Setup
+
 ```bash
 # Run comprehensive HA status check
 npm run week5:status
@@ -62,6 +69,7 @@ npm run week5:status
 ```
 
 ### 4. Quick Validation Test
+
 ```bash
 # Test HA component integration
 npm run week5:test
@@ -75,6 +83,7 @@ npm run week5:demo
 ### Step 1: Environment Configuration (10 minutes)
 
 #### 1.1 Cloud Provider Setup
+
 ```bash
 # AWS Configuration (if using AWS)
 aws configure
@@ -90,6 +99,7 @@ az account set --subscription YOUR_SUBSCRIPTION_ID
 ```
 
 #### 1.2 Kubernetes Context Setup
+
 ```bash
 # Verify kubectl is installed
 kubectl version --client
@@ -103,7 +113,9 @@ kubectl get nodes
 ```
 
 #### 1.3 Environment Variables
+
 Create a `.env.local` file in the project root:
+
 ```bash
 # High Availability Configuration
 HA_ORCHESTRATOR_PORT=8090
@@ -139,6 +151,7 @@ CIRCUIT_BREAKER_RESET_TIMEOUT=60000
 ### Step 2: High Availability Component Verification (15 minutes)
 
 #### 2.1 Multi-Region Deployment Setup
+
 ```bash
 # Test multi-region deployment system
 npm run ha:multi-region-deploy
@@ -151,6 +164,7 @@ npm run ha:orchestrator-status | jq '.components.multiRegionDeployment'
 ```
 
 #### 2.2 Disaster Recovery System Test
+
 ```bash
 # Create test backup
 npm run ha:disaster-recovery-backup
@@ -163,6 +177,7 @@ npm run ha:orchestrator-status | jq '.components.disasterRecovery'
 ```
 
 #### 2.3 Auto-Scaling Configuration
+
 ```bash
 # Check auto-scaling status
 npm run ha:auto-scaling-status
@@ -179,6 +194,7 @@ npm run ha:auto-scaling-status
 ```
 
 #### 2.4 Fault Tolerance Validation
+
 ```bash
 # Check fault tolerance system
 npm run ha:fault-tolerance-status
@@ -193,6 +209,7 @@ npm run ha:fault-tolerance-status
 ```
 
 #### 2.5 Health Monitoring Setup
+
 ```bash
 # Verify health monitoring system
 npm run ha:health-monitoring-status
@@ -209,6 +226,7 @@ npm run ha:health-monitoring-status
 ### Step 3: HA Orchestrator Initialization (10 minutes)
 
 #### 3.1 Start HA Orchestrator
+
 ```bash
 # Initialize centralized HA orchestration
 npm run ha:orchestrator-start
@@ -218,6 +236,7 @@ npm run ha:orchestrator-start
 ```
 
 #### 3.2 System Health Validation
+
 ```bash
 # Get comprehensive system health status
 npm run ha:system-health
@@ -232,6 +251,7 @@ npm run ha:system-health
 ```
 
 #### 3.3 Start All HA Components
+
 ```bash
 # Start all HA components simultaneously
 npm run ha:start-all
@@ -259,6 +279,7 @@ npm run week5:demo
 ```
 
 **Key Files to Monitor**:
+
 - `infrastructure/high-availability/ha-orchestrator.js` - API endpoints
 - Health check responses for dashboard integration
 - Event streams for real-time status updates
@@ -282,6 +303,7 @@ npm run ha:orchestrator-status
 ```
 
 **Key Integration Points**:
+
 - Circuit breaker integration in service calls
 - Health check implementation for custom services
 - Auto-scaling metrics and triggers
@@ -306,6 +328,7 @@ npm run ha:system-health
 ```
 
 **Infrastructure Configuration**:
+
 - Kubernetes cluster setup for auto-scaling
 - Multi-region cloud provider configuration
 - DNS and load balancer setup for failover
@@ -330,6 +353,7 @@ npm run ha:emergency-response-test
 ```
 
 **Testing Scenarios**:
+
 - Multi-region deployment validation
 - Disaster recovery testing procedures  
 - Auto-scaling behavior verification
@@ -340,6 +364,7 @@ npm run ha:emergency-response-test
 ### Multi-Region Cloud Configuration
 
 #### AWS Multi-Region Setup
+
 ```bash
 # Configure multiple AWS regions
 aws configure set region us-east-1
@@ -353,6 +378,7 @@ aws sts get-caller-identity --profile west
 ```
 
 #### GCP Multi-Region Setup
+
 ```bash
 # Set up multiple GCP regions
 gcloud config configurations create us-east
@@ -368,6 +394,7 @@ gcloud config set compute/region us-east1
 ### Kubernetes Integration
 
 #### HPA (Horizontal Pod Autoscaler) Setup
+
 ```yaml
 # Save as k8s-hpa-config.yaml
 apiVersion: autoscaling/v2
@@ -397,6 +424,7 @@ spec:
 ```
 
 Apply the configuration:
+
 ```bash
 kubectl apply -f k8s-hpa-config.yaml
 kubectl get hpa merajutasa-hpa
@@ -405,6 +433,7 @@ kubectl get hpa merajutasa-hpa
 ### Monitoring Integration
 
 #### Prometheus Metrics Configuration
+
 ```yaml
 # Save as prometheus-ha-config.yaml
 global:
@@ -430,6 +459,7 @@ scrape_configs:
 ### Common Issues and Solutions
 
 #### Issue 1: HA Orchestrator Won't Start
+
 ```bash
 # Check port availability
 lsof -i :8090
@@ -446,6 +476,7 @@ npm run ha:orchestrator-start
 ```
 
 #### Issue 2: Multi-Region Deployment Fails
+
 ```bash
 # Verify cloud provider credentials
 aws sts get-caller-identity  # For AWS
@@ -462,6 +493,7 @@ npm run ha:multi-region-deploy
 ```
 
 #### Issue 3: Auto-Scaling Not Responding
+
 ```bash
 # Check Kubernetes connection
 kubectl cluster-info
@@ -477,6 +509,7 @@ kubectl apply -f k8s-hpa-config.yaml
 ```
 
 #### Issue 4: Health Monitoring Shows Unknown Status
+
 ```bash
 # Check health monitoring service
 npm run ha:health-monitoring-status
@@ -493,6 +526,7 @@ npm run ha:start-all
 ### Performance Tuning
 
 #### Optimizing HA Orchestrator Performance
+
 ```javascript
 // Adjust configuration in .env.local
 HA_COORDINATION_INTERVAL=15000    // Reduce from 30000 for faster response
@@ -502,6 +536,7 @@ HA_ALERT_COOLDOWN=180000          // Reduce cooldown for faster alerts
 ```
 
 #### Auto-Scaling Sensitivity Tuning
+
 ```bash
 # Increase sensitivity for faster scaling
 AUTO_SCALING_TARGET_CPU=60        # Reduce from 70
@@ -515,6 +550,7 @@ AUTO_SCALING_SCALE_DOWN_THRESHOLD=5 # Number of periods before scaling down
 ### Secure Communication Setup
 
 #### TLS Configuration for HA Components
+
 ```bash
 # Generate self-signed certificates for testing
 openssl req -x509 -newkey rsa:4096 -keyout ha-key.pem -out ha-cert.pem -days 365 -nodes
@@ -526,6 +562,7 @@ HA_TLS_KEY_PATH=./certs/ha-key.pem
 ```
 
 #### RBAC Configuration
+
 ```yaml
 # Save as rbac-ha-config.yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -558,6 +595,7 @@ subjects:
 ```
 
 Apply RBAC configuration:
+
 ```bash
 kubectl apply -f rbac-ha-config.yaml
 ```
@@ -567,6 +605,7 @@ kubectl apply -f rbac-ha-config.yaml
 ### Comprehensive Testing Procedures
 
 #### 1. Component Integration Testing
+
 ```bash
 # Test all HA components individually
 npm run week5:test
@@ -581,6 +620,7 @@ npm run week5:test
 ```
 
 #### 2. End-to-End Workflow Testing
+
 ```bash
 # Run comprehensive demonstration
 npm run week5:demo
@@ -595,6 +635,7 @@ npm run week5:demo
 ```
 
 #### 3. Performance Validation
+
 ```bash
 # Test HA component performance
 time npm run ha:orchestrator-status
@@ -606,6 +647,7 @@ time npm run ha:auto-scaling-status
 ```
 
 #### 4. Disaster Recovery Testing
+
 ```bash
 # Test disaster recovery procedures
 npm run ha:disaster-recovery-backup
@@ -620,6 +662,7 @@ npm run ha:orchestrator-status | jq '.components.disasterRecovery.backupAge'
 ## Production Deployment Checklist ✅
 
 ### Pre-Production Validation
+
 - [ ] All HA components show healthy status
 - [ ] Multi-region connectivity verified
 - [ ] Kubernetes cluster configured with HPA
@@ -630,6 +673,7 @@ npm run ha:orchestrator-status | jq '.components.disasterRecovery.backupAge'
 - [ ] Backup and recovery procedures tested
 
 ### Production Configuration
+
 - [ ] Environment variables configured for production
 - [ ] Resource limits and requests set appropriately
 - [ ] Auto-scaling policies tuned for production load
@@ -640,6 +684,7 @@ npm run ha:orchestrator-status | jq '.components.disasterRecovery.backupAge'
 - [ ] Documentation and runbooks updated
 
 ### Post-Deployment Validation
+
 - [ ] All HA components operational
 - [ ] Multi-region deployment successful
 - [ ] Auto-scaling responding to load changes
@@ -652,24 +697,28 @@ npm run ha:orchestrator-status | jq '.components.disasterRecovery.backupAge'
 ## Support and Resources 📚
 
 ### Documentation References
+
 - [Phase 2 Week 5 Delivery Documentation](../phase-2/PHASE-2-WEEK-5-DELIVERY-DOCUMENTATION.md)
 - [Quick Reference Guide](../quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md)
 - [HA Architecture Overview](../strategic-analysis/PHASE-2-WEEK-5-STRATEGIC-ANALYSIS.md)
 
 ### External Resources
+
 - [Kubernetes Horizontal Pod Autoscaler](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)
 - [AWS Multi-Region Architecture](https://aws.amazon.com/solutions/implementations/multi-region-application-architecture/)
 - [Circuit Breaker Pattern](https://martinfowler.com/bliki/CircuitBreaker.html)
 - [Disaster Recovery Best Practices](https://cloud.google.com/architecture/disaster-recovery)
 
 ### Team Communication
+
 - **Slack Channel**: #merajutasa-ha-infrastructure
-- **Email**: devops@merajutasa.id
+- **Email**: <devops@merajutasa.id>
 - **Emergency Contact**: +62-xxx-xxx-xxxx (24/7 DevOps on-call)
 
 ## Success Metrics 📊
 
 ### Setup Success Indicators
+
 - [ ] `npm run week5:status` returns 77/100 or higher
 - [ ] All team members can run HA components locally
 - [ ] Multi-region deployment test completes successfully
@@ -678,6 +727,7 @@ npm run ha:orchestrator-status | jq '.components.disasterRecovery.backupAge'
 - [ ] Auto-scaling metrics are being collected
 
 ### Operational Success Indicators
+
 - [ ] 99.95% uptime achieved in staging environment
 - [ ] Sub-5 minute disaster recovery testing
 - [ ] Auto-scaling responds within 60 seconds

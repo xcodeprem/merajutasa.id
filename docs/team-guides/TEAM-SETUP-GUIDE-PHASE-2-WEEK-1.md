@@ -1,4 +1,5 @@
 # Team Onboarding Guide: Phase 2 Week 1 Containerization
+
 *Essential Setup Instructions for All Team Members*
 
 ---
@@ -8,6 +9,7 @@
 **Objective**: Get every team member ready to work with MerajutASA.id's new containerized infrastructure in under 30 minutes.
 
 ### Prerequisites Checklist
+
 - [ ] Computer with 8GB+ RAM and 50GB+ free disk space
 - [ ] Stable internet connection (for Docker image downloads)
 - [ ] Admin/sudo access on your development machine
@@ -20,7 +22,8 @@
 ### STEP 1: Create Docker Account (5 minutes)
 
 #### For All Team Members (MANDATORY)
-1. **Visit Docker Hub**: Go to https://hub.docker.com/signup
+
+1. **Visit Docker Hub**: Go to <https://hub.docker.com/signup>
 2. **Registration Details**:
    - **Email**: Use your `[name]@merajutasa.id` email
    - **Username**: `merajutasa-[yourname]` (example: `merajutasa-ahmad`)
@@ -31,6 +34,7 @@
 ### STEP 2: Install Docker Desktop (10 minutes)
 
 #### Windows Users
+
 ```powershell
 # Download Docker Desktop for Windows
 # Visit: https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe
@@ -45,6 +49,7 @@ docker-compose --version
 ```
 
 #### macOS Users
+
 ```bash
 # Download Docker Desktop for Mac
 # Visit: https://desktop.docker.com/mac/main/amd64/Docker.dmg
@@ -59,6 +64,7 @@ docker-compose --version
 ```
 
 #### Linux Users (Ubuntu/Debian)
+
 ```bash
 # Update package index
 sudo apt update
@@ -83,6 +89,7 @@ docker-compose --version
 ### STEP 3: Configure Docker (5 minutes)
 
 #### Login to Docker Hub
+
 ```bash
 # Login with your Docker Hub credentials
 docker login
@@ -95,6 +102,7 @@ docker info | grep Username
 ```
 
 #### Test Docker Installation
+
 ```bash
 # Run test container
 docker run hello-world
@@ -108,6 +116,7 @@ docker run hello-world
 #### Install kubectl (Kubernetes CLI)
 
 **Windows (PowerShell as Administrator)**:
+
 ```powershell
 # Download kubectl
 curl.exe -LO "https://dl.k8s.io/release/v1.28.0/bin/windows/amd64/kubectl.exe"
@@ -120,6 +129,7 @@ kubectl version --client
 ```
 
 **macOS**:
+
 ```bash
 # Using Homebrew (recommended)
 brew install kubectl
@@ -134,6 +144,7 @@ kubectl version --client
 ```
 
 **Linux**:
+
 ```bash
 # Download kubectl
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
@@ -148,6 +159,7 @@ kubectl version --client
 ### STEP 5: Project Setup (5 minutes)
 
 #### Clone and Setup Repository
+
 ```bash
 # Navigate to your development directory
 cd ~/Development  # or your preferred directory
@@ -171,6 +183,7 @@ npm run phase2:week1-demo
 ## 🎯 Role-Specific Instructions
 
 ### For Frontend Developers
+
 **Focus**: Understanding how UI services work in containers
 
 ```bash
@@ -188,12 +201,14 @@ npm run docker:logs
 ```
 
 **Key Ports to Know**:
+
 - Signer Service: `localhost:4601`
 - Chain Service: `localhost:4602`
 - Collector Service: `localhost:4603`
 - Monitoring: `localhost:3000`
 
 ### For Backend Developers
+
 **Focus**: Service development in containerized environment
 
 ```bash
@@ -209,11 +224,13 @@ npm run docker:health-check  # Verify everything works
 ```
 
 **Development Tips**:
+
 - Use `docker logs [container_name]` for debugging
 - Modify `docker-compose.yml` for development volumes
 - Use `docker exec -it [container] bash` to inspect containers
 
 ### For DevOps Engineers
+
 **Focus**: Infrastructure management and deployment
 
 ```bash
@@ -233,12 +250,14 @@ terraform plan
 ```
 
 **Responsibilities**:
+
 - Configure AWS credentials for EKS
 - Set up monitoring dashboards
 - Manage container registries
 - Monitor resource usage
 
 ### For QA Engineers
+
 **Focus**: Testing in containerized environments
 
 ```bash
@@ -258,6 +277,7 @@ npm run docker:deploy-test  # Fresh test environment
 ```
 
 **Testing Strategy**:
+
 - Test service isolation in containers
 - Verify health checks work correctly
 - Test container startup/shutdown procedures
@@ -268,6 +288,7 @@ npm run docker:deploy-test  # Fresh test environment
 ## 🔧 Common Commands Reference
 
 ### Docker Operations
+
 ```bash
 # Container Management
 npm run docker:build-all       # Build all containers
@@ -288,6 +309,7 @@ docker exec -it [container] bash  # Access container shell
 ```
 
 ### Kubernetes Operations
+
 ```bash
 # Deployment Management
 npm run k8s:deploy            # Deploy to Kubernetes
@@ -305,6 +327,7 @@ kubectl exec -it [pod] bash   # Access pod shell
 ```
 
 ### Phase 2 Management
+
 ```bash
 # Status and Monitoring
 npm run phase2:status         # Implementation status
@@ -320,7 +343,9 @@ npm run phase1:status         # Phase 1 status (for reference)
 ### Common Issues
 
 #### "Docker command not found"
+
 **Solution**:
+
 ```bash
 # Verify Docker is installed
 which docker
@@ -333,7 +358,9 @@ sudo systemctl status docker
 ```
 
 #### "Permission denied" on Linux
+
 **Solution**:
+
 ```bash
 # Add user to docker group
 sudo usermod -aG docker $USER
@@ -346,7 +373,9 @@ groups | grep docker
 ```
 
 #### "Port already in use"
+
 **Solution**:
+
 ```bash
 # Check what's using the port
 netstat -tulpn | grep :4601
@@ -359,7 +388,9 @@ kill -9 [PID]
 ```
 
 #### Container build failures
+
 **Solution**:
+
 ```bash
 # Clear Docker cache
 docker system prune -f

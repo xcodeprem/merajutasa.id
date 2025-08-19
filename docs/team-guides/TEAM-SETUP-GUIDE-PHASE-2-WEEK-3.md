@@ -7,6 +7,7 @@ This guide provides step-by-step instructions for team members to set up and use
 ## Prerequisites 📋
 
 ### System Requirements
+
 - **Node.js**: Version 18.0.0 or higher
 - **NPM**: Version 8.0.0 or higher
 - **Memory**: Minimum 4GB RAM (8GB recommended)
@@ -14,12 +15,14 @@ This guide provides step-by-step instructions for team members to set up and use
 - **Network**: Stable internet connection for external integrations
 
 ### Optional External Dependencies
+
 - **Redis**: For distributed caching (can run without)
 - **Jaeger**: For distributed tracing visualization (can run without)
 - **SMTP Server**: For email alerts (can use console alerts)
 - **Slack Workspace**: For Slack alerts (optional)
 
 ### Development Tools
+
 - **Web Browser**: Modern browser for dashboard access
 - **Terminal/Command Prompt**: For running npm scripts
 - **Code Editor**: VS Code recommended for configuration editing
@@ -27,6 +30,7 @@ This guide provides step-by-step instructions for team members to set up and use
 ## Quick Start (5 minutes) 🚀
 
 ### 1. Clone and Install
+
 ```bash
 # If not already done
 git clone https://github.com/codingxdev0/merajutasa.id.git
@@ -40,6 +44,7 @@ npm run week3:status
 ```
 
 ### 2. Start Observability System
+
 ```bash
 # Initialize complete observability infrastructure
 npm run observability:start
@@ -49,6 +54,7 @@ npm run observability:health-check
 ```
 
 ### 3. Access Real-time Dashboards
+
 ```bash
 # Open dashboards in browser
 npm run dashboards:open
@@ -57,6 +63,7 @@ npm run dashboards:open
 ```
 
 ### 4. Run Interactive Demo
+
 ```bash
 # Experience all observability features
 npm run week3:demo
@@ -87,6 +94,7 @@ npm run week3:status
 ```
 
 **Expected Output:**
+
 ```
 🎯 Overall Score: 85/100
 📦 Components: 7/7 implemented (≥80%)
@@ -106,6 +114,7 @@ npm run tracing:start
 ```
 
 **Optional Jaeger Setup:**
+
 ```bash
 # Run Jaeger locally (Docker required)
 docker run -d --name jaeger \
@@ -154,6 +163,7 @@ export PAGERDUTY_INTEGRATION_KEY=your-pagerduty-integration-key
 ```
 
 Test alerting system:
+
 ```bash
 npm run alerting:start
 ```
@@ -211,19 +221,21 @@ curl http://localhost:3000/health
 
 Open your web browser and navigate to:
 
-- **Main Dashboard**: http://localhost:3000/
-- **API Status**: http://localhost:3000/api/dashboards
-- **Health Check**: http://localhost:3000/health
+- **Main Dashboard**: <http://localhost:3000/>
+- **API Status**: <http://localhost:3000/api/dashboards>
+- **Health Check**: <http://localhost:3000/health>
 
 #### 3.3 Dashboard Navigation
 
 **Available Dashboards:**
+
 1. **System Overview** - High-level system health and performance
 2. **Business Metrics** - Key business KPIs and governance metrics
 3. **Performance Analysis** - Detailed performance metrics and trends
 4. **Security Monitoring** - Security events and threat analysis
 
 **Widget Types:**
+
 - **Gauges**: System health scores, integrity percentages
 - **Line Charts**: Time-series data for trends
 - **Bar Charts**: Categorical data comparison
@@ -241,6 +253,7 @@ npm run week3:demo
 ```
 
 The demo will:
+
 1. Initialize observability system
 2. Demonstrate distributed tracing
 3. Show advanced metrics collection
@@ -261,6 +274,7 @@ npm run observability:benchmark
 ```
 
 **Expected Performance:**
+
 - **Metrics Collection**: 2,000+ ops/sec
 - **Distributed Tracing**: 500+ ops/sec
 - **Log Generation**: 2,000+ ops/sec
@@ -282,6 +296,7 @@ ls -la observability-data.json
 ### For Frontend Developers 🎨
 
 #### Dashboard Integration
+
 ```javascript
 // Connect to real-time dashboard updates
 const socket = io('http://localhost:3000');
@@ -298,6 +313,7 @@ socket.on('dashboard_data', (data) => {
 ```
 
 #### Metrics Integration
+
 ```javascript
 // Record frontend metrics
 import('./infrastructure/observability/metrics/advanced-metrics-collector.js')
@@ -320,6 +336,7 @@ import('./infrastructure/observability/metrics/advanced-metrics-collector.js')
 ### For Backend Developers 🔧
 
 #### Service Integration
+
 ```javascript
 import { getAdvancedObservabilitySystem } from './infrastructure/observability/advanced-observability-system.js';
 
@@ -352,6 +369,7 @@ app.post('/api/documents/sign', async (req, res) => {
 ```
 
 #### Error Handling with Observability
+
 ```javascript
 app.use((error, req, res, next) => {
   // Log error with correlation
@@ -411,6 +429,7 @@ services:
 ```
 
 #### Monitoring Configuration
+
 ```bash
 # Set up production monitoring
 export NODE_ENV=production
@@ -424,6 +443,7 @@ npm run observability:start
 ```
 
 #### Alert Configuration
+
 ```javascript
 // Production alert rules
 const alertRules = [
@@ -464,6 +484,7 @@ import('./infrastructure/observability/alerting/intelligent-alerting.js')
 ```
 
 #### Monitoring Test Results
+
 ```javascript
 // Record test metrics
 import('./infrastructure/observability/metrics/advanced-metrics-collector.js')
@@ -486,6 +507,7 @@ import('./infrastructure/observability/metrics/advanced-metrics-collector.js')
 ### Common Issues
 
 #### 1. Port Conflicts
+
 ```bash
 # Check if port 3000 is in use
 lsof -i :3000
@@ -496,6 +518,7 @@ npm run dashboards:start
 ```
 
 #### 2. Missing Dependencies
+
 ```bash
 # Reinstall dependencies
 rm -rf node_modules package-lock.json
@@ -506,6 +529,7 @@ npm run week3:status
 ```
 
 #### 3. Permission Issues
+
 ```bash
 # Check file permissions
 chmod +x infrastructure/observability/**/*.js
@@ -515,6 +539,7 @@ sudo chown -R $USER:$USER ./logs/
 ```
 
 #### 4. Memory Issues
+
 ```bash
 # Increase Node.js memory limit
 export NODE_OPTIONS="--max-old-space-size=4096"
@@ -560,6 +585,7 @@ import('./infrastructure/observability/advanced-observability-system.js')
 ## Best Practices 📚
 
 ### Development Guidelines
+
 1. **Always use correlation IDs** for request tracking
 2. **Record custom metrics** for business operations
 3. **Structure logs consistently** with metadata
@@ -567,6 +593,7 @@ import('./infrastructure/observability/advanced-observability-system.js')
 5. **Monitor dashboard performance** regularly
 
 ### Security Considerations
+
 1. **Secure sensitive data** in logs and metrics
 2. **Use environment variables** for credentials
 3. **Implement proper access controls** for dashboards
@@ -574,6 +601,7 @@ import('./infrastructure/observability/advanced-observability-system.js')
 5. **Monitor for suspicious activity** in logs
 
 ### Performance Optimization
+
 1. **Configure appropriate metric intervals**
 2. **Use sampling for high-volume traces**
 3. **Implement log rotation** and cleanup
@@ -583,17 +611,20 @@ import('./infrastructure/observability/advanced-observability-system.js')
 ## Getting Help 🆘
 
 ### Documentation Resources
+
 - **Phase 2 Week 3 Delivery Documentation**: Complete feature overview
 - **Quick Reference Guide**: Command cheat sheet
 - **API Documentation**: Component APIs and integration points
 
 ### Support Channels
+
 1. **Team Chat**: #observability-support
 2. **Documentation**: `/docs/phase-2/` directory
 3. **Code Examples**: `/tools/` directory demos
 4. **Issue Tracking**: GitHub issues for bugs and feature requests
 
 ### Useful Commands Reference
+
 ```bash
 # Status and validation
 npm run week3:status                    # Validate implementation
@@ -618,7 +649,7 @@ npm run governance:verify              # Validate governance
 Following this setup guide, you should now have:
 
 - ✅ **Complete observability infrastructure** running locally
-- ✅ **Real-time monitoring dashboards** accessible at http://localhost:3000
+- ✅ **Real-time monitoring dashboards** accessible at <http://localhost:3000>
 - ✅ **All components integrated** and functioning properly
 - ✅ **Development environment** ready for observability-aware development
 - ✅ **Understanding of role-specific** integration patterns
