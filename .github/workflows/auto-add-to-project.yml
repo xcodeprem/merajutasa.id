@@ -19,30 +19,24 @@ jobs:
         with:
           github-token: ${{ secrets.GH_PROJECT_TOKEN }}
           script: |
-            // Check for comment command trigger
             if (context.eventName === 'issue_comment') {
               const comment = context.payload.comment.body.trim().toLowerCase();
-              if (!comment.includes('+project')) {
-                console.log('Comment does not contain "+project" command, skipping');
-                return;
-              }
-              console.log('Comment contains "+project" command, proceeding');
+              if (!comment.includes('+project')) { console.log('No +project'); return; }
+              console.log('Trigger via +project');
             }
-            
-            // Project selection
             const ownerLogin = process.env.PROJECT_OWNER || '${{ vars.PROJECT_OWNER }}' || 'Andhika-Rey';
             const projectTitle = process.env.PROJECT_TITLE || '${{ vars.PROJECT_TITLE }}' || 'MerajutASA Program Board';
 
-            // 1) Cari Project using repositoryOwner (fix union selection in fields)
+            // Project lookup (fields via interface fragment)
             let project;
             try {
-              const findProjectQuery = `
+              const q = `
                 query($owner: String!) {
                   repositoryOwner(login: $owner) {
                     ... on User {
-                      projectsV2(first: 50) { 
-                        nodes { 
-                          id title 
+                      projectsV2(first: 50) {
+                        nodes {
+                          id title
                           fields(first: 50) {
                             nodes {
                               __typename
@@ -51,21 +45,15 @@ jobs:
                             }
                           }
                           items(first: 100) {
-                            nodes { 
-                              id 
-                              content { 
-                                ... on Issue { id number }
-                                ... on PullRequest { id number }
-                              }
-                            }
+                            nodes { id content { ... on Issue { id number } ... on PullRequest { id number } } }
                           }
                         }
                       }
                     }
                     ... on Organization {
-                      projectsV2(first: 50) { 
-                        nodes { 
-                          id title 
+                      projectsV2(first: 50) {
+                        nodes {
+                          id title
                           fields(first: 50) {
                             nodes {
                               __typename
@@ -74,13 +62,7 @@ jobs:
                             }
                           }
                           items(first: 100) {
-                            nodes { 
-                              id 
-                              content { 
-                                ... on Issue { id number }
-                                ... on PullRequest { id number }
-                              }
-                            }
+                            nodes { id content { ... on Issue { id number } ... on PullRequest { id number } } }
                           }
                         }
                       }
@@ -88,158 +70,104 @@ jobs:
                   }
                 }
               `;
-              const projResp = await github.graphql(findProjectQuery, { owner: ownerLogin });
-              const projects = projResp.repositoryOwner?.projectsV2?.nodes || [];
-              project = projects.find(p => p.title === projectTitle);
-            } catch (error) {
-              core.warning(`Could not resolve repositoryOwner for project lookup: ${error.message}`);
-              console.log(`Project "${projectTitle}" not found under ${ownerLogin}.`);
+              const resp = await github.graphql(q, { owner: ownerLogin });
+              const nodes = resp.repositoryOwner?.projectsV2?.nodes || [];
+              project = nodes.find(p => p.title === projectTitle);
+            } catch (e) {
+              core.warning(`Project lookup failed: ${e.message}`);
               return;
             }
-            if (!project) {
-              console.log(`Project "${projectTitle}" not found under ${ownerLogin}.`);
-              return;
-            }
+            if (!project) { console.log(`Project "${projectTitle}" not found`); return; }
+
             const projectId = project.id;
             const fields = project.fields.nodes;
             const existingItems = project.items.nodes;
 
-            // 2) Ambil Issue/PR dari event
             const [repoOwner, repoName] = process.env.GITHUB_REPOSITORY.split('/');
-            const isIssue = !!context.payload.issue || (context.eventName === 'issue_comment');
-            const number = isIssue ? 
-              (context.payload.issue?.number || context.payload.issue?.number) : 
-              context.payload.pull_request.number;
+            // Determine if the target is a PR or Issue (issue_comment on PR includes issue.pull_request)
+            const isPRContext = !!context.payload.pull_request || (!!context.payload.issue && !!context.payload.issue.pull_request);
+            const number = isPRContext ? (context.payload.pull_request?.number || context.payload.issue.number) : context.payload.issue.number;
 
             const contentQuery = `
               query($owner:String!, $repo:String!, $number:Int!) {
                 repository(owner:$owner, name:$repo) {
-                  issue(number:$number) { 
-                    id number title body
-                    labels(first:50){ nodes { name } }
-                    milestone { title dueOn }
-                    assignees(first: 10) { nodes { login } }
-                  }
-                  pullRequest(number:$number) { 
-                    id number title body merged
-                    labels(first:50){ nodes { name } }
-                    milestone { title dueOn }
-                    assignees(first: 10) { nodes { login } }
-                  }
+                  issue(number:$number) { id number title body labels(first:50){ nodes { name } } milestone { title dueOn } assignees(first:10){nodes{login}} }
+                  pullRequest(number:$number) { id number title body merged labels(first:50){ nodes { name } } milestone { title dueOn } assignees(first:10){nodes{login}} }
                 }
               }
             `;
             const contentResp = await github.graphql(contentQuery, { owner: repoOwner, repo: repoName, number });
-            const content = isIssue ? contentResp.repository.issue : contentResp.repository.pullRequest;
+            // Prefer based on context, but fall back to whichever exists to avoid NOT_FOUND when commenting on PRs
+            const content = (isPRContext ? contentResp.repository.pullRequest : contentResp.repository.issue)
+              || contentResp.repository.pullRequest
+              || contentResp.repository.issue;
+            if (!content) { console.log(`Content not found for #${number}`); return; }
             const contentId = content.id;
             const labels = new Set((content.labels?.nodes || []).map(l => l.name));
 
-            // Check if item already exists in project (idempotent)
-            const existingItem = existingItems.find(item => 
-              item.content && item.content.id === contentId
-            );
-            
+            const existingItem = existingItems.find(i => i.content && i.content.id === contentId);
             let itemId;
-            if (existingItem) {
-              console.log(`${isIssue ? 'Issue' : 'PR'} #${number} already exists in project, reusing item`);
-              itemId = existingItem.id;
-            } else {
-              // 3) Tambahkan ke Project
-              const addItemMutation = `
-                mutation($projectId: ID!, $contentId: ID!) {
-                  addProjectV2ItemById(input:{projectId:$projectId, contentId:$contentId}) {
-                    item { id }
-                  }
-                }
-              `;
-              const addResp = await github.graphql(addItemMutation, { projectId, contentId });
-              itemId = addResp.addProjectV2ItemById.item.id;
-              console.log(`Added ${isIssue ? 'issue' : 'PR'} #${number} to project`);
+            if (existingItem) { itemId = existingItem.id; }
+            else {
+              const m = `mutation($projectId: ID!, $contentId: ID!) {
+                addProjectV2ItemById(input:{projectId:$projectId, contentId:$contentId}) { item { id } }
+              }`;
+              const r = await github.graphql(m, { projectId, contentId });
+              itemId = r.addProjectV2ItemById.item.id;
             }
 
-            // Helpers
-            function getField(name) { return fields.find(f => f.name === name); }
-            async function setSingleSelect(fieldName, optionName) {
+            function getField(name){ return fields.find(f => f.name === name); }
+            async function setSingleSelect(fieldName, optionName){
               const f = getField(fieldName);
               if (!f || f.dataType !== 'SINGLE_SELECT') return;
               const opt = (f.options || []).find(o => o.name.toLowerCase() === optionName.toLowerCase());
               if (!opt) return;
-              const m = `
-                mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $optionId: String!) {
-                  updateProjectV2ItemFieldValue(input:{
-                    projectId:$projectId, itemId:$itemId, fieldId:$fieldId,
-                    value:{ singleSelectOptionId:$optionId }
-                  }) { projectV2Item { id } }
-                }
-              `;
+              const m = `mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $optionId: String!) {
+                updateProjectV2ItemFieldValue(input:{ projectId:$projectId, itemId:$itemId, fieldId:$fieldId, value:{ singleSelectOptionId:$optionId }}) { projectV2Item { id } }
+              }`;
               await github.graphql(m, { projectId, itemId, fieldId: f.id, optionId: opt.id });
             }
-            async function setDate(fieldName, dateValue) {
-              const f = getField(fieldName);
-              if (!f || f.dataType !== 'DATE') return;
-              const m = `
-                mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $dateValue: Date!) {
-                  updateProjectV2ItemFieldValue(input:{
-                    projectId:$projectId, itemId:$itemId, fieldId:$fieldId,
-                    value:{ date: $dateValue }
-                  }) { projectV2Item { id } }
-                }
-              `;
-              await github.graphql(m, { projectId, itemId, fieldId: f.id, dateValue });
+            async function setDate(fieldName, value){
+              const f = getField(fieldName); if (!f || f.dataType !== 'DATE') return;
+              const m = `mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $v: Date!) {
+                updateProjectV2ItemFieldValue(input:{ projectId:$projectId, itemId:$itemId, fieldId:$fieldId, value:{ date:$v }}) { projectV2Item { id } }
+              }`;
+              await github.graphql(m, { projectId, itemId, fieldId: f.id, v: value });
             }
-            async function setNumber(fieldName, numberValue) {
-              const f = getField(fieldName);
-              if (!f || f.dataType !== 'NUMBER') return;
-              const m = `
-                mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $numberValue: Float!) {
-                  updateProjectV2ItemFieldValue(input:{
-                    projectId:$projectId, itemId:$itemId, fieldId:$fieldId,
-                    value:{ number: $numberValue }
-                  }) { projectV2Item { id } }
-                }
-              `;
-              await github.graphql(m, { projectId, itemId, fieldId: f.id, numberValue });
+            async function setNumber(fieldName, value){
+              const f = getField(fieldName); if (!f || f.dataType !== 'NUMBER') return;
+              const m = `mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $v: Float!) {
+                updateProjectV2ItemFieldValue(input:{ projectId:$projectId, itemId:$itemId, fieldId:$fieldId, value:{ number:$v }}) { projectV2Item { id } }
+              }`;
+              await github.graphql(m, { projectId, itemId, fieldId: f.id, v: value });
             }
-            async function setText(fieldName, textValue, { overwrite = true } = {}) {
-              const f = getField(fieldName);
-              if (!f || f.dataType !== 'TEXT') return;
-              if (!overwrite && (!textValue || !String(textValue).trim())) return;
-              const m = `
-                mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $textValue: String!) {
-                  updateProjectV2ItemFieldValue(input:{
-                    projectId:$projectId, itemId:$itemId, fieldId:$fieldId,
-                    value:{ text: $textValue }
-                  }) { projectV2Item { id } }
-                }
-              `;
-              await github.graphql(m, { projectId, itemId, fieldId: f.id, textValue });
+            async function setText(fieldName, value, { overwrite = true } = {}){
+              const f = getField(fieldName); if (!f || f.dataType !== 'TEXT') return;
+              if (!overwrite && (!value || !String(value).trim())) return;
+              const m = `mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $v: String!) {
+                updateProjectV2ItemFieldValue(input:{ projectId:$projectId, itemId:$itemId, fieldId:$fieldId, value:{ text:$v }}) { projectV2Item { id } }
+              }`;
+              await github.graphql(m, { projectId, itemId, fieldId: f.id, v: value });
             }
 
-            // 4) Comprehensive field mapping (sama seperti sebelumnya)
+            // Mappings (sama)
             if (labels.has('P0') || labels.has('urgent')) await setSingleSelect('Priority', 'P0');
             else if (labels.has('P1') || labels.has('high-priority')) await setSingleSelect('Priority', 'P1');
             else if (labels.has('P2') || labels.has('medium')) await setSingleSelect('Priority', 'P2');
             else if (labels.has('P3') || labels.has('planned')) await setSingleSelect('Priority', 'P3');
 
-            const areaPrefix = 'area:';
-            const areaLabel = Array.from(labels).find(l => l.toLowerCase().startsWith(areaPrefix));
-            if (areaLabel) await setSingleSelect('Area', areaLabel.slice(areaPrefix.length).replace(/-/g, ' '));
+            const areaLabel = Array.from(labels).find(l => l.toLowerCase().startsWith('area:'));
+            if (areaLabel) await setSingleSelect('Area', areaLabel.slice('area:'.length).replace(/-/g,' '));
 
-            const phasePrefix = 'phase:';
-            const phaseLabel = Array.from(labels).find(l => l.toLowerCase().startsWith(phasePrefix));
+            const phaseLabel = Array.from(labels).find(l => l.toLowerCase().startsWith('phase:'));
             if (phaseLabel) {
-              const raw = phaseLabel.slice(phasePrefix.length).toLowerCase();
+              const raw = phaseLabel.slice('phase:'.length).toLowerCase();
               const map = new Map([
-                ['1', 'Phase 1'],
-                ['2-week-1', 'Phase 2 W1'], ['2-week-2', 'Phase 2 W2'],
-                ['2-week-3', 'Phase 2 W3'], ['2-week-4', 'Phase 2 W4'],
-                ['2-week-5', 'Phase 2 W5'], ['2-week-6', 'Phase 2 W6'],
-                ['2-week-7', 'Phase 2 W7'], ['2-week-8', 'Phase 2 W8'],
-                ['3-q1', 'Phase 3 Q1'], ['3-q2', 'Phase 3 Q2'],
-                ['3-q3', 'Phase 3 Q3'], ['3-q4', 'Phase 3 Q4'],
+                ['1','Phase 1'],['2-week-1','Phase 2 W1'],['2-week-2','Phase 2 W2'],['2-week-3','Phase 2 W3'],
+                ['2-week-4','Phase 2 W4'],['2-week-5','Phase 2 W5'],['2-week-6','Phase 2 W6'],['2-week-7','Phase 2 W7'],
+                ['2-week-8','Phase 2 W8'],['3-q1','Phase 3 Q1'],['3-q2','Phase 3 Q2'],['3-q3','Phase 3 Q3'],['3-q4','Phase 3 Q4'],
               ]);
-              const target = map.get(raw);
-              if (target) await setSingleSelect('Phase', target);
+              const target = map.get(raw); if (target) await setSingleSelect('Phase', target);
             }
 
             if (labels.has('risk:low')) await setSingleSelect('Risk', 'Low');
@@ -263,7 +191,6 @@ jobs:
               const dateStr = startDateLabel.slice('start:'.length);
               if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) await setDate('Start date', dateStr);
             }
-
             const dueDateLabel = Array.from(labels).find(l => l.startsWith('due:'));
             if (dueDateLabel) {
               const dateStr = dueDateLabel.slice('due:'.length);
@@ -278,11 +205,9 @@ jobs:
               if (!isNaN(hours) && hours > 0) await setNumber('Estimate (h)', hours);
             }
 
-            // Owner (text) + Links
             const firstAssignee = content.assignees?.nodes?.[0]?.login;
             if (firstAssignee) await setText('Owner (text)', firstAssignee);
-            const body = content.body || '';
-            const urlMatch = body.match(/https?:\/\/\S+/);
+            const urlMatch = (content.body || '').match(/https?:\/\/\S+/);
             if (urlMatch) await setText('Links', urlMatch[0], { overwrite: false });
 
             console.log(`Updated fields for ${isIssue ? 'issue' : 'PR'} #${number} in project "${projectTitle}".`);
