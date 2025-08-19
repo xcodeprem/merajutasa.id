@@ -185,15 +185,16 @@ function deriveExpectedFromLabels(labelNames) {
     const m = lower.find(n => n.startsWith(prefix + ':'));
     return m ? m.split(':')[1] : null;
   };
-  const priorityLabel = pick('priority') || lower.find(n => /^(p[1-5]|high|medium|low)$/.test(n)) || null;
+  const priorityLabel = pick('priority') || lower.find(n => /^(p[0-5]|high|medium|low|urgent)$/.test(n)) || null;
   const areaLabel = pick('area');
   const phaseLabel = pick('phase');
   const statusLabel = pick('status');
   return {
-    Priority: priorityLabel ? normalizeValue(priorityLabel) : null,
-    Area: areaLabel ? normalizeValue(areaLabel) : null,
-    Phase: phaseLabel ? normalizeValue(phaseLabel) : null,
-    Status: statusLabel ? normalizeValue(statusLabel) : null,
+    // Map labels to the project's canonical single-select option names
+    Priority: priorityLabel ? normalizePriority(priorityLabel) : null,
+    Area: areaLabel ? normalizeArea(areaLabel) : null,
+    Phase: phaseLabel ? normalizePhase(phaseLabel) : null,
+    Status: statusLabel ? normalizeStatus(statusLabel) : null,
   };
 }
 
@@ -205,8 +206,8 @@ function normalizeValue(v) {
     'in-progress': 'In Progress',
     'in review': 'In Review',
     'in-review': 'In Review',
-    'todo': 'Todo',
-    'to do': 'Todo',
+  'todo': 'To Do',
+  'to do': 'To Do',
     'p1': 'P1', 'p2': 'P2', 'p3': 'P3', 'p4': 'P4', 'p5': 'P5',
     'high': 'High', 'medium': 'Medium', 'low': 'Low',
   };
@@ -215,6 +216,53 @@ function normalizeValue(v) {
 
 function capitalizeWords(str) {
   return str.replace(/\b\w+/g, w => w.charAt(0).toUpperCase() + w.slice(1));
+}
+
+// Field-specific normalizers to match the board's option names
+function normalizePriority(v) {
+  const s = String(v || '').trim().toLowerCase();
+  if (!s) return null;
+  if (/^p[0-5]$/.test(s)) return s.toUpperCase();
+  if (s === 'urgent') return 'P0';
+  if (s === 'high') return 'P1';
+  if (s === 'medium') return 'P2';
+  if (s === 'low') return 'P3';
+  return normalizeValue(v); // fallback best-effort
+}
+
+function normalizeStatus(v) {
+  const s = String(v || '').trim().toLowerCase();
+  if (!s) return null;
+  if (s === 'todo' || s === 'to do') return 'To Do';
+  if (s === 'in-progress') return 'In Progress';
+  if (s === 'in review' || s === 'in-review') return 'In Review';
+  return normalizeValue(v);
+}
+
+function normalizeArea(v) {
+  if (!v) return null;
+  return capitalizeWords(String(v).replace(/[-_]/g, ' ').trim());
+}
+
+function normalizePhase(v) {
+  const s = String(v || '').trim().toLowerCase();
+  if (!s) return null;
+  const map = new Map([
+    ['1', 'Phase 1'],
+    ['2-week-1', 'Phase 2 W1'],
+    ['2-week-2', 'Phase 2 W2'],
+    ['2-week-3', 'Phase 2 W3'],
+    ['2-week-4', 'Phase 2 W4'],
+    ['2-week-5', 'Phase 2 W5'],
+    ['2-week-6', 'Phase 2 W6'],
+    ['2-week-7', 'Phase 2 W7'],
+    ['2-week-8', 'Phase 2 W8'],
+    ['3-q1', 'Phase 3 Q1'],
+    ['3-q2', 'Phase 3 Q2'],
+    ['3-q3', 'Phase 3 Q3'],
+    ['3-q4', 'Phase 3 Q4'],
+  ]);
+  return map.get(s) || normalizeValue(v);
 }
 
 function extractProjectFields(fieldValues) {
