@@ -30,7 +30,7 @@ jobs:
           GH_PROJECT_TOKEN: ${{ secrets.GH_PROJECT_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PROJECT_OWNER: Andhika-Rey
-          PROJECT_TITLE: MerajutASA Program Board
+          PROJECT_TITLE: MerajutASA Roadmap
           GITHUB_REPOSITORY: ${{ github.repository }}
           INPUT_NUMBERS: ${{ inputs.numbers }}
         run: |
