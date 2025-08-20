@@ -39,7 +39,6 @@ env:
   DEFAULT_PROJECT_TITLE: "MerajutASA Program Board"
   ENABLE_DETAILED_LOGGING: true
   AUTO_CREATE_PROJECT: true
-  AUTO_APPLY_LABELS: false
 
 jobs:
   auto-add-to-project:
@@ -61,7 +60,6 @@ jobs:
             const enableDetailedLogging = process.env.ENABLE_DETAILED_LOGGING === 'true';
             const hasPat = !!(process.env.GH_PROJECT_TOKEN && process.env.GH_PROJECT_TOKEN.trim());
             const isDryRun = (String(process.env.INPUT_DRY_RUN).toLowerCase() === 'true') || !hasPat;
-            const autoApplyLabels = String(process.env.AUTO_APPLY_LABELS).toLowerCase() === 'true';
 
 
             function detailedLog(message, data = null) {
@@ -209,7 +207,6 @@ jobs:
               item_title: content.title,
               project: { owner: ownerLogin, title: projectTitle, url: project.url },
               fields_updated: [],
-              labels_added: [],
               dry_run: isDryRun
             };
 
@@ -343,59 +340,6 @@ jobs:
             const healthLabel = Array.from(labels).find(l => l.toLowerCase().startsWith('health:')); if (healthLabel) { const raw = healthLabel.split(':')[1].toLowerCase(); const map = { '100': '100/100', '90-99': '90-99/100', '75-89': '75-89/100', '50-74': '50-74/100', '25-49': '25-49/100', '0-24': '0-24/100' }; const target = map[raw] || raw; await setSingleSelect('Health Score', target); }
             const sizeLabel = Array.from(labels).find(l => l.toLowerCase().startsWith('size:')); if (sizeLabel) { const raw = sizeLabel.split(':')[1].toLowerCase(); const map = { 'small': '< 10KB', 'medium': '10-25KB', 'large': '25-50KB', 'very-large': '50-100KB', 'enterprise': '100KB+', 'system': 'Enterprise Scale' }; const target = map[raw] || raw.replace(/-/g, ' '); await setSingleSelect('Implementation Size', target); }
             const iterLabel = Array.from(labels).find(l => l.toLowerCase().startsWith('iteration:')); if (iterLabel) { const val = iterLabel.split(':')[1].replace(/-/g, ' '); await setSingleSelect('Iteration', val); }
-
-            // Optional auto-labeling (opt-in)
-            if (autoApplyLabels) {
-              const labelsToAdd = [];
-
-              // 1) Status label inference if missing
-              const hasStatusLabel = Array.from(labels).some(l => l.toLowerCase().startsWith('status:'));
-              if (!hasStatusLabel) {
-                let statusLabel = null;
-                if (context.payload.action === 'opened') {
-                  if (isPRContext && content.isDraft) statusLabel = 'status:todo';
-                  else if (isPRContext && !content.isDraft) statusLabel = 'status:in-review';
-                  else statusLabel = 'status:todo';
-                } else if (context.payload.action === 'ready_for_review') {
-                  statusLabel = 'status:in-review';
-                } else if (context.payload.action === 'closed') {
-                  if (isPRContext && content.merged) statusLabel = 'status:done';
-                  else if (!isPRContext && content.state === 'closed') statusLabel = 'status:done';
-                }
-                if (statusLabel) labelsToAdd.push(statusLabel);
-              }
-
-              // 2) Priority normalization aliases → P#
-              const hasP0 = labels.has('P0');
-              const hasP1 = labels.has('P1');
-              const hasP2 = labels.has('P2');
-              const hasP3 = labels.has('P3');
-              if (!hasP0 && (labels.has('urgent') || labels.has('critical'))) labelsToAdd.push('P0');
-              if (!hasP1 && (labels.has('high-priority') || labels.has('high'))) labelsToAdd.push('P1');
-              if (!hasP2 && (labels.has('medium-priority') || labels.has('medium'))) labelsToAdd.push('P2');
-              if (!hasP3 && (labels.has('planned') || labels.has('low') || labels.has('low-priority'))) labelsToAdd.push('P3');
-
-              // 3) Due label from milestone if missing
-              const hasDueLabel = Array.from(labels).some(l => /^due:\d{4}-\d{2}-\d{2}$/.test(l));
-              if (!hasDueLabel && content.milestone?.dueOn) {
-                const d = content.milestone.dueOn.split('T')[0];
-                labelsToAdd.push(`due:${d}`);
-              }
-
-              if (labelsToAdd.length) {
-                if (isDryRun) {
-                  core.info(`🧪 DRY RUN: Would add labels: ${labelsToAdd.join(', ')}`);
-                } else {
-                  try {
-                    await github.rest.issues.addLabels({ owner: repoOwner, repo: repoName, issue_number: number, labels: labelsToAdd });
-                    core.info(`🏷️  Added labels: ${labelsToAdd.join(', ')}`);
-                  } catch (e) {
-                    core.warning('Failed to add labels: ' + (e?.message || e));
-                  }
-                }
-                summary.labels_added = labelsToAdd;
-              }
-            }
 
             // Write summary artifact
             try {
