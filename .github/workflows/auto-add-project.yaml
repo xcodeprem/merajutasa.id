@@ -55,14 +55,12 @@ jobs:
           INPUT_PROJECT_TITLE: ${{ inputs.project_title }}
           INPUT_DRY_RUN: ${{ inputs.dry_run }}
         with:
-          github-token: ${{ github.token }}
+          github-token: ${{ secrets.GH_PROJECT_TOKEN || github.token }}
           script: |
             const enableDetailedLogging = process.env.ENABLE_DETAILED_LOGGING === 'true';
             const hasPat = !!(process.env.GH_PROJECT_TOKEN && process.env.GH_PROJECT_TOKEN.trim());
             const isDryRun = (String(process.env.INPUT_DRY_RUN).toLowerCase() === 'true') || !hasPat;
 
-            const { getOctokit } = require('@actions/github');
-            const writeClient = hasPat ? getOctokit(process.env.GH_PROJECT_TOKEN) : null;
 
             function detailedLog(message, data = null) {
               if (enableDetailedLogging) {
@@ -220,9 +218,9 @@ jobs:
               if (!field || field.dataType !== 'SINGLE_SELECT') return false;
               const option = (field.options || []).find(o => o.name.toLowerCase() === optionName.toLowerCase());
               if (!option) return false;
-              if (!writeClient || isDryRun) { core.info(`🧪 DRY RUN: Would set ${fieldName} = ${optionName}`); summary.fields_updated.push({ field: fieldName, value: optionName, dry_run: true }); return true; }
+              if (isDryRun) { core.info(`🧪 DRY RUN: Would set ${fieldName} = ${optionName}`); summary.fields_updated.push({ field: fieldName, value: optionName, dry_run: true }); return true; }
               const mutation = `mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $optionId: String!) { updateProjectV2ItemFieldValue(input:{ projectId:$projectId, itemId:$itemId, fieldId:$fieldId, value:{ singleSelectOptionId:$optionId } }) { projectV2Item { id } } }`;
-              await writeClient.graphql(mutation, { projectId, itemId, fieldId: field.id, optionId: option.id });
+              await github.graphql(mutation, { projectId, itemId, fieldId: field.id, optionId: option.id });
               core.info(`✅ Set ${fieldName} = ${optionName}`);
               summary.fields_updated.push({ field: fieldName, value: optionName });
               return true;
@@ -230,18 +228,18 @@ jobs:
 
             async function setDate(fieldName, value) {
               const field = getField(fieldName); if (!field || field.dataType !== 'DATE') return;
-              if (!writeClient || isDryRun) { core.info(`🧪 DRY RUN: Would set ${fieldName} = ${value}`); summary.fields_updated.push({ field: fieldName, value, dry_run: true }); return; }
+              if (isDryRun) { core.info(`🧪 DRY RUN: Would set ${fieldName} = ${value}`); summary.fields_updated.push({ field: fieldName, value, dry_run: true }); return; }
               const mutation = `mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $v: Date!) { updateProjectV2ItemFieldValue(input:{ projectId:$projectId, itemId:$itemId, fieldId:$fieldId, value:{ date:$v } }) { projectV2Item { id } } }`;
-              await writeClient.graphql(mutation, { projectId, itemId, fieldId: field.id, v: value });
+              await github.graphql(mutation, { projectId, itemId, fieldId: field.id, v: value });
               core.info(`✅ Set ${fieldName} = ${value}`);
               summary.fields_updated.push({ field: fieldName, value });
             }
 
             async function setNumber(fieldName, value) {
               const field = getField(fieldName); if (!field || field.dataType !== 'NUMBER') return;
-              if (!writeClient || isDryRun) { core.info(`🧪 DRY RUN: Would set ${fieldName} = ${value}`); summary.fields_updated.push({ field: fieldName, value, dry_run: true }); return; }
+              if (isDryRun) { core.info(`🧪 DRY RUN: Would set ${fieldName} = ${value}`); summary.fields_updated.push({ field: fieldName, value, dry_run: true }); return; }
               const mutation = `mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $v: Float!) { updateProjectV2ItemFieldValue(input:{ projectId:$projectId, itemId:$itemId, fieldId:$fieldId, value:{ number:$v } }) { projectV2Item { id } } }`;
-              await writeClient.graphql(mutation, { projectId, itemId, fieldId: field.id, v: value });
+              await github.graphql(mutation, { projectId, itemId, fieldId: field.id, v: value });
               core.info(`✅ Set ${fieldName} = ${value}`);
               summary.fields_updated.push({ field: fieldName, value });
             }
@@ -251,9 +249,9 @@ jobs:
               const field = getField(fieldName);
               if (!field || field.dataType !== 'TEXT') return;
               if (!overwrite && (!value || !String(value).trim())) return;
-              if (!writeClient || isDryRun) { core.info(`🧪 DRY RUN: Would set ${fieldName} = ${value}`); summary.fields_updated.push({ field: fieldName, value, dry_run: true }); return; }
+              if (isDryRun) { core.info(`🧪 DRY RUN: Would set ${fieldName} = ${value}`); summary.fields_updated.push({ field: fieldName, value, dry_run: true }); return; }
               const mutation = `mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $v: String!) { updateProjectV2ItemFieldValue(input:{ projectId:$projectId, itemId:$itemId, fieldId:$fieldId, value:{ text:$v } }) { projectV2Item { id } } }`;
-              await writeClient.graphql(mutation, { projectId, itemId, fieldId: field.id, v: value });
+              await github.graphql(mutation, { projectId, itemId, fieldId: field.id, v: value });
               core.info(`✅ Set ${fieldName} = ${value}`);
               summary.fields_updated.push({ field: fieldName, value });
             }
@@ -264,10 +262,10 @@ jobs:
             if (existingItem) {
               itemId = existingItem.id; core.info(`🔄 Item already exists in project, updating fields`);
             } else {
-              if (!writeClient || isDryRun) { core.info('🧪 DRY RUN: Would add item to project'); }
+              if (isDryRun) { core.info('🧪 DRY RUN: Would add item to project'); }
               else {
                 const addMutation = `mutation($projectId: ID!, $contentId: ID!) { addProjectV2ItemById(input:{projectId:$projectId, contentId:$contentId}) { item { id } } }`;
-                const addResult = await writeClient.graphql(addMutation, { projectId, contentId });
+                const addResult = await github.graphql(addMutation, { projectId, contentId });
                 itemId = addResult.addProjectV2ItemById.item.id;
                 core.info(`✅ Added item with ID: ${itemId}`);
               }
