@@ -3,6 +3,10 @@ name: Auto Labeler (Heuristic)
 on:
   workflow_dispatch:
     inputs:
+      number:
+        description: 'Issue/PR number when running manually (optional)'
+        required: false
+        default: ''
       dry_run:
         description: 'Dry run mode - log actions without changing labels'
         required: false
@@ -37,10 +41,22 @@ jobs:
               }
             }
 
-            const isPR = context.eventName === 'pull_request';
+            let isPR = context.eventName === 'pull_request';
             const owner = context.repo.owner;
             const repo = context.repo.repo;
-            const number = isPR ? context.payload.pull_request.number : context.payload.issue.number;
+            const inputs = context.payload && context.payload.inputs ? context.payload.inputs : {};
+            const manualNumber = (() => { const v = inputs.number; if (!v) return undefined; const n = parseInt(v, 10); return isNaN(n) ? undefined : n; })();
+            let number = undefined;
+            if (context.eventName === 'pull_request' && context.payload.pull_request) {
+              number = context.payload.pull_request.number;
+            } else if ((context.eventName === 'issues' || context.eventName === 'issue_comment') && context.payload.issue) {
+              number = context.payload.issue.number;
+            } else if (context.eventName === 'workflow_dispatch' && manualNumber) {
+              number = manualNumber;
+              // Detect whether the number refers to a PR
+              try { await github.rest.pulls.get({ owner, repo, pull_number: number }); isPR = true; } catch (e) { isPR = false; }
+            }
+            if (!number) { core.info('No issue/PR number available in this event; skipping.'); return; }
             const dryRun = (() => {
               const inputs = context.payload && context.payload.inputs;
               if (!inputs) return false;

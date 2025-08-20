@@ -25,7 +25,7 @@ on:
       dry_run:
         description: 'Dry run mode - log actions without making changes'
         required: false
-        default: 'false'
+  default: false
         type: boolean
   issues:
     types: [opened, labeled, unlabeled, reopened, edited, closed]
