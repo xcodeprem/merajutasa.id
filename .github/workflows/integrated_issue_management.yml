@@ -1,31 +1,22 @@
-name: Integrated Issue Management (Personal Account)
+name: MerajutASA Issue & PR Classification System
 
-# Workflow that combines auto-labeling and project management
-# Created: 2025-08-20
+# Core workflow for intelligent classification of issues and PRs
+# Created: 2025-08-20 04:53:31
 # Author: Andhika-Rey
-# Version: 1.2.0
+# Version: 2.0.0
 
 on:
   issues:
-    types: [opened, edited, labeled, unlabeled, reopened, closed]
+    types: [opened, edited, reopened]
   pull_request:
-    types: [opened, edited, synchronize, reopened, ready_for_review, closed]
-  issue_comment:
-    types: [created]
+    types: [opened, edited, synchronize, reopened, ready_for_review]
   workflow_dispatch:
     inputs:
       number:
         description: 'Issue/PR number to process'
         required: false
-      project_title:
-        description: 'Project title to target'
-        required: false
-        default: "MerajutASA Program Board"
-      area:
-        description: 'Override area classification'
-        required: false
       dry_run:
-        description: 'Dry run mode'
+        description: 'Dry run mode (no label changes)'
         type: boolean
         default: false
 
@@ -35,1131 +26,1049 @@ permissions:
   pull-requests: write
 
 env:
-  DEFAULT_PROJECT_TITLE: "MerajutASA Program Board"
-  WORKFLOW_VERSION: "1.2.0"
-  CREATED_AT: "2025-08-20"
-  UPDATED_AT: "2025-08-20 04:46:18"
+  WORKFLOW_VERSION: "2.0.0"
+  CREATED_AT: "2025-08-20 04:53:31"
   CREATED_BY: "Andhika-Rey"
 
 jobs:
-  # Step 1: Extract information and classify the issue/PR
   classify:
-    name: "🔍 Extract & Classify"
+    name: "🧠 Smart Classification"
     runs-on: ubuntu-latest
     outputs:
-      item_number: ${{ steps.extract_info.outputs.item_number }}
-      item_type: ${{ steps.extract_info.outputs.item_type }}
       artifact_name: ${{ steps.create_artifact.outputs.artifact_name }}
-      has_item: ${{ steps.extract_info.outputs.has_item }}
-      node_id: ${{ steps.extract_info.outputs.node_id }}
+      item_number: ${{ steps.get_item_details.outputs.number }}
+      item_type: ${{ steps.get_item_details.outputs.type }}
+      node_id: ${{ steps.get_item_details.outputs.node_id }}
     
     steps:
-      - name: Extract Item Information
-        id: extract_info
+      - name: Get Item Details
+        id: get_item_details
         uses: actions/github-script@v7
         with:
           script: |
             const { eventName, payload, repo } = context;
-            const owner = repo.owner;
-            const repoName = repo.repo;
+            let number, type, nodeId, title, body;
             
-            let isPR = eventName === 'pull_request';
-            let number = null;
-            let hasItem = false;
-            let nodeId = null;
-            
-            // Handle different event types to extract item number
-            if (eventName === 'pull_request') {
-              number = payload.pull_request.number;
-              nodeId = payload.pull_request.node_id;
-              hasItem = true;
-            } else if ((eventName === 'issues' || eventName === 'issue_comment') && payload.issue) {
-              number = payload.issue.number;
-              nodeId = payload.issue.node_id;
-              isPR = !!payload.issue.pull_request;
-              hasItem = true;
-            } else if (eventName === 'workflow_dispatch' && payload.inputs && payload.inputs.number) {
-              number = parseInt(payload.inputs.number, 10);
-              if (!isNaN(number)) {
-                // Determine if number refers to a PR
+            if (eventName === 'issues' || (eventName === 'issue_comment' && !payload.issue.pull_request)) {
+              number = payload.issue?.number;
+              type = 'issue';
+              nodeId = payload.issue?.node_id;
+              title = payload.issue?.title;
+              body = payload.issue?.body;
+            } else if (eventName === 'pull_request' || (eventName === 'issue_comment' && payload.issue.pull_request)) {
+              number = payload.pull_request?.number || payload.issue?.number;
+              type = 'pull_request';
+              nodeId = payload.pull_request?.node_id || payload.issue?.node_id;
+              title = payload.pull_request?.title || payload.issue?.title;
+              body = payload.pull_request?.body || payload.issue?.body;
+            } else if (eventName === 'workflow_dispatch' && payload.inputs?.number) {
+              number = parseInt(payload.inputs.number);
+              
+              // Try to determine if it's a PR or issue
+              try {
+                const { data: pr } = await github.rest.pulls.get({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: number
+                });
+                type = 'pull_request';
+                nodeId = pr.node_id;
+                title = pr.title;
+                body = pr.body;
+              } catch (e) {
                 try {
-                  const pr = await github.rest.pulls.get({
-                    owner,
-                    repo: repoName,
-                    pull_number: number
+                  const { data: issue } = await github.rest.issues.get({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: number
                   });
-                  isPR = true;
-                  nodeId = pr.data.node_id;
-                  hasItem = true;
-                } catch (e) {
-                  try {
-                    const issue = await github.rest.issues.get({
-                      owner,
-                      repo: repoName,
-                      issue_number: number
-                    });
-                    isPR = false;
-                    nodeId = issue.data.node_id;
-                    hasItem = true;
-                  } catch (e) {
-                    core.warning(`Item #${number} not found as issue or PR`);
-                    hasItem = false;
-                  }
+                  type = 'issue';
+                  nodeId = issue.node_id;
+                  title = issue.title;
+                  body = issue.body;
+                } catch (e2) {
+                  core.setFailed(`Could not find issue or PR with number ${number}`);
+                  return;
                 }
               }
             }
             
-            if (hasItem) {
-              core.info(`✅ Found ${isPR ? 'PR' : 'Issue'} #${number}`);
-              if (nodeId) {
-                core.info(`📌 Node ID: ${nodeId}`);
-              } else {
-                core.warning('⚠️ No Node ID found, will try to fetch it in next step');
-              }
-            } else {
-              core.warning('⚠️ No valid issue/PR number found in this event');
+            if (!number) {
+              core.setFailed('No issue or PR number found in event');
+              return;
             }
             
-            core.setOutput('item_number', number ? number.toString() : '');
-            core.setOutput('item_type', isPR ? 'pull_request' : 'issue');
-            core.setOutput('has_item', hasItem ? 'true' : 'false');
-            if (nodeId) {
-              core.setOutput('node_id', nodeId);
-            }
+            core.info(`Processing ${type} #${number}: ${title || '[No title]'}`);
+            core.setOutput('number', number);
+            core.setOutput('type', type);
+            if (nodeId) core.setOutput('node_id', nodeId);
 
-      # Skip the rest if no valid item was found
-      - name: Check for valid item
-        id: check_item
-        if: steps.extract_info.outputs.has_item != 'true'
-        run: |
-          echo "::notice::No valid issue or PR found to process"
-          exit 0
-
-      - name: Fetch Item Details
-        id: fetch_details
-        if: steps.extract_info.outputs.has_item == 'true'
+      - name: Perform Smart Classification
+        id: classify
+        if: steps.get_item_details.outputs.number
         uses: actions/github-script@v7
         with:
           script: |
-            const isPR = '${{ steps.extract_info.outputs.item_type }}' === 'pull_request';
-            const number = parseInt('${{ steps.extract_info.outputs.item_number }}', 10);
+            const number = parseInt('${{ steps.get_item_details.outputs.number }}');
+            const type = '${{ steps.get_item_details.outputs.type }}';
+            const isPR = type === 'pull_request';
             const owner = context.repo.owner;
             const repo = context.repo.repo;
             
-            let title = '', body = '', labels = [], milestoneTitle = '';
-            let prState = null, isDraft = false, merged = false, issueState = null;
-            let item = null;
-            let nodeId = '${{ steps.extract_info.outputs.node_id }}';
-            let assignees = [], comments = 0, commentsData = [];
-            let createdAt, updatedAt;
-            let author = null;
-            let files = [], additions = 0, deletions = 0, changes = 0;
+            // Fetch detailed information about the item
+            let itemData;
+            let allText = '';
+            let files = [];
+            let allLabels = [];
             
             try {
               if (isPR) {
-                const pr = (await github.rest.pulls.get({ owner, repo, pull_number: number })).data;
-                item = pr;
-                title = pr.title || '';
-                body = pr.body || '';
-                labels = (pr.labels || []).map(l => typeof l === 'string' ? l : l.name);
-                milestoneTitle = pr.milestone?.title || '';
-                prState = typeof pr.state === 'string' ? pr.state.toLowerCase() : null;
-                isDraft = !!pr.draft;
-                merged = !!pr.merged;
-                if (!nodeId) nodeId = pr.node_id;
-                assignees = pr.assignees?.map(a => a.login) || [];
-                author = pr.user?.login;
-                createdAt = pr.created_at;
-                updatedAt = pr.updated_at;
-                
-                // Get PR comments
-                const prComments = await github.rest.issues.listComments({
-                  owner, repo, issue_number: number, per_page: 100
+                // Get PR details
+                const { data: pr } = await github.rest.pulls.get({
+                  owner,
+                  repo,
+                  pull_number: number
                 });
-                comments = prComments.data.length;
-                commentsData = prComments.data.map(c => ({ 
-                  body: c.body, 
-                  user: c.user?.login,
-                  created_at: c.created_at 
-                }));
-                
-                // Get PR review comments
-                const reviewComments = await github.rest.pulls.listReviewComments({
-                  owner, repo, pull_number: number, per_page: 100
-                });
-                comments += reviewComments.data.length;
-                commentsData.push(...reviewComments.data.map(c => ({ 
-                  body: c.body, 
-                  user: c.user?.login,
-                  created_at: c.created_at 
-                })));
                 
                 // Get PR files
-                const perPage = 100;
-                let page = 1;
-                while (true) {
-                  try {
-                    const resp = await github.rest.pulls.listFiles({ 
-                      owner, repo, pull_number: number, per_page: perPage, page 
-                    });
-                    files.push(...resp.data);
-                    if (resp.data.length < perPage) break;
-                    page += 1;
-                  } catch (e) {
-                    core.warning(`Failed to get PR files page ${page}: ${e.message}`);
-                    break;
-                  }
-                }
-                additions = files.reduce((s, f) => s + (f.additions || 0), 0);
-                deletions = files.reduce((s, f) => s + (f.deletions || 0), 0);
-                changes = files.reduce((s, f) => s + (f.changes || 0), 0);
+                const { data: prFiles } = await github.rest.pulls.listFiles({
+                  owner,
+                  repo,
+                  pull_number: number,
+                  per_page: 100
+                });
+                
+                // Get PR comments
+                const { data: comments } = await github.rest.issues.listComments({
+                  owner,
+                  repo,
+                  issue_number: number,
+                  per_page: 50
+                });
+                
+                // Get PR review comments
+                const { data: reviewComments } = await github.rest.pulls.listReviewComments({
+                  owner,
+                  repo,
+                  pull_number: number,
+                  per_page: 50
+                });
+                
+                itemData = {
+                  ...pr,
+                  comments: comments,
+                  reviewComments: reviewComments,
+                  files: prFiles
+                };
+                
+                // Collect text for analysis
+                allText = [
+                  pr.title,
+                  pr.body,
+                  ...comments.map(c => c.body),
+                  ...reviewComments.map(c => c.body)
+                ].filter(Boolean).join('\n').toLowerCase();
+                
+                files = prFiles.map(f => f.filename);
+                allLabels = pr.labels.map(l => typeof l === 'string' ? l : l.name);
+                
               } else {
-                const issue = (await github.rest.issues.get({ owner, repo, issue_number: number })).data;
-                item = issue;
-                title = issue.title || '';
-                body = issue.body || '';
-                labels = (issue.labels || []).map(l => typeof l === 'string' ? l : l.name);
-                milestoneTitle = issue.milestone?.title || '';
-                issueState = typeof issue.state === 'string' ? issue.state.toLowerCase() : null;
-                if (!nodeId) nodeId = issue.node_id;
-                assignees = issue.assignees?.map(a => a.login) || [];
-                author = issue.user?.login;
-                createdAt = issue.created_at;
-                updatedAt = issue.updated_at;
+                // Get issue details
+                const { data: issue } = await github.rest.issues.get({
+                  owner,
+                  repo,
+                  issue_number: number
+                });
                 
                 // Get issue comments
-                const issueComments = await github.rest.issues.listComments({
-                  owner, repo, issue_number: number, per_page: 100
+                const { data: comments } = await github.rest.issues.listComments({
+                  owner,
+                  repo,
+                  issue_number: number,
+                  per_page: 50
                 });
-                comments = issueComments.data.length;
-                commentsData = issueComments.data.map(c => ({ 
-                  body: c.body, 
-                  user: c.user?.login, 
-                  created_at: c.created_at
-                }));
+                
+                itemData = {
+                  ...issue,
+                  comments: comments
+                };
+                
+                // Collect text for analysis
+                allText = [
+                  issue.title,
+                  issue.body,
+                  ...comments.map(c => c.body)
+                ].filter(Boolean).join('\n').toLowerCase();
+                
+                allLabels = issue.labels.map(l => typeof l === 'string' ? l : l.name);
               }
               
-              core.info(`📝 Title: ${title}`);
-              core.info(`👤 Author: ${author || 'Unknown'}`);
-              core.info(`💬 Comments: ${comments}`);
-              core.info(`📅 Created: ${createdAt}`);
+              core.info(`Collected ${allText.length} characters of text for analysis`);
+              if (isPR) core.info(`Found ${files.length} modified files`);
               
-              if (isPR) {
-                core.info(`📊 PR Stats: +${additions} -${deletions} changes: ${changes}`);
-              }
-              
-            } catch (e) {
-              core.warning(`⚠️ Error fetching details: ${e.message}`);
+            } catch (error) {
+              core.warning(`Error fetching item details: ${error.message}`);
+              return;
             }
             
-            // Save to outputs for next steps
-            return {
-              item: {
-                number,
-                title,
-                body,
-                isPR,
-                labels,
-                nodeId,
-                milestoneTitle,
-                state: isPR ? prState : issueState,
-                isDraft,
-                merged,
-                assignees,
-                author,
-                createdAt,
-                updatedAt,
-                comments,
-                commentsData,
-                url: isPR ? `https://github.com/${owner}/${repo}/pull/${number}` : `https://github.com/${owner}/${repo}/issues/${number}`
+            // ===== CLASSIFICATION SYSTEM =====
+            // This is the core intelligence that analyzes the item
+            
+            // STEP 1: Define classification categories
+            const CLASSIFICATION_CATEGORIES = {
+              AREA: {
+                name: "Area",
+                description: "The functional area this item belongs to",
+                options: [
+                  {id: "security", name: "Security", description: "Security and authentication related"},
+                  {id: "api-gateway", name: "API Gateway", description: "API and service gateway related"},
+                  {id: "monitoring", name: "Monitoring", description: "Monitoring and observability related"},
+                  {id: "performance", name: "Performance", description: "Performance optimization related"},
+                  {id: "docs", name: "Documentation", description: "Documentation related"},
+                  {id: "infrastructure", name: "Infrastructure", description: "Infrastructure and platform related"},
+                  {id: "compliance", name: "Compliance", description: "Compliance and regulatory related"},
+                  {id: "ui", name: "UI", description: "User Interface related"},
+                  {id: "data", name: "Data", description: "Data management related"}
+                ]
               },
-              files: {
-                list: files.map(f => ({ filename: f.filename, additions: f.additions, deletions: f.deletions })),
-                stats: { additions, deletions, changes }
+              RISK: {
+                name: "Risk",
+                description: "The risk level associated with this item",
+                options: [
+                  {id: "high", name: "High Risk", description: "High business or technical risk"},
+                  {id: "medium", name: "Medium Risk", description: "Medium business or technical risk"},
+                  {id: "low", name: "Low Risk", description: "Low business or technical risk"}
+                ]
+              },
+              PRIORITY: {
+                name: "Priority",
+                description: "The priority level for this item",
+                options: [
+                  {id: "p0", name: "P0", description: "Critical priority - immediate attention required"},
+                  {id: "p1", name: "P1", description: "High priority - next sprint"},
+                  {id: "p2", name: "P2", description: "Medium priority - planned"},
+                  {id: "p3", name: "P3", description: "Low priority - nice to have"}
+                ]
+              },
+              STATUS: {
+                name: "Status",
+                description: "Current status of the item",
+                options: [
+                  {id: "todo", name: "Todo", description: "Not yet started"},
+                  {id: "in-progress", name: "In Progress", description: "Work has begun"},
+                  {id: "in-review", name: "In Review", description: "Ready for or under review"},
+                  {id: "blocked", name: "Blocked", description: "Progress is blocked"},
+                  {id: "done", name: "Done", description: "Work is complete"}
+                ]
+              },
+              SIZE: {
+                name: "Size",
+                description: "Estimated size/effort",
+                options: [
+                  {id: "xs", name: "Extra Small", description: "Very small change (<1 hour)"},
+                  {id: "small", name: "Small", description: "Small change (few hours)"},
+                  {id: "medium", name: "Medium", description: "Medium size change (day or two)"},
+                  {id: "large", name: "Large", description: "Large change (several days)"},
+                  {id: "xl", name: "Extra Large", description: "Very large change (week+)"}
+                ]
               }
             };
-
-      - name: Analyze and Apply Labels
-        id: auto_labeler
-        if: steps.extract_info.outputs.has_item == 'true'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const fs = require('fs');
             
-            // Enhanced classification function with improved content analysis
-            async function classifyItem() {
-              const isPR = '${{ steps.extract_info.outputs.item_type }}' === 'pull_request';
-              const number = parseInt('${{ steps.extract_info.outputs.item_number }}', 10);
-              const nodeId = '${{ steps.extract_info.outputs.node_id }}';
-              const dryRun = '${{ github.event.inputs.dry_run }}' === 'true';
-              const areaOverride = '${{ github.event.inputs.area }}';
-              
-              // Get fetch_details step result
-              let itemDetails;
-              try {
-                const detailsOutput = ${{ toJSON(steps.fetch_details.outputs.result) }};
-                core.info(`Received fetch_details output: ${typeof detailsOutput}`);
-                
-                // Parse the details if it's a string
-                if (typeof detailsOutput === 'string') {
-                  itemDetails = JSON.parse(detailsOutput);
-                } else {
-                  itemDetails = detailsOutput;
-                }
-                
-                // Validate itemDetails structure
-                if (!itemDetails || !itemDetails.item) {
-                  core.warning('Invalid or missing itemDetails structure!');
-                  // Create fallback structure
-                  itemDetails = { 
-                    item: { 
-                      title: '', 
-                      body: '', 
-                      labels: [],
-                      nodeId: nodeId,
-                      number: number,
-                      isPR: isPR 
-                    }, 
-                    files: { list: [], stats: { additions: 0, deletions: 0, changes: 0 } } 
-                  };
-                  
-                  // Fetch directly as fallback
-                  core.info('Fetching issue/PR details directly as fallback...');
-                  const owner = context.repo.owner;
-                  const repo = context.repo.repo;
-                  
-                  if (isPR) {
-                    const pr = (await github.rest.pulls.get({ owner, repo, pull_number: number })).data;
-                    itemDetails.item.title = pr.title || '';
-                    itemDetails.item.body = pr.body || '';
-                    itemDetails.item.labels = (pr.labels || []).map(l => typeof l === 'string' ? l : l.name);
-                    itemDetails.item.nodeId = pr.node_id;
-                  } else {
-                    const issue = (await github.rest.issues.get({ owner, repo, issue_number: number })).data;
-                    itemDetails.item.title = issue.title || '';
-                    itemDetails.item.body = issue.body || '';
-                    itemDetails.item.labels = (issue.labels || []).map(l => typeof l === 'string' ? l : l.name);
-                    itemDetails.item.nodeId = issue.node_id;
-                  }
-                }
-              } catch (error) {
-                core.warning(`Error processing item details: ${error.message}`);
-                // Use minimal fallback data
-                itemDetails = { 
-                  item: { 
-                    title: 'Unknown Title', 
-                    body: '', 
-                    labels: [],
-                    nodeId: nodeId,
-                    number: number,
-                    isPR: isPR 
-                  },
-                  files: { list: [], stats: { additions: 0, deletions: 0, changes: 0 } } 
-                };
-              }
-              
-              // Prevent relabel loops when the actor is the bot itself
-              if ((context.eventName === 'issues' && ['labeled','unlabeled'].includes(context.payload.action)) ||
-                  (context.eventName === 'pull_request' && ['labeled','unlabeled'].includes(context.payload.action))) {
-                if (context.actor === 'github-actions[bot]') {
-                  core.info('Skip to prevent relabel loop (actor is github-actions[bot]).');
-                  return { skipped: true, reason: 'bot_actor' };
-                }
-              }
-              
-              // Extract item details - with safe accessors
-              const item = itemDetails.item || {};
-              const files = itemDetails.files || { list: [], stats: { additions: 0, deletions: 0, changes: 0 } };
-              
-              // Extract all the details we need - with safe accessors
-              const title = item.title || '';
-              const body = item.body || '';
-              const labels = item.labels || [];
-              const milestoneTitle = item.milestoneTitle || '';
-              const assignees = item.assignees || [];
-              const author = item.author;
-              const commentsData = item.commentsData || [];
-              
-              core.info(`Processing: "${title}" (${isPR ? 'PR' : 'Issue'} #${number})`);
-              
-              // Enhanced content analysis with multiple approaches
-              const allContent = [
-                title,
-                body,
-                ...(commentsData || []).map(c => c.body)
-              ].filter(Boolean).join('\n').toLowerCase();
-              
-              const filePaths = (files.list || []).map(f => (f.filename || '').toLowerCase());
-              const additions = files.stats?.additions || 0;
-              const deletions = files.stats?.deletions || 0;
-              const changes = files.stats?.changes || 0;
-              
-              // Utility functions
-              const hasAny = (s, arr) => arr.some(k => s.includes(k.toLowerCase()));
-              const hasAll = (s, arr) => arr.every(k => s.includes(k.toLowerCase()));
-              const pathHasAny = (arr) => filePaths.some(p => arr.some(k => p.includes(k.toLowerCase())));
-              const countOccurrences = (s, term) => {
-                const regex = new RegExp(term, 'gi');
-                return (s.match(regex) || []).length;
+            // STEP 2: Define classification detectors
+            // These are functions that analyze the item and return classification results
+            
+            function detectArea(text, files, item) {
+              // Analyze text and files to determine the area
+              const areaKeywords = {
+                "security": ["security", "auth", "authentication", "password", "login", "oauth", "jwt", "credential"],
+                "api-gateway": ["api", "rest", "gateway", "endpoint", "controller", "route", "service"],
+                "monitoring": ["monitor", "logging", "observability", "metrics", "tracing", "alert"],
+                "performance": ["performance", "optimize", "speed", "latency", "throughput", "cache"],
+                "docs": ["documentation", "docs", "readme", "guide", "wiki"],
+                "infrastructure": ["infrastructure", "config", "kubernetes", "docker", "deployment", "cicd"],
+                "compliance": ["compliance", "regulation", "standard", "audit", "certification"],
+                "ui": ["ui", "user interface", "frontend", "design", "css", "html"],
+                "data": ["database", "data", "storage", "sql", "nosql", "backup"]
               };
               
-              // ===== AREA CLASSIFICATION (IMPROVED) =====
-              const areas = [];
-              const areaConfidenceScores = {};
-              const areaDetails = {};
+              // Count keyword occurrences
+              const scores = {};
               
-              // Define area detectors
-              const areaDetectors = [
-                {
-                  name: 'security-layer',
-                  terms: ['security', 'auth', 'authentication', 'authorization', 'login', 'password', 'credential', 'oauth', 'vulnerability'],
-                  files: ['security', 'auth', 'login', 'password', 'credentials'],
-                  threshold: 0.6
-                },
-                {
-                  name: 'monitoring-observability',
-                  terms: ['monitoring', 'metrics', 'grafana', 'prometheus', 'logging', 'trace', 'observability', 'analytics'],
-                  files: ['monitor', 'metrics', 'log', 'trace'],
-                  threshold: 0.6
-                },
-                {
-                  name: 'performance-optimization',
-                  terms: ['performance', 'optimize', 'optimization', 'speed', 'fast', 'slow', 'latency', 'throughput', 'cache'],
-                  files: ['performance', 'optimize', 'cache', 'speed'],
-                  threshold: 0.6
-                },
-                {
-                  name: 'container-orchestration',
-                  terms: ['kubernetes', 'k8s', 'container', 'docker', 'pod', 'cluster', 'orchestration', 'helm', 'chart'],
-                  files: ['k8s', 'kubernetes', 'docker', 'container', 'pod'],
-                  threshold: 0.6
-                },
-                {
-                  name: 'cicd-pipeline',
-                  terms: ['ci/cd', 'pipeline', 'continuous integration', 'continuous delivery', 'github actions', 'jenkins', 'travis'],
-                  files: ['pipeline', 'ci', 'cd', 'github/workflows', 'github-workflow'],
-                  threshold: 0.6
-                },
-                {
-                  name: 'data-management',
-                  terms: ['database', 'data', 'sql', 'nosql', 'mongodb', 'postgres', 'mysql', 'redis', 'storage', 'etl', 'backup'],
-                  files: ['database', 'db', 'sql', 'data', 'backup', 'storage'],
-                  threshold: 0.6
-                },
-                {
-                  name: 'api-gateway-services',
-                  terms: ['api', 'gateway', 'service', 'microservice', 'rest', 'graphql', 'endpoint', 'route'],
-                  files: ['api', 'gateway', 'service', 'endpoint', 'controller'],
-                  threshold: 0.6
-                },
-                {
-                  name: 'docs',
-                  terms: ['documentation', 'doc', 'readme', 'wiki', 'guide', 'tutorial', 'manual'],
-                  files: ['docs', 'documentation', 'wiki', 'readme', '.md'],
-                  threshold: 0.6
-                },
-                {
-                  name: 'ui-components',
-                  terms: ['ui', 'ux', 'user interface', 'design', 'layout', 'css', 'html', 'frontend', 'react', 'vue', 'angular'],
-                  files: ['ui', 'frontend', 'css', 'html', 'jsx', 'tsx', 'vue'],
-                  threshold: 0.6
-                },
-                {
-                  name: 'compliance',
-                  terms: ['compliance', 'regulation', 'gdpr', 'hipaa', 'sox', 'pci', 'standard', 'audit', 'certification', 'conform'],
-                  files: ['compliance', 'regulation', 'audit', 'standard', 'certif'],
-                  threshold: 0.5
-                },
-                {
-                  name: 'integration',
-                  terms: ['integration', 'connect', 'connector', 'webhook', 'interface', 'bridge', 'middleware', 'sync'],
-                  files: ['integration', 'connector', 'webhook', 'middleware', 'bridge', 'interface'],
-                  threshold: 0.6
-                },
-                {
-                  name: 'infrastructure',
-                  terms: ['infrastructure', 'terraform', 'aws', 'azure', 'gcp', 'cloud', 'network', 'server', 'provision'],
-                  files: ['terraform', 'cloud', 'infra', 'provision', 'network', 'server'],
-                  threshold: 0.6
-                },
-                {
-                  name: 'analytics',
-                  terms: ['analytics', 'statistics', 'reporting', 'dashboard', 'chart', 'graph', 'data visualization', 'bi'],
-                  files: ['analytics', 'report', 'dashboard', 'stats', 'visualization'],
-                  threshold: 0.6
+              // Check text for keywords
+              for (const [area, keywords] of Object.entries(areaKeywords)) {
+                scores[area] = 0;
+                for (const keyword of keywords) {
+                  const regex = new RegExp(`\\b${keyword}\\b`, 'gi');
+                  const matches = text.match(regex);
+                  if (matches) {
+                    scores[area] += matches.length * 1;
+                  }
                 }
+              }
+              
+              // Check files for area indicators
+              if (files && files.length > 0) {
+                for (const file of files) {
+                  const fileLower = file.toLowerCase();
+                  
+                  // Check file path/name patterns
+                  if (/auth|security|login|password|credential/i.test(fileLower)) scores["security"] += 3;
+                  if (/api|controller|route|endpoint/i.test(fileLower)) scores["api-gateway"] += 3;
+                  if (/monitor|log|metric|trace|alert/i.test(fileLower)) scores["monitoring"] += 3;
+                  if (/perf|optimize|cache/i.test(fileLower)) scores["performance"] += 3;
+                  if (/docs|documentation|readme|\.md$/i.test(fileLower)) scores["docs"] += 3;
+                  if (/infrastructure|kubernetes|k8s|docker|deploy/i.test(fileLower)) scores["infrastructure"] += 3;
+                  if (/compliance|audit|regulation/i.test(fileLower)) scores["compliance"] += 3;
+                  if (/ui|css|html|frontend|components/i.test(fileLower)) scores["ui"] += 3;
+                  if (/database|db|data|sql|mongo/i.test(fileLower)) scores["data"] += 3;
+                }
+              }
+              
+              // Special case detection from title/content patterns
+              const title = item.title?.toLowerCase() || '';
+              
+              // Explicitly mentioned areas in title get a big boost
+              if (title.includes("security")) scores["security"] += 5;
+              if (title.includes("api") || title.includes("gateway")) scores["api-gateway"] += 5;
+              if (title.includes("monitor")) scores["monitoring"] += 5;
+              if (title.includes("performance") || title.includes("optimize")) scores["performance"] += 5;
+              if (title.includes("doc")) scores["docs"] += 5;
+              if (title.includes("infrastructure") || title.includes("deploy")) scores["infrastructure"] += 5;
+              if (title.includes("compliance")) scores["compliance"] += 5;
+              if (title.includes("ui") || title.includes("interface")) scores["ui"] += 5;
+              if (title.includes("data") || title.includes("database")) scores["data"] += 5;
+              
+              // Component completion likely involves compliance
+              if (title.includes("component") && title.includes("completion")) {
+                scores["compliance"] += 4;
+              }
+              
+              // Find top areas
+              const topAreas = Object.entries(scores)
+                .filter(([_, score]) => score > 2) // Minimum threshold
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 2); // Take up to two top areas
+              
+              if (topAreas.length === 0) {
+                // Default to API gateway if nothing else fits
+                return [{
+                  id: "api-gateway",
+                  confidence: 0.5,
+                  evidence: "Default classification - insufficient specific indicators"
+                }];
+              }
+              
+              // Return the top areas with confidence scores
+              return topAreas.map(([area, score]) => {
+                // Normalize score to confidence between 0.5-0.95
+                const confidence = Math.min(0.5 + (score / 20), 0.95);
+                return {
+                  id: area,
+                  confidence: parseFloat(confidence.toFixed(2)),
+                  evidence: `Scored ${score} points based on content analysis`
+                };
+              });
+            }
+            
+            function detectRisk(text, files, item) {
+              // Risk indicators
+              let highRiskScore = 0;
+              let mediumRiskScore = 0;
+              let lowRiskScore = 0;
+              
+              const title = item.title?.toLowerCase() || '';
+              const body = item.body?.toLowerCase() || '';
+              
+              // High risk indicators
+              const highRiskPatterns = [
+                /security\s+vulnerabilit/i,
+                /\bcrucial\b/i,
+                /\bcritical\b/i,
+                /\burgent\b/i,
+                /high\s+risk/i,
+                /production\s+issue/i,
+                /\bcrash\b/i,
+                /data\s+loss/i,
+                /breach/i,
+                /emergency/i
               ];
               
-              // Detect Phase from title
-              const phaseRegex = /phase\s*(\d+)\s*(?:week|w)?\s*(\d+)?/i;
-              const phaseMatch = title.match(phaseRegex) || body.match(phaseRegex);
-              let phase = null;
+              // Medium risk indicators
+              const mediumRiskPatterns = [
+                /\brefactor\b/i,
+                /important/i,
+                /medium\s+risk/i,
+                /\bbug\b/i,
+                /significant/i,
+                /component\s+completion/i,
+                /phase\s+2/i,
+                /integration/i
+              ];
               
-              if (phaseMatch) {
-                const phaseNum = phaseMatch[1];
-                const weekNum = phaseMatch[2];
+              // Low risk indicators
+              const lowRiskPatterns = [
+                /\bminor\b/i,
+                /low\s+risk/i,
+                /trivial/i,
+                /cosmetic/i,
+                /typo/i,
+                /small\s+improvement/i,
+                /documentation/i
+              ];
+              
+              // Check title and body for risk patterns
+              for (const pattern of highRiskPatterns) {
+                if (pattern.test(title)) highRiskScore += 3;
+                if (pattern.test(body)) highRiskScore += 2;
+              }
+              
+              for (const pattern of mediumRiskPatterns) {
+                if (pattern.test(title)) mediumRiskScore += 3;
+                if (pattern.test(body)) mediumRiskScore += 2;
+              }
+              
+              for (const pattern of lowRiskPatterns) {
+                if (pattern.test(title)) lowRiskScore += 3;
+                if (pattern.test(body)) lowRiskScore += 2;
+              }
+              
+              // PR specific factors
+              if (isPR) {
+                const changedFiles = files.length;
+                const additions = itemData.files?.reduce((sum, file) => sum + (file.additions || 0), 0) || 0;
+                const deletions = itemData.files?.reduce((sum, file) => sum + (file.deletions || 0), 0) || 0;
+                const totalChanges = additions + deletions;
                 
-                if (weekNum) {
-                  phase = `phase:${phaseNum}-week-${weekNum}`;
-                } else {
-                  phase = `phase:${phaseNum}`;
-                }
+                // Size based risk factors
+                if (totalChanges > 500) highRiskScore += 3;
+                else if (totalChanges > 200) mediumRiskScore += 3;
+                else lowRiskScore += 3;
                 
-                core.info(`📝 Detected phase information: ${phase}`);
-              }
-              
-              // Special cases from title patterns
-              if (title.match(/component completion|completion/i)) {
-                areaConfidenceScores['compliance'] = 0.8;
-                areaDetails['compliance'] = 'Identified from component completion task in title';
-              }
-              
-              if (title.match(/integration|flow completion|validate/i)) {
-                areaConfidenceScores['integration'] = 0.8;
-                areaDetails['integration'] = 'Identified from integration flow mentioned in title';
-              }
-              
-              if (title.match(/infra|infrastructure|script|exit code/i)) {
-                areaConfidenceScores['infrastructure'] = 0.7;
-                areaDetails['infrastructure'] = 'Identified from infrastructure or script references in title';
-              }
-              
-              // Analyze content for each area
-              for (const detector of areaDetectors) {
-                let score = 0;
-                let details = [];
+                // Number of files
+                if (changedFiles > 20) highRiskScore += 2;
+                else if (changedFiles > 10) mediumRiskScore += 2;
+                else lowRiskScore += 2;
                 
-                // Check term occurrences in content
-                for (const term of detector.terms) {
-                  const count = countOccurrences(allContent, term);
-                  if (count > 0) {
-                    score += Math.min(0.2 + (count * 0.1), 0.5); // Cap at 0.5 per term
-                    details.push(`Found "${term}" ${count} time(s) in content`);
-                  }
-                }
+                // Security sensitive files
+                const securityFiles = files.filter(file => 
+                  /security|auth|login|password|token|key|secret|credential/i.test(file)
+                ).length;
                 
-                // Check file paths for matches
-                if (filePaths.length > 0) {
-                  for (const filePattern of detector.files) {
-                    const matchingFiles = filePaths.filter(p => p.includes(filePattern));
-                    if (matchingFiles.length > 0) {
-                      score += Math.min(0.3 + (matchingFiles.length * 0.05), 0.6);
-                      details.push(`Found ${matchingFiles.length} file(s) matching "${filePattern}"`);
-                    }
-                  }
-                }
-                
-                // Special case: directly mentioned area in title/body (strong signal)
-                if (title.toLowerCase().includes(detector.name) || 
-                    allContent.includes(`area:${detector.name}`) ||
-                    allContent.includes(`area: ${detector.name}`)) {
-                  score += 0.8;
-                  details.push(`Direct mention of area "${detector.name}" in content`);
-                }
-                
-                // Record if threshold met
-                if (score >= detector.threshold) {
-                  areaConfidenceScores[detector.name] = parseFloat(score.toFixed(2));
-                  areaDetails[detector.name] = details.join('; ');
-                }
+                if (securityFiles > 0) highRiskScore += 3;
               }
               
-              // Apply override if provided
-              if (areaOverride) {
-                areaConfidenceScores[areaOverride] = 1.0;
-                areaDetails[areaOverride] = 'Manual override applied';
-                core.info(`🔧 Manual area override applied: ${areaOverride}`);
-              }
+              // Calculate confidence and determine risk level
+              let riskId, confidence, evidence;
               
-              // Select areas that meet threshold
-              for (const [area, score] of Object.entries(areaConfidenceScores)) {
-                if (score >= 0.5) {
-                  areas.push(`area:${area}`);
-                }
-              }
-              
-              // If no areas detected, use default based on content
-              if (areas.length === 0) {
-                if (title.toLowerCase().includes('test')) {
-                  areas.push('area:monitoring-observability');
-                  areaConfidenceScores['monitoring-observability'] = 0.6;
-                  areaDetails['monitoring-observability'] = 'Default: Test-related issue';
-                } else {
-                  areas.push('area:api-gateway-services');
-                  areaConfidenceScores['api-gateway-services'] = 0.5;
-                  areaDetails['api-gateway-services'] = 'Default: No specific area detected';
-                }
-              }
-              
-              // Log area classifications
-              core.info('📊 Area classification results:');
-              for (const [area, score] of Object.entries(areaConfidenceScores)) {
-                core.info(`  - ${area}: ${score} - ${areaDetails[area] || 'No details'}`);
-              }
-              
-              // ===== PRIORITY CLASSIFICATION =====
-              let priority = null;
-              if (title.toLowerCase().includes('urgent') || 
-                  title.toLowerCase().includes('critical') || 
-                  title.toLowerCase().includes('p0') || 
-                  body?.toLowerCase().includes('urgent') || 
-                  body?.toLowerCase().includes('p0')) {
-                priority = 'p0';
-              } else if (title.toLowerCase().includes('high priority') || 
-                         title.toLowerCase().includes('p1') || 
-                         body?.toLowerCase().includes('high priority') || 
-                         body?.toLowerCase().includes('p1') ||
-                         title.toLowerCase().includes('phase 2')) {
-                priority = 'p1';
-              } else if (title.toLowerCase().includes('medium priority') || 
-                         title.toLowerCase().includes('p2') || 
-                         body?.toLowerCase().includes('medium priority')) {
-                priority = 'p2';
+              if (highRiskScore > mediumRiskScore && highRiskScore > lowRiskScore) {
+                riskId = "high";
+                confidence = Math.min(0.5 + (highRiskScore / 20), 0.95);
+                evidence = `High risk score: ${highRiskScore}`;
+              } else if (mediumRiskScore > lowRiskScore) {
+                riskId = "medium";
+                confidence = Math.min(0.5 + (mediumRiskScore / 20), 0.95);
+                evidence = `Medium risk score: ${mediumRiskScore}`;
               } else {
-                priority = 'p3';
+                riskId = "low";
+                confidence = Math.min(0.5 + (lowRiskScore / 20), 0.95);
+                evidence = `Low risk score: ${lowRiskScore}`;
               }
               
-              // ===== RISK CLASSIFICATION =====
-              let risk = null;
-              if (title.toLowerCase().includes('high risk') || 
-                  body?.toLowerCase().includes('high risk') || 
-                  areaConfidenceScores['security-layer'] > 0.7) {
-                risk = 'risk:high';
-              } else if (title.toLowerCase().includes('medium risk') || 
-                         body?.toLowerCase().includes('medium risk') || 
-                         areaConfidenceScores['compliance'] > 0.7 || 
-                         title.includes('Phase 2')) {
-                risk = 'risk:medium';
-              } else {
-                risk = 'risk:low';
+              // Specific cases for issue #57
+              if (item.number === 57 && !isPR) {
+                // If this is issue #57, we can add specific logic if needed
+                // For example, if we know it should be a particular risk level
               }
               
-              // ===== STATUS CLASSIFICATION =====
-              let status = null;
-              const hasStatusLabel = labels.some(l => l.startsWith('status:'));
+              return [{
+                id: riskId,
+                confidence: parseFloat(confidence.toFixed(2)),
+                evidence: evidence
+              }];
+            }
+            
+            function detectPriority(text, files, item) {
+              const title = item.title?.toLowerCase() || '';
+              const body = item.body?.toLowerCase() || '';
               
+              // Look for explicit priority markers
+              if (/\bp0\b/i.test(title) || /critical priority/i.test(title) || /urgent/i.test(title)) {
+                return [{
+                  id: "p0",
+                  confidence: 0.9,
+                  evidence: "Explicit P0/critical/urgent mention in title"
+                }];
+              }
+              
+              if (/\bp1\b/i.test(title) || /high priority/i.test(title)) {
+                return [{
+                  id: "p1",
+                  confidence: 0.9,
+                  evidence: "Explicit P1/high priority mention in title"
+                }];
+              }
+              
+              if (/\bp2\b/i.test(title) || /medium priority/i.test(title)) {
+                return [{
+                  id: "p2", 
+                  confidence: 0.9,
+                  evidence: "Explicit P2/medium priority mention in title"
+                }];
+              }
+              
+              if (/\bp3\b/i.test(title) || /low priority/i.test(title)) {
+                return [{
+                  id: "p3",
+                  confidence: 0.9,
+                  evidence: "Explicit P3/low priority mention in title"
+                }];
+              }
+              
+              // Phase based priority
+              if (/phase\s+2/i.test(title) || /phase\s+2/i.test(body)) {
+                return [{
+                  id: "p1",
+                  confidence: 0.85,
+                  evidence: "Phase 2 items are typically P1 priority"
+                }];
+              }
+              
+              if (/phase\s+1/i.test(title) || /phase\s+1/i.test(body)) {
+                return [{
+                  id: "p0",
+                  confidence: 0.85,
+                  evidence: "Phase 1 items are typically P0 priority"
+                }];
+              }
+              
+              if (/phase\s+3/i.test(title) || /phase\s+3/i.test(body)) {
+                return [{
+                  id: "p2",
+                  confidence: 0.85,
+                  evidence: "Phase 3 items are typically P2 priority"
+                }];
+              }
+              
+              // Content based priority
+              if (/component completion/i.test(title)) {
+                return [{
+                  id: "p1",
+                  confidence: 0.85,
+                  evidence: "Component completion tasks are typically P1 priority"
+                }];
+              }
+              
+              // Default
+              return [{
+                id: "p2",
+                confidence: 0.7,
+                evidence: "Default medium priority (no explicit indicators)"
+              }];
+            }
+            
+            function detectStatus(text, files, item) {
+              // For PRs, status depends on PR state
               if (isPR) {
                 if (item.merged) {
-                  status = 'status:done';
-                } else if (item.state === 'closed') {
-                  status = 'status:done';
-                } else if (context.payload.action === 'ready_for_review' || !item.isDraft) {
-                  status = 'status:in-review';
-                } else {
-                  status = 'status:in-progress';
+                  return [{
+                    id: "done", 
+                    confidence: 1.0,
+                    evidence: "Pull request is merged"
+                  }];
                 }
-              } else {
-                if (item.state === 'closed') {
-                  status = 'status:done';
-                } else if (hasStatusLabel) {
-                  // Keep existing status label if any
-                  const existingStatus = labels.find(l => l.startsWith('status:'));
-                  if (existingStatus) {
-                    status = existingStatus;
-                  } else {
-                    status = 'status:todo';
-                  }
-                } else if (assignees.length > 0) {
-                  status = 'status:in-progress'; // Assigned issues are in progress
-                } else {
-                  status = 'status:todo';
+                
+                if (item.state === "closed") {
+                  return [{
+                    id: "done",
+                    confidence: 1.0,
+                    evidence: "Pull request is closed"
+                  }];
                 }
-              }
-              
-              // ===== SIZE CLASSIFICATION =====
-              let size = null;
-              if (isPR) {
-                const totalChanges = additions + deletions;
-                if (totalChanges <= 10) {
-                  size = 'size:xs';
-                } else if (totalChanges <= 100) {
-                  size = 'size:small';
-                } else if (totalChanges <= 250) {
-                  size = 'size:medium';
-                } else if (totalChanges <= 500) {
-                  size = 'size:large';
-                } else {
-                  size = 'size:very-large';
+                
+                if (item.draft) {
+                  return [{
+                    id: "in-progress",
+                    confidence: 0.9,
+                    evidence: "Pull request is in draft state"
+                  }];
                 }
-              } else {
-                // For issues, size is more subjective
-                // Use title length and task description as heuristics
-                if (title.includes('component') || title.includes('completion')) {
-                  size = 'size:medium';
-                } else if (body && body.length > 1000) {
-                  size = 'size:large';
-                } else if (body && body.length > 500) {
-                  size = 'size:medium';
-                } else {
-                  size = 'size:small';
-                }
-              }
-              
-              // ===== TEAM CLASSIFICATION =====
-              let team = null;
-              // Determine team based on areas
-              if (areas.includes('area:security-layer')) {
-                team = 'team:security';
-              } else if (areas.includes('area:container-orchestration') || 
-                         areas.includes('area:cicd-pipeline') || 
-                         areas.includes('area:infrastructure')) {
-                team = 'team:devops';
-              } else if (areas.includes('area:monitoring-observability') || 
-                         areas.includes('area:analytics')) {
-                team = 'team:qa';
-              } else if (areas.includes('area:ui-components')) {
-                team = 'team:frontend';
-              } else {
-                team = 'team:backend-dev';
-              }
-              
-              // ===== HEALTH CLASSIFICATION =====
-              let health = 'health:50-74';
-              
-              // Apply labels
-              const existing = new Set(labels);
-              const toAdd = new Set();
-              const toRemove = new Set();
-              
-              // Remove old conflicting labels before adding new ones
-              for (const label of existing) {
-                if (areas.some(a => a.startsWith('area:')) && label.startsWith('area:') && !areas.includes(label)) {
-                  toRemove.add(label);
-                }
-                if (risk && label.startsWith('risk:') && label !== risk) {
-                  toRemove.add(label);
-                }
-                if (status && label.startsWith('status:') && label !== status) {
-                  toRemove.add(label);
-                }
-                if (size && label.startsWith('size:') && label !== size) {
-                  toRemove.add(label);
-                }
-                if (team && label.startsWith('team:') && label !== team) {
-                  toRemove.add(label);
-                }
-              }
-              
-              // Add new labels
-              for (const area of areas) {
-                if (!existing.has(area)) toAdd.add(area);
-              }
-              if (phase && !existing.has(phase)) toAdd.add(phase);
-              if (risk && !existing.has(risk)) toAdd.add(risk);
-              if (status && !existing.has(status)) toAdd.add(status);
-              if (size && !existing.has(size)) toAdd.add(size);
-              if (team && !existing.has(team)) toAdd.add(team);
-              if (priority && !existing.has(priority)) toAdd.add(priority);
-              if (!existing.has(health)) toAdd.add(health);
-              
-              const addList = Array.from(toAdd);
-              const removeList = Array.from(toRemove);
-              
-              // Record classifications with confidence scores
-              const classifications = {
-                areas: areas.map(a => ({
-                  value: a.split(':')[1],
-                  confidence: areaConfidenceScores[a.split(':')[1]] || 0.5,
-                  reason: areaDetails[a.split(':')[1]] || 'Unknown'
-                })),
-                risk: risk ? { 
-                  value: risk.split(':')[1],
-                  confidence: 0.8,
-                  reason: 'Determined from content and area analysis'
-                } : null,
-                status: status ? {
-                  value: status.split(':')[1],
+                
+                return [{
+                  id: "in-review",
                   confidence: 0.9,
-                  reason: isPR ? 'Based on PR state' : 'Based on issue state and assignment'
-                } : null,
-                size: size ? {
-                  value: size.split(':')[1],
-                  confidence: 0.8,
-                  reason: isPR ? 'Based on code changes' : 'Based on content complexity'
-                } : null,
-                team: team ? {
-                  value: team.split(':')[1],
-                  confidence: 0.8,
-                  reason: 'Derived from area classification'
-                } : null,
-                phase: phase ? {
-                  value: phase.split(':')[1],
-                  confidence: 0.9,
-                  reason: 'Extracted from title/body'
-                } : null,
-                priority: priority ? {
-                  value: priority,
-                  confidence: 0.8,
-                  reason: 'Determined from content analysis and phase'
-                } : null,
-                health: {
-                  value: health.split(':')[1],
+                  evidence: "Pull request is open and ready for review"
+                }];
+              }
+              
+              // For issues
+              if (item.state === "closed") {
+                return [{
+                  id: "done",
+                  confidence: 1.0,
+                  evidence: "Issue is closed"
+                }];
+              }
+              
+              // Check for explicit status in text
+              if (/\bin progress\b/i.test(text) || /\bstarted\b/i.test(text) || /\bworking on\b/i.test(text)) {
+                return [{
+                  id: "in-progress",
+                  confidence: 0.85,
+                  evidence: "Explicit in-progress mention in content"
+                }];
+              }
+              
+              if (/\bblocked\b/i.test(text) || /\bwaiting for\b/i.test(text) || /\bcannot proceed\b/i.test(text)) {
+                return [{
+                  id: "blocked",
+                  confidence: 0.85,
+                  evidence: "Explicit blocked/waiting mention in content"
+                }];
+              }
+              
+              if (item.assignees && item.assignees.length > 0) {
+                return [{
+                  id: "in-progress",
                   confidence: 0.7,
-                  reason: 'Default health classification'
-                }
-              };
+                  evidence: "Issue is assigned, assuming in progress"
+                }];
+              }
               
-              // Dry-run or apply labels
-              if (dryRun) {
-                core.info('🧪 DRY RUN: Label changes preview');
-                core.info(`Would add: ${addList.join(', ') || 'None'}`);
-                core.info(`Would remove: ${removeList.join(', ') || 'None'}`);
+              // Default for new issues
+              return [{
+                id: "todo",
+                confidence: 0.7,
+                evidence: "Default status for new/unassigned issues"
+              }];
+            }
+            
+            function detectSize(text, files, item) {
+              // For PRs, size is based on code changes
+              if (isPR) {
+                const additions = itemData.files?.reduce((sum, file) => sum + (file.additions || 0), 0) || 0;
+                const deletions = itemData.files?.reduce((sum, file) => sum + (file.deletions || 0), 0) || 0;
+                const totalChanges = additions + deletions;
+                
+                if (totalChanges < 10) {
+                  return [{
+                    id: "xs",
+                    confidence: 0.9,
+                    evidence: `Very small change (${totalChanges} lines)`
+                  }];
+                } else if (totalChanges < 100) {
+                  return [{
+                    id: "small",
+                    confidence: 0.9,
+                    evidence: `Small change (${totalChanges} lines)`
+                  }];
+                } else if (totalChanges < 300) {
+                  return [{
+                    id: "medium",
+                    confidence: 0.9,
+                    evidence: `Medium change (${totalChanges} lines)`
+                  }];
+                } else if (totalChanges < 1000) {
+                  return [{
+                    id: "large",
+                    confidence: 0.9,
+                    evidence: `Large change (${totalChanges} lines)`
+                  }];
+                } else {
+                  return [{
+                    id: "xl",
+                    confidence: 0.9,
+                    evidence: `Extra large change (${totalChanges} lines)`
+                  }];
+                }
+              }
+              
+              // For issues, size is more subjective
+              const title = item.title?.toLowerCase() || '';
+              const body = item.body || '';
+              
+              // Check explicit size indicators
+              if (/\bsmall\b/i.test(title) || /\bminor\b/i.test(title) || /\bsimple\b/i.test(title)) {
+                return [{
+                  id: "small",
+                  confidence: 0.8,
+                  evidence: "Explicit small/minor/simple mention in title"
+                }];
+              }
+              
+              if (/\blarge\b/i.test(title) || /\bcomplex\b/i.test(title) || /\bmajor\b/i.test(title)) {
+                return [{
+                  id: "large",
+                  confidence: 0.8,
+                  evidence: "Explicit large/complex/major mention in title"
+                }];
+              }
+              
+              // Component completion tasks are typically medium sized
+              if (/component completion/i.test(title)) {
+                return [{
+                  id: "medium",
+                  confidence: 0.8,
+                  evidence: "Component completion tasks are typically medium sized"
+                }];
+              }
+              
+              // Complexity based on content length and detail
+              const bodyLength = body?.length || 0;
+              const hasSubtasks = body?.includes('- [ ]') || false;
+              const subtaskCount = hasSubtasks ? (body.match(/- \[ \]/g) || []).length : 0;
+              
+              if (bodyLength > 2000 || subtaskCount > 10) {
+                return [{
+                  id: "xl",
+                  confidence: 0.7,
+                  evidence: `Complex issue with ${bodyLength} chars and ${subtaskCount} subtasks`
+                }];
+              } else if (bodyLength > 1000 || subtaskCount > 5) {
+                return [{
+                  id: "large",
+                  confidence: 0.7,
+                  evidence: `Detailed issue with ${bodyLength} chars and ${subtaskCount} subtasks`
+                }];
+              } else if (bodyLength > 500 || subtaskCount > 2) {
+                return [{
+                  id: "medium",
+                  confidence: 0.7,
+                  evidence: `Moderate issue with ${bodyLength} chars and ${subtaskCount} subtasks`
+                }];
+              } else if (bodyLength > 200) {
+                return [{
+                  id: "small",
+                  confidence: 0.7,
+                  evidence: `Brief issue with ${bodyLength} chars`
+                }];
+              } else {
+                return [{
+                  id: "xs",
+                  confidence: 0.7,
+                  evidence: `Minimal issue with ${bodyLength} chars`
+                }];
+              }
+            }
+            
+            // STEP 3: Phase and Iteration Detection
+            function detectPhaseAndIteration(text, item) {
+              const title = item.title?.toLowerCase() || '';
+              const body = item.body?.toLowerCase() || '';
+              const combined = `${title} ${body}`;
+              
+              // Look for Phase X Week Y pattern
+              const phaseWeekRegex = /phase\s*(\d+)\s*(?:week|w)\s*(\d+)/i;
+              const phaseMatch = phaseWeekRegex.exec(combined);
+              
+              if (phaseMatch) {
+                const phase = phaseMatch[1];
+                const week = phaseMatch[2];
                 return {
-                  dryRun: true,
-                  item: {
-                    type: isPR ? 'pull_request' : 'issue',
-                    number: number,
-                    title: title,
-                    node_id: nodeId,
-                    author: author
-                  },
-                  labels: { existing: Array.from(existing), toAdd: addList, toRemove: removeList },
-                  classifications: classifications
+                  phase: {
+                    id: `${phase}-week-${week}`,
+                    name: `Phase ${phase} Week ${week}`,
+                    confidence: 0.95,
+                    evidence: `Explicit Phase ${phase} Week ${week} mention in content`
+                  }
                 };
               }
               
-              // Apply labels
-              const owner = context.repo.owner;
-              const repo = context.repo.repo;
+              // Look for just Phase X
+              const phaseOnlyRegex = /phase\s*(\d+)/i;
+              const phaseOnlyMatch = phaseOnlyRegex.exec(combined);
               
-              // Apply removals first
-              for (const l of removeList) {
-                try {
-                  await github.rest.issues.removeLabel({ 
-                    owner, repo, issue_number: number, name: l 
-                  });
-                  core.info(`🗑️ Removed label: ${l}`);
-                } catch (e) {
-                  if (e.status !== 404) core.warning(`Failed to remove label ${l}: ${e.message}`);
-                }
+              if (phaseOnlyMatch) {
+                const phase = phaseOnlyMatch[1];
+                return {
+                  phase: {
+                    id: `${phase}`,
+                    name: `Phase ${phase}`,
+                    confidence: 0.9,
+                    evidence: `Explicit Phase ${phase} mention in content`
+                  }
+                };
               }
               
-              // Apply additions
-              if (addList.length) {
-                try {
-                  await github.rest.issues.addLabels({ 
-                    owner, repo, issue_number: number, labels: addList 
-                  });
-                  core.info(`🏷️ Added labels: ${addList.join(', ')}`);
-                } catch (e) {
-                  core.warning(`Failed to add labels: ${e.message}`);
-                }
-              } else {
-                core.info('✓ No new labels to add');
+              return null;
+            }
+            
+            // STEP 4: Perform classifications
+            const classifications = {
+              areas: detectArea(allText, files, itemData),
+              risk: detectRisk(allText, files, itemData),
+              priority: detectPriority(allText, files, itemData),
+              status: detectStatus(allText, files, itemData),
+              size: detectSize(allText, files, itemData)
+            };
+            
+            // Add phase info if detected
+            const phaseInfo = detectPhaseAndIteration(allText, itemData);
+            if (phaseInfo) {
+              classifications.phase = phaseInfo.phase;
+            }
+            
+            // STEP 5: Create or update classification document
+            const classificationObject = {
+              schema_version: "2.0.0",
+              item: {
+                number: number,
+                type: type,
+                title: itemData.title,
+                created_at: itemData.created_at,
+                updated_at: itemData.updated_at,
+                url: itemData.html_url,
+                author: itemData.user?.login
+              },
+              classifications: classifications,
+              metadata: {
+                generated_at: new Date().toISOString(),
+                generated_by: "MerajutASA Classification System v2.0.0",
+                confidence_avg: (
+                  (classifications.areas.reduce((sum, a) => sum + a.confidence, 0) / classifications.areas.length) +
+                  classifications.risk[0].confidence +
+                  classifications.priority[0].confidence +
+                  classifications.status[0].confidence +
+                  classifications.size[0].confidence
+                ) / 5
+              }
+            };
+            
+            // STEP 6: Apply labels based on classifications (if not in dry run)
+            const dryRun = '${{ github.event.inputs.dry_run }}' === 'true';
+            if (!dryRun) {
+              // Map classifications to labels
+              const newLabels = [];
+              
+              // Area labels (can have multiple)
+              for (const area of classifications.areas) {
+                newLabels.push(`area:${area.id}`);
               }
               
-              const finalLabels = [...labels.filter(l => !removeList.includes(l)), ...addList];
+              // Other classifications (single value each)
+              newLabels.push(`risk:${classifications.risk[0].id}`);
+              newLabels.push(`status:${classifications.status[0].id}`);
+              newLabels.push(`size:${classifications.size[0].id}`);
+              newLabels.push(`priority:${classifications.priority[0].id}`);
               
-              // Add a comment explaining classifications if changes were made
-              if (addList.length > 0 || removeList.length > 0) {
-                try {
-                  const commentBody = `## 🤖 Classification Analysis
+              // Phase label if applicable
+              if (classifications.phase) {
+                newLabels.push(`phase:${classifications.phase.id}`);
+              }
+              
+              // Determine labels to add/remove
+              const existingLabels = new Set(allLabels);
+              const labelsToAdd = newLabels.filter(label => !existingLabels.has(label));
+              
+              // Remove old classification labels that conflict with new ones
+              const labelsToRemove = allLabels.filter(label => {
+                if (label.startsWith('area:') && !newLabels.some(nl => nl === label)) return true;
+                if (label.startsWith('risk:') && !newLabels.some(nl => nl === label)) return true;
+                if (label.startsWith('status:') && !newLabels.some(nl => nl === label)) return true;
+                if (label.startsWith('size:') && !newLabels.some(nl => nl === label)) return true;
+                if (label.startsWith('priority:') && !newLabels.some(nl => nl === label)) return true;
+                if (label.startsWith('phase:') && !newLabels.some(nl => nl === label)) return true;
+                return false;
+              });
+              
+              // Apply label changes
+              core.info(`Labels to add: ${labelsToAdd.join(', ')}`);
+              core.info(`Labels to remove: ${labelsToRemove.join(', ')}`);
+              
+              try {
+                // Remove old labels first
+                for (const label of labelsToRemove) {
+                  await github.rest.issues.removeLabel({
+                    owner,
+                    repo,
+                    issue_number: number,
+                    name: label
+                  });
+                  core.info(`Removed label: ${label}`);
+                }
+                
+                // Add new labels
+                if (labelsToAdd.length > 0) {
+                  await github.rest.issues.addLabels({
+                    owner,
+                    repo,
+                    issue_number: number,
+                    labels: labelsToAdd
+                  });
+                  core.info(`Added labels: ${labelsToAdd.join(', ')}`);
+                }
+              } catch (error) {
+                core.warning(`Error updating labels: ${error.message}`);
+              }
+              
+              // Add a comment explaining the classifications
+              try {
+                // Create a nicely formatted classification comment
+                const comment = `## 🧠 MerajutASA Classification System
 
 I've analyzed this ${isPR ? 'pull request' : 'issue'} and made the following classifications:
 
-${areas.map(area => `### ${area.replace('area:', 'Area: ')}
-- Confidence: ${(areaConfidenceScores[area.split(':')[1]] * 100).toFixed(0)}%
-- Reason: ${areaDetails[area.split(':')[1]] || 'No specific details'}`).join('\n\n')}
+### Area${classifications.areas.length > 1 ? 's' : ''}
+${classifications.areas.map(area => {
+  const areaInfo = CLASSIFICATION_CATEGORIES.AREA.options.find(o => o.id === area.id);
+  return `- **${areaInfo?.name || area.id}** (${(area.confidence * 100).toFixed(0)}% confidence)
+  - ${area.evidence}`;
+}).join('\n')}
 
-### Additional Classifications:
-- Risk: **${risk.split(':')[1]}**
-- Status: **${status.split(':')[1]}**
-- Size: **${size.split(':')[1]}**
-- Team: **${team.split(':')[1]}**
-${phase ? `- Phase: **${phase.split(':')[1]}**` : ''}
-${priority ? `- Priority: **${priority}**` : ''}
+### Risk
+- **${CLASSIFICATION_CATEGORIES.RISK.options.find(o => o.id === classifications.risk[0].id)?.name || classifications.risk[0].id}** (${(classifications.risk[0].confidence * 100).toFixed(0)}% confidence)
+  - ${classifications.risk[0].evidence}
 
-*Labels have been updated accordingly.*`;
+### Priority
+- **${CLASSIFICATION_CATEGORIES.PRIORITY.options.find(o => o.id === classifications.priority[0].id)?.name || classifications.priority[0].id}** (${(classifications.priority[0].confidence * 100).toFixed(0)}% confidence)
+  - ${classifications.priority[0].evidence}
 
-                  if (!isPR) {
-                    await github.rest.issues.createComment({
-                      owner,
-                      repo,
-                      issue_number: number,
-                      body: commentBody
-                    });
-                    core.info('💬 Added explanation comment');
-                  }
-                } catch (e) {
-                  core.warning(`Failed to add comment: ${e.message}`);
-                }
+### Status
+- **${CLASSIFICATION_CATEGORIES.STATUS.options.find(o => o.id === classifications.status[0].id)?.name || classifications.status[0].id}** (${(classifications.status[0].confidence * 100).toFixed(0)}% confidence)
+  - ${classifications.status[0].evidence}
+
+### Size
+- **${CLASSIFICATION_CATEGORIES.SIZE.options.find(o => o.id === classifications.size[0].id)?.name || classifications.size[0].id}** (${(classifications.size[0].confidence * 100).toFixed(0)}% confidence)
+  - ${classifications.size[0].evidence}
+
+${classifications.phase ? `### Phase
+- **Phase ${classifications.phase.name}** (${(classifications.phase.confidence * 100).toFixed(0)}% confidence)
+  - ${classifications.phase.evidence}` : ''}
+
+*Classification labels have been updated based on this analysis. [Learn more](https://github.com/${owner}/${repo}/wiki/Classification-System)*`;
+
+                await github.rest.issues.createComment({
+                  owner,
+                  repo,
+                  issue_number: number,
+                  body: comment
+                });
+                
+                core.info('Added classification explanation comment');
+              } catch (error) {
+                core.warning(`Error adding comment: ${error.message}`);
               }
-              
-              return {
-                item: {
-                  type: isPR ? 'pull_request' : 'issue',
-                  number: number,
-                  title: title,
-                  body: body,
-                  state: item.state,
-                  isPR: isPR,
-                  node_id: nodeId,
-                  author: author,
-                  url: item.url
-                },
-                labels: { final: finalLabels, added: addList, removed: removeList },
-                classifications: classifications
-              };
+            } else {
+              core.info('DRY RUN: No label changes were made');
             }
             
-            // Execute the classification
-            return await classifyItem();
+            return classificationObject;
 
       - name: Create Classification Artifact
         id: create_artifact
-        if: steps.extract_info.outputs.has_item == 'true'
+        if: steps.get_item_details.outputs.number
         uses: actions/github-script@v7
         with:
           script: |
             const fs = require('fs');
             const artifactName = `classification-${context.runId}`;
             
-            // Get the classification results from the previous step
-            const result = ${{ toJSON(steps.auto_labeler.outputs.result) }};
+            // Get classification results
+            const classificationResult = ${{ toJSON(steps.classify.outputs.result) }};
             
-            // Add metadata
+            // Add additional metadata
             const artifactData = {
               metadata: {
                 timestamp: new Date().toISOString(),
+                workflow_version: process.env.WORKFLOW_VERSION,
                 created_at: process.env.CREATED_AT,
                 created_by: process.env.CREATED_BY,
-                updated_at: process.env.UPDATED_AT,
-                version: process.env.WORKFLOW_VERSION,
-                user: context.actor,
-                event_type: context.eventName,
-                action: context.payload.action || 'manual',
                 run_id: context.runId,
                 run_number: context.runNumber,
-                repository: `${context.repo.owner}/${context.repo.repo}`
+                repository: `${context.repo.owner}/${context.repo.repo}`,
+                actor: context.actor,
+                event: context.eventName,
+                action: context.payload.action || 'manual',
+                ref: context.ref
               },
-              ...result
+              classification: classificationResult
             };
-            
-            // Ensure node_id is present
-            if (!artifactData.item || !artifactData.item.node_id) {
-              if ('${{ steps.extract_info.outputs.node_id }}') {
-                if (!artifactData.item) artifactData.item = {};
-                artifactData.item.node_id = '${{ steps.extract_info.outputs.node_id }}';
-                core.info('📌 Added node_id from extract_info step to artifact');
-              } else {
-                core.warning('⚠️ No node_id available in classification or extract_info outputs');
-              }
-            }
             
             // Write to file
             fs.writeFileSync('classification.json', JSON.stringify(artifactData, null, 2));
-            core.info('💾 Created classification artifact with the following data:');
-            core.info(`- Item type: ${artifactData.item?.type || 'Unknown'}`);
-            core.info(`- Item number: ${artifactData.item?.number || 'Unknown'}`);
-            core.info(`- Node ID present: ${artifactData.item?.node_id ? 'Yes' : 'No'}`);
             
             core.setOutput('artifact_name', artifactName);
+            return artifactName;
             
       - name: Upload Classification Artifact
-        if: steps.extract_info.outputs.has_item == 'true' && steps.create_artifact.outcome == 'success'
+        if: steps.create_artifact.outputs.artifact_name
         uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.create_artifact.outputs.artifact_name }}
           path: classification.json
-          retention-days: 1
+          retention-days: 7
 
-  # Project integration job remains the same...
   project_integration:
-    name: "📋 Project Integration"
+    name: "📋 Project Board Integration"
     needs: classify
-    if: needs.classify.outputs.has_item == 'true'
+    if: needs.classify.outputs.item_number
     runs-on: ubuntu-latest
     steps:
-      - name: Download Classification Artifact
+      - name: Download Classification
         uses: actions/download-artifact@v4
         with:
           name: ${{ needs.classify.outputs.artifact_name }}
-          
-      - name: Debug Classification Data
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const fs = require('fs');
-            try {
-              const data = JSON.parse(fs.readFileSync('classification.json', 'utf8'));
-              core.info('📊 Classification Data Debug:');
-              core.info(`- File exists: Yes`);
-              core.info(`- Has metadata: ${data.metadata ? 'Yes' : 'No'}`);
-              core.info(`- Has item: ${data.item ? 'Yes' : 'No'}`);
-              
-              if (data.item) {
-                core.info(`- Item number: ${data.item.number || 'Not found'}`);
-                core.info(`- Item type: ${data.item.type || 'Not found'}`);
-                core.info(`- Node ID: ${data.item.node_id || 'Not found'}`);
-              }
-              
-              if (!data.item?.node_id) {
-                // Try to fetch node_id directly as fallback
-                const owner = context.repo.owner;
-                const repo = context.repo.repo;
-                const number = data.item?.number || parseInt('${{ needs.classify.outputs.item_number }}', 10);
-                const isPR = data.item?.type === 'pull_request' || '${{ needs.classify.outputs.item_type }}' === 'pull_request';
-                
-                if (number) {
-                  core.info(`🔄 Attempting to fetch node_id for ${isPR ? 'PR' : 'Issue'} #${number} as fallback...`);
-                  
-                  try {
-                    if (isPR) {
-                      const pr = await github.rest.pulls.get({owner, repo, pull_number: number});
-                      data.item.node_id = pr.data.node_id;
-                    } else {
-                      const issue = await github.rest.issues.get({owner, repo, issue_number: number});
-                      data.item.node_id = issue.data.node_id;
-                    }
-                    
-                    if (data.item.node_id) {
-                      core.info(`✅ Successfully retrieved node_id: ${data.item.node_id}`);
-                      fs.writeFileSync('classification.json', JSON.stringify(data, null, 2));
-                    }
-                  } catch (e) {
-                    core.warning(`❌ Failed to fetch node_id: ${e.message}`);
-                  }
-                }
-              }
-              
-              // Log classifications to make them more visible
-              if (data.classifications) {
-                core.info('\n📋 Classification Results:');
-                
-                if (data.classifications.areas) {
-                  core.info('Areas:');
-                  data.classifications.areas.forEach(area => {
-                    core.info(`- ${area.value}: ${area.confidence * 100}% confidence`);
-                    core.info(`  Reason: ${area.reason}`);
-                  });
-                }
-                
-                if (data.classifications.risk) {
-                  core.info(`Risk: ${data.classifications.risk.value} (${data.classifications.risk.confidence * 100}% confidence)`);
-                  core.info(`Reason: ${data.classifications.risk.reason}`);
-                }
-                
-                if (data.classifications.phase) {
-                  core.info(`Phase: ${data.classifications.phase.value}`);
-                }
-                
-                if (data.classifications.priority) {
-                  core.info(`Priority: ${data.classifications.priority.value}`);
-                }
-              }
-              
-            } catch (e) {
-              core.error(`❌ Failed to parse classification.json: ${e.message}`);
-            }
-
-      - name: Add to Project with Classification
+      
+      - name: Update Project Board
         uses: actions/github-script@v7
         env:
           GH_PROJECT_TOKEN: ${{ secrets.GH_PROJECT_TOKEN }}
-          PROJECT_TITLE: ${{ github.event.inputs.project_title || env.DEFAULT_PROJECT_TITLE }}
-          NODE_ID_FALLBACK: ${{ needs.classify.outputs.node_id }}
+          PROJECT_TITLE: "MerajutASA Program Board"
         with:
           github-token: ${{ secrets.GH_PROJECT_TOKEN || github.token }}
           script: |
             const fs = require('fs');
-            const isDryRun = !process.env.GH_PROJECT_TOKEN || '${{ github.event.inputs.dry_run }}' === 'true';
-            const projectTitle = process.env.PROJECT_TITLE || 'MerajutASA Program Board';
-            const nodeIdFallback = process.env.NODE_ID_FALLBACK;
             
             // Load classification data
-            let classification;
+            const artifactData = JSON.parse(fs.readFileSync('classification.json', 'utf8'));
+            const classification = artifactData.classification;
+            
+            // Skip if dry run
+            const dryRun = '${{ github.event.inputs.dry_run }}' === 'true';
+            if (dryRun) {
+              core.info('DRY RUN: Skipping project board integration');
+              return;
+            }
+            
+            // Check if GH_PROJECT_TOKEN is available
+            const hasPAT = process.env.GH_PROJECT_TOKEN && process.env.GH_PROJECT_TOKEN.trim().length > 0;
+            if (!hasPAT) {
+              core.warning('GH_PROJECT_TOKEN not set - project integration requires a token with project scope');
+              return;
+            }
+            
+            // Log info about what we're doing
+            const itemType = classification.item.type;
+            const itemNumber = classification.item.number;
+            const projectTitle = process.env.PROJECT_TITLE;
+            
+            core.info(`Integrating ${itemType} #${itemNumber} with project "${projectTitle}"`);
+            
+            // Find project by title
             try {
-              classification = JSON.parse(fs.readFileSync('classification.json', 'utf8'));
-              core.info('✅ Loaded classification data');
-            } catch (e) {
-              core.setFailed(`Failed to load classification data: ${e.message}`);
-              return;
-            }
-            
-            // Extract key information
-            const item = classification.item || {};
-            const classifications = classification.classifications || {};
-            const labels = classification.labels?.final || [];
-            
-            const itemType = item.type || '${{ needs.classify.outputs.item_type }}';
-            const itemNumber = item.number || parseInt('${{ needs.classify.outputs.item_number }}', 10);
-            const isPR = itemType === 'pull_request';
-            
-            // Get node_id from classification data or fallback
-            let contentId = item.node_id || nodeIdFallback;
-            
-            // If still no node_id, fetch it directly
-            if (!contentId) {
+              // Project lookup
               const owner = context.repo.owner;
-              const repo = context.repo.repo;
-              
-              try {
-                core.info(`🔄 No node_id found in data, fetching directly for ${isPR ? 'PR' : 'Issue'} #${itemNumber}...`);
-                
-                if (isPR) {
-                  const pr = await github.rest.pulls.get({owner, repo, pull_number: itemNumber});
-                  contentId = pr.data.node_id;
-                } else {
-                  const issue = await github.rest.issues.get({owner, repo, issue_number: itemNumber});
-                  contentId = issue.data.node_id;
-                }
-                
-                if (contentId) {
-                  core.info(`✅ Successfully retrieved node_id: ${contentId}`);
-                }
-              } catch (e) {
-                core.setFailed(`Failed to fetch node_id: ${e.message}`);
-                return;
-              }
-            }
-            
-            if (!contentId) {
-              core.setFailed('Missing node_id. Cannot add to project.');
-              return;
-            }
-            
-            // Project configuration
-            const ownerLogin = context.repo.owner;
-            
-            core.info(`🎯 Processing ${isPR ? 'PR' : 'Issue'} #${itemNumber} for project "${projectTitle}"`);
-            core.info(`Using node ID: ${contentId}`);
-            
-            if (isDryRun) {
-              core.info('🧪 DRY RUN MODE: Will simulate but not make actual changes');
-              // Write summary for dry run
-              fs.writeFileSync('project-integration-summary.json', JSON.stringify({
-                timestamp: new Date().toISOString(),
-                dry_run: true,
-                project: projectTitle,
-                item: {
-                  type: itemType,
-                  number: itemNumber,
-                  title: item.title,
-                  node_id: contentId,
-                  classifications: classifications
-                }
-              }, null, 2));
-              return;
-            }
-            
-            // Project lookup
-            const projectQuery = `
-              query($owner: String!) {
-                repositoryOwner(login: $owner) {
-                  id
-                  login
-                  ... on User {
+              const projectQuery = `
+                query($owner: String!) {
+                  user(login: $owner) {
                     projectsV2(first: 20) {
                       nodes {
-                        id title url public
+                        id
+                        title
+                        url
                         fields(first: 50) {
                           nodes {
-                            __typename
-                            ... on ProjectV2FieldCommon { id name dataType }
-                            ... on ProjectV2SingleSelectField { 
-                              id name dataType 
-                              options { id name color description } 
+                            ... on ProjectV2FieldCommon {
+                              id
+                              name
+                              dataType
+                            }
+                            ... on ProjectV2SingleSelectField {
+                              id
+                              name
+                              options {
+                                id
+                                name
+                              }
                             }
                           }
                         }
@@ -1167,30 +1076,42 @@ ${priority ? `- Priority: **${priority}**` : ''}
                     }
                   }
                 }
-              }
-            `;
-            
-            try {
-              const resp = await github.graphql(projectQuery, { owner: ownerLogin });
-              const nodes = resp.repositoryOwner?.projectsV2?.nodes || [];
+              `;
               
-              const project = nodes.find(p => p.title === projectTitle)
-                    || nodes.find(p => p.title.toLowerCase() === projectTitle.toLowerCase())
-                    || nodes.find(p => p.title === 'MerajutASA Program Board');
-                    
+              const projectResp = await github.graphql(projectQuery, { owner });
+              const projects = projectResp.user?.projectsV2?.nodes || [];
+              const project = projects.find(p => p.title === projectTitle);
+              
               if (!project) {
-                core.warning(`❌ Project "${projectTitle}" not found in ${ownerLogin}'s account`);
-                core.info('💡 Available projects:');
-                for (const p of nodes) {
-                  core.info(`- ${p.title}`);
-                }
+                core.warning(`Project "${projectTitle}" not found for user ${owner}`);
+                core.info('Available projects:');
+                projects.forEach(p => core.info(`- ${p.title}`));
                 return;
               }
               
-              core.info(`✅ Using project: ${project.title} (${project.url || 'N/A'})`);
+              core.info(`Found project: ${project.title} (${project.url})`);
               
-              // The rest of the project integration logic follows
-              const projectId = project.id;
+              // Check if item already exists in the project
+              const itemId = await getOrAddProjectItem(project.id, classification);
+              if (!itemId) {
+                core.warning('Failed to add item to project');
+                return;
+              }
+              
+              // Update fields based on classifications
+              await updateProjectFields(project, itemId, classification);
+              
+            } catch (error) {
+              core.setFailed(`Error in project integration: ${error.message}`);
+            }
+            
+            // Helper function to get or add the item to the project
+            async function getOrAddProjectItem(projectId, classification) {
+              const contentId = needs.classify.outputs.node_id;
+              if (!contentId) {
+                core.warning('No node_id available for item');
+                return null;
+              }
               
               // Check if already in project
               const itemQuery = `
@@ -1201,8 +1122,8 @@ ${priority ? `- Priority: **${priority}**` : ''}
                         nodes {
                           id
                           content {
-                            ... on Issue { id number repository { nameWithOwner } }
-                            ... on PullRequest { id number repository { nameWithOwner } }
+                            ... on Issue { id number }
+                            ... on PullRequest { id number }
                           }
                         }
                       }
@@ -1212,83 +1133,145 @@ ${priority ? `- Priority: **${priority}**` : ''}
               `;
               
               const itemsResp = await github.graphql(itemQuery, { projectId });
-              const items = itemsResp.node.items.nodes;
+              const items = itemsResp.node?.items?.nodes || [];
               
-              const repoFullName = `${context.repo.owner}/${context.repo.repo}`;
-              const existingItem = items.find(i => 
-                i.content && 
-                i.content.number === itemNumber && 
-                i.content.repository?.nameWithOwner === repoFullName
+              const existingItem = items.find(item => 
+                item.content?.number === classification.item.number
               );
               
-              let itemId;
               if (existingItem) {
-                itemId = existingItem.id;
-                core.info(`🔄 Item already exists in project, ID: ${itemId}`);
-              } else {
-                // Add item to project
-                core.info(`➕ Adding ${isPR ? 'PR' : 'Issue'} #${itemNumber} to project`);
+                core.info(`Item already exists in project with ID: ${existingItem.id}`);
+                return existingItem.id;
+              }
+              
+              // Add to project
+              const addMutation = `
+                mutation($projectId: ID!, $contentId: ID!) {
+                  addProjectV2ItemById(input: {
+                    projectId: $projectId,
+                    contentId: $contentId
+                  }) {
+                    item {
+                      id
+                    }
+                  }
+                }
+              `;
+              
+              try {
+                const addResp = await github.graphql(addMutation, { projectId, contentId });
+                const itemId = addResp.addProjectV2ItemById.item.id;
+                core.info(`Added item to project with ID: ${itemId}`);
+                return itemId;
+              } catch (error) {
+                core.warning(`Failed to add item to project: ${error.message}`);
+                return null;
+              }
+            }
+            
+            // Helper function to update project fields
+            async function updateProjectFields(project, itemId, classification) {
+              const fields = project.fields?.nodes || [];
+              const projectId = project.id;
+              
+              // Map our classifications to project fields
+              const fieldMappings = [
+                {
+                  fieldName: "Status",
+                  getValue: () => {
+                    const statusId = classification.classifications.status[0].id;
+                    const mappings = {
+                      "todo": "To Do",
+                      "in-progress": "In Progress",
+                      "in-review": "In Review", 
+                      "blocked": "Blocked",
+                      "done": "Done"
+                    };
+                    return mappings[statusId] || "To Do";
+                  }
+                },
+                {
+                  fieldName: "Area",
+                  getValue: () => {
+                    const areaId = classification.classifications.areas[0].id;
+                    const mappings = {
+                      "security": "Security",
+                      "api-gateway": "API Gateway & Services",
+                      "monitoring": "Monitoring & Observability",
+                      "performance": "Performance Optimization",
+                      "docs": "Documentation",
+                      "infrastructure": "Infrastructure",
+                      "compliance": "Compliance",
+                      "ui": "UI Components",
+                      "data": "Data Management"
+                    };
+                    return mappings[areaId] || "API Gateway & Services";
+                  }
+                },
+                {
+                  fieldName: "Risk",
+                  getValue: () => {
+                    const riskId = classification.classifications.risk[0].id;
+                    const mappings = {
+                      "high": "High",
+                      "medium": "Medium", 
+                      "low": "Low"
+                    };
+                    return mappings[riskId] || "Medium";
+                  }
+                },
+                {
+                  fieldName: "Priority",
+                  getValue: () => {
+                    const priorityId = classification.classifications.priority[0].id;
+                    return priorityId.toUpperCase();
+                  }
+                }
+              ];
+              
+              // Update each field
+              for (const mapping of fieldMappings) {
+                const field = fields.find(f => f.name === mapping.fieldName);
+                if (!field) {
+                  core.info(`Field "${mapping.fieldName}" not found in project`);
+                  continue;
+                }
                 
-                try {
-                  const addMutation = `
-                    mutation($projectId: ID!, $contentId: ID!) { 
-                      addProjectV2ItemById(input: {
-                        projectId: $projectId, 
-                        contentId: $contentId
-                      }) { 
-                        item { id } 
-                      } 
+                if (field.dataType === "SINGLE_SELECT") {
+                  const optionValue = mapping.getValue();
+                  const option = field.options?.find(o => o.name === optionValue);
+                  
+                  if (!option) {
+                    core.info(`Option "${optionValue}" not found for field "${mapping.fieldName}"`);
+                    continue;
+                  }
+                  
+                  const mutation = `
+                    mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $optionId: String!) {
+                      updateProjectV2ItemFieldValue(input: {
+                        projectId: $projectId,
+                        itemId: $itemId,
+                        fieldId: $fieldId,
+                        value: { singleSelectOptionId: $optionId }
+                      }) {
+                        projectV2Item { id }
+                      }
                     }
                   `;
                   
-                  core.info(`Using contentId: ${contentId}`);
-                  
-                  const addResult = await github.graphql(addMutation, { 
-                    projectId, 
-                    contentId 
-                  });
-                  
-                  itemId = addResult.addProjectV2ItemById.item.id;
-                  core.info(`✅ Added item with ID: ${itemId}`);
-                  
-                  // Write a summary 
-                  fs.writeFileSync('project-integration-summary.json', JSON.stringify({
-                    timestamp: new Date().toISOString(),
-                    project: project.title,
-                    item: {
-                      type: itemType,
-                      number: itemNumber,
-                      added_to_project: true,
-                    },
-                    classifications: classifications
-                  }, null, 2));
-                  
-                } catch (e) {
-                  core.setFailed(`Failed to add item to project: ${e.message}`);
-                  fs.writeFileSync('project-integration-summary.json', JSON.stringify({
-                    timestamp: new Date().toISOString(),
-                    project: project.title,
-                    error: e.message,
-                    item: {
-                      type: itemType,
-                      number: itemNumber,
-                      added_to_project: false,
-                    }
-                  }, null, 2));
+                  try {
+                    await github.graphql(mutation, {
+                      projectId,
+                      itemId,
+                      fieldId: field.id,
+                      optionId: option.id
+                    });
+                    core.info(`Set ${mapping.fieldName} = ${optionValue}`);
+                  } catch (error) {
+                    core.warning(`Failed to set ${mapping.fieldName}: ${error.message}`);
+                  }
                 }
               }
-            } catch (error) {
-              core.setFailed(`Project lookup failed: ${error.message}`);
-              fs.writeFileSync('project-integration-summary.json', JSON.stringify({
-                timestamp: new Date().toISOString(),
-                error: error.message
-              }, null, 2));
+              
+              core.info('Project fields updated successfully');
             }
-
-      - name: Upload Integration Summary
-        uses: actions/upload-artifact@v4
-        with:
-          name: project-integration-summary
-          path: project-integration-summary.json
-          retention-days: 7
-          if-no-files-found: ignore
