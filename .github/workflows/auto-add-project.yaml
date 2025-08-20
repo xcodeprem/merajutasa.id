@@ -346,7 +346,7 @@ jobs:
 
             // Optional auto-labeling (opt-in)
             if (autoApplyLabels) {
-              const labelsToAddSet = new Set();
+              const labelsToAdd = [];
 
               // 1) Status label inference if missing
               const hasStatusLabel = Array.from(labels).some(l => l.toLowerCase().startsWith('status:'));
@@ -362,7 +362,7 @@ jobs:
                   if (isPRContext && content.merged) statusLabel = 'status:done';
                   else if (!isPRContext && content.state === 'closed') statusLabel = 'status:done';
                 }
-                if (statusLabel) labelsToAddSet.add(statusLabel);
+                if (statusLabel) labelsToAdd.push(statusLabel);
               }
 
               // 2) Priority normalization aliases → P#
@@ -370,94 +370,18 @@ jobs:
               const hasP1 = labels.has('P1');
               const hasP2 = labels.has('P2');
               const hasP3 = labels.has('P3');
-              if (!hasP0 && (labels.has('urgent') || labels.has('critical'))) labelsToAddSet.add('P0');
-              if (!hasP1 && (labels.has('high-priority') || labels.has('high'))) labelsToAddSet.add('P1');
-              if (!hasP2 && (labels.has('medium-priority') || labels.has('medium'))) labelsToAddSet.add('P2');
-              if (!hasP3 && (labels.has('planned') || labels.has('low') || labels.has('low-priority'))) labelsToAddSet.add('P3');
+              if (!hasP0 && (labels.has('urgent') || labels.has('critical'))) labelsToAdd.push('P0');
+              if (!hasP1 && (labels.has('high-priority') || labels.has('high'))) labelsToAdd.push('P1');
+              if (!hasP2 && (labels.has('medium-priority') || labels.has('medium'))) labelsToAdd.push('P2');
+              if (!hasP3 && (labels.has('planned') || labels.has('low') || labels.has('low-priority'))) labelsToAdd.push('P3');
 
               // 3) Due label from milestone if missing
               const hasDueLabel = Array.from(labels).some(l => /^due:\d{4}-\d{2}-\d{2}$/.test(l));
               if (!hasDueLabel && content.milestone?.dueOn) {
                 const d = content.milestone.dueOn.split('T')[0];
-                labelsToAddSet.add(`due:${d}`);
+                labelsToAdd.push(`due:${d}`);
               }
 
-              // 4) Derive labels from updated fields
-              const existingLc = new Set(Array.from(labels).map(l => l.toLowerCase()));
-              const addIfMissing = (label) => { if (!existingLc.has(label.toLowerCase())) labelsToAddSet.add(label); };
-
-              const areaSlugMap = {
-                'Security Layer': 'area:security-layer',
-                'Monitoring & Observability': 'area:monitoring-observability',
-                'Performance Optimization': 'area:performance-optimization',
-                'High Availability': 'area:high-availability',
-                'Compliance & Governance': 'area:compliance-governance',
-                'API Gateway & Services': 'area:api-gateway-services',
-                'CI/CD Pipeline': 'area:cicd-pipeline',
-                'Container Orchestration': 'area:container-orchestration',
-                'Data Management': 'area:data-management',
-                'Integration Platform': 'area:integration-platform',
-                'AI/ML Integration': 'area:ai-ml-integration',
-                'Executive Dashboard': 'area:executive-dashboard',
-                'Infrastructure Modernization': 'area:infrastructure-modernization',
-                'Developer Experience': 'area:developer-experience',
-                'Advanced Enterprise': 'area:advanced-enterprise',
-                'Equity UI': 'area:equity-ui',
-                'Docs': 'area:docs',
-                'Configuration': 'area:configuration',
-                'Testing': 'area:testing',
-                'Mobile API': 'area:mobile-api'
-              };
-
-              const phaseSlug = (val) => {
-                const m = {
-                  'Phase 1': 'phase:1',
-                  'Phase 2 W1': 'phase:2-week-1', 'Phase 2 W2': 'phase:2-week-2',
-                  'Phase 2 W3': 'phase:2-week-3', 'Phase 2 W4': 'phase:2-week-4',
-                  'Phase 2 W5': 'phase:2-week-5', 'Phase 2 W6': 'phase:2-week-6',
-                  'Phase 2 W7': 'phase:2-week-7', 'Phase 2 W8': 'phase:2-week-8',
-                  'Phase 3 Q1': 'phase:3-q1', 'Phase 3 Q2': 'phase:3-q2',
-                  'Phase 3 Q3': 'phase:3-q3', 'Phase 3 Q4': 'phase:3-q4'
-                }; return m[val];
-              };
-
-              const statusSlug = (val) => ({
-                'To Do': 'status:todo', 'In Progress': 'status:in-progress',
-                'In Review': 'status:in-review', 'Blocked': 'status:blocked',
-                'Done': 'status:done'
-              }[val]);
-
-              const riskSlug = (val) => ({ 'Low': 'risk:low', 'Medium': 'risk:medium', 'High': 'risk:high' }[val]);
-
-              const healthSlug = (val) => ({
-                '100/100': 'health:100', '90-99/100': 'health:90-99',
-                '75-89/100': 'health:75-89', '50-74/100': 'health:50-74',
-                '25-49/100': 'health:25-49', '0-24/100': 'health:0-24'
-              }[val]);
-
-              const sizeSlug = (val) => ({
-                '< 10KB': 'size:small', '10-25KB': 'size:medium', '25-50KB': 'size:large',
-                '50-100KB': 'size:very-large', '100KB+': 'size:enterprise',
-                'Enterprise Scale': 'size:system'
-              }[val]);
-
-              const slugify = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-
-              for (const upd of summary.fields_updated) {
-                const { field, value } = upd;
-                if (!value) continue;
-                if (field === 'Area') { const lab = areaSlugMap[value]; if (lab) addIfMissing(lab); }
-                else if (field === 'Phase') { const lab = phaseSlug(value); if (lab) addIfMissing(lab); }
-                else if (field === 'Status') { const lab = statusSlug(value); if (lab) addIfMissing(lab); }
-                else if (field === 'Risk') { const lab = riskSlug(value); if (lab) addIfMissing(lab); }
-                else if (field === 'Health Score') { const lab = healthSlug(value); if (lab) addIfMissing(lab); }
-                else if (field === 'Implementation Size') { const lab = sizeSlug(value); if (lab) addIfMissing(lab); }
-                else if (field === 'Iteration') { addIfMissing(`iteration:${slugify(value)}`); }
-                else if (field === 'Team Assignment') { addIfMissing(`team:${slugify(value)}`); }
-                else if (field === 'Priority') { addIfMissing(value); }
-              }
-
-              const labelsToAdd = Array.from(labelsToAddSet);
               if (labelsToAdd.length) {
                 if (isDryRun) {
                   core.info(`🧪 DRY RUN: Would add labels: ${labelsToAdd.join(', ')}`);
