@@ -68,18 +68,23 @@ jobs:
 
             // Fetch latest item details
             let title = '', body = '', labels = [], milestoneTitle = '';
+            let prState = null, isDraft = false, merged = false, issueState = null;
             if (isPR) {
               const pr = (await github.rest.pulls.get({ owner, repo, pull_number: number })).data;
               title = pr.title || '';
               body = pr.body || '';
               labels = (pr.labels || []).map(l => typeof l === 'string' ? l : l.name);
               milestoneTitle = pr.milestone?.title || '';
+              prState = typeof pr.state === 'string' ? pr.state.toLowerCase() : null;
+              isDraft = !!pr.draft;
+              merged = !!pr.merged;
             } else {
               const issue = (await github.rest.issues.get({ owner, repo, issue_number: number })).data;
               title = issue.title || '';
               body = issue.body || '';
               labels = (issue.labels || []).map(l => typeof l === 'string' ? l : l.name);
               milestoneTitle = issue.milestone?.title || '';
+              issueState = typeof issue.state === 'string' ? issue.state.toLowerCase() : null;
             }
 
             const existing = new Set(labels);
@@ -128,15 +133,11 @@ jobs:
             // Status label (for issues/PRs)
             let status = null;
             if (isPR) {
-              const prState = context.payload.pull_request.state; // open/closed
-              const isDraft = context.payload.pull_request.draft;
-              const merged = !!context.payload.pull_request.merged;
               if (merged) status = 'status:done';
               else if (prState === 'closed') status = 'status:done';
               else if (context.payload.action === 'ready_for_review' || !isDraft) status = 'status:in-review';
               else status = 'status:in-progress';
             } else {
-              const issueState = context.payload.issue.state; // open/closed
               if (issueState === 'closed') status = 'status:done';
               else if (hasAny(text, ['wip', 'progress'])) status = 'status:in-progress';
               else status = 'status:todo';

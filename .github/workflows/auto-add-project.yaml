@@ -308,15 +308,25 @@ jobs:
             else if (labels.has('status:blocked')) await setSingleSelect('Status', 'Blocked');
             else if (labels.has('status:done')) await setSingleSelect('Status', 'Done');
             else {
-              if (context.payload.action === 'opened') {
-                if (isPRContext && content.isDraft) await setSingleSelect('Status', 'To Do');
-                else if (isPRContext && !content.isDraft) await setSingleSelect('Status', 'In Review');
-                else await setSingleSelect('Status', 'To Do');
+              const action = context.payload.action;
+              if (action === 'opened') {
+                if (isPRContext) {
+                  const isDraft = !!(content && Object.prototype.hasOwnProperty.call(content, 'isDraft') && content.isDraft);
+                  await setSingleSelect('Status', isDraft ? 'To Do' : 'In Review');
+                } else {
+                  await setSingleSelect('Status', 'To Do');
+                }
               }
-              if (context.payload.action === 'ready_for_review') await setSingleSelect('Status', 'In Review');
-              if (context.payload.action === 'closed') {
-                if (isPRContext && content.merged) await setSingleSelect('Status', 'Done');
-                else if (!isPRContext && content.state === 'closed') await setSingleSelect('Status', 'Done');
+              if (action === 'ready_for_review') await setSingleSelect('Status', 'In Review');
+              if (action === 'closed') {
+                if (isPRContext) {
+                  const merged = !!(content && Object.prototype.hasOwnProperty.call(content, 'merged') && content.merged);
+                  const prClosed = (content && typeof content.state === 'string' && content.state.toLowerCase() === 'closed');
+                  if (merged || prClosed) await setSingleSelect('Status', 'Done');
+                } else {
+                  const isClosed = (content && typeof content.state === 'string' && content.state.toLowerCase() === 'closed');
+                  if (isClosed) await setSingleSelect('Status', 'Done');
+                }
               }
             }
 
