@@ -46,80 +46,58 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: 📋 Validate Prerequisites
-        id: validate
+      - name: 🎯 Process Project Addition
         uses: actions/github-script@v7
+        env:
+          GH_PROJECT_TOKEN: ${{ secrets.GH_PROJECT_TOKEN }}
+          INPUT_NUMBER: ${{ inputs.number }}
+          INPUT_PROJECT_OWNER: ${{ inputs.project_owner }}
+          INPUT_PROJECT_TITLE: ${{ inputs.project_title }}
+          INPUT_DRY_RUN: ${{ inputs.dry_run }}
         with:
+          github-token: ${{ github.token }}
           script: |
-            // Prefer GH_PROJECT_TOKEN; if missing, fallback to default token (dry-run only)
-            const pat = '${{ secrets.GH_PROJECT_TOKEN }}';
-            if (!pat) {
-              core.warning('GH_PROJECT_TOKEN is not set. Falling back to GITHUB_TOKEN and enabling dry-run.');
-              core.setOutput('use_default_token', 'true');
-            } else {
-              core.setOutput('use_default_token', 'false');
+            const enableDetailedLogging = process.env.ENABLE_DETAILED_LOGGING === 'true';
+            const hasPat = !!(process.env.GH_PROJECT_TOKEN && process.env.GH_PROJECT_TOKEN.trim());
+            const isDryRun = (String(process.env.INPUT_DRY_RUN).toLowerCase() === 'true') || !hasPat;
+
+            const { getOctokit } = require('@actions/github');
+            const writeClient = hasPat ? getOctokit(process.env.GH_PROJECT_TOKEN) : null;
+
+            function detailedLog(message, data = null) {
+              if (enableDetailedLogging) {
+                if (data) core.info(`🔍 ${message}: ${JSON.stringify(data, null, 2)}`);
+                else core.info(`🔍 ${message}`);
+              }
             }
 
-            // Log workflow trigger for IT Leader visibility
+            // Log trigger
             core.info('🎯 Auto-add Project Workflow triggered');
             core.info(`📧 Event: ${context.eventName}`);
             core.info(`🔧 Action: ${context.payload.action || 'N/A'}`);
-            core.info(`📅 Timestamp: ${new Date().toISOString()}`);
+            core.info(`🔐 Using PAT: ${hasPat ? 'yes' : 'no'}`);
+            core.info(`🧪 Dry-run: ${isDryRun}`);
 
-            core.setOutput('validated', 'true');
-
-      - name: 🎯 Process Project Addition
-        if: steps.validate.outputs.validated == 'true'
-        uses: actions/github-script@v7
-        env:
-          GH_TOKEN: ${{ secrets.GH_PROJECT_TOKEN != '' && secrets.GH_PROJECT_TOKEN || github.token }}
-          USE_DEFAULT_TOKEN: ${{ steps.validate.outputs.use_default_token }}
-        with:
-          github-token: ${{ secrets.GH_PROJECT_TOKEN != '' && secrets.GH_PROJECT_TOKEN || github.token }}
-          script: |
-            const forcedDryRun = '${{ steps.validate.outputs.use_default_token }}' === 'true';
-            const isDryRun = forcedDryRun || ('${{ inputs.dry_run }}' === 'true');
-            const enableDetailedLogging = process.env.ENABLE_DETAILED_LOGGING === 'true';
-            
-            // Helper function for detailed logging
-            function detailedLog(message, data = null) {
-              if (enableDetailedLogging) {
-                if (data) {
-                  core.info(`🔍 ${message}: ${JSON.stringify(data, null, 2)}`);
-                } else {
-                  core.info(`🔍 ${message}`);
-                }
-              }
-            }
-            
-            // Check for +project comment trigger
+            // Comment trigger
             if (context.eventName === 'issue_comment') {
-              const comment = context.payload.comment.body.trim().toLowerCase();
-              if (!comment.includes('+project')) { 
+              const comment = (context.payload.comment?.body || '').trim().toLowerCase();
+              if (!comment.includes('+project')) {
                 core.info('💬 Comment does not contain +project trigger, skipping');
-                return; 
+                return;
               }
               core.info('✅ Triggered via +project comment');
             }
-            
-            // Determine project configuration
-            const ownerLogin = '${{ inputs.project_owner }}' || 
-                              process.env.PROJECT_OWNER || 
-                              '${{ vars.PROJECT_OWNER }}' || 
-                              context.repo.owner;
-            const projectTitle = '${{ inputs.project_title }}' || 
-                               process.env.PROJECT_TITLE || 
-                               '${{ vars.PROJECT_TITLE }}' || 
-                               process.env.DEFAULT_PROJECT_TITLE;
+
+            // Inputs/env
+            const ownerLogin = (process.env.INPUT_PROJECT_OWNER || process.env.PROJECT_OWNER || context.repo.owner || '').trim() || context.repo.owner;
+            const projectTitle = (process.env.INPUT_PROJECT_TITLE || process.env.PROJECT_TITLE || process.env.DEFAULT_PROJECT_TITLE || '').trim() || 'MerajutASA Program Board';
 
             core.info(`🏢 Target Owner: ${ownerLogin}`);
             core.info(`📋 Target Project: ${projectTitle}`);
-            core.info(`🔄 Dry Run Mode: ${isDryRun} ${forcedDryRun ? '(forced: missing GH_PROJECT_TOKEN)' : ''}`);
 
-            // Enhanced project lookup using repositoryOwner pattern (personal account optimized)
+            // Project lookup
             let project;
             try {
-              core.info('🔍 Looking up project...');
               const projectQuery = `
                 query($owner: String!) {
                   repositoryOwner(login: $owner) {
@@ -128,642 +106,100 @@ jobs:
                     ... on User {
                       projectsV2(first: 50) {
                         nodes {
-                          id
-                          title
-                          url
-                          public
+                          id title url public
                           fields(first: 50) {
                             nodes {
                               __typename
-                              ... on ProjectV2FieldCommon { 
-                                id 
-                                name 
-                                dataType 
-                              }
-                              ... on ProjectV2SingleSelectField { 
-                                id
-                                name
-                                dataType
-                                options { 
-                                  id 
-                                  name 
-                                  color
-                                  description
-                                } 
-                              }
+                              ... on ProjectV2FieldCommon { id name dataType }
+                              ... on ProjectV2SingleSelectField { id name dataType options { id name color description } }
                             }
                           }
-                          items(first: 100) {
-                            nodes { 
-                              id 
-                              content { 
-                                ... on Issue { 
-                                  id 
-                                  number
-                                  title
-                                  state
-                                } 
-                                ... on PullRequest { 
-                                  id 
-                                  number
-                                  title
-                                  state
-                                  merged
-                                } 
-                              } 
-                            }
-                          }
+                          items(first: 100) { nodes { id content { ... on Issue { id number title state } ... on PullRequest { id number title state merged } } } }
                         }
                       }
                     }
                     ... on Organization {
                       projectsV2(first: 50) {
                         nodes {
-                          id
-                          title
-                          url
-                          public
+                          id title url public
                           fields(first: 50) {
                             nodes {
                               __typename
-                              ... on ProjectV2FieldCommon { 
-                                id 
-                                name 
-                                dataType 
-                              }
-                              ... on ProjectV2SingleSelectField { 
-                                id
-                                name
-                                dataType
-                                options { 
-                                  id 
-                                  name 
-                                  color
-                                  description
-                                } 
-                              }
+                              ... on ProjectV2FieldCommon { id name dataType }
+                              ... on ProjectV2SingleSelectField { id name dataType options { id name color description } }
                             }
                           }
-                          items(first: 100) {
-                            nodes { 
-                              id 
-                              content { 
-                                ... on Issue { 
-                                  id 
-                                  number
-                                  title
-                                  state
-                                } 
-                                ... on PullRequest { 
-                                  id 
-                                  number
-                                  title
-                                  state
-                                  merged
-                                } 
-                              } 
-                            }
-                          }
+                          items(first: 100) { nodes { id content { ... on Issue { id number title state } ... on PullRequest { id number title state merged } } } }
                         }
                       }
                     }
                   }
                 }
               `;
-              
               const resp = await github.graphql(projectQuery, { owner: ownerLogin });
               const nodes = resp.repositoryOwner?.projectsV2?.nodes || [];
-              
               detailedLog('Available projects', nodes.map(p => ({ title: p.title, id: p.id })));
-              
-              project = nodes.find(p => p.title === projectTitle);
-              
-              // Enhanced fallback logic for IT Leader convenience
-              if (!project && projectTitle !== 'MerajutASA Program Board') {
-                core.warning(`🔄 Project "${projectTitle}" not found, trying legacy title`);
-                project = nodes.find(p => p.title === 'MerajutASA Program Board');
-              }
-              
-              if (!project && nodes.length > 0) {
-                core.warning(`🔄 No exact match found, trying case-insensitive search`);
-                project = nodes.find(p => p.title.toLowerCase() === projectTitle.toLowerCase());
-              }
-              
+              project = nodes.find(p => p.title === projectTitle)
+                     || nodes.find(p => p.title.toLowerCase() === projectTitle.toLowerCase())
+                     || nodes.find(p => p.title === 'MerajutASA Program Board');
             } catch (error) {
               core.warning(`❌ Project lookup failed: ${error.message}`);
-              
               if (process.env.AUTO_CREATE_PROJECT === 'true') {
-                core.info('🆕 AUTO_CREATE_PROJECT is enabled, but project creation should be done via setup-project-v2.yml workflow');
-                core.info('💡 IT Leader Action Required: Run the "Setup Project V2" workflow first');
+                core.info('🆕 Run "Setup Project V2" workflow to create/configure the project');
               }
-              
               return;
             }
-            
-            if (!project) { 
+
+            if (!project) {
               core.warning(`❌ Project "${projectTitle}" not found in ${ownerLogin}'s account`);
-              core.info('💡 IT Leader Action Required:');
-              core.info('   1. Run "Setup Project V2" workflow to create the project');
-              core.info('   2. Or check the project title spelling');
-              core.info('   3. Verify GH_PROJECT_TOKEN has project access');
-              return; 
+              core.info('💡 Run "Setup Project V2" workflow, check title, or ensure PAT access');
+              return;
             }
 
             core.info(`✅ Found project: ${project.title} (${project.url})`);
-            
             const projectId = project.id;
             const fields = project.fields.nodes;
             const existingItems = project.items.nodes;
-            
             detailedLog('Project fields', fields.map(f => ({ name: f.name, type: f.dataType })));
 
             // Determine target issue/PR
             const repoOwner = context.payload.repository?.owner?.login || context.repo.owner;
             const repoName = context.payload.repository?.name || context.repo.repo;
             let isPRContext = false;
-            let number = undefined;
-            
-            // Enhanced number detection logic
+            let number;
             if (context.eventName === 'workflow_dispatch') {
-              const inputNum = ('${{ inputs.number }}' || '').trim();
+              const inputNum = (process.env.INPUT_NUMBER || '').trim();
               if (inputNum) {
                 number = parseInt(inputNum, 10);
                 core.info(`🎯 Manual target: #${number}`);
               }
             } else if (context.eventName === 'pull_request') {
-              isPRContext = true; 
-              number = context.payload.pull_request.number;
+              isPRContext = true; number = context.payload.pull_request.number;
             } else if (context.eventName === 'issues') {
-              isPRContext = false; 
               number = context.payload.issue.number;
             } else if (context.eventName === 'issue_comment') {
-              // Enhanced PR detection for comments
-              isPRContext = !!context.payload.issue?.pull_request;
-              number = context.payload.issue?.number;
+              isPRContext = !!context.payload.issue?.pull_request; number = context.payload.issue?.number;
             }
-            
-            if (!number) { 
-              core.warning('❌ No issue/PR number detected');
-              return; 
-            }
+            if (!number) { core.info('❌ No issue/PR number detected'); return; }
 
-            core.info(`🎯 Processing ${isPRContext ? 'PR' : 'Issue'} #${number}`);
-
-            // Fetch detailed content information
+            // Fetch content
             const contentQuery = isPRContext
-              ? `query($owner:String!, $repo:String!, $number:Int!) {
-                   repository(owner:$owner, name:$repo) {
-                     pullRequest(number:$number) {
-                       id number title body state merged mergeable
-                       labels(first:50){ nodes { name color description } }
-                       milestone { title dueOn }
-                       assignees(first:10){nodes{login name email}}
-                       author { login }
-                       createdAt
-                       updatedAt
-                       closedAt
-                       mergedAt
-                       isDraft
-                       reviewRequests(first:10) { nodes { requestedReviewer { ... on User { login } } } }
-                       reviews(first:10) { nodes { state author { login } } }
-                     }
-                   }
-                 }`
-              : `query($owner:String!, $repo:String!, $number:Int!) {
-                   repository(owner:$owner, name:$repo) {
-                     issue(number:$number) {
-                       id number title body state stateReason
-                       labels(first:50){ nodes { name color description } }
-                       milestone { title dueOn }
-                       assignees(first:10){nodes{login name email}}
-                       author { login }
-                       createdAt
-                       updatedAt
-                       closedAt
-                       comments { totalCount }
-                     }
-                   }
-                 }`;
-                 
-            const contentResp = await github.graphql(contentQuery, { 
-              owner: repoOwner, 
-              repo: repoName, 
-              number 
-            });
+              ? `query($owner:String!, $repo:String!, $number:Int!) { repository(owner:$owner, name:$repo) { pullRequest(number:$number) { id number title body state merged labels(first:50){nodes{name}} milestone{title dueOn} assignees(first:10){nodes{login}} author{login} createdAt updatedAt closedAt mergedAt isDraft } } }`
+              : `query($owner:String!, $repo:String!, $number:Int!) { repository(owner:$owner, name:$repo) { issue(number:$number) { id number title body state stateReason labels(first:50){nodes{name}} milestone{title dueOn} assignees(first:10){nodes{login}} author{login} createdAt updatedAt closedAt comments{totalCount} } } }`;
+            const contentResp = await github.graphql(contentQuery, { owner: repoOwner, repo: repoName, number });
             const content = isPRContext ? contentResp.repository.pullRequest : contentResp.repository.issue;
-            
-            if (!content) { 
-              core.error(`❌ Content not found for #${number}`);
-              return; 
-            }
-            
+            if (!content) { core.error(`❌ Content not found for #${number}`); return; }
+
             const contentId = content.id;
             const labels = new Set((content.labels?.nodes || []).map(l => l.name));
-            
+            const firstAssignee = content.assignees?.nodes?.[0]?.login;
+
+            core.info(`🎯 Processing ${isPRContext ? 'PR' : 'Issue'} #${number}`);
             core.info(`📝 Title: ${content.title}`);
             core.info(`🏷️  Labels: ${Array.from(labels).join(', ') || 'None'}`);
             core.info(`👤 Author: ${content.author?.login || 'Unknown'}`);
             core.info(`📅 Created: ${content.createdAt}`);
-            
-            detailedLog('Full content data', {
-              id: contentId,
-              number: content.number,
-              title: content.title,
-              state: content.state,
-              labels: Array.from(labels),
-              assignees: content.assignees?.nodes?.map(a => a.login) || [],
-              milestone: content.milestone?.title
-            });
 
-            // Check if item already exists in project
-            const existingItem = existingItems.find(i => i.content && i.content.id === contentId);
-            let itemId;
-            
-            if (existingItem) {
-              itemId = existingItem.id;
-              core.info(`🔄 Item already exists in project, updating fields`);
-            } else {
-              if (isDryRun) {
-                core.info(`🧪 DRY RUN: Would add item to project`);
-                return;
-              }
-              
-              core.info(`➕ Adding new item to project`);
-              const addMutation = `mutation($projectId: ID!, $contentId: ID!) {
-                addProjectV2ItemById(input:{projectId:$projectId, contentId:$contentId}) { 
-                  item { id } 
-                }
-              }`;
-              const addResult = await github.graphql(addMutation, { projectId, contentId });
-              itemId = addResult.addProjectV2ItemById.item.id;
-              core.info(`✅ Added item with ID: ${itemId}`);
-            }
-
-            // Field manipulation helpers
-            function getField(name) { 
-              return fields.find(f => f.name === name); 
-            }
-            
-            async function setSingleSelect(fieldName, optionName) {
-              const field = getField(fieldName);
-              if (!field || field.dataType !== 'SINGLE_SELECT') {
-                detailedLog(`Field "${fieldName}" not found or not single-select`);
-                return false;
-              }
-              
-              const option = (field.options || []).find(o => 
-                o.name.toLowerCase() === optionName.toLowerCase()
-              );
-              if (!option) {
-                detailedLog(`Option "${optionName}" not found in field "${fieldName}"`);
-                return false;
-              }
-              
-              if (isDryRun) {
-                core.info(`🧪 DRY RUN: Would set ${fieldName} = ${optionName}`);
-                return true;
-              }
-              
-              const mutation = `mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $optionId: String!) {
-                updateProjectV2ItemFieldValue(input:{ 
-                  projectId:$projectId, 
-                  itemId:$itemId, 
-                  fieldId:$fieldId, 
-                  value:{ singleSelectOptionId:$optionId }
-                }) { 
-                  projectV2Item { id } 
-                }
-              }`;
-              
-              await github.graphql(mutation, { 
-                projectId, 
-                itemId, 
-                fieldId: field.id, 
-                optionId: option.id 
-              });
-              
-              core.info(`✅ Set ${fieldName} = ${optionName}`);
-              return true;
-            }
-            
-            async function setDate(fieldName, value) {
-              const field = getField(fieldName);
-              if (!field || field.dataType !== 'DATE') return;
-              
-              if (isDryRun) {
-                core.info(`🧪 DRY RUN: Would set ${fieldName} = ${value}`);
-                return;
-              }
-              
-              const mutation = `mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $v: Date!) {
-                updateProjectV2ItemFieldValue(input:{ 
-                  projectId:$projectId, 
-                  itemId:$itemId, 
-                  fieldId:$fieldId, 
-                  value:{ date:$v }
-                }) { 
-                  projectV2Item { id } 
-                }
-              }`;
-              
-              await github.graphql(mutation, { 
-                projectId, 
-                itemId, 
-                fieldId: field.id, 
-                v: value 
-              });
-              
-              core.info(`✅ Set ${fieldName} = ${value}`);
-            }
-            
-            async function setNumber(fieldName, value) {
-              const field = getField(fieldName);
-              if (!field || field.dataType !== 'NUMBER') return;
-              
-              if (isDryRun) {
-                core.info(`🧪 DRY RUN: Would set ${fieldName} = ${value}`);
-                return;
-              }
-              
-              const mutation = `mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $v: Float!) {
-                updateProjectV2ItemFieldValue(input:{ 
-                  projectId:$projectId, 
-                  itemId:$itemId, 
-                  fieldId:$fieldId, 
-                  value:{ number:$v }
-                }) { 
-                  projectV2Item { id } 
-                }
-              }`;
-              
-              await github.graphql(mutation, { 
-                projectId, 
-                itemId, 
-                fieldId: field.id, 
-                v: value 
-              });
-              
-              core.info(`✅ Set ${fieldName} = ${value}`);
-            }
-            
-            async function setText(fieldName, value, options = {}) {
-              const { overwrite = true } = options;
-              const field = getField(fieldName);
-              if (!field || field.dataType !== 'TEXT') return;
-              if (!overwrite && (!value || !String(value).trim())) return;
-              
-              if (isDryRun) {
-                core.info(`🧪 DRY RUN: Would set ${fieldName} = ${value}`);
-                return;
-              }
-              
-              const mutation = `mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $v: String!) {
-                updateProjectV2ItemFieldValue(input:{ 
-                  projectId:$projectId, 
-                  itemId:$itemId, 
-                  fieldId:$fieldId, 
-                  value:{ text:$v }
-                }) { 
-                  projectV2Item { id } 
-                }
-              }`;
-              
-              await github.graphql(mutation, { 
-                projectId, 
-                itemId, 
-                fieldId: field.id, 
-                v: value 
-              });
-              
-              core.info(`✅ Set ${fieldName} = ${value}`);
-            }
-
-            // Enhanced field mapping logic for IT Leader tracking
-            core.info('🔧 Applying field mappings...');
-            
-            // Priority mapping with enhanced logic
-            if (labels.has('P0') || labels.has('urgent') || labels.has('critical')) {
-              await setSingleSelect('Priority', 'P0');
-            } else if (labels.has('P1') || labels.has('high-priority') || labels.has('high')) {
-              await setSingleSelect('Priority', 'P1');
-            } else if (labels.has('P2') || labels.has('medium') || labels.has('medium-priority')) {
-              await setSingleSelect('Priority', 'P2');
-            } else if (labels.has('P3') || labels.has('planned') || labels.has('low') || labels.has('low-priority')) {
-              await setSingleSelect('Priority', 'P3');
-            }
-
-            // Enhanced Area mapping
-            const areaLabel = Array.from(labels).find(l => l.toLowerCase().startsWith('area:'));
-            if (areaLabel) {
-              const key = areaLabel.slice('area:'.length).toLowerCase();
-              const areaMapping = {
-                'security': 'Security Layer',
-                'security-layer': 'Security Layer',
-                'observability': 'Monitoring & Observability',
-                'monitoring-observability': 'Monitoring & Observability',
-                'performance': 'Performance Optimization',
-                'performance-optimization': 'Performance Optimization',
-                'high-availability': 'High Availability',
-                'compliance': 'Compliance & Governance',
-                'compliance-governance': 'Compliance & Governance',
-                'api-gateway': 'API Gateway & Services',
-                'api-gateway-services': 'API Gateway & Services',
-                'ci-cd': 'CI/CD Pipeline',
-                'cicd-pipeline': 'CI/CD Pipeline',
-                'container-orchestration': 'Container Orchestration',
-                'data-management': 'Data Management',
-                'integration-platform': 'Integration Platform',
-                'ai-ml-integration': 'AI/ML Integration',
-                'executive-dashboard': 'Executive Dashboard',
-                'infrastructure-modernization': 'Infrastructure Modernization',
-                'developer-experience': 'Developer Experience',
-                'advanced-enterprise': 'Advanced Enterprise',
-                // Legacy fallbacks
-                'equity-ui': 'Equity UI',
-                'docs': 'Docs',
-                'configuration': 'Configuration',
-                'testing': 'Testing',
-                'mobile-api': 'Mobile API'
-              };
-
-              const mappedArea = areaMapping[key] || key.replace(/-/g, ' ');
-              const success = await setSingleSelect('Area', mappedArea);
-              
-              if (!success) {
-                // Fallback: try exact label match
-                const areaField = getField('Area');
-                const labelSetLc = new Set(Array.from(labels).map(s => s.toLowerCase()));
-                const hit = (areaField?.options || []).find(o => 
-                  labelSetLc.has(o.name.toLowerCase())
-                );
-                if (hit) {
-                  await setSingleSelect('Area', hit.name);
-                }
-              }
-            }
-
-            // Enhanced Phase mapping
-            const phaseLabel = Array.from(labels).find(l => l.toLowerCase().startsWith('phase:'));
-            if (phaseLabel) {
-              const raw = phaseLabel.slice('phase:'.length).toLowerCase();
-              const phaseMapping = new Map([
-                ['1', 'Phase 1'],
-                ['2-week-1', 'Phase 2 W1'], ['2-week-2', 'Phase 2 W2'], 
-                ['2-week-3', 'Phase 2 W3'], ['2-week-4', 'Phase 2 W4'],
-                ['2-week-5', 'Phase 2 W5'], ['2-week-6', 'Phase 2 W6'],
-                ['2-week-7', 'Phase 2 W7'], ['2-week-8', 'Phase 2 W8'],
-                ['3-q1', 'Phase 3 Q1'], ['3-q2', 'Phase 3 Q2'],
-                ['3-q3', 'Phase 3 Q3'], ['3-q4', 'Phase 3 Q4'],
-              ]);
-              
-              const target = phaseMapping.get(raw);
-              if (target) {
-                await setSingleSelect('Phase', target);
-              }
-            }
-
-            // Risk assessment
-            if (labels.has('risk:low')) {
-              await setSingleSelect('Risk', 'Low');
-            } else if (labels.has('risk:medium')) {
-              await setSingleSelect('Risk', 'Medium');
-            } else if (labels.has('risk:high')) {
-              await setSingleSelect('Risk', 'High');
-            }
-
-            // Enhanced Status mapping with PR-specific logic
-            if (labels.has('status:todo')) {
-              await setSingleSelect('Status', 'To Do');
-            } else if (labels.has('status:in-progress') || labels.has('in-progress')) {
-              await setSingleSelect('Status', 'In Progress');
-            } else if (labels.has('status:in-review')) {
-              await setSingleSelect('Status', 'In Review');
-            } else if (labels.has('status:blocked')) {
-              await setSingleSelect('Status', 'Blocked');
-            } else if (labels.has('status:done')) {
-              await setSingleSelect('Status', 'Done');
-            } else {
-              // Smart status inference
-              if (context.payload.action === 'opened') {
-                if (isPRContext && content.isDraft) {
-                  await setSingleSelect('Status', 'To Do');
-                } else if (isPRContext && !content.isDraft) {
-                  await setSingleSelect('Status', 'In Review');
-                } else {
-                  await setSingleSelect('Status', 'To Do');
-                }
-              }
-              
-              if (context.payload.action === 'ready_for_review') {
-                await setSingleSelect('Status', 'In Review');
-              }
-              
-              if (context.payload.action === 'closed') {
-                if (isPRContext && content.merged) {
-                  await setSingleSelect('Status', 'Done');
-                } else if (!isPRContext && content.state === 'closed') {
-                  await setSingleSelect('Status', 'Done');
-                }
-              }
-            }
-
-            // Date handling
-            const startDateLabel = Array.from(labels).find(l => l.startsWith('start:'));
-            if (startDateLabel) {
-              const dateStr = startDateLabel.slice('start:'.length);
-              if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
-                await setDate('Start date', dateStr);
-              }
-            }
-            
-            const dueDateLabel = Array.from(labels).find(l => l.startsWith('due:'));
-            if (dueDateLabel) {
-              const dateStr = dueDateLabel.slice('due:'.length);
-              if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
-                await setDate('Target date', dateStr);
-              }
-            } else if (content.milestone?.dueOn) {
-              const milestoneDate = content.milestone.dueOn.split('T')[0];
-              await setDate('Target date', milestoneDate);
-            }
-
-            // Estimate handling
-            const estimateLabel = Array.from(labels).find(l => l.startsWith('est:h:'));
-            if (estimateLabel) {
-              const hours = parseFloat(estimateLabel.slice('est:h:'.length));
-              if (!isNaN(hours) && hours > 0) {
-                await setNumber('Estimate (h)', hours);
-              }
-            }
-
-            // Owner assignment
-            const firstAssignee = content.assignees?.nodes?.[0]?.login;
-            if (firstAssignee) {
-              await setText('Owner (text)', firstAssignee);
-            } else if (content.author?.login) {
-              await setText('Owner (text)', content.author.login, { overwrite: false });
-            }
-
-            // Links extraction and milestone
-            const urlMatch = (content.body || '').match(/https?:\/\/\S+/);
-            if (urlMatch) {
-              await setText('Links', urlMatch[0], { overwrite: false });
-            }
-            
-            if (content.milestone?.title) {
-              await setText('Milestone', content.milestone.title);
-            }
-
-            // Component/team/health/size/iteration mappings (optional based on fields existing)
-            const teamLabel = Array.from(labels).find(l => l.toLowerCase().startsWith('team:'));
-            if (teamLabel) {
-              const val = teamLabel.split(':')[1].replace(/-/g, ' ');
-              await setSingleSelect('Team Assignment', val);
-            }
-
-            const componentLabel = Array.from(labels).find(l => l.toLowerCase().startsWith('component:'));
-            if (componentLabel) {
-              const val = componentLabel.split(':')[1].replace(/-/g, ' ');
-              await setSingleSelect('Component', val);
-            }
-
-            const healthLabel = Array.from(labels).find(l => l.toLowerCase().startsWith('health:'));
-            if (healthLabel) {
-              const raw = healthLabel.split(':')[1].toLowerCase();
-              const map = {
-                '100': '100/100',
-                '90-99': '90-99/100',
-                '75-89': '75-89/100',
-                '50-74': '50-74/100',
-                '25-49': '25-49/100',
-                '0-24': '0-24/100'
-              };
-              const target = map[raw] || raw;
-              await setSingleSelect('Health Score', target);
-            }
-
-            const sizeLabel = Array.from(labels).find(l => l.toLowerCase().startsWith('size:'));
-            if (sizeLabel) {
-              const raw = sizeLabel.split(':')[1].toLowerCase();
-              const map = {
-                'small': '< 10KB',
-                'medium': '10-25KB',
-                'large': '25-50KB',
-                'very-large': '50-100KB',
-                'enterprise': '100KB+',
-                'system': 'Enterprise Scale'
-              };
-              const target = map[raw] || raw.replace(/-/g, ' ');
-              await setSingleSelect('Implementation Size', target);
-            }
-
-            const iterLabel = Array.from(labels).find(l => l.toLowerCase().startsWith('iteration:'));
-            if (iterLabel) {
-              const val = iterLabel.split(':')[1].replace(/-/g, ' ');
-              await setSingleSelect('Iteration', val);
-            }
-
-            // Generate summary report for IT Leader
             const summary = {
               timestamp: new Date().toISOString(),
               event: context.eventName,
@@ -771,34 +207,146 @@ jobs:
               item_type: isPRContext ? 'pull_request' : 'issue',
               item_number: number,
               item_title: content.title,
-              project: {
-                owner: ownerLogin,
-                title: projectTitle,
-                url: project.url
-              },
+              project: { owner: ownerLogin, title: projectTitle, url: project.url },
               fields_updated: [],
               dry_run: isDryRun
             };
 
-            core.info('📊 === IT LEADER SUMMARY ===');
-            core.info(`✅ Successfully processed ${isPRContext ? 'PR' : 'Issue'} #${number}`);
-            core.info(`📋 Project: ${projectTitle}`);
-            core.info(`🔗 Project URL: ${project.url}`);
-            core.info(`🏷️  Labels applied: ${Array.from(labels).join(', ') || 'None'}`);
-            core.info(`👤 Owner: ${firstAssignee || content.author?.login || 'Unassigned'}`);
-            core.info(`📅 Milestone: ${content.milestone?.title || 'None'}`);
-            core.info(`🎯 Status: ${content.state}`);
-            
-            if (isDryRun) {
-              core.info('🧪 DRY RUN MODE - No changes were made');
+            // Helpers
+            function getField(name) { return fields.find(f => f.name === name); }
+
+            async function setSingleSelect(fieldName, optionName) {
+              const field = getField(fieldName);
+              if (!field || field.dataType !== 'SINGLE_SELECT') return false;
+              const option = (field.options || []).find(o => o.name.toLowerCase() === optionName.toLowerCase());
+              if (!option) return false;
+              if (!writeClient || isDryRun) { core.info(`🧪 DRY RUN: Would set ${fieldName} = ${optionName}`); summary.fields_updated.push({ field: fieldName, value: optionName, dry_run: true }); return true; }
+              const mutation = `mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $optionId: String!) { updateProjectV2ItemFieldValue(input:{ projectId:$projectId, itemId:$itemId, fieldId:$fieldId, value:{ singleSelectOptionId:$optionId } }) { projectV2Item { id } } }`;
+              await writeClient.graphql(mutation, { projectId, itemId, fieldId: field.id, optionId: option.id });
+              core.info(`✅ Set ${fieldName} = ${optionName}`);
+              summary.fields_updated.push({ field: fieldName, value: optionName });
+              return true;
             }
-            
-            core.info('🎉 Workflow completed successfully!');
+
+            async function setDate(fieldName, value) {
+              const field = getField(fieldName); if (!field || field.dataType !== 'DATE') return;
+              if (!writeClient || isDryRun) { core.info(`🧪 DRY RUN: Would set ${fieldName} = ${value}`); summary.fields_updated.push({ field: fieldName, value, dry_run: true }); return; }
+              const mutation = `mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $v: Date!) { updateProjectV2ItemFieldValue(input:{ projectId:$projectId, itemId:$itemId, fieldId:$fieldId, value:{ date:$v } }) { projectV2Item { id } } }`;
+              await writeClient.graphql(mutation, { projectId, itemId, fieldId: field.id, v: value });
+              core.info(`✅ Set ${fieldName} = ${value}`);
+              summary.fields_updated.push({ field: fieldName, value });
+            }
+
+            async function setNumber(fieldName, value) {
+              const field = getField(fieldName); if (!field || field.dataType !== 'NUMBER') return;
+              if (!writeClient || isDryRun) { core.info(`🧪 DRY RUN: Would set ${fieldName} = ${value}`); summary.fields_updated.push({ field: fieldName, value, dry_run: true }); return; }
+              const mutation = `mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $v: Float!) { updateProjectV2ItemFieldValue(input:{ projectId:$projectId, itemId:$itemId, fieldId:$fieldId, value:{ number:$v } }) { projectV2Item { id } } }`;
+              await writeClient.graphql(mutation, { projectId, itemId, fieldId: field.id, v: value });
+              core.info(`✅ Set ${fieldName} = ${value}`);
+              summary.fields_updated.push({ field: fieldName, value });
+            }
+
+            async function setText(fieldName, value, options = {}) {
+              const { overwrite = true } = options;
+              const field = getField(fieldName);
+              if (!field || field.dataType !== 'TEXT') return;
+              if (!overwrite && (!value || !String(value).trim())) return;
+              if (!writeClient || isDryRun) { core.info(`🧪 DRY RUN: Would set ${fieldName} = ${value}`); summary.fields_updated.push({ field: fieldName, value, dry_run: true }); return; }
+              const mutation = `mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $v: String!) { updateProjectV2ItemFieldValue(input:{ projectId:$projectId, itemId:$itemId, fieldId:$fieldId, value:{ text:$v } }) { projectV2Item { id } } }`;
+              await writeClient.graphql(mutation, { projectId, itemId, fieldId: field.id, v: value });
+              core.info(`✅ Set ${fieldName} = ${value}`);
+              summary.fields_updated.push({ field: fieldName, value });
+            }
+
+            // Ensure item exists or add
+            const existingItem = existingItems.find(i => i.content && i.content.id === contentId);
+            let itemId;
+            if (existingItem) {
+              itemId = existingItem.id; core.info(`🔄 Item already exists in project, updating fields`);
+            } else {
+              if (!writeClient || isDryRun) { core.info('🧪 DRY RUN: Would add item to project'); }
+              else {
+                const addMutation = `mutation($projectId: ID!, $contentId: ID!) { addProjectV2ItemById(input:{projectId:$projectId, contentId:$contentId}) { item { id } } }`;
+                const addResult = await writeClient.graphql(addMutation, { projectId, contentId });
+                itemId = addResult.addProjectV2ItemById.item.id;
+                core.info(`✅ Added item with ID: ${itemId}`);
+              }
+            }
+
+            // Field mappings
+            if (labels.has('P0') || labels.has('urgent') || labels.has('critical')) { await setSingleSelect('Priority', 'P0'); }
+            else if (labels.has('P1') || labels.has('high-priority') || labels.has('high')) { await setSingleSelect('Priority', 'P1'); }
+            else if (labels.has('P2') || labels.has('medium') || labels.has('medium-priority')) { await setSingleSelect('Priority', 'P2'); }
+            else if (labels.has('P3') || labels.has('planned') || labels.has('low') || labels.has('low-priority')) { await setSingleSelect('Priority', 'P3'); }
+
+            const areaLabel = Array.from(labels).find(l => l.toLowerCase().startsWith('area:'));
+            if (areaLabel) {
+              const key = areaLabel.slice('area:'.length).toLowerCase();
+              const areaMapping = { 'security': 'Security Layer', 'security-layer': 'Security Layer', 'observability': 'Monitoring & Observability', 'monitoring-observability': 'Monitoring & Observability', 'performance': 'Performance Optimization', 'performance-optimization': 'Performance Optimization', 'high-availability': 'High Availability', 'compliance': 'Compliance & Governance', 'compliance-governance': 'Compliance & Governance', 'api-gateway': 'API Gateway & Services', 'api-gateway-services': 'API Gateway & Services', 'ci-cd': 'CI/CD Pipeline', 'cicd-pipeline': 'CI/CD Pipeline', 'container-orchestration': 'Container Orchestration', 'data-management': 'Data Management', 'integration-platform': 'Integration Platform', 'ai-ml-integration': 'AI/ML Integration', 'executive-dashboard': 'Executive Dashboard', 'infrastructure-modernization': 'Infrastructure Modernization', 'developer-experience': 'Developer Experience', 'advanced-enterprise': 'Advanced Enterprise', 'equity-ui': 'Equity UI', 'docs': 'Docs', 'configuration': 'Configuration', 'testing': 'Testing', 'mobile-api': 'Mobile API' };
+              const mappedArea = areaMapping[key] || key.replace(/-/g, ' ');
+              let ok = await setSingleSelect('Area', mappedArea);
+              if (!ok) {
+                const areaField = getField('Area');
+                const labelSetLc = new Set(Array.from(labels).map(s => s.toLowerCase()));
+                const hit = (areaField?.options || []).find(o => labelSetLc.has(o.name.toLowerCase()));
+                if (hit) await setSingleSelect('Area', hit.name);
+              }
+            }
+
+            const phaseLabel = Array.from(labels).find(l => l.toLowerCase().startsWith('phase:'));
+            if (phaseLabel) {
+              const raw = phaseLabel.slice('phase:'.length).toLowerCase();
+              const phaseMapping = new Map([[ '1','Phase 1' ], [ '2-week-1','Phase 2 W1' ], [ '2-week-2','Phase 2 W2' ], [ '2-week-3','Phase 2 W3' ], [ '2-week-4','Phase 2 W4' ], [ '2-week-5','Phase 2 W5' ], [ '2-week-6','Phase 2 W6' ], [ '2-week-7','Phase 2 W7' ], [ '2-week-8','Phase 2 W8' ], [ '3-q1','Phase 3 Q1' ], [ '3-q2','Phase 3 Q2' ], [ '3-q3','Phase 3 Q3' ], [ '3-q4','Phase 3 Q4' ]]);
+              const target = phaseMapping.get(raw); if (target) await setSingleSelect('Phase', target);
+            }
+
+            if (labels.has('risk:low')) await setSingleSelect('Risk', 'Low');
+            else if (labels.has('risk:medium')) await setSingleSelect('Risk', 'Medium');
+            else if (labels.has('risk:high')) await setSingleSelect('Risk', 'High');
+
+            if (labels.has('status:todo')) await setSingleSelect('Status', 'To Do');
+            else if (labels.has('status:in-progress') || labels.has('in-progress')) await setSingleSelect('Status', 'In Progress');
+            else if (labels.has('status:in-review')) await setSingleSelect('Status', 'In Review');
+            else if (labels.has('status:blocked')) await setSingleSelect('Status', 'Blocked');
+            else if (labels.has('status:done')) await setSingleSelect('Status', 'Done');
+            else {
+              if (context.payload.action === 'opened') {
+                if (isPRContext && content.isDraft) await setSingleSelect('Status', 'To Do');
+                else if (isPRContext && !content.isDraft) await setSingleSelect('Status', 'In Review');
+                else await setSingleSelect('Status', 'To Do');
+              }
+              if (context.payload.action === 'ready_for_review') await setSingleSelect('Status', 'In Review');
+              if (context.payload.action === 'closed') {
+                if (isPRContext && content.merged) await setSingleSelect('Status', 'Done');
+                else if (!isPRContext && content.state === 'closed') await setSingleSelect('Status', 'Done');
+              }
+            }
+
+            const startDateLabel = Array.from(labels).find(l => l.startsWith('start:'));
+            if (startDateLabel) { const dateStr = startDateLabel.slice('start:'.length); if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) await setDate('Start date', dateStr); }
+            const dueDateLabel = Array.from(labels).find(l => l.startsWith('due:'));
+            if (dueDateLabel) { const dateStr = dueDateLabel.slice('due:'.length); if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) await setDate('Target date', dateStr); }
+            else if (content.milestone?.dueOn) { const milestoneDate = content.milestone.dueOn.split('T')[0]; await setDate('Target date', milestoneDate); }
+
+            const estimateLabel = Array.from(labels).find(l => l.startsWith('est:h:'));
+            if (estimateLabel) { const hours = parseFloat(estimateLabel.slice('est:h:'.length)); if (!isNaN(hours) && hours > 0) await setNumber('Estimate (h)', hours); }
+
+            if (firstAssignee) await setText('Owner (text)', firstAssignee);
+            else if (content.author?.login) await setText('Owner (text)', content.author.login, { overwrite: false });
+
+            const urlMatch = (content.body || '').match(/https?:\/\/\S+/); if (urlMatch) await setText('Links', urlMatch[0], { overwrite: false });
+            if (content.milestone?.title) await setText('Milestone', content.milestone.title);
+
+            const teamLabel = Array.from(labels).find(l => l.toLowerCase().startsWith('team:')); if (teamLabel) { const val = teamLabel.split(':')[1].replace(/-/g, ' '); await setSingleSelect('Team Assignment', val); }
+            const componentLabel = Array.from(labels).find(l => l.toLowerCase().startsWith('component:')); if (componentLabel) { const val = componentLabel.split(':')[1].replace(/-/g, ' '); await setSingleSelect('Component', val); }
+            const healthLabel = Array.from(labels).find(l => l.toLowerCase().startsWith('health:')); if (healthLabel) { const raw = healthLabel.split(':')[1].toLowerCase(); const map = { '100': '100/100', '90-99': '90-99/100', '75-89': '75-89/100', '50-74': '50-74/100', '25-49': '25-49/100', '0-24': '0-24/100' }; const target = map[raw] || raw; await setSingleSelect('Health Score', target); }
+            const sizeLabel = Array.from(labels).find(l => l.toLowerCase().startsWith('size:')); if (sizeLabel) { const raw = sizeLabel.split(':')[1].toLowerCase(); const map = { 'small': '< 10KB', 'medium': '10-25KB', 'large': '25-50KB', 'very-large': '50-100KB', 'enterprise': '100KB+', 'system': 'Enterprise Scale' }; const target = map[raw] || raw.replace(/-/g, ' '); await setSingleSelect('Implementation Size', target); }
+            const iterLabel = Array.from(labels).find(l => l.toLowerCase().startsWith('iteration:')); if (iterLabel) { const val = iterLabel.split(':')[1].replace(/-/g, ' '); await setSingleSelect('Iteration', val); }
 
             // Write summary artifact
             try {
-              const fs = await import('fs');
-              const path = await import('path');
+              const fs = require('fs');
+              const path = require('path');
               const file = path.join(process.env.GITHUB_WORKSPACE || process.cwd(), 'auto-add-summary.json');
               await fs.promises.writeFile(file, JSON.stringify(summary, null, 2), 'utf8');
               core.info('📦 Wrote auto-add-summary.json');
