@@ -192,11 +192,11 @@ jobs:
               opt('Performance Optimization','GREEN','Caching, compression, monitoring (7 components)'),
               opt('High Availability','GRAY','Auto-scaling, disaster recovery (6 components)'),
               opt('Compliance & Governance','ORANGE','Audit, privacy, automation (4 components)'),
-              opt('API Gateway & Services','CYAN','Orchestration, mesh, docs (4 components)'),
+              opt('API Gateway & Services','BLUE','Orchestration, mesh, docs (4 components)'),
               opt('CI/CD Pipeline','YELLOW','Automated deployment (1 component)'),
               opt('Container Orchestration','GRAY','Docker and Kubernetes infrastructure'),
               opt('Data Management','BLUE','Backup and storage systems'),
-              opt('Integration Platform','PINK','Platform, analyzer (2 components)'),
+              opt('Integration Platform','PURPLE','Platform, analyzer (2 components)'),
               opt('AI/ML Integration','GREEN','Anomaly detection, analytics, decision support'),
               opt('Executive Dashboard','YELLOW','KPI visualization, reporting engine'),
               opt('Infrastructure Modernization','GRAY','Component upgrades, optimization'),
@@ -252,7 +252,7 @@ jobs:
               opt('Blocked','RED','Blocked'),
               opt('Done','GREEN','Done'),
               opt('Testing','PURPLE','Testing phase'),
-              opt('Deployed','CYAN','Deployed to production')
+              opt('Deployed','BLUE','Deployed to production')
             ]);
 
             // New enhanced fields for enterprise tracking
@@ -296,16 +296,16 @@ jobs:
               opt('Policy Enforcement','ORANGE','Governance policy automation'),
               
               // API Gateway & Services (4 components)
-              opt('API Gateway','CYAN','Unified API access point'),
-              opt('Service Mesh','CYAN','Inter-service communication'),
-              opt('API Documentation','CYAN','Auto-generated API docs'),
-              opt('Service Discovery','CYAN','Dynamic service registration'),
+              opt('API Gateway','BLUE','Unified API access point'),
+              opt('Service Mesh','BLUE','Inter-service communication'),
+              opt('API Documentation','BLUE','Auto-generated API docs'),
+              opt('Service Discovery','BLUE','Dynamic service registration'),
               
               // Infrastructure Components
               opt('CI/CD Pipeline','YELLOW','Automated deployment pipeline'),
               opt('Container Orchestration','GRAY','Docker and Kubernetes'),
               opt('Data Management','BLUE','Backup and storage systems'),
-              opt('Integration Platform','PINK','Cross-component integration'),
+              opt('Integration Platform','PURPLE','Cross-component integration'),
               
               // Enterprise Features
               opt('Executive Dashboard','YELLOW','Leadership KPI visualization'),
@@ -333,9 +333,9 @@ jobs:
               opt('Accessibility Specialist','YELLOW','Inclusive design and WCAG compliance'),
               
               // Data & Analytics Team
-              opt('Data Engineer','CYAN','Analytics pipelines and processing'),
-              opt('ML Engineer','CYAN','AI/ML integration and models'),
-              opt('Business Intelligence','CYAN','Reporting and dashboard development'),
+              opt('Data Engineer','BLUE','Analytics pipelines and processing'),
+              opt('ML Engineer','BLUE','AI/ML integration and models'),
+              opt('Business Intelligence','BLUE','Reporting and dashboard development'),
               
               // External/Unassigned
               opt('External Consultant','GRAY','External specialist or consultant'),
