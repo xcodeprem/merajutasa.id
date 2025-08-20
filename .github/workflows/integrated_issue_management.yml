@@ -3,7 +3,7 @@ name: Integrated Issue Management (Personal Account)
 # Workflow that combines auto-labeling and project management
 # Created: 2025-08-20
 # Author: Andhika-Rey
-# Version: 1.0.1
+# Version: 1.0.2
 
 on:
   issues:
@@ -33,7 +33,7 @@ permissions:
 
 env:
   DEFAULT_PROJECT_TITLE: "MerajutASA Program Board"
-  WORKFLOW_VERSION: "1.0.1"
+  WORKFLOW_VERSION: "1.0.2"
   CREATED_AT: "2025-08-20"
   CREATED_BY: "Andhika-Rey"
 
@@ -47,6 +47,7 @@ jobs:
       item_type: ${{ steps.extract_info.outputs.item_type }}
       artifact_name: ${{ steps.create_artifact.outputs.artifact_name }}
       has_item: ${{ steps.extract_info.outputs.has_item }}
+      node_id: ${{ steps.extract_info.outputs.node_id }}
     
     steps:
       - name: Extract Item Information
@@ -61,13 +62,16 @@ jobs:
             let isPR = eventName === 'pull_request';
             let number = null;
             let hasItem = false;
+            let nodeId = null;
             
             // Handle different event types to extract item number
             if (eventName === 'pull_request') {
               number = payload.pull_request.number;
+              nodeId = payload.pull_request.node_id;
               hasItem = true;
             } else if ((eventName === 'issues' || eventName === 'issue_comment') && payload.issue) {
               number = payload.issue.number;
+              nodeId = payload.issue.node_id;
               isPR = !!payload.issue.pull_request;
               hasItem = true;
             } else if (eventName === 'workflow_dispatch' && payload.inputs && payload.inputs.number) {
@@ -75,21 +79,23 @@ jobs:
               if (!isNaN(number)) {
                 // Determine if number refers to a PR
                 try {
-                  await github.rest.pulls.get({
+                  const pr = await github.rest.pulls.get({
                     owner,
                     repo: repoName,
                     pull_number: number
                   });
                   isPR = true;
+                  nodeId = pr.data.node_id;
                   hasItem = true;
                 } catch (e) {
                   try {
-                    await github.rest.issues.get({
+                    const issue = await github.rest.issues.get({
                       owner,
                       repo: repoName,
                       issue_number: number
                     });
                     isPR = false;
+                    nodeId = issue.data.node_id;
                     hasItem = true;
                   } catch (e) {
                     core.warning(`Item #${number} not found as issue or PR`);
@@ -101,6 +107,11 @@ jobs:
             
             if (hasItem) {
               core.info(`✅ Found ${isPR ? 'PR' : 'Issue'} #${number}`);
+              if (nodeId) {
+                core.info(`📌 Node ID: ${nodeId}`);
+              } else {
+                core.warning('⚠️ No Node ID found, will try to fetch it in next step');
+              }
             } else {
               core.warning('⚠️ No valid issue/PR number found in this event');
             }
@@ -108,6 +119,9 @@ jobs:
             core.setOutput('item_number', number ? number.toString() : '');
             core.setOutput('item_type', isPR ? 'pull_request' : 'issue');
             core.setOutput('has_item', hasItem ? 'true' : 'false');
+            if (nodeId) {
+              core.setOutput('node_id', nodeId);
+            }
 
       # Skip the rest if no valid item was found
       - name: Check for valid item
@@ -143,7 +157,7 @@ jobs:
             let title = '', body = '', labels = [], milestoneTitle = '';
             let prState = null, isDraft = false, merged = false, issueState = null;
             let item = null;
-            let nodeId = null;
+            let nodeId = '${{ steps.extract_info.outputs.node_id }}';
             
             if (isPR) {
               const pr = (await github.rest.pulls.get({ owner, repo, pull_number: number })).data;
@@ -155,7 +169,7 @@ jobs:
               prState = typeof pr.state === 'string' ? pr.state.toLowerCase() : null;
               isDraft = !!pr.draft;
               merged = !!pr.merged;
-              nodeId = pr.node_id; // Get the GraphQL node ID
+              if (!nodeId) nodeId = pr.node_id;
             } else {
               const issue = (await github.rest.issues.get({ owner, repo, issue_number: number })).data;
               item = issue;
@@ -164,10 +178,14 @@ jobs:
               labels = (issue.labels || []).map(l => typeof l === 'string' ? l : l.name);
               milestoneTitle = issue.milestone?.title || '';
               issueState = typeof issue.state === 'string' ? issue.state.toLowerCase() : null;
-              nodeId = issue.node_id; // Get the GraphQL node ID
+              if (!nodeId) nodeId = issue.node_id;
             }
             
-            core.info(`Item GraphQL Node ID: ${nodeId}`);
+            if (!nodeId) {
+              core.warning('❌ Could not determine Node ID, project integration may fail');
+            } else {
+              core.info(`📌 Item GraphQL Node ID: ${nodeId}`);
+            }
             
             const existing = new Set(labels);
             
@@ -466,8 +484,23 @@ jobs:
               ...result
             };
             
+            // Ensure node_id is present
+            if (!artifactData.item || !artifactData.item.node_id) {
+              if ('${{ steps.extract_info.outputs.node_id }}') {
+                if (!artifactData.item) artifactData.item = {};
+                artifactData.item.node_id = '${{ steps.extract_info.outputs.node_id }}';
+                core.info('📌 Added node_id from extract_info step to artifact');
+              } else {
+                core.warning('⚠️ No node_id available in classification or extract_info outputs');
+              }
+            }
+            
             // Write to file
             fs.writeFileSync('classification.json', JSON.stringify(artifactData, null, 2));
+            core.info('💾 Created classification artifact with the following data:');
+            core.info(`- Item type: ${artifactData.item?.type || 'Unknown'}`);
+            core.info(`- Item number: ${artifactData.item?.number || 'Unknown'}`);
+            core.info(`- Node ID present: ${artifactData.item?.node_id ? 'Yes' : 'No'}`);
             
             core.setOutput('artifact_name', artifactName);
             
@@ -491,11 +524,62 @@ jobs:
         with:
           name: ${{ needs.classify.outputs.artifact_name }}
           
+      - name: Debug Classification Data
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            try {
+              const data = JSON.parse(fs.readFileSync('classification.json', 'utf8'));
+              core.info('📊 Classification Data Debug:');
+              core.info(`- File exists: Yes`);
+              core.info(`- Has metadata: ${data.metadata ? 'Yes' : 'No'}`);
+              core.info(`- Has item: ${data.item ? 'Yes' : 'No'}`);
+              
+              if (data.item) {
+                core.info(`- Item number: ${data.item.number || 'Not found'}`);
+                core.info(`- Item type: ${data.item.type || 'Not found'}`);
+                core.info(`- Node ID: ${data.item.node_id || 'Not found'}`);
+              }
+              
+              if (!data.item?.node_id) {
+                // Try to fetch node_id directly as fallback
+                const owner = context.repo.owner;
+                const repo = context.repo.repo;
+                const number = data.item?.number || parseInt('${{ needs.classify.outputs.item_number }}', 10);
+                const isPR = data.item?.type === 'pull_request' || '${{ needs.classify.outputs.item_type }}' === 'pull_request';
+                
+                if (number) {
+                  core.info(`🔄 Attempting to fetch node_id for ${isPR ? 'PR' : 'Issue'} #${number} as fallback...`);
+                  
+                  try {
+                    if (isPR) {
+                      const pr = await github.rest.pulls.get({owner, repo, pull_number: number});
+                      data.item.node_id = pr.data.node_id;
+                    } else {
+                      const issue = await github.rest.issues.get({owner, repo, issue_number: number});
+                      data.item.node_id = issue.data.node_id;
+                    }
+                    
+                    if (data.item.node_id) {
+                      core.info(`✅ Successfully retrieved node_id: ${data.item.node_id}`);
+                      fs.writeFileSync('classification.json', JSON.stringify(data, null, 2));
+                    }
+                  } catch (e) {
+                    core.warning(`❌ Failed to fetch node_id: ${e.message}`);
+                  }
+                }
+              }
+            } catch (e) {
+              core.error(`❌ Failed to parse classification.json: ${e.message}`);
+            }
+
       - name: Add to Project with Classification
         uses: actions/github-script@v7
         env:
           GH_PROJECT_TOKEN: ${{ secrets.GH_PROJECT_TOKEN }}
           PROJECT_TITLE: ${{ github.event.inputs.project_title || env.DEFAULT_PROJECT_TITLE }}
+          NODE_ID_FALLBACK: ${{ needs.classify.outputs.node_id }}
         with:
           github-token: ${{ secrets.GH_PROJECT_TOKEN || github.token }}
           script: |
@@ -522,10 +606,37 @@ jobs:
             const itemType = item.type || '${{ needs.classify.outputs.item_type }}';
             const itemNumber = item.number || parseInt('${{ needs.classify.outputs.item_number }}', 10);
             const isPR = itemType === 'pull_request';
-            const contentId = item.node_id; // Get the GraphQL node ID from classification
+            
+            // Get node_id from classification data or fallback
+            let contentId = item.node_id || process.env.NODE_ID_FALLBACK;
+            
+            // If still no node_id, fetch it directly
+            if (!contentId) {
+              const owner = context.repo.owner;
+              const repo = context.repo.repo;
+              
+              try {
+                core.info(`🔄 No node_id found in data, fetching directly for ${isPR ? 'PR' : 'Issue'} #${itemNumber}...`);
+                
+                if (isPR) {
+                  const pr = await github.rest.pulls.get({owner, repo, pull_number: itemNumber});
+                  contentId = pr.data.node_id;
+                } else {
+                  const issue = await github.rest.issues.get({owner, repo, issue_number: itemNumber});
+                  contentId = issue.data.node_id;
+                }
+                
+                if (contentId) {
+                  core.info(`✅ Successfully retrieved node_id: ${contentId}`);
+                }
+              } catch (e) {
+                core.setFailed(`Failed to fetch node_id: ${e.message}`);
+                return;
+              }
+            }
             
             if (!contentId) {
-              core.setFailed('Missing node_id in classification data. Cannot add to project.');
+              core.setFailed('Missing node_id. Cannot add to project.');
               return;
             }
             
@@ -834,6 +945,8 @@ jobs:
                       } 
                     }
                   `;
+                  
+                  core.info(`Using contentId: ${contentId}`);
                   
                   const addResult = await github.graphql(addMutation, { 
                     projectId, 
