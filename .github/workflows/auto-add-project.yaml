@@ -39,6 +39,7 @@ env:
   DEFAULT_PROJECT_TITLE: "MerajutASA Program Board"
   ENABLE_DETAILED_LOGGING: true
   AUTO_CREATE_PROJECT: true
+  STRIP_AREA_LABELS_AFTER_MAPPING: false
 
 jobs:
   auto-add-to-project:
@@ -88,14 +89,15 @@ jobs:
               }
             }
             
-            // Check for +project comment trigger
+            // Check for +project comment trigger (or /area command)
             if (context.eventName === 'issue_comment') {
-              const comment = context.payload.comment.body.trim().toLowerCase();
-              if (!comment.includes('+project')) { 
-                core.info('💬 Comment does not contain +project trigger, skipping');
-                return; 
+              const raw = context.payload.comment.body || '';
+              const comment = raw.trim();
+              if (!/\+project/i.test(comment) && !/^\s*\/area\s+/i.test(comment)) {
+                core.info('💬 Comment has no +project or /area command, skipping');
+                return;
               }
-              core.info('✅ Triggered via +project comment');
+              core.info('✅ Triggered via comment');
             }
             
             // Determine project configuration
@@ -243,6 +245,12 @@ jobs:
               if (!project && nodes.length > 0) {
                 core.warning(`🔄 No exact match found, trying case-insensitive search`);
                 project = nodes.find(p => p.title.toLowerCase() === projectTitle.toLowerCase());
+              }
+
+              // Extra fallback: try common alternate title
+              if (!project) {
+                const alt = ['MerajutASA Program', 'MerajutASA Program Board'];
+                project = nodes.find(p => alt.some(a => a.toLowerCase() === p.title.toLowerCase()));
               }
               
             } catch (error) {
@@ -548,7 +556,66 @@ jobs:
               await setSingleSelect('Priority', 'P3');
             }
 
-            // Enhanced Area mapping
+            // Area resolution helpers
+            const areaField = getField('Area');
+            function normalize(s){ return String(s||'').trim().toLowerCase().replace(/[_-]+/g,' ').replace(/\s+/g,' '); }
+            function findAreaOptionName(input){
+              if (!areaField || !input) return null;
+              const norm = normalize(input);
+              const opts = (areaField.options||[]).map(o=>({name:o.name, n:normalize(o.name)}));
+              // exact
+              const exact = opts.find(o=>o.n === norm);
+              if (exact) return exact.name;
+              // contains
+              const contains = opts.find(o=> norm.includes(o.n) || o.n.includes(norm));
+              if (contains) return contains.name;
+              // synonyms
+              const syn = {
+                'security':'Security Layer', 'security layer':'Security Layer',
+                'observability':'Monitoring & Observability','monitoring':'Monitoring & Observability', 'monitoring & observability':'Monitoring & Observability',
+                'performance':'Performance Optimization','performance optimization':'Performance Optimization',
+                'ha':'High Availability','high availability':'High Availability',
+                'compliance':'Compliance & Governance','compliance & governance':'Compliance & Governance',
+                'api gateway':'API Gateway & Services','api gateway & services':'API Gateway & Services',
+                'ci cd':'CI/CD Pipeline','cicd pipeline':'CI/CD Pipeline','ci/cd pipeline':'CI/CD Pipeline',
+                'kubernetes':'Container Orchestration','container orchestration':'Container Orchestration',
+                'data':'Data Management','data management':'Data Management',
+                'integration platform':'Integration Platform',
+                'ai/ml integration':'AI/ML Integration','ai ml integration':'AI/ML Integration','ai-ml integration':'AI/ML Integration',
+                'executive dashboard':'Executive Dashboard',
+                'infrastructure modernization':'Infrastructure Modernization',
+                'developer experience':'Developer Experience',
+                'advanced enterprise':'Advanced Enterprise'
+              };
+              if (syn[norm]) return syn[norm];
+              return null;
+            }
+
+            // Comment /area command support
+            let desiredArea = null;
+            if (context.eventName === 'issue_comment') {
+              const cm = (context.payload.comment.body||'').match(/\/area\s+(.+)/i);
+              if (cm && cm[1]) desiredArea = cm[1].trim();
+            }
+
+            // Body Area: <value>
+            if (!desiredArea) {
+              const bodyText = (content.body || content.bodyText || '');
+              const bm = bodyText.match(/\bArea\s*:\s*(.+)/i);
+              if (bm && bm[1]) desiredArea = bm[1].split(/\r?\n/)[0].trim();
+            }
+
+            // Apply direct Area if provided via comment/body
+            if (desiredArea) {
+              const optName = findAreaOptionName(desiredArea);
+              if (optName) {
+                await setSingleSelect('Area', optName);
+              } else {
+                detailedLog(`No matching Area option for input: ${desiredArea}`);
+              }
+            }
+
+            // Enhanced Area mapping from labels if not set by comment/body
             const areaLabel = Array.from(labels).find(l => l.toLowerCase().startsWith('area:'));
             if (areaLabel) {
               const key = areaLabel.slice('area:'.length).toLowerCase();
@@ -587,13 +654,26 @@ jobs:
               
               if (!success) {
                 // Fallback: try exact label match
-                const areaField = getField('Area');
                 const labelSetLc = new Set(Array.from(labels).map(s => s.toLowerCase()));
                 const hit = (areaField?.options || []).find(o => 
                   labelSetLc.has(o.name.toLowerCase())
                 );
                 if (hit) {
                   await setSingleSelect('Area', hit.name);
+                }
+              }
+            }
+
+            // Optionally strip area:* labels after mapping to avoid confusion
+            if (process.env.STRIP_AREA_LABELS_AFTER_MAPPING === 'true') {
+              const areaLabels = Array.from(labels).filter(n => /^area:/i.test(n));
+              for (const ln of areaLabels) {
+                try {
+                  if (isDryRun) { core.info(`🧪 DRY RUN: Would remove label ${ln}`); continue; }
+                  await github.rest.issues.removeLabel({ owner: repoOwner, repo: repoName, issue_number: number, name: ln });
+                  core.info(`🗑️ Removed label: ${ln}`);
+                } catch (e) {
+                  core.warning(`Could not remove label ${ln}: ${e?.message || e}`);
                 }
               }
             }
