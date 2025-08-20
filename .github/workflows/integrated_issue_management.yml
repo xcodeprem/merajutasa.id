@@ -3,7 +3,7 @@ name: Integrated Issue Management (Personal Account)
 # Workflow that combines auto-labeling and project management
 # Created: 2025-08-20
 # Author: Andhika-Rey
-# Version: 1.1.0
+# Version: 1.2.0
 
 on:
   issues:
@@ -36,9 +36,9 @@ permissions:
 
 env:
   DEFAULT_PROJECT_TITLE: "MerajutASA Program Board"
-  WORKFLOW_VERSION: "1.1.0"
+  WORKFLOW_VERSION: "1.2.0"
   CREATED_AT: "2025-08-20"
-  UPDATED_AT: "2025-08-20 04:40:25"
+  UPDATED_AT: "2025-08-20 04:46:18"
   CREATED_BY: "Andhika-Rey"
 
 jobs:
@@ -287,7 +287,7 @@ jobs:
           script: |
             const fs = require('fs');
             
-            // Load or use the classify module
+            // Enhanced classification function with improved content analysis
             async function classifyItem() {
               const isPR = '${{ steps.extract_info.outputs.item_type }}' === 'pull_request';
               const number = parseInt('${{ steps.extract_info.outputs.item_number }}', 10);
@@ -395,70 +395,416 @@ jobs:
               const deletions = files.stats?.deletions || 0;
               const changes = files.stats?.changes || 0;
               
-              // Helper functions
-              const hasAny = (s, arr) => arr.some(k => s.includes(k));
-              const pathHasAny = (arr) => filePaths.some(p => arr.some(k => p.includes(k)));
+              // Utility functions
+              const hasAny = (s, arr) => arr.some(k => s.includes(k.toLowerCase()));
+              const hasAll = (s, arr) => arr.every(k => s.includes(k.toLowerCase()));
+              const pathHasAny = (arr) => filePaths.some(p => arr.some(k => p.includes(k.toLowerCase())));
+              const countOccurrences = (s, term) => {
+                const regex = new RegExp(term, 'gi');
+                return (s.match(regex) || []).length;
+              };
               
-              // Special handling for "test" issues
-              const minimalContent = title.length + (body?.length || 0) < 20;
+              // ===== AREA CLASSIFICATION (IMPROVED) =====
+              const areas = [];
+              const areaConfidenceScores = {};
+              const areaDetails = {};
               
-              // Classification logic for "test" issues
-              let area, risk, status, team, size, health;
+              // Define area detectors
+              const areaDetectors = [
+                {
+                  name: 'security-layer',
+                  terms: ['security', 'auth', 'authentication', 'authorization', 'login', 'password', 'credential', 'oauth', 'vulnerability'],
+                  files: ['security', 'auth', 'login', 'password', 'credentials'],
+                  threshold: 0.6
+                },
+                {
+                  name: 'monitoring-observability',
+                  terms: ['monitoring', 'metrics', 'grafana', 'prometheus', 'logging', 'trace', 'observability', 'analytics'],
+                  files: ['monitor', 'metrics', 'log', 'trace'],
+                  threshold: 0.6
+                },
+                {
+                  name: 'performance-optimization',
+                  terms: ['performance', 'optimize', 'optimization', 'speed', 'fast', 'slow', 'latency', 'throughput', 'cache'],
+                  files: ['performance', 'optimize', 'cache', 'speed'],
+                  threshold: 0.6
+                },
+                {
+                  name: 'container-orchestration',
+                  terms: ['kubernetes', 'k8s', 'container', 'docker', 'pod', 'cluster', 'orchestration', 'helm', 'chart'],
+                  files: ['k8s', 'kubernetes', 'docker', 'container', 'pod'],
+                  threshold: 0.6
+                },
+                {
+                  name: 'cicd-pipeline',
+                  terms: ['ci/cd', 'pipeline', 'continuous integration', 'continuous delivery', 'github actions', 'jenkins', 'travis'],
+                  files: ['pipeline', 'ci', 'cd', 'github/workflows', 'github-workflow'],
+                  threshold: 0.6
+                },
+                {
+                  name: 'data-management',
+                  terms: ['database', 'data', 'sql', 'nosql', 'mongodb', 'postgres', 'mysql', 'redis', 'storage', 'etl', 'backup'],
+                  files: ['database', 'db', 'sql', 'data', 'backup', 'storage'],
+                  threshold: 0.6
+                },
+                {
+                  name: 'api-gateway-services',
+                  terms: ['api', 'gateway', 'service', 'microservice', 'rest', 'graphql', 'endpoint', 'route'],
+                  files: ['api', 'gateway', 'service', 'endpoint', 'controller'],
+                  threshold: 0.6
+                },
+                {
+                  name: 'docs',
+                  terms: ['documentation', 'doc', 'readme', 'wiki', 'guide', 'tutorial', 'manual'],
+                  files: ['docs', 'documentation', 'wiki', 'readme', '.md'],
+                  threshold: 0.6
+                },
+                {
+                  name: 'ui-components',
+                  terms: ['ui', 'ux', 'user interface', 'design', 'layout', 'css', 'html', 'frontend', 'react', 'vue', 'angular'],
+                  files: ['ui', 'frontend', 'css', 'html', 'jsx', 'tsx', 'vue'],
+                  threshold: 0.6
+                },
+                {
+                  name: 'compliance',
+                  terms: ['compliance', 'regulation', 'gdpr', 'hipaa', 'sox', 'pci', 'standard', 'audit', 'certification', 'conform'],
+                  files: ['compliance', 'regulation', 'audit', 'standard', 'certif'],
+                  threshold: 0.5
+                },
+                {
+                  name: 'integration',
+                  terms: ['integration', 'connect', 'connector', 'webhook', 'interface', 'bridge', 'middleware', 'sync'],
+                  files: ['integration', 'connector', 'webhook', 'middleware', 'bridge', 'interface'],
+                  threshold: 0.6
+                },
+                {
+                  name: 'infrastructure',
+                  terms: ['infrastructure', 'terraform', 'aws', 'azure', 'gcp', 'cloud', 'network', 'server', 'provision'],
+                  files: ['terraform', 'cloud', 'infra', 'provision', 'network', 'server'],
+                  threshold: 0.6
+                },
+                {
+                  name: 'analytics',
+                  terms: ['analytics', 'statistics', 'reporting', 'dashboard', 'chart', 'graph', 'data visualization', 'bi'],
+                  files: ['analytics', 'report', 'dashboard', 'stats', 'visualization'],
+                  threshold: 0.6
+                }
+              ];
               
-              if (minimalContent && title.toLowerCase().includes('test')) {
-                area = 'area:monitoring-observability'; // QA related
-                risk = 'risk:low';
-                status = 'status:todo';
-                team = 'team:qa';
-                size = 'size:small';
-                health = 'health:75-89';
+              // Detect Phase from title
+              const phaseRegex = /phase\s*(\d+)\s*(?:week|w)?\s*(\d+)?/i;
+              const phaseMatch = title.match(phaseRegex) || body.match(phaseRegex);
+              let phase = null;
+              
+              if (phaseMatch) {
+                const phaseNum = phaseMatch[1];
+                const weekNum = phaseMatch[2];
                 
-                core.info('✅ Test-related issue detected, using special classification');
-              } else {
-                // Default classification for non-test issues
-                area = 'area:api-gateway-services'; 
-                risk = 'risk:medium';
-                status = isPR ? 'status:in-review' : 'status:in-progress';
-                team = 'team:backend-dev';
-                size = 'size:medium';
-                health = 'health:50-74';
+                if (weekNum) {
+                  phase = `phase:${phaseNum}-week-${weekNum}`;
+                } else {
+                  phase = `phase:${phaseNum}`;
+                }
                 
-                // Override from input parameter
-                if (areaOverride) {
-                  area = `area:${areaOverride}`;
-                  core.info(`🔧 Manual area override applied: ${areaOverride}`);
+                core.info(`📝 Detected phase information: ${phase}`);
+              }
+              
+              // Special cases from title patterns
+              if (title.match(/component completion|completion/i)) {
+                areaConfidenceScores['compliance'] = 0.8;
+                areaDetails['compliance'] = 'Identified from component completion task in title';
+              }
+              
+              if (title.match(/integration|flow completion|validate/i)) {
+                areaConfidenceScores['integration'] = 0.8;
+                areaDetails['integration'] = 'Identified from integration flow mentioned in title';
+              }
+              
+              if (title.match(/infra|infrastructure|script|exit code/i)) {
+                areaConfidenceScores['infrastructure'] = 0.7;
+                areaDetails['infrastructure'] = 'Identified from infrastructure or script references in title';
+              }
+              
+              // Analyze content for each area
+              for (const detector of areaDetectors) {
+                let score = 0;
+                let details = [];
+                
+                // Check term occurrences in content
+                for (const term of detector.terms) {
+                  const count = countOccurrences(allContent, term);
+                  if (count > 0) {
+                    score += Math.min(0.2 + (count * 0.1), 0.5); // Cap at 0.5 per term
+                    details.push(`Found "${term}" ${count} time(s) in content`);
+                  }
+                }
+                
+                // Check file paths for matches
+                if (filePaths.length > 0) {
+                  for (const filePattern of detector.files) {
+                    const matchingFiles = filePaths.filter(p => p.includes(filePattern));
+                    if (matchingFiles.length > 0) {
+                      score += Math.min(0.3 + (matchingFiles.length * 0.05), 0.6);
+                      details.push(`Found ${matchingFiles.length} file(s) matching "${filePattern}"`);
+                    }
+                  }
+                }
+                
+                // Special case: directly mentioned area in title/body (strong signal)
+                if (title.toLowerCase().includes(detector.name) || 
+                    allContent.includes(`area:${detector.name}`) ||
+                    allContent.includes(`area: ${detector.name}`)) {
+                  score += 0.8;
+                  details.push(`Direct mention of area "${detector.name}" in content`);
+                }
+                
+                // Record if threshold met
+                if (score >= detector.threshold) {
+                  areaConfidenceScores[detector.name] = parseFloat(score.toFixed(2));
+                  areaDetails[detector.name] = details.join('; ');
                 }
               }
+              
+              // Apply override if provided
+              if (areaOverride) {
+                areaConfidenceScores[areaOverride] = 1.0;
+                areaDetails[areaOverride] = 'Manual override applied';
+                core.info(`🔧 Manual area override applied: ${areaOverride}`);
+              }
+              
+              // Select areas that meet threshold
+              for (const [area, score] of Object.entries(areaConfidenceScores)) {
+                if (score >= 0.5) {
+                  areas.push(`area:${area}`);
+                }
+              }
+              
+              // If no areas detected, use default based on content
+              if (areas.length === 0) {
+                if (title.toLowerCase().includes('test')) {
+                  areas.push('area:monitoring-observability');
+                  areaConfidenceScores['monitoring-observability'] = 0.6;
+                  areaDetails['monitoring-observability'] = 'Default: Test-related issue';
+                } else {
+                  areas.push('area:api-gateway-services');
+                  areaConfidenceScores['api-gateway-services'] = 0.5;
+                  areaDetails['api-gateway-services'] = 'Default: No specific area detected';
+                }
+              }
+              
+              // Log area classifications
+              core.info('📊 Area classification results:');
+              for (const [area, score] of Object.entries(areaConfidenceScores)) {
+                core.info(`  - ${area}: ${score} - ${areaDetails[area] || 'No details'}`);
+              }
+              
+              // ===== PRIORITY CLASSIFICATION =====
+              let priority = null;
+              if (title.toLowerCase().includes('urgent') || 
+                  title.toLowerCase().includes('critical') || 
+                  title.toLowerCase().includes('p0') || 
+                  body?.toLowerCase().includes('urgent') || 
+                  body?.toLowerCase().includes('p0')) {
+                priority = 'p0';
+              } else if (title.toLowerCase().includes('high priority') || 
+                         title.toLowerCase().includes('p1') || 
+                         body?.toLowerCase().includes('high priority') || 
+                         body?.toLowerCase().includes('p1') ||
+                         title.toLowerCase().includes('phase 2')) {
+                priority = 'p1';
+              } else if (title.toLowerCase().includes('medium priority') || 
+                         title.toLowerCase().includes('p2') || 
+                         body?.toLowerCase().includes('medium priority')) {
+                priority = 'p2';
+              } else {
+                priority = 'p3';
+              }
+              
+              // ===== RISK CLASSIFICATION =====
+              let risk = null;
+              if (title.toLowerCase().includes('high risk') || 
+                  body?.toLowerCase().includes('high risk') || 
+                  areaConfidenceScores['security-layer'] > 0.7) {
+                risk = 'risk:high';
+              } else if (title.toLowerCase().includes('medium risk') || 
+                         body?.toLowerCase().includes('medium risk') || 
+                         areaConfidenceScores['compliance'] > 0.7 || 
+                         title.includes('Phase 2')) {
+                risk = 'risk:medium';
+              } else {
+                risk = 'risk:low';
+              }
+              
+              // ===== STATUS CLASSIFICATION =====
+              let status = null;
+              const hasStatusLabel = labels.some(l => l.startsWith('status:'));
+              
+              if (isPR) {
+                if (item.merged) {
+                  status = 'status:done';
+                } else if (item.state === 'closed') {
+                  status = 'status:done';
+                } else if (context.payload.action === 'ready_for_review' || !item.isDraft) {
+                  status = 'status:in-review';
+                } else {
+                  status = 'status:in-progress';
+                }
+              } else {
+                if (item.state === 'closed') {
+                  status = 'status:done';
+                } else if (hasStatusLabel) {
+                  // Keep existing status label if any
+                  const existingStatus = labels.find(l => l.startsWith('status:'));
+                  if (existingStatus) {
+                    status = existingStatus;
+                  } else {
+                    status = 'status:todo';
+                  }
+                } else if (assignees.length > 0) {
+                  status = 'status:in-progress'; // Assigned issues are in progress
+                } else {
+                  status = 'status:todo';
+                }
+              }
+              
+              // ===== SIZE CLASSIFICATION =====
+              let size = null;
+              if (isPR) {
+                const totalChanges = additions + deletions;
+                if (totalChanges <= 10) {
+                  size = 'size:xs';
+                } else if (totalChanges <= 100) {
+                  size = 'size:small';
+                } else if (totalChanges <= 250) {
+                  size = 'size:medium';
+                } else if (totalChanges <= 500) {
+                  size = 'size:large';
+                } else {
+                  size = 'size:very-large';
+                }
+              } else {
+                // For issues, size is more subjective
+                // Use title length and task description as heuristics
+                if (title.includes('component') || title.includes('completion')) {
+                  size = 'size:medium';
+                } else if (body && body.length > 1000) {
+                  size = 'size:large';
+                } else if (body && body.length > 500) {
+                  size = 'size:medium';
+                } else {
+                  size = 'size:small';
+                }
+              }
+              
+              // ===== TEAM CLASSIFICATION =====
+              let team = null;
+              // Determine team based on areas
+              if (areas.includes('area:security-layer')) {
+                team = 'team:security';
+              } else if (areas.includes('area:container-orchestration') || 
+                         areas.includes('area:cicd-pipeline') || 
+                         areas.includes('area:infrastructure')) {
+                team = 'team:devops';
+              } else if (areas.includes('area:monitoring-observability') || 
+                         areas.includes('area:analytics')) {
+                team = 'team:qa';
+              } else if (areas.includes('area:ui-components')) {
+                team = 'team:frontend';
+              } else {
+                team = 'team:backend-dev';
+              }
+              
+              // ===== HEALTH CLASSIFICATION =====
+              let health = 'health:50-74';
               
               // Apply labels
               const existing = new Set(labels);
               const toAdd = new Set();
               const toRemove = new Set();
               
-              if (area && !existing.has(area)) toAdd.add(area);
-              if (!existing.has(risk)) toAdd.add(risk);
-              if (!existing.has(status)) toAdd.add(status);
-              if (!existing.has(team)) toAdd.add(team);
-              if (!existing.has(size)) toAdd.add(size);
+              // Remove old conflicting labels before adding new ones
+              for (const label of existing) {
+                if (areas.some(a => a.startsWith('area:')) && label.startsWith('area:') && !areas.includes(label)) {
+                  toRemove.add(label);
+                }
+                if (risk && label.startsWith('risk:') && label !== risk) {
+                  toRemove.add(label);
+                }
+                if (status && label.startsWith('status:') && label !== status) {
+                  toRemove.add(label);
+                }
+                if (size && label.startsWith('size:') && label !== size) {
+                  toRemove.add(label);
+                }
+                if (team && label.startsWith('team:') && label !== team) {
+                  toRemove.add(label);
+                }
+              }
+              
+              // Add new labels
+              for (const area of areas) {
+                if (!existing.has(area)) toAdd.add(area);
+              }
+              if (phase && !existing.has(phase)) toAdd.add(phase);
+              if (risk && !existing.has(risk)) toAdd.add(risk);
+              if (status && !existing.has(status)) toAdd.add(status);
+              if (size && !existing.has(size)) toAdd.add(size);
+              if (team && !existing.has(team)) toAdd.add(team);
+              if (priority && !existing.has(priority)) toAdd.add(priority);
               if (!existing.has(health)) toAdd.add(health);
               
               const addList = Array.from(toAdd);
               const removeList = Array.from(toRemove);
               
-              // Record classifications
+              // Record classifications with confidence scores
               const classifications = {
-                area: area ? { value: area.split(':')[1], confidence: 0.8 } : null,
-                risk: risk ? { value: risk.split(':')[1] } : null,
-                status: status ? { value: status.split(':')[1] } : null,
-                team: team ? { value: team.split(':')[1] } : null,
-                size: size ? { value: size.split(':')[1] } : null,
-                health: health ? { value: health.split(':')[1] } : null
+                areas: areas.map(a => ({
+                  value: a.split(':')[1],
+                  confidence: areaConfidenceScores[a.split(':')[1]] || 0.5,
+                  reason: areaDetails[a.split(':')[1]] || 'Unknown'
+                })),
+                risk: risk ? { 
+                  value: risk.split(':')[1],
+                  confidence: 0.8,
+                  reason: 'Determined from content and area analysis'
+                } : null,
+                status: status ? {
+                  value: status.split(':')[1],
+                  confidence: 0.9,
+                  reason: isPR ? 'Based on PR state' : 'Based on issue state and assignment'
+                } : null,
+                size: size ? {
+                  value: size.split(':')[1],
+                  confidence: 0.8,
+                  reason: isPR ? 'Based on code changes' : 'Based on content complexity'
+                } : null,
+                team: team ? {
+                  value: team.split(':')[1],
+                  confidence: 0.8,
+                  reason: 'Derived from area classification'
+                } : null,
+                phase: phase ? {
+                  value: phase.split(':')[1],
+                  confidence: 0.9,
+                  reason: 'Extracted from title/body'
+                } : null,
+                priority: priority ? {
+                  value: priority,
+                  confidence: 0.8,
+                  reason: 'Determined from content analysis and phase'
+                } : null,
+                health: {
+                  value: health.split(':')[1],
+                  confidence: 0.7,
+                  reason: 'Default health classification'
+                }
               };
               
               // Dry-run or apply labels
               if (dryRun) {
                 core.info('🧪 DRY RUN: Label changes preview');
                 core.info(`Would add: ${addList.join(', ') || 'None'}`);
+                core.info(`Would remove: ${removeList.join(', ') || 'None'}`);
                 return {
                   dryRun: true,
                   item: {
@@ -477,18 +823,68 @@ jobs:
               const owner = context.repo.owner;
               const repo = context.repo.repo;
               
+              // Apply removals first
+              for (const l of removeList) {
+                try {
+                  await github.rest.issues.removeLabel({ 
+                    owner, repo, issue_number: number, name: l 
+                  });
+                  core.info(`🗑️ Removed label: ${l}`);
+                } catch (e) {
+                  if (e.status !== 404) core.warning(`Failed to remove label ${l}: ${e.message}`);
+                }
+              }
+              
+              // Apply additions
               if (addList.length) {
                 try {
                   await github.rest.issues.addLabels({ 
                     owner, repo, issue_number: number, labels: addList 
                   });
-                  core.info(`Added labels: ${addList.join(', ')}`);
+                  core.info(`🏷️ Added labels: ${addList.join(', ')}`);
                 } catch (e) {
                   core.warning(`Failed to add labels: ${e.message}`);
                 }
+              } else {
+                core.info('✓ No new labels to add');
               }
               
               const finalLabels = [...labels.filter(l => !removeList.includes(l)), ...addList];
+              
+              // Add a comment explaining classifications if changes were made
+              if (addList.length > 0 || removeList.length > 0) {
+                try {
+                  const commentBody = `## 🤖 Classification Analysis
+
+I've analyzed this ${isPR ? 'pull request' : 'issue'} and made the following classifications:
+
+${areas.map(area => `### ${area.replace('area:', 'Area: ')}
+- Confidence: ${(areaConfidenceScores[area.split(':')[1]] * 100).toFixed(0)}%
+- Reason: ${areaDetails[area.split(':')[1]] || 'No specific details'}`).join('\n\n')}
+
+### Additional Classifications:
+- Risk: **${risk.split(':')[1]}**
+- Status: **${status.split(':')[1]}**
+- Size: **${size.split(':')[1]}**
+- Team: **${team.split(':')[1]}**
+${phase ? `- Phase: **${phase.split(':')[1]}**` : ''}
+${priority ? `- Priority: **${priority}**` : ''}
+
+*Labels have been updated accordingly.*`;
+
+                  if (!isPR) {
+                    await github.rest.issues.createComment({
+                      owner,
+                      repo,
+                      issue_number: number,
+                      body: commentBody
+                    });
+                    core.info('💬 Added explanation comment');
+                  }
+                } catch (e) {
+                  core.warning(`Failed to add comment: ${e.message}`);
+                }
+              }
               
               return {
                 item: {
@@ -626,6 +1022,33 @@ jobs:
                   }
                 }
               }
+              
+              // Log classifications to make them more visible
+              if (data.classifications) {
+                core.info('\n📋 Classification Results:');
+                
+                if (data.classifications.areas) {
+                  core.info('Areas:');
+                  data.classifications.areas.forEach(area => {
+                    core.info(`- ${area.value}: ${area.confidence * 100}% confidence`);
+                    core.info(`  Reason: ${area.reason}`);
+                  });
+                }
+                
+                if (data.classifications.risk) {
+                  core.info(`Risk: ${data.classifications.risk.value} (${data.classifications.risk.confidence * 100}% confidence)`);
+                  core.info(`Reason: ${data.classifications.risk.reason}`);
+                }
+                
+                if (data.classifications.phase) {
+                  core.info(`Phase: ${data.classifications.phase.value}`);
+                }
+                
+                if (data.classifications.priority) {
+                  core.info(`Priority: ${data.classifications.priority.value}`);
+                }
+              }
+              
             } catch (e) {
               core.error(`❌ Failed to parse classification.json: ${e.message}`);
             }
