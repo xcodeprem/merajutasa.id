@@ -1,11 +1,11 @@
 {
   "status": "ok",
-  "ts": "2025-08-19T17:59:58.416Z",
+  "ts": "2025-08-19T23:33:58.418Z",
   "config_path": "tools/config/privacy-policy.json",
   "checks": {
     "retention": {
       "cap": 14,
-      "length": 5,
+      "length": 6,
       "ok": true
     },
     "format": {
@@ -16,8 +16,8 @@
       ]
     },
     "freshness": {
-      "last_rotated_utc": "2025-08-18T08:56:34.958Z",
-      "age_hours": 33.05651611111111,
+      "last_rotated_utc": "2025-08-19T08:51:48.385Z",
+      "age_hours": 14.702786944444444,
       "ok": true
     }
   },

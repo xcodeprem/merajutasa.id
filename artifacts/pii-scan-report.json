@@ -25,55 +25,55 @@
       "file": "docs/agent-context-pack.md",
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
-      "sample": "checko…#f710f919"
+      "sample": "checko…#29918d01"
     },
     {
       "file": "docs/agent-context-pack.md",
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
-      "sample": "checko…#f710f919"
+      "sample": "checko…#29918d01"
     },
     {
       "file": "docs/agent-context-pack.md",
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
-      "sample": "action…#19a97538"
+      "sample": "action…#1fd017a2"
     },
     {
       "file": "docs/agent-context-pack.md",
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
-      "sample": "checko…#f710f919"
+      "sample": "checko…#29918d01"
     },
     {
       "file": "docs/agent-context-pack.md",
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
-      "sample": "checko…#f710f919"
+      "sample": "checko…#29918d01"
     },
     {
       "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-5.md",
       "category": "EDU_NISN",
       "action": "BLOCK",
-      "sample": "123456…#f4669f1c"
+      "sample": "123456…#3babf8a4"
     },
     {
       "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-5.md",
       "category": "EDU_NISN",
       "action": "BLOCK",
-      "sample": "123456…#f4669f1c"
+      "sample": "123456…#3babf8a4"
     },
     {
       "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-5.md",
       "category": "CONTACT_EMAIL",
       "action": "REDACT",
-      "sample": "devops…#98615066"
+      "sample": "devops…#df4b99c8"
     },
     {
       "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-5.md",
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
-      "sample": "devops…#2730c459"
+      "sample": "devops…#96e5ab08"
     },
     {
       "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-5.md",
@@ -89,13 +89,13 @@
       "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-4.md",
       "category": "CONTACT_EMAIL",
       "action": "REDACT",
-      "sample": "your.e…#a193421e"
+      "sample": "your.e…#ca1832c9"
     },
     {
       "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-4.md",
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
-      "sample": "email@…#4a6d52b0"
+      "sample": "email@…#72dca274"
     },
     {
       "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-4.md",
@@ -110,25 +110,25 @@
       "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-3.md",
       "category": "CONTACT_EMAIL",
       "action": "REDACT",
-      "sample": "your-e…#20fcc2fb"
+      "sample": "your-e…#737a4dc9"
     },
     {
       "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-3.md",
       "category": "CONTACT_EMAIL",
       "action": "REDACT",
-      "sample": "alerts…#aed6878f"
+      "sample": "alerts…#b309303e"
     },
     {
       "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-3.md",
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
-      "sample": "email@…#4a6d52b0"
+      "sample": "email@…#72dca274"
     },
     {
       "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-3.md",
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
-      "sample": "alerts…#3c103f2a"
+      "sample": "alerts…#a7babe63"
     },
     {
       "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-3.md",
@@ -143,49 +143,49 @@
       "file": "docs/status/gate1-verification-2025-08-17.md",
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
-      "sample": "checko…#f710f919"
+      "sample": "checko…#29918d01"
     },
     {
       "file": "docs/status/gate1-verification-2025-08-17.md",
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
-      "sample": "artifa…#ee16e5d0"
+      "sample": "artifa…#965fa7e9"
     },
     {
       "file": "docs/status/gate1-verification-2025-08-17.md",
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
-      "sample": "pages@…#9d6852ad"
+      "sample": "pages@…#7eef3f59"
     },
     {
       "file": "docs/scripts/NPM-SCRIPTS-ORGANIZATION.md",
       "category": "PLATE_ID",
       "action": "WARN",
-      "sample": "E2E…#cb6200bf"
+      "sample": "E2E…#71c38faf"
     },
     {
       "file": "docs/roadmap/roadmap-next-phase-v2.md",
       "category": "PLATE_ID",
       "action": "WARN",
-      "sample": "Q2 AI…#0ec78b35"
+      "sample": "Q2 AI…#f56548c9"
     },
     {
       "file": "docs/roadmap/roadmap-master-v1.md",
       "category": "CONTACT_EMAIL",
       "action": "REDACT",
-      "sample": "user@d…#b3fd813f"
+      "sample": "user@d…#4cc10972"
     },
     {
       "file": "docs/roadmap/roadmap-master-v1.md",
       "category": "PLATE_ID",
       "action": "WARN",
-      "sample": "A11Y…#d87e57e8"
+      "sample": "A11Y…#5f30c4ad"
     },
     {
       "file": "docs/roadmap/roadmap-master-v1.md",
       "category": "PLATE_ID",
       "action": "WARN",
-      "sample": "A11Y…#d87e57e8"
+      "sample": "A11Y…#5f30c4ad"
     },
     {
       "file": "docs/roadmap/roadmap-master-v1.md",
@@ -200,25 +200,25 @@
       "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-6.md",
       "category": "CONTACT_EMAIL",
       "action": "REDACT",
-      "sample": "compli…#19a8843f"
+      "sample": "compli…#2facdbc5"
     },
     {
       "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-6.md",
       "category": "CONTACT_EMAIL",
       "action": "REDACT",
-      "sample": "user@e…#38e89409"
+      "sample": "user@e…#7b630e0c"
     },
     {
       "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-6.md",
       "category": "CONTACT_EMAIL",
       "action": "REDACT",
-      "sample": "user@e…#38e89409"
+      "sample": "user@e…#7b630e0c"
     },
     {
       "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-6.md",
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
-      "sample": "compli…#9a4cd4b7"
+      "sample": "compli…#71ede031"
     },
     {
       "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-6.md",
@@ -233,31 +233,31 @@
       "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md",
       "category": "CONTACT_EMAIL",
       "action": "REDACT",
-      "sample": "devops…#27c57110"
+      "sample": "devops…#8a8d00d6"
     },
     {
       "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md",
       "category": "CONTACT_EMAIL",
       "action": "REDACT",
-      "sample": "cto@me…#b1e1dc72"
+      "sample": "cto@me…#fc1f96f1"
     },
     {
       "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md",
       "category": "CONTACT_EMAIL",
       "action": "REDACT",
-      "sample": "infra@…#7f25ce49"
+      "sample": "infra@…#24a3c7a0"
     },
     {
       "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md",
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
-      "sample": "oncall…#f5dd8f64"
+      "sample": "oncall…#ee7ad6c8"
     },
     {
       "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md",
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
-      "sample": "infra@…#3af152f8"
+      "sample": "infra@…#d010d780"
     },
     {
       "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md",
@@ -272,25 +272,25 @@
       "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-3.md",
       "category": "CONTACT_EMAIL",
       "action": "REDACT",
-      "sample": "your-e…#20fcc2fb"
+      "sample": "your-e…#737a4dc9"
     },
     {
       "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-3.md",
       "category": "CONTACT_EMAIL",
       "action": "REDACT",
-      "sample": "alerts…#aed6878f"
+      "sample": "alerts…#b309303e"
     },
     {
       "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-3.md",
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
-      "sample": "email@…#4a6d52b0"
+      "sample": "email@…#72dca274"
     },
     {
       "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-3.md",
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
-      "sample": "alerts…#3c103f2a"
+      "sample": "alerts…#a7babe63"
     },
     {
       "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-3.md",
@@ -305,73 +305,73 @@
       "file": "docs/public/ABOUT-PORTAL-PANTI.md",
       "category": "PLATE_ID",
       "action": "WARN",
-      "sample": "W3C…#dcac438e"
+      "sample": "W3C…#158bfbd3"
     },
     {
       "file": "docs/privacy/pii-scan-fixture.md",
       "category": "IDN_NIK",
       "action": "BLOCK",
-      "sample": "317501…#3ea41396"
+      "sample": "317501…#cbbcd12e"
     },
     {
       "file": "docs/privacy/pii-scan-fixture.md",
       "category": "GENERIC_16DIGIT",
       "action": "BLOCK",
-      "sample": "987654…#359e9723"
+      "sample": "987654…#d1f10e61"
     },
     {
       "file": "docs/privacy/pii-scan-fixture.md",
       "category": "CONTACT_EMAIL",
       "action": "REDACT",
-      "sample": "user@e…#38e89409"
+      "sample": "user@e…#7b630e0c"
     },
     {
       "file": "docs/privacy/pii-scan-fixture.md",
       "category": "CONTACT_PHONE",
       "action": "REDACT",
-      "sample": "628123…#044e18ef"
+      "sample": "628123…#587ff94a"
     },
     {
       "file": "docs/privacy/pii-scan-fixture.md",
       "category": "ADDRESS_STREET",
       "action": "MASK",
-      "sample": "Jalan …#9265b833"
+      "sample": "Jalan …#7358cf5d"
     },
     {
       "file": "docs/privacy/pii-scan-fixture.md",
       "category": "ADDRESS_STREET",
       "action": "MASK",
-      "sample": "RT 01/…#20f18cee"
+      "sample": "RT 01/…#f7cb109a"
     },
     {
       "file": "docs/privacy/pii-scan-fixture.md",
       "category": "DOB",
       "action": "REDACT",
-      "sample": "01/09/…#7c701cb3"
+      "sample": "01/09/…#e19f9cf9"
     },
     {
       "file": "docs/privacy/pii-scan-fixture.md",
       "category": "BANK_ACCOUNT",
       "action": "BLOCK",
-      "sample": "rek 12…#aeb9adf7"
+      "sample": "rek 12…#0b938adf"
     },
     {
       "file": "docs/privacy/pii-scan-fixture.md",
       "category": "PLATE_ID",
       "action": "WARN",
-      "sample": "B 1234…#9ab86e76"
+      "sample": "B 1234…#577554ff"
     },
     {
       "file": "docs/privacy/pii-scan-fixture.md",
       "category": "CHILD_NAME_AGE",
       "action": "BLOCK",
-      "sample": "Adi (7…#83485d89"
+      "sample": "Adi (7…#ba9292bb"
     },
     {
       "file": "docs/privacy/pii-scan-fixture.md",
       "category": "GEO_FINE",
       "action": "BLOCK",
-      "sample": "6.2000…#0e1b8591"
+      "sample": "6.2000…#e142199e"
     },
     {
       "file": "docs/privacy/pii-scan-fixture.md",
@@ -394,25 +394,25 @@
       "file": "docs/privacy/pii-pattern-library-v1.md",
       "category": "ADDRESS_STREET",
       "action": "MASK",
-      "sample": "Jalan …#6ee73923"
+      "sample": "Jalan …#aa95db9c"
     },
     {
       "file": "docs/privacy/pii-pattern-library-v1.md",
       "category": "DOB",
       "action": "REDACT",
-      "sample": "01/09/…#100cc787"
+      "sample": "01/09/…#c7a12c6a"
     },
     {
       "file": "docs/privacy/pii-pattern-library-v1.md",
       "category": "DOB",
       "action": "REDACT",
-      "sample": "02/10/…#e8323e8a"
+      "sample": "02/10/…#736aaad4"
     },
     {
       "file": "docs/privacy/pii-pattern-library-v1.md",
       "category": "PLATE_ID",
       "action": "WARN",
-      "sample": "B 1234…#b24e873f"
+      "sample": "B 1234…#1cc9c6a1"
     },
     {
       "file": "docs/privacy/pii-pattern-library-v1.md",
@@ -428,163 +428,163 @@
       "file": "docs/phase-2/PHASE-2-IMPLEMENTATION-GUIDE.md",
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
-      "sample": "checko…#f710f919"
+      "sample": "checko…#29918d01"
     },
     {
       "file": "docs/phase-2/PHASE-2-IMPLEMENTATION-GUIDE.md",
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
-      "sample": "action…#19a97538"
+      "sample": "action…#1fd017a2"
     },
     {
       "file": "docs/phase-2/PHASE-2-IMPLEMENTATION-GUIDE.md",
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
-      "sample": "checko…#f710f919"
+      "sample": "checko…#29918d01"
     },
     {
       "file": "docs/phase-2/PHASE-2-IMPLEMENTATION-GUIDE.md",
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
-      "sample": "action…#19a97538"
+      "sample": "action…#1fd017a2"
     },
     {
       "file": "docs/phase-2/PHASE-2-IMPLEMENTATION-GUIDE.md",
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
-      "sample": "sarif@…#2fa5e163"
+      "sample": "sarif@…#a47c47a3"
     },
     {
       "file": "docs/integrity/credential-schema-final-v1.md",
       "category": "PLATE_ID",
       "action": "WARN",
-      "sample": "W3C…#dcac438e"
+      "sample": "W3C…#158bfbd3"
     },
     {
       "file": "docs/integrity/credential-schema-final-v1.md",
       "category": "PLATE_ID",
       "action": "WARN",
-      "sample": "W3C…#dcac438e"
+      "sample": "W3C…#158bfbd3"
     },
     {
       "file": "docs/infrastructure/health-monitoring.md",
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
-      "sample": "artifa…#ee16e5d0"
+      "sample": "artifa…#965fa7e9"
     },
     {
       "file": "docs/governance/statement-orientasi-portal-panti.md",
       "category": "PLATE_ID",
       "action": "WARN",
-      "sample": "W3C…#dcac438e"
+      "sample": "W3C…#158bfbd3"
     },
     {
       "file": "docs/gap-analysis/JAWABAN-GAP-ANALYSIS.md",
       "category": "PLATE_ID",
       "action": "WARN",
-      "sample": "E2E…#cb6200bf"
+      "sample": "E2E…#71c38faf"
     },
     {
       "file": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
-      "sample": "checko…#f710f919"
+      "sample": "checko…#29918d01"
     },
     {
       "file": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
-      "sample": "artifa…#ee16e5d0"
+      "sample": "artifa…#965fa7e9"
     },
     {
       "file": "docs/audit/00-rubrik-audit-portal-panti.md",
       "category": "PLATE_ID",
       "action": "WARN",
-      "sample": "W3C…#dcac438e"
+      "sample": "W3C…#158bfbd3"
     },
     {
       "file": "docs/api/API_DOCUMENTATION.md",
       "category": "CONTACT_EMAIL",
       "action": "REDACT",
-      "sample": "api@me…#2f12fd5c"
+      "sample": "api@me…#7651962c"
     },
     {
       "file": "docs/produk/portal-panti/02-model-data-minimal-aman.md",
       "category": "PLATE_ID",
       "action": "WARN",
-      "sample": "I18N…#54137b15"
+      "sample": "I18N…#ac7d64d5"
     },
     {
       "file": "docs/produk/portal-panti/01-ruang-lingkup-produk.md",
       "category": "PLATE_ID",
       "action": "WARN",
-      "sample": "W3C…#dcac438e"
+      "sample": "W3C…#158bfbd3"
     },
     {
       "file": "docs/produk/portal-panti/00-orientasi-komprehensif.md",
       "category": "PLATE_ID",
       "action": "WARN",
-      "sample": "W3C…#dcac438e"
+      "sample": "W3C…#158bfbd3"
     },
     {
       "file": "docs/privacy/corpus/positive-highrisk.md",
       "category": "IDN_NIK",
       "action": "BLOCK",
-      "sample": "317501…#3ea41396"
+      "sample": "317501…#cbbcd12e"
     },
     {
       "file": "docs/privacy/corpus/positive-highrisk.md",
       "category": "CONTACT_EMAIL",
       "action": "REDACT",
-      "sample": "user@e…#38e89409"
+      "sample": "user@e…#7b630e0c"
     },
     {
       "file": "docs/privacy/corpus/positive-highrisk.md",
       "category": "CONTACT_PHONE",
       "action": "REDACT",
-      "sample": "628123…#044e18ef"
+      "sample": "628123…#587ff94a"
     },
     {
       "file": "docs/privacy/corpus/positive-highrisk.md",
       "category": "ADDRESS_STREET",
       "action": "MASK",
-      "sample": "Jalan …#9265b833"
+      "sample": "Jalan …#7358cf5d"
     },
     {
       "file": "docs/privacy/corpus/positive-highrisk.md",
       "category": "ADDRESS_STREET",
       "action": "MASK",
-      "sample": "RT 01/…#20f18cee"
+      "sample": "RT 01/…#f7cb109a"
     },
     {
       "file": "docs/privacy/corpus/positive-highrisk.md",
       "category": "DOB",
       "action": "REDACT",
-      "sample": "01/09/…#7c701cb3"
+      "sample": "01/09/…#e19f9cf9"
     },
     {
       "file": "docs/privacy/corpus/positive-highrisk.md",
       "category": "BANK_ACCOUNT",
       "action": "BLOCK",
-      "sample": "rek 12…#aeb9adf7"
+      "sample": "rek 12…#0b938adf"
     },
     {
       "file": "docs/privacy/corpus/positive-highrisk.md",
       "category": "PLATE_ID",
       "action": "WARN",
-      "sample": "B 1234…#9ab86e76"
+      "sample": "B 1234…#577554ff"
     },
     {
       "file": "docs/privacy/corpus/positive-highrisk.md",
       "category": "CHILD_NAME_AGE",
       "action": "BLOCK",
-      "sample": "Adi (7…#83485d89"
+      "sample": "Adi (7…#ba9292bb"
     },
     {
       "file": "docs/privacy/corpus/positive-highrisk.md",
       "category": "GEO_FINE",
       "action": "BLOCK",
-      "sample": "6.2000…#0e1b8591"
+      "sample": "6.2000…#e142199e"
     },
     {
       "file": "docs/privacy/corpus/positive-highrisk.md",
@@ -606,19 +606,19 @@
       "file": "docs/privacy/corpus/negative-decoy.md",
       "category": "GENERIC_16DIGIT",
       "action": "BLOCK",
-      "sample": "441122…#d3771e62"
+      "sample": "441122…#343b7351"
     },
     {
       "file": "docs/privacy/corpus/negative-decoy.md",
       "category": "GENERIC_16DIGIT",
       "action": "BLOCK",
-      "sample": "000000…#922237fc"
+      "sample": "000000…#57977a7a"
     },
     {
       "file": "docs/privacy/corpus/negative-decoy.md",
       "category": "GENERIC_16DIGIT",
       "action": "BLOCK",
-      "sample": "221122…#5236f4ae"
+      "sample": "221122…#6e8ab731"
     }
   ]
 }

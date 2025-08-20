@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-19T18:00:00.829Z",
+  "generated_utc": "2025-08-19T23:34:02.188Z",
   "summary": {
     "total_gaps": 8,
     "by_severity": {
@@ -72,7 +72,7 @@
         "path": "README.md",
         "feature": "Main project documentation",
         "description": "Documentation exists but appears incomplete",
-        "size": 34102,
+        "size": 35265,
         "impact": "Users may not understand how to use the system",
         "recommendation": "Complete documentation"
       }

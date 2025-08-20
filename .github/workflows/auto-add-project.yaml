@@ -1,0 +1,745 @@
+name: Auto-add to Project (Personal Account)
+
+# 🎯 Workflow for Personal GitHub Accounts - IT Leader Friendly
+# This workflow automatically adds Issues and PRs to GitHub Projects
+# and tracks team progress with field mappings and status updates
+# 
+# Inspired by enterprise practices from Netflix, Google, Microsoft, Amazon, and Gojek
+# Optimized for merajutasa.id IT Lead to track all Issues, PRs, and team progress
+
+on:
+  workflow_dispatch:
+    inputs:
+      number:
+        description: 'Issue/PR number to add/update (optional - leave empty to process recent items)'
+        required: false
+        default: ""
+      project_owner:
+        description: 'Project owner (default: repository owner)'
+        required: false
+        default: ""
+      project_title:
+        description: 'Project title to target'
+        required: false
+        default: "MerajutASA Program Board"
+      dry_run:
+        description: 'Dry run mode - log actions without making changes'
+        required: false
+        default: 'false'
+        type: boolean
+  issues:
+    types: [opened, labeled, unlabeled, reopened, edited, closed]
+  pull_request:
+    types: [opened, labeled, unlabeled, reopened, edited, closed, synchronize, ready_for_review]
+  issue_comment:
+    types: [created]
+
+env:
+  # Default configuration for IT Leader
+  DEFAULT_PROJECT_TITLE: "MerajutASA Program Board"
+  ENABLE_DETAILED_LOGGING: true
+  AUTO_CREATE_PROJECT: true
+
+jobs:
+  auto-add-to-project:
+    name: "🚀 Auto-add to Project (Personal Account)"
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📋 Validate Prerequisites
+        id: validate
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // Validate that GH_PROJECT_TOKEN is configured
+            const token = process.env.GH_PROJECT_TOKEN || '${{ secrets.GH_PROJECT_TOKEN }}';
+            if (!token || token === '${{ secrets.GH_PROJECT_TOKEN }}') {
+              core.setFailed('GH_PROJECT_TOKEN secret is required. Please configure it in repository settings.');
+              return;
+            }
+            
+            // Log workflow trigger for IT Leader visibility
+            core.info('🎯 Auto-add Project Workflow triggered');
+            core.info(`📧 Event: ${context.eventName}`);
+            core.info(`🔧 Action: ${context.payload.action || 'N/A'}`);
+            core.info(`📅 Timestamp: ${new Date().toISOString()}`);
+            
+            core.setOutput('validated', 'true');
+
+      - name: 🎯 Process Project Addition
+        if: steps.validate.outputs.validated == 'true'
+        uses: actions/github-script@v7
+        env:
+          GH_TOKEN: ${{ secrets.GH_PROJECT_TOKEN }}
+        with:
+          github-token: ${{ secrets.GH_PROJECT_TOKEN }}
+          script: |
+            const isDryRun = '${{ inputs.dry_run }}' === 'true';
+            const enableDetailedLogging = process.env.ENABLE_DETAILED_LOGGING === 'true';
+            
+            // Helper function for detailed logging
+            function detailedLog(message, data = null) {
+              if (enableDetailedLogging) {
+                if (data) {
+                  core.info(`🔍 ${message}: ${JSON.stringify(data, null, 2)}`);
+                } else {
+                  core.info(`🔍 ${message}`);
+                }
+              }
+            }
+            
+            // Check for +project comment trigger
+            if (context.eventName === 'issue_comment') {
+              const comment = context.payload.comment.body.trim().toLowerCase();
+              if (!comment.includes('+project')) { 
+                core.info('💬 Comment does not contain +project trigger, skipping');
+                return; 
+              }
+              core.info('✅ Triggered via +project comment');
+            }
+            
+            // Determine project configuration
+            const ownerLogin = '${{ inputs.project_owner }}' || 
+                              process.env.PROJECT_OWNER || 
+                              '${{ vars.PROJECT_OWNER }}' || 
+                              context.repo.owner;
+            const projectTitle = '${{ inputs.project_title }}' || 
+                               process.env.PROJECT_TITLE || 
+                               '${{ vars.PROJECT_TITLE }}' || 
+                               process.env.DEFAULT_PROJECT_TITLE;
+
+            core.info(`🏢 Target Owner: ${ownerLogin}`);
+            core.info(`📋 Target Project: ${projectTitle}`);
+            core.info(`🔄 Dry Run Mode: ${isDryRun}`);
+
+            // Enhanced project lookup using repositoryOwner pattern (personal account optimized)
+            let project;
+            try {
+              core.info('🔍 Looking up project...');
+              const projectQuery = `
+                query($owner: String!) {
+                  repositoryOwner(login: $owner) {
+                    id
+                    login
+                    ... on User {
+                      projectsV2(first: 50) {
+                        nodes {
+                          id
+                          title
+                          url
+                          public
+                          fields(first: 50) {
+                            nodes {
+                              __typename
+                              ... on ProjectV2FieldCommon { 
+                                id 
+                                name 
+                                dataType 
+                              }
+                              ... on ProjectV2SingleSelectField { 
+                                id
+                                name
+                                dataType
+                                options { 
+                                  id 
+                                  name 
+                                  color
+                                  description
+                                } 
+                              }
+                            }
+                          }
+                          items(first: 100) {
+                            nodes { 
+                              id 
+                              content { 
+                                ... on Issue { 
+                                  id 
+                                  number
+                                  title
+                                  state
+                                } 
+                                ... on PullRequest { 
+                                  id 
+                                  number
+                                  title
+                                  state
+                                  merged
+                                } 
+                              } 
+                            }
+                          }
+                        }
+                      }
+                    }
+                    ... on Organization {
+                      projectsV2(first: 50) {
+                        nodes {
+                          id
+                          title
+                          url
+                          public
+                          fields(first: 50) {
+                            nodes {
+                              __typename
+                              ... on ProjectV2FieldCommon { 
+                                id 
+                                name 
+                                dataType 
+                              }
+                              ... on ProjectV2SingleSelectField { 
+                                id
+                                name
+                                dataType
+                                options { 
+                                  id 
+                                  name 
+                                  color
+                                  description
+                                } 
+                              }
+                            }
+                          }
+                          items(first: 100) {
+                            nodes { 
+                              id 
+                              content { 
+                                ... on Issue { 
+                                  id 
+                                  number
+                                  title
+                                  state
+                                } 
+                                ... on PullRequest { 
+                                  id 
+                                  number
+                                  title
+                                  state
+                                  merged
+                                } 
+                              } 
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              `;
+              
+              const resp = await github.graphql(projectQuery, { owner: ownerLogin });
+              const nodes = resp.repositoryOwner?.projectsV2?.nodes || [];
+              
+              detailedLog('Available projects', nodes.map(p => ({ title: p.title, id: p.id })));
+              
+              project = nodes.find(p => p.title === projectTitle);
+              
+              // Enhanced fallback logic for IT Leader convenience
+              if (!project && projectTitle !== 'MerajutASA Program Board') {
+                core.warning(`🔄 Project "${projectTitle}" not found, trying legacy title`);
+                project = nodes.find(p => p.title === 'MerajutASA Program Board');
+              }
+              
+              if (!project && nodes.length > 0) {
+                core.warning(`🔄 No exact match found, trying case-insensitive search`);
+                project = nodes.find(p => p.title.toLowerCase() === projectTitle.toLowerCase());
+              }
+              
+            } catch (error) {
+              core.warning(`❌ Project lookup failed: ${error.message}`);
+              
+              if (process.env.AUTO_CREATE_PROJECT === 'true') {
+                core.info('🆕 AUTO_CREATE_PROJECT is enabled, but project creation should be done via setup-project-v2.yml workflow');
+                core.info('💡 IT Leader Action Required: Run the "Setup Project V2" workflow first');
+              }
+              
+              return;
+            }
+            
+            if (!project) { 
+              core.warning(`❌ Project "${projectTitle}" not found in ${ownerLogin}'s account`);
+              core.info('💡 IT Leader Action Required:');
+              core.info('   1. Run "Setup Project V2" workflow to create the project');
+              core.info('   2. Or check the project title spelling');
+              core.info('   3. Verify GH_PROJECT_TOKEN has project access');
+              return; 
+            }
+
+            core.info(`✅ Found project: ${project.title} (${project.url})`);
+            
+            const projectId = project.id;
+            const fields = project.fields.nodes;
+            const existingItems = project.items.nodes;
+            
+            detailedLog('Project fields', fields.map(f => ({ name: f.name, type: f.dataType })));
+
+            // Determine target issue/PR
+            const repoOwner = context.payload.repository?.owner?.login || context.repo.owner;
+            const repoName = context.payload.repository?.name || context.repo.repo;
+            let isPRContext = false;
+            let number = undefined;
+            
+            // Enhanced number detection logic
+            if (context.eventName === 'workflow_dispatch') {
+              const inputNum = ('${{ inputs.number }}' || '').trim();
+              if (inputNum) {
+                number = parseInt(inputNum, 10);
+                core.info(`🎯 Manual target: #${number}`);
+              }
+            } else if (context.eventName === 'pull_request') {
+              isPRContext = true; 
+              number = context.payload.pull_request.number;
+            } else if (context.eventName === 'issues') {
+              isPRContext = false; 
+              number = context.payload.issue.number;
+            } else if (context.eventName === 'issue_comment') {
+              // Enhanced PR detection for comments
+              isPRContext = !!context.payload.issue?.pull_request;
+              number = context.payload.issue?.number;
+            }
+            
+            if (!number) { 
+              core.warning('❌ No issue/PR number detected');
+              return; 
+            }
+
+            core.info(`🎯 Processing ${isPRContext ? 'PR' : 'Issue'} #${number}`);
+
+            // Fetch detailed content information
+            const contentQuery = isPRContext
+              ? `query($owner:String!, $repo:String!, $number:Int!) {
+                   repository(owner:$owner, name:$repo) {
+                     pullRequest(number:$number) {
+                       id number title body state merged mergeable
+                       labels(first:50){ nodes { name color description } }
+                       milestone { title dueOn }
+                       assignees(first:10){nodes{login name email}}
+                       author { login }
+                       createdAt
+                       updatedAt
+                       closedAt
+                       mergedAt
+                       isDraft
+                       reviewRequests(first:10) { nodes { requestedReviewer { ... on User { login } } } }
+                       reviews(first:10) { nodes { state author { login } } }
+                     }
+                   }
+                 }`
+              : `query($owner:String!, $repo:String!, $number:Int!) {
+                   repository(owner:$owner, name:$repo) {
+                     issue(number:$number) {
+                       id number title body state stateReason
+                       labels(first:50){ nodes { name color description } }
+                       milestone { title dueOn }
+                       assignees(first:10){nodes{login name email}}
+                       author { login }
+                       createdAt
+                       updatedAt
+                       closedAt
+                       comments { totalCount }
+                     }
+                   }
+                 }`;
+                 
+            const contentResp = await github.graphql(contentQuery, { 
+              owner: repoOwner, 
+              repo: repoName, 
+              number 
+            });
+            const content = isPRContext ? contentResp.repository.pullRequest : contentResp.repository.issue;
+            
+            if (!content) { 
+              core.error(`❌ Content not found for #${number}`);
+              return; 
+            }
+            
+            const contentId = content.id;
+            const labels = new Set((content.labels?.nodes || []).map(l => l.name));
+            
+            core.info(`📝 Title: ${content.title}`);
+            core.info(`🏷️  Labels: ${Array.from(labels).join(', ') || 'None'}`);
+            core.info(`👤 Author: ${content.author?.login || 'Unknown'}`);
+            core.info(`📅 Created: ${content.createdAt}`);
+            
+            detailedLog('Full content data', {
+              id: contentId,
+              number: content.number,
+              title: content.title,
+              state: content.state,
+              labels: Array.from(labels),
+              assignees: content.assignees?.nodes?.map(a => a.login) || [],
+              milestone: content.milestone?.title
+            });
+
+            // Check if item already exists in project
+            const existingItem = existingItems.find(i => i.content && i.content.id === contentId);
+            let itemId;
+            
+            if (existingItem) {
+              itemId = existingItem.id;
+              core.info(`🔄 Item already exists in project, updating fields`);
+            } else {
+              if (isDryRun) {
+                core.info(`🧪 DRY RUN: Would add item to project`);
+                return;
+              }
+              
+              core.info(`➕ Adding new item to project`);
+              const addMutation = `mutation($projectId: ID!, $contentId: ID!) {
+                addProjectV2ItemById(input:{projectId:$projectId, contentId:$contentId}) { 
+                  item { id } 
+                }
+              }`;
+              const addResult = await github.graphql(addMutation, { projectId, contentId });
+              itemId = addResult.addProjectV2ItemById.item.id;
+              core.info(`✅ Added item with ID: ${itemId}`);
+            }
+
+            // Field manipulation helpers
+            function getField(name) { 
+              return fields.find(f => f.name === name); 
+            }
+            
+            async function setSingleSelect(fieldName, optionName) {
+              const field = getField(fieldName);
+              if (!field || field.dataType !== 'SINGLE_SELECT') {
+                detailedLog(`Field "${fieldName}" not found or not single-select`);
+                return false;
+              }
+              
+              const option = (field.options || []).find(o => 
+                o.name.toLowerCase() === optionName.toLowerCase()
+              );
+              if (!option) {
+                detailedLog(`Option "${optionName}" not found in field "${fieldName}"`);
+                return false;
+              }
+              
+              if (isDryRun) {
+                core.info(`🧪 DRY RUN: Would set ${fieldName} = ${optionName}`);
+                return true;
+              }
+              
+              const mutation = `mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $optionId: String!) {
+                updateProjectV2ItemFieldValue(input:{ 
+                  projectId:$projectId, 
+                  itemId:$itemId, 
+                  fieldId:$fieldId, 
+                  value:{ singleSelectOptionId:$optionId }
+                }) { 
+                  projectV2Item { id } 
+                }
+              }`;
+              
+              await github.graphql(mutation, { 
+                projectId, 
+                itemId, 
+                fieldId: field.id, 
+                optionId: option.id 
+              });
+              
+              core.info(`✅ Set ${fieldName} = ${optionName}`);
+              return true;
+            }
+            
+            async function setDate(fieldName, value) {
+              const field = getField(fieldName);
+              if (!field || field.dataType !== 'DATE') return;
+              
+              if (isDryRun) {
+                core.info(`🧪 DRY RUN: Would set ${fieldName} = ${value}`);
+                return;
+              }
+              
+              const mutation = `mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $v: Date!) {
+                updateProjectV2ItemFieldValue(input:{ 
+                  projectId:$projectId, 
+                  itemId:$itemId, 
+                  fieldId:$fieldId, 
+                  value:{ date:$v }
+                }) { 
+                  projectV2Item { id } 
+                }
+              }`;
+              
+              await github.graphql(mutation, { 
+                projectId, 
+                itemId, 
+                fieldId: field.id, 
+                v: value 
+              });
+              
+              core.info(`✅ Set ${fieldName} = ${value}`);
+            }
+            
+            async function setNumber(fieldName, value) {
+              const field = getField(fieldName);
+              if (!field || field.dataType !== 'NUMBER') return;
+              
+              if (isDryRun) {
+                core.info(`🧪 DRY RUN: Would set ${fieldName} = ${value}`);
+                return;
+              }
+              
+              const mutation = `mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $v: Float!) {
+                updateProjectV2ItemFieldValue(input:{ 
+                  projectId:$projectId, 
+                  itemId:$itemId, 
+                  fieldId:$fieldId, 
+                  value:{ number:$v }
+                }) { 
+                  projectV2Item { id } 
+                }
+              }`;
+              
+              await github.graphql(mutation, { 
+                projectId, 
+                itemId, 
+                fieldId: field.id, 
+                v: value 
+              });
+              
+              core.info(`✅ Set ${fieldName} = ${value}`);
+            }
+            
+            async function setText(fieldName, value, options = {}) {
+              const { overwrite = true } = options;
+              const field = getField(fieldName);
+              if (!field || field.dataType !== 'TEXT') return;
+              if (!overwrite && (!value || !String(value).trim())) return;
+              
+              if (isDryRun) {
+                core.info(`🧪 DRY RUN: Would set ${fieldName} = ${value}`);
+                return;
+              }
+              
+              const mutation = `mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $v: String!) {
+                updateProjectV2ItemFieldValue(input:{ 
+                  projectId:$projectId, 
+                  itemId:$itemId, 
+                  fieldId:$fieldId, 
+                  value:{ text:$v }
+                }) { 
+                  projectV2Item { id } 
+                }
+              }`;
+              
+              await github.graphql(mutation, { 
+                projectId, 
+                itemId, 
+                fieldId: field.id, 
+                v: value 
+              });
+              
+              core.info(`✅ Set ${fieldName} = ${value}`);
+            }
+
+            // Enhanced field mapping logic for IT Leader tracking
+            core.info('🔧 Applying field mappings...');
+            
+            // Priority mapping with enhanced logic
+            if (labels.has('P0') || labels.has('urgent') || labels.has('critical')) {
+              await setSingleSelect('Priority', 'P0');
+            } else if (labels.has('P1') || labels.has('high-priority') || labels.has('high')) {
+              await setSingleSelect('Priority', 'P1');
+            } else if (labels.has('P2') || labels.has('medium') || labels.has('medium-priority')) {
+              await setSingleSelect('Priority', 'P2');
+            } else if (labels.has('P3') || labels.has('planned') || labels.has('low') || labels.has('low-priority')) {
+              await setSingleSelect('Priority', 'P3');
+            }
+
+            // Enhanced Area mapping
+            const areaLabel = Array.from(labels).find(l => l.toLowerCase().startsWith('area:'));
+            if (areaLabel) {
+              const areaName = areaLabel.slice('area:'.length).replace(/-/g, ' ');
+              const areaMapping = {
+                'security': 'Security',
+                'compliance': 'Compliance',
+                'observability': 'Observability',
+                'performance': 'Performance',
+                'high availability': 'High Availability',
+                'api gateway': 'API Gateway',
+                'equity ui': 'Equity UI',
+                'docs': 'Docs',
+                'ci cd': 'CI/CD',
+                'configuration': 'Configuration',
+                'logging': 'Logging',
+                'error handling': 'Error Handling',
+                'testing': 'Testing',
+                'backup': 'Backup',
+                'load testing': 'Load Testing',
+                'security audit': 'Security Audit',
+                'data pipeline': 'Data Pipeline',
+                'mobile api': 'Mobile API',
+                'integration': 'Integration'
+              };
+              
+              const mappedArea = areaMapping[areaName.toLowerCase()] || areaName;
+              const success = await setSingleSelect('Area', mappedArea);
+              
+              if (!success) {
+                // Fallback: try exact label match
+                const areaField = getField('Area');
+                const labelSetLc = new Set(Array.from(labels).map(s => s.toLowerCase()));
+                const hit = (areaField?.options || []).find(o => 
+                  labelSetLc.has(o.name.toLowerCase())
+                );
+                if (hit) {
+                  await setSingleSelect('Area', hit.name);
+                }
+              }
+            }
+
+            // Enhanced Phase mapping
+            const phaseLabel = Array.from(labels).find(l => l.toLowerCase().startsWith('phase:'));
+            if (phaseLabel) {
+              const raw = phaseLabel.slice('phase:'.length).toLowerCase();
+              const phaseMapping = new Map([
+                ['1', 'Phase 1'],
+                ['2-week-1', 'Phase 2 W1'], ['2-week-2', 'Phase 2 W2'], 
+                ['2-week-3', 'Phase 2 W3'], ['2-week-4', 'Phase 2 W4'],
+                ['2-week-5', 'Phase 2 W5'], ['2-week-6', 'Phase 2 W6'],
+                ['2-week-7', 'Phase 2 W7'], ['2-week-8', 'Phase 2 W8'],
+                ['3-q1', 'Phase 3 Q1'], ['3-q2', 'Phase 3 Q2'],
+                ['3-q3', 'Phase 3 Q3'], ['3-q4', 'Phase 3 Q4'],
+              ]);
+              
+              const target = phaseMapping.get(raw);
+              if (target) {
+                await setSingleSelect('Phase', target);
+              }
+            }
+
+            // Risk assessment
+            if (labels.has('risk:low')) {
+              await setSingleSelect('Risk', 'Low');
+            } else if (labels.has('risk:medium')) {
+              await setSingleSelect('Risk', 'Medium');
+            } else if (labels.has('risk:high')) {
+              await setSingleSelect('Risk', 'High');
+            }
+
+            // Enhanced Status mapping with PR-specific logic
+            if (labels.has('status:todo')) {
+              await setSingleSelect('Status', 'To Do');
+            } else if (labels.has('status:in-progress') || labels.has('in-progress')) {
+              await setSingleSelect('Status', 'In Progress');
+            } else if (labels.has('status:in-review')) {
+              await setSingleSelect('Status', 'In Review');
+            } else if (labels.has('status:blocked')) {
+              await setSingleSelect('Status', 'Blocked');
+            } else if (labels.has('status:done')) {
+              await setSingleSelect('Status', 'Done');
+            } else {
+              // Smart status inference
+              if (context.payload.action === 'opened') {
+                if (isPRContext && content.isDraft) {
+                  await setSingleSelect('Status', 'To Do');
+                } else if (isPRContext && !content.isDraft) {
+                  await setSingleSelect('Status', 'In Review');
+                } else {
+                  await setSingleSelect('Status', 'To Do');
+                }
+              }
+              
+              if (context.payload.action === 'ready_for_review') {
+                await setSingleSelect('Status', 'In Review');
+              }
+              
+              if (context.payload.action === 'closed') {
+                if (isPRContext && content.merged) {
+                  await setSingleSelect('Status', 'Done');
+                } else if (!isPRContext && content.state === 'closed') {
+                  await setSingleSelect('Status', 'Done');
+                }
+              }
+            }
+
+            // Date handling
+            const startDateLabel = Array.from(labels).find(l => l.startsWith('start:'));
+            if (startDateLabel) {
+              const dateStr = startDateLabel.slice('start:'.length);
+              if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+                await setDate('Start date', dateStr);
+              }
+            }
+            
+            const dueDateLabel = Array.from(labels).find(l => l.startsWith('due:'));
+            if (dueDateLabel) {
+              const dateStr = dueDateLabel.slice('due:'.length);
+              if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+                await setDate('Target date', dateStr);
+              }
+            } else if (content.milestone?.dueOn) {
+              const milestoneDate = content.milestone.dueOn.split('T')[0];
+              await setDate('Target date', milestoneDate);
+            }
+
+            // Estimate handling
+            const estimateLabel = Array.from(labels).find(l => l.startsWith('est:h:'));
+            if (estimateLabel) {
+              const hours = parseFloat(estimateLabel.slice('est:h:'.length));
+              if (!isNaN(hours) && hours > 0) {
+                await setNumber('Estimate (h)', hours);
+              }
+            }
+
+            // Owner assignment
+            const firstAssignee = content.assignees?.nodes?.[0]?.login;
+            if (firstAssignee) {
+              await setText('Owner (text)', firstAssignee);
+            } else if (content.author?.login) {
+              await setText('Owner (text)', content.author.login, { overwrite: false });
+            }
+
+            // Links extraction and milestone
+            const urlMatch = (content.body || '').match(/https?:\/\/\S+/);
+            if (urlMatch) {
+              await setText('Links', urlMatch[0], { overwrite: false });
+            }
+            
+            if (content.milestone?.title) {
+              await setText('Milestone', content.milestone.title);
+            }
+
+            // Generate summary report for IT Leader
+            const summary = {
+              timestamp: new Date().toISOString(),
+              event: context.eventName,
+              action: context.payload.action,
+              item_type: isPRContext ? 'pull_request' : 'issue',
+              item_number: number,
+              item_title: content.title,
+              project: {
+                owner: ownerLogin,
+                title: projectTitle,
+                url: project.url
+              },
+              fields_updated: [],
+              dry_run: isDryRun
+            };
+
+            core.info('📊 === IT LEADER SUMMARY ===');
+            core.info(`✅ Successfully processed ${isPRContext ? 'PR' : 'Issue'} #${number}`);
+            core.info(`📋 Project: ${projectTitle}`);
+            core.info(`🔗 Project URL: ${project.url}`);
+            core.info(`🏷️  Labels applied: ${Array.from(labels).join(', ') || 'None'}`);
+            core.info(`👤 Owner: ${firstAssignee || content.author?.login || 'Unassigned'}`);
+            core.info(`📅 Milestone: ${content.milestone?.title || 'None'}`);
+            core.info(`🎯 Status: ${content.state}`);
+            
+            if (isDryRun) {
+              core.info('🧪 DRY RUN MODE - No changes were made');
+            }
+            
+            core.info('🎉 Workflow completed successfully!');
+
+      - name: 📊 Upload Summary Artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: auto-add-project-summary
+          path: |
+            ${{ github.workspace }}/auto-add-summary.json
+          if-no-files-found: ignore
+          retention-days: 30
