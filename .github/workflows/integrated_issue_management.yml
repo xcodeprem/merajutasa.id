@@ -3,7 +3,7 @@ name: Integrated Issue Management (Personal Account)
 # Workflow that combines auto-labeling and project management
 # Created: 2025-08-20
 # Author: Andhika-Rey
-# Version: 1.0.0
+# Version: 1.0.1
 
 on:
   issues:
@@ -33,7 +33,7 @@ permissions:
 
 env:
   DEFAULT_PROJECT_TITLE: "MerajutASA Program Board"
-  WORKFLOW_VERSION: "1.0.0"
+  WORKFLOW_VERSION: "1.0.1"
   CREATED_AT: "2025-08-20"
   CREATED_BY: "Andhika-Rey"
 
@@ -143,6 +143,7 @@ jobs:
             let title = '', body = '', labels = [], milestoneTitle = '';
             let prState = null, isDraft = false, merged = false, issueState = null;
             let item = null;
+            let nodeId = null;
             
             if (isPR) {
               const pr = (await github.rest.pulls.get({ owner, repo, pull_number: number })).data;
@@ -154,6 +155,7 @@ jobs:
               prState = typeof pr.state === 'string' ? pr.state.toLowerCase() : null;
               isDraft = !!pr.draft;
               merged = !!pr.merged;
+              nodeId = pr.node_id; // Get the GraphQL node ID
             } else {
               const issue = (await github.rest.issues.get({ owner, repo, issue_number: number })).data;
               item = issue;
@@ -162,7 +164,10 @@ jobs:
               labels = (issue.labels || []).map(l => typeof l === 'string' ? l : l.name);
               milestoneTitle = issue.milestone?.title || '';
               issueState = typeof issue.state === 'string' ? issue.state.toLowerCase() : null;
+              nodeId = issue.node_id; // Get the GraphQL node ID
             }
+            
+            core.info(`Item GraphQL Node ID: ${nodeId}`);
             
             const existing = new Set(labels);
             
@@ -363,7 +368,8 @@ jobs:
                   type: isPR ? 'pull_request' : 'issue',
                   number: number,
                   title: title,
-                  url: item.html_url
+                  url: item.html_url,
+                  node_id: nodeId  // Include the GraphQL node ID
                 },
                 labels: {
                   existing: Array.from(existing),
@@ -414,7 +420,8 @@ jobs:
                 state: isPR ? prState : issueState,
                 isPR: isPR,
                 isDraft: isDraft,
-                merged: merged
+                merged: merged,
+                node_id: nodeId  // Include the GraphQL node ID
               },
               labels: {
                 final: finalLabels,
@@ -515,12 +522,19 @@ jobs:
             const itemType = item.type || '${{ needs.classify.outputs.item_type }}';
             const itemNumber = item.number || parseInt('${{ needs.classify.outputs.item_number }}', 10);
             const isPR = itemType === 'pull_request';
+            const contentId = item.node_id; // Get the GraphQL node ID from classification
+            
+            if (!contentId) {
+              core.setFailed('Missing node_id in classification data. Cannot add to project.');
+              return;
+            }
             
             // Project configuration
             const ownerLogin = context.repo.owner;
             const projectTitle = process.env.PROJECT_TITLE || 'MerajutASA Program Board';
             
             core.info(`🎯 Processing ${isPR ? 'PR' : 'Issue'} #${itemNumber} for project "${projectTitle}"`);
+            core.info(`Using node ID: ${contentId}`);
             
             if (isDryRun) {
               core.info('🧪 DRY RUN MODE: Will simulate but not make actual changes');
@@ -820,11 +834,6 @@ jobs:
                       } 
                     }
                   `;
-                  
-                  // Build content ID using the GraphQL ID format
-                  // Format: <type>:<database_id>
-                  const contentIdFormat = isPR ? 'PR' : 'I';
-                  const contentId = item.id; // This should be the GraphQL node ID from classification
                   
                   const addResult = await github.graphql(addMutation, { 
                     projectId, 
