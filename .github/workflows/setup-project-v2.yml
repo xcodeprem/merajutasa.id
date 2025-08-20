@@ -152,7 +152,7 @@ jobs:
               try {
                 const all = [...(f.options||[]).map(o=>({ id:o.id, name:o.name, color:o.color, description:o.description })), ...missing];
                 const m = `
-                  mutation($projectId: ID!, $fieldId: ID!, $opts: [ProjectV2SingleSelectFieldOptionInput!]!) {
+                  mutation($projectId: ID!, $fieldId: ID!, $opts: [ProjectV2SingleSelectFieldOptionColor!]!) {
                     updateProjectV2Field(input:{ projectId:$projectId, fieldId:$fieldId, singleSelectOptions:$opts }) { projectV2Field { ... on ProjectV2FieldCommon { id name } } }
                   }
                 `;
