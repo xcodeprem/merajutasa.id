@@ -152,11 +152,11 @@ jobs:
               try {
                 const all = [...(f.options||[]).map(o=>({ id:o.id, name:o.name, color:o.color, description:o.description })), ...missing];
                 const m = `
-                  mutation($projectId: ID!, $fieldId: ID!, $opts: [ProjectV2SingleSelectFieldOptionInput!]!) {
-                    updateProjectV2Field(input:{ projectId:$projectId, fieldId:$fieldId, singleSelectOptions:$opts }) { projectV2Field { ... on ProjectV2FieldCommon { id name } } }
+                  mutation($fieldId: ID!, $opts: [ProjectV2SingleSelectFieldOptionInput!]!) {
+                    updateProjectV2Field(input:{ fieldId:$fieldId, singleSelectOptions:$opts }) { projectV2Field { ... on ProjectV2FieldCommon { id name } } }
                   }
                 `;
-                await github.graphql(m, { projectId: project.id, fieldId: f.id, opts: all });
+                await github.graphql(m, { fieldId: f.id, opts: all });
                 console.log(`Updated options for field "${name}": added ${missing.map(m=>m.name).join(', ')}`);
               } catch (e) {
                 core.warning(`Could not update options for '${name}': ${e?.message || e}`);
