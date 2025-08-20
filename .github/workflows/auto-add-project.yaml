@@ -551,30 +551,38 @@ jobs:
             // Enhanced Area mapping
             const areaLabel = Array.from(labels).find(l => l.toLowerCase().startsWith('area:'));
             if (areaLabel) {
-              const areaName = areaLabel.slice('area:'.length).replace(/-/g, ' ');
+              const key = areaLabel.slice('area:'.length).toLowerCase();
               const areaMapping = {
-                'security': 'Security',
-                'compliance': 'Compliance',
-                'observability': 'Observability',
-                'performance': 'Performance',
-                'high availability': 'High Availability',
-                'api gateway': 'API Gateway',
-                'equity ui': 'Equity UI',
+                'security': 'Security Layer',
+                'security-layer': 'Security Layer',
+                'observability': 'Monitoring & Observability',
+                'monitoring-observability': 'Monitoring & Observability',
+                'performance': 'Performance Optimization',
+                'performance-optimization': 'Performance Optimization',
+                'high-availability': 'High Availability',
+                'compliance': 'Compliance & Governance',
+                'compliance-governance': 'Compliance & Governance',
+                'api-gateway': 'API Gateway & Services',
+                'api-gateway-services': 'API Gateway & Services',
+                'ci-cd': 'CI/CD Pipeline',
+                'cicd-pipeline': 'CI/CD Pipeline',
+                'container-orchestration': 'Container Orchestration',
+                'data-management': 'Data Management',
+                'integration-platform': 'Integration Platform',
+                'ai-ml-integration': 'AI/ML Integration',
+                'executive-dashboard': 'Executive Dashboard',
+                'infrastructure-modernization': 'Infrastructure Modernization',
+                'developer-experience': 'Developer Experience',
+                'advanced-enterprise': 'Advanced Enterprise',
+                // Legacy fallbacks
+                'equity-ui': 'Equity UI',
                 'docs': 'Docs',
-                'ci cd': 'CI/CD',
                 'configuration': 'Configuration',
-                'logging': 'Logging',
-                'error handling': 'Error Handling',
                 'testing': 'Testing',
-                'backup': 'Backup',
-                'load testing': 'Load Testing',
-                'security audit': 'Security Audit',
-                'data pipeline': 'Data Pipeline',
-                'mobile api': 'Mobile API',
-                'integration': 'Integration'
+                'mobile-api': 'Mobile API'
               };
-              
-              const mappedArea = areaMapping[areaName.toLowerCase()] || areaName;
+
+              const mappedArea = areaMapping[key] || key.replace(/-/g, ' ');
               const success = await setSingleSelect('Area', mappedArea);
               
               if (!success) {
@@ -702,6 +710,55 @@ jobs:
               await setText('Milestone', content.milestone.title);
             }
 
+            // Component/team/health/size/iteration mappings (optional based on fields existing)
+            const teamLabel = Array.from(labels).find(l => l.toLowerCase().startsWith('team:'));
+            if (teamLabel) {
+              const val = teamLabel.split(':')[1].replace(/-/g, ' ');
+              await setSingleSelect('Team Assignment', val);
+            }
+
+            const componentLabel = Array.from(labels).find(l => l.toLowerCase().startsWith('component:'));
+            if (componentLabel) {
+              const val = componentLabel.split(':')[1].replace(/-/g, ' ');
+              await setSingleSelect('Component', val);
+            }
+
+            const healthLabel = Array.from(labels).find(l => l.toLowerCase().startsWith('health:'));
+            if (healthLabel) {
+              const raw = healthLabel.split(':')[1].toLowerCase();
+              const map = {
+                '100': '100/100',
+                '90-99': '90-99/100',
+                '75-89': '75-89/100',
+                '50-74': '50-74/100',
+                '25-49': '25-49/100',
+                '0-24': '0-24/100'
+              };
+              const target = map[raw] || raw;
+              await setSingleSelect('Health Score', target);
+            }
+
+            const sizeLabel = Array.from(labels).find(l => l.toLowerCase().startsWith('size:'));
+            if (sizeLabel) {
+              const raw = sizeLabel.split(':')[1].toLowerCase();
+              const map = {
+                'small': '< 10KB',
+                'medium': '10-25KB',
+                'large': '25-50KB',
+                'very-large': '50-100KB',
+                'enterprise': '100KB+',
+                'system': 'Enterprise Scale'
+              };
+              const target = map[raw] || raw.replace(/-/g, ' ');
+              await setSingleSelect('Implementation Size', target);
+            }
+
+            const iterLabel = Array.from(labels).find(l => l.toLowerCase().startsWith('iteration:'));
+            if (iterLabel) {
+              const val = iterLabel.split(':')[1].replace(/-/g, ' ');
+              await setSingleSelect('Iteration', val);
+            }
+
             // Generate summary report for IT Leader
             const summary = {
               timestamp: new Date().toISOString(),
@@ -733,6 +790,17 @@ jobs:
             }
             
             core.info('🎉 Workflow completed successfully!');
+
+            // Write summary artifact
+            try {
+              const fs = await import('fs');
+              const path = await import('path');
+              const file = path.join(process.env.GITHUB_WORKSPACE || process.cwd(), 'auto-add-summary.json');
+              await fs.promises.writeFile(file, JSON.stringify(summary, null, 2), 'utf8');
+              core.info('📦 Wrote auto-add-summary.json');
+            } catch (e) {
+              core.warning('Failed to write summary artifact: ' + (e?.message || e));
+            }
 
       - name: 📊 Upload Summary Artifact
         if: always()

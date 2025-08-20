@@ -10,7 +10,7 @@ on:
       project_title:
         description: 'Judul Project'
         required: true
-        default: 'MerajutASA Program Board'
+        default: 'MerajutASA Program'
       public:
         description: 'Public? (true/false)'
         required: true
