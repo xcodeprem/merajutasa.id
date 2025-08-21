@@ -1,8 +1,6 @@
 # MerajutASA.id Testing Environment
 # Docker Compose configuration for testing and CI/CD
 
-version: '3.8'
-
 services:
   # Core Services - Testing Configuration
   signer-test:

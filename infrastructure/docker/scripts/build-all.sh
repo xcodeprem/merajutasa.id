@@ -50,7 +50,7 @@ build_service() {
         --build-arg VCS_REF="${VCS_REF}" \
         --build-arg VERSION="${VERSION}" \
         ${build_args} \
-        ../../
+        ../../../
     
     if [ $? -eq 0 ]; then
         log_success "${service} build completed"
@@ -110,7 +110,7 @@ main() {
     docker images | grep "${REGISTRY}" | grep -E "(${VERSION}|latest)"
     
     # Generate build manifest
-    cat > "../../artifacts/docker-build-manifest.json" << EOF
+    cat > "../../../artifacts/docker-build-manifest.json" << EOF
 {
   "build_date": "${BUILD_DATE}",
   "version": "${VERSION}",

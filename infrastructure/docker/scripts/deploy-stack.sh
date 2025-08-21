@@ -6,11 +6,25 @@ set -euo pipefail
 
 # Configuration
 ENVIRONMENT=${ENVIRONMENT:-"development"}
-COMPOSE_FILE_MAP=(
-    ["development"]="../compose/docker-compose.yml"
-    ["production"]="../compose/docker-compose.prod.yml"
-    ["test"]="../compose/docker-compose.test.yml"
-)
+
+# Function to get compose file based on environment
+get_compose_file() {
+    local env="$1"
+    case "$env" in
+        "development")
+            echo "../compose/docker-compose.yml"
+            ;;
+        "production")
+            echo "../compose/docker-compose.prod.yml"
+            ;;
+        "test")
+            echo "../compose/docker-compose.test.yml"
+            ;;
+        *)
+            echo ""
+            ;;
+    esac
+}
 REGISTRY=${REGISTRY:-"merajutasa"}
 VERSION=${VERSION:-"latest"}
 TIMEOUT=${TIMEOUT:-300}
@@ -68,10 +82,10 @@ rollback_deployment() {
     log_warning "Rolling back deployment..."
     
     # Stop current containers
-    docker-compose -f "${COMPOSE_FILE}" down
+    docker compose -f "${COMPOSE_FILE}" down
     
     # Deploy previous version (assuming it exists)
-    docker-compose -f "${COMPOSE_FILE}" up -d
+    docker compose -f "${COMPOSE_FILE}" up -d
     
     log_warning "Rollback completed"
 }
@@ -169,10 +183,10 @@ main() {
     cd "$(dirname "$0")"
     
     # Set compose file based on environment
-    COMPOSE_FILE=${COMPOSE_FILE_MAP[$ENVIRONMENT]}
+    COMPOSE_FILE=$(get_compose_file "$ENVIRONMENT")
     
-    if [ ! -f "$COMPOSE_FILE" ]; then
-        log_error "Compose file not found: $COMPOSE_FILE"
+    if [ -z "$COMPOSE_FILE" ] || [ ! -f "$COMPOSE_FILE" ]; then
+        log_error "Compose file not found for environment: $ENVIRONMENT"
         exit 1
     fi
     
@@ -184,12 +198,12 @@ main() {
             pre_deployment_checks
             
             log_info "Deploying services..."
-            docker-compose -f "$COMPOSE_FILE" up -d
+            docker compose -f "$COMPOSE_FILE" up -d
             
             post_deployment_validation
             
             # Generate deployment manifest
-            cat > "../../artifacts/deployment-manifest.json" << EOF
+            cat > "../../../artifacts/deployment-manifest.json" << EOF
 {
   "deployment_date": "$(date -u +'%Y-%m-%dT%H:%M:%SZ')",
   "environment": "${ENVIRONMENT}",
@@ -211,24 +225,24 @@ EOF
             
         "stop")
             log_info "Stopping services..."
-            docker-compose -f "$COMPOSE_FILE" down
+            docker compose -f "$COMPOSE_FILE" down
             log_success "Services stopped"
             ;;
             
         "restart")
             log_info "Restarting services..."
-            docker-compose -f "$COMPOSE_FILE" restart
+            docker compose -f "$COMPOSE_FILE" restart
             post_deployment_validation
             log_success "Services restarted"
             ;;
             
         "status")
             log_info "Service status:"
-            docker-compose -f "$COMPOSE_FILE" ps
+            docker compose -f "$COMPOSE_FILE" ps
             ;;
             
         "logs")
-            docker-compose -f "$COMPOSE_FILE" logs -f
+            docker compose -f "$COMPOSE_FILE" logs -f
             ;;
             
         *)

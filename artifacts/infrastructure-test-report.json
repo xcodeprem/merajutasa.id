@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-08-21T18:53:23.621Z",
+  "timestamp": "2025-08-21T19:31:03.521Z",
   "summary": {
     "total": 7,
     "passed": 7,
@@ -16,7 +16,7 @@
     {
       "name": "Docker Build Scripts",
       "status": "PASSED",
-      "duration": 6
+      "duration": 7
     },
     {
       "name": "Docker Compose Files",
@@ -31,7 +31,7 @@
     {
       "name": "Kubernetes Manifests",
       "status": "PASSED",
-      "duration": 1
+      "duration": 2
     },
     {
       "name": "Terraform Configuration",

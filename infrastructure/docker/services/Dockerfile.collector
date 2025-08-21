@@ -10,7 +10,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies with production optimizations
-RUN npm ci --only=production --no-audit --no-fund
+RUN npm install --omit=dev --no-audit --no-fund
 
 # Production stage
 FROM node:18-alpine AS runtime

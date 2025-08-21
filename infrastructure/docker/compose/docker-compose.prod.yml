@@ -1,8 +1,6 @@
 # MerajutASA.id Production Environment
 # Docker Compose configuration for production deployment
 
-version: '3.8'
-
 services:
   # Core Services - Production Configuration
   signer:

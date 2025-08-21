@@ -1,8 +1,6 @@
 # MerajutASA.id Development Environment
 # Docker Compose configuration for local development
 
-version: '3.8'
-
 services:
   # Core Services
   signer:

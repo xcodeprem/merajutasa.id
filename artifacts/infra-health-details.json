@@ -1,11 +1,11 @@
 {
   "_metadata": {
     "actor": "copilot-swe-agent[bot]",
-    "generated_at": "2025-08-21T18:53:30.778Z",
+    "generated_at": "2025-08-21T19:31:10.534Z",
     "generator": "infra-health-check-all",
-    "git_ref": "refs/heads/copilot/fix-149",
-    "git_sha": "27a836a023c36c77d6efbfa399d9aff8bef896dc",
-    "run_id": "17135920713",
+    "git_ref": "refs/heads/copilot/fix-152",
+    "git_sha": "4960a868a7095b8ac8357e22bcb6ae72be0736c3",
+    "run_id": "17136726036",
     "version": "1.0"
   },
   "category": "all",
@@ -15,10 +15,10 @@
       "component": "advanced-observability-system",
       "error": {
         "code": "ERR_MODULE_NOT_FOUND",
-        "message": "Cannot find package '@opentelemetry/auto-instrumentations-node' imported from /home/runner/work/merajutasa.id/merajutasa.id/infrastructure/observability/tracing/distributed-tracing.js"
+        "message": "Cannot find package '@opentelemetry/api' imported from /home/runner/work/merajutasa.id/merajutasa.id/infrastructure/observability/tracing/distributed-tracing.js"
       },
       "status": "FAILED",
-      "ts": "2025-08-21T18:53:30.649Z"
+      "ts": "2025-08-21T19:31:10.528Z"
     },
     {
       "category": "performance",
@@ -26,11 +26,11 @@
       "metrics": {
         "loadable": true,
         "message": "Component loadable, no explicit health check",
-        "responseTime": 11,
+        "responseTime": 10,
         "status": "healthy"
       },
       "status": "HEALTHY",
-      "ts": "2025-08-21T18:53:30.617Z"
+      "ts": "2025-08-21T19:31:10.500Z"
     },
     {
       "category": "performance",
@@ -38,23 +38,21 @@
       "metrics": {
         "loadable": true,
         "message": "Component loadable, no explicit health check",
-        "responseTime": 42,
+        "responseTime": 38,
         "status": "healthy"
       },
       "status": "HEALTHY",
-      "ts": "2025-08-21T18:53:30.649Z"
+      "ts": "2025-08-21T19:31:10.528Z"
     },
     {
       "category": "api-gateway",
       "component": "api-gateway-orchestrator",
-      "metrics": {
-        "loadable": true,
-        "message": "Component loadable, no explicit health check",
-        "responseTime": 170,
-        "status": "healthy"
+      "error": {
+        "code": "ERR_MODULE_NOT_FOUND",
+        "message": "Cannot find package 'express' imported from /home/runner/work/merajutasa.id/merajutasa.id/infrastructure/api-gateway/api-gateway-core.js"
       },
-      "status": "HEALTHY",
-      "ts": "2025-08-21T18:53:30.777Z"
+      "status": "FAILED",
+      "ts": "2025-08-21T19:31:10.531Z"
     },
     {
       "category": "api-gateway",
@@ -62,11 +60,11 @@
       "metrics": {
         "loadable": true,
         "message": "Component loadable, no explicit health check",
-        "responseTime": 13,
+        "responseTime": 12,
         "status": "healthy"
       },
       "status": "HEALTHY",
-      "ts": "2025-08-21T18:53:30.620Z"
+      "ts": "2025-08-21T19:31:10.502Z"
     },
     {
       "category": "high-availability",
@@ -74,11 +72,11 @@
       "metrics": {
         "loadable": true,
         "message": "Component loadable, no explicit health check",
-        "responseTime": 53,
+        "responseTime": 42,
         "status": "healthy"
       },
       "status": "HEALTHY",
-      "ts": "2025-08-21T18:53:30.660Z"
+      "ts": "2025-08-21T19:31:10.533Z"
     },
     {
       "category": "high-availability",
@@ -86,11 +84,11 @@
       "metrics": {
         "loadable": true,
         "message": "Component loadable, no explicit health check",
-        "responseTime": 14,
+        "responseTime": 13,
         "status": "healthy"
       },
       "status": "HEALTHY",
-      "ts": "2025-08-21T18:53:30.621Z"
+      "ts": "2025-08-21T19:31:10.504Z"
     },
     {
       "category": "high-availability",
@@ -102,7 +100,7 @@
         "status": "healthy"
       },
       "status": "HEALTHY",
-      "ts": "2025-08-21T18:53:30.621Z"
+      "ts": "2025-08-21T19:31:10.504Z"
     },
     {
       "category": "compliance",
@@ -114,7 +112,7 @@
         "status": "healthy"
       },
       "status": "HEALTHY",
-      "ts": "2025-08-21T18:53:30.625Z"
+      "ts": "2025-08-21T19:31:10.508Z"
     },
     {
       "category": "compliance",
@@ -126,7 +124,7 @@
         "status": "healthy"
       },
       "status": "HEALTHY",
-      "ts": "2025-08-21T18:53:30.627Z"
+      "ts": "2025-08-21T19:31:10.510Z"
     },
     {
       "category": "compliance",
@@ -134,11 +132,11 @@
       "metrics": {
         "loadable": true,
         "message": "Component loadable, no explicit health check",
-        "responseTime": 26,
+        "responseTime": 25,
         "status": "healthy"
       },
       "status": "HEALTHY",
-      "ts": "2025-08-21T18:53:30.635Z"
+      "ts": "2025-08-21T19:31:10.517Z"
     },
     {
       "category": "compliance",
@@ -146,11 +144,11 @@
       "metrics": {
         "loadable": true,
         "message": "Component loadable, no explicit health check",
-        "responseTime": 21,
+        "responseTime": 20,
         "status": "healthy"
       },
       "status": "HEALTHY",
-      "ts": "2025-08-21T18:53:30.630Z"
+      "ts": "2025-08-21T19:31:10.512Z"
     },
     {
       "category": "security",
@@ -159,7 +157,7 @@
         "loadable": true
       },
       "status": "HEALTHY",
-      "ts": "2025-08-21T18:53:30.635Z"
+      "ts": "2025-08-21T19:31:10.517Z"
     },
     {
       "category": "monitoring",
@@ -171,7 +169,7 @@
         "status": "healthy"
       },
       "status": "HEALTHY",
-      "ts": "2025-08-21T18:53:30.633Z"
+      "ts": "2025-08-21T19:31:10.515Z"
     },
     {
       "category": "monitoring",
@@ -179,11 +177,11 @@
       "metrics": {
         "loadable": true,
         "message": "Component loadable, no explicit health check",
-        "responseTime": 26,
+        "responseTime": 25,
         "status": "healthy"
       },
       "status": "HEALTHY",
-      "ts": "2025-08-21T18:53:30.636Z"
+      "ts": "2025-08-21T19:31:10.518Z"
     },
     {
       "category": "integrations",
@@ -191,11 +189,11 @@
       "metrics": {
         "loadable": true,
         "message": "Component loadable, no explicit health check",
-        "responseTime": 27,
+        "responseTime": 26,
         "status": "healthy"
       },
       "status": "HEALTHY",
-      "ts": "2025-08-21T18:53:30.637Z"
+      "ts": "2025-08-21T19:31:10.519Z"
     },
     {
       "category": "integrations",
@@ -203,11 +201,11 @@
       "metrics": {
         "loadable": true,
         "message": "Component loadable, no explicit health check",
-        "responseTime": 27,
+        "responseTime": 26,
         "status": "healthy"
       },
       "status": "HEALTHY",
-      "ts": "2025-08-21T18:53:30.637Z"
+      "ts": "2025-08-21T19:31:10.520Z"
     },
     {
       "category": "dependencies",
@@ -215,11 +213,11 @@
       "metrics": {
         "loadable": true,
         "message": "Component loadable, no explicit health check",
-        "responseTime": 26,
+        "responseTime": 25,
         "status": "healthy"
       },
       "status": "HEALTHY",
-      "ts": "2025-08-21T18:53:30.637Z"
+      "ts": "2025-08-21T19:31:10.519Z"
     }
   ],
   "totalComponents": 18

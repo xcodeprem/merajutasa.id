@@ -69,9 +69,7 @@ class InfrastructureIntegrationTests {
             try {
                 const content = await fs.readFile(filePath, 'utf8');
                 
-                if (!content.includes('version:')) {
-                    throw new Error(`${file} missing version declaration`);
-                }
+                // Docker Compose v2 doesn't require version declaration
                 if (!content.includes('services:')) {
                     throw new Error(`${file} missing services section`);
                 }
