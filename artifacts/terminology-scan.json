@@ -10,11 +10,11 @@
     "hysteresis": 283,
     "hash": 561,
     "credential": 199,
-    "governance": 742,
+    "governance": 758,
     "revocation": 110
   },
-  "totalKey": 2685,
-  "banned_terms_detected": 224,
+  "totalKey": 2701,
+  "banned_terms_detected": 225,
   "banned_samples": [
     {
       "file": "docs/contributing.md",
@@ -111,6 +111,10 @@
     {
       "file": "docs/status/gate3-verification-2025-08-17.md",
       "term": "peringkat"
+    },
+    {
+      "file": "docs/runbooks/boot-sequence-local.md",
+      "term": "top"
     },
     {
       "file": "docs/roadmap/roadmap-master-v1.md",

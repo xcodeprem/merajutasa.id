@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-21T22:39:05.237Z",
+  "generated_utc": "2025-08-21T23:56:50.598Z",
   "old_total": 0,
   "new_total": 0,
   "adoptionPercent": 100,
@@ -147,6 +147,11 @@
     },
     {
       "file": "docs/schemas/README.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/runbooks/boot-sequence-local.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -471,6 +476,11 @@
       "newCount": 0
     },
     {
+      "file": "docs/implementation/sanity-checks-guide.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
       "file": "docs/implementation/README.md",
       "oldCount": 0,
       "newCount": 0
@@ -746,16 +756,6 @@
       "newCount": 0
     },
     {
-      "file": "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs/governance/audit/README-audit-process.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
       "file": "docs/governance/dec/DEC-style-guide-v3.md",
       "oldCount": 0,
       "newCount": 0
@@ -857,6 +857,16 @@
     },
     {
       "file": "docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/governance/audit/README-audit-process.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -1938,16 +1948,6 @@
       ]
     },
     {
-      "file": "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
-      "suggestions": [
-        {
-          "old": "user",
-          "new": "pengguna",
-          "count": 1
-        }
-      ]
-    },
-    {
       "file": "docs/governance/dec/DEC-20250817-09-stage2-terminology-transition.md",
       "suggestions": [
         {
@@ -2093,6 +2093,16 @@
         {
           "old": "master",
           "new": "utama",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
           "count": 1
         }
       ]

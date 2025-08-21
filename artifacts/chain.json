@@ -38,5 +38,21 @@
     "signature": "3kPJB+yjNCuBY3QZW+LfGkv/AYFXH0UzcSbHq1Cp3W+vDmayqSn0JZJpAfKoXp9YmWAj8054/D0FZYi9RmByAQ==",
     "canonical": "{\"id\":\"chain-test-2\",\"n\":2,\"purpose\":\"append-seed\",\"ts\":\"2025-08-21T18:18:52.990Z\"}",
     "ts": "2025-08-21T18:18:53.002Z"
+  },
+  {
+    "seq": 5,
+    "prevHash": "be936a59b082da96187538e64307dea98fb89216aa1e615d52552461e6df8241",
+    "contentHash": "5be2a6a3c8e928f5e3af256ea251ea16e70f724893a1d761c38fcd99230512f1",
+    "signature": "frxFRecj9NInd921adamTW2Cp20kXplFvlblUMNUQS76r/MAiougMygOlK2Rf3vYOITPMJvKHLkRXuN5QcDpCw==",
+    "canonical": "{\"counts\":{},\"items\":[],\"schema_version\":\"1.0\",\"type\":\"event_anchor_batch\"}",
+    "ts": "2025-08-21T23:55:07.804Z"
+  },
+  {
+    "seq": 6,
+    "prevHash": "5be2a6a3c8e928f5e3af256ea251ea16e70f724893a1d761c38fcd99230512f1",
+    "contentHash": "e1368b192230c61699964c6373eaf40ba7908e1a91d349589c60c9b5f78cf0c2",
+    "signature": "1PmuZ40v2FZg9anHcup2ZZt5J6S71fdxUZE+jmTcTLu8f4GzeaGqnqZGveIUqfRGhrydViIKK3/1dmN3gC2mAw==",
+    "canonical": "{\"mode\":\"verify\",\"updated\":[],\"summary\":{\"total_entries\":56,\"updated_count\":0,\"violation_count\":0,\"placeholders_remaining_count\":0}}",
+    "ts": "2025-08-21T23:55:08.199Z"
   }
 ]

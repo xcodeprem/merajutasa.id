@@ -60,6 +60,7 @@ npm run week6:status         # Compliance & security
 # Start enterprise infrastructure (choose one):
 
 # Option 1: Core governance services
+# For detailed boot sequence, see: docs/runbooks/boot-sequence-local.md
 npm run service:signer &     # Port 4601
 npm run service:chain &      # Port 4602  
 npm run service:collector &  # Port 4603
