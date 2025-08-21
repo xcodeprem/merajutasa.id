@@ -1,0 +1,327 @@
+name: Personal Projects Master Automation
+
+on:
+  pull_request:
+    types: [opened, synchronize, labeled, unlabeled, ready_for_review, reopened, closed, edited]
+  issue_comment:
+    types: [created]
+  workflow_dispatch:
+    inputs:
+      project:
+        description: 'Target project (feature-release, team-retrospective, iterative-development, or all)'
+        required: false
+        type: choice
+        options:
+          - all
+          - feature-release
+          - team-retrospective
+          - iterative-development
+        default: all
+      pr_number:
+        description: 'PR number to process (optional)'
+        required: false
+        type: string
+      dry_run:
+        description: 'Dry run mode (no actual changes)'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  determine-projects:
+    name: Determine Target Projects
+    runs-on: ubuntu-latest
+    outputs:
+      projects: ${{ steps.projects.outputs.matrix }}
+      trigger: ${{ steps.context.outputs.trigger }}
+      pr_number: ${{ steps.context.outputs.pr_number }}
+      dry_run: ${{ steps.context.outputs.dry_run }}
+    steps:
+      - name: Determine context and projects
+        id: context
+        run: |
+          TRIGGER="true"
+          PR_NUMBER=""
+          DRY_RUN="false"
+          
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            PR_NUMBER="${{ inputs.pr_number }}"
+            DRY_RUN="${{ inputs.dry_run }}"
+            TARGET_PROJECT="${{ inputs.project }}"
+          elif [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            PR_NUMBER="${{ github.event.pull_request.number }}"
+            TARGET_PROJECT="all"
+          elif [[ "${{ github.event_name }}" == "issue_comment" && "${{ github.event.issue.pull_request }}" ]]; then
+            COMMENT_BODY="${{ github.event.comment.body }}"
+            PR_NUMBER="${{ github.event.issue.number }}"
+            
+            if [[ "$COMMENT_BODY" =~ \+project.*feature ]]; then
+              TARGET_PROJECT="feature-release"
+            elif [[ "$COMMENT_BODY" =~ \+project.*retro ]]; then
+              TARGET_PROJECT="team-retrospective"
+            elif [[ "$COMMENT_BODY" =~ \+project.*iterative ]]; then
+              TARGET_PROJECT="iterative-development"
+            elif [[ "$COMMENT_BODY" =~ \+project.*all ]]; then
+              TARGET_PROJECT="all"
+            else
+              TRIGGER="false"
+            fi
+          else
+            TRIGGER="false"
+          fi
+          
+          echo "trigger=$TRIGGER" >> $GITHUB_OUTPUT
+          echo "pr_number=$PR_NUMBER" >> $GITHUB_OUTPUT
+          echo "dry_run=$DRY_RUN" >> $GITHUB_OUTPUT
+          echo "target_project=$TARGET_PROJECT" >> $GITHUB_OUTPUT
+          
+      - name: Set project matrix
+        id: projects
+        run: |
+          TARGET_PROJECT="${{ steps.context.outputs.target_project }}"
+          
+          if [[ "$TARGET_PROJECT" == "all" ]]; then
+            MATRIX='["feature-release", "team-retrospective", "iterative-development"]'
+          else
+            MATRIX='["'"$TARGET_PROJECT"'"]'
+          fi
+          
+          echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
+
+  project-automation:
+    name: ${{ matrix.project }} Automation
+    runs-on: ubuntu-latest
+    needs: determine-projects
+    if: needs.determine-projects.outputs.trigger == 'true'
+    strategy:
+      matrix:
+        project: ${{ fromJson(needs.determine-projects.outputs.projects) }}
+      fail-fast: false
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+        
+      - name: Get project configuration
+        id: config
+        run: |
+          case "${{ matrix.project }}" in
+            "feature-release")
+              echo "project_id=12" >> $GITHUB_OUTPUT
+              echo "project_title=Feature Release" >> $GITHUB_OUTPUT
+              echo "emoji=🚀" >> $GITHUB_OUTPUT
+              ;;
+            "team-retrospective")
+              echo "project_id=11" >> $GITHUB_OUTPUT
+              echo "project_title=Team Retrospective" >> $GITHUB_OUTPUT
+              echo "emoji=📋" >> $GITHUB_OUTPUT
+              ;;
+            "iterative-development")
+              echo "project_id=13" >> $GITHUB_OUTPUT
+              echo "project_title=Iterative Development" >> $GITHUB_OUTPUT
+              echo "emoji=🔄" >> $GITHUB_OUTPUT
+              ;;
+          esac
+          
+      - name: Run Project Automation
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_PROJECT_TOKEN: ${{ secrets.GH_PROJECT_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+        run: |
+          PR_ARG=""
+          DRY_RUN_ARG=""
+          
+          if [[ -n "${{ needs.determine-projects.outputs.pr_number }}" ]]; then
+            PR_ARG="${{ needs.determine-projects.outputs.pr_number }}"
+          fi
+          
+          if [[ "${{ needs.determine-projects.outputs.dry_run }}" == "true" ]]; then
+            DRY_RUN_ARG="--dry-run"
+          fi
+          
+          echo "${{ steps.config.outputs.emoji }} Starting ${{ steps.config.outputs.project_title }} automation..."
+          echo "Project ID: #${{ steps.config.outputs.project_id }}"
+          echo "PR: ${PR_ARG:-'all open PRs'}"
+          echo "Dry run: ${{ needs.determine-projects.outputs.dry_run }}"
+          echo ""
+          
+          node tools/github/personal-projects-automation.js ${{ matrix.project }} $PR_ARG $DRY_RUN_ARG
+          
+      - name: Upload automation report
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.project }}-automation-report
+          path: artifacts/personal-project-automation-${{ matrix.project }}.json
+          retention-days: 30
+
+  summary:
+    name: Automation Summary
+    runs-on: ubuntu-latest
+    needs: [determine-projects, project-automation]
+    if: always() && needs.determine-projects.outputs.trigger == 'true'
+    
+    steps:
+      - name: Download all reports
+        uses: actions/download-artifact@v4
+        with:
+          path: reports/
+          
+      - name: Generate master summary
+        id: summary
+        run: |
+          echo "# 🎯 Personal Projects Automation Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Triggered by:** ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Target Projects:** ${{ needs.determine-projects.outputs.projects }}" >> $GITHUB_STEP_SUMMARY
+          echo "**PR:** ${{ needs.determine-projects.outputs.pr_number || 'All Open PRs' }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Dry Run:** ${{ needs.determine-projects.outputs.dry_run }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          TOTAL_PRS=0
+          TOTAL_SUCCESS=0
+          TOTAL_FAILED=0
+          
+          echo "## Project Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          for dir in reports/*/; do
+            if [[ -d "$dir" ]]; then
+              PROJECT_NAME=$(basename "$dir" | sed 's/-automation-report//')
+              REPORT_FILE="$dir/personal-project-automation-$PROJECT_NAME.json"
+              
+              if [[ -f "$REPORT_FILE" ]]; then
+                TOTAL=$(jq -r '.summary.total_processed' "$REPORT_FILE" 2>/dev/null || echo "0")
+                SUCCESS=$(jq -r '.summary.successful' "$REPORT_FILE" 2>/dev/null || echo "0")
+                FAILED=$(jq -r '.summary.failed' "$REPORT_FILE" 2>/dev/null || echo "0")
+                
+                TOTAL_PRS=$((TOTAL_PRS + TOTAL))
+                TOTAL_SUCCESS=$((TOTAL_SUCCESS + SUCCESS))
+                TOTAL_FAILED=$((TOTAL_FAILED + FAILED))
+                
+                case "$PROJECT_NAME" in
+                  "feature-release") EMOJI="🚀" TITLE="Feature Release (#12)" ;;
+                  "team-retrospective") EMOJI="📋" TITLE="Team Retrospective (#11)" ;;
+                  "iterative-development") EMOJI="🔄" TITLE="Iterative Development (#13)" ;;
+                  *) EMOJI="📊" TITLE="$PROJECT_NAME" ;;
+                esac
+                
+                echo "### $EMOJI $TITLE" >> $GITHUB_STEP_SUMMARY
+                echo "- **PRs Processed:** $TOTAL" >> $GITHUB_STEP_SUMMARY
+                echo "- **Successful:** $SUCCESS" >> $GITHUB_STEP_SUMMARY
+                echo "- **Failed:** $FAILED" >> $GITHUB_STEP_SUMMARY
+                echo "" >> $GITHUB_STEP_SUMMARY
+              fi
+            fi
+          done
+          
+          echo "## Overall Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- **Total PRs Processed:** $TOTAL_PRS" >> $GITHUB_STEP_SUMMARY
+          echo "- **Total Successful:** $TOTAL_SUCCESS" >> $GITHUB_STEP_SUMMARY
+          echo "- **Total Failed:** $TOTAL_FAILED" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [[ $TOTAL_FAILED -gt 0 ]]; then
+            echo "⚠️ Some automations failed. Check individual reports for details." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "✅ All project automations completed successfully!" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+      - name: Comment on PR with comprehensive results
+        if: needs.determine-projects.outputs.pr_number && github.event_name == 'issue_comment'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            
+            try {
+              let comment = `## 🎯 Personal Projects Automation Results\n\n`;
+              comment += `**Triggered by:** Comment "+project"\n`;
+              comment += `**Timestamp:** ${new Date().toISOString()}\n\n`;
+              
+              const reportsDir = 'reports';
+              let totalPrs = 0, totalSuccess = 0, totalFailed = 0;
+              
+              if (fs.existsSync(reportsDir)) {
+                const projectDirs = fs.readdirSync(reportsDir).filter(d => 
+                  fs.statSync(path.join(reportsDir, d)).isDirectory()
+                );
+                
+                for (const dir of projectDirs) {
+                  const projectName = dir.replace('-automation-report', '');
+                  const reportPath = path.join(reportsDir, dir, `personal-project-automation-${projectName}.json`);
+                  
+                  if (fs.existsSync(reportPath)) {
+                    const report = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
+                    
+                    totalPrs += report.summary.total_processed || 0;
+                    totalSuccess += report.summary.successful || 0;
+                    totalFailed += report.summary.failed || 0;
+                    
+                    let emoji, title, projectId;
+                    switch (projectName) {
+                      case 'feature-release':
+                        emoji = '🚀'; title = 'Feature Release'; projectId = '#12';
+                        break;
+                      case 'team-retrospective':
+                        emoji = '📋'; title = 'Team Retrospective'; projectId = '#11';
+                        break;
+                      case 'iterative-development':
+                        emoji = '🔄'; title = 'Iterative Development'; projectId = '#13';
+                        break;
+                      default:
+                        emoji = '📊'; title = projectName; projectId = '';
+                    }
+                    
+                    comment += `### ${emoji} ${title} ${projectId}\n`;
+                    comment += `- **PRs:** ${report.summary.total_processed}\n`;
+                    comment += `- **Success:** ${report.summary.successful}\n`;
+                    comment += `- **Failed:** ${report.summary.failed}\n\n`;
+                    
+                    if (report.results && report.results.length > 0) {
+                      comment += `**Changes Applied:**\n`;
+                      report.results.forEach(r => {
+                        if (r.success && r.actions && r.actions.length > 0) {
+                          comment += `- PR #${r.pr_number}: ${r.actions.join(', ')}\n`;
+                        }
+                      });
+                      comment += `\n`;
+                    }
+                  }
+                }
+              }
+              
+              comment += `## Summary\n`;
+              comment += `- **Total PRs:** ${totalPrs}\n`;
+              comment += `- **Successful:** ${totalSuccess}\n`;
+              comment += `- **Failed:** ${totalFailed}\n\n`;
+              
+              comment += `*Cross-project automation for Andhika-Rey's personal GitHub Projects*`;
+              
+              await github.rest.issues.createComment({
+                issue_number: ${{ needs.determine-projects.outputs.pr_number }},
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: comment
+              });
+              
+            } catch (error) {
+              console.error('Failed to post summary comment:', error);
+            }

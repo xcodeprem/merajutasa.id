@@ -1,0 +1,27 @@
+{
+  "test_suite": "Personal Projects Automation",
+  "timestamp": "2025-08-21T08:37:46.256Z",
+  "summary": {
+    "total_tests": 30,
+    "passed": 30,
+    "failed": 0,
+    "success_rate": 100
+  },
+  "errors": [],
+  "projects_tested": [
+    "feature-release",
+    "team-retrospective",
+    "iterative-development"
+  ],
+  "workflow_files_validated": 4,
+  "core_features_tested": [
+    "Project configuration validation",
+    "Label extraction and mapping",
+    "PR status determination",
+    "Field mapping logic",
+    "Suggested labels generation",
+    "Sub-issues progress calculation",
+    "Retrospective notes generation",
+    "Workflow file validation"
+  ]
+}

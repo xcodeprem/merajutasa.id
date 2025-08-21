@@ -1,0 +1,172 @@
+name: Iterative Development Project Automation
+
+on:
+  pull_request:
+    types: [opened, synchronize, labeled, unlabeled, ready_for_review, reopened, closed, edited]
+  issue_comment:
+    types: [created]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'PR number to process (optional)'
+        required: false
+        type: string
+      dry_run:
+        description: 'Dry run mode (no actual changes)'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  iterative-development-automation:
+    name: Iterative Development Integration
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+        
+      - name: Determine PR context
+        id: context
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "pr_number=${{ inputs.pr_number }}" >> $GITHUB_OUTPUT
+            echo "dry_run=${{ inputs.dry_run }}" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            echo "pr_number=${{ github.event.pull_request.number }}" >> $GITHUB_OUTPUT
+            echo "dry_run=false" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.event_name }}" == "issue_comment" && "${{ github.event.issue.pull_request }}" ]]; then
+            if [[ "${{ github.event.comment.body }}" =~ \+project.*iterative ]]; then
+              echo "pr_number=${{ github.event.issue.number }}" >> $GITHUB_OUTPUT
+              echo "dry_run=false" >> $GITHUB_OUTPUT
+            else
+              echo "trigger=false" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "trigger=false" >> $GITHUB_OUTPUT
+          fi
+          
+      - name: Run Iterative Development Automation
+        if: steps.context.outputs.trigger != 'false'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_PROJECT_TOKEN: ${{ secrets.GH_PROJECT_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+        run: |
+          PR_ARG=""
+          DRY_RUN_ARG=""
+          
+          if [[ -n "${{ steps.context.outputs.pr_number }}" ]]; then
+            PR_ARG="${{ steps.context.outputs.pr_number }}"
+          fi
+          
+          if [[ "${{ steps.context.outputs.dry_run }}" == "true" ]]; then
+            DRY_RUN_ARG="--dry-run"
+          fi
+          
+          echo "🔄 Starting Iterative Development automation..."
+          echo "Project: Iterative Development (#13)"
+          echo "PR: ${PR_ARG:-'all open PRs'}"
+          echo "Dry run: ${{ steps.context.outputs.dry_run }}"
+          echo ""
+          
+          node tools/github/personal-projects-automation.js iterative-development $PR_ARG $DRY_RUN_ARG
+          
+      - name: Comment on PR with results
+        if: steps.context.outputs.pr_number && github.event_name == 'issue_comment'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            
+            try {
+              const reportPath = 'artifacts/personal-project-automation-iterative-development.json';
+              if (fs.existsSync(reportPath)) {
+                const report = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
+                
+                const comment = `## 🔄 Iterative Development Project Integration
+                
+**Project:** Iterative Development (#13)
+**Timestamp:** ${report.timestamp}
+
+### Results
+- **Total PRs processed:** ${report.summary.total_processed}
+- **Successful:** ${report.summary.successful}  
+- **Failed:** ${report.summary.failed}
+
+### Applied Changes
+${report.results.map(r => {
+  if (r.success && r.actions.length > 0) {
+    return `- **PR #${r.pr_number}**: ${r.actions.join(', ')}`;
+  }
+  return `- **PR #${r.pr_number}**: ${r.errors.join(', ')}`;
+}).join('\n')}
+
+### Sprint Structure
+This iterative development automation supports:
+- 🚀 **Sprint 1** - Current sprint work
+- 📋 **Sprint 2** - Next sprint planning  
+- 🔮 **Sprint 3** - Future sprint backlog
+
+*Automation triggered by comment "+project iterative"*`;
+                
+                await github.rest.issues.createComment({
+                  issue_number: ${{ steps.context.outputs.pr_number }},
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  body: comment
+                });
+              }
+            } catch (error) {
+              console.error('Failed to post comment:', error);
+            }
+            
+      - name: Upload automation report
+        uses: actions/upload-artifact@v4
+        with:
+          name: iterative-development-automation-report
+          path: artifacts/personal-project-automation-iterative-development.json
+          retention-days: 30
+          
+      - name: Summary
+        run: |
+          echo "## 🔄 Iterative Development Automation Summary" >> $GITHUB_STEP_SUMMARY
+          
+          if [[ -f "artifacts/personal-project-automation-iterative-development.json" ]]; then
+            REPORT=$(cat artifacts/personal-project-automation-iterative-development.json)
+            TOTAL=$(echo "$REPORT" | jq -r '.summary.total_processed')
+            SUCCESS=$(echo "$REPORT" | jq -r '.summary.successful') 
+            FAILED=$(echo "$REPORT" | jq -r '.summary.failed')
+            
+            echo "- **Project:** Iterative Development (#13)" >> $GITHUB_STEP_SUMMARY
+            echo "- **Total PRs:** $TOTAL" >> $GITHUB_STEP_SUMMARY
+            echo "- **Successful:** $SUCCESS" >> $GITHUB_STEP_SUMMARY
+            echo "- **Failed:** $FAILED" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### Field Mappings Applied" >> $GITHUB_STEP_SUMMARY
+            echo "- Status, Sub-Issues Progress, Priority, Size" >> $GITHUB_STEP_SUMMARY
+            echo "- Estimate, Iteration" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### Sprint Organization" >> $GITHUB_STEP_SUMMARY
+            echo "- Current Sprint (Sprint 1)" >> $GITHUB_STEP_SUMMARY
+            echo "- Next Sprint (Sprint 2)" >> $GITHUB_STEP_SUMMARY
+            echo "- Future Sprint (Sprint 3)" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- No automation report generated" >> $GITHUB_STEP_SUMMARY
+          fi

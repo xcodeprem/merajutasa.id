@@ -11,8 +11,12 @@
   },
   "packageManager": "npm@9.8.1",
   "scripts": {
-  "project:spotcheck": "node tools/github/project-spotcheck.js --owner=Andhika-Rey --repo=merajutasa.id",
+    "project:spotcheck": "node tools/github/project-spotcheck.js --owner=Andhika-Rey --repo=merajutasa.id",
     "project:sync": "node tools/github/project-sync-item.js",
+    "project:feature-release": "node tools/github/personal-projects-automation.js feature-release",
+    "project:team-retrospective": "node tools/github/personal-projects-automation.js team-retrospective",
+    "project:iterative-development": "node tools/github/personal-projects-automation.js iterative-development",
+    "project:automation:all": "npm run project:feature-release && npm run project:team-retrospective && npm run project:iterative-development",
     "lint": "npm run lint:md && npm run lint:dec",
     "lint:md": "markdownlint-cli2 \"**/*.md\"",
     "lint:dec": "node tools/dec-lint.js",
@@ -184,6 +188,7 @@
     "test:week6-contracts": "node tools/tests/week6-component-contracts.test.js",
     "test:week6-smoke": "node tools/tests/week6-component-smoke.test.js",
     "test:week6": "npm run test:week6-imports && npm run test:week6-contracts && npm run test:week6-smoke",
+    "test:personal-projects": "node tools/tests/personal-projects-automation.test.js",
     "test:equity-smoke": "node tools/tests/equity-smoke.test.js",
     "test:equity-ui-smoke": "node tools/tests/equity-ui-smoke.test.js",
     "test:events-pipeline-hash": "node tools/tests/event-pipeline-hash.test.js",
@@ -254,6 +259,7 @@
     "pa11y": "^9.0.0"
   },
   "dependencies": {
+    "@octokit/rest": "^22.0.0",
     "compression": "^1.7.4",
     "concurrently": "^9.2.0",
     "cors": "^2.8.5",
