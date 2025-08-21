@@ -18,9 +18,11 @@ import addFormats from 'ajv-formats';
 import { compileMetaValidators } from '../event-meta-schemas.js';
 
 const PORT = Number(process.env.COLLECTOR_PORT || 4603);
+const HOST = process.env.COLLECTOR_HOST || '0.0.0.0';
+const DATA_DIR = process.env.EVENTS_DATA_DIR || 'artifacts';
 const BASE_SCHEMA_PATH = 'schemas/events/public-event-v1.json';
-const INGEST_PATH = 'artifacts/ingested-events.ndjson';
-const PIPELINE_HASH_ARTIFACT = 'artifacts/event-pipeline-hash.json';
+const INGEST_PATH = `${DATA_DIR}/ingested-events.ndjson`;
+const PIPELINE_HASH_ARTIFACT = `${DATA_DIR}/event-pipeline-hash.json`;
 const SCHEMA_DOC = 'docs/analytics/event-schema-canonical-v1.md';
 
 function sha256Hex(buf){ return createHash('sha256').update(buf).digest('hex'); }
@@ -33,7 +35,7 @@ const EMAIL_RE = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi;
 const PHONE_RE = /\b(?:\+?\d[\d\s\-()]{7,}\d)\b/g;
 
 async function appendNdjson(obj){
-  await fs.mkdir('artifacts',{recursive:true});
+  await fs.mkdir(DATA_DIR,{recursive:true});
   await fs.appendFile(INGEST_PATH, JSON.stringify(obj)+'\n');
 }
 
@@ -193,7 +195,7 @@ async function start(){
       res.end(JSON.stringify({ error: e.message }));
     }
   });
-  server.listen(PORT, ()=> console.log(`[collector] listening on ${PORT}`));
+  server.listen(PORT, HOST, ()=> console.log(`[collector] listening on ${HOST}:${PORT}`));
 }
 
 function readRaw(req){

@@ -1,12 +1,12 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-21T18:56:25.960Z",
+  "generated_utc": "2025-08-21T19:09:38.021Z",
   "default_threshold_hours": 24,
   "items": [
     {
       "path": "artifacts/spec-hash-diff.json",
       "exists": true,
-      "age_hours": 0,
+      "age_hours": 0.22,
       "threshold_hours": 24,
       "status": "PASS",
       "source_timestamp_type": "internal"
@@ -14,7 +14,7 @@
     {
       "path": "artifacts/param-integrity-matrix.json",
       "exists": true,
-      "age_hours": 0,
+      "age_hours": 0.22,
       "threshold_hours": 24,
       "status": "PASS",
       "source_timestamp_type": "internal"
@@ -22,7 +22,7 @@
     {
       "path": "artifacts/principles-impact-report.json",
       "exists": true,
-      "age_hours": 0,
+      "age_hours": 0.22,
       "threshold_hours": 24,
       "status": "PASS",
       "source_timestamp_type": "internal"
@@ -30,7 +30,7 @@
     {
       "path": "artifacts/hype-lint.json",
       "exists": true,
-      "age_hours": 0,
+      "age_hours": 0.04,
       "threshold_hours": 24,
       "status": "PASS",
       "source_timestamp_type": "internal"
@@ -38,7 +38,7 @@
     {
       "path": "artifacts/disclaimers-lint.json",
       "exists": true,
-      "age_hours": 0,
+      "age_hours": 0.04,
       "threshold_hours": 24,
       "status": "PASS",
       "source_timestamp_type": "mtime"
@@ -54,7 +54,7 @@
     {
       "path": "artifacts/fairness-sim-scenarios.json",
       "exists": true,
-      "age_hours": 0.05,
+      "age_hours": 0.14,
       "threshold_hours": 24,
       "status": "PASS",
       "source_timestamp_type": "mtime"
@@ -62,7 +62,7 @@
     {
       "path": "artifacts/fairness-sim-report.json",
       "exists": true,
-      "age_hours": 0.05,
+      "age_hours": 0.14,
       "threshold_hours": 24,
       "status": "PASS",
       "source_timestamp_type": "mtime"
@@ -70,7 +70,7 @@
     {
       "path": "artifacts/evidence-bundle.json",
       "exists": true,
-      "age_hours": 0.9,
+      "age_hours": 0,
       "threshold_hours": 6,
       "status": "PASS",
       "source_timestamp_type": "internal"
