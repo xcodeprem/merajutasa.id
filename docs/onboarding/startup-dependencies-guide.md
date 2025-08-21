@@ -5,12 +5,14 @@
 The MerajutASA.id infrastructure follows a strict startup order to ensure proper dependency resolution and system stability.
 
 ### Phase 1: Foundation Validation
+
 **Components:** `fileSystem`
 **Description:** File system access validation
 **Prerequisites:** None
 **Health Check:** Validates access to core directories (`./artifacts`, `./data`, `./docs`, `./infrastructure`, `./tools`)
 
 ### Phase 2: Core Services
+
 **Components:** `signer`, `chain`, `collector`
 **Description:** Core services (can start in parallel)
 **Prerequisites:** Phase 1 complete
@@ -24,6 +26,7 @@ npm run service:collector # Port 4603
 ```
 
 ### Phase 3: Foundation Services
+
 **Components:** `auditSystem`, `logAggregation`
 **Description:** Foundation services for compliance and observability
 **Prerequisites:** Phase 2 complete
@@ -36,6 +39,7 @@ npm run observability:logs:start
 ```
 
 ### Phase 4: Compliance & Security Services
+
 **Components:** `securityHardening`, `privacyRights`, `complianceAutomation`
 **Description:** Week 6 compliance and security services
 **Prerequisites:** Phase 3 complete (audit system required)
@@ -49,6 +53,7 @@ npm run compliance:automation
 ```
 
 ### Phase 5: Orchestration Services
+
 **Components:** `complianceOrchestrator`, `observability`
 **Description:** Orchestration and monitoring services
 **Prerequisites:** Phase 4 complete (requires compliance components)
@@ -61,6 +66,7 @@ npm run observability:start
 ```
 
 ### Phase 6: Infrastructure Services
+
 **Components:** `haOrchestrator`, `apiGateway`, `performance`
 **Description:** High-level infrastructure services
 **Prerequisites:** Phase 5 complete (requires core services)
@@ -76,6 +82,7 @@ npm run performance:start
 ## Component Dependencies
 
 ### Hard Dependencies
+
 - `complianceOrchestrator` → requires: `auditSystem`, `securityHardening`, `privacyRights`, `complianceAutomation`
 - `observability` → requires: `logAggregation`
 - `apiGateway` → requires: `signer`, `chain`, `collector`
@@ -83,6 +90,7 @@ npm run performance:start
 - `performance` → requires: `observability`
 
 ### Soft Dependencies
+
 - All Week 6 components benefit from audit system being available
 - Infrastructure services work better with observability running
 - HA components can bootstrap without full stack but provide better resilience with complete setup
@@ -90,6 +98,7 @@ npm run performance:start
 ## Health Check Commands
 
 ### Comprehensive Health Checks
+
 ```bash
 # Full system health check (all 35+ components)
 npm run health:full
@@ -108,6 +117,7 @@ npm run week6:components-status
 ```
 
 ### Component-Specific Health Checks
+
 ```bash
 # Individual components
 npm run infra:health:observability
@@ -119,6 +129,7 @@ npm run infra:health:security
 ```
 
 ### Integration Testing
+
 ```bash
 # Week 6 integration flow
 npm run week6:integration-flow
@@ -133,6 +144,7 @@ npm run week6:dependency-check
 ## Health Check Scoring
 
 ### Health Score Ranges
+
 - **100-80:** `healthy` - Component operating optimally
 - **79-50:** `warning` - Minor issues, monitoring recommended  
 - **49-20:** `degraded` - Performance issues, investigation needed
@@ -141,11 +153,13 @@ npm run week6:dependency-check
 ### Health Check Factors
 
 #### Core Services (signer, chain, collector)
+
 - HTTP endpoint responsiveness
 - Service port availability
 - Basic functionality validation
 
 #### Week 6 Components
+
 - **Audit System:** Event recording capability, storage access, compliance mode
 - **Compliance Automation:** Framework coverage, assessment completion, alert management
 - **Security Hardening:** Threat detection, configuration security, automated response
@@ -153,6 +167,7 @@ npm run week6:dependency-check
 - **Compliance Orchestrator:** Component integration, health monitoring, event correlation
 
 #### Infrastructure Services
+
 - **HA Orchestrator:** Multi-region readiness, failover capability, backup systems
 - **Observability:** Metrics collection, log aggregation, alerting systems
 - **API Gateway:** Route management, rate limiting, security policies
@@ -161,16 +176,19 @@ npm run week6:dependency-check
 ## Troubleshooting Common Issues
 
 ### Service Won't Start
+
 1. Check if required ports are available: `npm run health:core`
 2. Verify file system permissions: `npm run health:check fileSystem`
 3. Review startup order dependencies: `npm run startup:order`
 
 ### Health Check Failures
+
 1. **Critical scores:** Check component logs and restart service
 2. **Degraded performance:** Review resource utilization and configuration
 3. **Warning status:** Monitor metrics and investigate potential issues
 
 ### Integration Issues
+
 1. Verify component dependencies are running: `npm run health:week6`
 2. Check cross-component communication: `npm run week6:integration-test`
 3. Validate audit system availability: `npm run audit:start`
@@ -178,6 +196,7 @@ npm run week6:dependency-check
 ## Environment Variables
 
 ### Required for Health Checks
+
 ```bash
 # Core service ports
 SIGNER_PORT=4601
@@ -194,6 +213,7 @@ INCIDENT_AUTO_RESPONSE=true
 ```
 
 ### Optional Configuration
+
 ```bash
 # Health check intervals
 HEALTH_CHECK_TIMEOUT=10
@@ -208,17 +228,20 @@ ALERT_AVAILABILITY=99.9
 ## Monitoring Integration
 
 ### Health Check Reports
+
 - **Location:** `./artifacts/integrated-health-check-report.json`
 - **Format:** JSON with component details, dependency graph, recommendations
 - **Frequency:** On-demand via health check commands
 
 ### Metrics Collection
+
 - Component health scores tracked over time
 - Dependency resolution validation
 - Performance impact assessment
 - Alert correlation with health status
 
 ### Automated Alerts
+
 - Critical component failures trigger immediate alerts
 - Degraded performance generates monitoring recommendations
 - Dependency violations raise integration warnings

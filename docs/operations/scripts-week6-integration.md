@@ -100,6 +100,7 @@ ls -la artifacts/security/scans/
 This bundle is designed to be used in continuous integration pipelines to validate both Week6 components and script inventory as part of governance verification.
 
 Example CI usage:
+
 ```yaml
 - name: Week6 Integration & Scripts Validation
   run: bash scripts/week6-validation-bundle.sh

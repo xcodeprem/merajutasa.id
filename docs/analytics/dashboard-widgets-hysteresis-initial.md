@@ -1,6 +1,7 @@
 # Analytics Widgets Specification – Hysteresis (Initial Post DEC-20250812-02)
 
 ## Data Sources
+
 - Events: sys_fairness_under_served_enter, sys_fairness_under_served_exit
 - Snapshot table: equity_snapshots (ratios)
 - State table: hysteresis_states (current + audit fields)
@@ -29,6 +30,7 @@
    active_under_served_count / total_units
 
 ## Alert Thresholds
+
 - churnRate > 0.25 → raise MEDIUM alert
 - stalledUnits / activeUnderServed > 0.30 → review support intervention
 - severeEntries share > 0.40 persist 7d → structural shortage investigation

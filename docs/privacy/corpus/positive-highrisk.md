@@ -1,6 +1,6 @@
 <!-- EXPECT: CONTACT_EMAIL, CONTACT_PHONE, DOB, ADDRESS_STREET, PLATE_ID, BANK_ACCOUNT, IDN_NIK, CHILD_NAME_AGE, GEO_FINE -->
 
-Email: user@example.com
+Email: <user@example.com>
 Phone: +6281234567890
 DOB: 01/09/2001
 Address: Jalan Merdeka No. 10 RT 01/RW 02

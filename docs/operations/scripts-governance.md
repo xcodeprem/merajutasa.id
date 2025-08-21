@@ -46,6 +46,7 @@ Based on analysis of package.json scripts (as of current state):
 ### Specialized Prefixes (1-2 scripts)
 
 **Single-purpose domains:**
+
 - **governance:** (2) - Governance verification
 - **param:** (2) - Parameter integrity
 - **cache:** (2), **sla:** (2) - Performance utilities
@@ -58,6 +59,7 @@ Based on analysis of package.json scripts (as of current state):
 - **h1:** (2), **terms:** (2) - Heuristics and terms management
 
 **Singleton scripts:**
+
 - **format**, **tracing**, **metrics**, **alerting**, **logs**, **anomaly**
 - **gap**, **phase**, **transparency**, **risk**, **agent**, **pr**
 - **collector**, **governed**, **gen**, **snapshot**, **baseline**, **queries**
@@ -67,40 +69,50 @@ Based on analysis of package.json scripts (as of current state):
 ## Categorization by Function
 
 ### 1. Core Governance & Integrity
+
 - **governance:**, **spec-hash:**, **param:**, **evidence:**, **dec:**
 - **policy:**, **governed**, **verify**
 
 ### 2. Services & Infrastructure
+
 - **service:**, **infra:**, **docker:**, **k8s:**, **cache:**, **api-gateway:**
 - **service-mesh:**, **ha:**, **startup**
 
 ### 3. Testing & Validation
+
 - **test:**, **lint:**, **gate:**, **audit:**, **health:**
 - **week6:**, **week5:**, **week2-4:**, **baseline:**
 
 ### 4. Privacy & Compliance
+
 - **privacy:**, **compliance:**, **security:**
 
 ### 5. Observability & Performance
+
 - **observability:**, **performance:**, **metrics:**, **tracing:**
 - **alerting:**, **logs:**, **anomaly:**, **dashboards:**
 - **monitor:**, **sla:**, **perf:**
 
 ### 6. Fairness & Equity
+
 - **fairness:**, **equity:**, **equity-ui-v2:**
 
 ### 7. Data & Events
+
 - **events:**, **collector**, **feedback:**, **chain:**
 
 ### 8. Development & Automation
+
 - **scripts:**, **project:**, **docs:**, **format**
 - **gen:**, **snapshot:**, **pr:**, **changelog:**
 
 ### 9. Analysis & Reporting
+
 - **gap**, **phase:**, **transparency:**, **risk:**, **agent:**
 - **terms:**, **kpi:**, **h0**, **h1:**
 
 ### 10. Deployment & Operations
+
 - **cicd:**, **phase1:**, **phase2:**, **pipeline:**
 
 ## Naming Standards
@@ -115,6 +127,7 @@ Based on analysis of package.json scripts (as of current state):
 ### Action Naming Patterns
 
 **Common action suffixes:**
+
 - `:start`, `:stop`, `:restart` - Service lifecycle
 - `:status`, `:health`, `:check` - Status verification  
 - `:test`, `:smoke`, `:validate` - Testing variations
@@ -123,6 +136,7 @@ Based on analysis of package.json scripts (as of current state):
 - `:monitor`, `:metrics`, `:report` - Monitoring/reporting
 
 **Quality indicators:**
+
 - `:smoke-test` - Quick validation
 - `:integration-test` - Full integration
 - `:health-check` - Health verification
@@ -203,11 +217,13 @@ evidence:validate # Evidence bundle validation
 ### Automated Validation Scope
 
 **Safe for automation:**
+
 - `test:*`, `lint:*`, `*:verify`, `*:validate`
 - `*:status`, `*:list`, `*:check`  
 - `gen:*`, `*:report`, `*:metrics`
 
 **Skip automation:**
+
 - `service:*`, `*:start`, `*:monitor` (long-running)
 - `*:deploy`, `*:delete`, `*:cleanup` (potentially destructive)
 - `*:interactive`, `*:demo` (require user interaction)
@@ -239,17 +255,20 @@ evidence:validate # Evidence bundle validation
 ### Change Control
 
 **Adding new scripts:**
+
 1. Follow established prefix patterns
 2. Use appropriate action naming
 3. Classify as service/runner/validation/utility
 4. Update this document if introducing new patterns
 
 **Modifying existing scripts:**
+
 1. Maintain backward compatibility where possible
 2. Update documentation if changing behavior
 3. Re-validate after changes
 
 **Removing scripts:**
+
 1. Check for dependencies in other scripts
 2. Update runner scripts that may reference them
 3. Archive obsolete scripts rather than immediate deletion

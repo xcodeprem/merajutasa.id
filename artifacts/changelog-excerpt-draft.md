@@ -3,7 +3,7 @@
 Time: 2025-08-19T23:34:01.330Z
 
 - Spec hash changes: 0
-- Principles impacted: 
+- Principles impacted:
 - PII high-risk hits: 8
 - Disclaimers lint status: PASS
 - Fairness scenarios covered: 0

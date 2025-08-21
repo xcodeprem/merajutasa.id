@@ -80,6 +80,7 @@ Additionally, the canonical event schema specification requires updates to refle
 ### Security Patterns Remediation
 
 1. **Phase Tracker** (`tools/generate-phase-tracker.js`):
+
    ```javascript
    // BEFORE (vulnerable):
    const ts = execSync(`git log -1 --format=%cI -- ${DEC_FILE}`)
@@ -89,6 +90,7 @@ Additionally, the canonical event schema specification requires updates to refle
    ```
 
 2. **Schema Validator** (`tools/schema-validate.js`):
+
    ```javascript
    // BEFORE (vulnerable):
    const dataPath = path.resolve(process.argv[2])
@@ -110,6 +112,7 @@ Additionally, the canonical event schema specification requires updates to refle
 ### Artifact Standardization
 
 All governance artifacts MUST:
+
 - Use `stableStringify()` for deterministic output
 - Include `_metadata` section with:
   - `generated_at`: ISO timestamp
@@ -148,6 +151,7 @@ All governance artifacts MUST:
 ## Traceability Matrix
 
 ### Artifacts Modified
+
 - `docs/analytics/event-schema-canonical-v1.md`: Controlled canonical updates
 - `README.md`: Status section markers and governance documentation
 - `tools/generate-phase-tracker.js`: Security remediation and stable output
@@ -155,6 +159,7 @@ All governance artifacts MUST:
 - `tools/governance-verify.js`: Policy integration and security gating
 
 ### Artifacts Created
+
 - `tools/lib/security-validators.js`: Path validation utilities
 - `tools/lib/json-stable.js`: Deterministic JSON output
 - `tools/policy/policy.json`: Centralized gating policy
@@ -162,6 +167,7 @@ All governance artifacts MUST:
 - `.github/actions/run-a8/action.yml`: Composite A8 execution
 
 ### Test Coverage
+
 - Unit tests for security validators with traversal attack vectors
 - Integration tests for policy-driven gating behavior
 - End-to-end verification of deterministic artifact generation

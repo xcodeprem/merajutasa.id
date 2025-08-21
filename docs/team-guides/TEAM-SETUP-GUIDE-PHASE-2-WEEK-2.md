@@ -46,6 +46,7 @@ npm run cache:stats
 #### Option B: Local Redis Installation
 
 **Ubuntu/Debian:**
+
 ```bash
 sudo apt update
 sudo apt install redis-server
@@ -54,12 +55,14 @@ sudo systemctl enable redis-server
 ```
 
 **macOS:**
+
 ```bash
 brew install redis
 brew services start redis
 ```
 
 **Windows:**
+
 ```bash
 # Use WSL2 or Docker Desktop (Option A recommended)
 ```
@@ -147,11 +150,13 @@ npm run frontend:performance-test
 ```
 
 **Key Files to Understand**:
+
 - `infrastructure/performance/response-compression.js` - API response optimization
 - `infrastructure/performance/cache-manager.js` - Client-side cache integration
 - `tools/performance/frontend-metrics.js` - UI performance monitoring
 
 **Daily Workflow**:
+
 ```bash
 npm run performance:status      # Check performance services
 npm run cache:stats            # Monitor cache hit rates
@@ -177,11 +182,13 @@ npm run api:performance-monitor
 ```
 
 **Key Files to Understand**:
+
 - `infrastructure/performance/connection-pool.js` - Database optimization
 - `infrastructure/performance/performance-monitor.js` - API monitoring
 - `infrastructure/performance/sla-monitor.js` - Service level tracking
 
 **Daily Workflow**:
+
 ```bash
 npm run performance:monitor     # Real-time performance tracking
 npm run sla:alerts             # Check SLA violations
@@ -190,6 +197,7 @@ npm run api:benchmark          # API performance testing
 ```
 
 **Code Integration Example**:
+
 ```javascript
 // Add to your API routes
 import { performanceMonitor } from '../infrastructure/performance/performance-monitor.js';
@@ -241,12 +249,14 @@ npm run db:performance-monitor
 ```
 
 **Key Files to Understand**:
+
 - `infrastructure/k8s/performance/` - K8s performance configurations
 - `infrastructure/terraform/performance.tf` - Infrastructure scaling
 - `infrastructure/monitoring/performance-dashboard.json` - Grafana dashboards
 - `infrastructure/performance/load-balancer.conf` - NGINX optimization
 
 **Daily Workflow**:
+
 ```bash
 npm run infra:health           # Infrastructure health check
 npm run k8s:performance        # Kubernetes performance metrics
@@ -256,6 +266,7 @@ npm run backup:performance    # Performance-optimized backups
 ```
 
 **Infrastructure Scaling**:
+
 ```bash
 # Scale based on performance metrics
 kubectl autoscale deployment merajutasa-api --cpu-percent=70 --min=2 --max=10
@@ -285,12 +296,14 @@ npm run test:sla-compliance
 ```
 
 **Key Files to Understand**:
+
 - `tools/tests/performance-integration.test.js` - Performance test suite
 - `tools/tests/load-testing/` - Load test configurations
 - `tools/tests/sla-validation.js` - SLA compliance tests
 - `artifacts/performance-test-reports/` - Test result analysis
 
 **Daily Workflow**:
+
 ```bash
 npm run test:performance      # Run performance test suite
 npm run test:regression       # Performance regression testing
@@ -299,6 +312,7 @@ npm run reports:performance   # Generate performance reports
 ```
 
 **Performance Test Examples**:
+
 ```bash
 # Cache performance test
 npm run test:cache-performance
@@ -398,6 +412,7 @@ npm run sla:start
 ### Common Issues
 
 #### Redis Connection Errors
+
 ```bash
 # Check Redis status
 npm run cache:stats
@@ -408,6 +423,7 @@ npm run cache:restart
 ```
 
 #### Performance Services Not Starting
+
 ```bash
 # Check port availability
 netstat -tulpn | grep :4604
@@ -420,6 +436,7 @@ npm run performance:restart
 ```
 
 #### Low Cache Hit Rate
+
 ```bash
 # Check cache statistics
 npm run cache:stats
@@ -431,6 +448,7 @@ npm run cache:stats
 ```
 
 #### SLA Violations
+
 ```bash
 # Check SLA report
 npm run sla:report
@@ -512,18 +530,21 @@ tail -f logs/cache-operations.log
 ## Maintenance Schedule 📅
 
 ### Daily Tasks
+
 - Check performance dashboard
 - Review SLA compliance report
 - Monitor cache hit rates
 - Verify backup completion
 
 ### Weekly Tasks
+
 - Analyze performance trends
 - Review slow query reports
 - Update performance baselines
 - Test disaster recovery procedures
 
 ### Monthly Tasks
+
 - Performance capacity planning
 - Cache strategy optimization
 - Security performance audit
@@ -532,16 +553,19 @@ tail -f logs/cache-operations.log
 ## Support & Documentation 📚
 
 ### Internal Documentation
+
 - `/docs/performance/` - Detailed technical documentation
 - `/docs/troubleshooting/` - Issue resolution guides
 - `/docs/architecture/` - System architecture diagrams
 
 ### External Resources
-- Redis Documentation: https://redis.io/documentation
-- Node.js Performance: https://nodejs.org/en/docs/guides/nodejs-performance/
-- Kubernetes HPA: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/
+
+- Redis Documentation: <https://redis.io/documentation>
+- Node.js Performance: <https://nodejs.org/en/docs/guides/nodejs-performance/>
+- Kubernetes HPA: <https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/>
 
 ### Team Communication
+
 - **Performance Channel**: #merajutasa-performance
 - **Alerts Channel**: #merajutasa-alerts
 - **Weekly Review**: Every Friday 2PM

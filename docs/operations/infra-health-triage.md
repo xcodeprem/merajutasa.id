@@ -15,7 +15,7 @@ npm run health:check
 ### Bidang Penting pada Laporan
 
 - **`overall_status`**: `healthy|warning|degraded|critical` - Status keseluruhan sistem
-- **`overall_health_score`**: 0-100 - Skor kesehatan keseluruhan 
+- **`overall_health_score`**: 0-100 - Skor kesehatan keseluruhan
 - **`components`**: Status per komponen individu dengan detail
 - **`system_dependencies.startup_order`**: Fase startup komponen berdasarkan dependency
 - **`system_dependencies.dependencies`**: Ketergantungan antar komponen
@@ -35,12 +35,14 @@ npm run health:check
 **Fokus**: Komponen dengan status `critical` pada `components[*]`
 
 **Langkah**:
+
 1. Identifikasi komponen critical dari laporan
 2. Periksa error message di `components[component_name].error`
 3. Lakukan restart/inspeksi log sesuai rekomendasi `high` priority
 4. Verifikasi dependency order untuk startup yang benar
 
 **Contoh**:
+
 ```bash
 # Jika signer/chain/collector critical
 npm run service:signer &
@@ -56,6 +58,7 @@ npm run health:core
 **Fokus**: Pantau resource dan konfigurasi komponen terkait
 
 **Langkah**:
+
 1. Review komponen dengan status warning/degraded
 2. Periksa resource usage dan konfigurasi di `details`
 3. Monitor trend dan implementasi rekomendasi `medium/low` priority
@@ -66,6 +69,7 @@ npm run health:core
 **Fokus**: Maintenance rutin dan optimisasi
 
 **Langkah**:
+
 1. Review rekomendasi `low` priority untuk optimisasi
 2. Monitor dependency health secara berkala
 3. Implementasi improvement berdasarkan recommendations
@@ -97,25 +101,31 @@ npm run infra:health:monitoring
 Gunakan `system_dependencies.startup_order` untuk startup yang benar:
 
 **Phase 1**: File System
+
 - Validasi akses file system dasar
 
 **Phase 2**: Core Services (Paralel)
+
 - `signer`, `chain`, `collector`
 - Services ini bisa distart bersamaan
 
 **Phase 3**: Foundation Services  
+
 - `auditSystem`, `logAggregation`
 - Butuh file system, mendukung services selanjutnya
 
 **Phase 4**: Compliance & Security
-- `securityHardening`, `privacyRights`, `complianceAutomation` 
+
+- `securityHardening`, `privacyRights`, `complianceAutomation`
 - Butuh audit dan logging
 
 **Phase 5**: Orchestration
+
 - `complianceOrchestrator`, `observability`
 - Coordinate services dari phase sebelumnya
 
 **Phase 6**: Infrastructure
+
 - `haOrchestrator`, `apiGateway`, `performance`
 - Services tingkat tinggi yang butuh foundation lengkap
 
@@ -126,6 +136,7 @@ Gunakan `system_dependencies.startup_order` untuk startup yang benar:
 **Gejala**: `fetch failed` error, health_score = 0
 
 **Solusi**:
+
 1. Periksa apakah service berjalan di port yang benar
 2. Check environment variables (`SIGNER_PORT`, `CHAIN_PORT`, `COLLECTOR_PORT`)
 3. Restart service yang bermasalah
@@ -136,6 +147,7 @@ Gunakan `system_dependencies.startup_order` untuk startup yang benar:
 **Gejala**: `Cannot find module` atau `Cannot find package` error
 
 **Solusi**:
+
 1. Jalankan `npm ci` untuk install dependencies
 2. Periksa apakah file/module exists di path yang dimaksud
 3. Untuk optional modules, abaikan jika tidak critical untuk operasi
@@ -145,6 +157,7 @@ Gunakan `system_dependencies.startup_order` untuk startup yang benar:
 **Gejala**: Compliance score rendah, violation rate tinggi
 
 **Solusi**:
+
 1. Review `activeAlerts` dalam compliance automation detail
 2. Implementasikan rekomendasi dari compliance assessment
 3. Monitor framework compliance secara individual
@@ -152,10 +165,12 @@ Gunakan `system_dependencies.startup_order` untuk startup yang benar:
 ## CI/CD Integration
 
 ### Exit Codes
+
 - **Exit code 0**: `overall_status` selain `critical`
 - **Exit code 1**: `overall_status = critical` - cocok untuk gating di CI/CD
 
 ### Pipeline Integration
+
 ```bash
 # Dalam CI/CD pipeline
 npm run health:check
@@ -168,6 +183,7 @@ fi
 ## Monitoring dan Alerting
 
 ### Automated Monitoring
+
 ```bash
 # Setup monitoring berkala
 */5 * * * * cd /path/to/project && npm run health:check
@@ -177,6 +193,7 @@ npm run health:check || echo "ALERT: Infrastructure critical" | mail admin@domai
 ```
 
 ### Proactive Health Checks
+
 ```bash
 # Morning health check routine
 npm run health:check

@@ -2,7 +2,7 @@
 
 This file contains synthetic examples to exercise the PII scanner categories.
 
-- Email: user@example.com
+- Email: <user@example.com>
 - Phone: +6281234567890
 - Date of Birth: 01/09/2001
 - Address: Jalan Merdeka No. 10 RT 01/RW 02
