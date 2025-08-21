@@ -3,12 +3,12 @@
   "status": "ADVISORY",
   "summary": {
     "distinctCategories": 12,
-    "totalFindings": 92,
+    "totalFindings": 96,
     "categoryCounts": {
-      "EMAIL_IN_NAME": 33,
+      "EMAIL_IN_NAME": 34,
       "EDU_NISN": 2,
-      "CONTACT_EMAIL": 16,
-      "PLATE_ID": 16,
+      "CONTACT_EMAIL": 17,
+      "PLATE_ID": 17,
       "IDN_NIK": 2,
       "GENERIC_16DIGIT": 4,
       "CONTACT_PHONE": 2,
@@ -453,6 +453,33 @@
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
       "sample": "sarif@…#a47c47a3"
+    },
+    {
+      "file": "docs/operations/infra-health-triage.md",
+      "category": "CONTACT_EMAIL",
+      "action": "REDACT",
+      "sample": "admin@…#48d22e71"
+    },
+    {
+      "file": "docs/operations/infra-health-triage.md",
+      "category": "EMAIL_IN_NAME",
+      "action": "REDACT",
+      "sample": "admin@…#84860485"
+    },
+    {
+      "file": "docs/operations/infra-health-triage.md",
+      "code": "MULTI_CATEGORY_ESCALATION",
+      "categories": [
+        "CONTACT_EMAIL",
+        "EMAIL_IN_NAME"
+      ],
+      "threshold": 2
+    },
+    {
+      "file": "docs/integrity/index.md",
+      "category": "PLATE_ID",
+      "action": "WARN",
+      "sample": "W3C…#158bfbd3"
     },
     {
       "file": "docs/integrity/credential-schema-final-v1.md",
