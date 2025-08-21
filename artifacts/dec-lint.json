@@ -1,11 +1,11 @@
 {
   "_metadata": {
     "actor": "copilot-swe-agent[bot]",
-    "generated_at": "2025-08-21T12:55:21.334Z",
+    "generated_at": "2025-08-21T15:49:39.704Z",
     "generator": "dec-lint.js",
-    "git_ref": "refs/heads/copilot/fix-92",
-    "git_sha": "c0312ae7fcc66bf3924b4957af64da3e3f11b683",
-    "run_id": "17127351390",
+    "git_ref": "refs/heads/copilot/fix-134",
+    "git_sha": "c7c34702bcac6734618086e1e49fb151d02871b6",
+    "run_id": "17131924852",
     "version": "1.0"
   },
   "results": [
@@ -123,7 +123,7 @@
     },
     {
       "file": "DEC-20250816-01-governance-pipeline-security-enhancement.md",
-      "hash": "618b54742d15b37aaf6236a363f2c694ecb9ede35eac9fc8662d311687ef6609",
+      "hash": "2cfa9e8ad3b888db3fa61997111c1117a0ddde532fab55971c7171e79d08bfd2",
       "id": "DEC-20250816-01",
       "violations": [],
       "warnings": []
