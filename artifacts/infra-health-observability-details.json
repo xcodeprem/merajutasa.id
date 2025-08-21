@@ -1,11 +1,11 @@
 {
   "_metadata": {
     "actor": "copilot-swe-agent[bot]",
-    "generated_at": "2025-08-21T13:44:12.553Z",
+    "generated_at": "2025-08-21T14:09:17.220Z",
     "generator": "infra-health-check-all",
-    "git_ref": "refs/heads/copilot/fix-96",
-    "git_sha": "21b77cbff7e9f7b8054201604346d8a7c1b6eb84",
-    "run_id": "17128674831",
+    "git_ref": "refs/heads/copilot/fix-97",
+    "git_sha": "bb84e55a171bb3f84d4a74129f701a78a72c91e1",
+    "run_id": "17129338006",
     "version": "1.0"
   },
   "category": "observability",
@@ -15,10 +15,10 @@
       "component": "advanced-observability-system",
       "error": {
         "code": "ERR_MODULE_NOT_FOUND",
-        "message": "Cannot find package '@opentelemetry/auto-instrumentations-node' imported from /home/runner/work/merajutasa.id/merajutasa.id/infrastructure/observability/tracing/distributed-tracing.js"
+        "message": "Cannot find package '@opentelemetry/api' imported from /home/runner/work/merajutasa.id/merajutasa.id/infrastructure/observability/tracing/distributed-tracing.js"
       },
       "status": "FAILED",
-      "ts": "2025-08-21T13:44:12.552Z"
+      "ts": "2025-08-21T14:09:17.219Z"
     }
   ],
   "totalComponents": 1
