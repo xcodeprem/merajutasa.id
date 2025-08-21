@@ -5,13 +5,14 @@ This document describes the component dependency mapping system used to derive s
 ## Artifacts
 
 - **Machine-readable:** build/deps/graph.json (CI artifact)
+- **Dependency matrix:** docs/architecture/dependencies.json (includes criticality)
 - **Diagram source:** docs/architecture/dependency-graph.mmd
 
 ## How to Update
 
 1. Edit config/component-registry.json
-2. Run `npm run deps:graph`
-3. Commit changes to .mmd (do not commit PNG/SVG)
+2. Run `npm run deps:graph && npm run deps:matrix`
+3. Commit changes to .mmd and dependencies.json (do not commit PNG/SVG)
 
 ## Policy
 
@@ -56,6 +57,15 @@ Machine-readable dependency graph containing:
 
 - `nodes`: Array of all component names
 - `edges`: Array of dependency relationships with `from` and `to` properties
+
+### docs/architecture/dependencies.json
+
+Machine-readable dependency matrix for visualization tools containing:
+
+- `nodes`: Array of components with ID, name, type, category, and criticality
+- `edges`: Array of dependency relationships with criticality information
+- `metadata`: Statistics including total components, dependencies, and circular dependency count
+- `analysis`: Critical path analysis, isolated components, and highly dependent components
 
 ### docs/architecture/dependency-graph.mmd
 

@@ -1,0 +1,117 @@
+{
+  "analysis": {
+    "circular_dependencies": [],
+    "critical_path": [
+      "gateway",
+      "auth",
+      "db"
+    ],
+    "highly_dependent": [],
+    "isolated_components": []
+  },
+  "edges": [
+    {
+      "criticality": "critical",
+      "from": "gateway",
+      "to": "auth",
+      "type": "dependency"
+    },
+    {
+      "criticality": "critical",
+      "from": "gateway",
+      "to": "catalog",
+      "type": "dependency"
+    },
+    {
+      "criticality": "critical",
+      "from": "auth",
+      "to": "db",
+      "type": "dependency"
+    },
+    {
+      "criticality": "critical",
+      "from": "catalog",
+      "to": "db",
+      "type": "dependency"
+    },
+    {
+      "criticality": "medium",
+      "from": "catalog",
+      "to": "search",
+      "type": "dependency"
+    }
+  ],
+  "generated_at": "2025-08-21T21:44:42.957Z",
+  "metadata": {
+    "circular_dependencies": 0,
+    "generator": "dependencies-matrix-generator",
+    "source": "config/component-registry.json",
+    "total_components": 5,
+    "total_dependencies": 5
+  },
+  "nodes": [
+    {
+      "category": "unknown",
+      "criticality": "critical",
+      "dependencies": [
+        "auth",
+        "catalog"
+      ],
+      "dependents": [],
+      "id": "gateway",
+      "name": "API Gateway",
+      "type": "service"
+    },
+    {
+      "category": "unknown",
+      "criticality": "critical",
+      "dependencies": [
+        "db"
+      ],
+      "dependents": [
+        "gateway"
+      ],
+      "id": "auth",
+      "name": "Authentication Service",
+      "type": "service"
+    },
+    {
+      "category": "unknown",
+      "criticality": "medium",
+      "dependencies": [
+        "db",
+        "search"
+      ],
+      "dependents": [
+        "gateway"
+      ],
+      "id": "catalog",
+      "name": "Catalog Service",
+      "type": "service"
+    },
+    {
+      "category": "unknown",
+      "criticality": "medium",
+      "dependencies": [],
+      "dependents": [
+        "catalog"
+      ],
+      "id": "search",
+      "name": "Search Service",
+      "type": "service"
+    },
+    {
+      "category": "unknown",
+      "criticality": "critical",
+      "dependencies": [],
+      "dependents": [
+        "auth",
+        "catalog"
+      ],
+      "id": "db",
+      "name": "Database Service",
+      "type": "service"
+    }
+  ],
+  "version": "1.0.0"
+}
