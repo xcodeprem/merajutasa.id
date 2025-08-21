@@ -1,0 +1,160 @@
+# Kubernetes Services for MerajutASA.id
+# Service discovery and load balancing for all components
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: merajutasa-signer
+  labels:
+    app: merajutasa-signer
+    app.kubernetes.io/name: merajutasa-signer
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: signing-service
+    component: signing-service
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "4601"
+    prometheus.io/path: "/metrics"
+spec:
+  type: ClusterIP
+  ports:
+  - port: 4601
+    targetPort: 4601
+    protocol: TCP
+    name: http
+  selector:
+    app: merajutasa-signer
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: merajutasa-chain
+  labels:
+    app: merajutasa-chain
+    component: chain-service
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "4602"
+    prometheus.io/path: "/metrics"
+spec:
+  type: ClusterIP
+  ports:
+  - port: 4602
+    targetPort: 4602
+    protocol: TCP
+    name: http
+  selector:
+    app: merajutasa-chain
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: merajutasa-collector
+  labels:
+    app: merajutasa-collector
+    component: event-collector
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "4603"
+    prometheus.io/path: "/metrics"
+spec:
+  type: ClusterIP
+  ports:
+  - port: 4603
+    targetPort: 4603
+    protocol: TCP
+    name: http
+  selector:
+    app: merajutasa-collector
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: merajutasa-monitoring
+  labels:
+    app: merajutasa-monitoring
+    component: monitoring-service
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "4604"
+    prometheus.io/path: "/metrics"
+spec:
+  type: ClusterIP
+  ports:
+  - port: 4604
+    targetPort: 4604
+    protocol: TCP
+    name: http
+  selector:
+    app: merajutasa-monitoring
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: merajutasa-backup
+  labels:
+    app: merajutasa-backup
+    component: backup-service
+spec:
+  type: ClusterIP
+  ports:
+  - port: 4605
+    targetPort: 4605
+    protocol: TCP
+    name: http
+  selector:
+    app: merajutasa-backup
+
+---
+# Headless service for StatefulSet (Chain)
+apiVersion: v1
+kind: Service
+metadata:
+  name: merajutasa-chain-headless
+  labels:
+    app: merajutasa-chain
+    component: chain-service
+spec:
+  type: ClusterIP
+  clusterIP: None
+  ports:
+  - port: 4602
+    targetPort: 4602
+    protocol: TCP
+    name: http
+  selector:
+    app: merajutasa-chain
+
+---
+# External LoadBalancer service for public access
+apiVersion: v1
+kind: Service
+metadata:
+  name: merajutasa-public
+  labels:
+    app: merajutasa-public
+    component: public-access
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+    service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:region:account:certificate/cert-id"
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+    name: http
+  - port: 443
+    targetPort: 443
+    protocol: TCP
+    name: https
+  selector:
+    app: nginx-proxy
+  loadBalancerSourceRanges:
+  - 0.0.0.0/0

@@ -7,6 +7,10 @@ metadata:
   name: merajutasa-collector
   labels:
     app: merajutasa-collector
+    app.kubernetes.io/name: merajutasa-collector
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: event-collector
+    app.kubernetes.io/version: v1
     component: event-collector
     tier: backend
     version: v1
@@ -24,6 +28,10 @@ spec:
     metadata:
       labels:
         app: merajutasa-collector
+        app.kubernetes.io/name: merajutasa-collector
+        app.kubernetes.io/part-of: merajutasa
+        app.kubernetes.io/component: event-collector
+        app.kubernetes.io/version: v1
         component: event-collector
         tier: backend
         version: v1
@@ -147,7 +155,9 @@ metadata:
   name: merajutasa-collector
   labels:
     app: merajutasa-collector
-    component: event-collector
+    app.kubernetes.io/name: merajutasa-collector
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: event-collector
 
 ---
 apiVersion: policy/v1
@@ -167,7 +177,9 @@ metadata:
   name: collector-data-pvc
   labels:
     app: merajutasa-collector
-    component: event-collector
+    app.kubernetes.io/name: merajutasa-collector
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: event-collector
 spec:
   accessModes:
   - ReadWriteMany

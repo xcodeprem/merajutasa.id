@@ -1,0 +1,291 @@
+# Kubernetes Deployment for MerajutASA High Availability System (Week 5)
+# Multi-region deployment, disaster recovery, and intelligent auto-scaling
+
+# HA Orchestrator
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: merajutasa-ha-orchestrator
+  labels:
+    app: merajutasa-ha-orchestrator
+    app.kubernetes.io/name: merajutasa-ha-orchestrator
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: ha-orchestrator
+    app.kubernetes.io/version: v1
+    component: ha-orchestrator
+    tier: infrastructure
+    version: v1
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: merajutasa-ha-orchestrator
+  template:
+    metadata:
+      labels:
+        app: merajutasa-ha-orchestrator
+        app.kubernetes.io/name: merajutasa-ha-orchestrator
+        app.kubernetes.io/part-of: merajutasa
+        app.kubernetes.io/component: ha-orchestrator
+        app.kubernetes.io/version: v1
+        component: ha-orchestrator
+        tier: infrastructure
+        version: v1
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8090"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: merajutasa-ha-orchestrator
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
+        fsGroup: 1001
+      containers:
+      - name: ha-orchestrator
+        image: merajutasa/ha-orchestrator:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8090
+          name: http
+          protocol: TCP
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: HA_ORCHESTRATOR_PORT
+          value: "8090"
+        - name: HA_ORCHESTRATOR_HOST
+          value: "0.0.0.0"
+        - name: HA_ORCHESTRATOR_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: merajutasa-config
+              key: ha_orchestrator_name
+        - name: PRIMARY_REGION
+          valueFrom:
+            configMapKeyRef:
+              name: merajutasa-config
+              key: primary_region
+        - name: SECONDARY_REGIONS
+          valueFrom:
+            configMapKeyRef:
+              name: merajutasa-config
+              key: secondary_regions
+        - name: DEPLOYMENT_STRATEGY
+          valueFrom:
+            configMapKeyRef:
+              name: merajutasa-config
+              key: deployment_strategy
+        - name: LOG_LEVEL
+          valueFrom:
+            configMapKeyRef:
+              name: merajutasa-config
+              key: log_level
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "300m"
+          limits:
+            memory: "1Gi"
+            cpu: "600m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8090
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8090
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+        startupProbe:
+          httpGet:
+            path: /health
+            port: 8090
+          initialDelaySeconds: 15
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 30
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - name: ha-config
+          mountPath: /app/config
+          readOnly: true
+        - name: tmp
+          mountPath: /tmp
+        - name: logs
+          mountPath: /app/logs
+        - name: state
+          mountPath: /app/state
+      volumes:
+      - name: ha-config
+        configMap:
+          name: high-availability-config
+      - name: tmp
+        emptyDir: {}
+      - name: logs
+        emptyDir: {}
+      - name: state
+        persistentVolumeClaim:
+          claimName: ha-orchestrator-state-pvc
+      nodeSelector:
+        kubernetes.io/os: linux
+      tolerations:
+      - key: "node.kubernetes.io/not-ready"
+        operator: "Exists"
+        effect: "NoExecute"
+        tolerationSeconds: 300
+      - key: "node.kubernetes.io/unreachable"
+        operator: "Exists"
+        effect: "NoExecute"
+        tolerationSeconds: 300
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - merajutasa-ha-orchestrator
+              topologyKey: kubernetes.io/hostname
+
+---
+# ServiceAccount for HA components
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: merajutasa-ha-orchestrator
+  labels:
+    app: merajutasa-ha-orchestrator
+    app.kubernetes.io/name: merajutasa-ha-orchestrator
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: ha-orchestrator
+
+---
+# Persistent Volume Claim for HA Orchestrator state
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ha-orchestrator-state-pvc
+  labels:
+    app: merajutasa-ha-orchestrator
+    app.kubernetes.io/name: merajutasa-ha-orchestrator
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: ha-orchestrator
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: fast-ssd
+  resources:
+    requests:
+      storage: 5Gi
+
+---
+# Pod Disruption Budget for HA Orchestrator
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: merajutasa-ha-orchestrator-pdb
+spec:
+  selector:
+    matchLabels:
+      app: merajutasa-ha-orchestrator
+  maxUnavailable: 1
+
+---
+# RBAC for HA Orchestrator to manage other resources
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: merajutasa-ha-orchestrator
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services", "endpoints"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["apps"]
+  resources: ["deployments", "replicasets"]
+  verbs: ["get", "list", "watch", "patch"]
+- apiGroups: ["autoscaling"]
+  resources: ["horizontalpodautoscalers"]
+  verbs: ["get", "list", "watch", "patch"]
+- apiGroups: ["policy"]
+  resources: ["poddisruptionbudgets"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["metrics.k8s.io"]
+  resources: ["pods", "nodes"]
+  verbs: ["get", "list"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: merajutasa-ha-orchestrator
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: merajutasa-ha-orchestrator
+subjects:
+- kind: ServiceAccount
+  name: merajutasa-ha-orchestrator
+  namespace: default
+
+---
+# Horizontal Pod Autoscaler for HA Orchestrator
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: merajutasa-ha-orchestrator-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: merajutasa-ha-orchestrator
+  minReplicas: 2
+  maxReplicas: 5
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 120
+      policies:
+      - type: Percent
+        value: 50
+        periodSeconds: 60
+    scaleDown:
+      stabilizationWindowSeconds: 300
+      policies:
+      - type: Percent
+        value: 25
+        periodSeconds: 60
