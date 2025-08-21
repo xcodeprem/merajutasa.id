@@ -1,0 +1,39 @@
+{
+  "_metadata": {
+    "actor": "copilot-swe-agent[bot]",
+    "generated_at": "2025-08-21T13:47:05.503Z",
+    "generator": "infra-health-check-all",
+    "git_ref": "refs/heads/copilot/fix-96",
+    "git_sha": "21b77cbff7e9f7b8054201604346d8a7c1b6eb84",
+    "run_id": "17128674831",
+    "version": "1.0"
+  },
+  "category": "performance",
+  "components": [
+    {
+      "category": "performance",
+      "component": "sla-monitor",
+      "metrics": {
+        "loadable": true,
+        "message": "Component loadable, no explicit health check",
+        "responseTime": 3,
+        "status": "healthy"
+      },
+      "status": "HEALTHY",
+      "ts": "2025-08-21T13:47:05.501Z"
+    },
+    {
+      "category": "performance",
+      "component": "cache-strategies",
+      "metrics": {
+        "loadable": true,
+        "message": "Component loadable, no explicit health check",
+        "responseTime": 3,
+        "status": "healthy"
+      },
+      "status": "HEALTHY",
+      "ts": "2025-08-21T13:47:05.502Z"
+    }
+  ],
+  "totalComponents": 2
+}
