@@ -1,8 +1,8 @@
 {
-  "seq": 0,
-  "prevHash": null,
-  "contentHash": "43258cff783fe7036d8a43033f830adfc60ec037382473548ac742b888292777",
-  "signature": "kSNbpYfsBDPH9KdFRGAlgLv43HPx5i+q0x2WgvzB8c61rUGmikIHGkpIOzMwWsgarIoBKHUxurEri9/0JKplBQ==",
-  "canonical": "{\"a\":1,\"b\":2}",
-  "ts": "2025-08-18T22:13:14.180Z"
+  "seq": 4,
+  "prevHash": "25e2e78e851f49bc6f18b8e8151bc6174e62a0b6175669480549cd7a034b1ca4",
+  "contentHash": "be936a59b082da96187538e64307dea98fb89216aa1e615d52552461e6df8241",
+  "signature": "3kPJB+yjNCuBY3QZW+LfGkv/AYFXH0UzcSbHq1Cp3W+vDmayqSn0JZJpAfKoXp9YmWAj8054/D0FZYi9RmByAQ==",
+  "canonical": "{\"id\":\"chain-test-2\",\"n\":2,\"purpose\":\"append-seed\",\"ts\":\"2025-08-21T18:18:52.990Z\"}",
+  "ts": "2025-08-21T18:18:53.002Z"
 }

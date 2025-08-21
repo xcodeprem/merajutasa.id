@@ -1,6 +1,6 @@
 {
   "mode": "verify",
-  "timestamp_utc": "2025-08-21T18:02:21Z",
+  "timestamp_utc": "2025-08-21T18:23:46Z",
   "updated": [],
   "unchanged": [
     "docs/roadmap/roadmap-master-v1.md",
@@ -20,6 +20,7 @@
     "docs/master-spec-deltas/delta-master-spec-v2-DEC-20250813-06-event-schema-alignment.md",
     "docs/principles/GP1-GP10-index.md",
     "docs/privacy/pii-pattern-library-v1.md",
+    "docs/analytics/dashboard-widgets-hysteresis-initial.md",
     "docs/tests/hysteresis-test-plan-v1.md",
     "docs/faq/faq-fairness-hysteresis-update.md",
     "docs/status/progress-recap-latest-2025-08-12T035901Z.md",
@@ -61,17 +62,11 @@
   ],
   "placeholders_sealed": [],
   "placeholders_remaining": [],
-  "violations": [
-    {
-      "code": "HASH_MISMATCH",
-      "path": "docs/analytics/dashboard-widgets-hysteresis-initial.md",
-      "detail": "Manifest=0d411afe729a8f5894c00811fca70da23cbb9a43123b549292e9df2db7f24a5b current=80fd0140d0d47359d10fa7ef9648bb5bb56a33d38f3016958e1695f09c6cc9ab"
-    }
-  ],
+  "violations": [],
   "summary": {
     "total_entries": 56,
     "updated_count": 0,
-    "violation_count": 1,
+    "violation_count": 0,
     "placeholders_remaining_count": 0
   }
 }

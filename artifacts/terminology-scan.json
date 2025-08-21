@@ -5,17 +5,37 @@
     "stage2_active": false
   },
   "key_token_frequency": {
-    "fairness": 293,
-    "privacy": 336,
-    "hysteresis": 209,
-    "hash": 461,
-    "credential": 171,
-    "governance": 586,
-    "revocation": 109
+    "fairness": 365,
+    "privacy": 424,
+    "hysteresis": 284,
+    "hash": 546,
+    "credential": 199,
+    "governance": 726,
+    "revocation": 110
   },
-  "totalKey": 2165,
-  "banned_terms_detected": 207,
+  "totalKey": 2654,
+  "banned_terms_detected": 224,
   "banned_samples": [
+    {
+      "file": "docs/contributing.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/contributing.md",
+      "term": "terbaik"
+    },
+    {
+      "file": "docs/contributing.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs/contributing.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs/contributing.md",
+      "term": "top"
+    },
     {
       "file": "docs/trust/trust-hysteresis.md",
       "term": "ranking"
@@ -185,6 +205,10 @@
       "term": "ranking"
     },
     {
+      "file": "docs/privacy/index.md",
+      "term": "Ranking"
+    },
+    {
       "file": "docs/principles/GP1-GP10-index.md",
       "term": "ranking"
     },
@@ -222,6 +246,14 @@
     },
     {
       "file": "docs/phase-2/PHASE-2-WEEK-1-DELIVERY-DOCUMENTATION.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/operations/startup-order.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/operations/scripts-governance.md",
       "term": "top"
     },
     {
@@ -401,6 +433,22 @@
       "term": "ranking"
     },
     {
+      "file": "docs/fairness/index.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs/fairness/index.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs/fairness/index.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs/fairness/index.md",
+      "term": "ranking"
+    },
+    {
       "file": "docs/fairness/hysteresis-public-methodology-fragment-v1.md",
       "term": "ranking"
     },
@@ -470,6 +518,10 @@
     },
     {
       "file": "docs/analytics/media-digest.md",
+      "term": "ranking"
+    },
+    {
+      "file": "docs/analytics/index.md",
       "term": "ranking"
     },
     {

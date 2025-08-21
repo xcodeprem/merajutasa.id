@@ -1,22 +1,22 @@
 {
   "_metadata": {
     "actor": "copilot-swe-agent[bot]",
-    "generated_at": "2025-08-19T23:34:01.702Z",
+    "generated_at": "2025-08-21T18:23:50.151Z",
     "generator": "governance-verify-aggregator",
-    "git_ref": "refs/heads/copilot/fix-107",
-    "git_sha": "1322f4e5c6849111f76b87bd761ee6d29644dd86",
-    "run_id": "17084174963",
+    "git_ref": "refs/heads/copilot/fix-147",
+    "git_sha": "821ffb7fcc7564406d134052c3e2d1d2c5c417eb",
+    "run_id": "17135255368",
     "version": "1.0"
   },
   "artifacts": {
     "decLint": {
       "_metadata": {
         "actor": "copilot-swe-agent[bot]",
-        "generated_at": "2025-08-19T23:33:58.590Z",
+        "generated_at": "2025-08-21T18:23:48.343Z",
         "generator": "dec-lint.js",
-        "git_ref": "refs/heads/copilot/fix-107",
-        "git_sha": "1322f4e5c6849111f76b87bd761ee6d29644dd86",
-        "run_id": "17084174963",
+        "git_ref": "refs/heads/copilot/fix-147",
+        "git_sha": "821ffb7fcc7564406d134052c3e2d1d2c5c417eb",
+        "run_id": "17135255368",
         "version": "1.0"
       },
       "results": [
@@ -134,7 +134,7 @@
         },
         {
           "file": "DEC-20250816-01-governance-pipeline-security-enhancement.md",
-          "hash": "618b54742d15b37aaf6236a363f2c694ecb9ede35eac9fc8662d311687ef6609",
+          "hash": "2cfa9e8ad3b888db3fa61997111c1117a0ddde532fab55971c7171e79d08bfd2",
           "id": "DEC-20250816-01",
           "violations": [],
           "warnings": []
@@ -192,7 +192,7 @@
         "metrics": {
           "bannedNear": 0,
           "drift": 0,
-          "duplicates": 2,
+          "duplicates": 3,
           "locale": 0,
           "missingIds": 0,
           "scope": 7,
@@ -200,17 +200,17 @@
         },
         "presence_enforcement": true,
         "ruleCounts": {
-          "DISC-DUPL-005": 2,
+          "DISC-DUPL-005": 3,
           "DISC-SCOPE-006": 7
         },
         "versionMismatch": false,
-        "warnings": 9
+        "warnings": 10
       },
       "version": 3,
       "warnings": [
         {
           "code": "DISC-DUPL-005",
-          "count": 6,
+          "count": 7,
           "id": "D1",
           "page": "landing",
           "severity": "WARNING"
@@ -219,6 +219,13 @@
           "code": "DISC-DUPL-005",
           "count": 4,
           "id": "D7",
+          "page": "landing",
+          "severity": "WARNING"
+        },
+        {
+          "code": "DISC-DUPL-005",
+          "count": 4,
+          "id": "D2",
           "page": "landing",
           "severity": "WARNING"
         },
@@ -305,7 +312,7 @@
           {
             "detail": {
               "max": 120,
-              "medium": 12
+              "medium": 18
             },
             "id": "HYPE_MEDIUM",
             "passed": true
@@ -366,10 +373,10 @@
       "summary": {
         "disclaimers_errors": 0,
         "disclaimers_rule_counts": {
-          "DISC-DUPL-005": 2,
+          "DISC-DUPL-005": 3,
           "DISC-SCOPE-006": 7
         },
-        "disclaimers_warnings": 9,
+        "disclaimers_warnings": 10,
         "gate_checks": [
           {
             "detail": {
@@ -398,7 +405,7 @@
           {
             "detail": {
               "max": 120,
-              "medium": 12
+              "medium": 18
             },
             "id": "HYPE_MEDIUM",
             "passed": true
@@ -455,13 +462,13 @@
         "gate_status": "PASS",
         "gating_policy_version": 1,
         "hype_high": 0,
-        "hype_hits": 12,
+        "hype_hits": 18,
         "hype_max_severity": "MEDIUM",
-        "hype_medium": 12,
+        "hype_medium": 18,
         "hype_medium_max_allowed": 120,
         "hype_rule_counts": {
-          "RANKING": 6,
-          "TOP": 6
+          "RANKING": 10,
+          "TOP": 8
         },
         "param_mismatches": 0,
         "pii_critical": 0,
@@ -488,10 +495,10 @@
           "spec_hash_violation_count": 0
         }
       },
-      "timestamp_utc": "2025-08-19T23:34:01.171Z"
+      "timestamp_utc": "2025-08-21T18:23:49.581Z"
     },
     "hype": {
-      "file_count": 67,
+      "file_count": 83,
       "findings": [
         {
           "column": 9,
@@ -544,6 +551,66 @@
           "severity": "MEDIUM"
         },
         {
+          "column": 45,
+          "context_line": "- Include status/version information at the top",
+          "file": "docs/contributing.md",
+          "line": 117,
+          "match": "top",
+          "rationale": "Generic superiority claim.",
+          "rule": "TOP",
+          "severity": "MEDIUM"
+        },
+        {
+          "column": 4,
+          "context_line": "- \"ranking\" - unsubstantiated ranking claims",
+          "file": "docs/contributing.md",
+          "line": 137,
+          "match": "ranking",
+          "rationale": "Unsubstantiated ranking claim.",
+          "rule": "RANKING",
+          "severity": "MEDIUM"
+        },
+        {
+          "column": 31,
+          "context_line": "- \"ranking\" - unsubstantiated ranking claims",
+          "file": "docs/contributing.md",
+          "line": 137,
+          "match": "ranking",
+          "rationale": "Unsubstantiated ranking claim.",
+          "rule": "RANKING",
+          "severity": "MEDIUM"
+        },
+        {
+          "column": 4,
+          "context_line": "- \"top\" - generic superiority claims",
+          "file": "docs/contributing.md",
+          "line": 138,
+          "match": "top",
+          "rationale": "Generic superiority claim.",
+          "rule": "TOP",
+          "severity": "MEDIUM"
+        },
+        {
+          "column": 17,
+          "context_line": "- \"peringkat\" - ranking implications",
+          "file": "docs/contributing.md",
+          "line": 139,
+          "match": "ranking",
+          "rationale": "Unsubstantiated ranking claim.",
+          "rule": "RANKING",
+          "severity": "MEDIUM"
+        },
+        {
+          "column": 62,
+          "context_line": "- **\"indikator stabil fairness\"** instead of \"peringkat\" or \"ranking\"",
+          "file": "docs/contributing.md",
+          "line": 146,
+          "match": "ranking",
+          "rationale": "Unsubstantiated ranking claim.",
+          "rule": "RANKING",
+          "severity": "MEDIUM"
+        },
+        {
           "column": 52,
           "context_line": "- Salah tafsir sebagai peringkat → disclaimer anti-ranking; pemisahan modul (UNCRC-3; ODC-2015).",
           "file": "docs/produk/portal-panti/01-ruang-lingkup-produk.md",
@@ -587,7 +654,7 @@
           "column": 9,
           "context_line": "kubectl top nodes",
           "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-2.md",
-          "line": 236,
+          "line": 244,
           "match": "top",
           "rationale": "Generic superiority claim.",
           "rule": "TOP",
@@ -597,7 +664,7 @@
           "column": 9,
           "context_line": "kubectl top pods",
           "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-2.md",
-          "line": 237,
+          "line": 245,
           "match": "top",
           "rationale": "Generic superiority claim.",
           "rule": "TOP",
@@ -614,21 +681,21 @@
           "severity": "MEDIUM"
         }
       ],
-      "generated_utc": "2025-08-19T23:33:57.732Z",
+      "generated_utc": "2025-08-21T18:23:47.403Z",
       "max_severity": "MEDIUM",
       "rule_counts": {
-        "RANKING": 6,
-        "TOP": 6
+        "RANKING": 10,
+        "TOP": 8
       },
       "severity_counts": {
-        "MEDIUM": 12
+        "MEDIUM": 18
       },
-      "total_hits": 12,
+      "total_hits": 18,
       "truncated": false,
       "version": 1
     },
     "params": {
-      "generated_utc": "2025-08-19T23:33:57.327Z",
+      "generated_utc": "2025-08-21T18:23:46.915Z",
       "rows": [
         {
           "aliases": {
@@ -902,7 +969,7 @@
       "violations": []
     },
     "principles": {
-      "generated_utc": "2025-08-19T23:33:58.821Z",
+      "generated_utc": "2025-08-21T18:23:48.598Z",
       "principles": [
         {
           "confidence": 0.9,
@@ -918,7 +985,7 @@
           ],
           "evidence_sample": [
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 18,
@@ -926,7 +993,7 @@
               "snippet": "- **Fairness & Integrity**: Cryptographic integrity with hash chain verification"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 28,
@@ -934,7 +1001,7 @@
               "snippet": "- **Compliance**: GDPR/SOX/ISO27001/PCI automation with privacy rights management"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 82,
@@ -942,7 +1009,7 @@
               "snippet": "npm run spec-hash:verify     # Hash integrity verification"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 120,
@@ -950,7 +1017,7 @@
               "snippet": "npm run privacy:rights              # Privacy rights management"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 209,
@@ -958,7 +1025,7 @@
               "snippet": "- **🔒 Privacy Rights Management**: Multi-jurisdiction data rights automation (GDPR/CCPA/PIPEDA/LGPD)"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 214,
@@ -966,7 +1033,7 @@
               "snippet": "- **⛓️ Chain Service** (Port 4602) - Immutable hash chain integrity management"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 244,
@@ -974,7 +1041,7 @@
               "snippet": "- **Spec Hash**: PASS"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 334,
@@ -982,7 +1049,7 @@
               "snippet": "- **Privacy rights automation**: 30-day response for GDPR/CCPA/PIPEDA/LGPD requests"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 367,
@@ -990,7 +1057,7 @@
               "snippet": "- **GP1-GP10**: Comprehensive governance principles covering privacy, transparency, fairness, security, and accountability"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 370,
@@ -998,7 +1065,7 @@
               "snippet": "- **Cryptographic Integrity**: Hash chain verification with immutable audit trails"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 383,
@@ -1006,7 +1073,7 @@
               "snippet": "npm run spec-hash:verify      # Content hash verification"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 397,
@@ -1016,7 +1083,7 @@
           ],
           "evidence_truncated": true,
           "inferredImpact": true,
-          "match_count": 1232,
+          "match_count": 1432,
           "principle": "GP1"
         },
         {
@@ -1027,6 +1094,14 @@
             "analytics"
           ],
           "evidence_sample": [
+            {
+              "changed": false,
+              "domain": "other",
+              "file": "docs/index.md",
+              "line": 153,
+              "pattern": "safety",
+              "snippet": "- **[Agent Guardrails v1.0](onboarding/agent-guardrails-v1.md)** - Safety & constraint guidelines"
+            },
             {
               "changed": false,
               "domain": "other",
@@ -1066,6 +1141,14 @@
               "line": 911,
               "pattern": "abuse",
               "snippet": "- ✅ **Rate limiting** preventing abuse and DoS"
+            },
+            {
+              "changed": false,
+              "domain": "other",
+              "file": "docs/operations/scripts-governance.md",
+              "line": 213,
+              "pattern": "safety",
+              "snippet": "- **Safety**: Read-only operations preferred for frequent use"
             },
             {
               "changed": false,
@@ -1110,7 +1193,7 @@
           ],
           "evidence_truncated": false,
           "inferredImpact": true,
-          "match_count": 10,
+          "match_count": 12,
           "principle": "GP2"
         },
         {
@@ -1127,7 +1210,7 @@
           ],
           "evidence_sample": [
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 19,
@@ -1135,7 +1218,7 @@
               "snippet": "- **Transparency**: Open methodology with public decision processes (DEC chain)"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 332,
@@ -1143,7 +1226,7 @@
               "snippet": "- **Automated audit trails**: 7+ year retention with cryptographic integrity"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 363,
@@ -1151,7 +1234,7 @@
               "snippet": "MerajutASA.id's governance system ensures fairness, transparency, and integrity through cryptographic verification and open decision processes."
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 367,
@@ -1159,7 +1242,7 @@
               "snippet": "- **GP1-GP10**: Comprehensive governance principles covering privacy, transparency, fairness, security, and accountability"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 370,
@@ -1167,7 +1250,7 @@
               "snippet": "- **Cryptographic Integrity**: Hash chain verification with immutable audit trails"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 425,
@@ -1175,7 +1258,7 @@
               "snippet": "## 🌐 GitHub Pages & Transparency"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 427,
@@ -1183,7 +1266,7 @@
               "snippet": "The platform provides comprehensive transparency through GitHub Pages with real-time dashboard snapshots and governance artifacts."
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 467,
@@ -1191,7 +1274,7 @@
               "snippet": "- **Compliance**: Automated regulatory reporting and audit trail generation"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 596,
@@ -1199,7 +1282,7 @@
               "snippet": "| Trace Index                           | docs/governance/trace/archive-trace-index-v1.md                        | Peta archive → canonical            |"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 610,
@@ -1207,7 +1290,7 @@
               "snippet": "- Trace index mendokumentasikan mapping parameter & narasi."
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 737,
@@ -1215,7 +1298,7 @@
               "snippet": "Tidak ada penghapusan retrospektif dokumen historis (archive) – hanya append trace / DEC baru. Pelanggaran = investigasi integritas."
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 749,
@@ -1225,7 +1308,7 @@
           ],
           "evidence_truncated": true,
           "inferredImpact": true,
-          "match_count": 194,
+          "match_count": 219,
           "principle": "GP3"
         },
         {
@@ -1242,7 +1325,7 @@
           ],
           "evidence_sample": [
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 8,
@@ -1250,7 +1333,7 @@
               "snippet": "**Enterprise-grade skill credentialing platform with comprehensive governance, high availability, security, and compliance infrastructure - featuring 648KB+ of production-ready code across 35+ enterpr"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 14,
@@ -1258,7 +1341,7 @@
               "snippet": "MerajutASA.id is a comprehensive enterprise platform that combines governance excellence with sophisticated infrastructure capabilities:"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 16,
@@ -1266,7 +1349,7 @@
               "snippet": "### 🏛️ Governance Foundation"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 49,
@@ -1274,7 +1357,7 @@
               "snippet": "# Verify governance integrity"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 50,
@@ -1282,7 +1365,7 @@
               "snippet": "npm run governance:verify"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 62,
@@ -1290,7 +1373,7 @@
               "snippet": "# Option 1: Core governance services"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 77,
@@ -1298,7 +1381,7 @@
               "snippet": "### Core Governance Commands"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 80,
@@ -1306,7 +1389,7 @@
               "snippet": "# Governance & Integrity"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 81,
@@ -1314,7 +1397,7 @@
               "snippet": "npm run governance:verify     # Complete governance check"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 86,
@@ -1322,7 +1405,7 @@
               "snippet": "npm run test:governance      # Core governance tests"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 151,
@@ -1330,7 +1413,7 @@
               "snippet": "### Governance & Fairness"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 153,
@@ -1340,7 +1423,7 @@
           ],
           "evidence_truncated": true,
           "inferredImpact": true,
-          "match_count": 853,
+          "match_count": 1018,
           "principle": "GP4"
         },
         {
@@ -1357,7 +1440,7 @@
           ],
           "evidence_sample": [
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 27,
@@ -1365,7 +1448,7 @@
               "snippet": "- **Observability**: Advanced monitoring with distributed tracing and anomaly detection"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 186,
@@ -1373,7 +1456,7 @@
               "snippet": "- **🚨 Intelligent Alerting**: Context-aware anomaly detection"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 333,
@@ -1381,7 +1464,7 @@
               "snippet": "- **Advanced threat detection**: Behavioral anomaly analysis and automated response"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 350,
@@ -1389,7 +1472,7 @@
               "snippet": "- **Anomaly detection**: Statistical and business logic monitoring"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 369,
@@ -1397,7 +1480,7 @@
               "snippet": "- **Hysteresis-Based Fairness**: Stable \"under-served\" detection using Option F parameters"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 390,
@@ -1405,7 +1488,7 @@
               "snippet": "npm run equity:anomaly        # Detect equity anomalies"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 396,
@@ -1413,7 +1496,7 @@
               "snippet": "- **[Fairness Methodology](docs/fairness/)** - Equity calculation and hysteresis"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 482,
@@ -1421,7 +1504,7 @@
               "snippet": "Menyediakan kerangka (scaffold) governance, fairness, dan integrity untuk sistem penandaan “under‑served” berbasis hysteresis (Option F) yang:"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 484,
@@ -1429,7 +1512,7 @@
               "snippet": "1. Stabil (menghindari volatilitas metrik lewat hysteresis thresholds)."
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 495,
@@ -1437,7 +1520,7 @@
               "snippet": "| DEC-20250812-02     | Hysteresis Adoption Option F      | Mengunci parameter fairness (T_enter_major=0.50, T_enter_standard=0.60, consecutive_required_standard=2, T_exit=0.65, cooldown=1 snapshot, s"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 495,
@@ -1445,7 +1528,7 @@
               "snippet": "| DEC-20250812-02     | Hysteresis Adoption Option F      | Mengunci parameter fairness (T_enter_major=0.50, T_enter_standard=0.60, consecutive_required_standard=2, T_exit=0.65, cooldown=1 snapshot, s"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 495,
@@ -1455,7 +1538,7 @@
           ],
           "evidence_truncated": true,
           "inferredImpact": true,
-          "match_count": 450,
+          "match_count": 511,
           "principle": "GP5"
         },
         {
@@ -1467,11 +1550,12 @@
             "onboarding",
             "integrity",
             "governance",
+            "fairness",
             "analytics"
           ],
           "evidence_sample": [
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 20,
@@ -1479,7 +1563,7 @@
               "snippet": "- **Non-Ranking**: Equity indicators without competitive scoring"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 368,
@@ -1487,7 +1571,7 @@
               "snippet": "- **Non-Ranking System**: Equity indicators without competitive scoring or performance ranking"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 544,
@@ -1569,7 +1653,7 @@
           ],
           "evidence_truncated": true,
           "inferredImpact": true,
-          "match_count": 59,
+          "match_count": 63,
           "principle": "GP6"
         },
         {
@@ -1584,7 +1668,7 @@
           ],
           "evidence_sample": [
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 530,
@@ -1592,7 +1676,7 @@
               "snippet": "| GP6  | Anti Misuse / Anti-Hype (Non-Scoring)  |"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 544,
@@ -1600,7 +1684,7 @@
               "snippet": "| D1  | Non-Ranking               | Menegaskan sistem tanpa peringkat kompetitif <!-- hype-lint-ignore-line --> |"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 623,
@@ -1608,7 +1692,7 @@
               "snippet": "4. Hindari istilah terlarang (lihat Anti‑Hype)."
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 625,
@@ -1616,7 +1700,7 @@
               "snippet": "Anti‑Hype (Contoh Kata Dilarang – akan lint) <!-- lint-allow-negated-context hype-lint-ignore-line -->:"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 627,
@@ -1624,7 +1708,7 @@
               "snippet": "- “ranking”, “peringkat”, “top”, “terbaik”, “no.1”, “paling unggul”, “skor kompetitif” <!-- lint-allow-negated-context hype-lint-ignore-line -->"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 627,
@@ -1632,7 +1716,7 @@
               "snippet": "- “ranking”, “peringkat”, “top”, “terbaik”, “no.1”, “paling unggul”, “skor kompetitif” <!-- lint-allow-negated-context hype-lint-ignore-line -->"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 627,
@@ -1640,7 +1724,7 @@
               "snippet": "- “ranking”, “peringkat”, “top”, “terbaik”, “no.1”, “paling unggul”, “skor kompetitif” <!-- lint-allow-negated-context hype-lint-ignore-line -->"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 627,
@@ -1648,7 +1732,7 @@
               "snippet": "- “ranking”, “peringkat”, “top”, “terbaik”, “no.1”, “paling unggul”, “skor kompetitif” <!-- lint-allow-negated-context hype-lint-ignore-line -->"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 641,
@@ -1656,7 +1740,7 @@
               "snippet": "| hype lint report           | artifacts/hype-lint.json                | Yes                | Active                      |"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 679,
@@ -1664,7 +1748,7 @@
               "snippet": "## 13. Larangan Klaim Peringkat / Ranking <!-- data-phrase-context=\"disclaimer-explanation\" lint-allow-negated-context hype-lint-ignore-line -->"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 685,
@@ -1672,7 +1756,7 @@
               "snippet": "- Mengklaim “terbaik”, “top”, “juara”. <!-- hype-lint-ignore-line -->"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 685,
@@ -1682,13 +1766,14 @@
           ],
           "evidence_truncated": true,
           "inferredImpact": true,
-          "match_count": 239,
+          "match_count": 263,
           "principle": "GP7"
         },
         {
           "confidence": 0.9,
           "domains": [
             "other",
+            "privacy",
             "integrity"
           ],
           "evidence_sample": [
@@ -1699,6 +1784,14 @@
               "line": 47,
               "pattern": "portabil",
               "snippet": "| L Federation & Future | DID portability, external attestation, localization, CBOR | Future expansions in Credential spec | Scalability & portability guardrail |"
+            },
+            {
+              "changed": false,
+              "domain": "privacy",
+              "file": "docs/privacy/index.md",
+              "line": 139,
+              "pattern": "portabil",
+              "snippet": "| **Portability** | Export structured data | Semi-automated |"
             },
             {
               "changed": false,
@@ -1779,19 +1872,11 @@
               "line": 27,
               "pattern": "extensib",
               "snippet": "| **Kubernetes** | Governance model, policy enforcement, hash-based integrity | Multi-layer security, policy-as-code, extensible architecture |"
-            },
-            {
-              "changed": false,
-              "domain": "other",
-              "file": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
-              "line": 368,
-              "pattern": "interoperab",
-              "snippet": "##### **3.3.3 Interoperability Gaps**"
             }
           ],
           "evidence_truncated": true,
           "inferredImpact": true,
-          "match_count": 16,
+          "match_count": 17,
           "principle": "GP8"
         },
         {
@@ -1808,7 +1893,7 @@
           ],
           "evidence_sample": [
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 18,
@@ -1816,7 +1901,7 @@
               "snippet": "- **Fairness & Integrity**: Cryptographic integrity with hash chain verification"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 20,
@@ -1824,7 +1909,7 @@
               "snippet": "- **Non-Ranking**: Equity indicators without competitive scoring"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 94,
@@ -1832,7 +1917,7 @@
               "snippet": "npm run fairness:sim        # Fairness simulation"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 151,
@@ -1840,7 +1925,7 @@
               "snippet": "### Governance & Fairness"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 154,
@@ -1848,7 +1933,7 @@
               "snippet": "- **[Fairness Methodology](docs/fairness/)** - Equity and fairness measures"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 217,
@@ -1856,7 +1941,7 @@
               "snippet": "- **⚖️ Equity Service** - Fairness calculation and under-served detection"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 217,
@@ -1864,7 +1949,7 @@
               "snippet": "- **⚖️ Equity Service** - Fairness calculation and under-served detection"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 363,
@@ -1872,7 +1957,7 @@
               "snippet": "MerajutASA.id's governance system ensures fairness, transparency, and integrity through cryptographic verification and open decision processes."
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 367,
@@ -1880,7 +1965,7 @@
               "snippet": "- **GP1-GP10**: Comprehensive governance principles covering privacy, transparency, fairness, security, and accountability"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 368,
@@ -1888,7 +1973,7 @@
               "snippet": "- **Non-Ranking System**: Equity indicators without competitive scoring or performance ranking"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 369,
@@ -1896,7 +1981,7 @@
               "snippet": "- **Hysteresis-Based Fairness**: Stable \"under-served\" detection using Option F parameters"
             },
             {
-              "changed": true,
+              "changed": false,
               "domain": "other",
               "file": "README.md",
               "line": 369,
@@ -1906,7 +1991,7 @@
           ],
           "evidence_truncated": true,
           "inferredImpact": true,
-          "match_count": 437,
+          "match_count": 522,
           "principle": "GP9"
         },
         {
@@ -1917,6 +2002,7 @@
             "onboarding",
             "integrity",
             "governance",
+            "fairness",
             "analytics"
           ],
           "evidence_sample": [
@@ -2019,7 +2105,7 @@
           ],
           "evidence_truncated": true,
           "inferredImpact": true,
-          "match_count": 61,
+          "match_count": 63,
           "principle": "GP10"
         }
       ],
@@ -2041,9 +2127,9 @@
           ]
         },
         "freshness": {
-          "age_hours": 14.702786944444444,
+          "age_hours": 57.53327361111111,
           "last_rotated_utc": "2025-08-19T08:51:48.385Z",
-          "ok": true
+          "ok": false
         },
         "retention": {
           "cap": 14,
@@ -2053,11 +2139,11 @@
       },
       "config_path": "tools/config/privacy-policy.json",
       "status": "ok",
-      "ts": "2025-08-19T23:33:58.418Z",
+      "ts": "2025-08-21T18:23:48.170Z",
       "violations": []
     },
     "securitySmoke": {
-      "files_scanned": 173,
+      "files_scanned": 180,
       "summary": {
         "by_severity": {
           "HIGH": 0,
@@ -2066,7 +2152,7 @@
         },
         "total_violations": 0
       },
-      "timestamp": "2025-08-19T23:33:57.598Z",
+      "timestamp": "2025-08-21T18:23:47.258Z",
       "violations": []
     },
     "specHash": {
@@ -2079,7 +2165,7 @@
         "updated_count": 0,
         "violation_count": 0
       },
-      "timestamp_utc": "2025-08-19T23:33:57Z",
+      "timestamp_utc": "2025-08-21T18:23:46Z",
       "unchanged": [
         "docs/roadmap/roadmap-master-v1.md",
         "docs/governance/signature-pipeline-plan-v1.md",
@@ -2150,12 +2236,17 @@
           "oldCount": 0
         },
         {
-          "file": "docs/agent-context-pack.md",
+          "file": "docs/index.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
-          "file": "docs/workflows/auto-add-project-yaml-guide.md",
+          "file": "docs/contributing.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/agent-context-pack.md",
           "newCount": 0,
           "oldCount": 0
         },
@@ -2175,17 +2266,22 @@
           "oldCount": 0
         },
         {
+          "file": "docs/tests/hysteresis-test-plan-v1.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/tests/README.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
           "file": "docs/transparency/methodology-snippet-h0.md",
           "newCount": 0,
           "oldCount": 0
         },
         {
           "file": "docs/transparency/changelog-excerpt-phase1.5.md",
-          "newCount": 0,
-          "oldCount": 0
-        },
-        {
-          "file": "docs/tests/hysteresis-test-plan-v1.md",
           "newCount": 0,
           "oldCount": 0
         },
@@ -2360,6 +2456,11 @@
           "oldCount": 0
         },
         {
+          "file": "docs/privacy/index.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
           "file": "docs/privacy/README.md",
           "newCount": 0,
           "oldCount": 0
@@ -2371,6 +2472,11 @@
         },
         {
           "file": "docs/policies/README.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/playbooks/github-projects-personal-integration-merajutasa.md",
           "newCount": 0,
           "oldCount": 0
         },
@@ -2440,6 +2546,46 @@
           "oldCount": 0
         },
         {
+          "file": "docs/operations/startup-order.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/operations/scripts-week6-integration.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/operations/scripts-validation.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/operations/scripts-governance.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/operations/scripts-cleanup-plan.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/operations/integrated-health-checks.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/operations/infra-health-triage.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/operations/health-scripts-governance.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
           "file": "docs/onboarding/startup-dependencies-guide.md",
           "newCount": 0,
           "oldCount": 0
@@ -2495,6 +2641,11 @@
           "oldCount": 0
         },
         {
+          "file": "docs/integrity/index.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
           "file": "docs/integrity/hash-excerpt-module.md",
           "newCount": 0,
           "oldCount": 0
@@ -2520,6 +2671,11 @@
           "oldCount": 0
         },
         {
+          "file": "docs/integrity/README.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
           "file": "docs/infrastructure/week6-component-integration-guide.md",
           "newCount": 0,
           "oldCount": 0
@@ -2530,7 +2686,27 @@
           "oldCount": 0
         },
         {
+          "file": "docs/infrastructure/README.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
           "file": "docs/implementation/README.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/gap-analysis/JAWABAN-GAP-ANALYSIS.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/gap-analysis/GAP-ANALYSIS-SUMMARY.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
           "newCount": 0,
           "oldCount": 0
         },
@@ -2580,6 +2756,11 @@
           "oldCount": 0
         },
         {
+          "file": "docs/governance/index.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
           "file": "docs/governance/handbook-index.md",
           "newCount": 0,
           "oldCount": 0
@@ -2595,22 +2776,12 @@
           "oldCount": 0
         },
         {
+          "file": "docs/governance/README.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
           "file": "docs/governance/README-decision-log-process.md",
-          "newCount": 0,
-          "oldCount": 0
-        },
-        {
-          "file": "docs/gap-analysis/JAWABAN-GAP-ANALYSIS.md",
-          "newCount": 0,
-          "oldCount": 0
-        },
-        {
-          "file": "docs/gap-analysis/GAP-ANALYSIS-SUMMARY.md",
-          "newCount": 0,
-          "oldCount": 0
-        },
-        {
-          "file": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
           "newCount": 0,
           "oldCount": 0
         },
@@ -2626,6 +2797,11 @@
         },
         {
           "file": "docs/faq/faq-fairness-hysteresis-update.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/fairness/index.md",
           "newCount": 0,
           "oldCount": 0
         },
@@ -2655,6 +2831,11 @@
           "oldCount": 0
         },
         {
+          "file": "docs/fairness/README.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
           "file": "docs/development/scripts.md",
           "newCount": 0,
           "oldCount": 0
@@ -2676,6 +2857,16 @@
         },
         {
           "file": "docs/archive/fairness_equity-hysteresis-options-v1.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/architecture/startup-order.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/architecture/dependency-mapping.md",
           "newCount": 0,
           "oldCount": 0
         },
@@ -2705,6 +2896,11 @@
           "oldCount": 0
         },
         {
+          "file": "docs/analytics/index.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
           "file": "docs/analytics/event-schema-canonical-v1.md",
           "newCount": 0,
           "oldCount": 0
@@ -2716,6 +2912,16 @@
         },
         {
           "file": "docs/analysis/INFRASTRUCTURE-UPDATE-ANALYSIS-V1.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/adr/0005-dependency-mapping.md",
+          "newCount": 0,
+          "oldCount": 0
+        },
+        {
+          "file": "docs/_inventory/summary.md",
           "newCount": 0,
           "oldCount": 0
         },
@@ -2870,17 +3076,47 @@
           "oldCount": 0
         }
       ],
-      "generated_utc": "2025-08-19T23:34:01.542Z",
+      "generated_utc": "2025-08-21T18:23:49.978Z",
       "new_total": 0,
       "old_total": 0,
       "suggestions": [
         {
-          "file": "docs/workflows/auto-add-project-yaml-guide.md",
+          "file": "docs/index.md",
           "suggestions": [
+            {
+              "count": 5,
+              "new": "utama",
+              "old": "master"
+            },
             {
               "count": 2,
               "new": "pengguna",
               "old": "user"
+            }
+          ]
+        },
+        {
+          "file": "docs/contributing.md",
+          "suggestions": [
+            {
+              "count": 4,
+              "new": "tanpa ranking",
+              "old": "ranking"
+            },
+            {
+              "count": 2,
+              "new": "tanpa peringkat",
+              "old": "peringkat"
+            },
+            {
+              "count": 2,
+              "new": "rekomendasi",
+              "old": "top"
+            },
+            {
+              "count": 1,
+              "new": "sesuai kebutuhan",
+              "old": "terbaik"
             }
           ]
         },
@@ -3150,6 +3386,21 @@
           ]
         },
         {
+          "file": "docs/privacy/index.md",
+          "suggestions": [
+            {
+              "count": 1,
+              "new": "tanpa ranking",
+              "old": "ranking"
+            },
+            {
+              "count": 4,
+              "new": "pengguna",
+              "old": "user"
+            }
+          ]
+        },
+        {
           "file": "docs/principles/GP1-GP10-index.md",
           "suggestions": [
             {
@@ -3181,6 +3432,16 @@
               "count": 1,
               "new": "tanpa ranking",
               "old": "ranking"
+            }
+          ]
+        },
+        {
+          "file": "docs/playbooks/github-projects-personal-integration-merajutasa.md",
+          "suggestions": [
+            {
+              "count": 3,
+              "new": "pengguna",
+              "old": "user"
             }
           ]
         },
@@ -3269,6 +3530,26 @@
           "suggestions": [
             {
               "count": 3,
+              "new": "pengguna",
+              "old": "user"
+            }
+          ]
+        },
+        {
+          "file": "docs/operations/scripts-governance.md",
+          "suggestions": [
+            {
+              "count": 1,
+              "new": "pengguna",
+              "old": "user"
+            }
+          ]
+        },
+        {
+          "file": "docs/operations/scripts-cleanup-plan.md",
+          "suggestions": [
+            {
+              "count": 1,
               "new": "pengguna",
               "old": "user"
             }
@@ -3415,6 +3696,16 @@
           ]
         },
         {
+          "file": "docs/integrity/index.md",
+          "suggestions": [
+            {
+              "count": 4,
+              "new": "utama",
+              "old": "master"
+            }
+          ]
+        },
+        {
           "file": "docs/integrity/evidence-minimum-phase1.5-v1.md",
           "suggestions": [
             {
@@ -3471,6 +3762,26 @@
               "count": 2,
               "new": "pengguna",
               "old": "user"
+            }
+          ]
+        },
+        {
+          "file": "docs/gap-analysis/JAWABAN-GAP-ANALYSIS.md",
+          "suggestions": [
+            {
+              "count": 1,
+              "new": "pengguna",
+              "old": "user"
+            }
+          ]
+        },
+        {
+          "file": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
+          "suggestions": [
+            {
+              "count": 2,
+              "new": "utama",
+              "old": "master"
             }
           ]
         },
@@ -3535,6 +3846,16 @@
           ]
         },
         {
+          "file": "docs/governance/index.md",
+          "suggestions": [
+            {
+              "count": 2,
+              "new": "daftar izin",
+              "old": "whitelist"
+            }
+          ]
+        },
+        {
           "file": "docs/governance/disclaimers-lint-spec-v1.md",
           "suggestions": [
             {
@@ -3570,26 +3891,6 @@
           ]
         },
         {
-          "file": "docs/gap-analysis/JAWABAN-GAP-ANALYSIS.md",
-          "suggestions": [
-            {
-              "count": 1,
-              "new": "pengguna",
-              "old": "user"
-            }
-          ]
-        },
-        {
-          "file": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
-          "suggestions": [
-            {
-              "count": 2,
-              "new": "utama",
-              "old": "master"
-            }
-          ]
-        },
-        {
           "file": "docs/faq/privacy-faq-abridged.md",
           "suggestions": [
             {
@@ -3601,6 +3902,16 @@
         },
         {
           "file": "docs/faq/faq-fairness-hysteresis-update.md",
+          "suggestions": [
+            {
+              "count": 3,
+              "new": "tanpa ranking",
+              "old": "ranking"
+            }
+          ]
+        },
+        {
+          "file": "docs/fairness/index.md",
           "suggestions": [
             {
               "count": 3,
@@ -3705,6 +4016,21 @@
           ]
         },
         {
+          "file": "docs/analytics/index.md",
+          "suggestions": [
+            {
+              "count": 1,
+              "new": "tanpa ranking",
+              "old": "ranking"
+            },
+            {
+              "count": 1,
+              "new": "pengguna",
+              "old": "user"
+            }
+          ]
+        },
+        {
           "file": "docs/analytics/event-schema-canonical-v1.md",
           "suggestions": [
             {
@@ -3734,6 +4060,21 @@
           "suggestions": [
             {
               "count": 9,
+              "new": "pengguna",
+              "old": "user"
+            }
+          ]
+        },
+        {
+          "file": "docs/_inventory/summary.md",
+          "suggestions": [
+            {
+              "count": 15,
+              "new": "utama",
+              "old": "master"
+            },
+            {
+              "count": 4,
               "new": "pengguna",
               "old": "user"
             }
@@ -3968,13 +4309,13 @@
     "dec_lint_violation_count": 0,
     "disclaimers_status": "PASS",
     "drift_status": "ADVISORY",
-    "hype_hits": 12,
+    "hype_hits": 18,
     "overall_status": "PASS",
     "param_mismatches": 0,
     "policy_aggregation_status": "ALLOW",
     "policy_aggregation_violations": 0,
     "privacy_format_invalid_prev": 1,
-    "privacy_freshness_ok": true,
+    "privacy_freshness_ok": false,
     "privacy_retention_len": 6,
     "privacy_retention_ok": true,
     "security_high_count": 0,
@@ -3992,5 +4333,5 @@
     "terminology_old_total": 0,
     "total_param_checks": 15
   },
-  "timestamp": "2025-08-19T23:34:01.699Z"
+  "timestamp": "2025-08-21T18:23:50.148Z"
 }

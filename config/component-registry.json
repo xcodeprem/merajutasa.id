@@ -1,7 +1,35 @@
 {
-  "gateway": { "dependsOn": ["auth", "catalog"] },
-  "auth": { "dependsOn": ["db"] },
-  "catalog": { "dependsOn": ["db", "search"] },
-  "search": { "dependsOn": [] },
-  "db": { "dependsOn": [] }
+  "version": 1,
+  "components": [
+    {
+      "id": "gateway",
+      "name": "API Gateway",
+      "dependsOn": ["auth", "catalog"],
+      "healthEndpoint": "/api/health"
+    },
+    {
+      "id": "auth",
+      "name": "Authentication Service",
+      "dependsOn": ["db"],
+      "healthEndpoint": "/auth/health"
+    },
+    {
+      "id": "catalog",
+      "name": "Catalog Service",
+      "dependsOn": ["db", "search"],
+      "healthEndpoint": "/catalog/health"
+    },
+    {
+      "id": "search",
+      "name": "Search Service",
+      "dependsOn": [],
+      "healthEndpoint": "/search/health"
+    },
+    {
+      "id": "db",
+      "name": "Database Service",
+      "dependsOn": [],
+      "healthEndpoint": "/db/health"
+    }
+  ]
 }

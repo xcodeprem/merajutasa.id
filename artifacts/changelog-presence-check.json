@@ -1,28 +1,28 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-18T21:37:15.731Z",
+  "generated_utc": "2025-08-21T18:19:01.552Z",
   "checks": [
     {
       "check": "changelog_draft_exists",
       "status": "PASS",
       "size": 396,
-      "content_preview": "# Transparency – Changelog Excerpt (Draft)\n\nTime: 2025-08-18T21:37:15.681Z\n\n- Spec hash changes: 0\n-..."
+      "content_preview": "# Transparency – Changelog Excerpt (Draft)\n\nTime: 2025-08-21T18:19:01.498Z\n\n- Spec hash changes: 0\n-..."
     },
     {
       "check": "changelog_json_exists",
       "status": "PASS",
       "data": {
-        "ts": "2025-08-18T21:37:15.681Z",
+        "ts": "2025-08-21T18:19:01.498Z",
         "files_changed": 0,
         "dec_impacts": [],
-        "pii_high_risk_hits": 8,
+        "pii_high_risk_hits": 9,
         "disclaimers_status": "PASS",
         "fairness_scenarios": 0,
         "stage2_terminology": {
           "dec_ref": "DEC-20250817-09",
           "adoption_percent": 100,
-          "suggestions_count": 74,
-          "trend_entries": 25
+          "suggestions_count": 88,
+          "trend_entries": 27
         }
       }
     },

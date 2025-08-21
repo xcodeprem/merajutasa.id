@@ -1,8 +1,8 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-18T21:37:15.630Z",
+  "generated_utc": "2025-08-21T18:19:01.444Z",
   "gate": "Gate 2 - Expanded Transparency",
-  "status": "PASS",
+  "status": "FAIL",
   "requirements": [
     {
       "requirement": "H2-J1: Changelog Excerpt page live",
@@ -34,11 +34,11 @@
       "details": {
         "adoption_percent": 100,
         "adoption_persisted": true,
-        "trend_entries": 26,
+        "trend_entries": 28,
         "trend_report_generated": true,
         "ci_policy_enabled": true,
         "old_terms_total": 0,
-        "suggestions_count": 74
+        "suggestions_count": 88
       }
     },
     {
@@ -47,16 +47,16 @@
       "details": {
         "lint_status": "PASS",
         "errors_count": 0,
-        "warnings_count": 9,
+        "warnings_count": 10,
         "artifact_exists": true,
         "presence_enforcement": true
       }
     },
     {
       "requirement": "H1-H2: Accessibility automated scan PASS",
-      "status": "PASS",
+      "status": "FAIL",
       "details": {
-        "critical_violations": 0,
+        "critical_violations": 1,
         "serious_violations": 0,
         "total_issues": 1,
         "artifact_saved": true,
@@ -70,15 +70,15 @@
       "details": {
         "status": "PASS",
         "errors": 0,
-        "warnings": 9,
+        "warnings": 10,
         "computed_hash": "55ed6a0cc3b99a73296dfd0a88470f33510436b54e5bbd90a6cb2fa1c8364158"
       }
     }
   ],
   "summary": {
     "total_requirements": 6,
-    "passed": 6,
-    "failed": 0,
-    "gate2_closure_ready": true
+    "passed": 5,
+    "failed": 1,
+    "gate2_closure_ready": false
   }
 }

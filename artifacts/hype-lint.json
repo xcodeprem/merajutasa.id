@@ -1,17 +1,15 @@
 {
   "version": 1,
-  "generated_utc": "2025-08-21T17:01:09.493Z",
-  "file_count": 77,
-  "total_hits": 19,
-  "max_severity": "HIGH",
+  "generated_utc": "2025-08-21T18:23:47.403Z",
+  "file_count": 83,
+  "total_hits": 18,
+  "max_severity": "MEDIUM",
   "severity_counts": {
-    "MEDIUM": 18,
-    "HIGH": 1
+    "MEDIUM": 18
   },
   "rule_counts": {
     "RANKING": 10,
-    "TOP": 8,
-    "TERBAIK": 1
+    "TOP": 8
   },
   "findings": [
     {
@@ -123,16 +121,6 @@
       "severity": "MEDIUM",
       "rationale": "Unsubstantiated ranking claim.",
       "context_line": "- **\"indikator stabil fairness\"** instead of \"peringkat\" or \"ranking\""
-    },
-    {
-      "file": "docs/contributing.md",
-      "line": 149,
-      "column": 40,
-      "match": "terbaik",
-      "rule": "TERBAIK",
-      "severity": "HIGH",
-      "rationale": "“Terbaik” (best) absolute claim.",
-      "context_line": "- **\"solusi yang sesuai\"** instead of \"terbaik\""
     },
     {
       "file": "docs/produk/portal-panti/01-ruang-lingkup-produk.md",

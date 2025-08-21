@@ -1,0 +1,21 @@
+{
+  "generated_utc": "2025-08-21T18:20:42.090Z",
+  "files": [
+    {
+      "path": "artifacts/governance-verify-summary.json",
+      "sha256": "4ee2881972e5940adc10576c1a73ba7ba0065f5c7f53bfca87460382c612a598",
+      "size": 130223
+    },
+    {
+      "path": "artifacts/spec-hash-diff.json",
+      "sha256": "2f027189aeab1f702615936f552f739953fb3b0c587b867d9644e196150f5c81",
+      "size": 3496
+    },
+    {
+      "path": "artifacts/param-integrity-matrix.json",
+      "sha256": "7ffacfd8cd5ffa0b2cf04dce0b2e357be5d7a83cf6601208f13e901c23c4233b",
+      "size": 5496
+    }
+  ],
+  "summary_hash": "2db78fab2faf2c20b6c10fb911665df4a4f2fb44d717e310d1aa6fbbfb94a0c5"
+}

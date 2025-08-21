@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "timestamp_utc": "2025-08-18T21:37:15.380Z",
+  "timestamp_utc": "2025-08-21T18:18:53.058Z",
   "pass": false,
   "criteria": {
     "governance_verify_pass": true,
@@ -11,21 +11,21 @@
   "details": {
     "governance": {
       "code": 0,
-      "ms": 3210
+      "ms": 3458
     },
     "h1_guard": {
       "code": 1,
-      "ms": 14234
+      "ms": 14415
     },
     "collector_reliability": {
       "code": 0,
-      "ms": 571
+      "ms": 581
     },
     "signer_chain": {
       "ok": true,
       "append_code": 0,
       "verify_ok": true,
-      "length": 37
+      "length": 5
     }
   }
 }
