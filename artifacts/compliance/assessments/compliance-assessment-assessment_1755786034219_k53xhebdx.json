@@ -1,0 +1,452 @@
+{
+  "assessment_id": "assessment_1755786034219_k53xhebdx",
+  "assessed_at": "2025-08-21T14:20:34.219Z",
+  "frameworks_assessed": 4,
+  "overall_score": 91,
+  "compliance_status": "compliant",
+  "frameworks": {
+    "gdpr": {
+      "framework": "gdpr",
+      "framework_name": "General Data Protection Regulation",
+      "assessed_at": "2025-08-21T14:20:34.214Z",
+      "requirements": {
+        "consent_management": {
+          "category": "consent_management",
+          "weight": 20,
+          "rules_assessed": 3,
+          "rules_compliant": 3,
+          "score": 100,
+          "violations": [],
+          "recommendations": []
+        },
+        "data_subject_rights": {
+          "category": "data_subject_rights",
+          "weight": 25,
+          "rules_assessed": 4,
+          "rules_compliant": 4,
+          "score": 100,
+          "violations": [],
+          "recommendations": []
+        },
+        "privacy_by_design": {
+          "category": "privacy_by_design",
+          "weight": 15,
+          "rules_assessed": 3,
+          "rules_compliant": 3,
+          "score": 100,
+          "violations": [],
+          "recommendations": []
+        },
+        "security_measures": {
+          "category": "security_measures",
+          "weight": 20,
+          "rules_assessed": 3,
+          "rules_compliant": 3,
+          "score": 100,
+          "violations": [],
+          "recommendations": []
+        },
+        "breach_notification": {
+          "category": "breach_notification",
+          "weight": 10,
+          "rules_assessed": 3,
+          "rules_compliant": 3,
+          "score": 100,
+          "violations": [],
+          "recommendations": []
+        },
+        "documentation": {
+          "category": "documentation",
+          "weight": 10,
+          "rules_assessed": 3,
+          "rules_compliant": 3,
+          "score": 100,
+          "violations": [],
+          "recommendations": []
+        }
+      },
+      "overall_score": 100,
+      "weighted_score": 10000,
+      "status": "fully_compliant",
+      "violations": [],
+      "recommendations": []
+    },
+    "sox": {
+      "framework": "sox",
+      "framework_name": "Sarbanes-Oxley Act",
+      "assessed_at": "2025-08-21T14:20:34.216Z",
+      "requirements": {
+        "internal_controls": {
+          "category": "internal_controls",
+          "weight": 30,
+          "rules_assessed": 3,
+          "rules_compliant": 3,
+          "score": 100,
+          "violations": [],
+          "recommendations": []
+        },
+        "audit_trails": {
+          "category": "audit_trails",
+          "weight": 25,
+          "rules_assessed": 3,
+          "rules_compliant": 2,
+          "score": 67,
+          "violations": [
+            {
+              "rule": "tamper_proof_logs",
+              "category": "audit_trails",
+              "severity": "medium",
+              "description": "Assessment for rule: tamper_proof_logs",
+              "remediation": "Implement required controls and procedures"
+            }
+          ],
+          "recommendations": [
+            {
+              "rule": "tamper_proof_logs",
+              "priority": "medium",
+              "action": "Implement required controls and procedures",
+              "deadline": "2025-11-19T14:20:34.216Z"
+            }
+          ]
+        },
+        "segregation_of_duties": {
+          "category": "segregation_of_duties",
+          "weight": 20,
+          "rules_assessed": 3,
+          "rules_compliant": 3,
+          "score": 100,
+          "violations": [],
+          "recommendations": []
+        },
+        "management_certification": {
+          "category": "management_certification",
+          "weight": 15,
+          "rules_assessed": 3,
+          "rules_compliant": 2,
+          "score": 67,
+          "violations": [
+            {
+              "rule": "annual_assessment",
+              "category": "management_certification",
+              "severity": "medium",
+              "description": "Assessment for rule: annual_assessment",
+              "remediation": "Implement required controls and procedures"
+            }
+          ],
+          "recommendations": [
+            {
+              "rule": "annual_assessment",
+              "priority": "medium",
+              "action": "Implement required controls and procedures",
+              "deadline": "2025-11-19T14:20:34.216Z"
+            }
+          ]
+        },
+        "external_audits": {
+          "category": "external_audits",
+          "weight": 10,
+          "rules_assessed": 3,
+          "rules_compliant": 3,
+          "score": 100,
+          "violations": [],
+          "recommendations": []
+        }
+      },
+      "overall_score": 87,
+      "weighted_score": 8680,
+      "status": "substantially_compliant",
+      "violations": [
+        {
+          "rule": "tamper_proof_logs",
+          "category": "audit_trails",
+          "severity": "medium",
+          "description": "Assessment for rule: tamper_proof_logs",
+          "remediation": "Implement required controls and procedures"
+        },
+        {
+          "rule": "annual_assessment",
+          "category": "management_certification",
+          "severity": "medium",
+          "description": "Assessment for rule: annual_assessment",
+          "remediation": "Implement required controls and procedures"
+        }
+      ],
+      "recommendations": [
+        {
+          "rule": "tamper_proof_logs",
+          "priority": "medium",
+          "action": "Implement required controls and procedures",
+          "deadline": "2025-11-19T14:20:34.216Z"
+        },
+        {
+          "rule": "annual_assessment",
+          "priority": "medium",
+          "action": "Implement required controls and procedures",
+          "deadline": "2025-11-19T14:20:34.216Z"
+        }
+      ]
+    },
+    "iso27001": {
+      "framework": "iso27001",
+      "framework_name": "ISO 27001 Information Security Management",
+      "assessed_at": "2025-08-21T14:20:34.217Z",
+      "requirements": {
+        "information_security_policy": {
+          "category": "information_security_policy",
+          "weight": 15,
+          "rules_assessed": 3,
+          "rules_compliant": 3,
+          "score": 100,
+          "violations": [],
+          "recommendations": []
+        },
+        "risk_management": {
+          "category": "risk_management",
+          "weight": 25,
+          "rules_assessed": 3,
+          "rules_compliant": 3,
+          "score": 100,
+          "violations": [],
+          "recommendations": []
+        },
+        "access_control": {
+          "category": "access_control",
+          "weight": 20,
+          "rules_assessed": 3,
+          "rules_compliant": 3,
+          "score": 100,
+          "violations": [],
+          "recommendations": []
+        },
+        "incident_management": {
+          "category": "incident_management",
+          "weight": 15,
+          "rules_assessed": 3,
+          "rules_compliant": 3,
+          "score": 100,
+          "violations": [],
+          "recommendations": []
+        },
+        "business_continuity": {
+          "category": "business_continuity",
+          "weight": 15,
+          "rules_assessed": 3,
+          "rules_compliant": 2,
+          "score": 67,
+          "violations": [
+            {
+              "rule": "continuity_planning",
+              "category": "business_continuity",
+              "severity": "medium",
+              "description": "Assessment for rule: continuity_planning",
+              "remediation": "Implement required controls and procedures"
+            }
+          ],
+          "recommendations": [
+            {
+              "rule": "continuity_planning",
+              "priority": "medium",
+              "action": "Implement required controls and procedures",
+              "deadline": "2025-11-19T14:20:34.218Z"
+            }
+          ]
+        },
+        "compliance_monitoring": {
+          "category": "compliance_monitoring",
+          "weight": 10,
+          "rules_assessed": 3,
+          "rules_compliant": 2,
+          "score": 67,
+          "violations": [
+            {
+              "rule": "corrective_actions",
+              "category": "compliance_monitoring",
+              "severity": "medium",
+              "description": "Assessment for rule: corrective_actions",
+              "remediation": "Implement required controls and procedures"
+            }
+          ],
+          "recommendations": [
+            {
+              "rule": "corrective_actions",
+              "priority": "medium",
+              "action": "Implement required controls and procedures",
+              "deadline": "2025-11-19T14:20:34.218Z"
+            }
+          ]
+        }
+      },
+      "overall_score": 92,
+      "weighted_score": 9175,
+      "status": "fully_compliant",
+      "violations": [
+        {
+          "rule": "continuity_planning",
+          "category": "business_continuity",
+          "severity": "medium",
+          "description": "Assessment for rule: continuity_planning",
+          "remediation": "Implement required controls and procedures"
+        },
+        {
+          "rule": "corrective_actions",
+          "category": "compliance_monitoring",
+          "severity": "medium",
+          "description": "Assessment for rule: corrective_actions",
+          "remediation": "Implement required controls and procedures"
+        }
+      ],
+      "recommendations": [
+        {
+          "rule": "continuity_planning",
+          "priority": "medium",
+          "action": "Implement required controls and procedures",
+          "deadline": "2025-11-19T14:20:34.218Z"
+        },
+        {
+          "rule": "corrective_actions",
+          "priority": "medium",
+          "action": "Implement required controls and procedures",
+          "deadline": "2025-11-19T14:20:34.218Z"
+        }
+      ]
+    },
+    "pci": {
+      "framework": "pci",
+      "framework_name": "Payment Card Industry Data Security Standard",
+      "assessed_at": "2025-08-21T14:20:34.218Z",
+      "requirements": {
+        "secure_network": {
+          "category": "secure_network",
+          "weight": 20,
+          "rules_assessed": 3,
+          "rules_compliant": 3,
+          "score": 100,
+          "violations": [],
+          "recommendations": []
+        },
+        "cardholder_data_protection": {
+          "category": "cardholder_data_protection",
+          "weight": 25,
+          "rules_assessed": 3,
+          "rules_compliant": 2,
+          "score": 67,
+          "violations": [
+            {
+              "rule": "data_transmission",
+              "category": "cardholder_data_protection",
+              "severity": "medium",
+              "description": "Assessment for rule: data_transmission",
+              "remediation": "Implement required controls and procedures"
+            }
+          ],
+          "recommendations": [
+            {
+              "rule": "data_transmission",
+              "priority": "medium",
+              "action": "Implement required controls and procedures",
+              "deadline": "2025-11-19T14:20:34.218Z"
+            }
+          ]
+        },
+        "vulnerability_management": {
+          "category": "vulnerability_management",
+          "weight": 15,
+          "rules_assessed": 3,
+          "rules_compliant": 3,
+          "score": 100,
+          "violations": [],
+          "recommendations": []
+        },
+        "access_control": {
+          "category": "access_control",
+          "weight": 20,
+          "rules_assessed": 3,
+          "rules_compliant": 2,
+          "score": 67,
+          "violations": [
+            {
+              "rule": "access_restrictions",
+              "category": "access_control",
+              "severity": "medium",
+              "description": "Assessment for rule: access_restrictions",
+              "remediation": "Implement required controls and procedures"
+            }
+          ],
+          "recommendations": [
+            {
+              "rule": "access_restrictions",
+              "priority": "medium",
+              "action": "Implement required controls and procedures",
+              "deadline": "2025-11-19T14:20:34.218Z"
+            }
+          ]
+        },
+        "monitoring": {
+          "category": "monitoring",
+          "weight": 10,
+          "rules_assessed": 3,
+          "rules_compliant": 3,
+          "score": 100,
+          "violations": [],
+          "recommendations": []
+        },
+        "security_testing": {
+          "category": "security_testing",
+          "weight": 10,
+          "rules_assessed": 3,
+          "rules_compliant": 3,
+          "score": 100,
+          "violations": [],
+          "recommendations": []
+        }
+      },
+      "overall_score": 85,
+      "weighted_score": 8515,
+      "status": "substantially_compliant",
+      "violations": [
+        {
+          "rule": "data_transmission",
+          "category": "cardholder_data_protection",
+          "severity": "medium",
+          "description": "Assessment for rule: data_transmission",
+          "remediation": "Implement required controls and procedures"
+        },
+        {
+          "rule": "access_restrictions",
+          "category": "access_control",
+          "severity": "medium",
+          "description": "Assessment for rule: access_restrictions",
+          "remediation": "Implement required controls and procedures"
+        }
+      ],
+      "recommendations": [
+        {
+          "rule": "data_transmission",
+          "priority": "medium",
+          "action": "Implement required controls and procedures",
+          "deadline": "2025-11-19T14:20:34.218Z"
+        },
+        {
+          "rule": "access_restrictions",
+          "priority": "medium",
+          "action": "Implement required controls and procedures",
+          "deadline": "2025-11-19T14:20:34.218Z"
+        }
+      ]
+    }
+  },
+  "summary": {
+    "fully_compliant": 2,
+    "substantially_compliant": 2,
+    "partially_compliant": 0,
+    "non_compliant": 0
+  },
+  "total_violations": 6,
+  "critical_violations": 0,
+  "recommendations": [],
+  "metadata": {
+    "system_version": "0.1.2",
+    "assessment_tool": "merajutasa-compliance-automation",
+    "assessment_methodology": "automated_rules_engine"
+  }
+}
