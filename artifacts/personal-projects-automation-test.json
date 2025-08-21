@@ -1,13 +1,34 @@
 {
   "test_suite": "Personal Projects Automation",
-  "timestamp": "2025-08-21T10:35:56.825Z",
+  "timestamp": "2025-08-21T12:10:52.692Z",
   "summary": {
     "total_tests": 33,
-    "passed": 33,
-    "failed": 0,
-    "success_rate": 100
+    "passed": 28,
+    "failed": 5,
+    "success_rate": 85
   },
-  "errors": [],
+  "errors": [
+    {
+      "test": "Feature Release workflow exists",
+      "error": "ENOENT: no such file or directory, open '.github/workflows/feature-release-automation.yml'"
+    },
+    {
+      "test": "Team Retrospective workflow exists",
+      "error": "ENOENT: no such file or directory, open '.github/workflows/team-retrospective-automation.yml'"
+    },
+    {
+      "test": "Iterative Development workflow exists",
+      "error": "ENOENT: no such file or directory, open '.github/workflows/iterative-development-automation.yml'"
+    },
+    {
+      "test": "Custom Fields workflow exists",
+      "error": "ENOENT: no such file or directory, open '.github/workflows/custom-fields-automation.yml'"
+    },
+    {
+      "test": "Master automation workflow exists",
+      "error": "ENOENT: no such file or directory, open '.github/workflows/personal-projects-master-automation.yml'"
+    }
+  ],
   "projects_tested": [
     "feature-release",
     "team-retrospective",
