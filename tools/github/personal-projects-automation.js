@@ -356,11 +356,36 @@ export async function automateProjectIntegration(token, projectKey, prNumber = n
   const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] || 'merajutasa.id';
   
   try {
+    // Helper: get PR or null (soft-skip if not a PR or not found)
+    async function getPullIfExists(number) {
+      try {
+        const { data } = await octokit.rest.pulls.get({ owner, repo, pull_number: number });
+        return data;
+      } catch (e) {
+        if (e.status === 404) {
+          // Check if it's an issue (not a PR) or simply not found
+          try {
+            const { data: issue } = await octokit.rest.issues.get({ owner, repo, issue_number: number });
+            if (!issue.pull_request) {
+              console.warn(`[${projectKey}] Number ${number} is an Issue, not a PR. Skipping.`);
+              return null;
+            }
+          } catch {
+            console.warn(`[${projectKey}] Number ${number} not found. Skipping.`);
+            return null;
+          }
+          console.warn(`[${projectKey}] Pull request #${number} not found. Skipping.`);
+          return null;
+        }
+        throw e;
+      }
+    }
+
     // Get PRs to process
     let prs = [];
     if (prNumber) {
-      const { data: pr } = await octokit.rest.pulls.get({ owner, repo, pull_number: prNumber });
-      prs = [pr];
+      const pr = await getPullIfExists(prNumber);
+      if (pr) prs = [pr];
     } else {
       const { data: openPrs } = await octokit.rest.pulls.list({ 
         owner, 
@@ -369,6 +394,18 @@ export async function automateProjectIntegration(token, projectKey, prNumber = n
         per_page: 10
       });
       prs = openPrs;
+    }
+
+    if (!prs || prs.length === 0) {
+      console.log(`[${projectKey}] No PRs to process.`);
+      // Save empty report and return a success summary (no failures)
+      await saveAutomationReport(projectKey, []);
+      return {
+        project: projectKey,
+        config: projectConfig,
+        results: [],
+        summary: { total: 0, successful: 0, failed: 0 }
+      };
     }
     
     for (const pr of prs) {
@@ -482,8 +519,8 @@ if (import.meta.url === `file://${process.argv[1]}`) {
       console.log(`Total PRs: ${result.summary.total}`);
       console.log(`Successful: ${result.summary.successful}`);
       console.log(`Failed: ${result.summary.failed}`);
-      
-      if (result.summary.failed > 0) {
+      // Exit code 1 only when we processed at least one PR and there were failures
+      if (result.summary.total > 0 && result.summary.failed > 0) {
         process.exit(1);
       }
     })

@@ -67,25 +67,32 @@ jobs:
           GH_PROJECT_TOKEN: ${{ secrets.GH_PROJECT_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+        shell: bash
         run: |
           PR_ARG=""
           DRY_RUN_ARG=""
-          
-          if [[ -n "${{ steps.context.outputs.pr_number }}" ]]; then
-            PR_ARG="${{ steps.context.outputs.pr_number }}"
+
+          # Only set PR_ARG if this is a PR event, a comment on a PR, or workflow input provided
+          if [[ "${{ github.event_name }}" == "pull_request" || "${{ github.event_name }}" == "pull_request_target" ]]; then
+            PR_ARG="${{ github.event.pull_request.number }}"
+          elif [[ "${{ github.event_name }}" == "issue_comment" && ${{ github.event.issue.pull_request != null && 'true' || 'false' }} == 'true' ]]; then
+            PR_ARG="$(jq -r '.issue.number' "$GITHUB_EVENT_PATH")"
+          elif [[ -n "${{ inputs.pr_number }}" ]]; then
+            PR_ARG="${{ inputs.pr_number }}"
           fi
-          
-          if [[ "${{ steps.context.outputs.dry_run }}" == "true" ]]; then
+
+          if [[ "${{ inputs.dry_run }}" == "true" || "${{ steps.context.outputs.dry_run }}" == "true" ]]; then
             DRY_RUN_ARG="--dry-run"
           fi
-          
+
           echo "📋 Starting Team Retrospective automation..."
           echo "Project: Team Retrospective (#11)"
-          echo "PR: ${PR_ARG:-'all open PRs'}"
-          echo "Dry run: ${{ steps.context.outputs.dry_run }}"
+          echo "PR: ${PR_ARG:-all open PRs}"
+          echo "Dry run: $([[ "$DRY_RUN_ARG" == "--dry-run" ]] && echo true || echo false)"
           echo ""
-          
-          node tools/github/personal-projects-automation.js team-retrospective $PR_ARG $DRY_RUN_ARG
+
+          # Only pass PR_ARG if non-empty (prevents treating an Issue number as a PR)
+          node tools/github/personal-projects-automation.js team-retrospective ${PR_ARG:+$PR_ARG} $DRY_RUN_ARG
           
       - name: Comment on PR with results
         if: ${{ steps.context.outputs.pr_number && github.event_name == 'issue_comment' }}
