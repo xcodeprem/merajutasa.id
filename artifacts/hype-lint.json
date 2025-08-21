@@ -1,15 +1,17 @@
 {
   "version": 1,
-  "generated_utc": "2025-08-21T16:22:27.645Z",
-  "file_count": 76,
-  "total_hits": 12,
-  "max_severity": "MEDIUM",
+  "generated_utc": "2025-08-21T17:01:09.493Z",
+  "file_count": 77,
+  "total_hits": 19,
+  "max_severity": "HIGH",
   "severity_counts": {
-    "MEDIUM": 12
+    "MEDIUM": 18,
+    "HIGH": 1
   },
   "rule_counts": {
-    "RANKING": 6,
-    "TOP": 6
+    "RANKING": 10,
+    "TOP": 8,
+    "TERBAIK": 1
   },
   "findings": [
     {
@@ -61,6 +63,76 @@
       "severity": "MEDIUM",
       "rationale": "Unsubstantiated ranking claim.",
       "context_line": "Referensi publik: Lihat Methodology Snippet (H0) untuk ringkasan non‑ranking dan privasi → docs/transparency/methodology-snippet-h0.md"
+    },
+    {
+      "file": "docs/contributing.md",
+      "line": 117,
+      "column": 45,
+      "match": "top",
+      "rule": "TOP",
+      "severity": "MEDIUM",
+      "rationale": "Generic superiority claim.",
+      "context_line": "- Include status/version information at the top"
+    },
+    {
+      "file": "docs/contributing.md",
+      "line": 137,
+      "column": 4,
+      "match": "ranking",
+      "rule": "RANKING",
+      "severity": "MEDIUM",
+      "rationale": "Unsubstantiated ranking claim.",
+      "context_line": "- \"ranking\" - unsubstantiated ranking claims"
+    },
+    {
+      "file": "docs/contributing.md",
+      "line": 137,
+      "column": 31,
+      "match": "ranking",
+      "rule": "RANKING",
+      "severity": "MEDIUM",
+      "rationale": "Unsubstantiated ranking claim.",
+      "context_line": "- \"ranking\" - unsubstantiated ranking claims"
+    },
+    {
+      "file": "docs/contributing.md",
+      "line": 138,
+      "column": 4,
+      "match": "top",
+      "rule": "TOP",
+      "severity": "MEDIUM",
+      "rationale": "Generic superiority claim.",
+      "context_line": "- \"top\" - generic superiority claims"
+    },
+    {
+      "file": "docs/contributing.md",
+      "line": 139,
+      "column": 17,
+      "match": "ranking",
+      "rule": "RANKING",
+      "severity": "MEDIUM",
+      "rationale": "Unsubstantiated ranking claim.",
+      "context_line": "- \"peringkat\" - ranking implications"
+    },
+    {
+      "file": "docs/contributing.md",
+      "line": 146,
+      "column": 62,
+      "match": "ranking",
+      "rule": "RANKING",
+      "severity": "MEDIUM",
+      "rationale": "Unsubstantiated ranking claim.",
+      "context_line": "- **\"indikator stabil fairness\"** instead of \"peringkat\" or \"ranking\""
+    },
+    {
+      "file": "docs/contributing.md",
+      "line": 149,
+      "column": 40,
+      "match": "terbaik",
+      "rule": "TERBAIK",
+      "severity": "HIGH",
+      "rationale": "“Terbaik” (best) absolute claim.",
+      "context_line": "- **\"solusi yang sesuai\"** instead of \"terbaik\""
     },
     {
       "file": "docs/produk/portal-panti/01-ruang-lingkup-produk.md",

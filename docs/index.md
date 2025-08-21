@@ -127,6 +127,7 @@ Developer onboarding, team setup, and contribution guidelines.
 
 ### Getting Started
 
+- **[Contributor Guide](contributing.md)** - Complete documentation contribution guidelines
 - **[Agent Bootstrap Manifest](onboarding/agent-bootstrap-manifest.md)** - Quick onboarding for AI agents
 - **[Environment Setup](onboarding/environment-setup.md)** - Development environment configuration
 - **[Startup Dependencies Guide](onboarding/startup-dependencies-guide.md)** - Service dependencies & startup
