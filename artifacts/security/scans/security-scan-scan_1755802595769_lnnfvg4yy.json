@@ -1,0 +1,28 @@
+{
+  "scan_id": "scan_1755802595769_lnnfvg4yy",
+  "scan_type": "full",
+  "started_at": "2025-08-21T18:56:35.769Z",
+  "vulnerabilities": [
+    {
+      "type": "dependency_vulnerability",
+      "severity": "critical",
+      "package": "lighthouse",
+      "version": "^12.0.0",
+      "description": "Vulnerability found in lighthouse@^12.0.0",
+      "cvss_score": "9.3",
+      "cve_id": "CVE-2024-420"
+    }
+  ],
+  "threats": [],
+  "configuration_issues": [],
+  "overall_score": 80,
+  "recommendations": [
+    {
+      "priority": "critical",
+      "category": "vulnerability_management",
+      "title": "Address Critical Vulnerabilities",
+      "description": "1 critical vulnerabilities require immediate attention",
+      "action": "Patch or mitigate all critical vulnerabilities within 24 hours"
+    }
+  ]
+}

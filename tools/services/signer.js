@@ -14,6 +14,7 @@ import { generateKeyPairSync } from 'crypto';
 import crypto from 'crypto';
 
 const PORT = process.env.SIGNER_PORT || 4601;
+const HOST = process.env.SIGNER_HOST || '0.0.0.0';
 const KEY_DIR = '.integrity';
 const KEYS_STATE = `${KEY_DIR}/keys.json`;
 
@@ -109,7 +110,7 @@ async function start(){
       res.end(JSON.stringify({ error: e.message }));
     }
   });
-  server.listen(PORT, ()=> console.log(`[signer] listening on ${PORT}`));
+  server.listen(PORT, HOST, ()=> console.log(`[signer] listening on ${HOST}:${PORT}`));
 }
 
 function readBody(req){

@@ -120,6 +120,14 @@ jobs:
           npm run infra:health:all || echo "Infrastructure health check failed (advisory)"
         continue-on-error: true
 
+      - name: Compliance & Security Validation
+        run: |
+          echo "🔍 Running compliance and security validation..."
+          npm run compliance:audit
+          npm run security:scan
+          npm run privacy:rights
+        continue-on-error: false
+
       - name: Upload KPI artifacts
         uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
         with:
@@ -140,6 +148,10 @@ jobs:
             artifacts/equity-anomaly-coverage.json
             artifacts/equity-anomaly-annotations.json
             artifacts/week6-component-*.json
+            artifacts/audit/*.ndjson
+            artifacts/compliance/assessments/*.json
+            artifacts/security/scans/*.json
+            artifacts/privacy-*.json
 
       - name: Chain Integrity Monitor (advisory)
         run: |

@@ -1,12 +1,12 @@
 {
-  "timestamp": "2025-08-21T18:36:23.798Z",
+  "timestamp": "2025-08-21T18:53:23.695Z",
   "test_suite": "Week 6 Component Import Tests",
   "summary": {
     "total": 7,
     "passed": 7,
     "failed": 0,
     "success_rate": 100,
-    "total_duration": 21
+    "total_duration": 24
   },
   "results": [
     {
@@ -22,7 +22,7 @@
     {
       "name": "Compliance Orchestrator Imports",
       "status": "PASSED",
-      "duration": 1
+      "duration": 0
     },
     {
       "name": "No Circular Imports",
@@ -32,7 +32,7 @@
     {
       "name": "Component Import Resolution",
       "status": "PASSED",
-      "duration": 12
+      "duration": 14
     },
     {
       "name": "Component Instance Creation",
@@ -42,7 +42,7 @@
     {
       "name": "Module Types",
       "status": "PASSED",
-      "duration": 1
+      "duration": 2
     }
   ],
   "component_scores": {

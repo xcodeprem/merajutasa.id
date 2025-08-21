@@ -17,14 +17,16 @@ import { promises as fs } from 'fs';
 import crypto from 'crypto';
 
 const PORT = process.env.CHAIN_PORT || 4602;
-const CHAIN_SNAPSHOT_PATH = 'artifacts/chain.json';
-const CHAIN_LOG_PATH = 'artifacts/chain.ndjson';
-const CHAIN_HEAD_PATH = 'artifacts/chain-head.json';
+const HOST = process.env.CHAIN_HOST || '0.0.0.0';
+const DATA_DIR = process.env.CHAIN_DATA_DIR || 'artifacts';
+const CHAIN_SNAPSHOT_PATH = `${DATA_DIR}/chain.json`;
+const CHAIN_LOG_PATH = `${DATA_DIR}/chain.ndjson`;
+const CHAIN_HEAD_PATH = `${DATA_DIR}/chain-head.json`;
 
 async function pathExists(p){ try { await fs.access(p); return true; } catch { return false; } }
 
 async function safeWriteFileAtomic(p, data){
-  await fs.mkdir('artifacts',{recursive:true});
+  await fs.mkdir(DATA_DIR,{recursive:true});
   const tmp = p + '.tmp';
   await fs.writeFile(tmp, data);
   await fs.rename(tmp, p);
@@ -43,14 +45,14 @@ async function loadChain(){
   return [];
 }
 async function saveChain(chain){
-  await fs.mkdir('artifacts',{recursive:true});
+  await fs.mkdir(DATA_DIR,{recursive:true});
   await safeWriteFileAtomic(CHAIN_SNAPSHOT_PATH, JSON.stringify(chain,null,2));
   const head = chain[chain.length-1] || null;
   await safeWriteFileAtomic(CHAIN_HEAD_PATH, JSON.stringify(head, null, 2));
 }
 
 async function appendLog(entry){
-  await fs.mkdir('artifacts',{recursive:true});
+  await fs.mkdir(DATA_DIR,{recursive:true});
   await fs.appendFile(CHAIN_LOG_PATH, JSON.stringify(entry)+"\n");
 }
 
@@ -141,7 +143,7 @@ async function start(){
       res.end(JSON.stringify({ error:e.message }));
     }
   });
-  server.listen(PORT, ()=> console.log(`[chain] listening on ${PORT}`));
+  server.listen(PORT, HOST, ()=> console.log(`[chain] listening on ${HOST}:${PORT}`));
 }
 
 function readBody(req){

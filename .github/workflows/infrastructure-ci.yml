@@ -115,17 +115,22 @@ jobs:
       - name: Run security scan
         if: matrix.check-type == 'security'
         run: npm run security:scan
-        continue-on-error: true
 
       - name: Run compliance audit
         if: matrix.check-type == 'compliance'
         run: npm run compliance:audit
-        continue-on-error: true
+
+      - name: Run compliance automation assessment
+        if: matrix.check-type == 'compliance'
+        run: npm run compliance:automation -- --assess
+
+      - name: Generate compliance report
+        if: matrix.check-type == 'compliance'
+        run: npm run compliance:report
 
       - name: Run privacy rights check
         if: matrix.check-type == 'privacy'
         run: npm run privacy:rights
-        continue-on-error: true
 
       - name: Upload security/compliance artifacts
         if: always()
@@ -135,7 +140,11 @@ jobs:
           path: |
             artifacts/audit/*.ndjson
             artifacts/compliance/assessments/*.json
+            artifacts/compliance/compliance-report-*.json
+            artifacts/compliance/regulatory/*.json
             artifacts/privacy-*.json
+            artifacts/privacy/requests/*.json
+            artifacts/security/scans/*.json
             artifacts/security-*.json
 
   build-integration:
@@ -169,6 +178,14 @@ jobs:
         run: npm run docker:status
         continue-on-error: true
 
+      - name: Run Docker health check
+        run: npm run docker:health-check
+        continue-on-error: true
+
+      - name: Run integrated health check
+        run: npm run health:check
+        continue-on-error: true
+
       - name: Upload build artifacts
         if: always()
         uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874  # v4.4.0
@@ -177,6 +194,8 @@ jobs:
           path: |
             artifacts/docs-*.json
             artifacts/docker-*.json
+            artifacts/integrated-health-check-report.json
+            artifacts/infra-health-*.json
 
   operational-health:
     runs-on: ubuntu-latest

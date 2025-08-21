@@ -992,7 +992,7 @@ export class ComplianceAutomation extends EventEmitter {
       last_check: new Date().toISOString(),
       details: {
         is_running: this.options.real_time_monitoring,
-        frameworks_active: this.options.frameworks.length,
+        frameworks_active: this.options.complianceFrameworks?.length || 0,
         total_assessments: Object.keys(this.complianceState.assessments).length,
         active_alerts: this.complianceState.activeAlerts.length,
         average_compliance_score: this.calculateAverageComplianceScore(),
@@ -1043,19 +1043,175 @@ export class ComplianceAutomation extends EventEmitter {
    */
   getStatistics() {
     return {
-      total_assessments: Object.keys(this.complianceState.assessments).length,
-      frameworks_monitored: this.options.frameworks.length,
-      active_alerts: this.complianceState.activeAlerts.length,
-      compliance_scores: this.complianceState.scores,
+      total_assessments: Object.keys(this.complianceState?.assessments || {}).length,
+      frameworks_monitored: this.options.complianceFrameworks?.length || 0,
+      active_alerts: this.complianceState?.activeAlerts?.length || 0,
+      compliance_scores: this.complianceState?.scores || {},
       average_compliance_score: this.calculateAverageComplianceScore(),
       uptime: (Date.now() - this.startTime) / 1000,
       monitoring_active: this.options.real_time_monitoring,
       configuration: {
-        frameworks: this.options.frameworks,
+        frameworks: this.options.complianceFrameworks || [],
         real_time_monitoring: this.options.real_time_monitoring,
         reporting_directory: this.options.reportingDir
       }
     };
+  }
+
+  /**
+   * Generate comprehensive compliance report across all frameworks
+   */
+  async generateComplianceReport() {
+    try {
+      console.log('📊 Generating comprehensive compliance report...');
+      
+      const reportId = `compliance_report_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      const report = {
+        report_id: reportId,
+        generated_at: new Date().toISOString(),
+        reporting_entity: 'MerajutASA.id',
+        report_type: 'comprehensive_compliance_assessment',
+        executive_summary: {},
+        framework_assessments: {},
+        overall_statistics: {},
+        active_alerts: this.complianceState.activeAlerts || [],
+        recommendations: []
+      };
+      
+      // Build executive summary
+      const stats = this.getStatistics();
+      report.executive_summary = {
+        overall_compliance_score: stats.average_compliance_score,
+        frameworks_assessed: stats.frameworks_monitored,
+        total_assessments: stats.total_assessments,
+        active_alerts: stats.active_alerts,
+        assessment_timestamp: this.complianceState.lastAssessment,
+        report_summary: this.generateExecutiveSummary()
+      };
+      
+      // Add framework-specific assessments
+      for (const framework of this.options.complianceFrameworks || []) {
+        if (this.complianceState.assessments[framework]) {
+          report.framework_assessments[framework] = {
+            ...this.complianceState.assessments[framework],
+            framework_rules: this.frameworkRules[framework]?.name || framework
+          };
+        }
+      }
+      
+      // Add overall statistics
+      report.overall_statistics = stats;
+      
+      // Generate recommendations based on violations and alerts
+      report.recommendations = this.generateComplianceRecommendations();
+      
+      // Save report to file
+      const reportFilename = `compliance-report-${reportId}.json`;
+      const reportPath = path.join(this.options.reportingDir, reportFilename);
+      
+      await fs.mkdir(path.dirname(reportPath), { recursive: true });
+      await fs.writeFile(reportPath, JSON.stringify(report, null, 2), 'utf8');
+      
+      // Record audit event
+      await auditSystem.recordEvent('compliance_reporting', 'comprehensive_report_generated', {
+        report_id: reportId,
+        frameworks_count: this.options.complianceFrameworks?.length || 0,
+        overall_score: stats.average_compliance_score,
+        active_alerts: stats.active_alerts
+      }, {
+        sourceSystem: 'compliance-automation'
+      });
+      
+      console.log(`📄 Comprehensive compliance report saved: ${reportPath}`);
+      this.emit('compliance_report_generated', { report, filename: reportFilename });
+      
+      return reportPath;
+      
+    } catch (error) {
+      console.error('❌ Failed to generate compliance report:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Generate executive summary text
+   */
+  generateExecutiveSummary() {
+    const stats = this.getStatistics();
+    const score = stats.average_compliance_score;
+    
+    let summary = `Overall compliance score: ${score.toFixed(1)}% across ${stats.frameworks_monitored} frameworks. `;
+    
+    if (score >= 95) {
+      summary += "Excellent compliance posture with minimal violations.";
+    } else if (score >= 85) {
+      summary += "Good compliance posture with some areas for improvement.";
+    } else if (score >= 70) {
+      summary += "Acceptable compliance with several areas requiring attention.";
+    } else {
+      summary += "Compliance requires immediate attention and remediation.";
+    }
+    
+    if (stats.active_alerts > 0) {
+      summary += ` ${stats.active_alerts} active alerts require review.`;
+    }
+    
+    return summary;
+  }
+
+  /**
+   * Generate compliance recommendations based on current state
+   */
+  generateComplianceRecommendations() {
+    const recommendations = [];
+    const alerts = this.complianceState.activeAlerts || [];
+    
+    // Group alerts by type
+    const alertTypes = {};
+    alerts.forEach(alert => {
+      if (!alertTypes[alert.type]) {
+        alertTypes[alert.type] = [];
+      }
+      alertTypes[alert.type].push(alert);
+    });
+    
+    // Generate recommendations based on alert patterns
+    Object.keys(alertTypes).forEach(alertType => {
+      const alertsOfType = alertTypes[alertType];
+      
+      switch (alertType) {
+        case 'violation_rate_high':
+          recommendations.push({
+            priority: 'high',
+            category: 'violation_reduction',
+            recommendation: `Address high violation rates in ${alertsOfType.map(a => a.framework).join(', ')}`,
+            affected_frameworks: alertsOfType.map(a => a.framework),
+            expected_impact: 'Reduce violation rates and improve compliance scores'
+          });
+          break;
+          
+        case 'compliance_score_low':
+          recommendations.push({
+            priority: 'critical',
+            category: 'score_improvement',
+            recommendation: `Immediate action required for low compliance scores in ${alertsOfType.map(a => a.framework).join(', ')}`,
+            affected_frameworks: alertsOfType.map(a => a.framework),
+            expected_impact: 'Bring compliance scores above acceptable thresholds'
+          });
+          break;
+          
+        default:
+          recommendations.push({
+            priority: 'medium',
+            category: 'general_improvement',
+            recommendation: `Review and address ${alertType} alerts`,
+            affected_frameworks: alertsOfType.map(a => a.framework),
+            expected_impact: 'Improve overall compliance posture'
+          });
+      }
+    });
+    
+    return recommendations;
   }
 
   /**
@@ -1091,3 +1247,119 @@ export function getComplianceAutomation(options = {}) {
 }
 
 export default ComplianceAutomation;
+
+// CLI interface for npm script execution
+if (import.meta.url === `file://${process.argv[1]}`) {
+  const args = process.argv.slice(2);
+  
+  async function main() {
+    try {
+      if (args.includes('--generate-report')) {
+        console.log('🏛️ Running compliance automation in report generation mode...');
+        
+        // Create compliance automation instance for one-shot assessment
+        const complianceInstance = new ComplianceAutomation({ 
+          real_time_monitoring: false // Disable real-time monitoring for one-shot
+        });
+        
+        // Run a full compliance assessment
+        console.log('📊 Performing comprehensive compliance assessment...');
+        await complianceInstance.performComplianceAssessment();
+        
+        // Generate detailed compliance report
+        console.log('📄 Generating detailed compliance report...');
+        const reportPath = await complianceInstance.generateComplianceReport();
+        console.log(`📄 Compliance report generated: ${reportPath}`);
+        
+        // Get final statistics and status
+        const stats = complianceInstance.getStatistics();
+        const complianceScore = stats.average_compliance_score;
+        
+        console.log(`📊 Compliance assessment completed:`);
+        console.log(`  - Total assessments: ${stats.total_assessments}`);
+        console.log(`  - Frameworks monitored: ${stats.frameworks_monitored}`);
+        console.log(`  - Average compliance score: ${complianceScore}/100`);
+        console.log(`  - Active alerts: ${stats.active_alerts}`);
+        
+        // Shutdown gracefully
+        await complianceInstance.shutdown();
+        
+        // Exit with appropriate code based on compliance score
+        if (complianceScore < 70) {
+          console.log('⚠️ Compliance score below acceptable threshold (70)');
+          process.exit(1);
+        }
+        
+        console.log('✅ Compliance report generation completed successfully');
+        process.exit(0);
+        
+      } else if (args.includes('--assess') || args.includes('--audit')) {
+        console.log('🏛️ Running compliance automation in assessment mode...');
+        
+        // Create compliance automation instance for one-shot assessment
+        const complianceInstance = new ComplianceAutomation({ 
+          real_time_monitoring: false // Disable real-time monitoring for one-shot
+        });
+        
+        // Run a compliance assessment
+        console.log('📊 Performing compliance assessment...');
+        await complianceInstance.performComplianceAssessment();
+        
+        // Get final statistics and status
+        const stats = complianceInstance.getStatistics();
+        const status = complianceInstance.getComplianceStatus();
+        const complianceScore = stats.average_compliance_score;
+        
+        console.log(`📊 Compliance automation test completed:`);
+        console.log(`  - Total assessments: ${stats.total_assessments}`);
+        console.log(`  - Frameworks monitored: ${stats.frameworks_monitored}`);
+        console.log(`  - Average compliance score: ${complianceScore}/100`);
+        console.log(`  - Active alerts: ${stats.active_alerts}`);
+        console.log(`  - Monitoring active: ${stats.monitoring_active}`);
+        
+        // Shutdown gracefully
+        await complianceInstance.shutdown();
+        
+        // Exit with appropriate code based on compliance score
+        if (complianceScore < 70) {
+          console.log('⚠️ Compliance score below acceptable threshold (70)');
+          process.exit(1);
+        }
+        
+        console.log('✅ Compliance automation test completed successfully');
+        process.exit(0);
+        
+      } else {
+        console.log('📖 Compliance Automation CLI');
+        console.log('Usage:');
+        console.log('  --assess        Run compliance assessment and exit');
+        console.log('  --audit         Run compliance assessment and exit (alias)');
+        console.log('  --generate-report  Generate detailed compliance report and exit');
+        console.log('  (no args)      Start continuous compliance monitoring (default)');
+        
+        // Default behavior: start continuous compliance system
+        console.log('🏛️ Starting continuous compliance automation mode...');
+        console.log('Press Ctrl+C to stop');
+        
+        // Handle graceful shutdown
+        process.on('SIGINT', async () => {
+          console.log('\n🛑 Received shutdown signal...');
+          await complianceAutomation.shutdown();
+          process.exit(0);
+        });
+        
+        process.on('SIGTERM', async () => {
+          console.log('\n🛑 Received termination signal...');
+          await complianceAutomation.shutdown();
+          process.exit(0);
+        });
+      }
+      
+    } catch (error) {
+      console.error('❌ Compliance automation failed:', error.message);
+      process.exit(1);
+    }
+  }
+  
+  main();
+}
