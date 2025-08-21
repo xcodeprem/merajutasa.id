@@ -988,6 +988,86 @@
           ]
         },
         {
+          "ruleId": "CONTACT_EMAIL",
+          "level": "note",
+          "message": {
+            "text": "CONTACT_EMAIL docs/privacy/index.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/privacy/index.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CONTACT_PHONE",
+          "level": "note",
+          "message": {
+            "text": "CONTACT_PHONE docs/privacy/index.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/privacy/index.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "ADDRESS_STREET",
+          "level": "note",
+          "message": {
+            "text": "ADDRESS_STREET docs/privacy/index.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/privacy/index.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "BANK_ACCOUNT",
+          "level": "error",
+          "message": {
+            "text": "BANK_ACCOUNT docs/privacy/index.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/privacy/index.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "MULTI_CATEGORY_ESCALATION",
+          "level": "note",
+          "message": {
+            "text": "MULTI_CATEGORY_ESCALATION docs/privacy/index.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/privacy/index.md"
+                }
+              }
+            }
+          ]
+        },
+        {
           "ruleId": "EMAIL_IN_NAME",
           "level": "note",
           "message": {

@@ -102,6 +102,8 @@ Event tracking, schema definitions, and analytics framework.
 
 Privacy framework, PII detection, and data protection policies.
 
+- **[Privacy Documentation Index](privacy/index.md)** - Comprehensive privacy documentation hub & scanner usage guidelines
+
 ### PII Detection & Management
 
 - **[PII Pattern Library v1.0](privacy/pii-pattern-library-v1.md)** - Detection framework & pattern definitions

@@ -3,22 +3,22 @@
   "status": "ADVISORY",
   "summary": {
     "distinctCategories": 12,
-    "totalFindings": 96,
+    "totalFindings": 101,
     "categoryCounts": {
       "EMAIL_IN_NAME": 34,
       "EDU_NISN": 2,
-      "CONTACT_EMAIL": 17,
+      "CONTACT_EMAIL": 18,
       "PLATE_ID": 17,
       "IDN_NIK": 2,
       "GENERIC_16DIGIT": 4,
-      "CONTACT_PHONE": 2,
-      "ADDRESS_STREET": 5,
+      "CONTACT_PHONE": 3,
+      "ADDRESS_STREET": 6,
       "DOB": 4,
-      "BANK_ACCOUNT": 2,
+      "BANK_ACCOUNT": 3,
       "CHILD_NAME_AGE": 2,
       "GEO_FINE": 2
     },
-    "highRiskHits": 8
+    "highRiskHits": 9
   },
   "findings": [
     {
@@ -421,6 +421,41 @@
         "ADDRESS_STREET",
         "DOB",
         "PLATE_ID"
+      ],
+      "threshold": 2
+    },
+    {
+      "file": "docs/privacy/index.md",
+      "category": "CONTACT_EMAIL",
+      "action": "REDACT",
+      "sample": "user@e…#7b630e0c"
+    },
+    {
+      "file": "docs/privacy/index.md",
+      "category": "CONTACT_PHONE",
+      "action": "REDACT",
+      "sample": "628123…#587ff94a"
+    },
+    {
+      "file": "docs/privacy/index.md",
+      "category": "ADDRESS_STREET",
+      "action": "MASK",
+      "sample": "Jl. Me…#e31efcf9"
+    },
+    {
+      "file": "docs/privacy/index.md",
+      "category": "BANK_ACCOUNT",
+      "action": "BLOCK",
+      "sample": "rek 12…#0b938adf"
+    },
+    {
+      "file": "docs/privacy/index.md",
+      "code": "MULTI_CATEGORY_ESCALATION",
+      "categories": [
+        "CONTACT_EMAIL",
+        "CONTACT_PHONE",
+        "ADDRESS_STREET",
+        "BANK_ACCOUNT"
       ],
       "threshold": 2
     },
