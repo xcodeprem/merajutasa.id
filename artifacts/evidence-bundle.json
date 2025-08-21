@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-21T19:09:37.905Z",
+  "generated_utc": "2025-08-21T20:15:46.426Z",
   "evidence_phase": "1.5",
   "artifacts": [
     {
@@ -41,9 +41,9 @@
       "path": "artifacts/hype-lint.json",
       "exists": true,
       "size_bytes": 5775,
-      "sha256": "9b7200c804032681c056447c148599638038bc10221e5e1107d0f47c3d39e651",
-      "sha256_short": "9b7200c804032681",
-      "display_hash_prefix": "9b7200c804032681",
+      "sha256": "a7633a4fc090d50c04dafbe921669bc82df30005a4fbc31fe7034e6b42e025c9",
+      "sha256_short": "a7633a4fc090d50c",
+      "display_hash_prefix": "a7633a4fc090d50c",
       "schema_ref": "hype-lint-v1.json",
       "category": "language"
     },
@@ -118,9 +118,9 @@
       "path": "artifacts/evidence-collision-test.json",
       "exists": true,
       "size_bytes": 163,
-      "sha256": "f28de52f513515516cdb626d6c3ad34d96fa8c8558f2a613353bad950ee36dd2",
-      "sha256_short": "f28de52f51351551",
-      "display_hash_prefix": "f28de52f51351551",
+      "sha256": "548f30461eb956c0ade3a5a373b6e4f9ba364bafa29e14506240142567a509b5",
+      "sha256_short": "548f30461eb956c0",
+      "display_hash_prefix": "548f30461eb956c0",
       "schema_ref": "evidence-collision-test-v1.json",
       "category": "governance"
     },
@@ -140,7 +140,7 @@
     "total": 12,
     "missing": 0,
     "with_schema": 11,
-    "bundle_hash": "685871021a472edbda6345593b3a884a2411e2dfff6a00fef9ecb333372c08f1"
+    "bundle_hash": "bfc55948204ce52eddbbcb51cb70bc7de6913b11ce731c6d1c59c729b4a40cf0"
   },
   "integrity": {
     "hash_algorithm": "SHA256",

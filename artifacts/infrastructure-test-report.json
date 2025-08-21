@@ -1,11 +1,11 @@
 {
-  "timestamp": "2025-08-21T19:31:03.521Z",
+  "timestamp": "2025-08-21T20:18:29.563Z",
   "summary": {
     "total": 7,
     "passed": 7,
     "failed": 0,
     "success_rate": 100,
-    "total_duration": 15
+    "total_duration": 17
   },
   "results": [
     {
@@ -16,7 +16,7 @@
     {
       "name": "Docker Build Scripts",
       "status": "PASSED",
-      "duration": 7
+      "duration": 6
     },
     {
       "name": "Docker Compose Files",
@@ -36,7 +36,7 @@
     {
       "name": "Terraform Configuration",
       "status": "PASSED",
-      "duration": 0
+      "duration": 1
     },
     {
       "name": "NPM Scripts",

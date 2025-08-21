@@ -24,16 +24,29 @@ The component registry (`config/component-registry.json`) uses a simple format:
 
 ```json
 {
-  "service-name": { 
-    "dependsOn": ["dependency1", "dependency2"] 
-  }
+  "version": "1.0.0",
+  "description": "Component registry description",
+  "components": [
+    {
+      "id": "service-name",
+      "name": "Human Readable Name",
+      "type": "service|database|cache",
+      "category": "core|infrastructure|utility", 
+      "dependsOn": ["dependency1", "dependency2"],
+      "healthEndpoint": "/service/health",
+      "description": "Service description"
+    }
+  ]
 }
 ```
 
 Where:
 
-- `service-name`: Unique identifier for the component
+- `id`: Unique identifier for the component
 - `dependsOn`: Array of component IDs this service depends on (can be empty)
+- `dependencies`: Legacy field name (also supported for backward compatibility)
+
+**Field Compatibility:** The dependency checker supports both `dependsOn` (preferred) and `dependencies` (legacy) field names for maximum compatibility.
 
 ## Generated Artifacts
 

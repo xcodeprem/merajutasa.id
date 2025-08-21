@@ -56,7 +56,7 @@ class ComponentDependencyChecker {
 
   async buildDependencyGraph() {
     for (const [id, component] of this.components) {
-      const dependencies = component.dependencies || [];
+      const dependencies = component.dependsOn || component.dependencies || [];
       this.dependencyGraph.set(id, new Set(dependencies));
       
       // Validate that all dependencies exist in registry
