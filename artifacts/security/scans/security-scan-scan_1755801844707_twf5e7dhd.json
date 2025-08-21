@@ -1,0 +1,38 @@
+{
+  "scan_id": "scan_1755801844707_twf5e7dhd",
+  "scan_type": "full",
+  "started_at": "2025-08-21T18:44:04.707Z",
+  "vulnerabilities": [
+    {
+      "type": "dependency_vulnerability",
+      "severity": "medium",
+      "package": "express-rate-limit",
+      "version": "^8.0.1",
+      "description": "Vulnerability found in express-rate-limit@^8.0.1",
+      "cvss_score": "7.6",
+      "cve_id": "CVE-2024-7776"
+    },
+    {
+      "type": "dependency_vulnerability",
+      "severity": "high",
+      "package": "helmet",
+      "version": "^8.1.0",
+      "description": "Vulnerability found in helmet@^8.1.0",
+      "cvss_score": "8.3",
+      "cve_id": "CVE-2024-5270"
+    },
+    {
+      "type": "dependency_vulnerability",
+      "severity": "medium",
+      "package": "typescript",
+      "version": "^5.9.2",
+      "description": "Vulnerability found in typescript@^5.9.2",
+      "cvss_score": "4.1",
+      "cve_id": "CVE-2024-9342"
+    }
+  ],
+  "threats": [],
+  "configuration_issues": [],
+  "overall_score": 80,
+  "recommendations": []
+}
