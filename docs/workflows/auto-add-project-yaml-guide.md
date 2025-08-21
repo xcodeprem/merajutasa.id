@@ -33,6 +33,7 @@ This script was inspired by enterprise practices from Netflix, Google, Microsoft
 ### Automatic Triggers
 
 The workflow automatically runs when:
+
 - ✅ Issues are opened, labeled, reopened, edited, or closed
 - ✅ Pull Requests are opened, labeled, reopened, edited, closed, or synchronized
 - ✅ Comments containing "+project" are added to issues/PRs
@@ -41,6 +42,7 @@ The workflow automatically runs when:
 ### Manual Triggers
 
 IT Leaders can manually trigger the workflow with options:
+
 - **Issue/PR Number**: Specify a specific item to process
 - **Project Owner**: Override the default project owner
 - **Project Title**: Target a specific project
@@ -51,12 +53,14 @@ IT Leaders can manually trigger the workflow with options:
 The workflow automatically maps labels to project fields:
 
 #### Priority
+
 - `P0`, `urgent`, `critical` → **P0**
 - `P1`, `high-priority`, `high` → **P1**
 - `P2`, `medium`, `medium-priority` → **P2**
 - `P3`, `planned`, `low`, `low-priority` → **P3**
 
 #### Area
+
 - `area:security` → **Security**
 - `area:compliance` → **Compliance**
 - `area:observability` → **Observability**
@@ -66,12 +70,14 @@ The workflow automatically maps labels to project fields:
 - And many more...
 
 #### Phase
+
 - `phase:1` → **Phase 1**
 - `phase:2-week-1` → **Phase 2 W1**
 - `phase:2-week-2` → **Phase 2 W2**
 - Up to `phase:3-q4` → **Phase 3 Q4**
 
 #### Status (Smart Auto-Detection)
+
 - **Opening Issues**: Automatically set to "To Do"
 - **Opening Draft PRs**: Automatically set to "To Do"
 - **Opening Ready PRs**: Automatically set to "In Review"
@@ -80,11 +86,13 @@ The workflow automatically maps labels to project fields:
 - Manual labels: `status:todo`, `status:in-progress`, `status:in-review`, `status:blocked`, `status:done`
 
 #### Date Handling
+
 - `start:YYYY-MM-DD` → Sets **Start date**
 - `due:YYYY-MM-DD` → Sets **Target date**
 - Milestone due dates → Automatically sets **Target date**
 
 #### Estimation
+
 - `est:h:8` → Sets **Estimate** to 8 hours
 - `est:h:16` → Sets **Estimate** to 16 hours
 
@@ -118,6 +126,7 @@ The workflow automatically maps labels to project fields:
 ### Comprehensive Logging
 
 Every workflow run provides:
+
 - 📧 **Event details** (what triggered the workflow)
 - 🎯 **Item details** (issue/PR being processed)
 - 🔧 **Field updates** (what changes were made)
@@ -166,6 +175,7 @@ The workflow is designed to be enterprise-ready and requires minimal customizati
 ### 1. Label Strategy
 
 Implement a consistent labeling strategy:
+
 ```bash
 # Priority (required)
 P0, P1, P2, P3
@@ -223,6 +233,7 @@ status:in-progress, status:blocked
 ## 🎉 Success Metrics
 
 When properly configured, you should see:
+
 - ✅ **100% of Issues/PRs** automatically added to project
 - ✅ **Accurate field mapping** from labels to project fields
 - ✅ **Real-time status updates** as work progresses

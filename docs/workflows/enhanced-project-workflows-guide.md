@@ -30,6 +30,7 @@ This guide covers the enhanced **setup-project-v2.yml** and **seed-labels.yml** 
 Based on the comprehensive infrastructure analysis, the Area field now includes:
 
 **Core Infrastructure Domains:**
+
 - **Security Layer** - Security hardening, auth, rate limiting (3 components)
 - **Monitoring & Observability** - Metrics, tracing, alerting (8 components)  
 - **Performance Optimization** - Caching, compression, monitoring (7 components)
@@ -38,6 +39,7 @@ Based on the comprehensive infrastructure analysis, the Area field now includes:
 - **API Gateway & Services** - Orchestration, mesh, docs (4 components)
 
 **Advanced Infrastructure:**
+
 - **AI/ML Integration** - Anomaly detection, analytics, decision support
 - **Executive Dashboard** - KPI visualization, reporting engine
 - **Advanced Enterprise** - Federation, zero-trust, localization
@@ -46,12 +48,14 @@ Based on the comprehensive infrastructure analysis, the Area field now includes:
 #### **2. Enhanced Phase Field**
 
 **Phase 1 (Complete):**
+
 - Foundation - Security, Observability, Backup (100%)
 
 **Phase 2 (In Progress):**
-- Week 1: Docker & Kubernetes (87/100 - 71.3KB) 
+
+- Week 1: Docker & Kubernetes (87/100 - 71.3KB)
 - Week 2: Performance optimization (75/100 - 89.2KB)
-- Week 3: Advanced monitoring (100/100 - 91.1KB) 
+- Week 3: Advanced monitoring (100/100 - 91.1KB)
 - Week 4: API Gateway & Management (100/100 - 94.5KB)
 - Week 5: High Availability & Resilience (77/100 - 139.7KB)
 - Week 6: Compliance & Security Enhancement (67/100 - 145.5KB)
@@ -59,6 +63,7 @@ Based on the comprehensive infrastructure analysis, the Area field now includes:
 - Week 8: Executive Dashboard & Advanced Reporting (Planned - 150-170KB)
 
 **Phase 3 (Planned):**
+
 - Q1: Advanced Enterprise Features - Federation, Zero Trust, Localization
 - Q2: AI-Driven Governance - Intelligent Automation, Fairness AI, NLP  
 - Q3: Ecosystem Expansion - External Integration, Analytics, Community
@@ -68,6 +73,7 @@ Based on the comprehensive infrastructure analysis, the Area field now includes:
 
 **Component Field**: Track which of 37 infrastructure components the item relates to
 **Team Assignment**: Role-based assignment from development team structure:
+
 - Lead Infrastructure Architect
 - Backend Systems Developer  
 - DevOps Engineer
@@ -76,6 +82,7 @@ Based on the comprehensive infrastructure analysis, the Area field now includes:
 - Data Engineer, ML Engineer, etc.
 
 **Health Score**: Implementation health scoring:
+
 - 100/100: Complete - Production ready
 - 90-99/100: Nearly complete - Minor polish needed
 - 75-89/100: Substantial progress - On track
@@ -84,10 +91,12 @@ Based on the comprehensive infrastructure analysis, the Area field now includes:
 - 0-24/100: Minimal progress - Requires intervention
 
 **Implementation Size**: Code size categories:
+
 - Small (< 10KB), Medium (10-25KB), Large (25-50KB)
 - Very Large (50-100KB), Enterprise (100KB+), System (Multi-component)
 
 **Iteration**: Agile iteration tracking:
+
 - Sprint 1-6 (2-week iterations)
 - Epic (Multi-sprint work)
 - Maintenance, Research phases
@@ -119,6 +128,7 @@ Based on the comprehensive infrastructure analysis, the Area field now includes:
 #### **2. Infrastructure Domain Labels (15 Domains)**
 
 **Primary Domains:**
+
 - `area:security-layer` - Security hardening, auth, rate limiting (3 components)
 - `area:monitoring-observability` - Metrics, tracing, alerting (8 components)
 - `area:performance-optimization` - Caching, compression, monitoring (7 components)
@@ -127,6 +137,7 @@ Based on the comprehensive infrastructure analysis, the Area field now includes:
 - `area:api-gateway-services` - Orchestration, mesh, docs (4 components)
 
 **Advanced Domains:**
+
 - `area:ai-ml-integration` - Anomaly detection, analytics, decision support
 - `area:executive-dashboard` - KPI visualization, reporting engine
 - `area:advanced-enterprise` - Federation, zero-trust, localization
@@ -134,11 +145,13 @@ Based on the comprehensive infrastructure analysis, the Area field now includes:
 #### **3. Component-Specific Labels (37 Components)**
 
 **Security Layer:**
+
 - `component:security-hardening` - Enhanced security measures and threat detection
 - `component:authentication` - User authentication and authorization  
 - `component:rate-limiting` - API rate limiting and throttling
 
 **Monitoring & Observability:**
+
 - `component:metrics-collection` - System metrics and performance monitoring
 - `component:distributed-tracing` - Request tracing across services
 - `component:alerting-system` - Alert management and notification
@@ -146,6 +159,7 @@ Based on the comprehensive infrastructure analysis, the Area field now includes:
 - And 4 more observability components...
 
 **Performance Optimization:**
+
 - `component:caching-layer` - Multi-level caching strategy
 - `component:load-balancing` - Traffic distribution optimization
 - `component:database-optimization` - Query and index optimization
@@ -154,6 +168,7 @@ Based on the comprehensive infrastructure analysis, the Area field now includes:
 #### **4. Team Assignment Labels**
 
 **Core Infrastructure Team:**
+
 - `team:lead-architect` - Lead Infrastructure Architect
 - `team:backend-dev` - Backend Systems Developer
 - `team:devops` - DevOps Engineer  
@@ -161,11 +176,13 @@ Based on the comprehensive infrastructure analysis, the Area field now includes:
 - `team:qa` - Quality Assurance Engineer
 
 **Frontend & Experience Team:**
+
 - `team:frontend-lead` - Frontend Lead
 - `team:ux-designer` - UX/UI Designer
 - `team:accessibility` - Accessibility Specialist
 
 **Data & Analytics Team:**
+
 - `team:data-engineer` - Data Engineer
 - `team:ml-engineer` - ML Engineer
 - `team:bi-engineer` - Business Intelligence Engineer
@@ -211,6 +228,7 @@ Based on the comprehensive infrastructure analysis, the Area field now includes:
 ```
 
 This will create a project with:
+
 - 15 infrastructure domain options in Area field
 - Detailed Phase tracking with implementation scores
 - 37 component options for precise tracking
@@ -226,6 +244,7 @@ This will create a project with:
 ```
 
 This will create:
+
 - 15 infrastructure domain labels with descriptions
 - 37 component-specific labels for precise categorization
 - Team assignment labels for all development roles
@@ -236,6 +255,7 @@ This will create:
 ### Example Issue/PR Labeling
 
 **For a Security Hardening Component:**
+
 ```
 Labels:
 - P1 (HIGH PRIORITY)
@@ -249,6 +269,7 @@ Labels:
 ```
 
 **For AI/ML Integration Work:**
+
 ```
 Labels:
 - P2 (MEDIUM PRIORITY)
@@ -270,6 +291,7 @@ The enhanced labeling system works seamlessly with the auto-add-project.yaml wor
 ### Automatic Field Mapping
 
 **Labels → Project Fields:**
+
 - `area:*` labels → Area field
 - `component:*` labels → Component field  
 - `team:*` labels → Team Assignment field
@@ -280,6 +302,7 @@ The enhanced labeling system works seamlessly with the auto-add-project.yaml wor
 ### Smart Status Detection
 
 **PR States → Status Field:**
+
 - Draft PRs → "To Do"
 - Ready PRs → "In Review"  
 - Merged PRs → "Done"
@@ -288,6 +311,7 @@ The enhanced labeling system works seamlessly with the auto-add-project.yaml wor
 ### Enhanced Logging
 
 The auto-add-project.yaml workflow provides comprehensive logging:
+
 - Event details and processing status
 - Field updates and mapping results
 - IT Leader Summary section with key metrics
@@ -300,6 +324,7 @@ The auto-add-project.yaml workflow provides comprehensive logging:
 ### 1. Label Consistency
 
 **Use structured naming:**
+
 - `area:domain-name` for infrastructure domains
 - `component:component-name` for specific components
 - `team:role-name` for team assignments
@@ -308,11 +333,13 @@ The auto-add-project.yaml workflow provides comprehensive logging:
 ### 2. Project Field Usage
 
 **Required Fields:**
+
 - Area, Phase, Priority, Status
 - Team Assignment for all assigned work
 - Health Score for implementation tracking
 
 **Optional But Recommended:**
+
 - Component for precise categorization
 - Implementation Size for effort planning
 - Iteration for agile tracking
@@ -320,6 +347,7 @@ The auto-add-project.yaml workflow provides comprehensive logging:
 ### 3. Health Score Management
 
 **Update Regularly:**
+
 - Review health scores weekly
 - Update based on actual progress
 - Use for risk identification and resource allocation
@@ -327,6 +355,7 @@ The auto-add-project.yaml workflow provides comprehensive logging:
 ### 4. Team Assignment Strategy
 
 **Assign Based On:**
+
 - Primary skill requirements
 - Component expertise
 - Workload balancing
@@ -339,16 +368,19 @@ The auto-add-project.yaml workflow provides comprehensive logging:
 ### Common Issues
 
 **1. Too Many Labels**
+
 - Use label filters in project views
 - Create custom views for specific domains
 - Archive obsolete labels regularly
 
 **2. Field Mapping Conflicts**
+
 - Ensure consistent label naming
 - Review auto-add-project.yaml mapping logic
 - Use manual field updates when needed
 
 **3. Performance Impact**
+
 - Monitor project loading times
 - Consider archiving completed items
 - Use pagination in large projects
@@ -356,6 +388,7 @@ The auto-add-project.yaml workflow provides comprehensive logging:
 ### Getting Help
 
 **Resources:**
+
 - Check workflow logs in Actions tab
 - Review project field mappings in artifacts
 - Consult team leads for component assignments
@@ -368,6 +401,7 @@ The auto-add-project.yaml workflow provides comprehensive logging:
 The enhanced setup-project-v2.yml and seed-labels.yml workflows provide enterprise-grade project management capabilities that align with the sophisticated infrastructure of MerajutASA.id. With 15 infrastructure domains, 37 component labels, and comprehensive tracking fields, IT Leaders can effectively manage complex enterprise projects with full visibility and control.
 
 **Key Benefits:**
+
 - **Complete Coverage**: All 15 infrastructure domains and 37 components
 - **Role-Based Assignment**: Team structure aligned with development capabilities  
 - **Health Tracking**: Implementation scoring for risk management
