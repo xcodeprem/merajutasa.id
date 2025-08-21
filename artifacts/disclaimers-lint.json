@@ -3,20 +3,20 @@
   "status": "PASS",
   "summary": {
     "errors": 0,
-    "warnings": 9,
+    "warnings": 10,
     "metrics": {
       "missingIds": 0,
       "drift": 0,
       "shadow": 0,
       "bannedNear": 0,
-      "duplicates": 2,
+      "duplicates": 3,
       "scope": 7,
       "locale": 0
     },
     "versionMismatch": false,
     "computed_hash": "55ed6a0cc3b99a73296dfd0a88470f33510436b54e5bbd90a6cb2fa1c8364158",
     "ruleCounts": {
-      "DISC-DUPL-005": 2,
+      "DISC-DUPL-005": 3,
       "DISC-SCOPE-006": 7
     },
     "presence_enforcement": true
@@ -27,13 +27,20 @@
       "code": "DISC-DUPL-005",
       "page": "landing",
       "id": "D1",
-      "count": 6,
+      "count": 7,
       "severity": "WARNING"
     },
     {
       "code": "DISC-DUPL-005",
       "page": "landing",
       "id": "D7",
+      "count": 4,
+      "severity": "WARNING"
+    },
+    {
+      "code": "DISC-DUPL-005",
+      "page": "landing",
+      "id": "D2",
       "count": 4,
       "severity": "WARNING"
     },

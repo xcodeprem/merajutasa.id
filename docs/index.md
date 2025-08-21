@@ -86,6 +86,7 @@ Event tracking, schema definitions, and analytics framework.
 
 ### Schema & Standards
 
+- **[Analytics & Event Schema Index](analytics/index.md)** - Comprehensive event schema index & validation overview
 - **[Event Schema Canonical v1.0](analytics/event-schema-canonical-v1.md)** - Event fairness & envelope specification
 - **[Dashboard Widgets](analytics/dashboard-widgets-hysteresis-initial.md)** - Initial dashboard component specs
 - **[Media Digest](analytics/media-digest.md)** - Media analytics framework
