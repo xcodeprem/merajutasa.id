@@ -1,17 +1,9 @@
 {
   "version": 1,
-  "generated_utc": "2025-08-19T23:34:01.227Z",
-  "changed_count": 5,
-  "governed_impacted": [
-    "README.md"
-  ],
+  "generated_utc": "2025-08-21T18:23:49.638Z",
+  "changed_count": 46,
+  "governed_impacted": [],
   "dec_files_changed": [],
   "violations": [],
-  "evidence": [
-    {
-      "path": "README.md",
-      "referenced_in": [],
-      "authorizedByManifest": true
-    }
-  ]
+  "evidence": []
 }

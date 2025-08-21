@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "generated_utc": "2025-08-19T23:33:58.821Z",
+  "generated_utc": "2025-08-21T18:23:48.598Z",
   "principles": [
     {
       "principle": "GP1",
-      "match_count": 1232,
+      "match_count": 1432,
       "domains": [
         "other",
         "privacy",
@@ -23,7 +23,7 @@
           "line": 18,
           "snippet": "- **Fairness & Integrity**: Cryptographic integrity with hash chain verification",
           "pattern": "hash(ing)?",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -31,7 +31,7 @@
           "line": 28,
           "snippet": "- **Compliance**: GDPR/SOX/ISO27001/PCI automation with privacy rights management",
           "pattern": "privacy",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -39,7 +39,7 @@
           "line": 82,
           "snippet": "npm run spec-hash:verify     # Hash integrity verification",
           "pattern": "hash(ing)?",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -47,7 +47,7 @@
           "line": 120,
           "snippet": "npm run privacy:rights              # Privacy rights management",
           "pattern": "privacy",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -55,7 +55,7 @@
           "line": 209,
           "snippet": "- **🔒 Privacy Rights Management**: Multi-jurisdiction data rights automation (GDPR/CCPA/PIPEDA/LGPD)",
           "pattern": "privacy",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -63,7 +63,7 @@
           "line": 214,
           "snippet": "- **⛓️ Chain Service** (Port 4602) - Immutable hash chain integrity management",
           "pattern": "hash(ing)?",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -71,7 +71,7 @@
           "line": 244,
           "snippet": "- **Spec Hash**: PASS",
           "pattern": "hash(ing)?",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -79,7 +79,7 @@
           "line": 334,
           "snippet": "- **Privacy rights automation**: 30-day response for GDPR/CCPA/PIPEDA/LGPD requests",
           "pattern": "privacy",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -87,7 +87,7 @@
           "line": 367,
           "snippet": "- **GP1-GP10**: Comprehensive governance principles covering privacy, transparency, fairness, security, and accountability",
           "pattern": "privacy",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -95,7 +95,7 @@
           "line": 370,
           "snippet": "- **Cryptographic Integrity**: Hash chain verification with immutable audit trails",
           "pattern": "hash(ing)?",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -103,7 +103,7 @@
           "line": 383,
           "snippet": "npm run spec-hash:verify      # Content hash verification",
           "pattern": "hash(ing)?",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -111,7 +111,7 @@
           "line": 397,
           "snippet": "- **[Integrity Verification](docs/integrity/)** - Hash verification and evidence requirements",
           "pattern": "hash(ing)?",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         }
       ],
@@ -119,7 +119,7 @@
     },
     {
       "principle": "GP2",
-      "match_count": 10,
+      "match_count": 12,
       "domains": [
         "other",
         "privacy",
@@ -128,6 +128,14 @@
       "inferredImpact": true,
       "confidence": 0.9,
       "evidence_sample": [
+        {
+          "file": "docs/index.md",
+          "line": 153,
+          "snippet": "- **[Agent Guardrails v1.0](onboarding/agent-guardrails-v1.md)** - Safety & constraint guidelines",
+          "pattern": "safety",
+          "changed": false,
+          "domain": "other"
+        },
         {
           "file": "docs/strategic-analysis/STRATEGIC-IMPLEMENTATION-ANALYSIS.md",
           "line": 336,
@@ -165,6 +173,14 @@
           "line": 911,
           "snippet": "- ✅ **Rate limiting** preventing abuse and DoS",
           "pattern": "abuse",
+          "changed": false,
+          "domain": "other"
+        },
+        {
+          "file": "docs/operations/scripts-governance.md",
+          "line": 213,
+          "snippet": "- **Safety**: Read-only operations preferred for frequent use",
+          "pattern": "safety",
           "changed": false,
           "domain": "other"
         },
@@ -213,7 +229,7 @@
     },
     {
       "principle": "GP3",
-      "match_count": 194,
+      "match_count": 219,
       "domains": [
         "other",
         "privacy",
@@ -232,7 +248,7 @@
           "line": 19,
           "snippet": "- **Transparency**: Open methodology with public decision processes (DEC chain)",
           "pattern": "transparenc",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -240,7 +256,7 @@
           "line": 332,
           "snippet": "- **Automated audit trails**: 7+ year retention with cryptographic integrity",
           "pattern": "audit trail",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -248,7 +264,7 @@
           "line": 363,
           "snippet": "MerajutASA.id's governance system ensures fairness, transparency, and integrity through cryptographic verification and open decision processes.",
           "pattern": "transparenc",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -256,7 +272,7 @@
           "line": 367,
           "snippet": "- **GP1-GP10**: Comprehensive governance principles covering privacy, transparency, fairness, security, and accountability",
           "pattern": "transparenc",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -264,7 +280,7 @@
           "line": 370,
           "snippet": "- **Cryptographic Integrity**: Hash chain verification with immutable audit trails",
           "pattern": "audit trail",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -272,7 +288,7 @@
           "line": 425,
           "snippet": "## 🌐 GitHub Pages & Transparency",
           "pattern": "transparenc",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -280,7 +296,7 @@
           "line": 427,
           "snippet": "The platform provides comprehensive transparency through GitHub Pages with real-time dashboard snapshots and governance artifacts.",
           "pattern": "transparenc",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -288,7 +304,7 @@
           "line": 467,
           "snippet": "- **Compliance**: Automated regulatory reporting and audit trail generation",
           "pattern": "audit trail",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -296,7 +312,7 @@
           "line": 596,
           "snippet": "| Trace Index                           | docs/governance/trace/archive-trace-index-v1.md                        | Peta archive → canonical            |",
           "pattern": "trace",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -304,7 +320,7 @@
           "line": 610,
           "snippet": "- Trace index mendokumentasikan mapping parameter & narasi.",
           "pattern": "trace",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -312,7 +328,7 @@
           "line": 737,
           "snippet": "Tidak ada penghapusan retrospektif dokumen historis (archive) – hanya append trace / DEC baru. Pelanggaran = investigasi integritas.",
           "pattern": "trace",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -320,7 +336,7 @@
           "line": 749,
           "snippet": "Referensi publik: Lihat Methodology Snippet (H0) untuk ringkasan non‑ranking dan privasi → docs/transparency/methodology-snippet-h0.md",
           "pattern": "transparenc",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         }
       ],
@@ -328,7 +344,7 @@
     },
     {
       "principle": "GP4",
-      "match_count": 853,
+      "match_count": 1018,
       "domains": [
         "other",
         "privacy",
@@ -347,7 +363,7 @@
           "line": 8,
           "snippet": "**Enterprise-grade skill credentialing platform with comprehensive governance, high availability, security, and compliance infrastructure - featuring 648KB+ of production-ready code across 35+ enterpr",
           "pattern": "governance",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -355,7 +371,7 @@
           "line": 14,
           "snippet": "MerajutASA.id is a comprehensive enterprise platform that combines governance excellence with sophisticated infrastructure capabilities:",
           "pattern": "governance",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -363,7 +379,7 @@
           "line": 16,
           "snippet": "### 🏛️ Governance Foundation",
           "pattern": "governance",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -371,7 +387,7 @@
           "line": 49,
           "snippet": "# Verify governance integrity",
           "pattern": "governance",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -379,7 +395,7 @@
           "line": 50,
           "snippet": "npm run governance:verify",
           "pattern": "governance",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -387,7 +403,7 @@
           "line": 62,
           "snippet": "# Option 1: Core governance services",
           "pattern": "governance",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -395,7 +411,7 @@
           "line": 77,
           "snippet": "### Core Governance Commands",
           "pattern": "governance",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -403,7 +419,7 @@
           "line": 80,
           "snippet": "# Governance & Integrity",
           "pattern": "governance",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -411,7 +427,7 @@
           "line": 81,
           "snippet": "npm run governance:verify     # Complete governance check",
           "pattern": "governance",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -419,7 +435,7 @@
           "line": 86,
           "snippet": "npm run test:governance      # Core governance tests",
           "pattern": "governance",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -427,7 +443,7 @@
           "line": 151,
           "snippet": "### Governance & Fairness",
           "pattern": "governance",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -435,7 +451,7 @@
           "line": 153,
           "snippet": "- **[Governance Overview](docs/governance/)** - Decision processes and policies",
           "pattern": "governance",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         }
       ],
@@ -443,7 +459,7 @@
     },
     {
       "principle": "GP5",
-      "match_count": 450,
+      "match_count": 511,
       "domains": [
         "other",
         "privacy",
@@ -462,7 +478,7 @@
           "line": 27,
           "snippet": "- **Observability**: Advanced monitoring with distributed tracing and anomaly detection",
           "pattern": "anomaly",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -470,7 +486,7 @@
           "line": 186,
           "snippet": "- **🚨 Intelligent Alerting**: Context-aware anomaly detection",
           "pattern": "anomaly",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -478,7 +494,7 @@
           "line": 333,
           "snippet": "- **Advanced threat detection**: Behavioral anomaly analysis and automated response",
           "pattern": "anomaly",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -486,7 +502,7 @@
           "line": 350,
           "snippet": "- **Anomaly detection**: Statistical and business logic monitoring",
           "pattern": "anomaly",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -494,7 +510,7 @@
           "line": 369,
           "snippet": "- **Hysteresis-Based Fairness**: Stable \"under-served\" detection using Option F parameters",
           "pattern": "hysteresis",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -502,7 +518,7 @@
           "line": 390,
           "snippet": "npm run equity:anomaly        # Detect equity anomalies",
           "pattern": "anomaly",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -510,7 +526,7 @@
           "line": 396,
           "snippet": "- **[Fairness Methodology](docs/fairness/)** - Equity calculation and hysteresis",
           "pattern": "hysteresis",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -518,7 +534,7 @@
           "line": 482,
           "snippet": "Menyediakan kerangka (scaffold) governance, fairness, dan integrity untuk sistem penandaan “under‑served” berbasis hysteresis (Option F) yang:",
           "pattern": "hysteresis",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -526,7 +542,7 @@
           "line": 484,
           "snippet": "1. Stabil (menghindari volatilitas metrik lewat hysteresis thresholds).",
           "pattern": "hysteresis",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -534,7 +550,7 @@
           "line": 495,
           "snippet": "| DEC-20250812-02     | Hysteresis Adoption Option F      | Mengunci parameter fairness (T_enter_major=0.50, T_enter_standard=0.60, consecutive_required_standard=2, T_exit=0.65, cooldown=1 snapshot, s",
           "pattern": "anomaly",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -542,7 +558,7 @@
           "line": 495,
           "snippet": "| DEC-20250812-02     | Hysteresis Adoption Option F      | Mengunci parameter fairness (T_enter_major=0.50, T_enter_standard=0.60, consecutive_required_standard=2, T_exit=0.65, cooldown=1 snapshot, s",
           "pattern": "cooldown",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -550,7 +566,7 @@
           "line": 495,
           "snippet": "| DEC-20250812-02     | Hysteresis Adoption Option F      | Mengunci parameter fairness (T_enter_major=0.50, T_enter_standard=0.60, consecutive_required_standard=2, T_exit=0.65, cooldown=1 snapshot, s",
           "pattern": "stalled",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         }
       ],
@@ -558,7 +574,7 @@
     },
     {
       "principle": "GP6",
-      "match_count": 59,
+      "match_count": 63,
       "domains": [
         "other",
         "privacy",
@@ -566,6 +582,7 @@
         "onboarding",
         "integrity",
         "governance",
+        "fairness",
         "analytics"
       ],
       "inferredImpact": true,
@@ -576,7 +593,7 @@
           "line": 20,
           "snippet": "- **Non-Ranking**: Equity indicators without competitive scoring",
           "pattern": "non-?ranking",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -584,7 +601,7 @@
           "line": 368,
           "snippet": "- **Non-Ranking System**: Equity indicators without competitive scoring or performance ranking",
           "pattern": "non-?ranking",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -592,7 +609,7 @@
           "line": 544,
           "snippet": "| D1  | Non-Ranking               | Menegaskan sistem tanpa peringkat kompetitif <!-- hype-lint-ignore-line --> |",
           "pattern": "non-?ranking",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -672,7 +689,7 @@
     },
     {
       "principle": "GP7",
-      "match_count": 239,
+      "match_count": 263,
       "domains": [
         "other",
         "principles",
@@ -689,7 +706,7 @@
           "line": 530,
           "snippet": "| GP6  | Anti Misuse / Anti-Hype (Non-Scoring)  |",
           "pattern": "hype",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -697,7 +714,7 @@
           "line": 544,
           "snippet": "| D1  | Non-Ranking               | Menegaskan sistem tanpa peringkat kompetitif <!-- hype-lint-ignore-line --> |",
           "pattern": "hype",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -705,7 +722,7 @@
           "line": 623,
           "snippet": "4. Hindari istilah terlarang (lihat Anti‑Hype).",
           "pattern": "hype",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -713,7 +730,7 @@
           "line": 625,
           "snippet": "Anti‑Hype (Contoh Kata Dilarang – akan lint) <!-- lint-allow-negated-context hype-lint-ignore-line -->:",
           "pattern": "hype",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -721,7 +738,7 @@
           "line": 627,
           "snippet": "- “ranking”, “peringkat”, “top”, “terbaik”, “no.1”, “paling unggul”, “skor kompetitif” <!-- lint-allow-negated-context hype-lint-ignore-line -->",
           "pattern": "hype",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -729,7 +746,7 @@
           "line": 627,
           "snippet": "- “ranking”, “peringkat”, “top”, “terbaik”, “no.1”, “paling unggul”, “skor kompetitif” <!-- lint-allow-negated-context hype-lint-ignore-line -->",
           "pattern": "terbaik",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -737,7 +754,7 @@
           "line": 627,
           "snippet": "- “ranking”, “peringkat”, “top”, “terbaik”, “no.1”, “paling unggul”, “skor kompetitif” <!-- lint-allow-negated-context hype-lint-ignore-line -->",
           "pattern": "unggul",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -745,7 +762,7 @@
           "line": 627,
           "snippet": "- “ranking”, “peringkat”, “top”, “terbaik”, “no.1”, “paling unggul”, “skor kompetitif” <!-- lint-allow-negated-context hype-lint-ignore-line -->",
           "pattern": "top\\b",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -753,7 +770,7 @@
           "line": 641,
           "snippet": "| hype lint report           | artifacts/hype-lint.json                | Yes                | Active                      |",
           "pattern": "hype",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -761,7 +778,7 @@
           "line": 679,
           "snippet": "## 13. Larangan Klaim Peringkat / Ranking <!-- data-phrase-context=\"disclaimer-explanation\" lint-allow-negated-context hype-lint-ignore-line -->",
           "pattern": "hype",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -769,7 +786,7 @@
           "line": 685,
           "snippet": "- Mengklaim “terbaik”, “top”, “juara”. <!-- hype-lint-ignore-line -->",
           "pattern": "hype",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -777,7 +794,7 @@
           "line": 685,
           "snippet": "- Mengklaim “terbaik”, “top”, “juara”. <!-- hype-lint-ignore-line -->",
           "pattern": "terbaik",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         }
       ],
@@ -785,9 +802,10 @@
     },
     {
       "principle": "GP8",
-      "match_count": 16,
+      "match_count": 17,
       "domains": [
         "other",
+        "privacy",
         "integrity"
       ],
       "inferredImpact": true,
@@ -800,6 +818,14 @@
           "pattern": "portabil",
           "changed": false,
           "domain": "other"
+        },
+        {
+          "file": "docs/privacy/index.md",
+          "line": 139,
+          "snippet": "| **Portability** | Export structured data | Semi-automated |",
+          "pattern": "portabil",
+          "changed": false,
+          "domain": "privacy"
         },
         {
           "file": "docs/phase-2/PHASE-2-WEEK-6-DELIVERY-DOCUMENTATION.md",
@@ -880,21 +906,13 @@
           "pattern": "extensib",
           "changed": false,
           "domain": "other"
-        },
-        {
-          "file": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
-          "line": 368,
-          "snippet": "##### **3.3.3 Interoperability Gaps**",
-          "pattern": "interoperab",
-          "changed": false,
-          "domain": "other"
         }
       ],
       "evidence_truncated": true
     },
     {
       "principle": "GP9",
-      "match_count": 437,
+      "match_count": 522,
       "domains": [
         "other",
         "privacy",
@@ -913,7 +931,7 @@
           "line": 18,
           "snippet": "- **Fairness & Integrity**: Cryptographic integrity with hash chain verification",
           "pattern": "fairness",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -921,7 +939,7 @@
           "line": 20,
           "snippet": "- **Non-Ranking**: Equity indicators without competitive scoring",
           "pattern": "non-?ranking",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -929,7 +947,7 @@
           "line": 94,
           "snippet": "npm run fairness:sim        # Fairness simulation",
           "pattern": "fairness",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -937,7 +955,7 @@
           "line": 151,
           "snippet": "### Governance & Fairness",
           "pattern": "fairness",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -945,7 +963,7 @@
           "line": 154,
           "snippet": "- **[Fairness Methodology](docs/fairness/)** - Equity and fairness measures",
           "pattern": "fairness",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -953,7 +971,7 @@
           "line": 217,
           "snippet": "- **⚖️ Equity Service** - Fairness calculation and under-served detection",
           "pattern": "under-?served",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -961,7 +979,7 @@
           "line": 217,
           "snippet": "- **⚖️ Equity Service** - Fairness calculation and under-served detection",
           "pattern": "fairness",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -969,7 +987,7 @@
           "line": 363,
           "snippet": "MerajutASA.id's governance system ensures fairness, transparency, and integrity through cryptographic verification and open decision processes.",
           "pattern": "fairness",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -977,7 +995,7 @@
           "line": 367,
           "snippet": "- **GP1-GP10**: Comprehensive governance principles covering privacy, transparency, fairness, security, and accountability",
           "pattern": "fairness",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -985,7 +1003,7 @@
           "line": 368,
           "snippet": "- **Non-Ranking System**: Equity indicators without competitive scoring or performance ranking",
           "pattern": "non-?ranking",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -993,7 +1011,7 @@
           "line": 369,
           "snippet": "- **Hysteresis-Based Fairness**: Stable \"under-served\" detection using Option F parameters",
           "pattern": "under-?served",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         },
         {
@@ -1001,7 +1019,7 @@
           "line": 369,
           "snippet": "- **Hysteresis-Based Fairness**: Stable \"under-served\" detection using Option F parameters",
           "pattern": "fairness",
-          "changed": true,
+          "changed": false,
           "domain": "other"
         }
       ],
@@ -1009,13 +1027,14 @@
     },
     {
       "principle": "GP10",
-      "match_count": 61,
+      "match_count": 63,
       "domains": [
         "other",
         "principles",
         "onboarding",
         "integrity",
         "governance",
+        "fairness",
         "analytics"
       ],
       "inferredImpact": true,

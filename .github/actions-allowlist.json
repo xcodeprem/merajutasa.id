@@ -79,6 +79,13 @@
         "c062e08bd532815e2082a85e87e3ef29c3e6d191"
       ],
       "description": "Third-party GitHub release action (v2.0.8)"
+    },
+    {
+      "action": "benc-uk/workflow-dispatch",
+      "allowed_shas": [
+        "25938ad20bcf54d63616cf6d7d0a3f114c0b0e4d"
+      ],
+      "description": "Third-party workflow dispatch action (v1)"
     }
   ],
   "local_actions": [

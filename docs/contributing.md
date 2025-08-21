@@ -146,7 +146,7 @@ Instead of banned terms, use:
 - **"indikator stabil fairness"** instead of "peringkat" or "ranking"
 - **"metrik objektif"** instead of "scoring" claims
 - **"pendekatan berbasis evidens"** instead of "revolutionary"
-- **"solusi yang sesuai"** instead of "terbaik"
+- **"solusi yang sesuai"** instead of "yang optimal"
 
 ### Lint Integration
 
