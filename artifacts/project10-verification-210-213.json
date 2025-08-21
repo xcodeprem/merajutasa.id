@@ -1,0 +1,50 @@
+[
+  {
+    "number": 210,
+    "title": "[Epic] Refactoring Kritis untuk Skalabilitas dan Keberlanjutan Jangka Panjang",
+    "url": "https://github.com/Andhika-Rey/merajutasa.id/issues/210",
+    "itemId": "PVTI_lAHODKwuSc4BBEBjzgd5QoI",
+    "team": "DevOps",
+    "area": "Infra/DevOps",
+    "priority": "P1",
+    "size": "XL",
+    "risk": "Medium",
+    "status": "To triage"
+  },
+  {
+    "number": 211,
+    "title": "Sub-Issue 1: [Task] Inisiatif Refaktor Arsitektur dan Dekomposisi Sistem",
+    "url": "https://github.com/Andhika-Rey/merajutasa.id/issues/211",
+    "itemId": "PVTI_lAHODKwuSc4BBEBjzgd5Qo0",
+    "team": "DevOps",
+    "area": "Infra/DevOps",
+    "priority": "P1",
+    "size": "L",
+    "risk": "Medium",
+    "status": "To triage"
+  },
+  {
+    "number": 212,
+    "title": "Sub-Issue 2: [Task] Inisiatif Rasionalisasi Developer Experience (DevEx) dan Toolchain",
+    "url": "https://github.com/Andhika-Rey/merajutasa.id/issues/212",
+    "itemId": "PVTI_lAHODKwuSc4BBEBjzgd5QpM",
+    "team": "DevOps",
+    "area": "Tooling",
+    "priority": "P2",
+    "size": "M",
+    "risk": "Low",
+    "status": "To triage"
+  },
+  {
+    "number": 213,
+    "title": "Sub-Issue 3: [Task] Inisiatif Isolasi dan Penguatan Produk Berisiko Tinggi",
+    "url": "https://github.com/Andhika-Rey/merajutasa.id/issues/213",
+    "itemId": "PVTI_lAHODKwuSc4BBEBjzgd5QxE",
+    "team": "DevOps",
+    "area": "Tooling",
+    "priority": "P2",
+    "size": "M",
+    "risk": "Low",
+    "status": "To triage"
+  }
+]

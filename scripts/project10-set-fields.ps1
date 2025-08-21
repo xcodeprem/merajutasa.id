@@ -175,6 +175,56 @@ mutation {
     $newItemId = $addRes.addProjectV2ItemById.item.id
     if ($newItemId) { $itemMap[$num] = $newItemId }
   }
+  # CLI fallback for any still-missing items
+  $stillMissing = @()
+  foreach ($n in $issues) { if (-not $itemMap.ContainsKey($n)) { $stillMissing += $n } }
+  if ($stillMissing.Count -gt 0) {
+    foreach ($n in $stillMissing) {
+      $url = "https://github.com/$owner/merajutasa.id/issues/$n"
+      try {
+        & $gh project item-add $projectNumber --owner $owner --url $url 2>&1 | Out-Null
+      } catch {
+        $msg = $_.Exception.Message
+        Write-Host ("CLI item-add failed for #${n}: ${msg}")
+      }
+    }
+    # Re-fetch items to rebuild map
+    $items = @()
+    $after = $null
+    do {
+      if ($after) { $afterPart = "after: `"$after`"" } else { $afterPart = '' }
+      $qItems = @"
+query {
+  node(id: "$projectId") {
+    ... on ProjectV2 {
+      items(first: 100 $afterPart) {
+        pageInfo { hasNextPage endCursor }
+        nodes {
+          id
+          content {
+            __typename
+            ... on Issue { number url title state }
+            ... on PullRequest { number url title state }
+          }
+        }
+      }
+    }
+  }
+}
+"@
+      $res = Invoke-GraphQL $qItems
+      $page = $res.node.items
+      $items += $page.nodes
+      $after = $page.pageInfo.endCursor
+      $more = $page.pageInfo.hasNextPage
+    } while ($more)
+    $itemMap = @{}
+    foreach ($it in $items) {
+      if ($it.content -and $it.content.__typename -eq 'Issue' -and $issues -contains [int]$it.content.number) {
+        $itemMap[[int]$it.content.number] = $it.id
+      }
+    }
+  }
 }
 
 # 3) Prepare option ID lookup
