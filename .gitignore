@@ -48,3 +48,11 @@ artifacts/volatile/
 
 # Local integrity keys (private material – never commit)
 .integrity/
+
+# Generated dependency diagrams (source .mmd files are committed, generated images are artifacts)
+*.png
+*.svg
+docs/architecture/*.png
+docs/architecture/*.svg
+build/deps/*.png
+build/deps/*.svg

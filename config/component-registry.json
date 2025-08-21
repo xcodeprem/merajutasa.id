@@ -1,0 +1,159 @@
+{
+  "version": "1.0.0",
+  "description": "Component registry for merajutasa.id infrastructure",
+  "components": [
+    {
+      "id": "api-gateway",
+      "name": "API Gateway",
+      "type": "gateway",
+      "category": "networking",
+      "healthEndpoint": "/health",
+      "dependencies": ["auth", "monitoring"],
+      "description": "Main API gateway for routing requests"
+    },
+    {
+      "id": "auth", 
+      "name": "Authentication Service",
+      "type": "service",
+      "category": "security",
+      "healthEndpoint": "/health",
+      "dependencies": ["monitoring"],
+      "description": "Authentication and authorization service"
+    },
+    {
+      "id": "monitoring",
+      "name": "Monitoring System",
+      "type": "infrastructure",
+      "category": "observability", 
+      "healthEndpoint": "/health",
+      "dependencies": [],
+      "description": "System monitoring and metrics collection"
+    },
+    {
+      "id": "observability",
+      "name": "Observability Stack",
+      "type": "infrastructure", 
+      "category": "observability",
+      "healthEndpoint": "/health",
+      "dependencies": ["monitoring"],
+      "description": "Logging, tracing and observability platform"
+    },
+    {
+      "id": "signer",
+      "name": "Signing Service",
+      "type": "service",
+      "category": "security",
+      "healthEndpoint": "/pubkey", 
+      "dependencies": ["monitoring"],
+      "description": "Digital signing service for content integrity"
+    },
+    {
+      "id": "chain",
+      "name": "Chain Service",
+      "type": "service",
+      "category": "data",
+      "healthEndpoint": "/health",
+      "dependencies": ["signer", "monitoring"],
+      "description": "Blockchain-like append-only data chain"
+    },
+    {
+      "id": "collector",
+      "name": "Event Collector",
+      "type": "service",
+      "category": "data",
+      "healthEndpoint": "/health", 
+      "dependencies": ["monitoring"],
+      "description": "Event collection and processing service"
+    },
+    {
+      "id": "reverse-proxy",
+      "name": "Reverse Proxy",
+      "type": "infrastructure",
+      "category": "networking",
+      "healthEndpoint": "/health",
+      "dependencies": ["api-gateway"],
+      "description": "Load balancing reverse proxy"
+    },
+    {
+      "id": "kubernetes",
+      "name": "Kubernetes Orchestration", 
+      "type": "platform",
+      "category": "orchestration",
+      "healthEndpoint": "/healthz",
+      "dependencies": ["docker", "monitoring"],
+      "description": "Container orchestration platform"
+    },
+    {
+      "id": "docker",
+      "name": "Docker Runtime",
+      "type": "platform",
+      "category": "containerization", 
+      "healthEndpoint": "/health",
+      "dependencies": [],
+      "description": "Container runtime environment"
+    },
+    {
+      "id": "backup",
+      "name": "Backup System",
+      "type": "infrastructure",
+      "category": "data",
+      "healthEndpoint": "/health",
+      "dependencies": ["monitoring"],
+      "description": "Data backup and recovery system"
+    },
+    {
+      "id": "security",
+      "name": "Security Suite",
+      "type": "infrastructure", 
+      "category": "security",
+      "healthEndpoint": "/health",
+      "dependencies": ["monitoring"],
+      "description": "Security scanning and hardening tools"
+    },
+    {
+      "id": "performance",
+      "name": "Performance Monitoring",
+      "type": "infrastructure",
+      "category": "observability",
+      "healthEndpoint": "/health", 
+      "dependencies": ["monitoring"],
+      "description": "Performance monitoring and optimization"
+    },
+    {
+      "id": "high-availability",
+      "name": "High Availability Suite",
+      "type": "infrastructure",
+      "category": "reliability",
+      "healthEndpoint": "/health",
+      "dependencies": ["kubernetes", "monitoring"],
+      "description": "HA configuration and failover management"
+    },
+    {
+      "id": "cicd",
+      "name": "CI/CD Pipeline", 
+      "type": "automation",
+      "category": "deployment",
+      "healthEndpoint": "/health",
+      "dependencies": ["kubernetes", "security"],
+      "description": "Continuous integration and deployment"
+    },
+    {
+      "id": "compliance",
+      "name": "Compliance Engine",
+      "type": "service",
+      "category": "governance",
+      "healthEndpoint": "/health",
+      "dependencies": ["monitoring", "security"],
+      "description": "Compliance monitoring and reporting"
+    },
+    {
+      "id": "terraform",
+      "name": "Terraform Infrastructure",
+      "type": "automation", 
+      "category": "infrastructure",
+      "healthEndpoint": "/health",
+      "dependencies": [],
+      "description": "Infrastructure as code management"
+    }
+  ]
+}

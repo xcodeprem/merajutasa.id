@@ -238,5 +238,45 @@
     "status": "ERROR",
     "step": "spec-hash-diff",
     "timestamp": "2025-08-21T17:01:15.901Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-21T17:29:19.640Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-80",
+      "git_sha": "fa16c7f4c1d8cf946dddce94d05752cb3b319f0e",
+      "run_id": "17134251769",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/spec-hash-diff.js --mode=verify",
+    "critical": true,
+    "duration_ms": 74,
+    "exit_code": 1,
+    "status": "ERROR",
+    "step": "spec-hash-diff",
+    "timestamp": "2025-08-21T17:29:19.640Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-21T17:36:19.749Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-80",
+      "git_sha": "fa16c7f4c1d8cf946dddce94d05752cb3b319f0e",
+      "run_id": "17134251769",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/spec-hash-diff.js --mode=verify",
+    "critical": true,
+    "duration_ms": 71,
+    "exit_code": 1,
+    "status": "ERROR",
+    "step": "spec-hash-diff",
+    "timestamp": "2025-08-21T17:36:19.749Z"
   }
 ]

@@ -95,6 +95,7 @@ const STEPS = [
   { name: 'spec-hash-diff-strict-or-autoseal', cmd: ['node','tools/governance-verify.js','__internal_spechash__'], critical: true },
   { name: 'param-integrity', cmd: ['node','tools/param-integrity.js'], critical: true },
   { name: 'param-lock', cmd: ['node','tools/param-lock-verify.js'], critical: true },
+  { name: 'component-dependency-check', cmd: ['node','tools/component-dependency-check.js'], critical: true },
   { name: 'fairness-unit', cmd: ['node','tools/tests/fairness-engine-unit-tests.js'], critical: true },
   { name: 'security-patterns-smoke', cmd: ['node','tools/tests/security-patterns-smoke.js'], advisory: true },
   { name: 'hype-lint', cmd: ['node','tools/hype-lint.js'], advisory: true },
