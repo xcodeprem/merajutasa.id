@@ -40,6 +40,7 @@
     "evidence:validate": "node tools/validate-evidence.js",
     "evidence:bundle": "node tools/evidence-bundle.js",
     "evidence:collision": "node tools/evidence-collision-test.js",
+    "docs:inventory": "node tools/docs-inventory.js",
     "service:signer": "node tools/services/signer.js",
     "service:chain": "node tools/services/chain.js",
     "service:collector": "node tools/services/collector.js",
