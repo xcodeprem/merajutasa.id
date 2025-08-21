@@ -255,6 +255,8 @@
     "deps:graph": "node --loader ts-node/esm scripts/deps/generate-graph.ts",
     "deps:check": "node --loader ts-node/esm scripts/deps/check-cycles.ts",
     "deps:matrix": "node tools/dependencies-matrix-generator.js",
+    "deps:svg": "node scripts/deps/export-svg.js",
+    "deps:all": "npm run deps:graph && npm run deps:matrix && npm run deps:svg",
     "compliance:assess": "node tools/compliance-assessment.js",
     "compliance:orchestrator:test": "node tools/compliance-orchestrator-test.js",
     "privacy:request:simulate": "node tools/privacy-request-simulator.js",

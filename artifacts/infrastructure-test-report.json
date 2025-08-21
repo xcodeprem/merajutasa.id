@@ -1,11 +1,11 @@
 {
-  "timestamp": "2025-08-21T20:18:29.563Z",
+  "timestamp": "2025-08-21T23:42:35.916Z",
   "summary": {
     "total": 7,
     "passed": 7,
     "failed": 0,
     "success_rate": 100,
-    "total_duration": 17
+    "total_duration": 16
   },
   "results": [
     {
@@ -41,7 +41,7 @@
     {
       "name": "NPM Scripts",
       "status": "PASSED",
-      "duration": 1
+      "duration": 0
     }
   ]
 }

@@ -1,0 +1,40 @@
+<svg width="570" height="420" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+<polygon points="0 0, 10 3.5, 0 7" fill="#666" />
+</marker>
+</defs>
+<line x1="100" y1="100" x2="250" y2="100" 
+        stroke="#d32f2f" stroke-width="3" marker-end="url(#arrowhead)" />
+<line x1="100" y1="100" x2="400" y2="100" 
+        stroke="#d32f2f" stroke-width="3" marker-end="url(#arrowhead)" />
+<line x1="250" y1="100" x2="250" y2="250" 
+        stroke="#d32f2f" stroke-width="3" marker-end="url(#arrowhead)" />
+<line x1="400" y1="100" x2="250" y2="250" 
+        stroke="#d32f2f" stroke-width="3" marker-end="url(#arrowhead)" />
+<line x1="400" y1="100" x2="100" y2="250" 
+        stroke="#1976d2" stroke-width="2" marker-end="url(#arrowhead)" />
+<circle cx="100" cy="100" r="60" 
+      fill="#e8f5e8" stroke="#666" stroke-width="2" />
+<text x="100" y="104" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#333">API Gateway</text>
+<circle cx="250" cy="100" r="60" 
+      fill="#e1f5fe" stroke="#666" stroke-width="2" />
+<text x="250" y="104" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#333">Authentication Service</text>
+<circle cx="400" cy="100" r="60" 
+      fill="#e1f5fe" stroke="#666" stroke-width="2" />
+<text x="400" y="104" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#333">Catalog Service</text>
+<circle cx="100" cy="250" r="60" 
+      fill="#e1f5fe" stroke="#666" stroke-width="2" />
+<text x="100" y="254" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#333">Search Service</text>
+<circle cx="250" cy="250" r="60" 
+      fill="#f3e5f5" stroke="#666" stroke-width="2" />
+<text x="250" y="254" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#333">Database Service</text>
+<text x="25" y="30" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#333">System Dependencies</text>
+<text x="25" y="280" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">Legend:</text>
+<circle cx="35" cy="300" r="8" fill="#e8f5e8" stroke="#666" stroke-width="1" />
+<text x="50" y="305" font-family="Arial, sans-serif" font-size="12" fill="#333">Gateway</text>
+<circle cx="35" cy="320" r="8" fill="#f3e5f5" stroke="#666" stroke-width="1" />
+<text x="50" y="325" font-family="Arial, sans-serif" font-size="12" fill="#333">Database</text>
+<circle cx="35" cy="340" r="8" fill="#e1f5fe" stroke="#666" stroke-width="1" />
+<text x="50" y="345" font-family="Arial, sans-serif" font-size="12" fill="#333">Service</text>
+</svg>
