@@ -2,7 +2,7 @@
 
 ## 🎯 Overview
 
-This automation system provides seamless integration between GitHub Pull Requests and Andhika-Rey's personal GitHub Projects boards. It automatically manages three key project boards with intelligent labeling, field mapping, and cross-project orchestration.
+This automation system provides seamless integration between GitHub Pull Requests and Andhika-Rey's personal GitHub Projects boards. It automatically manages four key project boards with intelligent labeling, field mapping, and cross-project orchestration.
 
 ## 🚀 Supported Projects
 
@@ -27,6 +27,13 @@ This automation system provides seamless integration between GitHub Pull Request
 - **Fields**: Status, Sub-Issues Progress, Priority, Size, Estimate, Iteration
 - **Workflow**: `.github/workflows/iterative-development-automation.yml`
 
+### 4. Custom Fields Projects (#10)
+
+- **URL**: <https://github.com/users/Andhika-Rey/projects/10>
+- **Purpose**: Comprehensive project tracking with full custom field support
+- **Fields**: Status, Priority, Size, Category, Notes, Estimate, Progress, Start Date, Due Date, Iteration
+- **Workflow**: `.github/workflows/custom-fields-automation.yml`
+
 ## 🎮 How to Use
 
 ### Automatic Triggers
@@ -45,9 +52,10 @@ Add these comments to any PR to trigger specific project automation:
 +project feature      # Triggers Feature Release automation
 +project retro        # Triggers Team Retrospective automation  
 +project iterative    # Triggers Iterative Development automation
++project custom       # Triggers Custom Fields Projects automation
 
 # Multi-project trigger
-+project all          # Triggers all three project automations
++project all          # Triggers all four project automations
 ```
 
 ### Workflow Dispatch
@@ -100,13 +108,32 @@ category:what-to-improve     # Areas for growth
 category:action-items        # Specific next steps
 ```
 
+### Category Labels (Custom Fields Projects)
+
+```yaml
+category:feature          # Feature development
+category:bugfix          # Bug fixes
+category:enhancement     # Enhancements/improvements
+category:documentation   # Documentation updates
+```
+
+### Progress Labels (Custom Fields Projects)
+
+```yaml
+progress:25     # 25% complete
+progress:50     # 50% complete
+progress:75     # 75% complete
+progress:100    # 100% complete
+```
+
 ### Iteration Labels
 
 ```yaml
-# Feature Release & Iterative Development
+# Feature Release & Custom Fields Projects
 iteration:current    # Current sprint/iteration
 iteration:next       # Next sprint/iteration
 iteration:backlog    # Future sprints
+iteration:future     # Long-term backlog
 
 # Iterative Development specific
 iteration:sprint-1   # Sprint 1

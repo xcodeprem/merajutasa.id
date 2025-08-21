@@ -44,7 +44,7 @@ class PersonalProjectsAutomationTest {
 
   async testProjectConfigurations() {
     await this.runTest('Project configurations exist', () => {
-      const expectedProjects = ['feature-release', 'team-retrospective', 'iterative-development'];
+      const expectedProjects = ['feature-release', 'team-retrospective', 'iterative-development', 'custom-fields'];
       
       for (const project of expectedProjects) {
         const config = getProjectConfig(project);
@@ -79,6 +79,15 @@ class PersonalProjectsAutomationTest {
       
       for (const field of expectedFields) {
         assert(config.fields[field], `Iterative Development should have ${field} field`);
+      }
+    });
+
+    await this.runTest('Custom Fields project fields', () => {
+      const config = getProjectConfig('custom-fields');
+      const expectedFields = ['Status', 'Priority', 'Size', 'Category', 'Notes', 'Estimate', 'Progress', 'Start Date', 'Due Date', 'Iteration'];
+      
+      for (const field of expectedFields) {
+        assert(config.fields[field], `Custom Fields should have ${field} field`);
       }
     });
   }
@@ -194,6 +203,14 @@ class PersonalProjectsAutomationTest {
       assert(suggested.includes('size:m'), 'Should include default size');
     });
 
+    await this.runTest('Custom Fields suggested labels', () => {
+      const mockPR = { number: 123, title: 'Test PR', draft: false, state: 'open', labels: [] };
+      const suggested = generateSuggestedLabels(mockPR, 'custom-fields');
+      
+      assert(suggested.includes('project:custom-fields'), 'Should include project label');
+      assert(suggested.includes('size:m'), 'Should include default size');
+    });
+
     await this.runTest('Skip existing labels', () => {
       const mockPR = { 
         number: 123, 
@@ -280,6 +297,12 @@ class PersonalProjectsAutomationTest {
       const content = await fs.readFile('.github/workflows/iterative-development-automation.yml', 'utf8');
       assert(content.includes('Iterative Development Project Automation'), 'Workflow should have correct title');
       assert(content.includes('iterative-development'), 'Workflow should reference correct project key');
+    });
+
+    await this.runTest('Custom Fields workflow exists', async () => {
+      const content = await fs.readFile('.github/workflows/custom-fields-automation.yml', 'utf8');
+      assert(content.includes('Custom Fields Project Automation'), 'Workflow should have correct title');
+      assert(content.includes('custom-fields'), 'Workflow should reference correct project key');
     });
 
     await this.runTest('Master automation workflow exists', async () => {

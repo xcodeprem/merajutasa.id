@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       project:
-        description: 'Target project (feature-release, team-retrospective, iterative-development, or all)'
+        description: 'Target project (feature-release, team-retrospective, iterative-development, custom-fields, or all)'
         required: false
         type: choice
         options:
@@ -16,6 +16,7 @@ on:
           - feature-release
           - team-retrospective
           - iterative-development
+          - custom-fields
         default: all
       pr_number:
         description: 'PR number to process (optional)'
@@ -66,6 +67,8 @@ jobs:
               TARGET_PROJECT="team-retrospective"
             elif [[ "$COMMENT_BODY" =~ \+project.*iterative ]]; then
               TARGET_PROJECT="iterative-development"
+            elif [[ "$COMMENT_BODY" =~ \+project.*custom ]]; then
+              TARGET_PROJECT="custom-fields"
             elif [[ "$COMMENT_BODY" =~ \+project.*all ]]; then
               TARGET_PROJECT="all"
             else
@@ -86,7 +89,7 @@ jobs:
           TARGET_PROJECT="${{ steps.context.outputs.target_project }}"
           
           if [[ "$TARGET_PROJECT" == "all" ]]; then
-            MATRIX='["feature-release", "team-retrospective", "iterative-development"]'
+            MATRIX='["feature-release", "team-retrospective", "iterative-development", "custom-fields"]'
           else
             MATRIX='["'"$TARGET_PROJECT"'"]'
           fi
@@ -134,6 +137,11 @@ jobs:
               echo "project_id=13" >> $GITHUB_OUTPUT
               echo "project_title=Iterative Development" >> $GITHUB_OUTPUT
               echo "emoji=🔄" >> $GITHUB_OUTPUT
+              ;;
+            "custom-fields")
+              echo "project_id=10" >> $GITHUB_OUTPUT
+              echo "project_title=Custom Fields Projects" >> $GITHUB_OUTPUT
+              echo "emoji=🎨" >> $GITHUB_OUTPUT
               ;;
           esac
           
@@ -218,6 +226,7 @@ jobs:
                   "feature-release") EMOJI="🚀" TITLE="Feature Release (#12)" ;;
                   "team-retrospective") EMOJI="📋" TITLE="Team Retrospective (#11)" ;;
                   "iterative-development") EMOJI="🔄" TITLE="Iterative Development (#13)" ;;
+                  "custom-fields") EMOJI="🎨" TITLE="Custom Fields Projects (#10)" ;;
                   *) EMOJI="📊" TITLE="$PROJECT_NAME" ;;
                 esac
                 
@@ -285,6 +294,9 @@ jobs:
                         break;
                       case 'iterative-development':
                         emoji = '🔄'; title = 'Iterative Development'; projectId = '#13';
+                        break;
+                      case 'custom-fields':
+                        emoji = '🎨'; title = 'Custom Fields Projects'; projectId = '#10';
                         break;
                       default:
                         emoji = '📊'; title = projectName; projectId = '';

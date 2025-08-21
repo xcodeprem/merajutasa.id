@@ -62,6 +62,29 @@ export const PROJECTS_CONFIG = {
       size: ['size:xs', 'size:s', 'size:m', 'size:l', 'size:xl'],
       iteration: ['iteration:sprint-1', 'iteration:sprint-2', 'iteration:sprint-3']
     }
+  },
+  'custom-fields': {
+    id: 10,
+    title: 'Custom Fields Projects',
+    url: 'https://github.com/users/Andhika-Rey/projects/10',
+    fields: {
+      'Status': { type: 'single_select', required: true },
+      'Priority': { type: 'single_select', required: true },
+      'Size': { type: 'single_select', required: true },
+      'Category': { type: 'single_select', required: false },
+      'Notes': { type: 'text', required: false },
+      'Estimate': { type: 'number', required: false },
+      'Progress': { type: 'number', required: false },
+      'Start Date': { type: 'date', required: false },
+      'Due Date': { type: 'date', required: false },
+      'Iteration': { type: 'single_select', required: false }
+    },
+    labels: {
+      priority: ['priority:p0', 'priority:p1', 'priority:p2', 'priority:p3'],
+      size: ['size:xs', 'size:s', 'size:m', 'size:l', 'size:xl'],
+      category: ['category:feature', 'category:bugfix', 'category:enhancement', 'category:documentation'],
+      iteration: ['iteration:backlog', 'iteration:current', 'iteration:next', 'iteration:future']
+    }
   }
 };
 
@@ -109,14 +132,25 @@ const SIZE_MAPPING = {
   'xl': 'XL'
 };
 
-// Category mapping for retrospective
+// Category mapping for retrospective and custom fields projects
 const CATEGORY_MAPPING = {
   'category:what-went-well': 'What Went Well',
   'category:what-to-improve': 'What to Improve', 
   'category:action-items': 'Action Items',
   'went-well': 'What Went Well',
   'improve': 'What to Improve',
-  'action': 'Action Items'
+  'action': 'Action Items',
+  // Custom fields project categories
+  'category:feature': 'Feature',
+  'category:bugfix': 'Bugfix',
+  'category:enhancement': 'Enhancement',
+  'category:documentation': 'Documentation',
+  'feature': 'Feature',
+  'bugfix': 'Bugfix',
+  'bug': 'Bugfix',
+  'enhancement': 'Enhancement',
+  'docs': 'Documentation',
+  'documentation': 'Documentation'
 };
 
 /**
@@ -238,6 +272,18 @@ export function mapLabelsToFields(labels, projectConfig) {
     }
     if (dueMatch && projectConfig.fields['End Date']) {
       fields['End Date'] = dueMatch[1];
+    }
+    if (dueMatch && projectConfig.fields['Due Date']) {
+      fields['Due Date'] = dueMatch[1];
+    }
+  }
+  
+  // Extract progress percentage (progress:75 = 75%)
+  for (const label of labels) {
+    const progressMatch = label.match(/^progress:(\d+)$/);
+    if (progressMatch && projectConfig.fields.Progress) {
+      fields.Progress = parseInt(progressMatch[1], 10);
+      break;
     }
   }
   
