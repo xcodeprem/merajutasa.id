@@ -55,6 +55,21 @@ Trust primitives, verification systems, and credential schemas.
 - **[Evidence Minimum Phase 1.5](integrity/evidence-minimum-phase1.5-v1.md)** - Minimum evidence requirements
 - **[Hash Excerpt Module](integrity/hash-excerpt-module.md)** - Hash metadata extraction
 
+### Evidence Pointers
+
+Automated reports and pipeline artifacts for governance & auditability:
+
+- **[Disclaimers Lint Report](../artifacts/disclaimers-lint.json)** - Disclaimers compliance validation
+- **[Evidence Schema Validation](../artifacts/evidence-schema-validation.json)** - Artifact schema validation summary  
+- **[PII Scan Report](../artifacts/pii-scan-report.json)** - Privacy scanning and PII detection results
+- **[Spec Hash Diff Report](../artifacts/spec-hash-diff.json)** - Governance integrity verification
+- **[Param Integrity Matrix](../artifacts/param-integrity-matrix.json)** - Fairness parameter validation
+- **[Principles Impact Report](../artifacts/principles-impact-report.json)** - Principles compliance assessment
+- **[Hype Lint Report](../artifacts/hype-lint.json)** - Language and terminology validation
+- **[No Silent Drift Report](../artifacts/no-silent-drift-report.json)** - System drift detection and aggregation
+- **[Fairness Simulation Report](../artifacts/fairness-sim-report.json)** - Fairness engine simulation results
+- **[Evidence Bundle](../artifacts/evidence-bundle.json)** - Comprehensive evidence artifact manifest
+
 ---
 
 ## ⚖️ Fairness & Hysteresis Systems
