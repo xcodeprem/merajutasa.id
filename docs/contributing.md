@@ -94,7 +94,7 @@ Last Updated: 2025-08-21
 ```markdown
 - **[Document Title](path/to/document.md)** - Brief description
 - See: **[Section Name](document.md#section)** for details
-- Cross-reference: [GP1-GP10 Principles](governance/principles.md)
+- Cross-reference: [GP1-GP10 Principles](governance/dec/DEC-20250812-03-principles-reference-activation.md)
 ```
 
 **Central Index Integration:**
