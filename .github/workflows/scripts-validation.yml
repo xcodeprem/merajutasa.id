@@ -1,0 +1,32 @@
+name: Scripts Validation
+on:
+  pull_request:
+    paths:
+      - "package.json"
+      - "tools/scripts-*"
+      - ".github/workflows/scripts-validation.yml"
+  push:
+    branches: [ main ]
+permissions:
+  contents: read
+jobs:
+  validate-scripts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+      - run: npm ci
+      - name: Analyze scripts inventory
+        run: npm run scripts:analyze
+      - name: Validate scripts (safe-only)
+        run: npm run scripts:validate
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: scripts-validation
+          path: |
+            artifacts/scripts/inventory.json
+            artifacts/scripts/validation.json
+            artifacts/scripts/validation-summary.json

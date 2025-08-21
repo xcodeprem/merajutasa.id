@@ -1,14 +1,66 @@
 {
   "tool": "scripts-inventory",
   "version": "1.0.0",
-  "generated_at": "2025-08-18T22:08:21.818Z",
+  "generated_at": "2025-08-21T12:10:41.559Z",
   "metadata": {
-    "total_scripts": 203,
-    "analyzed_at": "2025-08-18T22:08:21.808Z",
+    "total_scripts": 238,
+    "analyzed_at": "2025-08-21T12:10:41.546Z",
     "package_version": "0.1.2",
     "node_version": "v20.19.4"
   },
   "categories": {
+    "Uncategorized": [
+      "project:spotcheck",
+      "project:sync",
+      "project:token:diag",
+      "project:feature-release",
+      "project:team-retrospective",
+      "project:iterative-development",
+      "project:custom-fields",
+      "project:automation:all",
+      "cache:redis-start",
+      "cache:clear-all",
+      "sla:monitor-start",
+      "sla:status",
+      "tracing:start",
+      "alerting:start",
+      "logs:start",
+      "anomaly:start",
+      "dashboards:start",
+      "dashboards:open",
+      "gap:enhanced",
+      "transparency:changelog",
+      "risk:digest",
+      "agent:trend",
+      "pr:labels",
+      "feedback:smoke",
+      "feedback:monthly",
+      "governed:scan",
+      "gen:test-vectors",
+      "snapshot:artifacts",
+      "baseline:snapshot",
+      "queries:seeds",
+      "doc:verify-cli:stub",
+      "schema:validate",
+      "hero:prerender",
+      "h0:content",
+      "monitor:chain",
+      "h1:kpi",
+      "h1:guard",
+      "kpi:weekly",
+      "terms:adoption",
+      "terms:trend",
+      "changelog:presence",
+      "gate:1",
+      "gate:2",
+      "gate:3",
+      "health:check",
+      "health:core",
+      "health:week6",
+      "health:infra",
+      "health:full",
+      "startup:order"
+    ],
     "Core Development & Validation": [
       "lint",
       "lint:md",
@@ -30,6 +82,7 @@
       "test:week6-contracts",
       "test:week6-smoke",
       "test:week6",
+      "test:personal-projects",
       "test:equity-smoke",
       "test:equity-ui-smoke",
       "test:events-pipeline-hash",
@@ -73,7 +126,8 @@
       "privacy:rights",
       "privacy:request",
       "privacy:report",
-      "privacy:validate"
+      "privacy:validate",
+      "privacy:request:simulate"
     ],
     "Fairness & Equity": [
       "fairness:generate-snapshots",
@@ -98,6 +152,16 @@
       "infra:backup:create",
       "infra:backup:list",
       "infra:backup:cleanup",
+      "infra:health:all",
+      "infra:health:observability",
+      "infra:health:performance",
+      "infra:health:api-gateway",
+      "infra:health:high-availability",
+      "infra:health:compliance",
+      "infra:health:security",
+      "infra:health:monitoring",
+      "infra:health:integrations",
+      "infra:health:dependencies",
       "infra:start-all"
     ],
     "Docker & Container Management": [
@@ -126,44 +190,6 @@
       "performance:report",
       "performance:benchmark",
       "perf:budget"
-    ],
-    "Uncategorized": [
-      "cache:redis-start",
-      "cache:clear-all",
-      "sla:monitor-start",
-      "sla:status",
-      "tracing:start",
-      "alerting:start",
-      "logs:start",
-      "anomaly:start",
-      "dashboards:start",
-      "dashboards:open",
-      "gap:enhanced",
-      "transparency:changelog",
-      "risk:digest",
-      "agent:trend",
-      "pr:labels",
-      "feedback:smoke",
-      "feedback:monthly",
-      "governed:scan",
-      "gen:test-vectors",
-      "snapshot:artifacts",
-      "baseline:snapshot",
-      "queries:seeds",
-      "doc:verify-cli:stub",
-      "schema:validate",
-      "hero:prerender",
-      "h0:content",
-      "monitor:chain",
-      "h1:kpi",
-      "h1:guard",
-      "kpi:weekly",
-      "terms:adoption",
-      "terms:trend",
-      "changelog:presence",
-      "gate:1",
-      "gate:2",
-      "gate:3"
     ],
     "Observability & Metrics": [
       "observability:start",
@@ -203,7 +229,9 @@
       "audit:flush",
       "audit:report",
       "compliance:start-all",
-      "security:monitor"
+      "security:monitor",
+      "compliance:assess",
+      "compliance:orchestrator:test"
     ],
     "Week Status & Demos": [
       "week2:status",
@@ -225,7 +253,13 @@
       "phase:tracker",
       "week6:validate",
       "week6:health-check",
-      "week6:integration-test"
+      "week6:integration-test",
+      "week6:components-status",
+      "week6:full-health",
+      "week6:dependency-check",
+      "week6:smoke-test",
+      "week6:integration-flow",
+      "phase2:week6:verify"
     ],
     "Deployment & CI/CD": [
       "cicd:deploy",
@@ -254,7 +288,8 @@
     "Scripts Management": [
       "scripts:validate",
       "scripts:analyze",
-      "scripts:organize"
+      "scripts:organize",
+      "scripts:docs-metrics"
     ]
   },
   "risk_levels": {
@@ -278,6 +313,7 @@
       "test:week6-contracts",
       "test:week6-smoke",
       "test:week6",
+      "test:personal-projects",
       "test:equity-smoke",
       "test:equity-ui-smoke",
       "test:events-pipeline-hash",
@@ -287,10 +323,19 @@
       "verify:cli"
     ],
     "grey": [
-      "monitor:chain"
+      "monitor:chain",
+      "startup:order"
     ],
     "black": [],
     "unknown": [
+      "project:spotcheck",
+      "project:sync",
+      "project:token:diag",
+      "project:feature-release",
+      "project:team-retrospective",
+      "project:iterative-development",
+      "project:custom-fields",
+      "project:automation:all",
       "format",
       "governance:check",
       "governance:verify",
@@ -329,6 +374,16 @@
       "infra:backup:create",
       "infra:backup:list",
       "infra:backup:cleanup",
+      "infra:health:all",
+      "infra:health:observability",
+      "infra:health:performance",
+      "infra:health:api-gateway",
+      "infra:health:high-availability",
+      "infra:health:compliance",
+      "infra:health:security",
+      "infra:health:monitoring",
+      "infra:health:integrations",
+      "infra:health:dependencies",
       "infra:start-all",
       "docker:build-all",
       "docker:deploy-dev",
@@ -461,15 +516,36 @@
       "week6:validate",
       "week6:health-check",
       "week6:integration-test",
+      "week6:components-status",
+      "week6:full-health",
+      "week6:dependency-check",
+      "week6:smoke-test",
+      "week6:integration-flow",
       "compliance:start-all",
       "security:monitor",
       "privacy:validate",
+      "health:check",
+      "health:core",
+      "health:week6",
+      "health:infra",
+      "health:full",
       "scripts:validate",
       "scripts:analyze",
-      "scripts:organize"
+      "scripts:organize",
+      "scripts:docs-metrics",
+      "compliance:assess",
+      "compliance:orchestrator:test",
+      "privacy:request:simulate",
+      "phase2:week6:verify"
     ]
   },
   "cross_platform_issues": [
+    {
+      "script": "project:automation:all",
+      "issues": [
+        "shell_chaining_operators"
+      ]
+    },
     {
       "script": "lint",
       "issues": [
@@ -592,6 +668,18 @@
       ]
     },
     {
+      "script": "week6:dependency-check",
+      "issues": [
+        "shell_chaining_operators"
+      ]
+    },
+    {
+      "script": "week6:integration-flow",
+      "issues": [
+        "shell_chaining_operators"
+      ]
+    },
+    {
       "script": "security:monitor",
       "issues": [
         "shell_chaining_operators"
@@ -602,16 +690,144 @@
       "issues": [
         "shell_chaining_operators"
       ]
+    },
+    {
+      "script": "phase2:week6:verify",
+      "issues": [
+        "shell_chaining_operators"
+      ]
     }
   ],
   "dependency_analysis": {
     "has_cross_env": false,
     "has_npm_run_all": false,
     "has_concurrently": true,
-    "total_dependencies": 11,
+    "total_dependencies": 13,
     "total_dev_dependencies": 8
   },
   "scripts_details": {
+    "project:spotcheck": {
+      "name": "project:spotcheck",
+      "command": "node tools/github/project-spotcheck.js --owner=Andhika-Rey --repo=merajutasa.id",
+      "risk_level": "unknown",
+      "category": "Uncategorized",
+      "estimated_duration": "unknown",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [],
+      "dependencies": [
+        "nodejs"
+      ],
+      "can_run_safely": false,
+      "skip_reason": "unknown_safety_level"
+    },
+    "project:sync": {
+      "name": "project:sync",
+      "command": "node tools/github/project-sync-item.js",
+      "risk_level": "unknown",
+      "category": "Uncategorized",
+      "estimated_duration": "unknown",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [],
+      "dependencies": [
+        "nodejs"
+      ],
+      "can_run_safely": false,
+      "skip_reason": "unknown_safety_level"
+    },
+    "project:token:diag": {
+      "name": "project:token:diag",
+      "command": "node tools/github/project-token-diagnostics.js",
+      "risk_level": "unknown",
+      "category": "Uncategorized",
+      "estimated_duration": "unknown",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [],
+      "dependencies": [
+        "nodejs"
+      ],
+      "can_run_safely": false,
+      "skip_reason": "unknown_safety_level"
+    },
+    "project:feature-release": {
+      "name": "project:feature-release",
+      "command": "node tools/github/personal-projects-automation.js feature-release",
+      "risk_level": "unknown",
+      "category": "Uncategorized",
+      "estimated_duration": "unknown",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [],
+      "dependencies": [
+        "nodejs"
+      ],
+      "can_run_safely": false,
+      "skip_reason": "unknown_safety_level"
+    },
+    "project:team-retrospective": {
+      "name": "project:team-retrospective",
+      "command": "node tools/github/personal-projects-automation.js team-retrospective",
+      "risk_level": "unknown",
+      "category": "Uncategorized",
+      "estimated_duration": "unknown",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [],
+      "dependencies": [
+        "nodejs"
+      ],
+      "can_run_safely": false,
+      "skip_reason": "unknown_safety_level"
+    },
+    "project:iterative-development": {
+      "name": "project:iterative-development",
+      "command": "node tools/github/personal-projects-automation.js iterative-development",
+      "risk_level": "unknown",
+      "category": "Uncategorized",
+      "estimated_duration": "unknown",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [],
+      "dependencies": [
+        "nodejs"
+      ],
+      "can_run_safely": false,
+      "skip_reason": "unknown_safety_level"
+    },
+    "project:custom-fields": {
+      "name": "project:custom-fields",
+      "command": "node tools/github/personal-projects-automation.js custom-fields",
+      "risk_level": "unknown",
+      "category": "Uncategorized",
+      "estimated_duration": "unknown",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [],
+      "dependencies": [
+        "nodejs"
+      ],
+      "can_run_safely": false,
+      "skip_reason": "unknown_safety_level"
+    },
+    "project:automation:all": {
+      "name": "project:automation:all",
+      "command": "npm run project:feature-release && npm run project:team-retrospective && npm run project:iterative-development && npm run project:custom-fields",
+      "risk_level": "unknown",
+      "category": "Uncategorized",
+      "estimated_duration": "unknown",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [
+        "shell_chaining_operators"
+      ],
+      "dependencies": [
+        "npm"
+      ],
+      "can_run_safely": false,
+      "skip_reason": "cross_platform_issues: shell_chaining_operators"
+    },
     "lint": {
       "name": "lint",
       "command": "npm run lint:md && npm run lint:dec",
@@ -740,7 +956,7 @@
     },
     "test:infrastructure": {
       "name": "test:infrastructure",
-      "command": "node tools/tests/infrastructure-integration.test.js && node tools/tests/week6-component-imports.test.js && node tools/tests/week6-component-contracts.test.js && node tools/tests/week6-component-smoke.test.js",
+      "command": "node tools/tests/infrastructure-integration.test.js && node tools/tests/week6-component-imports.test.js && node tools/tests/week6-component-contracts.test.js && node tools/tests/week6-component-smoke.test.js && node tools/tests/infra-health-contract.test.js && npm run infra:health:all",
       "risk_level": "safe",
       "category": "Core Development & Validation",
       "estimated_duration": "short",
@@ -750,7 +966,8 @@
         "shell_chaining_operators"
       ],
       "dependencies": [
-        "nodejs"
+        "nodejs",
+        "npm"
       ],
       "can_run_safely": false,
       "skip_reason": "cross_platform_issues: shell_chaining_operators"
@@ -1060,7 +1277,7 @@
     },
     "privacy:rights": {
       "name": "privacy:rights",
-      "command": "node infrastructure/compliance/privacy-rights-management.js",
+      "command": "node infrastructure/compliance/privacy-rights-management.js --process-request",
       "risk_level": "unknown",
       "category": "Privacy & PII Tools",
       "estimated_duration": "unknown",
@@ -1329,6 +1546,156 @@
     "infra:backup:cleanup": {
       "name": "infra:backup:cleanup",
       "command": "node -e \"import('./infrastructure/backup/backup-service.js').then(m => m.default.cleanupOldBackups().then(console.log))\"",
+      "risk_level": "unknown",
+      "category": "Infrastructure Management",
+      "estimated_duration": "unknown",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [],
+      "dependencies": [
+        "nodejs"
+      ],
+      "can_run_safely": false,
+      "skip_reason": "unknown_safety_level"
+    },
+    "infra:health:all": {
+      "name": "infra:health:all",
+      "command": "node tools/infra/health-check-all.js",
+      "risk_level": "unknown",
+      "category": "Infrastructure Management",
+      "estimated_duration": "unknown",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [],
+      "dependencies": [
+        "nodejs"
+      ],
+      "can_run_safely": false,
+      "skip_reason": "unknown_safety_level"
+    },
+    "infra:health:observability": {
+      "name": "infra:health:observability",
+      "command": "node tools/infra/health-check-all.js observability",
+      "risk_level": "unknown",
+      "category": "Infrastructure Management",
+      "estimated_duration": "unknown",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [],
+      "dependencies": [
+        "nodejs"
+      ],
+      "can_run_safely": false,
+      "skip_reason": "unknown_safety_level"
+    },
+    "infra:health:performance": {
+      "name": "infra:health:performance",
+      "command": "node tools/infra/health-check-all.js performance",
+      "risk_level": "unknown",
+      "category": "Infrastructure Management",
+      "estimated_duration": "unknown",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [],
+      "dependencies": [
+        "nodejs"
+      ],
+      "can_run_safely": false,
+      "skip_reason": "unknown_safety_level"
+    },
+    "infra:health:api-gateway": {
+      "name": "infra:health:api-gateway",
+      "command": "node tools/infra/health-check-all.js api-gateway",
+      "risk_level": "unknown",
+      "category": "Infrastructure Management",
+      "estimated_duration": "unknown",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [],
+      "dependencies": [
+        "nodejs"
+      ],
+      "can_run_safely": false,
+      "skip_reason": "unknown_safety_level"
+    },
+    "infra:health:high-availability": {
+      "name": "infra:health:high-availability",
+      "command": "node tools/infra/health-check-all.js high-availability",
+      "risk_level": "unknown",
+      "category": "Infrastructure Management",
+      "estimated_duration": "unknown",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [],
+      "dependencies": [
+        "nodejs"
+      ],
+      "can_run_safely": false,
+      "skip_reason": "unknown_safety_level"
+    },
+    "infra:health:compliance": {
+      "name": "infra:health:compliance",
+      "command": "node tools/infra/health-check-all.js compliance",
+      "risk_level": "unknown",
+      "category": "Infrastructure Management",
+      "estimated_duration": "unknown",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [],
+      "dependencies": [
+        "nodejs"
+      ],
+      "can_run_safely": false,
+      "skip_reason": "unknown_safety_level"
+    },
+    "infra:health:security": {
+      "name": "infra:health:security",
+      "command": "node tools/infra/health-check-all.js security",
+      "risk_level": "unknown",
+      "category": "Infrastructure Management",
+      "estimated_duration": "unknown",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [],
+      "dependencies": [
+        "nodejs"
+      ],
+      "can_run_safely": false,
+      "skip_reason": "unknown_safety_level"
+    },
+    "infra:health:monitoring": {
+      "name": "infra:health:monitoring",
+      "command": "node tools/infra/health-check-all.js monitoring",
+      "risk_level": "unknown",
+      "category": "Infrastructure Management",
+      "estimated_duration": "unknown",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [],
+      "dependencies": [
+        "nodejs"
+      ],
+      "can_run_safely": false,
+      "skip_reason": "unknown_safety_level"
+    },
+    "infra:health:integrations": {
+      "name": "infra:health:integrations",
+      "command": "node tools/infra/health-check-all.js integrations",
+      "risk_level": "unknown",
+      "category": "Infrastructure Management",
+      "estimated_duration": "unknown",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [],
+      "dependencies": [
+        "nodejs"
+      ],
+      "can_run_safely": false,
+      "skip_reason": "unknown_safety_level"
+    },
+    "infra:health:dependencies": {
+      "name": "infra:health:dependencies",
+      "command": "node tools/infra/health-check-all.js dependencies",
       "risk_level": "unknown",
       "category": "Infrastructure Management",
       "estimated_duration": "unknown",
@@ -2143,7 +2510,7 @@
     },
     "compliance:audit": {
       "name": "compliance:audit",
-      "command": "node infrastructure/compliance/audit-system.js",
+      "command": "node infrastructure/compliance/audit-system.js --audit",
       "risk_level": "unknown",
       "category": "Compliance & Security",
       "estimated_duration": "unknown",
@@ -3043,6 +3410,21 @@
       "can_run_safely": false,
       "skip_reason": "cross_platform_issues: shell_chaining_operators"
     },
+    "test:personal-projects": {
+      "name": "test:personal-projects",
+      "command": "node tools/tests/personal-projects-automation.test.js",
+      "risk_level": "safe",
+      "category": "Core Development & Validation",
+      "estimated_duration": "short",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [],
+      "dependencies": [
+        "nodejs"
+      ],
+      "can_run_safely": true,
+      "skip_reason": null
+    },
     "test:equity-smoke": {
       "name": "test:equity-smoke",
       "command": "node tools/tests/equity-smoke.test.js",
@@ -3550,7 +3932,7 @@
     },
     "week6:validate": {
       "name": "week6:validate",
-      "command": "npm run test:week6 && npm run compliance:orchestrator",
+      "command": "npm run test:week6 && node infrastructure/compliance/compliance-orchestrator.js --once",
       "risk_level": "unknown",
       "category": "Week Status & Demos",
       "estimated_duration": "short",
@@ -3560,6 +3942,7 @@
         "shell_chaining_operators"
       ],
       "dependencies": [
+        "nodejs",
         "npm"
       ],
       "can_run_safely": false,
@@ -3586,6 +3969,85 @@
       "risk_level": "unknown",
       "category": "Week Status & Demos",
       "estimated_duration": "unknown",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [
+        "shell_chaining_operators"
+      ],
+      "dependencies": [
+        "npm"
+      ],
+      "can_run_safely": false,
+      "skip_reason": "cross_platform_issues: shell_chaining_operators"
+    },
+    "week6:components-status": {
+      "name": "week6:components-status",
+      "command": "node tools/integrated-health-check.js auditSystem complianceAutomation securityHardening privacyRights complianceOrchestrator",
+      "risk_level": "unknown",
+      "category": "Week Status & Demos",
+      "estimated_duration": "unknown",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [],
+      "dependencies": [
+        "nodejs"
+      ],
+      "can_run_safely": false,
+      "skip_reason": "unknown_safety_level"
+    },
+    "week6:full-health": {
+      "name": "week6:full-health",
+      "command": "node tools/integrated-health-check.js",
+      "risk_level": "unknown",
+      "category": "Week Status & Demos",
+      "estimated_duration": "unknown",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [],
+      "dependencies": [
+        "nodejs"
+      ],
+      "can_run_safely": false,
+      "skip_reason": "unknown_safety_level"
+    },
+    "week6:dependency-check": {
+      "name": "week6:dependency-check",
+      "command": "npm run lint:imports && npm run test:week6-imports",
+      "risk_level": "unknown",
+      "category": "Week Status & Demos",
+      "estimated_duration": "short",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [
+        "shell_chaining_operators"
+      ],
+      "dependencies": [
+        "npm"
+      ],
+      "can_run_safely": false,
+      "skip_reason": "cross_platform_issues: shell_chaining_operators"
+    },
+    "week6:smoke-test": {
+      "name": "week6:smoke-test",
+      "command": "npm run test:week6-smoke",
+      "risk_level": "unknown",
+      "category": "Week Status & Demos",
+      "estimated_duration": "short",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [],
+      "dependencies": [
+        "npm"
+      ],
+      "can_run_safely": false,
+      "skip_reason": "unknown_safety_level"
+    },
+    "week6:integration-flow": {
+      "name": "week6:integration-flow",
+      "command": "npm run week6:dependency-check && npm run week6:components-status && npm run week6:smoke-test",
+      "risk_level": "unknown",
+      "category": "Week Status & Demos",
+      "estimated_duration": "short",
       "requires_network": false,
       "requires_filesystem_write": true,
       "cross_platform_issues": [
@@ -3646,9 +4108,99 @@
       "can_run_safely": false,
       "skip_reason": "cross_platform_issues: shell_chaining_operators"
     },
+    "health:check": {
+      "name": "health:check",
+      "command": "node tools/integrated-health-check.js",
+      "risk_level": "unknown",
+      "category": "Uncategorized",
+      "estimated_duration": "unknown",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [],
+      "dependencies": [
+        "nodejs"
+      ],
+      "can_run_safely": false,
+      "skip_reason": "unknown_safety_level"
+    },
+    "health:core": {
+      "name": "health:core",
+      "command": "node tools/integrated-health-check.js signer chain collector fileSystem",
+      "risk_level": "unknown",
+      "category": "Uncategorized",
+      "estimated_duration": "unknown",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [],
+      "dependencies": [
+        "nodejs"
+      ],
+      "can_run_safely": false,
+      "skip_reason": "unknown_safety_level"
+    },
+    "health:week6": {
+      "name": "health:week6",
+      "command": "node tools/integrated-health-check.js auditSystem complianceAutomation securityHardening privacyRights complianceOrchestrator",
+      "risk_level": "unknown",
+      "category": "Uncategorized",
+      "estimated_duration": "unknown",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [],
+      "dependencies": [
+        "nodejs"
+      ],
+      "can_run_safely": false,
+      "skip_reason": "unknown_safety_level"
+    },
+    "health:infra": {
+      "name": "health:infra",
+      "command": "node tools/integrated-health-check.js haOrchestrator observability apiGateway performance",
+      "risk_level": "unknown",
+      "category": "Uncategorized",
+      "estimated_duration": "unknown",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [],
+      "dependencies": [
+        "nodejs"
+      ],
+      "can_run_safely": false,
+      "skip_reason": "unknown_safety_level"
+    },
+    "health:full": {
+      "name": "health:full",
+      "command": "npm run health:check",
+      "risk_level": "unknown",
+      "category": "Uncategorized",
+      "estimated_duration": "unknown",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [],
+      "dependencies": [
+        "npm"
+      ],
+      "can_run_safely": false,
+      "skip_reason": "unknown_safety_level"
+    },
+    "startup:order": {
+      "name": "startup:order",
+      "command": "node -e \"import('./tools/integrated-health-check.js').then(m => { const checker = new m.IntegratedHealthChecker(); const report = { system_dependencies: checker.generateDependencyGraph() }; console.log('🚀 STARTUP ORDER:'); report.system_dependencies.startup_order.forEach(p => console.log('Phase ' + p.phase + ': ' + p.components.join(', ') + ' - ' + p.description)); })\"",
+      "risk_level": "grey",
+      "category": "Uncategorized",
+      "estimated_duration": "unknown",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [],
+      "dependencies": [
+        "nodejs"
+      ],
+      "can_run_safely": false,
+      "skip_reason": "potentially_risky_operations"
+    },
     "scripts:validate": {
       "name": "scripts:validate",
-      "command": "node tools/scripts-validation.js",
+      "command": "node tools/scripts-validator.js",
       "risk_level": "unknown",
       "category": "Scripts Management",
       "estimated_duration": "unknown",
@@ -3663,7 +4215,7 @@
     },
     "scripts:analyze": {
       "name": "scripts:analyze",
-      "command": "node tools/quick-script-analysis.js",
+      "command": "node tools/scripts-inventory.js",
       "risk_level": "unknown",
       "category": "Scripts Management",
       "estimated_duration": "unknown",
@@ -3690,26 +4242,103 @@
       ],
       "can_run_safely": false,
       "skip_reason": "unknown_safety_level"
+    },
+    "scripts:docs-metrics": {
+      "name": "scripts:docs-metrics",
+      "command": "node scripts/calculate-docs-metrics.js",
+      "risk_level": "unknown",
+      "category": "Scripts Management",
+      "estimated_duration": "unknown",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [],
+      "dependencies": [
+        "nodejs"
+      ],
+      "can_run_safely": false,
+      "skip_reason": "unknown_safety_level"
+    },
+    "compliance:assess": {
+      "name": "compliance:assess",
+      "command": "node tools/compliance-assessment.js",
+      "risk_level": "unknown",
+      "category": "Compliance & Security",
+      "estimated_duration": "unknown",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [],
+      "dependencies": [
+        "nodejs"
+      ],
+      "can_run_safely": false,
+      "skip_reason": "unknown_safety_level"
+    },
+    "compliance:orchestrator:test": {
+      "name": "compliance:orchestrator:test",
+      "command": "node tools/compliance-orchestrator-test.js",
+      "risk_level": "unknown",
+      "category": "Compliance & Security",
+      "estimated_duration": "short",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [],
+      "dependencies": [
+        "nodejs"
+      ],
+      "can_run_safely": false,
+      "skip_reason": "unknown_safety_level"
+    },
+    "privacy:request:simulate": {
+      "name": "privacy:request:simulate",
+      "command": "node tools/privacy-request-simulator.js",
+      "risk_level": "unknown",
+      "category": "Privacy & PII Tools",
+      "estimated_duration": "unknown",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [],
+      "dependencies": [
+        "nodejs"
+      ],
+      "can_run_safely": false,
+      "skip_reason": "unknown_safety_level"
+    },
+    "phase2:week6:verify": {
+      "name": "phase2:week6:verify",
+      "command": "npm run week6:validate && npm run compliance:assess && npm run security:scan && npm run privacy:request:simulate",
+      "risk_level": "unknown",
+      "category": "Week Status & Demos",
+      "estimated_duration": "unknown",
+      "requires_network": false,
+      "requires_filesystem_write": true,
+      "cross_platform_issues": [
+        "shell_chaining_operators"
+      ],
+      "dependencies": [
+        "npm"
+      ],
+      "can_run_safely": false,
+      "skip_reason": "cross_platform_issues: shell_chaining_operators"
     }
   },
   "summary": {
-    "total_scripts": 203,
-    "safe_scripts": 26,
-    "grey_scripts": 1,
+    "total_scripts": 238,
+    "safe_scripts": 27,
+    "grey_scripts": 2,
     "black_scripts": 0,
-    "unknown_scripts": 176,
-    "safe_coverage": 0.12807881773399016,
+    "unknown_scripts": 209,
+    "safe_coverage": 0.1134453781512605,
     "categories_count": 22,
-    "cross_platform_issues": 22,
-    "can_run_safely_count": 19
+    "cross_platform_issues": 26,
+    "can_run_safely_count": 20
   },
   "_metadata": {
-    "generated_at": "2025-08-18T22:08:21.818Z",
+    "generated_at": "2025-08-21T12:10:41.559Z",
     "generator": "scripts-inventory",
     "version": "1.0",
-    "git_sha": "be9e873655edcf5e61f9eedfccc9ea4eeaf97d91",
-    "run_id": "17053500605",
+    "git_sha": "c1fb8bea61a404a56a1fd601b7797ccc72132393",
+    "run_id": "17126366273",
     "actor": "copilot-swe-agent[bot]",
-    "git_ref": "refs/heads/copilot/fix-58"
+    "git_ref": "refs/heads/copilot/fix-89"
   }
 }
