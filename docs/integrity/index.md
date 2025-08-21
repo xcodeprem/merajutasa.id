@@ -70,6 +70,7 @@ npm run test:signer-e2e        # End-to-end signer tests
 **Location:** `artifacts/test-vectors.json`
 
 Example credential hash vector:
+
 ```json
 {
   "sample": {
@@ -96,6 +97,7 @@ Example credential hash vector:
 **Full Chain:** `artifacts/chain.json`
 
 Example chain entry:
+
 ```json
 {
   "seq": 0,
@@ -110,11 +112,13 @@ Example chain entry:
 ### Canonicalization Process
 
 **Algorithm:** SHA-256 over canonical JSON
+
 - Sorted keys, UTF-8 encoding
 - LF line endings only
 - No trailing whitespace
 
 **Hash Computation Example:**
+
 ```bash
 # Generate test vectors
 node tools/generate-test-vectors.js
@@ -151,6 +155,7 @@ npm run evidence:bundle         # Generate evidence bundle
 ```
 
 **Key Artifacts:**
+
 - `artifacts/evidence-bundle.json` - Current evidence bundle
 - `artifacts/evidence-collision-test.json` - Collision analysis
 - `artifacts/evidence-freshness-report.json` - Freshness validation
@@ -247,16 +252,19 @@ cat artifacts/governance-verify-summary.json
 ### Troubleshooting
 
 **Hash Mismatch:**
+
 - File changed without proper governance
 - Use `spec-hash:verify` to identify violations
 - Check DEC authorization for governed files
 
 **Parameter Mismatch:**  
+
 - Configuration drift detected
 - Review `artifacts/param-integrity-matrix.json`
 - Ensure hysteresis config alignment
 
 **Service Failure:**
+
 - Check service ports (4601, 4602, 4603)
 - Verify service integration with `npm run test:services`
 - Review service logs for errors
@@ -289,6 +297,7 @@ cat artifacts/governance-verify-summary.json
 **Evidence Bundle:** `artifacts/evidence-bundle.json`
 
 **Service Status:**
+
 - Signer: Verify via `GET /pubkey`
 - Chain: Verify via `GET /health`  
 - Collector: Verify via `GET /stats`
@@ -296,4 +305,5 @@ cat artifacts/governance-verify-summary.json
 ---
 
 **Version History:**
+
 - v1.0 (2025-08-21): Initial comprehensive index creation
