@@ -1,0 +1,29 @@
+name: Integrated Infrastructure Health
+on:
+  pull_request:
+    paths:
+      - "tools/integrated-health-check.js"
+      - "infrastructure/**"
+      - "package.json"
+      - ".github/workflows/integrated-health.yml"
+  push:
+    branches: [ main ]
+permissions:
+  contents: read
+jobs:
+  infra-health:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+      - run: npm ci
+      - name: Run unified health check
+        run: npm run health:check
+      - name: Upload health report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: integrated-health-report
+          path: artifacts/integrated-health-check-report.json
