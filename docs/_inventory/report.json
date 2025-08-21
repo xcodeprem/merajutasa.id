@@ -1,52 +1,88 @@
 {
   "metadata": {
-    "generatedAt": "2025-08-21T15:21:13.015Z",
-    "totalFiles": 152,
+    "generatedAt": "2025-08-21T21:15:21.669Z",
+    "totalFiles": 168,
     "scanDirectory": "docs/",
     "version": "1.0.0"
   },
   "statistics": {
-    "fileCount": 152,
+    "fileCount": 168,
     "domainDistribution": {
-      "Other": 2,
-      "Architecture & Analysis": 3,
-      "Analytics & Events": 3,
+      "Other": 5,
+      "Architecture & Analysis": 5,
+      "Analytics & Events": 4,
       "API Documentation": 2,
       "Archive": 2,
-      "Governance": 39,
+      "Governance": 41,
       "Data & Schemas": 2,
       "Development": 2,
-      "Fairness & Equity": 5,
+      "Fairness & Equity": 7,
       "Support & FAQ": 3,
       "User Feedback": 1,
       "Analysis & Planning": 4,
       "Implementation": 1,
-      "Infrastructure": 2,
-      "Integrity & Security": 7,
+      "Infrastructure": 3,
+      "Integrity & Security": 9,
       "Legal & Compliance": 1,
       "Specifications": 3,
       "Onboarding & Setup": 12,
-      "Operations & Runbooks": 9,
+      "Operations & Runbooks": 10,
       "Project Phases": 10,
       "Planning & Strategy": 6,
       "Policies & Guidelines": 1,
       "Principles & Guidelines": 1,
-      "Privacy & Data Protection": 6,
+      "Privacy & Data Protection": 7,
       "Product Specifications": 3,
       "Public Documentation": 2,
       "Reference & Guides": 6,
       "Release Management": 1,
       "Status & Progress": 7,
-      "Testing": 1,
+      "Testing": 2,
       "Transparency & Trust": 4,
       "User Experience": 1
     },
-    "averageHeadersPerFile": "14.14",
-    "totalH1Headers": 1055,
-    "totalH2Headers": 1095,
+    "averageHeadersPerFile": "13.63",
+    "totalH1Headers": 1107,
+    "totalH2Headers": 1183,
     "gapCount": 3
   },
   "inventory": [
+    {
+      "path": "docs/adr/0005-dependency-mapping.md",
+      "domain": "Other",
+      "headers": [
+        {
+          "level": 1,
+          "text": "ADR-0005: Component Dependency Mapping"
+        },
+        {
+          "level": 2,
+          "text": "Context"
+        },
+        {
+          "level": 2,
+          "text": "Decision"
+        },
+        {
+          "level": 2,
+          "text": "Consequences"
+        },
+        {
+          "level": 2,
+          "text": "Acceptance Criteria"
+        },
+        {
+          "level": 2,
+          "text": "References"
+        }
+      ],
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
+      "firstH1": "ADR-0005: Component Dependency Mapping",
+      "firstH2": "Context",
+      "headerCount": 6,
+      "h1Count": 1,
+      "h2Count": 5
+    },
     {
       "path": "docs/agent-context-pack.md",
       "domain": "Other",
@@ -116,7 +152,7 @@
           "text": "References"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Agent Context Pack - CI Governance & Workflow Hardening",
       "firstH2": "Overview",
       "headerCount": 16,
@@ -172,7 +208,7 @@
           "text": "CONCLUSION"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Infrastructure Update Analysis: Post Phase 2 Week 6 Assessment",
       "firstH2": "EXECUTIVE SUMMARY",
       "headerCount": 11,
@@ -200,7 +236,7 @@
           "text": "Alert Thresholds"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Analytics Widgets Specification – Hysteresis (Initial Post DEC-20250812-02)",
       "firstH2": "Data Sources",
       "headerCount": 4,
@@ -360,7 +396,7 @@
           "text": "36. FINAL DECISION PROMPT"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "MerajutASA – Public Tier Event Schema Canonical Specification (v1.0)",
       "firstH2": "1. PRINCIPLES MAPPING",
       "headerCount": 37,
@@ -368,10 +404,58 @@
       "h2Count": 36
     },
     {
+      "path": "docs/analytics/index.md",
+      "domain": "Analytics & Events",
+      "headers": [
+        {
+          "level": 1,
+          "text": "Analytics & Event Schema Index"
+        },
+        {
+          "level": 2,
+          "text": "📋 Event Schema Overview"
+        },
+        {
+          "level": 2,
+          "text": "🎯 Event Taxonomy"
+        },
+        {
+          "level": 2,
+          "text": "🔍 Validation & Pipeline"
+        },
+        {
+          "level": 2,
+          "text": "📊 Validation Reports & Artifacts"
+        },
+        {
+          "level": 2,
+          "text": "🛠️ Schema Versioning & Changes"
+        },
+        {
+          "level": 2,
+          "text": "🔧 Testing & Integration"
+        },
+        {
+          "level": 2,
+          "text": "📈 Analytics & Observability"
+        },
+        {
+          "level": 2,
+          "text": "🔗 Related Documentation"
+        }
+      ],
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
+      "firstH1": "Analytics & Event Schema Index",
+      "firstH2": "📋 Event Schema Overview",
+      "headerCount": 9,
+      "h1Count": 1,
+      "h2Count": 8
+    },
+    {
       "path": "docs/analytics/media-digest.md",
       "domain": "Analytics & Events",
       "headers": [],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": null,
       "firstH2": null,
       "headerCount": 0,
@@ -411,7 +495,7 @@
           "text": "Contact"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "MerajutASA.id API Gateway",
       "firstH2": "Base URLs",
       "headerCount": 7,
@@ -495,11 +579,55 @@
           "text": "Security"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "MerajutASA API Documentation",
       "firstH2": "Core Services",
       "headerCount": 18,
       "h1Count": 11,
+      "h2Count": 7
+    },
+    {
+      "path": "docs/architecture/dependency-mapping.md",
+      "domain": "Architecture & Analysis",
+      "headers": [
+        {
+          "level": 1,
+          "text": "Dependency Mapping"
+        },
+        {
+          "level": 2,
+          "text": "Artifacts"
+        },
+        {
+          "level": 2,
+          "text": "How to Update"
+        },
+        {
+          "level": 2,
+          "text": "Policy"
+        },
+        {
+          "level": 2,
+          "text": "Component Registry Format"
+        },
+        {
+          "level": 2,
+          "text": "Generated Artifacts"
+        },
+        {
+          "level": 2,
+          "text": "Validation"
+        },
+        {
+          "level": 2,
+          "text": "Integration"
+        }
+      ],
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
+      "firstH1": "Dependency Mapping",
+      "firstH2": "Artifacts",
+      "headerCount": 8,
+      "h1Count": 1,
       "h2Count": 7
     },
     {
@@ -543,7 +671,7 @@
           "text": "Conclusion"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "MerajutASA.id Infrastructure Architecture Documentation",
       "firstH2": "Executive Summary",
       "headerCount": 9,
@@ -595,12 +723,44 @@
           "text": "Conclusion"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Lead Infrastructure Architect - Implementation Summary",
       "firstH2": "Executive Summary",
       "headerCount": 10,
       "h1Count": 1,
       "h2Count": 9
+    },
+    {
+      "path": "docs/architecture/startup-order.md",
+      "domain": "Architecture & Analysis",
+      "headers": [
+        {
+          "level": 1,
+          "text": "Startup Order"
+        },
+        {
+          "level": 2,
+          "text": "Overview"
+        },
+        {
+          "level": 2,
+          "text": "Rules"
+        },
+        {
+          "level": 2,
+          "text": "Sections"
+        },
+        {
+          "level": 2,
+          "text": "Operational Notes"
+        }
+      ],
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
+      "firstH1": "Startup Order",
+      "firstH2": "Overview",
+      "headerCount": 5,
+      "h1Count": 1,
+      "h2Count": 4
     },
     {
       "path": "docs/archive/fairness_equity-hysteresis-options-v1.md",
@@ -755,7 +915,7 @@
           "text": "36. DECISION PROMPT"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "MerajutASA – Equity Under‑Served Hysteresis Options (Decision Pack v1.0)",
       "firstH2": "1. LATAR & MASALAH",
       "headerCount": 37,
@@ -995,7 +1155,7 @@
           "text": "55. CONTINUITY SAFEGUARD"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "MerajutASA — Public Multi‑Page Experience Master Specification (v2.0 “Hero Constellation”)",
       "firstH2": "0. EXECUTIVE SYNTHESIS (WHY v2.0)",
       "headerCount": 57,
@@ -1031,12 +1191,96 @@
           "text": "Daftar Rujukan (kode sitasi)"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Rubrik Audit Kesesuaian Orientasi — Portal Panti",
       "firstH2": "Dimensi Audit (dengan landasan rujukan)",
       "headerCount": 6,
       "h1Count": 1,
       "h2Count": 5
+    },
+    {
+      "path": "docs/contributing.md",
+      "domain": "Other",
+      "headers": [
+        {
+          "level": 1,
+          "text": "MerajutASA.id Contributor Guide"
+        },
+        {
+          "level": 2,
+          "text": "🎯 Overview"
+        },
+        {
+          "level": 2,
+          "text": "📝 Documentation Contribution Guidelines"
+        },
+        {
+          "level": 1,
+          "text": "Document Title (H1 - once per document)"
+        },
+        {
+          "level": 2,
+          "text": "Major Section (H2)"
+        },
+        {
+          "level": 1,
+          "text": "Event Schema Canonical v1.0"
+        },
+        {
+          "level": 2,
+          "text": "🎯 Schema Definition"
+        },
+        {
+          "level": 2,
+          "text": "🚫 Terminology & Anti-Hype Policy"
+        },
+        {
+          "level": 1,
+          "text": "Check terminology compliance"
+        },
+        {
+          "level": 1,
+          "text": "View detailed results"
+        },
+        {
+          "level": 2,
+          "text": "🔗 Reference Integration"
+        },
+        {
+          "level": 2,
+          "text": "✅ Quality Assurance Process"
+        },
+        {
+          "level": 2,
+          "text": "🛠️ Tools & Automation"
+        },
+        {
+          "level": 1,
+          "text": "Markdown compliance"
+        },
+        {
+          "level": 1,
+          "text": "Terminology compliance"
+        },
+        {
+          "level": 1,
+          "text": "DEC document validation"
+        },
+        {
+          "level": 1,
+          "text": "Full governance verification"
+        },
+        {
+          "level": 2,
+          "text": "📚 Resources & Support"
+        }
+      ],
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
+      "firstH1": "MerajutASA.id Contributor Guide",
+      "firstH2": "🎯 Overview",
+      "headerCount": 18,
+      "h1Count": 9,
+      "h2Count": 9
     },
     {
       "path": "docs/data/README.md",
@@ -1047,7 +1291,7 @@
           "text": "Data — Kamus & Retensi"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Data — Kamus & Retensi",
       "firstH2": null,
       "headerCount": 1,
@@ -1115,7 +1359,7 @@
           "text": "Artifact Generation"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "NPM Scripts Organization Guide",
       "firstH2": "Overview",
       "headerCount": 14,
@@ -1126,7 +1370,7 @@
       "path": "docs/fairness/equity-page.md",
       "domain": "Fairness & Equity",
       "headers": [],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": null,
       "firstH2": null,
       "headerCount": 0,
@@ -1142,7 +1386,7 @@
           "text": "Equity Snapshot Pseudocode (Draft)"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Equity Snapshot Pseudocode (Draft)",
       "firstH2": null,
       "headerCount": 1,
@@ -1153,7 +1397,7 @@
       "path": "docs/fairness/equity-under-served-section.md",
       "domain": "Fairness & Equity",
       "headers": [],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": null,
       "firstH2": null,
       "headerCount": 0,
@@ -1169,7 +1413,7 @@
           "text": "Metodologi Penandaan Under‑Served (Versi Aktif – DEC-20250812-02)"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Metodologi Penandaan Under‑Served (Versi Aktif – DEC-20250812-02)",
       "firstH2": null,
       "headerCount": 1,
@@ -1209,12 +1453,80 @@
           "text": "Policy-as-Code Lock"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Hysteresis State Machine (Concrete After DEC-20250812-02)",
       "firstH2": "States",
       "headerCount": 7,
       "h1Count": 1,
       "h2Count": 6
+    },
+    {
+      "path": "docs/fairness/index.md",
+      "domain": "Fairness & Equity",
+      "headers": [
+        {
+          "level": 1,
+          "text": "Fairness & Hysteresis Index"
+        },
+        {
+          "level": 2,
+          "text": "Overview"
+        },
+        {
+          "level": 2,
+          "text": "Official Configuration"
+        },
+        {
+          "level": 2,
+          "text": "Governance & Decision References"
+        },
+        {
+          "level": 2,
+          "text": "Methodology & Implementation"
+        },
+        {
+          "level": 2,
+          "text": "How to Validate"
+        },
+        {
+          "level": 2,
+          "text": "Bias Mitigation & Transparency"
+        },
+        {
+          "level": 2,
+          "text": "References"
+        }
+      ],
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
+      "firstH1": "Fairness & Hysteresis Index",
+      "firstH2": "Overview",
+      "headerCount": 8,
+      "h1Count": 1,
+      "h2Count": 7
+    },
+    {
+      "path": "docs/fairness/README.md",
+      "domain": "Fairness & Equity",
+      "headers": [
+        {
+          "level": 1,
+          "text": "Fairness & Hysteresis Systems"
+        },
+        {
+          "level": 2,
+          "text": "Quick Navigation"
+        },
+        {
+          "level": 2,
+          "text": "Core Components"
+        }
+      ],
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
+      "firstH1": "Fairness & Hysteresis Systems",
+      "firstH2": "Quick Navigation",
+      "headerCount": 3,
+      "h1Count": 1,
+      "h2Count": 2
     },
     {
       "path": "docs/faq/faq-fairness-hysteresis-update.md",
@@ -1225,7 +1537,7 @@
           "text": "FAQ Tambahan – Hysteresis Under‑Served (DEC-20250812-02)"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "FAQ Tambahan – Hysteresis Under‑Served (DEC-20250812-02)",
       "firstH2": null,
       "headerCount": 1,
@@ -1241,7 +1553,7 @@
           "text": "Privacy FAQ (Abridged)"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Privacy FAQ (Abridged)",
       "firstH2": null,
       "headerCount": 1,
@@ -1252,7 +1564,7 @@
       "path": "docs/feedback/feedback.md",
       "domain": "User Feedback",
       "headers": [],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": null,
       "firstH2": null,
       "headerCount": 0,
@@ -1312,7 +1624,7 @@
           "text": "7. Kesimpulan & Rekomendasi"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Ekspansi Komprehensif Gap Analysis - MerajutASA.id",
       "firstH2": "Executive Summary",
       "headerCount": 12,
@@ -1360,7 +1672,7 @@
           "text": "Key Findings"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Gap Analysis Summary",
       "firstH2": "Executive Summary",
       "headerCount": 9,
@@ -1392,7 +1704,7 @@
           "text": "Kesimpulan"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Analisis GAP Proyek MerajutASA.id",
       "firstH2": "Kategori GAP Menurut Proyek MerajutASA.id",
       "headerCount": 5,
@@ -1432,7 +1744,7 @@
           "text": "3. Verify the SHA is 40 characters (commit hash, not tag hash)"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "GitHub Actions Allowlist Management SOP",
       "firstH2": "Overview",
       "headerCount": 7,
@@ -1508,7 +1820,7 @@
           "text": "10. Append-Only Guarantee"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "PR Template Line & Integrity Audit (Initial Capture)",
       "firstH2": "1. Source File",
       "headerCount": 16,
@@ -1544,7 +1856,7 @@
           "text": "5. Future Extensions"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Audit Process Overview (Append-Only)",
       "firstH2": "1. Artifacts",
       "headerCount": 6,
@@ -1555,7 +1867,7 @@
       "path": "docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md",
       "domain": "Governance",
       "headers": [],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": null,
       "firstH2": null,
       "headerCount": 0,
@@ -1566,7 +1878,7 @@
       "path": "docs/governance/dec/DEC-20250812-03-principles-reference-activation.md",
       "domain": "Governance",
       "headers": [],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": null,
       "firstH2": null,
       "headerCount": 0,
@@ -1577,7 +1889,7 @@
       "path": "docs/governance/dec/DEC-20250812-04-governance-baseline-thresholds.md",
       "domain": "Governance",
       "headers": [],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": null,
       "firstH2": null,
       "headerCount": 0,
@@ -1588,7 +1900,7 @@
       "path": "docs/governance/dec/DEC-20250813-01-known-debt-register.md",
       "domain": "Governance",
       "headers": [],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": null,
       "firstH2": null,
       "headerCount": 0,
@@ -1599,7 +1911,7 @@
       "path": "docs/governance/dec/DEC-20250813-02-signature-pipeline-adoption.md",
       "domain": "Governance",
       "headers": [],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": null,
       "firstH2": null,
       "headerCount": 0,
@@ -1610,7 +1922,7 @@
       "path": "docs/governance/dec/DEC-20250813-03-disclaimers-presence-enforcement.md",
       "domain": "Governance",
       "headers": [],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": null,
       "firstH2": null,
       "headerCount": 0,
@@ -1621,7 +1933,7 @@
       "path": "docs/governance/dec/DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
       "domain": "Governance",
       "headers": [],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": null,
       "firstH2": null,
       "headerCount": 0,
@@ -1632,7 +1944,7 @@
       "path": "docs/governance/dec/DEC-20250813-05-gating-policy-wave1-adoption.md",
       "domain": "Governance",
       "headers": [],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": null,
       "firstH2": null,
       "headerCount": 0,
@@ -1643,7 +1955,7 @@
       "path": "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md",
       "domain": "Governance",
       "headers": [],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": null,
       "firstH2": null,
       "headerCount": 0,
@@ -1654,7 +1966,7 @@
       "path": "docs/governance/dec/DEC-20250813-07-hype-threshold-transition.md",
       "domain": "Governance",
       "headers": [],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": null,
       "firstH2": null,
       "headerCount": 0,
@@ -1665,7 +1977,7 @@
       "path": "docs/governance/dec/DEC-20250813-08-evidence-hash-display-length.md",
       "domain": "Governance",
       "headers": [],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": null,
       "firstH2": null,
       "headerCount": 0,
@@ -1676,7 +1988,7 @@
       "path": "docs/governance/dec/DEC-20250813-09-equity-index-rounding.md",
       "domain": "Governance",
       "headers": [],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": null,
       "firstH2": null,
       "headerCount": 0,
@@ -1687,7 +1999,7 @@
       "path": "docs/governance/dec/DEC-20250813-10-feedback-categories-canonical.md",
       "domain": "Governance",
       "headers": [],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": null,
       "firstH2": null,
       "headerCount": 0,
@@ -1698,7 +2010,7 @@
       "path": "docs/governance/dec/DEC-20250815-01-governed-editorial-maintenance.md",
       "domain": "Governance",
       "headers": [],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": null,
       "firstH2": null,
       "headerCount": 0,
@@ -1709,7 +2021,7 @@
       "path": "docs/governance/dec/DEC-20250815-02-hysteresis-config-update.md",
       "domain": "Governance",
       "headers": [],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": null,
       "firstH2": null,
       "headerCount": 0,
@@ -1720,7 +2032,7 @@
       "path": "docs/governance/dec/DEC-20250815-03-trace-index-update.md",
       "domain": "Governance",
       "headers": [],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": null,
       "firstH2": null,
       "headerCount": 0,
@@ -1764,7 +2076,7 @@
           "text": "Compliance Statement"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": null,
       "firstH2": "Context",
       "headerCount": 8,
@@ -1808,7 +2120,7 @@
           "text": "Notes"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": null,
       "firstH2": "Decision Summary",
       "headerCount": 8,
@@ -1892,7 +2204,7 @@
           "text": "9. Change Log"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Decision (DEC) Authoring Style Guide (v1)",
       "firstH2": "1. Purpose",
       "headerCount": 18,
@@ -1903,7 +2215,7 @@
       "path": "docs/governance/dec/DEC-style-guide-v2.md",
       "domain": "Governance",
       "headers": [],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": null,
       "firstH2": null,
       "headerCount": 0,
@@ -1935,7 +2247,7 @@
           "text": "Review plan"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": null,
       "firstH2": "Canonicalization",
       "headerCount": 5,
@@ -1946,7 +2258,7 @@
       "path": "docs/governance/dec/templates/DEC-template-v1.md",
       "domain": "Governance",
       "headers": [],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": null,
       "firstH2": null,
       "headerCount": 0,
@@ -2126,7 +2438,7 @@
           "text": "35. ACKNOWLEDGEMENT"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "MerajutASA – Disclaimers Presence & Integrity Lint Specification (v1.0)",
       "firstH2": "1. SINGKATAN & TERMINOLOGI",
       "headerCount": 42,
@@ -2146,12 +2458,48 @@
           "text": "Area"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Handbook Index — Governance & Integrity",
       "firstH2": "Area",
       "headerCount": 2,
       "h1Count": 1,
       "h2Count": 1
+    },
+    {
+      "path": "docs/governance/index.md",
+      "domain": "Governance",
+      "headers": [
+        {
+          "level": 1,
+          "text": "Governance & Decision Management Index"
+        },
+        {
+          "level": 2,
+          "text": "📋 Decision Documents (DEC) Registry"
+        },
+        {
+          "level": 2,
+          "text": "📚 Core Governance Documents"
+        },
+        {
+          "level": 2,
+          "text": "🔗 Cross-Domain References"
+        },
+        {
+          "level": 2,
+          "text": "📊 Governance Metrics & Status"
+        },
+        {
+          "level": 2,
+          "text": "🔍 Quick Navigation"
+        }
+      ],
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
+      "firstH1": "Governance & Decision Management Index",
+      "firstH2": "📋 Decision Documents (DEC) Registry",
+      "headerCount": 6,
+      "h1Count": 1,
+      "h2Count": 5
     },
     {
       "path": "docs/governance/lint-principles-reference-spec-v1.md",
@@ -2206,7 +2554,7 @@
           "text": "Adoption Addendum (APPENDED – DO NOT ALTER ORIGINAL CONTENT)"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Lint Specification – principles.reference (v1.0)",
       "firstH2": "1. Purpose",
       "headerCount": 12,
@@ -2226,7 +2574,7 @@
           "text": "Required secret (recommended)"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Phase Tracker PR automation (ops)",
       "firstH2": "Required secret (recommended)",
       "headerCount": 2,
@@ -2246,7 +2594,7 @@
           "text": "Non-code Policy References (Portal Panti)"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Policy Index v1.0 (Append-Only)",
       "firstH2": "Non-code Policy References (Portal Panti)",
       "headerCount": 2,
@@ -2278,12 +2626,36 @@
           "text": "Enforcement Phases Activation & Gating (Appended 2025-08-13 for Requirement 1.3)"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Decision Log Process (Excerpt – Updated for DEC-20250812-02)",
       "firstH2": "Parameter Lock Rule",
       "headerCount": 5,
       "h1Count": 1,
       "h2Count": 4
+    },
+    {
+      "path": "docs/governance/README.md",
+      "domain": "Governance",
+      "headers": [
+        {
+          "level": 1,
+          "text": "Governance & Decision Management"
+        },
+        {
+          "level": 2,
+          "text": "Quick Navigation"
+        },
+        {
+          "level": 2,
+          "text": "Key Areas"
+        }
+      ],
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
+      "firstH1": "Governance & Decision Management",
+      "firstH2": "Quick Navigation",
+      "headerCount": 3,
+      "h1Count": 1,
+      "h2Count": 2
     },
     {
       "path": "docs/governance/signature-pipeline-plan-v1.md",
@@ -2362,7 +2734,7 @@
           "text": "17. Next Immediate Steps (S0 → S1)"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": null,
       "firstH2": "Signature & Hash Pipeline Plan (v1)",
       "headerCount": 18,
@@ -2434,7 +2806,7 @@
           "text": "Daftar Rujukan (kode sitasi)"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Pernyataan Orientasi Produk: Portal Panti Asuhan",
       "firstH2": "Tujuan (berlandas teori/standar/regulasi)",
       "headerCount": 15,
@@ -2445,7 +2817,7 @@
       "path": "docs/governance/terminology-banner.md",
       "domain": "Governance",
       "headers": [],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": null,
       "firstH2": null,
       "headerCount": 0,
@@ -2456,7 +2828,7 @@
       "path": "docs/governance/terminology.md",
       "domain": "Governance",
       "headers": [],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": null,
       "firstH2": null,
       "headerCount": 0,
@@ -2492,7 +2864,7 @@
           "text": "Governance"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Post-Decision Action List – Hysteresis Adoption (DEC-20250812-02)",
       "firstH2": "Immediate (Day 0–2)",
       "headerCount": 6,
@@ -2508,7 +2880,7 @@
           "text": "Governance toolchain overview (Wave 1)"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Governance toolchain overview (Wave 1)",
       "firstH2": null,
       "headerCount": 1,
@@ -2552,7 +2924,7 @@
           "text": "7. Future Addendum Placeholder"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Archive Trace Index v1.0 (Append-Only)",
       "firstH2": "1. Scope",
       "headerCount": 8,
@@ -2596,12 +2968,80 @@
           "text": "File Organization"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "MerajutASA.id Implementation Documentation Index",
       "firstH2": "Overview",
       "headerCount": 8,
       "h1Count": 1,
       "h2Count": 7
+    },
+    {
+      "path": "docs/index.md",
+      "domain": "Other",
+      "headers": [
+        {
+          "level": 1,
+          "text": "MerajutASA.id Documentation Index"
+        },
+        {
+          "level": 2,
+          "text": "🏛️ Governance & Decision Management"
+        },
+        {
+          "level": 2,
+          "text": "🔒 Integrity & Credential Management"
+        },
+        {
+          "level": 2,
+          "text": "⚖️ Fairness & Hysteresis Systems"
+        },
+        {
+          "level": 2,
+          "text": "📊 Analytics & Event Schema"
+        },
+        {
+          "level": 2,
+          "text": "🔐 Privacy & PII Protection"
+        },
+        {
+          "level": 2,
+          "text": "👥 Contributor Guide & Onboarding"
+        },
+        {
+          "level": 2,
+          "text": "🏗️ Implementation & Infrastructure"
+        },
+        {
+          "level": 2,
+          "text": "📋 Specifications & Standards"
+        },
+        {
+          "level": 2,
+          "text": "🎯 Planning & Strategy"
+        },
+        {
+          "level": 2,
+          "text": "🔍 Transparency & Trust"
+        },
+        {
+          "level": 2,
+          "text": "🧪 Testing & Validation"
+        },
+        {
+          "level": 2,
+          "text": "📚 Additional Resources"
+        },
+        {
+          "level": 2,
+          "text": "🔗 Cross-References"
+        }
+      ],
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
+      "firstH1": "MerajutASA.id Documentation Index",
+      "firstH2": "🏛️ Governance & Decision Management",
+      "headerCount": 14,
+      "h1Count": 1,
+      "h2Count": 13
     },
     {
       "path": "docs/infrastructure/health-monitoring.md",
@@ -2688,12 +3128,36 @@
           "text": "Support"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Infrastructure Health Monitoring System",
       "firstH2": "Overview",
       "headerCount": 20,
       "h1Count": 7,
       "h2Count": 13
+    },
+    {
+      "path": "docs/infrastructure/README.md",
+      "domain": "Infrastructure",
+      "headers": [
+        {
+          "level": 1,
+          "text": "Infrastructure Documentation"
+        },
+        {
+          "level": 2,
+          "text": "Quick Navigation"
+        },
+        {
+          "level": 2,
+          "text": "Infrastructure Areas"
+        }
+      ],
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
+      "firstH1": "Infrastructure Documentation",
+      "firstH2": "Quick Navigation",
+      "headerCount": 3,
+      "h1Count": 1,
+      "h2Count": 2
     },
     {
       "path": "docs/infrastructure/week6-component-integration-guide.md",
@@ -2760,7 +3224,7 @@
           "text": "Maintenance Guidelines"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Week 6 Component Integration Guide",
       "firstH2": "Component Architecture",
       "headerCount": 15,
@@ -2771,7 +3235,7 @@
       "path": "docs/integrity/api-verification-docs.md",
       "domain": "Integrity & Security",
       "headers": [],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": null,
       "firstH2": null,
       "headerCount": 0,
@@ -2943,7 +3407,7 @@
           "text": "39. APPENDIX – DIFF POLICY"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "MerajutASA – Integrity Credential Schema (Final Draft v1.0)",
       "firstH2": "1. PRINCIPLES (RESTATED & BOUND TO SCHEMA)",
       "headerCount": 40,
@@ -2987,7 +3451,7 @@
           "text": "7. Change Control"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Phase 1.5 Evidence Minimum Set (v1.0 Draft)",
       "firstH2": "1. Daftar Artefak Minimum",
       "headerCount": 8,
@@ -3003,7 +3467,7 @@
           "text": "Gating Policy Annotations (Wave 1)"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Gating Policy Annotations (Wave 1)",
       "firstH2": null,
       "headerCount": 1,
@@ -3014,12 +3478,136 @@
       "path": "docs/integrity/hash-excerpt-module.md",
       "domain": "Integrity & Security",
       "headers": [],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": null,
       "firstH2": null,
       "headerCount": 0,
       "h1Count": 0,
       "h2Count": 0
+    },
+    {
+      "path": "docs/integrity/index.md",
+      "domain": "Integrity & Security",
+      "headers": [
+        {
+          "level": 1,
+          "text": "Integrity & Credential Chain Index"
+        },
+        {
+          "level": 2,
+          "text": "🏗️ Core Credential System"
+        },
+        {
+          "level": 2,
+          "text": "🔐 Verification & Validation Systems"
+        },
+        {
+          "level": 1,
+          "text": "Core verification commands"
+        },
+        {
+          "level": 1,
+          "text": "Service verification"
+        },
+        {
+          "level": 2,
+          "text": "⚙️ Cryptographic Primitives & Examples"
+        },
+        {
+          "level": 1,
+          "text": "Generate test vectors"
+        },
+        {
+          "level": 1,
+          "text": "Verify hash computation"
+        },
+        {
+          "level": 2,
+          "text": "📋 Evidence & Audit Framework"
+        },
+        {
+          "level": 1,
+          "text": "Evidence validation commands"
+        },
+        {
+          "level": 2,
+          "text": "🛡️ Gating Policy & Enforcement"
+        },
+        {
+          "level": 2,
+          "text": "🔧 Service Integration"
+        },
+        {
+          "level": 1,
+          "text": "Start core services"
+        },
+        {
+          "level": 1,
+          "text": "Health endpoint examples"
+        },
+        {
+          "level": 1,
+          "text": "Chain management"
+        },
+        {
+          "level": 2,
+          "text": "📖 CLI Quick Reference"
+        },
+        {
+          "level": 1,
+          "text": "Check hash integrity"
+        },
+        {
+          "level": 1,
+          "text": "Seal hashes (first time)"
+        },
+        {
+          "level": 1,
+          "text": "Verify parameter consistency"
+        },
+        {
+          "level": 1,
+          "text": "Complete governance verification"
+        },
+        {
+          "level": 2,
+          "text": "🔗 Related Documentation"
+        },
+        {
+          "level": 2,
+          "text": "📊 System Status"
+        }
+      ],
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
+      "firstH1": "Integrity & Credential Chain Index",
+      "firstH2": "🏗️ Core Credential System",
+      "headerCount": 22,
+      "h1Count": 13,
+      "h2Count": 9
+    },
+    {
+      "path": "docs/integrity/README.md",
+      "domain": "Integrity & Security",
+      "headers": [
+        {
+          "level": 1,
+          "text": "Integrity & Credential Management"
+        },
+        {
+          "level": 2,
+          "text": "Quick Navigation"
+        },
+        {
+          "level": 2,
+          "text": "Core Components"
+        }
+      ],
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
+      "firstH1": "Integrity & Credential Management",
+      "firstH2": "Quick Navigation",
+      "headerCount": 3,
+      "h1Count": 1,
+      "h2Count": 2
     },
     {
       "path": "docs/integrity/verify-cli-doc-draft.md",
@@ -3158,7 +3746,7 @@
           "text": "6. Next"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "CLI Verification Guide",
       "firstH2": "Prerequisites",
       "headerCount": 33,
@@ -3174,7 +3762,7 @@
           "text": "Legal — Catatan Yurisdiksi"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Legal — Catatan Yurisdiksi",
       "firstH2": null,
       "headerCount": 1,
@@ -3194,7 +3782,7 @@
           "text": "Section Impacted: Fairness & Equity (Sections 14, 30, 42 in Master Spec)"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Master Spec Delta – Adoption of Hysteresis Option F (DEC-20250812-02)",
       "firstH2": "Section Impacted: Fairness & Equity (Sections 14, 30, 42 in Master Spec)",
       "headerCount": 2,
@@ -3210,7 +3798,7 @@
           "text": "Delta: Master Spec v2.0 – §27 Event Schema Alignment with Canonical v1.0"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Delta: Master Spec v2.0 – §27 Event Schema Alignment with Canonical v1.0",
       "firstH2": null,
       "headerCount": 1,
@@ -3262,7 +3850,7 @@
           "text": "Hash & Integrity Notice"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Master Spec v2.0 (Baseline Canonical)",
       "firstH2": "Table of Contents (Section Numbers Stable)",
       "headerCount": 10,
@@ -3382,7 +3970,7 @@
           "text": "25. Ringkasan Eksekutif Untuk Agent"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Agent Bootstrap Manifest v1.0 (Append-Only)",
       "firstH2": "1. Tujuan",
       "headerCount": 27,
@@ -3446,7 +4034,7 @@
           "text": "12. Next Steps (Non-Automatable yet)"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Agent Guardrails v1 (Bootstrap Readiness)",
       "firstH2": "1. Purpose",
       "headerCount": 13,
@@ -3502,7 +4090,7 @@
           "text": "Known gaps and notes (H0 scope check)"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Agent knowledge baseline (2025-08-14)",
       "firstH2": "Principles (GP1–GP10) anchors",
       "headerCount": 11,
@@ -3590,7 +4178,7 @@
           "text": "17. Addendum Placeholder (Append Below This Line)"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Agent Role Policy v1.0 (Append‑Only)",
       "firstH2": "1. Purpose",
       "headerCount": 19,
@@ -3674,7 +4262,7 @@
           "text": "Next Steps"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Environment Configuration Guide",
       "firstH2": "Configuration Files Overview",
       "headerCount": 18,
@@ -3790,7 +4378,7 @@
           "text": "Monitoring Integration"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Startup Dependencies & Health Check Guide",
       "firstH2": "Component Startup Order",
       "headerCount": 26,
@@ -3890,7 +4478,7 @@
           "text": "Catatan Penting"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Health Scripts Governance: Categories & Usage Guide",
       "firstH2": "Skrip Unified",
       "headerCount": 22,
@@ -3986,7 +4574,7 @@
           "text": "Quick Reference"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Infra Health Triage Runbook",
       "firstH2": "Cara Menjalankan",
       "headerCount": 21,
@@ -4002,7 +4590,7 @@
           "text": "Integrated Infrastructure Health (Baseline)"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Integrated Infrastructure Health (Baseline)",
       "firstH2": null,
       "headerCount": 1,
@@ -4030,7 +4618,7 @@
           "text": "Tools Tersedia"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Scripts Cleanup Plan",
       "firstH2": "Langkah Eksekusi",
       "headerCount": 4,
@@ -4106,7 +4694,7 @@
           "text": "Future Cleanup Targets"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Scripts Governance: Naming, Grouping, and Prefix Standards",
       "firstH2": "Overview",
       "headerCount": 16,
@@ -4122,7 +4710,7 @@
           "text": "Scripts Validation (Baseline)"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Scripts Validation (Baseline)",
       "firstH2": null,
       "headerCount": 1,
@@ -4178,12 +4766,76 @@
           "text": "Integration with CI/CD"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Week6 Integration + Scripts Validation (Ops)",
       "firstH2": "Overview",
       "headerCount": 11,
       "h1Count": 4,
       "h2Count": 7
+    },
+    {
+      "path": "docs/operations/startup-order.md",
+      "domain": "Operations & Runbooks",
+      "headers": [
+        {
+          "level": 1,
+          "text": "Startup Order (Derived from Dependency Graph)"
+        },
+        {
+          "level": 2,
+          "text": "Global Prerequisites"
+        },
+        {
+          "level": 2,
+          "text": "Order (Topologically Sorted)"
+        },
+        {
+          "level": 2,
+          "text": "Operational Guidance"
+        },
+        {
+          "level": 1,
+          "text": "Phase 1: Start foundation services in parallel"
+        },
+        {
+          "level": 1,
+          "text": "Phase 2: Start authentication"
+        },
+        {
+          "level": 1,
+          "text": "Wait for /ready endpoint"
+        },
+        {
+          "level": 1,
+          "text": "Phase 3: Start catalog"
+        },
+        {
+          "level": 1,
+          "text": "Wait for /ready endpoint"
+        },
+        {
+          "level": 1,
+          "text": "Phase 4: Start gateway"
+        },
+        {
+          "level": 1,
+          "text": "Wait for /ready endpoint"
+        },
+        {
+          "level": 1,
+          "text": "Verify startup order"
+        },
+        {
+          "level": 1,
+          "text": "Health check validation"
+        }
+      ],
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
+      "firstH1": "Startup Order (Derived from Dependency Graph)",
+      "firstH2": "Global Prerequisites",
+      "headerCount": 13,
+      "h1Count": 10,
+      "h2Count": 3
     },
     {
       "path": "docs/phase-1/PHASE-1-IMPLEMENTATION-COMPLETE.md",
@@ -4250,7 +4902,7 @@
           "text": "🎉 Conclusion"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Phase 1 Implementation Complete - Executive Summary",
       "firstH2": "🎯 Implementation Overview",
       "headerCount": 15,
@@ -4294,7 +4946,7 @@
           "text": "Expected Outcomes"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Phase 1 Implementation Guide - Incremental Enhancement",
       "firstH2": "Implementation Strategy Overview",
       "headerCount": 8,
@@ -4362,7 +5014,7 @@
           "text": "🤝 Conclusion"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Phase 2 Implementation Guide - Scalability & Enterprise Infrastructure",
       "firstH2": "Executive Summary",
       "headerCount": 14,
@@ -4534,7 +5186,7 @@
           "text": "🎉 Conclusion"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Phase 2 Week 1 Delivery Documentation",
       "firstH2": "🎯 Executive Summary",
       "headerCount": 40,
@@ -4614,7 +5266,7 @@
           "text": "Conclusion"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Phase 2 Week 2+ Performance Enhancement - Delivery Documentation",
       "firstH2": "Executive Summary 🎯",
       "headerCount": 17,
@@ -4658,7 +5310,7 @@
           "text": "🎯 Final Strategic Recommendation"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Phase 2 Week 2+ Strategic Analysis - Performance & Advanced Infrastructure",
       "firstH2": "🎯 Executive Strategic Conclusion",
       "headerCount": 8,
@@ -4734,7 +5386,7 @@
           "text": "Conclusion"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Phase 2 Week 3 Delivery Documentation - Advanced Monitoring & Observability",
       "firstH2": "Executive Summary 🎯",
       "headerCount": 16,
@@ -4798,7 +5450,7 @@
           "text": "Next Steps: Phase 2 Week 5"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Phase 2 Week 4 Delivery Documentation - API Gateway & Management",
       "firstH2": "Executive Summary 🎯",
       "headerCount": 13,
@@ -4850,7 +5502,7 @@
           "text": "Conclusion"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Phase 2 Week 5 Delivery Documentation - High Availability & Infrastructure Resilience",
       "firstH2": "Executive Summary 🎯",
       "headerCount": 10,
@@ -4938,7 +5590,7 @@
           "text": "🎉 Conclusion"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Phase 2 Week 6: Compliance & Security Enhancement - Delivery Documentation",
       "firstH2": "🎯 Implementation Overview",
       "headerCount": 19,
@@ -5066,7 +5718,7 @@
           "text": "CONCLUSION"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Immediate Action Plan: Week 1 Critical Updates",
       "firstH2": "🚨 WEEK 1 CRITICAL ACTIONS (Days 1-7)",
       "headerCount": 29,
@@ -5118,7 +5770,7 @@
           "text": "CONCLUSION"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Strategic Planning Index: Post Phase 2 Week 6",
       "firstH2": "📋 DOCUMENT INDEX",
       "headerCount": 10,
@@ -5190,7 +5842,7 @@
           "text": "Catatan integrasi repo"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "GitHub Projects (Personal) Integration Guide — merajutasa.id",
       "firstH2": "Tujuan",
       "headerCount": 15,
@@ -5206,7 +5858,7 @@
           "text": "Playbooks — Operational Guides (Deskriptif)"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Playbooks — Operational Guides (Deskriptif)",
       "firstH2": null,
       "headerCount": 1,
@@ -5222,7 +5874,7 @@
           "text": "Policies — Ringkasan Kebijakan"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Policies — Ringkasan Kebijakan",
       "firstH2": null,
       "headerCount": 1,
@@ -5258,7 +5910,7 @@
           "text": "No Removal Guarantee"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "GP1–GP10 Principles Index (Quick Machine & Reviewer Reference)",
       "firstH2": "Cross-File Pointers",
       "headerCount": 6,
@@ -5286,7 +5938,7 @@
           "text": "Contoh negatif 16 digit random (bukan NIK/NKK tanpa konteks)"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Corpus Negatif (Decoy)",
       "firstH2": "Decoy bank-like contexts (tidak boleh terdeteksi BANK_ACCOUNT)",
       "headerCount": 4,
@@ -5297,12 +5949,88 @@
       "path": "docs/privacy/corpus/positive-highrisk.md",
       "domain": "Privacy & Data Protection",
       "headers": [],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": null,
       "firstH2": null,
       "headerCount": 0,
       "h1Count": 0,
       "h2Count": 0
+    },
+    {
+      "path": "docs/privacy/index.md",
+      "domain": "Privacy & Data Protection",
+      "headers": [
+        {
+          "level": 1,
+          "text": "Privacy & PII Protection — Documentation Index"
+        },
+        {
+          "level": 2,
+          "text": "🛡️ Prinsip Privasi Inti"
+        },
+        {
+          "level": 2,
+          "text": "🔍 PII Detection & Management"
+        },
+        {
+          "level": 2,
+          "text": "🔐 Data Minimization & Security"
+        },
+        {
+          "level": 2,
+          "text": "🧪 Testing & Validation"
+        },
+        {
+          "level": 1,
+          "text": "Jalankan PII scanner tests"
+        },
+        {
+          "level": 1,
+          "text": "Validate pattern library consistency"
+        },
+        {
+          "level": 1,
+          "text": "Test corpus compliance check"
+        },
+        {
+          "level": 2,
+          "text": "📋 Compliance & Risk Management"
+        },
+        {
+          "level": 2,
+          "text": "🚀 Implementation & Operations"
+        },
+        {
+          "level": 2,
+          "text": "📚 Additional Resources"
+        },
+        {
+          "level": 1,
+          "text": "Privacy scanner smoke test"
+        },
+        {
+          "level": 1,
+          "text": "Generate privacy metrics"
+        },
+        {
+          "level": 1,
+          "text": "Privacy rights request processing"
+        },
+        {
+          "level": 1,
+          "text": "Privacy compliance assertions"
+        },
+        {
+          "level": 2,
+          "text": "🔗 Cross-References"
+        }
+      ],
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
+      "firstH1": "Privacy & PII Protection — Documentation Index",
+      "firstH2": "🛡️ Prinsip Privasi Inti",
+      "headerCount": 16,
+      "h1Count": 8,
+      "h2Count": 8
     },
     {
       "path": "docs/privacy/pii-pattern-library-v1.md",
@@ -5513,7 +6241,7 @@
           "text": "39. ACKNOWLEDGEMENT"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "MerajutASA – PII Pattern Library & Detection Framework (v1.0)",
       "firstH2": "1. PRINCIPLES APPLIED",
       "headerCount": 51,
@@ -5529,7 +6257,7 @@
           "text": "PII Hash Salt Rotation Policy (Internal Ops)"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "PII Hash Salt Rotation Policy (Internal Ops)",
       "firstH2": null,
       "headerCount": 1,
@@ -5545,7 +6273,7 @@
           "text": "PII Scan Fixture (Test Only)"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "PII Scan Fixture (Test Only)",
       "firstH2": null,
       "headerCount": 1,
@@ -5561,7 +6289,7 @@
           "text": "Privacy — Prinsip & Praktik Publik"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Privacy — Prinsip & Praktik Publik",
       "firstH2": null,
       "headerCount": 1,
@@ -5617,7 +6345,7 @@
           "text": "10. Daftar Rujukan (Kode Sitasi)"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Orientasi Komprehensif: Portal Panti Asuhan",
       "firstH2": "1. Definisi dan Ruang Lingkup Terminologi",
       "headerCount": 11,
@@ -5705,7 +6433,7 @@
           "text": "Daftar Rujukan (kode sitasi)"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Ruang Lingkup Produk: Portal Panti Asuhan",
       "firstH2": "Sasaran (berlandas regulasi/standar)",
       "headerCount": 19,
@@ -5761,7 +6489,7 @@
           "text": "Daftar Rujukan (kode sitasi) — tambahan"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Model Data Minimal Aman — Portal Panti",
       "firstH2": "1) Wajib (dasar legitimasi & transparansi)",
       "headerCount": 11,
@@ -5817,7 +6545,7 @@
           "text": "Daftar Rujukan (kode sitasi)"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Tentang Portal Panti",
       "firstH2": "Apa ini (basis hukum/standar)",
       "headerCount": 11,
@@ -5833,7 +6561,7 @@
           "text": "Public — Materi Komunikasi Publik"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Public — Materi Komunikasi Publik",
       "firstH2": null,
       "headerCount": 1,
@@ -5885,7 +6613,7 @@
           "text": "📋 Docker Account Requirements"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Quick Reference: Phase 2 Week 1 Commands",
       "firstH2": "🚀 Essential Daily Commands",
       "headerCount": 10,
@@ -6165,7 +6893,7 @@
           "text": "Contact & Support 📞"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Quick Reference - Phase 2 Week 2+ Performance Enhancement",
       "firstH2": "Essential Commands ⚡",
       "headerCount": 67,
@@ -6333,7 +7061,7 @@
           "text": "Restart from clean state"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Quick Reference - Phase 2 Week 3: Advanced Monitoring & Observability",
       "firstH2": "Essential Commands 🚀",
       "headerCount": 39,
@@ -6449,7 +7177,7 @@
           "text": "Version Information 📋"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Quick Reference - Phase 2 Week 4: API Gateway & Management",
       "firstH2": "Essential Commands 🚀",
       "headerCount": 26,
@@ -6757,7 +7485,7 @@
           "text": "Overall System Health: 77/100"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Quick Reference - Phase 2 Week 5: High Availability & Infrastructure Resilience",
       "firstH2": "Essential Commands 🚀",
       "headerCount": 74,
@@ -7085,7 +7813,7 @@
           "text": "🎉 Quick Win Tips"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Quick Reference - Phase 2 Week 6: Compliance & Security Enhancement",
       "firstH2": "🎯 At a Glance",
       "headerCount": 79,
@@ -7101,7 +7829,7 @@
           "text": "Release — Proses & Checklist"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Release — Proses & Checklist",
       "firstH2": null,
       "headerCount": 1,
@@ -7133,7 +7861,7 @@
           "text": "Exit Criteria (Gate 2)"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Next Milestones — Menuju Gate 2 (Expanded Transparency)",
       "firstH2": "Sasaran Gate 2 (ringkas)",
       "headerCount": 5,
@@ -7161,7 +7889,7 @@
           "text": "Exit Criteria (Gate 3)"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Next Milestones — Menuju Gate 3 (Stage 2 Terminology)",
       "firstH2": "Sasaran Gate 3 (ringkas)",
       "headerCount": 4,
@@ -7405,7 +8133,7 @@
           "text": "Dimensi Audit"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "MerajutASA – Roadmap & Milestones Komprehensif (Master Consolidation)",
       "firstH2": "0. EXECUTIVE OVERVIEW",
       "headerCount": 58,
@@ -7461,7 +8189,7 @@
           "text": "CONCLUSION"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "MerajutASA.id - Next Phase Roadmap v2.0 (Post Phase 2 Week 6)",
       "firstH2": "EXECUTIVE SUMMARY",
       "headerCount": 11,
@@ -7477,7 +8205,7 @@
           "text": "Schemas — Data & Validation"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Schemas — Data & Validation",
       "firstH2": null,
       "headerCount": 1,
@@ -7525,7 +8253,7 @@
           "text": "Next Steps"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "NPM Scripts Organization Guide",
       "firstH2": "Overview",
       "headerCount": 9,
@@ -7541,7 +8269,7 @@
           "text": "Security — Kebijakan & Pelaporan"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Security — Kebijakan & Pelaporan",
       "firstH2": null,
       "headerCount": 1,
@@ -7557,7 +8285,7 @@
           "text": "Gate 1 – Public Soft Launch Checklist"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Gate 1 – Public Soft Launch Checklist",
       "firstH2": null,
       "headerCount": 1,
@@ -7605,7 +8333,7 @@
           "text": "Gate 1 Closure Confirmation"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Gate 1 Verification Status - 2025-08-17",
       "firstH2": "Executive Summary",
       "headerCount": 9,
@@ -7645,7 +8373,7 @@
           "text": "Next Steps (Gate 3 Preview)"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Gate 2 Verification Status - 2025-08-17",
       "firstH2": "Executive Summary",
       "headerCount": 7,
@@ -7689,7 +8417,7 @@
           "text": "Checks"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Gate 3 Verification Status - 2025-08-17",
       "firstH2": "Gate 3 Criteria",
       "headerCount": 8,
@@ -7781,7 +8509,7 @@
           "text": "19. PENUTUP"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "MerajutASA – Progress Recap (Latest)",
       "firstH2": "1. RINGKASAN CEPAT (EXECUTIVE SNAPSHOT)",
       "headerCount": 20,
@@ -7849,7 +8577,7 @@
           "text": "13. CLOSING NOTE"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Wave 0 Completion Recap (Enable Seal)",
       "firstH2": "1. EXECUTIVE SNAPSHOT",
       "headerCount": 14,
@@ -7885,7 +8613,7 @@
           "text": "Next steps (H1)"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Horizon 0 Completion – Quick Guide (Windows PowerShell)",
       "firstH2": "Acceptance checklist",
       "headerCount": 6,
@@ -7937,7 +8665,7 @@
           "text": "Conclusion"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Strategic Implementation Analysis - Phase 1 Implementation",
       "firstH2": "Executive Summary",
       "headerCount": 10,
@@ -7953,7 +8681,7 @@
           "text": "Support — Dukungan & Keberatan"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Support — Dukungan & Keberatan",
       "firstH2": null,
       "headerCount": 1,
@@ -8297,7 +9025,7 @@
           "text": "📞 Support Contacts"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Team Onboarding Guide: Phase 2 Week 1 Containerization",
       "firstH2": "🚀 Quick Start for Teams",
       "headerCount": 83,
@@ -8697,7 +9425,7 @@
           "text": "Support & Documentation 📚"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Team Setup Guide - Phase 2 Week 2+ Performance Enhancement",
       "firstH2": "Overview 🎯",
       "headerCount": 97,
@@ -8965,7 +9693,7 @@
           "text": "Conclusion ✅"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Team Setup Guide - Phase 2 Week 3: Advanced Monitoring & Observability",
       "firstH2": "Overview 🎯",
       "headerCount": 64,
@@ -9281,7 +10009,7 @@
           "text": "Development"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Team Setup Guide - Phase 2 Week 4: API Gateway & Management",
       "firstH2": "Overview 🎯",
       "headerCount": 76,
@@ -9881,7 +10609,7 @@
           "text": "Success Metrics 📊"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Team Setup Guide - Phase 2 Week 5: High Availability & Infrastructure Resilience",
       "firstH2": "Overview 🎯",
       "headerCount": 147,
@@ -10293,7 +11021,7 @@
           "text": "🎉 Conclusion"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Team Setup Guide - Phase 2 Week 6: Compliance & Security Enhancement",
       "firstH2": "🎯 Overview",
       "headerCount": 100,
@@ -10341,12 +11069,36 @@
           "text": "Failure Handling"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Hysteresis Test Plan (Post DEC-20250812-02)",
       "firstH2": "Objectives",
       "headerCount": 9,
       "h1Count": 1,
       "h2Count": 8
+    },
+    {
+      "path": "docs/tests/README.md",
+      "domain": "Testing",
+      "headers": [
+        {
+          "level": 1,
+          "text": "Testing & Validation Documentation"
+        },
+        {
+          "level": 2,
+          "text": "Quick Navigation"
+        },
+        {
+          "level": 2,
+          "text": "Testing Areas"
+        }
+      ],
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
+      "firstH1": "Testing & Validation Documentation",
+      "firstH2": "Quick Navigation",
+      "headerCount": 3,
+      "h1Count": 1,
+      "h2Count": 2
     },
     {
       "path": "docs/transparency/changelog-excerpt-phase1.5.md",
@@ -10361,7 +11113,7 @@
           "text": "Planned Structure"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Changelog Excerpt (Phase 1.5 Placeholder)",
       "firstH2": "Planned Structure",
       "headerCount": 2,
@@ -10377,7 +11129,7 @@
           "text": "Methodology Snippet (H0)"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Methodology Snippet (H0)",
       "firstH2": null,
       "headerCount": 1,
@@ -10388,7 +11140,7 @@
       "path": "docs/trust/trust-hysteresis.md",
       "domain": "Transparency & Trust",
       "headers": [],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": null,
       "firstH2": null,
       "headerCount": 0,
@@ -10399,7 +11151,7 @@
       "path": "docs/trust/trust-page.md",
       "domain": "Transparency & Trust",
       "headers": [],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": null,
       "firstH2": null,
       "headerCount": 0,
@@ -10415,7 +11167,7 @@
           "text": "UX — Aksesibilitas & Gaya Konten"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "UX — Aksesibilitas & Gaya Konten",
       "firstH2": null,
       "headerCount": 1,
@@ -10435,7 +11187,7 @@
           "text": "Steps"
         }
       ],
-      "lastCommitTimestamp": "2025-08-21T21:26:08+07:00",
+      "lastCommitTimestamp": "2025-08-22T04:12:28+07:00",
       "firstH1": "Verify CLI (Draft)",
       "firstH2": "Steps",
       "headerCount": 2,

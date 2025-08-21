@@ -1,0 +1,909 @@
+{
+  "components": [
+    {
+      "category": "api-gateway",
+      "className": "APIGatewayCore",
+      "description": "Enterprise API Gateway Core Provides centralized API management with versioning, rate limiting, security, monitoring, and service orchestration",
+      "failureImpact": "critical",
+      "filePath": "infrastructure/api-gateway/api-gateway-core.js",
+      "healthCheck": {
+        "endpoint": "/health",
+        "type": "http"
+      },
+      "id": "api-gateway-api-gateway-core",
+      "lastModified": "2025-08-21T21:13:42.542Z",
+      "name": "Api Gateway Core",
+      "ports": [
+        8080,
+        3000
+      ],
+      "requiredUpstreams": [
+        "gateway",
+        "monitoring",
+        "metrics",
+        "logging"
+      ],
+      "subcategory": "api-gateway-core.js",
+      "type": "service",
+      "version": "1.0.0"
+    },
+    {
+      "category": "api-gateway",
+      "className": "APIGatewayOrchestrator",
+      "description": "API Gateway & Management Orchestrator Unified system that coordinates API Gateway, Service Mesh, CI/CD pipelines, and documentation generation",
+      "failureImpact": "critical",
+      "filePath": "infrastructure/api-gateway/api-gateway-orchestrator.js",
+      "healthCheck": {
+        "endpoint": "/health",
+        "type": "http"
+      },
+      "id": "api-gateway-api-gateway-orchestrator",
+      "lastModified": "2025-08-21T21:13:42.542Z",
+      "name": "Api Gateway Orchestrator",
+      "ports": [
+        8080,
+        4601,
+        4602,
+        4603
+      ],
+      "requiredUpstreams": [
+        "api-gateway-core",
+        "service-mesh",
+        "openapi-documentation",
+        "cicd/pipeline-manager",
+        "signer",
+        "chain",
+        "collector",
+        "gateway",
+        "metrics"
+      ],
+      "subcategory": "api-gateway-orchestrator.js",
+      "type": "gateway",
+      "version": "1.0.0"
+    },
+    {
+      "category": "api-gateway",
+      "className": "OpenAPIDocumentationSystem",
+      "description": "OpenAPI Documentation Generator Generates comprehensive API documentation with interactive exploration",
+      "failureImpact": "critical",
+      "filePath": "infrastructure/api-gateway/openapi-documentation.js",
+      "healthCheck": {
+        "endpoint": "/health",
+        "type": "http"
+      },
+      "id": "api-gateway-openapi-documentation",
+      "lastModified": "2025-08-21T21:13:42.542Z",
+      "name": "Openapi Documentation",
+      "ports": [],
+      "requiredUpstreams": [
+        "signer",
+        "chain",
+        "collector",
+        "auth",
+        "gateway",
+        "metrics"
+      ],
+      "subcategory": "openapi-documentation.js",
+      "type": "gateway",
+      "version": "1.0.0"
+    },
+    {
+      "category": "api-gateway",
+      "className": "ServiceMeshIntegration",
+      "description": "Service Mesh Integration Provides service discovery, load balancing, circuit breaking, and inter-service communication management",
+      "failureImpact": "critical",
+      "filePath": "infrastructure/api-gateway/service-mesh.js",
+      "healthCheck": {
+        "endpoint": "/health",
+        "type": "http"
+      },
+      "id": "api-gateway-service-mesh",
+      "lastModified": "2025-08-21T21:13:42.542Z",
+      "name": "Service Mesh",
+      "ports": [],
+      "requiredUpstreams": [
+        "metrics"
+      ],
+      "subcategory": "service-mesh.js",
+      "type": "gateway"
+    },
+    {
+      "category": "auth",
+      "className": "APIKeyManager",
+      "description": "auth-middleware.js Authentication middleware for MerajutASA.id services Implements JWT validation, API key authentication, and role-based access control Based on OWASP authentication best practices",
+      "failureImpact": "critical",
+      "filePath": "infrastructure/auth/auth-middleware.js",
+      "healthCheck": {
+        "endpoint": "/health",
+        "type": "http"
+      },
+      "id": "auth-auth-middleware",
+      "lastModified": "2025-08-21T21:13:42.542Z",
+      "name": "Auth Middleware",
+      "ports": [],
+      "requiredUpstreams": [
+        "signer",
+        "chain",
+        "collector",
+        "auth",
+        "metrics"
+      ],
+      "subcategory": "auth-middleware.js",
+      "type": "authentication"
+    },
+    {
+      "category": "backup",
+      "description": "backup-service.js Comprehensive backup and disaster recovery service for MerajutASA.id Implements automated backups, point-in-time recovery, and integrity verification",
+      "failureImpact": "low",
+      "filePath": "infrastructure/backup/backup-service.js",
+      "healthCheck": {
+        "status": "no health check implemented",
+        "type": "none"
+      },
+      "id": "backup-backup-service",
+      "lastModified": "2025-08-21T21:13:42.542Z",
+      "name": "Backup Service",
+      "ports": [],
+      "requiredUpstreams": [],
+      "subcategory": "backup-service.js",
+      "type": "storage"
+    },
+    {
+      "category": "cicd",
+      "className": "CICDPipelineManager",
+      "description": "Advanced CI/CD Pipeline Management Provides automated testing, building, deployment, and release management",
+      "failureImpact": "high",
+      "filePath": "infrastructure/cicd/pipeline-manager.js",
+      "healthCheck": {
+        "endpoint": "/health",
+        "type": "http"
+      },
+      "id": "cicd-pipeline-manager",
+      "lastModified": "2025-08-21T21:13:42.542Z",
+      "name": "Pipeline Manager",
+      "ports": [],
+      "requiredUpstreams": [
+        "signer",
+        "chain",
+        "collector",
+        "gateway",
+        "monitoring",
+        "metrics"
+      ],
+      "subcategory": "pipeline-manager.js",
+      "type": "cache"
+    },
+    {
+      "category": "compliance",
+      "className": "AuditSystem",
+      "description": "Enterprise Audit System for MerajutASA.id * Provides comprehensive audit trail capabilities for compliance with: - GDPR (General Data Protection Regulation) - SOX (Sarbanes-Oxley Act) - ISO 27001 (Information Security Management) - PCI DSS (Payment Card Industry Data Security Standard) * Features: - Immutable audit trails with cryptographic integrity - Automated compliance tagging and classification - Real-time audit event processing - Automated retention policy enforcement - Comprehensive search and reporting capabilities",
+      "failureImpact": "critical",
+      "filePath": "infrastructure/compliance/audit-system.js",
+      "healthCheck": {
+        "status": "no health check implemented",
+        "type": "none"
+      },
+      "id": "compliance-audit-system",
+      "lastModified": "2025-08-21T21:13:42.543Z",
+      "name": "Audit System",
+      "ports": [],
+      "requiredUpstreams": [
+        "auth",
+        "database",
+        "metrics"
+      ],
+      "subcategory": "audit-system.js",
+      "type": "database"
+    },
+    {
+      "category": "compliance",
+      "className": "ComplianceAutomation",
+      "description": "Compliance Automation & Reporting System for MerajutASA.id * Provides automated compliance management with support for: - GDPR (General Data Protection Regulation) - SOX (Sarbanes-Oxley Act) - ISO 27001 (Information Security Management) - PCI DSS (Payment Card Industry Data Security Standard) - HIPAA (Health Insurance Portability and Accountability Act) * Features: - Automated compliance assessment and scoring - Real-time compliance monitoring and alerting - Automated report generation for regulators - Policy enforcement and violation detection - Data subject rights automation (GDPR) - Risk assessment and mitigation tracking",
+      "failureImpact": "medium",
+      "filePath": "infrastructure/compliance/compliance-automation.js",
+      "healthCheck": {
+        "status": "no health check implemented",
+        "type": "none"
+      },
+      "id": "compliance-compliance-automation",
+      "lastModified": "2025-08-21T21:13:42.543Z",
+      "name": "Compliance Automation",
+      "ports": [],
+      "requiredUpstreams": [
+        "audit-system",
+        "monitoring",
+        "metrics",
+        "logging"
+      ],
+      "subcategory": "compliance-automation.js",
+      "type": "compliance"
+    },
+    {
+      "category": "compliance",
+      "className": "ComplianceOrchestrator",
+      "description": "Compliance & Security Orchestrator for MerajutASA.id * Central orchestration system that coordinates all compliance and security components: - Enterprise Audit System - Compliance Automation - Security Hardening - Privacy Rights Management * Features: - Unified compliance and security dashboard - Cross-component event correlation - Automated incident response coordination - Compliance reporting aggregation - Risk assessment and mitigation - Regulatory reporting automation",
+      "failureImpact": "high",
+      "filePath": "infrastructure/compliance/compliance-orchestrator.js",
+      "healthCheck": {
+        "status": "no health check implemented",
+        "type": "none"
+      },
+      "id": "compliance-compliance-orchestrator",
+      "lastModified": "2025-08-21T21:13:42.543Z",
+      "name": "Compliance Orchestrator",
+      "ports": [],
+      "requiredUpstreams": [
+        "audit-system",
+        "compliance-automation",
+        "security/enhanced/security-hardening",
+        "privacy-rights-management",
+        "monitoring",
+        "metrics"
+      ],
+      "subcategory": "compliance-orchestrator.js",
+      "type": "compliance"
+    },
+    {
+      "category": "compliance",
+      "className": "PrivacyRightsManagement",
+      "description": "Privacy Rights Management System for MerajutASA.id * Comprehensive privacy rights automation system supporting: - GDPR Data Subject Rights (EU) - CCPA Consumer Rights (California) - PIPEDA Individual Rights (Canada) - LGPD Data Subject Rights (Brazil) * Features: - Automated data subject request processing - Right to access, rectification, erasure, portability - Consent management and tracking - Data mapping and inventory management - Privacy impact assessments (DPIA/PIA) - Automated compliance reporting",
+      "failureImpact": "medium",
+      "filePath": "infrastructure/compliance/privacy-rights-management.js",
+      "healthCheck": {
+        "status": "no health check implemented",
+        "type": "none"
+      },
+      "id": "compliance-privacy-rights-management",
+      "lastModified": "2025-08-21T21:13:42.543Z",
+      "name": "Privacy Rights Management",
+      "ports": [],
+      "requiredUpstreams": [
+        "compliance/audit-system",
+        "database",
+        "monitoring",
+        "metrics"
+      ],
+      "subcategory": "privacy-rights-management.js",
+      "type": "service",
+      "version": "1.0"
+    },
+    {
+      "category": "high-availability",
+      "className": "AutoScalingSystem",
+      "description": "Auto-Scaling System Intelligent auto-scaling with predictive analytics Phase 2 Week 5: High Availability & Infrastructure Resilience",
+      "failureImpact": "medium",
+      "filePath": "infrastructure/high-availability/auto-scaling.js",
+      "healthCheck": {
+        "endpoint": "/health",
+        "type": "http"
+      },
+      "id": "high-availability-auto-scaling",
+      "lastModified": "2025-08-21T21:13:42.544Z",
+      "name": "Auto Scaling",
+      "ports": [],
+      "requiredUpstreams": [
+        "monitoring",
+        "metrics"
+      ],
+      "subcategory": "auto-scaling.js",
+      "type": "infrastructure"
+    },
+    {
+      "category": "high-availability",
+      "className": "DisasterRecoverySystem",
+      "description": "Disaster Recovery System Automated backup, failover, and recovery orchestration Phase 2 Week 5: High Availability & Infrastructure Resilience",
+      "failureImpact": "critical",
+      "filePath": "infrastructure/high-availability/disaster-recovery.js",
+      "healthCheck": {
+        "endpoint": "/health",
+        "type": "http"
+      },
+      "id": "high-availability-disaster-recovery",
+      "lastModified": "2025-08-21T21:13:42.544Z",
+      "name": "Disaster Recovery",
+      "ports": [],
+      "requiredUpstreams": [
+        "database",
+        "monitoring",
+        "metrics"
+      ],
+      "subcategory": "disaster-recovery.js",
+      "type": "database"
+    },
+    {
+      "category": "high-availability",
+      "className": "FaultToleranceSystem",
+      "description": "Fault Tolerance System Advanced circuit breakers, retry mechanisms, and fault isolation Phase 2 Week 5: High Availability & Infrastructure Resilience",
+      "failureImpact": "medium",
+      "filePath": "infrastructure/high-availability/fault-tolerance.js",
+      "healthCheck": {
+        "endpoint": "/health",
+        "type": "http"
+      },
+      "id": "high-availability-fault-tolerance",
+      "lastModified": "2025-08-21T21:13:42.544Z",
+      "name": "Fault Tolerance",
+      "ports": [],
+      "requiredUpstreams": [
+        "monitoring",
+        "metrics"
+      ],
+      "subcategory": "fault-tolerance.js",
+      "type": "worker"
+    },
+    {
+      "category": "high-availability",
+      "className": "HighAvailabilityOrchestrator",
+      "description": "High Availability Orchestrator Central coordination system for all high availability components Phase 2 Week 5: High Availability & Infrastructure Resilience",
+      "failureImpact": "high",
+      "filePath": "infrastructure/high-availability/ha-orchestrator.js",
+      "healthCheck": {
+        "endpoint": "./health-monitoring.js",
+        "type": "http"
+      },
+      "id": "high-availability-ha-orchestrator",
+      "lastModified": "2025-08-21T21:13:42.544Z",
+      "name": "Ha Orchestrator",
+      "ports": [
+        "env:HA_ORCHESTRATOR_PORT"
+      ],
+      "requiredUpstreams": [
+        "multi-region-deployment",
+        "disaster-recovery",
+        "auto-scaling",
+        "fault-tolerance",
+        "health-monitoring",
+        "signer",
+        "chain",
+        "collector",
+        "metrics"
+      ],
+      "subcategory": "ha-orchestrator.js",
+      "type": "infrastructure"
+    },
+    {
+      "category": "high-availability",
+      "className": "HealthMonitoringSystem",
+      "description": "Health Monitoring System Comprehensive health monitoring with intelligent alerting Phase 2 Week 5: High Availability & Infrastructure Resilience",
+      "failureImpact": "critical",
+      "filePath": "infrastructure/high-availability/health-monitoring.js",
+      "healthCheck": {
+        "endpoint": "/health",
+        "type": "http"
+      },
+      "id": "high-availability-health-monitoring",
+      "lastModified": "2025-08-21T21:13:42.544Z",
+      "name": "Health Monitoring",
+      "ports": [],
+      "requiredUpstreams": [
+        "database",
+        "monitoring",
+        "metrics"
+      ],
+      "subcategory": "health-monitoring.js",
+      "type": "database",
+      "version": "1.0.0"
+    },
+    {
+      "category": "high-availability",
+      "className": "MultiRegionDeploymentSystem",
+      "description": "Multi-Region Deployment System Enterprise-grade deployment orchestration across multiple regions Phase 2 Week 5: High Availability & Infrastructure Resilience",
+      "failureImpact": "critical",
+      "filePath": "infrastructure/high-availability/multi-region-deployment.js",
+      "healthCheck": {
+        "endpoint": "/health",
+        "type": "http"
+      },
+      "id": "high-availability-multi-region-deployment",
+      "lastModified": "2025-08-21T21:13:42.544Z",
+      "name": "Multi Region Deployment",
+      "ports": [],
+      "requiredUpstreams": [
+        "database",
+        "monitoring",
+        "metrics"
+      ],
+      "subcategory": "multi-region-deployment.js",
+      "type": "database"
+    },
+    {
+      "category": "integration",
+      "className": "ComponentDependencyAnalyzer",
+      "description": "Component Dependency Analyzer Lead Infrastructure Architect: Component dependency mapping and documentation * Analyzes dependencies between 35+ infrastructure components and generates comprehensive startup order documentation and dependency visualization",
+      "failureImpact": "critical",
+      "filePath": "infrastructure/integration/component-dependency-analyzer.js",
+      "healthCheck": {
+        "endpoint": "/health",
+        "type": "http"
+      },
+      "id": "integration-component-dependency-analyzer",
+      "lastModified": "2025-08-21T21:13:42.545Z",
+      "name": "Component Dependency Analyzer",
+      "ports": [],
+      "requiredUpstreams": [
+        "chain",
+        "auth",
+        "gateway",
+        "monitoring",
+        "metrics",
+        "logging"
+      ],
+      "subcategory": "component-dependency-analyzer.js",
+      "type": "middleware",
+      "version": "1.0.0"
+    },
+    {
+      "category": "integration",
+      "className": "InfrastructureIntegrationPlatform",
+      "description": "Infrastructure Integration Platform Lead Infrastructure Architect: Overall system design and integration * Provides unified orchestration, discovery, and coordination across all 35+ enterprise components Manages cross-component dependencies, health monitoring, and data flow optimization",
+      "failureImpact": "critical",
+      "filePath": "infrastructure/integration/infrastructure-integration-platform.js",
+      "healthCheck": {
+        "endpoint": "/health",
+        "type": "http"
+      },
+      "id": "integration-infrastructure-integration-platform",
+      "lastModified": "2025-08-21T21:13:42.545Z",
+      "name": "Infrastructure Integration Platform",
+      "ports": [],
+      "requiredUpstreams": [
+        "auth",
+        "gateway",
+        "monitoring",
+        "metrics",
+        "logging"
+      ],
+      "subcategory": "infrastructure-integration-platform.js",
+      "type": "middleware"
+    },
+    {
+      "category": "monitoring",
+      "description": "metrics-collector.js Prometheus-compatible metrics collection service for MerajutASA.id Implements comprehensive observability for all microservices",
+      "failureImpact": "medium",
+      "filePath": "infrastructure/monitoring/metrics-collector.js",
+      "healthCheck": {
+        "endpoint": "/health",
+        "type": "http"
+      },
+      "id": "monitoring-metrics-collector",
+      "lastModified": "2025-08-21T21:13:42.546Z",
+      "name": "Metrics Collector",
+      "ports": [
+        4601,
+        4602,
+        4603,
+        4604,
+        4605,
+        9090,
+        "env:METRICS_PORT"
+      ],
+      "requiredUpstreams": [
+        "signer",
+        "chain",
+        "collector",
+        "metrics"
+      ],
+      "subcategory": "metrics-collector.js",
+      "type": "cache",
+      "version": "1.0.0"
+    },
+    {
+      "category": "monitoring",
+      "description": "structured-logger.js Centralized structured logging service for MerajutASA.id Implements JSON structured logging with log levels, correlation IDs, and audit trails",
+      "failureImpact": "medium",
+      "filePath": "infrastructure/monitoring/structured-logger.js",
+      "healthCheck": {
+        "status": "no health check implemented",
+        "type": "none"
+      },
+      "id": "monitoring-structured-logger",
+      "lastModified": "2025-08-21T21:13:42.546Z",
+      "name": "Structured Logger",
+      "ports": [],
+      "requiredUpstreams": [
+        "metrics",
+        "logging"
+      ],
+      "subcategory": "structured-logger.js",
+      "type": "monitoring"
+    },
+    {
+      "category": "observability",
+      "className": "AdvancedMetricsCollector",
+      "description": "MerajutASA.id - Phase 2 Week 3: Advanced Metrics Collection System * Enterprise-grade metrics collection with custom business metrics Extends basic Prometheus with domain-specific metrics for governance * Features: - Business metrics (signing ops, chain ops, equity scoring) - Custom metric aggregations - Real-time metric streaming - Historical trend analysis - Metric correlation and anomaly detection * @version 1.0.0 @since Phase 2 Week 3",
+      "failureImpact": "critical",
+      "filePath": "infrastructure/observability/metrics/advanced-metrics-collector.js",
+      "healthCheck": {
+        "endpoint": "/health",
+        "type": "http"
+      },
+      "id": "observability-metrics-advanced-metrics-collector",
+      "lastModified": "2025-08-21T21:13:42.546Z",
+      "name": "Advanced Metrics Collector",
+      "ports": [],
+      "requiredUpstreams": [
+        "chain",
+        "collector",
+        "database",
+        "monitoring",
+        "metrics"
+      ],
+      "subcategory": "metrics",
+      "type": "database"
+    },
+    {
+      "category": "observability",
+      "className": "AdvancedObservabilitySystem",
+      "description": "MerajutASA.id - Phase 2 Week 3: Advanced Observability System * Main orchestrator for the advanced observability infrastructure Integrates all observability components into a unified system * Features: - Unified observability API - Component lifecycle management - Cross-component data correlation - Health monitoring and self-healing - Configuration management - Performance optimization * @version 1.0.0 @since Phase 2 Week 3",
+      "failureImpact": "high",
+      "filePath": "infrastructure/observability/advanced-observability-system.js",
+      "healthCheck": {
+        "endpoint": "/health",
+        "type": "http"
+      },
+      "id": "observability-advanced-observability-system",
+      "lastModified": "2025-08-21T21:13:42.546Z",
+      "name": "Advanced Observability System",
+      "ports": [],
+      "requiredUpstreams": [
+        "tracing/distributed-tracing",
+        "metrics/advanced-metrics-collector",
+        "alerting/intelligent-alerting",
+        "logs/log-aggregation",
+        "anomaly/anomaly-detection",
+        "dashboards/real-time-dashboards",
+        "auth",
+        "monitoring",
+        "logging"
+      ],
+      "subcategory": "advanced-observability-system.js",
+      "type": "observability",
+      "version": "1.0.0"
+    },
+    {
+      "category": "observability",
+      "className": "AnomalyDetectionSystem",
+      "description": "MerajutASA.id - Phase 2 Week 3: Anomaly Detection System * Advanced anomaly detection for system and business metrics Provides intelligent anomaly detection using statistical methods * Features: - Statistical anomaly detection (Z-score, IQR) - Machine learning-based detection - Business logic anomaly detection - Real-time anomaly alerting - Historical baseline learning - Adaptive thresholds * @version 1.0.0 @since Phase 2 Week 3",
+      "failureImpact": "medium",
+      "filePath": "infrastructure/observability/anomaly/anomaly-detection.js",
+      "healthCheck": {
+        "endpoint": "/health",
+        "type": "http"
+      },
+      "id": "observability-anomaly-anomaly-detection",
+      "lastModified": "2025-08-21T21:13:42.546Z",
+      "name": "Anomaly Detection",
+      "ports": [],
+      "requiredUpstreams": [
+        "chain",
+        "metrics"
+      ],
+      "subcategory": "anomaly",
+      "type": "observability"
+    },
+    {
+      "category": "observability",
+      "className": "DistributedTracing",
+      "description": "MerajutASA.id - Phase 2 Week 3: Distributed Tracing System * Advanced distributed tracing implementation with OpenTelemetry Provides end-to-end request tracking across all microservices * Features: - OpenTelemetry-compatible tracing - Jaeger export for visualization - Service dependency mapping - Performance bottleneck identification - Cross-service correlation * @version 1.0.0 @since Phase 2 Week 3",
+      "failureImpact": "critical",
+      "filePath": "infrastructure/observability/tracing/distributed-tracing.js",
+      "healthCheck": {
+        "endpoint": "/health",
+        "type": "http"
+      },
+      "id": "observability-tracing-distributed-tracing",
+      "lastModified": "2025-08-21T21:13:42.547Z",
+      "name": "Distributed Tracing",
+      "ports": [],
+      "requiredUpstreams": [
+        "signer",
+        "chain",
+        "collector",
+        "database"
+      ],
+      "subcategory": "tracing",
+      "type": "database"
+    },
+    {
+      "category": "observability",
+      "className": "IntelligentAlertingSystem",
+      "description": "MerajutASA.id - Phase 2 Week 3: Intelligent Alerting System * Advanced alerting with escalation, correlation, and anomaly detection Provides intelligent alert management for enterprise operations * Features: - Multi-channel alerting (email, Slack, PagerDuty, webhooks) - Intelligent escalation policies - Alert correlation and deduplication - Anomaly-based alerting - Customizable alert rules * @version 1.0.0 @since Phase 2 Week 3",
+      "failureImpact": "medium",
+      "filePath": "infrastructure/observability/alerting/intelligent-alerting.js",
+      "healthCheck": {
+        "endpoint": "/health",
+        "type": "http"
+      },
+      "id": "observability-alerting-intelligent-alerting",
+      "lastModified": "2025-08-21T21:13:42.546Z",
+      "name": "Intelligent Alerting",
+      "ports": [
+        "env:SMTP_PORT"
+      ],
+      "requiredUpstreams": [
+        "chain",
+        "auth",
+        "metrics"
+      ],
+      "subcategory": "alerting",
+      "type": "worker"
+    },
+    {
+      "category": "observability",
+      "className": "LogAggregationSystem",
+      "description": "MerajutASA.id - Phase 2 Week 3: Log Aggregation System * Enterprise-grade log aggregation and management system Provides centralized logging with structured data and correlation * Features: - Structured logging with correlation IDs - Log level management and filtering - Audit trail integration - Security event logging - Performance and error tracking * @version 1.0.0 @since Phase 2 Week 3",
+      "failureImpact": "medium",
+      "filePath": "infrastructure/observability/logs/log-aggregation.js",
+      "healthCheck": {
+        "status": "no health check implemented",
+        "type": "none"
+      },
+      "id": "observability-logs-log-aggregation",
+      "lastModified": "2025-08-21T21:13:42.546Z",
+      "name": "Log Aggregation",
+      "ports": [],
+      "requiredUpstreams": [
+        "logging"
+      ],
+      "subcategory": "logs",
+      "type": "observability"
+    },
+    {
+      "category": "observability",
+      "className": "RealTimeMonitoringDashboards",
+      "description": "MerajutASA.id - Phase 2 Week 3: Real-time Monitoring Dashboards * Advanced dashboard system with real-time metrics and visualization Provides comprehensive monitoring dashboards for operations teams * Features: - Real-time metric streaming - Interactive dashboard widgets - Custom dashboard creation - Alert integration with dashboards - Historical data visualization - Export and sharing capabilities * @version 1.0.0 @since Phase 2 Week 3",
+      "failureImpact": "high",
+      "filePath": "infrastructure/observability/dashboards/real-time-dashboards.js",
+      "healthCheck": {
+        "endpoint": "/health",
+        "type": "http"
+      },
+      "id": "observability-dashboards-real-time-dashboards",
+      "lastModified": "2025-08-21T21:13:42.546Z",
+      "name": "Real Time Dashboards",
+      "ports": [],
+      "requiredUpstreams": [
+        "signer",
+        "chain",
+        "collector",
+        "auth",
+        "database",
+        "monitoring",
+        "metrics"
+      ],
+      "subcategory": "dashboards",
+      "type": "service",
+      "version": "1.0.0"
+    },
+    {
+      "category": "performance",
+      "className": "CacheStrategies",
+      "description": "Multi-Layer Cache Strategies for Phase 2 Week 2 Performance Enhancement Implements intelligent caching with multiple strategies and automatic invalidation",
+      "failureImpact": "low",
+      "filePath": "infrastructure/performance/cache/cache-strategies.js",
+      "healthCheck": {
+        "endpoint": "/health",
+        "type": "http"
+      },
+      "id": "performance-cache-cache-strategies",
+      "lastModified": "2025-08-21T21:13:42.547Z",
+      "name": "Cache Strategies",
+      "ports": [],
+      "requiredUpstreams": [
+        "redis-manager",
+        "redis",
+        "monitoring"
+      ],
+      "subcategory": "cache",
+      "type": "cache"
+    },
+    {
+      "category": "performance",
+      "className": "ConnectionPoolManager",
+      "description": "Connection Pool Manager for Phase 2 Week 2 Performance Enhancement Provides intelligent connection pooling with resource optimization",
+      "failureImpact": "low",
+      "filePath": "infrastructure/performance/optimization/connection-pool.js",
+      "healthCheck": {
+        "endpoint": "/health",
+        "type": "http"
+      },
+      "id": "performance-optimization-connection-pool",
+      "lastModified": "2025-08-21T21:13:42.547Z",
+      "name": "Connection Pool",
+      "ports": [],
+      "requiredUpstreams": [
+        "monitoring",
+        "metrics"
+      ],
+      "subcategory": "optimization",
+      "type": "worker"
+    },
+    {
+      "category": "performance",
+      "className": "EnhancedSignerService",
+      "description": "Enhanced Signer Service with Performance Optimizations Phase 2 Week 2+ Integration",
+      "failureImpact": "high",
+      "filePath": "infrastructure/performance/services/enhanced-signer.js",
+      "healthCheck": {
+        "endpoint": "/sign",
+        "type": "http"
+      },
+      "id": "performance-services-enhanced-signer",
+      "lastModified": "2025-08-21T21:13:42.547Z",
+      "name": "Enhanced Signer",
+      "ports": [],
+      "requiredUpstreams": [
+        "cache/cache-strategies",
+        "optimization/response-compression",
+        "monitoring/sla-monitor",
+        "monitoring/performance-monitor",
+        "signer",
+        "metrics"
+      ],
+      "subcategory": "services",
+      "type": "cache"
+    },
+    {
+      "category": "performance",
+      "className": "PerformanceMonitor",
+      "description": "Performance Monitor for Phase 2 Week 2 Performance Enhancement Provides comprehensive performance tracking with intelligent analysis",
+      "failureImpact": "critical",
+      "filePath": "infrastructure/performance/monitoring/performance-monitor.js",
+      "healthCheck": {
+        "endpoint": "/health",
+        "type": "http"
+      },
+      "id": "performance-monitoring-performance-monitor",
+      "lastModified": "2025-08-21T21:13:42.547Z",
+      "name": "Performance Monitor",
+      "ports": [],
+      "requiredUpstreams": [
+        "database",
+        "monitoring",
+        "metrics"
+      ],
+      "subcategory": "monitoring",
+      "type": "database"
+    },
+    {
+      "category": "performance",
+      "className": "RedisManager",
+      "description": "Redis Cache Manager for Phase 2 Week 2 Performance Enhancement Provides multi-layer caching with intelligent invalidation",
+      "failureImpact": "critical",
+      "filePath": "infrastructure/performance/cache/redis-manager.js",
+      "healthCheck": {
+        "endpoint": "/health",
+        "type": "http"
+      },
+      "id": "performance-cache-redis-manager",
+      "lastModified": "2025-08-21T21:13:42.547Z",
+      "name": "Redis Manager",
+      "ports": [
+        6379,
+        "env:REDIS_PORT"
+      ],
+      "requiredUpstreams": [
+        "redis"
+      ],
+      "subcategory": "cache",
+      "type": "database"
+    },
+    {
+      "category": "performance",
+      "className": "ResponseCompression",
+      "description": "Response Compression Manager for Phase 2 Week 2 Performance Enhancement Provides intelligent response compression with performance optimization",
+      "failureImpact": "low",
+      "filePath": "infrastructure/performance/optimization/response-compression.js",
+      "healthCheck": {
+        "endpoint": "/health",
+        "type": "http"
+      },
+      "id": "performance-optimization-response-compression",
+      "lastModified": "2025-08-21T21:13:42.547Z",
+      "name": "Response Compression",
+      "ports": [],
+      "requiredUpstreams": [],
+      "subcategory": "optimization",
+      "type": "cache"
+    },
+    {
+      "category": "performance",
+      "className": "SLAMonitor",
+      "description": "SLA Monitor for Phase 2 Week 2 Performance Enhancement Provides comprehensive SLA tracking with intelligent alerting",
+      "failureImpact": "low",
+      "filePath": "infrastructure/performance/monitoring/sla-monitor.js",
+      "healthCheck": {
+        "endpoint": "/health",
+        "type": "http"
+      },
+      "id": "performance-monitoring-sla-monitor",
+      "lastModified": "2025-08-21T21:13:42.547Z",
+      "name": "Sla Monitor",
+      "ports": [],
+      "requiredUpstreams": [
+        "chain",
+        "collector",
+        "monitoring",
+        "metrics"
+      ],
+      "subcategory": "monitoring",
+      "type": "optimization"
+    },
+    {
+      "category": "security",
+      "description": "input-validator.js Comprehensive input validation middleware for MerajutASA.id services Implements OWASP input validation and sanitization best practices",
+      "failureImpact": "medium",
+      "filePath": "infrastructure/security/input-validator.js",
+      "healthCheck": {
+        "status": "no health check implemented",
+        "type": "none"
+      },
+      "id": "security-input-validator",
+      "lastModified": "2025-08-21T21:13:42.548Z",
+      "name": "Input Validator",
+      "ports": [],
+      "requiredUpstreams": [
+        "signer",
+        "chain",
+        "collector"
+      ],
+      "subcategory": "input-validator.js",
+      "type": "security"
+    },
+    {
+      "category": "security",
+      "description": "rate-limiter.js Advanced rate limiting middleware for MerajutASA.id services Implements token bucket, sliding window, and adaptive rate limiting",
+      "failureImpact": "medium",
+      "filePath": "infrastructure/security/rate-limiter.js",
+      "healthCheck": {
+        "status": "no health check implemented",
+        "type": "none"
+      },
+      "id": "security-rate-limiter",
+      "lastModified": "2025-08-21T21:13:42.548Z",
+      "name": "Rate Limiter",
+      "ports": [],
+      "requiredUpstreams": [
+        "signer",
+        "chain",
+        "collector",
+        "database",
+        "metrics"
+      ],
+      "subcategory": "rate-limiter.js",
+      "type": "worker"
+    },
+    {
+      "category": "security",
+      "className": "SecurityHardening",
+      "description": "Enhanced Security Hardening System for MerajutASA.id * Provides comprehensive security hardening capabilities including: - Advanced threat detection and prevention - Automated security scanning and vulnerability assessment - Security policy enforcement and compliance - Incident response automation - Security metrics and reporting - Zero-trust architecture implementation * Features: - Real-time threat monitoring and response - Automated security configuration validation - Advanced intrusion detection and prevention - Security orchestration and automated response (SOAR) - Comprehensive security audit and compliance reporting",
+      "failureImpact": "critical",
+      "filePath": "infrastructure/security/enhanced/security-hardening.js",
+      "healthCheck": {
+        "status": "no health check implemented",
+        "type": "none"
+      },
+      "id": "security-enhanced-security-hardening",
+      "lastModified": "2025-08-21T21:13:42.548Z",
+      "name": "Security Hardening",
+      "ports": [],
+      "requiredUpstreams": [
+        "../compliance/audit-system",
+        "auth",
+        "database",
+        "monitoring",
+        "metrics",
+        "logging"
+      ],
+      "subcategory": "enhanced",
+      "type": "database"
+    }
+  ],
+  "metadata": {
+    "generatedAt": "2025-08-21T21:18:52.967Z",
+    "generator": "component-inventory-generator",
+    "source": "infrastructure/ directory scan",
+    "totalComponents": 38,
+    "version": "1.0.0"
+  }
+}
