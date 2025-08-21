@@ -15,9 +15,209 @@
  * @since Phase 2 Week 3
  */
 
-import prometheus from 'prom-client';
 import EventEmitter from 'events';
 import { performance } from 'perf_hooks';
+
+// Lightweight Prometheus client fallback
+class LightweightRegistry {
+  constructor() {
+    this.metrics = new Map();
+    this.defaultMetricsInterval = null;
+  }
+
+  register(metric) {
+    this.metrics.set(metric.name, metric);
+  }
+
+  clear() {
+    if (this.defaultMetricsInterval) {
+      clearInterval(this.defaultMetricsInterval);
+    }
+    this.metrics.clear();
+  }
+
+  async metrics() {
+    const lines = [];
+    for (const [name, metric] of this.metrics) {
+      lines.push(...metric.toPrometheusString());
+    }
+    return lines.join('\n');
+  }
+
+  async getMetricsAsJSON() {
+    const result = [];
+    for (const [name, metric] of this.metrics) {
+      result.push(metric.toJSON());
+    }
+    return result;
+  }
+}
+
+class LightweightMetric {
+  constructor(config, type) {
+    this.name = config.name;
+    this.help = config.help;
+    this.labelNames = config.labelNames || [];
+    this.type = type;
+    this.values = new Map();
+    
+    if (config.registers) {
+      config.registers.forEach(registry => registry.register(this));
+    }
+  }
+
+  toPrometheusString() {
+    const lines = [`# HELP ${this.name} ${this.help}`, `# TYPE ${this.name} ${this.type}`];
+    
+    for (const [labelKey, value] of this.values) {
+      if (labelKey === '__default__') {
+        lines.push(`${this.name} ${value.value}`);
+      } else {
+        lines.push(`${this.name}{${labelKey}} ${value.value}`);
+      }
+    }
+    
+    return lines;
+  }
+
+  toJSON() {
+    return {
+      name: this.name,
+      help: this.help,
+      type: this.type,
+      values: Array.from(this.values.entries()).map(([labelKey, value]) => ({
+        labels: labelKey === '__default__' ? {} : JSON.parse(labelKey),
+        value: value.value,
+        timestamp: value.timestamp
+      }))
+    };
+  }
+
+  _getLabelKey(labels = {}) {
+    if (Object.keys(labels).length === 0) return '__default__';
+    return JSON.stringify(labels);
+  }
+}
+
+class LightweightCounter extends LightweightMetric {
+  constructor(config) {
+    super(config, 'counter');
+  }
+
+  inc(labels = {}, value = 1) {
+    const key = this._getLabelKey(labels);
+    const current = this.values.get(key) || { value: 0, timestamp: Date.now() };
+    this.values.set(key, { value: current.value + value, timestamp: Date.now() });
+  }
+}
+
+class LightweightGauge extends LightweightMetric {
+  constructor(config) {
+    super(config, 'gauge');
+  }
+
+  set(labels = {}, value) {
+    const key = this._getLabelKey(labels);
+    this.values.set(key, { value, timestamp: Date.now() });
+  }
+
+  inc(labels = {}, value = 1) {
+    const key = this._getLabelKey(labels);
+    const current = this.values.get(key) || { value: 0, timestamp: Date.now() };
+    this.values.set(key, { value: current.value + value, timestamp: Date.now() });
+  }
+
+  dec(labels = {}, value = 1) {
+    this.inc(labels, -value);
+  }
+}
+
+class LightweightHistogram extends LightweightMetric {
+  constructor(config) {
+    super(config, 'histogram');
+    this.buckets = config.buckets || [0.1, 0.5, 1, 2, 5, 10];
+    this.observations = new Map();
+  }
+
+  observe(labels = {}, value) {
+    const key = this._getLabelKey(labels);
+    const observations = this.observations.get(key) || [];
+    observations.push({ value, timestamp: Date.now() });
+    this.observations.set(key, observations);
+
+    // Update histogram buckets
+    for (const bucket of this.buckets) {
+      const bucketKey = `${key}_bucket_${bucket}`;
+      const bucketCount = observations.filter(obs => obs.value <= bucket).length;
+      this.values.set(bucketKey, { value: bucketCount, timestamp: Date.now() });
+    }
+    
+    // Update count and sum
+    this.values.set(`${key}_count`, { value: observations.length, timestamp: Date.now() });
+    this.values.set(`${key}_sum`, { 
+      value: observations.reduce((sum, obs) => sum + obs.value, 0), 
+      timestamp: Date.now() 
+    });
+  }
+}
+
+class LightweightSummary extends LightweightMetric {
+  constructor(config) {
+    super(config, 'summary');
+    this.percentiles = config.percentiles || [0.5, 0.9, 0.95, 0.99];
+    this.observations = new Map();
+  }
+
+  observe(labels = {}, value) {
+    const key = this._getLabelKey(labels);
+    const observations = this.observations.get(key) || [];
+    observations.push({ value, timestamp: Date.now() });
+    observations.sort((a, b) => a.value - b.value);
+    this.observations.set(key, observations);
+
+    // Calculate percentiles
+    for (const percentile of this.percentiles) {
+      const index = Math.ceil(percentile * observations.length) - 1;
+      const percentileValue = observations[Math.max(0, index)]?.value || 0;
+      this.values.set(`${key}_${percentile}`, { value: percentileValue, timestamp: Date.now() });
+    }
+
+    // Update count and sum
+    this.values.set(`${key}_count`, { value: observations.length, timestamp: Date.now() });
+    this.values.set(`${key}_sum`, { 
+      value: observations.reduce((sum, obs) => sum + obs.value, 0), 
+      timestamp: Date.now() 
+    });
+  }
+}
+
+// Try to import real prometheus client, fall back to lightweight implementation
+let prometheus;
+
+try {
+  prometheus = await import('prom-client');
+  console.log('✅ Using full Prometheus client implementation');
+} catch (error) {
+  console.log('ℹ️ Prometheus client not available, using lightweight fallback');
+  
+  prometheus = {
+    Registry: LightweightRegistry,
+    Counter: LightweightCounter,
+    Gauge: LightweightGauge,
+    Histogram: LightweightHistogram,
+    Summary: LightweightSummary,
+    collectDefaultMetrics: (config) => {
+      console.log('📊 Default metrics collection simulated');
+      // Simulate default metrics collection
+      if (config.register) {
+        const interval = setInterval(() => {
+          // This would normally collect Node.js metrics
+        }, 10000);
+        config.register.defaultMetricsInterval = interval;
+      }
+    }
+  };
+}
 
 export class AdvancedMetricsCollector extends EventEmitter {
   constructor(config = {}) {

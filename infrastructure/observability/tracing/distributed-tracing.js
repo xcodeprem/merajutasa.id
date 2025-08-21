@@ -15,13 +15,163 @@
  * @since Phase 2 Week 3
  */
 
-import { trace, context, SpanStatusCode, SpanKind } from '@opentelemetry/api';
-import { NodeSDK } from '@opentelemetry/auto-instrumentations-node';
-import { Resource } from '@opentelemetry/resources';
-import { SemanticResourceAttributes } from '@opentelemetry/semantic-conventions';
-import { JaegerExporter } from '@opentelemetry/exporter-jaeger';
-import { BatchSpanProcessor } from '@opentelemetry/sdk-trace-base';
+// Lightweight fallback implementations for observability without external dependencies
 import { v4 as uuidv4 } from 'uuid';
+
+// Fallback OpenTelemetry API implementations
+const SpanStatusCode = {
+  OK: 1,
+  ERROR: 2
+};
+
+const SpanKind = {
+  INTERNAL: 0,
+  SERVER: 1,
+  CLIENT: 2,
+  PRODUCER: 3,
+  CONSUMER: 4
+};
+
+// Lightweight span implementation
+class LightweightSpan {
+  constructor(name, parentSpan = null) {
+    this.name = name;
+    this.traceId = uuidv4();
+    this.spanId = uuidv4();
+    this.parentSpanId = parentSpan?.spanId || null;
+    this.startTime = Date.now();
+    this.endTime = null;
+    this.attributes = {};
+    this.events = [];
+    this.status = { code: SpanStatusCode.OK };
+  }
+
+  setAttributes(attributes) {
+    Object.assign(this.attributes, attributes);
+    return this;
+  }
+
+  addEvent(name, attributes = {}) {
+    this.events.push({
+      name,
+      timestamp: Date.now(),
+      attributes
+    });
+    return this;
+  }
+
+  setStatus(status) {
+    this.status = status;
+    return this;
+  }
+
+  end() {
+    this.endTime = Date.now();
+  }
+
+  recordException(error) {
+    this.addEvent('exception', {
+      'exception.type': error.constructor.name,
+      'exception.message': error.message,
+      'exception.stacktrace': error.stack
+    });
+    this.setStatus({ code: SpanStatusCode.ERROR });
+  }
+}
+
+// Lightweight tracer implementation
+class LightweightTracer {
+  constructor(serviceName) {
+    this.serviceName = serviceName;
+    this.activeSpans = new Map();
+  }
+
+  startSpan(name, options = {}) {
+    const parentSpan = options.parent || this.getActiveSpan();
+    const span = new LightweightSpan(name, parentSpan);
+    
+    if (options.attributes) {
+      span.setAttributes(options.attributes);
+    }
+
+    this.activeSpans.set(span.spanId, span);
+    return span;
+  }
+
+  getActiveSpan() {
+    const spanIds = Array.from(this.activeSpans.keys());
+    return spanIds.length > 0 ? this.activeSpans.get(spanIds[spanIds.length - 1]) : null;
+  }
+}
+
+// Lightweight context implementation
+const context = {
+  active() {
+    return {};
+  },
+  with(contextValue, fn, ...args) {
+    return fn(...args);
+  }
+};
+
+// Try to import real OpenTelemetry packages, fall back to lightweight implementation
+let trace, NodeSDK, Resource, SemanticResourceAttributes, JaegerExporter, BatchSpanProcessor;
+
+try {
+  const otelApi = await import('@opentelemetry/api');
+  const otelNode = await import('@opentelemetry/auto-instrumentations-node');
+  const otelResources = await import('@opentelemetry/resources');
+  const otelSemantic = await import('@opentelemetry/semantic-conventions');
+  const otelJaeger = await import('@opentelemetry/exporter-jaeger');
+  const otelTrace = await import('@opentelemetry/sdk-trace-base');
+
+  trace = otelApi.trace;
+  NodeSDK = otelNode.NodeSDK;
+  Resource = otelResources.Resource;
+  SemanticResourceAttributes = otelSemantic.SemanticResourceAttributes;
+  JaegerExporter = otelJaeger.JaegerExporter;
+  BatchSpanProcessor = otelTrace.BatchSpanProcessor;
+
+  console.log('✅ Using full OpenTelemetry implementation');
+} catch (error) {
+  console.log('ℹ️ OpenTelemetry packages not available, using lightweight fallback');
+  
+  // Use lightweight implementations
+  trace = {
+    getTracer: (name) => new LightweightTracer(name)
+  };
+  
+  NodeSDK = class {
+    constructor(config) { this.config = config; }
+    start() { console.log('🔍 Lightweight tracing SDK started'); }
+    shutdown() { console.log('🔍 Lightweight tracing SDK shutdown'); }
+  };
+  
+  Resource = class {
+    static default() { return new Resource({}); }
+    constructor(attributes) { 
+      this.attributes = attributes || {}; 
+    }
+    merge(other) {
+      return new Resource({ ...this.attributes, ...other.attributes });
+    }
+  };
+  
+  SemanticResourceAttributes = {
+    SERVICE_NAME: 'service.name',
+    SERVICE_VERSION: 'service.version'
+  };
+  
+  JaegerExporter = class {
+    constructor(config) { this.config = config; }
+    shutdown() { return Promise.resolve(); }
+  };
+  
+  BatchSpanProcessor = class {
+    constructor(exporter) { this.exporter = exporter; }
+    shutdown() { return Promise.resolve(); }
+  };
+}
 
 export class DistributedTracing {
   constructor(config = {}) {
