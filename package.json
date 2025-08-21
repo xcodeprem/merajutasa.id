@@ -13,6 +13,7 @@
   "scripts": {
     "project:spotcheck": "node tools/github/project-spotcheck.js --owner=Andhika-Rey --repo=merajutasa.id",
     "project:sync": "node tools/github/project-sync-item.js",
+  "project:token:diag": "node tools/github/project-token-diagnostics.js",
     "project:feature-release": "node tools/github/personal-projects-automation.js feature-release",
     "project:team-retrospective": "node tools/github/personal-projects-automation.js team-retrospective",
     "project:iterative-development": "node tools/github/personal-projects-automation.js iterative-development",
@@ -260,6 +261,7 @@
   },
   "dependencies": {
     "@octokit/rest": "^22.0.0",
+  "@octokit/graphql": "^7.0.2",
     "compression": "^1.7.4",
     "concurrently": "^9.2.0",
     "cors": "^2.8.5",

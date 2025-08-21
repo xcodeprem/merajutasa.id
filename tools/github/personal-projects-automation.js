@@ -6,6 +6,7 @@
  */
 
 import { Octokit } from '@octokit/rest';
+import { graphql as baseGraphql } from '@octokit/graphql';
 import { promises as fs } from 'fs';
 
 // Project Configuration
@@ -126,6 +127,16 @@ export function createClient(token) {
     throw new Error('GitHub token is required');
   }
   return new Octokit({ auth: token });
+}
+
+/**
+ * Initialize GraphQL client
+ */
+export function createGraphQL(token) {
+  if (!token) {
+    throw new Error('GitHub token is required');
+  }
+  return baseGraphql.defaults({ headers: { authorization: `token ${token}` } });
 }
 
 /**
@@ -345,6 +356,7 @@ export async function saveAutomationReport(projectKey, results) {
  */
 export async function automateProjectIntegration(token, projectKey, prNumber = null, dryRun = false) {
   const octokit = createClient(token);
+  const graphql = createGraphQL(token);
   const projectConfig = getProjectConfig(projectKey);
   const results = [];
   
@@ -381,6 +393,129 @@ export async function automateProjectIntegration(token, projectKey, prNumber = n
       }
     }
 
+    // Fetch project and its fields (GraphQL)
+    async function fetchUserProject(ownerLogin, projectNumber) {
+      const data = await graphql(
+        `query($owner:String!, $number:Int!) {
+          user(login: $owner) {
+            projectV2(number: $number) {
+              id
+              title
+              url
+              fields(first: 100) {
+                nodes {
+                  __typename
+                  id
+                  name
+                  dataType
+                  ... on ProjectV2SingleSelectField { options { id name } }
+                }
+              }
+            }
+          }
+        }`,
+        { owner: ownerLogin, number: projectNumber }
+      );
+      const proj = data?.user?.projectV2;
+      if (!proj?.id) throw new Error(`Project V2 not found for ${ownerLogin} #${projectNumber}`);
+      return proj;
+    }
+
+    // Find field by name (case-insensitive)
+    function findFieldByName(project, name) {
+      const nodes = project?.fields?.nodes || [];
+      return nodes.find(f => (f.name || '').toLowerCase() === name.toLowerCase());
+    }
+
+    // Get PR node id via GraphQL
+    async function getPullRequestNodeId(ownerLogin, repoName, number) {
+      const data = await graphql(
+        `query($owner:String!, $repo:String!, $number:Int!) {
+          repository(owner: $owner, name: $repo) {
+            pullRequest(number: $number) { id number }
+          }
+        }`,
+        { owner: ownerLogin, repo: repoName, number }
+      );
+      return data?.repository?.pullRequest?.id || null;
+    }
+
+    // Ensure PR is in project, return itemId
+    async function ensureProjectItemForPR(ownerLogin, projectNumber, projectId, prNodeId) {
+      // Try to add; if fails because exists, fall back to lookup
+      try {
+        const add = await graphql(
+          `mutation($projectId:ID!, $contentId:ID!) {
+            addProjectV2ItemById(input: { projectId: $projectId, contentId: $contentId }) {
+              item { id }
+            }
+          }`,
+          { projectId, contentId: prNodeId }
+        );
+        const itemId = add?.addProjectV2ItemById?.item?.id;
+        if (itemId) return itemId;
+      } catch (e) {
+        const msg = (e?.message || '').toLowerCase();
+        if (!msg.includes('already') && !msg.includes('exists')) throw e;
+        // continue to lookup
+      }
+      // Lookup items to find existing item id
+      const data = await graphql(
+        `query($owner:String!, $number:Int!) {
+          user(login: $owner) {
+            projectV2(number: $number) {
+              items(first: 100) {
+                nodes {
+                  id
+                  content { __typename ... on PullRequest { id number } }
+                }
+              }
+            }
+          }
+        }`,
+        { owner: ownerLogin, number: projectNumber }
+      );
+      const nodes = data?.user?.projectV2?.items?.nodes || [];
+      const found = nodes.find(n => n?.content?.__typename === 'PullRequest' && n?.content?.id === prNodeId);
+      return found?.id || null;
+    }
+
+    // Update field helper
+    async function updateFieldValue(projectId, itemId, field, value) {
+      const typename = field.__typename;
+      const dataType = (field.dataType || '').toUpperCase();
+      const input = { projectId, itemId, fieldId: field.id, value: {} };
+      if (dataType === 'SINGLE_SELECT' || typename === 'ProjectV2SingleSelectField') {
+        const opts = (field.options || []).map(o => ({ id: o.id, name: o.name }));
+        const match = opts.find(o => (o.name || '').toLowerCase() === String(value).toLowerCase());
+        if (!match) {
+          throw new Error(`Option not found for field ${field.name}: ${value}`);
+        }
+        input.value = { singleSelectOptionId: match.id };
+      } else if (dataType === 'NUMBER') {
+        const num = typeof value === 'number' ? value : Number(value);
+        if (!Number.isFinite(num)) throw new Error(`Invalid number for field ${field.name}: ${value}`);
+        input.value = { number: num };
+      } else if (dataType === 'TEXT') {
+        input.value = { text: String(value) };
+      } else if (dataType === 'DATE') {
+        // Expect YYYY-MM-DD
+        input.value = { date: String(value) };
+      } else {
+        // Unsupported
+        return { skipped: true, reason: `Unsupported dataType ${dataType} for ${field.name}` };
+      }
+      const res = await graphql(
+        `mutation($projectId:ID!, $itemId:ID!, $fieldId:ID!, $value:ProjectV2FieldValue!) {
+          updateProjectV2ItemFieldValue(input: { projectId: $projectId, itemId: $itemId, fieldId: $fieldId, value: $value }) {
+            projectV2Item { id }
+          }
+        }`,
+        input
+      );
+      return { ok: !!res?.updateProjectV2ItemFieldValue?.projectV2Item?.id };
+    }
+
     // Get PRs to process
     let prs = [];
     if (prNumber) {
@@ -408,6 +543,14 @@ export async function automateProjectIntegration(token, projectKey, prNumber = n
       };
     }
     
+    // Resolve project via GraphQL once
+    let projectV2 = null;
+    try {
+      projectV2 = await fetchUserProject(owner, projectConfig.id);
+    } catch (e) {
+      console.warn(`[${projectKey}] Project access error: ${e.message}`);
+    }
+
     for (const pr of prs) {
       const result = {
         pr_number: pr.number,
@@ -452,11 +595,35 @@ export async function automateProjectIntegration(token, projectKey, prNumber = n
         
         result.field_mappings = fieldMappings;
         
-        // Here we would add to project and update fields via GraphQL
-        // For now, we'll simulate this
-        if (!dryRun) {
-          result.actions.push('Added to project (simulated)');
-          result.actions.push(`Updated fields: ${Object.keys(fieldMappings).join(', ')}`);
+        // Add to Project V2 and update fields via GraphQL
+        if (!dryRun && projectV2?.id) {
+          try {
+            const prNodeId = await getPullRequestNodeId(owner, repo, pr.number);
+            if (!prNodeId) throw new Error('PR node id not found');
+            const itemId = await ensureProjectItemForPR(owner, projectConfig.id, projectV2.id, prNodeId);
+            if (!itemId) throw new Error('Failed to add/find project item for PR');
+            result.actions.push(`Added to project: ${projectV2.title}`);
+
+            // Update mapped fields
+            const updatedFields = [];
+            for (const [name, val] of Object.entries(fieldMappings)) {
+              const field = findFieldByName(projectV2, name);
+              if (!field) { result.actions.push(`Field missing: ${name} (skipped)`); continue; }
+              try {
+                const upd = await updateFieldValue(projectV2.id, itemId, field, val);
+                if (upd?.ok) updatedFields.push(name);
+              } catch (fe) {
+                result.actions.push(`Field update failed ${name}: ${fe.message}`);
+              }
+            }
+            if (updatedFields.length) {
+              result.actions.push(`Updated fields: ${updatedFields.join(', ')}`);
+            }
+          } catch (pe) {
+            result.errors.push(`Project sync: ${pe.message}`);
+          }
+        } else if (!dryRun) {
+          result.actions.push('Project sync skipped (no access to Project V2)');
         }
         
         result.success = true;
