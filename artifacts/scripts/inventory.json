@@ -1,10 +1,10 @@
 {
   "tool": "scripts-inventory",
   "version": "1.0.0",
-  "generated_at": "2025-08-21T12:10:41.559Z",
+  "generated_at": "2025-08-21T12:26:17.874Z",
   "metadata": {
     "total_scripts": 238,
-    "analyzed_at": "2025-08-21T12:10:41.546Z",
+    "analyzed_at": "2025-08-21T12:26:17.861Z",
     "package_version": "0.1.2",
     "node_version": "v20.19.4"
   },
@@ -4333,12 +4333,12 @@
     "can_run_safely_count": 20
   },
   "_metadata": {
-    "generated_at": "2025-08-21T12:10:41.559Z",
+    "generated_at": "2025-08-21T12:26:17.874Z",
     "generator": "scripts-inventory",
     "version": "1.0",
-    "git_sha": "c1fb8bea61a404a56a1fd601b7797ccc72132393",
-    "run_id": "17126366273",
+    "git_sha": "43ea28e660b816bfcb200288e9186591b8e921f1",
+    "run_id": "17126799999",
     "actor": "copilot-swe-agent[bot]",
-    "git_ref": "refs/heads/copilot/fix-89"
+    "git_ref": "refs/heads/copilot/fix-90"
   }
 }
