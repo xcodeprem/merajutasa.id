@@ -1,70 +1,11 @@
-graph TD
-    %% Core Infrastructure
-    docker["Docker Runtime"]
-    monitoring["Monitoring System"] 
-    terraform["Terraform Infrastructure"]
-    
-    %% Security Layer
-    auth["Authentication Service"]
-    signer["Signing Service"] 
-    security["Security Suite"]
-    
-    %% Platform Services
-    kubernetes["Kubernetes Orchestration"]
-    api-gateway["API Gateway"]
-    reverse-proxy["Reverse Proxy"]
-    
-    %% Data Services
-    chain["Chain Service"]
-    collector["Event Collector"]
-    backup["Backup System"]
-    
-    %% Operations
-    observability["Observability Stack"]
-    performance["Performance Monitoring"]
-    high-availability["High Availability Suite"]
-    compliance["Compliance Engine"]
-    cicd["CI/CD Pipeline"]
-    
-    %% Dependencies
-    monitoring --> docker
-    auth --> monitoring
-    signer --> monitoring
-    security --> monitoring
-    backup --> monitoring
-    performance --> monitoring
-    
-    api-gateway --> auth
-    api-gateway --> monitoring
-    
-    reverse-proxy --> api-gateway
-    
-    kubernetes --> docker
-    kubernetes --> monitoring
-    
-    chain --> signer
-    chain --> monitoring
-    
-    collector --> monitoring
-    
-    observability --> monitoring
-    
-    high-availability --> kubernetes
-    high-availability --> monitoring
-    
-    compliance --> monitoring
-    compliance --> security
-    
-    cicd --> kubernetes
-    cicd --> security
-    
-    %% Styling
-    classDef platform fill:#e1f5fe
-    classDef service fill:#f3e5f5  
-    classDef infrastructure fill:#e8f5e8
-    classDef automation fill:#fff3e0
-    
-    class docker,kubernetes platform
-    class auth,signer,chain,collector,compliance service
-    class monitoring,observability,reverse-proxy,backup,security,performance,high-availability infrastructure
-    class terraform,cicd automation
+graph LR
+  gateway
+  auth
+  catalog
+  search
+  db
+  gateway --> auth
+  gateway --> catalog
+  auth --> db
+  catalog --> db
+  catalog --> search

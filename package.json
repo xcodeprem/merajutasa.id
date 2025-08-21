@@ -13,7 +13,7 @@
   "scripts": {
     "project:spotcheck": "node tools/github/project-spotcheck.js --owner=Andhika-Rey --repo=merajutasa.id",
     "project:sync": "node tools/github/project-sync-item.js",
-  "project:token:diag": "node tools/github/project-token-diagnostics.js",
+    "project:token:diag": "node tools/github/project-token-diagnostics.js",
     "project:feature-release": "node tools/github/personal-projects-automation.js feature-release",
     "project:team-retrospective": "node tools/github/personal-projects-automation.js team-retrospective",
     "project:iterative-development": "node tools/github/personal-projects-automation.js iterative-development",
@@ -249,6 +249,8 @@
     "scripts:analyze": "node tools/scripts-inventory.js",
     "scripts:organize": "node tools/organize-scripts.js",
     "scripts:docs-metrics": "node scripts/calculate-docs-metrics.js",
+    "deps:graph": "node --loader ts-node/esm scripts/deps/generate-graph.ts",
+    "deps:check": "node --loader ts-node/esm scripts/deps/check-cycles.ts",
     "compliance:assess": "node tools/compliance-assessment.js",
     "compliance:orchestrator:test": "node tools/compliance-orchestrator-test.js",
     "privacy:request:simulate": "node tools/privacy-request-simulator.js",
@@ -262,11 +264,13 @@
     "lighthouse": "^12.0.0",
     "markdownlint": "^0.38.0",
     "markdownlint-cli2": "^0.18.1",
-    "pa11y": "^9.0.0"
+    "pa11y": "^9.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
   },
   "dependencies": {
+    "@octokit/graphql": "^7.0.2",
     "@octokit/rest": "^22.0.0",
-  "@octokit/graphql": "^7.0.2",
     "compression": "^1.7.4",
     "concurrently": "^9.2.0",
     "cors": "^2.8.5",

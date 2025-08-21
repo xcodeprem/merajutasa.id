@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-21T16:31:33.872Z",
+  "generated_utc": "2025-08-21T17:41:27.774Z",
   "evidence_phase": "1.5",
   "artifacts": [
     {
@@ -8,9 +8,9 @@
       "path": "artifacts/spec-hash-diff.json",
       "exists": true,
       "size_bytes": 3717,
-      "sha256": "90f69ab54ee3f2aa7f4a394bc619396a2f8c61754c267d3c9c15bb88dcae722b",
-      "sha256_short": "90f69ab54ee3f2aa",
-      "display_hash_prefix": "90f69ab54ee3f2aa",
+      "sha256": "806b343a46c2ed85284d20cf7ca6fbc7c771306aca1bdbb5f6c136e673bedf24",
+      "sha256_short": "806b343a46c2ed85",
+      "display_hash_prefix": "806b343a46c2ed85",
       "schema_ref": "spec-hash-diff-v1.json",
       "category": "governance"
     },
@@ -40,10 +40,10 @@
       "id": "A4",
       "path": "artifacts/hype-lint.json",
       "exists": true,
-      "size_bytes": 4028,
-      "sha256": "807316151ec50ae1273da59aaafaf7aec5a78be54ef952589074e6e5bfa5b386",
-      "sha256_short": "807316151ec50ae1",
-      "display_hash_prefix": "807316151ec50ae1",
+      "size_bytes": 6108,
+      "sha256": "a59ffbec689340b7c7edc0a0c0bcec4e93acdb581998b1249dd80920ef005579",
+      "sha256_short": "a59ffbec689340b7",
+      "display_hash_prefix": "a59ffbec689340b7",
       "schema_ref": "hype-lint-v1.json",
       "category": "language"
     },
@@ -129,9 +129,9 @@
       "path": "artifacts/evidence-schema-validation.json",
       "exists": true,
       "size_bytes": 1192,
-      "sha256": "0a4ae432b79caeb553edf2859607427b8bcf5d625224294c706d41bd85c23cad",
-      "sha256_short": "0a4ae432b79caeb5",
-      "display_hash_prefix": "0a4ae432b79caeb5",
+      "sha256": "dd32a6097b4aaf6ce2e9a761375f77e001fe1a39f07f27795695d9d72bc44d28",
+      "sha256_short": "dd32a6097b4aaf6c",
+      "display_hash_prefix": "dd32a6097b4aaf6c",
       "schema_ref": null,
       "category": "meta"
     }
@@ -140,7 +140,7 @@
     "total": 12,
     "missing": 0,
     "with_schema": 11,
-    "bundle_hash": "61e041fd210e3369ec1f28b1ac9abf2de93e96858d675464c18ff199ee54b146"
+    "bundle_hash": "0430b9d7c186fe99e6df25378bd3556d6f301be0a4dcbbddf8a703c1b489dedf"
   },
   "integrity": {
     "hash_algorithm": "SHA256",
