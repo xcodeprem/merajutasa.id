@@ -1,0 +1,93 @@
+labels:
+  # Work Type
+  - name: "type:bug"
+    color: "d73a4a"
+    description: "Bug fix or defect"
+  - name: "type:feature"
+    color: "1f883d"
+    description: "New feature"
+  - name: "type:improvement"
+    color: "2b7fff"
+    description: "Enhancement or improvement"
+  - name: "type:chore"
+    color: "cfd3d7"
+    description: "Chore or maintenance"
+  - name: "type:docs"
+    color: "0e8a16"
+    description: "Documentation changes"
+  - name: "type:design"
+    color: "5319e7"
+    description: "Design/UI/UX changes"
+  - name: "type:research"
+    color: "bfe5bf"
+    description: "Investigation or research"
+
+  # Priority
+  - { name: "priority:p0", color: "b60205", description: "Critical priority" }
+  - { name: "priority:p1", color: "d93f0b", description: "High priority" }
+  - { name: "priority:p2", color: "fbca04", description: "Medium priority" }
+  - { name: "priority:p3", color: "0e8a16", description: "Low priority" }
+
+  # Severity (bugs)
+  - { name: "severity:s1", color: "b60205", description: "Critical severity" }
+  - { name: "severity:s2", color: "d93f0b", description: "Major severity" }
+  - { name: "severity:s3", color: "fbca04", description: "Minor severity" }
+  - { name: "severity:s4", color: "0e8a16", description: "Trivial severity" }
+
+  # Impact
+  - { name: "impact:blocker", color: "b60205", description: "Blocks release or critical flow" }
+  - { name: "impact:high", color: "d93f0b", description: "High impact" }
+  - { name: "impact:medium", color: "fbca04", description: "Medium impact" }
+  - { name: "impact:low", color: "0e8a16", description: "Low impact" }
+
+  # Effort / Size
+  - { name: "size:xs", color: "ededed", description: "Extra small effort" }
+  - { name: "size:s", color: "bfdadc", description: "Small effort" }
+  - { name: "size:m", color: "c2e0c6", description: "Medium effort" }
+  - { name: "size:l", color: "fef2c0", description: "Large effort" }
+  - { name: "size:xl", color: "f9d0c4", description: "Extra large effort" }
+
+  # Area / Module
+  - { name: "area:landing", color: "c5def5", description: "Landing" }
+  - { name: "area:auth", color: "c5def5", description: "Authentication" }
+  - { name: "area:user-profile", color: "c5def5", description: "User Profile" }
+  - { name: "area:orders", color: "c5def5", description: "Orders" }
+  - { name: "area:payments", color: "c5def5", description: "Payments" }
+  - { name: "area:catalog", color: "c5def5", description: "Catalog" }
+  - { name: "area:cms", color: "c5def5", description: "CMS" }
+  - { name: "area:api", color: "c5def5", description: "API" }
+  - { name: "area:infra-devops", color: "c5def5", description: "Infrastructure/DevOps" }
+  - { name: "area:analytics", color: "c5def5", description: "Analytics" }
+  - { name: "area:seo-content", color: "c5def5", description: "SEO & Content" }
+  - { name: "area:mobile", color: "c5def5", description: "Mobile app" }
+  - { name: "area:security", color: "c5def5", description: "Security" }
+  - { name: "area:compliance", color: "c5def5", description: "Compliance" }
+
+  # Environment
+  - { name: "env:prod", color: "5319e7", description: "Production" }
+  - { name: "env:staging", color: "5319e7", description: "Staging" }
+  - { name: "env:dev", color: "5319e7", description: "Development" }
+
+  # Platform
+  - { name: "platform:web", color: "0e8a16", description: "Web / Frontend" }
+  - { name: "platform:backend", color: "0e8a16", description: "Backend / Server" }
+  - { name: "platform:mobile", color: "0e8a16", description: "Mobile" }
+
+  # Risk
+  - { name: "risk:high", color: "b60205", description: "High risk" }
+  - { name: "risk:medium", color: "d93f0b", description: "Medium risk" }
+  - { name: "risk:low", color: "0e8a16", description: "Low risk" }
+
+  # Story points (Fibonacci)
+  - { name: "sp:1", color: "cfd3d7", description: "Story points 1" }
+  - { name: "sp:2", color: "cfd3d7", description: "Story points 2" }
+  - { name: "sp:3", color: "cfd3d7", description: "Story points 3" }
+  - { name: "sp:5", color: "cfd3d7", description: "Story points 5" }
+  - { name: "sp:8", color: "cfd3d7", description: "Story points 8" }
+  - { name: "sp:13", color: "cfd3d7", description: "Story points 13" }
+
+  # Release (dynamic; created on-the-fly), keep one seed:
+  - { name: "release:seed", color: "0366d6", description: "Seed label to allow dynamic release:* creation" }
+
+  # State helpers
+  - { name: "blocked", color: "000000", description: "Work is currently blocked" }

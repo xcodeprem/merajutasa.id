@@ -1,0 +1,54 @@
+{
+  "prefixes": {
+    "type": "type:",
+    "priority": "priority:",
+    "severity": "severity:",
+    "size": "size:",
+    "area": "area:",
+    "environment": "env:",
+    "platform": "platform:",
+    "risk": "risk:",
+    "impact": "impact:",
+    "story_points": "sp:",
+    "release": "release:"
+  },
+  "allowed": {
+    "work_type": ["bug", "feature", "improvement", "chore", "docs", "design", "research"],
+    "priority": ["p0", "p1", "p2", "p3"],
+    "severity": ["s1", "s2", "s3", "s4"],
+    "size": ["xs", "s", "m", "l", "xl"],
+    "environment": ["prod", "staging", "dev"],
+    "platform": ["web", "backend", "mobile"],
+    "risk": ["high", "medium", "low"],
+    "impact": ["blocker", "high", "medium", "low"],
+    "story_points": ["1", "2", "3", "5", "8", "13"],
+    "area": [
+      "landing",
+      "auth",
+      "user-profile",
+      "orders",
+      "payments",
+      "catalog",
+      "cms",
+      "api",
+      "infra-devops",
+      "analytics",
+      "seo-content",
+      "mobile",
+      "security",
+      "compliance"
+    ]
+  },
+  "pathMappings": [
+    { "pattern": "^infrastructure\\/security", "label": "area:security" },
+    { "pattern": "^infrastructure\\/compliance", "label": "area:compliance" },
+    { "pattern": "^(backend\\/|server\\/)", "label": "platform:backend" },
+    { "pattern": "^(web\\/|frontend\\/|ui\\/)", "label": "platform:web" },
+    { "pattern": "^mobile\\/", "label": "platform:mobile" },
+    { "pattern": "^infrastructure\\/prod", "label": "env:prod" },
+    { "pattern": "^infrastructure\\/staging", "label": "env:staging" },
+    { "pattern": "^infrastructure\\/dev", "label": "env:dev" }
+  ],
+  "linkedIssueLabelSync": true,
+  "createMissingLabels": true
+}

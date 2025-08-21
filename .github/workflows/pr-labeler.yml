@@ -1,0 +1,263 @@
+name: PR Labeler (Evidence-based, Personal Account Safe)
+
+on:
+  pull_request_target:
+    types: [opened, edited, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: pr-labeler-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  label-pr:
+    name: Label PR from verified evidence
+    runs-on: ubuntu-latest
+    steps:
+      - name: Apply labels from PR metadata, linked issues, and path mappings
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7 pinned
+        env:
+          CONFIG_PATH: .github/pr-labeler-config.json
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const { owner, repo } = context.repo;
+            const prNumber = pr.number;
+
+            // Load config file
+            async function loadConfig() {
+              const repoData = context.payload.repository;
+              const defaultBranch = repoData.default_branch || "main";
+              const res = await github.rest.repos.getContent({
+                owner, repo, path: process.env.CONFIG_PATH, ref: defaultBranch
+              });
+              const content = Buffer.from(res.data.content, res.data.encoding || 'base64').toString('utf8');
+              return JSON.parse(content);
+            }
+
+            function unique(arr) { return [...new Set(arr)]; }
+
+            // Parse JSON code block from PR body (strict, no guess)
+            function parseJsonBlock(text) {
+              if (!text) return null;
+              const re = /```json\s*([\s\S]*?)```/im;
+              const m = text.match(re);
+              if (!m) return null;
+              try {
+                return JSON.parse(m[1]);
+              } catch (e) {
+                core.warning("Failed to parse JSON block in PR body: " + e.message);
+                return null;
+              }
+            }
+
+            function toLowerSafe(v) {
+              if (typeof v === 'string') return v.trim().toLowerCase();
+              return v;
+            }
+
+            // Extract closing issue references from PR title/body (Fixes/Closes/Resolves #123)
+            function extractReferencedIssues(text) {
+              if (!text) return [];
+              const re = /\b(?:(?:close[sd]?)|(?:fixe?[sd]?)|(?:resolve[sd]?))\s+#(\d+)\b/ig;
+              const nums = [];
+              let m;
+              while ((m = re.exec(text)) !== null) nums.push(Number(m[1]));
+              return unique(nums);
+            }
+
+            // Simple regex test helper
+            function matchesAnyRegex(text, regexList) {
+              return regexList.some(r => new RegExp(r).test(text));
+            }
+
+            // Compute labels to add
+            const config = await loadConfig();
+            const prefixes = config.prefixes || {};
+            const allowed = config.allowed || {};
+            const pathMappings = config.pathMappings || [];
+            const createMissing = !!config.createMissingLabels;
+
+            const toAdd = new Set();
+            const already = new Set((pr.labels || []).map(l => l.name));
+
+            // 1) From PR metadata JSON block
+            const meta = parseJsonBlock(pr.body || "");
+            if (meta) {
+              // work_type -> type:*
+              if (meta.work_type) {
+                const val = toLowerSafe(meta.work_type);
+                if (allowed.work_type.includes(val)) toAdd.add(`${prefixes.type}${val}`);
+              }
+              // priority
+              if (meta.priority) {
+                const val = toLowerSafe(meta.priority);
+                if (allowed.priority.includes(val)) toAdd.add(`${prefixes.priority}${val}`);
+              }
+              // severity
+              if (meta.severity) {
+                const val = toLowerSafe(meta.severity);
+                if (allowed.severity.includes(val)) toAdd.add(`${prefixes.severity}${val}`);
+              }
+              // size
+              if (meta.size) {
+                const val = toLowerSafe(meta.size);
+                if (allowed.size.includes(val)) toAdd.add(`${prefixes.size}${val}`);
+              }
+              // environment
+              if (meta.environment) {
+                const val = toLowerSafe(meta.environment);
+                if (allowed.environment.includes(val)) toAdd.add(`${prefixes.environment}${val}`);
+              }
+              // platform
+              if (meta.platform) {
+                const val = toLowerSafe(meta.platform);
+                if (allowed.platform.includes(val)) toAdd.add(`${prefixes.platform}${val}`);
+              }
+              // risk
+              if (meta.risk) {
+                const val = toLowerSafe(meta.risk);
+                if (allowed.risk.includes(val)) toAdd.add(`${prefixes.risk}${val}`);
+              }
+              // impact
+              if (meta.impact) {
+                const val = toLowerSafe(meta.impact);
+                if (allowed.impact.includes(val)) toAdd.add(`${prefixes.impact}${val}`);
+              }
+              // story_points
+              if (meta.story_points != null) {
+                const val = String(meta.story_points).trim();
+                if (allowed.story_points.includes(val)) toAdd.add(`${prefixes.story_points}${val}`);
+              }
+              // area (array or string)
+              if (meta.area) {
+                const arr = Array.isArray(meta.area) ? meta.area : [meta.area];
+                for (const a of arr) {
+                  const val = toLowerSafe(a);
+                  if (allowed.area.includes(val)) toAdd.add(`${prefixes.area}${val}`);
+                }
+              }
+              // release (free-form; create if missing allowed)
+              if (meta.release && typeof meta.release === 'string' && meta.release.trim().length <= 30) {
+                const val = meta.release.trim();
+                toAdd.add(`${prefixes.release}${val}`);
+              }
+              // blocked flag
+              if (meta.blocked === true) {
+                toAdd.add("blocked");
+              }
+            }
+
+            // 2) Copy labels from referenced issues (evidence-based)
+            if (config.linkedIssueLabelSync !== false) {
+              const referencedIssues = unique([
+                ...extractReferencedIssues(pr.title || ""),
+                ...extractReferencedIssues(pr.body || "")
+              ]);
+              const acceptedPrefixes = new RegExp(`^(?:${[
+                prefixes.type, prefixes.priority, prefixes.severity, prefixes.size, prefixes.area,
+                prefixes.environment, prefixes.platform, prefixes.risk, prefixes.impact, prefixes.story_points,
+                prefixes.release
+              ].map(p => p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})`);
+
+              for (const num of referencedIssues) {
+                try {
+                  const issueRes = await github.rest.issues.get({ owner, repo, issue_number: num });
+                  const labels = issueRes.data.labels || [];
+                  for (const l of labels) {
+                    const name = typeof l === 'string' ? l : l.name;
+                    if (!name) continue;
+                    if (name === 'blocked' || acceptedPrefixes.test(name)) {
+                      toAdd.add(name);
+                    }
+                  }
+                } catch (e) {
+                  core.warning(`Cannot fetch labels from issue #${num}: ${e.message}`);
+                }
+              }
+            }
+
+            // 3) Path-based mapping (strict patterns only, no inference)
+            // List changed files
+            const files = await github.rest.pulls.listFiles({ owner, repo, pull_number: prNumber, per_page: 300 });
+            const changed = files.data.map(f => f.filename);
+            for (const file of changed) {
+              for (const map of pathMappings) {
+                try {
+                  const rx = new RegExp(map.pattern);
+                  if (rx.test(file)) toAdd.add(map.label);
+                } catch (e) {
+                  core.warning(`Invalid regex in pathMappings: ${map.pattern}`);
+                }
+              }
+            }
+
+            // Finalize label set
+            const desired = unique([...toAdd]).filter(l => !already.has(l));
+
+            // Optionally create missing labels used in this PR only
+            if (createMissing && desired.length) {
+              // Fetch existing labels (first 1000)
+              const existing = new Set();
+              let page = 1;
+              while (true) {
+                const res = await github.rest.issues.listLabelsForRepo({ owner, repo, per_page: 100, page });
+                for (const lab of res.data) existing.add(lab.name);
+                if (res.data.length < 100) break;
+                page++;
+              }
+              // Create missing with sensible defaults
+              for (const name of desired) {
+                if (!existing.has(name)) {
+                  try {
+                    await github.rest.issues.createLabel({
+                      owner, repo, name,
+                      color: "666666",
+                      description: `Auto-created for project field: ${name}`
+                    });
+                  } catch (e) {
+                    core.warning(`Failed to create label '${name}': ${e.message}`);
+                  }
+                }
+              }
+            }
+
+            if (desired.length) {
+              await github.rest.issues.addLabels({ owner, repo, issue_number: prNumber, labels: desired });
+              core.notice(`Added labels: ${desired.join(', ')}`);
+            } else {
+              core.notice('No new labels to add based on verified evidence.');
+            }name: PR Label Recommendations
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-labeler-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  recommend-labels:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
+        with:
+          node-version: '20'
+      - run: npm ci
+      - name: Generate recommendations
+        run: node tools/pr-label-advisor.js
+      - name: Upload recommendations
+        uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
+        with:
+          name: pr-label-recommendations
+          path: artifacts/pr-label-recommendations.json

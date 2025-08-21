@@ -1,0 +1,112 @@
+name: Labels: Sync repository labels
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/labels.yml"
+
+permissions:
+  issues: write
+  contents: read
+
+concurrency:
+  group: labels-sync-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.1.7 pinned
+      - name: Sync labels from .github/labels.yml
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7 pinned
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            const file = path.join(process.cwd(), '.github', 'labels.yml');
+            const text = fs.readFileSync(file, 'utf8');
+
+            function stripQuotes(s) {
+              if (s == null) return s;
+              s = s.trim();
+              if ((s.startsWith('"') && s.endsWith('"')) || (s.startsWith("'") && s.endsWith("'"))) {
+                return s.slice(1, -1);
+              }
+              return s;
+            }
+
+            // Minimal YAML parser for the expected labels structure
+            function parseLabelsYAML(yamlText) {
+              const lines = yamlText.split(/\r?\n/);
+              const labels = [];
+              let inLabels = false;
+              let current = null;
+              for (let i = 0; i < lines.length; i++) {
+                const raw = lines[i];
+                const line = raw.replace(/\t/g, '  ');
+                if (/^\s*#/.test(line) || /^\s*$/.test(line)) continue;
+                if (!inLabels) {
+                  if (/^labels:\s*$/.test(line)) inLabels = true;
+                  continue;
+                }
+                // Inline map: - { name: "..", color: "..", description: ".." }
+                const inline = line.match(/^\s*-\s*\{\s*(.*)\s*\}\s*$/);
+                if (inline) {
+                  const obj = {};
+                  const inner = inline[1];
+                  for (const part of inner.split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/)) {
+                    const [k, v] = part.split(/:\s*/);
+                    if (!k) continue;
+                    obj[k.trim()] = stripQuotes((v || '').trim());
+                  }
+                  if (obj.name) labels.push(obj);
+                  continue;
+                }
+                // Block map start: - name: ...
+                const start = line.match(/^\s*-\s*name:\s*(.+)\s*$/);
+                if (start) {
+                  if (current && current.name) labels.push(current);
+                  current = { name: stripQuotes(start[1]) };
+                  continue;
+                }
+                if (current) {
+                  const color = line.match(/^\s+color:\s*(.+)\s*$/);
+                  if (color) { current.color = stripQuotes(color[1]); continue; }
+                  const desc = line.match(/^\s+description:\s*(.+)\s*$/);
+                  if (desc) { current.description = stripQuotes(desc[1]); continue; }
+                }
+              }
+              if (current && current.name) labels.push(current);
+              return labels;
+            }
+
+            const desired = parseLabelsYAML(text);
+
+            // Fetch existing labels
+            const existing = [];
+            let page = 1;
+            while (true) {
+              const res = await github.rest.issues.listLabelsForRepo({ owner: context.repo.owner, repo: context.repo.repo, per_page: 100, page });
+              existing.push(...res.data);
+              if (res.data.length < 100) break;
+              page++;
+            }
+            const existingMap = new Map(existing.map(l => [l.name, l]));
+
+            // Create or update
+            for (const lab of desired) {
+              const cur = existingMap.get(lab.name);
+              if (!cur) {
+                core.info(`Creating label ${lab.name}`);
+                await github.rest.issues.createLabel({ owner: context.repo.owner, repo: context.repo.repo, name: lab.name, color: (lab.color || '666666').replace('#',''), description: lab.description || '' });
+              } else {
+                const needUpdate = (cur.color?.toLowerCase() !== (lab.color||'').replace('#','').toLowerCase()) || ((cur.description||'') !== (lab.description||''));
+                if (needUpdate) {
+                  core.info(`Updating label ${lab.name}`);
+                  await github.rest.issues.updateLabel({ owner: context.repo.owner, repo: context.repo.repo, name: lab.name, color: (lab.color || cur.color).replace('#',''), description: lab.description ?? cur.description });
+                }
+              }
+            }
+            core.notice(`Labels sync complete. Total desired: ${desired.length}`);

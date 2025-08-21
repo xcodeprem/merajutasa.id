@@ -21,11 +21,11 @@ Hasil akhir:
 
 ## Ringkasan langkah (checklist)
 
-- [ ] Hubungkan repo ke Project dan aktifkan auto-add
-- [ ] Tampilkan field bawaan yang relevan
-- [ ] Buat semua Custom Fields (sesuai daftar)
-- [ ] Susun Status (field bawaan) sesuai standar
-- [ ] Standarisasi label di repo (selaras dengan fields)
+- [x] Hubungkan repo ke Project dan aktifkan auto-add
+- [x] Tampilkan field bawaan yang relevan
+- [x] Buat semua Custom Fields (sesuai daftar)
+- [x] Susun Status (field bawaan) sesuai standar
+- [x] Standarisasi label di repo (selaras dengan fields)
 - [ ] Atur automations (workflows) pemetaan label → fields + status syncing
 - [ ] Siapkan Iteration/Sprint bila diperlukan
 - [ ] Buat Saved Views (Backlog, Bug Triage, Current Sprint, Release)
