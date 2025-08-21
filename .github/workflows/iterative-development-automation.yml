@@ -100,34 +100,39 @@ jobs:
               if (fs.existsSync(reportPath)) {
                 const report = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
                 
-                const comment = `## 🔄 Iterative Development Project Integration
-                
-**Project:** Iterative Development (#13)
-**Timestamp:** ${report.timestamp}
+                const changesList = report.results.map(r => {
+                  if (r.success && r.actions.length > 0) {
+                    return '- **PR #' + r.pr_number + '**: ' + r.actions.join(', ');
+                  }
+                  return '- **PR #' + r.pr_number + '**: ' + r.errors.join(', ');
+                }).join('\n');
 
-### Results
-- **Total PRs processed:** ${report.summary.total_processed}
-- **Successful:** ${report.summary.successful}  
-- **Failed:** ${report.summary.failed}
+                const comment = [
+                  '## 🔄 Iterative Development Project Integration',
+                  '',
+                  '**Project:** Iterative Development (#13)',
+                  `**Timestamp:** ${report.timestamp}`,
+                  '',
+                  '### Results',
+                  `- **Total PRs processed:** ${report.summary.total_processed}`,
+                  `- **Successful:** ${report.summary.successful}  `,
+                  `- **Failed:** ${report.summary.failed}`,
+                  '',
+                  '### Applied Changes',
+                  changesList,
+                  '',
+                  '### Sprint Structure',
+                  'This iterative development automation supports:',
+                  '- 🚀 **Sprint 1** - Current sprint work',
+                  '- 📋 **Sprint 2** - Next sprint planning  ',
+                  '- 🔮 **Sprint 3** - Future sprint backlog',
+                  '',
+                  '*Automation triggered by comment "+project iterative"*'
+                ].join('\n');
 
-### Applied Changes
-${report.results.map(r => {
-  if (r.success && r.actions.length > 0) {
-    return `- **PR #${r.pr_number}**: ${r.actions.join(', ')}`;
-  }
-  return `- **PR #${r.pr_number}**: ${r.errors.join(', ')}`;
-}).join('\n')}
-
-### Sprint Structure
-This iterative development automation supports:
-- 🚀 **Sprint 1** - Current sprint work
-- 📋 **Sprint 2** - Next sprint planning  
-- 🔮 **Sprint 3** - Future sprint backlog
-
-*Automation triggered by comment "+project iterative"*`;
-                
+                const issueNumber = parseInt(process.env.PR_NUMBER || '${{ steps.context.outputs.pr_number }}', 10);
                 await github.rest.issues.createComment({
-                  issue_number: ${{ steps.context.outputs.pr_number }},
+                  issue_number: issueNumber,
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   body: comment

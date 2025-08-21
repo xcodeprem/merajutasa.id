@@ -100,34 +100,39 @@ jobs:
               if (fs.existsSync(reportPath)) {
                 const report = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
                 
-                const comment = `## 📋 Team Retrospective Project Integration
+                const changesList = report.results.map(r => {
+                  if (r.success && r.actions.length > 0) {
+                    return '- **PR #' + r.pr_number + '**: ' + r.actions.join(', ');
+                  }
+                  return '- **PR #' + r.pr_number + '**: ' + r.errors.join(', ');
+                }).join('\n');
+
+                const comment = [
+                  '## 📋 Team Retrospective Project Integration',
+                  '',
+                  '**Project:** Team Retrospective (#11)',
+                  `**Timestamp:** ${report.timestamp}`,
+                  '',
+                  '### Results',
+                  `- **Total PRs processed:** ${report.summary.total_processed}`,
+                  `- **Successful:** ${report.summary.successful}  `,
+                  `- **Failed:** ${report.summary.failed}`,
+                  '',
+                  '### Applied Changes',
+                  changesList,
+                  '',
+                  '### Categories Applied',
+                  'This retrospective automation supports:',
+                  '- 🎉 **What Went Well** - Celebrating successes',
+                  '- 🔧 **What to Improve** - Identifying areas for growth  ',
+                  '- 📋 **Action Items** - Specific next steps',
+                  '',
+                  '*Automation triggered by comment "+project retro"*'
+                ].join('\n');
                 
-**Project:** Team Retrospective (#11)
-**Timestamp:** ${report.timestamp}
-
-### Results
-- **Total PRs processed:** ${report.summary.total_processed}
-- **Successful:** ${report.summary.successful}  
-- **Failed:** ${report.summary.failed}
-
-### Applied Changes
-${report.results.map(r => {
-  if (r.success && r.actions.length > 0) {
-    return `- **PR #${r.pr_number}**: ${r.actions.join(', ')}`;
-  }
-  return `- **PR #${r.pr_number}**: ${r.errors.join(', ')}`;
-}).join('\n')}
-
-### Categories Applied
-This retrospective automation supports:
-- 🎉 **What Went Well** - Celebrating successes
-- 🔧 **What to Improve** - Identifying areas for growth  
-- 📋 **Action Items** - Specific next steps
-
-*Automation triggered by comment "+project retro"*`;
-                
+                const issueNumber = parseInt(process.env.PR_NUMBER || '${{ steps.context.outputs.pr_number }}', 10);
                 await github.rest.issues.createComment({
-                  issue_number: ${{ steps.context.outputs.pr_number }},
+                  issue_number: issueNumber,
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   body: comment
