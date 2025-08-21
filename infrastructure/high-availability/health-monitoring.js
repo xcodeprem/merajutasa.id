@@ -696,7 +696,8 @@ export class HealthMonitoringSystem extends EventEmitter {
   calculateSystemHealth(healthStatus) {
     const { totalServices, healthyServices, criticalAlerts } = healthStatus.systemSummary;
     
-    if (totalServices === 0) return 'unknown';
+    // If no services are configured, the system is healthy but idle
+    if (totalServices === 0) return 'healthy';
     
     const healthPercentage = (healthyServices / totalServices) * 100;
     

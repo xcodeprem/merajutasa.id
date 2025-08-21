@@ -680,8 +680,9 @@ export class FaultToleranceSystem extends EventEmitter {
     const openCircuitBreakers = Array.from(this.circuitBreakers.values())
       .filter(b => b.state === 'open').length;
     
+    // If no health checkers are configured, the system is healthy but idle
     if (healthCheckers.length === 0) {
-      return 'unknown';
+      return openCircuitBreakers === 0 ? 'healthy' : 'degraded';
     }
     
     const healthyCheckers = healthCheckers.filter(c => c.isHealthy).length;

@@ -15,12 +15,17 @@ export class HighAvailabilityOrchestrator extends EventEmitter {
   constructor(config = {}) {
     super();
     this.config = {
-      orchestratorName: 'merajutasa-ha-orchestrator',
-      coordinationInterval: 30000, // 30 seconds
-      healthCheckInterval: 60000, // 1 minute
-      metricsRetentionPeriod: 24 * 60 * 60 * 1000, // 24 hours
-      alertCooldownPeriod: 300000, // 5 minutes
-      emergencyResponseEnabled: true,
+      orchestratorName: process.env.HA_ORCHESTRATOR_NAME || 'merajutasa-ha-orchestrator',
+      orchestratorPort: parseInt(process.env.HA_ORCHESTRATOR_PORT || '8090'),
+      orchestratorHost: process.env.HA_ORCHESTRATOR_HOST || '0.0.0.0',
+      coordinationInterval: parseInt(process.env.HA_COORDINATION_INTERVAL || '30000'),
+      healthCheckInterval: parseInt(process.env.HA_HEALTH_CHECK_INTERVAL || '60000'),
+      metricsRetentionPeriod: parseInt(process.env.HA_METRICS_RETENTION_PERIOD || (24 * 60 * 60 * 1000).toString()),
+      alertCooldownPeriod: parseInt(process.env.HA_ALERT_COOLDOWN_PERIOD || '300000'),
+      emergencyResponseEnabled: process.env.HA_EMERGENCY_RESPONSE_ENABLED !== 'false',
+      primaryRegion: process.env.PRIMARY_REGION || 'us-east-1',
+      secondaryRegions: process.env.SECONDARY_REGIONS?.split(',') || ['us-west-2', 'eu-west-1', 'ap-southeast-1'],
+      deploymentStrategy: process.env.DEPLOYMENT_STRATEGY || 'blue-green',
       ...config
     };
 
@@ -78,44 +83,59 @@ export class HighAvailabilityOrchestrator extends EventEmitter {
   async initializeComponents() {
     // Initialize Multi-Region Deployment
     this.components.multiRegionDeployment = getMultiRegionDeployment({
-      regions: ['us-east-1', 'us-west-2', 'eu-west-1', 'ap-southeast-1'],
-      primaryRegion: 'us-east-1'
+      regions: [this.config.primaryRegion, ...this.config.secondaryRegions],
+      primaryRegion: this.config.primaryRegion,
+      deploymentStrategy: this.config.deploymentStrategy
     });
 
     // Initialize Disaster Recovery
     this.components.disasterRecovery = getDisasterRecoverySystem({
-      primarySite: 'us-east-1',
-      drSites: ['us-west-2', 'eu-west-1'],
-      recoveryTimeObjective: 300000, // 5 minutes
-      recoveryPointObjective: 900000  // 15 minutes
+      primarySite: this.config.primaryRegion,
+      drSites: this.config.secondaryRegions,
+      recoveryTimeObjective: parseInt(process.env.DR_RECOVERY_TIME_OBJECTIVE || '300000'),
+      recoveryPointObjective: parseInt(process.env.DR_RECOVERY_POINT_OBJECTIVE || '900000')
     });
 
     // Initialize Auto-Scaling
     this.components.autoScaling = getAutoScalingSystem({
-      minInstances: 2,
-      maxInstances: 50,
-      predictiveScalingEnabled: true
+      minInstances: parseInt(process.env.AUTO_SCALING_MIN_INSTANCES || '2'),
+      maxInstances: parseInt(process.env.AUTO_SCALING_MAX_INSTANCES || '50'),
+      predictiveScalingEnabled: process.env.AUTO_SCALING_PREDICTIVE_ENABLED !== 'false'
     });
 
     // Initialize Fault Tolerance
     this.components.faultTolerance = getFaultToleranceSystem({
-      failureThreshold: 5,
-      timeoutThreshold: 30000,
-      maxRetries: 3
+      failureThreshold: parseInt(process.env.FAULT_TOLERANCE_FAILURE_THRESHOLD || '5'),
+      timeoutThreshold: parseInt(process.env.FAULT_TOLERANCE_TIMEOUT_THRESHOLD || '30000'),
+      maxRetries: parseInt(process.env.FAULT_TOLERANCE_MAX_RETRIES || '3')
     });
 
     // Initialize Health Monitoring
     this.components.healthMonitoring = getHealthMonitoringSystem({
-      checkInterval: 30000,
+      checkInterval: parseInt(process.env.HEALTH_MONITORING_CHECK_INTERVAL || '30000'),
       alertThresholds: {
-        cpu: { warning: 75, critical: 90 },
-        memory: { warning: 80, critical: 95 },
-        responseTime: { warning: 1000, critical: 5000 }
+        cpu: { 
+          warning: parseInt(process.env.HEALTH_MONITORING_CPU_WARNING || '75'), 
+          critical: parseInt(process.env.HEALTH_MONITORING_CPU_CRITICAL || '90') 
+        },
+        memory: { 
+          warning: parseInt(process.env.HEALTH_MONITORING_MEMORY_WARNING || '80'), 
+          critical: parseInt(process.env.HEALTH_MONITORING_MEMORY_CRITICAL || '95') 
+        },
+        responseTime: { 
+          warning: parseInt(process.env.HEALTH_MONITORING_RESPONSE_TIME_WARNING || '1000'), 
+          critical: parseInt(process.env.HEALTH_MONITORING_RESPONSE_TIME_CRITICAL || '5000') 
+        }
       }
     });
 
     this.emit('components-initialized', {
-      componentCount: Object.keys(this.components).length
+      componentCount: Object.keys(this.components).length,
+      config: {
+        orchestratorName: this.config.orchestratorName,
+        primaryRegion: this.config.primaryRegion,
+        secondaryRegions: this.config.secondaryRegions
+      }
     });
   }
 
@@ -926,6 +946,15 @@ let haOrchestratorInstance = null;
 export function getHighAvailabilityOrchestrator(config) {
   if (!haOrchestratorInstance) {
     haOrchestratorInstance = new HighAvailabilityOrchestrator(config);
+    // Auto-initialize if not explicitly configured otherwise
+    if (config?.autoInitialize !== false) {
+      // Initialize components but don't start the loops for health checks
+      haOrchestratorInstance.initializeComponents().catch(error => {
+        console.warn('Failed to auto-initialize HA components:', error.message);
+      });
+      // Set as active to indicate basic setup is complete
+      haOrchestratorInstance.orchestratorState.isActive = true;
+    }
   }
   return haOrchestratorInstance;
 }
