@@ -506,8 +506,9 @@ export class ComplianceOrchestrator extends EventEmitter {
   calculateComplianceHealthScore(status) {
     let score = 100;
     if (status.activeAlerts && status.activeAlerts.length > 0) score -= status.activeAlerts.length * 10;
-    if (status.scores) {
-      const avgScore = Object.values(status.scores).reduce((a, b) => a + b, 0) / Object.values(status.scores).length;
+    if (status.scores && Object.keys(status.scores).length > 0) {
+      const scoreValues = Object.values(status.scores);
+      const avgScore = scoreValues.reduce((a, b) => a + b, 0) / scoreValues.length;
       score = Math.min(score, avgScore);
     }
     return Math.max(0, score);
@@ -533,6 +534,7 @@ export class ComplianceOrchestrator extends EventEmitter {
 
   calculateOverallStatus() {
     const healthScores = Object.values(this.components).map(c => c.healthScore);
+    if (healthScores.length === 0) return 'unknown';
     const avgHealth = healthScores.reduce((a, b) => a + b, 0) / healthScores.length;
     
     if (avgHealth >= 80) return 'healthy';
@@ -702,6 +704,7 @@ export class ComplianceOrchestrator extends EventEmitter {
 
   getOverallComplianceScore() {
     const scores = Object.values(this.components).map(c => c.healthScore);
+    if (scores.length === 0) return 0;
     return scores.reduce((a, b) => a + b, 0) / scores.length;
   }
 
