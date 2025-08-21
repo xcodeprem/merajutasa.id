@@ -1,0 +1,46 @@
+{
+  "scan_id": "scan_1755780912819_d1x3v1nvg",
+  "scan_type": "full",
+  "started_at": "2025-08-21T12:55:12.819Z",
+  "vulnerabilities": [
+    {
+      "type": "dependency_vulnerability",
+      "severity": "low",
+      "package": "@octokit/rest",
+      "version": "^22.0.0",
+      "description": "Vulnerability found in @octokit/rest@^22.0.0",
+      "cvss_score": "4.3",
+      "cve_id": "CVE-2024-2921"
+    },
+    {
+      "type": "dependency_vulnerability",
+      "severity": "critical",
+      "package": "http-proxy-middleware",
+      "version": "^3.0.5",
+      "description": "Vulnerability found in http-proxy-middleware@^3.0.5",
+      "cvss_score": "0.9",
+      "cve_id": "CVE-2024-5030"
+    },
+    {
+      "type": "dependency_vulnerability",
+      "severity": "medium",
+      "package": "markdownlint",
+      "version": "^0.38.0",
+      "description": "Vulnerability found in markdownlint@^0.38.0",
+      "cvss_score": "5.2",
+      "cve_id": "CVE-2024-5790"
+    }
+  ],
+  "threats": [],
+  "configuration_issues": [],
+  "overall_score": 73,
+  "recommendations": [
+    {
+      "priority": "critical",
+      "category": "vulnerability_management",
+      "title": "Address Critical Vulnerabilities",
+      "description": "1 critical vulnerabilities require immediate attention",
+      "action": "Patch or mitigate all critical vulnerabilities within 24 hours"
+    }
+  ]
+}

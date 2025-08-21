@@ -1,5 +1,47 @@
 {
   "version": 1,
-  "status": "SKIP",
-  "reason": "collector not reachable"
+  "valid": {
+    "status": 200,
+    "json": {
+      "status": "INGESTED",
+      "event_hash": "de639cc1b3e10493442be13af311a144c4a7ff7db0f9a793018148e8a799fbd1",
+      "prohibited_meta": false,
+      "meta_valid": true
+    }
+  },
+  "invalid": {
+    "status": 400,
+    "json": {
+      "status": "SCHEMA_ERROR",
+      "errors": [
+        {
+          "instancePath": "/event_name",
+          "schemaPath": "#/properties/event_name/pattern",
+          "keyword": "pattern",
+          "params": {
+            "pattern": "^(pub|sys)_[a-z0-9_]+$"
+          },
+          "message": "must match pattern \"^(pub|sys)_[a-z0-9_]+$\""
+        },
+        {
+          "instancePath": "/occurred_at",
+          "schemaPath": "#/properties/occurred_at/format",
+          "keyword": "format",
+          "params": {
+            "format": "date-time"
+          },
+          "message": "must match format \"date-time\""
+        },
+        {
+          "instancePath": "/received_at",
+          "schemaPath": "#/properties/received_at/format",
+          "keyword": "format",
+          "params": {
+            "format": "date-time"
+          },
+          "message": "must match format \"date-time\""
+        }
+      ]
+    }
+  }
 }

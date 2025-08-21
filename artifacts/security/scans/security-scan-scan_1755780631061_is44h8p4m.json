@@ -1,0 +1,28 @@
+{
+  "scan_id": "scan_1755780631061_is44h8p4m",
+  "scan_type": "full",
+  "started_at": "2025-08-21T12:50:31.061Z",
+  "vulnerabilities": [
+    {
+      "type": "dependency_vulnerability",
+      "severity": "critical",
+      "package": "@octokit/graphql",
+      "version": "^7.0.2",
+      "description": "Vulnerability found in @octokit/graphql@^7.0.2",
+      "cvss_score": "2.1",
+      "cve_id": "CVE-2024-5598"
+    }
+  ],
+  "threats": [],
+  "configuration_issues": [],
+  "overall_score": 80,
+  "recommendations": [
+    {
+      "priority": "critical",
+      "category": "vulnerability_management",
+      "title": "Address Critical Vulnerabilities",
+      "description": "1 critical vulnerabilities require immediate attention",
+      "action": "Patch or mitigate all critical vulnerabilities within 24 hours"
+    }
+  ]
+}

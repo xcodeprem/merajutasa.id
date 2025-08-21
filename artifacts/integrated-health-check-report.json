@@ -1,58 +1,25 @@
 {
-  "timestamp": "2025-08-21T12:00:12.435Z",
-  "overall_status": "critical",
-  "overall_health_score": 38,
-  "duration_ms": 142,
+  "timestamp": "2025-08-21T12:55:05.448Z",
+  "overall_status": "warning",
+  "overall_health_score": 71,
+  "duration_ms": 32,
   "summary": {
-    "total_components": 14,
-    "healthy": 5,
+    "total_components": 5,
+    "healthy": 3,
     "warning": 1,
-    "degraded": 1,
-    "critical": 7
+    "degraded": 0,
+    "critical": 1
   },
   "components": {
-    "performance": {
-      "name": "Performance Monitor",
-      "status": "critical",
-      "health_score": 0,
-      "error": "Cannot find module '/home/runner/work/merajutasa.id/merajutasa.id/infrastructure/performance/performance-orchestrator.js' imported from /home/runner/work/merajutasa.id/merajutasa.id/tools/integrated-health-check.js"
-    },
-    "signer": {
-      "name": "Signer Service",
-      "status": "critical",
-      "health_score": 0,
-      "error": "fetch failed",
-      "details": {
-        "port": 4601
-      }
-    },
-    "chain": {
-      "name": "Chain Service",
-      "status": "critical",
-      "health_score": 0,
-      "error": "fetch failed",
-      "details": {
-        "port": 4602
-      }
-    },
-    "collector": {
-      "name": "Collector Service",
-      "status": "critical",
-      "health_score": 0,
-      "error": "fetch failed",
-      "details": {
-        "port": 4603
-      }
-    },
     "auditSystem": {
       "name": "Enterprise Audit System",
       "status": "healthy",
       "health_score": 100,
-      "last_check": "2025-08-21T12:00:12.395Z",
+      "last_check": "2025-08-21T12:55:05.427Z",
       "details": {
         "total_events": 0,
         "buffer_size": 0,
-        "uptime": 0.144151486,
+        "uptime": 0.053009347,
         "compliance_violations": 0,
         "storage_path": "/tmp/health-check-audit",
         "compliance_mode": "strict"
@@ -62,7 +29,7 @@
       "name": "Security Hardening",
       "status": "healthy",
       "health_score": 100,
-      "last_check": "2025-08-21T12:00:12.406Z",
+      "last_check": "2025-08-21T12:55:05.439Z",
       "details": {
         "security_score": 100,
         "threat_level": "medium",
@@ -71,7 +38,7 @@
         "incidents": 0,
         "monitoring_active": true,
         "automated_response": true,
-        "uptime": 0.155738553
+        "uptime": 0.06545376
       }
     },
     "privacyRights": {
@@ -84,84 +51,21 @@
       "name": "Compliance Orchestrator",
       "status": "warning",
       "health_score": 65,
-      "last_check": "2025-08-21T12:00:12.412Z",
+      "last_check": "2025-08-21T12:55:05.445Z",
       "details": {
         "orchestration_status": "initializing",
         "component_count": 4,
         "healthy_components": 0,
         "active_alerts": 0,
-        "uptime": 0.161539957,
+        "uptime": 0.071612198,
         "real_time_correlation": true
       }
-    },
-    "logAggregation": {
-      "status": "healthy",
-      "logBufferSize": 0,
-      "auditLogSize": 0,
-      "securityLogSize": 0,
-      "configuration": {
-        "logLevel": "info",
-        "logDir": "artifacts/logs"
-      }
-    },
-    "fileSystem": {
-      "name": "File System",
-      "status": "healthy",
-      "health_score": 100,
-      "details": {
-        "directories": [
-          {
-            "path": "./artifacts",
-            "accessible": true,
-            "type": "directory"
-          },
-          {
-            "path": "./data",
-            "accessible": true,
-            "type": "directory"
-          },
-          {
-            "path": "./docs",
-            "accessible": true,
-            "type": "directory"
-          },
-          {
-            "path": "./infrastructure",
-            "accessible": true,
-            "type": "directory"
-          },
-          {
-            "path": "./tools",
-            "accessible": true,
-            "type": "directory"
-          }
-        ],
-        "total": 5,
-        "accessible": 5
-      }
-    },
-    "haOrchestrator": {
-      "name": "HA Orchestrator",
-      "status": "degraded",
-      "health_score": 75
-    },
-    "observability": {
-      "name": "Observability System",
-      "status": "critical",
-      "health_score": 0,
-      "error": "Cannot find package '@opentelemetry/api' imported from /home/runner/work/merajutasa.id/merajutasa.id/infrastructure/observability/tracing/distributed-tracing.js"
-    },
-    "apiGateway": {
-      "name": "API Gateway",
-      "status": "critical",
-      "health_score": 0,
-      "error": "Cannot find package 'express' imported from /home/runner/work/merajutasa.id/merajutasa.id/infrastructure/api-gateway/api-gateway-core.js"
     },
     "complianceAutomation": {
       "name": "Compliance Automation",
       "status": "healthy",
       "health_score": 90,
-      "last_check": "2025-08-21T12:00:12.399Z",
+      "last_check": "2025-08-21T12:55:05.431Z",
       "details": {
         "is_running": false,
         "frameworks_active": 2,
@@ -253,34 +157,6 @@
   "recommendations": [
     {
       "priority": "high",
-      "component": "performance",
-      "issue": "Performance Monitor is not responding",
-      "action": "Restart performance service and check logs",
-      "health_score": 0
-    },
-    {
-      "priority": "high",
-      "component": "signer",
-      "issue": "Signer Service is not responding",
-      "action": "Restart signer service and check logs",
-      "health_score": 0
-    },
-    {
-      "priority": "high",
-      "component": "chain",
-      "issue": "Chain Service is not responding",
-      "action": "Restart chain service and check logs",
-      "health_score": 0
-    },
-    {
-      "priority": "high",
-      "component": "collector",
-      "issue": "Collector Service is not responding",
-      "action": "Restart collector service and check logs",
-      "health_score": 0
-    },
-    {
-      "priority": "high",
       "component": "privacyRights",
       "issue": "Privacy Rights Management is not responding",
       "action": "Restart privacyRights service and check logs",
@@ -292,27 +168,6 @@
       "issue": "Compliance Orchestrator showing warning signs",
       "action": "Review complianceOrchestrator configuration and metrics",
       "health_score": 65
-    },
-    {
-      "priority": "medium",
-      "component": "haOrchestrator",
-      "issue": "HA Orchestrator performance degraded",
-      "action": "Monitor haOrchestrator resources and investigate performance",
-      "health_score": 75
-    },
-    {
-      "priority": "high",
-      "component": "observability",
-      "issue": "Observability System is not responding",
-      "action": "Restart observability service and check logs",
-      "health_score": 0
-    },
-    {
-      "priority": "high",
-      "component": "apiGateway",
-      "issue": "API Gateway is not responding",
-      "action": "Restart apiGateway service and check logs",
-      "health_score": 0
     }
   ]
 }
