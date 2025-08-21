@@ -1,4 +1,4 @@
-name: Labels: Sync repository labels
+name: 'Labels: Sync repository labels'
 
 on:
   workflow_dispatch:
