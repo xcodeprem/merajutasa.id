@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-21T21:19:25.777Z",
+  "generated_utc": "2025-08-21T21:29:50.137Z",
   "evidence_phase": "1.5",
   "artifacts": [
     {
@@ -8,9 +8,9 @@
       "path": "artifacts/spec-hash-diff.json",
       "exists": true,
       "size_bytes": 3496,
-      "sha256": "95549e76670159278488873e022e6a710ce232813f6a67332d76343cf2633d6d",
-      "sha256_short": "95549e7667015927",
-      "display_hash_prefix": "95549e7667015927",
+      "sha256": "fba9c7a804e09d3dc19658c57146019c4e3d11bf24f03e5f917ce8a3d015dfb1",
+      "sha256_short": "fba9c7a804e09d3d",
+      "display_hash_prefix": "fba9c7a804e09d3d",
       "schema_ref": "spec-hash-diff-v1.json",
       "category": "governance"
     },
@@ -129,9 +129,9 @@
       "path": "artifacts/evidence-schema-validation.json",
       "exists": true,
       "size_bytes": 1192,
-      "sha256": "85e066cfe001f8ab823be7727e1a46f1489a98664de073d7c5bcd9da70df2a90",
-      "sha256_short": "85e066cfe001f8ab",
-      "display_hash_prefix": "85e066cfe001f8ab",
+      "sha256": "9f6e0496864caab6f8c06bfae5e5e8cfe155004949efb2723da3f8f690445bd7",
+      "sha256_short": "9f6e0496864caab6",
+      "display_hash_prefix": "9f6e0496864caab6",
       "schema_ref": null,
       "category": "meta"
     }
@@ -140,7 +140,7 @@
     "total": 12,
     "missing": 0,
     "with_schema": 11,
-    "bundle_hash": "a05be311252eedea2279ab4d322332a61a5a77b1592321b8b0891baf4ed5deb2"
+    "bundle_hash": "820ed4310b233306ac5a8559bd33414d2115060899db2721320435addd22b8cd"
   },
   "integrity": {
     "hash_algorithm": "SHA256",

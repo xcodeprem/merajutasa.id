@@ -1,0 +1,405 @@
+{
+  "generated_at": "2025-08-21T21:29:58.240Z",
+  "version": "1.0.0",
+  "components": [
+    {
+      "name": "signer",
+      "displayName": "Signer Service",
+      "category": "performance",
+      "type": "cache",
+      "version": "1.0.0",
+      "port": 4601,
+      "filePath": "infrastructure/performance/services/enhanced-signer.js",
+      "providedEndpoints": [
+        {
+          "path": "/api/v1/signer/pubkey",
+          "method": "GET",
+          "summary": "Get signer public key",
+          "version": "1"
+        },
+        {
+          "path": "/api/v1/signer/sign",
+          "method": "POST",
+          "summary": "Sign a payload",
+          "version": "1"
+        }
+      ],
+      "upstreamDependencies": [
+        "authentication",
+        "configuration"
+      ],
+      "downstreamClients": [
+        "api-gateway",
+        "chain",
+        "collector"
+      ],
+      "existingUpstreams": [
+        "cache/cache-strategies",
+        "optimization/response-compression",
+        "monitoring/sla-monitor",
+        "monitoring/performance-monitor",
+        "signer",
+        "metrics"
+      ],
+      "failureImpact": "high",
+      "statistics": {
+        "endpointCount": 2,
+        "uniqueUpstreams": 2,
+        "uniqueDownstreams": 3
+      }
+    },
+    {
+      "name": "chain",
+      "displayName": "Chain Service",
+      "category": "api",
+      "type": "service",
+      "version": "1.0.0",
+      "port": 4602,
+      "filePath": null,
+      "providedEndpoints": [
+        {
+          "path": "/api/v1/chain/append",
+          "method": "POST",
+          "summary": "Append to integrity chain",
+          "version": "1"
+        },
+        {
+          "path": "/api/v1/chain/head",
+          "method": "GET",
+          "summary": "Get chain head",
+          "version": "1"
+        }
+      ],
+      "upstreamDependencies": [
+        "authentication",
+        "configuration",
+        "database",
+        "signer"
+      ],
+      "downstreamClients": [
+        "api-gateway",
+        "collector",
+        "governance-tools"
+      ],
+      "existingUpstreams": [],
+      "failureImpact": "medium",
+      "statistics": {
+        "endpointCount": 2,
+        "uniqueUpstreams": 4,
+        "uniqueDownstreams": 3
+      }
+    },
+    {
+      "name": "collector",
+      "displayName": "Event Collector Service",
+      "category": "monitoring",
+      "type": "cache",
+      "version": "1.0.0",
+      "port": 4603,
+      "filePath": "infrastructure/monitoring/metrics-collector.js",
+      "providedEndpoints": [
+        {
+          "path": "/api/v1/collector/ingest",
+          "method": "POST",
+          "summary": "Ingest event data",
+          "version": "1"
+        }
+      ],
+      "upstreamDependencies": [
+        "authentication",
+        "chain",
+        "configuration",
+        "database",
+        "schema-validation",
+        "signer"
+      ],
+      "downstreamClients": [
+        "analytics",
+        "api-gateway",
+        "reporting"
+      ],
+      "existingUpstreams": [
+        "signer",
+        "chain",
+        "collector",
+        "metrics"
+      ],
+      "failureImpact": "medium",
+      "statistics": {
+        "endpointCount": 1,
+        "uniqueUpstreams": 6,
+        "uniqueDownstreams": 3
+      }
+    },
+    {
+      "name": "management",
+      "displayName": "Management & Health Service",
+      "category": "compliance",
+      "type": "service",
+      "version": "1.0",
+      "port": null,
+      "filePath": "infrastructure/compliance/privacy-rights-management.js",
+      "providedEndpoints": [
+        {
+          "path": "/health",
+          "method": "GET",
+          "summary": "Gateway health check",
+          "version": "1.0"
+        },
+        {
+          "path": "/metrics",
+          "method": "GET",
+          "summary": "Gateway metrics",
+          "version": "1.0"
+        },
+        {
+          "path": "/services",
+          "method": "GET",
+          "summary": "List available services",
+          "version": "1.0"
+        }
+      ],
+      "upstreamDependencies": [
+        "chain",
+        "collector",
+        "configuration",
+        "monitoring",
+        "signer"
+      ],
+      "downstreamClients": [
+        "alerting",
+        "api-gateway",
+        "dashboard",
+        "monitoring"
+      ],
+      "existingUpstreams": [
+        "compliance/audit-system",
+        "database",
+        "monitoring",
+        "metrics"
+      ],
+      "failureImpact": "medium",
+      "statistics": {
+        "endpointCount": 3,
+        "uniqueUpstreams": 5,
+        "uniqueDownstreams": 4
+      }
+    }
+  ],
+  "endpoints": [
+    {
+      "path": "/api/v1/signer/pubkey",
+      "method": "GET",
+      "summary": "Get signer public key",
+      "description": "Retrieve the public key used for digital signing",
+      "tags": [
+        "Signer"
+      ],
+      "serviceType": "signer",
+      "upstreamServices": [
+        "authentication",
+        "configuration"
+      ],
+      "downstreamClients": [
+        "chain",
+        "collector",
+        "api-gateway"
+      ],
+      "version": "1",
+      "port": 4601
+    },
+    {
+      "path": "/api/v1/signer/sign",
+      "method": "POST",
+      "summary": "Sign a payload",
+      "description": "Create a digital signature for the provided payload",
+      "tags": [
+        "Signer"
+      ],
+      "serviceType": "signer",
+      "upstreamServices": [
+        "authentication",
+        "configuration"
+      ],
+      "downstreamClients": [
+        "chain",
+        "collector",
+        "api-gateway"
+      ],
+      "version": "1",
+      "port": 4601
+    },
+    {
+      "path": "/api/v1/chain/append",
+      "method": "POST",
+      "summary": "Append to integrity chain",
+      "description": "Add a new entry to the integrity chain",
+      "tags": [
+        "Chain"
+      ],
+      "serviceType": "chain",
+      "upstreamServices": [
+        "signer",
+        "authentication",
+        "database",
+        "configuration"
+      ],
+      "downstreamClients": [
+        "collector",
+        "api-gateway",
+        "governance-tools"
+      ],
+      "version": "1",
+      "port": 4602
+    },
+    {
+      "path": "/api/v1/chain/head",
+      "method": "GET",
+      "summary": "Get chain head",
+      "description": "Retrieve the latest chain entry",
+      "tags": [
+        "Chain"
+      ],
+      "serviceType": "chain",
+      "upstreamServices": [
+        "signer",
+        "authentication",
+        "database",
+        "configuration"
+      ],
+      "downstreamClients": [
+        "collector",
+        "api-gateway",
+        "governance-tools"
+      ],
+      "version": "1",
+      "port": 4602
+    },
+    {
+      "path": "/api/v1/collector/ingest",
+      "method": "POST",
+      "summary": "Ingest event data",
+      "description": "Submit event data for processing and analysis",
+      "tags": [
+        "Collector"
+      ],
+      "serviceType": "collector",
+      "upstreamServices": [
+        "chain",
+        "signer",
+        "authentication",
+        "database",
+        "schema-validation",
+        "configuration"
+      ],
+      "downstreamClients": [
+        "analytics",
+        "reporting",
+        "api-gateway"
+      ],
+      "version": "1",
+      "port": 4603
+    },
+    {
+      "path": "/health",
+      "method": "GET",
+      "summary": "Gateway health check",
+      "description": "Check the health status of the API gateway",
+      "tags": [
+        "Management"
+      ],
+      "serviceType": "management",
+      "upstreamServices": [
+        "signer",
+        "chain",
+        "collector",
+        "monitoring",
+        "configuration"
+      ],
+      "downstreamClients": [
+        "monitoring",
+        "alerting",
+        "dashboard",
+        "api-gateway"
+      ],
+      "version": "1.0",
+      "port": null
+    },
+    {
+      "path": "/metrics",
+      "method": "GET",
+      "summary": "Gateway metrics",
+      "description": "Retrieve operational metrics from the API gateway",
+      "tags": [
+        "Management"
+      ],
+      "serviceType": "management",
+      "upstreamServices": [
+        "signer",
+        "chain",
+        "collector",
+        "monitoring",
+        "configuration"
+      ],
+      "downstreamClients": [
+        "monitoring",
+        "alerting",
+        "dashboard",
+        "api-gateway"
+      ],
+      "version": "1.0",
+      "port": null
+    },
+    {
+      "path": "/services",
+      "method": "GET",
+      "summary": "List available services",
+      "description": "Get information about all registered microservices",
+      "tags": [
+        "Management"
+      ],
+      "serviceType": "management",
+      "upstreamServices": [
+        "signer",
+        "chain",
+        "collector",
+        "monitoring",
+        "configuration"
+      ],
+      "downstreamClients": [
+        "monitoring",
+        "alerting",
+        "dashboard",
+        "api-gateway"
+      ],
+      "version": "1.0",
+      "port": null
+    }
+  ],
+  "conflicts": [],
+  "statistics": {
+    "totalComponents": 4,
+    "totalEndpoints": 8,
+    "totalConflicts": 0,
+    "serviceDistribution": {
+      "performance": 1,
+      "api": 1,
+      "monitoring": 1,
+      "compliance": 1
+    },
+    "versionDistribution": {
+      "1": 5,
+      "1.0": 3
+    },
+    "portDistribution": {
+      "4601": 2,
+      "4602": 2,
+      "4603": 1
+    },
+    "averageUpstreamsPerComponent": 4.3,
+    "averageDownstreamsPerComponent": 3.3,
+    "averageEndpointsPerComponent": 2,
+    "criticalComponents": 0,
+    "highImpactComponents": 1
+  }
+}

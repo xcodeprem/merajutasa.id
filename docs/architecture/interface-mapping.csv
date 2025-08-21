@@ -1,0 +1,5 @@
+"Component Name","Display Name","Category","Type","Version","Port","Endpoint Count","Upstream Dependencies","Downstream Clients","Failure Impact","File Path"
+"signer","Signer Service","performance","cache","1.0.0","4601","2","authentication; configuration","api-gateway; chain; collector","high","infrastructure/performance/services/enhanced-signer.js"
+"chain","Chain Service","api","service","1.0.0","4602","2","authentication; configuration; database; signer","api-gateway; collector; governance-tools","medium",""
+"collector","Event Collector Service","monitoring","cache","1.0.0","4603","1","authentication; chain; configuration; database; schema-validation; signer","analytics; api-gateway; reporting","medium","infrastructure/monitoring/metrics-collector.js"
+"management","Management & Health Service","compliance","service","1.0","","3","chain; collector; configuration; monitoring; signer","alerting; api-gateway; dashboard; monitoring","medium","infrastructure/compliance/privacy-rights-management.js"
