@@ -259,3 +259,62 @@ jobs:
             artifacts/week6-component-*.json
             artifacts/compliance/assessments/*.json
             artifacts/audit/*.ndjson
+
+  week6-component-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      matrix:
+        test-type: 
+          - imports
+          - contracts
+          - smoke
+          - components-status
+          - dependency-check
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332  # v4.1.7
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b  # v4.0.3
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Week 6 component imports test
+        if: matrix.test-type == 'imports'
+        run: npm run test:week6-imports
+
+      - name: Run Week 6 component contracts test
+        if: matrix.test-type == 'contracts'
+        run: npm run test:week6-contracts
+
+      - name: Run Week 6 component smoke test
+        if: matrix.test-type == 'smoke'
+        run: npm run test:week6-smoke
+
+      - name: Run Week 6 components status check
+        if: matrix.test-type == 'components-status'
+        run: npm run week6:components-status
+
+      - name: Run Week 6 dependency check
+        if: matrix.test-type == 'dependency-check'
+        run: npm run week6:dependency-check
+
+      - name: Upload Week 6 component test artifacts
+        if: always()
+        uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874  # v4.4.0
+        with:
+          name: week6-component-test-${{ matrix.test-type }}-artifacts
+          path: |
+            artifacts/week6-component-*.json
+            artifacts/integrated-health-check-report.json
+            artifacts/import-dependency-check.json
+            artifacts/compliance/assessments/*.json
+            artifacts/audit/*.ndjson

@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-08-21T12:55:31.346Z",
+  "timestamp": "2025-08-21T18:36:30.727Z",
   "test_suite": "Week 6 Component Smoke Tests",
   "summary": {
     "total": 6,
@@ -17,7 +17,7 @@
     {
       "name": "Security Threat Detection Flow",
       "status": "PASSED",
-      "duration": 2004
+      "duration": 2005
     },
     {
       "name": "Compliance Orchestration Flow",
@@ -27,7 +27,7 @@
     {
       "name": "Cross-Component Event Correlation",
       "status": "PASSED",
-      "duration": 1502
+      "duration": 1503
     },
     {
       "name": "System Integration Under Load",
