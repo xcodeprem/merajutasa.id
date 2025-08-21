@@ -1,0 +1,1474 @@
+name: MerajutASA Issue & PR Classification System
+
+# Core workflow for intelligent classification of issues and PRs with full project integration
+# Created: 2025-08-20 06:14:10
+# Author: Andhika-Rey
+# Version: 2.1.0
+
+on:
+  issues:
+    types: [opened, edited, reopened, labeled, unlabeled]
+  pull_request:
+    types: [opened, edited, synchronize, reopened, ready_for_review, labeled, unlabeled]
+  workflow_dispatch:
+    inputs:
+      number:
+        description: 'Issue/PR number to process'
+        required: false
+      dry_run:
+        description: 'Dry run mode (no changes)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+env:
+  WORKFLOW_VERSION: "2.1.0"
+  CREATED_AT: "2025-08-20 06:14:10"
+  CREATED_BY: "Andhika-Rey"
+
+jobs:
+  classify:
+    name: "🧠 Smart Classification"
+    runs-on: ubuntu-latest
+    outputs:
+      artifact_name: ${{ steps.create_artifact.outputs.artifact_name }}
+      item_number: ${{ steps.get_item_details.outputs.number }}
+      item_type: ${{ steps.get_item_details.outputs.type }}
+      node_id: ${{ steps.get_item_details.outputs.node_id }}
+    
+    steps:
+      - name: Get Item Details
+        id: get_item_details
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { eventName, payload, repo } = context;
+            let number, type, nodeId, title, body;
+            
+            if (eventName === 'issues' || (eventName === 'issue_comment' && !payload.issue.pull_request)) {
+              number = payload.issue?.number;
+              type = 'issue';
+              nodeId = payload.issue?.node_id;
+              title = payload.issue?.title;
+              body = payload.issue?.body;
+            } else if (eventName === 'pull_request' || (eventName === 'issue_comment' && payload.issue.pull_request)) {
+              number = payload.pull_request?.number || payload.issue?.number;
+              type = 'pull_request';
+              nodeId = payload.pull_request?.node_id || payload.issue?.node_id;
+              title = payload.pull_request?.title || payload.issue?.title;
+              body = payload.pull_request?.body || payload.issue?.body;
+            } else if (eventName === 'workflow_dispatch' && payload.inputs?.number) {
+              number = parseInt(payload.inputs.number);
+              
+              // Try to determine if it's a PR or issue
+              try {
+                const { data: pr } = await github.rest.pulls.get({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: number
+                });
+                type = 'pull_request';
+                nodeId = pr.node_id;
+                title = pr.title;
+                body = pr.body;
+              } catch (e) {
+                try {
+                  const { data: issue } = await github.rest.issues.get({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: number
+                  });
+                  type = 'issue';
+                  nodeId = issue.node_id;
+                  title = issue.title;
+                  body = issue.body;
+                } catch (e2) {
+                  core.setFailed(`Could not find issue or PR with number ${number}`);
+                  return;
+                }
+              }
+            }
+            
+            if (!number) {
+              core.setFailed('No issue or PR number found in event');
+              return;
+            }
+            
+            core.info(`Processing ${type} #${number}: ${title || '[No title]'}`);
+            core.setOutput('number', number);
+            core.setOutput('type', type);
+            if (nodeId) core.setOutput('node_id', nodeId);
+
+      - name: Perform Smart Classification
+        id: classify
+        if: steps.get_item_details.outputs.number
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const number = parseInt('${{ steps.get_item_details.outputs.number }}');
+            const type = '${{ steps.get_item_details.outputs.type }}';
+            const isPR = type === 'pull_request';
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            
+            // Fetch detailed information about the item
+            let itemData;
+            let allText = '';
+            let files = [];
+            let allLabels = [];
+            
+            try {
+              if (isPR) {
+                // Get PR details
+                const { data: pr } = await github.rest.pulls.get({
+                  owner,
+                  repo,
+                  pull_number: number
+                });
+                
+                // Get PR files
+                const { data: prFiles } = await github.rest.pulls.listFiles({
+                  owner,
+                  repo,
+                  pull_number: number,
+                  per_page: 100
+                });
+                
+                // Get PR comments
+                const { data: comments } = await github.rest.issues.listComments({
+                  owner,
+                  repo,
+                  issue_number: number,
+                  per_page: 50
+                });
+                
+                // Get PR review comments
+                const { data: reviewComments } = await github.rest.pulls.listReviewComments({
+                  owner,
+                  repo,
+                  pull_number: number,
+                  per_page: 50
+                });
+                
+                itemData = {
+                  ...pr,
+                  comments: comments,
+                  reviewComments: reviewComments,
+                  files: prFiles
+                };
+                
+                // Collect text for analysis
+                allText = [
+                  pr.title,
+                  pr.body,
+                  ...comments.map(c => c.body),
+                  ...reviewComments.map(c => c.body)
+                ].filter(Boolean).join('\n').toLowerCase();
+                
+                files = prFiles.map(f => f.filename);
+                allLabels = pr.labels.map(l => typeof l === 'string' ? l : l.name);
+                
+              } else {
+                // Get issue details
+                const { data: issue } = await github.rest.issues.get({
+                  owner,
+                  repo,
+                  issue_number: number
+                });
+                
+                // Get issue comments
+                const { data: comments } = await github.rest.issues.listComments({
+                  owner,
+                  repo,
+                  issue_number: number,
+                  per_page: 50
+                });
+                
+                itemData = {
+                  ...issue,
+                  comments: comments
+                };
+                
+                // Collect text for analysis
+                allText = [
+                  issue.title,
+                  issue.body,
+                  ...comments.map(c => c.body)
+                ].filter(Boolean).join('\n').toLowerCase();
+                
+                allLabels = issue.labels.map(l => typeof l === 'string' ? l : l.name);
+              }
+              
+              core.info(`Collected ${allText.length} characters of text for analysis`);
+              if (isPR) core.info(`Found ${files.length} modified files`);
+              
+            } catch (error) {
+              core.warning(`Error fetching item details: ${error.message}`);
+              return;
+            }
+            
+            // ===== CLASSIFICATION SYSTEM =====
+            // This is the core intelligence that analyzes the item
+            
+            // STEP 1: Define classification categories with GitHub Project field mappings
+            const CLASSIFICATION_CATEGORIES = {
+              AREA: {
+                name: "Area",
+                description: "The functional area this item belongs to",
+                project_field: "Area", // GitHub Project field name
+                options: [
+                  {id: "security", name: "Security", project_value: "Security", description: "Security and authentication related"},
+                  {id: "api-gateway", name: "API Gateway", project_value: "API Gateway & Services", description: "API and service gateway related"},
+                  {id: "monitoring", name: "Monitoring", project_value: "Monitoring & Observability", description: "Monitoring and observability related"},
+                  {id: "performance", name: "Performance", project_value: "Performance Optimization", description: "Performance optimization related"},
+                  {id: "docs", name: "Documentation", project_value: "Documentation", description: "Documentation related"},
+                  {id: "infrastructure", name: "Infrastructure", project_value: "Infrastructure", description: "Infrastructure and platform related"},
+                  {id: "compliance", name: "Compliance", project_value: "Compliance", description: "Compliance and regulatory related"},
+                  {id: "ui", name: "UI", project_value: "UI Components", description: "User Interface related"},
+                  {id: "data", name: "Data", project_value: "Data Management", description: "Data management related"}
+                ]
+              },
+              RISK: {
+                name: "Risk",
+                description: "The risk level associated with this item",
+                project_field: "Risk", // GitHub Project field name
+                options: [
+                  {id: "high", name: "High Risk", project_value: "High", description: "High business or technical risk"},
+                  {id: "medium", name: "Medium Risk", project_value: "Medium", description: "Medium business or technical risk"},
+                  {id: "low", name: "Low Risk", project_value: "Low", description: "Low business or technical risk"}
+                ]
+              },
+              PRIORITY: {
+                name: "Priority",
+                description: "The priority level for this item",
+                project_field: "Priority", // GitHub Project field name
+                options: [
+                  {id: "p0", name: "P0", project_value: "P0", description: "Critical priority - immediate attention required"},
+                  {id: "p1", name: "P1", project_value: "P1", description: "High priority - next sprint"},
+                  {id: "p2", name: "P2", project_value: "P2", description: "Medium priority - planned"},
+                  {id: "p3", name: "P3", project_value: "P3", description: "Low priority - nice to have"}
+                ]
+              },
+              STATUS: {
+                name: "Status",
+                description: "Current status of the item",
+                project_field: "Status", // GitHub Project field name
+                options: [
+                  {id: "todo", name: "Todo", project_value: "Todo", description: "Not yet started"},
+                  {id: "in-progress", name: "In Progress", project_value: "In Progress", description: "Work has begun"},
+                  {id: "in-review", name: "In Review", project_value: "In Review", description: "Ready for or under review"},
+                  {id: "blocked", name: "Blocked", project_value: "Blocked", description: "Progress is blocked"},
+                  {id: "done", name: "Done", project_value: "Done", description: "Work is complete"}
+                ]
+              },
+              SIZE: {
+                name: "Size",
+                description: "Estimated size/effort",
+                project_field: "Size", // GitHub Project field name
+                options: [
+                  {id: "xs", name: "Extra Small", project_value: "XS", description: "Very small change (<1 hour)"},
+                  {id: "small", name: "Small", project_value: "Small", description: "Small change (few hours)"},
+                  {id: "medium", name: "Medium", project_value: "Medium", description: "Medium size change (day or two)"},
+                  {id: "large", name: "Large", project_value: "Large", description: "Large change (several days)"},
+                  {id: "xl", name: "Extra Large", project_value: "XL", description: "Very large change (week+)"}
+                ]
+              },
+              PHASE: {
+                name: "Phase",
+                description: "Development phase",
+                project_field: "Phase", // GitHub Project field name
+                options: [
+                  {id: "1", name: "Phase 1", project_value: "Phase 1", description: "Initial development phase"},
+                  {id: "2-week-1", name: "Phase 2 Week 1", project_value: "Phase 2 W1", description: "Phase 2, Week 1"},
+                  {id: "2-week-2", name: "Phase 2 Week 2", project_value: "Phase 2 W2", description: "Phase 2, Week 2"},
+                  {id: "2-week-3", name: "Phase 2 Week 3", project_value: "Phase 2 W3", description: "Phase 2, Week 3"},
+                  {id: "2-week-4", name: "Phase 2 Week 4", project_value: "Phase 2 W4", description: "Phase 2, Week 4"},
+                  {id: "2-week-5", name: "Phase 2 Week 5", project_value: "Phase 2 W5", description: "Phase 2, Week 5"},
+                  {id: "2-week-6", name: "Phase 2 Week 6", project_value: "Phase 2 W6", description: "Phase 2, Week 6"},
+                  {id: "3-q1", name: "Phase 3 Q1", project_value: "Phase 3 Q1", description: "Phase 3, Quarter 1"},
+                  {id: "3-q2", name: "Phase 3 Q2", project_value: "Phase 3 Q2", description: "Phase 3, Quarter 2"},
+                  {id: "3-q3", name: "Phase 3 Q3", project_value: "Phase 3 Q3", description: "Phase 3, Quarter 3"},
+                  {id: "3-q4", name: "Phase 3 Q4", project_value: "Phase 3 Q4", description: "Phase 3, Quarter 4"}
+                ]
+              },
+              TEAM: {
+                name: "Team",
+                description: "Team assignment",
+                project_field: "Team Assignment", // GitHub Project field name
+                options: [
+                  {id: "backend-dev", name: "Backend Dev", project_value: "Backend Dev", description: "Backend development team"},
+                  {id: "frontend", name: "Frontend", project_value: "Frontend", description: "Frontend development team"},
+                  {id: "devops", name: "DevOps", project_value: "DevOps", description: "DevOps team"},
+                  {id: "security", name: "Security", project_value: "Security", description: "Security team"},
+                  {id: "qa", name: "QA", project_value: "QA", description: "Quality assurance team"},
+                  {id: "docs", name: "Docs", project_value: "Documentation", description: "Documentation team"},
+                  {id: "design", name: "Design", project_value: "Design", description: "Design team"}
+                ]
+              },
+              HEALTH: {
+                name: "Health",
+                description: "Health score",
+                project_field: "Health Score", // GitHub Project field name
+                options: [
+                  {id: "100", name: "Perfect", project_value: "100/100", description: "Perfect health"},
+                  {id: "90-99", name: "Very Good", project_value: "90-99/100", description: "Very good health"},
+                  {id: "75-89", name: "Good", project_value: "75-89/100", description: "Good health"},
+                  {id: "50-74", name: "Fair", project_value: "50-74/100", description: "Fair health"},
+                  {id: "25-49", name: "Poor", project_value: "25-49/100", description: "Poor health"},
+                  {id: "0-24", name: "Critical", project_value: "0-24/100", description: "Critical health"}
+                ]
+              }
+            };
+            
+            // STEP 2: Define classification detectors (these analyze the content and decide on classifications)
+            // Similar to before but with improved logic and more comprehensive detection
+            function detectArea(text, files, item) {
+              // Analyze text and files to determine the area
+              const areaKeywords = {
+                "security": ["security", "auth", "authentication", "password", "login", "oauth", "jwt", "credential"],
+                "api-gateway": ["api", "rest", "gateway", "endpoint", "controller", "route", "service"],
+                "monitoring": ["monitor", "logging", "observability", "metrics", "tracing", "alert"],
+                "performance": ["performance", "optimize", "speed", "latency", "throughput", "cache"],
+                "docs": ["documentation", "docs", "readme", "guide", "wiki"],
+                "infrastructure": ["infrastructure", "config", "kubernetes", "docker", "deployment", "cicd"],
+                "compliance": ["compliance", "regulation", "standard", "audit", "certification"],
+                "ui": ["ui", "user interface", "frontend", "design", "css", "html"],
+                "data": ["database", "data", "storage", "sql", "nosql", "backup"]
+              };
+              
+              // Count keyword occurrences
+              const scores = {};
+              
+              // Check text for keywords
+              for (const [area, keywords] of Object.entries(areaKeywords)) {
+                scores[area] = 0;
+                for (const keyword of keywords) {
+                  const regex = new RegExp(`\\b${keyword}\\b`, 'gi');
+                  const matches = text.match(regex);
+                  if (matches) {
+                    scores[area] += matches.length * 1;
+                  }
+                }
+              }
+              
+              // Check files for area indicators if PR
+              if (files && files.length > 0) {
+                for (const file of files) {
+                  const fileLower = file.toLowerCase();
+                  
+                  // Check file path/name patterns
+                  if (/auth|security|login|password|credential/i.test(fileLower)) scores["security"] += 3;
+                  if (/api|controller|route|endpoint/i.test(fileLower)) scores["api-gateway"] += 3;
+                  if (/monitor|log|metric|trace|alert/i.test(fileLower)) scores["monitoring"] += 3;
+                  if (/perf|optimize|cache/i.test(fileLower)) scores["performance"] += 3;
+                  if (/docs|documentation|readme|\.md$/i.test(fileLower)) scores["docs"] += 3;
+                  if (/infrastructure|kubernetes|k8s|docker|deploy/i.test(fileLower)) scores["infrastructure"] += 3;
+                  if (/compliance|audit|regulation/i.test(fileLower)) scores["compliance"] += 3;
+                  if (/ui|css|html|frontend|components/i.test(fileLower)) scores["ui"] += 3;
+                  if (/database|db|data|sql|mongo/i.test(fileLower)) scores["data"] += 3;
+                }
+              }
+              
+              // Special case detection from title/content patterns
+              const title = item.title?.toLowerCase() || '';
+              
+              // Explicitly mentioned areas in title get a big boost
+              if (title.includes("security")) scores["security"] += 5;
+              if (title.includes("api") || title.includes("gateway")) scores["api-gateway"] += 5;
+              if (title.includes("monitor")) scores["monitoring"] += 5;
+              if (title.includes("performance") || title.includes("optimize")) scores["performance"] += 5;
+              if (title.includes("doc")) scores["docs"] += 5;
+              if (title.includes("infrastructure") || title.includes("deploy")) scores["infrastructure"] += 5;
+              if (title.includes("compliance")) scores["compliance"] += 5;
+              if (title.includes("ui") || title.includes("interface")) scores["ui"] += 5;
+              if (title.includes("data") || title.includes("database")) scores["data"] += 5;
+              
+              // Component completion likely involves compliance
+              if (title.includes("component") && title.includes("completion")) {
+                scores["compliance"] += 4;
+              }
+              
+              // Test issues are often about monitoring/QA
+              if (title === 'test' || title === 'testing') {
+                scores["monitoring"] += 3;
+              }
+              
+              // Find top areas
+              const topAreas = Object.entries(scores)
+                .filter(([_, score]) => score > 2) // Minimum threshold
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 2); // Take up to two top areas
+              
+              if (topAreas.length === 0) {
+                // Default to API gateway if nothing else fits
+                return [{
+                  id: "api-gateway",
+                  confidence: 0.5,
+                  evidence: "Default classification - insufficient specific indicators"
+                }];
+              }
+              
+              // Return the top areas with confidence scores
+              return topAreas.map(([area, score]) => {
+                // Normalize score to confidence between 0.5-0.95
+                const confidence = Math.min(0.5 + (score / 20), 0.95);
+                return {
+                  id: area,
+                  confidence: parseFloat(confidence.toFixed(2)),
+                  evidence: `Scored ${score} points based on content analysis`
+                };
+              });
+            }
+            
+            function detectRisk(text, files, item) {
+              // Risk indicators
+              let highRiskScore = 0;
+              let mediumRiskScore = 0;
+              let lowRiskScore = 0;
+              
+              const title = item.title?.toLowerCase() || '';
+              const body = item.body?.toLowerCase() || '';
+              
+              // High risk indicators
+              const highRiskPatterns = [
+                /security\s+vulnerabilit/i,
+                /\bcrucial\b/i,
+                /\bcritical\b/i,
+                /\burgent\b/i,
+                /high\s+risk/i,
+                /production\s+issue/i,
+                /\bcrash\b/i,
+                /data\s+loss/i,
+                /breach/i,
+                /emergency/i
+              ];
+              
+              // Medium risk indicators
+              const mediumRiskPatterns = [
+                /\brefactor\b/i,
+                /important/i,
+                /medium\s+risk/i,
+                /\bbug\b/i,
+                /significant/i,
+                /component\s+completion/i,
+                /phase\s+2/i,
+                /integration/i
+              ];
+              
+              // Low risk indicators
+              const lowRiskPatterns = [
+                /\bminor\b/i,
+                /low\s+risk/i,
+                /trivial/i,
+                /cosmetic/i,
+                /typo/i,
+                /small\s+improvement/i,
+                /documentation/i
+              ];
+              
+              // Check title and body for risk patterns
+              for (const pattern of highRiskPatterns) {
+                if (pattern.test(title)) highRiskScore += 3;
+                if (pattern.test(body)) highRiskScore += 2;
+              }
+              
+              for (const pattern of mediumRiskPatterns) {
+                if (pattern.test(title)) mediumRiskScore += 3;
+                if (pattern.test(body)) mediumRiskScore += 2;
+              }
+              
+              for (const pattern of lowRiskPatterns) {
+                if (pattern.test(title)) lowRiskScore += 3;
+                if (pattern.test(body)) lowRiskScore += 2;
+              }
+              
+              // PR specific factors
+              if (isPR) {
+                const changedFiles = files.length;
+                const additions = itemData.files?.reduce((sum, file) => sum + (file.additions || 0), 0) || 0;
+                const deletions = itemData.files?.reduce((sum, file) => sum + (file.deletions || 0), 0) || 0;
+                const totalChanges = additions + deletions;
+                
+                // Size based risk factors
+                if (totalChanges > 500) highRiskScore += 3;
+                else if (totalChanges > 200) mediumRiskScore += 3;
+                else lowRiskScore += 3;
+                
+                // Number of files
+                if (changedFiles > 20) highRiskScore += 2;
+                else if (changedFiles > 10) mediumRiskScore += 2;
+                else lowRiskScore += 2;
+                
+                // Security sensitive files
+                const securityFiles = files.filter(file => 
+                  /security|auth|login|password|token|key|secret|credential/i.test(file)
+                ).length;
+                
+                if (securityFiles > 0) highRiskScore += 3;
+              }
+              
+              // For minimal test issues, assume low risk
+              if (title === 'test' && (!body || body.length < 20)) {
+                lowRiskScore += 5;
+              }
+              
+              // Calculate confidence and determine risk level
+              let riskId, confidence, evidence;
+              
+              if (highRiskScore > mediumRiskScore && highRiskScore > lowRiskScore) {
+                riskId = "high";
+                confidence = Math.min(0.5 + (highRiskScore / 20), 0.95);
+                evidence = `High risk score: ${highRiskScore}`;
+              } else if (mediumRiskScore > lowRiskScore) {
+                riskId = "medium";
+                confidence = Math.min(0.5 + (mediumRiskScore / 20), 0.95);
+                evidence = `Medium risk score: ${mediumRiskScore}`;
+              } else {
+                riskId = "low";
+                confidence = Math.min(0.5 + (lowRiskScore / 20), 0.95);
+                evidence = `Low risk score: ${lowRiskScore}`;
+              }
+              
+              return [{
+                id: riskId,
+                confidence: parseFloat(confidence.toFixed(2)),
+                evidence: evidence
+              }];
+            }
+            
+            function detectPriority(text, files, item) {
+              const title = item.title?.toLowerCase() || '';
+              const body = item.body?.toLowerCase() || '';
+              
+              // Look for explicit priority markers
+              if (/\bp0\b/i.test(title) || /critical priority/i.test(title) || /urgent/i.test(title)) {
+                return [{
+                  id: "p0",
+                  confidence: 0.9,
+                  evidence: "Explicit P0/critical/urgent mention in title"
+                }];
+              }
+              
+              if (/\bp1\b/i.test(title) || /high priority/i.test(title)) {
+                return [{
+                  id: "p1",
+                  confidence: 0.9,
+                  evidence: "Explicit P1/high priority mention in title"
+                }];
+              }
+              
+              if (/\bp2\b/i.test(title) || /medium priority/i.test(title)) {
+                return [{
+                  id: "p2", 
+                  confidence: 0.9,
+                  evidence: "Explicit P2/medium priority mention in title"
+                }];
+              }
+              
+              if (/\bp3\b/i.test(title) || /low priority/i.test(title)) {
+                return [{
+                  id: "p3",
+                  confidence: 0.9,
+                  evidence: "Explicit P3/low priority mention in title"
+                }];
+              }
+              
+              // Phase based priority
+              if (/phase\s+2/i.test(title) || /phase\s+2/i.test(body)) {
+                return [{
+                  id: "p1",
+                  confidence: 0.85,
+                  evidence: "Phase 2 items are typically P1 priority"
+                }];
+              }
+              
+              if (/phase\s+1/i.test(title) || /phase\s+1/i.test(body)) {
+                return [{
+                  id: "p0",
+                  confidence: 0.85,
+                  evidence: "Phase 1 items are typically P0 priority"
+                }];
+              }
+              
+              if (/phase\s+3/i.test(title) || /phase\s+3/i.test(body)) {
+                return [{
+                  id: "p2",
+                  confidence: 0.85,
+                  evidence: "Phase 3 items are typically P2 priority"
+                }];
+              }
+              
+              // Content based priority
+              if (/component completion/i.test(title)) {
+                return [{
+                  id: "p1",
+                  confidence: 0.85,
+                  evidence: "Component completion tasks are typically P1 priority"
+                }];
+              }
+              
+              // Test issues are usually P3
+              if (title === 'test' && (!body || body.length < 20)) {
+                return [{
+                  id: "p3",
+                  confidence: 0.8,
+                  evidence: "Simple test issues are typically P3 priority"
+                }];
+              }
+              
+              // Default
+              return [{
+                id: "p2",
+                confidence: 0.7,
+                evidence: "Default medium priority (no explicit indicators)"
+              }];
+            }
+            
+            function detectStatus(text, files, item) {
+              // For PRs, status depends on PR state
+              if (isPR) {
+                if (item.merged) {
+                  return [{
+                    id: "done", 
+                    confidence: 1.0,
+                    evidence: "Pull request is merged"
+                  }];
+                }
+                
+                if (item.state === "closed") {
+                  return [{
+                    id: "done",
+                    confidence: 1.0,
+                    evidence: "Pull request is closed"
+                  }];
+                }
+                
+                if (item.draft) {
+                  return [{
+                    id: "in-progress",
+                    confidence: 0.9,
+                    evidence: "Pull request is in draft state"
+                  }];
+                }
+                
+                return [{
+                  id: "in-review",
+                  confidence: 0.9,
+                  evidence: "Pull request is open and ready for review"
+                }];
+              }
+              
+              // For issues
+              if (item.state === "closed") {
+                return [{
+                  id: "done",
+                  confidence: 1.0,
+                  evidence: "Issue is closed"
+                }];
+              }
+              
+              // Check for explicit status in text
+              if (/\bin progress\b/i.test(text) || /\bstarted\b/i.test(text) || /\bworking on\b/i.test(text)) {
+                return [{
+                  id: "in-progress",
+                  confidence: 0.85,
+                  evidence: "Explicit in-progress mention in content"
+                }];
+              }
+              
+              if (/\bblocked\b/i.test(text) || /\bwaiting for\b/i.test(text) || /\bcannot proceed\b/i.test(text)) {
+                return [{
+                  id: "blocked",
+                  confidence: 0.85,
+                  evidence: "Explicit blocked/waiting mention in content"
+                }];
+              }
+              
+              if (item.assignees && item.assignees.length > 0) {
+                return [{
+                  id: "in-progress",
+                  confidence: 0.7,
+                  evidence: "Issue is assigned, assuming in progress"
+                }];
+              }
+              
+              // For minimal test issues, use todo
+              if (item.title?.toLowerCase() === 'test' && (!item.body || item.body.length < 20)) {
+                return [{
+                  id: "todo",
+                  confidence: 0.8,
+                  evidence: "Simple test issues start in todo state"
+                }];
+              }
+              
+              // Default for new issues
+              return [{
+                id: "todo",
+                confidence: 0.7,
+                evidence: "Default status for new/unassigned issues"
+              }];
+            }
+            
+            function detectSize(text, files, item) {
+              // For PRs, size is based on code changes
+              if (isPR) {
+                const additions = itemData.files?.reduce((sum, file) => sum + (file.additions || 0), 0) || 0;
+                const deletions = itemData.files?.reduce((sum, file) => sum + (file.deletions || 0), 0) || 0;
+                const totalChanges = additions + deletions;
+                
+                if (totalChanges < 10) {
+                  return [{
+                    id: "xs",
+                    confidence: 0.9,
+                    evidence: `Very small change (${totalChanges} lines)`
+                  }];
+                } else if (totalChanges < 100) {
+                  return [{
+                    id: "small",
+                    confidence: 0.9,
+                    evidence: `Small change (${totalChanges} lines)`
+                  }];
+                } else if (totalChanges < 300) {
+                  return [{
+                    id: "medium",
+                    confidence: 0.9,
+                    evidence: `Medium change (${totalChanges} lines)`
+                  }];
+                } else if (totalChanges < 1000) {
+                  return [{
+                    id: "large",
+                    confidence: 0.9,
+                    evidence: `Large change (${totalChanges} lines)`
+                  }];
+                } else {
+                  return [{
+                    id: "xl",
+                    confidence: 0.9,
+                    evidence: `Extra large change (${totalChanges} lines)`
+                  }];
+                }
+              }
+              
+              // For issues, size is more subjective
+              const title = item.title?.toLowerCase() || '';
+              const body = item.body || '';
+              
+              // Check explicit size indicators
+              if (/\bsmall\b/i.test(title) || /\bminor\b/i.test(title) || /\bsimple\b/i.test(title)) {
+                return [{
+                  id: "small",
+                  confidence: 0.8,
+                  evidence: "Explicit small/minor/simple mention in title"
+                }];
+              }
+              
+              if (/\blarge\b/i.test(title) || /\bcomplex\b/i.test(title) || /\bmajor\b/i.test(title)) {
+                return [{
+                  id: "large",
+                  confidence: 0.8,
+                  evidence: "Explicit large/complex/major mention in title"
+                }];
+              }
+              
+              // Component completion tasks are typically medium sized
+              if (/component completion/i.test(title)) {
+                return [{
+                  id: "medium",
+                  confidence: 0.8,
+                  evidence: "Component completion tasks are typically medium sized"
+                }];
+              }
+              
+              // Test issues are typically small or XS
+              if (title === 'test' && (!body || body.length < 20)) {
+                return [{
+                  id: "small",
+                  confidence: 0.85,
+                  evidence: "Simple test issues are small"
+                }];
+              }
+              
+              // Complexity based on content length and detail
+              const bodyLength = body?.length || 0;
+              const hasSubtasks = body?.includes('- [ ]') || false;
+              const subtaskCount = hasSubtasks ? (body.match(/- \[ \]/g) || []).length : 0;
+              
+              if (bodyLength > 2000 || subtaskCount > 10) {
+                return [{
+                  id: "xl",
+                  confidence: 0.7,
+                  evidence: `Complex issue with ${bodyLength} chars and ${subtaskCount} subtasks`
+                }];
+              } else if (bodyLength > 1000 || subtaskCount > 5) {
+                return [{
+                  id: "large",
+                  confidence: 0.7,
+                  evidence: `Detailed issue with ${bodyLength} chars and ${subtaskCount} subtasks`
+                }];
+              } else if (bodyLength > 500 || subtaskCount > 2) {
+                return [{
+                  id: "medium",
+                  confidence: 0.7,
+                  evidence: `Moderate issue with ${bodyLength} chars and ${subtaskCount} subtasks`
+                }];
+              } else if (bodyLength > 200) {
+                return [{
+                  id: "small",
+                  confidence: 0.7,
+                  evidence: `Brief issue with ${bodyLength} chars`
+                }];
+              } else {
+                return [{
+                  id: "xs",
+                  confidence: 0.7,
+                  evidence: `Minimal issue with ${bodyLength} chars`
+                }];
+              }
+            }
+            
+            function detectPhase(text, item) {
+              const title = item.title?.toLowerCase() || '';
+              const body = item.body?.toLowerCase() || '';
+              const combined = `${title} ${body}`;
+              
+              // Look for Phase X Week Y pattern
+              const phaseWeekRegex = /phase\s*(\d+)\s*(?:week|w)\s*(\d+)/i;
+              const phaseMatch = phaseWeekRegex.exec(combined);
+              
+              if (phaseMatch) {
+                const phase = phaseMatch[1];
+                const week = phaseMatch[2];
+                return [{
+                  id: `${phase}-week-${week}`,
+                  confidence: 0.95,
+                  evidence: `Explicit Phase ${phase} Week ${week} mention in content`
+                }];
+              }
+              
+              // Look for just Phase X
+              const phaseOnlyRegex = /phase\s*(\d+)/i;
+              const phaseOnlyMatch = phaseOnlyRegex.exec(combined);
+              
+              if (phaseOnlyMatch) {
+                const phase = phaseOnlyMatch[1];
+                return [{
+                  id: phase,
+                  confidence: 0.9,
+                  evidence: `Explicit Phase ${phase} mention in content`
+                }];
+              }
+              
+              // For test issues, default to Phase 2
+              if (title === 'test' && (!body || body.length < 20)) {
+                return [{
+                  id: "2",
+                  confidence: 0.6,
+                  evidence: "Default Phase 2 for test issues"
+                }];
+              }
+              
+              // Default if no phase found
+              return [{
+                id: "2",
+                confidence: 0.5,
+                evidence: "Default Phase 2 (no explicit phase mention)"
+              }];
+            }
+            
+            function detectTeam(text, files, area) {
+              // Map areas to teams
+              const areaToTeam = {
+                "security": "security",
+                "api-gateway": "backend-dev",
+                "monitoring": "qa",
+                "performance": "backend-dev",
+                "docs": "docs",
+                "infrastructure": "devops",
+                "compliance": "security",
+                "ui": "frontend",
+                "data": "backend-dev"
+              };
+              
+              const title = item.title?.toLowerCase() || '';
+              
+              // If we have an area classification, use that first
+              if (area && area.length > 0 && area[0].id) {
+                const mappedTeam = areaToTeam[area[0].id];
+                if (mappedTeam) {
+                  return [{
+                    id: mappedTeam,
+                    confidence: 0.8,
+                    evidence: `Mapped from primary area: ${area[0].id}`
+                  }];
+                }
+              }
+              
+              // Look for explicit team mentions
+              if (/security\steam|security\steam/i.test(text)) {
+                return [{
+                  id: "security",
+                  confidence: 0.9,
+                  evidence: "Explicit security team mention"
+                }];
+              }
+              
+              if (/frontend\steam|ui\steam|front-end\steam/i.test(text)) {
+                return [{
+                  id: "frontend",
+                  confidence: 0.9,
+                  evidence: "Explicit frontend team mention"
+                }];
+              }
+              
+              if (/backend\steam|api\steam|server\steam/i.test(text)) {
+                return [{
+                  id: "backend-dev",
+                  confidence: 0.9,
+                  evidence: "Explicit backend team mention"
+                }];
+              }
+              
+              if (/devops\steam|infrastructure\steam|ops\steam/i.test(text)) {
+                return [{
+                  id: "devops",
+                  confidence: 0.9,
+                  evidence: "Explicit devops team mention"
+                }];
+              }
+              
+              if (/qa\steam|test\steam|quality\sassurance/i.test(text)) {
+                return [{
+                  id: "qa",
+                  confidence: 0.9,
+                  evidence: "Explicit QA team mention"
+                }];
+              }
+              
+              if (/docs\steam|documentation\steam/i.test(text)) {
+                return [{
+                  id: "docs",
+                  confidence: 0.9,
+                  evidence: "Explicit docs team mention"
+                }];
+              }
+              
+              // Look at file patterns for PRs
+              if (isPR && files && files.length > 0) {
+                const fileTypes = files.map(f => f.toLowerCase());
+                
+                if (fileTypes.some(f => /auth|security|login|password/i.test(f))) {
+                  return [{
+                    id: "security",
+                    confidence: 0.8,
+                    evidence: "Security-related files"
+                  }];
+                }
+                
+                if (fileTypes.some(f => /\.jsx$|\.tsx$|\.css$|\.scss$|\.vue$|\/ui\//i.test(f))) {
+                  return [{
+                    id: "frontend",
+                    confidence: 0.8,
+                    evidence: "Frontend-related files"
+                  }];
+                }
+                
+                if (fileTypes.some(f => /docker|kubernetes|k8s|deploy|ci|cd/i.test(f))) {
+                  return [{
+                    id: "devops",
+                    confidence: 0.8,
+                    evidence: "DevOps-related files"
+                  }];
+                }
+                
+                if (fileTypes.some(f => /test|spec|cypress|jest|playwright/i.test(f))) {
+                  return [{
+                    id: "qa",
+                    confidence: 0.7,
+                    evidence: "QA/Testing-related files"
+                  }];
+                }
+                
+                if (fileTypes.some(f => /\.md$|docs\//i.test(f))) {
+                  return [{
+                    id: "docs",
+                    confidence: 0.8,
+                    evidence: "Documentation-related files"
+                  }];
+                }
+              }
+              
+              // For test issues
+              if (title === 'test' && (!item.body || item.body.length < 20)) {
+                return [{
+                  id: "qa",
+                  confidence: 0.7,
+                  evidence: "Simple test issues assigned to QA team"
+                }];
+              }
+              
+              // Default to backend if nothing else fits
+              return [{
+                id: "backend-dev",
+                confidence: 0.6,
+                evidence: "Default backend team assignment (no specific signals)"
+              }];
+            }
+            
+            function detectHealth(text, files, item) {
+              const title = item.title?.toLowerCase() || '';
+              const body = item.body || '';
+              
+              // For PRs, look at code quality indicators
+              if (isPR) {
+                let healthScore = 50; // Start at middle
+                
+                // Code quality signals
+                const hasTests = files.some(f => /test|spec|__tests__/i.test(f));
+                const hasDocs = files.some(f => /docs\/|\.md$/i.test(f));
+                const hasComments = item.comments && item.comments.length > 0;
+                
+                // Add points for positive signals
+                if (hasTests) healthScore += 20;
+                if (hasDocs) healthScore += 15;
+                if (hasComments) healthScore += 5;
+                
+                // Subtract for negative signals
+                if (files.length > 20) healthScore -= 10;
+                if (!body || body.length < 30) healthScore -= 10;
+                
+                // Cap the score
+                healthScore = Math.max(10, Math.min(100, healthScore));
+                
+                // Map to health labels
+                if (healthScore >= 90) {
+                  return [{
+                    id: "90-99",
+                    confidence: 0.8,
+                    evidence: `High health score: ${healthScore}`
+                  }];
+                } else if (healthScore >= 75) {
+                  return [{
+                    id: "75-89",
+                    confidence: 0.8,
+                    evidence: `Good health score: ${healthScore}`
+                  }];
+                } else if (healthScore >= 50) {
+                  return [{
+                    id: "50-74",
+                    confidence: 0.8,
+                    evidence: `Average health score: ${healthScore}`
+                  }];
+                } else if (healthScore >= 25) {
+                  return [{
+                    id: "25-49",
+                    confidence: 0.8,
+                    evidence: `Below average health score: ${healthScore}`
+                  }];
+                } else {
+                  return [{
+                    id: "0-24",
+                    confidence: 0.8,
+                    evidence: `Low health score: ${healthScore}`
+                  }];
+                }
+              }
+              
+              // For issues, base health on completeness
+              let issueHealthScore = 50;
+              
+              if (body && body.length > 100) issueHealthScore += 10;
+              if (body && body.includes('## Steps to reproduce')) issueHealthScore += 15;
+              if (body && body.includes('## Expected behavior')) issueHealthScore += 10;
+              if (body && (body.includes('```') || body.includes('~~~'))) issueHealthScore += 5; 
+              if (item.assignees && item.assignees.length > 0) issueHealthScore += 5;
+              if (item.comments && item.comments.length > 0) issueHealthScore += 5;
+              
+              // Subtract points for minimal issues
+              if (!body || body.length < 20) issueHealthScore -= 15;
+              if (title.length < 10) issueHealthScore -= 10;
+              
+              // For test issues
+              if (title === 'test' && (!body || body.length < 20)) {
+                return [{
+                  id: "50-74",
+                  confidence: 0.7,
+                  evidence: "Default health for test issues"
+                }];
+              }
+              
+              // Cap and map to labels
+              issueHealthScore = Math.max(10, Math.min(100, issueHealthScore));
+              
+              if (issueHealthScore >= 90) {
+                return [{
+                  id: "90-99",
+                  confidence: 0.8,
+                  evidence: `High health score: ${issueHealthScore}`
+                }];
+              } else if (issueHealthScore >= 75) {
+                return [{
+                  id: "75-89",
+                  confidence: 0.8,
+                  evidence: `Good health score: ${issueHealthScore}`
+                }];
+              } else if (issueHealthScore >= 50) {
+                return [{
+                  id: "50-74",
+                  confidence: 0.8,
+                  evidence: `Average health score: ${issueHealthScore}`
+                }];
+              } else if (issueHealthScore >= 25) {
+                return [{
+                  id: "25-49",
+                  confidence: 0.8,
+                  evidence: `Below average health score: ${issueHealthScore}`
+                }];
+              } else {
+                return [{
+                  id: "0-24",
+                  confidence: 0.8, 
+                  evidence: `Low health score: ${issueHealthScore}`
+                }];
+              }
+            }
+            
+            // STEP 4: Perform classifications
+            // Detect area first since other classifications may depend on it
+            const areaClassification = detectArea(allText, files, itemData);
+            
+            // Now detect other classifications
+            const classifications = {
+              areas: areaClassification,
+              risk: detectRisk(allText, files, itemData),
+              priority: detectPriority(allText, files, itemData),
+              status: detectStatus(allText, files, itemData),
+              size: detectSize(allText, files, itemData),
+              phase: detectPhase(allText, itemData),
+              team: detectTeam(allText, files, areaClassification),
+              health: detectHealth(allText, files, itemData)
+            };
+            
+            // STEP 5: Create or update classification document
+            const classificationObject = {
+              schema_version: "2.1.0",
+              item: {
+                number: number,
+                type: type,
+                title: itemData.title,
+                created_at: itemData.created_at,
+                updated_at: itemData.updated_at,
+                url: itemData.html_url,
+                author: itemData.user?.login,
+                node_id: itemData.node_id
+              },
+              classifications: classifications,
+              metadata: {
+                generated_at: new Date().toISOString(),
+                generated_by: "MerajutASA Classification System v2.1.0",
+                confidence_avg: (
+                  (classifications.areas.reduce((sum, a) => sum + a.confidence, 0) / classifications.areas.length) +
+                  classifications.risk[0].confidence +
+                  classifications.priority[0].confidence +
+                  classifications.status[0].confidence +
+                  classifications.size[0].confidence +
+                  classifications.phase[0].confidence +
+                  classifications.team[0].confidence +
+                  classifications.health[0].confidence
+                ) / 8
+              }
+            };
+            
+            // STEP 6: Apply labels based on classifications (if not in dry run)
+            const dryRun = '${{ github.event.inputs.dry_run }}' === 'true';
+            if (!dryRun) {
+              // Map classifications to labels
+              const newLabels = [];
+              
+              // Area labels (can have multiple)
+              for (const area of classifications.areas) {
+                newLabels.push(`area:${area.id}`);
+              }
+              
+              // Other classifications (single value each)
+              newLabels.push(`risk:${classifications.risk[0].id}`);
+              newLabels.push(`status:${classifications.status[0].id}`);
+              newLabels.push(`size:${classifications.size[0].id}`);
+              newLabels.push(`priority:${classifications.priority[0].id}`);
+              newLabels.push(`phase:${classifications.phase[0].id}`);
+              newLabels.push(`team:${classifications.team[0].id}`);
+              newLabels.push(`health:${classifications.health[0].id}`);
+              
+              // Determine labels to add/remove
+              const existingLabels = new Set(allLabels);
+              const labelsToAdd = newLabels.filter(label => !existingLabels.has(label));
+              
+              // Remove old classification labels that conflict with new ones
+              const labelsToRemove = allLabels.filter(label => {
+                if (label.startsWith('area:') && !newLabels.some(nl => nl === label)) return true;
+                if (label.startsWith('risk:') && !newLabels.some(nl => nl === label)) return true;
+                if (label.startsWith('status:') && !newLabels.some(nl => nl === label)) return true;
+                if (label.startsWith('size:') && !newLabels.some(nl => nl === label)) return true;
+                if (label.startsWith('priority:') && !newLabels.some(nl => nl === label)) return true;
+                if (label.startsWith('phase:') && !newLabels.some(nl => nl === label)) return true;
+                if (label.startsWith('team:') && !newLabels.some(nl => nl === label)) return true;
+                if (label.startsWith('health:') && !newLabels.some(nl => nl === label)) return true;
+                return false;
+              });
+              
+              // Apply label changes
+              core.info(`Labels to add: ${labelsToAdd.join(', ')}`);
+              core.info(`Labels to remove: ${labelsToRemove.join(', ')}`);
+              
+              try {
+                // Remove old labels first
+                for (const label of labelsToRemove) {
+                  await github.rest.issues.removeLabel({
+                    owner,
+                    repo,
+                    issue_number: number,
+                    name: label
+                  });
+                  core.info(`Removed label: ${label}`);
+                }
+                
+                // Add new labels
+                if (labelsToAdd.length > 0) {
+                  await github.rest.issues.addLabels({
+                    owner,
+                    repo,
+                    issue_number: number,
+                    labels: labelsToAdd
+                  });
+                  core.info(`Added labels: ${labelsToAdd.join(', ')}`);
+                }
+              } catch (error) {
+                core.warning(`Error updating labels: ${error.message}`);
+              }
+              
+              // Add a comment explaining the classifications
+              try {
+                // Create a nicely formatted classification comment
+                const comment = `## 🧠 MerajutASA Classification System
+
+I've analyzed this ${isPR ? 'pull request' : 'issue'} and made the following classifications:
+
+### Area${classifications.areas.length > 1 ? 's' : ''}
+${classifications.areas.map(area => {
+  const areaInfo = CLASSIFICATION_CATEGORIES.AREA.options.find(o => o.id === area.id);
+  return `- **${areaInfo?.name || area.id}** (${(area.confidence * 100).toFixed(0)}% confidence)
+  - ${area.evidence}`;
+}).join('\n')}
+
+### Risk
+- **${CLASSIFICATION_CATEGORIES.RISK.options.find(o => o.id === classifications.risk[0].id)?.name || classifications.risk[0].id}** (${(classifications.risk[0].confidence * 100).toFixed(0)}% confidence)
+  - ${classifications.risk[0].evidence}
+
+### Priority
+- **${CLASSIFICATION_CATEGORIES.PRIORITY.options.find(o => o.id === classifications.priority[0].id)?.name || classifications.priority[0].id}** (${(classifications.priority[0].confidence * 100).toFixed(0)}% confidence)
+  - ${classifications.priority[0].evidence}
+
+### Status
+- **${CLASSIFICATION_CATEGORIES.STATUS.options.find(o => o.id === classifications.status[0].id)?.name || classifications.status[0].id}** (${(classifications.status[0].confidence * 100).toFixed(0)}% confidence)
+  - ${classifications.status[0].evidence}
+
+### Size
+- **${CLASSIFICATION_CATEGORIES.SIZE.options.find(o => o.id === classifications.size[0].id)?.name || classifications.size[0].id}** (${(classifications.size[0].confidence * 100).toFixed(0)}% confidence)
+  - ${classifications.size[0].evidence}
+
+### Phase
+- **Phase ${classifications.phase[0].id}** (${(classifications.phase[0].confidence * 100).toFixed(0)}% confidence)
+  - ${classifications.phase[0].evidence}
+
+### Team
+- **${CLASSIFICATION_CATEGORIES.TEAM.options.find(o => o.id === classifications.team[0].id)?.name || classifications.team[0].id}** (${(classifications.team[0].confidence * 100).toFixed(0)}% confidence)
+  - ${classifications.team[0].evidence}
+
+### Health
+- **${CLASSIFICATION_CATEGORIES.HEALTH.options.find(o => o.id === classifications.health[0].id)?.name || classifications.health[0].id}** (${(classifications.health[0].confidence * 100).toFixed(0)}% confidence)
+  - ${classifications.health[0].evidence}
+
+*Classification labels have been updated based on this analysis. Project fields will be updated automatically.*`;
+
+                await github.rest.issues.createComment({
+                  owner,
+                  repo,
+                  issue_number: number,
+                  body: comment
+                });
+                
+                core.info('Added classification explanation comment');
+              } catch (error) {
+                core.warning(`Error adding comment: ${error.message}`);
+              }
+            } else {
+              core.info('DRY RUN: No label changes were made');
+            }
+            
+            return classificationObject;
+
+      - name: Create Classification Artifact
+        id: create_artifact
+        if: steps.get_item_details.outputs.number
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const artifactName = `classification-${context.runId}`;
+            
+            // Get classification results
+            const classificationResult = ${{ toJSON(steps.classify.outputs.result) }};
+            
+            // Add additional metadata
+            const artifactData = {
+              metadata: {
+                timestamp: new Date().toISOString(),
+                workflow_version: process.env.WORKFLOW_VERSION,
+                created_at: process.env.CREATED_AT,
+                created_by: process.env.CREATED_BY,
+                run_id: context.runId,
+                run_number: context.runNumber,
+                repository: `${context.repo.owner}/${context.repo.repo}`,
+                actor: context.actor,
+                event: context.eventName,
+                action: context.payload.action || 'manual',
+                ref: context.ref
+              },
+              classification: classificationResult
+            };
+            
+            // Write to file
+            fs.writeFileSync('classification.json', JSON.stringify(artifactData, null, 2));
+            
+            core.setOutput('artifact_name', artifactName);
+            return artifactName;
+            
+      - name: Upload Classification Artifact
+        if: steps.create_artifact.outputs.artifact_name
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.create_artifact.outputs.artifact_name }}
+          path: classification.json
+          retention-days: 7
+
+  project_integration:
+    name: "📋 Project Board Integration"
+    needs: classify
+    if: needs.classify.outputs.item_number
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Classification
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ needs.classify.outputs.artifact_name }}
+      
+      - name: Update Project Board
+        uses: actions/github-script@v7
+        env:
+          GH_PROJECT_TOKEN: ${{ secrets.GH_PROJECT_TOKEN }}
+          PROJECT_TITLE: "MerajutASA Program Board"
+        with:
+          github-token: ${{ secrets.GH_PROJECT_TOKEN || github.token }}
+          script: |
+            const fs = require('fs');
+            
+            // Load classification data
+            const artifactData = JSON.parse(fs.readFileSync('classification.json', 'utf8'));
+            const classification = artifactData.classification;
+            
+            // Skip if dry run
+            const dryRun = '${{ github.event.inputs.dry_run }}' === 'true';
+            if (dryRun) {
+              core.info('DRY RUN: Skipping project board integration');
+              return;
+            }
+            
+            // Check if GH_PROJECT_TOKEN is available
+            const hasPAT = process.env.GH_PROJECT_TOKEN && process.env.GH_PROJECT_TOKEN.trim().length > 0;
+            if (!hasPAT) {
+              core.warning('GH_PROJECT_TOKEN not set - project integration requires a token with project scope');
+              return;
+            }
+            
+            // Log info about what we're doing
+            const itemType = classification.item.type;
+            const itemNumber = classification.item.number;
+            const projectTitle = process.env.PROJECT_TITLE;
+            
+            core.info(`Integrating ${itemType} #${itemNumber} with project "${projectTitle}"`);
+            
+            // Find project by title
+            try {
+              // Project lookup
+              const owner = context.repo.owner;
+              const projectQuery = `
+                query($owner: String!) {
+                  user(login: $owner) {
+                    projectsV2(first: 20) {
+                      nodes {
+                        id
+                        title
+                        url
+                        fields(first: 50) {
+                          nodes {
+                            ... on ProjectV2FieldCommon {
+                              id
+                              name
+                              dataType
+                            }
+                            ... on ProjectV2SingleSelectField {
+                              id
+                              name
+                              options {
+                                id
+                                name
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              `;
+              
+              const projectResp = await github.graphql(projectQuery, { owner });
+              const projects = projectResp.user?.projectsV2?.nodes || [];
+              const project = projects.find(p => p.title === projectTitle);
+              
+              if (!project) {
+                core.warning(`Project "${projectTitle}" not found for user ${owner}`);
+                core.info('Available projects:');
+                projects.forEach(p => core.info(`- ${p.title}`));
+                return;
+              }
+              
+              core.info(`Found project: ${project.title} (${project.url})`);
+              
+              // Check if item already exists in the project
+              const itemId = await getOrAddProjectItem(project.id, classification);
+              if (!itemId) {
+                core.warning('Failed to add item to project');
+                return;
+              }
+              
+              // Update fields based on classifications
+              await updateProjectFields(project, itemId, classification);
+              
+            } catch (error) {
+              core.setFailed(`Error in project integration: ${error.message}`);
+            }
+            
+            // Helper function to get or add the item to the project
+            async function getOrAddProjectItem(projectId, classification) {
+              const contentId = classification.item.node_id || needs.classify.outputs.node_id;
+              if (!contentId) {
+                core.warning('No node_id available for item');
+                return null;
+              }
+              
+              // Check if already in project
+              const itemQuery = `
