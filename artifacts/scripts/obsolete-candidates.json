@@ -1,13 +1,13 @@
 {
   "tool": "obsolete-detector",
   "version": "1.0.0",
-  "generated_at": "2025-08-18T22:15:35.624Z",
+  "generated_at": "2025-08-21T12:42:27.792Z",
   "summary": {
-    "total_candidates": 3,
+    "total_candidates": 6,
     "powershell_dependent": 0,
     "consistently_failing": 0,
     "unreferenced": 0,
-    "duplicate_functionality": 3,
+    "duplicate_functionality": 6,
     "deprecated_patterns": 0
   },
   "candidates": {
@@ -15,6 +15,11 @@
     "consistently_failing": [],
     "unreferenced": [],
     "duplicate_functionality": [
+      {
+        "name": "privacy:request",
+        "command": "node infrastructure/compliance/privacy-rights-management.js --process-request",
+        "reason": "Duplicate of: privacy:rights"
+      },
       {
         "name": "equity:snapshot",
         "command": "node tools/fairness/generate-equity-snapshots.js",
@@ -29,6 +34,16 @@
         "name": "verify:cli",
         "command": "node tools/generate-test-vectors.js",
         "reason": "Duplicate of: gen:test-vectors"
+      },
+      {
+        "name": "health:check",
+        "command": "node tools/integrated-health-check.js",
+        "reason": "Duplicate of: week6:full-health"
+      },
+      {
+        "name": "health:week6",
+        "command": "node tools/integrated-health-check.js auditSystem complianceAutomation securityHardening privacyRights complianceOrchestrator",
+        "reason": "Duplicate of: week6:components-status"
       }
     ],
     "deprecated_patterns": []
