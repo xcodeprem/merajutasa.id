@@ -1,0 +1,557 @@
+[
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-21T22:34:54.816Z",
+      "generator": "post-config-verify",
+      "git_ref": "refs/heads/copilot/fix-157",
+      "git_sha": "dbd294a6f7d5f5c828506937329114f1235c2d0f",
+      "run_id": "17140672445",
+      "version": "1.0"
+    },
+    "action": "verification-start",
+    "status": "STARTED",
+    "steps_planned": 4,
+    "timestamp": "2025-08-21T22:34:54.816Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-21T22:34:58.442Z",
+      "generator": "post-config-verify",
+      "git_ref": "refs/heads/copilot/fix-157",
+      "git_sha": "dbd294a6f7d5f5c828506937329114f1235c2d0f",
+      "run_id": "17140672445",
+      "version": "1.0"
+    },
+    "action": "verification-step",
+    "cmd": "npm run governance:verify",
+    "critical": true,
+    "description": "Complete governance integrity check",
+    "duration_ms": 3622,
+    "exit_code": 0,
+    "status": "PASS",
+    "step": "governance-verify",
+    "timestamp": "2025-08-21T22:34:58.442Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-21T22:34:58.655Z",
+      "generator": "post-config-verify",
+      "git_ref": "refs/heads/copilot/fix-157",
+      "git_sha": "dbd294a6f7d5f5c828506937329114f1235c2d0f",
+      "run_id": "17140672445",
+      "version": "1.0"
+    },
+    "action": "verification-step",
+    "cmd": "npm run spec-hash:verify",
+    "critical": true,
+    "description": "Content hash verification",
+    "duration_ms": 213,
+    "exit_code": 0,
+    "status": "PASS",
+    "step": "spec-hash-verify",
+    "timestamp": "2025-08-21T22:34:58.655Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-21T22:34:58.894Z",
+      "generator": "post-config-verify",
+      "git_ref": "refs/heads/copilot/fix-157",
+      "git_sha": "dbd294a6f7d5f5c828506937329114f1235c2d0f",
+      "run_id": "17140672445",
+      "version": "1.0"
+    },
+    "action": "verification-step",
+    "cmd": "npm run param:integrity",
+    "critical": true,
+    "description": "Parameter consistency validation",
+    "duration_ms": 239,
+    "exit_code": 0,
+    "status": "PASS",
+    "step": "param-integrity",
+    "timestamp": "2025-08-21T22:34:58.894Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-21T22:34:59.091Z",
+      "generator": "post-config-verify",
+      "git_ref": "refs/heads/copilot/fix-157",
+      "git_sha": "dbd294a6f7d5f5c828506937329114f1235c2d0f",
+      "run_id": "17140672445",
+      "version": "1.0"
+    },
+    "action": "verification-step",
+    "cmd": "npm run compliance:audit",
+    "critical": true,
+    "description": "Compliance audit checks",
+    "duration_ms": 199,
+    "exit_code": 0,
+    "status": "PASS",
+    "step": "compliance-audit",
+    "timestamp": "2025-08-21T22:34:59.091Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-21T22:34:59.092Z",
+      "generator": "post-config-verify",
+      "git_ref": "refs/heads/copilot/fix-157",
+      "git_sha": "dbd294a6f7d5f5c828506937329114f1235c2d0f",
+      "run_id": "17140672445",
+      "version": "1.0"
+    },
+    "action": "verification-complete",
+    "duration_ms": 4277,
+    "status": "PASS",
+    "summary_file": "artifacts/post-config-verification-summary.json",
+    "timestamp": "2025-08-21T22:34:59.092Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-21T22:35:26.904Z",
+      "generator": "post-config-verify",
+      "git_ref": "refs/heads/copilot/fix-157",
+      "git_sha": "dbd294a6f7d5f5c828506937329114f1235c2d0f",
+      "run_id": "17140672445",
+      "version": "1.0"
+    },
+    "action": "verification-start",
+    "status": "STARTED",
+    "steps_planned": 4,
+    "timestamp": "2025-08-21T22:35:26.904Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-21T22:35:30.433Z",
+      "generator": "post-config-verify",
+      "git_ref": "refs/heads/copilot/fix-157",
+      "git_sha": "dbd294a6f7d5f5c828506937329114f1235c2d0f",
+      "run_id": "17140672445",
+      "version": "1.0"
+    },
+    "action": "verification-step",
+    "cmd": "npm run governance:verify",
+    "critical": true,
+    "description": "Complete governance integrity check",
+    "duration_ms": 3524,
+    "exit_code": 0,
+    "status": "PASS",
+    "step": "governance-verify",
+    "timestamp": "2025-08-21T22:35:30.433Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-21T22:35:30.640Z",
+      "generator": "post-config-verify",
+      "git_ref": "refs/heads/copilot/fix-157",
+      "git_sha": "dbd294a6f7d5f5c828506937329114f1235c2d0f",
+      "run_id": "17140672445",
+      "version": "1.0"
+    },
+    "action": "verification-step",
+    "cmd": "npm run spec-hash:verify",
+    "critical": true,
+    "description": "Content hash verification",
+    "duration_ms": 206,
+    "exit_code": 0,
+    "status": "PASS",
+    "step": "spec-hash-verify",
+    "timestamp": "2025-08-21T22:35:30.640Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-21T22:35:30.869Z",
+      "generator": "post-config-verify",
+      "git_ref": "refs/heads/copilot/fix-157",
+      "git_sha": "dbd294a6f7d5f5c828506937329114f1235c2d0f",
+      "run_id": "17140672445",
+      "version": "1.0"
+    },
+    "action": "verification-step",
+    "cmd": "npm run param:integrity",
+    "critical": true,
+    "description": "Parameter consistency validation",
+    "duration_ms": 229,
+    "exit_code": 0,
+    "status": "PASS",
+    "step": "param-integrity",
+    "timestamp": "2025-08-21T22:35:30.869Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-21T22:35:31.063Z",
+      "generator": "post-config-verify",
+      "git_ref": "refs/heads/copilot/fix-157",
+      "git_sha": "dbd294a6f7d5f5c828506937329114f1235c2d0f",
+      "run_id": "17140672445",
+      "version": "1.0"
+    },
+    "action": "verification-step",
+    "cmd": "npm run compliance:audit",
+    "critical": true,
+    "description": "Compliance audit checks",
+    "duration_ms": 195,
+    "exit_code": 0,
+    "status": "PASS",
+    "step": "compliance-audit",
+    "timestamp": "2025-08-21T22:35:31.063Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-21T22:35:31.064Z",
+      "generator": "post-config-verify",
+      "git_ref": "refs/heads/copilot/fix-157",
+      "git_sha": "dbd294a6f7d5f5c828506937329114f1235c2d0f",
+      "run_id": "17140672445",
+      "version": "1.0"
+    },
+    "action": "verification-complete",
+    "duration_ms": 4160,
+    "status": "PASS",
+    "summary_file": "artifacts/post-config-verification-summary.json",
+    "timestamp": "2025-08-21T22:35:31.064Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-21T22:36:11.747Z",
+      "generator": "post-config-verify",
+      "git_ref": "refs/heads/copilot/fix-157",
+      "git_sha": "dbd294a6f7d5f5c828506937329114f1235c2d0f",
+      "run_id": "17140672445",
+      "version": "1.0"
+    },
+    "action": "verification-start",
+    "status": "STARTED",
+    "steps_planned": 4,
+    "timestamp": "2025-08-21T22:36:11.746Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-21T22:36:15.275Z",
+      "generator": "post-config-verify",
+      "git_ref": "refs/heads/copilot/fix-157",
+      "git_sha": "dbd294a6f7d5f5c828506937329114f1235c2d0f",
+      "run_id": "17140672445",
+      "version": "1.0"
+    },
+    "action": "verification-step",
+    "cmd": "npm run governance:verify",
+    "critical": true,
+    "description": "Complete governance integrity check",
+    "duration_ms": 3525,
+    "exit_code": 0,
+    "status": "PASS",
+    "step": "governance-verify",
+    "timestamp": "2025-08-21T22:36:15.275Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-21T22:36:15.478Z",
+      "generator": "post-config-verify",
+      "git_ref": "refs/heads/copilot/fix-157",
+      "git_sha": "dbd294a6f7d5f5c828506937329114f1235c2d0f",
+      "run_id": "17140672445",
+      "version": "1.0"
+    },
+    "action": "verification-step",
+    "cmd": "npm run spec-hash:verify",
+    "critical": true,
+    "description": "Content hash verification",
+    "duration_ms": 202,
+    "exit_code": 0,
+    "status": "PASS",
+    "step": "spec-hash-verify",
+    "timestamp": "2025-08-21T22:36:15.478Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-21T22:36:15.710Z",
+      "generator": "post-config-verify",
+      "git_ref": "refs/heads/copilot/fix-157",
+      "git_sha": "dbd294a6f7d5f5c828506937329114f1235c2d0f",
+      "run_id": "17140672445",
+      "version": "1.0"
+    },
+    "action": "verification-step",
+    "cmd": "npm run param:integrity",
+    "critical": true,
+    "description": "Parameter consistency validation",
+    "duration_ms": 231,
+    "exit_code": 0,
+    "status": "PASS",
+    "step": "param-integrity",
+    "timestamp": "2025-08-21T22:36:15.710Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-21T22:36:15.904Z",
+      "generator": "post-config-verify",
+      "git_ref": "refs/heads/copilot/fix-157",
+      "git_sha": "dbd294a6f7d5f5c828506937329114f1235c2d0f",
+      "run_id": "17140672445",
+      "version": "1.0"
+    },
+    "action": "verification-step",
+    "cmd": "npm run compliance:audit",
+    "critical": true,
+    "description": "Compliance audit checks",
+    "duration_ms": 195,
+    "exit_code": 0,
+    "status": "PASS",
+    "step": "compliance-audit",
+    "timestamp": "2025-08-21T22:36:15.904Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-21T22:36:15.905Z",
+      "generator": "post-config-verify",
+      "git_ref": "refs/heads/copilot/fix-157",
+      "git_sha": "dbd294a6f7d5f5c828506937329114f1235c2d0f",
+      "run_id": "17140672445",
+      "version": "1.0"
+    },
+    "action": "verification-complete",
+    "duration_ms": 4160,
+    "status": "PASS",
+    "summary_file": "artifacts/post-config-verification-summary.json",
+    "timestamp": "2025-08-21T22:36:15.905Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-21T22:38:11.155Z",
+      "generator": "post-config-verify",
+      "git_ref": "refs/heads/copilot/fix-157",
+      "git_sha": "dbd294a6f7d5f5c828506937329114f1235c2d0f",
+      "run_id": "17140672445",
+      "version": "1.0"
+    },
+    "action": "verification-start",
+    "status": "STARTED",
+    "steps_planned": 4,
+    "timestamp": "2025-08-21T22:38:11.155Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-21T22:38:14.709Z",
+      "generator": "post-config-verify",
+      "git_ref": "refs/heads/copilot/fix-157",
+      "git_sha": "dbd294a6f7d5f5c828506937329114f1235c2d0f",
+      "run_id": "17140672445",
+      "version": "1.0"
+    },
+    "action": "verification-step",
+    "cmd": "npm run governance:verify",
+    "critical": true,
+    "description": "Complete governance integrity check",
+    "duration_ms": 3551,
+    "exit_code": 0,
+    "status": "PASS",
+    "step": "governance-verify",
+    "timestamp": "2025-08-21T22:38:14.709Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-21T22:38:14.915Z",
+      "generator": "post-config-verify",
+      "git_ref": "refs/heads/copilot/fix-157",
+      "git_sha": "dbd294a6f7d5f5c828506937329114f1235c2d0f",
+      "run_id": "17140672445",
+      "version": "1.0"
+    },
+    "action": "verification-step",
+    "cmd": "npm run spec-hash:verify",
+    "critical": true,
+    "description": "Content hash verification",
+    "duration_ms": 206,
+    "exit_code": 0,
+    "status": "PASS",
+    "step": "spec-hash-verify",
+    "timestamp": "2025-08-21T22:38:14.915Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-21T22:38:15.148Z",
+      "generator": "post-config-verify",
+      "git_ref": "refs/heads/copilot/fix-157",
+      "git_sha": "dbd294a6f7d5f5c828506937329114f1235c2d0f",
+      "run_id": "17140672445",
+      "version": "1.0"
+    },
+    "action": "verification-step",
+    "cmd": "npm run param:integrity",
+    "critical": true,
+    "description": "Parameter consistency validation",
+    "duration_ms": 233,
+    "exit_code": 0,
+    "status": "PASS",
+    "step": "param-integrity",
+    "timestamp": "2025-08-21T22:38:15.148Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-21T22:38:15.339Z",
+      "generator": "post-config-verify",
+      "git_ref": "refs/heads/copilot/fix-157",
+      "git_sha": "dbd294a6f7d5f5c828506937329114f1235c2d0f",
+      "run_id": "17140672445",
+      "version": "1.0"
+    },
+    "action": "verification-step",
+    "cmd": "npm run compliance:audit",
+    "critical": true,
+    "description": "Compliance audit checks",
+    "duration_ms": 192,
+    "exit_code": 0,
+    "status": "PASS",
+    "step": "compliance-audit",
+    "timestamp": "2025-08-21T22:38:15.339Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-21T22:38:15.340Z",
+      "generator": "post-config-verify",
+      "git_ref": "refs/heads/copilot/fix-157",
+      "git_sha": "dbd294a6f7d5f5c828506937329114f1235c2d0f",
+      "run_id": "17140672445",
+      "version": "1.0"
+    },
+    "action": "verification-complete",
+    "duration_ms": 4187,
+    "status": "PASS",
+    "summary_file": "artifacts/post-config-verification-summary.json",
+    "timestamp": "2025-08-21T22:38:15.340Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-21T22:39:01.740Z",
+      "generator": "post-config-verify",
+      "git_ref": "refs/heads/copilot/fix-157",
+      "git_sha": "dbd294a6f7d5f5c828506937329114f1235c2d0f",
+      "run_id": "17140672445",
+      "version": "1.0"
+    },
+    "action": "verification-start",
+    "status": "STARTED",
+    "steps_planned": 4,
+    "timestamp": "2025-08-21T22:39:01.740Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-21T22:39:05.436Z",
+      "generator": "post-config-verify",
+      "git_ref": "refs/heads/copilot/fix-157",
+      "git_sha": "dbd294a6f7d5f5c828506937329114f1235c2d0f",
+      "run_id": "17140672445",
+      "version": "1.0"
+    },
+    "action": "verification-step",
+    "cmd": "npm run governance:verify",
+    "critical": true,
+    "description": "Complete governance integrity check",
+    "duration_ms": 3692,
+    "exit_code": 0,
+    "status": "PASS",
+    "step": "governance-verify",
+    "timestamp": "2025-08-21T22:39:05.436Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-21T22:39:05.641Z",
+      "generator": "post-config-verify",
+      "git_ref": "refs/heads/copilot/fix-157",
+      "git_sha": "dbd294a6f7d5f5c828506937329114f1235c2d0f",
+      "run_id": "17140672445",
+      "version": "1.0"
+    },
+    "action": "verification-step",
+    "cmd": "npm run spec-hash:verify",
+    "critical": true,
+    "description": "Content hash verification",
+    "duration_ms": 204,
+    "exit_code": 0,
+    "status": "PASS",
+    "step": "spec-hash-verify",
+    "timestamp": "2025-08-21T22:39:05.641Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-21T22:39:05.871Z",
+      "generator": "post-config-verify",
+      "git_ref": "refs/heads/copilot/fix-157",
+      "git_sha": "dbd294a6f7d5f5c828506937329114f1235c2d0f",
+      "run_id": "17140672445",
+      "version": "1.0"
+    },
+    "action": "verification-step",
+    "cmd": "npm run param:integrity",
+    "critical": true,
+    "description": "Parameter consistency validation",
+    "duration_ms": 230,
+    "exit_code": 0,
+    "status": "PASS",
+    "step": "param-integrity",
+    "timestamp": "2025-08-21T22:39:05.871Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-21T22:39:06.068Z",
+      "generator": "post-config-verify",
+      "git_ref": "refs/heads/copilot/fix-157",
+      "git_sha": "dbd294a6f7d5f5c828506937329114f1235c2d0f",
+      "run_id": "17140672445",
+      "version": "1.0"
+    },
+    "action": "verification-step",
+    "cmd": "npm run compliance:audit",
+    "critical": true,
+    "description": "Compliance audit checks",
+    "duration_ms": 198,
+    "exit_code": 0,
+    "status": "PASS",
+    "step": "compliance-audit",
+    "timestamp": "2025-08-21T22:39:06.068Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-21T22:39:06.070Z",
+      "generator": "post-config-verify",
+      "git_ref": "refs/heads/copilot/fix-157",
+      "git_sha": "dbd294a6f7d5f5c828506937329114f1235c2d0f",
+      "run_id": "17140672445",
+      "version": "1.0"
+    },
+    "action": "verification-complete",
+    "duration_ms": 4331,
+    "status": "PASS",
+    "summary_file": "artifacts/post-config-verification-summary.json",
+    "timestamp": "2025-08-21T22:39:06.070Z"
+  }
+]

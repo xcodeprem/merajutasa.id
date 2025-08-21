@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "generated_utc": "2025-08-21T21:29:50.765Z",
-  "file_count": 85,
+  "generated_utc": "2025-08-21T22:39:02.726Z",
+  "file_count": 86,
   "total_hits": 18,
   "max_severity": "MEDIUM",
   "severity_counts": {
@@ -24,7 +24,7 @@
     },
     {
       "file": "README.md",
-      "line": 368,
+      "line": 369,
       "column": 9,
       "match": "Ranking",
       "rule": "RANKING",
@@ -34,7 +34,7 @@
     },
     {
       "file": "README.md",
-      "line": 368,
+      "line": 369,
       "column": 88,
       "match": "ranking",
       "rule": "RANKING",
@@ -44,7 +44,7 @@
     },
     {
       "file": "README.md",
-      "line": 557,
+      "line": 559,
       "column": 69,
       "match": "ranking",
       "rule": "RANKING",
@@ -54,7 +54,7 @@
     },
     {
       "file": "README.md",
-      "line": 749,
+      "line": 751,
       "column": 70,
       "match": "ranking",
       "rule": "RANKING",
