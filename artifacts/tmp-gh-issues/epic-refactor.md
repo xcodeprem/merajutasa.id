@@ -17,11 +17,11 @@ Epic ini berfungsi sebagai isu utama untuk melacak tiga inisiatif perbaikan krit
 ## Tugas Utama (Sub-Issues)
 
 - [ ] 1. Inisiatif Refaktor Arsitektur dan Dekomposisi Sistem
- 	- Tujuan: Mengurangi keterkaitan antar komponen (coupling), menghilangkan dependensi sirkular, dan meningkatkan resiliensi sistem secara keseluruhan.
+  - Tujuan: Mengurangi keterkaitan antar komponen (coupling), menghilangkan dependensi sirkular, dan meningkatkan resiliensi sistem secara keseluruhan.
 - [ ] 2. Inisiatif Rasionalisasi Developer Experience (DevEx) dan Toolchain
- 	- Tujuan: Menyederhanakan alur kerja pengembangan dan operasional, mengurangi beban kognitif, dan meningkatkan produktivitas tim rekayasa.
+  - Tujuan: Menyederhanakan alur kerja pengembangan dan operasional, mengurangi beban kognitif, dan meningkatkan produktivitas tim rekayasa.
 - [ ] 3. Inisiatif Isolasi dan Penguatan Produk Berisiko Tinggi
- 	- Tujuan: Memitigasi risiko reputasi dan keamanan yang terkait dengan aplikasi "Portal Panti Asuhan" dengan memisahkannya dari platform inti yang kompleks.
+  - Tujuan: Memitigasi risiko reputasi dan keamanan yang terkait dengan aplikasi "Portal Panti Asuhan" dengan memisahkannya dari platform inti yang kompleks.
 
 ## Tracking
 
