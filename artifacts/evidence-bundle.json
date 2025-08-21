@@ -1,16 +1,16 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-21T15:50:15.916Z",
+  "generated_utc": "2025-08-21T15:58:58.088Z",
   "evidence_phase": "1.5",
   "artifacts": [
     {
       "id": "A1",
       "path": "artifacts/spec-hash-diff.json",
       "exists": true,
-      "size_bytes": 3717,
-      "sha256": "76fcd5bed583a91976de1b17b1cecede8f4a1ec5dffcf12df8cc453015c5a582",
-      "sha256_short": "76fcd5bed583a919",
-      "display_hash_prefix": "76fcd5bed583a919",
+      "size_bytes": 3721,
+      "sha256": "e23ea7a5944ff5a9b8679be69f87a63620191ec1e6cad79bd41533141e3ea4c8",
+      "sha256_short": "e23ea7a5944ff5a9",
+      "display_hash_prefix": "e23ea7a5944ff5a9",
       "schema_ref": "spec-hash-diff-v1.json",
       "category": "governance"
     },
@@ -118,9 +118,9 @@
       "path": "artifacts/evidence-collision-test.json",
       "exists": true,
       "size_bytes": 163,
-      "sha256": "f6285f21c8025abf30980defa8dc88b7b7e1806994c2a71c0cc976fab3adcced",
-      "sha256_short": "f6285f21c8025abf",
-      "display_hash_prefix": "f6285f21c8025abf",
+      "sha256": "a8fc7eec0ca6870d9a0872c79811832c0880d9b50321930bd2dab4dad2483a9b",
+      "sha256_short": "a8fc7eec0ca6870d",
+      "display_hash_prefix": "a8fc7eec0ca6870d",
       "schema_ref": "evidence-collision-test-v1.json",
       "category": "governance"
     },
@@ -140,7 +140,7 @@
     "total": 12,
     "missing": 0,
     "with_schema": 11,
-    "bundle_hash": "707988b9cc535463ed4e93fb7404753b7914a82aaa17db00a2519b7f738ca8bf"
+    "bundle_hash": "2d710473888dab78c9f84b3d8f25ce78b21d01ccffd59c8926c075705e2a4690"
   },
   "integrity": {
     "hash_algorithm": "SHA256",

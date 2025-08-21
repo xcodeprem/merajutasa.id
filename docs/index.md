@@ -39,6 +39,7 @@ Trust primitives, verification systems, and credential schemas.
 
 ### Core Integrity
 
+- **[🏠 Integrity & Credential Chain Index](integrity/index.md)** - **Indeks terpusat sistem integritas lengkap**
 - **[Spec Hash Manifest](integrity/spec-hash-manifest-v1.json)** - Anchor hash integritas dokumen
 - **[Credential Schema Final v1.0](integrity/credential-schema-final-v1.md)** - Struktur credential trust primitive
 - **[Auto-Seal Allowlist](integrity/auto-seal-allowlist.json)** - Daftar file yang diizinkan auto-seal
