@@ -1,0 +1,33 @@
+name: Dependency Graph
+on:
+  pull_request:
+    paths:
+      - "scripts/deps/**"
+      - "config/**"
+      - "docs/architecture/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "package-lock.json"
+      - "yarn.lock"
+  push:
+    branches: [ main ]
+permissions:
+  contents: read
+jobs:
+  deps:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npm ci
+      - run: npm run deps:graph
+      - run: npm run deps:check
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: dependency-graph
+          path: |
+            build/deps/graph.json
+            docs/architecture/dependency-graph.mmd
