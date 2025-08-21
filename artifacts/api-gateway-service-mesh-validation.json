@@ -1,0 +1,68 @@
+{
+  "timestamp": "2025-08-21T22:17:34.039Z",
+  "testSuite": "API Gateway & Service Mesh Routing/Auth Validation",
+  "results": {
+    "apiGateway": {
+      "status": "PASS",
+      "message": "API Gateway starts without configuration errors"
+    },
+    "serviceMesh": {
+      "status": "PASS",
+      "message": "Service Mesh healthy with 3 registered services",
+      "services": [
+        "signer",
+        "chain",
+        "collector"
+      ]
+    },
+    "routing": {
+      "status": "PASS",
+      "configuredRoutes": [
+        "/health",
+        "/metrics",
+        "/services",
+        "/docs",
+        "/api/v1/signer",
+        "/api/v1/chain",
+        "/api/v1/collector"
+      ],
+      "message": "All expected routes configured"
+    },
+    "authentication": {
+      "status": "PASS",
+      "message": "Auth middleware integrated",
+      "features": [
+        "JWT token validation",
+        "API key authentication",
+        "Role-based access control"
+      ]
+    },
+    "rateLimiting": {
+      "status": "PASS",
+      "message": "IPv6-safe rate limiting configured",
+      "features": [
+        "IPv6-safe keyGenerator",
+        "Service-specific limits",
+        "Global API limits"
+      ]
+    },
+    "integration": {
+      "status": "PASS",
+      "circuitBreakers": [
+        "signer",
+        "chain",
+        "collector"
+      ],
+      "message": "Circuit breakers active for 3 services"
+    }
+  },
+  "artifacts": [],
+  "issues": [],
+  "recommendations": [],
+  "summary": {
+    "totalTests": 6,
+    "passCount": 6,
+    "failCount": 0,
+    "successRate": "100%"
+  }
+}

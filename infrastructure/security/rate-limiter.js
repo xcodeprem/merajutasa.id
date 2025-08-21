@@ -7,6 +7,30 @@
 
 import { createHash } from 'crypto';
 
+/**
+ * IPv6-safe IP extraction - similar to express-rate-limit's ipKeyGenerator
+ */
+function getClientIP(req) {
+  // Use req.ip first (trust proxy should be configured)
+  if (req.ip) {
+    return req.ip;
+  }
+  
+  // Fallback to connection info
+  if (req.connection && req.connection.remoteAddress) {
+    return req.connection.remoteAddress;
+  }
+  
+  // Extract from forwarded headers (be careful with proxy configuration)
+  const forwarded = req.headers['x-forwarded-for'];
+  if (forwarded) {
+    // Take the first IP in the chain
+    return forwarded.split(',')[0].trim();
+  }
+  
+  return 'unknown';
+}
+
 // Rate limiting configurations for different endpoints
 const RATE_LIMIT_CONFIGS = {
   // Signer service - cryptographic operations are expensive
@@ -67,7 +91,7 @@ const rateLimitState = new Map();
  * Generate rate limiting key based on strategy
  */
 function generateKey(req, strategy) {
-  const ip = req.ip || req.connection.remoteAddress || 'unknown';
+  const ip = getClientIP(req);
   const userAgent = req.headers['user-agent'] || 'unknown';
   const user = req.user?.id || 'anonymous';
   

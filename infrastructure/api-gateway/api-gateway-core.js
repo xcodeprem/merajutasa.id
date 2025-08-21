@@ -1,6 +1,6 @@
 import express from 'express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
-import rateLimit from 'express-rate-limit';
+import rateLimit, { ipKeyGenerator } from 'express-rate-limit';
 import compression from 'compression';
 import cors from 'cors';
 import helmet from 'helmet';
@@ -107,7 +107,8 @@ export class APIGatewayCore {
     this.app.use(rateLimit({
       ...this.config.rateLimit,
       keyGenerator: (req) => {
-        return req.ip + ':' + (req.headers['x-api-key'] || 'anonymous');
+        const ip = ipKeyGenerator(req);
+        return ip + ':' + (req.headers['x-api-key'] || 'anonymous');
       },
       message: {
         error: 'Too many requests',
@@ -216,7 +217,10 @@ export class APIGatewayCore {
     // Service-specific rate limiting
     const serviceLimiter = rateLimit({
       ...config.rateLimit,
-      keyGenerator: (req) => `${serviceName}:${req.ip}:${req.headers['x-api-key'] || 'anon'}`,
+      keyGenerator: (req) => {
+        const ip = ipKeyGenerator(req);
+        return `${serviceName}:${ip}:${req.headers['x-api-key'] || 'anon'}`;
+      },
       message: {
         error: `Rate limit exceeded for ${serviceName}`,
         service: serviceName
@@ -260,7 +264,7 @@ export class APIGatewayCore {
     });
 
     // 404 handler
-    this.app.use('*', (req, res) => {
+    this.app.use((req, res) => {
       res.status(404).json({
         error: 'Endpoint not found',
         requestId: req.requestId,
