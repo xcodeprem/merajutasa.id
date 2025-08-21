@@ -1,0 +1,721 @@
+# Kubernetes Deployment for MerajutASA Compliance & Security System (Week 6)
+# Enterprise compliance, audit, privacy rights, and security hardening
+
+# Compliance Orchestrator
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: merajutasa-compliance-orchestrator
+  labels:
+    app: merajutasa-compliance-orchestrator
+    app.kubernetes.io/name: merajutasa-compliance-orchestrator
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: compliance-orchestrator
+    app.kubernetes.io/version: v1
+    component: compliance-orchestrator
+    tier: security
+    version: v1
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: merajutasa-compliance-orchestrator
+  template:
+    metadata:
+      labels:
+        app: merajutasa-compliance-orchestrator
+        app.kubernetes.io/name: merajutasa-compliance-orchestrator
+        app.kubernetes.io/part-of: merajutasa
+        app.kubernetes.io/component: compliance-orchestrator
+        app.kubernetes.io/version: v1
+        component: compliance-orchestrator
+        tier: security
+        version: v1
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9000"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: merajutasa-compliance-orchestrator
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
+        fsGroup: 1001
+      containers:
+      - name: compliance-orchestrator
+        image: merajutasa/compliance-orchestrator:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9000
+          name: http
+          protocol: TCP
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: COMPLIANCE_ORCHESTRATOR_PORT
+          value: "9000"
+        - name: COMPLIANCE_ORCHESTRATOR_HOST
+          value: "0.0.0.0"
+        - name: LOG_LEVEL
+          valueFrom:
+            configMapKeyRef:
+              name: merajutasa-config
+              key: log_level
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "300m"
+          limits:
+            memory: "1Gi"
+            cpu: "600m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 9000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 9000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+        startupProbe:
+          httpGet:
+            path: /health
+            port: 9000
+          initialDelaySeconds: 15
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 30
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - name: compliance-config
+          mountPath: /app/config
+          readOnly: true
+        - name: compliance-data
+          mountPath: /app/data
+        - name: tmp
+          mountPath: /tmp
+        - name: logs
+          mountPath: /app/logs
+      volumes:
+      - name: compliance-config
+        configMap:
+          name: compliance-config
+      - name: compliance-data
+        persistentVolumeClaim:
+          claimName: compliance-data-pvc
+      - name: tmp
+        emptyDir: {}
+      - name: logs
+        emptyDir: {}
+      nodeSelector:
+        kubernetes.io/os: linux
+
+---
+# Audit System
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: merajutasa-audit-system
+  labels:
+    app: merajutasa-audit-system
+    app.kubernetes.io/name: merajutasa-audit-system
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: audit-system
+    app.kubernetes.io/version: v1
+    component: audit-system
+    tier: security
+    version: v1
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: merajutasa-audit-system
+  template:
+    metadata:
+      labels:
+        app: merajutasa-audit-system
+        app.kubernetes.io/name: merajutasa-audit-system
+        app.kubernetes.io/part-of: merajutasa
+        app.kubernetes.io/component: audit-system
+        app.kubernetes.io/version: v1
+        component: audit-system
+        tier: security
+        version: v1
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9001"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: merajutasa-audit-system
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
+        fsGroup: 1001
+      containers:
+      - name: audit-system
+        image: merajutasa/audit-system:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9001
+          name: http
+          protocol: TCP
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: AUDIT_SYSTEM_PORT
+          value: "9001"
+        - name: AUDIT_SYSTEM_HOST
+          value: "0.0.0.0"
+        - name: LOG_LEVEL
+          valueFrom:
+            configMapKeyRef:
+              name: merajutasa-config
+              key: log_level
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "200m"
+          limits:
+            memory: "512Mi"
+            cpu: "400m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 9001
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 9001
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - name: audit-data
+          mountPath: /app/artifacts
+        - name: tmp
+          mountPath: /tmp
+        - name: logs
+          mountPath: /app/logs
+      volumes:
+      - name: audit-data
+        persistentVolumeClaim:
+          claimName: audit-data-pvc
+      - name: tmp
+        emptyDir: {}
+      - name: logs
+        emptyDir: {}
+      nodeSelector:
+        kubernetes.io/os: linux
+
+---
+# Compliance Automation
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: merajutasa-compliance-automation
+  labels:
+    app: merajutasa-compliance-automation
+    app.kubernetes.io/name: merajutasa-compliance-automation
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: compliance-automation
+    app.kubernetes.io/version: v1
+    component: compliance-automation
+    tier: security
+    version: v1
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: merajutasa-compliance-automation
+  template:
+    metadata:
+      labels:
+        app: merajutasa-compliance-automation
+        app.kubernetes.io/name: merajutasa-compliance-automation
+        app.kubernetes.io/part-of: merajutasa
+        app.kubernetes.io/component: compliance-automation
+        app.kubernetes.io/version: v1
+        component: compliance-automation
+        tier: security
+        version: v1
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9002"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: merajutasa-compliance-automation
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
+        fsGroup: 1001
+      containers:
+      - name: compliance-automation
+        image: merajutasa/compliance-automation:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9002
+          name: http
+          protocol: TCP
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: COMPLIANCE_AUTOMATION_PORT
+          value: "9002"
+        - name: COMPLIANCE_AUTOMATION_HOST
+          value: "0.0.0.0"
+        - name: LOG_LEVEL
+          valueFrom:
+            configMapKeyRef:
+              name: merajutasa-config
+              key: log_level
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "200m"
+          limits:
+            memory: "512Mi"
+            cpu: "400m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 9002
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 9002
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+        - name: logs
+          mountPath: /app/logs
+      volumes:
+      - name: tmp
+        emptyDir: {}
+      - name: logs
+        emptyDir: {}
+      nodeSelector:
+        kubernetes.io/os: linux
+
+---
+# Privacy Rights Management
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: merajutasa-privacy-rights
+  labels:
+    app: merajutasa-privacy-rights
+    app.kubernetes.io/name: merajutasa-privacy-rights
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: privacy-rights
+    app.kubernetes.io/version: v1
+    component: privacy-rights
+    tier: security
+    version: v1
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: merajutasa-privacy-rights
+  template:
+    metadata:
+      labels:
+        app: merajutasa-privacy-rights
+        app.kubernetes.io/name: merajutasa-privacy-rights
+        app.kubernetes.io/part-of: merajutasa
+        app.kubernetes.io/component: privacy-rights
+        app.kubernetes.io/version: v1
+        component: privacy-rights
+        tier: security
+        version: v1
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9003"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: merajutasa-privacy-rights
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
+        fsGroup: 1001
+      containers:
+      - name: privacy-rights
+        image: merajutasa/privacy-rights:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9003
+          name: http
+          protocol: TCP
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: PRIVACY_RIGHTS_PORT
+          value: "9003"
+        - name: PRIVACY_RIGHTS_HOST
+          value: "0.0.0.0"
+        - name: LOG_LEVEL
+          valueFrom:
+            configMapKeyRef:
+              name: merajutasa-config
+              key: log_level
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "200m"
+          limits:
+            memory: "512Mi"
+            cpu: "400m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 9003
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 9003
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+        - name: logs
+          mountPath: /app/logs
+      volumes:
+      - name: tmp
+        emptyDir: {}
+      - name: logs
+        emptyDir: {}
+      nodeSelector:
+        kubernetes.io/os: linux
+
+---
+# Security Hardening
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: merajutasa-security-hardening
+  labels:
+    app: merajutasa-security-hardening
+    app.kubernetes.io/name: merajutasa-security-hardening
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: security-hardening
+    app.kubernetes.io/version: v1
+    component: security-hardening
+    tier: security
+    version: v1
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: merajutasa-security-hardening
+  template:
+    metadata:
+      labels:
+        app: merajutasa-security-hardening
+        app.kubernetes.io/name: merajutasa-security-hardening
+        app.kubernetes.io/part-of: merajutasa
+        app.kubernetes.io/component: security-hardening
+        app.kubernetes.io/version: v1
+        component: security-hardening
+        tier: security
+        version: v1
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9004"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: merajutasa-security-hardening
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
+        fsGroup: 1001
+      containers:
+      - name: security-hardening
+        image: merajutasa/security-hardening:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9004
+          name: http
+          protocol: TCP
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: SECURITY_HARDENING_PORT
+          value: "9004"
+        - name: SECURITY_HARDENING_HOST
+          value: "0.0.0.0"
+        - name: LOG_LEVEL
+          valueFrom:
+            configMapKeyRef:
+              name: merajutasa-config
+              key: log_level
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "300m"
+          limits:
+            memory: "1Gi"
+            cpu: "600m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 9004
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 9004
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - name: security-data
+          mountPath: /app/data
+        - name: tmp
+          mountPath: /tmp
+        - name: logs
+          mountPath: /app/logs
+      volumes:
+      - name: security-data
+        persistentVolumeClaim:
+          claimName: security-data-pvc
+      - name: tmp
+        emptyDir: {}
+      - name: logs
+        emptyDir: {}
+      nodeSelector:
+        kubernetes.io/os: linux
+
+---
+# ServiceAccounts
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: merajutasa-compliance-orchestrator
+  labels:
+    app: merajutasa-compliance-orchestrator
+    app.kubernetes.io/name: merajutasa-compliance-orchestrator
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: compliance-orchestrator
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: merajutasa-audit-system
+  labels:
+    app: merajutasa-audit-system
+    app.kubernetes.io/name: merajutasa-audit-system
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: audit-system
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: merajutasa-compliance-automation
+  labels:
+    app: merajutasa-compliance-automation
+    app.kubernetes.io/name: merajutasa-compliance-automation
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: compliance-automation
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: merajutasa-privacy-rights
+  labels:
+    app: merajutasa-privacy-rights
+    app.kubernetes.io/name: merajutasa-privacy-rights
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: privacy-rights
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: merajutasa-security-hardening
+  labels:
+    app: merajutasa-security-hardening
+    app.kubernetes.io/name: merajutasa-security-hardening
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: security-hardening
+
+---
+# Persistent Volume Claims
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: compliance-data-pvc
+  labels:
+    app: merajutasa-compliance-orchestrator
+    app.kubernetes.io/name: merajutasa-compliance-orchestrator
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: compliance-orchestrator
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: fast-ssd
+  resources:
+    requests:
+      storage: 10Gi
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: audit-data-pvc
+  labels:
+    app: merajutasa-audit-system
+    app.kubernetes.io/name: merajutasa-audit-system
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: audit-system
+spec:
+  accessModes:
+  - ReadWriteMany
+  storageClassName: nfs-storage
+  resources:
+    requests:
+      storage: 50Gi
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: security-data-pvc
+  labels:
+    app: merajutasa-security-hardening
+    app.kubernetes.io/name: merajutasa-security-hardening
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: security-hardening
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: fast-ssd
+  resources:
+    requests:
+      storage: 5Gi
+
+---
+# Pod Disruption Budgets
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: merajutasa-compliance-orchestrator-pdb
+spec:
+  selector:
+    matchLabels:
+      app: merajutasa-compliance-orchestrator
+  maxUnavailable: 1
+
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: merajutasa-audit-system-pdb
+spec:
+  selector:
+    matchLabels:
+      app: merajutasa-audit-system
+  maxUnavailable: 1
+
+---
+# Horizontal Pod Autoscalers
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: merajutasa-audit-system-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: merajutasa-audit-system
+  minReplicas: 2
+  maxReplicas: 6
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80

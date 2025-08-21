@@ -7,6 +7,10 @@ metadata:
   name: merajutasa-signer
   labels:
     app: merajutasa-signer
+    app.kubernetes.io/name: merajutasa-signer
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: signing-service
+    app.kubernetes.io/version: v1
     component: signing-service
     tier: backend
     version: v1
@@ -24,6 +28,10 @@ spec:
     metadata:
       labels:
         app: merajutasa-signer
+        app.kubernetes.io/name: merajutasa-signer
+        app.kubernetes.io/part-of: merajutasa
+        app.kubernetes.io/component: signing-service
+        app.kubernetes.io/version: v1
         component: signing-service
         tier: backend
         version: v1
@@ -124,7 +132,9 @@ metadata:
   name: merajutasa-signer
   labels:
     app: merajutasa-signer
-    component: signing-service
+    app.kubernetes.io/name: merajutasa-signer
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: signing-service
 
 ---
 apiVersion: policy/v1

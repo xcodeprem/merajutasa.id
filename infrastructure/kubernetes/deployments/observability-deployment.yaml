@@ -1,0 +1,702 @@
+# Kubernetes Deployment for MerajutASA Observability System (Week 3)
+# Advanced monitoring, metrics, tracing, and dashboards
+
+# Advanced Observability System
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: merajutasa-observability
+  labels:
+    app: merajutasa-observability
+    app.kubernetes.io/name: merajutasa-observability
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: observability-system
+    app.kubernetes.io/version: v1
+    component: observability-system
+    tier: infrastructure
+    version: v1
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: merajutasa-observability
+  template:
+    metadata:
+      labels:
+        app: merajutasa-observability
+        app.kubernetes.io/name: merajutasa-observability
+        app.kubernetes.io/part-of: merajutasa
+        app.kubernetes.io/component: observability-system
+        app.kubernetes.io/version: v1
+        component: observability-system
+        tier: infrastructure
+        version: v1
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: merajutasa-observability
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
+        fsGroup: 1001
+      containers:
+      - name: observability
+        image: merajutasa/observability:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: OBSERVABILITY_PORT
+          value: "8080"
+        - name: OBSERVABILITY_HOST
+          value: "0.0.0.0"
+        - name: LOG_LEVEL
+          valueFrom:
+            configMapKeyRef:
+              name: merajutasa-config
+              key: log_level
+        - name: METRICS_INTERVAL
+          valueFrom:
+            configMapKeyRef:
+              name: merajutasa-config
+              key: metrics_interval
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+        startupProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 30
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - name: observability-config
+          mountPath: /app/config
+          readOnly: true
+        - name: tmp
+          mountPath: /tmp
+        - name: logs
+          mountPath: /app/logs
+      volumes:
+      - name: observability-config
+        configMap:
+          name: observability-config
+      - name: tmp
+        emptyDir: {}
+      - name: logs
+        emptyDir: {}
+      nodeSelector:
+        kubernetes.io/os: linux
+
+---
+# Metrics Collector
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: merajutasa-metrics
+  labels:
+    app: merajutasa-metrics
+    app.kubernetes.io/name: merajutasa-metrics
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: metrics-collector
+    app.kubernetes.io/version: v1
+    component: metrics-collector
+    tier: infrastructure
+    version: v1
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: merajutasa-metrics
+  template:
+    metadata:
+      labels:
+        app: merajutasa-metrics
+        app.kubernetes.io/name: merajutasa-metrics
+        app.kubernetes.io/part-of: merajutasa
+        app.kubernetes.io/component: metrics-collector
+        app.kubernetes.io/version: v1
+        component: metrics-collector
+        tier: infrastructure
+        version: v1
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8081"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: merajutasa-metrics
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
+        fsGroup: 1001
+      containers:
+      - name: metrics
+        image: merajutasa/metrics:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8081
+          name: http
+          protocol: TCP
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: METRICS_PORT
+          value: "8081"
+        - name: METRICS_HOST
+          value: "0.0.0.0"
+        - name: LOG_LEVEL
+          valueFrom:
+            configMapKeyRef:
+              name: merajutasa-config
+              key: log_level
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "200m"
+          limits:
+            memory: "512Mi"
+            cpu: "400m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8081
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8081
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+        - name: logs
+          mountPath: /app/logs
+      volumes:
+      - name: tmp
+        emptyDir: {}
+      - name: logs
+        emptyDir: {}
+      nodeSelector:
+        kubernetes.io/os: linux
+
+---
+# Distributed Tracing
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: merajutasa-tracing
+  labels:
+    app: merajutasa-tracing
+    app.kubernetes.io/name: merajutasa-tracing
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: distributed-tracing
+    app.kubernetes.io/version: v1
+    component: distributed-tracing
+    tier: infrastructure
+    version: v1
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: merajutasa-tracing
+  template:
+    metadata:
+      labels:
+        app: merajutasa-tracing
+        app.kubernetes.io/name: merajutasa-tracing
+        app.kubernetes.io/part-of: merajutasa
+        app.kubernetes.io/component: distributed-tracing
+        app.kubernetes.io/version: v1
+        component: distributed-tracing
+        tier: infrastructure
+        version: v1
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8082"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: merajutasa-tracing
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
+        fsGroup: 1001
+      containers:
+      - name: tracing
+        image: merajutasa/tracing:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8082
+          name: http
+          protocol: TCP
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: TRACING_PORT
+          value: "8082"
+        - name: TRACING_HOST
+          value: "0.0.0.0"
+        - name: LOG_LEVEL
+          valueFrom:
+            configMapKeyRef:
+              name: merajutasa-config
+              key: log_level
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "200m"
+          limits:
+            memory: "512Mi"
+            cpu: "400m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8082
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8082
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+        - name: logs
+          mountPath: /app/logs
+      volumes:
+      - name: tmp
+        emptyDir: {}
+      - name: logs
+        emptyDir: {}
+      nodeSelector:
+        kubernetes.io/os: linux
+
+---
+# Real-time Dashboards
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: merajutasa-dashboards
+  labels:
+    app: merajutasa-dashboards
+    app.kubernetes.io/name: merajutasa-dashboards
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: real-time-dashboards
+    app.kubernetes.io/version: v1
+    component: real-time-dashboards
+    tier: frontend
+    version: v1
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: merajutasa-dashboards
+  template:
+    metadata:
+      labels:
+        app: merajutasa-dashboards
+        app.kubernetes.io/name: merajutasa-dashboards
+        app.kubernetes.io/part-of: merajutasa
+        app.kubernetes.io/component: real-time-dashboards
+        app.kubernetes.io/version: v1
+        component: real-time-dashboards
+        tier: frontend
+        version: v1
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8085"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: merajutasa-dashboards
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
+        fsGroup: 1001
+      containers:
+      - name: dashboards
+        image: merajutasa/dashboards:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8085
+          name: http
+          protocol: TCP
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: DASHBOARDS_PORT
+          value: "8085"
+        - name: DASHBOARDS_HOST
+          value: "0.0.0.0"
+        - name: LOG_LEVEL
+          valueFrom:
+            configMapKeyRef:
+              name: merajutasa-config
+              key: log_level
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "200m"
+          limits:
+            memory: "512Mi"
+            cpu: "400m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8085
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8085
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+        - name: logs
+          mountPath: /app/logs
+      volumes:
+      - name: tmp
+        emptyDir: {}
+      - name: logs
+        emptyDir: {}
+      nodeSelector:
+        kubernetes.io/os: linux
+
+---
+# Log Aggregation
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: merajutasa-logs
+  labels:
+    app: merajutasa-logs
+    app.kubernetes.io/name: merajutasa-logs
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: log-aggregation
+    app.kubernetes.io/version: v1
+    component: log-aggregation
+    tier: infrastructure
+    version: v1
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: merajutasa-logs
+  template:
+    metadata:
+      labels:
+        app: merajutasa-logs
+        app.kubernetes.io/name: merajutasa-logs
+        app.kubernetes.io/part-of: merajutasa
+        app.kubernetes.io/component: log-aggregation
+        app.kubernetes.io/version: v1
+        component: log-aggregation
+        tier: infrastructure
+        version: v1
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8083"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: merajutasa-logs
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
+        fsGroup: 1001
+      containers:
+      - name: logs
+        image: merajutasa/logs:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8083
+          name: http
+          protocol: TCP
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: LOGS_PORT
+          value: "8083"
+        - name: LOGS_HOST
+          value: "0.0.0.0"
+        - name: LOG_LEVEL
+          valueFrom:
+            configMapKeyRef:
+              name: merajutasa-config
+              key: log_level
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "300m"
+          limits:
+            memory: "1Gi"
+            cpu: "600m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8083
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8083
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - name: log-data
+          mountPath: /app/data
+        - name: tmp
+          mountPath: /tmp
+        - name: logs
+          mountPath: /app/logs
+      volumes:
+      - name: log-data
+        persistentVolumeClaim:
+          claimName: log-data-pvc
+      - name: tmp
+        emptyDir: {}
+      - name: logs
+        emptyDir: {}
+      nodeSelector:
+        kubernetes.io/os: linux
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: merajutasa-logs
+  labels:
+    app: merajutasa-logs
+    app.kubernetes.io/name: merajutasa-logs
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: log-aggregation
+
+---
+# Persistent Volume Claim for Log Aggregation
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: log-data-pvc
+  labels:
+    app: merajutasa-logs
+    app.kubernetes.io/name: merajutasa-logs
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: log-aggregation
+spec:
+  accessModes:
+  - ReadWriteMany
+  storageClassName: nfs-storage
+  resources:
+    requests:
+      storage: 100Gi
+
+---
+# ServiceAccount for Observability components
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: merajutasa-observability
+  labels:
+    app: merajutasa-observability
+    app.kubernetes.io/name: merajutasa-observability
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: observability-system
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: merajutasa-metrics
+  labels:
+    app: merajutasa-metrics
+    app.kubernetes.io/name: merajutasa-metrics
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: metrics-collector
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: merajutasa-tracing
+  labels:
+    app: merajutasa-tracing
+    app.kubernetes.io/name: merajutasa-tracing
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: distributed-tracing
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: merajutasa-dashboards
+  labels:
+    app: merajutasa-dashboards
+    app.kubernetes.io/name: merajutasa-dashboards
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: real-time-dashboards
+
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: merajutasa-logs-pdb
+spec:
+  selector:
+    matchLabels:
+      app: merajutasa-logs
+  maxUnavailable: 1
+
+---
+# Pod Disruption Budgets
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: merajutasa-observability-pdb
+spec:
+  selector:
+    matchLabels:
+      app: merajutasa-observability
+  maxUnavailable: 1
+
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: merajutasa-metrics-pdb
+spec:
+  selector:
+    matchLabels:
+      app: merajutasa-metrics
+  maxUnavailable: 1
+
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: merajutasa-dashboards-pdb
+spec:
+  selector:
+    matchLabels:
+      app: merajutasa-dashboards
+  maxUnavailable: 1
+
+---
+# Horizontal Pod Autoscaler for Metrics
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: merajutasa-metrics-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: merajutasa-metrics
+  minReplicas: 2
+  maxReplicas: 5
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80

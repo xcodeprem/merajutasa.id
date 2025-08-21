@@ -7,6 +7,10 @@ metadata:
   name: merajutasa-chain
   labels:
     app: merajutasa-chain
+    app.kubernetes.io/name: merajutasa-chain
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: chain-service
+    app.kubernetes.io/version: v1
     component: chain-service
     tier: backend
     version: v1
@@ -22,6 +26,10 @@ spec:
     metadata:
       labels:
         app: merajutasa-chain
+        app.kubernetes.io/name: merajutasa-chain
+        app.kubernetes.io/part-of: merajutasa
+        app.kubernetes.io/component: chain-service
+        app.kubernetes.io/version: v1
         component: chain-service
         tier: backend
         version: v1
@@ -138,7 +146,9 @@ metadata:
   name: merajutasa-chain
   labels:
     app: merajutasa-chain
-    component: chain-service
+    app.kubernetes.io/name: merajutasa-chain
+    app.kubernetes.io/part-of: merajutasa
+    app.kubernetes.io/component: chain-service
 
 ---
 apiVersion: policy/v1
