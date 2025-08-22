@@ -1,21 +1,21 @@
 {
   "_metadata": {
     "actor": "copilot-swe-agent[bot]",
-    "generated_at": "2025-08-21T23:42:43.139Z",
+    "generated_at": "2025-08-22T09:59:54.466Z",
     "generator": "infra-health-check-all",
-    "git_ref": "refs/heads/copilot/fix-164",
-    "git_sha": "a3d095699b4b2c16b36e4ec45e21b3c06290f864",
-    "run_id": "17141759574",
+    "git_ref": "refs/heads/copilot/fix-169",
+    "git_sha": "f1a890f96bc4e7119564ddccd4292064febc7a2a",
+    "run_id": "17152135587",
     "version": "1.0"
   },
   "category": "all",
   "matrix": {
     "api-gateway": {
       "degraded": 0,
-      "failed": 0,
-      "healthPercentage": 100,
-      "ok": 2,
-      "slaStatus": "MEETS_SLA",
+      "failed": 1,
+      "healthPercentage": 50,
+      "ok": 1,
+      "slaStatus": "BELOW_SLA",
       "slaTarget": 95,
       "total": 2
     },
@@ -66,10 +66,10 @@
     },
     "observability": {
       "degraded": 0,
-      "failed": 0,
-      "healthPercentage": 100,
-      "ok": 1,
-      "slaStatus": "MEETS_SLA",
+      "failed": 1,
+      "healthPercentage": 0,
+      "ok": 0,
+      "slaStatus": "BELOW_SLA",
       "slaTarget": 95,
       "total": 1
     },
@@ -92,6 +92,6 @@
       "total": 1
     }
   },
-  "overallHealth": 100,
-  "overallSlaStatus": "MEETS_SLA"
+  "overallHealth": 89,
+  "overallSlaStatus": "BELOW_SLA"
 }

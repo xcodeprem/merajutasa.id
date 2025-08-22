@@ -1,6 +1,6 @@
 # Component Inventory Summary
 
-Generated: 2025-08-21T21:26:27.085Z
+Generated: 2025-08-22T09:56:14.414Z
 Total Components: 38
 
 ## Statistics
@@ -21,9 +21,9 @@ Total Components: 38
 ### By Type  
 - **database**: 9 components
 - **cache**: 5 components
-- **worker**: 4 components
-- **service**: 3 components
+- **service**: 4 components
 - **gateway**: 3 components
+- **worker**: 3 components
 - **observability**: 3 components
 - **compliance**: 2 components
 - **infrastructure**: 2 components

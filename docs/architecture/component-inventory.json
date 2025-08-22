@@ -11,7 +11,7 @@
         "type": "http"
       },
       "id": "api-gateway-api-gateway-core",
-      "lastModified": "2025-08-21T21:24:28.515Z",
+      "lastModified": "2025-08-22T09:55:13.260Z",
       "name": "Api Gateway Core",
       "ports": [
         8080,
@@ -38,7 +38,7 @@
         "type": "http"
       },
       "id": "api-gateway-api-gateway-orchestrator",
-      "lastModified": "2025-08-21T21:24:28.516Z",
+      "lastModified": "2025-08-22T09:55:13.260Z",
       "name": "Api Gateway Orchestrator",
       "ports": [
         8080,
@@ -72,7 +72,7 @@
         "type": "http"
       },
       "id": "api-gateway-openapi-documentation",
-      "lastModified": "2025-08-21T21:24:28.516Z",
+      "lastModified": "2025-08-22T09:55:13.260Z",
       "name": "Openapi Documentation",
       "ports": [],
       "requiredUpstreams": [
@@ -98,7 +98,7 @@
         "type": "http"
       },
       "id": "api-gateway-service-mesh",
-      "lastModified": "2025-08-21T21:24:28.516Z",
+      "lastModified": "2025-08-22T09:55:13.260Z",
       "name": "Service Mesh",
       "ports": [],
       "requiredUpstreams": [
@@ -118,7 +118,7 @@
         "type": "http"
       },
       "id": "auth-auth-middleware",
-      "lastModified": "2025-08-21T21:24:28.516Z",
+      "lastModified": "2025-08-22T09:55:13.260Z",
       "name": "Auth Middleware",
       "ports": [],
       "requiredUpstreams": [
@@ -141,7 +141,7 @@
         "type": "none"
       },
       "id": "backup-backup-service",
-      "lastModified": "2025-08-21T21:24:28.516Z",
+      "lastModified": "2025-08-22T09:55:13.260Z",
       "name": "Backup Service",
       "ports": [],
       "requiredUpstreams": [],
@@ -159,7 +159,7 @@
         "type": "http"
       },
       "id": "cicd-pipeline-manager",
-      "lastModified": "2025-08-21T21:24:28.516Z",
+      "lastModified": "2025-08-22T09:55:13.261Z",
       "name": "Pipeline Manager",
       "ports": [],
       "requiredUpstreams": [
@@ -184,7 +184,7 @@
         "type": "none"
       },
       "id": "compliance-audit-system",
-      "lastModified": "2025-08-21T21:24:28.516Z",
+      "lastModified": "2025-08-22T09:55:13.261Z",
       "name": "Audit System",
       "ports": [],
       "requiredUpstreams": [
@@ -206,7 +206,7 @@
         "type": "none"
       },
       "id": "compliance-compliance-automation",
-      "lastModified": "2025-08-21T21:24:28.516Z",
+      "lastModified": "2025-08-22T09:55:13.261Z",
       "name": "Compliance Automation",
       "ports": [],
       "requiredUpstreams": [
@@ -229,7 +229,7 @@
         "type": "none"
       },
       "id": "compliance-compliance-orchestrator",
-      "lastModified": "2025-08-21T21:24:28.517Z",
+      "lastModified": "2025-08-22T09:55:13.261Z",
       "name": "Compliance Orchestrator",
       "ports": [],
       "requiredUpstreams": [
@@ -254,7 +254,7 @@
         "type": "none"
       },
       "id": "compliance-privacy-rights-management",
-      "lastModified": "2025-08-21T21:24:28.517Z",
+      "lastModified": "2025-08-22T09:55:13.261Z",
       "name": "Privacy Rights Management",
       "ports": [],
       "requiredUpstreams": [
@@ -278,7 +278,7 @@
         "type": "http"
       },
       "id": "high-availability-auto-scaling",
-      "lastModified": "2025-08-21T21:24:28.518Z",
+      "lastModified": "2025-08-22T09:55:13.262Z",
       "name": "Auto Scaling",
       "ports": [],
       "requiredUpstreams": [
@@ -299,7 +299,7 @@
         "type": "http"
       },
       "id": "high-availability-disaster-recovery",
-      "lastModified": "2025-08-21T21:24:28.518Z",
+      "lastModified": "2025-08-22T09:55:13.262Z",
       "name": "Disaster Recovery",
       "ports": [],
       "requiredUpstreams": [
@@ -321,7 +321,7 @@
         "type": "http"
       },
       "id": "high-availability-fault-tolerance",
-      "lastModified": "2025-08-21T21:24:28.518Z",
+      "lastModified": "2025-08-22T09:55:13.262Z",
       "name": "Fault Tolerance",
       "ports": [],
       "requiredUpstreams": [
@@ -342,7 +342,7 @@
         "type": "http"
       },
       "id": "high-availability-ha-orchestrator",
-      "lastModified": "2025-08-21T21:24:28.518Z",
+      "lastModified": "2025-08-22T09:55:13.262Z",
       "name": "Ha Orchestrator",
       "ports": [
         "env:HA_ORCHESTRATOR_PORT"
@@ -372,7 +372,7 @@
         "type": "http"
       },
       "id": "high-availability-health-monitoring",
-      "lastModified": "2025-08-21T21:24:28.518Z",
+      "lastModified": "2025-08-22T09:55:13.263Z",
       "name": "Health Monitoring",
       "ports": [],
       "requiredUpstreams": [
@@ -395,7 +395,7 @@
         "type": "http"
       },
       "id": "high-availability-multi-region-deployment",
-      "lastModified": "2025-08-21T21:24:28.518Z",
+      "lastModified": "2025-08-22T09:55:13.263Z",
       "name": "Multi Region Deployment",
       "ports": [],
       "requiredUpstreams": [
@@ -417,7 +417,7 @@
         "type": "http"
       },
       "id": "integration-component-dependency-analyzer",
-      "lastModified": "2025-08-21T21:24:28.518Z",
+      "lastModified": "2025-08-22T09:55:13.263Z",
       "name": "Component Dependency Analyzer",
       "ports": [],
       "requiredUpstreams": [
@@ -443,7 +443,7 @@
         "type": "http"
       },
       "id": "integration-infrastructure-integration-platform",
-      "lastModified": "2025-08-21T21:24:28.518Z",
+      "lastModified": "2025-08-22T09:55:13.263Z",
       "name": "Infrastructure Integration Platform",
       "ports": [],
       "requiredUpstreams": [
@@ -466,7 +466,7 @@
         "type": "http"
       },
       "id": "monitoring-metrics-collector",
-      "lastModified": "2025-08-21T21:24:28.519Z",
+      "lastModified": "2025-08-22T09:55:13.264Z",
       "name": "Metrics Collector",
       "ports": [
         4601,
@@ -497,7 +497,7 @@
         "type": "none"
       },
       "id": "monitoring-structured-logger",
-      "lastModified": "2025-08-21T21:24:28.519Z",
+      "lastModified": "2025-08-22T09:55:13.264Z",
       "name": "Structured Logger",
       "ports": [],
       "requiredUpstreams": [
@@ -518,7 +518,7 @@
         "type": "http"
       },
       "id": "observability-metrics-advanced-metrics-collector",
-      "lastModified": "2025-08-21T21:24:28.520Z",
+      "lastModified": "2025-08-22T09:55:13.265Z",
       "name": "Advanced Metrics Collector",
       "ports": [],
       "requiredUpstreams": [
@@ -542,7 +542,7 @@
         "type": "http"
       },
       "id": "observability-advanced-observability-system",
-      "lastModified": "2025-08-21T21:24:28.519Z",
+      "lastModified": "2025-08-22T09:55:13.264Z",
       "name": "Advanced Observability System",
       "ports": [],
       "requiredUpstreams": [
@@ -571,7 +571,7 @@
         "type": "http"
       },
       "id": "observability-anomaly-anomaly-detection",
-      "lastModified": "2025-08-21T21:24:28.520Z",
+      "lastModified": "2025-08-22T09:55:13.264Z",
       "name": "Anomaly Detection",
       "ports": [],
       "requiredUpstreams": [
@@ -592,7 +592,7 @@
         "type": "http"
       },
       "id": "observability-tracing-distributed-tracing",
-      "lastModified": "2025-08-21T21:24:28.520Z",
+      "lastModified": "2025-08-22T09:55:13.265Z",
       "name": "Distributed Tracing",
       "ports": [],
       "requiredUpstreams": [
@@ -615,7 +615,7 @@
         "type": "http"
       },
       "id": "observability-alerting-intelligent-alerting",
-      "lastModified": "2025-08-21T21:24:28.519Z",
+      "lastModified": "2025-08-22T09:55:13.264Z",
       "name": "Intelligent Alerting",
       "ports": [
         "env:SMTP_PORT"
@@ -639,7 +639,7 @@
         "type": "none"
       },
       "id": "observability-logs-log-aggregation",
-      "lastModified": "2025-08-21T21:24:28.520Z",
+      "lastModified": "2025-08-22T09:55:13.264Z",
       "name": "Log Aggregation",
       "ports": [],
       "requiredUpstreams": [
@@ -659,7 +659,7 @@
         "type": "http"
       },
       "id": "observability-dashboards-real-time-dashboards",
-      "lastModified": "2025-08-21T21:24:28.520Z",
+      "lastModified": "2025-08-22T09:55:13.264Z",
       "name": "Real Time Dashboards",
       "ports": [],
       "requiredUpstreams": [
@@ -686,7 +686,7 @@
         "type": "http"
       },
       "id": "performance-cache-cache-strategies",
-      "lastModified": "2025-08-21T21:24:28.520Z",
+      "lastModified": "2025-08-22T09:55:13.265Z",
       "name": "Cache Strategies",
       "ports": [],
       "requiredUpstreams": [
@@ -708,7 +708,7 @@
         "type": "http"
       },
       "id": "performance-optimization-connection-pool",
-      "lastModified": "2025-08-21T21:24:28.521Z",
+      "lastModified": "2025-08-22T09:55:13.265Z",
       "name": "Connection Pool",
       "ports": [],
       "requiredUpstreams": [
@@ -729,7 +729,7 @@
         "type": "http"
       },
       "id": "performance-services-enhanced-signer",
-      "lastModified": "2025-08-21T21:24:28.521Z",
+      "lastModified": "2025-08-22T09:55:13.265Z",
       "name": "Enhanced Signer",
       "ports": [],
       "requiredUpstreams": [
@@ -754,7 +754,7 @@
         "type": "http"
       },
       "id": "performance-monitoring-performance-monitor",
-      "lastModified": "2025-08-21T21:24:28.520Z",
+      "lastModified": "2025-08-22T09:55:13.265Z",
       "name": "Performance Monitor",
       "ports": [],
       "requiredUpstreams": [
@@ -776,7 +776,7 @@
         "type": "http"
       },
       "id": "performance-cache-redis-manager",
-      "lastModified": "2025-08-21T21:24:28.520Z",
+      "lastModified": "2025-08-22T09:55:13.265Z",
       "name": "Redis Manager",
       "ports": [
         6379,
@@ -799,7 +799,7 @@
         "type": "http"
       },
       "id": "performance-optimization-response-compression",
-      "lastModified": "2025-08-21T21:24:28.521Z",
+      "lastModified": "2025-08-22T09:55:13.265Z",
       "name": "Response Compression",
       "ports": [],
       "requiredUpstreams": [],
@@ -817,7 +817,7 @@
         "type": "http"
       },
       "id": "performance-monitoring-sla-monitor",
-      "lastModified": "2025-08-21T21:24:28.520Z",
+      "lastModified": "2025-08-22T09:55:13.265Z",
       "name": "Sla Monitor",
       "ports": [],
       "requiredUpstreams": [
@@ -839,7 +839,7 @@
         "type": "none"
       },
       "id": "security-input-validator",
-      "lastModified": "2025-08-21T21:24:28.521Z",
+      "lastModified": "2025-08-22T09:55:13.266Z",
       "name": "Input Validator",
       "ports": [],
       "requiredUpstreams": [
@@ -860,7 +860,7 @@
         "type": "none"
       },
       "id": "security-rate-limiter",
-      "lastModified": "2025-08-21T21:24:28.521Z",
+      "lastModified": "2025-08-22T09:55:13.266Z",
       "name": "Rate Limiter",
       "ports": [],
       "requiredUpstreams": [
@@ -871,7 +871,7 @@
         "metrics"
       ],
       "subcategory": "rate-limiter.js",
-      "type": "worker"
+      "type": "service"
     },
     {
       "category": "security",
@@ -884,7 +884,7 @@
         "type": "none"
       },
       "id": "security-enhanced-security-hardening",
-      "lastModified": "2025-08-21T21:24:28.521Z",
+      "lastModified": "2025-08-22T09:55:13.266Z",
       "name": "Security Hardening",
       "ports": [],
       "requiredUpstreams": [
@@ -900,7 +900,7 @@
     }
   ],
   "metadata": {
-    "generatedAt": "2025-08-21T21:26:27.083Z",
+    "generatedAt": "2025-08-22T09:56:14.411Z",
     "generator": "component-inventory-generator",
     "source": "infrastructure/ directory scan",
     "totalComponents": 38,

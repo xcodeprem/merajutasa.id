@@ -1,0 +1,207 @@
+{
+  "blast_radius": {
+    "auth": {
+      "cascadingImpact": [],
+      "directImpact": [
+        "gateway"
+      ],
+      "totalImpacted": 1
+    },
+    "catalog": {
+      "cascadingImpact": [],
+      "directImpact": [
+        "gateway"
+      ],
+      "totalImpacted": 1
+    },
+    "db": {
+      "cascadingImpact": [
+        "gateway"
+      ],
+      "directImpact": [
+        "auth",
+        "catalog"
+      ],
+      "totalImpacted": 3
+    },
+    "gateway": {
+      "cascadingImpact": [],
+      "directImpact": [],
+      "totalImpacted": 0
+    },
+    "search": {
+      "cascadingImpact": [
+        "gateway"
+      ],
+      "directImpact": [
+        "catalog"
+      ],
+      "totalImpacted": 2
+    }
+  },
+  "critical_paths": [
+    {
+      "dependencyCount": 0,
+      "dependentCount": 2,
+      "id": "db",
+      "impactLevel": "critical",
+      "isCritical": true,
+      "name": "Database Service",
+      "pathScore": 16
+    },
+    {
+      "dependencyCount": 1,
+      "dependentCount": 1,
+      "id": "auth",
+      "impactLevel": "critical",
+      "isCritical": true,
+      "name": "Authentication Service",
+      "pathScore": 14
+    },
+    {
+      "dependencyCount": 2,
+      "dependentCount": 0,
+      "id": "gateway",
+      "impactLevel": "critical",
+      "isCritical": true,
+      "name": "API Gateway",
+      "pathScore": 12
+    }
+  ],
+  "generated_at": "2025-08-22T10:01:10.371Z",
+  "impact_matrix": [
+    {
+      "cascadingImpact": [],
+      "category": "unknown",
+      "criticality": "critical",
+      "dependencyCount": 2,
+      "dependentCount": 0,
+      "directImpact": [],
+      "failureImpact": "critical",
+      "id": "gateway",
+      "name": "API Gateway",
+      "pathScore": 12,
+      "ports": [],
+      "slaAffecting": true,
+      "totalImpacted": 0,
+      "type": "service"
+    },
+    {
+      "cascadingImpact": [],
+      "category": "unknown",
+      "criticality": "critical",
+      "dependencyCount": 1,
+      "dependentCount": 1,
+      "directImpact": [
+        "gateway"
+      ],
+      "failureImpact": "critical",
+      "id": "auth",
+      "name": "Authentication Service",
+      "pathScore": 14,
+      "ports": [],
+      "slaAffecting": true,
+      "totalImpacted": 1,
+      "type": "service"
+    },
+    {
+      "cascadingImpact": [],
+      "category": "unknown",
+      "criticality": "medium",
+      "dependencyCount": 2,
+      "dependentCount": 1,
+      "directImpact": [
+        "gateway"
+      ],
+      "failureImpact": "medium",
+      "id": "catalog",
+      "name": "Catalog Service",
+      "pathScore": 7,
+      "ports": [],
+      "slaAffecting": false,
+      "totalImpacted": 1,
+      "type": "service"
+    },
+    {
+      "cascadingImpact": [
+        "gateway"
+      ],
+      "category": "unknown",
+      "criticality": "medium",
+      "dependencyCount": 0,
+      "dependentCount": 1,
+      "directImpact": [
+        "catalog"
+      ],
+      "failureImpact": "medium",
+      "id": "search",
+      "name": "Search Service",
+      "pathScore": 5,
+      "ports": [],
+      "slaAffecting": false,
+      "totalImpacted": 2,
+      "type": "service"
+    },
+    {
+      "cascadingImpact": [
+        "gateway"
+      ],
+      "category": "unknown",
+      "criticality": "critical",
+      "dependencyCount": 0,
+      "dependentCount": 2,
+      "directImpact": [
+        "auth",
+        "catalog"
+      ],
+      "failureImpact": "critical",
+      "id": "db",
+      "name": "Database Service",
+      "pathScore": 16,
+      "ports": [],
+      "slaAffecting": true,
+      "totalImpacted": 3,
+      "type": "service"
+    }
+  ],
+  "metadata": {
+    "critical_paths": 3,
+    "generator": "failure-impact-matrix-generator",
+    "sla_affecting_deps": 3,
+    "source": "docs/architecture/dependencies.json",
+    "total_components": 5
+  },
+  "sla_affecting_dependencies": [
+    {
+      "affectedComponents": [
+        "auth",
+        "catalog",
+        "gateway"
+      ],
+      "blastRadius": 3,
+      "id": "db",
+      "impact": "critical",
+      "name": "Database Service",
+      "reason": "Critical component failure causes system outage"
+    },
+    {
+      "affectedComponents": [
+        "gateway"
+      ],
+      "blastRadius": 1,
+      "id": "auth",
+      "impact": "critical",
+      "name": "Authentication Service",
+      "reason": "Critical component failure causes system outage"
+    },
+    {
+      "affectedComponents": [],
+      "blastRadius": 0,
+      "id": "gateway",
+      "impact": "critical",
+      "name": "API Gateway",
+      "reason": "Critical component failure causes system outage; Gateway component - single point of failure"
+    }
+  ],
+  "version": "1.0.0"
+}
