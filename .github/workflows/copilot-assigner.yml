@@ -173,6 +173,12 @@ jobs:
               awk -v s="${{ steps.cfg.outputs.START_FROM }}" '{if(found||$0==s){print;found=1}}' order.txt > order.slice && mv order.slice order.txt
             fi
             choose_from_order
+            # If nothing selected and no gate and not already verbose, re-run with verbose to print reasons
+            if [ -z "${NUM:-}" ] && [ -z "${GATE:-}" ] && [ "$VERBOSE" != "true" ]; then
+              echo "No candidate found silently; re-running diagnostics with verbose=true"
+              VERBOSE=true
+              choose_from_order
+            fi
             if [ -z "${NUM:-}" ] && [ -z "${GATE:-}" ] && [ "${{ steps.cfg.outputs.STRICT }}" = "true" ] && [ "${{ steps.cfg.outputs.FALLBACK_ON_NONE }}" = "true" ]; then
               echo "No eligible issue in ordered list (all done/blocked/closed). (Fallback enabled) Searching any open issue without in-progress/done/blocked..."
               gh issue list --repo "$GITHUB_REPOSITORY" --state open --json number,labels \
