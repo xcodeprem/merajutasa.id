@@ -1,0 +1,41 @@
+name: "Trivy Container & FS Scan"
+on:
+  pull_request:
+  schedule:
+    - cron: '0 3 * * *'
+permissions:
+  contents: read
+jobs:
+  trivy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install Node deps
+        run: npm ci
+      - name: Install Trivy
+        uses: aquasecurity/setup-trivy@v0.2.2
+      - name: Trivy FS scan (repo)
+        run: trivy fs --format json --output trivy-fs.json --severity HIGH,CRITICAL . || true
+      - name: Build minimal image (optional)
+        run: |
+          echo "FROM node:20-alpine\nWORKDIR /app\nCOPY package.json package-lock.json ./\nRUN npm ci --omit=dev || true\nCOPY . .\nCMD [\"node\", \"tools/sanity-check-all.js\"]" > Dockerfile.trivy
+          docker build -f Dockerfile.trivy -t local/merajutasa:ci . || true
+      - name: Trivy Image scan
+        run: trivy image --format json --output trivy-image.json --severity HIGH,CRITICAL local/merajutasa:ci || true
+      - name: Enforce Trivy policy
+        run: |
+          node -e "import('fs').then(fs=>fs.promises.mkdir('artifacts',{recursive:true}))"
+          node -e "import('fs').then(fs=>fs.promises.writeFile('artifacts/trivy-fs.json', require('fs').readFileSync('trivy-fs.json')))" || true
+          node -e "import('fs').then(fs=>fs.promises.writeFile('artifacts/trivy-image.json', require('fs').readFileSync('trivy-image.json')))" || true
+          node tools/trivy-enforce.js
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: trivy-artifacts
+          path: |
+            artifacts/trivy-*.json
+            artifacts/container-trivy-enforce-summary.json

@@ -3,6 +3,8 @@ on:
   pull_request:
   push:
     branches: [ "main" ]
+  schedule:
+    - cron: '0 3 * * *'
 permissions:
   contents: read
 jobs:
@@ -13,11 +15,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: npm ci
       - name: Install osv-scanner
         run: |
           curl -sSfL https://raw.githubusercontent.com/google/osv-scanner/main/install.sh | sh -s -- -b /usr/local/bin
       - run: osv-scanner -r . --skip-git -o osv-results.json || true
+      - name: Enforce OSV policy
+        run: |
+          node tools/enforce-osv.js
       - uses: actions/upload-artifact@v4
         with:
           name: osv-results
-          path: osv-results.json
+          path: |
+            osv-results.json
+            artifacts/sca-osv-enforce-summary.json

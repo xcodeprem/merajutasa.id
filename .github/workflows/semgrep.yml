@@ -3,6 +3,8 @@ on:
   pull_request:
   push:
     branches: [ "main" ]
+  schedule:
+    - cron: '0 3 * * *'
 permissions:
   contents: read
 jobs:
@@ -11,6 +13,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: returntocorp/semgrep-action@v1
+        continue-on-error: true
         with:
           config: >-
             p/ci
+          generateSarif: true
+          output: semgrep-results.sarif.json
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: npm ci
+      - name: Enforce Semgrep policy
+        run: node tools/enforce-semgrep.js
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: semgrep-artifacts
+          path: |
+            semgrep-results.sarif.json
+            artifacts/sast-semgrep-enforce-summary.json

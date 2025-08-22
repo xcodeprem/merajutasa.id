@@ -7,13 +7,37 @@ jobs:
   gate:
     runs-on: ubuntu-latest
     steps:
-      - name: Policy Gate (placeholder)
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Policy Gate summary
         run: |
-          echo "Enforce: Fail merge on High/Critical findings."
-          echo "Placeholder: implement artifact parsing (osv-results.json / semgrep SARIF / CodeQL alerts) later."
-          echo "Use PR label 'security:fail' or 'block:high-critical' to simulate a High/Critical finding."
+          echo "Gate enforces High/Critical fail for OSV, Semgrep, Trivy per tools/policy/scanner-policy.json"
       - name: Fail if blocking label present (simulation)
         if: contains(toJson(github.event.pull_request.labels), 'security:fail') || contains(toJson(github.event.pull_request.labels), 'block:high-critical') || contains(toJson(github.event.pull_request.labels), 'high-critical')
         run: |
           echo "Simulated High/Critical finding detected via PR label. Failing gate."
           exit 1
+      - name: Download artifacts from scanners
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts-ci
+        continue-on-error: true
+      - name: Evaluate enforcement summaries
+        run: |
+          PASS=1
+          echo "Evaluating enforcement artifacts..."
+          for f in \
+            artifacts-ci/**/sca-osv-enforce-summary.json \
+            artifacts-ci/**/sast-semgrep-enforce-summary.json \
+            artifacts-ci/**/container-trivy-enforce-summary.json; do
+            if [ -f "$f" ]; then
+              echo "- Found: $f"; cat "$f" || true
+              VIOL=$(jq -r '.violating | length' "$f" 2>/dev/null || echo 0)
+              if [ "${VIOL}" != "0" ]; then
+                echo "Violation count: ${VIOL}"; PASS=0
+              fi
+            fi
+          done
+          if [ "$PASS" = "0" ]; then
+            echo "Policy gate failed due to High/Critical findings"; exit 1; fi
+          echo "Policy gate passed"

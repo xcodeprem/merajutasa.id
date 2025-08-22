@@ -1,0 +1,17 @@
+{
+  "tool": "osv",
+  "policy": {
+    "severity_fail": [
+      "HIGH",
+      "CRITICAL"
+    ]
+  },
+  "totals": {
+    "all": 0,
+    "bySeverity": {},
+    "allowed": 0,
+    "violating": 0
+  },
+  "violating": [],
+  "timestamp": "2025-08-22T17:21:21.691Z"
+}

@@ -278,7 +278,14 @@
     "validation:playbook": "./scripts/run-validation-playbook.sh",
     "deps:drift:check": "node tools/dependency-drift-detector.js",
     "boot:sequence:validate": "node tools/boot-sequence-validator.js",
-    "ci:dependency-drift": "npm run governance:verify && npm run deps:drift:check && npm run boot:sequence:validate"
+  "ci:dependency-drift": "npm run governance:verify && npm run deps:drift:check && npm run boot:sequence:validate",
+  "scan:osv": "osv-scanner -r . --skip-git -o osv-results.json || true",
+  "scan:osv:enforce": "node tools/enforce-osv.js",
+  "scan:semgrep": "semgrep --config p/ci --sarif --output semgrep-results.sarif.json || true",
+  "scan:semgrep:enforce": "node tools/enforce-semgrep.js",
+  "scan:trivy:fs": "trivy fs --format json --output trivy-fs.json --severity HIGH,CRITICAL . || true",
+  "scan:trivy:image": "trivy image --format json --output trivy-image.json --severity HIGH,CRITICAL local/merajutasa:ci || true",
+  "scan:trivy:enforce": "node tools/trivy-enforce.js"
   },
   "devDependencies": {
     "ajv": "^8.17.1",

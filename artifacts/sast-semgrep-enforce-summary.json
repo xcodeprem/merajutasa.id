@@ -1,0 +1,14 @@
+{
+  "tool": "semgrep",
+  "policy": {
+    "min_level_to_fail": "ERROR"
+  },
+  "totals": {
+    "all": 0,
+    "byLevel": {},
+    "allowed": 0,
+    "violating": 0
+  },
+  "violating": [],
+  "timestamp": "2025-08-22T17:21:29.161Z"
+}
