@@ -1,5 +1,7 @@
 ## Copilot instructions for merajutasa.id
 
+ALWAYS THINK LIKE CODING-AGENT https://docs.github.com/en/copilot/concepts/coding-agent/coding-agent
+
 Purpose: fast onboarding for AI agents in this governance/integrity repo. Prefer existing npm scripts and deterministic JSON outputs.
 
 Big picture
