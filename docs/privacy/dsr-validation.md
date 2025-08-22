@@ -7,16 +7,19 @@
 - Type: access
 
 ## Steps
+
 - Create: PASS
 - Verify: PASS
 - Fulfill: PASS
 - Close: PASS
 
 ## Generated Files
+
 - Request folder: artifacts\privacy\requests\req_1755876357634_7hsap1cdf
 - access-report.json
 
 ## Audit Logs
+
 - artifacts\audit\audit-2025-08-18-1755529654787.ndjson
 - artifacts\audit\audit-2025-08-18-1755531069211.ndjson
 - artifacts\audit\audit-2025-08-18-1755531283566.ndjson

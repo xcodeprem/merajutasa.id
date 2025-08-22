@@ -103,11 +103,12 @@ async function main() {
     security: { widgets: ['security_events', 'authentication_stats', 'threat_analysis'] }
   });
 
-  // stop stream timer to end process
+  // stop stream timer and shutdown observability to end process cleanly
   metrics.stopMetricStreaming();
+  await obs.shutdown();
 }
 
 main().catch(err => {
   console.error('observability-alerts-sim failed:', err);
   process.exitCode = 1;
-});
+}).then(() => process.exit(0));
