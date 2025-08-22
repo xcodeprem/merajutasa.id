@@ -35,6 +35,7 @@ jobs:
           echo "SEQ_MODE=$(jq -r '.sequence.mode // ""' .github/copilot-orchestrator.json)" >> $GITHUB_OUTPUT
           echo "EPIC_NUM=$(jq -r '.sequence.epic // ""' .github/copilot-orchestrator.json)" >> $GITHUB_OUTPUT
           echo "ORDER=$(jq -c '.sequence.order // []' .github/copilot-orchestrator.json)" >> $GITHUB_OUTPUT
+          echo "STRICT=$(jq -r '.sequence.strict // "false"' .github/copilot-orchestrator.json)" >> $GITHUB_OUTPUT
 
       - name: Find in-progress issues (scoped to order/epic if configured)
         id: inprog
@@ -74,7 +75,7 @@ jobs:
             : > next.json
             while read n; do
               [ -z "$n" ] && continue
-              gh issue view "$n" --repo "$GITHUB_REPOSITORY" --json number,state,isPullRequest,assignees,labels 2>/dev/null \
+              gh issue view "$n" --repo "$GITHUB_REPOSITORY" --json number,state,isPullRequest,labels 2>/dev/null \
                 | jq 'select(.isPullRequest==false and .state=="OPEN" and ((.labels|map(.name)|index("'${{ steps.cfg.outputs.LABEL_INPROG }}'"))|not) and ((.labels|map(.name)|index("'${{ steps.cfg.outputs.LABEL_DONE }}'"))|not) and ((.labels|map(.name)|index("copilot:blocked"))|not))' \
                 > cand.json || true
               if [ -s cand.json ]; then
@@ -83,7 +84,7 @@ jobs:
               fi
             done < order.txt
             NUM=$(jq -r '.number // ""' next.json 2>/dev/null)
-            if [ -z "$NUM" ]; then
+            if [ -z "$NUM" ] && [ "${{ steps.cfg.outputs.STRICT }}" != "true" ]; then
               echo "No eligible issue in explicit order; falling back to numeric open issues"
               gh issue list --repo "$GITHUB_REPOSITORY" --state open --json number,title,labels,assignees \
                 | jq '[.[]

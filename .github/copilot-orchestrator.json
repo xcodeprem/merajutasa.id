@@ -1,5 +1,5 @@
 {
-  "assignee": "Copilot",
+  "assignee": "Andhika-Rey",
   "labels": {
     "inProgress": "copilot:in-progress",
     "done": "copilot:done"
@@ -7,6 +7,7 @@
   "sequence": {
     "mode": "explicit",
     "epic": 55,
+    "strict": true,
     "order": [
       169, 170, 75, 76, 77, 78, 79, 174, 175, 176, 177, 178, 179, 180, 181,
       182, 183, 185, 186, 187, 189, 190, 191, 192, 193, 194, 195, 196, 197,
