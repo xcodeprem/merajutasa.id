@@ -21,6 +21,30 @@ export class APIGatewayCore {
       enableMetrics: true,
       enableTracing: true,
       enableCompression: true,
+      auth: {
+        enabled: true,
+        // Static API keys for dev; override via orchestrator or env
+        allowedApiKeys: ['dev-key'],
+      },
+      authz: {
+        enabled: true,
+        // serviceName -> requiredRoles array (comma-separated allowed in header)
+        serviceRoles: {
+          collector: ['ingest:write'],
+          chain: ['append:write'],
+          signer: ['sign:write']
+        }
+      },
+      validation: {
+        enabled: true,
+        // serviceName -> JSON schema object (Ajv compatible)
+        serviceSchemas: {}
+      },
+      mtls: {
+        enabled: false,
+        // Since this server runs HTTP in dev, allow simulated header to emulate mTLS presence
+        simulateHeader: 'x-client-cert'
+      },
       cors: {
         origin: ['http://localhost:3000', 'https://merajutasa.id'],
         credentials: true
@@ -227,9 +251,69 @@ export class APIGatewayCore {
       }
     });
 
+    // AuthN middleware (API key or mTLS simulation)
+    const authNMiddleware = (req, res, next) => {
+      if (!this.config.auth?.enabled) return next();
+
+      // Simulated mTLS header check when mtls.enabled
+      if (this.config.mtls?.enabled) {
+        const hdr = this.config.mtls.simulateHeader || 'x-client-cert';
+        if (!req.headers[hdr]) {
+          return res.status(401).json({ error: 'mTLS client certificate required', requestId: req.requestId });
+        }
+      }
+
+      const key = req.headers['x-api-key'];
+      if (!key || !this.config.auth.allowedApiKeys?.includes(String(key))) {
+        return res.status(401).json({ error: 'Unauthorized', requestId: req.requestId });
+      }
+      next();
+    };
+
+    // AuthZ middleware (role-based by service)
+    const authZMiddleware = (req, res, next) => {
+      if (!this.config.authz?.enabled) return next();
+      const required = this.config.authz.serviceRoles?.[serviceName];
+      if (!required || required.length === 0) return next();
+      const rolesHeader = String(req.headers['x-roles'] || '').split(',').map(r => r.trim()).filter(Boolean);
+      const hasRole = required.some(r => rolesHeader.includes(r));
+      if (!hasRole) {
+        return res.status(403).json({ error: 'Forbidden: missing required role', required, requestId: req.requestId });
+      }
+      next();
+    };
+
+    // Schema validation middleware for JSON bodies on write methods
+    let validator = null;
+    if (this.config.validation?.enabled && this.config.validation.serviceSchemas?.[serviceName]) {
+      try {
+        // Lazy import AJV to avoid overhead when not needed
+        const Ajv = (await import('ajv')).default;
+        const addFormats = (await import('ajv-formats')).default;
+        const ajv = new Ajv({ allErrors: true, strict: false });
+        addFormats(ajv);
+        validator = ajv.compile(this.config.validation.serviceSchemas[serviceName]);
+      } catch (e) {
+        console.warn(`Schema validation disabled for ${serviceName}:`, e.message);
+      }
+    }
+
+    const schemaValidation = async (req, res, next) => {
+      if (!validator) return next();
+      if (!['POST', 'PUT', 'PATCH'].includes(req.method)) return next();
+      const valid = validator(req.body || {});
+      if (!valid) {
+        return res.status(400).json({ error: 'Invalid request body', details: validator.errors, requestId: req.requestId });
+      }
+      next();
+    };
+
     this.app.use(
       `/api/${config.version}/${serviceName}`,
       serviceLimiter,
+      authNMiddleware,
+      authZMiddleware,
+      schemaValidation,
       createProxyMiddleware(proxyOptions)
     );
   }

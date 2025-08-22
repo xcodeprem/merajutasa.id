@@ -217,7 +217,22 @@ export class AdvancedObservabilitySystem extends EventEmitter {
     // Metrics → Dashboards integration
     if (metrics && dashboards) {
       metrics.on('metrics_stream', (metricsData) => {
-        dashboards.updateMetrics(metricsData.metrics);
+        // derive simple flattened metrics for dashboards
+        try {
+          const flat = {};
+          for (const m of metricsData.metrics || []) {
+            const name = m.name || m.help || '';
+            const last = Array.isArray(m.values) && m.values.length > 0 ? m.values[m.values.length - 1].value : null;
+            if (name.endsWith('error_rate')) flat.error_rate = last ?? flat.error_rate;
+            if (name.endsWith('service_health_status')) flat.service_health_status = last ?? flat.service_health_status;
+            if (name.endsWith('chain_integrity_score')) flat.chain_integrity_score = last ?? flat.chain_integrity_score;
+            if (name.endsWith('cpu_usage_percent')) flat.cpu_usage_percent = last ?? flat.cpu_usage_percent;
+            if (name.endsWith('memory_usage_percent')) flat.memory_usage_percent = last ?? flat.memory_usage_percent;
+          }
+          dashboards.updateMetrics({ ...flat });
+        } catch (e) {
+          dashboards.updateMetrics({});
+        }
       });
     }
 

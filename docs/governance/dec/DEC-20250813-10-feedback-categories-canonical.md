@@ -65,7 +65,7 @@ signoff:
   governance_chair: PENDING
   product_owner: PENDING
   privacy_lead: PENDING
-hash_of_decision_document: "c209daae774250fa94bc04f95e8bfe9a30b9059b109fcd48c0f5faed3c0f4545"
+hash_of_decision_document: "98bf229f5d6cc9f4c64496f0cb4fe7567a2e0ea55f5e919f328300460886ffe7"
 integrity_manifest_pointer: <ADD_ON_SEAL>
 append_only_notice: "Immutable; perubahan perlu DEC penerus."
 supersede_policy: none

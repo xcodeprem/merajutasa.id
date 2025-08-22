@@ -18,7 +18,8 @@ const REQUIRED = [
   { artifact: 'artifacts/pii-scan-report.json', schema: 'schemas/evidence/pii-scan-v1.json' },
   { artifact: 'artifacts/fairness-sim-scenarios.json', schema: 'schemas/evidence/fairness-sim-scenarios-v1.json' },
   { artifact: 'artifacts/fairness-sim-report.json', schema: 'schemas/evidence/fairness-sim-report-v1.json' },
-  { artifact: 'artifacts/no-silent-drift-report.json', schema: 'schemas/evidence/no-silent-drift-v1.json' }
+  { artifact: 'artifacts/no-silent-drift-report.json', schema: 'schemas/evidence/no-silent-drift-v1.json' },
+  { artifact: 'artifacts/secrets-rotation-evidence.json', schema: 'schemas/evidence/secrets-rotation-evidence-v1.json' }
 ];
 
 async function loadJSON(p){ return JSON.parse(await fs.readFile(p,'utf8')); }

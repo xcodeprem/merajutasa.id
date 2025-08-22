@@ -14,7 +14,7 @@ spec_reference:
   - docs/fairness/hysteresis-public-methodology-fragment-v1.md
 related_principles: [GP1, GP5, GP6, GP7, GP9]
 impacted_components: [disclaimers_lint, credential_schema, fairness_public_narrative, faq, readme]
-hash_of_decision_document: "e6f4abe53178c6dcac31b9fba5b53c6f822f36f949fce8b6df934007af9770bd" # sealed SHA256 canonical
+hash_of_decision_document: "f331424d73e1cd7cbecc89548365e2581a7c8dd16b3e8d72843e5693bfda1c39" # sealed SHA256 canonical
 non_removal_assertion: "Tidak menghapus strategi atau parameter; hanya normalisasi teks & whitelist anti false-positive."
 append_only_notice: "File immutable setelah hash seal; perubahan baru memerlukan DEC penerus."
 change_batch:

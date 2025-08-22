@@ -18,6 +18,7 @@
 import EventEmitter from 'events';
 import fs from 'fs/promises';
 import path from 'path';
+import { standardizeSecurityEvent } from '../common/security-telemetry-schema.js';
 
 export class LogAggregationSystem extends EventEmitter {
   constructor(config = {}) {
@@ -144,20 +145,36 @@ export class LogAggregationSystem extends EventEmitter {
    * Log security events
    */
   security(eventType, severity, description, metadata = {}) {
-    const securityEntry = {
-      timestamp: new Date().toISOString(),
-      type: 'security',
-      eventType,
+    const standardized = standardizeSecurityEvent({
+      event_name: eventType,
       severity,
       description,
-      metadata,
-      correlationId: metadata.correlationId || this.generateCorrelationId()
-    };
+      actor: metadata.actor || {},
+      resource: metadata.resource || {},
+      http: metadata.http || {},
+      network: metadata.network || {},
+      auth: metadata.auth || {},
+      labels: metadata.labels || {},
+      metadata: metadata.metadata || {}
+    }, {
+      serviceName: this.config.serviceName,
+      environment: metadata.environment,
+      traceId: metadata.traceId,
+      spanId: metadata.spanId,
+      correlationId: metadata.correlationId
+    });
+
+    const securityEntry = standardized;
 
     this.securityLog.push(securityEntry);
     this.emit('security_entry', securityEntry);
 
-    console.log(`[SECURITY] ${severity.toUpperCase()}: ${eventType} - ${description}`, metadata);
+    console.log(`[SECURITY] ${severity.toUpperCase()}: ${eventType} - ${description}`, {
+      event_id: securityEntry.event_id,
+      correlation_id: securityEntry.correlation?.correlation_id,
+      actor: securityEntry.actor,
+      resource: securityEntry.resource
+    });
   }
 
   /**

@@ -618,10 +618,21 @@ export class AdvancedMetricsCollector extends EventEmitter {
    * Record custom metric value
    */
   recordCustomMetric(name, operation, value, labels = {}) {
-    const metric = this.customMetrics.get(name);
+    let metric = this.customMetrics.get(name);
     if (!metric) {
-      console.warn(`Custom metric '${name}' not found`);
-      return;
+      // Auto-create as Gauge by default to enable write-on-first-use
+      try {
+        metric = new prometheus.Gauge({
+          name: `${this.config.metricPrefix}${name}`,
+          help: `Auto-created metric ${name}`,
+          labelNames: [],
+          registers: [this.registry]
+        });
+        this.customMetrics.set(name, metric);
+      } catch (e) {
+        console.warn(`Custom metric '${name}' not found and auto-create failed: ${e.message}`);
+        return;
+      }
     }
 
     switch (operation) {

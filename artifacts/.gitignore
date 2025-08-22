@@ -1,0 +1,4 @@
+# Do not commit local dev KEK material
+# This file is created by tools/dev-kms-mock.js for dev-only flows
+# and must never be published to remote environments.
+dev-kek.json

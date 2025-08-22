@@ -1,0 +1,36 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-mesh-to-compliance
+  labels:
+    app.kubernetes.io/part-of: merajutasa
+spec:
+  podSelector:
+    matchExpressions:
+    - key: app.kubernetes.io/component
+      operator: In
+      values: ["compliance-orchestrator","audit-system","compliance-automation","privacy-rights","security-hardening"]
+  policyTypes: [Ingress, Egress]
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/component: service-mesh
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/component: api-gateway
+  egress:
+  - to:
+    - podSelector:
+        matchExpressions:
+        - key: app.kubernetes.io/component
+          operator: In
+          values: ["service-mesh","api-gateway"]
+  - to:
+    - namespaceSelector: {}
+    ports:
+    - protocol: TCP
+      port: 53
+    - protocol: UDP
+      port: 53

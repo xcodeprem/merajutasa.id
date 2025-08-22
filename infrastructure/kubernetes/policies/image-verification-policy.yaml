@@ -1,0 +1,37 @@
+# Kyverno verifyImages policy (scaffold). Requires Kyverno admission controller installed.
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: verify-signed-images
+  annotations:
+    policies.kyverno.io/title: Verify container images are signed
+    policies.kyverno.io/category: Security
+    policies.kyverno.io/severity: medium
+spec:
+  validationFailureAction: Enforce
+  background: true
+  rules:
+  - name: verify-images-merajutasa
+    match:
+      any:
+      - resources:
+          kinds: [Pod]
+          selector:
+            matchLabels:
+              app.kubernetes.io/part-of: merajutasa
+    verifyImages:
+    - imageReferences:
+      - "ghcr.io/*"
+      - "merajutasa/*"
+      mutateDigest: true
+      # Note: supply your public key or Cosign keyless issuer below.
+      # The following is a placeholder and must be configured in cluster.
+      attestors:
+      - entries:
+        - keys:
+            # Example: use a ConfigMap reference or inline public key
+            publicKeys: |
+              -----BEGIN PUBLIC KEY-----
+              MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEXAMPLEPLACEHOLDERKEYONLY
+              -----END PUBLIC KEY-----
+            signatureAlgorithm: sha256

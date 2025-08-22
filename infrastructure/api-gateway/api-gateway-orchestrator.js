@@ -48,7 +48,40 @@ export class APIGatewayOrchestrator extends EventEmitter {
       this.components.gateway = getAPIGateway({
         port: this.config.gatewayPort,
         name: 'merajutasa-api-gateway',
-        enableMetrics: this.config.enableMetrics
+        enableMetrics: this.config.enableMetrics,
+        auth: { enabled: true, allowedApiKeys: ['dev-key'] },
+        authz: {
+          enabled: true,
+          serviceRoles: {
+            collector: ['ingest:write'],
+            chain: ['append:write'],
+            signer: ['sign:write']
+          }
+        },
+        validation: {
+          enabled: true,
+          serviceSchemas: {
+            collector: {
+              type: 'object',
+              required: ['event'],
+              properties: {
+                event: {
+                  type: 'object',
+                  required: ['event_name', 'occurred_at'],
+                  properties: {
+                    event_name: { type: 'string', minLength: 1 },
+                    occurred_at: { type: 'string' },
+                    received_at: { type: 'string' },
+                    meta: { type: 'object' }
+                  },
+                  additionalProperties: true
+                }
+              },
+              additionalProperties: false
+            }
+          }
+        },
+        mtls: { enabled: false, simulateHeader: 'x-client-cert' }
       });
 
       // Initialize Service Mesh

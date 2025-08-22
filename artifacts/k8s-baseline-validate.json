@@ -1,0 +1,55 @@
+{
+  "ts": "2025-08-22T15:46:09.706Z",
+  "files": [
+    {
+      "file": "D:\\farid\\tigabelas8\\merajutasa.id\\infrastructure\\kubernetes\\deployments\\compliance-deployment.yaml",
+      "ok": true,
+      "results": [
+        {
+          "key": "seccompProfile",
+          "ok": true
+        },
+        {
+          "key": "pss.enforce",
+          "ok": true
+        },
+        {
+          "key": "apparmor",
+          "ok": true
+        },
+        {
+          "key": "container.securityContext",
+          "ok": true
+        }
+      ]
+    },
+    {
+      "file": "D:\\farid\\tigabelas8\\merajutasa.id\\infrastructure\\kubernetes\\deployments\\api-gateway-deployment.yaml",
+      "ok": true,
+      "results": [
+        {
+          "key": "seccompProfile",
+          "ok": true
+        },
+        {
+          "key": "pss.enforce",
+          "ok": true
+        },
+        {
+          "key": "apparmor",
+          "ok": true
+        },
+        {
+          "key": "container.securityContext",
+          "ok": true
+        }
+      ]
+    }
+  ],
+  "policies": {
+    "networkPolicy": true,
+    "namespacePSS": true,
+    "imageVerification": true
+  },
+  "overall": true
+}

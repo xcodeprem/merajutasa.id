@@ -25,7 +25,7 @@ spec_reference:
   - docs/principles/GP1-GP10-index.md
 related_principles: [GP1, GP5, GP6, GP7, GP8, GP9, GP10]
 impacted_components: [lint_suite, param_integrity_checker, pii_scanner, evidence_bundle, terminology_scan, fairness_engine]
-hash_of_decision_document: "b1f53ab6b83476329e4c8cf7e48d826df8a28bdf8b02a9ef66fc580159b0d8cb"  # sealed SHA256
+hash_of_decision_document: "fce2c9404bfa4401cd67761649c7829b586acbeda5a7330b67e7f4f1cb566ef2"  # sealed SHA256
 decision_blocks:
   - id: DB-01
     topic: Multi-Category PII Block Threshold

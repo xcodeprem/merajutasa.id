@@ -41,6 +41,9 @@ spec:
         prometheus.io/scrape: "true"
         prometheus.io/port: "8086"
         prometheus.io/path: "/metrics"
+  container.apparmor.security.beta.kubernetes.io/api-gateway: runtime/default
+  pod-security.kubernetes.io/enforce: restricted
+  pod-security.kubernetes.io/enforce-version: latest
     spec:
       serviceAccountName: merajutasa-api-gateway
       securityContext:
@@ -48,6 +51,8 @@ spec:
         runAsUser: 1001
         runAsGroup: 1001
         fsGroup: 1001
+        seccompProfile:
+          type: RuntimeDefault
       containers:
       - name: api-gateway
         image: merajutasa/api-gateway:latest
@@ -175,6 +180,9 @@ spec:
         prometheus.io/scrape: "true"
         prometheus.io/port: "8087"
         prometheus.io/path: "/metrics"
+  container.apparmor.security.beta.kubernetes.io/service-mesh: runtime/default
+  pod-security.kubernetes.io/enforce: restricted
+  pod-security.kubernetes.io/enforce-version: latest
     spec:
       serviceAccountName: merajutasa-service-mesh
       securityContext:
@@ -182,6 +190,8 @@ spec:
         runAsUser: 1001
         runAsGroup: 1001
         fsGroup: 1001
+        seccompProfile:
+          type: RuntimeDefault
       containers:
       - name: service-mesh
         image: merajutasa/service-mesh:latest

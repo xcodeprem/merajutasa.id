@@ -1,0 +1,17 @@
+{
+  "system_overview": {
+    "widgets": [
+      "system_health",
+      "response_time",
+      "error_rate",
+      "active_alerts"
+    ]
+  },
+  "security": {
+    "widgets": [
+      "security_events",
+      "authentication_stats",
+      "threat_analysis"
+    ]
+  }
+}

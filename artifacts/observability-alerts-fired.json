@@ -1,0 +1,34 @@
+{
+  "generated_at": "2025-08-22T17:05:32.150Z",
+  "count": 4,
+  "alerts": [
+    {
+      "id": "204a0cc0-8842-4388-a827-cae8bef7e7ab",
+      "rule": "high_error_rate",
+      "severity": "high",
+      "name": "High Error Rate",
+      "timestamp": "2025-08-22T17:05:32.145Z"
+    },
+    {
+      "id": "d592d31b-dff1-40e3-a9d5-4f6fed0353d5",
+      "rule": "slow_response_time",
+      "severity": "medium",
+      "name": "Slow Response Time",
+      "timestamp": "2025-08-22T17:05:32.145Z"
+    },
+    {
+      "id": "89f47b85-2636-48f3-b8aa-7cfe3f48dd3b",
+      "rule": "chain_integrity_low",
+      "severity": "critical",
+      "name": "Chain Integrity Low",
+      "timestamp": "2025-08-22T17:05:32.145Z"
+    },
+    {
+      "id": "2d178965-178a-4b67-b006-dff986cd518f",
+      "rule": "high_cpu_usage",
+      "severity": "medium",
+      "name": "High CPU Usage",
+      "timestamp": "2025-08-22T17:05:32.145Z"
+    }
+  ]
+}

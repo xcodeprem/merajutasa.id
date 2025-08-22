@@ -1,0 +1,82 @@
+{
+  "ts": "2025-08-22T15:59:58.944Z",
+  "regions": [
+    "us-east-1",
+    "us-west-2",
+    "eu-west-1",
+    "ap-southeast-1"
+  ],
+  "policyFiles": [
+    "infrastructure/kubernetes/deployments/compliance-deployment.yaml",
+    "infrastructure/kubernetes/deployments/api-gateway-deployment.yaml",
+    "infrastructure/kubernetes/networkpolicy/compliance-network-policies.yaml",
+    "infrastructure/kubernetes/namespaces/merajutasa-pss.yaml",
+    "infrastructure/kubernetes/policies/image-verification-policy.yaml"
+  ],
+  "missingFiles": [],
+  "perFile": [
+    {
+      "file": "infrastructure/kubernetes/deployments/compliance-deployment.yaml",
+      "regions": {
+        "us-east-1": "c73bb44d4bf823b0db7762942e857c3f18fedbf759811f819179a656994c169a",
+        "us-west-2": "c73bb44d4bf823b0db7762942e857c3f18fedbf759811f819179a656994c169a",
+        "eu-west-1": "c73bb44d4bf823b0db7762942e857c3f18fedbf759811f819179a656994c169a",
+        "ap-southeast-1": "c73bb44d4bf823b0db7762942e857c3f18fedbf759811f819179a656994c169a"
+      },
+      "uniqueDigests": 1,
+      "drift": false
+    },
+    {
+      "file": "infrastructure/kubernetes/deployments/api-gateway-deployment.yaml",
+      "regions": {
+        "us-east-1": "53273b4e850d9f2f99e6edec7f389939eae40f1c68ce3d550547b5cd8a24f5ee",
+        "us-west-2": "53273b4e850d9f2f99e6edec7f389939eae40f1c68ce3d550547b5cd8a24f5ee",
+        "eu-west-1": "53273b4e850d9f2f99e6edec7f389939eae40f1c68ce3d550547b5cd8a24f5ee",
+        "ap-southeast-1": "53273b4e850d9f2f99e6edec7f389939eae40f1c68ce3d550547b5cd8a24f5ee"
+      },
+      "uniqueDigests": 1,
+      "drift": false
+    },
+    {
+      "file": "infrastructure/kubernetes/networkpolicy/compliance-network-policies.yaml",
+      "regions": {
+        "us-east-1": "054ec9a5f542a10880323d48c2f8ac6ab593f8868afaee31d07b9680912ceabb",
+        "us-west-2": "054ec9a5f542a10880323d48c2f8ac6ab593f8868afaee31d07b9680912ceabb",
+        "eu-west-1": "054ec9a5f542a10880323d48c2f8ac6ab593f8868afaee31d07b9680912ceabb",
+        "ap-southeast-1": "054ec9a5f542a10880323d48c2f8ac6ab593f8868afaee31d07b9680912ceabb"
+      },
+      "uniqueDigests": 1,
+      "drift": false
+    },
+    {
+      "file": "infrastructure/kubernetes/namespaces/merajutasa-pss.yaml",
+      "regions": {
+        "us-east-1": "82a1837e931f59f95ca81b495dcf161bfdfafb9efacb0ca937195b54edc545e5",
+        "us-west-2": "82a1837e931f59f95ca81b495dcf161bfdfafb9efacb0ca937195b54edc545e5",
+        "eu-west-1": "82a1837e931f59f95ca81b495dcf161bfdfafb9efacb0ca937195b54edc545e5",
+        "ap-southeast-1": "82a1837e931f59f95ca81b495dcf161bfdfafb9efacb0ca937195b54edc545e5"
+      },
+      "uniqueDigests": 1,
+      "drift": false
+    },
+    {
+      "file": "infrastructure/kubernetes/policies/image-verification-policy.yaml",
+      "regions": {
+        "us-east-1": "d00d254a30eb74f248f0b534ed06b0a3b2affc8026a3b07aef4ec523ac045b18",
+        "us-west-2": "d00d254a30eb74f248f0b534ed06b0a3b2affc8026a3b07aef4ec523ac045b18",
+        "eu-west-1": "d00d254a30eb74f248f0b534ed06b0a3b2affc8026a3b07aef4ec523ac045b18",
+        "ap-southeast-1": "d00d254a30eb74f248f0b534ed06b0a3b2affc8026a3b07aef4ec523ac045b18"
+      },
+      "uniqueDigests": 1,
+      "drift": false
+    }
+  ],
+  "policy_drift_count": 0,
+  "secrets": {
+    "plaintextFindings": [],
+    "plaintextFound": false,
+    "drift": 0,
+    "note": "No plaintext secrets detected in repo; use external secret manager/KMS for per-region sync."
+  },
+  "overall": true
+}

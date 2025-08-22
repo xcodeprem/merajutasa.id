@@ -1,0 +1,11 @@
+{
+  "service": "high-availability-orchestrator",
+  "status": "healthy",
+  "isActive": true,
+  "components": 5,
+  "services": 0,
+  "systemHealthPercentage": 100,
+  "activeAlerts": 0,
+  "emergencyActions": 0,
+  "timestamp": 1755878416533
+}

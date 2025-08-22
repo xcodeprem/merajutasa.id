@@ -1,0 +1,17 @@
+{
+  "ts": "2025-08-22T15:33:16.676Z",
+  "checks": [
+    {
+      "name": "docker:status",
+      "ok": false
+    },
+    {
+      "name": "k8s:status",
+      "ok": false
+    },
+    {
+      "name": "k8s:logs",
+      "ok": false
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+
+> merajutasa-governance@0.1.2 k8s:status
+> kubectl get pods,services,deployments -l app.kubernetes.io/part-of=merajutasa
+

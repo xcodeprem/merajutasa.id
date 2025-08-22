@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "generated_utc": "2025-08-22T11:01:52.624Z",
+  "generated_utc": "2025-08-22T14:50:34.282Z",
   "summary": {
-    "total": 9,
-    "pass": 9,
+    "total": 10,
+    "pass": 10,
     "fail": 0,
     "missing": 0,
     "schema_missing": 0
@@ -51,6 +51,11 @@
     },
     {
       "artifact": "artifacts/no-silent-drift-report.json",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "artifact": "artifacts/secrets-rotation-evidence.json",
       "status": "PASS",
       "errors": []
     }

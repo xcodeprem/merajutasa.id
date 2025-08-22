@@ -1,0 +1,25 @@
+{
+  "id": "req_1755876357634_7hsap1cdf",
+  "type": "access",
+  "user_id": "dsr-user-1755876357633",
+  "jurisdiction": "gdpr",
+  "details": {
+    "email": "dsr.requester@example.com"
+  },
+  "status": "closed",
+  "created_at": "2025-08-22T15:25:57.634Z",
+  "deadline": "2025-09-21T15:25:57.635Z",
+  "automated_processing": false,
+  "steps_completed": [
+    "verification",
+    "data_collection",
+    "report_generation",
+    "fulfilled",
+    "closed"
+  ],
+  "files_generated": [
+    "access-report.json"
+  ],
+  "fulfilled_at": "2025-08-22T15:25:57.656Z",
+  "closed_at": "2025-08-22T15:25:57.665Z"
+}

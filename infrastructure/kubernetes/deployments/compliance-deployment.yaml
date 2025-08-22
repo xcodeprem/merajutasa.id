@@ -41,6 +41,9 @@ spec:
         prometheus.io/scrape: "true"
         prometheus.io/port: "9000"
         prometheus.io/path: "/metrics"
+  container.apparmor.security.beta.kubernetes.io/compliance-orchestrator: runtime/default
+  pod-security.kubernetes.io/enforce: restricted
+  pod-security.kubernetes.io/enforce-version: latest
     spec:
       serviceAccountName: merajutasa-compliance-orchestrator
       securityContext:
@@ -48,6 +51,8 @@ spec:
         runAsUser: 1001
         runAsGroup: 1001
         fsGroup: 1001
+        seccompProfile:
+          type: RuntimeDefault
       containers:
       - name: compliance-orchestrator
         image: merajutasa/compliance-orchestrator:latest
@@ -169,6 +174,9 @@ spec:
         prometheus.io/scrape: "true"
         prometheus.io/port: "9001"
         prometheus.io/path: "/metrics"
+  container.apparmor.security.beta.kubernetes.io/audit-system: runtime/default
+  pod-security.kubernetes.io/enforce: restricted
+  pod-security.kubernetes.io/enforce-version: latest
     spec:
       serviceAccountName: merajutasa-audit-system
       securityContext:
@@ -176,6 +184,8 @@ spec:
         runAsUser: 1001
         runAsGroup: 1001
         fsGroup: 1001
+        seccompProfile:
+          type: RuntimeDefault
       containers:
       - name: audit-system
         image: merajutasa/audit-system:latest
@@ -279,6 +289,9 @@ spec:
         prometheus.io/scrape: "true"
         prometheus.io/port: "9002"
         prometheus.io/path: "/metrics"
+  container.apparmor.security.beta.kubernetes.io/compliance-automation: runtime/default
+  pod-security.kubernetes.io/enforce: restricted
+  pod-security.kubernetes.io/enforce-version: latest
     spec:
       serviceAccountName: merajutasa-compliance-automation
       securityContext:
@@ -286,6 +299,8 @@ spec:
         runAsUser: 1001
         runAsGroup: 1001
         fsGroup: 1001
+        seccompProfile:
+          type: RuntimeDefault
       containers:
       - name: compliance-automation
         image: merajutasa/compliance-automation:latest
@@ -384,6 +399,9 @@ spec:
         prometheus.io/scrape: "true"
         prometheus.io/port: "9003"
         prometheus.io/path: "/metrics"
+  container.apparmor.security.beta.kubernetes.io/privacy-rights: runtime/default
+  pod-security.kubernetes.io/enforce: restricted
+  pod-security.kubernetes.io/enforce-version: latest
     spec:
       serviceAccountName: merajutasa-privacy-rights
       securityContext:
@@ -391,6 +409,8 @@ spec:
         runAsUser: 1001
         runAsGroup: 1001
         fsGroup: 1001
+        seccompProfile:
+          type: RuntimeDefault
       containers:
       - name: privacy-rights
         image: merajutasa/privacy-rights:latest
@@ -489,6 +509,9 @@ spec:
         prometheus.io/scrape: "true"
         prometheus.io/port: "9004"
         prometheus.io/path: "/metrics"
+  container.apparmor.security.beta.kubernetes.io/security-hardening: runtime/default
+  pod-security.kubernetes.io/enforce: restricted
+  pod-security.kubernetes.io/enforce-version: latest
     spec:
       serviceAccountName: merajutasa-security-hardening
       securityContext:
@@ -496,6 +519,8 @@ spec:
         runAsUser: 1001
         runAsGroup: 1001
         fsGroup: 1001
+        seccompProfile:
+          type: RuntimeDefault
       containers:
       - name: security-hardening
         image: merajutasa/security-hardening:latest

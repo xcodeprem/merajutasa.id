@@ -1,0 +1,40 @@
+{
+  "generated_at": "2025-08-22T17:05:32.148Z",
+  "rules": [
+    {
+      "id": "service_down",
+      "name": "Service Down",
+      "severity": "critical"
+    },
+    {
+      "id": "high_error_rate",
+      "name": "High Error Rate",
+      "severity": "high"
+    },
+    {
+      "id": "slow_response_time",
+      "name": "Slow Response Time",
+      "severity": "medium"
+    },
+    {
+      "id": "signing_failure_spike",
+      "name": "Signing Failure Spike",
+      "severity": "high"
+    },
+    {
+      "id": "chain_integrity_low",
+      "name": "Chain Integrity Low",
+      "severity": "critical"
+    },
+    {
+      "id": "high_memory_usage",
+      "name": "High Memory Usage",
+      "severity": "medium"
+    },
+    {
+      "id": "high_cpu_usage",
+      "name": "High CPU Usage",
+      "severity": "medium"
+    }
+  ]
+}

@@ -181,3 +181,4 @@ Agent behavior quick checklist
 - Avoid editing DEC files; create new DEC for semantic changes and link via `dec_ref`
 - Sanitize PII and ensure disclaimers presence per `content/disclaimers/*`
 - Add small evidence and status artifacts for actions; keep outputs stable and minimal
+- After completing each task, write optional "Next steps" to `artifacts/next-steps/YYYY-MM-DD-<slug>.md` (short bullets; no secrets)

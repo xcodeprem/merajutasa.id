@@ -87,7 +87,7 @@ signoff:
   data_lead: "PENDING"
   ethics_representative: "PENDING"
   product_owner: "PENDING"
-hash_of_decision_document: "d82cb3f360fdbc944284fb98666d7d7acb7ac2a1702a33f11d1d26016415d7cb"  # will be canonicalized by tooling
+hash_of_decision_document: "8bf0f05cfa58004cac4decbc30639a10093a3dc7af1e63157b5e5c11e7dbee88"  # will be canonicalized by tooling
 integrity_manifest_pointer: "docs/integrity/spec-hash-manifest-v1.json#files[path=docs/governance/dec/DEC-20250813-03-disclaimers-presence-enforcement.md]"
 append_only_notice: "File immutable; changes require successor DEC referencing this id."
 ---
