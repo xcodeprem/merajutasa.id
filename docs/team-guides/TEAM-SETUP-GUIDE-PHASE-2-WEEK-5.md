@@ -39,7 +39,7 @@ This guide provides step-by-step instructions for team members to set up and wor
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/codingxdev0/merajutasa.id.git
+git clone https://github.com/xcodeprem/merajutasa.id.git
 cd merajutasa.id
 ```
 

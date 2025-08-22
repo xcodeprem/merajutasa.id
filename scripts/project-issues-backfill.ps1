@@ -3,7 +3,7 @@
 	Normalizes all (or limited) open issues into governed labels & project fields.
 
 	Usage:
-		pwsh -NoProfile -ExecutionPolicy Bypass -File scripts/project-issues-backfill.ps1 -RepoOwner codexridd -Repo merajutasa.id -Limit 50
+		pwsh -NoProfile -ExecutionPolicy Bypass -File scripts/project-issues-backfill.ps1 -RepoOwner xcodeprem -Repo merajutasa.id -Limit 50
 
 	Parameters:
 		-RepoOwner         GitHub username that owns both repo & user project (user project v2)

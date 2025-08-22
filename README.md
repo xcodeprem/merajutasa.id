@@ -1,13 +1,13 @@
 # MerajutASA.id Enterprise Platform
 
-[![CI Guard (H1)](https://github.com/Andhika-Rey/merajutasa.id/actions/workflows/ci-guard.yml/badge.svg)](https://github.com/Andhika-Rey/merajutasa.id/actions/workflows/ci-guard.yml)
-[![H1 Guard & KPI](https://github.com/Andhika-Rey/merajutasa.id/actions/workflows/h1-guard.yml/badge.svg)](https://github.com/Andhika-Rey/merajutasa.id/actions/workflows/h1-guard.yml)
-[![Deploy Pages (Dashboard Snapshots)](https://github.com/Andhika-Rey/merajutasa.id/actions/workflows/pages.yml/badge.svg)](https://github.com/Andhika-Rey/merajutasa.id/actions/workflows/pages.yml)
-[![Changelog Excerpt](https://img.shields.io/badge/changelog-excerpt-blue)](https://Andhika-Rey.github.io/merajutasa.id/changelog.html)
+[![CI Guard (H1)](https://github.com/xcodeprem/merajutasa.id/actions/workflows/ci-guard.yml/badge.svg)](https://github.com/xcodeprem/merajutasa.id/actions/workflows/ci-guard.yml)
+[![H1 Guard & KPI](https://github.com/xcodeprem/merajutasa.id/actions/workflows/h1-guard.yml/badge.svg)](https://github.com/xcodeprem/merajutasa.id/actions/workflows/h1-guard.yml)
+[![Deploy Pages (Dashboard Snapshots)](https://github.com/xcodeprem/merajutasa.id/actions/workflows/pages.yml/badge.svg)](https://github.com/xcodeprem/merajutasa.id/actions/workflows/pages.yml)
+[![Changelog Excerpt](https://img.shields.io/badge/changelog-excerpt-blue)](https://xcodeprem.github.io/merajutasa.id/changelog.html)
 
 **Enterprise-grade skill credentialing platform with comprehensive governance, high availability, security, and compliance infrastructure - featuring 648KB+ of production-ready code across 35+ enterprise components.**
 
-🚀 **Live Dashboard**: [Andhika-Rey.github.io/merajutasa.id](https://Andhika-Rey.github.io/merajutasa.id/)
+🚀 **Live Dashboard**: [xcodeprem.github.io/merajutasa.id](https://xcodeprem.github.io/merajutasa.id/)
 
 ## 🎯 Platform Overview
 
@@ -40,7 +40,7 @@ MerajutASA.id is a comprehensive enterprise platform that combines governance ex
 
 ```bash
 # Clone repository
-git clone https://github.com/Andhika-Rey/merajutasa.id.git
+git clone https://github.com/xcodeprem/merajutasa.id.git
 cd merajutasa.id
 
 # Install dependencies
@@ -413,7 +413,7 @@ This repo includes five GitHub.com–compatible workflows to automate a Project 
 Configuration (once):
 
 - Secrets: GH_PROJECT_TOKEN (classic PAT with repo, project, and admin:org scopes)
-- Repo variables (optional): PROJECT_OWNER (default: Andhika-Rey), PROJECT_TITLE (default: MerajutASA Program Board)
+- Repo variables (optional): PROJECT_OWNER (default: xcodeprem), PROJECT_TITLE (default: MerajutASA Program Board)
 
 Run order:
 
@@ -432,17 +432,17 @@ The platform provides comprehensive transparency through GitHub Pages with real-
 
 ### Live Dashboard Links
 
-- **Main Dashboard**: <https://Andhika-Rey.github.io/merajutasa.id/>
-- **Snapshots Index**: <https://Andhika-Rey.github.io/merajutasa.id/snapshots.html>
-- **Changelog**: <https://Andhika-Rey.github.io/merajutasa.id/changelog.html>
+- **Main Dashboard**: <https://xcodeprem.github.io/merajutasa.id/>
+- **Snapshots Index**: <https://xcodeprem.github.io/merajutasa.id/snapshots.html>
+- **Changelog**: <https://xcodeprem.github.io/merajutasa.id/changelog.html>
 
 ### Real-Time Data Endpoints
 
-- **KPI Summary**: <https://Andhika-Rey.github.io/merajutasa.id/data/h1-kpi-summary.json>
-- **Weekly Trends**: <https://Andhika-Rey.github.io/merajutasa.id/data/weekly-trends.json>
-- **Under-served Analysis**: <https://Andhika-Rey.github.io/merajutasa.id/data/under-served.json>
-- **Equity Anomalies**: <https://Andhika-Rey.github.io/merajutasa.id/data/equity-anomalies.json>
-- **Governance Risk**: <https://Andhika-Rey.github.io/merajutasa.id/data/risk-digest.json>
+- **KPI Summary**: <https://xcodeprem.github.io/merajutasa.id/data/h1-kpi-summary.json>
+- **Weekly Trends**: <https://xcodeprem.github.io/merajutasa.id/data/weekly-trends.json>
+- **Under-served Analysis**: <https://xcodeprem.github.io/merajutasa.id/data/under-served.json>
+- **Equity Anomalies**: <https://xcodeprem.github.io/merajutasa.id/data/equity-anomalies.json>
+- **Governance Risk**: <https://xcodeprem.github.io/merajutasa.id/data/risk-digest.json>
 
 ## 🤝 Support & Contributing
 

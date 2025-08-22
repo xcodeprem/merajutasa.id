@@ -11,7 +11,7 @@
   },
   "packageManager": "npm@9.8.1",
   "scripts": {
-    "project:spotcheck": "node tools/github/project-spotcheck.js --owner=Andhika-Rey --repo=merajutasa.id",
+    "project:spotcheck": "node tools/github/project-spotcheck.js --owner=xcodeprem --repo=merajutasa.id",
     "project:sync": "node tools/github/project-sync-item.js",
     "project:token:diag": "node tools/github/project-token-diagnostics.js",
     "project:feature-release": "node tools/github/personal-projects-automation.js feature-release",

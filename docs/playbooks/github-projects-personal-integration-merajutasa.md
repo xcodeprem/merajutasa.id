@@ -1,8 +1,8 @@
 # GitHub Projects (Personal) Integration Guide — merajutasa.id
 
-Audience: Lead IT • Scope: Personal GitHub Projects (user-owned) fully integrated with repository `Andhika-Rey/merajutasa.id`.
+Audience: Lead IT • Scope: Personal GitHub Projects (user-owned) fully integrated with repository `xcodeprem/merajutasa.id`.
 
-Project URL: <https://github.com/users/Andhika-Rey/projects/10>
+Project URL: <https://github.com/users/xcodeprem/projects/10>
 
 ---
 
@@ -37,7 +37,7 @@ Hasil akhir:
 
 - Buka Project Anda → tab Workflows (ikon gear/Automation).
 - Tambahkan workflow “Auto-add items”.
-- Filter “Items to add”: `repository: Andhika-Rey/merajutasa.id`; pilih Issues dan Pull requests (sesuai kebutuhan).
+- Filter “Items to add”: `repository: xcodeprem/merajutasa.id`; pilih Issues dan Pull requests (sesuai kebutuhan).
 - Simpan workflow.
 
 Catatan: Ini memastikan setiap Issue/PR baru dari repo langsung masuk ke Project.
@@ -194,7 +194,7 @@ Dengan struktur di atas:
 
 ## Validasi cepat (QA)
 
-- Auto-add berfungsi: Item baru dari `Andhika-Rey/merajutasa.id` muncul otomatis di Project.
+- Auto-add berfungsi: Item baru dari `xcodeprem/merajutasa.id` muncul otomatis di Project.
 - Pemetaan label → fields berjalan (uji dengan `type:bug`, `priority:p0`, `size:m`).
 - Status syncing: close Issue/merge PR → Status menjadi Done; reopen → Status sesuai aturan.
 - Views menampilkan data sesuai filter/group/sort yang ditetapkan.

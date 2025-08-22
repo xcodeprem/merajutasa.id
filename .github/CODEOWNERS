@@ -2,32 +2,32 @@
 # This file enforces review requirements for sensitive areas of the repository
 
 # Workflow governance - require review for any changes to CI/CD infrastructure
-/.github/workflows/ @codingxdev0
-/.github/actions/ @codingxdev0  
-/.github/scripts/ @codingxdev0
-/.github/actions-allowlist.json @codingxdev0
-/.github/CODEOWNERS @codingxdev0
+/.github/workflows/ @xcodeprem
+/.github/actions/ @xcodeprem  
+/.github/scripts/ @xcodeprem
+/.github/actions-allowlist.json @xcodeprem
+/.github/CODEOWNERS @xcodeprem
 
 # Security configuration (baseline requirement)
-config/security/** @codingxdev0
+config/security/** @xcodeprem
 
 # Policy and governance configuration
-/tools/policy/ @codingxdev0
-/tools/governance-verify.js @codingxdev0
-/tools/lib/security-validators.js @codingxdev0
-/tools/lib/json-stable.js @codingxdev0
+/tools/policy/ @xcodeprem
+/tools/governance-verify.js @xcodeprem
+/tools/lib/security-validators.js @xcodeprem
+/tools/lib/json-stable.js @xcodeprem
 
 # Security and privacy critical files
-/SECURITY.md @codingxdev0
-/docs/privacy/ @codingxdev0
-/docs/governance/dec/ @codingxdev0
+/SECURITY.md @xcodeprem
+/docs/privacy/ @xcodeprem
+/docs/governance/dec/ @xcodeprem
 
 # Core governance and fairness logic
-/tools/fairness/ @codingxdev0
-/tools/h1-verify-guard.js @codingxdev0
-/tools/no-silent-drift.js @codingxdev0
-/tools/spec-hash-diff.js @codingxdev0
+/tools/fairness/ @xcodeprem
+/tools/h1-verify-guard.js @xcodeprem
+/tools/no-silent-drift.js @xcodeprem
+/tools/spec-hash-diff.js @xcodeprem
 
 # Agent context and documentation
-/docs/agent-context-pack.md @codingxdev0
-/docs/onboarding/agent-bootstrap-manifest.md @codingxdev0
+/docs/agent-context-pack.md @xcodeprem
+/docs/onboarding/agent-bootstrap-manifest.md @xcodeprem

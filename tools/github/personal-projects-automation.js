@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Personal Projects Automation - Core Logic
- * Automated PR management for Andhika-Rey's personal GitHub projects
+ * Automated PR management for xcodeprem's personal GitHub projects
  * Supports: Feature Release (#12), Team Retrospective (#11), Iterative Development (#13)
  */
 
@@ -14,7 +14,7 @@ export const PROJECTS_CONFIG = {
   'feature-release': {
     id: 12,
     title: 'Feature Release',
-    url: 'https://github.com/users/Andhika-Rey/projects/12',
+    url: 'https://github.com/users/xcodeprem/projects/12',
     fields: {
       'Status': { type: 'single_select', required: true },
       'Sub-Issues Progress': { type: 'number', required: false },
@@ -34,7 +34,7 @@ export const PROJECTS_CONFIG = {
   'team-retrospective': {
     id: 11,
     title: 'Team Retrospective',
-    url: 'https://github.com/users/Andhika-Rey/projects/11',
+    url: 'https://github.com/users/xcodeprem/projects/11',
     fields: {
       'Status': { type: 'single_select', required: true },
       'Sub-Issues Progress': { type: 'number', required: false },
@@ -48,7 +48,7 @@ export const PROJECTS_CONFIG = {
   'iterative-development': {
     id: 13,
     title: 'Iterative Development',
-    url: 'https://github.com/users/Andhika-Rey/projects/13',
+    url: 'https://github.com/users/xcodeprem/projects/13',
     fields: {
       'Status': { type: 'single_select', required: true },
       'Sub-Issues Progress': { type: 'number', required: false },
@@ -66,7 +66,7 @@ export const PROJECTS_CONFIG = {
   'custom-fields': {
     id: 10,
     title: 'Custom Fields Projects',
-    url: 'https://github.com/users/Andhika-Rey/projects/10',
+    url: 'https://github.com/users/xcodeprem/projects/10',
     fields: {
       'Status': { type: 'single_select', required: true },
       'Priority': { type: 'single_select', required: true },
@@ -410,7 +410,7 @@ export async function automateProjectIntegration(token, projectKey, prNumber = n
   console.log(`[${projectKey}] Dry run: ${dryRun}`);
   
   // Get repository info
-  const owner = process.env.GITHUB_REPOSITORY_OWNER || 'Andhika-Rey';
+  const owner = process.env.GITHUB_REPOSITORY_OWNER || 'xcodeprem';
   const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] || 'merajutasa.id';
   
   try {

@@ -80,7 +80,7 @@ echo "SHA_HERE" | grep -E '^[a-f0-9]{40}$'
 1. **Create Pull Request:**
    - Use the workflow PR template
    - Include security review documentation
-   - Tag security team for review (`@codingxdev0`)
+   - Tag security team for review (`@xcodeprem`)
    - Include rollback plan in PR description
 
 2. **Required Reviews:**
@@ -161,8 +161,8 @@ All allowlist changes must maintain audit trail:
 
 ### Emergency Contacts
 
-- **Security Issues:** @codingxdev0
-- **Repository Owner:** @codingxdev0
+- **Security Issues:** @xcodeprem
+- **Repository Owner:** @xcodeprem
 - **Governance Questions:** Create issue with `governance` label
 
 ---

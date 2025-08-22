@@ -28,7 +28,7 @@ body:
     attributes:
       label: PR Terkait (opsional)
       description: URL atau nomor PR yang akan/baru dibuat untuk tugas ini.
-      placeholder: https://github.com/codingxdev0/merajutasa.id/pull/XX
+      placeholder: https://github.com/xcodeprem/merajutasa.id/pull/XX
     validations:
       required: false
 

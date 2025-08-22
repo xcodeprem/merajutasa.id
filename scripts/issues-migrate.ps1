@@ -9,7 +9,7 @@ with a token that can read source and write destination repos.
 
 .EXAMPLE
 pwsh -NoProfile -ExecutionPolicy Bypass -File scripts/issues-migrate.ps1 `
-  -SourceOwner codexridd -SourceRepo merajutasa.id `
+  -SourceOwner xcodeprem -SourceRepo merajutasa.id `
   -DestOwner xcodeprem -DestRepo merajutasa.id `
   -IncludeComments:$true -State all -WhatIf
 

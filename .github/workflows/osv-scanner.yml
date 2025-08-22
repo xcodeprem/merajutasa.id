@@ -1,0 +1,23 @@
+name: "OSV Scanner"
+on:
+  pull_request:
+  push:
+    branches: [ "main" ]
+permissions:
+  contents: read
+jobs:
+  osv:
+    permissions:
+      contents: read
+      actions: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install osv-scanner
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/google/osv-scanner/main/install.sh | sh -s -- -b /usr/local/bin
+      - run: osv-scanner -r . --skip-git -o osv-results.json || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: osv-results
+          path: osv-results.json

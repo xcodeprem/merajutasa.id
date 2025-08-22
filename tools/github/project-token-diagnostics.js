@@ -2,7 +2,7 @@
 import { graphql as baseGraphql } from '@octokit/graphql';
 import { promises as fs } from 'fs';
 
-const owner = process.env.GITHUB_REPOSITORY_OWNER || 'Andhika-Rey';
+const owner = process.env.GITHUB_REPOSITORY_OWNER || 'xcodeprem';
 const token = process.env.GH_PROJECT_TOKEN || process.env.GITHUB_TOKEN;
 if (!token) {
   console.error('Missing GH_PROJECT_TOKEN or GITHUB_TOKEN');

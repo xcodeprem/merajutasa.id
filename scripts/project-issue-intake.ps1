@@ -3,7 +3,7 @@
   Derives component/team/priority/SLA fields & sets project fields.
 
   Usage:
-    pwsh -NoProfile -ExecutionPolicy Bypass -File scripts/project-issue-intake.ps1 -Owner Andhika-Rey -Repo merajutasa.id -ProjectNumber 10 -IssueNumbers 210,213 -ConfigPath config\governance\project-field-schema.json
+    pwsh -NoProfile -ExecutionPolicy Bypass -File scripts/project-issue-intake.ps1 -Owner xcodeprem -Repo merajutasa.id -ProjectNumber 10 -IssueNumbers 210,213 -ConfigPath config\governance\project-field-schema.json
 
   Limitations:
     - Assumes fields already exist (run project-fields-sync.ps1 first).

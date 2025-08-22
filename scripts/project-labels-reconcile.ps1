@@ -4,10 +4,10 @@
   emits a normalization plan. Optionally applies safe renames/creations when -Apply switch used.
 
   Usage (dry run):
-    powershell -NoProfile -ExecutionPolicy Bypass -File scripts/project-labels-reconcile.ps1 -RepoOwner codexridd -Repo merajutasa.id
+    powershell -NoProfile -ExecutionPolicy Bypass -File scripts/project-labels-reconcile.ps1 -RepoOwner xcodeprem -Repo merajutasa.id
 
   Apply changes:
-    powershell -NoProfile -ExecutionPolicy Bypass -File scripts/project-labels-reconcile.ps1 -RepoOwner codexridd -Repo merajutasa.id -Apply
+    powershell -NoProfile -ExecutionPolicy Bypass -File scripts/project-labels-reconcile.ps1 -RepoOwner xcodeprem -Repo merajutasa.id -Apply
 
   Output artifact: artifacts/project-labels-reconcile.json
 #>

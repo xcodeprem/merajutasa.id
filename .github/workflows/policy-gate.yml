@@ -1,0 +1,19 @@
+name: "Security Policy Gate"
+on:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Policy Gate (placeholder)
+        run: |
+          echo "Enforce: Fail merge on High/Critical findings."
+          echo "Placeholder: implement artifact parsing (osv-results.json / semgrep SARIF / CodeQL alerts) later."
+          echo "Use PR label 'security:fail' or 'block:high-critical' to simulate a High/Critical finding."
+      - name: Fail if blocking label present (simulation)
+        if: contains(toJson(github.event.pull_request.labels), 'security:fail') || contains(toJson(github.event.pull_request.labels), 'block:high-critical') || contains(toJson(github.event.pull_request.labels), 'high-critical')
+        run: |
+          echo "Simulated High/Critical finding detected via PR label. Failing gate."
+          exit 1

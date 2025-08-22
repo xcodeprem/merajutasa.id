@@ -83,7 +83,7 @@ The changelog excerpt is now publicly accessible through GitHub Pages at `/chang
 
 ### Changelog Transparency
 
-- **Public route:** `https://codingxdev0.github.io/merajutasa.id/changelog.html`
+- **Public route:** `https://xcodeprem.github.io/merajutasa.id/changelog.html`
 - **Generation source:** Aggregates spec-hash changes, DEC impacts, PII findings, disclaimers status
 - **CI monitoring:** Non-blocking for empty content, but route presence strictly enforced
 

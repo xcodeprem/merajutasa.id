@@ -184,7 +184,7 @@ kubectl version --client
 
 ```bash
 # Clone repository (if not already done)
-git clone https://github.com/codingxdev0/merajutasa.id.git
+git clone https://github.com/xcodeprem/merajutasa.id.git
 cd merajutasa.id
 
 # Install dependencies

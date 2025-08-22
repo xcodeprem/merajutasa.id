@@ -708,7 +708,7 @@
   "scripts_details": {
     "project:spotcheck": {
       "name": "project:spotcheck",
-      "command": "node tools/github/project-spotcheck.js --owner=Andhika-Rey --repo=merajutasa.id",
+      "command": "node tools/github/project-spotcheck.js --owner=xcodeprem --repo=merajutasa.id",
       "risk_level": "unknown",
       "category": "Uncategorized",
       "estimated_duration": "unknown",

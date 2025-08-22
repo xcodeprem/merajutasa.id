@@ -77,7 +77,7 @@ function showWorkflowChanges() {
   console.log('===========================================');
   
   console.log('\n🎯 Problem Solved:');
-  console.log('- Setup Project V2 workflow failed on public GitHub accounts (e.g., "ridd", "Andhika-Rey")');
+  console.log('- Setup Project V2 workflow failed on public GitHub accounts (e.g., "ridd", "xcodeprem")');
   console.log('- Root cause: Combined user+organization GraphQL queries threw GraphqlResponseError');
   console.log('- Impact: Projects V2 workflows unusable for personal account owners');
 
@@ -120,7 +120,7 @@ function showWorkflowChanges() {
   console.log('- All workflow files validated for YAML syntax correctness');
 
   console.log('\n✅ Expected Results for Personal Accounts:');
-  console.log('- Setup Project V2: Successfully creates/updates project for user "Andhika-Rey"');
+  console.log('- Setup Project V2: Successfully creates/updates project for user "xcodeprem"');
   console.log('- Auto-add to Project: Finds personal projects and adds issues/PRs');
   console.log('- Bulk Import: Processes issues and maps to personal project fields');
   console.log('- No more GraphqlResponseError when owner is a user (not organization)');
@@ -137,7 +137,7 @@ function showWorkflowChanges() {
 // Demo account scenarios
 const testScenarios = [
   {
-    account: 'Andhika-Rey',
+    account: 'xcodeprem',
     type: 'Personal',
     projects: ['MerajutASA Program Board'],
     works: '✅ Now works with repositoryOwner pattern'

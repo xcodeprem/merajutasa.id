@@ -1,7 +1,7 @@
 <#
   Project Fields Sync (Phase 1) - 100% CLI (gh)
   Usage:
-    pwsh -NoProfile -ExecutionPolicy Bypass -File scripts/project-fields-sync.ps1 -Owner Andhika-Rey -ProjectNumber 10 -ConfigPath config\governance\project-field-schema.json
+    pwsh -NoProfile -ExecutionPolicy Bypass -File scripts/project-fields-sync.ps1 -Owner xcodeprem -ProjectNumber 10 -ConfigPath config\governance\project-field-schema.json
 
   Notes:
     - Creates managed fields (single_select/number/date/text) if missing.
