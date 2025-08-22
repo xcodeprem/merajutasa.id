@@ -1,0 +1,446 @@
+{
+    "schema_version": "1.0.0",
+    "project_reference": {
+        "id": 1,
+        "title": "Custom Fields Projects",
+        "url": "https://github.com/users/codexridd/projects/1"
+    },
+    "fields": {
+        "Teams": {
+            "type": "single_select",
+            "managed": true,
+            "options": [
+                {
+                    "key": "devops",
+                    "label": "DevOps"
+                },
+                {
+                    "key": "security",
+                    "label": "Security"
+                },
+                {
+                    "key": "qa",
+                    "label": "QA"
+                },
+                {
+                    "key": "platform",
+                    "label": "Platform"
+                },
+                {
+                    "key": "governance",
+                    "label": "Governance"
+                }
+            ],
+            "rules": {
+                "auto_assign_component_fallback": true
+            }
+        },
+        "Components": {
+            "type": "single_select",
+            "managed": true,
+            "options": [
+                {
+                    "key": "ui_web",
+                    "label": "UI/Web",
+                    "paths": [
+                        "public/",
+                        "content/"
+                    ]
+                },
+                {
+                    "key": "api_gateway",
+                    "label": "API Gateway",
+                    "paths": [
+                        "infrastructure/api-gateway/"
+                    ]
+                },
+                {
+                    "key": "collector",
+                    "label": "Collector",
+                    "paths": [
+                        "tools/services/collector",
+                        "service:collector"
+                    ]
+                },
+                {
+                    "key": "chain",
+                    "label": "Chain",
+                    "paths": [
+                        "tools/services/chain",
+                        "service:chain"
+                    ]
+                },
+                {
+                    "key": "signer",
+                    "label": "Signer",
+                    "paths": [
+                        "tools/services/signer",
+                        "service:signer"
+                    ]
+                },
+                {
+                    "key": "infrastructure",
+                    "label": "Infrastructure",
+                    "paths": [
+                        "infrastructure/",
+                        "k8s:",
+                        "docker:"
+                    ]
+                },
+                {
+                    "key": "data_schemas",
+                    "label": "Data & Schemas",
+                    "paths": [
+                        "schemas/",
+                        "docs/analytics/"
+                    ]
+                },
+                {
+                    "key": "governance_docs",
+                    "label": "Governance & Docs",
+                    "paths": [
+                        "docs/governance/",
+                        "docs/integrity/",
+                        "docs/fairness/"
+                    ]
+                },
+                {
+                    "key": "automation",
+                    "label": "Automation (CI/CD)",
+                    "paths": [
+                        ".github/workflows/",
+                        "tools/github/"
+                    ]
+                },
+                {
+                    "key": "compliance_privacy",
+                    "label": "Compliance/Privacy",
+                    "paths": [
+                        "infrastructure/compliance/",
+                        "privacy:"
+                    ]
+                },
+                {
+                    "key": "security_hardening",
+                    "label": "Security Hardening",
+                    "paths": [
+                        "hardening/",
+                        "security_hardening",
+                        "hardening:"
+                    ]
+                },
+                {
+                    "key": "equity_ui_v2",
+                    "label": "Equity UI v2",
+                    "paths": [
+                        "ui/v2/",
+                        "equity_ui_v2",
+                        "equity ui v2"
+                    ]
+                },
+                {
+                    "key": "governance_pipeline",
+                    "label": "Governance Pipeline",
+                    "paths": [
+                        "pipeline/governance/",
+                        "governance_pipeline",
+                        "gov pipeline"
+                    ]
+                }
+            ],
+            "rules": {
+                "select_first_match": true,
+                "fallback_label": "Infrastructure"
+            }
+        },
+        "Priority": {
+            "type": "single_select",
+            "managed": true,
+            "options": [
+                {
+                    "label": "P0"
+                },
+                {
+                    "label": "P1"
+                },
+                {
+                    "label": "P2"
+                },
+                {
+                    "label": "P3"
+                }
+            ],
+            "rules": {
+                "default": "P2",
+                "keywords": {
+                    "p0": [
+                        "critical",
+                        "severe",
+                        "integrity-incident",
+                        "security-vuln"
+                    ],
+                    "p1": [
+                        "high",
+                        "urgent",
+                        "breach",
+                        "sla:breach"
+                    ],
+                    "p3": [
+                        "low",
+                        "nice to have",
+                        "chore"
+                    ]
+                }
+            }
+        },
+        "Status": {
+            "type": "single_select",
+            "managed": false,
+            "options": [
+                {
+                    "label": "To Do"
+                },
+                {
+                    "label": "In Progress"
+                },
+                {
+                    "label": "Blocked"
+                },
+                {
+                    "label": "In Review"
+                },
+                {
+                    "label": "Done"
+                }
+            ],
+            "rules": {
+                "blocked_keywords": [
+                    "blocked",
+                    "dependency",
+                    "waiting"
+                ],
+                "review_keywords": [
+                    "review",
+                    "rfr"
+                ]
+            }
+        },
+        "SLA Tier": {
+            "type": "single_select",
+            "managed": true,
+            "options": [
+                {
+                    "key": "fast_track",
+                    "label": "Fast Track"
+                },
+                {
+                    "key": "standard",
+                    "label": "Standard"
+                },
+                {
+                    "key": "deferred",
+                    "label": "Deferred"
+                }
+            ],
+            "rules": {
+                "derive_from_priority": true,
+                "mapping": {
+                    "P0": "Fast Track",
+                    "P1": "Fast Track",
+                    "P2": "Standard",
+                    "P3": "Deferred"
+                }
+            }
+        },
+        "Response Target (hrs)": {
+            "type": "number",
+            "managed": true
+        },
+        "Resolve Target (hrs)": {
+            "type": "number",
+            "managed": true
+        },
+        "Last Automation Sync": {
+            "type": "date",
+            "managed": true
+        },
+        "Triage State": {
+            "type": "single_select",
+            "managed": true,
+            "options": [
+                {
+                    "label": "New"
+                },
+                {
+                    "label": "Needs Info"
+                },
+                {
+                    "label": "Ready"
+                },
+                {
+                    "label": "In Progress"
+                },
+                {
+                    "label": "Waiting"
+                },
+                {
+                    "label": "Done"
+                }
+            ],
+            "rules": {
+                "initial_default": "New",
+                "needs_info_keywords": [
+                    "need info",
+                    "repro?",
+                    "steps?",
+                    "clarify"
+                ],
+                "waiting_keywords": [
+                    "blocked",
+                    "waiting",
+                    "dependency",
+                    "on hold"
+                ],
+                "recent_days_new": 7
+            }
+        }
+    },
+    "sla_matrix": {
+        "P0": {
+            "response_hours": 2,
+            "resolve_hours": 8
+        },
+        "P1": {
+            "response_hours": 4,
+            "resolve_hours": 24
+        },
+        "P2": {
+            "response_hours": 24,
+            "resolve_hours": 72
+        },
+        "P3": {
+            "response_hours": 72,
+            "resolve_hours": 168
+        }
+    },
+    "label_mapping": {
+        "team": "team:",
+        "component": "comp:",
+        "priority": "priority:",
+        "status": "status:",
+        "iteration": "iteration:"
+    },
+    "derivation": {
+        "component_regex": [
+            {
+                "pattern": "(collector|event)",
+                "component_key": "collector"
+            },
+            {
+                "pattern": "(chain|hash|immutable)",
+                "component_key": "chain"
+            },
+            {
+                "pattern": "(signer|ed25519|signature)",
+                "component_key": "signer"
+            },
+            {
+                "pattern": "(governance|dec|fairness|hysteresis|integrity)",
+                "component_key": "governance_docs"
+            },
+            {
+                "pattern": "(api gateway|gateway)",
+                "component_key": "api_gateway"
+            },
+            {
+                "pattern": "(compliance|privacy|audit)",
+                "component_key": "compliance_privacy"
+            },
+            {
+                "pattern": "(hardening|security hardening)",
+                "component_key": "security_hardening"
+            },
+            {
+                "pattern": "(equity ui v2|equity_ui_v2|ui v2)",
+                "component_key": "equity_ui_v2"
+            },
+            {
+                "pattern": "(governance pipeline|governance_pipeline|gov pipeline)",
+                "component_key": "governance_pipeline"
+            }
+        ],
+        "team_rules": [
+            {
+                "component_key": "collector",
+                "team": "Platform"
+            },
+            {
+                "component_key": "chain",
+                "team": "Platform"
+            },
+            {
+                "component_key": "signer",
+                "team": "Platform"
+            },
+            {
+                "component_key": "governance_docs",
+                "team": "Governance"
+            },
+            {
+                "component_key": "api_gateway",
+                "team": "Platform"
+            },
+            {
+                "component_key": "compliance_privacy",
+                "team": "Security"
+            },
+            {
+                "component_key": "security_hardening",
+                "team": "Security"
+            },
+            {
+                "component_key": "equity_ui_v2",
+                "team": "Governance"
+            },
+            {
+                "component_key": "governance_pipeline",
+                "team": "Governance"
+            }
+        ]
+    },
+    "governance": {
+        "mutation_policy": "append-only",
+        "dec_required_for_changes": true
+    },
+    "automation_policy": {
+        "skip_if_label_present": [
+            "manual-override",
+            "no-auto"
+        ],
+        "comment_once_marker": "<!-- auto-triage:v1 -->",
+        "retry_backoff_seconds": [
+            2,
+            5,
+            15
+        ]
+    },
+    "security": {
+        "required_env": [
+            "GITHUB_TOKEN"
+        ],
+        "scopes_minimum": [
+            "repo",
+            "project"
+        ]
+    },
+    "observability": {
+        "artifact_emit": true,
+        "artifact_prefix": "artifacts/automation-",
+        "metric_keys": [
+            "issues_processed",
+            "fields_set",
+            "skipped_manual",
+            "errors"
+        ]
+    }
+}

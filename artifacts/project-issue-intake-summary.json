@@ -1,0 +1,33 @@
+﻿{
+    "timestamp_utc":  "2025-08-22T10:50:23.1599511Z",
+    "project":  1,
+    "labels_created":  {
+
+                       },
+    "results":  [
+                    {
+                        "component":  "Chain",
+                        "triage":  "New",
+                        "priority":  "P1",
+                        "team":  "Platform",
+                        "issue":  "210",
+                        "sla":  {
+                                    "tier":  "Fast Track",
+                                    "response":  4,
+                                    "resolve":  24
+                                }
+                    },
+                    {
+                        "component":  "Compliance/Privacy",
+                        "triage":  "New",
+                        "priority":  "P2",
+                        "team":  "Security",
+                        "issue":  "213",
+                        "sla":  {
+                                    "tier":  "Standard",
+                                    "response":  24,
+                                    "resolve":  72
+                                }
+                    }
+                ]
+}

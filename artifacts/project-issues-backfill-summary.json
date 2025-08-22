@@ -1,0 +1,366 @@
+﻿{
+    "timestamp_utc":  "2025-08-22T11:35:18.5953467Z",
+    "project_number":  1,
+    "repo":  "codexridd/merajutasa.id",
+    "dry_run":  false,
+    "stats":  {
+                  "issues_processed":  16,
+                  "fields_set":  112,
+                  "skipped_manual":  0,
+                  "errors":  14
+              },
+    "results":  [
+                    {
+                        "component":  "chain",
+                        "migration":  {
+                                          "add":  {
+
+                                                  },
+                                          "remove":  {
+
+                                                     }
+                                      },
+                        "triage":  "New",
+                        "priority":  "P0",
+                        "team":  "Platform",
+                        "issue":  79,
+                        "labels_added":  [
+                                             "comp:chain",
+                                             "team:platform",
+                                             "priority:p0"
+                                         ]
+                    },
+                    {
+                        "component":  "compliance_privacy",
+                        "migration":  {
+                                          "add":  {
+
+                                                  },
+                                          "remove":  {
+
+                                                     }
+                                      },
+                        "triage":  "New",
+                        "priority":  "P2",
+                        "team":  "Security",
+                        "issue":  174,
+                        "labels_added":  [
+
+                                         ]
+                    },
+                    {
+                        "component":  "api_gateway",
+                        "migration":  {
+                                          "add":  {
+
+                                                  },
+                                          "remove":  {
+
+                                                     }
+                                      },
+                        "triage":  "New",
+                        "priority":  "P2",
+                        "team":  "Platform",
+                        "issue":  175,
+                        "labels_added":  [
+
+                                         ]
+                    },
+                    {
+                        "component":  "compliance_privacy",
+                        "migration":  {
+                                          "add":  {
+
+                                                  },
+                                          "remove":  {
+
+                                                     }
+                                      },
+                        "triage":  "New",
+                        "priority":  "P2",
+                        "team":  "Security",
+                        "issue":  176,
+                        "labels_added":  [
+
+                                         ]
+                    },
+                    {
+                        "component":  "chain",
+                        "migration":  {
+                                          "add":  {
+
+                                                  },
+                                          "remove":  {
+
+                                                     }
+                                      },
+                        "triage":  "New",
+                        "priority":  "P3",
+                        "team":  "Platform",
+                        "issue":  177,
+                        "labels_added":  [
+
+                                         ]
+                    },
+                    {
+                        "component":  "compliance_privacy",
+                        "migration":  {
+                                          "add":  {
+
+                                                  },
+                                          "remove":  {
+
+                                                     }
+                                      },
+                        "triage":  "New",
+                        "priority":  "P3",
+                        "team":  "Security",
+                        "issue":  178,
+                        "labels_added":  [
+
+                                         ]
+                    },
+                    {
+                        "component":  "compliance_privacy",
+                        "migration":  {
+                                          "add":  {
+
+                                                  },
+                                          "remove":  {
+
+                                                     }
+                                      },
+                        "triage":  "New",
+                        "priority":  "P2",
+                        "team":  "Security",
+                        "issue":  179,
+                        "labels_added":  [
+
+                                         ]
+                    },
+                    {
+                        "component":  "infrastructure",
+                        "migration":  {
+                                          "add":  {
+
+                                                  },
+                                          "remove":  {
+
+                                                     }
+                                      },
+                        "triage":  "New",
+                        "priority":  "P2",
+                        "team":  "Platform",
+                        "issue":  180,
+                        "labels_added":  [
+
+                                         ]
+                    },
+                    {
+                        "component":  "collector",
+                        "migration":  {
+                                          "add":  {
+
+                                                  },
+                                          "remove":  {
+
+                                                     }
+                                      },
+                        "triage":  "New",
+                        "priority":  "P2",
+                        "team":  "Platform",
+                        "issue":  181,
+                        "labels_added":  [
+
+                                         ]
+                    },
+                    {
+                        "component":  "governance_docs",
+                        "migration":  {
+                                          "add":  {
+
+                                                  },
+                                          "remove":  {
+
+                                                     }
+                                      },
+                        "triage":  "Waiting",
+                        "priority":  "P3",
+                        "team":  "Governance",
+                        "issue":  182,
+                        "labels_added":  [
+                                             "comp:governance_docs",
+                                             "team:governance",
+                                             "priority:p3"
+                                         ]
+                    },
+                    {
+                        "component":  "compliance_privacy",
+                        "migration":  {
+                                          "add":  {
+
+                                                  },
+                                          "remove":  {
+
+                                                     }
+                                      },
+                        "triage":  "New",
+                        "priority":  "P2",
+                        "team":  "Security",
+                        "issue":  183,
+                        "labels_added":  [
+
+                                         ]
+                    },
+                    {
+                        "component":  "governance_docs",
+                        "migration":  {
+                                          "add":  {
+
+                                                  },
+                                          "remove":  {
+
+                                                     }
+                                      },
+                        "triage":  "New",
+                        "priority":  "P2",
+                        "team":  "Governance",
+                        "issue":  185,
+                        "labels_added":  [
+                                             "comp:governance_docs",
+                                             "team:governance",
+                                             "priority:p2"
+                                         ]
+                    },
+                    {
+                        "issue":  186,
+                        "error":  "Cannot bind parameter \u0027Date\u0027 to the target. Exception setting \"Date\": \"Cannot convert null to type \"System.DateTime\".\""
+                    },
+                    {
+                        "issue":  187,
+                        "error":  "Cannot bind parameter \u0027Date\u0027 to the target. Exception setting \"Date\": \"Cannot convert null to type \"System.DateTime\".\""
+                    },
+                    {
+                        "issue":  189,
+                        "error":  "Cannot bind parameter \u0027Date\u0027 to the target. Exception setting \"Date\": \"Cannot convert null to type \"System.DateTime\".\""
+                    },
+                    {
+                        "issue":  190,
+                        "error":  "Cannot bind parameter \u0027Date\u0027 to the target. Exception setting \"Date\": \"Cannot convert null to type \"System.DateTime\".\""
+                    },
+                    {
+                        "issue":  191,
+                        "error":  "Cannot bind parameter \u0027Date\u0027 to the target. Exception setting \"Date\": \"Cannot convert null to type \"System.DateTime\".\""
+                    },
+                    {
+                        "issue":  192,
+                        "error":  "Cannot bind parameter \u0027Date\u0027 to the target. Exception setting \"Date\": \"Cannot convert null to type \"System.DateTime\".\""
+                    },
+                    {
+                        "issue":  193,
+                        "error":  "Cannot bind parameter \u0027Date\u0027 to the target. Exception setting \"Date\": \"Cannot convert null to type \"System.DateTime\".\""
+                    },
+                    {
+                        "issue":  194,
+                        "error":  "Cannot bind parameter \u0027Date\u0027 to the target. Exception setting \"Date\": \"Cannot convert null to type \"System.DateTime\".\""
+                    },
+                    {
+                        "issue":  195,
+                        "error":  "Cannot bind parameter \u0027Date\u0027 to the target. Exception setting \"Date\": \"Cannot convert null to type \"System.DateTime\".\""
+                    },
+                    {
+                        "issue":  196,
+                        "error":  "Cannot bind parameter \u0027Date\u0027 to the target. Exception setting \"Date\": \"Cannot convert null to type \"System.DateTime\".\""
+                    },
+                    {
+                        "issue":  197,
+                        "error":  "Cannot bind parameter \u0027Date\u0027 to the target. Exception setting \"Date\": \"Cannot convert null to type \"System.DateTime\".\""
+                    },
+                    {
+                        "issue":  198,
+                        "error":  "Cannot bind parameter \u0027Date\u0027 to the target. Exception setting \"Date\": \"Cannot convert null to type \"System.DateTime\".\""
+                    },
+                    {
+                        "issue":  199,
+                        "error":  "Cannot bind parameter \u0027Date\u0027 to the target. Exception setting \"Date\": \"Cannot convert null to type \"System.DateTime\".\""
+                    },
+                    {
+                        "issue":  200,
+                        "error":  "Cannot bind parameter \u0027Date\u0027 to the target. Exception setting \"Date\": \"Cannot convert null to type \"System.DateTime\".\""
+                    },
+                    {
+                        "component":  "chain",
+                        "migration":  {
+                                          "add":  {
+
+                                                  },
+                                          "remove":  {
+
+                                                     }
+                                      },
+                        "triage":  "New",
+                        "priority":  "P1",
+                        "team":  "Platform",
+                        "issue":  210,
+                        "labels_added":  [
+                                             "comp:chain",
+                                             "team:platform",
+                                             "priority:p1"
+                                         ]
+                    },
+                    {
+                        "component":  "collector",
+                        "migration":  {
+                                          "add":  {
+
+                                                  },
+                                          "remove":  {
+
+                                                     }
+                                      },
+                        "triage":  "Waiting",
+                        "priority":  "P2",
+                        "team":  "Platform",
+                        "issue":  211,
+                        "labels_added":  [
+
+                                         ]
+                    },
+                    {
+                        "component":  "chain",
+                        "migration":  {
+                                          "add":  {
+
+                                                  },
+                                          "remove":  {
+
+                                                     }
+                                      },
+                        "triage":  "New",
+                        "priority":  "P2",
+                        "team":  "Platform",
+                        "issue":  212,
+                        "labels_added":  [
+
+                                         ]
+                    },
+                    {
+                        "component":  "compliance_privacy",
+                        "migration":  {
+                                          "add":  {
+
+                                                  },
+                                          "remove":  {
+
+                                                     }
+                                      },
+                        "triage":  "New",
+                        "priority":  "P2",
+                        "team":  "Security",
+                        "issue":  213,
+                        "labels_added":  [
+
+                                         ]
+                    }
+                ]
+}
