@@ -3,7 +3,17 @@ name: Copilot Sub-issue Assigner
 on:
   schedule:
     - cron: '*/20 * * * *'
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      start_from:
+        description: 'Resume from this issue number (strict order from here)'
+        required: false
+        type: string
+      reset_earlier:
+        description: 'If true, remove in-progress label from earlier items before resuming'
+        required: false
+        type: boolean
+        default: false
 
 concurrency:
   group: copilot-assigner-singleton
@@ -36,6 +46,8 @@ jobs:
           echo "EPIC_NUM=$(jq -r '.sequence.epic // ""' .github/copilot-orchestrator.json)" >> $GITHUB_OUTPUT
           echo "ORDER=$(jq -c '.sequence.order // []' .github/copilot-orchestrator.json)" >> $GITHUB_OUTPUT
           echo "STRICT=$(jq -r '.sequence.strict // "false"' .github/copilot-orchestrator.json)" >> $GITHUB_OUTPUT
+          echo "START_FROM=${{ github.event.inputs.start_from || '' }}" >> $GITHUB_OUTPUT
+          echo "RESET_EARLIER=${{ github.event.inputs.reset_earlier || 'false' }}" >> $GITHUB_OUTPUT
 
       - name: Find in-progress issues (scoped to order/epic if configured)
         id: inprog
@@ -44,6 +56,10 @@ jobs:
         run: |
           if [ "${{ steps.cfg.outputs.SEQ_MODE }}" = "explicit" ] && [ "${{ steps.cfg.outputs.ORDER }}" != "[]" ]; then
             printf "%s" '${{ steps.cfg.outputs.ORDER }}' | jq -r '.[]' > order.txt
+            if [ -n "${{ steps.cfg.outputs.START_FROM }}" ]; then
+              awk -v s="${{ steps.cfg.outputs.START_FROM }}" '{if(found||$0==s){print; found=1}}' order.txt > order.sliced.txt || true
+              mv order.sliced.txt order.txt
+            fi
             gh issue list --repo "$GITHUB_REPOSITORY" --label "${{ steps.cfg.outputs.LABEL_INPROG }}" --state open --json number | jq -r '.[].number' > inprog_all.txt
             COUNT=$(grep -Fx -f order.txt inprog_all.txt | wc -l | tr -d '[:space:]')
             echo "COUNT=$COUNT" >> $GITHUB_OUTPUT
@@ -51,6 +67,10 @@ jobs:
             # Build the ordered list of issue numbers from the epic body
             gh api repos/${GITHUB_REPOSITORY}/issues/${{ steps.cfg.outputs.EPIC_NUM }} --jq '.body' > epic.md
             awk 'match($0, /#([0-9]+)/, m){print m[1]}' epic.md | awk '!seen[$0]++' > order.txt || true
+            if [ -n "${{ steps.cfg.outputs.START_FROM }}" ]; then
+              awk -v s="${{ steps.cfg.outputs.START_FROM }}" '{if(found||$0==s){print; found=1}}' order.txt > order.sliced.txt || true
+              mv order.sliced.txt order.txt
+            fi
             gh issue list --repo "$GITHUB_REPOSITORY" --label "${{ steps.cfg.outputs.LABEL_INPROG }}" --state open --json number | jq -r '.[].number' > inprog_all.txt
             COUNT=$(grep -Fx -f order.txt inprog_all.txt | wc -l | tr -d '[:space:]')
             echo "COUNT=$COUNT" >> $GITHUB_OUTPUT
@@ -58,6 +78,22 @@ jobs:
             gh issue list --repo "$GITHUB_REPOSITORY" --label "${{ steps.cfg.outputs.LABEL_INPROG }}" --state open --json number | tee inprog.json
             echo "COUNT=$(jq 'length' inprog.json)" >> $GITHUB_OUTPUT
           fi
+
+      - name: Optional reset earlier in-progress labels
+        if: ${{ steps.cfg.outputs.SEQ_MODE == 'explicit' && steps.cfg.outputs.RESET_EARLIER == 'true' && steps.cfg.outputs.ORDER != '[]' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          printf "%s" '${{ steps.cfg.outputs.ORDER }}' | jq -r '.[]' > order.txt
+          if [ -n "${{ steps.cfg.outputs.START_FROM }}" ]; then
+            awk -v s="${{ steps.cfg.outputs.START_FROM }}" '{if(!found && $0!=s){print} if($0==s){found=1}}' order.txt > earlier.txt || true
+          else
+            : > earlier.txt
+          fi
+          while read n; do
+            [ -z "$n" ] && continue
+            gh issue edit "$n" --repo "$GITHUB_REPOSITORY" --remove-label '${{ steps.cfg.outputs.LABEL_INPROG }}' || true
+          done < earlier.txt
 
       - name: Find next unassigned open sub-issue (top-down)
         # Always run; we'll gate strictly inside by detecting earlier in-progress
@@ -67,6 +103,10 @@ jobs:
         run: |
           if [ "${{ steps.cfg.outputs.SEQ_MODE }}" = "explicit" ] && [ "${{ steps.cfg.outputs.ORDER }}" != "[]" ]; then
             printf "%s" '${{ steps.cfg.outputs.ORDER }}' | jq -r '.[]' > order.txt
+            if [ -n "${{ steps.cfg.outputs.START_FROM }}" ]; then
+              awk -v s="${{ steps.cfg.outputs.START_FROM }}" '{if(found||$0==s){print; found=1}}' order.txt > order.sliced.txt || true
+              mv order.sliced.txt order.txt
+            fi
             : > next.json
             GATE=""
             while read n; do
@@ -107,6 +147,10 @@ jobs:
           elif [ "${{ steps.cfg.outputs.SEQ_MODE }}" = "epic-body" ] && [ -n "${{ steps.cfg.outputs.EPIC_NUM }}" ]; then
             gh api repos/${GITHUB_REPOSITORY}/issues/${{ steps.cfg.outputs.EPIC_NUM }} --jq '.body' > epic.md
             awk 'match($0, /#([0-9]+)/, m){print m[1]}' epic.md | awk '!seen[$0]++' > order.txt || true
+            if [ -n "${{ steps.cfg.outputs.START_FROM }}" ]; then
+              awk -v s="${{ steps.cfg.outputs.START_FROM }}" '{if(found||$0==s){print; found=1}}' order.txt > order.sliced.txt || true
+              mv order.sliced.txt order.txt
+            fi
             : > next.json
             GATE=""
             while read n; do
