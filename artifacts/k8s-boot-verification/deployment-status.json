@@ -1,0 +1,136 @@
+{
+  "verification_timestamp": "2024-08-22T00:15:00Z",
+  "runbook_version": "1.0",
+  "cluster_info": {
+    "context": "production-cluster",
+    "server": "https://api.k8s.merajutasa.id:6443"
+  },
+  "deployment_manifest_summary": {
+    "total_deployments": 7,
+    "deployments": [
+      {
+        "name": "merajutasa-signer",
+        "replicas": 3,
+        "image": "merajutasa/signer:latest",
+        "port": 4601,
+        "health_probes": ["liveness", "readiness", "startup"],
+        "resource_requests": {"memory": "256Mi", "cpu": "250m"},
+        "resource_limits": {"memory": "512Mi", "cpu": "500m"}
+      },
+      {
+        "name": "merajutasa-chain", 
+        "replicas": 2,
+        "image": "merajutasa/chain:latest",
+        "port": 4602,
+        "health_probes": ["liveness", "readiness", "startup"],
+        "resource_requests": {"memory": "512Mi", "cpu": "500m"},
+        "resource_limits": {"memory": "1Gi", "cpu": "1000m"}
+      },
+      {
+        "name": "merajutasa-collector",
+        "replicas": 5,
+        "image": "merajutasa/collector:latest", 
+        "port": 4603,
+        "health_probes": ["liveness", "readiness", "startup"],
+        "resource_requests": {"memory": "512Mi", "cpu": "500m"},
+        "resource_limits": {"memory": "1Gi", "cpu": "1000m"}
+      },
+      {
+        "name": "merajutasa-observability",
+        "replicas": 2,
+        "image": "merajutasa/observability:latest",
+        "port": 8080,
+        "health_probes": ["liveness", "readiness", "startup"],
+        "resource_requests": {"memory": "512Mi", "cpu": "500m"},
+        "resource_limits": {"memory": "1Gi", "cpu": "1000m"}
+      },
+      {
+        "name": "merajutasa-api-gateway",
+        "replicas": 3,
+        "image": "merajutasa/api-gateway:latest",
+        "port": 8086,
+        "health_probes": ["liveness", "readiness", "startup"],
+        "resource_requests": {"memory": "256Mi", "cpu": "250m"},
+        "resource_limits": {"memory": "512Mi", "cpu": "500m"}
+      },
+      {
+        "name": "merajutasa-ha-orchestrator",
+        "replicas": 3,
+        "image": "merajutasa/ha-orchestrator:latest",
+        "port": 8090,
+        "health_probes": ["liveness", "readiness", "startup"],
+        "resource_requests": {"memory": "512Mi", "cpu": "500m"},
+        "resource_limits": {"memory": "1Gi", "cpu": "1000m"}
+      },
+      {
+        "name": "merajutasa-compliance-orchestrator",
+        "replicas": 2,
+        "image": "merajutasa/compliance-orchestrator:latest",
+        "port": 9000,
+        "health_probes": ["liveness", "readiness", "startup"],
+        "resource_requests": {"memory": "256Mi", "cpu": "250m"},
+        "resource_limits": {"memory": "512Mi", "cpu": "500m"}
+      }
+    ],
+    "total_pods": 20,
+    "total_services": 7,
+    "total_configmaps": 1
+  },
+  "health_probe_configuration": {
+    "startup_probes": {
+      "initial_delay_seconds": 10,
+      "period_seconds": 10,
+      "timeout_seconds": 5,
+      "failure_threshold": 30,
+      "max_startup_time": "5 minutes"
+    },
+    "liveness_probes": {
+      "initial_delay_seconds": 30,
+      "period_seconds": 10,
+      "timeout_seconds": 5,
+      "failure_threshold": 3,
+      "action": "restart container"
+    },
+    "readiness_probes": {
+      "initial_delay_seconds": 5,
+      "period_seconds": 5,
+      "timeout_seconds": 3,
+      "failure_threshold": 3,
+      "action": "remove from service endpoints"
+    }
+  },
+  "resource_summary": {
+    "total_cpu_requests": "7750m",
+    "total_cpu_limits": "15500m", 
+    "total_memory_requests": "7680Mi",
+    "total_memory_limits": "15360Mi",
+    "recommended_cluster_size": {
+      "minimum_nodes": 3,
+      "cpu_per_node": "4+ cores",
+      "memory_per_node": "8+ GB",
+      "storage_per_node": "20+ GB"
+    }
+  },
+  "npm_scripts": {
+    "k8s:deploy": "kubectl apply -f infrastructure/kubernetes/ -R",
+    "k8s:delete": "kubectl delete -f infrastructure/kubernetes/ -R", 
+    "k8s:status": "kubectl get pods,services,deployments -l app.kubernetes.io/part-of=merajutasa",
+    "k8s:logs": "kubectl logs -l app.kubernetes.io/part-of=merajutasa --tail=100",
+    "k8s:describe": "kubectl describe deployments,services,pods -l app.kubernetes.io/part-of=merajutasa"
+  },
+  "success_criteria": {
+    "deployment_success": "All 7 deployments created without errors",
+    "pod_readiness": "All 20 pods in Running state with 1/1 Ready",
+    "service_availability": "All 7 services have active endpoints", 
+    "health_checks": "All startup, liveness, and readiness probes passing",
+    "log_validation": "No configuration errors in application logs",
+    "resource_compliance": "All pods within defined CPU and memory limits"
+  },
+  "troubleshooting_endpoints": {
+    "verification_script": "scripts/verify-k8s-boot.sh",
+    "runbook_location": "docs/runbooks/boot-sequence-k8s.md",
+    "sample_outputs": "artifacts/k8s-boot-verification/boot-sequence-output.md"
+  },
+  "validation_status": "DOCUMENTED",
+  "implementation_complete": true
+}
