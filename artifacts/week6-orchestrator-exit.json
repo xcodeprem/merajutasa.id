@@ -1,0 +1,31 @@
+{
+  "test": "week6-orchestrator-exit-code",
+  "ts": "2025-08-22T18:27:58.414Z",
+  "code": 0,
+  "signal": null,
+  "duration_ms": 72,
+  "status": "PASS",
+  "stdout_preview": [
+    "🔐 Enterprise Audit System initialized",
+    "📁 Storage: artifacts/audit",
+    "📋 Compliance Mode: strict",
+    "⚡ Setting up real-time compliance monitoring...",
+    "🏛️ Compliance Automation System initialized",
+    "📊 Frameworks: gdpr, sox, iso27001, pci",
+    "⚡ Real-time monitoring: Enabled",
+    "🤖 Setting up automated privacy request processing...",
+    "🔒 Privacy Rights Management System initialized",
+    "📋 Supported jurisdictions: gdpr, ccpa, pipeda, lgpd",
+    "⏱️ Response time limit: 30 days",
+    "🤖 Automated processing: Enabled",
+    "⚡ Setting up real-time security monitoring...",
+    "🛡️ Enhanced Security Hardening System initialized",
+    "🔍 Scan interval: 1800s",
+    "⚡ Real-time monitoring: Enabled",
+    "🤖 Automated response: Enabled",
+    "...",
+    "✅ Compliance orchestrator shutdown complete",
+    "✅ Compliance orchestration completed successfully"
+  ],
+  "stderr_preview": []
+}

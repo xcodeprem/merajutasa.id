@@ -1020,13 +1020,13 @@ export class PrivacyRightsManagement extends EventEmitter {
       health_score,
       last_check: new Date().toISOString(),
       details: {
-        pending_requests: status.pendingRequests.length,
-        completed_requests: status.completedRequests.length,
-        total_requests: status.totalRequests,
-        average_response_time: status.averageResponseTime,
-        jurisdictions_supported: status.jurisdictions_supported.length,
-        automated_processing: status.automated_processing_enabled,
-        uptime: status.uptime
+  pending_requests: Array.from(this.privacyState.activeRequests.values()).filter(r => r.status !== 'completed' && r.status !== 'closed').length,
+  completed_requests: this.privacyState.processedRequests,
+  total_requests: this.privacyState.processedRequests + Array.from(this.privacyState.activeRequests.values()).filter(r => r.status !== 'closed').length,
+  average_response_time: status.averageResponseTime,
+  jurisdictions_supported: (status.jurisdictions_supported || []).length,
+  automated_processing: status.automated_processing_enabled,
+  uptime: status.uptime
       }
     };
   }
@@ -1094,11 +1094,11 @@ export default PrivacyRightsManagement;
 // CLI interface for npm script execution
 const __isDirectRun = (() => {
   try {
-    const argv1 = (process.argv && process.argv[1]) ? process.argv[1].replace(/\\+/g, '/') : '';
-    const url = import.meta.url.replace(/\\+/g, '/');
-    return argv1.endsWith('/infrastructure/compliance/privacy-rights-management.js') ||
-           url.endsWith('/infrastructure/compliance/privacy-rights-management.js') ||
-           argv1.includes('privacy-rights-management.js');
+    const main = (process.argv && process.argv[1]) ? process.argv[1] : '';
+    const normalizedMain = main.replace(/\\+/g, '/');
+    const normalizedUrl = import.meta.url.replace(/\\+/g, '/');
+    // Only true when this module is the entrypoint script
+    return normalizedUrl === `file://${normalizedMain}`;
   } catch {
     return false;
   }

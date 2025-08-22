@@ -21,7 +21,14 @@ import fs from 'fs/promises';
 import path from 'path';
 import crypto from 'crypto';
 import { EventEmitter } from 'events';
-import { auditSystem } from '../../compliance/audit-system.js';
+// Defer audit system import to avoid hard failures on import cycles
+let auditSystem;
+try {
+  const mod = await import('../../compliance/audit-system.js');
+  auditSystem = mod.auditSystem;
+} catch (e) {
+  console.warn('⚠️ audit-system not available; running security-hardening in degraded mode');
+}
 
 export class SecurityHardening extends EventEmitter {
   constructor(options = {}) {
@@ -470,7 +477,7 @@ export class SecurityHardening extends EventEmitter {
         }, playbook.escalation_threshold * 60 * 1000);
         
         // Record audit event
-        await auditSystem.recordEvent('security_incident', 'incident_response_executed', {
+  await auditSystem?.recordEvent?.('security_incident', 'incident_response_executed', {
           incident_id: incident.id,
           threat_type: threatType,
           priority: playbook.priority,
@@ -576,7 +583,7 @@ export class SecurityHardening extends EventEmitter {
         console.log('🔍 Running threat detection...');
         
         // Get recent audit events for threat analysis
-        const recentEvents = await this.getRecentAuditEvents();
+  const recentEvents = await this.getRecentAuditEvents();
         
         for (const event of recentEvents) {
           for (const detector of Object.values(this.threatDetectors)) {
@@ -613,7 +620,7 @@ export class SecurityHardening extends EventEmitter {
       await fs.writeFile(scanResultsPath, JSON.stringify(scanResults, null, 2), 'utf8');
       
       // Record audit event
-      await auditSystem.recordEvent('security_scan', 'scan_completed', {
+  await auditSystem?.recordEvent?.('security_scan', 'scan_completed', {
         scan_id: scanResults.scan_id,
         scan_type: scanType,
         vulnerabilities_found: scanResults.vulnerabilities.length,
@@ -684,7 +691,7 @@ export class SecurityHardening extends EventEmitter {
     }
     
     // Record security event
-    await auditSystem.recordEvent('security_threat', 'threat_detected', {
+  await auditSystem?.recordEvent?.('security_threat', 'threat_detected', {
       threat_type: threat.type,
       severity: threat.severity,
       description: threat.description,
@@ -835,7 +842,7 @@ export class SecurityHardening extends EventEmitter {
     console.log('⚡ Setting up real-time security monitoring...');
     
     // Listen for audit events
-    auditSystem.on('audit_event', async (event) => {
+  auditSystem?.on?.('audit_event', async (event) => {
       try {
         await this.processSecurityEvent(event);
       } catch (error) {
@@ -890,8 +897,24 @@ export class SecurityHardening extends EventEmitter {
   }
 
   async getRecentAuditEvents() {
-    // In production, this would fetch recent events from audit system
-    return [];
+    // Try pull recent lines from artifacts/audit/*.ndjson as a fallback
+    try {
+      const dir = path.join('artifacts', 'audit');
+      const files = await fs.readdir(dir);
+      const nd = files.filter(f => f.startsWith('audit-') && f.endsWith('.ndjson')).sort();
+      const tail = nd.slice(-2);
+      const events = [];
+      for (const f of tail) {
+        const content = await fs.readFile(path.join(dir, f), 'utf8');
+        const lines = content.trim().split(/\r?\n/).slice(-50);
+        for (const line of lines) {
+          try { events.push(JSON.parse(line)); } catch {}
+        }
+      }
+      return events;
+    } catch {
+      return [];
+    }
   }
 
   async checkTLSConfiguration() {

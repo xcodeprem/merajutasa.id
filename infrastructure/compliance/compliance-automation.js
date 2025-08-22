@@ -38,6 +38,12 @@ export class ComplianceAutomation extends EventEmitter {
       },
       ...options
     };
+    // Back-compat/alias for existing references expecting real_time_monitoring
+    if (typeof this.options.real_time_monitoring === 'undefined') {
+      this.options.real_time_monitoring = this.options.enableRealTimeMonitoring;
+    }
+    // Start time for uptime/health calculations
+    this.startTime = Date.now();
     
     this.complianceState = {
       scores: {},
