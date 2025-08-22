@@ -43,18 +43,18 @@ jobs:
         run: |
           if [ "${{ steps.cfg.outputs.SEQ_MODE }}" = "explicit" ] && [ "${{ steps.cfg.outputs.ORDER }}" != "[]" ]; then
             printf "%s" '${{ steps.cfg.outputs.ORDER }}' | jq -r '.[]' > order.txt
-            gh issue list --label "${{ steps.cfg.outputs.LABEL_INPROG }}" --state open --json number | jq -r '.[].number' > inprog_all.txt
+            gh issue list --repo "$GITHUB_REPOSITORY" --label "${{ steps.cfg.outputs.LABEL_INPROG }}" --state open --json number | jq -r '.[].number' > inprog_all.txt
             COUNT=$(grep -Fx -f order.txt inprog_all.txt | wc -l | tr -d '[:space:]')
             echo "COUNT=$COUNT" >> $GITHUB_OUTPUT
           elif [ "${{ steps.cfg.outputs.SEQ_MODE }}" = "epic-body" ] && [ -n "${{ steps.cfg.outputs.EPIC_NUM }}" ]; then
             # Build the ordered list of issue numbers from the epic body
             gh api repos/${GITHUB_REPOSITORY}/issues/${{ steps.cfg.outputs.EPIC_NUM }} --jq '.body' > epic.md
             awk 'match($0, /#([0-9]+)/, m){print m[1]}' epic.md | awk '!seen[$0]++' > order.txt || true
-            gh issue list --label "${{ steps.cfg.outputs.LABEL_INPROG }}" --state open --json number | jq -r '.[].number' > inprog_all.txt
+            gh issue list --repo "$GITHUB_REPOSITORY" --label "${{ steps.cfg.outputs.LABEL_INPROG }}" --state open --json number | jq -r '.[].number' > inprog_all.txt
             COUNT=$(grep -Fx -f order.txt inprog_all.txt | wc -l | tr -d '[:space:]')
             echo "COUNT=$COUNT" >> $GITHUB_OUTPUT
           else
-            gh issue list --label "${{ steps.cfg.outputs.LABEL_INPROG }}" --state open --json number | tee inprog.json
+            gh issue list --repo "$GITHUB_REPOSITORY" --label "${{ steps.cfg.outputs.LABEL_INPROG }}" --state open --json number | tee inprog.json
             echo "COUNT=$(jq 'length' inprog.json)" >> $GITHUB_OUTPUT
           fi
 
@@ -74,7 +74,7 @@ jobs:
             : > next.json
             while read n; do
               [ -z "$n" ] && continue
-              gh issue view "$n" --json number,state,isPullRequest,assignees,labels 2>/dev/null \
+              gh issue view "$n" --repo "$GITHUB_REPOSITORY" --json number,state,isPullRequest,assignees,labels 2>/dev/null \
                 | jq 'select(.isPullRequest==false and .state=="OPEN" and ((.labels|map(.name)|index("'${{ steps.cfg.outputs.LABEL_INPROG }}'"))|not) and ((.labels|map(.name)|index("'${{ steps.cfg.outputs.LABEL_DONE }}'"))|not) and ((.labels|map(.name)|index("copilot:blocked"))|not))' \
                 > cand.json || true
               if [ -s cand.json ]; then
@@ -82,7 +82,19 @@ jobs:
                 break
               fi
             done < order.txt
-            echo "NUM=$(jq -r '.number // ""' next.json 2>/dev/null)" >> $GITHUB_OUTPUT
+            NUM=$(jq -r '.number // ""' next.json 2>/dev/null)
+            if [ -z "$NUM" ]; then
+              echo "No eligible issue in explicit order; falling back to numeric open issues"
+              gh issue list --repo "$GITHUB_REPOSITORY" --state open --json number,title,labels,assignees \
+                | jq '[.[]
+                    | select((.labels|map(.name)|index("'${{ steps.cfg.outputs.LABEL_INPROG }}'"))|not)
+                    | select((.labels|map(.name)|index("'${{ steps.cfg.outputs.LABEL_DONE }}'"))|not)
+                    | select((.labels|map(.name)|index("copilot:blocked"))|not)
+                  ] | sort_by(.number) | .[0] // {}' | tee next.json
+              NUM=$(jq -r '.number // ""' next.json)
+            fi
+            echo "NUM=$NUM" >> $GITHUB_OUTPUT
+            echo "Selected issue: ${NUM:-<none>}"
           elif [ "${{ steps.cfg.outputs.SEQ_MODE }}" = "epic-body" ] && [ -n "${{ steps.cfg.outputs.EPIC_NUM }}" ]; then
             gh api repos/${GITHUB_REPOSITORY}/issues/${{ steps.cfg.outputs.EPIC_NUM }} --jq '.body' > epic.md
             awk 'match($0, /#([0-9]+)/, m){print m[1]}' epic.md | awk '!seen[$0]++' > order.txt || true
@@ -90,7 +102,7 @@ jobs:
             while read n; do
               [ -z "$n" ] && continue
               [ "$n" = "${{ steps.cfg.outputs.EPIC_NUM }}" ] && continue
-              gh issue view "$n" --json number,state,isPullRequest,assignees,labels 2>/dev/null \
+              gh issue view "$n" --repo "$GITHUB_REPOSITORY" --json number,state,isPullRequest,assignees,labels 2>/dev/null \
                 | jq 'select(.isPullRequest==false and .state=="OPEN" and ((.labels|map(.name)|index("'${{ steps.cfg.outputs.LABEL_INPROG }}'"))|not) and ((.labels|map(.name)|index("'${{ steps.cfg.outputs.LABEL_DONE }}'"))|not) and ((.labels|map(.name)|index("copilot:blocked"))|not))' \
                 > cand.json || true
               if [ -s cand.json ]; then
@@ -98,16 +110,30 @@ jobs:
                 break
               fi
             done < order.txt
-            echo "NUM=$(jq -r '.number // ""' next.json 2>/dev/null)" >> $GITHUB_OUTPUT
+            NUM=$(jq -r '.number // ""' next.json 2>/dev/null)
+            if [ -z "$NUM" ]; then
+              echo "No eligible issue in epic order; falling back to numeric open issues"
+              gh issue list --repo "$GITHUB_REPOSITORY" --state open --json number,title,labels,assignees \
+                | jq '[.[]
+                    | select((.labels|map(.name)|index("'${{ steps.cfg.outputs.LABEL_INPROG }}'"))|not)
+                    | select((.labels|map(.name)|index("'${{ steps.cfg.outputs.LABEL_DONE }}'"))|not)
+                    | select((.labels|map(.name)|index("copilot:blocked"))|not)
+                  ] | sort_by(.number) | .[0] // {}' | tee next.json
+              NUM=$(jq -r '.number // ""' next.json)
+            fi
+            echo "NUM=$NUM" >> $GITHUB_OUTPUT
+            echo "Selected issue: ${NUM:-<none>}"
           else
             # Fallback: numeric order across all issues
-            gh issue list --state open --json number,title,labels,assignees \
+            gh issue list --repo "$GITHUB_REPOSITORY" --state open --json number,title,labels,assignees \
               | jq '[.[]
                   | select((.labels|map(.name)|index("'${{ steps.cfg.outputs.LABEL_INPROG }}'"))|not)
                   | select((.labels|map(.name)|index("'${{ steps.cfg.outputs.LABEL_DONE }}'"))|not)
                   | select((.labels|map(.name)|index("copilot:blocked"))|not)
                 ] | sort_by(.number) | .[0] // {}' | tee next.json
-            echo "NUM=$(jq -r '.number // ""' next.json)" >> $GITHUB_OUTPUT
+            NUM=$(jq -r '.number // ""' next.json)
+            echo "NUM=$NUM" >> $GITHUB_OUTPUT
+            echo "Selected issue: ${NUM:-<none>}"
           fi
 
       - name: Assign to Copilot and mark in-progress
@@ -116,8 +142,9 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           n='${{ steps.next.outputs.NUM }}'
-          gh issue edit "$n" --add-assignee '${{ steps.cfg.outputs.ASSIGNEE }}' || echo "Assignee add failed (likely not assignable); continuing"
-          gh label create '${{ steps.cfg.outputs.LABEL_INPROG }}' --color 1f6feb --description "Being worked by Copilot" || true
-          gh issue edit "$n" --add-label '${{ steps.cfg.outputs.LABEL_INPROG }}'
-          gh issue comment "$n" --body "AI run started: marking as in-progress by Copilot orchestrator."
+          echo "Will operate on $GITHUB_REPOSITORY #$n"
+          gh issue edit "$n" --repo "$GITHUB_REPOSITORY" --add-assignee '${{ steps.cfg.outputs.ASSIGNEE }}' || echo "Assignee add failed (likely not assignable); continuing"
+          gh label create '${{ steps.cfg.outputs.LABEL_INPROG }}' --repo "$GITHUB_REPOSITORY" --color 1f6feb --description "Being worked by Copilot" || true
+          gh issue edit "$n" --repo "$GITHUB_REPOSITORY" --add-label '${{ steps.cfg.outputs.LABEL_INPROG }}'
+          gh issue comment "$n" --repo "$GITHUB_REPOSITORY" --body "AI run started: marking as in-progress by Copilot orchestrator."
           echo "Assigned issue #$n to ${{ steps.cfg.outputs.ASSIGNEE }} and marked in-progress."
