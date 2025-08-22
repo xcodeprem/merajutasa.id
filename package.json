@@ -282,7 +282,7 @@
     "typescript": "^5.9.2"
   },
   "dependencies": {
-    "@octokit/graphql": "^7.0.2",
+    "@octokit/graphql": "^9.0.1",
     "@octokit/rest": "^22.0.0",
     "compression": "^1.7.4",
     "concurrently": "^9.2.0",
