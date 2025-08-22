@@ -61,7 +61,7 @@ jobs:
 
       - name: Trigger next assignment
         if: ${{ steps.link.outputs.ISSUE != '' }}
-  uses: benc-uk/workflow-dispatch@25938ad20bcf54d63616cf6d7d0a3f114c0b0e4d
+        uses: benc-uk/workflow-dispatch@25938ad20bcf54d63616cf6d7d0a3f114c0b0e4d
         with:
           workflow: Copilot Sub-issue Assigner
           ref: ${{ github.ref_name }}
