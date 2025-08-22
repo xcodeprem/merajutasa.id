@@ -535,12 +535,6 @@
       "sample": "artifa…#965fa7e9"
     },
     {
-      "file": "docs/governance/statement-orientasi-portal-panti.md",
-      "category": "PLATE_ID",
-      "action": "WARN",
-      "sample": "W3C…#158bfbd3"
-    },
-    {
       "file": "docs/gap-analysis/JAWABAN-GAP-ANALYSIS.md",
       "category": "PLATE_ID",
       "action": "WARN",
@@ -557,6 +551,12 @@
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
       "sample": "artifa…#965fa7e9"
+    },
+    {
+      "file": "docs/governance/statement-orientasi-portal-panti.md",
+      "category": "PLATE_ID",
+      "action": "WARN",
+      "sample": "W3C…#158bfbd3"
     },
     {
       "file": "docs/audit/00-rubrik-audit-portal-panti.md",

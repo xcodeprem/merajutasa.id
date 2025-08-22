@@ -10,11 +10,11 @@
     "hysteresis": 283,
     "hash": 561,
     "credential": 199,
-    "governance": 758,
+    "governance": 761,
     "revocation": 110
   },
-  "totalKey": 2701,
-  "banned_terms_detected": 225,
+  "totalKey": 2704,
+  "banned_terms_detected": 229,
   "banned_samples": [
     {
       "file": "docs/contributing.md",
@@ -114,6 +114,22 @@
     },
     {
       "file": "docs/runbooks/boot-sequence-local.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/runbooks/boot-sequence-docker.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/runbooks/boot-sequence-docker.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/runbooks/boot-sequence-docker.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/runbooks/boot-sequence-docker.md",
       "term": "top"
     },
     {

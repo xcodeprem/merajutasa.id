@@ -1,0 +1,23 @@
+[0;34m[INFO][0m Starting comprehensive health check for MerajutASA.id
+[0;34m[INFO][0m Environment: development
+[0;34m[INFO][0m Timestamp: 2025-08-22T00:04:57Z
+[0;34m[INFO][0m === Signer Service Health Check ===
+[0;34m[INFO][0m Checking container: merajutasa-signer-development
+[0;31m[ERROR][0m Container merajutasa-signer-development is not running
+[0;34m[INFO][0m === Chain Service Health Check ===
+[0;34m[INFO][0m Checking container: merajutasa-chain-development
+[0;31m[ERROR][0m Container merajutasa-chain-development is not running
+[0;34m[INFO][0m === Collector Service Health Check ===
+[0;34m[INFO][0m Checking container: merajutasa-collector-development
+[0;31m[ERROR][0m Container merajutasa-collector-development is not running
+[0;34m[INFO][0m === Monitoring Service Health Check ===
+[0;34m[INFO][0m Checking container: merajutasa-monitoring-development
+[0;31m[ERROR][0m Container merajutasa-monitoring-development is not running
+[0;34m[INFO][0m === Backup Service Health Check ===
+[0;34m[INFO][0m Checking container: merajutasa-backup-development
+[0;31m[ERROR][0m Container merajutasa-backup-development is not running
+[0;34m[INFO][0m === Network Connectivity Check ===
+[0;31m[ERROR][0m Port 4601 not accessible on merajutasa-signer-development
+[0;34m[INFO][0m === Resource Usage Check ===
+CONTAINER   CPU %     MEM USAGE / LIMIT   NET I/O   BLOCK I/O
+[0;32m[SUCCESS][0m CPU usage within normal limits
