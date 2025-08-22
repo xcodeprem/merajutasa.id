@@ -1263,6 +1263,22 @@
           "ruleId": "PLATE_ID",
           "level": "warning",
           "message": {
+            "text": "PLATE_ID docs/governance/statement-orientasi-portal-panti.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/governance/statement-orientasi-portal-panti.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "PLATE_ID",
+          "level": "warning",
+          "message": {
             "text": "PLATE_ID docs/gap-analysis/JAWABAN-GAP-ANALYSIS.md"
           },
           "locations": [
@@ -1302,22 +1318,6 @@
               "physicalLocation": {
                 "artifactLocation": {
                   "uri": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md"
-                }
-              }
-            }
-          ]
-        },
-        {
-          "ruleId": "PLATE_ID",
-          "level": "warning",
-          "message": {
-            "text": "PLATE_ID docs/governance/statement-orientasi-portal-panti.md"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "docs/governance/statement-orientasi-portal-panti.md"
                 }
               }
             }

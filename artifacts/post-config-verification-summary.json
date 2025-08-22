@@ -1,11 +1,11 @@
 {
   "_metadata": {
     "actor": "copilot-swe-agent[bot]",
-    "generated_at": "2025-08-22T10:26:11.197Z",
+    "generated_at": "2025-08-22T10:54:25.498Z",
     "generator": "post-config-verify",
-    "git_ref": "refs/heads/copilot/fix-75",
-    "git_sha": "68dbb29cba3aac6ca8e5bb30f9a1749c2e5b94bf",
-    "run_id": "17152692756",
+    "git_ref": "refs/heads/copilot/fix-76",
+    "git_sha": "c4ad0ad3decb117dedb3bb5e8b058cde90afb051",
+    "run_id": "17153269062",
     "version": "1.0"
   },
   "criteria_met": {
@@ -19,31 +19,31 @@
   "passed_steps": 4,
   "steps": [
     {
-      "duration_ms": 3561,
+      "duration_ms": 3525,
       "exit_code": 0,
       "status": "PASS",
       "step": "governance-verify"
     },
     {
-      "duration_ms": 207,
+      "duration_ms": 205,
       "exit_code": 0,
       "status": "PASS",
       "step": "spec-hash-verify"
     },
     {
-      "duration_ms": 232,
+      "duration_ms": 230,
       "exit_code": 0,
       "status": "PASS",
       "step": "param-integrity"
     },
     {
-      "duration_ms": 191,
+      "duration_ms": 196,
       "exit_code": 0,
       "status": "PASS",
       "step": "compliance-audit"
     }
   ],
-  "total_duration_ms": 4191,
+  "total_duration_ms": 4156,
   "total_steps": 4,
-  "verification_timestamp": "2025-08-22T10:26:11.196Z"
+  "verification_timestamp": "2025-08-22T10:54:25.497Z"
 }

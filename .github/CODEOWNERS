@@ -8,6 +8,9 @@
 /.github/actions-allowlist.json @codingxdev0
 /.github/CODEOWNERS @codingxdev0
 
+# Security configuration (baseline requirement)
+config/security/** @codingxdev0
+
 # Policy and governance configuration
 /tools/policy/ @codingxdev0
 /tools/governance-verify.js @codingxdev0
