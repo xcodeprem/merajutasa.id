@@ -264,7 +264,10 @@
     "phase2:week6:verify": "npm run week6:validate && npm run compliance:assess && npm run security:scan && npm run privacy:request:simulate",
     "sanity:check": "node tools/sanity-check-all.js",
     "sanity:check:all": "node tools/sanity-check-all.js",
-    "validation:playbook": "./scripts/run-validation-playbook.sh"
+    "validation:playbook": "./scripts/run-validation-playbook.sh",
+    "deps:drift:check": "node tools/dependency-drift-detector.js",
+    "boot:sequence:validate": "node tools/boot-sequence-validator.js",
+    "ci:dependency-drift": "npm run governance:verify && npm run deps:drift:check && npm run boot:sequence:validate"
   },
   "devDependencies": {
     "ajv": "^8.17.1",

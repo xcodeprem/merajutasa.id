@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-22T07:15:23.134Z",
+  "generated_utc": "2025-08-22T10:17:10.292Z",
   "old_total": 0,
   "new_total": 0,
   "adoptionPercent": 100,
@@ -501,21 +501,6 @@
       "newCount": 0
     },
     {
-      "file": "docs/gap-analysis/JAWABAN-GAP-ANALYSIS.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs/gap-analysis/GAP-ANALYSIS-SUMMARY.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
       "file": "docs/governance/toolchain-overview.md",
       "oldCount": 0,
       "newCount": 0
@@ -591,6 +576,21 @@
       "newCount": 0
     },
     {
+      "file": "docs/gap-analysis/JAWABAN-GAP-ANALYSIS.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/gap-analysis/GAP-ANALYSIS-SUMMARY.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
       "file": "docs/feedback/feedback.md",
       "oldCount": 0,
       "newCount": 0
@@ -651,6 +651,11 @@
       "newCount": 0
     },
     {
+      "file": "docs/ci/dependency-drift-check.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
       "file": "docs/audit/00-rubrik-audit-portal-panti.md",
       "oldCount": 0,
       "newCount": 0
@@ -672,6 +677,11 @@
     },
     {
       "file": "docs/architecture/interface-mapping-summary.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/architecture/failure-impact-matrix.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -1613,26 +1623,6 @@
       ]
     },
     {
-      "file": "docs/gap-analysis/JAWABAN-GAP-ANALYSIS.md",
-      "suggestions": [
-        {
-          "old": "user",
-          "new": "pengguna",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "file": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
-      "suggestions": [
-        {
-          "old": "master",
-          "new": "utama",
-          "count": 2
-        }
-      ]
-    },
-    {
       "file": "docs/governance/todo-post-DEC-20250812-02.md",
       "suggestions": [
         {
@@ -1734,6 +1724,26 @@
           "old": "user",
           "new": "pengguna",
           "count": 3
+        }
+      ]
+    },
+    {
+      "file": "docs/gap-analysis/JAWABAN-GAP-ANALYSIS.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
+      "suggestions": [
+        {
+          "old": "master",
+          "new": "utama",
+          "count": 2
         }
       ]
     },

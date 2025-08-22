@@ -1,0 +1,183 @@
+{
+  "_metadata": {
+    "actor": "copilot-swe-agent[bot]",
+    "generated_at": "2025-08-22T10:17:10.845Z",
+    "generator": "boot-sequence-validator.js",
+    "git_ref": "refs/heads/copilot/fix-170",
+    "git_sha": "45942cd89099a5a9adebacc6b6e20275c2c558ee",
+    "run_id": "17152366844",
+    "version": "1.0"
+  },
+  "documented_phases": [
+    {
+      "components": [
+        "fileSystem"
+      ],
+      "description": "File system access validation",
+      "name": "Foundation Validation",
+      "phase": 1,
+      "prerequisites": "None"
+    },
+    {
+      "components": [
+        "signer",
+        "chain",
+        "collector"
+      ],
+      "description": "Core services (can start in parallel)",
+      "name": "Core Services",
+      "phase": 2,
+      "prerequisites": "Phase 1 complete"
+    },
+    {
+      "components": [
+        "auditSystem",
+        "logAggregation"
+      ],
+      "description": "Foundation services for compliance and observability",
+      "name": "Foundation Services",
+      "phase": 3,
+      "prerequisites": "Phase 2 complete"
+    },
+    {
+      "components": [
+        "securityHardening",
+        "privacyRights",
+        "complianceAutomation"
+      ],
+      "description": "Week 6 compliance and security services",
+      "name": "Compliance & Security Services",
+      "phase": 4,
+      "prerequisites": "Phase 3 complete (audit system required)"
+    },
+    {
+      "components": [
+        "complianceOrchestrator",
+        "observability"
+      ],
+      "description": "Orchestration and monitoring services",
+      "name": "Orchestration Services",
+      "phase": 5,
+      "prerequisites": "Phase 4 complete (requires compliance components)"
+    },
+    {
+      "components": [
+        "haOrchestrator",
+        "apiGateway",
+        "performance"
+      ],
+      "description": "High-level infrastructure services",
+      "name": "Infrastructure Services",
+      "phase": 6,
+      "prerequisites": "Phase 5 complete (requires core services)"
+    }
+  ],
+  "phase_validations": [
+    {
+      "documented_components": [
+        "fileSystem"
+      ],
+      "issues": [],
+      "name": "Foundation Validation",
+      "phase": 1,
+      "recommendations": [
+        "File system validation passed (assumed in CI environment)"
+      ],
+      "status": "pass"
+    },
+    {
+      "documented_components": [
+        "signer",
+        "chain",
+        "collector"
+      ],
+      "issues": [
+        "Core services not found in health check: signer, chain, collector"
+      ],
+      "name": "Core Services",
+      "phase": 2,
+      "recommendations": [
+        "Ensure core services are running and included in health monitoring"
+      ],
+      "status": "warning"
+    },
+    {
+      "documented_components": [
+        "auditSystem",
+        "logAggregation"
+      ],
+      "issues": [
+        "Foundation services not clearly identified in health check"
+      ],
+      "name": "Foundation Services",
+      "phase": 3,
+      "recommendations": [
+        "Improve health check reporting for foundation services"
+      ],
+      "status": "warning"
+    },
+    {
+      "documented_components": [
+        "securityHardening",
+        "privacyRights",
+        "complianceAutomation"
+      ],
+      "issues": [
+        "Compliance services not clearly identified in health check"
+      ],
+      "name": "Compliance & Security Services",
+      "phase": 4,
+      "recommendations": [
+        "Ensure compliance services are properly monitored"
+      ],
+      "status": "warning"
+    },
+    {
+      "documented_components": [
+        "complianceOrchestrator",
+        "observability"
+      ],
+      "issues": [
+        "Phase 5 validation not implemented"
+      ],
+      "name": "Orchestration Services",
+      "phase": 5,
+      "recommendations": [],
+      "status": "not_implemented"
+    },
+    {
+      "documented_components": [
+        "haOrchestrator",
+        "apiGateway",
+        "performance"
+      ],
+      "issues": [
+        "Phase 6 validation not implemented"
+      ],
+      "name": "Infrastructure Services",
+      "phase": 6,
+      "recommendations": [],
+      "status": "not_implemented"
+    }
+  ],
+  "recommendations": [
+    "File system validation passed (assumed in CI environment)",
+    "Ensure core services are running and included in health monitoring",
+    "Improve health check reporting for foundation services",
+    "Ensure compliance services are properly monitored",
+    "📚 Keep boot sequence documentation updated with implementation changes",
+    "🔧 Improve health monitoring to better reflect boot sequence components",
+    "🚀 Consider automating boot sequence validation in deployment pipelines",
+    "📊 Monitor boot sequence performance and optimize startup times"
+  ],
+  "sequence_issues": [],
+  "summary": {
+    "failing_phases": 0,
+    "overall_status": "WARNING",
+    "passing_phases": 1,
+    "phases_validated": 6,
+    "sequence_issues": 0,
+    "total_phases": 6,
+    "warning_phases": 3
+  }
+}

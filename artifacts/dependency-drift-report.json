@@ -1,0 +1,44 @@
+{
+  "_metadata": {
+    "actor": "copilot-swe-agent[bot]",
+    "generated_at": "2025-08-22T10:17:10.652Z",
+    "generator": "dependency-drift-detector.js",
+    "git_ref": "refs/heads/copilot/fix-170",
+    "git_sha": "45942cd89099a5a9adebacc6b6e20275c2c558ee",
+    "run_id": "17152366844",
+    "version": "1.0"
+  },
+  "analysis": {
+    "documented_components": 5,
+    "documented_dependencies": 5,
+    "governance_status": "unknown",
+    "infrastructure_health": "unknown"
+  },
+  "findings": [
+    {
+      "message": "Components documented but not found in health check: gateway, auth, catalog, search, db",
+      "recommendation": "Update component registry or fix health check implementation",
+      "severity": "medium",
+      "type": "component_health_mismatch"
+    }
+  ],
+  "metadata": {
+    "ci_mode": false,
+    "event_name": "dynamic",
+    "pr_number": null
+  },
+  "recommendations": [
+    "Update component registry or fix health check implementation",
+    "📝 Update documentation to match current implementation",
+    "🔄 Run dependency drift check regularly to catch issues early",
+    "📊 Consider automating dependency documentation updates"
+  ],
+  "summary": {
+    "boot_sequence_status": "PASS",
+    "critical_drift_count": 0,
+    "doc_sync_issues": 1,
+    "service_mesh_status": "unknown",
+    "sla_status": "not_available",
+    "total_findings": 1
+  }
+}

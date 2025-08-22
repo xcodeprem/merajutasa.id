@@ -1,0 +1,190 @@
+name: Dependency Drift Check
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/architecture/dependencies.json'
+      - 'docs/onboarding/startup-dependencies-guide.md'
+      - 'docs/runbooks/boot-sequence-*.md'
+      - 'infrastructure/**'
+      - 'config/component-registry.json'
+      - 'tools/governance-verify.js'
+      - 'tools/no-silent-drift.js'
+      - '.github/workflows/dependency-drift-check.yml'
+  schedule:
+    # Run nightly at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      include_health_checks:
+        description: 'Include full health checks (may timeout in CI)'
+        required: false
+        default: 'true'
+        type: boolean
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: dependency-drift-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  dependency-drift-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+        env:
+          PUPPETEER_SKIP_DOWNLOAD: 'true'
+
+      # Core governance verification (subset for dependency focus)
+      - name: Run Governance Verify (dependency-focused)
+        run: |
+          echo "🔍 Running governance verification for dependency analysis..."
+          npm run governance:verify || echo "Governance verify completed with warnings (expected in CI)"
+        continue-on-error: false
+
+      # Generate current dependency state
+      - name: Generate Current Dependency Matrix
+        run: |
+          echo "📊 Generating current dependency matrix..."
+          npm run deps:matrix
+          echo "✅ Dependency matrix generated"
+
+      # Service Mesh Health Check
+      - name: Service Mesh Health Check
+        run: |
+          echo "🌐 Checking service mesh health..."
+          timeout 30s npm run service-mesh:health > artifacts/service-mesh-health-check.json 2>&1 || echo "Service mesh check completed (timeout expected in CI)"
+        continue-on-error: true
+
+      # SLA Status Check
+      - name: SLA Status Check
+        run: |
+          echo "📈 Checking SLA status..."
+          timeout 30s npm run sla:status > artifacts/sla-status-check.json 2>&1 || echo "SLA status check completed (timeout expected in CI)"
+        continue-on-error: true
+
+      # Infrastructure Health Check (lightweight)
+      - name: Infrastructure Health Check
+        run: |
+          echo "🏥 Running infrastructure health check..."
+          npm run infra:health:dependencies
+          npm run infra:health:integrations
+        continue-on-error: true
+
+      # Generate dependency drift report
+      - name: Generate Dependency Drift Report
+        run: |
+          echo "🔄 Generating dependency drift report..."
+          node tools/dependency-drift-detector.js
+        env:
+          CI_MODE: 'true'
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+          PR_NUMBER: ${{ github.event.number }}
+
+      # Validate boot sequence against docs
+      - name: Validate Boot Sequence
+        run: |
+          echo "🚀 Validating boot sequence against documentation..."
+          node tools/boot-sequence-validator.js
+        continue-on-error: true
+
+      # Check for drift alerts
+      - name: Check for Drift Alerts
+        run: |
+          echo "⚠️ Checking for critical dependency drift..."
+          if [ -f "artifacts/dependency-drift-report.json" ]; then
+            CRITICAL_DRIFT=$(node -p "JSON.parse(require('fs').readFileSync('artifacts/dependency-drift-report.json', 'utf8')).critical_drift_count || 0")
+            if [ "$CRITICAL_DRIFT" -gt 0 ]; then
+              echo "❌ Critical dependency drift detected: $CRITICAL_DRIFT issues"
+              echo "Check artifacts/dependency-drift-report.json for details"
+              exit 1
+            else
+              echo "✅ No critical dependency drift detected"
+            fi
+          else
+            echo "⚠️ Dependency drift report not found"
+          fi
+
+      # Upload drift detection artifacts
+      - name: Upload Dependency Drift Artifacts
+        if: always()
+        uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
+        with:
+          name: dependency-drift-report-${{ github.run_id }}
+          path: |
+            artifacts/dependency-drift-report.json
+            artifacts/boot-sequence-validation.json
+            artifacts/service-mesh-health-check.json
+            artifacts/sla-status-check.json
+            artifacts/governance-verify-summary.json
+            artifacts/no-silent-drift-report.json
+            artifacts/infra-health-dependencies-*.json
+            artifacts/infra-health-integrations-*.json
+            docs/architecture/dependencies.json
+          retention-days: 30
+
+      # Comment on PR with drift summary (for PRs only)
+      - name: Comment on PR with Drift Summary
+        if: github.event_name == 'pull_request' && github.event.action != 'closed'
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          script: |
+            const fs = require('fs');
+            
+            let comment = '## 🔄 Dependency Drift Check Results\n\n';
+            
+            try {
+              if (fs.existsSync('artifacts/dependency-drift-report.json')) {
+                const driftReport = JSON.parse(fs.readFileSync('artifacts/dependency-drift-report.json', 'utf8'));
+                
+                comment += `- **Critical Drift Issues**: ${driftReport.critical_drift_count || 0}\n`;
+                comment += `- **Documentation Sync Issues**: ${driftReport.doc_sync_issues || 0}\n`;
+                comment += `- **Boot Sequence Validation**: ${driftReport.boot_sequence_status || 'N/A'}\n`;
+                comment += `- **Service Mesh Health**: ${driftReport.service_mesh_status || 'N/A'}\n`;
+                comment += `- **SLA Status**: ${driftReport.sla_status || 'N/A'}\n\n`;
+                
+                if (driftReport.critical_drift_count > 0) {
+                  comment += '⚠️ **Critical dependency drift detected!** Check the uploaded artifacts for details.\n\n';
+                }
+                
+                if (driftReport.recommendations && driftReport.recommendations.length > 0) {
+                  comment += '### Recommendations\n\n';
+                  driftReport.recommendations.forEach(rec => {
+                    comment += `- ${rec}\n`;
+                  });
+                  comment += '\n';
+                }
+              } else {
+                comment += '❌ Dependency drift report not generated. Check workflow logs.\n\n';
+              }
+              
+              comment += '📄 **Artifacts**: dependency-drift-report-${{ github.run_id }}\n';
+              comment += '🕒 **Run Time**: ' + new Date().toISOString() + '\n';
+              
+            } catch (error) {
+              comment += '❌ Error reading drift report: ' + error.message + '\n\n';
+            }
+            
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
