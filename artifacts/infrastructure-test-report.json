@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-08-22T09:59:47.298Z",
+  "timestamp": "2025-08-22T11:01:54.106Z",
   "summary": {
     "total": 7,
     "passed": 7,
@@ -16,7 +16,7 @@
     {
       "name": "Docker Build Scripts",
       "status": "PASSED",
-      "duration": 7
+      "duration": 6
     },
     {
       "name": "Docker Compose Files",
@@ -31,7 +31,7 @@
     {
       "name": "Kubernetes Manifests",
       "status": "PASSED",
-      "duration": 2
+      "duration": 3
     },
     {
       "name": "Terraform Configuration",
@@ -41,7 +41,7 @@
     {
       "name": "NPM Scripts",
       "status": "PASSED",
-      "duration": 0
+      "duration": 1
     }
   ]
 }

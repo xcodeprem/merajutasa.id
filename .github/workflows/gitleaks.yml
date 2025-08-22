@@ -1,0 +1,16 @@
+name: "Gitleaks"
+on:
+  pull_request:
+    branches: [ "main" ]
+permissions:
+  contents: read
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2 # v2.4.0
+        with:
+          args: detect -v --redact --config=.gitleaks.toml

@@ -1,18 +1,18 @@
 {
-  "timestamp": "2025-08-22T09:59:54.054Z",
+  "timestamp": "2025-08-22T11:02:00.860Z",
   "test_suite": "Week 6 Component Smoke Tests",
   "summary": {
     "total": 6,
     "passed": 6,
     "failed": 0,
     "success_rate": 100,
-    "total_duration": 6547
+    "total_duration": 6545
   },
   "results": [
     {
       "name": "End-to-End Audit Event Flow",
       "status": "PASSED",
-      "duration": 1005
+      "duration": 1004
     },
     {
       "name": "Security Threat Detection Flow",
@@ -32,7 +32,7 @@
     {
       "name": "System Integration Under Load",
       "status": "PASSED",
-      "duration": 2005
+      "duration": 2004
     },
     {
       "name": "Error Recovery Flow",
