@@ -16,12 +16,7 @@ jobs:
     if: ${{ github.event.pull_request.draft == false }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup gh
-        uses: cli/cli-action@v2
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
 
       - name: Read config
         id: cfg
@@ -62,7 +57,7 @@ jobs:
 
       - name: Trigger next assignment
         if: ${{ steps.link.outputs.ISSUE != '' }}
-        uses: benc-uk/workflow-dispatch@v1
+  uses: benc-uk/workflow-dispatch@25938ad20bcf54d63616cf6d7d0a3f114c0b0e4d
         with:
           workflow: Copilot Sub-issue Assigner
           ref: ${{ github.ref_name }}
