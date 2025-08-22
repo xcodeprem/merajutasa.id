@@ -1,15 +1,15 @@
 {
-  "timestamp": "2025-08-19T08:51:41.379Z",
+  "timestamp": "2025-08-21T23:25:02.621Z",
   "phase": "Phase 2 Week 6",
   "title": "Compliance & Security Enhancement",
   "components": {
     "Enterprise Audit System": {
       "file": "infrastructure/compliance/audit-system.js",
       "exists": true,
-      "size": "21.4KB",
-      "sizeBytes": 21962,
+      "size": "24.1KB",
+      "sizeBytes": 24696,
       "expectedSize": "20KB",
-      "sizeScore": 100,
+      "sizeScore": 80,
       "features": [
         "GDPR/SOX/ISO27001/PCI compliance tracking",
         "Immutable audit trails with cryptographic integrity",
@@ -22,22 +22,22 @@
       "loading_test": {
         "loaded": true,
         "functional": true,
-        "test_event_id": "audit_meib1j9q_f40f5f84a6c4",
+        "test_event_id": "audit_mem14dns_8766c9819f85",
         "features_tested": [
           "event_recording",
           "compliance_tagging",
           "integrity_hashing"
         ]
       },
-      "score": 85
+      "score": 81
     },
     "Compliance Automation": {
       "file": "infrastructure/compliance/compliance-automation.js",
       "exists": true,
-      "size": "36KB",
-      "sizeBytes": 36879,
+      "size": "46.5KB",
+      "sizeBytes": 47588,
       "expectedSize": "29KB",
-      "sizeScore": 80,
+      "sizeScore": 60,
       "features": [
         "Automated compliance assessment and scoring",
         "Real-time compliance monitoring and alerting",
@@ -50,7 +50,7 @@
       "loading_test": {
         "loaded": true,
         "functional": true,
-        "assessment_score": 90,
+        "assessment_score": 92,
         "frameworks_tested": [
           "gdpr"
         ],
@@ -60,13 +60,13 @@
           "reporting"
         ]
       },
-      "score": 81
+      "score": 77
     },
     "Security Hardening": {
       "file": "infrastructure/security/enhanced/security-hardening.js",
       "exists": true,
-      "size": "35.6KB",
-      "sizeBytes": 36444,
+      "size": "37.1KB",
+      "sizeBytes": 38027,
       "expectedSize": "29KB",
       "sizeScore": 80,
       "features": [
@@ -94,8 +94,8 @@
     "Privacy Rights Management": {
       "file": "infrastructure/compliance/privacy-rights-management.js",
       "exists": true,
-      "size": "36.8KB",
-      "sizeBytes": 37717,
+      "size": "40.6KB",
+      "sizeBytes": 41614,
       "expectedSize": "34KB",
       "sizeScore": 100,
       "features": [
@@ -110,7 +110,7 @@
       "loading_test": {
         "loaded": true,
         "functional": true,
-        "request_id": "req_1755593501404_48l079azg",
+        "request_id": "req_1755818702646_2n47rf2w0",
         "jurisdictions_tested": [
           "gdpr"
         ],
@@ -125,10 +125,10 @@
     "Compliance Orchestrator": {
       "file": "infrastructure/compliance/compliance-orchestrator.js",
       "exists": true,
-      "size": "27.6KB",
-      "sizeBytes": 28303,
+      "size": "30.5KB",
+      "sizeBytes": 31184,
       "expectedSize": "24KB",
-      "sizeScore": 100,
+      "sizeScore": 80,
       "features": [
         "Unified compliance and security dashboard",
         "Cross-component event correlation",
@@ -149,17 +149,17 @@
           "event_correlation"
         ]
       },
-      "score": 85
+      "score": 81
     }
   },
-  "overallScore": 83,
+  "overallScore": 81,
   "overallStatus": "good",
   "filesSummary": {
     "total_files": 5,
     "files_found": 5,
     "files_missing": 0,
-    "total_size": "157.5KB",
-    "total_size_bytes": 161305
+    "total_size": "178.8KB",
+    "total_size_bytes": 183109
   },
   "integrationTests": {
     "Audit System → Compliance Automation": {

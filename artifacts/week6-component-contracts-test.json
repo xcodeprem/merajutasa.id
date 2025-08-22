@@ -1,12 +1,12 @@
 {
-  "timestamp": "2025-08-21T20:18:29.716Z",
+  "timestamp": "2025-08-21T23:42:36.065Z",
   "test_suite": "Week 6 Component Contract Tests",
   "summary": {
     "total": 7,
     "passed": 7,
     "failed": 0,
     "success_rate": 100,
-    "total_duration": 29
+    "total_duration": 27
   },
   "results": [
     {
@@ -17,7 +17,7 @@
     {
       "name": "Audit System Call Contract",
       "status": "PASSED",
-      "duration": 2
+      "duration": 1
     },
     {
       "name": "Orchestrator Event Handling",
@@ -27,7 +27,7 @@
     {
       "name": "Cross-Component Integration",
       "status": "PASSED",
-      "duration": 1
+      "duration": 0
     },
     {
       "name": "Security Hardening Integration",
@@ -42,7 +42,7 @@
     {
       "name": "Minimal Audit Event Flow",
       "status": "PASSED",
-      "duration": 1
+      "duration": 0
     }
   ],
   "contract_validation": {

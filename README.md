@@ -60,6 +60,7 @@ npm run week6:status         # Compliance & security
 # Start enterprise infrastructure (choose one):
 
 # Option 1: Core governance services
+# For detailed boot sequence, see: docs/runbooks/boot-sequence-local.md
 npm run service:signer &     # Port 4601
 npm run service:chain &      # Port 4602  
 npm run service:collector &  # Port 4603
@@ -81,6 +82,7 @@ npm run ha:system-health
 npm run governance:verify     # Complete governance check
 npm run spec-hash:verify     # Hash integrity verification
 npm run param:integrity      # Parameter consistency check
+npm run post-config:verify   # Post-configuration verification
 
 # Testing & Validation
 npm run test:governance      # Core governance tests
@@ -383,6 +385,7 @@ MerajutASA.id's governance system ensures fairness, transparency, and integrity 
 npm run governance:verify      # Complete governance integrity check
 npm run spec-hash:verify      # Content hash verification  
 npm run param:integrity       # Parameter consistency validation
+npm run post-config:verify    # Post-configuration verification
 npm run evidence:bundle       # Generate governance evidence package
 
 # Fairness & equity

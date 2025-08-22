@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-21T18:56:26.657Z",
+  "generated_utc": "2025-08-22T00:05:37.545Z",
   "old_total": 0,
   "new_total": 0,
   "adoptionPercent": 100,
@@ -147,6 +147,16 @@
     },
     {
       "file": "docs/schemas/README.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/runbooks/boot-sequence-local.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/runbooks/boot-sequence-docker.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -346,6 +356,11 @@
       "newCount": 0
     },
     {
+      "file": "docs/operations/post-config-verification.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
       "file": "docs/operations/integrated-health-checks.md",
       "oldCount": 0,
       "newCount": 0
@@ -466,22 +481,12 @@
       "newCount": 0
     },
     {
+      "file": "docs/implementation/sanity-checks-guide.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
       "file": "docs/implementation/README.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs/gap-analysis/JAWABAN-GAP-ANALYSIS.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs/gap-analysis/GAP-ANALYSIS-SUMMARY.md",
-      "oldCount": 0,
-      "newCount": 0
-    },
-    {
-      "file": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -557,6 +562,21 @@
     },
     {
       "file": "docs/governance/README-decision-log-process.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/gap-analysis/JAWABAN-GAP-ANALYSIS.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/gap-analysis/GAP-ANALYSIS-SUMMARY.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -641,7 +661,17 @@
       "newCount": 0
     },
     {
+      "file": "docs/architecture/interface-mapping-summary.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
       "file": "docs/architecture/dependency-mapping.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/architecture/component-inventory-summary.md",
       "oldCount": 0,
       "newCount": 0
     },
@@ -1013,6 +1043,16 @@
       ]
     },
     {
+      "file": "docs/runbooks/boot-sequence-docker.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 2
+        }
+      ]
+    },
+    {
       "file": "docs/roadmap/roadmap-next-phase-v2.md",
       "suggestions": [
         {
@@ -1328,6 +1368,16 @@
       ]
     },
     {
+      "file": "docs/operations/post-config-verification.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 1
+        }
+      ]
+    },
+    {
       "file": "docs/onboarding/environment-setup.md",
       "suggestions": [
         {
@@ -1538,26 +1588,6 @@
       ]
     },
     {
-      "file": "docs/gap-analysis/JAWABAN-GAP-ANALYSIS.md",
-      "suggestions": [
-        {
-          "old": "user",
-          "new": "pengguna",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "file": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
-      "suggestions": [
-        {
-          "old": "master",
-          "new": "utama",
-          "count": 2
-        }
-      ]
-    },
-    {
       "file": "docs/governance/todo-post-DEC-20250812-02.md",
       "suggestions": [
         {
@@ -1659,6 +1689,26 @@
           "old": "user",
           "new": "pengguna",
           "count": 3
+        }
+      ]
+    },
+    {
+      "file": "docs/gap-analysis/JAWABAN-GAP-ANALYSIS.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
+      "suggestions": [
+        {
+          "old": "master",
+          "new": "utama",
+          "count": 2
         }
       ]
     },

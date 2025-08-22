@@ -1,3 +1,21 @@
 graph LR
-  version
-  components
+  gateway["API Gateway"]
+  auth["Authentication Service"]
+  catalog["Catalog Service"]
+  search["Search Service"]
+  db["Database Service"]
+  gateway --> auth
+  gateway --> catalog
+  auth --> db
+  catalog --> db
+  catalog --> search
+
+  %% Styling
+  classDef service fill:#e1f5fe,stroke:#0277bd,stroke-width:2px
+  classDef database fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+  classDef gateway fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px
+  gateway:::gateway
+  auth:::service
+  catalog:::service
+  search:::service
+  db:::database

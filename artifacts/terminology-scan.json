@@ -6,15 +6,15 @@
   },
   "key_token_frequency": {
     "fairness": 365,
-    "privacy": 424,
-    "hysteresis": 284,
-    "hash": 546,
+    "privacy": 425,
+    "hysteresis": 283,
+    "hash": 561,
     "credential": 199,
-    "governance": 726,
+    "governance": 761,
     "revocation": 110
   },
-  "totalKey": 2654,
-  "banned_terms_detected": 224,
+  "totalKey": 2704,
+  "banned_terms_detected": 229,
   "banned_samples": [
     {
       "file": "docs/contributing.md",
@@ -111,6 +111,26 @@
     {
       "file": "docs/status/gate3-verification-2025-08-17.md",
       "term": "peringkat"
+    },
+    {
+      "file": "docs/runbooks/boot-sequence-local.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/runbooks/boot-sequence-docker.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/runbooks/boot-sequence-docker.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/runbooks/boot-sequence-docker.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/runbooks/boot-sequence-docker.md",
+      "term": "top"
     },
     {
       "file": "docs/roadmap/roadmap-master-v1.md",

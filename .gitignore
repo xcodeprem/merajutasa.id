@@ -53,6 +53,7 @@ artifacts/volatile/
 *.png
 *.svg
 docs/architecture/*.png
-docs/architecture/*.svg
+# Allow dependency-graph.svg for cross-team consumption (but exclude other SVGs)
+!docs/architecture/dependency-graph.svg
 build/deps/*.png
 build/deps/*.svg
