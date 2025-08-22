@@ -136,15 +136,16 @@ npm run k8s:logs                    # Application logs
 
 ### Getting Started
 
-- **[Phase 1 Implementation](docs/phase-1/PHASE-1-IMPLEMENTATION-COMPLETE.md)** - Security, observability, backup (100% complete)
-- **[Phase 2 Implementation Guide](docs/phase-2/PHASE-2-IMPLEMENTATION-GUIDE.md)** - Enterprise scalability roadmap
-- **[Team Setup Guides](docs/team-guides/)** - Step-by-step setup for all infrastructure components
-- **[Quick Reference Cards](docs/quick-reference/)** - Daily operation commands for each system
-
 ### Infrastructure Documentation
 
 - **[Implementation Status](docs/implementation/README.md)** - Complete implementation overview with metrics
 - **[High Availability Guide](docs/phase-2/PHASE-2-WEEK-5-DELIVERY-DOCUMENTATION.md)** - Multi-region deployment and disaster recovery
+- `scripts/project10-team-platform.ps1`: Adds the 'Platform' option to the Team field in your user Project 10 via GraphQL (no gh CLI required). Requires `GH_TOKEN` env var with `project` scope.
+- `scripts/project10-set-team.ps1`: Sets Team for selected issues in Project 10. Example (PowerShell):
+ 	- `$env:GH_TOKEN = 'ghp_xxx'`
+ 	- `pwsh -NoProfile -ExecutionPolicy Bypass -File scripts/project10-team-platform.ps1`
+ 	- `pwsh -NoProfile -ExecutionPolicy Bypass -File scripts/project10-set-team.ps1 -Issues 210,211 -TeamOption 'Platform'`
+
 - **[Compliance & Security](docs/phase-2/PHASE-2-WEEK-6-DELIVERY-DOCUMENTATION.md)** - Enterprise compliance automation and security hardening
 - **[API Documentation](docs/api/README.md)** - Service integration guide  
 
