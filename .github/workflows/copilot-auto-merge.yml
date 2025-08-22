@@ -5,6 +5,10 @@ on:
     types: [opened, ready_for_review, synchronize, reopened]
   workflow_dispatch: {}
 
+concurrency:
+  group: copilot-auto-merge-${{ github.ref }}
+  cancel-in-progress: false
+
 permissions:
   contents: write
   pull-requests: write

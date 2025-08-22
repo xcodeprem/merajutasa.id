@@ -5,6 +5,10 @@ on:
     - cron: '*/20 * * * *'
   workflow_dispatch: {}
 
+concurrency:
+  group: copilot-assigner-singleton
+  cancel-in-progress: false
+
 permissions:
   contents: read
   issues: write
@@ -28,30 +32,78 @@ jobs:
           echo "ASSIGNEE=$(jq -r '.assignee' .github/copilot-orchestrator.json)" >> $GITHUB_OUTPUT
           echo "LABEL_INPROG=$(jq -r '.labels.inProgress' .github/copilot-orchestrator.json)" >> $GITHUB_OUTPUT
           echo "LABEL_DONE=$(jq -r '.labels.done' .github/copilot-orchestrator.json)" >> $GITHUB_OUTPUT
+          echo "SEQ_MODE=$(jq -r '.sequence.mode // ""' .github/copilot-orchestrator.json)" >> $GITHUB_OUTPUT
+          echo "EPIC_NUM=$(jq -r '.sequence.epic // ""' .github/copilot-orchestrator.json)" >> $GITHUB_OUTPUT
+          echo "ORDER=$(jq -c '.sequence.order // []' .github/copilot-orchestrator.json)" >> $GITHUB_OUTPUT
 
-      - name: Find in-progress issues
+      - name: Find in-progress issues (scoped to order/epic if configured)
         id: inprog
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # find any open issues with the in-progress label
-          gh issue list --label "${{ steps.cfg.outputs.LABEL_INPROG }}" --state open --json number | tee inprog.json
-          echo "COUNT=$(jq 'length' inprog.json)" >> $GITHUB_OUTPUT
+          if [ "${{ steps.cfg.outputs.SEQ_MODE }}" = "explicit" ] && [ "${{ steps.cfg.outputs.ORDER }}" != "[]" ]; then
+            printf "%s" '${{ steps.cfg.outputs.ORDER }}' | jq -r '.[]' > order.txt
+            gh issue list --label "${{ steps.cfg.outputs.LABEL_INPROG }}" --state open --json number | jq -r '.[].number' > inprog_all.txt
+            COUNT=$(grep -Fx -f order.txt inprog_all.txt | wc -l | tr -d '[:space:]')
+            echo "COUNT=$COUNT" >> $GITHUB_OUTPUT
+          elif [ "${{ steps.cfg.outputs.SEQ_MODE }}" = "epic-body" ] && [ -n "${{ steps.cfg.outputs.EPIC_NUM }}" ]; then
+            # Build the ordered list of issue numbers from the epic body
+            gh api repos/${GITHUB_REPOSITORY}/issues/${{ steps.cfg.outputs.EPIC_NUM }} --jq '.body' > epic.md
+            awk 'match($0, /#([0-9]+)/, m){print m[1]}' epic.md | awk '!seen[$0]++' > order.txt || true
+            gh issue list --label "${{ steps.cfg.outputs.LABEL_INPROG }}" --state open --json number | jq -r '.[].number' > inprog_all.txt
+            COUNT=$(grep -Fx -f order.txt inprog_all.txt | wc -l | tr -d '[:space:]')
+            echo "COUNT=$COUNT" >> $GITHUB_OUTPUT
+          else
+            gh issue list --label "${{ steps.cfg.outputs.LABEL_INPROG }}" --state open --json number | tee inprog.json
+            echo "COUNT=$(jq 'length' inprog.json)" >> $GITHUB_OUTPUT
+          fi
 
       - name: Exit if something in progress
         if: ${{ steps.inprog.outputs.COUNT != '0' }}
         run: |
           echo "An issue is already in progress; skipping assignment."
 
-      - name: Find next unassigned open sub-issue
+      - name: Find next unassigned open sub-issue (top-down)
         if: ${{ steps.inprog.outputs.COUNT == '0' }}
         id: next
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Heuristic: any open issue without in-progress/done labels and not assigned
-          gh issue list --state open --json number,title,labels,assignees | jq '[.[] | select((.assignees|length)==0) | select((.labels|map(.name)|index("'${{ steps.cfg.outputs.LABEL_INPROG }}'"))|not) | select((.labels|map(.name)|index("'${{ steps.cfg.outputs.LABEL_DONE }}'"))|not)] | sort_by(.number) | .[0] // {}' | tee next.json
-          echo "NUM=$(jq -r '.number // ""' next.json)" >> $GITHUB_OUTPUT
+          if [ "${{ steps.cfg.outputs.SEQ_MODE }}" = "explicit" ] && [ "${{ steps.cfg.outputs.ORDER }}" != "[]" ]; then
+            printf "%s" '${{ steps.cfg.outputs.ORDER }}' | jq -r '.[]' > order.txt
+            : > next.json
+            while read n; do
+              [ -z "$n" ] && continue
+              gh issue view "$n" --json number,state,isPullRequest,assignees,labels 2>/dev/null \
+                | jq 'select(.isPullRequest==false and .state=="OPEN" and (.assignees|length)==0 and ((.labels|map(.name)|index("'${{ steps.cfg.outputs.LABEL_INPROG }}'"))|not) and ((.labels|map(.name)|index("'${{ steps.cfg.outputs.LABEL_DONE }}'"))|not))' \
+                > cand.json || true
+              if [ -s cand.json ]; then
+                cp cand.json next.json
+                break
+              fi
+            done < order.txt
+            echo "NUM=$(jq -r '.number // ""' next.json 2>/dev/null)" >> $GITHUB_OUTPUT
+          elif [ "${{ steps.cfg.outputs.SEQ_MODE }}" = "epic-body" ] && [ -n "${{ steps.cfg.outputs.EPIC_NUM }}" ]; then
+            gh api repos/${GITHUB_REPOSITORY}/issues/${{ steps.cfg.outputs.EPIC_NUM }} --jq '.body' > epic.md
+            awk 'match($0, /#([0-9]+)/, m){print m[1]}' epic.md | awk '!seen[$0]++' > order.txt || true
+            : > next.json
+            while read n; do
+              [ -z "$n" ] && continue
+              [ "$n" = "${{ steps.cfg.outputs.EPIC_NUM }}" ] && continue
+              gh issue view "$n" --json number,state,isPullRequest,assignees,labels 2>/dev/null \
+                | jq 'select(.isPullRequest==false and .state=="OPEN" and (.assignees|length)==0 and ((.labels|map(.name)|index("'${{ steps.cfg.outputs.LABEL_INPROG }}'"))|not) and ((.labels|map(.name)|index("'${{ steps.cfg.outputs.LABEL_DONE }}'"))|not))' \
+                > cand.json || true
+              if [ -s cand.json ]; then
+                cp cand.json next.json
+                break
+              fi
+            done < order.txt
+            echo "NUM=$(jq -r '.number // ""' next.json 2>/dev/null)" >> $GITHUB_OUTPUT
+          else
+            # Fallback: numeric order across all issues
+            gh issue list --state open --json number,title,labels,assignees | jq '[.[] | select((.assignees|length)==0) | select((.labels|map(.name)|index("'${{ steps.cfg.outputs.LABEL_INPROG }}'"))|not) | select((.labels|map(.name)|index("'${{ steps.cfg.outputs.LABEL_DONE }}'"))|not)] | sort_by(.number) | .[0] // {}' | tee next.json
+            echo "NUM=$(jq -r '.number // ""' next.json)" >> $GITHUB_OUTPUT
+          fi
 
       - name: Assign to Copilot and mark in-progress
         if: ${{ steps.next.outputs.NUM != '' }}
