@@ -33,6 +33,7 @@ Follow these steps in order. **Each step captures evidence artifacts for complia
 Validate the API Gateway system and service mesh integration.
 
 **1.1 API Gateway Status**
+
 ```bash
 # Check API Gateway orchestrator status
 npm run api-gateway:status
@@ -42,6 +43,7 @@ npm run api-gateway:status
 **Evidence captured:** System status with uptime and metrics
 
 **1.2 Service Mesh Health**
+
 ```bash
 # Check service mesh health and topology
 npm run service-mesh:health
@@ -51,7 +53,8 @@ npm run service-mesh:health
 **Evidence captured:** Service topology and circuit breaker status
 
 **Success criteria for Step 1:**
-- [ ] API Gateway orchestrator status: "healthy" 
+
+- [ ] API Gateway orchestrator status: "healthy"
 - [ ] Service mesh status: "healthy"
 - [ ] All circuit breakers operational
 - [ ] No critical errors in component logs
@@ -63,6 +66,7 @@ npm run service-mesh:health
 Validate monitoring, metrics, and alerting systems.
 
 **2.1 Observability System Startup**
+
 ```bash
 # Initialize observability system
 timeout 30s npm run observability:start || echo "Observability started in background"
@@ -72,6 +76,7 @@ timeout 30s npm run observability:start || echo "Observability started in backgr
 **Evidence captured:** Component status and health metrics
 
 **2.2 Metrics Collection Health**
+
 ```bash
 # Check advanced metrics collector
 npm run metrics:start
@@ -81,6 +86,7 @@ npm run metrics:start
 **Evidence captured:** Metrics count and collection status
 
 **2.3 Performance Monitoring**
+
 ```bash
 # Start performance monitoring
 timeout 30s npm run performance:monitor || echo "Performance monitoring started"
@@ -90,6 +96,7 @@ timeout 30s npm run performance:monitor || echo "Performance monitoring started"
 **Evidence captured:** Monitoring configuration and baseline metrics
 
 **2.4 SLA Monitoring Status**
+
 ```bash
 # Check SLA status for all services
 npm run sla:status
@@ -99,6 +106,7 @@ npm run sla:status
 **Evidence captured:** SLA compliance status for all services
 
 **Success criteria for Step 2:**
+
 - [ ] Observability system components initialized
 - [ ] Metrics collector status: "healthy"
 - [ ] Performance monitoring active
@@ -112,6 +120,7 @@ npm run sla:status
 Validate security scanning and threat detection systems.
 
 **3.1 Security Hardening Scan**
+
 ```bash
 # Run comprehensive security scan
 npm run security:scan
@@ -121,6 +130,7 @@ npm run security:scan
 **Evidence captured:** Security scan results and vulnerability report
 
 **3.2 Compliance Audit**
+
 ```bash
 # Execute compliance audit
 npm run compliance:audit
@@ -130,6 +140,7 @@ npm run compliance:audit
 **Evidence captured:** Audit events and compliance assessment
 
 **Success criteria for Step 3:**
+
 - [ ] Security scan score ≥75/100
 - [ ] Compliance audit completes without critical violations
 - [ ] Audit events properly logged
@@ -142,6 +153,7 @@ npm run compliance:audit
 Validate HA orchestrator and system resilience.
 
 **4.1 HA Orchestrator Initialization**
+
 ```bash
 # Start HA orchestrator
 timeout 30s npm run ha:orchestrator-start || echo "HA Orchestrator initialized"
@@ -151,6 +163,7 @@ timeout 30s npm run ha:orchestrator-start || echo "HA Orchestrator initialized"
 **Evidence captured:** HA system configuration and status
 
 **4.2 System Health Assessment**
+
 ```bash
 # Check overall system health
 npm run ha:system-health
@@ -160,6 +173,7 @@ npm run ha:system-health
 **Evidence captured:** Component health matrix and alert status
 
 **4.3 Performance Health Check**
+
 ```bash
 # Validate performance subsystems
 npm run performance:health-check
@@ -169,6 +183,7 @@ npm run performance:health-check
 **Evidence captured:** Performance component health status
 
 **Success criteria for Step 4:**
+
 - [ ] HA orchestrator status: "healthy"
 - [ ] System health percentage ≥90%
 - [ ] Performance subsystems operational
@@ -181,6 +196,7 @@ npm run performance:health-check
 Consolidate validation evidence and generate compliance report.
 
 **5.1 Create Validation Evidence Bundle**
+
 ```bash
 # Generate timestamped evidence bundle
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
@@ -195,6 +211,7 @@ npm run sla:status > artifacts/logs/validation/sla-status-$TIMESTAMP.json
 ```
 
 **5.2 Generate Validation Summary**
+
 ```bash
 # Create comprehensive validation report
 cat > artifacts/logs/validation/validation-summary-$TIMESTAMP.json << EOF
@@ -225,6 +242,7 @@ EOF
 ```
 
 **Success criteria for Step 5:**
+
 - [ ] All evidence artifacts created successfully
 - [ ] Validation summary generated
 - [ ] No missing validation steps
@@ -250,6 +268,7 @@ The validation playbook is successful when:
 The following artifacts are generated during validation:
 
 ### Core Evidence Files
+
 - `artifacts/logs/validation/validation-evidence-{timestamp}.md` - Evidence documentation
 - `artifacts/logs/validation/validation-summary-{timestamp}.json` - Validation summary
 - `artifacts/logs/validation/api-gateway-status-{timestamp}.json` - API Gateway status
@@ -258,6 +277,7 @@ The following artifacts are generated during validation:
 - `artifacts/logs/validation/sla-status-{timestamp}.json` - SLA monitoring status
 
 ### System-Generated Artifacts
+
 - `artifacts/security/scans/` - Security scan reports
 - `artifacts/audit/` - Compliance audit logs
 - `artifacts/performance-monitoring/` - Performance metrics

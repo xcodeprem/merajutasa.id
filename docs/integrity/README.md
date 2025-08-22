@@ -12,15 +12,18 @@ Trust primitives, verification systems, and credential schemas for MerajutASA.id
 ## Core Components
 
 ### Verification & Validation
+
 - **[CLI Verification Guide](verify-cli-doc-draft.md)** - Manual verification steps
 - **[API Verification Docs](api-verification-docs.md)** - API verification endpoints
 - **[Gating Policy v1.0](gating-policy-v1.json)** - Policy enforcement configuration
 
 ### Evidence & Audit
+
 - **[Evidence Minimum Phase 1.5](evidence-minimum-phase1.5-v1.md)** - Minimum evidence requirements
 - **[Hash Excerpt Module](hash-excerpt-module.md)** - Hash metadata extraction
 
 ### Policy Enforcement
+
 - **[Gating Policy Annotations](gating-policy-annotations.md)** - Policy configuration documentation
 
 ---

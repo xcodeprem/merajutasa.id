@@ -49,6 +49,7 @@ npm run k8s:deploy
 ```
 
 **Expected output:**
+
 ```
 configmap/merajutasa-config created
 deployment.apps/merajutasa-signer created
@@ -77,6 +78,7 @@ npm run k8s:status
 ```
 
 **Expected healthy output:**
+
 ```
 NAME                                                    READY   STATUS    RESTARTS   AGE
 pod/merajutasa-signer-[hash]-[hash]                    1/1     Running   0          2m
@@ -122,6 +124,7 @@ npm run k8s:logs
 ```
 
 **Expected healthy log patterns:**
+
 ```
 merajutasa-signer-xxx: [signer] listening on 0.0.0.0:4601
 merajutasa-signer-xxx: [signer] health check endpoint ready
@@ -225,17 +228,20 @@ Infrastructure Services (Tier 2):
 The following health probes are configured across all services:
 
 #### Startup Probes
+
 - **Purpose**: Ensure containers start successfully before other probes begin
 - **Timing**: 10s initial delay, 10s intervals, 30 failure threshold (5 minutes max)
 - **Endpoint**: `GET /health` on service port
 
 #### Liveness Probes  
+
 - **Purpose**: Detect and restart unhealthy containers
 - **Timing**: 30s initial delay, 10s intervals, 3 failure threshold
 - **Endpoint**: `GET /health` on service port
 - **Action**: Container restart on failure
 
 #### Readiness Probes
+
 - **Purpose**: Control traffic routing to healthy pods
 - **Timing**: 5s initial delay, 5s intervals, 3 failure threshold  
 - **Endpoint**: `GET /health` on service port
@@ -314,10 +320,12 @@ kubectl scale deployment merajutasa-signer --replicas=5
 #### 1. Pods Stuck in Pending State
 
 **Symptoms:**
+
 - Pods show `Pending` status
 - `kubectl describe pod` shows scheduling failures
 
 **Diagnostic Commands:**
+
 ```bash
 kubectl describe pods -l app.kubernetes.io/part-of=merajutasa
 kubectl get nodes -o wide
@@ -325,6 +333,7 @@ kubectl top nodes
 ```
 
 **Solutions:**
+
 - **Insufficient Resources**: Scale up cluster or reduce resource requests
 - **Node Selector Issues**: Check node labels and selectors
 - **Volume Mounting Problems**: Verify persistent volume availability
@@ -333,10 +342,12 @@ kubectl top nodes
 #### 2. Pods Crashing (CrashLoopBackOff)
 
 **Symptoms:**
+
 - Pods show `CrashLoopBackOff` status
 - High restart count
 
 **Diagnostic Commands:**
+
 ```bash
 kubectl logs <pod-name> --previous
 kubectl describe pod <pod-name>
@@ -344,6 +355,7 @@ kubectl get events --field-selector involvedObject.name=<pod-name>
 ```
 
 **Solutions:**
+
 - **Configuration Issues**: Check ConfigMap values and environment variables
 - **Health Check Failures**: Verify health endpoints are accessible
 - **Resource Limits**: Increase memory/CPU limits if needed
@@ -352,10 +364,12 @@ kubectl get events --field-selector involvedObject.name=<pod-name>
 #### 3. Services Not Accessible
 
 **Symptoms:**
+
 - Service endpoints not reachable
 - Connection timeouts
 
 **Diagnostic Commands:**
+
 ```bash
 kubectl get services -l app.kubernetes.io/part-of=merajutasa
 kubectl get endpoints -l app.kubernetes.io/part-of=merajutasa
@@ -363,6 +377,7 @@ kubectl describe service <service-name>
 ```
 
 **Solutions:**
+
 - **Pod Readiness**: Ensure pods pass readiness probes
 - **Network Policies**: Verify network policies allow traffic
 - **Service Selectors**: Check service selector labels match pod labels
@@ -371,16 +386,19 @@ kubectl describe service <service-name>
 #### 4. Health Probe Failures
 
 **Symptoms:**
+
 - Pods not becoming ready
 - Frequent restarts due to liveness failures
 
 **Diagnostic Commands:**
+
 ```bash
 kubectl describe pod <pod-name> | grep -A 10 "Conditions:"
 kubectl logs <pod-name> | grep health
 ```
 
 **Solutions:**
+
 - **Probe Configuration**: Adjust timing and thresholds
 - **Application Startup Time**: Increase initial delay for startup probes
 - **Health Endpoint Issues**: Verify health endpoint implementation
@@ -389,15 +407,18 @@ kubectl logs <pod-name> | grep health
 #### 5. Image Pull Errors
 
 **Symptoms:**
+
 - `ImagePullBackOff` or `ErrImagePull` status
 - Cannot pull container images
 
 **Diagnostic Commands:**
+
 ```bash
 kubectl describe pod <pod-name> | grep -A 5 "Events:"
 ```
 
 **Solutions:**
+
 - **Registry Access**: Verify registry credentials and network access
 - **Image Tags**: Ensure image tags exist and are correctly specified
 - **Pull Policy**: Check imagePullPolicy settings

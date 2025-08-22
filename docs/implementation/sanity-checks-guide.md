@@ -5,11 +5,13 @@ This document describes the implementation of systematic phase tracking and SLA 
 ## Quick Start
 
 Run comprehensive sanity checks:
+
 ```bash
 npm run sanity:check
 ```
 
 Run individual status checks:
+
 ```bash
 npm run phase1:status    # Phase 1 implementation status
 npm run week6:status     # Week 6 compliance & security status  

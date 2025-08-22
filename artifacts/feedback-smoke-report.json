@@ -1,11 +1,11 @@
 {
   "_metadata": {
     "actor": "copilot-swe-agent[bot]",
-    "generated_at": "2025-08-22T10:17:09.444Z",
+    "generated_at": "2025-08-22T10:27:16.292Z",
     "generator": "feedback-smoke.js",
-    "git_ref": "refs/heads/copilot/fix-170",
-    "git_sha": "45942cd89099a5a9adebacc6b6e20275c2c558ee",
-    "run_id": "17152366844",
+    "git_ref": "refs/heads/copilot/fix-75",
+    "git_sha": "68dbb29cba3aac6ca8e5bb30f9a1749c2e5b94bf",
+    "run_id": "17152692756",
     "version": "1.0"
   },
   "results": [
@@ -13,14 +13,14 @@
       "pii_categories": [
         "CONTACT_EMAIL"
       ],
-      "record_id": "139156f6-30c2-49cf-ae41-99a7f420c76b",
+      "record_id": "f2051962-5ab5-4517-8c90-446d98fddd3e",
       "status": "OK"
     },
     {
       "pii_categories": [
         "CONTACT_PHONE"
       ],
-      "record_id": "3bd98cdc-77f3-4d49-8b7a-25a176a693fb",
+      "record_id": "204dd7ac-0c50-487c-8884-1780ee49e46e",
       "status": "OK"
     },
     {

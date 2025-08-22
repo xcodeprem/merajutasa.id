@@ -144,9 +144,9 @@ npm run k8s:logs                    # Application logs
 - **[High Availability Guide](docs/phase-2/PHASE-2-WEEK-5-DELIVERY-DOCUMENTATION.md)** - Multi-region deployment and disaster recovery
 - `scripts/project10-team-platform.ps1`: Adds the 'Platform' option to the Team field in your user Project 10 via GraphQL (no gh CLI required). Requires `GH_TOKEN` env var with `project` scope.
 - `scripts/project10-set-team.ps1`: Sets Team for selected issues in Project 10. Example (PowerShell):
- 	- `$env:GH_TOKEN = 'ghp_xxx'`
- 	- `pwsh -NoProfile -ExecutionPolicy Bypass -File scripts/project10-team-platform.ps1`
- 	- `pwsh -NoProfile -ExecutionPolicy Bypass -File scripts/project10-set-team.ps1 -Issues 210,211 -TeamOption 'Platform'`
+  - `$env:GH_TOKEN = 'ghp_xxx'`
+  - `pwsh -NoProfile -ExecutionPolicy Bypass -File scripts/project10-team-platform.ps1`
+  - `pwsh -NoProfile -ExecutionPolicy Bypass -File scripts/project10-set-team.ps1 -Issues 210,211 -TeamOption 'Platform'`
 
 - **[Compliance & Security](docs/phase-2/PHASE-2-WEEK-6-DELIVERY-DOCUMENTATION.md)** - Enterprise compliance automation and security hardening
 - **[API Documentation](docs/api/README.md)** - Service integration guide  

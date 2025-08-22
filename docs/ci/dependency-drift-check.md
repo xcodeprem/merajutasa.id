@@ -18,20 +18,24 @@ The Dependency Drift Check workflow provides automated CI guardrails to detect:
 ## What It Checks
 
 ### 1. Governance Verification
+
 - Runs `npm run governance:verify` to check core integrity
 - Validates spec hashes, parameter integrity, and policy compliance
 
 ### 2. Dependency Analysis
+
 - Compares `docs/architecture/dependencies.json` against actual component health
 - Identifies components documented but not found in health checks
 - Flags undocumented components appearing in health monitoring
 
 ### 3. Boot Sequence Validation
+
 - Parses `docs/onboarding/startup-dependencies-guide.md` for documented phases
 - Validates each phase against actual system state
 - Checks phase prerequisites and component availability
 
 ### 4. Service Health Checks
+
 - **Service Mesh**: Connectivity and health status
 - **SLA Monitoring**: Service level agreement compliance
 - **Infrastructure Health**: Component availability and status
@@ -39,12 +43,15 @@ The Dependency Drift Check workflow provides automated CI guardrails to detect:
 ## Outputs
 
 ### Reports Generated
+
 - `dependency-drift-report.json` - Comprehensive drift analysis
 - `boot-sequence-validation.json` - Boot sequence validation results
 - `dependency-drift-summary.json` - Quick summary for CI decisions
 
 ### PR Comments
+
 For pull requests, the workflow automatically comments with:
+
 - Critical drift issue count
 - Documentation sync status
 - Boot sequence validation results
@@ -53,18 +60,21 @@ For pull requests, the workflow automatically comments with:
 
 ## Success Criteria
 
-### Passes When:
+### Passes When
+
 - No critical dependency drift detected
 - Boot sequence validates successfully
 - Service mesh health is acceptable
 - Documentation sync issues are minor
 
-### Fails When:
+### Fails When
+
 - Critical dependency drift found (mismatched critical components)
 - Governance verification has critical failures
 - Boot sequence validation fails
 
-### Warnings When:
+### Warnings When
+
 - Documentation sync issues (non-critical)
 - Service health checks timeout (expected in CI)
 - Boot sequence has warnings
@@ -72,6 +82,7 @@ For pull requests, the workflow automatically comments with:
 ## Usage
 
 ### Local Testing
+
 ```bash
 # Test complete dependency drift flow
 npm run ci:dependency-drift
@@ -82,7 +93,9 @@ npm run boot:sequence:validate
 ```
 
 ### CI Integration
+
 The workflow runs automatically but can be triggered manually:
+
 ```bash
 # Via GitHub CLI
 gh workflow run dependency-drift-check.yml
@@ -94,6 +107,7 @@ gh workflow run dependency-drift-check.yml -f include_health_checks=true
 ## Configuration
 
 ### File Paths Monitored
+
 - `docs/architecture/dependencies.json`
 - `docs/onboarding/startup-dependencies-guide.md`
 - `docs/runbooks/boot-sequence-*.md`
@@ -101,6 +115,7 @@ gh workflow run dependency-drift-check.yml -f include_health_checks=true
 - `config/component-registry.json`
 
 ### Timeout Settings
+
 - Overall workflow: 15 minutes
 - Health checks: 30 seconds (expected to timeout in CI)
 
@@ -121,6 +136,7 @@ gh workflow run dependency-drift-check.yml -f include_health_checks=true
    - Run workflow manually with services running for full validation
 
 ### Debug Commands
+
 ```bash
 # Check current dependency state
 npm run deps:matrix

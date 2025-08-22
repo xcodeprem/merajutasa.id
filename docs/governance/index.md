@@ -79,14 +79,17 @@ Last Updated: 2025-08-21
 ## 🔗 Cross-Domain References
 
 ### Integrity & Credentials
+
 - [Integrity Spec Hash Manifest v1](../integrity/spec-hash-manifest-v1.json) - Manifest integritas dokumen governance
 - [Credential Schema Final v1](../integrity/credential-schema-final-v1.md) - Skema kredensial dan validasi
 
 ### Fairness & Analytics  
+
 - [Hysteresis Configuration v1](../fairness/hysteresis-config-v1.yml) - Konfigurasi sistem fairness hysteresis
 - [Event Schema Canonical v1](../analytics/event-schema-canonical-v1.md) - Skema event analytics
 
 ### Privacy & Compliance
+
 - [PII Pattern Library v1](../privacy/pii-pattern-library-v1.md) - Library pattern deteksi PII
 - [Principles GP1-GP10 Index](../principles/GP1-GP10-index.md) - Indeks prinsip governance
 
@@ -95,13 +98,15 @@ Last Updated: 2025-08-21
 ## 📊 Governance Metrics & Status
 
 ### Decision Classification (CIC)
+
 - **CIC-A**: Core Infrastructure Critical - Aktivasi sistem kritikal
-- **CIC-B**: Baseline & Thresholds - Parameter dan ambang batas 
+- **CIC-B**: Baseline & Thresholds - Parameter dan ambang batas
 - **CIC-C**: Configuration & Controls - Konfigurasi dan kontrol operasional
 - **CIC-D**: Debt & Deferred - Register utang teknis dan kontrol tertunda
 - **CIC-E**: Engine & Execution - Mesin eksekusi dan implementasi
 
 ### Implementation Status
+
 - **Active Decisions**: 11 adopted DECs governing current operations
 - **Pending Implementation**: 7 draft/pending DECs awaiting activation
 - **Process Documentation**: 3 style guides governing DEC authoring
@@ -111,6 +116,7 @@ Last Updated: 2025-08-21
 ## 🔍 Quick Navigation
 
 ### By Topic Area
+
 - **Fairness & Hysteresis**: DEC-20250812-02, DEC-20250815-02
 - **Security & Integrity**: DEC-20250812-03, DEC-20250813-02, DEC-20250816-01
 - **Compliance & Disclaimers**: DEC-20250813-03, DEC-20250813-04
@@ -118,6 +124,7 @@ Last Updated: 2025-08-21
 - **Technical Debt**: DEC-20250813-01
 
 ### By Implementation Phase
+
 - **Phase 1 (Current)**: DEC-20250812-02, DEC-20250812-03, DEC-20250812-04
 - **Phase 2 (Upcoming)**: DEC-20250813-03, DEC-20250813-02
 - **Ongoing**: Editorial and maintenance DECs

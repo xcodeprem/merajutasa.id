@@ -48,6 +48,7 @@ npm run docker:deploy-dev
 ```
 
 **Expected output:**
+
 ```
 [INFO] Starting MerajutASA.id deployment
 [INFO] Environment: development
@@ -84,6 +85,7 @@ npm run docker:status
 ```
 
 **Expected output:**
+
 ```
 [INFO] Service status:
 NAME                               IMAGE                        COMMAND             SERVICE        CREATED         STATUS                    PORTS
@@ -102,6 +104,7 @@ npm run docker:health-check
 ```
 
 **Expected output:**
+
 ```
 [INFO] Starting comprehensive health check for MerajutASA.id
 [INFO] Environment: development
@@ -143,6 +146,7 @@ npm run docker:deploy-prod
 ```
 
 **Expected output:**
+
 ```
 [INFO] Starting MerajutASA.id deployment
 [INFO] Environment: production
@@ -188,6 +192,7 @@ The services start in the following dependency order:
 Use this checklist to verify successful deployment:
 
 ### Core Services Health
+
 - [ ] **Signer Service** (Port 4601)
   - [ ] Container status: `healthy`
   - [ ] HTTP endpoint: `GET /health` returns 200
@@ -208,6 +213,7 @@ Use this checklist to verify successful deployment:
   - [ ] Log shows: `[collector] listening on 0.0.0.0:4603`
 
 ### Infrastructure Services Health
+
 - [ ] **Monitoring Service** (Port 4604)
   - [ ] Container status: `healthy`
   - [ ] Metrics endpoint: `GET /metrics` returns Prometheus format
@@ -224,6 +230,7 @@ Use this checklist to verify successful deployment:
   - [ ] Appendonly file being written
 
 ### Network & Integration Health
+
 - [ ] **Internal Networking**
   - [ ] All containers on `merajutasa-network`
   - [ ] Services can communicate via container names
@@ -237,6 +244,7 @@ Use this checklist to verify successful deployment:
 ## Service Management Commands
 
 ### Basic Operations
+
 ```bash
 # Deploy development stack
 npm run docker:deploy-dev
@@ -261,6 +269,7 @@ npm run docker:stop
 ```
 
 ### Advanced Operations
+
 ```bash
 # Build all container images
 npm run docker:build-all
@@ -301,6 +310,7 @@ The Docker boot sequence is successful when:
 #### Container Health Check Failures
 
 **Issue:** Container shows `unhealthy` status
+
 ```bash
 # Check container logs for errors
 docker logs <container-name> --tail 50
@@ -315,6 +325,7 @@ docker restart <container-name>
 #### Port Conflicts
 
 **Issue:** `Error: bind: address already in use`
+
 ```bash
 # Find process using the port
 netstat -tlnp | grep :<port>
@@ -331,6 +342,7 @@ SIGNER_PORT=4701 npm run docker:deploy-dev
 #### Image Build Failures
 
 **Issue:** Docker build fails during deployment
+
 ```bash
 # Rebuild all images manually
 npm run docker:build-all
@@ -343,6 +355,7 @@ npm run docker:build-all
 #### Service Communication Issues
 
 **Issue:** Services cannot communicate with each other
+
 ```bash
 # Check network configuration
 docker network ls
@@ -355,6 +368,7 @@ docker exec -it merajutasa-signer-dev ping merajutasa-chain-dev
 #### Resource Exhaustion
 
 **Issue:** Containers failing to start due to insufficient resources
+
 ```bash
 # Check system resources
 docker system df
@@ -370,6 +384,7 @@ docker system prune -a --volumes
 ### Emergency Procedures
 
 #### Complete Stack Reset
+
 ```bash
 # Stop and remove all containers
 npm run docker:stop
@@ -382,6 +397,7 @@ npm run docker:deploy-dev
 ```
 
 #### Service-Specific Recovery
+
 ```bash
 # Restart individual service
 docker restart merajutasa-<service>-dev
@@ -393,6 +409,7 @@ docker-compose -f infrastructure/docker/compose/docker-compose.yml up -d --build
 ## Performance Monitoring
 
 ### Resource Usage Monitoring
+
 ```bash
 # Real-time container statistics
 docker stats
@@ -405,6 +422,7 @@ watch docker ps --format "table {{.Names}}\t{{.Status}}"
 ```
 
 ### Log Monitoring
+
 ```bash
 # Follow logs for all services
 npm run docker:logs
@@ -428,6 +446,7 @@ docker logs merajutasa-chain-dev 2>&1 | grep -i error
 ## Maintenance
 
 ### Regular Maintenance Tasks
+
 ```bash
 # Update container images
 docker-compose pull
@@ -441,6 +460,7 @@ docker run --rm -v merajutasa_chain_data:/data -v $(pwd):/backup alpine tar czf 
 ```
 
 ### Log Rotation
+
 ```bash
 # Configure Docker log rotation in daemon.json
 {

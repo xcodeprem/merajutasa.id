@@ -41,7 +41,6 @@ This report maps interface relationships between components based on API documen
 
 ## Components Summary
 
-
 ### Signer Service
 
 - **Service Type:** signer
@@ -55,9 +54,9 @@ This report maps interface relationships between components based on API documen
 **Downstream Clients:** api-gateway, chain, collector
 
 **API Endpoints:**
+
 - `GET /api/v1/signer/pubkey` - Get signer public key
 - `POST /api/v1/signer/sign` - Sign a payload
-
 
 ### Chain Service
 
@@ -72,9 +71,9 @@ This report maps interface relationships between components based on API documen
 **Downstream Clients:** api-gateway, collector, governance-tools
 
 **API Endpoints:**
+
 - `POST /api/v1/chain/append` - Append to integrity chain
 - `GET /api/v1/chain/head` - Get chain head
-
 
 ### Event Collector Service
 
@@ -89,8 +88,8 @@ This report maps interface relationships between components based on API documen
 **Downstream Clients:** analytics, api-gateway, reporting
 
 **API Endpoints:**
-- `POST /api/v1/collector/ingest` - Ingest event data
 
+- `POST /api/v1/collector/ingest` - Ingest event data
 
 ### Management & Health Service
 
@@ -105,10 +104,10 @@ This report maps interface relationships between components based on API documen
 **Downstream Clients:** alerting, api-gateway, dashboard, monitoring
 
 **API Endpoints:**
+
 - `GET /health` - Gateway health check
 - `GET /metrics` - Gateway metrics
 - `GET /services` - List available services
-
 
 ## ✅ No Conflicts Detected
 
@@ -127,6 +126,7 @@ This report maps interface relationships between components based on API documen
 ## Usage
 
 This interface mapping supports:
+
 - API dependency analysis
 - Service integration planning  
 - Endpoint conflict detection

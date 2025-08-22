@@ -46,11 +46,13 @@ npm run service:signer
 ```
 
 **Expected output:**
+
 ```
 [signer] listening on 0.0.0.0:4601
 ```
 
 **Health check:**
+
 ```bash
 # In a new terminal
 curl http://localhost:4601/pubkey
@@ -70,11 +72,13 @@ npm run service:chain
 ```
 
 **Expected output:**
+
 ```
 [chain] listening on 0.0.0.0:4602
 ```
 
 **Health check:**
+
 ```bash
 curl http://localhost:4602/health
 ```
@@ -93,11 +97,13 @@ npm run service:collector
 ```
 
 **Expected output:**
+
 ```
 [collector] listening on 0.0.0.0:4603
 ```
 
 **Health check:**
+
 ```bash
 curl http://localhost:4603/health
 ```
@@ -127,6 +133,7 @@ npm run governance:verify
 **Expected outcome:** All critical checks should pass with exit code 0.
 
 **Success indicator:** The final message should read:
+
 ```
 [governance-verify] Completed. See artifacts/governance-verify-summary.json
 ```

@@ -11,15 +11,18 @@ Equity measures, fairness methodology, and hysteresis configuration for MerajutA
 ## Core Components
 
 ### Configuration & Methodology
+
 - **[State Machine Transitions](hysteresis-state-machine-transitions.md)** - System status transitions
 - **[Hysteresis Test Plan v1](../tests/hysteresis-test-plan-v1.md)** - Testing procedures
 
 ### Equity Implementation
+
 - **[Equity Page](equity-page.md)** - Equity implementation details
 - **[Equity Snapshot Pseudocode](equity-snapshot-pseudocode.md)** - Logic for equity calculation
 - **[Under-Served Section](equity-under-served-section.md)** - Focused equity measures
 
 ### Historical Options
+
 - **[Hysteresis Options v1.0](../archive/fairness_equity-hysteresis-options-v1.md)** - Historical options A–F
 
 ---

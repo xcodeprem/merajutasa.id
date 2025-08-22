@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-22T10:17:10.292Z",
+  "generated_utc": "2025-08-22T10:27:17.167Z",
   "old_total": 0,
   "new_total": 0,
   "adoptionPercent": 100,
@@ -737,6 +737,11 @@
     },
     {
       "file": "docs/analysis/INFRASTRUCTURE-UPDATE-ANALYSIS-V1.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs/adr/0006-security-integration.md",
       "oldCount": 0,
       "newCount": 0
     },

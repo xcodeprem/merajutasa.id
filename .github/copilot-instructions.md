@@ -15,6 +15,7 @@ Core services (local)
 Governance pipeline (code-derived)
 
 - `npm run governance:verify` executes ordered steps (critical unless noted):
+
  1) spec-hash-diff (strict or auto-seal allowlist), 2) param-integrity, 3) param-lock, 4) fairness unit tests,
  5) security-patterns-smoke (advisory but gated via `tools/policy/policy.json` HIGH>0), 6) hype-lint (advisory),
  7) disclaimers-lint (critical), 8) privacy tools (scan/metrics/asserts), 9) dec-lint (critical), 10) principles-impact (advisory),
@@ -58,7 +59,7 @@ Environment toggles
 
 - `DISC_BOOTSTRAP=1` downgrades disclaimers-lint exit (still writes artifact).
 - `SPEC_HASH_SARIF=1` emits SARIF for spec-hash diff. `POLICY_CELLS_PATH` can override cells file for policy aggregation enforce.
- 	- Windows PowerShell note: set env vars per-session via `$env:SIGNER_PORT=4605; $env:CHAIN_PORT=4606; $env:COLLECTOR_PORT=4607`.
+  - Windows PowerShell note: set env vars per-session via `$env:SIGNER_PORT=4605; $env:CHAIN_PORT=4606; $env:COLLECTOR_PORT=4607`.
 
 Key artifacts
 
@@ -85,8 +86,10 @@ Artifacts map (common outputs)
 Quick start recipes
 
 - Core trio smoke:
+
  1) Append via signer→chain: `npm run chain:append`
  2) Start collector then ingest: run `npm run service:collector` (separate shell), then `npm run collector:smoke`
+
 - Governance E2E: `npm run governance:verify` → check `artifacts/governance-verify-summary.json`
 - Policy aggregation enforce: `npm run policy:aggregation:enforce:allow` (deny variant available)
 
@@ -140,19 +143,19 @@ Which script to run when
 Minimal request payload shapes (contracts)
 
 - Signer POST /sign
- 	- Input: `{ payload: object|string }`
- 	- Output: `{ canonical: string, hash_sha256: string, signature: base64, alg: "Ed25519" }`
+  - Input: `{ payload: object|string }`
+  - Output: `{ canonical: string, hash_sha256: string, signature: base64, alg: "Ed25519" }`
 - Chain POST /append
- 	- Input: `{ canonical: string, signature: base64, publicKeyPem: string }`
- 	- Output: `{ seq, prevHash, contentHash, signature, canonical, ts }` (idempotent on contentHash)
+  - Input: `{ canonical: string, signature: base64, publicKeyPem: string }`
+  - Output: `{ seq, prevHash, contentHash, signature, canonical, ts }` (idempotent on contentHash)
 - Collector POST /ingest
- 	- Input: `{ event: { event_name, occurred_at, received_at, meta?, ... } }` (defaults auto-filled; `integrity.event_hash` computed)
- 	- Output: `{ status: 'INGESTED', event_hash, prohibited_meta: boolean, meta_valid: boolean }`
- 	- Schema: `schemas/events/public-event-v1.json`; whitelist driven by `docs/analytics/event-schema-canonical-v1.md`
+  - Input: `{ event: { event_name, occurred_at, received_at, meta?, ... } }` (defaults auto-filled; `integrity.event_hash` computed)
+  - Output: `{ status: 'INGESTED', event_hash, prohibited_meta: boolean, meta_valid: boolean }`
+  - Schema: `schemas/events/public-event-v1.json`; whitelist driven by `docs/analytics/event-schema-canonical-v1.md`
 - Collector POST /ingest-batch
- 	- Input: NDJSON (one JSON per line) or a JSON array of events
- 	- Output: `{ status: 'BATCH_DONE', ingested: number, errors: number }`
- 	- Notes: Unknown events yield `UNKNOWN_EVENT` on single ingest; batched mode counts such lines as errors.
+  - Input: NDJSON (one JSON per line) or a JSON array of events
+  - Output: `{ status: 'BATCH_DONE', ingested: number, errors: number }`
+  - Notes: Unknown events yield `UNKNOWN_EVENT` on single ingest; batched mode counts such lines as errors.
 
 Common failure quick diagnosis
 

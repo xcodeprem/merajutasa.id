@@ -138,7 +138,9 @@ merajutasa-compliance-orchestrator-7p8q9r1s-a3b4c: [2024-08-22T00:15:40.234Z] [c
 ## Health Probe Status Verification
 
 ### Startup Probes Status
+
 All services configured with startup probes (10s initial delay, 10s intervals, 30 failure threshold):
+
 - ✅ Signer Service: PASSING (startup time: 25s)
 - ✅ Chain Service: PASSING (startup time: 28s)
 - ✅ Collector Service: PASSING (startup time: 31s)
@@ -148,11 +150,15 @@ All services configured with startup probes (10s initial delay, 10s intervals, 3
 - ✅ Compliance: PASSING (startup time: 41s)
 
 ### Liveness Probes Status
+
 All services configured with liveness probes (30s initial delay, 10s intervals, 3 failure threshold):
+
 - ✅ All services: HEALTHY (0 restarts)
 
 ### Readiness Probes Status
+
 All services configured with readiness probes (5s initial delay, 5s intervals, 3 failure threshold):
+
 - ✅ All services: READY (traffic being routed)
 
 ## Resource Utilization Summary

@@ -70,15 +70,18 @@ All verification steps must meet the following criteria:
 The verification process generates several important artifacts:
 
 ### Summary Report
+
 - `artifacts/post-config-verification-summary.json` - Complete verification summary with status and timing
 
 ### Step-Specific Artifacts
+
 - `artifacts/governance-verify-summary.json` - Governance verification details
 - `artifacts/spec-hash-diff.json` - Hash verification results
 - `artifacts/param-integrity-matrix.json` - Parameter consistency matrix
 - Audit logs in `artifacts/audit/` - Compliance audit trail
 
 ### Action Logs
+
 - `artifacts/post-config-verify-YYYY-MM-DD.json` - Detailed action log with metadata
 
 ## Example Output

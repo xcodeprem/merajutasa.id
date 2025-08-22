@@ -9,16 +9,19 @@ Testing frameworks, validation procedures, and quality assurance for MerajutASA.
 ## Testing Areas
 
 ### System Testing
+
 - Fairness and hysteresis system validation
 - Integration testing procedures
 - Performance testing frameworks
 
 ### Validation Procedures
+
 - Data validation testing
 - Schema validation procedures
 - Event pipeline testing
 
 ### Quality Assurance
+
 - Code quality testing
 - Documentation testing
 - Compliance testing

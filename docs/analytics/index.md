@@ -168,6 +168,7 @@ This ensures pipeline consistency and detects schema drift.
 ## 🛠️ Schema Versioning & Changes
 
 ### Version 1.0.0 (Current)
+
 - **Released**: 2025-08-12
 - **Status**: Draft for Ratification
 - **Changes**: Initial canonical schema & taxonomy
@@ -189,6 +190,7 @@ This ensures pipeline consistency and detects schema drift.
 ### Event Processing Tests
 
 Run the full event processing test suite:
+
 ```bash
 npm run test:services         # Service integration tests
 npm run events:validate       # Event validation tests  
@@ -198,6 +200,7 @@ npm run collector:smoke       # Collector functionality tests
 ### Collector Integration Testing
 
 Test the collector service:
+
 ```bash
 npm run service:collector     # Start collector service
 npm run test:collector        # Run collector integration tests
@@ -206,6 +209,7 @@ npm run test:collector        # Run collector integration tests
 ### Event Pipeline Validation
 
 Verify the event pipeline:
+
 ```bash
 npm run events:pipeline:hash  # Generate pipeline hash
 npm run event:validate        # Validate event samples
@@ -245,16 +249,19 @@ Events integrate with governance through:
 ## 🔗 Related Documentation
 
 ### Schema & Standards
+
 - **[Event Schema Canonical v1.0](event-schema-canonical-v1.md)** - Complete schema specification
 - **[Schemas Overview](../schemas/README.md)** - Data validation schemas  
 - **[Data Dictionary](../data/README.md)** - Data definitions & retention
 
 ### Infrastructure & Services
+
 - **[Services Overview](../infrastructure/README.md)** - Service architecture
 - **[Testing & Validation](../tests/README.md)** - Testing framework
 - **[Privacy & PII Protection](../privacy/README.md)** - Privacy implementation
 
 ### Governance & Process
+
 - **[Integrity Management](../integrity/README.md)** - Hash verification & signing
 - **[Governance Process](../governance/README.md)** - Decision processes (DEC)
 - **[Fairness Systems](../fairness/README.md)** - Equity monitoring

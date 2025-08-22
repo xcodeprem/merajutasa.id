@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "generated_utc": "2025-08-22T10:17:07.782Z",
-  "file_count": 93,
+  "generated_utc": "2025-08-22T10:27:14.613Z",
+  "file_count": 94,
   "total_hits": 25,
   "max_severity": "MEDIUM",
   "severity_counts": {
@@ -174,7 +174,7 @@
     },
     {
       "file": "docs/runbooks/boot-sequence-k8s.md",
-      "line": 275,
+      "line": 281,
       "column": 9,
       "match": "top",
       "rule": "TOP",
@@ -184,7 +184,7 @@
     },
     {
       "file": "docs/runbooks/boot-sequence-k8s.md",
-      "line": 324,
+      "line": 332,
       "column": 9,
       "match": "top",
       "rule": "TOP",
@@ -194,7 +194,7 @@
     },
     {
       "file": "docs/runbooks/boot-sequence-k8s.md",
-      "line": 447,
+      "line": 468,
       "column": 9,
       "match": "top",
       "rule": "TOP",
@@ -204,7 +204,7 @@
     },
     {
       "file": "docs/runbooks/boot-sequence-k8s.md",
-      "line": 448,
+      "line": 469,
       "column": 9,
       "match": "top",
       "rule": "TOP",
@@ -214,7 +214,7 @@
     },
     {
       "file": "docs/runbooks/boot-sequence-k8s.md",
-      "line": 500,
+      "line": 521,
       "column": 9,
       "match": "top",
       "rule": "TOP",
@@ -224,7 +224,7 @@
     },
     {
       "file": "docs/runbooks/boot-sequence-k8s.md",
-      "line": 501,
+      "line": 522,
       "column": 9,
       "match": "top",
       "rule": "TOP",
