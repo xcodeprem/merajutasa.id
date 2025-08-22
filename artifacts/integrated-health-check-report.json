@@ -1,0 +1,175 @@
+{
+  "timestamp": "2025-08-22T18:42:23.057Z",
+  "overall_status": "healthy",
+  "overall_health_score": 93,
+  "duration_ms": 71,
+  "summary": {
+    "total_components": 5,
+    "healthy": 4,
+    "warning": 1,
+    "degraded": 0,
+    "critical": 0
+  },
+  "components": {
+    "auditSystem": {
+      "name": "Enterprise Audit System",
+      "status": "healthy",
+      "health_score": 100,
+      "last_check": "2025-08-22T18:42:23.008Z",
+      "details": {
+        "total_events": 0,
+        "buffer_size": 0,
+        "uptime": 0.0974238,
+        "compliance_violations": 0,
+        "storage_path": "/tmp/health-check-audit",
+        "compliance_mode": "strict"
+      }
+    },
+    "privacyRights": {
+      "name": "Privacy Rights Management",
+      "status": "healthy",
+      "health_score": 110,
+      "last_check": "2025-08-22T18:42:23.019Z",
+      "details": {
+        "pending_requests": 0,
+        "completed_requests": 0,
+        "total_requests": 0,
+        "average_response_time": 0,
+        "jurisdictions_supported": 4,
+        "automated_processing": true,
+        "uptime": 0.1084367
+      }
+    },
+    "complianceOrchestrator": {
+      "name": "Compliance Orchestrator",
+      "status": "warning",
+      "health_score": 65,
+      "last_check": "2025-08-22T18:42:23.049Z",
+      "details": {
+        "orchestration_status": "initializing",
+        "component_count": 4,
+        "healthy_components": 0,
+        "active_alerts": 0,
+        "uptime": 0.1384639,
+        "real_time_correlation": true
+      }
+    },
+    "securityHardening": {
+      "name": "Security Hardening",
+      "status": "healthy",
+      "health_score": 100,
+      "last_check": "2025-08-22T18:42:23.050Z",
+      "details": {
+        "security_score": 100,
+        "threat_level": "medium",
+        "active_threats": 0,
+        "vulnerabilities": 0,
+        "incidents": 0,
+        "monitoring_active": true,
+        "automated_response": true,
+        "uptime": 0.1392239
+      }
+    },
+    "complianceAutomation": {
+      "name": "Compliance Automation",
+      "status": "healthy",
+      "health_score": 90,
+      "last_check": "2025-08-22T18:42:23.029Z",
+      "details": {
+        "is_running": false,
+        "frameworks_active": 4,
+        "total_assessments": 0,
+        "active_alerts": 0,
+        "average_compliance_score": 85,
+        "uptime": 0.006
+      }
+    }
+  },
+  "system_dependencies": {
+    "startup_order": [
+      {
+        "phase": 1,
+        "components": [
+          "fileSystem"
+        ],
+        "description": "File system access validation"
+      },
+      {
+        "phase": 2,
+        "components": [
+          "signer",
+          "chain",
+          "collector"
+        ],
+        "description": "Core services (can start in parallel)"
+      },
+      {
+        "phase": 3,
+        "components": [
+          "auditSystem",
+          "logAggregation"
+        ],
+        "description": "Foundation services"
+      },
+      {
+        "phase": 4,
+        "components": [
+          "securityHardening",
+          "privacyRights",
+          "complianceAutomation"
+        ],
+        "description": "Compliance & Security services"
+      },
+      {
+        "phase": 5,
+        "components": [
+          "complianceOrchestrator",
+          "observability"
+        ],
+        "description": "Orchestration services"
+      },
+      {
+        "phase": 6,
+        "components": [
+          "haOrchestrator",
+          "apiGateway",
+          "performance"
+        ],
+        "description": "Infrastructure services"
+      }
+    ],
+    "dependencies": {
+      "complianceOrchestrator": [
+        "auditSystem",
+        "securityHardening",
+        "privacyRights",
+        "complianceAutomation"
+      ],
+      "observability": [
+        "logAggregation"
+      ],
+      "apiGateway": [
+        "signer",
+        "chain",
+        "collector"
+      ],
+      "haOrchestrator": [
+        "signer",
+        "chain",
+        "collector"
+      ],
+      "performance": [
+        "observability"
+      ]
+    }
+  },
+  "recommendations": [
+    {
+      "priority": "low",
+      "component": "complianceOrchestrator",
+      "issue": "Compliance Orchestrator showing warning signs",
+      "action": "Review complianceOrchestrator configuration and metrics",
+      "health_score": 65
+    }
+  ]
+}

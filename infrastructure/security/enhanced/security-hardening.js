@@ -22,13 +22,7 @@ import path from 'path';
 import crypto from 'crypto';
 import { EventEmitter } from 'events';
 // Defer audit system import to avoid hard failures on import cycles
-let auditSystem;
-try {
-  const mod = await import('../../compliance/audit-system.js');
-  auditSystem = mod.auditSystem;
-} catch (e) {
-  console.warn('⚠️ audit-system not available; running security-hardening in degraded mode');
-}
+import { auditSystem } from '../../compliance/audit-system.js';
 
 export class SecurityHardening extends EventEmitter {
   constructor(options = {}) {
@@ -1045,7 +1039,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   
   async function main() {
     try {
-      if (args.includes('--scan')) {
+  if (args.includes('--scan') || args.includes('--one-shot')) {
         console.log('🔍 Running security scan...');
         
         // Perform comprehensive security scan
@@ -1066,12 +1060,12 @@ if (import.meta.url === `file://${process.argv[1]}`) {
         console.log('✅ Security scan passed');
         process.exit(0);
         
-      } else if (args.includes('--status')) {
+  } else if (args.includes('--status') || args.includes('--orchestrator-status')) {
         const status = securityHardening.getSecurityStatus();
         console.log('🛡️ Security Status:', JSON.stringify(status, null, 2));
         process.exit(0);
         
-      } else if (args.includes('--detect-threats')) {
+  } else if (args.includes('--detect-threats') || args.includes('--threats')) {
         console.log('🔍 Detecting threats...');
         
         // Get current threat status

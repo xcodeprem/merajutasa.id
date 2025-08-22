@@ -1,8 +1,25 @@
 {
   // Explicit config so the extension tidak menginterpret package.json kosong sebagai config konten
-  "globs": ["**/*.md", "!node_modules"] ,
+  // Narrow scope to first-party docs; exclude vendors, generated artifacts, and UI sub-app
+  "globs": [
+    "**/*.md",
+    "!**/node_modules/**",
+    "!public/equity-ui-v2/**",
+    "!artifacts/**",
+    "!.github/**"
+  ],
   "config": {
+    // Keep lines flexible in long specs
     "MD013": false,
-    "MD033": false
+    // Allow inline HTML (used for disclaimer injection blocks)
+    "MD033": false,
+    // Many governed docs begin with disclaimer HTML instead of an H1
+    "MD041": false,
+    // Code fence languages are optional in historical/archived docs
+    "MD040": false,
+    // Some docs stylistically use emphasis-like headings
+    "MD036": false,
+    // Duplicate headings occur in generated summaries
+    "MD024": false
   }
 }

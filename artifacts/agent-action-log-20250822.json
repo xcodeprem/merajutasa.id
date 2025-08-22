@@ -1,0 +1,18 @@
+[
+  {
+    "_metadata": {
+      "generated_at": "2025-08-22T19:06:18.765Z",
+      "generator": "governance-verify",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/spec-hash-diff.js --mode=verify",
+    "critical": true,
+    "duration_ms": 124,
+    "exit_code": 1,
+    "status": "ERROR",
+    "step": "spec-hash-diff",
+    "timestamp": "2025-08-22T19:06:18.764Z"
+  }
+]

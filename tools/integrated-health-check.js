@@ -7,6 +7,7 @@
 
 import { promises as fs } from 'fs';
 import path from 'path';
+import { pathToFileURL } from 'url';
 
 // Import health check modules
 const healthCheckModules = {
@@ -445,8 +446,10 @@ class IntegratedHealthChecker {
   }
 
   async saveReport(report) {
-    const reportPath = './artifacts/integrated-health-check-report.json';
-    await fs.writeFile(reportPath, JSON.stringify(report, null, 2));
+  const reportPath = './artifacts/integrated-health-check-report.json';
+  // Ensure artifacts directory exists (Windows-safe)
+  await fs.mkdir(path.dirname(reportPath), { recursive: true });
+  await fs.writeFile(reportPath, JSON.stringify(report, null, 2));
     console.log(`📊 Health check report saved to ${reportPath}`);
     return reportPath;
   }
@@ -498,7 +501,17 @@ async function main() {
 // Export for programmatic use
 export { IntegratedHealthChecker, healthCheckModules };
 
+// Windows-safe direct-run detection
+const __isDirectRun = (() => {
+  try {
+    const argv1 = process.argv && process.argv[1] ? process.argv[1] : '';
+    return import.meta.url === pathToFileURL(argv1).href;
+  } catch {
+    return false;
+  }
+})();
+
 // Run if called directly
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (__isDirectRun) {
   main();
 }
