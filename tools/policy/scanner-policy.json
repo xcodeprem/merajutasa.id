@@ -1,0 +1,15 @@
+{
+  "severity_fail": ["HIGH", "CRITICAL"],
+  "osv": {
+    "allowlist_ids": [],
+    "cvss": { "high": 7.0, "critical": 9.0 }
+  },
+  "semgrep": {
+    "allowlist_rules": [],
+    "min_level_to_fail": "error"
+  },
+  "trivy": {
+    "allowlist_cves": [],
+    "severity_fail": ["HIGH", "CRITICAL"]
+  }
+}
