@@ -29,13 +29,20 @@ jobs:
           echo "LABEL_INPROG=$(jq -r '.labels.inProgress' .github/copilot-orchestrator.json)" >> $GITHUB_OUTPUT
           echo "LABEL_DONE=$(jq -r '.labels.done' .github/copilot-orchestrator.json)" >> $GITHUB_OUTPUT
 
-      - name: Identify linked issues from PR body
+      - name: Identify linked issue
         id: link
         env:
           PR_BODY: ${{ github.event.pull_request.body }}
         run: |
-          printf "%s" "$PR_BODY" | sed -nE 's/.*#([0-9]+).*/\1/p' | head -n1 > issue.txt || true
+          # Prefer explicit closing keywords
+          echo "$PR_BODY" | tr '\r' '\n' | \
+            sed -nE 's/.*((close|closes|closed|fix|fixes|fixed|resolve|resolves|resolved)[[:space:]]+#([0-9]+)).*/\3/ip' | head -n1 > issue.txt
+          if [ ! -s issue.txt ]; then
+            # Fallback: first #number anywhere
+            echo "$PR_BODY" | sed -nE 's/.*#([0-9]+).*/\1/p' | head -n1 > issue.txt || true
+          fi
           ISSUE=$(cat issue.txt || true)
+          echo "Linked issue: ${ISSUE:-<none>}"
           echo "ISSUE=$ISSUE" >> $GITHUB_OUTPUT
 
       - name: Approve PR
@@ -50,14 +57,15 @@ jobs:
         run: |
           gh pr merge "${{ github.event.pull_request.number }}" --squash --auto --delete-branch || gh pr merge "${{ github.event.pull_request.number }}" --squash --admin --delete-branch
 
-      - name: Mark linked issue done and remove in-progress
+    - name: Mark linked issue done
         if: ${{ steps.link.outputs.ISSUE != '' }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           n='${{ steps.link.outputs.ISSUE }}'
-          gh label create '${{ steps.cfg.outputs.LABEL_DONE }}' --color 2ea043 --description "Completed by Copilot" || true
+      gh label create '${{ steps.cfg.outputs.LABEL_DONE }}' --color 2ea043 --description "Completed by Copilot" 2>/dev/null || true
           gh issue edit "$n" --remove-label '${{ steps.cfg.outputs.LABEL_INPROG }}' --add-label '${{ steps.cfg.outputs.LABEL_DONE }}' --state closed
+      gh issue comment "$n" --body "Automated merge completed; marking done."
 
       - name: Trigger next assignment
         if: ${{ steps.link.outputs.ISSUE != '' }}
