@@ -1,0 +1,28 @@
+{
+  "scan_id": "scan_1755847189527_89xpl821w",
+  "scan_type": "full",
+  "started_at": "2025-08-22T07:19:49.527Z",
+  "vulnerabilities": [
+    {
+      "type": "dependency_vulnerability",
+      "severity": "critical",
+      "package": "markdownlint",
+      "version": "^0.38.0",
+      "description": "Vulnerability found in markdownlint@^0.38.0",
+      "cvss_score": "3.1",
+      "cve_id": "CVE-2024-2809"
+    }
+  ],
+  "threats": [],
+  "configuration_issues": [],
+  "overall_score": 80,
+  "recommendations": [
+    {
+      "priority": "critical",
+      "category": "vulnerability_management",
+      "title": "Address Critical Vulnerabilities",
+      "description": "1 critical vulnerabilities require immediate attention",
+      "action": "Patch or mitigate all critical vulnerabilities within 24 hours"
+    }
+  ]
+}

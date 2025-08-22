@@ -1,15 +1,15 @@
 {
   "version": 1,
-  "generated_utc": "2025-08-22T00:05:33.655Z",
-  "file_count": 89,
-  "total_hits": 18,
+  "generated_utc": "2025-08-22T07:15:19.140Z",
+  "file_count": 91,
+  "total_hits": 25,
   "max_severity": "MEDIUM",
   "severity_counts": {
-    "MEDIUM": 18
+    "MEDIUM": 25
   },
   "rule_counts": {
     "RANKING": 10,
-    "TOP": 8
+    "TOP": 15
   },
   "findings": [
     {
@@ -24,7 +24,7 @@
     },
     {
       "file": "README.md",
-      "line": 370,
+      "line": 371,
       "column": 9,
       "match": "Ranking",
       "rule": "RANKING",
@@ -34,7 +34,7 @@
     },
     {
       "file": "README.md",
-      "line": 370,
+      "line": 371,
       "column": 88,
       "match": "ranking",
       "rule": "RANKING",
@@ -44,7 +44,7 @@
     },
     {
       "file": "README.md",
-      "line": 560,
+      "line": 561,
       "column": 69,
       "match": "ranking",
       "rule": "RANKING",
@@ -54,7 +54,7 @@
     },
     {
       "file": "README.md",
-      "line": 752,
+      "line": 753,
       "column": 70,
       "match": "ranking",
       "rule": "RANKING",
@@ -161,6 +161,76 @@
       "severity": "MEDIUM",
       "rationale": "Generic superiority claim.",
       "context_line": "kubectl top pods"
+    },
+    {
+      "file": "docs/runbooks/boot-sequence-k8s.md",
+      "line": 26,
+      "column": 9,
+      "match": "top",
+      "rule": "TOP",
+      "severity": "MEDIUM",
+      "rationale": "Generic superiority claim.",
+      "context_line": "kubectl top nodes                          # Should show available CPU/memory"
+    },
+    {
+      "file": "docs/runbooks/boot-sequence-k8s.md",
+      "line": 275,
+      "column": 9,
+      "match": "top",
+      "rule": "TOP",
+      "severity": "MEDIUM",
+      "rationale": "Generic superiority claim.",
+      "context_line": "kubectl top pods -l app.kubernetes.io/part-of=merajutasa"
+    },
+    {
+      "file": "docs/runbooks/boot-sequence-k8s.md",
+      "line": 324,
+      "column": 9,
+      "match": "top",
+      "rule": "TOP",
+      "severity": "MEDIUM",
+      "rationale": "Generic superiority claim.",
+      "context_line": "kubectl top nodes"
+    },
+    {
+      "file": "docs/runbooks/boot-sequence-k8s.md",
+      "line": 447,
+      "column": 9,
+      "match": "top",
+      "rule": "TOP",
+      "severity": "MEDIUM",
+      "rationale": "Generic superiority claim.",
+      "context_line": "kubectl top nodes"
+    },
+    {
+      "file": "docs/runbooks/boot-sequence-k8s.md",
+      "line": 448,
+      "column": 9,
+      "match": "top",
+      "rule": "TOP",
+      "severity": "MEDIUM",
+      "rationale": "Generic superiority claim.",
+      "context_line": "kubectl top pods -l app.kubernetes.io/part-of=merajutasa"
+    },
+    {
+      "file": "docs/runbooks/boot-sequence-k8s.md",
+      "line": 500,
+      "column": 9,
+      "match": "top",
+      "rule": "TOP",
+      "severity": "MEDIUM",
+      "rationale": "Generic superiority claim.",
+      "context_line": "kubectl top nodes"
+    },
+    {
+      "file": "docs/runbooks/boot-sequence-k8s.md",
+      "line": 501,
+      "column": 9,
+      "match": "top",
+      "rule": "TOP",
+      "severity": "MEDIUM",
+      "rationale": "Generic superiority claim.",
+      "context_line": "kubectl top pods -l app.kubernetes.io/part-of=merajutasa"
     },
     {
       "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-2.md",

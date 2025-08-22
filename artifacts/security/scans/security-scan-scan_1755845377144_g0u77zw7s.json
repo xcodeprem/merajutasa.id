@@ -1,0 +1,28 @@
+{
+  "scan_id": "scan_1755845377144_g0u77zw7s",
+  "scan_type": "full",
+  "started_at": "2025-08-22T06:49:37.144Z",
+  "vulnerabilities": [
+    {
+      "type": "dependency_vulnerability",
+      "severity": "critical",
+      "package": "express-rate-limit",
+      "version": "^8.0.1",
+      "description": "Vulnerability found in express-rate-limit@^8.0.1",
+      "cvss_score": "6.1",
+      "cve_id": "CVE-2024-4785"
+    }
+  ],
+  "threats": [],
+  "configuration_issues": [],
+  "overall_score": 80,
+  "recommendations": [
+    {
+      "priority": "critical",
+      "category": "vulnerability_management",
+      "title": "Address Critical Vulnerabilities",
+      "description": "1 critical vulnerabilities require immediate attention",
+      "action": "Patch or mitigate all critical vulnerabilities within 24 hours"
+    }
+  ]
+}

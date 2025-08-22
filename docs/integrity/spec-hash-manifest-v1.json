@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generation_timestamp_utc": "2025-08-21T23:56:46Z",
+  "generation_timestamp_utc": "2025-08-22T07:15:18Z",
   "generator_note": "Refined manifest: added onboarding & (optional) README, fixed dec_ref placeholders, standardized mutable_policy for adopted lint spec. All existing entries preserved; only additive or metadata corrections before first hash seal.",
   "files": [
     {
@@ -317,7 +317,7 @@
       "path": "README.md",
       "version": "1.0.0",
       "dec_ref": "DEC-20250813-04 + DEC-20250813-06 + DEC-20250815-01 + DEC-20250816-01",
-      "hash_sha256": "2c521a0a616647ea047163998952ac92a1fac99f9954f39ec8eeed223ca9f4f2",
+      "hash_sha256": "7921cfb31a24be381951d28d5e0d247287a21fb12a9fb51d48546fe31e16b643",
       "integrity_class": "repository-readme",
       "mutable_policy": "append-only",
       "next_change_requires_dec": true,

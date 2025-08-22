@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "generated_utc": "2025-08-22T00:05:34.822Z",
+  "generated_utc": "2025-08-22T07:15:20.349Z",
   "principles": [
     {
       "principle": "GP1",
-      "match_count": 1444,
+      "match_count": 1451,
       "domains": [
         "other",
         "privacy",
@@ -52,7 +52,7 @@
         },
         {
           "file": "README.md",
-          "line": 211,
+          "line": 212,
           "snippet": "- **🔒 Privacy Rights Management**: Multi-jurisdiction data rights automation (GDPR/CCPA/PIPEDA/LGPD)",
           "pattern": "privacy",
           "changed": false,
@@ -60,7 +60,7 @@
         },
         {
           "file": "README.md",
-          "line": 216,
+          "line": 217,
           "snippet": "- **⛓️ Chain Service** (Port 4602) - Immutable hash chain integrity management",
           "pattern": "hash(ing)?",
           "changed": false,
@@ -68,7 +68,7 @@
         },
         {
           "file": "README.md",
-          "line": 246,
+          "line": 247,
           "snippet": "- **Spec Hash**: PASS",
           "pattern": "hash(ing)?",
           "changed": false,
@@ -76,7 +76,7 @@
         },
         {
           "file": "README.md",
-          "line": 336,
+          "line": 337,
           "snippet": "- **Privacy rights automation**: 30-day response for GDPR/CCPA/PIPEDA/LGPD requests",
           "pattern": "privacy",
           "changed": false,
@@ -84,7 +84,7 @@
         },
         {
           "file": "README.md",
-          "line": 369,
+          "line": 370,
           "snippet": "- **GP1-GP10**: Comprehensive governance principles covering privacy, transparency, fairness, security, and accountability",
           "pattern": "privacy",
           "changed": false,
@@ -92,7 +92,7 @@
         },
         {
           "file": "README.md",
-          "line": 372,
+          "line": 373,
           "snippet": "- **Cryptographic Integrity**: Hash chain verification with immutable audit trails",
           "pattern": "hash(ing)?",
           "changed": false,
@@ -100,7 +100,7 @@
         },
         {
           "file": "README.md",
-          "line": 385,
+          "line": 386,
           "snippet": "npm run spec-hash:verify      # Content hash verification",
           "pattern": "hash(ing)?",
           "changed": false,
@@ -108,7 +108,7 @@
         },
         {
           "file": "README.md",
-          "line": 400,
+          "line": 401,
           "snippet": "- **[Integrity Verification](docs/integrity/)** - Hash verification and evidence requirements",
           "pattern": "hash(ing)?",
           "changed": false,
@@ -229,7 +229,7 @@
     },
     {
       "principle": "GP3",
-      "match_count": 222,
+      "match_count": 223,
       "domains": [
         "other",
         "privacy",
@@ -253,7 +253,7 @@
         },
         {
           "file": "README.md",
-          "line": 334,
+          "line": 335,
           "snippet": "- **Automated audit trails**: 7+ year retention with cryptographic integrity",
           "pattern": "audit trail",
           "changed": false,
@@ -261,7 +261,7 @@
         },
         {
           "file": "README.md",
-          "line": 365,
+          "line": 366,
           "snippet": "MerajutASA.id's governance system ensures fairness, transparency, and integrity through cryptographic verification and open decision processes.",
           "pattern": "transparenc",
           "changed": false,
@@ -269,7 +269,7 @@
         },
         {
           "file": "README.md",
-          "line": 369,
+          "line": 370,
           "snippet": "- **GP1-GP10**: Comprehensive governance principles covering privacy, transparency, fairness, security, and accountability",
           "pattern": "transparenc",
           "changed": false,
@@ -277,7 +277,7 @@
         },
         {
           "file": "README.md",
-          "line": 372,
+          "line": 373,
           "snippet": "- **Cryptographic Integrity**: Hash chain verification with immutable audit trails",
           "pattern": "audit trail",
           "changed": false,
@@ -285,7 +285,7 @@
         },
         {
           "file": "README.md",
-          "line": 428,
+          "line": 429,
           "snippet": "## 🌐 GitHub Pages & Transparency",
           "pattern": "transparenc",
           "changed": false,
@@ -293,7 +293,7 @@
         },
         {
           "file": "README.md",
-          "line": 430,
+          "line": 431,
           "snippet": "The platform provides comprehensive transparency through GitHub Pages with real-time dashboard snapshots and governance artifacts.",
           "pattern": "transparenc",
           "changed": false,
@@ -301,7 +301,7 @@
         },
         {
           "file": "README.md",
-          "line": 470,
+          "line": 471,
           "snippet": "- **Compliance**: Automated regulatory reporting and audit trail generation",
           "pattern": "audit trail",
           "changed": false,
@@ -309,7 +309,7 @@
         },
         {
           "file": "README.md",
-          "line": 599,
+          "line": 600,
           "snippet": "| Trace Index                           | docs/governance/trace/archive-trace-index-v1.md                        | Peta archive → canonical            |",
           "pattern": "trace",
           "changed": false,
@@ -317,7 +317,7 @@
         },
         {
           "file": "README.md",
-          "line": 613,
+          "line": 614,
           "snippet": "- Trace index mendokumentasikan mapping parameter & narasi.",
           "pattern": "trace",
           "changed": false,
@@ -325,7 +325,7 @@
         },
         {
           "file": "README.md",
-          "line": 740,
+          "line": 741,
           "snippet": "Tidak ada penghapusan retrospektif dokumen historis (archive) – hanya append trace / DEC baru. Pelanggaran = investigasi integritas.",
           "pattern": "trace",
           "changed": false,
@@ -333,7 +333,7 @@
         },
         {
           "file": "README.md",
-          "line": 752,
+          "line": 753,
           "snippet": "Referensi publik: Lihat Methodology Snippet (H0) untuk ringkasan non‑ranking dan privasi → docs/transparency/methodology-snippet-h0.md",
           "pattern": "transparenc",
           "changed": false,
@@ -344,7 +344,7 @@
     },
     {
       "principle": "GP4",
-      "match_count": 1046,
+      "match_count": 1048,
       "domains": [
         "other",
         "privacy",
@@ -440,7 +440,7 @@
         },
         {
           "file": "README.md",
-          "line": 153,
+          "line": 154,
           "snippet": "### Governance & Fairness",
           "pattern": "governance",
           "changed": false,
@@ -448,7 +448,7 @@
         },
         {
           "file": "README.md",
-          "line": 155,
+          "line": 156,
           "snippet": "- **[Governance Overview](docs/governance/)** - Decision processes and policies",
           "pattern": "governance",
           "changed": false,
@@ -459,7 +459,7 @@
     },
     {
       "principle": "GP5",
-      "match_count": 518,
+      "match_count": 522,
       "domains": [
         "other",
         "privacy",
@@ -483,7 +483,7 @@
         },
         {
           "file": "README.md",
-          "line": 188,
+          "line": 189,
           "snippet": "- **🚨 Intelligent Alerting**: Context-aware anomaly detection",
           "pattern": "anomaly",
           "changed": false,
@@ -491,7 +491,7 @@
         },
         {
           "file": "README.md",
-          "line": 335,
+          "line": 336,
           "snippet": "- **Advanced threat detection**: Behavioral anomaly analysis and automated response",
           "pattern": "anomaly",
           "changed": false,
@@ -499,7 +499,7 @@
         },
         {
           "file": "README.md",
-          "line": 352,
+          "line": 353,
           "snippet": "- **Anomaly detection**: Statistical and business logic monitoring",
           "pattern": "anomaly",
           "changed": false,
@@ -507,7 +507,7 @@
         },
         {
           "file": "README.md",
-          "line": 371,
+          "line": 372,
           "snippet": "- **Hysteresis-Based Fairness**: Stable \"under-served\" detection using Option F parameters",
           "pattern": "hysteresis",
           "changed": false,
@@ -515,7 +515,7 @@
         },
         {
           "file": "README.md",
-          "line": 393,
+          "line": 394,
           "snippet": "npm run equity:anomaly        # Detect equity anomalies",
           "pattern": "anomaly",
           "changed": false,
@@ -523,7 +523,7 @@
         },
         {
           "file": "README.md",
-          "line": 399,
+          "line": 400,
           "snippet": "- **[Fairness Methodology](docs/fairness/)** - Equity calculation and hysteresis",
           "pattern": "hysteresis",
           "changed": false,
@@ -531,7 +531,7 @@
         },
         {
           "file": "README.md",
-          "line": 485,
+          "line": 486,
           "snippet": "Menyediakan kerangka (scaffold) governance, fairness, dan integrity untuk sistem penandaan “under‑served” berbasis hysteresis (Option F) yang:",
           "pattern": "hysteresis",
           "changed": false,
@@ -539,7 +539,7 @@
         },
         {
           "file": "README.md",
-          "line": 487,
+          "line": 488,
           "snippet": "1. Stabil (menghindari volatilitas metrik lewat hysteresis thresholds).",
           "pattern": "hysteresis",
           "changed": false,
@@ -547,7 +547,7 @@
         },
         {
           "file": "README.md",
-          "line": 498,
+          "line": 499,
           "snippet": "| DEC-20250812-02     | Hysteresis Adoption Option F      | Mengunci parameter fairness (T_enter_major=0.50, T_enter_standard=0.60, consecutive_required_standard=2, T_exit=0.65, cooldown=1 snapshot, s",
           "pattern": "anomaly",
           "changed": false,
@@ -555,7 +555,7 @@
         },
         {
           "file": "README.md",
-          "line": 498,
+          "line": 499,
           "snippet": "| DEC-20250812-02     | Hysteresis Adoption Option F      | Mengunci parameter fairness (T_enter_major=0.50, T_enter_standard=0.60, consecutive_required_standard=2, T_exit=0.65, cooldown=1 snapshot, s",
           "pattern": "cooldown",
           "changed": false,
@@ -563,7 +563,7 @@
         },
         {
           "file": "README.md",
-          "line": 498,
+          "line": 499,
           "snippet": "| DEC-20250812-02     | Hysteresis Adoption Option F      | Mengunci parameter fairness (T_enter_major=0.50, T_enter_standard=0.60, consecutive_required_standard=2, T_exit=0.65, cooldown=1 snapshot, s",
           "pattern": "stalled",
           "changed": false,
@@ -598,7 +598,7 @@
         },
         {
           "file": "README.md",
-          "line": 370,
+          "line": 371,
           "snippet": "- **Non-Ranking System**: Equity indicators without competitive scoring or performance ranking",
           "pattern": "non-?ranking",
           "changed": false,
@@ -606,7 +606,7 @@
         },
         {
           "file": "README.md",
-          "line": 547,
+          "line": 548,
           "snippet": "| D1  | Non-Ranking               | Menegaskan sistem tanpa peringkat kompetitif <!-- hype-lint-ignore-line --> |",
           "pattern": "non-?ranking",
           "changed": false,
@@ -689,7 +689,7 @@
     },
     {
       "principle": "GP7",
-      "match_count": 268,
+      "match_count": 276,
       "domains": [
         "other",
         "principles",
@@ -703,7 +703,7 @@
       "evidence_sample": [
         {
           "file": "README.md",
-          "line": 533,
+          "line": 534,
           "snippet": "| GP6  | Anti Misuse / Anti-Hype (Non-Scoring)  |",
           "pattern": "hype",
           "changed": false,
@@ -711,7 +711,7 @@
         },
         {
           "file": "README.md",
-          "line": 547,
+          "line": 548,
           "snippet": "| D1  | Non-Ranking               | Menegaskan sistem tanpa peringkat kompetitif <!-- hype-lint-ignore-line --> |",
           "pattern": "hype",
           "changed": false,
@@ -719,7 +719,7 @@
         },
         {
           "file": "README.md",
-          "line": 626,
+          "line": 627,
           "snippet": "4. Hindari istilah terlarang (lihat Anti‑Hype).",
           "pattern": "hype",
           "changed": false,
@@ -727,7 +727,7 @@
         },
         {
           "file": "README.md",
-          "line": 628,
+          "line": 629,
           "snippet": "Anti‑Hype (Contoh Kata Dilarang – akan lint) <!-- lint-allow-negated-context hype-lint-ignore-line -->:",
           "pattern": "hype",
           "changed": false,
@@ -735,7 +735,7 @@
         },
         {
           "file": "README.md",
-          "line": 630,
+          "line": 631,
           "snippet": "- “ranking”, “peringkat”, “top”, “terbaik”, “no.1”, “paling unggul”, “skor kompetitif” <!-- lint-allow-negated-context hype-lint-ignore-line -->",
           "pattern": "hype",
           "changed": false,
@@ -743,7 +743,7 @@
         },
         {
           "file": "README.md",
-          "line": 630,
+          "line": 631,
           "snippet": "- “ranking”, “peringkat”, “top”, “terbaik”, “no.1”, “paling unggul”, “skor kompetitif” <!-- lint-allow-negated-context hype-lint-ignore-line -->",
           "pattern": "terbaik",
           "changed": false,
@@ -751,7 +751,7 @@
         },
         {
           "file": "README.md",
-          "line": 630,
+          "line": 631,
           "snippet": "- “ranking”, “peringkat”, “top”, “terbaik”, “no.1”, “paling unggul”, “skor kompetitif” <!-- lint-allow-negated-context hype-lint-ignore-line -->",
           "pattern": "unggul",
           "changed": false,
@@ -759,7 +759,7 @@
         },
         {
           "file": "README.md",
-          "line": 630,
+          "line": 631,
           "snippet": "- “ranking”, “peringkat”, “top”, “terbaik”, “no.1”, “paling unggul”, “skor kompetitif” <!-- lint-allow-negated-context hype-lint-ignore-line -->",
           "pattern": "top\\b",
           "changed": false,
@@ -767,7 +767,7 @@
         },
         {
           "file": "README.md",
-          "line": 644,
+          "line": 645,
           "snippet": "| hype lint report           | artifacts/hype-lint.json                | Yes                | Active                      |",
           "pattern": "hype",
           "changed": false,
@@ -775,7 +775,7 @@
         },
         {
           "file": "README.md",
-          "line": 682,
+          "line": 683,
           "snippet": "## 13. Larangan Klaim Peringkat / Ranking <!-- data-phrase-context=\"disclaimer-explanation\" lint-allow-negated-context hype-lint-ignore-line -->",
           "pattern": "hype",
           "changed": false,
@@ -783,7 +783,7 @@
         },
         {
           "file": "README.md",
-          "line": 688,
+          "line": 689,
           "snippet": "- Mengklaim “terbaik”, “top”, “juara”. <!-- hype-lint-ignore-line -->",
           "pattern": "hype",
           "changed": false,
@@ -791,7 +791,7 @@
         },
         {
           "file": "README.md",
-          "line": 688,
+          "line": 689,
           "snippet": "- Mengklaim “terbaik”, “top”, “juara”. <!-- hype-lint-ignore-line -->",
           "pattern": "terbaik",
           "changed": false,
@@ -952,7 +952,7 @@
         },
         {
           "file": "README.md",
-          "line": 153,
+          "line": 154,
           "snippet": "### Governance & Fairness",
           "pattern": "fairness",
           "changed": false,
@@ -960,7 +960,7 @@
         },
         {
           "file": "README.md",
-          "line": 156,
+          "line": 157,
           "snippet": "- **[Fairness Methodology](docs/fairness/)** - Equity and fairness measures",
           "pattern": "fairness",
           "changed": false,
@@ -968,7 +968,7 @@
         },
         {
           "file": "README.md",
-          "line": 219,
+          "line": 220,
           "snippet": "- **⚖️ Equity Service** - Fairness calculation and under-served detection",
           "pattern": "under-?served",
           "changed": false,
@@ -976,7 +976,7 @@
         },
         {
           "file": "README.md",
-          "line": 219,
+          "line": 220,
           "snippet": "- **⚖️ Equity Service** - Fairness calculation and under-served detection",
           "pattern": "fairness",
           "changed": false,
@@ -984,7 +984,7 @@
         },
         {
           "file": "README.md",
-          "line": 365,
+          "line": 366,
           "snippet": "MerajutASA.id's governance system ensures fairness, transparency, and integrity through cryptographic verification and open decision processes.",
           "pattern": "fairness",
           "changed": false,
@@ -992,7 +992,7 @@
         },
         {
           "file": "README.md",
-          "line": 369,
+          "line": 370,
           "snippet": "- **GP1-GP10**: Comprehensive governance principles covering privacy, transparency, fairness, security, and accountability",
           "pattern": "fairness",
           "changed": false,
@@ -1000,7 +1000,7 @@
         },
         {
           "file": "README.md",
-          "line": 370,
+          "line": 371,
           "snippet": "- **Non-Ranking System**: Equity indicators without competitive scoring or performance ranking",
           "pattern": "non-?ranking",
           "changed": false,
@@ -1008,7 +1008,7 @@
         },
         {
           "file": "README.md",
-          "line": 371,
+          "line": 372,
           "snippet": "- **Hysteresis-Based Fairness**: Stable \"under-served\" detection using Option F parameters",
           "pattern": "under-?served",
           "changed": false,
@@ -1016,7 +1016,7 @@
         },
         {
           "file": "README.md",
-          "line": 371,
+          "line": 372,
           "snippet": "- **Hysteresis-Based Fairness**: Stable \"under-served\" detection using Option F parameters",
           "pattern": "fairness",
           "changed": false,

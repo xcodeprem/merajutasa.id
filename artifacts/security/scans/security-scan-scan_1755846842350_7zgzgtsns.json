@@ -1,0 +1,20 @@
+{
+  "scan_id": "scan_1755846842350_7zgzgtsns",
+  "scan_type": "full",
+  "started_at": "2025-08-22T07:14:02.350Z",
+  "vulnerabilities": [
+    {
+      "type": "dependency_vulnerability",
+      "severity": "low",
+      "package": "markdownlint-cli2",
+      "version": "^0.18.1",
+      "description": "Vulnerability found in markdownlint-cli2@^0.18.1",
+      "cvss_score": "7.7",
+      "cve_id": "CVE-2024-201"
+    }
+  ],
+  "threats": [],
+  "configuration_issues": [],
+  "overall_score": 98,
+  "recommendations": []
+}

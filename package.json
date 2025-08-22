@@ -262,7 +262,8 @@
     "privacy:request:simulate": "node tools/privacy-request-simulator.js",
     "phase2:week6:verify": "npm run week6:validate && npm run compliance:assess && npm run security:scan && npm run privacy:request:simulate",
     "sanity:check": "node tools/sanity-check-all.js",
-    "sanity:check:all": "node tools/sanity-check-all.js"
+    "sanity:check:all": "node tools/sanity-check-all.js",
+    "validation:playbook": "./scripts/run-validation-playbook.sh"
   },
   "devDependencies": {
     "ajv": "^8.17.1",

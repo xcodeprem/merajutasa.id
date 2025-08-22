@@ -6,15 +6,15 @@
   },
   "key_token_frequency": {
     "fairness": 365,
-    "privacy": 425,
+    "privacy": 426,
     "hysteresis": 283,
-    "hash": 561,
+    "hash": 573,
     "credential": 199,
-    "governance": 761,
+    "governance": 764,
     "revocation": 110
   },
-  "totalKey": 2704,
-  "banned_terms_detected": 229,
+  "totalKey": 2720,
+  "banned_terms_detected": 237,
   "banned_samples": [
     {
       "file": "docs/contributing.md",
@@ -113,7 +113,31 @@
       "term": "peringkat"
     },
     {
+      "file": "docs/runbooks/validation-playbook.md",
+      "term": "top"
+    },
+    {
       "file": "docs/runbooks/boot-sequence-local.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/runbooks/boot-sequence-k8s.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/runbooks/boot-sequence-k8s.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/runbooks/boot-sequence-k8s.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/runbooks/boot-sequence-k8s.md",
+      "term": "top"
+    },
+    {
+      "file": "docs/runbooks/boot-sequence-k8s.md",
       "term": "top"
     },
     {
