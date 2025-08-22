@@ -1,0 +1,68 @@
+name: Copilot Auto Review and Merge
+
+on:
+  pull_request:
+    types: [opened, ready_for_review, synchronize, reopened]
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  review-and-merge:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request.draft == false }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup gh
+        uses: cli/cli-action@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Read config
+        id: cfg
+        run: |
+          echo "ASSIGNEE=$(jq -r '.assignee' .github/copilot-orchestrator.json)" >> $GITHUB_OUTPUT
+          echo "LABEL_INPROG=$(jq -r '.labels.inProgress' .github/copilot-orchestrator.json)" >> $GITHUB_OUTPUT
+          echo "LABEL_DONE=$(jq -r '.labels.done' .github/copilot-orchestrator.json)" >> $GITHUB_OUTPUT
+
+      - name: Identify linked issues from PR body
+        id: link
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          printf "%s" "$PR_BODY" | sed -nE 's/.*#([0-9]+).*/\1/p' | head -n1 > issue.txt || true
+          ISSUE=$(cat issue.txt || true)
+          echo "ISSUE=$ISSUE" >> $GITHUB_OUTPUT
+
+      - name: Approve PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr review "${{ github.event.pull_request.number }}" --approve
+
+      - name: Squash merge PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr merge "${{ github.event.pull_request.number }}" --squash --auto --delete-branch || gh pr merge "${{ github.event.pull_request.number }}" --squash --admin --delete-branch
+
+      - name: Mark linked issue done and remove in-progress
+        if: ${{ steps.link.outputs.ISSUE != '' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          n='${{ steps.link.outputs.ISSUE }}'
+          gh label create '${{ steps.cfg.outputs.LABEL_DONE }}' --color 2ea043 --description "Completed by Copilot" || true
+          gh issue edit "$n" --remove-label '${{ steps.cfg.outputs.LABEL_INPROG }}' --add-label '${{ steps.cfg.outputs.LABEL_DONE }}' --state closed
+
+      - name: Trigger next assignment
+        if: ${{ steps.link.outputs.ISSUE != '' }}
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: Copilot Sub-issue Assigner
+          ref: ${{ github.ref_name }}

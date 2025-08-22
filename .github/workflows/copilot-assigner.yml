@@ -1,0 +1,66 @@
+name: Copilot Sub-issue Assigner
+
+on:
+  schedule:
+    - cron: '*/20 * * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  assign-next:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup gh
+        uses: cli/cli-action@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Read config
+        id: cfg
+        run: |
+          cat .github/copilot-orchestrator.json
+          echo "ASSIGNEE=$(jq -r '.assignee' .github/copilot-orchestrator.json)" >> $GITHUB_OUTPUT
+          echo "LABEL_INPROG=$(jq -r '.labels.inProgress' .github/copilot-orchestrator.json)" >> $GITHUB_OUTPUT
+          echo "LABEL_DONE=$(jq -r '.labels.done' .github/copilot-orchestrator.json)" >> $GITHUB_OUTPUT
+
+      - name: Find in-progress issues
+        id: inprog
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # find any open issues with the in-progress label
+          gh issue list --label "${{ steps.cfg.outputs.LABEL_INPROG }}" --state open --json number | tee inprog.json
+          echo "COUNT=$(jq 'length' inprog.json)" >> $GITHUB_OUTPUT
+
+      - name: Exit if something in progress
+        if: ${{ steps.inprog.outputs.COUNT != '0' }}
+        run: |
+          echo "An issue is already in progress; skipping assignment."
+
+      - name: Find next unassigned open sub-issue
+        if: ${{ steps.inprog.outputs.COUNT == '0' }}
+        id: next
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Heuristic: any open issue without in-progress/done labels and not assigned
+          gh issue list --state open --json number,title,labels,assignees | jq '[.[] | select((.assignees|length)==0) | select((.labels|map(.name)|index("'${{ steps.cfg.outputs.LABEL_INPROG }}'"))|not) | select((.labels|map(.name)|index("'${{ steps.cfg.outputs.LABEL_DONE }}'"))|not)] | sort_by(.number) | .[0] // {}' | tee next.json
+          echo "NUM=$(jq -r '.number // ""' next.json)" >> $GITHUB_OUTPUT
+
+      - name: Assign to Copilot and mark in-progress
+        if: ${{ steps.next.outputs.NUM != '' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          n='${{ steps.next.outputs.NUM }}'
+          gh issue edit "$n" --add-assignee '${{ steps.cfg.outputs.ASSIGNEE }}'
+          gh label create '${{ steps.cfg.outputs.LABEL_INPROG }}' --color 1f6feb --description "Being worked by Copilot" || true
+          gh issue edit "$n" --add-label '${{ steps.cfg.outputs.LABEL_INPROG }}'
+          echo "Assigned issue #$n to ${{ steps.cfg.outputs.ASSIGNEE }} and marked in-progress."
