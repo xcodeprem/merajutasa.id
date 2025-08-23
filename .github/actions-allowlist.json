@@ -81,6 +81,13 @@
       "description": "Third-party GitHub release action (v2.0.8)"
     },
     {
+      "action": "actions/download-artifact",
+      "allowed_shas": [
+        "65a9edc5881444af0b9093a5e628f2fe47ea3b2e"
+      ],
+      "description": "Official GitHub artifact download action"
+    },
+    {
       "action": "benc-uk/workflow-dispatch",
       "allowed_shas": [
         "25938ad20bcf54d63616cf6d7d0a3f114c0b0e4d"

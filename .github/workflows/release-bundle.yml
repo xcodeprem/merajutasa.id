@@ -23,6 +23,7 @@ jobs:
       - uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
         with:
           node-version: '24'
+          cache: 'npm'
       - run: npm ci
       - name: Generate artifacts
         run: |
