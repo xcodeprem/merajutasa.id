@@ -1,0 +1,110 @@
+{
+  "issue": "Issue #21 - Pemindaian rahasia repo-wide dan pembersihan riwayat",
+  "overall_compliance": true,
+  "recommendations": [],
+  "requirements": {
+    "acceptance_criteria": {
+      "hooks_prevent_commits": {
+        "details": {
+          "pre_commit_blocks_secrets": true
+        },
+        "status": "PASS"
+      },
+      "scan_reports_in_ci": {
+        "details": {
+          "reports_available": 2,
+          "total_required": 2
+        },
+        "status": "READY"
+      },
+      "security_md_explains_process": {
+        "details": {
+          "security_md_comprehensive": true
+        },
+        "status": "READY"
+      },
+      "zero_critical_high_findings": {
+        "details": {
+          "findings_count": 0
+        },
+        "status": "PASS"
+      }
+    },
+    "deliverables": {
+      "gitignore_policy": {
+        "details": {
+          "patterns_covered": 7,
+          "total_patterns": 7
+        },
+        "status": "READY"
+      },
+      "hooks": {
+        "details": {
+          "gitignore_patterns": true,
+          "hook_exists": true,
+          "hook_has_gitleaks": true
+        },
+        "status": "MET"
+      },
+      "log_rotation": {
+        "details": {
+          "rotation_log": true,
+          "rotation_report": true
+        },
+        "status": "MET"
+      },
+      "scan_reports": {
+        "details": {
+          "reports_available": 2,
+          "total_required": 2
+        },
+        "status": "READY"
+      },
+      "security_md_update": {
+        "details": {
+          "security_md_comprehensive": true
+        },
+        "status": "READY"
+      }
+    },
+    "non_negotiable": {
+      "file_blocking_active": {
+        "details": {
+          "gitignore_patterns": true,
+          "hook_exists": true,
+          "hook_has_gitleaks": true
+        },
+        "status": "MET"
+      },
+      "history_tools_available": {
+        "details": {
+          "history_scan_available": true,
+          "tools_installed": true
+        },
+        "status": "MET"
+      },
+      "rotation_framework": {
+        "details": {
+          "rotation_log": true,
+          "rotation_report": true
+        },
+        "status": "MET"
+      },
+      "secret_scanning_active": {
+        "details": {
+          "protection_active": {
+            "ci_scanning": "ACTIVE",
+            "github_secret_scanning": "ENABLED",
+            "gitignore_blocking": "ACTIVE",
+            "gitleaks_pre_commit": "ACTIVE"
+          },
+          "scan_status": "SECURE"
+        },
+        "status": "MET"
+      }
+    }
+  },
+  "status": "COMPLIANT",
+  "summary": "All Issue #21 requirements are met",
+  "timestamp": "2025-08-23T21:42:25.388Z"
+}
