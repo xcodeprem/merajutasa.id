@@ -233,7 +233,6 @@
     "test:week6-contracts": "node tools/tests/week6-component-contracts.test.js",
     "test:week6-smoke": "node tools/tests/week6-component-smoke.test.js",
     "test:week6": "npm run test:week6-imports && npm run test:week6-contracts && npm run test:week6-smoke",
-    "test:gitignore-patterns": "node tools/tests/gitignore-patterns.test.js",
     "test:personal-projects": "node tools/tests/personal-projects-automation.test.js",
     "test:equity-smoke": "node tools/tests/equity-smoke.test.js",
     "test:equity-ui-smoke": "node tools/tests/equity-ui-smoke.test.js",
