@@ -11,39 +11,159 @@
       "status": "verified",
       "verified_at": "2025-08-23T16:05:00Z",
       "parents": [
-        { "number": 4,  "title": "SEGERA: Proteksi rahasia dan sanitasi riwayat git", "url": "https://github.com/xcodeprem/merajutasa.id/issues/4" },
-        { "number": 5,  "title": "Standarisasi CI/CD di GitHub Actions: build, lint, test, security", "url": "https://github.com/xcodeprem/merajutasa.id/issues/5" },
-        { "number": 6,  "title": "Supply chain hardening: pin Actions, SBOM, provenance/attestation", "url": "https://github.com/xcodeprem/merajutasa.id/issues/6" },
-        { "number": 7,  "title": "Governance repo: LICENSE, CODEOWNERS, CONTRIBUTING, CoC", "url": "https://github.com/xcodeprem/merajutasa.id/issues/7" },
-        { "number": 8,  "title": "Kualitas kode JS/TS: ESLint, Prettier, TypeScript strict, hooks", "url": "https://github.com/xcodeprem/merajutasa.id/issues/8" },
-        { "number": 9,  "title": "Strategi testing menyeluruh: unit, integration, e2e", "url": "https://github.com/xcodeprem/merajutasa.id/issues/9" },
-        { "number": 10, "title": "Dokumentasi dan arsitektur: README, ADR, diagram, runbook", "url": "https://github.com/xcodeprem/merajutasa.id/issues/10" },
-        { "number": 11, "title": "Infrastructure as Code dan kebijakan: Terraform + OPA", "url": "https://github.com/xcodeprem/merajutasa.id/issues/11" },
-        { "number": 12, "title": "Kontainerisasi dan rilis: Docker, GHCR, otomatisasi rilis", "url": "https://github.com/xcodeprem/merajutasa.id/issues/12" },
-        { "number": 13, "title": "Manajemen environment dan rahasia: GitHub Environments", "url": "https://github.com/xcodeprem/merajutasa.id/issues/13" },
-        { "number": 14, "title": "Observability: logging terstruktur, tracing, error tracking, uptime", "url": "https://github.com/xcodeprem/merajutasa.id/issues/14" },
-        { "number": 15, "title": "API contracts dan gateway: OpenAPI, auth, rate limiting", "url": "https://github.com/xcodeprem/merajutasa.id/issues/15" },
-        { "number": 16, "title": "Kinerja dan ketahanan: load test, budgets, chaos (opsional lanjutan)", "url": "https://github.com/xcodeprem/merajutasa.id/issues/16" },
-        { "number": 17, "title": "Audit keamanan berkala dan threat modeling", "url": "https://github.com/xcodeprem/merajutasa.id/issues/17" },
-        { "number": 18, "title": "Manajemen data: backup/restore, retensi, privasi", "url": "https://github.com/xcodeprem/merajutasa.id/issues/18" }
+        {
+          "number": 4,
+          "title": "SEGERA: Proteksi rahasia dan sanitasi riwayat git",
+          "url": "https://github.com/xcodeprem/merajutasa.id/issues/4"
+        },
+        {
+          "number": 5,
+          "title": "Standarisasi CI/CD di GitHub Actions: build, lint, test, security",
+          "url": "https://github.com/xcodeprem/merajutasa.id/issues/5"
+        },
+        {
+          "number": 6,
+          "title": "Supply chain hardening: pin Actions, SBOM, provenance/attestation",
+          "url": "https://github.com/xcodeprem/merajutasa.id/issues/6"
+        },
+        {
+          "number": 7,
+          "title": "Governance repo: LICENSE, CODEOWNERS, CONTRIBUTING, CoC",
+          "url": "https://github.com/xcodeprem/merajutasa.id/issues/7"
+        },
+        {
+          "number": 8,
+          "title": "Kualitas kode JS/TS: ESLint, Prettier, TypeScript strict, hooks",
+          "url": "https://github.com/xcodeprem/merajutasa.id/issues/8"
+        },
+        {
+          "number": 9,
+          "title": "Strategi testing menyeluruh: unit, integration, e2e",
+          "url": "https://github.com/xcodeprem/merajutasa.id/issues/9"
+        },
+        {
+          "number": 10,
+          "title": "Dokumentasi dan arsitektur: README, ADR, diagram, runbook",
+          "url": "https://github.com/xcodeprem/merajutasa.id/issues/10"
+        },
+        {
+          "number": 11,
+          "title": "Infrastructure as Code dan kebijakan: Terraform + OPA",
+          "url": "https://github.com/xcodeprem/merajutasa.id/issues/11"
+        },
+        {
+          "number": 12,
+          "title": "Kontainerisasi dan rilis: Docker, GHCR, otomatisasi rilis",
+          "url": "https://github.com/xcodeprem/merajutasa.id/issues/12"
+        },
+        {
+          "number": 13,
+          "title": "Manajemen environment dan rahasia: GitHub Environments",
+          "url": "https://github.com/xcodeprem/merajutasa.id/issues/13"
+        },
+        {
+          "number": 14,
+          "title": "Observability: logging terstruktur, tracing, error tracking, uptime",
+          "url": "https://github.com/xcodeprem/merajutasa.id/issues/14"
+        },
+        {
+          "number": 15,
+          "title": "API contracts dan gateway: OpenAPI, auth, rate limiting",
+          "url": "https://github.com/xcodeprem/merajutasa.id/issues/15"
+        },
+        {
+          "number": 16,
+          "title": "Kinerja dan ketahanan: load test, budgets, chaos (opsional lanjutan)",
+          "url": "https://github.com/xcodeprem/merajutasa.id/issues/16"
+        },
+        {
+          "number": 17,
+          "title": "Audit keamanan berkala dan threat modeling",
+          "url": "https://github.com/xcodeprem/merajutasa.id/issues/17"
+        },
+        {
+          "number": 18,
+          "title": "Manajemen data: backup/restore, retensi, privasi",
+          "url": "https://github.com/xcodeprem/merajutasa.id/issues/18"
+        }
       ]
     }
   },
   "parents": [
-    { "number": 4,  "narrative_comment_posted": true, "native_links_verified": null },
-    { "number": 5,  "narrative_comment_posted": true, "native_links_verified": null },
-    { "number": 6,  "narrative_comment_posted": true, "native_links_verified": true },
-    { "number": 7,  "narrative_comment_posted": true, "native_links_verified": true },
-    { "number": 8,  "narrative_comment_posted": true, "native_links_verified": true },
-    { "number": 9,  "narrative_comment_posted": true, "native_links_verified": true },
-    { "number": 10, "narrative_comment_posted": true, "native_links_verified": true },
-    { "number": 11, "narrative_comment_posted": true, "native_links_verified": true },
-    { "number": 12, "narrative_comment_posted": true, "native_links_verified": true },
-    { "number": 13, "narrative_comment_posted": true, "native_links_verified": true },
-    { "number": 14, "narrative_comment_posted": true, "native_links_verified": true },
-    { "number": 15, "narrative_comment_posted": true, "native_links_verified": true },
-    { "number": 16, "narrative_comment_posted": true, "native_links_verified": true },
-    { "number": 17, "narrative_comment_posted": true, "native_links_verified": true },
-    { "number": 18, "narrative_comment_posted": true, "native_links_verified": true }
+    {
+      "number": 4,
+      "narrative_comment_posted": true,
+      "native_links_verified": true
+    },
+    {
+      "number": 5,
+      "narrative_comment_posted": true,
+      "native_links_verified": true
+    },
+    {
+      "number": 6,
+      "narrative_comment_posted": true,
+      "native_links_verified": true
+    },
+    {
+      "number": 7,
+      "narrative_comment_posted": true,
+      "native_links_verified": true
+    },
+    {
+      "number": 8,
+      "narrative_comment_posted": true,
+      "native_links_verified": true
+    },
+    {
+      "number": 9,
+      "narrative_comment_posted": true,
+      "native_links_verified": true
+    },
+    {
+      "number": 10,
+      "narrative_comment_posted": true,
+      "native_links_verified": true
+    },
+    {
+      "number": 11,
+      "narrative_comment_posted": true,
+      "native_links_verified": true
+    },
+    {
+      "number": 12,
+      "narrative_comment_posted": true,
+      "native_links_verified": true
+    },
+    {
+      "number": 13,
+      "narrative_comment_posted": true,
+      "native_links_verified": true
+    },
+    {
+      "number": 14,
+      "narrative_comment_posted": true,
+      "native_links_verified": true
+    },
+    {
+      "number": 15,
+      "narrative_comment_posted": true,
+      "native_links_verified": true
+    },
+    {
+      "number": 16,
+      "narrative_comment_posted": true,
+      "native_links_verified": true
+    },
+    {
+      "number": 17,
+      "narrative_comment_posted": true,
+      "native_links_verified": true
+    },
+    {
+      "number": 18,
+      "narrative_comment_posted": true,
+      "native_links_verified": true
+    }
   ]
 }
