@@ -21,5 +21,6 @@ jobs:
           output-file: sbom.spdx.json
       - uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
         with:
-          name: sbom
+          name: sbom-${{ github.run_id }}
           path: sbom.spdx.json
+          retention-days: 90

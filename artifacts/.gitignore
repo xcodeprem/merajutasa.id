@@ -2,3 +2,10 @@
 # This file is created by tools/dev-kms-mock.js for dev-only flows
 # and must never be published to remote environments.
 dev-kek.json
+
+# CI-generated artifacts (should only be generated in CI)
+coverage-summary-comprehensive.json
+lint-summary-comprehensive.json
+equity-ui-v2-coverage/
+test-coverage/
+build/

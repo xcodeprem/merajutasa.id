@@ -97,6 +97,12 @@ jobs:
         run: npm run test
         continue-on-error: true
 
+      - name: Generate root test coverage summary
+        run: |
+          mkdir -p artifacts/test-coverage
+          echo "{\"timestamp\":\"$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)\",\"test_suites\":{\"governance\":\"$(npm run test:governance >/dev/null 2>&1 && echo 'passed' || echo 'failed')\",\"services\":\"$(npm run test:services >/dev/null 2>&1 && echo 'passed' || echo 'failed')\",\"infrastructure\":\"$(npm run test:infrastructure >/dev/null 2>&1 && echo 'passed' || echo 'failed')\"}}" > artifacts/test-coverage/root-test-summary.json
+        continue-on-error: true
+
       - name: Run governance:verify
         run: npm run governance:verify
         continue-on-error: true
@@ -111,6 +117,25 @@ jobs:
         run: npx playwright test || echo "Playwright e2e failed (advisory)"
         continue-on-error: true
 
+      - name: Build UI production assets
+        working-directory: public/equity-ui-v2
+        run: npm run build
+        continue-on-error: true
+
+      - name: Generate build summary
+        run: |
+          mkdir -p artifacts/build
+          if [ -d "public/dist" ]; then
+            echo "{\"status\":\"success\",\"timestamp\":\"$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)\",\"build_size\":\"$(du -sh public/dist 2>/dev/null | cut -f1 || echo 'unknown')\",\"files\":$(find public/dist -type f | wc -l 2>/dev/null || echo 0)}" > artifacts/build/ui-build-summary.json
+          else
+            echo "{\"status\":\"failed\",\"timestamp\":\"$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)\",\"error\":\"Build directory not found\"}" > artifacts/build/ui-build-summary.json
+          fi
+        continue-on-error: true
+
+      - name: Generate comprehensive coverage summary
+        run: npm run coverage:summary
+        continue-on-error: true
+
       - name: Upload UI coverage & e2e artifacts
         if: always()
         uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
@@ -120,6 +145,17 @@ jobs:
             artifacts/equity-ui-v2-coverage
             artifacts/equity-ui-e2e-smoke.json
             artifacts/a11y-*.json
+          retention-days: 30
+
+      - name: Upload UI build artifacts
+        if: always()
+        uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
+        with:
+          name: ui-build-${{ github.run_id }}
+          path: |
+            public/dist
+            artifacts/build/ui-build-summary.json
+          retention-days: 14
 
       - name: Run A8 (no-silent-drift) Gates
         uses: ./.github/actions/run-a8
@@ -152,6 +188,10 @@ jobs:
 
       - name: Markdown Lint (advisory)
         run: npm run lint:md || echo "Markdown linting found issues (advisory mode)"
+
+      - name: Generate comprehensive lint summary
+        run: npm run lint:summary
+        continue-on-error: true
 
       - name: Terminology Adoption Enforcement (Stage 2)
         run: |
@@ -231,6 +271,22 @@ jobs:
             artifacts/compliance/assessments/*.json
             artifacts/security/scans/*.json
             artifacts/privacy-*.json
+          retention-days: 30
+
+      - name: Upload test coverage artifacts
+        if: always()
+        uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
+        with:
+          name: test-coverage-${{ github.run_id }}
+          path: |
+            artifacts/test-coverage
+            artifacts/coverage-summary-comprehensive.json
+            artifacts/lint-summary-comprehensive.json
+            artifacts/governance-verify-summary.json
+            artifacts/*-test.json
+            artifacts/spec-hash-diff.json
+            artifacts/param-integrity-matrix.json
+          retention-days: 30
 
       - name: Chain Integrity Monitor (advisory)
         run: |
