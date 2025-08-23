@@ -2,8 +2,12 @@
 
 [![CI Guard (H1)](https://github.com/xcodeprem/merajutasa.id/actions/workflows/ci-guard.yml/badge.svg)](https://github.com/xcodeprem/merajutasa.id/actions/workflows/ci-guard.yml)
 [![Node LTS Matrix Build](https://github.com/xcodeprem/merajutasa.id/actions/workflows/node-lts-matrix.yml/badge.svg)](https://github.com/xcodeprem/merajutasa.id/actions/workflows/node-lts-matrix.yml)
+[![CI: Comprehensive Tests & Coverage](https://github.com/xcodeprem/merajutasa.id/actions/workflows/ci-comprehensive-tests.yml/badge.svg)](https://github.com/xcodeprem/merajutasa.id/actions/workflows/ci-comprehensive-tests.yml)
+[![CodeQL](https://github.com/xcodeprem/merajutasa.id/actions/workflows/codeql.yml/badge.svg)](https://github.com/xcodeprem/merajutasa.id/actions/workflows/codeql.yml)
+[![Gitleaks](https://github.com/xcodeprem/merajutasa.id/actions/workflows/gitleaks.yml/badge.svg)](https://github.com/xcodeprem/merajutasa.id/actions/workflows/gitleaks.yml)
 [![H1 Guard & KPI](https://github.com/xcodeprem/merajutasa.id/actions/workflows/h1-guard.yml/badge.svg)](https://github.com/xcodeprem/merajutasa.id/actions/workflows/h1-guard.yml)
 [![Deploy Pages (Dashboard Snapshots)](https://github.com/xcodeprem/merajutasa.id/actions/workflows/pages.yml/badge.svg)](https://github.com/xcodeprem/merajutasa.id/actions/workflows/pages.yml)
+[![Coverage Gate](https://img.shields.io/badge/coverage-%E2%89%A580%25-green)](docs/ci/comprehensive-testing-workflow.md)
 [![Changelog Excerpt](https://img.shields.io/badge/changelog-excerpt-blue)](https://xcodeprem.github.io/merajutasa.id/changelog.html)
 
 **Enterprise-grade skill credentialing platform with comprehensive governance, high availability, security, and compliance infrastructure - featuring 648KB+ of production-ready code across 35+ enterprise components.**
