@@ -94,65 +94,97 @@ async function createAllowedFiles() {
 async function testGitleaksDetection() {
   console.log('[secret-protection] Testing gitleaks detection...');
   
-  const result = spawnSync('gitleaks', [
-    'detect', 
-    '--source', TEMP_DIR,
-    '--config', path.join(TEMP_DIR, '.gitleaks.toml'),
-    '--redact',
-    '--verbose'
-  ], {
-    encoding: 'utf8',
-    timeout: 30000
-  });
+  // Try different gitleaks command paths
+  const gitleaksCmds = ['/tmp/gitleaks', 'gitleaks', 'npx gitleaks'];
+  let result = null;
+  
+  for (const cmd of gitleaksCmds) {
+    const cmdParts = cmd.split(' ');
+    const baseCmd = cmdParts[0];
+    const args = cmdParts.slice(1);
+    
+    result = spawnSync(baseCmd, [
+      ...args,
+      'detect', 
+      '--source', TEMP_DIR,
+      '--config', path.join(TEMP_DIR, '.gitleaks.toml'),
+      '--redact',
+      '--verbose'
+    ], {
+      encoding: 'utf8',
+      timeout: 30000
+    });
+    
+    // If command exists (not 127 = command not found), use this result
+    if (result.status !== 127) {
+      break;
+    }
+  }
   
   return {
     exitCode: result.status,
     stdout: result.stdout || '',
     stderr: result.stderr || '',
-    detected: result.status !== 0 // Non-zero exit means secrets detected
+    detected: result.status !== 0 && result.status !== 127 // Non-zero exit means secrets detected, but not command not found
   };
 }
 
 async function testPreCommitHook() {
   console.log('[secret-protection] Testing pre-commit hook simulation...');
   
-  // Initialize git repo in temp directory
-  const initResult = spawnSync('git', ['init'], {
-    cwd: TEMP_DIR,
-    encoding: 'utf8'
-  });
+  // Try different gitleaks command paths for pre-commit simulation
+  const gitleaksCmds = ['/tmp/gitleaks', 'gitleaks', 'npx gitleaks'];
+  let result = null;
   
-  if (initResult.status !== 0) {
-    throw new Error(`Git init failed: ${initResult.stderr}`);
+  for (const cmd of gitleaksCmds) {
+    const cmdParts = cmd.split(' ');
+    const baseCmd = cmdParts[0];
+    const args = cmdParts.slice(1);
+    
+    // Create a test file that should be detected by built-in rules
+    const testSecretFile = path.join(TEMP_DIR, 'secret-test.js');
+    await fs.writeFile(testSecretFile, 'const TOKEN = "ghp_1234567890abcdef1234567890123456789";');
+    
+    // Add the new file to staging
+    const addResult = spawnSync('git', ['add', 'secret-test.js'], {
+      cwd: TEMP_DIR,
+      encoding: 'utf8'
+    });
+    
+    // If add failed (file ignored), try a different file type
+    if (addResult.status !== 0) {
+      const testSecretFile2 = path.join(TEMP_DIR, 'config.yml');
+      await fs.writeFile(testSecretFile2, 'api_token: "AKIA1234567890123456"');
+      spawnSync('git', ['add', 'config.yml'], {
+        cwd: TEMP_DIR,
+        encoding: 'utf8'
+      });
+    }
+    
+    // Try to run gitleaks protect (pre-commit simulation)
+    result = spawnSync(baseCmd, [
+      ...args,
+      'protect',
+      '--staged',
+      '--config', '.gitleaks.toml',
+      '--verbose'
+    ], {
+      cwd: TEMP_DIR,
+      encoding: 'utf8',
+      timeout: 30000
+    });
+    
+    // If command exists (not 127 = command not found), use this result
+    if (result.status !== 127) {
+      break;
+    }
   }
   
-  // Configure git to avoid user identity issues
-  spawnSync('git', ['config', 'user.email', 'test@example.com'], { cwd: TEMP_DIR });
-  spawnSync('git', ['config', 'user.name', 'Test User'], { cwd: TEMP_DIR });
-  
-  // Add files to git
-  const addResult = spawnSync('git', ['add', '.'], {
-    cwd: TEMP_DIR,
-    encoding: 'utf8'
-  });
-  
-  // Try to commit (should be blocked by pre-commit hook if gitleaks is available)
-  const commitResult = spawnSync('gitleaks', [
-    'protect',
-    '--staged',
-    '--config', '.gitleaks.toml',
-    '--verbose'
-  ], {
-    cwd: TEMP_DIR,
-    encoding: 'utf8',
-    timeout: 30000
-  });
-  
   return {
-    exitCode: commitResult.status,
-    stdout: commitResult.stdout || '',
-    stderr: commitResult.stderr || '',
-    blocked: commitResult.status !== 0
+    exitCode: result.status,
+    stdout: result.stdout || '',
+    stderr: result.stderr || '',
+    blocked: result.status !== 0 && result.status !== 127
   };
 }
 
@@ -193,12 +225,19 @@ async function validateSecretPatterns() {
   const secretFiles = await createSecretFiles();
   await createAllowedFiles();
   
-  // Initialize git in temp directory for gitignore testing
+  // Initialize git in temp directory for all tests
   spawnSync('git', ['init'], { cwd: TEMP_DIR });
   spawnSync('git', ['config', 'user.email', 'test@example.com'], { cwd: TEMP_DIR });
   spawnSync('git', ['config', 'user.name', 'Test User'], { cwd: TEMP_DIR });
   
-  // Test gitleaks detection
+  // Add and commit all files so gitleaks can scan them
+  spawnSync('git', ['add', '.'], { cwd: TEMP_DIR });
+  const commitResult = spawnSync('git', ['commit', '-m', 'Test commit with secrets'], { 
+    cwd: TEMP_DIR, 
+    encoding: 'utf8' 
+  });
+  
+  // Test gitleaks detection on committed files
   const gitleaksResult = await testGitleaksDetection();
   
   // Test pre-commit protection

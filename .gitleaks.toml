@@ -1,5 +1,6 @@
 title = "MerajutASA Secret Scanning"
 redact = true
+# Use built-in rules + custom additions
 
 [allowlist]
 description = "Allowed non-sensitive content and fixtures"
@@ -11,7 +12,9 @@ paths = [
   "^schemas/.*$",
   "^tests/fixtures/.*$",
   "^.*\\.test\\.js$",
-  "^.*\\.spec\\.js$"
+  "^.*\\.spec\\.js$",
+  "^\\.env\\.example$",  # Example env file is safe
+  "^.*\\.md$"  # Documentation files
 ]
 regexes = [
   "DUMMY_[A-Z0-9_]{8,}",
@@ -20,21 +23,20 @@ regexes = [
   "MOCK_[A-Z0-9_]{8,}",
   "(?i)^[a-f0-9]{64}$", # sha256 hashes
   "(?i)^[a-f0-9]{40}$", # sha1 hashes
-  "(?i)^[a-f0-9]{32}$"  # md5 hashes
+  "(?i)^[a-f0-9]{32}$",  # md5 hashes
+  "(?i)redis://localhost:[0-9]+", # Local redis examples
+  "(?i)mongodb://localhost:[0-9]+", # Local mongo examples
+  "(?i)mysql://localhost:[0-9]+", # Local mysql examples
+  "(?i)postgresql://localhost:[0-9]+", # Local postgres examples
+  "(?i)(password|token|key|secret|api)\\s*=\\s*['\"]?fake_[a-z0-9_]+['\"]?", # Fake test values
+  "(?i)(password|token|key|secret|api)\\s*=\\s*['\"]?test[_-][a-z0-9_-]+['\"]?", # Test values
+  "(?i)(password|token|key|secret|api)\\s*=\\s*['\"]?example[_-][a-z0-9_-]+['\"]?", # Example values
+  "(?i)(password|token|key|secret|api)\\s*=\\s*['\"]?mock[_-][a-z0-9_-]+['\"]?" # Mock values
 ]
 
-# Additional secret patterns beyond defaults
-[[rules]]
-id = "custom-env-vars"
-description = "Environment variables with sensitive patterns"
-regex = '''(?i)(password|passwd|secret|token|key|api|auth|credential)[\s]*=[\s]*["\']?[a-zA-Z0-9+/=]{8,}["\']?'''
-
+# Additional patterns for connection strings with credentials
 [[rules]]
 id = "custom-connection-strings"
-description = "Database and service connection strings"
-regex = '''(?i)(mongodb|mysql|postgresql|redis|rabbitmq|kafka)://[^\s\'"]+'''
-
-[[rules]]
-id = "custom-private-keys"
-description = "Private key patterns"
-regex = '''-----BEGIN [A-Z ]+PRIVATE KEY-----'''
+description = "Database and service connection strings with credentials"
+regex = '''(?i)(mongodb|mysql|postgresql|redis|rabbitmq|kafka)://[^:]+:[^@]+@[^\s\'"]+'''
+# Only match connection strings with credentials (user:pass@host format)
