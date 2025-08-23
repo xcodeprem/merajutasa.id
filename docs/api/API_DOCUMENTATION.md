@@ -6,8 +6,8 @@ Enterprise API for MerajutASA.id governance and integrity platform
 
 ## Base URLs
 
-- **Development:** http://localhost:8080
-- **Production:** https://api.merajutasa.id
+- **Development:** <http://localhost:8080>
+- **Production:** <https://api.merajutasa.id>
 
 ## Authentication
 
@@ -32,6 +32,7 @@ This API supports multiple authentication methods:
 **Tags:** Signer
 
 **Responses:**
+
 - **200:** Public key retrieved successfully
 - **400:** #/components/responses/Error
 - **401:** #/components/responses/Unauthorized
@@ -47,6 +48,7 @@ This API supports multiple authentication methods:
 **Tags:** Signer
 
 **Responses:**
+
 - **200:** Signature created successfully
 - **400:** #/components/responses/Error
 - **401:** #/components/responses/Unauthorized
@@ -62,6 +64,7 @@ This API supports multiple authentication methods:
 **Tags:** Chain
 
 **Responses:**
+
 - **200:** Entry appended successfully
 - **400:** #/components/responses/Error
 - **401:** #/components/responses/Unauthorized
@@ -77,6 +80,7 @@ This API supports multiple authentication methods:
 **Tags:** Chain
 
 **Responses:**
+
 - **200:** Chain head retrieved successfully
 - **400:** #/components/responses/Error
 - **401:** #/components/responses/Unauthorized
@@ -92,6 +96,7 @@ This API supports multiple authentication methods:
 **Tags:** Collector
 
 **Responses:**
+
 - **200:** Event ingested successfully
 - **400:** #/components/responses/Error
 - **401:** #/components/responses/Unauthorized
@@ -107,6 +112,7 @@ This API supports multiple authentication methods:
 **Tags:** Management
 
 **Responses:**
+
 - **200:** Gateway is healthy
 - **400:** #/components/responses/Error
 - **401:** #/components/responses/Unauthorized
@@ -122,6 +128,7 @@ This API supports multiple authentication methods:
 **Tags:** Management
 
 **Responses:**
+
 - **200:** Metrics retrieved successfully
 - **400:** #/components/responses/Error
 - **401:** #/components/responses/Unauthorized
@@ -137,12 +144,12 @@ This API supports multiple authentication methods:
 **Tags:** Management
 
 **Responses:**
+
 - **200:** Services list retrieved successfully
 - **400:** #/components/responses/Error
 - **401:** #/components/responses/Unauthorized
 - **429:** #/components/responses/RateLimitExceeded
 - **500:** #/components/responses/Error
-
 
 ## Error Handling
 
@@ -159,5 +166,5 @@ All endpoints return consistent error responses:
 ## Contact
 
 - **Team:** MerajutASA.id API Team
-- **Email:** api@merajutasa.id
-- **Website:** https://merajutasa.id
+- **Email:** <api@merajutasa.id>
+- **Website:** <https://merajutasa.id>
