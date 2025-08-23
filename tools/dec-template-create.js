@@ -14,13 +14,13 @@ function parseArgs() {
   for (let i = 0; i < args.length; i += 2) {
     const key = args[i];
     const val = args[i + 1];
-    if (!key || !val) break;
+    if (!key || !val) {break;}
     switch (key.toLowerCase()) {
-      case '-id': out.id = val; break;
-      case '-title': out.title = val; break;
-      case '-area': out.area = val; break;
-      case '-out': out.out = val; break;
-      default: break;
+    case '-id': out.id = val; break;
+    case '-title': out.title = val; break;
+    case '-area': out.area = val; break;
+    case '-out': out.out = val; break;
+    default: break;
     }
   }
   return out;

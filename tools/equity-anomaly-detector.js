@@ -37,7 +37,7 @@ async function loadParams(){
     alpha_beta_min_gap: a.alpha_beta_min_gap ?? 0.1, // ensure α<β by at least this gap when σ≈0
     // toggling guard
     guard_window: a.guard_window ?? 12,        // sliding window (snapshots) to limit firings
-    guard_max_alerts: a.guard_max_alerts ?? 2  // max anomalies allowed in the window
+    guard_max_alerts: a.guard_max_alerts ?? 2,  // max anomalies allowed in the window
   };
 }
 
@@ -65,19 +65,19 @@ async function main(){
   const decisionLogPath = 'artifacts/equity-decision-log.json';
   const decisionLogArr = Array.isArray(await readJson(decisionLogPath)) ? await readJson(decisionLogPath) : [];
   const decisionLogMap = new Map();
-  for (const e of decisionLogArr){ if (e && e.unit && e.ts) decisionLogMap.set(`${e.unit}__${e.ts}`, e); }
+  for (const e of decisionLogArr){ if (e && e.unit && e.ts) {decisionLogMap.set(`${e.unit}__${e.ts}`, e);} }
   const byUnit = new Map();
-  for (const s of snaps){ if (!byUnit.has(s.unit)) byUnit.set(s.unit, []); byUnit.get(s.unit).push(s); }
+  for (const s of snaps){ if (!byUnit.has(s.unit)) {byUnit.set(s.unit, []);} byUnit.get(s.unit).push(s); }
 
   const anomalies = [];
   const regionStats = {};
   for (const [unit, arr] of byUnit.entries()){
     const sorted = arr.slice().sort((a,b)=> a.ts.localeCompare(b.ts));
-    if (sorted.length < params.min_samples) continue;
+    if (sorted.length < params.min_samples) {continue;}
     let smoothedPrev = null; let consec=0; let cooldown=0; let lastAnomTs=null;
     // TWD tracking
-  // Seed phi window with persisted history for smoothing across restarts
-  const phiWindow = Array.isArray(phiHistory[unit]) ? phiHistory[unit].slice(-params.phi_window) : [];
+    // Seed phi window with persisted history for smoothing across restarts
+    const phiWindow = Array.isArray(phiHistory[unit]) ? phiHistory[unit].slice(-params.phi_window) : [];
     const regionCounts = { POS:0, BND:0, NEG:0 };
     // toggling guard (by index window)
     const recentAnomalyIdx = [];
@@ -93,8 +93,8 @@ async function main(){
       const pAnom = logistic(margin / Math.max(1e-9, params.phi_k));
       const phi = 1 - entropy01(pAnom);
       // maintain rolling phi stats
-  phiWindow.push(phi);
-      if (phiWindow.length > params.phi_window) phiWindow.shift();
+      phiWindow.push(phi);
+      if (phiWindow.length > params.phi_window) {phiWindow.shift();}
       const mu = phiWindow.reduce((s,v)=>s+v,0) / phiWindow.length;
       const variance = phiWindow.reduce((s,v)=> s + (v-mu)*(v-mu), 0) / phiWindow.length;
       const sigma = Math.sqrt(Math.max(0, variance));
@@ -105,14 +105,14 @@ async function main(){
         alpha = Math.max(0, Math.min(1, mu - params.alpha_beta_min_gap/2));
         beta  = Math.max(0, Math.min(1, mu + params.alpha_beta_min_gap/2));
       }
-  // region assignment
+      // region assignment
       let region;
-      if (phi >= beta) region = 'POS'; else if (phi <= alpha) region = 'NEG'; else region = 'BND';
+      if (phi >= beta) {region = 'POS';} else if (phi <= alpha) {region = 'NEG';} else {region = 'BND';}
       regionCounts[region]++;
 
-  // Record per-snapshot decision for weekly aggregation; de-dup by (unit,ts)
-  const key = `${unit}__${curr.ts}`;
-  decisionLogMap.set(key, { unit, ts: curr.ts, region, phi: +phi.toFixed(4), alpha: +alpha.toFixed(4), beta: +beta.toFixed(4) });
+      // Record per-snapshot decision for weekly aggregation; de-dup by (unit,ts)
+      const key = `${unit}__${curr.ts}`;
+      decisionLogMap.set(key, { unit, ts: curr.ts, region, phi: +phi.toFixed(4), alpha: +alpha.toFixed(4), beta: +beta.toFixed(4) });
 
       // Sliding window guard: drop old anomaly indices
       while (recentAnomalyIdx.length && recentAnomalyIdx[0] <= i - params.guard_window) {

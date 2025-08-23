@@ -7,7 +7,7 @@ async function loadJson(p){ try{ return JSON.parse(await fs.readFile(p,'utf8'));
 
 async function main(){
   const policy = await loadJson(path.join('tools','policy','scanner-policy.json'));
-  if(!policy) throw new Error('Missing tools/policy/scanner-policy.json');
+  if(!policy) {throw new Error('Missing tools/policy/scanner-policy.json');}
   const input = process.env.SEMGREP_RESULTS || 'semgrep-results.sarif.json';
   const raw = await loadJson(input) || {};
   // Semgrep SARIF format
@@ -34,10 +34,10 @@ async function main(){
       all: findings.length,
       byLevel: findings.reduce((acc,f)=>{acc[f.level]=(acc[f.level]||0)+1;return acc;},{}),
       allowed: findings.filter(f=>f.allowed).length,
-      violating: violating.length
+      violating: violating.length,
     },
     violating,
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   };
   await fs.mkdir('artifacts', { recursive: true });
   await fs.writeFile(path.join('artifacts','sast-semgrep-enforce-summary.json'), JSON.stringify(summary,null,2));

@@ -22,31 +22,31 @@ export class FrontendPerformanceTest {
         '/kpi/h1',
         '/under-served',
         '/weekly-trends',
-        '/monthly-rollup'
+        '/monthly-rollup',
       ],
-      
+
       // Performance thresholds
       maxResponseTime: options.maxResponseTime || 500, // 500ms
       maxApiResponseTime: options.maxApiResponseTime || 200, // 200ms
       minApiSuccessRate: options.minApiSuccessRate || 95, // 95%
-      
+
       // Test configuration
       iterations: options.iterations || 5,
       timeout: options.timeout || 5000, // 5 seconds
       userAgent: options.userAgent || 'MerajutASA-PerformanceTest/1.0',
-      
+
       // Output settings
       outputPath: options.outputPath || 'artifacts/frontend-performance',
       saveReports: options.saveReports !== false,
-      
-      ...options
+
+      ...options,
     };
 
     this.results = {
       ui: {},
       api: {},
       summary: {},
-      errors: []
+      errors: [],
     };
   }
 
@@ -55,40 +55,40 @@ export class FrontendPerformanceTest {
    */
   async runPerformanceTest() {
     console.log('🚀 Starting Frontend Performance Test...');
-    
+
     try {
       // Ensure output directory exists
       await this.ensureOutputDirectory();
-      
+
       // Test UI accessibility
       console.log('🌐 Testing UI accessibility...');
       await this.testUIAccessibility();
-      
+
       // Test API performance
       console.log('⚡ Testing API performance...');
       await this.testAPIPerformance();
-      
+
       // Test frontend assets
       console.log('📦 Testing frontend assets...');
       await this.testFrontendAssets();
-      
+
       // Generate performance report
       const report = await this.generatePerformanceReport();
-      
+
       // Save reports if enabled
       if (this.config.saveReports) {
         await this.saveReports(report);
       }
-      
+
       console.log('✅ Frontend performance test completed');
       return report;
-      
+
     } catch (error) {
       console.error('❌ Frontend performance test failed:', error.message);
       this.results.errors.push({
         timestamp: new Date().toISOString(),
         error: error.message,
-        stack: error.stack
+        stack: error.stack,
       });
       throw error;
     }
@@ -100,25 +100,25 @@ export class FrontendPerformanceTest {
   async testUIAccessibility() {
     const uiUrl = `${this.config.baseUrl}${this.config.uiPath}`;
     const startTime = Date.now();
-    
+
     try {
       const response = await this.fetchWithTimeout(uiUrl, {
         method: 'GET',
         headers: {
           'User-Agent': this.config.userAgent,
-          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
-        }
+          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        },
       });
-      
+
       const endTime = Date.now();
       const responseTime = endTime - startTime;
-      
+
       if (!response.ok) {
         throw new Error(`UI request failed with status ${response.status}`);
       }
-      
+
       const content = await response.text();
-      
+
       this.results.ui = {
         accessible: true,
         responseTime,
@@ -127,17 +127,17 @@ export class FrontendPerformanceTest {
         hasContent: content.length > 0,
         performance: {
           grade: this.getResponseTimeGrade(responseTime),
-          withinThreshold: responseTime <= this.config.maxResponseTime
+          withinThreshold: responseTime <= this.config.maxResponseTime,
         },
         contentAnalysis: this.analyzeUIContent(content),
-        headers: Object.fromEntries(response.headers.entries())
+        headers: Object.fromEntries(response.headers.entries()),
       };
-      
+
     } catch (error) {
       this.results.ui = {
         accessible: false,
         error: error.message,
-        responseTime: Date.now() - startTime
+        responseTime: Date.now() - startTime,
       };
     }
   }
@@ -147,30 +147,30 @@ export class FrontendPerformanceTest {
    */
   async testAPIPerformance() {
     const apiResults = {};
-    
+
     for (const endpoint of this.config.apiEndpoints) {
       console.log(`  📊 Testing ${endpoint}...`);
       apiResults[endpoint] = await this.testSingleEndpoint(endpoint);
     }
-    
+
     // Calculate overall API performance
     const allResults = Object.values(apiResults);
     const successfulResults = allResults.filter(r => r.success);
-    
+
     this.results.api = {
       endpoints: apiResults,
       summary: {
         totalEndpoints: allResults.length,
         successfulEndpoints: successfulResults.length,
         successRate: Math.round((successfulResults.length / allResults.length) * 100),
-        avgResponseTime: successfulResults.length > 0 
+        avgResponseTime: successfulResults.length > 0
           ? Math.round(successfulResults.reduce((sum, r) => sum + r.avgResponseTime, 0) / successfulResults.length)
           : 0,
         performance: {
           grade: this.getAPIPerformanceGrade(successfulResults),
-          meetsThresholds: this.checkAPIThresholds(successfulResults)
-        }
-      }
+          meetsThresholds: this.checkAPIThresholds(successfulResults),
+        },
+      },
     };
   }
 
@@ -181,42 +181,42 @@ export class FrontendPerformanceTest {
     const url = `${this.config.baseUrl}${endpoint}`;
     const responseTimes = [];
     const errors = [];
-    
+
     for (let i = 0; i < this.config.iterations; i++) {
       const startTime = Date.now();
-      
+
       try {
         const response = await this.fetchWithTimeout(url, {
           method: 'GET',
           headers: {
             'User-Agent': this.config.userAgent,
-            'Accept': 'application/json'
-          }
+            'Accept': 'application/json',
+          },
         });
-        
+
         const endTime = Date.now();
         const responseTime = endTime - startTime;
         responseTimes.push(responseTime);
-        
+
         if (!response.ok) {
           errors.push(`HTTP ${response.status}: ${response.statusText}`);
         }
-        
+
       } catch (error) {
         const endTime = Date.now();
         responseTimes.push(endTime - startTime);
         errors.push(error.message);
       }
     }
-    
-    const avgResponseTime = responseTimes.length > 0 
+
+    const avgResponseTime = responseTimes.length > 0
       ? Math.round(responseTimes.reduce((sum, time) => sum + time, 0) / responseTimes.length)
       : 0;
-    
+
     const minResponseTime = responseTimes.length > 0 ? Math.min(...responseTimes) : 0;
     const maxResponseTime = responseTimes.length > 0 ? Math.max(...responseTimes) : 0;
     const successfulRequests = this.config.iterations - errors.length;
-    
+
     return {
       endpoint,
       success: errors.length === 0,
@@ -228,8 +228,8 @@ export class FrontendPerformanceTest {
       errors,
       performance: {
         grade: this.getResponseTimeGrade(avgResponseTime),
-        withinThreshold: avgResponseTime <= this.config.maxApiResponseTime
-      }
+        withinThreshold: avgResponseTime <= this.config.maxApiResponseTime,
+      },
     };
   }
 
@@ -239,44 +239,44 @@ export class FrontendPerformanceTest {
   async testFrontendAssets() {
     const assets = [
       '/ui/app.js',
-      '/ui/index.html'
+      '/ui/index.html',
     ];
-    
+
     const assetResults = {};
-    
+
     for (const asset of assets) {
       const url = `${this.config.baseUrl}${asset}`;
       const startTime = Date.now();
-      
+
       try {
         const response = await this.fetchWithTimeout(url, {
           method: 'GET',
           headers: {
-            'User-Agent': this.config.userAgent
-          }
+            'User-Agent': this.config.userAgent,
+          },
         });
-        
+
         const endTime = Date.now();
         const responseTime = endTime - startTime;
         const content = await response.text();
-        
+
         assetResults[asset] = {
           accessible: response.ok,
           responseTime,
           contentLength: content.length,
           statusCode: response.status,
-          mimeType: response.headers.get('content-type') || 'unknown'
+          mimeType: response.headers.get('content-type') || 'unknown',
         };
-        
+
       } catch (error) {
         assetResults[asset] = {
           accessible: false,
           error: error.message,
-          responseTime: Date.now() - startTime
+          responseTime: Date.now() - startTime,
         };
       }
     }
-    
+
     this.results.assets = assetResults;
   }
 
@@ -291,7 +291,7 @@ export class FrontendPerformanceTest {
       hasJavaScript: /<script[^>]*>/i.test(content),
       hasMainContent: /<main[^>]*>/i.test(content) || /<div[^>]*id=["\']main["\'][^>]*>/i.test(content),
       estimatedSize: content.length,
-      hasEquityDashboard: /equity.*dashboard/i.test(content) || /kpi.*summary/i.test(content)
+      hasEquityDashboard: /equity.*dashboard/i.test(content) || /kpi.*summary/i.test(content),
     };
   }
 
@@ -299,11 +299,11 @@ export class FrontendPerformanceTest {
    * Get response time performance grade
    */
   getResponseTimeGrade(responseTime) {
-    if (responseTime <= 100) return 'A+';
-    if (responseTime <= 200) return 'A';
-    if (responseTime <= 500) return 'B+';
-    if (responseTime <= 1000) return 'B';
-    if (responseTime <= 2000) return 'C';
+    if (responseTime <= 100) {return 'A+';}
+    if (responseTime <= 200) {return 'A';}
+    if (responseTime <= 500) {return 'B+';}
+    if (responseTime <= 1000) {return 'B';}
+    if (responseTime <= 2000) {return 'C';}
     return 'D';
   }
 
@@ -311,17 +311,17 @@ export class FrontendPerformanceTest {
    * Get API performance grade based on multiple endpoints
    */
   getAPIPerformanceGrade(results) {
-    if (results.length === 0) return 'F';
-    
+    if (results.length === 0) {return 'F';}
+
     const avgResponseTime = results.reduce((sum, r) => sum + r.avgResponseTime, 0) / results.length;
     const avgSuccessRate = results.reduce((sum, r) => sum + r.successRate, 0) / results.length;
-    
+
     // Consider both response time and success rate
-    if (avgResponseTime <= 100 && avgSuccessRate >= 98) return 'A+';
-    if (avgResponseTime <= 200 && avgSuccessRate >= 95) return 'A';
-    if (avgResponseTime <= 500 && avgSuccessRate >= 90) return 'B+';
-    if (avgResponseTime <= 1000 && avgSuccessRate >= 85) return 'B';
-    if (avgResponseTime <= 2000 && avgSuccessRate >= 75) return 'C';
+    if (avgResponseTime <= 100 && avgSuccessRate >= 98) {return 'A+';}
+    if (avgResponseTime <= 200 && avgSuccessRate >= 95) {return 'A';}
+    if (avgResponseTime <= 500 && avgSuccessRate >= 90) {return 'B+';}
+    if (avgResponseTime <= 1000 && avgSuccessRate >= 85) {return 'B';}
+    if (avgResponseTime <= 2000 && avgSuccessRate >= 75) {return 'C';}
     return 'D';
   }
 
@@ -329,12 +329,12 @@ export class FrontendPerformanceTest {
    * Check if API results meet configured thresholds
    */
   checkAPIThresholds(results) {
-    if (results.length === 0) return false;
-    
+    if (results.length === 0) {return false;}
+
     const avgResponseTime = results.reduce((sum, r) => sum + r.avgResponseTime, 0) / results.length;
     const avgSuccessRate = results.reduce((sum, r) => sum + r.successRate, 0) / results.length;
-    
-    return avgResponseTime <= this.config.maxApiResponseTime && 
+
+    return avgResponseTime <= this.config.maxApiResponseTime &&
            avgSuccessRate >= this.config.minApiSuccessRate;
   }
 
@@ -347,7 +347,7 @@ export class FrontendPerformanceTest {
         timestamp: new Date().toISOString(),
         version: '1.0.0',
         config: this.config,
-        testType: 'lightweight_frontend_performance'
+        testType: 'lightweight_frontend_performance',
       },
       ui: this.results.ui,
       api: this.results.api,
@@ -355,9 +355,9 @@ export class FrontendPerformanceTest {
       summary: {
         overallGrade: this.calculateOverallGrade(),
         recommendations: this.generateRecommendations(),
-        status: this.determineOverallStatus()
+        status: this.determineOverallStatus(),
       },
-      errors: this.results.errors
+      errors: this.results.errors,
     };
 
     return report;
@@ -368,17 +368,17 @@ export class FrontendPerformanceTest {
    */
   calculateOverallGrade() {
     const grades = [];
-    
+
     if (this.results.ui?.performance?.grade) {
       grades.push(this.gradeToNumber(this.results.ui.performance.grade));
     }
-    
+
     if (this.results.api?.summary?.performance?.grade) {
       grades.push(this.gradeToNumber(this.results.api.summary.performance.grade));
     }
-    
-    if (grades.length === 0) return 'F';
-    
+
+    if (grades.length === 0) {return 'F';}
+
     const avgGrade = grades.reduce((sum, grade) => sum + grade, 0) / grades.length;
     return this.numberToGrade(avgGrade);
   }
@@ -395,12 +395,12 @@ export class FrontendPerformanceTest {
    * Convert number back to grade letter
    */
   numberToGrade(number) {
-    if (number >= 4.2) return 'A+';
-    if (number >= 3.8) return 'A';
-    if (number >= 3.2) return 'B+';
-    if (number >= 2.8) return 'B';
-    if (number >= 1.8) return 'C';
-    if (number >= 0.8) return 'D';
+    if (number >= 4.2) {return 'A+';}
+    if (number >= 3.8) {return 'A';}
+    if (number >= 3.2) {return 'B+';}
+    if (number >= 2.8) {return 'B';}
+    if (number >= 1.8) {return 'C';}
+    if (number >= 0.8) {return 'D';}
     return 'F';
   }
 
@@ -416,7 +416,7 @@ export class FrontendPerformanceTest {
         type: 'ui_performance',
         priority: 'high',
         message: `UI response time (${this.results.ui.responseTime}ms) exceeds threshold (${this.config.maxResponseTime}ms)`,
-        action: 'Optimize HTML rendering and reduce initial page load time'
+        action: 'Optimize HTML rendering and reduce initial page load time',
       });
     }
 
@@ -426,7 +426,7 @@ export class FrontendPerformanceTest {
         type: 'api_reliability',
         priority: 'critical',
         message: `API success rate (${this.results.api.summary.successRate}%) is below threshold (${this.config.minApiSuccessRate}%)`,
-        action: 'Investigate API failures and improve error handling'
+        action: 'Investigate API failures and improve error handling',
       });
     }
 
@@ -435,7 +435,7 @@ export class FrontendPerformanceTest {
         type: 'api_performance',
         priority: 'high',
         message: `API average response time (${this.results.api.summary.avgResponseTime}ms) exceeds threshold (${this.config.maxApiResponseTime}ms)`,
-        action: 'Optimize database queries and implement caching'
+        action: 'Optimize database queries and implement caching',
       });
     }
 
@@ -445,7 +445,7 @@ export class FrontendPerformanceTest {
         type: 'mobile_optimization',
         priority: 'medium',
         message: 'Missing viewport meta tag for mobile optimization',
-        action: 'Add <meta name="viewport" content="width=device-width, initial-scale=1"> to HTML head'
+        action: 'Add <meta name="viewport" content="width=device-width, initial-scale=1"> to HTML head',
       });
     }
 
@@ -456,13 +456,13 @@ export class FrontendPerformanceTest {
    * Determine overall test status
    */
   determineOverallStatus() {
-    if (this.results.errors.length > 0) return 'ERROR';
-    
+    if (this.results.errors.length > 0) {return 'ERROR';}
+
     const uiAccessible = this.results.ui?.accessible !== false;
     const apiHealthy = this.results.api?.summary?.successRate >= this.config.minApiSuccessRate;
-    
-    if (uiAccessible && apiHealthy) return 'PASS';
-    if (uiAccessible || apiHealthy) return 'PARTIAL';
+
+    if (uiAccessible && apiHealthy) {return 'PASS';}
+    if (uiAccessible || apiHealthy) {return 'PARTIAL';}
     return 'FAIL';
   }
 
@@ -472,11 +472,11 @@ export class FrontendPerformanceTest {
   async fetchWithTimeout(url, options = {}) {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), this.config.timeout);
-    
+
     try {
       const response = await fetch(url, {
         ...options,
-        signal: controller.signal
+        signal: controller.signal,
       });
       return response;
     } finally {
@@ -489,7 +489,7 @@ export class FrontendPerformanceTest {
    */
   async saveReports(report) {
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
-    
+
     // Save JSON report
     const jsonPath = path.join(this.config.outputPath, `frontend-performance-test-${timestamp}.json`);
     await fs.writeFile(jsonPath, JSON.stringify(report, null, 2));
@@ -518,7 +518,7 @@ export class FrontendPerformanceTest {
     try {
       const healthUrl = `${this.config.baseUrl}/health`;
       const response = await this.fetchWithTimeout(healthUrl);
-      
+
       return {
         status: 'healthy',
         baseUrl: this.config.baseUrl,
@@ -528,14 +528,14 @@ export class FrontendPerformanceTest {
           uiTesting: true,
           apiTesting: true,
           assetTesting: true,
-          performanceAnalysis: true
-        }
+          performanceAnalysis: true,
+        },
       };
     } catch (error) {
       return {
         status: 'error',
         error: error.message,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
     }
   }
@@ -549,21 +549,21 @@ export function getFrontendPerformanceTest(options = {}) {
 // CLI interface
 if (import.meta.url === `file://${process.argv[1]}`) {
   const test = new FrontendPerformanceTest({
-    baseUrl: process.env.BASE_URL || 'http://localhost:4620'
+    baseUrl: process.env.BASE_URL || 'http://localhost:4620',
   });
 
   const command = process.argv[2] || 'test';
 
   switch (command) {
-    case 'test':
-      await test.runPerformanceTest();
-      break;
-    case 'health':
-      const health = await test.healthCheck();
-      console.log('Health Check:', JSON.stringify(health, null, 2));
-      break;
-    default:
-      console.log('Available commands: test, health');
-      process.exit(1);
+  case 'test':
+    await test.runPerformanceTest();
+    break;
+  case 'health':
+    const health = await test.healthCheck();
+    console.log('Health Check:', JSON.stringify(health, null, 2));
+    break;
+  default:
+    console.log('Available commands: test, health');
+    process.exit(1);
   }
 }

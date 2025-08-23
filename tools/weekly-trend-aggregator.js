@@ -30,7 +30,7 @@ function isoWeek(date) {
   return {
     key: `${year}-W${String(week).padStart(2,'0')}`,
     start_utc: weekStart.toISOString().slice(0,10),
-    end_utc: weekEnd.toISOString().slice(0,10)
+    end_utc: weekEnd.toISOString().slice(0,10),
   };
 }
 
@@ -62,7 +62,7 @@ async function main(){
   let adoptionPercent = null;
   try {
     const adoption = JSON.parse(await fs.readFile('artifacts/terminology-adoption.json','utf8'));
-    if (typeof adoption?.adoptionPercent === 'number') adoptionPercent = adoption.adoptionPercent;
+    if (typeof adoption?.adoptionPercent === 'number') {adoptionPercent = adoption.adoptionPercent;}
   } catch {}
 
   const isCanonical = await buildSchemaValidator();
@@ -72,22 +72,22 @@ async function main(){
     for (const line of lines){
       let ev; try { ev = JSON.parse(line); } catch { continue; }
       const ts = ev.occurred_at || ev.received_at;
-      if (!ts) continue;
+      if (!ts) {continue;}
       const wk = isoWeek(new Date(ts));
-  const bucket = weeks.get(wk.key) || { week: wk.key, start_utc: wk.start_utc, end_utc: wk.end_utc, totals: { events:0, canonical_ok:0, hero_views:0, feedback:0, prohibited:0 } };
+      const bucket = weeks.get(wk.key) || { week: wk.key, start_utc: wk.start_utc, end_utc: wk.end_utc, totals: { events:0, canonical_ok:0, hero_views:0, feedback:0, prohibited:0 } };
       bucket.totals.events += 1;
-  if (isCanonical(ev)) bucket.totals.canonical_ok += 1;
-  if (PROHIBITED_META_RE.test(JSON.stringify(ev.meta||{}))) bucket.totals.prohibited += 1;
+      if (isCanonical(ev)) {bucket.totals.canonical_ok += 1;}
+      if (PROHIBITED_META_RE.test(JSON.stringify(ev.meta||{}))) {bucket.totals.prohibited += 1;}
       const name = String(ev.event_name||'');
-      if (name === 'pub_hero_view') bucket.totals.hero_views += 1;
-      if (name.startsWith('feedback_')) bucket.totals.feedback += 1;
+      if (name === 'pub_hero_view') {bucket.totals.hero_views += 1;}
+      if (name.startsWith('feedback_')) {bucket.totals.feedback += 1;}
       weeks.set(wk.key, bucket);
     }
   }
 
   const out = Array.from(weeks.values()).sort((a,b)=> a.week.localeCompare(b.week)).map(w=>({
     ...w,
-    totals: { ...w.totals, coverage: w.totals.events? Number((w.totals.canonical_ok / w.totals.events).toFixed(3)) : 0 }
+    totals: { ...w.totals, coverage: w.totals.events? Number((w.totals.canonical_ok / w.totals.events).toFixed(3)) : 0 },
   }));
   // Try to attach decision mix (POS/BND/NEG) from latest anomalies run if available
   let decision_mix = null;
@@ -108,8 +108,8 @@ async function main(){
         ratios: {
           POS: +(agg.POS/total).toFixed(3),
           BND: +(agg.BND/total).toFixed(3),
-          NEG: +(agg.NEG/total).toFixed(3)
-        }
+          NEG: +(agg.NEG/total).toFixed(3),
+        },
       } : { counts: agg, ratios: { POS:0, BND:0, NEG:0 } };
     }
     // Per-snapshot decision log → aggregate by ISO week
@@ -117,10 +117,10 @@ async function main(){
       const dlogTxt = await fs.readFile('artifacts/equity-decision-log.json','utf8');
       const dlog = JSON.parse(dlogTxt);
       for (const e of dlog){
-        if (!e?.ts || !e?.region) continue;
+        if (!e?.ts || !e?.region) {continue;}
         const wk = isoWeek(new Date(e.ts)).key;
         const bucket = weekly_decisions.get(wk) || { POS:0, BND:0, NEG:0, total:0 };
-        if (e.region==='POS') bucket.POS++; else if (e.region==='NEG') bucket.NEG++; else bucket.BND++;
+        if (e.region==='POS') {bucket.POS++;} else if (e.region==='NEG') {bucket.NEG++;} else {bucket.BND++;}
         bucket.total++;
         weekly_decisions.set(wk, bucket);
       }
@@ -130,7 +130,7 @@ async function main(){
   // Attach per-week decision ratios if any
   const outWithDecisions = out.map(w=>{
     const dec = weekly_decisions.get(w.week);
-    if (!dec || dec.total===0) return w;
+    if (!dec || dec.total===0) {return w;}
     const ratios = { POS:+(dec.POS/dec.total).toFixed(3), BND:+(dec.BND/dec.total).toFixed(3), NEG:+(dec.NEG/dec.total).toFixed(3) };
     return { ...w, decisions: { counts: { POS:dec.POS, BND:dec.BND, NEG:dec.NEG }, ratios } };
   });

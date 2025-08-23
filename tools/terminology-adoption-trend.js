@@ -16,16 +16,16 @@ async function readJson(path) {
 
 async function main() {
   await fs.mkdir('artifacts', { recursive: true });
-  
+
   // Get current adoption data
   const currentReport = await readJson('artifacts/terminology-adoption.json');
   const timestamp = new Date().toISOString();
-  
+
   if (!currentReport) {
     console.error('[terminology-trend] No current adoption data found');
     process.exit(1);
   }
-  
+
   // Create trend entry
   const trendEntry = {
     timestamp,
@@ -33,9 +33,9 @@ async function main() {
     old_total: currentReport.old_total,
     new_total: currentReport.new_total,
     files_scanned: currentReport.files.length,
-    suggestions_count: currentReport.suggestions?.length || 0
+    suggestions_count: currentReport.suggestions?.length || 0,
   };
-  
+
   // Read existing trend data
   let trendData = [];
   try {
@@ -44,19 +44,19 @@ async function main() {
   } catch {
     // File doesn't exist yet
   }
-  
+
   // Append new entry
   trendData.push(trendEntry);
-  
+
   // Keep only last 30 entries to prevent infinite growth
   if (trendData.length > 30) {
     trendData = trendData.slice(-30);
   }
-  
+
   // Write NDJSON format
   const ndjsonContent = trendData.map(entry => JSON.stringify(entry)).join('\n') + '\n';
   await fs.writeFile('artifacts/terminology-adoption-trend.ndjson', ndjsonContent);
-  
+
   // Generate aggregated JSON report
   const summary = {
     version: '1.0.0',
@@ -67,13 +67,13 @@ async function main() {
     trend_analysis: {
       latest_adoption: trendEntry.adoptionPercent,
       avg_adoption_last_7: trendData.slice(-7).reduce((sum, e) => sum + e.adoptionPercent, 0) / Math.min(7, trendData.length),
-      suggestion_reduction: trendData.length >= 2 ? 
-        trendData[trendData.length - 2].suggestions_count - trendEntry.suggestions_count : 0
-    }
+      suggestion_reduction: trendData.length >= 2 ?
+        trendData[trendData.length - 2].suggestions_count - trendEntry.suggestions_count : 0,
+    },
   };
-  
+
   await fs.writeFile('artifacts/terminology-adoption-trend.json', JSON.stringify(summary, null, 2));
-  
+
   console.log(`[terminology-trend] Generated trend report: ${trendData.length} entries, current adoption: ${trendEntry.adoptionPercent}%`);
 }
 

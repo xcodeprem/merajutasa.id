@@ -18,9 +18,9 @@ class ScriptValidator {
       broken: [],
       skipped: [],
       categories: {},
-      summary: {}
+      summary: {},
     };
-    
+
     // Scripts that should be skipped from automatic validation
     this.skipPatterns = [
       /^service:/, // Require manual startup/shutdown
@@ -33,19 +33,19 @@ class ScriptValidator {
       /^chain:append$/, // Requires running services
       /^chain:verify:negative$/, // Requires running services
       /^test:signer-e2e$/, // Requires specific service setup
-      /^test:chain-verify-negative$/ // Requires specific service setup
+      /^test:chain-verify-negative$/, // Requires specific service setup
     ];
-    
+
     // Scripts that are known to have specific environmental requirements
     this.environmentalRequirements = {
       'docker:build-all': 'Docker daemon',
       'docker:deploy-dev': 'Docker daemon',
-      'docker:deploy-prod': 'Docker daemon', 
+      'docker:deploy-prod': 'Docker daemon',
       'docker:deploy-test': 'Docker daemon',
       'k8s:deploy': 'Kubernetes cluster',
       'k8s:delete': 'Kubernetes cluster',
       'k8s:status': 'kubectl configured',
-      'infra:nginx': 'nginx installed'
+      'infra:nginx': 'nginx installed',
     };
   }
 
@@ -66,7 +66,7 @@ class ScriptValidator {
    */
   categorizeScripts(scripts) {
     const categories = {};
-    
+
     Object.keys(scripts).forEach(scriptName => {
       const prefix = scriptName.split(':')[0];
       if (!categories[prefix]) {
@@ -74,7 +74,7 @@ class ScriptValidator {
       }
       categories[prefix].push(scriptName);
     });
-    
+
     return categories;
   }
 
@@ -92,7 +92,7 @@ class ScriptValidator {
     return new Promise((resolve) => {
       const child = spawn('npm', ['run', scriptName], {
         stdio: 'pipe',
-        timeout: timeout
+        timeout: timeout,
       });
 
       let stdout = '';
@@ -114,7 +114,7 @@ class ScriptValidator {
 
       child.on('close', (code) => {
         clearTimeout(timer);
-        
+
         const result = {
           scriptName,
           command: scriptCommand,
@@ -122,7 +122,7 @@ class ScriptValidator {
           stdout: stdout.slice(0, 500), // Limit output size
           stderr: stderr.slice(0, 500),
           timedOut,
-          success: code === 0 && !timedOut
+          success: code === 0 && !timedOut,
         };
 
         resolve(result);
@@ -137,7 +137,7 @@ class ScriptValidator {
           stdout: '',
           stderr: error.message,
           timedOut: false,
-          success: false
+          success: false,
         });
       });
     });
@@ -159,7 +159,7 @@ class ScriptValidator {
         }
       }
     }
-    
+
     // For shell scripts
     if (scriptCommand.includes('.sh')) {
       const scriptPath = scriptCommand.match(/([^\s]+\.sh)/)?.[1];
@@ -172,7 +172,7 @@ class ScriptValidator {
         }
       }
     }
-    
+
     return { exists: null, scriptPath: null };
   }
 
@@ -181,45 +181,45 @@ class ScriptValidator {
    */
   async validateAllScripts() {
     console.log('🔍 Loading package.json scripts...\n');
-    
+
     const scripts = await this.loadScripts();
     const categories = this.categorizeScripts(scripts);
-    
+
     console.log(`📊 Found ${Object.keys(scripts).length} scripts in ${Object.keys(categories).length} categories\n`);
-    
+
     // Group scripts by category for better reporting
     this.results.categories = categories;
-    
+
     const scriptEntries = Object.entries(scripts);
     let tested = 0;
-    
+
     for (const [scriptName, scriptCommand] of scriptEntries) {
       console.log(`\n📋 Testing script ${tested + 1}/${scriptEntries.length}: ${scriptName}`);
-      
+
       // Check if should skip
       if (this.shouldSkip(scriptName)) {
-        console.log(`   ⏭️  Skipped: Requires manual intervention`);
+        console.log('   ⏭️  Skipped: Requires manual intervention');
         this.results.skipped.push({
           scriptName,
           command: scriptCommand,
-          reason: 'Requires manual intervention'
+          reason: 'Requires manual intervention',
         });
         tested++;
         continue;
       }
-      
+
       // Check environmental requirements
       if (this.environmentalRequirements[scriptName]) {
         console.log(`   ⏭️  Skipped: Requires ${this.environmentalRequirements[scriptName]}`);
         this.results.skipped.push({
           scriptName,
           command: scriptCommand,
-          reason: `Requires ${this.environmentalRequirements[scriptName]}`
+          reason: `Requires ${this.environmentalRequirements[scriptName]}`,
         });
         tested++;
         continue;
       }
-      
+
       // Test syntax/file existence first
       const syntaxCheck = await this.testSyntaxValidation(scriptName, scriptCommand);
       if (syntaxCheck.exists === false) {
@@ -229,18 +229,18 @@ class ScriptValidator {
           command: scriptCommand,
           exitCode: -1,
           error: `File not found: ${syntaxCheck.scriptPath}`,
-          type: 'missing_file'
+          type: 'missing_file',
         });
         tested++;
         continue;
       }
-      
+
       // Test script execution
       console.log(`   🧪 Running: npm run ${scriptName}`);
       const testResult = await this.testScript(scriptName, scriptCommand);
-      
+
       if (testResult.success) {
-        console.log(`   ✅ Success`);
+        console.log('   ✅ Success');
         this.results.working.push(testResult);
       } else {
         console.log(`   ❌ Failed (exit code: ${testResult.exitCode})`);
@@ -249,13 +249,13 @@ class ScriptValidator {
         }
         this.results.broken.push({
           ...testResult,
-          type: testResult.timedOut ? 'timeout' : 'execution_error'
+          type: testResult.timedOut ? 'timeout' : 'execution_error',
         });
       }
-      
+
       tested++;
     }
-    
+
     return this.generateSummary();
   }
 
@@ -264,7 +264,7 @@ class ScriptValidator {
    */
   generateSummary() {
     const total = this.results.working.length + this.results.broken.length + this.results.skipped.length;
-    
+
     this.results.summary = {
       total,
       working: this.results.working.length,
@@ -272,9 +272,9 @@ class ScriptValidator {
       skipped: this.results.skipped.length,
       workingPercentage: Math.round((this.results.working.length / total) * 100),
       brokenPercentage: Math.round((this.results.broken.length / total) * 100),
-      skippedPercentage: Math.round((this.results.skipped.length / total) * 100)
+      skippedPercentage: Math.round((this.results.skipped.length / total) * 100),
     };
-    
+
     return this.results;
   }
 
@@ -285,13 +285,13 @@ class ScriptValidator {
     console.log('\n═'.repeat(80));
     console.log('📊 SCRIPT VALIDATION SUMMARY');
     console.log('═'.repeat(80));
-    
+
     const { summary } = this.results;
     console.log(`📋 Total Scripts: ${summary.total}`);
     console.log(`✅ Working: ${summary.working} (${summary.workingPercentage}%)`);
     console.log(`❌ Broken: ${summary.broken} (${summary.brokenPercentage}%)`);
     console.log(`⏭️  Skipped: ${summary.skipped} (${summary.skippedPercentage}%)`);
-    
+
     // Category breakdown
     console.log('\n📊 CATEGORY BREAKDOWN:');
     Object.entries(this.results.categories)
@@ -299,7 +299,7 @@ class ScriptValidator {
       .forEach(([category, scripts]) => {
         console.log(`   ${category}: ${scripts.length} scripts`);
       });
-    
+
     // Broken scripts details
     if (this.results.broken.length > 0) {
       console.log('\n❌ BROKEN SCRIPTS:');
@@ -307,7 +307,7 @@ class ScriptValidator {
         console.log(`   ${script.scriptName}: ${script.error || script.stderr || 'Execution failed'}`);
       });
     }
-    
+
     // Environmental requirement scripts
     if (this.results.skipped.length > 0) {
       console.log('\n⏭️  SKIPPED SCRIPTS (by category):');
@@ -318,7 +318,7 @@ class ScriptValidator {
         }
         skippedByReason[script.reason].push(script.scriptName);
       });
-      
+
       Object.entries(skippedByReason).forEach(([reason, scripts]) => {
         console.log(`   ${reason}: ${scripts.length} scripts`);
         scripts.forEach(scriptName => {
@@ -326,7 +326,7 @@ class ScriptValidator {
         });
       });
     }
-    
+
     console.log('\n═'.repeat(80));
     return this.results;
   }
@@ -348,7 +348,7 @@ class ScriptValidator {
 // Run validation if called directly
 if (import.meta.url === `file://${process.argv[1]}`) {
   const validator = new ScriptValidator();
-  
+
   validator.validateAllScripts()
     .then(results => {
       validator.generateDetailedReport();

@@ -37,12 +37,12 @@ async function start(){
         return createReadStream(p).pipe(res);
       }
       if (req.method==='GET' && req.url==='/ui/methodology'){
-        const html = `<!doctype html><html><head><meta charset="utf-8"/><title>Methodology</title></head><body style="font-family:system-ui,Arial,sans-serif;margin:20px"><h2>Hysteresis Methodology (Option F)</h2><p>States: NONE → CANDIDATE → ACTIVE → CLEARED with thresholds per DEC. Under-served includes ACTIVE or STALLED. Cooldown prevents immediate re-entry; severe ratio allows bypass.</p><p>See docs: <code>docs/fairness/hysteresis-public-methodology-fragment-v1.md</code></p></body></html>`;
+        const html = '<!doctype html><html><head><meta charset="utf-8"/><title>Methodology</title></head><body style="font-family:system-ui,Arial,sans-serif;margin:20px"><h2>Hysteresis Methodology (Option F)</h2><p>States: NONE → CANDIDATE → ACTIVE → CLEARED with thresholds per DEC. Under-served includes ACTIVE or STALLED. Cooldown prevents immediate re-entry; severe ratio allows bypass.</p><p>See docs: <code>docs/fairness/hysteresis-public-methodology-fragment-v1.md</code></p></body></html>';
         res.writeHead(200, { 'content-type': 'text/html; charset=utf-8' });
         return res.end(html);
       }
       if (req.method==='GET' && req.url==='/ui/privacy-faq'){
-        const html = `<!doctype html><html><head><meta charset="utf-8"/><title>Privacy FAQ</title></head><body style="font-family:system-ui,Arial,sans-serif;margin:20px"><h2>Privacy FAQ (Abridged)</h2><ul><li>Kami tidak menyimpan PII anak/pengasuh.</li><li>Masukan (feedback) disaring otomatis (mask/redact) untuk data sensitif.</li><li>Salt rotasi harian: planned (H1-E1).</li></ul><p>Lihat: <code>docs/privacy/pii-pattern-library-v1.md</code> untuk pola yang didukung.</p></body></html>`;
+        const html = '<!doctype html><html><head><meta charset="utf-8"/><title>Privacy FAQ</title></head><body style="font-family:system-ui,Arial,sans-serif;margin:20px"><h2>Privacy FAQ (Abridged)</h2><ul><li>Kami tidak menyimpan PII anak/pengasuh.</li><li>Masukan (feedback) disaring otomatis (mask/redact) untuk data sensitif.</li><li>Salt rotasi harian: planned (H1-E1).</li></ul><p>Lihat: <code>docs/privacy/pii-pattern-library-v1.md</code> untuk pola yang didukung.</p></body></html>';
         res.writeHead(200, { 'content-type': 'text/html; charset=utf-8' });
         return res.end(html);
       }
@@ -72,7 +72,7 @@ async function start(){
           '.ico': 'image/x-icon',
           '.map': 'application/json',
           '.json': 'application/json',
-          '.txt': 'text/plain'
+          '.txt': 'text/plain',
         };
         if (!types[ext]) { res.writeHead(415); return res.end(); }
         const p = path.resolve(UI_ROOT, file);
@@ -88,7 +88,7 @@ async function start(){
           res.writeHead(403);
           return res.end();
         }
-  const type = types[ext] || 'application/octet-stream';
+        const type = types[ext] || 'application/octet-stream';
         res.writeHead(200, { 'content-type': type });
         return createReadStream(realPath).pipe(res);
       }

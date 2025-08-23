@@ -47,7 +47,7 @@ function updateIssueBodyFromFile(number, file) {
 }
 
 function unwrapFences(text) {
-  if (!text) return '';
+  if (!text) {return '';}
   const lines = text.replace(/\r\n/g, '\n').split('\n');
   if (lines[0]?.startsWith('```')) {
     lines.shift();
@@ -62,7 +62,7 @@ function unwrapFences(text) {
 
 function upsertBlock(existingBody, content) {
   const block = `${MARK_BEGIN}\n\n${content.trim()}\n\n${MARK_END}`;
-  if (!existingBody || typeof existingBody !== 'string') existingBody = '';
+  if (!existingBody || typeof existingBody !== 'string') {existingBody = '';}
   const b = existingBody.indexOf(MARK_BEGIN);
   const e = existingBody.indexOf(MARK_END);
   if (b !== -1 && e !== -1 && e > b) {

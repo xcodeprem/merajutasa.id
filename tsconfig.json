@@ -6,9 +6,40 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "strict": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "exactOptionalPropertyTypes": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "declaration": false,
+    "outDir": "./dist",
+    "rootDir": "./",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./tools/*"],
+      "@tools/*": ["./tools/*"],
+      "@infrastructure/*": ["./infrastructure/*"]
+    }
   },
+  "include": [
+    "tools/**/*",
+    "infrastructure/**/*", 
+    "scripts/**/*",
+    "**/*.ts",
+    "**/*.js"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    "coverage",
+    "artifacts",
+    "public/equity-ui-v2"
+  ],
   "ts-node": {
     "esm": true
   }

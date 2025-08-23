@@ -2,13 +2,13 @@
 
 /**
  * Link Check Tool for MerajutASA.id Documentation
- * 
+ *
  * Validates internal markdown links and generates a comprehensive report.
  * Focuses on:
  * - Relative path validation
  * - Anchor link verification
  * - Cross-reference integrity
- * 
+ *
  * Usage: node tools/link-check.js [--file=path] [--output=path]
  */
 
@@ -28,9 +28,9 @@ class LinkChecker {
     this.options = {
       outputFile: options.outputFile || DEFAULT_OUTPUT,
       targetFile: options.targetFile || null,
-      verbose: options.verbose || false
+      verbose: options.verbose || false,
     };
-    
+
     this.results = {
       timestamp: new Date().toISOString(),
       summary: {
@@ -38,11 +38,11 @@ class LinkChecker {
         totalLinks: 0,
         validLinks: 0,
         brokenLinks: 0,
-        warningLinks: 0
+        warningLinks: 0,
       },
       files: [],
       errors: [],
-      warnings: []
+      warnings: [],
     };
   }
 
@@ -64,7 +64,7 @@ class LinkChecker {
     while ((match = linkRegex.exec(content)) !== null) {
       const [fullMatch, text, href] = match;
       const lineNumber = content.substring(0, match.index).split('\n').length;
-      
+
       // Skip external links (http/https) and mailto links
       if (href.startsWith('http://') || href.startsWith('https://') || href.startsWith('mailto:')) {
         continue;
@@ -75,7 +75,7 @@ class LinkChecker {
         href: href.trim(),
         line: lineNumber,
         fullMatch,
-        sourceFile: filePath
+        sourceFile: filePath,
       });
     }
 
@@ -91,13 +91,13 @@ class LinkChecker {
       ...link,
       status: 'valid',
       message: '',
-      resolvedPath: ''
+      resolvedPath: '',
     };
 
     try {
       // Parse href for file path and anchor
       const [filePath, anchor] = href.split('#');
-      
+
       // Resolve relative path from source file's directory
       const sourceDir = path.dirname(sourceFile);
       let targetPath;
@@ -111,7 +111,7 @@ class LinkChecker {
           // Relative path from source file
           targetPath = path.resolve(sourceDir, filePath);
         }
-        
+
         result.resolvedPath = targetPath;
 
         // Check if target file exists
@@ -126,9 +126,9 @@ class LinkChecker {
           const targetContent = fs.readFileSync(targetPath, 'utf8');
           const anchorId = this.normalizeAnchor(anchor);
           const headings = this.extractHeadings(targetContent);
-          
-          const headingFound = headings.some(heading => 
-            this.normalizeAnchor(heading) === anchorId
+
+          const headingFound = headings.some(heading =>
+            this.normalizeAnchor(heading) === anchorId,
           );
 
           if (!headingFound) {
@@ -141,9 +141,9 @@ class LinkChecker {
         const sourceContent = fs.readFileSync(sourceFile, 'utf8');
         const anchorId = this.normalizeAnchor(anchor);
         const headings = this.extractHeadings(sourceContent);
-        
-        const headingFound = headings.some(heading => 
-          this.normalizeAnchor(heading) === anchorId
+
+        const headingFound = headings.some(heading =>
+          this.normalizeAnchor(heading) === anchorId,
         );
 
         if (!headingFound) {
@@ -192,17 +192,17 @@ class LinkChecker {
    */
   processFile(filePath) {
     this.log(`Processing: ${filePath}`);
-    
+
     const content = fs.readFileSync(filePath, 'utf8');
     const links = this.extractLinks(content, filePath);
-    
+
     const fileResult = {
       path: path.relative(process.cwd(), filePath),
       totalLinks: links.length,
       validLinks: 0,
       brokenLinks: 0,
       warningLinks: 0,
-      links: []
+      links: [],
     };
 
     // Validate each link
@@ -211,38 +211,38 @@ class LinkChecker {
       fileResult.links.push(validation);
 
       switch (validation.status) {
-        case 'valid':
-          fileResult.validLinks++;
-          this.results.summary.validLinks++;
-          break;
-        case 'broken':
-          fileResult.brokenLinks++;
-          this.results.summary.brokenLinks++;
-          this.results.errors.push({
-            file: fileResult.path,
-            line: validation.line,
-            link: validation.href,
-            message: validation.message
-          });
-          this.log(`BROKEN LINK: ${fileResult.path}:${validation.line} - ${validation.href} (${validation.message})`, 'error');
-          break;
-        case 'warning':
-          fileResult.warningLinks++;
-          this.results.summary.warningLinks++;
-          this.results.warnings.push({
-            file: fileResult.path,
-            line: validation.line,
-            link: validation.href,
-            message: validation.message
-          });
-          this.log(`WARNING: ${fileResult.path}:${validation.line} - ${validation.href} (${validation.message})`, 'warn');
-          break;
+      case 'valid':
+        fileResult.validLinks++;
+        this.results.summary.validLinks++;
+        break;
+      case 'broken':
+        fileResult.brokenLinks++;
+        this.results.summary.brokenLinks++;
+        this.results.errors.push({
+          file: fileResult.path,
+          line: validation.line,
+          link: validation.href,
+          message: validation.message,
+        });
+        this.log(`BROKEN LINK: ${fileResult.path}:${validation.line} - ${validation.href} (${validation.message})`, 'error');
+        break;
+      case 'warning':
+        fileResult.warningLinks++;
+        this.results.summary.warningLinks++;
+        this.results.warnings.push({
+          file: fileResult.path,
+          line: validation.line,
+          link: validation.href,
+          message: validation.message,
+        });
+        this.log(`WARNING: ${fileResult.path}:${validation.line} - ${validation.href} (${validation.message})`, 'warn');
+        break;
       }
     }
 
     this.results.summary.totalLinks += fileResult.totalLinks;
     this.results.files.push(fileResult);
-    
+
     return fileResult;
   }
 
@@ -251,13 +251,13 @@ class LinkChecker {
    */
   findMarkdownFiles(startPath = DOCS_ROOT) {
     const files = [];
-    
+
     const traverse = (dir) => {
       const entries = fs.readdirSync(dir, { withFileTypes: true });
-      
+
       for (const entry of entries) {
         const fullPath = path.join(dir, entry.name);
-        
+
         if (entry.isDirectory()) {
           // Skip node_modules and hidden directories
           if (!entry.name.startsWith('.') && entry.name !== 'node_modules') {
@@ -268,7 +268,7 @@ class LinkChecker {
         }
       }
     };
-    
+
     traverse(startPath);
     return files;
   }
@@ -278,9 +278,9 @@ class LinkChecker {
    */
   async run() {
     this.log('Starting link check...');
-    
+
     let filesToProcess;
-    
+
     if (this.options.targetFile) {
       // Process specific file
       const targetPath = path.resolve(this.options.targetFile);
@@ -306,17 +306,17 @@ class LinkChecker {
           file: path.relative(process.cwd(), filePath),
           line: 0,
           link: '',
-          message: `Processing error: ${error.message}`
+          message: `Processing error: ${error.message}`,
         });
       }
     }
 
     // Write results
     await this.writeResults();
-    
+
     // Summary
     const { summary } = this.results;
-    this.log(`\n=== LINK CHECK SUMMARY ===`);
+    this.log('\n=== LINK CHECK SUMMARY ===');
     this.log(`Files processed: ${summary.totalFiles}`);
     this.log(`Total links: ${summary.totalLinks}`);
     this.log(`Valid links: ${summary.validLinks}`);
@@ -333,12 +333,12 @@ class LinkChecker {
   async writeResults() {
     const outputPath = path.resolve(this.options.outputFile);
     const outputDir = path.dirname(outputPath);
-    
+
     // Ensure output directory exists
     if (!fs.existsSync(outputDir)) {
       fs.mkdirSync(outputDir, { recursive: true });
     }
-    
+
     fs.writeFileSync(outputPath, JSON.stringify(this.results, null, 2), 'utf8');
   }
 }
@@ -362,7 +362,7 @@ async function main() {
   try {
     const checker = new LinkChecker(options);
     const results = await checker.run();
-    
+
     // Exit with error code if there are broken links
     if (results.summary.brokenLinks > 0) {
       process.exit(1);

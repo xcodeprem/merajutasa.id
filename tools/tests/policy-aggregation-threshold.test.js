@@ -11,7 +11,7 @@ const THRESHOLD = 20; // DEC-20250812-04 reference
 function evaluate(cells){
   const violations = [];
   for (const [k,v] of Object.entries(cells)) {
-    if (v.count < THRESHOLD) violations.push({ cell:k, count:v.count });
+    if (v.count < THRESHOLD) {violations.push({ cell:k, count:v.count });}
   }
   return violations;
 }

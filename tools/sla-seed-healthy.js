@@ -12,7 +12,7 @@ async function seedService(monitor, service, options = {}) {
       responseTime: options.responseTimeMs ?? 50,
       success: true,
       statusCode: 200,
-      endpoint: '/health'
+      endpoint: '/health',
     });
   }
 }

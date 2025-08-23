@@ -21,7 +21,7 @@ const sleep = (ms)=> new Promise(r=>setTimeout(r,ms));
 async function ensureCollector(timeoutMs=3000){
   const start = Date.now();
   while (Date.now()-start < timeoutMs){
-    if (await get('/health')) return { ok:true };
+    if (await get('/health')) {return { ok:true };}
     await sleep(150);
   }
   return { ok:false };
@@ -59,13 +59,13 @@ async function main(){
   let success = 0;
   for (let i=0;i<ATTEMPTS;i++){
     const r = await post('/ingest', validEvent());
-    if (r.status===200 && r.json?.status==='INGESTED' && typeof r.json?.event_hash==='string') success++;
+    if (r.status===200 && r.json?.status==='INGESTED' && typeof r.json?.event_hash==='string') {success++;}
     await sleep(10);
   }
   const pct = Math.round((success/ATTEMPTS)*1000)/10; // 1 decimal
   const out = { version:1, attempts: ATTEMPTS, success, success_pct: pct, threshold_pct: THRESHOLD, advisory: ADVISORY };
   await fs.writeFile('artifacts/collector-reliability.json', JSON.stringify(out,null,2));
-  if (proc) try { proc.kill('SIGKILL'); } catch {}
+  if (proc) {try { proc.kill('SIGKILL'); } catch {}}
   const pass = pct >= THRESHOLD;
   if (!pass && !ADVISORY){
     console.error(`[collector-reliability] FAIL ${pct}% < ${THRESHOLD}%`);

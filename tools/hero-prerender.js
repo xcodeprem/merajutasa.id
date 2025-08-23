@@ -20,8 +20,8 @@ async function main(){
     hero_copy: {
       title: 'MerajutASA',
       subtitle: 'Transparansi & Keadilan—tanpa ranking',
-      badges: [ 'Decision Pending', 'Privacy-Aware' ]
-    }
+      badges: [ 'Decision Pending', 'Privacy-Aware' ],
+    },
   };
   await fs.writeFile('artifacts/hero-snapshot.json', JSON.stringify(payload, null, 2));
   console.log('[hero-prerender] wrote artifacts/hero-snapshot.json');

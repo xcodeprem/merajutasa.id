@@ -10,6 +10,6 @@ export function tokenize(text){
     .filter(Boolean);
 }
 export function overlapCoefficient(aTokens,bTokens){
-  const aSet=new Set(aTokens); const bSet=new Set(bTokens); let inter=0; aSet.forEach(t=>{ if(bSet.has(t)) inter++; });
+  const aSet=new Set(aTokens); const bSet=new Set(bTokens); let inter=0; aSet.forEach(t=>{ if(bSet.has(t)) {inter++;} });
   return inter/(Math.min(aSet.size,bSet.size)||1);
 }

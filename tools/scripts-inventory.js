@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 /**
  * NPM Scripts Inventory and Classification System
- * 
+ *
  * Analyzes package.json scripts and categorizes them by:
  * - Prefix-based classification
  * - Risk level assessment (safe/grey/black)
  * - Dependency analysis
  * - Cross-platform compatibility
- * 
+ *
  * Generates comprehensive inventory for validation pipeline.
  */
 
@@ -21,18 +21,18 @@ class ScriptsInventory {
       safe: [
         /^lint/, /^test/, /^validate/, /^check/, /^verify/, /^status/,
         /^show/, /^list/, /^get/, /^read/, /^view/, /^info/, /^help/,
-        /^schema/, /^generate.*\.js$/, /^analyze/, /^report/
+        /^schema/, /^generate.*\.js$/, /^analyze/, /^report/,
       ],
       grey: [
         /^build/, /^compile/, /^bundle/, /^install/, /^setup/,
         /^start.*/, /^serve/, /^dev/, /^watch/, /^monitor/,
-        /^backup/, /^restore/, /^migrate/, /^sync/
+        /^backup/, /^restore/, /^migrate/, /^sync/,
       ],
       black: [
         /^deploy/, /^publish/, /^release/, /^destroy/, /^delete/,
         /^remove/, /^clean/, /^reset/, /^kill/, /^stop/,
-        /^drop/, /^wipe/, /^purge/, /^force/
-      ]
+        /^drop/, /^wipe/, /^purge/, /^force/,
+      ],
     };
 
     this.categories = {
@@ -58,7 +58,7 @@ class ScriptsInventory {
       'Documentation & Help': ['docs', 'help', 'readme'],
       'Deployment & CI/CD': ['deploy', 'ci', 'cd', 'publish'],
       'Database & Storage': ['db', 'database', 'storage'],
-      'Scripts Management': ['scripts']
+      'Scripts Management': ['scripts'],
     };
   }
 
@@ -68,77 +68,77 @@ class ScriptsInventory {
   async analyzeScripts() {
     try {
       console.log('📋 Analyzing NPM scripts inventory...');
-      
+
       const packagePath = path.join(process.cwd(), 'package.json');
       const packageContent = await fs.readFile(packagePath, 'utf8');
       const packageData = JSON.parse(packageContent);
-      
+
       const scripts = packageData.scripts || {};
       const scriptNames = Object.keys(scripts);
-      
+
       console.log(`📦 Found ${scriptNames.length} scripts to analyze`);
-      
+
       const inventory = {
         metadata: {
           total_scripts: scriptNames.length,
           analyzed_at: new Date().toISOString(),
           package_version: packageData.version,
-          node_version: process.version
+          node_version: process.version,
         },
         categories: {},
         risk_levels: {
           safe: [],
           grey: [],
           black: [],
-          unknown: []
+          unknown: [],
         },
         cross_platform_issues: [],
         dependency_analysis: {},
-        scripts_details: {}
+        scripts_details: {},
       };
-      
+
       console.log('🔍 Analyzing individual scripts...');
-      
+
       // Analyze each script
       for (const [name, command] of Object.entries(scripts)) {
         const analysis = this.analyzeScript(name, command);
-        
+
         // Categorize by prefix
         const category = this.categorizeScript(name);
         if (!inventory.categories[category]) {
           inventory.categories[category] = [];
         }
         inventory.categories[category].push(name);
-        
+
         // Risk level classification
         inventory.risk_levels[analysis.risk_level].push(name);
-        
+
         // Cross-platform issues
         if (analysis.cross_platform_issues.length > 0) {
           inventory.cross_platform_issues.push({
             script: name,
-            issues: analysis.cross_platform_issues
+            issues: analysis.cross_platform_issues,
           });
         }
-        
+
         // Store detailed analysis
         inventory.scripts_details[name] = analysis;
       }
-      
+
       console.log('📊 Analyzing dependencies...');
-      
+
       // Dependency analysis
       inventory.dependency_analysis = await this.analyzeDependencies(packageData);
-      
+
       // Generate summary statistics
       inventory.summary = this.generateSummary(inventory);
-      
+
       console.log('💾 Saving inventory...');
-      
+
       // Save inventory
       const outputPath = path.join('artifacts', 'scripts', 'inventory.json');
       await fs.mkdir(path.dirname(outputPath), { recursive: true });
-      
+
       const output = {
         tool: 'scripts-inventory',
         version: '1.0.0',
@@ -151,23 +151,23 @@ class ScriptsInventory {
           git_sha: process.env.GITHUB_SHA || 'unknown',
           run_id: process.env.GITHUB_RUN_ID || 'local',
           actor: process.env.GITHUB_ACTOR || 'local-user',
-          git_ref: process.env.GITHUB_REF || 'unknown'
-        }
+          git_ref: process.env.GITHUB_REF || 'unknown',
+        },
       };
-      
+
       await fs.writeFile(outputPath, JSON.stringify(output, null, 2), 'utf8');
-      
+
       console.log(`✅ Scripts inventory saved to ${outputPath}`);
       console.log(`📊 Summary: ${inventory.summary.safe_scripts}/${inventory.metadata.total_scripts} safe scripts (${Math.round(inventory.summary.safe_coverage * 100)}% safe coverage)`);
-      
+
       return inventory;
-      
+
     } catch (error) {
       console.error('❌ Failed to analyze scripts:', error);
       throw error;
     }
   }
-  
+
   /**
    * Analyze individual script
    */
@@ -183,27 +183,27 @@ class ScriptsInventory {
       cross_platform_issues: [],
       dependencies: this.extractDependencies(command),
       can_run_safely: false,
-      skip_reason: null
+      skip_reason: null,
     };
-    
+
     // Determine risk level
     analysis.risk_level = this.determineRiskLevel(name, command);
-    
+
     // Check cross-platform compatibility
     analysis.cross_platform_issues = this.checkCrossPlatformIssues(command);
-    
+
     // Determine if can run safely
-    analysis.can_run_safely = analysis.risk_level === 'safe' && 
+    analysis.can_run_safely = analysis.risk_level === 'safe' &&
                               analysis.cross_platform_issues.length === 0 &&
                               !this.hasProhibitedPatterns(command);
-    
+
     if (!analysis.can_run_safely) {
       analysis.skip_reason = this.getSkipReason(analysis);
     }
-    
+
     return analysis;
   }
-  
+
   /**
    * Categorize script by name/prefix
    */
@@ -215,7 +215,7 @@ class ScriptsInventory {
     }
     return 'Uncategorized';
   }
-  
+
   /**
    * Determine risk level based on patterns
    */
@@ -226,67 +226,67 @@ class ScriptsInventory {
         return 'safe';
       }
     }
-    
+
     // Check black patterns (destructive)
     for (const pattern of this.riskPatterns.black) {
       if (pattern.test(name) || pattern.test(command)) {
         return 'black';
       }
     }
-    
+
     // Check grey patterns (potentially risky)
     for (const pattern of this.riskPatterns.grey) {
       if (pattern.test(name) || pattern.test(command)) {
         return 'grey';
       }
     }
-    
+
     // Additional heuristics
     if (command.includes('--watch') || command.includes('--serve')) {
       return 'grey';
     }
-    
-    if (command.includes('rm ') || command.includes('del ') || 
+
+    if (command.includes('rm ') || command.includes('del ') ||
         command.includes('> /dev/null') || command.includes('--force')) {
       return 'black';
     }
-    
+
     return 'unknown';
   }
-  
+
   /**
    * Check for cross-platform compatibility issues
    */
   checkCrossPlatformIssues(command) {
     const issues = [];
-    
+
     // PowerShell specific
     if (command.includes('powershell') || command.includes('.ps1')) {
       issues.push('powershell_dependency');
     }
-    
+
     // Shell-specific operators
     if (command.includes(' && ') && !command.includes('npm-run-all')) {
       issues.push('shell_chaining_operators');
     }
-    
+
     if (command.includes(' || ')) {
       issues.push('shell_logical_operators');
     }
-    
+
     // Environment variable syntax
     if (command.includes('$') && !command.includes('npm_')) {
       issues.push('environment_variable_syntax');
     }
-    
+
     // Path separators
     if (command.includes('\\')) {
       issues.push('windows_path_separators');
     }
-    
+
     return issues;
   }
-  
+
   /**
    * Check for prohibited patterns that make scripts unsafe
    */
@@ -295,12 +295,12 @@ class ScriptsInventory {
       /sudo/, /su /, /chmod/, /chown/,
       /format /, /fdisk/, /mkfs/,
       /DROP TABLE/, /DELETE FROM/,
-      /rm -rf/, /del \/s/, /rmdir \/s/
+      /rm -rf/, /del \/s/, /rmdir \/s/,
     ];
-    
+
     return prohibited.some(pattern => pattern.test(command));
   }
-  
+
   /**
    * Estimate script duration
    */
@@ -316,12 +316,12 @@ class ScriptsInventory {
     }
     return 'unknown';
   }
-  
+
   /**
    * Check if script requires network access
    */
   requiresNetwork(command) {
-    return command.includes('npm install') || 
+    return command.includes('npm install') ||
            command.includes('curl') ||
            command.includes('wget') ||
            command.includes('git clone') ||
@@ -329,7 +329,7 @@ class ScriptsInventory {
            command.includes('http://') ||
            command.includes('https://');
   }
-  
+
   /**
    * Check if script requires filesystem write access
    */
@@ -340,13 +340,13 @@ class ScriptsInventory {
            command.includes('write') ||
            this.determineRiskLevel('', command) !== 'safe';
   }
-  
+
   /**
    * Extract dependencies from command
    */
   extractDependencies(command) {
     const deps = [];
-    
+
     if (command.includes('node ')) {
       deps.push('nodejs');
     }
@@ -362,10 +362,10 @@ class ScriptsInventory {
     if (command.includes('curl')) {
       deps.push('curl');
     }
-    
+
     return deps;
   }
-  
+
   /**
    * Get reason why script should be skipped
    */
@@ -384,7 +384,7 @@ class ScriptsInventory {
     }
     return 'unknown_safety_level';
   }
-  
+
   /**
    * Analyze package dependencies
    */
@@ -394,10 +394,10 @@ class ScriptsInventory {
       has_npm_run_all: 'npm-run-all' in (packageData.dependencies || {}),
       has_concurrently: 'concurrently' in (packageData.dependencies || {}),
       total_dependencies: Object.keys(packageData.dependencies || {}).length,
-      total_dev_dependencies: Object.keys(packageData.devDependencies || {}).length
+      total_dev_dependencies: Object.keys(packageData.devDependencies || {}).length,
     };
   }
-  
+
   /**
    * Generate summary statistics
    */
@@ -407,7 +407,7 @@ class ScriptsInventory {
     const grey = inventory.risk_levels.grey.length;
     const black = inventory.risk_levels.black.length;
     const unknown = inventory.risk_levels.unknown.length;
-    
+
     return {
       total_scripts: total,
       safe_scripts: safe,
@@ -418,7 +418,7 @@ class ScriptsInventory {
       categories_count: Object.keys(inventory.categories).length,
       cross_platform_issues: inventory.cross_platform_issues.length,
       can_run_safely_count: Object.values(inventory.scripts_details)
-        .filter(s => s.can_run_safely).length
+        .filter(s => s.can_run_safely).length,
     };
   }
 }

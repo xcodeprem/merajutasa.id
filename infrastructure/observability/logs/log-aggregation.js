@@ -1,16 +1,16 @@
 /**
  * MerajutASA.id - Phase 2 Week 3: Log Aggregation System
- * 
+ *
  * Enterprise-grade log aggregation and management system
  * Provides centralized logging with structured data and correlation
- * 
+ *
  * Features:
  * - Structured logging with correlation IDs
  * - Log level management and filtering
  * - Audit trail integration
  * - Security event logging
  * - Performance and error tracking
- * 
+ *
  * @version 1.0.0
  * @since Phase 2 Week 3
  */
@@ -23,7 +23,7 @@ import { standardizeSecurityEvent } from '../common/security-telemetry-schema.js
 export class LogAggregationSystem extends EventEmitter {
   constructor(config = {}) {
     super();
-    
+
     this.config = {
       serviceName: config.serviceName || 'merajutasa-service',
       logLevel: config.logLevel || 'info',
@@ -32,7 +32,7 @@ export class LogAggregationSystem extends EventEmitter {
       maxFiles: config.maxFiles || 10,
       enableConsoleLogging: config.enableConsoleLogging !== false,
       enableAuditLogging: config.enableAuditLogging !== false,
-      ...config
+      ...config,
     };
 
     // Log levels
@@ -41,14 +41,14 @@ export class LogAggregationSystem extends EventEmitter {
       warn: 1,
       info: 2,
       debug: 3,
-      trace: 4
+      trace: 4,
     };
 
     // Log storage
     this.logBuffer = [];
     this.auditLog = [];
     this.securityLog = [];
-    
+
     this.initializeLogging();
   }
 
@@ -78,11 +78,11 @@ export class LogAggregationSystem extends EventEmitter {
       service: this.config.serviceName,
       message,
       metadata,
-      correlationId: metadata.correlationId || this.generateCorrelationId()
+      correlationId: metadata.correlationId || this.generateCorrelationId(),
     };
 
     this.logBuffer.push(logEntry);
-    
+
     if (this.config.enableConsoleLogging) {
       console[level] || console.log(`[${level.toUpperCase()}] ${message}`, metadata);
     }
@@ -130,7 +130,7 @@ export class LogAggregationSystem extends EventEmitter {
       details,
       status,
       metadata,
-      correlationId: metadata.correlationId || this.generateCorrelationId()
+      correlationId: metadata.correlationId || this.generateCorrelationId(),
     };
 
     this.auditLog.push(auditEntry);
@@ -155,13 +155,13 @@ export class LogAggregationSystem extends EventEmitter {
       network: metadata.network || {},
       auth: metadata.auth || {},
       labels: metadata.labels || {},
-      metadata: metadata.metadata || {}
+      metadata: metadata.metadata || {},
     }, {
       serviceName: this.config.serviceName,
       environment: metadata.environment,
       traceId: metadata.traceId,
       spanId: metadata.spanId,
-      correlationId: metadata.correlationId
+      correlationId: metadata.correlationId,
     });
 
     const securityEntry = standardized;
@@ -173,7 +173,7 @@ export class LogAggregationSystem extends EventEmitter {
       event_id: securityEntry.event_id,
       correlation_id: securityEntry.correlation?.correlation_id,
       actor: securityEntry.actor,
-      resource: securityEntry.resource
+      resource: securityEntry.resource,
     });
   }
 
@@ -182,7 +182,7 @@ export class LogAggregationSystem extends EventEmitter {
    */
   async searchLogs(filters = {}) {
     const { startTime, endTime, level, component, limit = 100 } = filters;
-    
+
     let results = [...this.logBuffer];
 
     if (startTime) {
@@ -213,10 +213,10 @@ export class LogAggregationSystem extends EventEmitter {
       auditLogs: this.auditLog.length,
       securityLogs: this.securityLog.length,
       logsByLevel: {},
-      recentErrors: this.logBuffer.filter(log => 
-        log.level === 'error' && 
-        Date.now() - new Date(log.timestamp).getTime() < 3600000 // Last hour
-      ).length
+      recentErrors: this.logBuffer.filter(log =>
+        log.level === 'error' &&
+        Date.now() - new Date(log.timestamp).getTime() < 3600000, // Last hour
+      ).length,
     };
 
     // Count logs by level
@@ -275,8 +275,8 @@ export class LogAggregationSystem extends EventEmitter {
       securityLogSize: this.securityLog.length,
       configuration: {
         logLevel: this.config.logLevel,
-        logDir: this.config.logDir
-      }
+        logDir: this.config.logDir,
+      },
     };
   }
 }

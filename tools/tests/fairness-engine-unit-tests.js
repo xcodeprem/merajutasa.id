@@ -17,11 +17,11 @@ async function loadParams(){
 }
 
 function runSequence(params, seq){
-  let st=null; const events=[]; seq.forEach((r,i)=>{ const res = decide(params, st, r); st={...res,lastRatio:r}; if(res.events.length) res.events.forEach(ev=>events.push({idx:i,ratio:r,...ev})); });
+  let st=null; const events=[]; seq.forEach((r,i)=>{ const res = decide(params, st, r); st={...res,lastRatio:r}; if(res.events.length) {res.events.forEach(ev=>events.push({idx:i,ratio:r,...ev}));} });
   return { final: st?.state||'NONE', events };
 }
 
-function assert(cond, msg){ if(!cond) throw new Error(msg); }
+function assert(cond, msg){ if(!cond) {throw new Error(msg);} }
 
 async function main(){
   const p = await loadParams();
@@ -60,7 +60,7 @@ async function main(){
     // Start with severe trigger then ratios inside stall band but below exit
     const seq = [p.T_enter_major - 0.01];
     // push window stall band ratios mid-band
-    for (let i=0;i<window;i++) seq.push((p.stalled_min_ratio + p.stalled_max_ratio_below_exit)/2);
+    for (let i=0;i<window;i++) {seq.push((p.stalled_min_ratio + p.stalled_max_ratio_below_exit)/2);}
     const r = runSequence(p, seq);
     const stallEvt = r.events.find(e=>e.type==='STALL');
     assert(stallEvt, 'UT4 expected STALL event');
@@ -72,7 +72,7 @@ async function main(){
     const window = p.stalled_window_snapshots;
     const bandRatio = (p.stalled_min_ratio + p.stalled_max_ratio_below_exit)/2;
     const seq = [p.T_enter_major - 0.01];
-    for (let i=0;i<window;i++) seq.push(bandRatio);
+    for (let i=0;i<window;i++) {seq.push(bandRatio);}
     // now break stall by going deeper severe (still below exit)
     seq.push(p.T_enter_major - 0.02);
     const r = runSequence(p, seq);
@@ -86,7 +86,7 @@ async function main(){
     const window = p.stalled_window_snapshots;
     const bandRatio = (p.stalled_min_ratio + p.stalled_max_ratio_below_exit)/2;
     const seq = [p.T_enter_major - 0.01];
-    for (let i=0;i<window;i++) seq.push(bandRatio);
+    for (let i=0;i<window;i++) {seq.push(bandRatio);}
     // now exit by going above T_exit
     seq.push(p.T_exit + 0.01);
     // then borderline ratio which should NOT create CANDIDATE due to cooldown

@@ -8,7 +8,7 @@ const PORT = Number(process.env.EQUITY_PORT || 4620);
 const URL = `http://127.0.0.1:${PORT}/`;
 const HEALTH = `http://127.0.0.1:${PORT}/health`;
 const EXTRA = [
-  `http://127.0.0.1:${PORT}/ui/methodology`
+  `http://127.0.0.1:${PORT}/ui/methodology`,
 ];
 
 async function main(){
@@ -33,17 +33,17 @@ async function main(){
   let ok = false;
   while (Date.now() < deadline) {
     ok = await checkHealth();
-    if (ok) break;
+    if (ok) {break;}
     // fallback to root
     ok = await checkRoot();
-    if (ok) break;
+    if (ok) {break;}
     await new Promise(r=> setTimeout(r, 300));
   }
   if (!ok) { console.error('[a11y] service not reachable'); process.exit(2); }
   const runOnce = (url)=> pa11y(url, {
     standard: 'WCAG2AA',
     timeout: 30000,
-    chromeLaunchConfig: { args: ['--no-sandbox','--disable-gpu','--headless=new'] }
+    chromeLaunchConfig: { args: ['--no-sandbox','--disable-gpu','--headless=new'] },
   });
   async function runWithRetry(url, tries=3){
     let lastErr;
@@ -66,7 +66,7 @@ async function main(){
     critical: criticalCount,
     serious: warningCount,
     warnings: warningCount,
-    notices: noticeCount
+    notices: noticeCount,
   };
   await fs.mkdir('artifacts',{recursive:true});
   await fs.writeFile('artifacts/a11y-smoke-report.json', JSON.stringify({ url: URL, counts, issues }, null, 2));

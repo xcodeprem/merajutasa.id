@@ -19,19 +19,19 @@ const KEY_DIR = '.integrity';
 const KEYS_STATE = `${KEY_DIR}/keys.json`;
 
 function stableStringify(obj){
-  if (typeof obj === 'string') return obj;
+  if (typeof obj === 'string') {return obj;}
   const keys = Object.keys(obj).sort();
   return '{' + keys.map(k=>`"${k}":${stableSerialize(obj[k])}`).join(',') + '}';
 }
 function stableSerialize(v){
-  if (v === null) return 'null';
-  if (Array.isArray(v)) return '['+v.map(stableSerialize).join(',')+']';
+  if (v === null) {return 'null';}
+  if (Array.isArray(v)) {return '['+v.map(stableSerialize).join(',')+']';}
   switch(typeof v){
-    case 'string': return JSON.stringify(v);
-    case 'number': return Number.isFinite(v)? String(v):'null';
-    case 'boolean': return v?'true':'false';
-    case 'object': return stableStringify(v);
-    default: return 'null';
+  case 'string': return JSON.stringify(v);
+  case 'number': return Number.isFinite(v)? String(v):'null';
+  case 'boolean': return v?'true':'false';
+  case 'object': return stableStringify(v);
+  default: return 'null';
   }
 }
 
@@ -45,8 +45,8 @@ async function ensureKeys(){
       {
         id: `k-${Date.now()}`,
         privPem: privateKey.export({type:'pkcs8',format:'pem'}),
-        pubPem: publicKey.export({type:'spki',format:'pem'})
-      }
+        pubPem: publicKey.export({type:'spki',format:'pem'}),
+      },
     ]};
     await fs.writeFile(KEYS_STATE, JSON.stringify(state,null,2));
   }
@@ -61,7 +61,7 @@ function verifyCanonical(pubPem, canonical, sigB64){
 }
 
 async function start(){
-  let state = await ensureKeys();
+  const state = await ensureKeys();
   const server = http.createServer(async (req,res)=>{
     try {
       if (req.method === 'GET' && req.url === '/pubkey'){

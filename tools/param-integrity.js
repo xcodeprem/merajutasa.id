@@ -39,7 +39,7 @@ async function extractDec04Params() {
 
 function compareNumeric(a,b){
   const na = Number(a); const nb = Number(b);
-  if (Number.isNaN(na) || Number.isNaN(nb)) return a===b;
+  if (Number.isNaN(na) || Number.isNaN(nb)) {return a===b;}
   return na === nb;
 }
 
@@ -61,12 +61,12 @@ async function main(){
     multi_category_block_threshold: Number(dec04Params['multi_category_block_threshold'] ?? 2),
     min_cell_aggregation_threshold: Number(dec04Params['min_cell_aggregation_threshold'] ?? 20),
     evidence_hash_display_len: Number(dec04Params['evidence_hash_display_len'] ?? 16),
-  numeric_sampling_truncation_decimals: Number(dec04Params['numeric_sampling_truncation_decimals'] ?? 2),
-  // Wave 1 added constants
-  disclaimer_D7_default: (dec04Params['disclaimer_D7_default'] || 'off'),
-  terminology_stage2_trigger_formula: normalizeQuoted(dec04Params['terminology_stage2_trigger_formula'] || '5 distinct OR 12 cumulative/7d'),
-  revocation_reason_codes: normalizeQuoted(dec04Params['revocation_reason_codes'] || 'USER_REQUEST|COMPROMISED|POLICY_VIOLATION|DATA_SUPERSEDED|INTEGRITY_ERROR'),
-  revocation_reason_codes_count: (normalizeQuoted(dec04Params['revocation_reason_codes'] || '')).split('|').filter(s=>s).length
+    numeric_sampling_truncation_decimals: Number(dec04Params['numeric_sampling_truncation_decimals'] ?? 2),
+    // Wave 1 added constants
+    disclaimer_D7_default: (dec04Params['disclaimer_D7_default'] || 'off'),
+    terminology_stage2_trigger_formula: normalizeQuoted(dec04Params['terminology_stage2_trigger_formula'] || '5 distinct OR 12 cumulative/7d'),
+    revocation_reason_codes: normalizeQuoted(dec04Params['revocation_reason_codes'] || 'USER_REQUEST|COMPROMISED|POLICY_VIOLATION|DATA_SUPERSEDED|INTEGRITY_ERROR'),
+    revocation_reason_codes_count: (normalizeQuoted(dec04Params['revocation_reason_codes'] || '')).split('|').filter(s=>s).length,
   };
 
   // Parameter alias mapping to unify names across YAML, DEC matrix, and requirement spec (Option F list)
@@ -86,15 +86,15 @@ async function main(){
     { canonical: 'disclaimer_D7_default', config: null, dec: 'disclaimer_D7_default' },
     { canonical: 'terminology_stage2_trigger_formula', config: null, dec: 'terminology_stage2_trigger_formula', decTransform: normalizeQuoted },
     { canonical: 'revocation_reason_codes', config: null, dec: 'revocation_reason_codes', decTransform: normalizeQuoted },
-    { canonical: 'revocation_reason_codes_count', config: null, dec: 'revocation_reason_codes', decTransform: v => normalizeQuoted(v).split('|').filter(s=>s).length }
+    { canonical: 'revocation_reason_codes_count', config: null, dec: 'revocation_reason_codes', decTransform: v => normalizeQuoted(v).split('|').filter(s=>s).length },
   ];
 
   const rows = paramMap.map(m => {
     const configVal = m.config ? configParams[m.config] : null;
     const decRaw = m.dec ? dec04Params[m.dec] : null;
     let decVal = decRaw === undefined ? null : decRaw;
-    if (typeof decVal === 'string') decVal = normalizeQuoted(decVal);
-    if (decVal !== null && m.decTransform) decVal = m.decTransform(decVal);
+    if (typeof decVal === 'string') {decVal = normalizeQuoted(decVal);}
+    if (decVal !== null && m.decTransform) {decVal = m.decTransform(decVal);}
     const codeVal = Object.prototype.hasOwnProperty.call(codeConstants, m.canonical) ? codeConstants[m.canonical] : null;
 
     // Normalize numeric strings
@@ -106,8 +106,8 @@ async function main(){
     const sources = { config: nConfig, dec: nDec, code: nCode };
     const presentSources = Object.entries(sources).filter(([k,v])=>v!==null).map(([k])=>k);
     let status;
-    if (presentSources.length === 0) status = 'MISSING_ALL';
-    else if (presentSources.length === 1) status = 'MISSING_OTHERS';
+    if (presentSources.length === 0) {status = 'MISSING_ALL';}
+    else if (presentSources.length === 1) {status = 'MISSING_OTHERS';}
     else {
       const vals = presentSources.map(k=>sources[k]);
       const allEqual = vals.every(v => compareNumeric(v, vals[0]));
@@ -118,7 +118,7 @@ async function main(){
       aliases: { config: m.config, dec: m.dec },
       values: sources,
       sources_present: presentSources,
-      status
+      status,
     };
   });
 
@@ -137,7 +137,7 @@ main().catch(e=>{ console.error('param-integrity error',e); process.exit(2); });
 
 // Helper placed at end to avoid hoist confusion above
 function normalizeQuoted(v){
-  if (typeof v !== 'string') return v;
+  if (typeof v !== 'string') {return v;}
   const trimmed = v.trim();
   if ((trimmed.startsWith('"') && trimmed.endsWith('"')) || (trimmed.startsWith("'") && trimmed.endsWith("'"))) {
     return trimmed.substring(1, trimmed.length-1);

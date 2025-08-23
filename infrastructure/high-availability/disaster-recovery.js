@@ -20,7 +20,7 @@ export class DisasterRecoverySystem extends EventEmitter {
       primarySite: 'us-east-1',
       drSites: ['us-west-2', 'eu-west-1'],
       backupStorageClass: 'GLACIER_IR', // Intelligent Glacier
-      ...config
+      ...config,
     };
 
     this.recoveryState = {
@@ -30,14 +30,14 @@ export class DisasterRecoverySystem extends EventEmitter {
       backupHistory: [],
       failoverHistory: [],
       currentRTO: null,
-      currentRPO: null
+      currentRPO: null,
     };
 
     this.backupSystems = {
       databases: new DatabaseBackupSystem(this.config),
       storage: new StorageBackupSystem(this.config),
       configuration: new ConfigurationBackupSystem(this.config),
-      secrets: new SecretsBackupSystem(this.config)
+      secrets: new SecretsBackupSystem(this.config),
     };
 
     this.initializeRecoverySystem();
@@ -47,7 +47,7 @@ export class DisasterRecoverySystem extends EventEmitter {
     try {
       // Initialize backup systems
       await Promise.all(
-        Object.values(this.backupSystems).map(system => system.initialize())
+        Object.values(this.backupSystems).map(system => system.initialize()),
       );
 
       // Set up automated backup schedule
@@ -60,7 +60,7 @@ export class DisasterRecoverySystem extends EventEmitter {
         primarySite: this.config.primarySite,
         drSites: this.config.drSites,
         rto: this.config.recoveryTimeObjective,
-        rpo: this.config.recoveryPointObjective
+        rpo: this.config.recoveryPointObjective,
       });
 
     } catch (error) {
@@ -82,8 +82,8 @@ export class DisasterRecoverySystem extends EventEmitter {
       metadata: {
         site: this.recoveryState.activeSite,
         triggered: options.triggered || 'manual',
-        ...options.metadata
-      }
+        ...options.metadata,
+      },
     };
 
     this.emit('backup-started', backup);
@@ -147,8 +147,8 @@ export class DisasterRecoverySystem extends EventEmitter {
       metadata: {
         site: this.recoveryState.activeSite,
         triggered: options.triggered || 'manual',
-        ...options.metadata
-      }
+        ...options.metadata,
+      },
     };
 
     this.emit('incremental-backup-started', backup);
@@ -204,7 +204,7 @@ export class DisasterRecoverySystem extends EventEmitter {
       status: 'in-progress',
       type: options.type || 'planned',
       reason: options.reason || 'manual-failover',
-      stages: []
+      stages: [],
     };
 
     this.emit('failover-started', failover);
@@ -262,7 +262,7 @@ export class DisasterRecoverySystem extends EventEmitter {
     const stage = {
       name: 'validate-target-readiness',
       startTime: Date.now(),
-      status: 'in-progress'
+      status: 'in-progress',
     };
 
     failover.stages.push(stage);
@@ -307,7 +307,7 @@ export class DisasterRecoverySystem extends EventEmitter {
     const stage = {
       name: 'stop-primary-traffic',
       startTime: Date.now(),
-      status: 'in-progress'
+      status: 'in-progress',
     };
 
     failover.stages.push(stage);
@@ -336,7 +336,7 @@ export class DisasterRecoverySystem extends EventEmitter {
     const stage = {
       name: 'restore-to-target',
       startTime: Date.now(),
-      status: 'in-progress'
+      status: 'in-progress',
     };
 
     failover.stages.push(stage);
@@ -378,7 +378,7 @@ export class DisasterRecoverySystem extends EventEmitter {
     const stage = {
       name: 'update-dns-routing',
       startTime: Date.now(),
-      status: 'in-progress'
+      status: 'in-progress',
     };
 
     failover.stages.push(stage);
@@ -408,7 +408,7 @@ export class DisasterRecoverySystem extends EventEmitter {
     const stage = {
       name: 'start-target-services',
       startTime: Date.now(),
-      status: 'in-progress'
+      status: 'in-progress',
     };
 
     failover.stages.push(stage);
@@ -437,7 +437,7 @@ export class DisasterRecoverySystem extends EventEmitter {
     const stage = {
       name: 'validate-failover-success',
       startTime: Date.now(),
-      status: 'in-progress'
+      status: 'in-progress',
     };
 
     failover.stages.push(stage);
@@ -446,7 +446,7 @@ export class DisasterRecoverySystem extends EventEmitter {
     try {
       // Perform health checks
       const healthChecks = await this.performPostFailoverHealthChecks(targetSite);
-      
+
       if (!healthChecks.allHealthy) {
         throw new Error(`Health checks failed after failover: ${healthChecks.failures.join(', ')}`);
       }
@@ -472,7 +472,7 @@ export class DisasterRecoverySystem extends EventEmitter {
       database: await this.healthCheckDatabase(targetSite),
       api: await this.healthCheckAPI(targetSite),
       storage: await this.healthCheckStorage(targetSite),
-      network: await this.healthCheckNetwork(targetSite)
+      network: await this.healthCheckNetwork(targetSite),
     };
 
     const failures = Object.entries(checks)
@@ -482,7 +482,7 @@ export class DisasterRecoverySystem extends EventEmitter {
     return {
       checks,
       allHealthy: failures.length === 0,
-      failures
+      failures,
     };
   }
 
@@ -490,8 +490,8 @@ export class DisasterRecoverySystem extends EventEmitter {
     const backupInterval = setInterval(async () => {
       try {
         // Determine backup type based on schedule
-        const lastBackupAge = this.recoveryState.lastBackup 
-          ? Date.now() - this.recoveryState.lastBackup.startTime 
+        const lastBackupAge = this.recoveryState.lastBackup
+          ? Date.now() - this.recoveryState.lastBackup.startTime
           : Infinity;
 
         const shouldCreateFullBackup = lastBackupAge > 24 * 60 * 60 * 1000; // 24 hours
@@ -512,15 +512,15 @@ export class DisasterRecoverySystem extends EventEmitter {
 
   async cleanupOldBackups() {
     const cutoffDate = Date.now() - (this.config.backupRetentionDays * 24 * 60 * 60 * 1000);
-    
+
     const backupsToDelete = this.recoveryState.backupHistory.filter(
-      backup => backup.startTime < cutoffDate
+      backup => backup.startTime < cutoffDate,
     );
 
     for (const backup of backupsToDelete) {
       try {
         await this.deleteBackup(backup.id);
-        
+
         // Remove from history
         const index = this.recoveryState.backupHistory.indexOf(backup);
         if (index > -1) {
@@ -538,13 +538,13 @@ export class DisasterRecoverySystem extends EventEmitter {
     const hash = createHash('sha256');
     hash.update(backup.id);
     hash.update(backup.startTime.toString());
-    
+
     for (const [component, componentBackup] of backup.components) {
       hash.update(component);
       hash.update(componentBackup.id || '');
       hash.update((componentBackup.size || 0).toString());
     }
-    
+
     return hash.digest('hex');
   }
 
@@ -561,12 +561,12 @@ export class DisasterRecoverySystem extends EventEmitter {
   }
 
   async healthCheck() {
-    const backupAge = this.recoveryState.lastBackup 
-      ? Date.now() - this.recoveryState.lastBackup.endTime 
+    const backupAge = this.recoveryState.lastBackup
+      ? Date.now() - this.recoveryState.lastBackup.endTime
       : null;
 
     const rpoCompliant = !backupAge || backupAge <= this.config.recoveryPointObjective;
-    
+
     return {
       service: 'disaster-recovery',
       status: rpoCompliant ? 'healthy' : 'warning',
@@ -579,7 +579,7 @@ export class DisasterRecoverySystem extends EventEmitter {
       rtoTarget: this.config.recoveryTimeObjective,
       currentRPO: this.recoveryState.currentRPO,
       currentRTO: this.recoveryState.currentRTO,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     };
   }
 
@@ -628,17 +628,17 @@ export class DisasterRecoverySystem extends EventEmitter {
 class DatabaseBackupSystem {
   constructor(config) { this.config = config; }
   async initialize() { return true; }
-  async createBackup(backupId) { 
-    await this.sleep(2000); 
-    return { id: `db-${backupId}`, size: 1000000, status: 'completed' }; 
+  async createBackup(backupId) {
+    await this.sleep(2000);
+    return { id: `db-${backupId}`, size: 1000000, status: 'completed' };
   }
-  async createIncrementalBackup(backupId, baseId) { 
-    await this.sleep(1000); 
-    return { id: `db-inc-${backupId}`, baseId, size: 100000, status: 'completed' }; 
+  async createIncrementalBackup(backupId, baseId) {
+    await this.sleep(1000);
+    return { id: `db-inc-${backupId}`, baseId, size: 100000, status: 'completed' };
   }
-  async restoreFromBackup(backupId, targetSite) { 
-    await this.sleep(3000); 
-    return { status: 'restored', targetSite }; 
+  async restoreFromBackup(backupId, targetSite) {
+    await this.sleep(3000);
+    return { status: 'restored', targetSite };
   }
   sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
 }
@@ -646,17 +646,17 @@ class DatabaseBackupSystem {
 class StorageBackupSystem {
   constructor(config) { this.config = config; }
   async initialize() { return true; }
-  async createBackup(backupId) { 
-    await this.sleep(1500); 
-    return { id: `storage-${backupId}`, size: 5000000, status: 'completed' }; 
+  async createBackup(backupId) {
+    await this.sleep(1500);
+    return { id: `storage-${backupId}`, size: 5000000, status: 'completed' };
   }
-  async createIncrementalBackup(backupId, baseId) { 
-    await this.sleep(800); 
-    return { id: `storage-inc-${backupId}`, baseId, size: 500000, status: 'completed' }; 
+  async createIncrementalBackup(backupId, baseId) {
+    await this.sleep(800);
+    return { id: `storage-inc-${backupId}`, baseId, size: 500000, status: 'completed' };
   }
-  async restoreFromBackup(backupId, targetSite) { 
-    await this.sleep(4000); 
-    return { status: 'restored', targetSite }; 
+  async restoreFromBackup(backupId, targetSite) {
+    await this.sleep(4000);
+    return { status: 'restored', targetSite };
   }
   sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
 }
@@ -664,17 +664,17 @@ class StorageBackupSystem {
 class ConfigurationBackupSystem {
   constructor(config) { this.config = config; }
   async initialize() { return true; }
-  async createBackup(backupId) { 
-    await this.sleep(500); 
-    return { id: `config-${backupId}`, size: 50000, status: 'completed' }; 
+  async createBackup(backupId) {
+    await this.sleep(500);
+    return { id: `config-${backupId}`, size: 50000, status: 'completed' };
   }
-  async createIncrementalBackup(backupId, baseId) { 
-    await this.sleep(300); 
-    return { id: `config-inc-${backupId}`, baseId, size: 5000, status: 'completed' }; 
+  async createIncrementalBackup(backupId, baseId) {
+    await this.sleep(300);
+    return { id: `config-inc-${backupId}`, baseId, size: 5000, status: 'completed' };
   }
-  async restoreFromBackup(backupId, targetSite) { 
-    await this.sleep(1000); 
-    return { status: 'restored', targetSite }; 
+  async restoreFromBackup(backupId, targetSite) {
+    await this.sleep(1000);
+    return { status: 'restored', targetSite };
   }
   sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
 }
@@ -682,17 +682,17 @@ class ConfigurationBackupSystem {
 class SecretsBackupSystem {
   constructor(config) { this.config = config; }
   async initialize() { return true; }
-  async createBackup(backupId) { 
-    await this.sleep(800); 
-    return { id: `secrets-${backupId}`, size: 10000, status: 'completed' }; 
+  async createBackup(backupId) {
+    await this.sleep(800);
+    return { id: `secrets-${backupId}`, size: 10000, status: 'completed' };
   }
-  async createIncrementalBackup(backupId, baseId) { 
-    await this.sleep(400); 
-    return { id: `secrets-inc-${backupId}`, baseId, size: 1000, status: 'completed' }; 
+  async createIncrementalBackup(backupId, baseId) {
+    await this.sleep(400);
+    return { id: `secrets-inc-${backupId}`, baseId, size: 1000, status: 'completed' };
   }
-  async restoreFromBackup(backupId, targetSite) { 
-    await this.sleep(1500); 
-    return { status: 'restored', targetSite }; 
+  async restoreFromBackup(backupId, targetSite) {
+    await this.sleep(1500);
+    return { status: 'restored', targetSite };
   }
   sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
 }

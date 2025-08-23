@@ -82,7 +82,7 @@ async function ghFetch(url, options = {}) {
     throw new Error(`GitHub API ${res.status}: ${res.statusText} - ${text.slice(0, 1000)}`);
   }
   const ct = res.headers.get('content-type') || '';
-  if (ct.includes('application/json') || url.includes('/graphql')) return res.json();
+  if (ct.includes('application/json') || url.includes('/graphql')) {return res.json();}
   return res.text();
 }
 
@@ -124,7 +124,7 @@ async function resolveProjectByTitle(login, title) {
     }
   }
   const match = nodes.find(n => n.title === title) || nodes.find(n => n.title?.toLowerCase() === title.toLowerCase());
-  if (!match) throw new Error(`Project titled '${title}' not found under ${login}`);
+  if (!match) {throw new Error(`Project titled '${title}' not found under ${login}`);}
   return { id: match.id, number: match.number, title: match.title };
 }
 
@@ -199,15 +199,15 @@ function deriveExpectedFromLabels(labelNames) {
 }
 
 function normalizeValue(v) {
-  if (!v) return v;
+  if (!v) {return v;}
   const s = String(v).trim();
   // map common variants
   const map = {
     'in-progress': 'In Progress',
     'in review': 'In Review',
     'in-review': 'In Review',
-  'todo': 'To Do',
-  'to do': 'To Do',
+    'todo': 'To Do',
+    'to do': 'To Do',
     'p1': 'P1', 'p2': 'P2', 'p3': 'P3', 'p4': 'P4', 'p5': 'P5',
     'high': 'High', 'medium': 'Medium', 'low': 'Low',
   };
@@ -221,32 +221,32 @@ function capitalizeWords(str) {
 // Field-specific normalizers to match the board's option names
 function normalizePriority(v) {
   const s = String(v || '').trim().toLowerCase();
-  if (!s) return null;
-  if (/^p[0-5]$/.test(s)) return s.toUpperCase();
-  if (s === 'urgent') return 'P0';
-  if (s === 'high') return 'P1';
-  if (s === 'medium') return 'P2';
-  if (s === 'low') return 'P3';
+  if (!s) {return null;}
+  if (/^p[0-5]$/.test(s)) {return s.toUpperCase();}
+  if (s === 'urgent') {return 'P0';}
+  if (s === 'high') {return 'P1';}
+  if (s === 'medium') {return 'P2';}
+  if (s === 'low') {return 'P3';}
   return normalizeValue(v); // fallback best-effort
 }
 
 function normalizeStatus(v) {
   const s = String(v || '').trim().toLowerCase();
-  if (!s) return null;
-  if (s === 'todo' || s === 'to do') return 'To Do';
-  if (s === 'in-progress') return 'In Progress';
-  if (s === 'in review' || s === 'in-review') return 'In Review';
+  if (!s) {return null;}
+  if (s === 'todo' || s === 'to do') {return 'To Do';}
+  if (s === 'in-progress') {return 'In Progress';}
+  if (s === 'in review' || s === 'in-review') {return 'In Review';}
   return normalizeValue(v);
 }
 
 function normalizeArea(v) {
-  if (!v) return null;
+  if (!v) {return null;}
   return capitalizeWords(String(v).replace(/[-_]/g, ' ').trim());
 }
 
 function normalizePhase(v) {
   const s = String(v || '').trim().toLowerCase();
-  if (!s) return null;
+  if (!s) {return null;}
   const map = new Map([
     ['1', 'Phase 1'],
     ['2-week-1', 'Phase 2 W1'],
@@ -269,12 +269,12 @@ function extractProjectFields(fieldValues) {
   const rv = {};
   for (const fv of fieldValues || []) {
     const fieldName = fv?.field?.name;
-    if (!fieldName) continue;
-    if (typeof fv.text === 'string') rv[fieldName] = fv.text;
-    else if (typeof fv.date === 'string') rv[fieldName] = fv.date;
-    else if (typeof fv.number === 'number') rv[fieldName] = String(fv.number);
-    else if (typeof fv.title === 'string') rv[fieldName] = fv.title;
-  else if (typeof fv.name === 'string') rv[fieldName] = fv.name; // single-select value
+    if (!fieldName) {continue;}
+    if (typeof fv.text === 'string') {rv[fieldName] = fv.text;}
+    else if (typeof fv.date === 'string') {rv[fieldName] = fv.date;}
+    else if (typeof fv.number === 'number') {rv[fieldName] = String(fv.number);}
+    else if (typeof fv.title === 'string') {rv[fieldName] = fv.title;}
+    else if (typeof fv.name === 'string') {rv[fieldName] = fv.name;} // single-select value
   }
   return rv;
 }
@@ -283,7 +283,7 @@ function compareMapping(expected, actual) {
   const fields = ['Priority', 'Area', 'Phase', 'Status'];
   const mismatches = [];
   for (const f of fields) {
-    if (!expected[f]) continue; // only check when label expectation exists
+    if (!expected[f]) {continue;} // only check when label expectation exists
     const exp = expected[f];
     const act = actual[f] || null;
     if (!act || exp.toLowerCase() !== String(act).toLowerCase()) {
@@ -316,7 +316,7 @@ async function main() {
       });
     }
 
-    if (!fs.existsSync(ARTIFACTS)) fs.mkdirSync(ARTIFACTS, { recursive: true });
+    if (!fs.existsSync(ARTIFACTS)) {fs.mkdirSync(ARTIFACTS, { recursive: true });}
     const out = {
       kind: 'project_spotcheck',
       ts: new Date().toISOString(),

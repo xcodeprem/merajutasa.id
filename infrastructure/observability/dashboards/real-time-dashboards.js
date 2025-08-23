@@ -1,9 +1,9 @@
 /**
  * MerajutASA.id - Phase 2 Week 3: Real-time Monitoring Dashboards
- * 
+ *
  * Advanced dashboard system with real-time metrics and visualization
  * Provides comprehensive monitoring dashboards for operations teams
- * 
+ *
  * Features:
  * - Real-time metric streaming
  * - Interactive dashboard widgets
@@ -11,7 +11,7 @@
  * - Alert integration with dashboards
  * - Historical data visualization
  * - Export and sharing capabilities
- * 
+ *
  * @version 1.0.0
  * @since Phase 2 Week 3
  */
@@ -74,7 +74,7 @@ class LightweightExpressApp {
 
   listen(port, callback) {
     console.log(`🌐 [EXPRESS] Simulated server listening on port ${port}`);
-    if (callback) callback();
+    if (callback) {callback();}
     return this;
   }
 }
@@ -85,13 +85,13 @@ let SocketIOServer, express;
 try {
   const socketio = await import('socket.io');
   const expressModule = await import('express');
-  
+
   SocketIOServer = socketio.Server;
   express = expressModule.default;
   console.log('✅ Using full Socket.IO and Express implementations for dashboards');
 } catch (error) {
   console.log('ℹ️ Socket.IO and Express not available for dashboards, using lightweight fallback');
-  
+
   SocketIOServer = LightweightSocketServer;
   express = () => new LightweightExpressApp();
   express.static = (path) => {
@@ -105,7 +105,7 @@ try {
 export class RealTimeMonitoringDashboards extends EventEmitter {
   constructor(config = {}) {
     super();
-    
+
     this.config = {
       serviceName: config.serviceName || 'merajutasa-service',
       port: config.port || 3000,
@@ -113,7 +113,7 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
       updateInterval: config.updateInterval || 5000, // 5 seconds
       maxDataPoints: config.maxDataPoints || 1000,
       dashboardsEnabled: config.dashboardsEnabled !== false,
-      ...config
+      ...config,
     };
 
     // Dashboard state
@@ -121,16 +121,16 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
     this.widgets = new Map();
     this.dataStreams = new Map();
     this.clients = new Map();
-    
+
     // Web server components
     this.app = null;
     this.server = null;
     this.io = null;
-    
+
     // Data storage for dashboards
     this.metricsBuffer = new Map();
     this.alertsBuffer = [];
-    
+
     this.initialize();
   }
 
@@ -141,14 +141,14 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
     try {
       this.setupDefaultDashboards();
       this.setupDefaultWidgets();
-      
+
       if (this.config.dashboardsEnabled) {
         await this.setupWebServer();
         await this.setupSocketIO();
       }
-      
+
       this.startDataStreaming();
-      
+
       console.log(`Real-time monitoring dashboards initialized on port ${this.config.port}`);
     } catch (error) {
       console.error('Failed to initialize dashboard system:', error);
@@ -166,7 +166,7 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
       description: 'High-level system health and performance metrics',
       layout: {
         rows: 3,
-        columns: 4
+        columns: 4,
       },
       widgets: [
         { id: 'system_health', position: { row: 0, col: 0, span: 1 } },
@@ -175,10 +175,10 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
         { id: 'throughput', position: { row: 0, col: 3, span: 1 } },
         { id: 'cpu_memory', position: { row: 1, col: 0, span: 2 } },
         { id: 'active_alerts', position: { row: 1, col: 2, span: 2 } },
-        { id: 'service_status', position: { row: 2, col: 0, span: 4 } }
+        { id: 'service_status', position: { row: 2, col: 0, span: 4 } },
       ],
       refreshInterval: 5000,
-      isDefault: true
+      isDefault: true,
     });
 
     // Business Metrics Dashboard
@@ -187,7 +187,7 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
       description: 'Key business KPIs and governance metrics',
       layout: {
         rows: 3,
-        columns: 3
+        columns: 3,
       },
       widgets: [
         { id: 'signing_operations', position: { row: 0, col: 0, span: 1 } },
@@ -195,10 +195,10 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
         { id: 'governance_compliance', position: { row: 0, col: 2, span: 1 } },
         { id: 'equity_scores', position: { row: 1, col: 0, span: 2 } },
         { id: 'user_activity', position: { row: 1, col: 2, span: 1 } },
-        { id: 'business_trends', position: { row: 2, col: 0, span: 3 } }
+        { id: 'business_trends', position: { row: 2, col: 0, span: 3 } },
       ],
       refreshInterval: 10000,
-      isDefault: true
+      isDefault: true,
     });
 
     // Performance Dashboard
@@ -207,16 +207,16 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
       description: 'Detailed performance metrics and trends',
       layout: {
         rows: 2,
-        columns: 3
+        columns: 3,
       },
       widgets: [
         { id: 'response_time_histogram', position: { row: 0, col: 0, span: 1 } },
         { id: 'cache_performance', position: { row: 0, col: 1, span: 1 } },
         { id: 'database_performance', position: { row: 0, col: 2, span: 1 } },
-        { id: 'performance_trends', position: { row: 1, col: 0, span: 3 } }
+        { id: 'performance_trends', position: { row: 1, col: 0, span: 3 } },
       ],
       refreshInterval: 5000,
-      isDefault: true
+      isDefault: true,
     });
 
     // Security Dashboard
@@ -225,15 +225,15 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
       description: 'Security events and threat analysis',
       layout: {
         rows: 2,
-        columns: 2
+        columns: 2,
       },
       widgets: [
         { id: 'security_events', position: { row: 0, col: 0, span: 1 } },
         { id: 'authentication_stats', position: { row: 0, col: 1, span: 1 } },
-        { id: 'threat_analysis', position: { row: 1, col: 0, span: 2 } }
+        { id: 'threat_analysis', position: { row: 1, col: 0, span: 2 } },
       ],
       refreshInterval: 10000,
-      isDefault: true
+      isDefault: true,
     });
   }
 
@@ -255,9 +255,9 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
         thresholds: [
           { value: 80, color: 'green' },
           { value: 60, color: 'yellow' },
-          { value: 0, color: 'red' }
-        ]
-      }
+          { value: 0, color: 'red' },
+        ],
+      },
     });
 
     // Response Time Widget
@@ -270,8 +270,8 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
       visualization: {
         type: 'line',
         timeWindow: '1h',
-        yAxisLabel: 'ms'
-      }
+        yAxisLabel: 'ms',
+      },
     });
 
     // Error Rate Widget
@@ -288,9 +288,9 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
         thresholds: [
           { value: 5, color: 'red' },
           { value: 1, color: 'yellow' },
-          { value: 0, color: 'green' }
-        ]
-      }
+          { value: 0, color: 'green' },
+        ],
+      },
     });
 
     // Throughput Widget
@@ -303,8 +303,8 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
       visualization: {
         type: 'number',
         suffix: ' req/s',
-        precision: 1
-      }
+        precision: 1,
+      },
     });
 
     // CPU and Memory Widget
@@ -320,9 +320,9 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
         yAxisLabel: '%',
         series: [
           { name: 'CPU', color: '#ff6b6b' },
-          { name: 'Memory', color: '#4ecdc4' }
-        ]
-      }
+          { name: 'Memory', color: '#4ecdc4' },
+        ],
+      },
     });
 
     // Active Alerts Widget
@@ -336,8 +336,8 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
         type: 'alert_list',
         maxItems: 10,
         showSeverity: true,
-        showTimestamp: true
-      }
+        showTimestamp: true,
+      },
     });
 
     // Service Status Widget
@@ -349,8 +349,8 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
       query: 'service_health_status',
       visualization: {
         type: 'status_grid',
-        services: ['signer', 'chain', 'collector', 'backup', 'monitoring']
-      }
+        services: ['signer', 'chain', 'collector', 'backup', 'monitoring'],
+      },
     });
 
     // Signing Operations Widget
@@ -362,8 +362,8 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
       query: 'signing_operations_by_status',
       visualization: {
         type: 'bar',
-        categories: ['success', 'failed', 'pending']
-      }
+        categories: ['success', 'failed', 'pending'],
+      },
     });
 
     // Chain Integrity Widget
@@ -380,9 +380,9 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
         thresholds: [
           { value: 95, color: 'green' },
           { value: 90, color: 'yellow' },
-          { value: 0, color: 'red' }
-        ]
-      }
+          { value: 0, color: 'red' },
+        ],
+      },
     });
 
     // Performance Trends Widget
@@ -396,8 +396,8 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
         type: 'multi_line',
         timeWindow: '24h',
         aggregation: 'avg',
-        interval: '1h'
-      }
+        interval: '1h',
+      },
     });
   }
 
@@ -406,17 +406,17 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
    */
   async setupWebServer() {
     this.app = express();
-    
+
     // Serve static dashboard files
     this.app.use('/static', express.static(path.join(process.cwd(), 'public/dashboards')));
-    
+
     // API endpoints
     this.app.get('/api/dashboards', (req, res) => {
       const dashboards = Array.from(this.dashboards.values()).map(d => ({
         id: d.id,
         name: d.name,
         description: d.description,
-        isDefault: d.isDefault
+        isDefault: d.isDefault,
       }));
       res.json(dashboards);
     });
@@ -448,7 +448,7 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
       res.json({
         status: 'healthy',
         service: 'monitoring-dashboards',
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       });
     });
 
@@ -466,9 +466,9 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
   setupSocketIO() {
     this.io = new SocketIOServer(this.server, {
       cors: {
-        origin: "*",
-        methods: ["GET", "POST"]
-      }
+        origin: '*',
+        methods: ['GET', 'POST'],
+      },
     });
 
     this.io.on('connection', (socket) => {
@@ -477,7 +477,7 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
         id: clientId,
         socket,
         subscribedDashboards: new Set(),
-        subscribedWidgets: new Set()
+        subscribedWidgets: new Set(),
       });
 
       console.log(`Dashboard client connected: ${clientId}`);
@@ -537,7 +537,7 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
     this.dashboards.set(dashboardId, {
       id: dashboardId,
       ...config,
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
     });
   }
 
@@ -548,7 +548,7 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
     this.widgets.set(widgetId, {
       id: widgetId,
       ...config,
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
     });
   }
 
@@ -557,15 +557,15 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
    */
   updateMetrics(metrics) {
     const timestamp = new Date().toISOString();
-    
+
     // Store metrics with timestamp
     for (const [key, value] of Object.entries(metrics)) {
       if (typeof value === 'number' && !isNaN(value)) {
         let metricHistory = this.metricsBuffer.get(key) || [];
-        
+
         metricHistory.push({
           value,
-          timestamp
+          timestamp,
         });
 
         // Keep only recent data points
@@ -609,16 +609,16 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
     }
 
     switch (widget.dataSource) {
-      case 'metrics':
-        return this.getMetricsData(widget);
-      case 'alerts':
-        return this.getAlertsData(widget);
-      case 'services':
-        return this.getServicesData(widget);
-      case 'business_metrics':
-        return this.getBusinessMetricsData(widget);
-      default:
-        throw new Error(`Unknown data source: ${widget.dataSource}`);
+    case 'metrics':
+      return this.getMetricsData(widget);
+    case 'alerts':
+      return this.getAlertsData(widget);
+    case 'services':
+      return this.getServicesData(widget);
+    case 'business_metrics':
+      return this.getBusinessMetricsData(widget);
+    default:
+      throw new Error(`Unknown data source: ${widget.dataSource}`);
     }
   }
 
@@ -646,11 +646,11 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
    */
   getAlertsData(widget) {
     const alerts = this.alertsBuffer.filter(alert => alert.status === 'active');
-    
+
     return {
       alerts: alerts.slice(0, widget.visualization.maxItems || 10),
       total: alerts.length,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
   }
 
@@ -665,16 +665,16 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
       // Get latest health status for each service
       const healthMetric = this.metricsBuffer.get(`service_health_${service}`) || [];
       const latest = healthMetric.length > 0 ? healthMetric[healthMetric.length - 1] : null;
-      
+
       serviceStatus[service] = {
         status: latest && latest.value === 1 ? 'healthy' : 'unhealthy',
-        lastUpdate: latest ? latest.timestamp : null
+        lastUpdate: latest ? latest.timestamp : null,
       };
     }
 
     return {
       services: serviceStatus,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
   }
 
@@ -701,8 +701,8 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
     if (visualization.timeWindow) {
       const timeWindowMs = this.parseTimeWindow(visualization.timeWindow);
       const cutoffTime = Date.now() - timeWindowMs;
-      processedData = metricHistory.filter(point => 
-        new Date(point.timestamp).getTime() > cutoffTime
+      processedData = metricHistory.filter(point =>
+        new Date(point.timestamp).getTime() > cutoffTime,
       );
     }
 
@@ -715,7 +715,7 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
       value: latest.value,
       data: processedData,
       timestamp: latest.timestamp,
-      count: processedData.length
+      count: processedData.length,
     };
   }
 
@@ -727,7 +727,7 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
       's': 1000,
       'm': 60 * 1000,
       'h': 60 * 60 * 1000,
-      'd': 24 * 60 * 60 * 1000
+      'd': 24 * 60 * 60 * 1000,
     };
 
     const match = timeWindow.match(/^(\d+)([smhd])$/);
@@ -750,7 +750,7 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
     for (const point of data) {
       const time = new Date(point.timestamp).getTime();
       const bucketTime = Math.floor(time / intervalMs) * intervalMs;
-      
+
       if (!buckets.has(bucketTime)) {
         buckets.set(bucketTime, []);
       }
@@ -761,27 +761,27 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
     const aggregated = [];
     for (const [bucketTime, values] of buckets) {
       let aggregatedValue;
-      
+
       switch (aggregation) {
-        case 'avg':
-          aggregatedValue = values.reduce((sum, val) => sum + val, 0) / values.length;
-          break;
-        case 'sum':
-          aggregatedValue = values.reduce((sum, val) => sum + val, 0);
-          break;
-        case 'max':
-          aggregatedValue = Math.max(...values);
-          break;
-        case 'min':
-          aggregatedValue = Math.min(...values);
-          break;
-        default:
-          aggregatedValue = values[values.length - 1]; // Last value
+      case 'avg':
+        aggregatedValue = values.reduce((sum, val) => sum + val, 0) / values.length;
+        break;
+      case 'sum':
+        aggregatedValue = values.reduce((sum, val) => sum + val, 0);
+        break;
+      case 'max':
+        aggregatedValue = Math.max(...values);
+        break;
+      case 'min':
+        aggregatedValue = Math.min(...values);
+        break;
+      default:
+        aggregatedValue = values[values.length - 1]; // Last value
       }
 
       aggregated.push({
         value: aggregatedValue,
-        timestamp: new Date(bucketTime).toISOString()
+        timestamp: new Date(bucketTime).toISOString(),
       });
     }
 
@@ -795,8 +795,8 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
     try {
       const client = this.clients.get(clientId);
       const dashboard = this.dashboards.get(dashboardId);
-      
-      if (!client || !dashboard) return;
+
+      if (!client || !dashboard) {return;}
 
       // Get data for all widgets in dashboard
       const widgetData = {};
@@ -808,7 +808,7 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
       client.socket.emit('dashboard_data', {
         dashboardId,
         widgets: widgetData,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       });
     } catch (error) {
       console.error(`Error sending dashboard data to client ${clientId}:`, error);
@@ -821,13 +821,13 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
   async sendWidgetData(clientId, widgetId) {
     try {
       const client = this.clients.get(clientId);
-      if (!client) return;
+      if (!client) {return;}
 
       const data = await this.getWidgetData(widgetId);
       client.socket.emit('widget_data', {
         widgetId,
         data,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       });
     } catch (error) {
       console.error(`Error sending widget data to client ${clientId}:`, error);
@@ -868,7 +868,7 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
    * Start data streaming
    */
   startDataStreaming() {
-    if (!this.config.enableRealTimeStreaming) return;
+    if (!this.config.enableRealTimeStreaming) {return;}
 
     this.streamingInterval = setInterval(() => {
       // Refresh all connected clients
@@ -992,7 +992,7 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
       dashboard,
       widgets: dashboard.widgets.map(w => this.widgets.get(w.id)),
       exportedAt: new Date().toISOString(),
-      version: '1.0.0'
+      version: '1.0.0',
     };
   }
 
@@ -1001,7 +1001,7 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
    */
   importDashboard(config) {
     const dashboardId = config.dashboard.id || uuidv4();
-    
+
     // Import widgets first
     for (const widget of config.widgets) {
       if (widget) {
@@ -1011,7 +1011,7 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
 
     // Import dashboard
     this.addDashboard(dashboardId, config.dashboard);
-    
+
     return dashboardId;
   }
 
@@ -1031,13 +1031,13 @@ export class RealTimeMonitoringDashboards extends EventEmitter {
         updateInterval: this.config.updateInterval,
         metricsBuffered: this.metricsBuffer.size,
         alertsBuffered: this.alertsBuffer.length,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
     } catch (error) {
       return {
         status: 'unhealthy',
         error: error.message,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
     }
   }

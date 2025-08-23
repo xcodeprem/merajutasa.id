@@ -14,7 +14,7 @@ const HIGHRISK = new Set(['IDN_NIK','IDN_NKK','BANK_ACCOUNT','GOV_ID_DOC','CHILD
 
 function parseExpectHeader(text){
   const m = text.match(/EXPECT:\s*([^\n]+)/i);
-  if(!m) return new Set();
+  if(!m) {return new Set();}
   return new Set(m[1].split(',').map(s=>s.trim()).filter(Boolean));
 }
 

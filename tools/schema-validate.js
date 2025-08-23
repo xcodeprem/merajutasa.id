@@ -25,20 +25,20 @@ function loadJson(p) {
     const validate = ajv.compile(schema);
     const data = loadJson(dataPath);
     const ok = validate(data);
-    
+
     // Create validation result for artifact
     const result = {
       schema_path: schemaPath,
       data_path: dataPath,
       validation_passed: ok,
       timestamp: new Date().toISOString(),
-      errors: ok ? null : validate.errors
+      errors: ok ? null : validate.errors,
     };
-    
+
     // Write stable artifact
     await fs.promises.mkdir('artifacts', { recursive: true });
     await fs.promises.writeFile('artifacts/schema-validation.json', stableStringify(result));
-    
+
     if (!ok) {
       console.error('Schema validation FAILED for', dataPath);
       console.error(stableStringify(validate.errors, 2));

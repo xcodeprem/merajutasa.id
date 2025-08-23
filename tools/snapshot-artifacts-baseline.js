@@ -14,7 +14,7 @@ const ARTIFACTS = [
   'artifacts/pii-scan-report.json',
   'artifacts/no-silent-drift-report.json',
   'artifacts/fairness-sim-report.json',
-  'artifacts/fairness-engine-runtime-report.json'
+  'artifacts/fairness-engine-runtime-report.json',
 ];
 function sha256(buf){ return crypto.createHash('sha256').update(buf).digest('hex'); }
 async function hashFile(p){ try { const data = await fs.readFile(p); return { path:p, hash:sha256(data) }; } catch { return { path:p, missing:true }; } }

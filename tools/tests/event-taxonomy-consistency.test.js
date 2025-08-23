@@ -16,7 +16,7 @@ function parseDocEvents(md){
   const ev = [];
   for (const line of md.split(/\r?\n/)){
     const m = line.match(/^\s*-\s*((?:pub|sys)_[a-z0-9_]+)/);
-    if (m) ev.push(m[1]);
+    if (m) {ev.push(m[1]);}
   }
   return Array.from(new Set(ev));
 }

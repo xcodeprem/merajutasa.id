@@ -1,7 +1,7 @@
 /**
  * Infrastructure Integration Platform
  * Lead Infrastructure Architect: Overall system design and integration
- * 
+ *
  * Provides unified orchestration, discovery, and coordination across all 35+ enterprise components
  * Manages cross-component dependencies, health monitoring, and data flow optimization
  */
@@ -17,7 +17,7 @@ import fs from 'fs/promises';
 export class InfrastructureIntegrationPlatform extends EventEmitter {
   constructor(config = {}) {
     super();
-    
+
     this.config = {
       platformName: 'merajutasa-infrastructure',
       enableAutoDiscovery: true,
@@ -27,7 +27,7 @@ export class InfrastructureIntegrationPlatform extends EventEmitter {
       healthCheckInterval: 30000, // 30 seconds
       dependencyResolutionTimeout: 60000, // 1 minute
       maxRetries: 3,
-      ...config
+      ...config,
     };
 
     this.components = new Map();
@@ -41,7 +41,7 @@ export class InfrastructureIntegrationPlatform extends EventEmitter {
       unhealthyComponents: 0,
       dependencyViolations: 0,
       dataFlowOptimizations: 0,
-      lastHealthCheck: null
+      lastHealthCheck: null,
     };
 
     this.platformState = {
@@ -49,7 +49,7 @@ export class InfrastructureIntegrationPlatform extends EventEmitter {
       startupPhase: 'idle',
       lastStartup: null,
       coordinationCycles: 0,
-      errorHistory: []
+      errorHistory: [],
     };
   }
 
@@ -58,17 +58,17 @@ export class InfrastructureIntegrationPlatform extends EventEmitter {
    */
   async initialize() {
     console.log('🚀 Initializing Infrastructure Integration Platform...');
-    
+
     try {
       // Discover all infrastructure components
       await this.discoverComponents();
-      
+
       // Build dependency graph
       await this.buildDependencyGraph();
-      
+
       // Calculate startup order
       await this.calculateStartupOrder();
-      
+
       // Initialize health monitoring
       if (this.config.enableHealthMonitoring) {
         await this.initializeHealthMonitoring();
@@ -81,29 +81,29 @@ export class InfrastructureIntegrationPlatform extends EventEmitter {
 
       this.platformState.initialized = true;
       this.platformState.lastStartup = new Date();
-      
-      console.log(`✅ Infrastructure Integration Platform initialized`);
+
+      console.log('✅ Infrastructure Integration Platform initialized');
       console.log(`📊 Discovered ${this.components.size} components`);
       console.log(`🔗 Mapped ${this.dependencies.size} dependency relationships`);
-      
+
       this.emit('platform-initialized', {
         components: this.components.size,
         dependencies: this.dependencies.size,
-        timestamp: new Date()
+        timestamp: new Date(),
       });
 
       return {
         success: true,
         components: this.components.size,
         dependencies: this.dependencies.size,
-        startupOrder: this.startupOrder.length
+        startupOrder: this.startupOrder.length,
       };
     } catch (error) {
       console.error('❌ Failed to initialize Infrastructure Integration Platform:', error.message);
       this.platformState.errorHistory.push({
         phase: 'initialization',
         error: error.message,
-        timestamp: new Date()
+        timestamp: new Date(),
       });
       throw error;
     }
@@ -114,12 +114,12 @@ export class InfrastructureIntegrationPlatform extends EventEmitter {
    */
   async discoverComponents() {
     console.log('🔍 Auto-discovering infrastructure components...');
-    
+
     const infrastructurePath = path.join(process.cwd(), 'infrastructure');
     const componentTypes = [
       'api-gateway', 'auth', 'backup', 'cicd', 'compliance',
       'docker', 'high-availability', 'kubernetes', 'monitoring',
-      'observability', 'performance', 'reverse-proxy', 'security', 'terraform'
+      'observability', 'performance', 'reverse-proxy', 'security', 'terraform',
     ];
 
     for (const componentType of componentTypes) {
@@ -141,12 +141,12 @@ export class InfrastructureIntegrationPlatform extends EventEmitter {
   async discoverComponentsInDirectory(componentType, dirPath) {
     try {
       const files = await fs.readdir(dirPath, { recursive: true });
-      
+
       for (const file of files) {
         if (file.endsWith('.js')) {
           const componentName = path.basename(file, '.js');
           const componentId = `${componentType}/${componentName}`;
-          
+
           const component = {
             id: componentId,
             name: componentName,
@@ -157,7 +157,7 @@ export class InfrastructureIntegrationPlatform extends EventEmitter {
             provides: [],
             healthCheck: null,
             lastHealthStatus: null,
-            discoveredAt: new Date()
+            discoveredAt: new Date(),
           };
 
           this.components.set(componentId, component);
@@ -176,7 +176,7 @@ export class InfrastructureIntegrationPlatform extends EventEmitter {
    */
   async buildDependencyGraph() {
     console.log('🔗 Building component dependency graph...');
-    
+
     // Known dependency patterns based on infrastructure analysis
     const dependencyRules = {
       'security': [], // Security is foundational
@@ -192,22 +192,22 @@ export class InfrastructureIntegrationPlatform extends EventEmitter {
       'reverse-proxy': ['security', 'monitoring'],
       'docker': ['security'],
       'kubernetes': ['docker', 'security', 'monitoring'],
-      'terraform': ['security']
+      'terraform': ['security'],
     };
 
     // Build dependency relationships
     for (const [componentId, component] of this.components) {
       const componentType = component.type;
       const deps = dependencyRules[componentType] || [];
-      
+
       for (const depType of deps) {
         // Find all components of the dependency type
         const dependencyComponents = Array.from(this.components.values())
           .filter(c => c.type === depType);
-        
+
         for (const depComponent of dependencyComponents) {
           component.dependencies.push(depComponent.id);
-          
+
           // Track the reverse dependency
           if (!this.dependencies.has(depComponent.id)) {
             this.dependencies.set(depComponent.id, new Set());
@@ -225,7 +225,7 @@ export class InfrastructureIntegrationPlatform extends EventEmitter {
    */
   async calculateStartupOrder() {
     console.log('📋 Calculating optimal component startup order...');
-    
+
     const visited = new Set();
     const visiting = new Set();
     const order = [];
@@ -234,13 +234,13 @@ export class InfrastructureIntegrationPlatform extends EventEmitter {
       if (visiting.has(componentId)) {
         throw new Error(`Circular dependency detected involving ${componentId}`);
       }
-      
+
       if (visited.has(componentId)) {
         return;
       }
 
       visiting.add(componentId);
-      
+
       const component = this.components.get(componentId);
       if (component) {
         for (const depId of component.dependencies) {
@@ -264,7 +264,7 @@ export class InfrastructureIntegrationPlatform extends EventEmitter {
 
     this.startupOrder = order;
     console.log(`✅ Calculated startup order for ${order.length} components`);
-    
+
     // Log startup order by phases
     const phases = this.groupComponentsByStartupPhase();
     console.log('📋 Startup phases:');
@@ -278,20 +278,20 @@ export class InfrastructureIntegrationPlatform extends EventEmitter {
    */
   groupComponentsByStartupPhase() {
     const phases = new Map();
-    
+
     for (const componentId of this.startupOrder) {
       const component = this.components.get(componentId);
-      if (!component) continue;
-      
+      if (!component) {continue;}
+
       // Calculate phase based on dependency depth
       const phase = this.calculateComponentPhase(componentId);
-      
+
       if (!phases.has(phase)) {
         phases.set(phase, []);
       }
       phases.get(phase).push(component.type);
     }
-    
+
     return phases;
   }
 
@@ -303,14 +303,14 @@ export class InfrastructureIntegrationPlatform extends EventEmitter {
     if (!component || component.dependencies.length === 0) {
       return 1;
     }
-    
+
     let maxDepPhase = 0;
     for (const depId of component.dependencies) {
       if (this.components.has(depId)) {
         maxDepPhase = Math.max(maxDepPhase, this.calculateComponentPhase(depId));
       }
     }
-    
+
     return maxDepPhase + 1;
   }
 
@@ -319,10 +319,10 @@ export class InfrastructureIntegrationPlatform extends EventEmitter {
    */
   async initializeHealthMonitoring() {
     console.log('🏥 Initializing health monitoring...');
-    
+
     // Perform initial health check
     await this.performHealthCheck();
-    
+
     console.log('✅ Health monitoring initialized');
   }
 
@@ -339,10 +339,10 @@ export class InfrastructureIntegrationPlatform extends EventEmitter {
         // Try to import and check if component has health check method
         const modulePath = component.path;
         let healthStatus = { status: 'unknown', message: 'No health check available' };
-        
+
         try {
           const module = await import(modulePath);
-          
+
           // Look for health check methods in various patterns
           if (module.default && typeof module.default.healthCheck === 'function') {
             healthStatus = await module.default.healthCheck();
@@ -355,10 +355,10 @@ export class InfrastructureIntegrationPlatform extends EventEmitter {
             healthStatus = { status: 'healthy', message: 'Component loadable' };
           }
         } catch (importError) {
-          healthStatus = { 
-            status: 'unhealthy', 
+          healthStatus = {
+            status: 'unhealthy',
             message: `Import failed: ${importError.message}`,
-            error: importError.code
+            error: importError.code,
           };
         }
 
@@ -366,7 +366,7 @@ export class InfrastructureIntegrationPlatform extends EventEmitter {
           ...healthStatus,
           timestamp: new Date(),
           componentId,
-          type: component.type
+          type: component.type,
         });
 
         if (healthStatus.status === 'healthy') {
@@ -381,7 +381,7 @@ export class InfrastructureIntegrationPlatform extends EventEmitter {
           message: error.message,
           timestamp: new Date(),
           componentId,
-          type: component.type
+          type: component.type,
         });
         unhealthyCount++;
       }
@@ -393,7 +393,7 @@ export class InfrastructureIntegrationPlatform extends EventEmitter {
     this.platformState.coordinationCycles++;
 
     const duration = Date.now() - healthCheckStart;
-    
+
     if (unhealthyCount > 0) {
       console.warn(`⚠️ Health check completed: ${healthyCount} healthy, ${unhealthyCount} unhealthy (${duration}ms)`);
     }
@@ -403,7 +403,7 @@ export class InfrastructureIntegrationPlatform extends EventEmitter {
       unhealthy: unhealthyCount,
       total: this.components.size,
       duration,
-      timestamp: new Date()
+      timestamp: new Date(),
     });
   }
 
@@ -412,13 +412,13 @@ export class InfrastructureIntegrationPlatform extends EventEmitter {
    */
   async initializeDataFlowOptimization() {
     console.log('🌊 Initializing data flow optimization...');
-    
+
     // Identify data flow patterns between components
     await this.identifyDataFlows();
-    
+
     // Optimize data flow paths
     await this.optimizeDataFlowPaths();
-    
+
     console.log('✅ Data flow optimization initialized');
   }
 
@@ -432,7 +432,7 @@ export class InfrastructureIntegrationPlatform extends EventEmitter {
       { from: 'performance', to: 'observability', type: 'performance-data', priority: 'high' },
       { from: 'security', to: 'compliance', type: 'security-events', priority: 'critical' },
       { from: 'api-gateway', to: 'monitoring', type: 'request-logs', priority: 'medium' },
-      { from: 'high-availability', to: 'observability', type: 'health-data', priority: 'high' }
+      { from: 'high-availability', to: 'observability', type: 'health-data', priority: 'high' },
     ];
 
     for (const pattern of dataFlowPatterns) {
@@ -442,7 +442,7 @@ export class InfrastructureIntegrationPlatform extends EventEmitter {
         id: flowId,
         status: 'active',
         optimized: false,
-        createdAt: new Date()
+        createdAt: new Date(),
       });
     }
 
@@ -454,7 +454,7 @@ export class InfrastructureIntegrationPlatform extends EventEmitter {
    */
   async optimizeDataFlowPaths() {
     let optimizations = 0;
-    
+
     for (const [flowId, flow] of this.dataFlows) {
       if (!flow.optimized) {
         flow.optimized = true;
@@ -477,25 +477,25 @@ export class InfrastructureIntegrationPlatform extends EventEmitter {
         initialized: this.platformState.initialized,
         startupPhase: this.platformState.startupPhase,
         lastStartup: this.platformState.lastStartup,
-        coordinationCycles: this.platformState.coordinationCycles
+        coordinationCycles: this.platformState.coordinationCycles,
       },
       components: {
         total: this.metrics.totalComponents,
         healthy: this.metrics.healthyComponents,
         unhealthy: this.metrics.unhealthyComponents,
-        discovered: this.components.size
+        discovered: this.components.size,
       },
       dependencies: {
         totalRelationships: this.dependencies.size,
         violations: this.metrics.dependencyViolations,
-        startupPhases: this.groupComponentsByStartupPhase().size
+        startupPhases: this.groupComponentsByStartupPhase().size,
       },
       dataFlows: {
         total: this.dataFlows.size,
-        optimized: this.metrics.dataFlowOptimizations
+        optimized: this.metrics.dataFlowOptimizations,
       },
       lastHealthCheck: this.metrics.lastHealthCheck,
-      timestamp: new Date()
+      timestamp: new Date(),
     };
   }
 
@@ -508,12 +508,12 @@ export class InfrastructureIntegrationPlatform extends EventEmitter {
       overview: {
         totalComponents: this.components.size,
         totalPhases: phases.size,
-        dependencyRelationships: this.dependencies.size
+        dependencyRelationships: this.dependencies.size,
       },
       phases: Array.from(phases.entries()).map(([phase, components]) => ({
         phase,
         components: [...new Set(components)], // Remove duplicates
-        description: this.getPhaseDescription(phase)
+        description: this.getPhaseDescription(phase),
       })),
       startupOrder: this.startupOrder.map(componentId => {
         const component = this.components.get(componentId);
@@ -522,9 +522,9 @@ export class InfrastructureIntegrationPlatform extends EventEmitter {
           name: component?.name,
           type: component?.type,
           phase: this.calculateComponentPhase(componentId),
-          dependencies: component?.dependencies || []
+          dependencies: component?.dependencies || [],
         };
-      })
+      }),
     };
   }
 
@@ -537,7 +537,7 @@ export class InfrastructureIntegrationPlatform extends EventEmitter {
       2: 'Infrastructure Layer - Docker, Kubernetes, backup systems',
       3: 'Observability Layer - Advanced monitoring, metrics, and logging',
       4: 'Service Layer - API Gateway, performance optimization, reverse proxy',
-      5: 'Orchestration Layer - High availability, CI/CD, compliance systems'
+      5: 'Orchestration Layer - High availability, CI/CD, compliance systems',
     };
 
     return descriptions[phase] || `Phase ${phase} - Advanced integration components`;
@@ -553,13 +553,13 @@ export class InfrastructureIntegrationPlatform extends EventEmitter {
       components: {
         discovered: this.components.size,
         healthy: this.metrics.healthyComponents,
-        unhealthy: this.metrics.unhealthyComponents
+        unhealthy: this.metrics.unhealthyComponents,
       },
       platform: {
         coordinationCycles: this.platformState.coordinationCycles,
-        lastHealthCheck: this.metrics.lastHealthCheck
+        lastHealthCheck: this.metrics.lastHealthCheck,
       },
-      timestamp: new Date()
+      timestamp: new Date(),
     };
   }
 }

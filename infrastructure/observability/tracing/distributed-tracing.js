@@ -1,16 +1,16 @@
 /**
  * MerajutASA.id - Phase 2 Week 3: Distributed Tracing System
- * 
+ *
  * Advanced distributed tracing implementation with OpenTelemetry
  * Provides end-to-end request tracking across all microservices
- * 
+ *
  * Features:
  * - OpenTelemetry-compatible tracing
  * - Jaeger export for visualization
  * - Service dependency mapping
  * - Performance bottleneck identification
  * - Cross-service correlation
- * 
+ *
  * @version 1.0.0
  * @since Phase 2 Week 3
  */
@@ -21,7 +21,7 @@ import { v4 as uuidv4 } from 'uuid';
 // Fallback OpenTelemetry API implementations
 const SpanStatusCode = {
   OK: 1,
-  ERROR: 2
+  ERROR: 2,
 };
 
 const SpanKind = {
@@ -29,7 +29,7 @@ const SpanKind = {
   SERVER: 1,
   CLIENT: 2,
   PRODUCER: 3,
-  CONSUMER: 4
+  CONSUMER: 4,
 };
 
 // Lightweight span implementation
@@ -55,7 +55,7 @@ class LightweightSpan {
     this.events.push({
       name,
       timestamp: Date.now(),
-      attributes
+      attributes,
     });
     return this;
   }
@@ -73,7 +73,7 @@ class LightweightSpan {
     this.addEvent('exception', {
       'exception.type': error.constructor.name,
       'exception.message': error.message,
-      'exception.stacktrace': error.stack
+      'exception.stacktrace': error.stack,
     });
     this.setStatus({ code: SpanStatusCode.ERROR });
   }
@@ -89,7 +89,7 @@ class LightweightTracer {
   startSpan(name, options = {}) {
     const parentSpan = options.parent || this.getActiveSpan();
     const span = new LightweightSpan(name, parentSpan);
-    
+
     if (options.attributes) {
       span.setAttributes(options.attributes);
     }
@@ -111,7 +111,7 @@ const context = {
   },
   with(contextValue, fn, ...args) {
     return fn(...args);
-  }
+  },
 };
 
 // Try to import real OpenTelemetry packages, fall back to lightweight implementation
@@ -135,38 +135,38 @@ try {
   console.log('✅ Using full OpenTelemetry implementation');
 } catch (error) {
   console.log('ℹ️ OpenTelemetry packages not available, using lightweight fallback');
-  
+
   // Use lightweight implementations
   trace = {
-    getTracer: (name) => new LightweightTracer(name)
+    getTracer: (name) => new LightweightTracer(name),
   };
-  
+
   NodeSDK = class {
     constructor(config) { this.config = config; }
     start() { console.log('🔍 Lightweight tracing SDK started'); }
     shutdown() { console.log('🔍 Lightweight tracing SDK shutdown'); }
   };
-  
+
   Resource = class {
     static default() { return new Resource({}); }
-    constructor(attributes) { 
-      this.attributes = attributes || {}; 
+    constructor(attributes) {
+      this.attributes = attributes || {};
     }
     merge(other) {
       return new Resource({ ...this.attributes, ...other.attributes });
     }
   };
-  
+
   SemanticResourceAttributes = {
     SERVICE_NAME: 'service.name',
-    SERVICE_VERSION: 'service.version'
+    SERVICE_VERSION: 'service.version',
   };
-  
+
   JaegerExporter = class {
     constructor(config) { this.config = config; }
     shutdown() { return Promise.resolve(); }
   };
-  
+
   BatchSpanProcessor = class {
     constructor(exporter) { this.exporter = exporter; }
     shutdown() { return Promise.resolve(); }
@@ -181,14 +181,14 @@ export class DistributedTracing {
       jaegerEndpoint: config.jaegerEndpoint || process.env.JAEGER_ENDPOINT || 'http://localhost:14268/api/traces',
       environment: config.environment || process.env.NODE_ENV || 'development',
       enableAutoInstrumentation: config.enableAutoInstrumentation !== false,
-      ...config
+      ...config,
     };
-    
+
     this.tracer = null;
     this.sdk = null;
     this.isInitialized = false;
     this.activeSpans = new Map();
-    
+
     this.initialize();
   }
 
@@ -204,34 +204,34 @@ export class DistributedTracing {
           [SemanticResourceAttributes.SERVICE_VERSION]: this.config.serviceVersion,
           [SemanticResourceAttributes.DEPLOYMENT_ENVIRONMENT]: this.config.environment,
           'service.instance.id': uuidv4(),
-          'service.namespace': 'merajutasa.id'
-        })
+          'service.namespace': 'merajutasa.id',
+        }),
       );
 
       // Setup Jaeger exporter
       const jaegerExporter = new JaegerExporter({
         endpoint: this.config.jaegerEndpoint,
         headers: {
-          'X-Service-Name': this.config.serviceName
-        }
+          'X-Service-Name': this.config.serviceName,
+        },
       });
 
       // Create SDK with auto-instrumentation
       this.sdk = new NodeSDK({
         resource,
         spanProcessors: [new BatchSpanProcessor(jaegerExporter)],
-        instrumentations: this.config.enableAutoInstrumentation ? [] : undefined
+        instrumentations: this.config.enableAutoInstrumentation ? [] : undefined,
       });
 
       // Initialize SDK
       this.sdk.start();
-      
+
       // Get tracer instance
       this.tracer = trace.getTracer(this.config.serviceName, this.config.serviceVersion);
-      
+
       this.isInitialized = true;
       console.log(`Distributed tracing initialized for ${this.config.serviceName}`);
-      
+
     } catch (error) {
       console.error('Failed to initialize distributed tracing:', error);
       this.isInitialized = false;
@@ -255,8 +255,8 @@ export class DistributedTracing {
         'service.name': this.config.serviceName,
         'service.version': this.config.serviceVersion,
         'operation.type': options.type || 'business_logic',
-        ...options.attributes
-      }
+        ...options.attributes,
+      },
     });
 
     const spanId = uuidv4();
@@ -268,40 +268,40 @@ export class DistributedTracing {
         const spanContext = {
           spanId,
           traceId: span.spanContext().traceId,
-          parentSpanId: span.spanContext().spanId
+          parentSpanId: span.spanContext().spanId,
         };
 
         const result = await fn(span, spanContext);
-        
+
         // Mark span as successful
         span.setStatus({ code: SpanStatusCode.OK });
-        
+
         // Add result metadata if provided
         if (options.recordResult && result) {
           span.setAttributes({
             'operation.result.type': typeof result,
-            'operation.result.size': JSON.stringify(result).length
+            'operation.result.size': JSON.stringify(result).length,
           });
         }
 
         return result;
-        
+
       } catch (error) {
         // Record error in span
-        span.setStatus({ 
-          code: SpanStatusCode.ERROR, 
-          message: error.message 
+        span.setStatus({
+          code: SpanStatusCode.ERROR,
+          message: error.message,
         });
-        
+
         span.recordException(error);
         span.setAttributes({
           'error.name': error.name,
           'error.message': error.message,
-          'error.stack': error.stack?.substring(0, 1000) // Truncate for performance
+          'error.stack': error.stack?.substring(0, 1000), // Truncate for performance
         });
 
         throw error;
-        
+
       } finally {
         span.end();
         this.activeSpans.delete(spanId);
@@ -323,8 +323,8 @@ export class DistributedTracing {
       attributes: {
         'operation.name': operationName,
         'span.type': 'child',
-        ...options.attributes
-      }
+        ...options.attributes,
+      },
     });
 
     return span;
@@ -338,29 +338,29 @@ export class DistributedTracing {
       span.setAttributes({
         'db.operation': operation,
         'db.statement': query?.substring(0, 500), // Truncate long queries
-        'component': 'database'
+        'component': 'database',
       });
 
       const startTime = Date.now();
       try {
         const result = await fn();
-        
+
         span.setAttributes({
           'db.duration_ms': Date.now() - startTime,
-          'db.rows_affected': Array.isArray(result) ? result.length : 1
+          'db.rows_affected': Array.isArray(result) ? result.length : 1,
         });
 
         return result;
       } catch (error) {
         span.setAttributes({
           'db.error': error.message,
-          'db.duration_ms': Date.now() - startTime
+          'db.duration_ms': Date.now() - startTime,
         });
         throw error;
       }
-    }, { 
+    }, {
       kind: SpanKind.CLIENT,
-      type: 'database'
+      type: 'database',
     });
   }
 
@@ -374,17 +374,17 @@ export class DistributedTracing {
         'http.url': url,
         'http.scheme': new URL(url).protocol.slice(0, -1),
         'http.host': new URL(url).host,
-        'component': 'http'
+        'component': 'http',
       });
 
       const startTime = Date.now();
       try {
         const response = await fn();
-        
+
         span.setAttributes({
           'http.status_code': response.status || response.statusCode || 200,
           'http.response_size': response.data ? JSON.stringify(response.data).length : 0,
-          'http.duration_ms': Date.now() - startTime
+          'http.duration_ms': Date.now() - startTime,
         });
 
         return response;
@@ -392,13 +392,13 @@ export class DistributedTracing {
         span.setAttributes({
           'http.error': error.message,
           'http.status_code': error.response?.status || 0,
-          'http.duration_ms': Date.now() - startTime
+          'http.duration_ms': Date.now() - startTime,
         });
         throw error;
       }
-    }, { 
+    }, {
       kind: SpanKind.CLIENT,
-      type: 'http'
+      type: 'http',
     });
   }
 
@@ -420,7 +420,7 @@ export class DistributedTracing {
     if (currentSpan) {
       currentSpan.addEvent(name, {
         timestamp: Date.now(),
-        ...attributes
+        ...attributes,
       });
     }
   }
@@ -435,7 +435,7 @@ export class DistributedTracing {
       return {
         traceId: spanContext.traceId,
         spanId: spanContext.spanId,
-        isValid: spanContext.isValid
+        isValid: spanContext.isValid,
       };
     }
     return null;
@@ -460,12 +460,12 @@ export class DistributedTracing {
       upstreamServices: [],
       downstreamServices: [
         'signer-service',
-        'chain-service', 
+        'chain-service',
         'collector-service',
-        'backup-service'
+        'backup-service',
       ],
       databases: ['governance-db', 'chain-db'],
-      externalAPIs: ['jaeger-collector']
+      externalAPIs: ['jaeger-collector'],
     };
   }
 
@@ -476,20 +476,20 @@ export class DistributedTracing {
     try {
       const isHealthy = this.isInitialized && this.tracer !== null;
       const activeSpanCount = this.activeSpans.size;
-      
+
       return {
         status: isHealthy ? 'healthy' : 'unhealthy',
         service: this.config.serviceName,
         activeSpans: activeSpanCount,
         jaegerEndpoint: this.config.jaegerEndpoint,
         autoInstrumentation: this.config.enableAutoInstrumentation,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
     } catch (error) {
       return {
         status: 'unhealthy',
         error: error.message,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
     }
   }
@@ -529,7 +529,7 @@ export function getDistributedTracing(config = {}) {
 export function initializeTracing(serviceName, options = {}) {
   return getDistributedTracing({
     serviceName,
-    ...options
+    ...options,
   });
 }
 

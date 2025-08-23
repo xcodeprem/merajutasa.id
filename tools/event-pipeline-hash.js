@@ -36,10 +36,10 @@ function tryGitCommitHash(filePath){
 function parseSchemaVersion(md){
   // Try title pattern: "Public Tier Event Schema Canonical Specification (v1.0)"
   const m1 = md.match(/Canonical Specification \(v(\d+\.\d+)/i);
-  if (m1) return m1[1];
+  if (m1) {return m1[1];}
   // Try change log version table: "| 1.0.0 |"
   const m2 = md.match(/\|\s*(\d+\.\d+(?:\.\d+)?)\s*\|\s*\d{4}-\d{2}-\d{2}\s*\|/);
-  if (m2) return m2[1];
+  if (m2) {return m2[1];}
   return '1.0';
 }
 
@@ -48,7 +48,7 @@ function parseEventNames(md){
   const events = [];
   for (const line of md.split(/\r?\n/)){
     const m = line.match(/^\s*-\s*((?:pub|sys)_[a-z0-9_]+)/);
-    if (m) events.push(m[1]);
+    if (m) {events.push(m[1]);}
   }
   // De-duplicate and sort
   return Array.from(new Set(events)).sort();
@@ -95,7 +95,7 @@ async function main(){
     `schema_version=${schemaVersion}`,
     'events=',
     ...eventNames,
-    `schema_commit=${schemaCommit}`
+    `schema_commit=${schemaCommit}`,
   ].join('\n');
   const pipelineHash = sha256Hex(Buffer.from(inputStr, 'utf8'));
 
@@ -104,12 +104,12 @@ async function main(){
     generated_utc: new Date().toISOString(),
     spec_doc: path.relative(process.cwd(), MD_SPEC_PATH).replace(/\\/g,'/'),
     schema_file: path.relative(process.cwd(), JSON_SCHEMA_PATH).replace(/\\/g,'/'),
-  taxonomy_file: (await fs.access(TAXONOMY_JSON_PATH).then(()=>true).catch(()=>false)) ? path.relative(process.cwd(), TAXONOMY_JSON_PATH).replace(/\\/g,'/') : null,
+    taxonomy_file: (await fs.access(TAXONOMY_JSON_PATH).then(()=>true).catch(()=>false)) ? path.relative(process.cwd(), TAXONOMY_JSON_PATH).replace(/\\/g,'/') : null,
     schema_commit_source: schemaCommitSource,
     schema_version: schemaVersion,
     event_count: eventNames.length,
     events: eventNames,
-    pipeline_hash: pipelineHash
+    pipeline_hash: pipelineHash,
   };
 
   await fs.mkdir('artifacts', { recursive: true });

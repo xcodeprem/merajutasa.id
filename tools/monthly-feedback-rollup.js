@@ -68,7 +68,7 @@ async function main(){
     generated_utc: new Date().toISOString(),
     source_records: records.length,
     blocked_hint,
-    months: Array.from(months.values()).sort((a,b)=> a.month.localeCompare(b.month))
+    months: Array.from(months.values()).sort((a,b)=> a.month.localeCompare(b.month)),
   };
 
   await fs.writeFile('artifacts/feedback-monthly-rollup.json', JSON.stringify(out,null,2));

@@ -13,7 +13,7 @@ class WorkflowGraphQLTests {
       tests: 0,
       passed: 0,
       failed: 0,
-      errors: []
+      errors: [],
     };
   }
 
@@ -45,18 +45,18 @@ class WorkflowGraphQLTests {
       if (expectedPatterns.shouldUseRepositoryOwner) {
         this.assert(
           content.includes('repositoryOwner(login:'),
-          `${fileName} should use repositoryOwner GraphQL pattern`
+          `${fileName} should use repositoryOwner GraphQL pattern`,
         );
-        
+
         this.assert(
           content.includes('... on User') && content.includes('... on Organization'),
-          `${fileName} should use type fragments for User and Organization`
+          `${fileName} should use type fragments for User and Organization`,
         );
 
         this.assert(
           !content.includes('user(login:') || !content.includes('organization(login:') ||
           !(content.includes('user(login:') && content.includes('organization(login:')),
-          `${fileName} should not use combined user+organization query pattern`
+          `${fileName} should not use combined user+organization query pattern`,
         );
       }
 
@@ -64,12 +64,12 @@ class WorkflowGraphQLTests {
       if (expectedPatterns.shouldHaveErrorHandling) {
         this.assert(
           content.includes('try {') && content.includes('catch'),
-          `${fileName} should have try/catch error handling`
+          `${fileName} should have try/catch error handling`,
         );
 
         this.assert(
           content.includes('core.warning'),
-          `${fileName} should use core.warning for non-fatal errors`
+          `${fileName} should use core.warning for non-fatal errors`,
         );
       }
 
@@ -77,12 +77,12 @@ class WorkflowGraphQLTests {
       if (expectedPatterns.shouldUseNewOutput) {
         this.assert(
           content.includes('core.setOutput'),
-          `${fileName} should use core.setOutput`
+          `${fileName} should use core.setOutput`,
         );
 
         this.assert(
           !content.includes('::set-output'),
-          `${fileName} should not use deprecated ::set-output`
+          `${fileName} should not use deprecated ::set-output`,
         );
       }
 
@@ -90,7 +90,7 @@ class WorkflowGraphQLTests {
       if (expectedPatterns.shouldHandleProjectNotFound) {
         this.assert(
           content.includes('not found') && (content.includes('Project') || content.includes('project')),
-          `${fileName} should handle project not found gracefully`
+          `${fileName} should handle project not found gracefully`,
         );
       }
 
@@ -112,7 +112,7 @@ class WorkflowGraphQLTests {
       shouldUseRepositoryOwner: true,
       shouldHaveErrorHandling: true,
       shouldUseNewOutput: true,
-      shouldHandleProjectNotFound: false
+      shouldHandleProjectNotFound: false,
     });
 
     // Test auto-add-to-project.yml
@@ -120,7 +120,7 @@ class WorkflowGraphQLTests {
       shouldUseRepositoryOwner: true,
       shouldHaveErrorHandling: true,
       shouldUseNewOutput: false,
-      shouldHandleProjectNotFound: true
+      shouldHandleProjectNotFound: true,
     });
 
     // Test bulk-import-to-project.yml
@@ -128,7 +128,7 @@ class WorkflowGraphQLTests {
       shouldUseRepositoryOwner: true,
       shouldHaveErrorHandling: true,
       shouldUseNewOutput: false,
-      shouldHandleProjectNotFound: true
+      shouldHandleProjectNotFound: true,
     });
 
     // Test seed-labels.yml (should remain unchanged)
@@ -136,7 +136,7 @@ class WorkflowGraphQLTests {
       shouldUseRepositoryOwner: false,
       shouldHaveErrorHandling: false,
       shouldUseNewOutput: false,
-      shouldHandleProjectNotFound: false
+      shouldHandleProjectNotFound: false,
     });
 
     // Test auto-add-project.yaml (new personal account optimized workflow)
@@ -144,7 +144,7 @@ class WorkflowGraphQLTests {
       shouldUseRepositoryOwner: true,
       shouldHaveErrorHandling: true,
       shouldUseNewOutput: false,
-      shouldHandleProjectNotFound: true
+      shouldHandleProjectNotFound: true,
     });
 
     return this.generateReport();
@@ -155,7 +155,7 @@ class WorkflowGraphQLTests {
     console.log(`Total tests: ${this.results.tests}`);
     console.log(`✅ Passed: ${this.results.passed}`);
     console.log(`❌ Failed: ${this.results.failed}`);
-    
+
     if (this.results.errors.length > 0) {
       console.log('\n=== Errors ===');
       this.results.errors.forEach(error => console.log(`- ${error}`));
@@ -167,9 +167,9 @@ class WorkflowGraphQLTests {
         total_tests: this.results.tests,
         passed: this.results.passed,
         failed: this.results.failed,
-        success_rate: this.results.tests > 0 ? (this.results.passed / this.results.tests * 100).toFixed(1) : 0
+        success_rate: this.results.tests > 0 ? (this.results.passed / this.results.tests * 100).toFixed(1) : 0,
       },
-      errors: this.results.errors
+      errors: this.results.errors,
     };
 
     // Write report to artifacts

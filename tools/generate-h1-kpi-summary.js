@@ -31,25 +31,25 @@ async function main(){
   const scenariosTotal = fairness?.scenarios_total ?? 0;
   const fairnessPass = scenariosTotal>0 && scenariosPass === scenariosTotal;
   const result = {
-  version: '1.1.0',
+    version: '1.1.0',
     generated_utc: new Date().toISOString(),
     phase: phase?.current_phase || null,
     fairness: {
       pass: fairnessPass,
       scenarios_pass: scenariosPass,
       scenarios_total: scenariosTotal,
-      detection_delay_avg_snapshots: fairness?.detection_delay_avg_snapshots ?? null
+      detection_delay_avg_snapshots: fairness?.detection_delay_avg_snapshots ?? null,
     },
     equity: {
       index: summary?.equity_index ?? null,
       index_raw: summary?.equity_index_raw ?? null,
       under_served_total: under?.total ?? null,
-      anomalies_count: anomalies?.anomalies_count ?? null
+      anomalies_count: anomalies?.anomalies_count ?? null,
     },
     adoption: {
       percent: adoption?.adoptionPercent ?? null,
       old_total: adoption?.old_total ?? null,
-      new_total: adoption?.new_total ?? null
+      new_total: adoption?.new_total ?? null,
     },
     feedback: (()=>{
       const out = { ingested: null, categories: null };
@@ -77,15 +77,15 @@ async function main(){
     })(),
     trust: {
       hero_badges: hero?.hero_copy?.badges ?? null,
-      disclaimers_status: hero?.governance?.disclaimers_status ?? null
+      disclaimers_status: hero?.governance?.disclaimers_status ?? null,
     },
     weekly: {
       weeks: weekly?.weeks ?? [],
       latest: weekly?.weeks?.length ? weekly.weeks[weekly.weeks.length-1] : null,
-  coverage_latest: weekly?.weeks?.length ? weekly.weeks[weekly.weeks.length-1].totals?.coverage ?? null : null,
-  throughput_latest: weekly?.weeks?.length ? weekly.weeks[weekly.weeks.length-1].totals?.events ?? null : null,
-  decision_mix: weekly?.decision_mix ?? null
-    }
+      coverage_latest: weekly?.weeks?.length ? weekly.weeks[weekly.weeks.length-1].totals?.coverage ?? null : null,
+      throughput_latest: weekly?.weeks?.length ? weekly.weeks[weekly.weeks.length-1].totals?.events ?? null : null,
+      decision_mix: weekly?.decision_mix ?? null,
+    },
   };
   const resultWithMetadata = addMetadata(result, { generator: 'generate-h1-kpi-summary.js' });
   await fs.writeFile('artifacts/h1-kpi-summary.json', stableStringify(resultWithMetadata));

@@ -44,7 +44,7 @@ function get(path){
   if (!exists){
     await fs.writeFile('artifacts/chain-prevhash-negative.json', JSON.stringify({ status:'SKIP', reason:'no chain file; generate entries first' }, null, 2));
     console.log('[chain-prevhash-negative] SKIP');
-    if (proc) try{ proc.kill(); }catch{}
+    if (proc) {try{ proc.kill(); }catch{}}
     process.exit(0);
   }
   const chain = JSON.parse(await fs.readFile(path,'utf8'));
@@ -61,6 +61,6 @@ function get(path){
   const v = await post('/verify', {});
   await fs.writeFile('artifacts/chain-prevhash-negative.json', JSON.stringify(v.body,null,2));
   console.log('[chain-prevhash-negative] verify issues=', (v.body.issues||[]).length);
-  if (proc) try{ proc.kill(); }catch{}
+  if (proc) {try{ proc.kill(); }catch{}}
   process.exit(0);
 })().catch(e=>{ console.error('[chain-prevhash-negative] fail', e); process.exit(2); });

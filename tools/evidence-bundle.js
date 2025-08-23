@@ -37,7 +37,7 @@ const EVIDENCE_MAP = [
   { id:'A8', path:'artifacts/no-silent-drift-report.json', schema:'schemas/evidence/no-silent-drift-v1.json', category:'aggregator' },
   { id:'A9', path:'artifacts/fairness-engine-runtime-report.json', schema:'schemas/evidence/fairness-engine-runtime-v1.json', category:'fairness-runtime' },
   { id:'A10', path:'artifacts/evidence-collision-test.json', schema:'schemas/evidence/evidence-collision-test-v1.json', category:'governance' },
-  { id:'SCHEMA_VALIDATION', path:'artifacts/evidence-schema-validation.json', schema:null, category:'meta' }
+  { id:'SCHEMA_VALIDATION', path:'artifacts/evidence-schema-validation.json', schema:null, category:'meta' },
 ];
 
 function sha256(buf){ return crypto.createHash('sha256').update(buf).digest('hex'); }
@@ -55,8 +55,8 @@ async function main(){
     }
     const buf = await readFileMaybe(item.path);
     const hash = buf ? sha256(buf) : null;
-  const sha256_short = hash? hash.slice(0,16):null; // DEC-20250813-08 prefix length = 16
-  artifacts.push({ id:item.id, path:item.path, exists:true, size_bytes:st.size, sha256:hash, sha256_short, display_hash_prefix: sha256_short, schema_ref:item.schema?path.basename(item.schema):null, category:item.category });
+    const sha256_short = hash? hash.slice(0,16):null; // DEC-20250813-08 prefix length = 16
+    artifacts.push({ id:item.id, path:item.path, exists:true, size_bytes:st.size, sha256:hash, sha256_short, display_hash_prefix: sha256_short, schema_ref:item.schema?path.basename(item.schema):null, category:item.category });
   }
 
   // Derive bundle hash from existing artifacts only (stable ordering by path)
@@ -67,7 +67,7 @@ async function main(){
     total: artifacts.length,
     missing: artifacts.filter(a=>!a.exists).length,
     with_schema: artifacts.filter(a=>a.schema_ref).length,
-    bundle_hash: bundleHash
+    bundle_hash: bundleHash,
   };
   const out = {
     version:'1.0.0',
@@ -77,8 +77,8 @@ async function main(){
     summary,
     integrity: {
       hash_algorithm:'SHA256',
-      bundle_hash_derivation:'sha256(concat(sorted sha256 per existing artifact with "\\n"))'
-    }
+      bundle_hash_derivation:'sha256(concat(sorted sha256 per existing artifact with "\\n"))',
+    },
   };
   await fs.writeFile('artifacts/evidence-bundle.json', JSON.stringify(out,null,2));
 

@@ -50,27 +50,27 @@ export class CacheStrategies {
       // Memory cache settings
       memoryTTL: options.memoryTTL || 300, // 5 minutes
       memoryCheckPeriod: options.memoryCheckPeriod || 120, // 2 minutes
-      
-      // Redis cache settings  
+
+      // Redis cache settings
       redisTTL: options.redisTTL || 3600, // 1 hour
-      
+
       // Strategy settings
       enableMemoryCache: options.enableMemoryCache !== false,
       enableRedisCache: options.enableRedisCache !== false,
       enableWriteThrough: options.enableWriteThrough || true,
       enableWriteBehind: options.enableWriteBehind || false,
-      
+
       // Performance settings
       compressionThreshold: options.compressionThreshold || 1024, // 1KB
       maxMemoryItems: options.maxMemoryItems || 1000,
-      ...options
+      ...options,
     };
 
     // Initialize memory cache
-    this.memoryCache = this.config.enableMemoryCache ? 
+    this.memoryCache = this.config.enableMemoryCache ?
       new LightweightCache({
         stdTTL: this.config.memoryTTL,
-        maxKeys: this.config.maxMemoryItems
+        maxKeys: this.config.maxMemoryItems,
       }) : null;
 
     // Redis manager will be initialized when needed
@@ -86,19 +86,19 @@ export class CacheStrategies {
       writeThrough: 0,
       writeBehind: 0,
       errors: 0,
-      compressions: 0
+      compressions: 0,
     };
 
     // Strategy handlers (define basic methods)
     this.strategies = {
-      'cache-aside': this.cacheAside.bind(this)
+      'cache-aside': this.cacheAside.bind(this),
     };
 
     this.initializeRedis();
   }
 
   async initializeRedis() {
-    if (!this.config.enableRedisCache) return;
+    if (!this.config.enableRedisCache) {return;}
 
     try {
       this.redisManager = getRedisManager();
@@ -113,10 +113,10 @@ export class CacheStrategies {
 
   // ==================== CACHE-ASIDE STRATEGY ====================
   async cacheAside(key, dataLoader, options = {}) {
-    const { 
+    const {
       ttl = this.config.redisTTL,
       memoryTTL = this.config.memoryTTL,
-      useCompression = false 
+      useCompression = false,
     } = options;
 
     try {
@@ -135,12 +135,12 @@ export class CacheStrategies {
         const redisValue = await this.redisManager.get(key);
         if (redisValue !== null) {
           this.stats.redisHits++;
-          
+
           // Store in memory cache for faster access
           if (this.memoryCache) {
             this.memoryCache.set(key, redisValue, memoryTTL);
           }
-          
+
           return redisValue;
         }
         this.stats.redisMisses++;
@@ -157,7 +157,7 @@ export class CacheStrategies {
     } catch (error) {
       this.stats.errors++;
       console.error('Cache-aside strategy error:', error.message);
-      
+
       // Fallback to direct data loading
       try {
         return await dataLoader();
@@ -169,19 +169,19 @@ export class CacheStrategies {
 
   // ==================== WRITE-THROUGH STRATEGY ====================
   async writeThrough(key, data, dataPersister, options = {}) {
-    const { 
+    const {
       ttl = this.config.redisTTL,
       memoryTTL = this.config.memoryTTL,
-      useCompression = false 
+      useCompression = false,
     } = options;
 
     try {
       // First persist to data store
       const result = await dataPersister(data);
-      
+
       // Then update caches
       await this.set(key, result, { ttl, memoryTTL, useCompression });
-      
+
       this.stats.writeThrough++;
       return result;
     } catch (error) {
@@ -209,12 +209,12 @@ export class CacheStrategies {
         const redisValue = await this.redisManager.get(key);
         if (redisValue !== null) {
           this.stats.redisHits++;
-          
+
           // Store in memory cache
           if (this.memoryCache) {
             this.memoryCache.set(key, redisValue);
           }
-          
+
           return redisValue;
         }
         this.stats.redisMisses++;
@@ -229,15 +229,15 @@ export class CacheStrategies {
   }
 
   async set(key, value, options = {}) {
-    const { 
+    const {
       ttl = this.config.redisTTL,
       memoryTTL = this.config.memoryTTL,
-      useCompression = false 
+      useCompression = false,
     } = options;
 
     try {
       let processedValue = value;
-      
+
       // Apply compression if needed
       if (useCompression && this.shouldCompress(value)) {
         processedValue = await this.compress(value);
@@ -293,7 +293,7 @@ export class CacheStrategies {
     return {
       __compressed: true,
       data: value,
-      originalSize: JSON.stringify(value).length
+      originalSize: JSON.stringify(value).length,
     };
   }
 
@@ -301,18 +301,18 @@ export class CacheStrategies {
   getStats() {
     const memoryTotal = this.stats.memoryHits + this.stats.memoryMisses;
     const redisTotal = this.stats.redisHits + this.stats.redisMisses;
-    
+
     return {
       ...this.stats,
       memoryHitRate: memoryTotal > 0 ? (this.stats.memoryHits / memoryTotal * 100).toFixed(2) : 0,
       redisHitRate: redisTotal > 0 ? (this.stats.redisHits / redisTotal * 100).toFixed(2) : 0,
-      overallHitRate: (memoryTotal + redisTotal) > 0 ? 
+      overallHitRate: (memoryTotal + redisTotal) > 0 ?
         ((this.stats.memoryHits + this.stats.redisHits) / (memoryTotal + redisTotal) * 100).toFixed(2) : 0,
       cacheHealth: {
         memoryEnabled: !!this.memoryCache,
         redisEnabled: this.isRedisAvailable,
-        memoryKeys: this.memoryCache ? this.memoryCache.keys().length : 0
-      }
+        memoryKeys: this.memoryCache ? this.memoryCache.keys().length : 0,
+      },
     };
   }
 
@@ -321,7 +321,7 @@ export class CacheStrategies {
       status: 'healthy',
       memory: !!this.memoryCache,
       redis: this.isRedisAvailable,
-      stats: this.getStats()
+      stats: this.getStats(),
     };
 
     if (this.isRedisAvailable) {

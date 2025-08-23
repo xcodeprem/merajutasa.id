@@ -8,41 +8,41 @@ import EventEmitter from 'events';
 export class ConnectionPoolManager extends EventEmitter {
   constructor(options = {}) {
     super();
-    
+
     this.config = {
       // Pool configuration
       minConnections: options.minConnections || 2,
       maxConnections: options.maxConnections || 20,
       acquireTimeoutMillis: options.acquireTimeoutMillis || 10000,
       idleTimeoutMillis: options.idleTimeoutMillis || 30000,
-      
+
       // Health check settings
       enableHealthCheck: options.enableHealthCheck !== false,
       healthCheckInterval: options.healthCheckInterval || 60000,
       maxHealthCheckFailures: options.maxHealthCheckFailures || 3,
-      
+
       // Resource optimization
       enableConnectionRecycling: options.enableConnectionRecycling !== false,
       recycleInterval: options.recycleInterval || 300000, // 5 minutes
       maxConnectionAge: options.maxConnectionAge || 3600000, // 1 hour
-      
+
       // Performance monitoring
       enableMetrics: options.enableMetrics !== false,
       metricsWindow: options.metricsWindow || 300000, // 5 minutes
-      
-      ...options
+
+      ...options,
     };
 
     // Pool state
     this.pools = new Map(); // service -> pool mapping
     this.connectionFactories = new Map(); // service -> factory mapping
     this.poolStats = new Map(); // service -> stats mapping
-    
+
     // Timers
     this.healthCheckTimer = null;
     this.recycleTimer = null;
     this.metricsTimer = null;
-    
+
     // Global statistics
     this.globalStats = {
       totalConnections: 0,
@@ -52,7 +52,7 @@ export class ConnectionPoolManager extends EventEmitter {
       totalReleases: 0,
       totalTimeouts: 0,
       totalErrors: 0,
-      averageAcquisitionTime: 0
+      averageAcquisitionTime: 0,
     };
 
     this.initialize();
@@ -60,19 +60,19 @@ export class ConnectionPoolManager extends EventEmitter {
 
   async initialize() {
     console.log('🔗 Initializing Connection Pool Manager...');
-    
+
     if (this.config.enableHealthCheck) {
       this.startHealthChecks();
     }
-    
+
     if (this.config.enableConnectionRecycling) {
       this.startConnectionRecycling();
     }
-    
+
     if (this.config.enableMetrics) {
       this.startMetricsCollection();
     }
-    
+
     console.log('✅ Connection Pool Manager initialized successfully');
   }
 
@@ -81,17 +81,17 @@ export class ConnectionPoolManager extends EventEmitter {
     if (typeof factory !== 'function') {
       throw new Error('Connection factory must be a function');
     }
-    
+
     this.connectionFactories.set(service, factory);
-    
+
     // Initialize pool for this service
     this.pools.set(service, {
       available: [],
       active: new Set(),
       pending: [],
-      creating: 0
+      creating: 0,
     });
-    
+
     // Initialize stats for this service
     this.poolStats.set(service, {
       created: 0,
@@ -102,9 +102,9 @@ export class ConnectionPoolManager extends EventEmitter {
       errors: 0,
       healthCheckFailures: 0,
       averageAcquisitionTime: 0,
-      lastHealthCheck: null
+      lastHealthCheck: null,
     });
-    
+
     console.log(`📊 Registered connection factory for service: ${service}`);
   }
 
@@ -123,13 +123,13 @@ export class ConnectionPoolManager extends EventEmitter {
       if (pool.available.length > 0) {
         const connection = pool.available.pop();
         pool.active.add(connection);
-        
+
         // Update statistics
         stats.acquired++;
         const acquisitionTime = Date.now() - startTime;
-        stats.averageAcquisitionTime = 
+        stats.averageAcquisitionTime =
           (stats.averageAcquisitionTime * (stats.acquired - 1) + acquisitionTime) / stats.acquired;
-        
+
         this.emit('connection:acquired', { service, connectionId: connection.id, acquisitionTime });
         return connection;
       }
@@ -142,16 +142,16 @@ export class ConnectionPoolManager extends EventEmitter {
 
       // Wait for a connection to become available
       return await this.waitForConnection(service, timeout, startTime);
-      
+
     } catch (error) {
       stats.errors++;
       this.globalStats.totalErrors++;
-      
+
       if (error.name === 'TimeoutError') {
         stats.timeouts++;
         this.globalStats.totalTimeouts++;
       }
-      
+
       throw error;
     }
   }
@@ -163,36 +163,36 @@ export class ConnectionPoolManager extends EventEmitter {
     const factory = this.connectionFactories.get(service);
 
     pool.creating++;
-    
+
     try {
       const connection = await factory();
-      
+
       // Add metadata to connection
       connection.id = `${service}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
       connection.service = service;
       connection.createdAt = Date.now();
       connection.lastUsed = Date.now();
       connection.healthCheckFailures = 0;
-      
+
       // Add to active pool
       pool.active.add(connection);
       pool.creating--;
-      
+
       // Update statistics
       stats.created++;
       stats.acquired++;
       this.globalStats.totalConnections++;
       this.globalStats.activeConnections++;
-      
+
       const acquisitionTime = Date.now() - startTime;
-      stats.averageAcquisitionTime = 
+      stats.averageAcquisitionTime =
         (stats.averageAcquisitionTime * (stats.acquired - 1) + acquisitionTime) / stats.acquired;
-      
+
       this.emit('connection:created', { service, connectionId: connection.id });
       this.emit('connection:acquired', { service, connectionId: connection.id, acquisitionTime });
-      
+
       return connection;
-      
+
     } catch (error) {
       pool.creating--;
       throw error;
@@ -202,7 +202,7 @@ export class ConnectionPoolManager extends EventEmitter {
   // Wait for an available connection
   async waitForConnection(service, timeout, startTime) {
     const pool = this.pools.get(service);
-    
+
     return new Promise((resolve, reject) => {
       const timeoutId = setTimeout(() => {
         // Remove from pending queue
@@ -210,7 +210,7 @@ export class ConnectionPoolManager extends EventEmitter {
         if (index !== -1) {
           pool.pending.splice(index, 1);
         }
-        
+
         reject(new Error(`Connection acquisition timeout after ${timeout}ms for service: ${service}`));
       }, timeout);
 
@@ -225,7 +225,7 @@ export class ConnectionPoolManager extends EventEmitter {
           reject(error);
         },
         service,
-        startTime
+        startTime,
       });
     });
   }
@@ -244,7 +244,7 @@ export class ConnectionPoolManager extends EventEmitter {
     // Remove from active pool
     pool.active.delete(connection);
     connection.lastUsed = Date.now();
-    
+
     // Update statistics
     stats.released++;
     this.globalStats.totalReleases++;
@@ -254,25 +254,25 @@ export class ConnectionPoolManager extends EventEmitter {
     if (pool.pending.length > 0) {
       const pending = pool.pending.shift();
       pool.active.add(connection);
-      
+
       // Update pending request statistics
       const acquisitionTime = Date.now() - pending.startTime;
-      stats.averageAcquisitionTime = 
+      stats.averageAcquisitionTime =
         (stats.averageAcquisitionTime * stats.acquired + acquisitionTime) / (stats.acquired + 1);
       stats.acquired++;
-      
-      this.emit('connection:acquired', { 
-        service: pending.service, 
-        connectionId: connection.id, 
-        acquisitionTime 
+
+      this.emit('connection:acquired', {
+        service: pending.service,
+        connectionId: connection.id,
+        acquisitionTime,
       });
-      
+
       pending.resolve(connection);
       return;
     }
 
     // Check pool size and connection health
-    if (pool.available.length >= this.config.minConnections || 
+    if (pool.available.length >= this.config.minConnections ||
         this.shouldRecycleConnection(connection)) {
       // Destroy excess or unhealthy connections
       await this.destroyConnection(connection);
@@ -280,7 +280,7 @@ export class ConnectionPoolManager extends EventEmitter {
       // Return to available pool
       pool.available.push(connection);
       this.globalStats.pooledConnections++;
-      
+
       this.emit('connection:released', { service, connectionId: connection.id });
     }
   }
@@ -312,9 +312,9 @@ export class ConnectionPoolManager extends EventEmitter {
       // Update statistics
       stats.destroyed++;
       this.globalStats.totalConnections--;
-      
+
       this.emit('connection:destroyed', { service, connectionId: connection.id });
-      
+
     } catch (error) {
       console.error(`Error destroying connection ${connection.id}:`, error.message);
     }
@@ -324,8 +324,8 @@ export class ConnectionPoolManager extends EventEmitter {
   shouldRecycleConnection(connection) {
     const age = Date.now() - connection.createdAt;
     const idle = Date.now() - connection.lastUsed;
-    
-    return age > this.config.maxConnectionAge || 
+
+    return age > this.config.maxConnectionAge ||
            idle > this.config.idleTimeoutMillis ||
            connection.healthCheckFailures >= this.config.maxHealthCheckFailures;
   }
@@ -341,7 +341,7 @@ export class ConnectionPoolManager extends EventEmitter {
       } else if (typeof connection.healthCheck === 'function') {
         await connection.healthCheck();
       }
-      
+
       connection.healthCheckFailures = 0;
       return true;
     } catch (error) {
@@ -357,7 +357,7 @@ export class ConnectionPoolManager extends EventEmitter {
       for (const [service, pool] of this.pools) {
         const stats = this.poolStats.get(service);
         stats.lastHealthCheck = new Date().toISOString();
-        
+
         // Check available connections
         const unhealthyConnections = [];
         for (const connection of pool.available) {
@@ -366,7 +366,7 @@ export class ConnectionPoolManager extends EventEmitter {
             unhealthyConnections.push(connection);
           }
         }
-        
+
         // Remove unhealthy connections
         for (const connection of unhealthyConnections) {
           await this.destroyConnection(connection);
@@ -380,14 +380,14 @@ export class ConnectionPoolManager extends EventEmitter {
     this.recycleTimer = setInterval(async () => {
       for (const [service, pool] of this.pools) {
         const connectionsToRecycle = [];
-        
+
         // Check available connections for recycling
         for (const connection of pool.available) {
           if (this.shouldRecycleConnection(connection)) {
             connectionsToRecycle.push(connection);
           }
         }
-        
+
         // Recycle old connections
         for (const connection of connectionsToRecycle) {
           await this.destroyConnection(connection);
@@ -408,12 +408,12 @@ export class ConnectionPoolManager extends EventEmitter {
   updateGlobalStats() {
     let totalActive = 0;
     let totalPooled = 0;
-    
+
     for (const [service, pool] of this.pools) {
       totalActive += pool.active.size;
       totalPooled += pool.available.length;
     }
-    
+
     this.globalStats.activeConnections = totalActive;
     this.globalStats.pooledConnections = totalPooled;
   }
@@ -421,7 +421,7 @@ export class ConnectionPoolManager extends EventEmitter {
   // Get comprehensive metrics
   getMetrics() {
     const serviceMetrics = {};
-    
+
     for (const [service, stats] of this.poolStats) {
       const pool = this.pools.get(service);
       serviceMetrics[service] = {
@@ -430,15 +430,15 @@ export class ConnectionPoolManager extends EventEmitter {
           active: pool.active.size,
           available: pool.available.length,
           pending: pool.pending.length,
-          creating: pool.creating
-        }
+          creating: pool.creating,
+        },
       };
     }
-    
+
     return {
       global: this.globalStats,
       services: serviceMetrics,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
   }
 
@@ -446,7 +446,7 @@ export class ConnectionPoolManager extends EventEmitter {
   async healthCheck() {
     const metrics = this.getMetrics();
     const totalConnections = this.globalStats.activeConnections + this.globalStats.pooledConnections;
-    
+
     return {
       status: 'healthy',
       totalServices: this.pools.size,
@@ -458,15 +458,15 @@ export class ConnectionPoolManager extends EventEmitter {
         minConnections: this.config.minConnections,
         maxConnections: this.config.maxConnections,
         acquireTimeout: this.config.acquireTimeoutMillis,
-        idleTimeout: this.config.idleTimeoutMillis
-      }
+        idleTimeout: this.config.idleTimeoutMillis,
+      },
     };
   }
 
   // Graceful shutdown
   async shutdown() {
     console.log('🛑 Shutting down Connection Pool Manager...');
-    
+
     // Clear timers
     if (this.healthCheckTimer) {
       clearInterval(this.healthCheckTimer);
@@ -477,27 +477,27 @@ export class ConnectionPoolManager extends EventEmitter {
     if (this.metricsTimer) {
       clearInterval(this.metricsTimer);
     }
-    
+
     // Close all connections
     for (const [service, pool] of this.pools) {
       console.log(`Closing connections for service: ${service}`);
-      
+
       // Destroy active connections
       for (const connection of pool.active) {
         await this.destroyConnection(connection);
       }
-      
+
       // Destroy available connections
       for (const connection of pool.available) {
         await this.destroyConnection(connection);
       }
-      
+
       // Reject pending requests
       for (const pending of pool.pending) {
         pending.reject(new Error('Connection pool shutting down'));
       }
     }
-    
+
     console.log('✅ Connection Pool Manager shutdown complete');
   }
 }

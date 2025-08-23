@@ -8,7 +8,7 @@ function countOccurrences(text, terms){
     const rx = new RegExp(`\b${t.replace(/[-\/\\^$*+?.()|[\]{}]/g,'\\$&')}\b`,'gi');
     const matches = text.match(rx) || [];
     total += matches.length;
-    if (matches.length && !samples[t]) samples[t] = matches.slice(0,3).map(m=>m);
+    if (matches.length && !samples[t]) {samples[t] = matches.slice(0,3).map(m=>m);}
   }
   return { total, samples };
 }
@@ -20,7 +20,7 @@ async function main(){
   let dictPairs = [];
   try {
     const dict = JSON.parse(await fs.readFile('docs/principles/terminology-dictionary.json','utf8'));
-    if (Array.isArray(dict.pairs)) dictPairs = dict.pairs;
+    if (Array.isArray(dict.pairs)) {dictPairs = dict.pairs;}
   } catch {}
   const files = await glob('{docs,README.md}/**/*.md', { nodir:true, strict:false });
   let oldTotal=0, newTotal=0; const fileBreakdown=[]; let bannedHits=0; const suggestions=[];
@@ -29,7 +29,7 @@ async function main(){
   const unifiedOld = Array.from(new Set([...(mapping.old_terms||[]), ...dictOld]));
   for (const f of files){
     let txt=''; try { txt = await fs.readFile(f,'utf8'); } catch {}
-  const { total: oldCount } = countOccurrences(txt, unifiedOld);
+    const { total: oldCount } = countOccurrences(txt, unifiedOld);
     const { total: newCount } = countOccurrences(txt, mapping.new_terms);
     oldTotal += oldCount; newTotal += newCount;
     bannedHits += oldCount;
@@ -49,8 +49,8 @@ async function main(){
   const threshold = Number(process.env.ADOPTION_MIN || '0');
   const bannedMax = Number(process.env.BANNED_MAX || '0');
   const violations = [];
-  if (threshold && adoptionPercent < threshold) violations.push({ code:'ADOPTION_LOW', threshold, actual: adoptionPercent });
-  if (bannedMax>=0 && oldTotal > bannedMax) violations.push({ code:'BANNED_TERMS', max: bannedMax, actual: oldTotal });
+  if (threshold && adoptionPercent < threshold) {violations.push({ code:'ADOPTION_LOW', threshold, actual: adoptionPercent });}
+  if (bannedMax>=0 && oldTotal > bannedMax) {violations.push({ code:'BANNED_TERMS', max: bannedMax, actual: oldTotal });}
   if (violations.length){
     await fs.writeFile('artifacts/terminology-violations.json', JSON.stringify({ violations },null,2));
     console.error('[terminology-adoption] FAIL', violations);

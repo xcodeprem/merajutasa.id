@@ -15,7 +15,7 @@ async function main() {
   const summary = { ts: new Date().toISOString(), checks: [] };
 
   const dockerStatus = run(process.platform === 'win32' ? 'cmd /c npm run docker:status' : 'npm run docker:status');
-  await fs.promises.writeFile('artifacts/docker-status.txt', (dockerStatus.out || dockerStatus.err || '')); 
+  await fs.promises.writeFile('artifacts/docker-status.txt', (dockerStatus.out || dockerStatus.err || ''));
   summary.checks.push({ name: 'docker:status', ok: dockerStatus.ok });
 
   const k8sStatus = run('npm run k8s:status');

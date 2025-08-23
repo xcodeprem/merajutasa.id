@@ -10,7 +10,7 @@ import crypto from 'crypto';
 const TARGETS = [
   'artifacts/governance-verify-summary.json',
   'artifacts/spec-hash-diff.json',
-  'artifacts/param-integrity-matrix.json'
+  'artifacts/param-integrity-matrix.json',
 ];
 
 function sha256(buf){ return crypto.createHash('sha256').update(buf).digest('hex'); }

@@ -27,7 +27,7 @@ const PROHIBITED_META_RE = /\b(ip(address)?|email|e[-_]?mail|phone|tel(ephone)?|
 async function* readNdjson(file){
   const txt = await fs.readFile(file,'utf8');
   for (const line of txt.split(/\r?\n/)){
-    if (!line.trim()) continue;
+    if (!line.trim()) {continue;}
     try { yield JSON.parse(line); } catch { yield { __parse_error: true, line }; }
   }
 }
@@ -54,10 +54,10 @@ async function main(){
     // If rehashing, compute digest and backfill empty/missing integrity.event_hash prior to schema validation
     if (rehash){
       const cloneForHash = JSON.parse(JSON.stringify(evt));
-      if (cloneForHash.integrity) delete cloneForHash.integrity.event_hash;
+      if (cloneForHash.integrity) {delete cloneForHash.integrity.event_hash;}
       const canonForHash = canonicalStringify(cloneForHash);
       const digestForHash = sha256Hex(canonForHash);
-      if (!evt.integrity) evt.integrity = {};
+      if (!evt.integrity) {evt.integrity = {};}
       if (!evt.integrity.event_hash || evt.integrity.event_hash === ''){
         evt.integrity.event_hash = digestForHash;
         results.push({ status:'HASH_FILLED', event_id: evt.event_id, event_hash: digestForHash });
@@ -77,14 +77,14 @@ async function main(){
     // rehash
     if (rehash){
       const clone = JSON.parse(JSON.stringify(evt));
-      if (clone.integrity) delete clone.integrity.event_hash;
+      if (clone.integrity) {delete clone.integrity.event_hash;}
       const canon = canonicalStringify(clone);
       const digest = sha256Hex(canon);
       if (evt.integrity?.event_hash && evt.integrity.event_hash !== digest){
         hashMismatch++; results.push({ status:'HASH_MISMATCH', event_id: evt.event_id, expected: evt.integrity.event_hash, actual: digest });
       }
     }
-    if (ok) valid++;
+    if (ok) {valid++;}
   }
 
   const report = { version:1, summary:{ total, valid, invalid, prohibited, hashMismatch, metaInvalid }, results };

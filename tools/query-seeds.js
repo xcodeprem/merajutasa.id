@@ -13,7 +13,7 @@ async function main(){
   let stats = { total:0, byEvent:{} };
   try {
     const res = await fetch(`${BASE}/stats`);
-    if (res.ok) stats = await res.json();
+    if (res.ok) {stats = await res.json();}
   } catch {}
   // Align with canonical taxonomy: count landing impressions and a key hero interaction
   const landing = (stats.byEvent?.pub_landing_impression) || 0;

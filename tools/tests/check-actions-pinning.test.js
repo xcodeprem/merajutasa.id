@@ -22,41 +22,41 @@ function createTestWorkflow(content) {
   const tempDir = mkdtempSync(join(tmpdir(), 'actions-pinning-test-'));
   const workflowsDir = join(tempDir, '.github', 'workflows');
   const allowlistPath = join(tempDir, '.github', 'actions-allowlist.json');
-  
+
   // Create directories (safe, no shell)
   mkdirSync(workflowsDir, { recursive: true });
   mkdirSync(join(tempDir, '.github'), { recursive: true });
-  
+
   // Create test workflow
   writeFileSync(join(workflowsDir, 'test.yml'), content);
-  
+
   // Create minimal allowlist
   const allowlist = {
-    "version": "1.0",
-    "allowed_actions": [
+    'version': '1.0',
+    'allowed_actions': [
       {
-        "action": "actions/checkout",
-        "allowed_shas": ["692973e3d937129bcbf40652eb9f2f61becf3332"],
-        "description": "Test action"
-      }
-    ]
+        'action': 'actions/checkout',
+        'allowed_shas': ['692973e3d937129bcbf40652eb9f2f61becf3332'],
+        'description': 'Test action',
+      },
+    ],
   };
   writeFileSync(allowlistPath, JSON.stringify(allowlist, null, 2));
-  
+
   return tempDir;
 }
 
 function runTest(name, workflowContent, shouldPass) {
   console.log(`Testing: ${name}`);
-  
+
   const tempDir = createTestWorkflow(workflowContent);
-  
+
   try {
     // Run the script without invoking a shell; prefer executing directly.
     const result = spawnSync(SCRIPT_PATH, { cwd: tempDir, encoding: 'utf8' });
     const stdout = result.stdout?.toString?.() ?? '';
     const stderr = result.stderr?.toString?.() ?? '';
-    
+
     if (shouldPass && result.status === 0) {
       console.log(`✅ ${name} - PASSED as expected`);
     } else if (!shouldPass && result.status !== 0) {
@@ -85,7 +85,7 @@ console.log('Testing: Script runs on current repository');
 if (existsSync(SCRIPT_PATH)) {
   const res = spawnSync(SCRIPT_PATH, { encoding: 'utf8' });
   if (res.status === 0) {
-    console.log(`✅ Script runs successfully on current repository`);
+    console.log('✅ Script runs successfully on current repository');
   } else {
     console.log(`❌ Script failed on current repository (exit ${res.status})`);
     process.exitCode = 1;

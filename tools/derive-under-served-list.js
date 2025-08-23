@@ -20,7 +20,7 @@ async function main(){
   const snaps = JSON.parse(await fs.readFile('artifacts/equity-snapshots.json','utf8'));
   const byUnit = new Map();
   for (const s of snaps){
-    if (!byUnit.has(s.unit)) byUnit.set(s.unit, []);
+    if (!byUnit.has(s.unit)) {byUnit.set(s.unit, []);}
     byUnit.get(s.unit).push(s);
   }
   const out=[];

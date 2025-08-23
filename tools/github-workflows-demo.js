@@ -64,7 +64,7 @@ console.log(\`::set-output name=project_url::\${project.url}\`);
 
 // NEW (current) output method  
 core.setOutput('project_url', project.url);
-`
+`,
 };
 
 function displayExample(title, code) {
@@ -75,7 +75,7 @@ function displayExample(title, code) {
 function showWorkflowChanges() {
   console.log('GitHub Workflows GraphQL Compatibility Demo');
   console.log('===========================================');
-  
+
   console.log('\n🎯 Problem Solved:');
   console.log('- Setup Project V2 workflow failed on public GitHub accounts (e.g., "ridd", "xcodeprem")');
   console.log('- Root cause: Combined user+organization GraphQL queries threw GraphqlResponseError');
@@ -140,20 +140,20 @@ const testScenarios = [
     account: 'xcodeprem',
     type: 'Personal',
     projects: ['MerajutASA Program Board'],
-    works: '✅ Now works with repositoryOwner pattern'
+    works: '✅ Now works with repositoryOwner pattern',
   },
   {
-    account: 'ridd', 
+    account: 'ridd',
     type: 'Personal',
     projects: ['Example Project'],
-    works: '✅ Now works with repositoryOwner pattern'
+    works: '✅ Now works with repositoryOwner pattern',
   },
   {
     account: 'github',
     type: 'Organization',
     projects: ['Public Roadmap'],
-    works: '✅ Still works (backward compatible)'
-  }
+    works: '✅ Still works (backward compatible)',
+  },
 ];
 
 console.log('\n📊 Account Compatibility Matrix:');
@@ -164,13 +164,13 @@ testScenarios.forEach(scenario => {
 
 if (import.meta.url === `file://${process.argv[1]}`) {
   const success = showWorkflowChanges();
-  
+
   console.log('\n🚀 Ready for Production:');
   console.log('- All workflows now compatible with Public GitHub accounts');
   console.log('- Modern GitHub Actions output methods used');
   console.log('- Comprehensive error handling and logging');
   console.log('- Test coverage for critical GraphQL patterns');
-  
+
   console.log('\n📝 Next Steps:');
   console.log('1. Test with actual personal account: workflow_dispatch on setup-project-v2.yml');
   console.log('2. Create/label an issue to test auto-add-to-project.yml');

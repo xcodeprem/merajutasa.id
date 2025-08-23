@@ -49,15 +49,15 @@ test('sortKeys - basic object', () => {
 
 // Test 2: Nested object sorting
 test('sortKeys - nested objects', () => {
-  const input = { 
+  const input = {
     z: { y: 1, x: 2 },
-    a: { c: 3, b: 4 }
+    a: { c: 3, b: 4 },
   };
   const result = sortKeys(input);
   const topKeys = Object.keys(result);
   assertEqual(topKeys[0], 'a', 'Top level should be sorted');
   assertEqual(topKeys[1], 'z', 'Top level should be sorted');
-  
+
   const nestedKeys = Object.keys(result.a);
   assertEqual(nestedKeys[0], 'b', 'Nested keys should be sorted');
   assertEqual(nestedKeys[1], 'c', 'Nested keys should be sorted');
@@ -65,14 +65,14 @@ test('sortKeys - nested objects', () => {
 
 // Test 3: Array handling
 test('sortKeys - arrays preserved', () => {
-  const input = { 
+  const input = {
     items: [{ z: 1, a: 2 }, { y: 3, x: 4 }],
-    name: 'test'
+    name: 'test',
   };
   const result = sortKeys(input);
   assertEqual(Array.isArray(result.items), true, 'Arrays should be preserved');
   assertEqual(result.items.length, 2, 'Array length should be preserved');
-  
+
   // Check that array elements are sorted
   const firstItem = result.items[0];
   const firstKeys = Object.keys(firstItem);
@@ -84,10 +84,10 @@ test('sortKeys - arrays preserved', () => {
 test('stableStringify - deterministic output', () => {
   const obj1 = { z: 1, a: 2, m: 3 };
   const obj2 = { a: 2, m: 3, z: 1 }; // Same content, different order
-  
+
   const result1 = stableStringify(obj1);
   const result2 = stableStringify(obj2);
-  
+
   assertEqual(result1, result2, 'Objects with same content should produce identical output');
   assertEqual(result1.endsWith('\n'), true, 'Output should end with newline');
 });
@@ -96,7 +96,7 @@ test('stableStringify - deterministic output', () => {
 test('addMetadata - basic metadata', () => {
   const artifact = { data: 'test' };
   const result = addMetadata(artifact, { generator: 'test-runner' });
-  
+
   assertEqual(typeof result._metadata, 'object', 'Metadata should be added');
   assertEqual(result._metadata.generator, 'test-runner', 'Custom generator should be set');
   assertEqual(result._metadata.version, '1.0', 'Version should be set');
@@ -111,16 +111,16 @@ test('addMetadata - environment variables', () => {
   process.env.GITHUB_RUN_ID = 'test-run-456';
   process.env.GITHUB_ACTOR = 'test-actor';
   process.env.GITHUB_REF = 'refs/pull/123/merge';
-  
+
   const artifact = { test: true };
   const result = addMetadata(artifact);
-  
+
   assertEqual(result._metadata.git_sha, 'test-sha-123', 'GitHub SHA should be included');
   assertEqual(result._metadata.run_id, 'test-run-456', 'Run ID should be included');
   assertEqual(result._metadata.actor, 'test-actor', 'Actor should be included');
   assertEqual(result._metadata.git_ref, 'refs/pull/123/merge', 'Git ref should be included');
   assertEqual(result._metadata.pr_number, 123, 'PR number should be extracted');
-  
+
   // Cleanup
   delete process.env.GITHUB_SHA;
   delete process.env.GITHUB_RUN_ID;
@@ -144,23 +144,23 @@ test('stableStringify - complex structure', () => {
       a_setting: false,
       nested: {
         y: [{ b: 2, a: 1 }],
-        x: 'value'
-      }
+        x: 'value',
+      },
     },
     metadata: {
       version: '1.0',
-      created: '2024-01-01'
-    }
+      created: '2024-01-01',
+    },
   };
-  
+
   const result = stableStringify(complex);
   const parsed = JSON.parse(result.trim());
-  
+
   // Verify structure is preserved and sorted
   const topKeys = Object.keys(parsed);
   assertEqual(topKeys[0], 'config', 'Top level keys should be sorted');
   assertEqual(topKeys[1], 'metadata', 'Top level keys should be sorted');
-  
+
   const configKeys = Object.keys(parsed.config);
   assertEqual(configKeys[0], 'a_setting', 'Config keys should be sorted');
   assertEqual(configKeys[1], 'nested', 'Config keys should be sorted');

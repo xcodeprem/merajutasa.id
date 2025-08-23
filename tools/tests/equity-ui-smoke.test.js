@@ -34,16 +34,16 @@ async function main(){
   if(!ready){ child.kill('SIGKILL'); console.error('[equity-ui-smoke] FAIL: start'); process.exit(1); }
   try{
     const page = await httpGetText('/');
-    if (page.status!==200 || !page.text.includes('H1 Equity Dashboard')) throw new Error('ui index');
-  const api = await httpGetJson('/kpi/h1');
-  if (api.status!==200 || typeof api.json?.fairness?.pass === 'undefined') throw new Error('kpi');
-  const under = await httpGetJson('/under-served');
-  if (under.status!==200 || typeof under.json?.total !== 'number') throw new Error('under');
-  const weekly = await httpGetJson('/kpi/weekly');
-  if (weekly.status!==200 || !Array.isArray(weekly.json?.weeks)) throw new Error('weekly');
-  // Monthly endpoint is optional in early runs; treat 200 with schema as pass, 404 as ok
-  const monthly = await httpGetJson('/feedback/monthly');
-  if (monthly.status===200 && !Array.isArray(monthly.json?.months)) throw new Error('monthly schema');
+    if (page.status!==200 || !page.text.includes('H1 Equity Dashboard')) {throw new Error('ui index');}
+    const api = await httpGetJson('/kpi/h1');
+    if (api.status!==200 || typeof api.json?.fairness?.pass === 'undefined') {throw new Error('kpi');}
+    const under = await httpGetJson('/under-served');
+    if (under.status!==200 || typeof under.json?.total !== 'number') {throw new Error('under');}
+    const weekly = await httpGetJson('/kpi/weekly');
+    if (weekly.status!==200 || !Array.isArray(weekly.json?.weeks)) {throw new Error('weekly');}
+    // Monthly endpoint is optional in early runs; treat 200 with schema as pass, 404 as ok
+    const monthly = await httpGetJson('/feedback/monthly');
+    if (monthly.status===200 && !Array.isArray(monthly.json?.months)) {throw new Error('monthly schema');}
     console.log('[equity-ui-smoke] PASS');
   } finally {
     child.kill('SIGKILL');

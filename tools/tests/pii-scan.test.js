@@ -25,7 +25,7 @@ const expected = [
   'IDN_NIK',
   'IDN_NKK',
   'CHILD_NAME_AGE',
-  'GEO_FINE'
+  'GEO_FINE',
 ];
 
 const counts = report.summary.categoryCounts || {};

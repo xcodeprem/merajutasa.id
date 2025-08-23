@@ -28,10 +28,10 @@ function simulateScenario(p, scenario){
     st = { ...result, lastRatio:r, idx };
     if (result.events.length){
       result.events.forEach(ev=> transitions.push({ idx, ratio:r, ...ev }));
-      if (activeIdx==null && result.events.find(e=> e.type==='ENTER')) activeIdx=idx;
-      if (exitIdx==null && result.events.find(e=> e.type==='EXIT')) exitIdx=idx;
+      if (activeIdx==null && result.events.find(e=> e.type==='ENTER')) {activeIdx=idx;}
+      if (exitIdx==null && result.events.find(e=> e.type==='EXIT')) {exitIdx=idx;}
     }
-    if (firstSignalIdx==null && (r < p.T_enter_standard)) firstSignalIdx=idx; // borderline or severe
+    if (firstSignalIdx==null && (r < p.T_enter_standard)) {firstSignalIdx=idx;} // borderline or severe
   });
   const final = st?.state || 'NONE';
   const entryEvent = transitions.find(t=> t.type==='ENTER');
@@ -46,62 +46,62 @@ function buildScenarios(){
       id:'S1',
       description:'Immediate severe entry (<0.50) leads to ACTIVE',
       sequence:[0.49],
-      expected:{ final_state:'ACTIVE', entry_reason:'severe' }
+      expected:{ final_state:'ACTIVE', entry_reason:'severe' },
     },
     {
       id:'S2',
       description:'Single borderline snapshot remains CANDIDATE',
       sequence:[0.55],
-      expected:{ final_state:'CANDIDATE' }
+      expected:{ final_state:'CANDIDATE' },
     },
     {
       id:'S3',
       description:'Two consecutive borderline snapshots promote to ACTIVE (consecutive)',
       sequence:[0.58,0.59,0.59],
-      expected:{ final_state:'ACTIVE', entry_reason:'consecutive' }
+      expected:{ final_state:'ACTIVE', entry_reason:'consecutive' },
     },
     {
       id:'S4',
       description:'Borderline then high ratio aborts candidate back to NONE',
       sequence:[0.58,0.62],
-      expected:{ final_state:'NONE' }
+      expected:{ final_state:'NONE' },
     },
     {
       id:'S5',
       description:'Severe entry then exit when ratio >= T_exit',
       sequence:[0.49,0.52,0.66],
-      expected:{ final_state:'CLEARED' }
+      expected:{ final_state:'CLEARED' },
     },
     {
       id:'S6',
       description:'Consecutive borderline entry then no exit (stays ACTIVE)',
       sequence:[0.55,0.56,0.56,0.57],
-      expected:{ final_state:'ACTIVE' }
+      expected:{ final_state:'ACTIVE' },
     },
     {
       id:'S7',
-    description:'Exit then one snapshot cooldown, then borderline -> CANDIDATE (cooldown length=1)',
-  sequence:[0.49,0.70,0.70,0.57],
-  expected:{ final_state:'CANDIDATE' }
+      description:'Exit then one snapshot cooldown, then borderline -> CANDIDATE (cooldown length=1)',
+      sequence:[0.49,0.70,0.70,0.57],
+      expected:{ final_state:'CANDIDATE' },
     },
     {
       id:'S8',
       description:'Exit then severe ratio triggers REENTER while in cooldown (engine behavior)',
       sequence:[0.49,0.70,0.49],
-      expected:{ final_state:'ACTIVE' }
+      expected:{ final_state:'ACTIVE' },
     },
     {
       id:'S9',
       description:'Multiple severe re-entries (churn example)',
       sequence:[0.49,0.70,0.49,0.70,0.49],
-      expected:{ final_state:'ACTIVE' }
+      expected:{ final_state:'ACTIVE' },
     },
     {
       id:'S10',
       description:'No activation path (all high ratios)',
       sequence:[0.70,0.72,0.74],
-      expected:{ final_state:'NONE' }
-    }
+      expected:{ final_state:'NONE' },
+    },
   ];
 }
 
@@ -128,7 +128,7 @@ async function main(){
     reentries_total: reentries.length,
     exits_total: exits.length,
     churn_ratio: activeEntries.length ? Number((reentries.length / activeEntries.length).toFixed(3)) : 0,
-    detection_delay_avg_snapshots: detectionDelayAvg
+    detection_delay_avg_snapshots: detectionDelayAvg,
   };
   await fs.mkdir('artifacts',{recursive:true});
   await fs.writeFile('artifacts/fairness-sim-scenarios.json', JSON.stringify({
@@ -136,7 +136,7 @@ async function main(){
     coverage_tag:'baseline_v1',
     dec_ref: dec_id || null,
     scenario_count: enriched.length,
-    scenarios: enriched
+    scenarios: enriched,
   },null,2));
   await fs.writeFile('artifacts/fairness-sim-report.json', JSON.stringify(report,null,2));
   console.log(`[fairness-sim] scenarios=${enriched.length} pass=${report.scenarios_pass}/${report.scenarios_total} activeEntries=${report.active_entries_total} exits=${report.exits_total}`);

@@ -56,7 +56,7 @@ async function tryLoadPipelineHash(){
     const obj = JSON.parse(raw);
     if (obj && obj.pipeline_hash) {
       pipeline_hash = obj.pipeline_hash;
-      if (obj.schema_version) schema_version = obj.schema_version;
+      if (obj.schema_version) {schema_version = obj.schema_version;}
       return { schema_version, pipeline_hash };
     }
   }catch{}
@@ -64,7 +64,7 @@ async function tryLoadPipelineHash(){
   try{
     const doc = await fs.readFile(SCHEMA_DOC,'utf8');
     const versionMatch = doc.match(/Canonical Specification \(v([0-9.]+)\)/);
-    if (versionMatch) schema_version = versionMatch[1];
+    if (versionMatch) {schema_version = versionMatch[1];}
     const eventNames = Array.from(doc.matchAll(/^[-*]\s+(pub|sys)_[a-z0-9_]+/gmi)).map(m=>m[0].replace(/^[-*]\s+/,'').trim());
     const uniqueSorted = [...new Set(eventNames)].sort();
     event_names = uniqueSorted;
@@ -75,7 +75,7 @@ async function tryLoadPipelineHash(){
 }
 
 function redactFeedbackMeta(evt){
-  if (!evt || !evt.meta) return { redacted:false };
+  if (!evt || !evt.meta) {return { redacted:false };}
   let redacted=false;
   for (const key of ['text','message']){
     if (typeof evt.meta[key] === 'string'){
@@ -91,29 +91,29 @@ function redactFeedbackMeta(evt){
 function prepareEvent(evt){
   // Compute event_hash if missing
   const clone = JSON.parse(JSON.stringify(evt));
-  if (clone.integrity) delete clone.integrity.event_hash;
+  if (clone.integrity) {delete clone.integrity.event_hash;}
   const canon = canonicalStringify(clone);
   const digest = sha256Hex(canon);
-  if (!evt.integrity) evt.integrity = {};
-  if (!evt.integrity.event_hash) evt.integrity.event_hash = digest;
+  if (!evt.integrity) {evt.integrity = {};}
+  if (!evt.integrity.event_hash) {evt.integrity.event_hash = digest;}
   return { digest };
 }
 
 function ensureDefaults(evt, defaults){
   // Minimal defaults for H0 bootstrap to reduce schema friction
-  if (!evt.schema_version) evt.schema_version = defaults.schema_version || '1.0';
-  if (!evt.event_name) evt.event_name = 'pub_hero_view';
-  if (!evt.event_id) evt.event_id = (typeof randomUUID === 'function') ? randomUUID() : `${Date.now()}-evt`;
-  if (!evt.session_id) evt.session_id = (typeof randomUUID === 'function') ? randomUUID() : `${Date.now()}-sess`;
-  if (!evt.user_type) evt.user_type = 'public_anonymous';
-  if (!evt.page) evt.page = 'landing';
-  if (!evt.source) evt.source = 'web_public';
-  if (!evt.occurred_at) evt.occurred_at = new Date().toISOString();
-  if (!evt.received_at) evt.received_at = new Date().toISOString();
-  if (!evt.privacy) evt.privacy = { pii_scan_performed: true, pii_detected: false, raw_payload_scrubbed: true };
-  if (!evt.integrity) evt.integrity = {};
-  if (!evt.integrity.schema_version_ack) evt.integrity.schema_version_ack = evt.schema_version;
-  if (!evt.integrity.pipeline_hash && defaults.pipeline_hash) evt.integrity.pipeline_hash = defaults.pipeline_hash;
+  if (!evt.schema_version) {evt.schema_version = defaults.schema_version || '1.0';}
+  if (!evt.event_name) {evt.event_name = 'pub_hero_view';}
+  if (!evt.event_id) {evt.event_id = (typeof randomUUID === 'function') ? randomUUID() : `${Date.now()}-evt`;}
+  if (!evt.session_id) {evt.session_id = (typeof randomUUID === 'function') ? randomUUID() : `${Date.now()}-sess`;}
+  if (!evt.user_type) {evt.user_type = 'public_anonymous';}
+  if (!evt.page) {evt.page = 'landing';}
+  if (!evt.source) {evt.source = 'web_public';}
+  if (!evt.occurred_at) {evt.occurred_at = new Date().toISOString();}
+  if (!evt.received_at) {evt.received_at = new Date().toISOString();}
+  if (!evt.privacy) {evt.privacy = { pii_scan_performed: true, pii_detected: false, raw_payload_scrubbed: true };}
+  if (!evt.integrity) {evt.integrity = {};}
+  if (!evt.integrity.schema_version_ack) {evt.integrity.schema_version_ack = evt.schema_version;}
+  if (!evt.integrity.pipeline_hash && defaults.pipeline_hash) {evt.integrity.pipeline_hash = defaults.pipeline_hash;}
 }
 
 async function start(){
@@ -138,20 +138,20 @@ async function start(){
         res.writeHead(200,{ 'content-type':'application/json' });
         return res.end(JSON.stringify({ total: lines.length, byEvent }));
       }
-  if (req.method==='POST' && req.url==='/ingest'){
-  const body = await readJson(req);
-  const evt = body.event || body; // allow raw event
-  ensureDefaults(evt, defaults);
-  // Compute event_hash before validation because schema requires it
-  const { digest } = prepareEvent(evt);
-  // Enforce whitelist when available
-  if (Array.isArray(defaults.event_names) && defaults.event_names.length>0) {
-    if (!defaults.event_names.includes(evt.event_name)){
-      res.writeHead(400,{ 'content-type':'application/json' });
-      return res.end(JSON.stringify({ status:'UNKNOWN_EVENT', event_name: evt.event_name }));
-    }
-  }
-  const ok = validate(evt);
+      if (req.method==='POST' && req.url==='/ingest'){
+        const body = await readJson(req);
+        const evt = body.event || body; // allow raw event
+        ensureDefaults(evt, defaults);
+        // Compute event_hash before validation because schema requires it
+        const { digest } = prepareEvent(evt);
+        // Enforce whitelist when available
+        if (Array.isArray(defaults.event_names) && defaults.event_names.length>0) {
+          if (!defaults.event_names.includes(evt.event_name)){
+            res.writeHead(400,{ 'content-type':'application/json' });
+            return res.end(JSON.stringify({ status:'UNKNOWN_EVENT', event_name: evt.event_name }));
+          }
+        }
+        const ok = validate(evt);
         if (!ok){ res.writeHead(400,{ 'content-type':'application/json' }); return res.end(JSON.stringify({ status:'SCHEMA_ERROR', errors: validate.errors })); }
         const metaStr = JSON.stringify(evt.meta||{});
         const prohibited = PROHIBITED_META_RE.test(metaStr);
@@ -160,7 +160,7 @@ async function start(){
         const mv = metaValidators.get(evt.event_name);
         if (mv){
           meta_valid = mv(evt.meta || {});
-          if (!meta_valid) meta_errors = mv.errors;
+          if (!meta_valid) {meta_errors = mv.errors;}
         }
         if (/feedback/i.test(evt.event_name||'') || /feedback|message|text/i.test(metaStr)){
           redactFeedbackMeta(evt);
@@ -169,12 +169,12 @@ async function start(){
         res.writeHead(200,{ 'content-type':'application/json' });
         return res.end(JSON.stringify({ status:'INGESTED', event_hash: digest, prohibited_meta: !!prohibited, meta_valid, meta_errors }));
       }
-    if (req.method==='POST' && req.url==='/ingest-batch'){
+      if (req.method==='POST' && req.url==='/ingest-batch'){
         const raw = await readRaw(req);
         let count=0, errors=0;
         // Accept NDJSON or JSON array
         const isJsonArray = raw.trim().startsWith('[');
-        const lines = isJsonArray? JSON.parse(raw) : raw.split(/\r?\n/).filter(Boolean).map(l=>{ try{return JSON.parse(l);}catch{return { __parse_error:true, raw:l}}});
+        const lines = isJsonArray? JSON.parse(raw) : raw.split(/\r?\n/).filter(Boolean).map(l=>{ try{return JSON.parse(l);}catch{return { __parse_error:true, raw:l};}});
         for (const evt of lines){
           if (!evt || evt.__parse_error){ errors++; continue; }
           ensureDefaults(evt, defaults);
@@ -182,7 +182,7 @@ async function start(){
           prepareEvent(evt);
           const ok = validate(evt);
           if (!ok){ errors++; continue; }
-          if (/feedback/i.test(evt.event_name||'')) redactFeedbackMeta(evt);
+          if (/feedback/i.test(evt.event_name||'')) {redactFeedbackMeta(evt);}
           await appendNdjson(evt);
           count++;
         }

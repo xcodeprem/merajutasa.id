@@ -15,7 +15,7 @@ async function loadCells(path){
   try {
     const raw = await fs.readFile(path, 'utf8');
     const data = JSON.parse(raw);
-    if (Array.isArray(data)) return Object.fromEntries(data.filter(Boolean).map(x=>[x.id, { count: Number(x.count||0) }]));
+    if (Array.isArray(data)) {return Object.fromEntries(data.filter(Boolean).map(x=>[x.id, { count: Number(x.count||0) }]));}
     return data;
   } catch { return null; }
 }
@@ -23,7 +23,7 @@ async function loadCells(path){
 function evaluate(cells){
   const violations = [];
   const keys = Object.keys(cells||{});
-  for (const k of keys){ const c = Number(cells[k]?.count||0); if (c < THRESHOLD) violations.push({ cell:k, count:c }); }
+  for (const k of keys){ const c = Number(cells[k]?.count||0); if (c < THRESHOLD) {violations.push({ cell:k, count:c });} }
   return { total_cells: keys.length, violations };
 }
 

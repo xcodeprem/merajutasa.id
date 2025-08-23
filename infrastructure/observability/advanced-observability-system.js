@@ -1,9 +1,9 @@
 /**
  * MerajutASA.id - Phase 2 Week 3: Advanced Observability System
- * 
+ *
  * Main orchestrator for the advanced observability infrastructure
  * Integrates all observability components into a unified system
- * 
+ *
  * Features:
  * - Unified observability API
  * - Component lifecycle management
@@ -11,7 +11,7 @@
  * - Health monitoring and self-healing
  * - Configuration management
  * - Performance optimization
- * 
+ *
  * @version 1.0.0
  * @since Phase 2 Week 3
  */
@@ -27,7 +27,7 @@ import { getRealTimeMonitoringDashboards } from './dashboards/real-time-dashboar
 export class AdvancedObservabilitySystem extends EventEmitter {
   constructor(config = {}) {
     super();
-    
+
     this.config = {
       serviceName: config.serviceName || 'merajutasa-observability',
       environment: config.environment || process.env.NODE_ENV || 'development',
@@ -35,24 +35,24 @@ export class AdvancedObservabilitySystem extends EventEmitter {
       autoCorrelation: config.autoCorrelation !== false,
       healthCheckInterval: config.healthCheckInterval || 60000, // 1 minute
       metricsUpdateInterval: config.metricsUpdateInterval || 10000, // 10 seconds
-      ...config
+      ...config,
     };
 
     // Component instances
     this.components = new Map();
     this.isInitialized = false;
     this.isHealthy = true;
-    
+
     // Correlation and integration state
     this.correlationEngine = null;
     this.healthCheckInterval = null;
-    
+
     // Performance metrics
     this.systemMetrics = {
       startTime: Date.now(),
       requestCount: 0,
       errorCount: 0,
-      lastError: null
+      lastError: null,
     };
   }
 
@@ -62,21 +62,21 @@ export class AdvancedObservabilitySystem extends EventEmitter {
   async initialize() {
     try {
       console.log('Initializing Advanced Observability System...');
-      
+
       await this.initializeComponents();
       this.setupComponentIntegration();
       this.startHealthMonitoring();
       this.startMetricsCollection();
-      
+
       if (this.config.autoCorrelation) {
         this.setupAutoCorrelation();
       }
-      
+
       this.isInitialized = true;
       this.emit('system_initialized');
-      
+
       console.log('Advanced Observability System initialized successfully');
-      
+
     } catch (error) {
       console.error('Failed to initialize observability system:', error);
       this.emit('system_error', error);
@@ -92,41 +92,41 @@ export class AdvancedObservabilitySystem extends EventEmitter {
       tracing: {
         serviceName: this.config.serviceName,
         environment: this.config.environment,
-        ...this.config.tracing
+        ...this.config.tracing,
       },
       metrics: {
         serviceName: this.config.serviceName,
         collectDefaultMetrics: true,
         customMetricsEnabled: true,
-        ...this.config.metrics
+        ...this.config.metrics,
       },
       alerting: {
         serviceName: this.config.serviceName,
         environment: this.config.environment,
         escalationEnabled: true,
         correlationEnabled: true,
-        ...this.config.alerting
+        ...this.config.alerting,
       },
       logging: {
         serviceName: this.config.serviceName,
         enableStructuredLogging: true,
         enableLogCorrelation: true,
         retentionDays: 30,
-        ...this.config.logging
+        ...this.config.logging,
       },
       anomalyDetection: {
         serviceName: this.config.serviceName,
         enableStatisticalDetection: true,
         enableBusinessLogicDetection: true,
         alertingEnabled: true,
-        ...this.config.anomalyDetection
+        ...this.config.anomalyDetection,
       },
       dashboards: {
         serviceName: this.config.serviceName,
         port: this.config.dashboardPort || 3000,
         enableRealTimeStreaming: true,
-        ...this.config.dashboards
-      }
+        ...this.config.dashboards,
+      },
     };
 
     // Initialize distributed tracing
@@ -223,11 +223,11 @@ export class AdvancedObservabilitySystem extends EventEmitter {
           for (const m of metricsData.metrics || []) {
             const name = m.name || m.help || '';
             const last = Array.isArray(m.values) && m.values.length > 0 ? m.values[m.values.length - 1].value : null;
-            if (name.endsWith('error_rate')) flat.error_rate = last ?? flat.error_rate;
-            if (name.endsWith('service_health_status')) flat.service_health_status = last ?? flat.service_health_status;
-            if (name.endsWith('chain_integrity_score')) flat.chain_integrity_score = last ?? flat.chain_integrity_score;
-            if (name.endsWith('cpu_usage_percent')) flat.cpu_usage_percent = last ?? flat.cpu_usage_percent;
-            if (name.endsWith('memory_usage_percent')) flat.memory_usage_percent = last ?? flat.memory_usage_percent;
+            if (name.endsWith('error_rate')) {flat.error_rate = last ?? flat.error_rate;}
+            if (name.endsWith('service_health_status')) {flat.service_health_status = last ?? flat.service_health_status;}
+            if (name.endsWith('chain_integrity_score')) {flat.chain_integrity_score = last ?? flat.chain_integrity_score;}
+            if (name.endsWith('cpu_usage_percent')) {flat.cpu_usage_percent = last ?? flat.cpu_usage_percent;}
+            if (name.endsWith('memory_usage_percent')) {flat.memory_usage_percent = last ?? flat.memory_usage_percent;}
           }
           dashboards.updateMetrics({ ...flat });
         } catch (e) {
@@ -242,7 +242,7 @@ export class AdvancedObservabilitySystem extends EventEmitter {
         logging.audit('alert_triggered', 'system', alert.rule, 'sent', {
           alertId: alert.id,
           severity: alert.severity,
-          service: alert.service
+          service: alert.service,
         });
       });
     }
@@ -263,7 +263,7 @@ export class AdvancedObservabilitySystem extends EventEmitter {
           condition: () => true, // Already detected
           severity: anomaly.severity,
           description: anomaly.description,
-          channels: ['email', 'slack']
+          channels: ['email', 'slack'],
         });
       });
     }
@@ -274,7 +274,7 @@ export class AdvancedObservabilitySystem extends EventEmitter {
         logging.security('anomaly_detected', anomaly.severity, anomaly.description, {
           anomalyId: anomaly.id,
           detector: anomaly.detector,
-          value: anomaly.value
+          value: anomaly.value,
         });
       });
     }
@@ -290,9 +290,9 @@ export class AdvancedObservabilitySystem extends EventEmitter {
             severity: patternEvent.severity,
             description: `Log pattern detected: ${patternEvent.patternName}`,
             detector: 'log_pattern',
-            timestamp: patternEvent.timestamp
+            timestamp: patternEvent.timestamp,
           };
-          
+
           anomalyDetection.emit('anomaly_detected', anomaly);
         }
       });
@@ -308,7 +308,7 @@ export class AdvancedObservabilitySystem extends EventEmitter {
     this.correlationEngine = {
       correlationRules: new Map(),
       correlationData: new Map(),
-      processingInterval: null
+      processingInterval: null,
     };
 
     // Setup correlation rules
@@ -317,39 +317,39 @@ export class AdvancedObservabilitySystem extends EventEmitter {
       components: ['metrics', 'anomalyDetection', 'logging'],
       condition: (data) => {
         const hasSlowResponse = data.metrics?.avg_response_time > 1000;
-        const hasPerformanceAnomalies = data.anomalies?.some(a => 
-          a.detector.includes('response_time') || a.detector.includes('throughput')
+        const hasPerformanceAnomalies = data.anomalies?.some(a =>
+          a.detector.includes('response_time') || a.detector.includes('throughput'),
         );
-        const hasPerformanceLogs = data.logs?.some(log => 
-          log.message.includes('slow') || log.message.includes('timeout')
+        const hasPerformanceLogs = data.logs?.some(log =>
+          log.message.includes('slow') || log.message.includes('timeout'),
         );
-        
+
         return hasSlowResponse && (hasPerformanceAnomalies || hasPerformanceLogs);
       },
       action: (correlatedData) => {
         this.handlePerformanceDegradation(correlatedData);
-      }
+      },
     });
 
     this.addCorrelationRule('security_incident', {
       name: 'Security Incident Correlation',
       components: ['logging', 'anomalyDetection', 'alerting'],
       condition: (data) => {
-        const hasSecurityLogs = data.logs?.some(log => 
-          log.logType === 'security' && log.level === 'error'
+        const hasSecurityLogs = data.logs?.some(log =>
+          log.logType === 'security' && log.level === 'error',
         );
-        const hasSecurityAnomalies = data.anomalies?.some(a => 
-          a.detector.includes('security') || a.detector.includes('authentication')
+        const hasSecurityAnomalies = data.anomalies?.some(a =>
+          a.detector.includes('security') || a.detector.includes('authentication'),
         );
-        const hasSecurityAlerts = data.alerts?.some(alert => 
-          alert.rule.includes('security') || alert.rule.includes('auth')
+        const hasSecurityAlerts = data.alerts?.some(alert =>
+          alert.rule.includes('security') || alert.rule.includes('auth'),
         );
-        
+
         return hasSecurityLogs && (hasSecurityAnomalies || hasSecurityAlerts);
       },
       action: (correlatedData) => {
         this.handleSecurityIncident(correlatedData);
-      }
+      },
     });
 
     // Start correlation processor
@@ -373,11 +373,11 @@ export class AdvancedObservabilitySystem extends EventEmitter {
    * Process correlations between components
    */
   processCorrelations() {
-    if (!this.correlationEngine) return;
+    if (!this.correlationEngine) {return;}
 
     // Collect data from all components
     const correlationData = this.collectCorrelationData();
-    
+
     // Apply correlation rules
     for (const [ruleId, rule] of this.correlationEngine.correlationRules) {
       try {
@@ -436,7 +436,7 @@ export class AdvancedObservabilitySystem extends EventEmitter {
         correlationType: 'performance_degradation',
         metrics: data.metrics,
         anomalies: data.anomalies?.length || 0,
-        logs: data.logs?.length || 0
+        logs: data.logs?.length || 0,
       });
     }
 
@@ -447,7 +447,7 @@ export class AdvancedObservabilitySystem extends EventEmitter {
         condition: () => true, // Already detected
         severity: 'high',
         description: 'Performance degradation detected through cross-component correlation',
-        channels: ['email', 'slack']
+        channels: ['email', 'slack'],
       });
     }
 
@@ -466,7 +466,7 @@ export class AdvancedObservabilitySystem extends EventEmitter {
         correlationType: 'security_incident',
         logs: data.logs?.length || 0,
         anomalies: data.anomalies?.length || 0,
-        alerts: data.alerts?.length || 0
+        alerts: data.alerts?.length || 0,
       });
     }
 
@@ -477,7 +477,7 @@ export class AdvancedObservabilitySystem extends EventEmitter {
         condition: () => true, // Already detected
         severity: 'critical',
         description: 'Security incident detected through cross-component correlation',
-        channels: ['email', 'slack', 'pagerduty']
+        channels: ['email', 'slack', 'pagerduty'],
       });
     }
 
@@ -507,7 +507,7 @@ export class AdvancedObservabilitySystem extends EventEmitter {
         try {
           const health = await component.healthCheck();
           healthResults[componentName] = health;
-          
+
           if (health.status !== 'healthy') {
             overallHealthy = false;
           }
@@ -515,7 +515,7 @@ export class AdvancedObservabilitySystem extends EventEmitter {
           healthResults[componentName] = {
             status: 'unhealthy',
             error: error.message,
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
           };
           overallHealthy = false;
         }
@@ -525,7 +525,7 @@ export class AdvancedObservabilitySystem extends EventEmitter {
       this.emit('health_check_completed', {
         overall: overallHealthy ? 'healthy' : 'unhealthy',
         components: healthResults,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       });
 
       // Log health issues
@@ -536,7 +536,7 @@ export class AdvancedObservabilitySystem extends EventEmitter {
             healthResults,
             unhealthyComponents: Object.entries(healthResults)
               .filter(([name, health]) => health.status !== 'healthy')
-              .map(([name]) => name)
+              .map(([name]) => name),
           });
         }
       }
@@ -563,10 +563,10 @@ export class AdvancedObservabilitySystem extends EventEmitter {
    */
   collectSystemMetrics() {
     const metrics = this.components.get('metrics');
-    if (!metrics) return;
+    if (!metrics) {return;}
 
     const uptime = Date.now() - this.systemMetrics.startTime;
-    const errorRate = this.systemMetrics.requestCount > 0 ? 
+    const errorRate = this.systemMetrics.requestCount > 0 ?
       (this.systemMetrics.errorCount / this.systemMetrics.requestCount) * 100 : 0;
 
     // Record observability system metrics
@@ -580,7 +580,7 @@ export class AdvancedObservabilitySystem extends EventEmitter {
     for (const [componentName, component] of this.components) {
       metrics.recordCustomMetric('observability_component_status', 'set', 1, {
         component: componentName,
-        status: 'active'
+        status: 'active',
       });
     }
   }
@@ -604,8 +604,8 @@ export class AdvancedObservabilitySystem extends EventEmitter {
           attributes: {
             'operation.id': operationId,
             'operation.type': 'business',
-            ...metadata
-          }
+            ...metadata,
+          },
         });
       } else {
         result = await fn();
@@ -617,11 +617,11 @@ export class AdvancedObservabilitySystem extends EventEmitter {
       if (metrics) {
         metrics.recordCustomMetric('business_operation_duration', 'observe', duration, {
           operation: operationName,
-          status: 'success'
+          status: 'success',
         });
         metrics.recordCustomMetric('business_operation_total', 'inc', 1, {
           operation: operationName,
-          status: 'success'
+          status: 'success',
         });
       }
 
@@ -632,7 +632,7 @@ export class AdvancedObservabilitySystem extends EventEmitter {
           operationName,
           duration,
           status: 'success',
-          ...metadata
+          ...metadata,
         });
       }
 
@@ -642,7 +642,7 @@ export class AdvancedObservabilitySystem extends EventEmitter {
         operationId,
         duration,
         status: 'success',
-        result
+        result,
       });
 
       return result;
@@ -654,11 +654,11 @@ export class AdvancedObservabilitySystem extends EventEmitter {
       if (metrics) {
         metrics.recordCustomMetric('business_operation_duration', 'observe', duration, {
           operation: operationName,
-          status: 'error'
+          status: 'error',
         });
         metrics.recordCustomMetric('business_operation_total', 'inc', 1, {
           operation: operationName,
-          status: 'error'
+          status: 'error',
         });
       }
 
@@ -670,7 +670,7 @@ export class AdvancedObservabilitySystem extends EventEmitter {
           duration,
           status: 'error',
           error: error.message,
-          ...metadata
+          ...metadata,
         });
       }
 
@@ -683,7 +683,7 @@ export class AdvancedObservabilitySystem extends EventEmitter {
         operationId,
         duration,
         status: 'error',
-        error
+        error,
       });
 
       throw error;
@@ -707,7 +707,7 @@ export class AdvancedObservabilitySystem extends EventEmitter {
       logging.log(metadata.logLevel, `Metric recorded: ${metricName} = ${value}`, {
         metricName,
         value,
-        ...metadata
+        ...metadata,
       });
     }
 
@@ -728,7 +728,7 @@ export class AdvancedObservabilitySystem extends EventEmitter {
         condition: () => true, // Alert is being created manually
         severity,
         description,
-        channels: metadata.channels || ['email', 'slack']
+        channels: metadata.channels || ['email', 'slack'],
       });
     }
 
@@ -737,7 +737,7 @@ export class AdvancedObservabilitySystem extends EventEmitter {
       logging.audit('alert_created', 'system', alertName, 'created', {
         severity,
         description,
-        ...metadata
+        ...metadata,
       });
     }
 
@@ -755,11 +755,11 @@ export class AdvancedObservabilitySystem extends EventEmitter {
         initialized: this.isInitialized,
         healthy: this.isHealthy,
         uptime: Date.now() - this.systemMetrics.startTime,
-        version: '1.0.0'
+        version: '1.0.0',
       },
       components: {},
       metrics: this.systemMetrics,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
 
     // Get status from each component
@@ -769,7 +769,7 @@ export class AdvancedObservabilitySystem extends EventEmitter {
       } catch (error) {
         status.components[componentName] = {
           status: 'error',
-          error: error.message
+          error: error.message,
         };
       }
     }
@@ -786,7 +786,7 @@ export class AdvancedObservabilitySystem extends EventEmitter {
       components: Array.from(this.components.keys()),
       initialized: this.isInitialized,
       correlationEnabled: !!this.correlationEngine,
-      healthMonitoringEnabled: !!this.healthCheckInterval
+      healthMonitoringEnabled: !!this.healthCheckInterval,
     };
   }
 
@@ -796,15 +796,15 @@ export class AdvancedObservabilitySystem extends EventEmitter {
   updateConfiguration(newConfig) {
     // Merge with existing config
     Object.assign(this.config, newConfig);
-    
+
     // Apply changes to components if needed
     this.emit('configuration_updated', this.config);
-    
+
     const logging = this.components.get('logging');
     if (logging) {
       logging.info('Observability configuration updated', {
         previousConfig: this.config,
-        newConfig
+        newConfig,
       });
     }
   }
@@ -815,15 +815,15 @@ export class AdvancedObservabilitySystem extends EventEmitter {
   async exportObservabilityData(options = {}) {
     const timeRange = options.timeRange || '1h';
     const components = options.components || Array.from(this.components.keys());
-    
+
     const exportData = {
       metadata: {
         exportedAt: new Date().toISOString(),
         timeRange,
         components,
-        system: this.config.serviceName
+        system: this.config.serviceName,
       },
-      data: {}
+      data: {},
     };
 
     // Export data from each requested component
@@ -832,30 +832,30 @@ export class AdvancedObservabilitySystem extends EventEmitter {
       if (component) {
         try {
           switch (componentName) {
-            case 'metrics':
-              exportData.data.metrics = await component.getMetricsJSON();
-              break;
-            case 'logging':
-              exportData.data.logs = await component.searchLogs({
-                startTime: this.getTimeRangeStart(timeRange),
-                limit: options.logLimit || 1000
-              });
-              break;
-            case 'alerting':
-              exportData.data.alerts = {
-                active: component.getActiveAlerts(),
-                history: component.getAlertHistory(options.alertLimit || 100)
-              };
-              break;
-            case 'anomalyDetection':
-              exportData.data.anomalies = {
-                current: component.getCurrentAnomalies(),
-                statistics: component.getAnomalyStatistics()
-              };
-              break;
-            case 'dashboards':
-              exportData.data.dashboards = Array.from(component.dashboards.keys());
-              break;
+          case 'metrics':
+            exportData.data.metrics = await component.getMetricsJSON();
+            break;
+          case 'logging':
+            exportData.data.logs = await component.searchLogs({
+              startTime: this.getTimeRangeStart(timeRange),
+              limit: options.logLimit || 1000,
+            });
+            break;
+          case 'alerting':
+            exportData.data.alerts = {
+              active: component.getActiveAlerts(),
+              history: component.getAlertHistory(options.alertLimit || 100),
+            };
+            break;
+          case 'anomalyDetection':
+            exportData.data.anomalies = {
+              current: component.getCurrentAnomalies(),
+              statistics: component.getAnomalyStatistics(),
+            };
+            break;
+          case 'dashboards':
+            exportData.data.dashboards = Array.from(component.dashboards.keys());
+            break;
           }
         } catch (error) {
           exportData.data[componentName] = { error: error.message };
@@ -872,14 +872,14 @@ export class AdvancedObservabilitySystem extends EventEmitter {
   getTimeRangeStart(timeRange) {
     const now = new Date();
     switch (timeRange) {
-      case '1h':
-        return new Date(now.getTime() - 60 * 60 * 1000).toISOString();
-      case '24h':
-        return new Date(now.getTime() - 24 * 60 * 60 * 1000).toISOString();
-      case '7d':
-        return new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000).toISOString();
-      default:
-        return new Date(now.getTime() - 60 * 60 * 1000).toISOString();
+    case '1h':
+      return new Date(now.getTime() - 60 * 60 * 1000).toISOString();
+    case '24h':
+      return new Date(now.getTime() - 24 * 60 * 60 * 1000).toISOString();
+    case '7d':
+      return new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000).toISOString();
+    default:
+      return new Date(now.getTime() - 60 * 60 * 1000).toISOString();
     }
   }
 
@@ -944,9 +944,9 @@ export function getAdvancedObservabilitySystem(config = {}) {
 export async function initializeObservability(serviceName, config = {}) {
   const observability = getAdvancedObservabilitySystem({
     serviceName,
-    ...config
+    ...config,
   });
-  
+
   await observability.initialize();
   return observability;
 }

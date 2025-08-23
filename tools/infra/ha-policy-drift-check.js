@@ -20,14 +20,14 @@ function getRegions() {
 function main() {
   const repo = process.cwd();
   const artifactsDir = path.join(repo, 'artifacts');
-  if (!fs.existsSync(artifactsDir)) fs.mkdirSync(artifactsDir, { recursive: true });
+  if (!fs.existsSync(artifactsDir)) {fs.mkdirSync(artifactsDir, { recursive: true });}
 
   const policyFiles = [
     'infrastructure/kubernetes/deployments/compliance-deployment.yaml',
     'infrastructure/kubernetes/deployments/api-gateway-deployment.yaml',
     'infrastructure/kubernetes/networkpolicy/compliance-network-policies.yaml',
     'infrastructure/kubernetes/namespaces/merajutasa-pss.yaml',
-    'infrastructure/kubernetes/policies/image-verification-policy.yaml'
+    'infrastructure/kubernetes/policies/image-verification-policy.yaml',
   ];
 
   const regions = getRegions();
@@ -56,13 +56,13 @@ function main() {
   const secretMatches = [];
   for (const base of scanPaths) {
     const absBase = path.join(repo, base);
-    if (!fs.existsSync(absBase)) continue;
+    if (!fs.existsSync(absBase)) {continue;}
     const stack = [absBase];
     while (stack.length) {
       const cur = stack.pop();
       const stat = fs.statSync(cur);
       if (stat.isDirectory()) {
-        for (const name of fs.readdirSync(cur)) stack.push(path.join(cur, name));
+        for (const name of fs.readdirSync(cur)) {stack.push(path.join(cur, name));}
       } else if (stat.isFile() && /\.(ya?ml|json|env|txt)$/i.test(cur)) {
         const txt = fs.readFileSync(cur, 'utf8');
         if (/\bkind:\s*Secret\b/i.test(txt) || /AWS_SECRET_|SECRET_KEY|PRIVATE_KEY/i.test(txt)) {
@@ -78,7 +78,7 @@ function main() {
     drift: 0, // single source-of-truth in repo; region-specific secret sync must be handled by external secret manager
     note: secretMatches.length === 0
       ? 'No plaintext secrets detected in repo; use external secret manager/KMS for per-region sync.'
-      : 'Plaintext secret-like patterns found; refactor to external secret manager.'
+      : 'Plaintext secret-like patterns found; refactor to external secret manager.',
   };
 
   const report = {
@@ -89,7 +89,7 @@ function main() {
     perFile,
     policy_drift_count: policyDrift,
     secrets: secretsStatus,
-    overall: (policyDrift === 0) && !secretsStatus.plaintextFound
+    overall: (policyDrift === 0) && !secretsStatus.plaintextFound,
   };
 
   fs.writeFileSync(path.join(artifactsDir, 'ha-policy-drift-report.json'), JSON.stringify(report, null, 2));

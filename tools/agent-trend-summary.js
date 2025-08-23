@@ -23,7 +23,7 @@ async function main(){
   const aggregate = {
     generated_utc: new Date().toISOString(),
     days,
-    totals: days.reduce((acc,d)=>{ acc.total += d.actions.total||0; acc.OK += d.actions.OK||0; acc.ADVISORY += d.actions.ADVISORY||0; acc.ERROR += d.actions.ERROR||0; return acc; }, { total:0, OK:0, ADVISORY:0, ERROR:0 })
+    totals: days.reduce((acc,d)=>{ acc.total += d.actions.total||0; acc.OK += d.actions.OK||0; acc.ADVISORY += d.actions.ADVISORY||0; acc.ERROR += d.actions.ERROR||0; return acc; }, { total:0, OK:0, ADVISORY:0, ERROR:0 }),
   };
   await fs.writeFile('artifacts/agent-trend-summary.json', JSON.stringify(aggregate,null,2));
   console.log('[agent-trend-summary] Wrote artifacts/agent-trend-summary.json');

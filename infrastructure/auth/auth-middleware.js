@@ -16,19 +16,19 @@ const AUTH_CONFIG = {
     algorithm: 'HS256',
     expiresIn: '1h',
     issuer: 'merajutasa.id',
-    audience: 'merajutasa-api'
+    audience: 'merajutasa-api',
   },
   apiKey: {
     headerName: 'X-API-Key',
     minLength: 32,
-    hashAlgorithm: 'sha256'
+    hashAlgorithm: 'sha256',
   },
   session: {
     maxAge: 3600000, // 1 hour
     secure: true,
     httpOnly: true,
-    sameSite: 'strict'
-  }
+    sameSite: 'strict',
+  },
 };
 
 // Role-based permissions
@@ -36,7 +36,7 @@ const ROLE_PERMISSIONS = {
   admin: ['signer:*', 'chain:*', 'collector:*', 'equity:*', 'revocation:*'],
   operator: ['signer:read', 'chain:read', 'chain:append', 'collector:ingest', 'equity:read'],
   auditor: ['signer:read', 'chain:read', 'collector:read', 'equity:read'],
-  readonly: ['signer:read', 'chain:read', 'equity:read']
+  readonly: ['signer:read', 'chain:read', 'equity:read'],
 };
 
 // Service endpoint permissions mapping
@@ -52,7 +52,7 @@ const ENDPOINT_PERMISSIONS = {
   'GET:/api/equity/metrics': 'equity:read',
   'POST:/api/equity/snapshot': 'equity:write',
   'GET:/api/revocation/status': 'revocation:read',
-  'POST:/api/revocation/revoke': 'revocation:revoke'
+  'POST:/api/revocation/revoke': 'revocation:revoke',
 };
 
 /**
@@ -61,7 +61,7 @@ const ENDPOINT_PERMISSIONS = {
 async function loadAuthConfig() {
   try {
     const authDir = './infrastructure/auth';
-    
+
     // Load JWT secret
     let jwtSecret;
     try {
@@ -74,7 +74,7 @@ async function loadAuthConfig() {
     }
 
     // Load API keys
-    let apiKeys = new Map();
+    const apiKeys = new Map();
     try {
       const apiKeyData = await fs.readFile(`${authDir}/api-keys.json`, 'utf8');
       const keys = JSON.parse(apiKeyData);
@@ -89,13 +89,13 @@ async function loadAuthConfig() {
         name: 'default-admin',
         role: 'admin',
         created: new Date().toISOString(),
-        lastUsed: null
+        lastUsed: null,
       });
-      
+
       await fs.writeFile(`${authDir}/api-keys.json`, JSON.stringify({
-        [keyHash]: apiKeys.get(keyHash)
+        [keyHash]: apiKeys.get(keyHash),
       }, null, 2));
-      
+
       await fs.writeFile(`${authDir}/admin-api-key.txt`, adminKey, { mode: 0o600 });
       console.log(`Generated admin API key: ${adminKey}`);
     }
@@ -113,28 +113,28 @@ async function loadAuthConfig() {
 function validateJWT(token, secret) {
   try {
     const parts = token.split('.');
-    if (parts.length !== 3) return null;
+    if (parts.length !== 3) {return null;}
 
     const [headerB64, payloadB64, signatureB64] = parts;
-    
+
     // Verify signature
     const data = `${headerB64}.${payloadB64}`;
     const expectedSignature = crypto
       .createHmac('sha256', secret)
       .update(data)
       .digest('base64url');
-    
-    if (signatureB64 !== expectedSignature) return null;
+
+    if (signatureB64 !== expectedSignature) {return null;}
 
     // Parse payload
     const payload = JSON.parse(Buffer.from(payloadB64, 'base64url').toString());
-    
+
     // Check expiration
-    if (payload.exp && Date.now() >= payload.exp * 1000) return null;
-    
+    if (payload.exp && Date.now() >= payload.exp * 1000) {return null;}
+
     // Check issuer and audience
-    if (payload.iss !== AUTH_CONFIG.jwt.issuer) return null;
-    if (payload.aud !== AUTH_CONFIG.jwt.audience) return null;
+    if (payload.iss !== AUTH_CONFIG.jwt.issuer) {return null;}
+    if (payload.aud !== AUTH_CONFIG.jwt.audience) {return null;}
 
     return payload;
   } catch {
@@ -147,7 +147,7 @@ function validateJWT(token, secret) {
  */
 function hasPermission(userRole, requiredPermission) {
   const userPermissions = ROLE_PERMISSIONS[userRole] || [];
-  
+
   return userPermissions.some(perm => {
     if (perm.endsWith(':*')) {
       const service = perm.split(':')[0];
@@ -164,7 +164,7 @@ export function createAuthMiddleware(options = {}) {
   const {
     requireAuth = true,
     allowedRoles = null,
-    bypassPaths = ['/health', '/metrics']
+    bypassPaths = ['/health', '/metrics'],
   } = options;
 
   let authConfig = null;
@@ -188,7 +188,7 @@ export function createAuthMiddleware(options = {}) {
       if (!authConfig) {
         return res.status(503).json({
           error: 'Authentication service unavailable',
-          code: 'AUTH_LOADING'
+          code: 'AUTH_LOADING',
         });
       }
 
@@ -208,7 +208,7 @@ export function createAuthMiddleware(options = {}) {
           user = {
             id: payload.sub,
             role: payload.role,
-            type: 'jwt'
+            type: 'jwt',
           };
         }
       }
@@ -220,15 +220,15 @@ export function createAuthMiddleware(options = {}) {
           const keyHash = createHash(AUTH_CONFIG.apiKey.hashAlgorithm)
             .update(apiKey)
             .digest('hex');
-          
+
           const keyMetadata = authConfig.apiKeys.get(keyHash);
           if (keyMetadata) {
             user = {
               id: keyMetadata.name,
               role: keyMetadata.role,
-              type: 'apikey'
+              type: 'apikey',
             };
-            
+
             // Update last used timestamp
             keyMetadata.lastUsed = new Date().toISOString();
           }
@@ -240,7 +240,7 @@ export function createAuthMiddleware(options = {}) {
         return res.status(401).json({
           error: 'Authentication required',
           code: 'AUTH_REQUIRED',
-          message: 'Valid JWT token or API key required'
+          message: 'Valid JWT token or API key required',
         });
       }
 
@@ -250,20 +250,20 @@ export function createAuthMiddleware(options = {}) {
           error: 'Insufficient permissions',
           code: 'INSUFFICIENT_ROLE',
           required: allowedRoles,
-          actual: user.role
+          actual: user.role,
         });
       }
 
       // Check endpoint-specific permissions
       const endpoint = `${req.method}:${req.url.split('?')[0]}`;
       const requiredPermission = ENDPOINT_PERMISSIONS[endpoint];
-      
+
       if (requiredPermission && !hasPermission(user.role, requiredPermission)) {
         return res.status(403).json({
           error: 'Insufficient permissions',
           code: 'INSUFFICIENT_PERMISSION',
           required: requiredPermission,
-          endpoint
+          endpoint,
         });
       }
 
@@ -281,7 +281,7 @@ export function createAuthMiddleware(options = {}) {
       console.error('Auth middleware error:', error);
       res.status(500).json({
         error: 'Authentication error',
-        code: 'AUTH_ERROR'
+        code: 'AUTH_ERROR',
       });
     }
   };
@@ -293,18 +293,18 @@ export function createAuthMiddleware(options = {}) {
 export function generateJWT(payload, secret) {
   const header = { alg: 'HS256', typ: 'JWT' };
   const now = Math.floor(Date.now() / 1000);
-  
+
   const jwtPayload = {
     ...payload,
     iss: AUTH_CONFIG.jwt.issuer,
     aud: AUTH_CONFIG.jwt.audience,
     iat: now,
-    exp: now + 3600 // 1 hour
+    exp: now + 3600, // 1 hour
   };
 
   const headerB64 = Buffer.from(JSON.stringify(header)).toString('base64url');
   const payloadB64 = Buffer.from(JSON.stringify(jwtPayload)).toString('base64url');
-  
+
   const data = `${headerB64}.${payloadB64}`;
   const signature = crypto
     .createHmac('sha256', secret)
@@ -325,16 +325,16 @@ export class APIKeyManager {
   async generateKey(name, role = 'readonly') {
     const key = crypto.randomBytes(32).toString('hex');
     const keyHash = createHash('sha256').update(key).digest('hex');
-    
+
     const metadata = {
       name,
       role,
       created: new Date().toISOString(),
-      lastUsed: null
+      lastUsed: null,
     };
 
     this.authConfig.apiKeys.set(keyHash, metadata);
-    
+
     // Save to file
     const authDir = './infrastructure/auth';
     const keyData = Object.fromEntries(this.authConfig.apiKeys);
@@ -345,7 +345,7 @@ export class APIKeyManager {
 
   async revokeKey(keyHash) {
     const deleted = this.authConfig.apiKeys.delete(keyHash);
-    
+
     if (deleted) {
       // Save to file
       const authDir = './infrastructure/auth';
@@ -359,7 +359,7 @@ export class APIKeyManager {
   listKeys() {
     return Array.from(this.authConfig.apiKeys.entries()).map(([hash, metadata]) => ({
       hash: hash.substring(0, 8) + '...',
-      ...metadata
+      ...metadata,
     }));
   }
 }

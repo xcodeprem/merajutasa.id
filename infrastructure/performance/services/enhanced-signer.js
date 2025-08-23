@@ -18,7 +18,7 @@ export class EnhancedSignerService {
       enablePerformanceTracking: options.enablePerformanceTracking !== false,
       cacheKeyPrefix: options.cacheKeyPrefix || 'signer:',
       cacheTTL: options.cacheTTL || 300, // 5 minutes
-      ...options
+      ...options,
     };
 
     // Initialize performance components
@@ -35,26 +35,26 @@ export class EnhancedSignerService {
   async sign(payload, options = {}) {
     const requestId = this.generateRequestId();
     const startTime = Date.now();
-    
+
     try {
       // Start performance tracking
       if (this.perfMonitor) {
         this.perfMonitor.startRequest(requestId, {
           endpoint: '/sign',
           method: 'POST',
-          payloadSize: JSON.stringify(payload).length
+          payloadSize: JSON.stringify(payload).length,
         });
       }
 
       // Check cache first
       if (this.cache && !options.bypassCache) {
         const cacheKey = this.generateCacheKey(payload);
-        
+
         const cachedResult = await this.cache.cacheAside(cacheKey, async () => {
           return await this.performSigning(payload, options);
         }, {
           ttl: this.config.cacheTTL,
-          useCompression: true
+          useCompression: true,
         });
 
         // Record metrics
@@ -64,7 +64,7 @@ export class EnhancedSignerService {
 
       // Perform signing without cache
       const result = await this.performSigning(payload, options);
-      
+
       // Record metrics
       this.recordSuccessMetrics(requestId, startTime, false);
       return result;
@@ -88,7 +88,7 @@ export class EnhancedSignerService {
       canonical: JSON.stringify(payload),
       hash_sha256: `hash_${Date.now()}`,
       timestamp: new Date().toISOString(),
-      enhanced: true
+      enhanced: true,
     };
   }
 
@@ -113,7 +113,7 @@ export class EnhancedSignerService {
   // Record successful operation metrics
   recordSuccessMetrics(requestId, startTime, fromCache) {
     const duration = Date.now() - startTime;
-    
+
     // Performance monitoring
     if (this.perfMonitor) {
       this.perfMonitor.endRequest(requestId, true, 200);
@@ -125,7 +125,7 @@ export class EnhancedSignerService {
         responseTime: duration,
         success: true,
         statusCode: 200,
-        fromCache
+        fromCache,
       });
     }
   }
@@ -133,7 +133,7 @@ export class EnhancedSignerService {
   // Record error metrics
   recordErrorMetrics(requestId, startTime, error) {
     const duration = Date.now() - startTime;
-    
+
     // Performance monitoring
     if (this.perfMonitor) {
       this.perfMonitor.endRequest(requestId, false, 500, error.message);
@@ -145,7 +145,7 @@ export class EnhancedSignerService {
         responseTime: duration,
         success: false,
         statusCode: 500,
-        error: error.message
+        error: error.message,
       });
     }
   }
@@ -156,7 +156,7 @@ export class EnhancedSignerService {
       service: 'enhanced_signer_service',
       status: 'healthy',
       timestamp: new Date().toISOString(),
-      performance: {}
+      performance: {},
     };
 
     try {
@@ -165,7 +165,7 @@ export class EnhancedSignerService {
         const cacheHealth = await this.cache.healthCheck();
         checks.performance.cache = {
           status: cacheHealth.status,
-          hitRate: cacheHealth.stats.overallHitRate
+          hitRate: cacheHealth.stats.overallHitRate,
         };
       }
 
@@ -175,15 +175,15 @@ export class EnhancedSignerService {
         checks.performance.sla = {
           status: slaStatus.status,
           availability: slaStatus.metrics?.availability,
-          avgLatency: slaStatus.metrics?.latency_avg
+          avgLatency: slaStatus.metrics?.latency_avg,
         };
       }
 
       // Overall health assessment
       const hasIssues = Object.values(checks.performance).some(
-        metric => metric.status === 'degraded' || metric.status === 'critical'
+        metric => metric.status === 'degraded' || metric.status === 'critical',
       );
-      
+
       if (hasIssues) {
         checks.status = 'degraded';
       }

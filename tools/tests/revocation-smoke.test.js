@@ -33,9 +33,9 @@ async function main(){
   }
   try {
     const health = await httpGet('/health');
-    if (health.status !== 200 || !health.json?.ok) throw new Error('health check failed');
+    if (health.status !== 200 || !health.json?.ok) {throw new Error('health check failed');}
     const rev = await httpGet('/revocations');
-    if (rev.status !== 200 || !Array.isArray(rev.json)) throw new Error('revocations not array');
+    if (rev.status !== 200 || !Array.isArray(rev.json)) {throw new Error('revocations not array');}
     console.log('[revocation-smoke] PASS');
   } finally {
     child.kill('SIGKILL');

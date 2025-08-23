@@ -11,7 +11,7 @@ async function testPhase2Week5() {
   const results = {
     timestamp: new Date().toISOString(),
     tests: [],
-    overall: 'unknown'
+    overall: 'unknown',
   };
 
   try {
@@ -23,7 +23,7 @@ async function testPhase2Week5() {
     results.tests.push({
       name: 'Multi-Region Deployment',
       status: mrHealth.status,
-      score: mrHealth.status === 'healthy' ? 100 : 50
+      score: mrHealth.status === 'healthy' ? 100 : 50,
     });
     console.log(`   ✅ ${mrHealth.status}`);
 
@@ -35,7 +35,7 @@ async function testPhase2Week5() {
     results.tests.push({
       name: 'Disaster Recovery',
       status: drHealth.status,
-      score: drHealth.status === 'healthy' ? 100 : drHealth.status === 'warning' ? 75 : 25
+      score: drHealth.status === 'healthy' ? 100 : drHealth.status === 'warning' ? 75 : 25,
     });
     console.log(`   ✅ ${drHealth.status}`);
 
@@ -47,7 +47,7 @@ async function testPhase2Week5() {
     results.tests.push({
       name: 'Auto-Scaling',
       status: asHealth.status,
-      score: asHealth.status === 'healthy' ? 100 : 50
+      score: asHealth.status === 'healthy' ? 100 : 50,
     });
     console.log(`   ✅ ${asHealth.status}`);
 
@@ -59,7 +59,7 @@ async function testPhase2Week5() {
     results.tests.push({
       name: 'Fault Tolerance',
       status: ftHealth.status,
-      score: ftHealth.status === 'healthy' ? 100 : 50
+      score: ftHealth.status === 'healthy' ? 100 : 50,
     });
     console.log(`   ✅ ${ftHealth.status}`);
 
@@ -71,7 +71,7 @@ async function testPhase2Week5() {
     results.tests.push({
       name: 'Health Monitoring',
       status: hmHealth.status,
-      score: hmHealth.status === 'healthy' ? 100 : 50
+      score: hmHealth.status === 'healthy' ? 100 : 50,
     });
     console.log(`   ✅ ${hmHealth.status}`);
 
@@ -84,17 +84,17 @@ async function testPhase2Week5() {
     results.tests.push({
       name: 'HA Orchestrator',
       status: haHealth.status,
-      score: haHealth.status === 'healthy' ? 100 : 50
+      score: haHealth.status === 'healthy' ? 100 : 50,
     });
     console.log(`   ✅ ${haHealth.status}`);
 
     // Calculate overall score
     const totalScore = results.tests.reduce((sum, test) => sum + test.score, 0);
     const averageScore = totalScore / results.tests.length;
-    
-    results.overall = averageScore >= 90 ? 'excellent' : 
-                     averageScore >= 80 ? 'good' : 
-                     averageScore >= 70 ? 'acceptable' : 'needs-work';
+
+    results.overall = averageScore >= 90 ? 'excellent' :
+      averageScore >= 80 ? 'good' :
+        averageScore >= 70 ? 'acceptable' : 'needs-work';
 
     console.log('\n📊 Test Results:');
     results.tests.forEach(test => {

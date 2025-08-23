@@ -1,9 +1,9 @@
 /**
  * MerajutASA.id - Phase 2 Week 3: Interactive Demo
- * 
+ *
  * Interactive demonstration of advanced monitoring and observability capabilities
  * Showcases real-time monitoring, distributed tracing, and intelligent alerting
- * 
+ *
  * @version 1.0.0
  * @since Phase 2 Week 3
  */
@@ -24,7 +24,7 @@ class Phase2Week3Demo {
       { name: 'Display Real-time Dashboards', method: 'demonstrateDashboards' },
       { name: 'Show System Integration', method: 'demonstrateIntegration' },
       { name: 'Performance Benchmarking', method: 'demonstratePerformance' },
-      { name: 'Export Observability Data', method: 'demonstrateExport' }
+      { name: 'Export Observability Data', method: 'demonstrateExport' },
     ];
   }
 
@@ -48,7 +48,7 @@ class Phase2Week3Demo {
   async runStep(step) {
     console.log(`\n🔄 ${step.name}...`);
     console.log('─'.repeat(60));
-    
+
     try {
       await this[step.method]();
       console.log(`✅ ${step.name} completed successfully`);
@@ -59,17 +59,17 @@ class Phase2Week3Demo {
 
   async initializeSystem() {
     console.log('🏗️  Initializing Advanced Observability System...');
-    
+
     this.observability = getAdvancedObservabilitySystem({
       serviceName: 'merajutasa-demo',
       environment: 'demo',
       enableAllComponents: true,
       autoCorrelation: true,
-      dashboardPort: 3000
+      dashboardPort: 3000,
     });
 
     await this.observability.initialize();
-    
+
     const status = await this.observability.getSystemStatus();
     console.log('📋 System Status:');
     console.log(`   • Service: ${status.system.name}`);
@@ -81,36 +81,36 @@ class Phase2Week3Demo {
 
   async demonstrateTracing() {
     console.log('🔍 Demonstrating Distributed Tracing...');
-    
+
     // Simulate business operations with tracing
     const operations = [
       { name: 'user_authentication', duration: 50 },
       { name: 'document_signing', duration: 150 },
       { name: 'chain_verification', duration: 75 },
-      { name: 'audit_logging', duration: 25 }
+      { name: 'audit_logging', duration: 25 },
     ];
 
     for (const op of operations) {
-        await this.observability.traceBusinessOperation(op.name, async (span) => {
+      await this.observability.traceBusinessOperation(op.name, async (span) => {
         console.log(`   🔗 Tracing: ${op.name}`);
-        
+
         // Simulate operation duration
         await this.pause(op.duration);
-        
+
         // Add custom span attributes
         if (span) {
           span.setAttributes({
             'operation.duration_ms': op.duration,
             'operation.success': true,
-            'demo.step': 'distributed_tracing'
+            'demo.step': 'distributed_tracing',
           });
         }
-        
+
         return { success: true, duration: op.duration };
       }, {
         operationId: `demo_${Date.now()}`,
         userAgent: 'MerajutASA-Demo/1.0',
-          requestId: `req_${(await import('crypto')).randomUUID()}`
+        requestId: `req_${(await import('crypto')).randomUUID()}`,
       });
     }
 
@@ -120,27 +120,27 @@ class Phase2Week3Demo {
 
   async demonstrateMetrics() {
     console.log('📈 Demonstrating Advanced Metrics Collection...');
-    
+
     // Generate sample metrics
     const sampleMetrics = {
       // System metrics
-    avg_response_time: 145 + (await import('crypto')).webcrypto.getRandomValues(new Uint32Array(1))[0] % 50,
-    error_rate: ((await import('crypto')).webcrypto.getRandomValues(new Uint32Array(1))[0] % 500) / 100,
-    throughput: 50 + ((await import('crypto')).webcrypto.getRandomValues(new Uint32Array(1))[0] % 30),
-    cpu_usage_percent: 45 + ((await import('crypto')).webcrypto.getRandomValues(new Uint32Array(1))[0] % 20),
-    memory_usage_percent: 65 + ((await import('crypto')).webcrypto.getRandomValues(new Uint32Array(1))[0] % 15),
-      
+      avg_response_time: 145 + (await import('crypto')).webcrypto.getRandomValues(new Uint32Array(1))[0] % 50,
+      error_rate: ((await import('crypto')).webcrypto.getRandomValues(new Uint32Array(1))[0] % 500) / 100,
+      throughput: 50 + ((await import('crypto')).webcrypto.getRandomValues(new Uint32Array(1))[0] % 30),
+      cpu_usage_percent: 45 + ((await import('crypto')).webcrypto.getRandomValues(new Uint32Array(1))[0] % 20),
+      memory_usage_percent: 65 + ((await import('crypto')).webcrypto.getRandomValues(new Uint32Array(1))[0] % 15),
+
       // Business metrics
-    signing_operations_success: (await import('crypto')).randomInt(0, 100),
-    signing_operations_failed: (await import('crypto')).randomInt(0, 5),
-    chain_integrity_score: 95 + ((await import('crypto')).randomInt(0, 5)),
-    governance_verifications_total: (await import('crypto')).randomInt(0, 50),
-    equity_score_avg: 0.7 + ((await import('crypto')).randomInt(0, 200) / 1000),
-      
+      signing_operations_success: (await import('crypto')).randomInt(0, 100),
+      signing_operations_failed: (await import('crypto')).randomInt(0, 5),
+      chain_integrity_score: 95 + ((await import('crypto')).randomInt(0, 5)),
+      governance_verifications_total: (await import('crypto')).randomInt(0, 50),
+      equity_score_avg: 0.7 + ((await import('crypto')).randomInt(0, 200) / 1000),
+
       // Performance metrics
       cache_hit_ratio: 0.85 + Math.random() * 0.1,
       database_connections_active: Math.floor(Math.random() * 20),
-      active_users: Math.floor(Math.random() * 500) + 100
+      active_users: Math.floor(Math.random() * 500) + 100,
     };
 
     // Update metrics in observability system
@@ -152,12 +152,12 @@ class Phase2Week3Demo {
     console.log(`   • Throughput: ${sampleMetrics.throughput.toFixed(1)} req/s`);
     console.log(`   • Chain Integrity: ${sampleMetrics.chain_integrity_score.toFixed(1)}%`);
     console.log(`   • Cache Hit Ratio: ${(sampleMetrics.cache_hit_ratio * 100).toFixed(1)}%`);
-    
+
     // Record custom business metrics
     this.observability.recordUnifiedMetric('demo_operations_total', 1, {
       operation_type: 'demo',
       success: true,
-      logLevel: 'info'
+      logLevel: 'info',
     });
 
     console.log('✨ Custom business metrics recorded');
@@ -166,29 +166,29 @@ class Phase2Week3Demo {
 
   async demonstrateAlerting() {
     console.log('🚨 Demonstrating Intelligent Alerting...');
-    
+
     // Simulate alert conditions
     const alertScenarios = [
       {
         name: 'High Response Time',
         metrics: { avg_response_time: 2500, error_rate: 3.2 },
-        severity: 'medium'
+        severity: 'medium',
       },
       {
         name: 'Chain Integrity Issue',
         metrics: { chain_integrity_score: 92, signing_failures: 15 },
-        severity: 'high'
+        severity: 'high',
       },
       {
         name: 'System Resource Warning',
         metrics: { cpu_usage_percent: 87, memory_usage_percent: 89 },
-        severity: 'medium'
-      }
+        severity: 'medium',
+      },
     ];
 
     for (const scenario of alertScenarios) {
       console.log(`   🔔 Triggering: ${scenario.name}`);
-      
+
       // Create unified alert
       this.observability.createUnifiedAlert(
         scenario.name.toLowerCase().replace(/\s+/g, '_'),
@@ -197,10 +197,10 @@ class Phase2Week3Demo {
         {
           channels: ['console', 'email'],
           metrics: scenario.metrics,
-          demo: true
-        }
+          demo: true,
+        },
       );
-      
+
       await this.pause(500);
     }
 
@@ -211,14 +211,14 @@ class Phase2Week3Demo {
 
   async demonstrateLogs() {
     console.log('📝 Demonstrating Log Aggregation & Analysis...');
-    
+
     // Generate sample log entries
     const logEntries = [
       { level: 'info', message: 'User authentication successful', metadata: { userId: 'demo_user_123', ip: '192.168.1.100' } },
       { level: 'warn', message: 'Slow database query detected', metadata: { query: 'SELECT * FROM governance_records', duration: 1250 } },
       { level: 'error', message: 'Authentication failed for invalid credentials', metadata: { attempts: 3, ip: '192.168.1.200' } },
       { level: 'info', message: 'Document signed successfully', metadata: { documentId: 'doc_456', signatureType: 'digital' } },
-      { level: 'debug', message: 'Cache hit for equity calculation', metadata: { cacheKey: 'equity_user_789', ttl: 300 } }
+      { level: 'debug', message: 'Cache hit for equity calculation', metadata: { cacheKey: 'equity_user_789', ttl: 300 } },
     ];
 
     const logging = this.observability.components.get('logging');
@@ -226,9 +226,9 @@ class Phase2Week3Demo {
       for (const entry of logEntries) {
         logging.log(entry.level, entry.message, entry.metadata, {
           correlationId: `demo_${Date.now()}`,
-          requestId: `req_${Math.random().toString(36).substr(2, 9)}`
+          requestId: `req_${Math.random().toString(36).substr(2, 9)}`,
         });
-        
+
         console.log(`   📄 [${entry.level.toUpperCase()}] ${entry.message}`);
       }
     }
@@ -239,11 +239,11 @@ class Phase2Week3Demo {
       const searchResults = await logging.searchLogs({
         query: 'authentication',
         level: null,
-        limit: 10
+        limit: 10,
       });
-      
+
       console.log(`   📋 Found ${searchResults.count} log entries matching 'authentication'`);
-      
+
       // Generate log analytics
       const analytics = await logging.getLogAnalytics('1h');
       console.log(`   📊 Log Analytics (1h): ${analytics.logCounts.error} errors, ${analytics.logCounts.warn} warnings`);
@@ -255,14 +255,14 @@ class Phase2Week3Demo {
 
   async demonstrateAnomalies() {
     console.log('🔍 Demonstrating Anomaly Detection...');
-    
+
     // Generate baseline metrics first
     const baselineMetrics = {
       avg_response_time: 120,
       error_rate: 1.5,
       throughput: 65,
       signing_failures: 2,
-      chain_integrity_score: 98.5
+      chain_integrity_score: 98.5,
     };
 
     // Generate anomalous metrics
@@ -271,7 +271,7 @@ class Phase2Week3Demo {
       error_rate: 12.5, // Much higher error rate
       throughput: 25, // Much lower throughput
       signing_failures: 25, // Spike in failures
-      chain_integrity_score: 91.2 // Lower integrity
+      chain_integrity_score: 91.2, // Lower integrity
     };
 
     const anomalyDetection = this.observability.components.get('anomalyDetection');
@@ -280,16 +280,16 @@ class Phase2Week3Demo {
       console.log('   📊 Establishing baseline metrics...');
       await anomalyDetection.detectAnomalies(baselineMetrics);
       await this.pause(1000);
-      
+
       // Then detect anomalies
       console.log('   🚨 Injecting anomalous metrics...');
       const detectedAnomalies = await anomalyDetection.detectAnomalies(anomalousMetrics);
-      
+
       console.log(`   🔍 Detected ${detectedAnomalies.length} anomalies:`);
       for (const anomaly of detectedAnomalies) {
         console.log(`     • ${anomaly.name} (${anomaly.severity}): ${anomaly.description}`);
       }
-      
+
       // Show anomaly statistics
       const stats = anomalyDetection.getAnomalyStatistics();
       console.log(`   📈 Anomaly Statistics: ${stats.total} total, ${stats.bySeverity.critical} critical`);
@@ -301,7 +301,7 @@ class Phase2Week3Demo {
 
   async demonstrateDashboards() {
     console.log('📱 Demonstrating Real-time Monitoring Dashboards...');
-    
+
     const dashboards = this.observability.components.get('dashboards');
     if (dashboards) {
       // Generate sample data for dashboards
@@ -314,23 +314,23 @@ class Phase2Week3Demo {
         memory_usage_percent: 72,
         chain_integrity_score: 97.8,
         signing_operations_success: 145,
-        signing_operations_failed: 3
+        signing_operations_failed: 3,
       };
 
       // Update dashboard data
       dashboards.updateMetrics(sampleMetrics);
-      
+
       console.log('📊 Dashboard Components:');
-      console.log(`   • System Overview: 4 widgets active`);
-      console.log(`   • Business Metrics: 6 widgets active`);
-      console.log(`   • Performance Analysis: 4 widgets active`);
-      console.log(`   • Security Monitoring: 3 widgets active`);
-      
+      console.log('   • System Overview: 4 widgets active');
+      console.log('   • Business Metrics: 6 widgets active');
+      console.log('   • Performance Analysis: 4 widgets active');
+      console.log('   • Security Monitoring: 3 widgets active');
+
       const healthCheck = await dashboards.healthCheck();
       console.log(`   📡 Real-time streaming: ${healthCheck.realTimeStreaming ? 'Active' : 'Inactive'}`);
       console.log(`   👥 Connected clients: ${healthCheck.connectedClients}`);
       console.log(`   📈 Metrics buffered: ${healthCheck.metricsBuffered}`);
-      
+
       console.log('\n🌐 Dashboard URLs:');
       console.log(`   • Main Dashboard: http://localhost:${healthCheck.port}/`);
       console.log(`   • API Status: http://localhost:${healthCheck.port}/api/dashboards`);
@@ -343,29 +343,29 @@ class Phase2Week3Demo {
 
   async demonstrateIntegration() {
     console.log('🔗 Demonstrating System Integration...');
-    
+
     // Demonstrate cross-component correlation
     console.log('   🤖 Cross-component correlation:');
-    
+
     // Simulate a performance issue that triggers multiple systems
     const performanceIssue = {
       metrics: { avg_response_time: 1200, error_rate: 8.5 },
       logs: [{ level: 'error', message: 'Database timeout detected' }],
-      anomalies: [{ detector: 'response_time', severity: 'high' }]
+      anomalies: [{ detector: 'response_time', severity: 'high' }],
     };
 
     console.log('     • Metrics: High response time and error rate detected');
     console.log('     • Logs: Database timeout errors identified');
     console.log('     • Anomalies: Statistical deviation in response times');
     console.log('     • Alerts: Composite alert created for performance degradation');
-    
+
     // Show configuration
     const config = this.observability.getConfiguration();
     console.log('\n⚙️  System Configuration:');
     console.log(`   • Components: ${config.components.join(', ')}`);
     console.log(`   • Auto-correlation: ${config.correlationEnabled ? 'Enabled' : 'Disabled'}`);
     console.log(`   • Health monitoring: ${config.healthMonitoringEnabled ? 'Active' : 'Inactive'}`);
-    
+
     // Export system status
     const status = await this.observability.getSystemStatus();
     console.log('\n📋 System Health Summary:');
@@ -380,14 +380,14 @@ class Phase2Week3Demo {
 
   async demonstratePerformance() {
     console.log('⚡ Demonstrating Performance Benchmarking...');
-    
+
     // Benchmark observability operations
     const operations = [
       { name: 'Metric Recording', operation: 'metric' },
       { name: 'Log Generation', operation: 'log' },
       { name: 'Trace Creation', operation: 'trace' },
       { name: 'Alert Evaluation', operation: 'alert' },
-      { name: 'Anomaly Detection', operation: 'anomaly' }
+      { name: 'Anomaly Detection', operation: 'anomaly' },
     ];
 
     const benchmarkResults = [];
@@ -395,49 +395,49 @@ class Phase2Week3Demo {
     for (const op of operations) {
       const iterations = 100;
       const startTime = performance.now();
-      
+
       for (let i = 0; i < iterations; i++) {
         switch (op.operation) {
-          case 'metric':
-              this.observability.recordUnifiedMetric(`benchmark_${i}`, (await import('crypto')).randomInt(0, 100));
-            break;
-          case 'log':
-            const logging = this.observability.components.get('logging');
-            if (logging) logging.info(`Benchmark log entry ${i}`, { iteration: i });
-            break;
-          case 'trace':
-            await this.observability.traceBusinessOperation(`benchmark_${i}`, async () => {
-              return { result: 'success' };
-            });
-            break;
-          case 'alert':
-            // Simulate alert evaluation
-            break;
-          case 'anomaly':
-            // Simulate anomaly detection
-            break;
+        case 'metric':
+          this.observability.recordUnifiedMetric(`benchmark_${i}`, (await import('crypto')).randomInt(0, 100));
+          break;
+        case 'log':
+          const logging = this.observability.components.get('logging');
+          if (logging) {logging.info(`Benchmark log entry ${i}`, { iteration: i });}
+          break;
+        case 'trace':
+          await this.observability.traceBusinessOperation(`benchmark_${i}`, async () => {
+            return { result: 'success' };
+          });
+          break;
+        case 'alert':
+          // Simulate alert evaluation
+          break;
+        case 'anomaly':
+          // Simulate anomaly detection
+          break;
         }
       }
-      
+
       const endTime = performance.now();
       const duration = endTime - startTime;
       const opsPerSec = (iterations / duration) * 1000;
-      
+
       benchmarkResults.push({
         operation: op.name,
         duration: duration.toFixed(2),
         opsPerSec: opsPerSec.toFixed(0),
-        iterations
+        iterations,
       });
-      
+
       console.log(`   ⚡ ${op.name}: ${opsPerSec.toFixed(0)} ops/sec (${duration.toFixed(2)}ms total)`);
     }
 
     console.log('\n📊 Performance Summary:');
     const totalOps = benchmarkResults.reduce((sum, r) => sum + parseInt(r.opsPerSec), 0);
     console.log(`   • Total throughput: ${totalOps.toLocaleString()} ops/sec`);
-    console.log(`   • Overhead: Minimal impact on application performance`);
-    console.log(`   • Scalability: Designed for high-throughput production workloads`);
+    console.log('   • Overhead: Minimal impact on application performance');
+    console.log('   • Scalability: Designed for high-throughput production workloads');
 
     console.log('🚀 Production-ready performance characteristics');
     console.log('📈 Horizontal scaling capabilities demonstrated');
@@ -445,14 +445,14 @@ class Phase2Week3Demo {
 
   async demonstrateExport() {
     console.log('📤 Demonstrating Observability Data Export...');
-    
+
     try {
       // Export observability data
       const exportData = await this.observability.exportObservabilityData({
         timeRange: '1h',
         components: ['metrics', 'alerts', 'anomalies'],
         logLimit: 50,
-        alertLimit: 20
+        alertLimit: 20,
       });
 
       console.log('📊 Export Summary:');
@@ -502,7 +502,7 @@ class Phase2Week3Demo {
 // Main execution
 async function main() {
   const demo = new Phase2Week3Demo();
-  
+
   try {
     await demo.runDemo();
   } catch (error) {

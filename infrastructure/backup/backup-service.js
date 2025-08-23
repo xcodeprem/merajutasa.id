@@ -26,18 +26,18 @@ const BACKUP_CONFIG = {
     './docs/governance',
     './.integrity',
     './data',
-    './policies'
+    './policies',
   ],
   excludePatterns: [
     '*.tmp',
     '*.log',
     'node_modules',
     '.git',
-    'backups'
+    'backups',
   ],
   maxBackupSize: 1024 * 1024 * 1024, // 1GB
   enableEncryption: false, // Set to true for production
-  enableRemoteSync: false  // Set to true for cloud backup
+  enableRemoteSync: false,  // Set to true for cloud backup
 };
 
 /**
@@ -99,7 +99,7 @@ class BackupService {
     return new Promise((resolve, reject) => {
       const hash = createHash('sha256');
       const stream = createReadStream(filePath);
-      
+
       stream.on('data', data => hash.update(data));
       stream.on('end', () => resolve(hash.digest('hex')));
       stream.on('error', reject);
@@ -113,7 +113,7 @@ class BackupService {
     for (const pattern of this.config.excludePatterns) {
       if (pattern.includes('*')) {
         const regex = new RegExp(pattern.replace(/\*/g, '.*'));
-        if (regex.test(filePath)) return true;
+        if (regex.test(filePath)) {return true;}
       } else if (filePath.includes(pattern)) {
         return true;
       }
@@ -126,17 +126,17 @@ class BackupService {
    */
   async getFilesToBackup() {
     const files = [];
-    
+
     for (const path of this.config.criticalPaths) {
       try {
         const stats = await fs.stat(path);
-        
+
         if (stats.isFile()) {
           if (!this.shouldExcludeFile(path)) {
             files.push({
               path: path,
               size: stats.size,
-              mtime: stats.mtime
+              mtime: stats.mtime,
             });
           }
         } else if (stats.isDirectory()) {
@@ -147,7 +147,7 @@ class BackupService {
         console.warn(`⚠️  Path not found: ${path}`);
       }
     }
-    
+
     return files;
   }
 
@@ -156,25 +156,25 @@ class BackupService {
    */
   async scanDirectory(dirPath, basePath = dirPath) {
     const files = [];
-    
+
     try {
       const entries = await fs.readdir(dirPath, { withFileTypes: true });
-      
+
       for (const entry of entries) {
         const fullPath = `${dirPath}/${entry.name}`;
         const relativePath = fullPath.replace(basePath, '').replace(/^\//, '');
-        
+
         if (this.shouldExcludeFile(fullPath)) {
           continue;
         }
-        
+
         if (entry.isFile()) {
           const stats = await fs.stat(fullPath);
           files.push({
             path: fullPath,
             relativePath: relativePath,
             size: stats.size,
-            mtime: stats.mtime
+            mtime: stats.mtime,
           });
         } else if (entry.isDirectory()) {
           const subFiles = await this.scanDirectory(fullPath, basePath);
@@ -184,7 +184,7 @@ class BackupService {
     } catch (error) {
       console.error(`Error scanning directory ${dirPath}:`, error);
     }
-    
+
     return files;
   }
 
@@ -194,31 +194,31 @@ class BackupService {
   async createBackupArchive(backupId, files) {
     const archivePath = `${this.config.backupDir}/${backupId}.tar.gz`;
     const metadataPath = `${this.config.backupDir}/${backupId}.metadata.json`;
-    
+
     console.log(`📦 Creating backup archive: ${archivePath}`);
-    
+
     try {
       // Create tar command
       const fileList = files.map(f => f.path).join(' ');
       const tarCommand = `tar -czf "${archivePath}" ${fileList}`;
-      
+
       const { stdout, stderr } = await execAsync(tarCommand, {
-        maxBuffer: 1024 * 1024 * 10 // 10MB buffer
+        maxBuffer: 1024 * 1024 * 10, // 10MB buffer
       });
-      
+
       if (stderr) {
         console.warn('⚠️  Tar warnings:', stderr);
       }
-      
+
       // Get archive size
       const archiveStats = await fs.stat(archivePath);
-      
+
       console.log(`✅ Archive created: ${(archiveStats.size / 1024 / 1024).toFixed(2)} MB`);
-      
+
       return {
         archivePath: archivePath,
         size: archiveStats.size,
-        metadataPath: metadataPath
+        metadataPath: metadataPath,
       };
     } catch (error) {
       console.error('❌ Failed to create archive:', error);
@@ -232,22 +232,22 @@ class BackupService {
   async verifyBackupIntegrity(backupId) {
     const archivePath = `${this.config.backupDir}/${backupId}.tar.gz`;
     const metadataPath = `${this.config.backupDir}/${backupId}.metadata.json`;
-    
+
     try {
       // Check if archive exists and is readable
       await fs.access(archivePath);
-      
+
       // Verify tar archive integrity
       const { stdout, stderr } = await execAsync(`tar -tzf "${archivePath}" > /dev/null`);
-      
+
       if (stderr) {
         throw new Error(`Archive verification failed: ${stderr}`);
       }
-      
+
       // Check metadata file
       await fs.access(metadataPath);
       const metadata = JSON.parse(await fs.readFile(metadataPath, 'utf8'));
-      
+
       // Verify archive checksum if stored
       if (metadata.archiveChecksum) {
         const currentChecksum = await this.calculateChecksum(archivePath);
@@ -255,7 +255,7 @@ class BackupService {
           throw new Error('Archive checksum mismatch');
         }
       }
-      
+
       console.log('✅ Backup integrity verified');
       return true;
     } catch (error) {
@@ -271,69 +271,69 @@ class BackupService {
     if (this.isRunning) {
       throw new Error('Backup operation already in progress');
     }
-    
+
     this.isRunning = true;
     const startTime = Date.now();
     const backupId = this.generateBackupId();
-    
+
     console.log(`🚀 Starting ${type} backup: ${backupId}`);
-    
+
     try {
       const metadata = new BackupMetadata(backupId);
       metadata.type = type;
       metadata.status = 'in_progress';
-      
+
       // Get files to backup
       console.log('📋 Scanning files to backup...');
       const files = await this.getFilesToBackup();
-      
+
       if (files.length === 0) {
         throw new Error('No files found to backup');
       }
-      
+
       console.log(`📁 Found ${files.length} files to backup`);
-      
+
       // Calculate total size
       metadata.totalSize = files.reduce((sum, file) => sum + file.size, 0);
       metadata.files = files;
-      
+
       if (metadata.totalSize > this.config.maxBackupSize) {
         throw new Error(`Backup size exceeds maximum allowed size: ${metadata.totalSize} bytes`);
       }
-      
+
       // Create backup archive
       const archive = await this.createBackupArchive(backupId, files);
       metadata.compressedSize = archive.size;
-      
+
       // Calculate archive checksum
       metadata.archiveChecksum = await this.calculateChecksum(archive.archivePath);
-      
+
       // Calculate compression ratio
       const compressionRatio = ((metadata.totalSize - metadata.compressedSize) / metadata.totalSize * 100).toFixed(2);
       console.log(`📊 Compression ratio: ${compressionRatio}%`);
-      
+
       // Update metadata
       metadata.status = 'completed';
       metadata.duration = Date.now() - startTime;
       metadata.compressionRatio = parseFloat(compressionRatio);
-      
+
       // Save metadata
       await fs.writeFile(archive.metadataPath, JSON.stringify(metadata, null, 2));
-      
+
       // Verify backup integrity
       const isValid = await this.verifyBackupIntegrity(backupId);
       if (!isValid) {
         metadata.status = 'failed';
         metadata.errors.push('Integrity verification failed');
       }
-      
+
       console.log(`✅ Backup completed: ${backupId}`);
       console.log(`⏱️  Duration: ${(metadata.duration / 1000).toFixed(2)} seconds`);
       console.log(`💾 Size: ${(metadata.compressedSize / 1024 / 1024).toFixed(2)} MB`);
-      
+
       this.currentBackup = metadata;
       return metadata;
-      
+
     } catch (error) {
       console.error('❌ Backup failed:', error);
       throw error;
@@ -349,9 +349,9 @@ class BackupService {
     try {
       const files = await fs.readdir(this.config.backupDir);
       const metadataFiles = files.filter(f => f.endsWith('.metadata.json'));
-      
+
       const backups = [];
-      
+
       for (const metadataFile of metadataFiles) {
         try {
           const content = await fs.readFile(`${this.config.backupDir}/${metadataFile}`, 'utf8');
@@ -361,7 +361,7 @@ class BackupService {
           console.warn(`⚠️  Failed to read metadata: ${metadataFile}`);
         }
       }
-      
+
       // Sort by timestamp (newest first)
       return backups.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
     } catch (error) {
@@ -376,38 +376,38 @@ class BackupService {
   async restoreBackup(backupId, targetDir = './') {
     const archivePath = `${this.config.backupDir}/${backupId}.tar.gz`;
     const metadataPath = `${this.config.backupDir}/${backupId}.metadata.json`;
-    
+
     console.log(`🔄 Restoring backup: ${backupId}`);
-    
+
     try {
       // Verify backup exists and is valid
       const isValid = await this.verifyBackupIntegrity(backupId);
       if (!isValid) {
         throw new Error('Backup integrity verification failed');
       }
-      
+
       // Load metadata
       const metadata = JSON.parse(await fs.readFile(metadataPath, 'utf8'));
-      
+
       console.log(`📦 Extracting ${metadata.files.length} files...`);
-      
+
       // Extract archive
       const extractCommand = `tar -xzf "${archivePath}" -C "${targetDir}"`;
       const { stdout, stderr } = await execAsync(extractCommand);
-      
+
       if (stderr) {
         console.warn('⚠️  Extract warnings:', stderr);
       }
-      
+
       console.log('✅ Backup restored successfully');
-      
+
       return {
         backupId: backupId,
         filesRestored: metadata.files.length,
         targetDir: targetDir,
-        timestamp: metadata.timestamp
+        timestamp: metadata.timestamp,
       };
-      
+
     } catch (error) {
       console.error('❌ Restore failed:', error);
       throw error;
@@ -419,22 +419,22 @@ class BackupService {
    */
   async cleanupOldBackups() {
     console.log('🧹 Cleaning up old backups...');
-    
+
     try {
       const backups = await this.listBackups();
       const cutoffDate = new Date(Date.now() - (this.config.retentionDays * 24 * 60 * 60 * 1000));
-      
+
       let deletedCount = 0;
-      
+
       for (const backup of backups) {
         const backupDate = new Date(backup.timestamp);
-        
+
         if (backupDate < cutoffDate) {
           try {
             // Delete archive and metadata
             await fs.unlink(`${this.config.backupDir}/${backup.backupId}.tar.gz`);
             await fs.unlink(`${this.config.backupDir}/${backup.backupId}.metadata.json`);
-            
+
             console.log(`🗑️  Deleted old backup: ${backup.backupId}`);
             deletedCount++;
           } catch (error) {
@@ -442,10 +442,10 @@ class BackupService {
           }
         }
       }
-      
+
       console.log(`🧹 Cleanup completed: ${deletedCount} backups deleted`);
       return deletedCount;
-      
+
     } catch (error) {
       console.error('❌ Cleanup failed:', error);
       return 0;
@@ -458,7 +458,7 @@ class BackupService {
   async getBackupStatistics() {
     try {
       const backups = await this.listBackups();
-      
+
       const stats = {
         totalBackups: backups.length,
         totalSize: 0,
@@ -467,39 +467,39 @@ class BackupService {
         newestBackup: null,
         completedBackups: 0,
         failedBackups: 0,
-        compressionRatios: []
+        compressionRatios: [],
       };
-      
+
       for (const backup of backups) {
         stats.totalSize += backup.compressedSize || 0;
-        
+
         if (backup.status === 'completed') {
           stats.completedBackups++;
         } else {
           stats.failedBackups++;
         }
-        
+
         if (backup.compressionRatio) {
           stats.compressionRatios.push(backup.compressionRatio);
         }
-        
+
         if (!stats.oldestBackup || new Date(backup.timestamp) < new Date(stats.oldestBackup.timestamp)) {
           stats.oldestBackup = backup;
         }
-        
+
         if (!stats.newestBackup || new Date(backup.timestamp) > new Date(stats.newestBackup.timestamp)) {
           stats.newestBackup = backup;
         }
       }
-      
+
       if (backups.length > 0) {
         stats.averageSize = stats.totalSize / backups.length;
       }
-      
+
       if (stats.compressionRatios.length > 0) {
         stats.averageCompressionRatio = stats.compressionRatios.reduce((a, b) => a + b, 0) / stats.compressionRatios.length;
       }
-      
+
       return stats;
     } catch (error) {
       console.error('❌ Failed to get backup statistics:', error);
@@ -512,7 +512,7 @@ class BackupService {
    */
   startScheduledBackups() {
     console.log(`⏰ Starting scheduled backups every ${this.config.scheduleInterval / 1000 / 60} minutes`);
-    
+
     const schedule = setInterval(async () => {
       try {
         console.log('⏰ Scheduled backup starting...');
@@ -522,7 +522,7 @@ class BackupService {
         console.error('❌ Scheduled backup failed:', error);
       }
     }, this.config.scheduleInterval);
-    
+
     return schedule;
   }
 }

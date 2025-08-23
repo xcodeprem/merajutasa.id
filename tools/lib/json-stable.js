@@ -15,18 +15,18 @@ function sortKeys(obj) {
   if (obj === null || typeof obj !== 'object') {
     return obj;
   }
-  
+
   if (Array.isArray(obj)) {
     return obj.map(sortKeys);
   }
-  
+
   const sorted = {};
   const keys = Object.keys(obj).sort();
-  
+
   for (const key of keys) {
     sorted[key] = sortKeys(obj[key]);
   }
-  
+
   return sorted;
 }
 
@@ -54,7 +54,7 @@ export function addMetadata(artifact, options = {}) {
     generator: options.generator || 'unknown',
     version: '1.0',
   };
-  
+
   // Add Git/CI metadata if available
   if (process.env.GITHUB_SHA) {
     metadata.git_sha = process.env.GITHUB_SHA;
@@ -68,7 +68,7 @@ export function addMetadata(artifact, options = {}) {
   if (process.env.GITHUB_REF) {
     metadata.git_ref = process.env.GITHUB_REF;
   }
-  
+
   // Extract PR number from GITHUB_REF if available
   if (process.env.GITHUB_REF && process.env.GITHUB_REF.includes('/pull/')) {
     const match = process.env.GITHUB_REF.match(/\/pull\/(\d+)\//);
@@ -76,7 +76,7 @@ export function addMetadata(artifact, options = {}) {
       metadata.pr_number = parseInt(match[1], 10);
     }
   }
-  
+
   return {
     ...artifact,
     _metadata: metadata,

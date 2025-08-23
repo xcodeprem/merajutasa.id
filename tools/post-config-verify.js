@@ -2,13 +2,13 @@
 /**
  * post-config-verify.js
  * Comprehensive post-configuration verification orchestrator
- * 
+ *
  * Runs all required governance and compliance checks after configuration changes:
  * 1. governance:verify - Complete governance integrity check
  * 2. spec-hash:verify - Content hash verification
  * 3. param:integrity - Parameter consistency validation
  * 4. compliance:audit - Compliance audit checks
- * 
+ *
  * Success Criteria:
  * - All verification commands must PASS (exit code 0)
  * - No hash drift or parameter integrity violations
@@ -26,29 +26,29 @@ const VERIFICATION_STEPS = [
     cmd: ['npm', 'run', 'governance:verify'],
     description: 'Complete governance integrity check',
     critical: true,
-    timeout: 300000 // 5 minutes
+    timeout: 300000, // 5 minutes
   },
   {
-    name: 'spec-hash-verify', 
+    name: 'spec-hash-verify',
     cmd: ['npm', 'run', 'spec-hash:verify'],
     description: 'Content hash verification',
     critical: true,
-    timeout: 60000 // 1 minute
+    timeout: 60000, // 1 minute
   },
   {
     name: 'param-integrity',
     cmd: ['npm', 'run', 'param:integrity'],
     description: 'Parameter consistency validation',
     critical: true,
-    timeout: 60000 // 1 minute
+    timeout: 60000, // 1 minute
   },
   {
     name: 'compliance-audit',
     cmd: ['npm', 'run', 'compliance:audit'],
     description: 'Compliance audit checks',
     critical: true,
-    timeout: 120000 // 2 minutes
-  }
+    timeout: 120000, // 2 minutes
+  },
 ];
 
 const ACTION_LOG_DIR = 'artifacts';
@@ -61,10 +61,10 @@ async function runVerificationStep(step) {
   return new Promise((resolve, reject) => {
     const started = Date.now();
     console.log(`[post-config-verify] Running ${step.name}: ${step.description}`);
-    
+
     const child = spawn(step.cmd[0], step.cmd.slice(1), {
       stdio: ['inherit', 'pipe', 'pipe'],
-      timeout: step.timeout
+      timeout: step.timeout,
     });
 
     let stdout = '';
@@ -85,7 +85,7 @@ async function runVerificationStep(step) {
     child.on('exit', (code) => {
       const durationMs = Date.now() - started;
       const status = code === 0 ? 'PASS' : 'FAIL';
-      
+
       logAction({
         action: 'verification-step',
         step: step.name,
@@ -94,7 +94,7 @@ async function runVerificationStep(step) {
         status,
         duration_ms: durationMs,
         critical: step.critical,
-        description: step.description
+        description: step.description,
       });
 
       if (code === 0) {
@@ -131,19 +131,19 @@ async function logAction(entry) {
   try {
     await fs.mkdir(ACTION_LOG_DIR, { recursive: true });
     const logPath = path.join(ACTION_LOG_DIR, `post-config-verify-${new Date().toISOString().slice(0, 10)}.json`);
-    
+
     let logEntries = [];
     try {
       const content = await fs.readFile(logPath, 'utf8');
       logEntries = JSON.parse(content);
-      if (!Array.isArray(logEntries)) logEntries = [];
+      if (!Array.isArray(logEntries)) {logEntries = [];}
     } catch {
       // File doesn't exist or is invalid, start fresh
     }
 
     const logEntry = addMetadata({
       timestamp: new Date().toISOString(),
-      ...entry
+      ...entry,
     }, { generator: 'post-config-verify' });
 
     logEntries.push(logEntry);
@@ -169,8 +169,8 @@ async function generateSummary(results) {
       all_commands_pass: results.every(r => r.status === 'PASS'),
       no_hash_drift: true, // Will be updated based on actual results
       no_param_violations: true, // Will be updated based on actual results
-      artifacts_generated: true
-    }
+      artifacts_generated: true,
+    },
   };
 
   // Check for specific failure indicators
@@ -178,13 +178,13 @@ async function generateSummary(results) {
     // Check spec-hash results for drift
     const specHashData = await fs.readFile('artifacts/spec-hash-diff.json', 'utf8');
     const specHash = JSON.parse(specHashData);
-    summary.criteria_met.no_hash_drift = (specHash.summary?.violation_count === 0) || 
+    summary.criteria_met.no_hash_drift = (specHash.summary?.violation_count === 0) ||
                                         (Array.isArray(specHash.violations) && specHash.violations.length === 0);
-    
+
     // Check param-integrity results
     const paramData = await fs.readFile('artifacts/param-integrity-matrix.json', 'utf8');
     const paramIntegrity = JSON.parse(paramData);
-    summary.criteria_met.no_param_violations = (paramIntegrity.status === 'PASS') || 
+    summary.criteria_met.no_param_violations = (paramIntegrity.status === 'PASS') ||
                                               (paramIntegrity.rows?.every(row => row.status === 'MATCH'));
   } catch (error) {
     console.warn('[post-config-verify] Could not verify detailed criteria:', error.message);
@@ -194,7 +194,7 @@ async function generateSummary(results) {
 
   const enhancedSummary = addMetadata(summary, { generator: 'post-config-verify' });
   await fs.writeFile(SUMMARY_FILE, stableStringify(enhancedSummary));
-  
+
   return enhancedSummary;
 }
 
@@ -203,14 +203,14 @@ async function generateSummary(results) {
  */
 async function main() {
   console.log('[post-config-verify] Starting comprehensive post-configuration verification...');
-  
+
   const startTime = Date.now();
   const results = [];
-  
+
   await logAction({
     action: 'verification-start',
     status: 'STARTED',
-    steps_planned: VERIFICATION_STEPS.length
+    steps_planned: VERIFICATION_STEPS.length,
   });
 
   try {
@@ -226,9 +226,9 @@ async function main() {
           status: 'FAIL',
           duration_ms: Date.now() - startTime,
           exit_code: 1,
-          error: error.message
+          error: error.message,
         });
-        
+
         if (step.critical) {
           console.error('[post-config-verify] Stopping due to critical failure');
           break;
@@ -238,13 +238,13 @@ async function main() {
 
     // Generate comprehensive summary
     const summary = await generateSummary(results);
-    
+
     // Log final status
     await logAction({
       action: 'verification-complete',
       status: summary.overall_status,
       duration_ms: Date.now() - startTime,
-      summary_file: SUMMARY_FILE
+      summary_file: SUMMARY_FILE,
     });
 
     // Display results
@@ -255,7 +255,7 @@ async function main() {
     console.log(`Steps: ${summary.passed_steps}/${summary.total_steps} passed`);
     console.log(`Duration: ${summary.total_duration_ms}ms`);
     console.log(`Summary: ${SUMMARY_FILE}`);
-    
+
     if (summary.overall_status === 'PASS') {
       console.log('\n✅ All post-configuration verification criteria met:');
       console.log(`   - All verification commands: ${summary.criteria_met.all_commands_pass ? 'PASS' : 'FAIL'}`);
@@ -268,21 +268,21 @@ async function main() {
         console.log(`   - ${r.step}: ${r.error || 'Command failed'}`);
       });
     }
-    
+
     console.log('\n[post-config-verify] See artifacts directory for detailed reports');
-    
+
     // Exit with appropriate code
     process.exit(summary.overall_status === 'PASS' ? 0 : 1);
 
   } catch (error) {
     console.error('[post-config-verify] Fatal error during verification:', error);
-    
+
     await logAction({
       action: 'verification-error',
       status: 'ERROR',
-      error: error.message
+      error: error.message,
     });
-    
+
     process.exit(2);
   }
 }

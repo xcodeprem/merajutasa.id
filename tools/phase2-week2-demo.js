@@ -13,10 +13,10 @@ class Phase2Week2Demo {
   constructor() {
     this.demoSteps = [
       'Cache Strategies Demo',
-      'Response Compression Demo', 
+      'Response Compression Demo',
       'SLA Monitoring Demo',
       'Performance Monitoring Demo',
-      'Integration Demo'
+      'Integration Demo',
     ];
   }
 
@@ -36,13 +36,13 @@ class Phase2Week2Demo {
       await this.demoSLAMonitoring();
       await this.demoPerformanceMonitoring();
       await this.demoIntegration();
-      
+
       console.log('✅ Demo completed successfully!');
       console.log('\n📋 Next Steps:');
       console.log('   • Run: npm run performance:start');
-      console.log('   • Monitor: npm run sla:status'); 
+      console.log('   • Monitor: npm run sla:status');
       console.log('   • Report: npm run performance:report');
-      
+
     } catch (error) {
       console.error('❌ Demo failed:', error.message);
     }
@@ -56,7 +56,7 @@ class Phase2Week2Demo {
       const cache = getCacheStrategies({
         enableRedisCache: false, // Demo without Redis dependency
         memoryTTL: 60,
-        enableMemoryCache: true
+        enableMemoryCache: true,
       });
 
       // Simulate cache-aside strategy
@@ -68,7 +68,7 @@ class Phase2Week2Demo {
       };
 
       console.log('   📝 Cache-aside strategy test:');
-      
+
       // First call - cache miss
       const start1 = Date.now();
       const result1 = await cache.cacheAside(testKey, dataLoader);
@@ -98,35 +98,35 @@ class Phase2Week2Demo {
     try {
       const compression = getResponseCompression({
         threshold: 100, // Lower threshold for demo
-        algorithms: ['gzip', 'deflate']
+        algorithms: ['gzip', 'deflate'],
       });
 
       // Test data of various sizes
       const testData = [
         { name: 'Small JSON', data: JSON.stringify({ message: 'Hello World' }) },
-        { name: 'Medium JSON', data: JSON.stringify({ 
-          users: Array(50).fill(null).map((_, i) => ({ 
-            id: i, 
-            name: `User ${i}`, 
-            email: `user${i}@example.com` 
-          }))
+        { name: 'Medium JSON', data: JSON.stringify({
+          users: Array(50).fill(null).map((_, i) => ({
+            id: i,
+            name: `User ${i}`,
+            email: `user${i}@example.com`,
+          })),
         }) },
-        { name: 'Large Text', data: 'Lorem ipsum dolor sit amet, '.repeat(200) }
+        { name: 'Large Text', data: 'Lorem ipsum dolor sit amet, '.repeat(200) },
       ];
 
       for (const test of testData) {
         console.log(`   📄 Testing ${test.name} (${test.data.length} bytes):`);
-        
+
         const result = await compression.compress(test.data, {
           contentType: 'application/json',
-          acceptEncoding: 'gzip, deflate'
+          acceptEncoding: 'gzip, deflate',
         });
 
         if (result.compressed) {
           const savings = ((result.originalSize - result.compressedSize) / result.originalSize * 100).toFixed(1);
           console.log(`   ✅ Compressed with ${result.algorithm}: ${result.compressedSize} bytes (${savings}% smaller)`);
         } else {
-          console.log(`   ⏭️  Skipped compression: Too small or not beneficial`);
+          console.log('   ⏭️  Skipped compression: Too small or not beneficial');
         }
       }
 
@@ -144,21 +144,21 @@ class Phase2Week2Demo {
 
     try {
       const slaMonitor = getSLAMonitor({
-        enableAlerts: false // Demo mode
+        enableAlerts: false, // Demo mode
       });
 
       // Simulate various service metrics
       const services = ['signing_service', 'chain_service', 'collector_service'];
-      
+
       for (const service of services) {
         console.log(`   🔍 Recording metrics for ${service}:`);
-        
+
         // Simulate good performance
         for (let i = 0; i < 5; i++) {
           slaMonitor.recordMetric(service, {
             responseTime: Math.random() * 100 + 50, // 50-150ms
             success: Math.random() > 0.05, // 95% success rate
-            statusCode: Math.random() > 0.05 ? 200 : 500
+            statusCode: Math.random() > 0.05 ? 200 : 500,
           });
         }
 
@@ -167,7 +167,7 @@ class Phase2Week2Demo {
         console.log(`   📊 SLA Status: ${slaStatus.status}`);
         console.log(`   ⏱️  Avg latency: ${slaStatus.metrics.latency_avg?.toFixed(2) || 0}ms`);
         console.log(`   ✅ Availability: ${slaStatus.metrics.availability?.toFixed(2) || 0}%`);
-        
+
         if (slaStatus.violations.length > 0) {
           console.log(`   ⚠️  Violations: ${slaStatus.violations.length}`);
         }
@@ -185,32 +185,32 @@ class Phase2Week2Demo {
 
     try {
       const perfMonitor = getPerformanceMonitor({
-        enablePersistence: false // Demo mode
+        enablePersistence: false, // Demo mode
       });
 
       // Simulate some requests
       console.log('   🚀 Simulating request performance tracking:');
-      
+
       for (let i = 0; i < 3; i++) {
         const requestId = `demo-request-${i + 1}`;
-        
+
         perfMonitor.startRequest(requestId, {
           endpoint: `/api/demo/${i + 1}`,
-          method: 'GET'
+          method: 'GET',
         });
 
         // Simulate request processing time
         await new Promise(resolve => setTimeout(resolve, Math.random() * 200 + 50));
-        
+
         const success = Math.random() > 0.1; // 90% success rate
         perfMonitor.endRequest(requestId, success, success ? 200 : 500);
-        
+
         console.log(`   ✅ Request ${i + 1} completed ${success ? 'successfully' : 'with error'}`);
       }
 
       // Get current metrics
       const metrics = perfMonitor.getCurrentMetrics();
-      console.log(`   📊 Performance Metrics:`);
+      console.log('   📊 Performance Metrics:');
       console.log(`   ⏱️  Average response time: ${metrics.stats.averageResponseTime?.toFixed(2) || 0}ms`);
       console.log(`   📈 Throughput: ${metrics.stats.throughput} requests/min`);
       console.log(`   ❌ Error rate: ${metrics.stats.errorRate?.toFixed(2) || 0}%`);
@@ -228,7 +228,7 @@ class Phase2Week2Demo {
     try {
       // Simulate a complete request lifecycle with all enhancements
       console.log('   🔄 Simulating enhanced request lifecycle:');
-      
+
       const cache = getCacheStrategies({ enableRedisCache: false });
       const compression = getResponseCompression();
       const slaMonitor = getSLAMonitor({ enableAlerts: false });
@@ -242,7 +242,7 @@ class Phase2Week2Demo {
       // Step 2: Check cache
       const cacheKey = 'demo:integrated:data';
       let data = await cache.get(cacheKey);
-      
+
       if (!data) {
         console.log('   2. 🔄 Cache miss - loading from "database"');
         data = { message: 'Integrated demo data', timestamp: new Date().toISOString() };
@@ -255,7 +255,7 @@ class Phase2Week2Demo {
       const jsonResponse = JSON.stringify(data);
       const compressionResult = await compression.compress(jsonResponse, {
         contentType: 'application/json',
-        acceptEncoding: 'gzip'
+        acceptEncoding: 'gzip',
       });
       console.log(`   3. 🗜️  Response compressed: ${compressionResult.compressedSize} bytes`);
 
@@ -263,7 +263,7 @@ class Phase2Week2Demo {
       slaMonitor.recordMetric('integrated_service', {
         responseTime: 150,
         success: true,
-        statusCode: 200
+        statusCode: 200,
       });
       console.log('   4. 📊 SLA metrics recorded');
 
@@ -272,12 +272,12 @@ class Phase2Week2Demo {
       console.log('   5. ✅ Request tracking completed');
 
       console.log('\n   🎉 All performance components working together successfully!');
-      
+
       // Show combined health status
       const cacheHealth = await cache.healthCheck();
       const slaHealth = await slaMonitor.healthCheck();
       const perfHealth = await perfMonitor.healthCheck();
-      
+
       console.log('\n   🏥 Combined Health Status:');
       console.log(`   • Cache System: ${cacheHealth.status}`);
       console.log(`   • SLA Monitoring: ${slaHealth.status}`);
