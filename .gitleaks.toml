@@ -9,10 +9,32 @@ paths = [
   "^docs/.*\\.md$",
   "^docs/.*\\.json$",
   "^schemas/.*$",
-  "^tests/fixtures/.*$"
+  "^tests/fixtures/.*$",
+  "^.*\\.test\\.js$",
+  "^.*\\.spec\\.js$"
 ]
 regexes = [
   "DUMMY_[A-Z0-9_]{8,}",
+  "TEST_[A-Z0-9_]{8,}",
+  "FIXTURE_[A-Z0-9_]{8,}",
+  "MOCK_[A-Z0-9_]{8,}",
   "(?i)^[a-f0-9]{64}$", # sha256 hashes
-  "(?i)^[a-f0-9]{40}$"  # sha1 hashes
+  "(?i)^[a-f0-9]{40}$", # sha1 hashes
+  "(?i)^[a-f0-9]{32}$"  # md5 hashes
 ]
+
+# Additional secret patterns beyond defaults
+[[rules]]
+id = "custom-env-vars"
+description = "Environment variables with sensitive patterns"
+regex = '''(?i)(password|passwd|secret|token|key|api|auth|credential)[\s]*=[\s]*["\']?[a-zA-Z0-9+/=]{8,}["\']?'''
+
+[[rules]]
+id = "custom-connection-strings"
+description = "Database and service connection strings"
+regex = '''(?i)(mongodb|mysql|postgresql|redis|rabbitmq|kafka)://[^\s\'"]+'''
+
+[[rules]]
+id = "custom-private-keys"
+description = "Private key patterns"
+regex = '''-----BEGIN [A-Z ]+PRIVATE KEY-----'''

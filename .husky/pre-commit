@@ -1,0 +1,28 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Secret scanning pre-commit hook
+echo "🔍 Running secret scan on staged files..."
+
+# Check if gitleaks is available
+if ! command -v gitleaks &> /dev/null; then
+    echo "⚠️  Warning: gitleaks not found. Installing via npm..."
+    if command -v npm &> /dev/null; then
+        npx --yes gitleaks protect --staged --config=.gitleaks.toml --verbose
+    else
+        echo "❌ Neither gitleaks nor npm found. Please install gitleaks: https://github.com/gitleaks/gitleaks"
+        exit 1
+    fi
+else
+    gitleaks protect --staged --config=.gitleaks.toml --verbose
+fi
+
+if [ $? -ne 0 ]; then
+    echo ""
+    echo "🚨 SECRET DETECTED IN STAGED FILES!"
+    echo "💡 Please review and remove secrets before committing."
+    echo "📖 See SECURITY.md for secret handling guidelines."
+    exit 1
+fi
+
+echo "✅ No secrets detected in staged files"

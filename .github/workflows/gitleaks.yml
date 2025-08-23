@@ -11,6 +11,6 @@ jobs:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:
           fetch-depth: 0
-      - uses: gitleaks/gitleaks-action@e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2 # v2.4.0
+      - uses: gitleaks/gitleaks-action@12e7d55e6d1f9ec86b44f8e35fed08399b60cbc0 # v2.4.0
         with:
           args: detect -v --redact --config=.gitleaks.toml

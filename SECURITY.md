@@ -133,6 +133,138 @@ npm run privacy:report        # Generate privacy compliance reports
 - **Transport Security**: TLS 1.3 for all communications
 - **Data Minimization**: Privacy-by-design with minimal data collection
 
+## 🔐 Secret Management & Incident Response
+
+### Secret Scanning & Protection
+
+MerajutASA.id implements comprehensive secret detection and protection to prevent credential leaks:
+
+#### Active Protection Layers
+
+1. **GitHub Advanced Security**: Secret scanning enabled with push protection
+2. **Pre-commit Hooks**: Gitleaks scanning on staged files (`.husky/pre-commit`)
+3. **CI/CD Scanning**: Automated secret detection on all pushes and PRs
+4. **History Scanning**: Comprehensive repository history analysis
+
+#### Configuration Files
+
+- **Gitleaks Config**: `.gitleaks.toml` - Custom rules for secret detection
+- **Gitignore Patterns**: Enhanced `.gitignore` with comprehensive secret file patterns
+- **Workflow**: `.github/workflows/secret-scanning.yml` - Automated CI scanning
+
+### Secret Incident Response Procedure
+
+#### 🚨 IMMEDIATE RESPONSE (0-15 minutes)
+
+If a secret is detected in commits or alerts:
+
+1. **STOP**: Immediately halt any deployments using the compromised secret
+2. **ISOLATE**: Revoke/disable the compromised credential at source
+3. **ASSESS**: Determine scope of exposure (commit history, logs, caches)
+
+#### 🔄 ROTATION PROCESS (15-60 minutes)
+
+1. **Generate New Secret**: Create replacement credential with same permissions
+2. **Update Services**: Deploy new secret to all affected services
+3. **Verify Functionality**: Confirm all services work with new credential
+4. **Document**: Log rotation in `artifacts/secret-rotation-log.json`
+
+#### 🧹 CLEANUP PROCESS (1-24 hours)
+
+1. **History Cleanup**: Use `git filter-repo` or BFG to remove from git history
+2. **Cache Invalidation**: Clear any logs, caches, or backups containing the secret
+3. **Access Review**: Audit who had access to compromised repositories/systems
+4. **Monitoring**: Enhanced monitoring for 48 hours post-incident
+
+### Secret Rotation Schedule & SLA
+
+#### Mandatory Rotation Triggers
+
+- **IMMEDIATE**: Secret detected in git history or logs
+- **24 HOURS**: Secret exposed in public repository
+- **72 HOURS**: Suspected unauthorized access to secret storage
+- **7 DAYS**: Team member with secret access leaves organization
+
+#### Routine Rotation Schedule
+
+- **API Keys**: Quarterly (90 days)
+- **Database Credentials**: Semi-annually (180 days)  
+- **Service Tokens**: Annually (365 days)
+- **Encryption Keys**: As per compliance requirements (varies)
+
+#### SLA Commitments
+
+- **Detection**: ≤ 5 minutes (automated scanning)
+- **Notification**: ≤ 10 minutes (Slack/email alerts)
+- **Initial Response**: ≤ 15 minutes (revoke/disable)
+- **Full Rotation**: ≤ 4 hours (new secret deployed)
+- **History Cleanup**: ≤ 24 hours (git sanitization)
+
+### Authorized Secret Storage
+
+#### ✅ APPROVED Locations
+
+- **GitHub Secrets**: Repository and organization encrypted secrets
+- **Environment Variables**: Runtime-only, never logged
+- **KMS/Key Vault**: Cloud provider managed secret services
+- **Local Development**: `.env.local` files (gitignored, temporary)
+
+#### ❌ PROHIBITED Locations
+
+- **Source Code**: Hardcoded secrets in any files
+- **Configuration Files**: Committed config with secrets
+- **Git History**: Any secrets in commit history  
+- **Logs/Artifacts**: Secrets in CI logs or build artifacts
+- **Documentation**: Example secrets (even fake ones)
+- **Comments**: API keys or tokens in code comments
+
+### Validation & Testing
+
+#### Pre-commit Validation
+
+```bash
+# Automatically runs on git commit
+.husky/pre-commit  # Gitleaks scanning on staged files
+```
+
+#### Manual Scanning
+
+```bash
+# Full repository history scan
+node tools/security/history-secret-scan.js
+
+# Scan specific files or directories
+gitleaks detect --source=./path/to/scan --config=.gitleaks.toml
+```
+
+#### Push Protection Simulation
+
+```bash
+# Test that protection works
+npm run test:secret-protection  # Validates hooks prevent secret commits
+```
+
+### Compliance & Reporting
+
+- **Weekly Reports**: Secret scanning compliance in CI artifacts
+- **Quarterly Audits**: Full repository history and access review
+- **Annual Assessment**: Secret management policy effectiveness
+- **Incident Documentation**: All rotations tracked in governance artifacts
+
+### Emergency Contacts
+
+- **Security Team**: security@merajutasa.id
+- **Incident Response**: incident@merajutasa.id  
+- **On-call Engineer**: +1-XXX-XXX-XXXX (to be configured)
+- **Escalation**: CTO/CISO notification for critical incidents
+
+### Related Documentation
+
+- **Rotation Runbook**: `docs/security/secrets-rotation.md`
+- **Development Guide**: `docs/development/secret-handling.md`
+- **Compliance Evidence**: `artifacts/secret-*` files
+- **Historical Incidents**: `docs/security/incident-log.md`
+
 ## 🚨 Threat Detection & Response
 
 ### Advanced Threat Detection

@@ -34,6 +34,51 @@ desktop.ini
 .env.*
 !.env.example
 
+# Secret files and keys - CRITICAL SECURITY PATTERNS
+*.pem
+*.key
+*.crt
+*.cer
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.pub
+id_rsa*
+id_dsa*
+id_ecdsa*
+id_ed25519*
+*.gpg
+*.asc
+
+# Cloud and API credentials
+*credentials*
+*secret*
+*token*
+.aws/
+.azure/
+.gcp/
+.docker/config.json
+
+# SSH and certificates
+.ssh/
+authorized_keys
+known_hosts
+
+# Database connection strings and configs
+*.db
+*.sqlite
+*.sqlite3
+database.yml
+database.json
+
+# Secret management files
+secrets.yml
+secrets.yaml
+secrets.json
+vault.json
+.vault-token
+
 # Package artifacts
 *.tgz
 
