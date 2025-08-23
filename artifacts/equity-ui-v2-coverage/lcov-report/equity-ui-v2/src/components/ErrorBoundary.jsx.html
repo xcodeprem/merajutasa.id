@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for equity-ui-v2/src/stores/ThemeContext.jsx</title>
+    <title>Code coverage report for equity-ui-v2/src/components/ErrorBoundary.jsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">equity-ui-v2/src/stores</a> ThemeContext.jsx</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">equity-ui-v2/src/components</a> ErrorBoundary.jsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70.83% </span>
+                <span class="strong">58.33% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>17/24</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
-                <span class="quiet">Branches</span>
-                <span class='fraction'>3/4</span>
+                <span class='fraction'>14/24</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">66.66% </span>
-                <span class="quiet">Functions</span>
+                <span class="quiet">Branches</span>
                 <span class='fraction'>2/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70.83% </span>
+                <span class="strong">50% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>2/4</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">58.33% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>17/24</span>
+                <span class='fraction'>14/24</span>
             </div>
         
             
@@ -93,72 +93,66 @@
 <a name='L28'></a><a href='#L28'>28</a>
 <a name='L29'></a><a href='#L29'>29</a>
 <a name='L30'></a><a href='#L30'>30</a>
-<a name='L31'></a><a href='#L31'>31</a>
-<a name='L32'></a><a href='#L32'>32</a>
-<a name='L33'></a><a href='#L33'>33</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L31'></a><a href='#L31'>31</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// Theme context for managing light/dark mode
-import React, { createContext, useContext, useState, useEffect } from 'react';
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
 &nbsp;
-const ThemeContext = createContext();
+export class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
 &nbsp;
-export const useTheme = () =&gt; {
-  const context = useContext(ThemeContext);
-  if (!context) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >    throw new Error('useTheme must be used within a ThemeProvider');</span>
+  static <span class="fstat-no" title="function not covered" >getDerivedStateFromError(error) {</span>
+<span class="cstat-no" title="statement not covered" >    return { hasError: true, error };</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
-  return context;
-};
 &nbsp;
-export const ThemeProvider = ({ children }) =&gt; {
-  const [theme, setTheme] = useState('light');
+<span class="fstat-no" title="function not covered" >  componentDidCatch(error, errorInfo) {</span>
+<span class="cstat-no" title="statement not covered" >    console.error('[UI] ErrorBoundary caught error', error, errorInfo);</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
 &nbsp;
-  useEffect(() =&gt; {
-    // Get theme from localStorage or default to light
-    const savedTheme = localStorage.getItem('equity-ui-theme') || 'light';
-    setTheme(savedTheme);
-    document.documentElement.classList.toggle('dark', savedTheme === 'dark');
-  }, []);
+  render() {
+    if (this.state.hasError) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >      return (</span>
+<span class="cstat-no" title="statement not covered" >        &lt;div role="alert" className="p-6 text-center text-red-700 bg-red-50 dark:bg-red-900/20 rounded"&gt;</span>
+<span class="cstat-no" title="statement not covered" >          &lt;h2 className="text-lg font-semibold mb-2"&gt;Something went wrong.&lt;/h2&gt;</span>
+<span class="cstat-no" title="statement not covered" >          &lt;pre className="text-sm whitespace-pre-wrap opacity-80"&gt;{String(this.state.error)}&lt;/pre&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;/div&gt;</span>
+      );
+<span class="cstat-no" title="statement not covered" >    }</span>
+    return this.props.children;
+  }
+}
 &nbsp;
-  const toggleTheme = <span class="fstat-no" title="function not covered" >() =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    const newTheme = theme === 'light' ? 'dark' : 'light';</span>
-<span class="cstat-no" title="statement not covered" >    setTheme(newTheme);</span>
-<span class="cstat-no" title="statement not covered" >    localStorage.setItem('equity-ui-theme', newTheme);</span>
-<span class="cstat-no" title="statement not covered" >    document.documentElement.classList.toggle('dark', newTheme === 'dark');</span>
-<span class="cstat-no" title="statement not covered" >  };</span>
-&nbsp;
-  return &lt;ThemeContext.Provider value={{ theme, toggleTheme }}&gt;{children}&lt;/ThemeContext.Provider&gt;;
-};
+export default ErrorBoundary;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->

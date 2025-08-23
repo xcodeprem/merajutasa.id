@@ -2,12 +2,13 @@ import React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from './stores/ThemeContext';
 import { Header } from './components/Header';
+import ErrorBoundary from './components/ErrorBoundary';
 import { Dashboard } from './components/Dashboard';
 import './services/i18n'; // Initialize i18n
 import { useTranslation } from 'react-i18next';
 import './App.css';
 import { useRealtimeDashboard } from './services/websocket/useRealtimeDashboard';
-import { getAccessToken } from './services/auth/tokenManager';
+import { useAuth } from './services/auth/useAuth';
 
 // Create a query client
 const queryClient = new QueryClient({
@@ -22,6 +23,7 @@ const queryClient = new QueryClient({
 function RealtimeRoot() {
   const { t } = useTranslation();
   useRealtimeDashboard({ enabled: true });
+  const { isAuthenticated } = useAuth();
   const [hash, setHash] = React.useState(() => window.location.hash);
   React.useEffect(() => {
     const onHash = () => setHash(window.location.hash);
@@ -49,23 +51,21 @@ function RealtimeRoot() {
     <ThemeProvider>
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
         <Header />
-        <React.Suspense
-          fallback={<div className="p-6 text-center text-gray-500">{t('common.loading')}</div>}
-        >
-          {isSettings ? (
-            <SettingsPage />
-          ) : isCompliance ? (
-            getAccessToken() ? (
-              <CompliancePage />
-            ) : (
+        <ErrorBoundary>
+          <React.Suspense
+            fallback={<div className="p-6 text-center text-gray-500">{t('common.loading')}</div>}
+          >
+            {isSettings ? (
               <SettingsPage />
-            )
-          ) : isAnalytics ? (
-            <AnalyticsPage />
-          ) : (
-            <Dashboard />
-          )}
-        </React.Suspense>
+            ) : isCompliance ? (
+              isAuthenticated ? <CompliancePage /> : <SettingsPage />
+            ) : isAnalytics ? (
+              isAuthenticated ? <AnalyticsPage /> : <SettingsPage />
+            ) : (
+              <Dashboard />
+            )}
+          </React.Suspense>
+        </ErrorBoundary>
       </div>
     </ThemeProvider>
   );

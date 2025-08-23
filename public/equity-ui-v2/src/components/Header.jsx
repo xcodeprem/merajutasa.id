@@ -10,6 +10,7 @@ import {
   LanguageIcon,
   ChartBarIcon,
 } from '@heroicons/react/24/outline';
+import { logout } from '../services/auth/useAuth';
 
 export const Header = () => {
   const { t, i18n } = useTranslation();
@@ -107,6 +108,13 @@ export const Header = () => {
             >
               {t('link.privacy')}
             </a>
+            <button
+              onClick={logout}
+              className="text-sm px-3 py-2 rounded bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100 hover:bg-gray-300 dark:hover:bg-gray-600"
+              aria-label={t('settings.clear')}
+            >
+              {t('settings.clear')}
+            </button>
           </nav>
 
           {/* Mobile menu button */}
@@ -190,6 +198,12 @@ export const Header = () => {
               >
                 {t('nav.settings')}
               </a>
+              <button
+                onClick={logout}
+                className="block w-full text-left px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
+              >
+                {t('settings.clear')}
+              </button>
             </div>
           </nav>
         )}
