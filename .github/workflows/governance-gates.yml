@@ -25,8 +25,16 @@ jobs:
     if: >
       ${{
         github.event_name == 'push' ||
-        (github.event_name == 'pull_request' && github.actor != 'dependabot[bot]') ||
-        (github.event_name == 'pull_request_target' && github.actor == 'dependabot[bot]')
+        (
+          github.event_name == 'pull_request' &&
+          github.actor != 'dependabot[bot]' &&
+          contains(github.event.pull_request.labels.*.name, 'enforce-governance')
+        ) ||
+        (
+          github.event_name == 'pull_request_target' &&
+          github.actor == 'dependabot[bot]' &&
+          contains(github.event.pull_request.labels.*.name, 'enforce-governance')
+        )
       }}
     runs-on: ubuntu-latest
     timeout-minutes: 25

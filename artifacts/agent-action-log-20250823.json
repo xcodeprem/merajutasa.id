@@ -370,21 +370,21 @@
   {
     "_metadata": {
       "actor": "copilot-swe-agent[bot]",
-      "generated_at": "2025-08-23T17:14:57.698Z",
+      "generated_at": "2025-08-23T18:51:48.346Z",
       "generator": "governance-verify",
-      "git_ref": "refs/heads/copilot/fix-19",
-      "git_sha": "f9b0f2025d15c5337e78da447f1fe75e244bae64",
-      "run_id": "17178060534",
+      "git_ref": "refs/heads/copilot/fix-22",
+      "git_sha": "ee68620513478cb47c84bcc34faa620462a6cdcb",
+      "run_id": "17178957008",
       "version": "1.0"
     },
     "action": "step",
     "advisory": false,
     "cmd": "node tools/spec-hash-diff.js --mode=verify",
     "critical": true,
-    "duration_ms": 77,
+    "duration_ms": 73,
     "exit_code": 1,
     "status": "ERROR",
     "step": "spec-hash-diff",
-    "timestamp": "2025-08-23T17:14:57.698Z"
+    "timestamp": "2025-08-23T18:51:48.346Z"
   }
 ]
