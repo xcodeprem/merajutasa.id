@@ -12,6 +12,7 @@
   "packageManager": "npm@9.8.1",
   "scripts": {
     "coverage:summary": "node tools/generate-coverage-summary.js",
+    "coverage:gate": "node tools/coverage-gate-enforce.js",
     "lint:summary": "node tools/generate-lint-summary.js",
     "frontend:performance-test": "node tools/performance/frontend-performance-test.js",
     "frontend:lighthouse": "node tools/performance/frontend-metrics.js",
@@ -242,6 +243,7 @@
     "test:personal-projects": "node tools/tests/personal-projects-automation.test.js",
     "test:equity-smoke": "node tools/tests/equity-smoke.test.js",
     "test:equity-ui-smoke": "node tools/tests/equity-ui-smoke.test.js",
+    "test:coverage-gate": "node tools/tests/coverage-gate-enforce.test.js",
     "test:node-lts-workflow": "node tools/tests/node-lts-workflow.test.js",
     "test:events-pipeline-hash": "node tools/tests/event-pipeline-hash.test.js",
     "test:event-taxonomy": "node tools/tests/event-taxonomy-consistency.test.js",

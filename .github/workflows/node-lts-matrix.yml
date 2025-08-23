@@ -147,6 +147,10 @@ jobs:
           npm run coverage:summary
           echo "{\"node_version\":\"${{ matrix.node-version }}\",\"timestamp\":\"$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)\",\"coverage_generated\":true}" > artifacts/coverage/node-${{ matrix.node-version }}-summary.json
 
+      - name: Enforce coverage gate (≥80% lines, functions, statements)
+        if: matrix.node-version == 20
+        run: npm run coverage:gate
+
       - name: Run governance verification
         if: matrix.node-version == 20
         run: |
@@ -270,6 +274,7 @@ jobs:
           path: |
             artifacts/build/
             artifacts/coverage/
+            artifacts/coverage-gate-enforcement.json
             artifacts/test-coverage/
             public/dist/
           retention-days: 14

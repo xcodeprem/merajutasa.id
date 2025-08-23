@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-23T23:14:17.531Z",
+  "generated_utc": "2025-08-23T23:41:13.581Z",
   "evidence_phase": "1.5",
   "artifacts": [
     {
@@ -8,9 +8,9 @@
       "path": "artifacts/spec-hash-diff.json",
       "exists": true,
       "size_bytes": 24561,
-      "sha256": "340197a0deccc97dc6136cb26804ee493843edee09b698f72e250fc6a43b1858",
-      "sha256_short": "340197a0deccc97d",
-      "display_hash_prefix": "340197a0deccc97d",
+      "sha256": "c72af94e13de4b260c54e5f1034f0bc921889b6d1771d5a546f6435624b8d41e",
+      "sha256_short": "c72af94e13de4b26",
+      "display_hash_prefix": "c72af94e13de4b26",
       "schema_ref": "spec-hash-diff-v1.json",
       "category": "governance"
     },
@@ -140,7 +140,7 @@
     "total": 12,
     "missing": 0,
     "with_schema": 11,
-    "bundle_hash": "d2a15bbeaa4d1741c9050313c0a27139850c0971f3194bd5733761f215a5ab79"
+    "bundle_hash": "fd34eac071c8d110e5c77e0025516bda80545b90ea60fb4d93c53484ed46f935"
   },
   "integrity": {
     "hash_algorithm": "SHA256",

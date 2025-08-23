@@ -10,12 +10,14 @@ To maintain code quality and security, the following status checks are required 
 - **`ci/lint`** - Linting & Type Checking  
 - **`ci/test`** - Test Suite (governance, services, infrastructure)
 - **`ci/security`** - Security Scanning (npm audit, secret scan)
+- **`coverage-gate`** - Coverage Gate Enforcement (≥80% lines, functions, statements)
 
 ### Additional Required Checks
 
 - **CodeQL analysis** - Static code analysis
 - **SBOM generation** - Software Bill of Materials
 - **Governance verification** - Hash integrity and policy compliance
+- **Coverage gate enforcement** - Minimum 80% test coverage (progressive to 90%+)
 
 ## Configuration Requirements
 
@@ -71,6 +73,23 @@ To maintain code quality and security, the following status checks are required 
 - **Cache Hit Rate**: >80% for dependency caching
 - **Artifact Retention**: 14-90 days based on type
 - **Security Scan**: Zero tolerance for HIGH/CRITICAL findings
+- **Test Coverage**: Minimum 80% (lines, functions, statements), progressing to 90%+
+
+### Coverage Gate Requirements
+
+The coverage gate enforces minimum test coverage thresholds:
+
+- **Lines**: ≥80% (target: 90%+)
+- **Functions**: ≥80% (target: 90%+) 
+- **Statements**: ≥80% (target: 90%+)
+- **Branches**: ≥70% (target: 80%+)
+
+**Progressive Plan:**
+1. **Phase 1** (current): 80% minimum for lines, functions, statements
+2. **Phase 2** (future): 85% minimum 
+3. **Phase 3** (target): 90%+ minimum
+
+**Enforcement:** Coverage gate fails the build if any threshold is not met. Use `npm run coverage:gate` to check locally.
 
 ### Governance Integration
 

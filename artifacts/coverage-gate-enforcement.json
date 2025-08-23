@@ -1,0 +1,88 @@
+{
+  "timestamp": "2025-08-23T23:41:22.304Z",
+  "thresholds": {
+    "lines": 80,
+    "functions": 80,
+    "branches": 70,
+    "statements": 80
+  },
+  "coverage_actual": {
+    "lines": {
+      "pct": 72.03,
+      "covered": 1543,
+      "total": 2142
+    },
+    "statements": {
+      "pct": 72.03,
+      "covered": 1543,
+      "total": 2142
+    },
+    "functions": {
+      "pct": 59.7,
+      "covered": 80,
+      "total": 134
+    },
+    "branches": {
+      "pct": 55.8,
+      "covered": 197,
+      "total": 353
+    }
+  },
+  "checks": {
+    "lines": {
+      "threshold": 80,
+      "actual": 72.03,
+      "passed": false,
+      "covered": 1543,
+      "total": 2142
+    },
+    "functions": {
+      "threshold": 80,
+      "actual": 59.7,
+      "passed": false,
+      "covered": 80,
+      "total": 134
+    },
+    "branches": {
+      "threshold": 70,
+      "actual": 55.8,
+      "passed": false,
+      "covered": 197,
+      "total": 353
+    },
+    "statements": {
+      "threshold": 80,
+      "actual": 72.03,
+      "passed": false,
+      "covered": 1543,
+      "total": 2142
+    }
+  },
+  "overall_status": "FAIL",
+  "failures": [
+    {
+      "metric": "lines",
+      "threshold": 80,
+      "actual": 72.03,
+      "deficit": 7.969999999999999
+    },
+    {
+      "metric": "functions",
+      "threshold": 80,
+      "actual": 59.7,
+      "deficit": 20.299999999999997
+    },
+    {
+      "metric": "branches",
+      "threshold": 70,
+      "actual": 55.8,
+      "deficit": 14.200000000000003
+    },
+    {
+      "metric": "statements",
+      "threshold": 80,
+      "actual": 72.03,
+      "deficit": 7.969999999999999
+    }
+  ]
+}
