@@ -1,0 +1,15 @@
+{
+  "ts": "2025-08-23T00:00:00.000Z",
+  "docs": [
+    "public/equity-ui-v2/docs/README.md",
+    "public/equity-ui-v2/docs/architecture.md",
+    "public/equity-ui-v2/docs/contributing.md",
+    "public/equity-ui-v2/docs/scripts.md",
+    "public/equity-ui-v2/docs/page-data-mapping.md",
+    "public/equity-ui-v2/docs/pr-checklist.md",
+    "public/equity-ui-v2/docs/adrs/ADR-0001-stack-and-build.md",
+    "public/equity-ui-v2/docs/adrs/ADR-0002-authn-authz-and-refresh.md",
+    "public/equity-ui-v2/docs/adrs/ADR-0003-data-sourcing-and-fallbacks.md",
+    "docs/equity-ui-v2.md"
+  ]
+}
