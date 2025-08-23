@@ -4,11 +4,11 @@
 
 # Workflow governance - require review for any changes to CI/CD infrastructure
 
-/.github/workflows/ @xcodeprem
-/.github/actions/ @xcodeprem  
-/.github/scripts/ @xcodeprem
-/.github/actions-allowlist.json @xcodeprem
-/.github/CODEOWNERS @xcodeprem
+/.github/workflows/ @xcodeprem # relaxed: still owned but not enforced when branch protection is off
+/.github/actions/ @xcodeprem  # relaxed
+/.github/scripts/ @xcodeprem  # relaxed
+/.github/actions-allowlist.json @xcodeprem # relaxed
+/.github/CODEOWNERS @xcodeprem # relaxed
 
 # Security configuration (baseline requirement)
 
@@ -23,9 +23,9 @@ config/security/** @xcodeprem
 
 # Security and privacy critical files
 
-/SECURITY.md @xcodeprem
-/docs/privacy/ @xcodeprem
-/docs/governance/dec/ @xcodeprem
+/SECURITY.md @xcodeprem # relaxed
+/docs/privacy/ @xcodeprem # relaxed
+/docs/governance/dec/ @xcodeprem # relaxed
 
 # Core governance and fairness logic
 
