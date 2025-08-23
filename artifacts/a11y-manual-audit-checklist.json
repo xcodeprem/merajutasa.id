@@ -1,0 +1,44 @@
+{
+  "artifact": "a11y-manual-audit-checklist",
+  "version": 1,
+  "timestamp": "${ISO_TIMESTAMP}",
+  "pages": [
+    {
+      "page": "dashboard",
+      "checks": {
+        "skip_link_present": "PENDING",
+        "keyboard_nav_traverses_all_interactives": "PENDING",
+        "focus_visible_outlines": "PENDING",
+        "labels_and_names": "PENDING",
+        "color_contrast_wcag_aa": "PENDING"
+      }
+    },
+    {
+      "page": "analytics",
+      "checks": {
+        "keyboard_nav_traverses_all_interactives": "PENDING",
+        "focus_visible_outlines": "PENDING",
+        "labels_and_names": "PENDING",
+        "color_contrast_wcag_aa": "PENDING"
+      }
+    },
+    {
+      "page": "compliance",
+      "checks": {
+        "main_landmark_present": "PENDING",
+        "labels_and_names": "PENDING",
+        "color_contrast_wcag_aa": "PENDING"
+      }
+    },
+    {
+      "page": "settings",
+      "checks": {
+        "form_labels_associated": "PENDING",
+        "keyboard_nav_traverses_all_interactives": "PENDING",
+        "focus_visible_outlines": "PENDING",
+        "color_contrast_wcag_aa": "PENDING"
+      }
+    }
+  ],
+  "notes": "Fill statuses after manual audit (PASS/FAIL with short note)."
+}

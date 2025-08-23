@@ -59,7 +59,11 @@ const SettingsPage = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card title="Access Token">
           <form onSubmit={onSaveToken} className="space-y-3">
+            <label htmlFor="access-token" className="block text-sm text-gray-600 dark:text-gray-400">
+              Token
+            </label>
             <input
+              id="access-token"
               type="password"
               value={token}
               onChange={(e) => setToken(e.target.value)}
@@ -94,7 +98,11 @@ const SettingsPage = () => {
 
         <Card title="API Key">
           <form onSubmit={onSaveApiKey} className="space-y-3">
+            <label htmlFor="api-key" className="block text-sm text-gray-600 dark:text-gray-400">
+              API Key
+            </label>
             <input
+              id="api-key"
               type="text"
               value={apiKey}
               onChange={(e) => setApiKeyLocal(e.target.value)}
@@ -124,7 +132,11 @@ const SettingsPage = () => {
 
         <Card title="Language">
           <div className="space-y-3">
+            <label htmlFor="language-select" className="block text-sm text-gray-600 dark:text-gray-400">
+              Language
+            </label>
             <select
+              id="language-select"
               value={lang}
               onChange={onLangChange}
               className="w-full p-2 rounded border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
