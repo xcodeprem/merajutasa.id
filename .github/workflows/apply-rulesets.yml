@@ -1,6 +1,6 @@
 name: Apply Repository Rulesets
-on:
-  workflow_dispatch:
+'on':
+  workflow_dispatch: {}
 
 permissions:
   contents: read
