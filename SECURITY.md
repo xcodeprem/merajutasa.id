@@ -325,6 +325,81 @@ Ensure:
 - [ ] Proper sanitization is applied
 - [ ] Security tests cover the new functionality
 
+## 🔄 Secret Management & Rotation
+
+### Secret Rotation Policy
+
+**SLA**: All secrets discovered in repository history must be rotated within **24 hours** of detection.
+
+### Supported Secret Types & Rotation Procedures
+
+#### API Keys & Tokens
+
+- **Detection**: Automated via secret scanning and manual audits
+- **Rotation**: Generate new API key/token, update all references, revoke old key
+- **Validation**: Test all integrations before revoking old credentials
+
+#### Database Credentials
+
+- **Rotation**: Update connection strings, restart services, verify connectivity
+- **Validation**: Connection tests across all environments
+
+#### Cryptographic Keys
+
+- **SSH Keys**: Generate new keypair, update authorized_keys, remove old key
+- **TLS Certificates**: Issue new certificate, update server configuration, revoke old certificate
+- **Signing Keys**: Generate new keypair, update public key distribution, maintain backwards compatibility period
+
+#### Environment Variables
+
+- **Process**: Update .env files, restart services, validate configuration
+- **Verification**: Functional testing across affected systems
+
+### Emergency Rotation Procedure
+
+1. **Immediate Actions** (within 1 hour):
+   - Revoke compromised credentials if possible
+   - Generate temporary replacement credentials
+   - Update critical systems to prevent service disruption
+
+2. **Full Rotation** (within 24 hours):
+   - Generate permanent replacement credentials
+   - Update all systems and configurations
+   - Validate all integrations and services
+   - Document rotation in audit trail
+
+3. **Verification** (within 48 hours):
+   - Confirm old credentials are fully revoked
+   - Validate no service disruptions
+   - Update incident report with lessons learned
+
+### Secret Scanning & Detection
+
+```bash
+# Run secret detection scans
+npm run privacy:scan              # PII and secret pattern detection  
+npm run security:scan            # Comprehensive security scanning
+npm run governance:verify        # Governance compliance including secret checks
+```
+
+### Rotation Testing
+
+```bash
+# Test secret rotation procedures
+npm run secrets:rotation:test    # Validate rotation mechanisms
+npm run secrets:kek:rotate      # Test key encryption key rotation
+```
+
+### Audit Trail Requirements
+
+All secret rotations must include:
+
+- **Timestamp**: When rotation was initiated and completed
+- **Trigger**: What caused the rotation (scheduled, incident, detection)
+- **Scope**: Which systems and credentials were affected  
+- **Validation**: Confirmation that old credentials are revoked
+- **Impact**: Any service disruptions or issues encountered
+
 ## 🚨 Security Incident Reporting
 
 ### Reporting Security Vulnerabilities

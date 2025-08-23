@@ -18,6 +18,14 @@ out/
 .temp/
 .cache/
 
+# Additional build artifacts
+*.tgz
+*.tar.gz
+*.zip
+bundle/
+compiled/
+release/
+
 # Framework caches (future-proof)
 .next/
 
@@ -34,8 +42,35 @@ desktop.ini
 .env.*
 !.env.example
 
-# Package artifacts
-*.tgz
+# Cryptographic keys and certificates (NEVER commit)
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+*.keystore
+*.jks
+.pki/
+.ssh/
+id_rsa*
+id_dsa*
+id_ecdsa*
+id_ed25519*
+*.rsa
+*.dsa
+*.ecdsa
+*.ed25519
+
+# Additional secret file patterns
+secrets/
+secret.*
+*.secret
+*.token
+*.credentials
+.credentials/
+
+# Package artifacts (moved to build section above for consolidation)
+# *.tgz
 
 # Governance Artifacts Notice:
 # Do NOT ignore artifacts/ directory: evidence & integrity JSON meant to be committed post-seal.
