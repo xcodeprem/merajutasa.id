@@ -62,6 +62,8 @@ id_ed25519*
 # Cloud and API credentials
 *credentials*
 *secret*
+!*secret*.test.js
+!*secret*.js
 *token*
 .aws/
 .azure/
@@ -113,6 +115,18 @@ secret.*
 *.token
 *.credentials
 .credentials/
+
+# SSH keys and authentication files  
+ssh_key*
+*_key
+auth.*
+authentication.*
+
+# AWS and cloud config files with potential secrets
+aws-config.*
+*-config.yml
+*-config.yaml
+.aws-*
 
 # Package artifacts (moved to build section above for consolidation)
 # *.tgz
