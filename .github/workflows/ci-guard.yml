@@ -58,6 +58,30 @@ jobs:
       - name: Install Playwright browsers
         run: npm run equity-ui-v2:test:a11y:e2e --silent --workspaces=false || npx playwright install --with-deps
 
+      - name: Run root tests (all)
+        run: npm run test
+
+      - name: Run governance:verify
+        run: npm run governance:verify
+
+      - name: UI unit tests (Vitest) with coverage
+        working-directory: public/equity-ui-v2
+        run: npm test -- --coverage
+
+      - name: UI e2e tests (Playwright)
+        working-directory: public/equity-ui-v2
+        run: npx playwright test
+
+      - name: Upload UI coverage & e2e artifacts
+        if: always()
+        uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
+        with:
+          name: ui2-tests-${{ github.run_id }}
+          path: |
+            artifacts/equity-ui-v2-coverage
+            artifacts/equity-ui-e2e-smoke.json
+            artifacts/a11y-*.json
+
       - name: Run A8 (no-silent-drift) Gates
         uses: ./.github/actions/run-a8
         with:

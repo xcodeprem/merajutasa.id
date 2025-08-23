@@ -5,7 +5,11 @@ import { useTranslation } from 'react-i18next';
 import { fetchDashboardData } from '../services/api';
 import { KPIBadges } from './KPIBadges';
 import { Card, DataCard } from './Card';
-const Charts = React.lazy(() => import('./Charts'));
+// Lazy-load chart components individually (named exports)
+const DecisionTrendsChart = React.lazy(() =>
+  import('./Charts').then((m) => ({ default: m.DecisionTrendsChart }))
+);
+const KPIChart = React.lazy(() => import('./Charts').then((m) => ({ default: m.KPIChart })));
 import { RefreshCw, AlertCircle } from 'lucide-react';
 import { useSyncDashboardToStore } from '../stores/sync';
 import Disclaimers from './Disclaimers';
@@ -125,7 +129,7 @@ export const Dashboard = () => {
                     </div>
                   }
                 >
-                  <Charts.DecisionTrendsChart weeklyData={weekly} />
+                  <DecisionTrendsChart weeklyData={weekly} />
                 </React.Suspense>
 
                 {/* Decision mix badges */}
@@ -226,7 +230,7 @@ export const Dashboard = () => {
                 </div>
               }
             >
-              <Charts.KPIChart kpiData={kpi} />
+              <KPIChart kpiData={kpi} />
             </React.Suspense>
           </Card>
         </div>

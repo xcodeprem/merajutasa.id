@@ -27,5 +27,17 @@ export default defineConfig({
     globals: true,
     include: ['src/**/*.{test,spec}.jsx'],
     css: true,
+    coverage: {
+      enabled: true,
+      provider: 'v8',
+      reporter: ['text', 'json-summary', 'lcov'],
+      reportsDirectory: '../../artifacts/equity-ui-v2-coverage',
+      thresholds: {
+        lines: 60,
+        functions: 55,
+        branches: 50,
+        statements: 60,
+      },
+    },
   },
 });

@@ -12,6 +12,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
     "test:watch": "vitest",
     "test:a11y:unit": "vitest run src/a11y/a11y.test.jsx",
     "test:a11y:e2e": "playwright test"
@@ -41,6 +42,7 @@
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
     "@vitejs/plugin-react": "^5.0.0",
+    "@vitest/coverage-v8": "^2.1.9",
     "autoprefixer": "^10.4.21",
     "axe-core": "^4.10.3",
     "eslint": "^9.33.0",

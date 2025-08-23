@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom';
+import React from 'react';
 import { vi } from 'vitest';
 import { expect } from 'vitest';
 import { toHaveNoViolations } from 'jest-axe';
@@ -43,4 +44,60 @@ vi.mock('axios', () => {
     interceptors: { request: { use: () => {} }, response: { use: () => {} } },
   });
   return { default: { create, get: mockGet } };
+});
+
+// JSDOM doesn't implement canvas; stub getContext to avoid chart.js errors
+// Also mock react-chartjs-2 to lightweight placeholders
+try {
+  Object.defineProperty(HTMLCanvasElement.prototype, 'getContext', {
+    value: vi.fn(() => ({
+      // minimal 2d context stub
+      fillRect: vi.fn(),
+      clearRect: vi.fn(),
+      getImageData: vi.fn(() => ({ data: [] })),
+      putImageData: vi.fn(),
+      createImageData: vi.fn(),
+      setTransform: vi.fn(),
+      drawImage: vi.fn(),
+      save: vi.fn(),
+      fillText: vi.fn(),
+      restore: vi.fn(),
+      beginPath: vi.fn(),
+      moveTo: vi.fn(),
+      lineTo: vi.fn(),
+      closePath: vi.fn(),
+      stroke: vi.fn(),
+      translate: vi.fn(),
+      scale: vi.fn(),
+      rotate: vi.fn(),
+      arc: vi.fn(),
+      fill: vi.fn(),
+      measureText: vi.fn(() => ({ width: 0 })),
+      transform: vi.fn(),
+      rect: vi.fn(),
+      clip: vi.fn(),
+    })),
+  });
+} catch {}
+
+vi.mock('react-chartjs-2', () => {
+  const Placeholder = (props) =>
+    React.createElement('div', { 'data-testid': 'chart' }, props?.children);
+  return {
+    Line: Placeholder,
+    Bar: Placeholder,
+  };
+});
+
+// Avoid real WebSocket connections in tests
+vi.mock('socket.io-client', () => {
+  return {
+    io: () => ({
+      on: () => {},
+      off: () => {},
+      emit: () => {},
+      close: () => {},
+      connected: true,
+    }),
+  };
 });
