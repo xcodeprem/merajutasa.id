@@ -236,6 +236,7 @@
     "test:personal-projects": "node tools/tests/personal-projects-automation.test.js",
     "test:equity-smoke": "node tools/tests/equity-smoke.test.js",
     "test:equity-ui-smoke": "node tools/tests/equity-ui-smoke.test.js",
+    "test:node-lts-workflow": "node tools/tests/node-lts-workflow.test.js",
     "test:events-pipeline-hash": "node tools/tests/event-pipeline-hash.test.js",
     "test:event-taxonomy": "node tools/tests/event-taxonomy-consistency.test.js",
     "test:dec-hash": "node tools/tests/dec-canonical-hash-equivalence.test.js",

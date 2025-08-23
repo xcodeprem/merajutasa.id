@@ -1,6 +1,7 @@
 # MerajutASA.id Enterprise Platform
 
 [![CI Guard (H1)](https://github.com/xcodeprem/merajutasa.id/actions/workflows/ci-guard.yml/badge.svg)](https://github.com/xcodeprem/merajutasa.id/actions/workflows/ci-guard.yml)
+[![Node LTS Matrix Build](https://github.com/xcodeprem/merajutasa.id/actions/workflows/node-lts-matrix.yml/badge.svg)](https://github.com/xcodeprem/merajutasa.id/actions/workflows/node-lts-matrix.yml)
 [![H1 Guard & KPI](https://github.com/xcodeprem/merajutasa.id/actions/workflows/h1-guard.yml/badge.svg)](https://github.com/xcodeprem/merajutasa.id/actions/workflows/h1-guard.yml)
 [![Deploy Pages (Dashboard Snapshots)](https://github.com/xcodeprem/merajutasa.id/actions/workflows/pages.yml/badge.svg)](https://github.com/xcodeprem/merajutasa.id/actions/workflows/pages.yml)
 [![Changelog Excerpt](https://img.shields.io/badge/changelog-excerpt-blue)](https://xcodeprem.github.io/merajutasa.id/changelog.html)
