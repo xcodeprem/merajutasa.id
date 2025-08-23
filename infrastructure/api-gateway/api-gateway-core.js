@@ -9,7 +9,7 @@ import { performance } from 'perf_hooks';
 
 /**
  * Enterprise API Gateway Core
- * Provides centralized API management with versioning, rate limiting, 
+ * Provides centralized API management with versioning, rate limiting,
  * security, monitoring, and service orchestration
  */
 export class APIGatewayCore {
@@ -32,29 +32,29 @@ export class APIGatewayCore {
         serviceRoles: {
           collector: ['ingest:write'],
           chain: ['append:write'],
-          signer: ['sign:write']
-        }
+          signer: ['sign:write'],
+        },
       },
       validation: {
         enabled: true,
         // serviceName -> JSON schema object (Ajv compatible)
-        serviceSchemas: {}
+        serviceSchemas: {},
       },
       mtls: {
         enabled: false,
         // Since this server runs HTTP in dev, allow simulated header to emulate mTLS presence
-        simulateHeader: 'x-client-cert'
+        simulateHeader: 'x-client-cert',
       },
       cors: {
         origin: ['http://localhost:3000', 'https://merajutasa.id'],
-        credentials: true
+        credentials: true,
       },
       rateLimit: {
         windowMs: 15 * 60 * 1000, // 15 minutes
         max: 1000, // requests per windowMs
-        skipSuccessfulRequests: false
+        skipSuccessfulRequests: false,
       },
-      ...config
+      ...config,
     };
 
     this.app = express();
@@ -64,7 +64,7 @@ export class APIGatewayCore {
       requests: 0,
       errors: 0,
       latency: [],
-      uptime: Date.now()
+      uptime: Date.now(),
     };
 
     this.setupCore();
@@ -84,18 +84,18 @@ export class APIGatewayCore {
       retries: 3,
       circuitBreaker: {
         threshold: 5,
-        timeout: 60000
+        timeout: 60000,
       },
       rateLimit: {
         windowMs: 15 * 60 * 1000,
-        max: 500
+        max: 500,
       },
-      ...config
+      ...config,
     };
 
     this.services.set(name, serviceConfig);
     this.setupServiceProxy(name, serviceConfig);
-    
+
     return this;
   }
 
@@ -107,7 +107,7 @@ export class APIGatewayCore {
           defaultSrc: ["'self'"],
           styleSrc: ["'self'", "'unsafe-inline'"],
           scriptSrc: ["'self'"],
-          imgSrc: ["'self'", "data:", "https:"],
+          imgSrc: ["'self'", 'data:', 'https:'],
         },
       },
     }));
@@ -136,10 +136,10 @@ export class APIGatewayCore {
       },
       message: {
         error: 'Too many requests',
-        retryAfter: Math.ceil(this.config.rateLimit.windowMs / 1000)
+        retryAfter: Math.ceil(this.config.rateLimit.windowMs / 1000),
       },
       standardHeaders: true,
-      legacyHeaders: false
+      legacyHeaders: false,
     }));
 
     // Request logging
@@ -149,24 +149,24 @@ export class APIGatewayCore {
   requestMetadata = (req, res, next) => {
     req.requestId = uuidv4();
     req.startTime = performance.now();
-    
+
     res.setHeader('X-Request-ID', req.requestId);
     res.setHeader('X-Gateway-Version', this.config.version);
     res.setHeader('X-Gateway-Name', this.config.name);
-    
+
     next();
   };
 
   requestLogging = (req, res, next) => {
     const originalSend = res.send;
-    
+
     res.send = function(data) {
       const endTime = performance.now();
       const duration = endTime - req.startTime;
-      
+
       // Update metrics
       this.updateMetrics(req, res, duration);
-      
+
       // Log request
       console.log(JSON.stringify({
         timestamp: new Date().toISOString(),
@@ -177,24 +177,24 @@ export class APIGatewayCore {
         duration: Math.round(duration * 100) / 100,
         userAgent: req.headers['user-agent'],
         ip: req.ip,
-        service: req.targetService || 'gateway'
+        service: req.targetService || 'gateway',
       }));
-      
+
       originalSend.call(this, data);
     }.bind(this);
-    
+
     next();
   };
 
   updateMetrics(req, res, duration) {
     this.metrics.requests++;
     this.metrics.latency.push(duration);
-    
+
     // Keep latency array manageable
     if (this.metrics.latency.length > 1000) {
       this.metrics.latency = this.metrics.latency.slice(-500);
     }
-    
+
     if (res.statusCode >= 400) {
       this.metrics.errors++;
     }
@@ -206,7 +206,7 @@ export class APIGatewayCore {
       changeOrigin: true,
       timeout: config.timeout,
       pathRewrite: {
-        [`^/api/${config.version}/${serviceName}`]: '/'
+        [`^/api/${config.version}/${serviceName}`]: '/',
       },
       onProxyReq: (proxyReq, req, res) => {
         // Add gateway metadata
@@ -214,7 +214,7 @@ export class APIGatewayCore {
         proxyReq.setHeader('X-Service-Name', serviceName);
         proxyReq.setHeader('X-API-Version', config.version);
         proxyReq.setHeader('X-Gateway-Name', this.config.name);
-        
+
         req.targetService = serviceName;
       },
       onProxyRes: (proxyRes, req, res) => {
@@ -227,15 +227,15 @@ export class APIGatewayCore {
         console.error(`Proxy error for ${serviceName}:`, {
           error: err.message,
           requestId: req.requestId,
-          url: req.url
+          url: req.url,
         });
-        
+
         res.status(502).json({
           error: 'Service temporarily unavailable',
           requestId: req.requestId,
-          service: serviceName
+          service: serviceName,
         });
-      }
+      },
     };
 
     // Service-specific rate limiting
@@ -247,13 +247,13 @@ export class APIGatewayCore {
       },
       message: {
         error: `Rate limit exceeded for ${serviceName}`,
-        service: serviceName
-      }
+        service: serviceName,
+      },
     });
 
     // AuthN middleware (API key or mTLS simulation)
     const authNMiddleware = (req, res, next) => {
-      if (!this.config.auth?.enabled) return next();
+      if (!this.config.auth?.enabled) {return next();}
 
       // Simulated mTLS header check when mtls.enabled
       if (this.config.mtls?.enabled) {
@@ -272,9 +272,9 @@ export class APIGatewayCore {
 
     // AuthZ middleware (role-based by service)
     const authZMiddleware = (req, res, next) => {
-      if (!this.config.authz?.enabled) return next();
+      if (!this.config.authz?.enabled) {return next();}
       const required = this.config.authz.serviceRoles?.[serviceName];
-      if (!required || required.length === 0) return next();
+      if (!required || required.length === 0) {return next();}
       const rolesHeader = String(req.headers['x-roles'] || '').split(',').map(r => r.trim()).filter(Boolean);
       const hasRole = required.some(r => rolesHeader.includes(r));
       if (!hasRole) {
@@ -286,7 +286,7 @@ export class APIGatewayCore {
     // Schema validation middleware for JSON bodies on write methods
     let validator = null;
     const initValidator = async () => {
-      if (!(this.config.validation?.enabled && this.config.validation.serviceSchemas?.[serviceName])) return;
+      if (!(this.config.validation?.enabled && this.config.validation.serviceSchemas?.[serviceName])) {return;}
       try {
         // Safe Ajv loader for Node 18-22: avoid top-level await timing issues
         const ajvMod = await import('ajv');
@@ -308,8 +308,8 @@ export class APIGatewayCore {
       if (!validator) {
         await initValidator();
       }
-      if (!validator) return next();
-      if (!['POST', 'PUT', 'PATCH'].includes(req.method)) return next();
+      if (!validator) {return next();}
+      if (!['POST', 'PUT', 'PATCH'].includes(req.method)) {return next();}
       const valid = validator(req.body || {});
       if (!valid) {
         return res.status(400).json({ error: 'Invalid request body', details: validator.errors, requestId: req.requestId });
@@ -323,7 +323,7 @@ export class APIGatewayCore {
       authNMiddleware,
       authZMiddleware,
       schemaValidation,
-      createProxyMiddleware(proxyOptions)
+      createProxyMiddleware(proxyOptions),
     );
   }
 
@@ -345,9 +345,9 @@ export class APIGatewayCore {
         name,
         version: config.version,
         endpoint: `/api/${config.version}/${name}`,
-        health: config.healthPath
+        health: config.healthPath,
       }));
-      
+
       res.json({ services });
     });
 
@@ -361,7 +361,7 @@ export class APIGatewayCore {
       res.status(404).json({
         error: 'Endpoint not found',
         requestId: req.requestId,
-        availableServices: Array.from(this.services.keys())
+        availableServices: Array.from(this.services.keys()),
       });
     });
 
@@ -370,24 +370,24 @@ export class APIGatewayCore {
       console.error('Gateway error:', {
         error: err.message,
         stack: err.stack,
-        requestId: req.requestId
+        requestId: req.requestId,
       });
-      
+
       res.status(500).json({
         error: 'Internal gateway error',
-        requestId: req.requestId
+        requestId: req.requestId,
       });
     });
   }
 
   getHealthStatus() {
     const uptime = Date.now() - this.metrics.uptime;
-    const avgLatency = this.metrics.latency.length > 0 
-      ? this.metrics.latency.reduce((a, b) => a + b, 0) / this.metrics.latency.length 
+    const avgLatency = this.metrics.latency.length > 0
+      ? this.metrics.latency.reduce((a, b) => a + b, 0) / this.metrics.latency.length
       : 0;
-    
-    const errorRate = this.metrics.requests > 0 
-      ? (this.metrics.errors / this.metrics.requests) * 100 
+
+    const errorRate = this.metrics.requests > 0
+      ? (this.metrics.errors / this.metrics.requests) * 100
       : 0;
 
     const status = errorRate < 5 && avgLatency < 1000 ? 'healthy' : 'degraded';
@@ -400,17 +400,17 @@ export class APIGatewayCore {
         requests: this.metrics.requests,
         errors: this.metrics.errors,
         errorRate: Math.round(errorRate * 100) / 100,
-        avgLatency: Math.round(avgLatency * 100) / 100
+        avgLatency: Math.round(avgLatency * 100) / 100,
       },
       services: Array.from(this.services.keys()),
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
   }
 
   getMetrics() {
     const uptime = Date.now() - this.metrics.uptime;
-    const avgLatency = this.metrics.latency.length > 0 
-      ? this.metrics.latency.reduce((a, b) => a + b, 0) / this.metrics.latency.length 
+    const avgLatency = this.metrics.latency.length > 0
+      ? this.metrics.latency.reduce((a, b) => a + b, 0) / this.metrics.latency.length
       : 0;
 
     return {
@@ -423,15 +423,15 @@ export class APIGatewayCore {
         errorRate: this.metrics.requests > 0 ? (this.metrics.errors / this.metrics.requests) * 100 : 0,
         avgLatency: avgLatency,
         p95Latency: this.calculatePercentile(this.metrics.latency, 95),
-        p99Latency: this.calculatePercentile(this.metrics.latency, 99)
+        p99Latency: this.calculatePercentile(this.metrics.latency, 99),
       },
       services: Object.fromEntries(this.services),
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
   }
 
   calculatePercentile(arr, percentile) {
-    if (arr.length === 0) return 0;
+    if (arr.length === 0) {return 0;}
     const sorted = [...arr].sort((a, b) => a - b);
     const index = Math.ceil((percentile / 100) * sorted.length) - 1;
     return sorted[index] || 0;
@@ -443,11 +443,11 @@ export class APIGatewayCore {
       info: {
         title: 'MerajutASA.id API Gateway',
         version: this.config.version,
-        description: 'Enterprise API Gateway for MerajutASA.id microservices'
+        description: 'Enterprise API Gateway for MerajutASA.id microservices',
       },
       servers: [
         { url: `http://localhost:${this.config.port}`, description: 'Development' },
-        { url: 'https://api.merajutasa.id', description: 'Production' }
+        { url: 'https://api.merajutasa.id', description: 'Production' },
       ],
       paths: {
         '/health': {
@@ -455,27 +455,27 @@ export class APIGatewayCore {
             summary: 'Gateway health check',
             responses: {
               '200': { description: 'Gateway is healthy' },
-              '503': { description: 'Gateway is degraded' }
-            }
-          }
+              '503': { description: 'Gateway is degraded' },
+            },
+          },
         },
         '/metrics': {
           get: {
             summary: 'Gateway metrics',
             responses: {
-              '200': { description: 'Current gateway metrics' }
-            }
-          }
+              '200': { description: 'Current gateway metrics' },
+            },
+          },
         },
         '/services': {
           get: {
             summary: 'Available services',
             responses: {
-              '200': { description: 'List of registered services' }
-            }
-          }
-        }
-      }
+              '200': { description: 'List of registered services' },
+            },
+          },
+        },
+      },
     };
 
     // Add service paths
@@ -486,9 +486,9 @@ export class APIGatewayCore {
           description: `Proxy to ${name} microservice`,
           responses: {
             '200': { description: 'Success' },
-            '502': { description: 'Service unavailable' }
-          }
-        }
+            '502': { description: 'Service unavailable' },
+          },
+        },
       };
     }
 

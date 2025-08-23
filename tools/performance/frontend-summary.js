@@ -15,17 +15,17 @@ export class FrontendPerformanceSummary {
       // Data sources
       performanceDataPath: options.performanceDataPath || 'artifacts/frontend-performance',
       cacheDataPath: options.cacheDataPath || 'artifacts/cache-statistics',
-      
+
       // Summary settings
       historicalDays: options.historicalDays || 7,
       refreshInterval: options.refreshInterval || 60000, // 1 minute
-      
+
       // Thresholds for summary status
       performanceThreshold: options.performanceThreshold || 85,
       cacheHitRateThreshold: options.cacheHitRateThreshold || 80,
       apiSuccessRateThreshold: options.apiSuccessRateThreshold || 95,
-      
-      ...options
+
+      ...options,
     };
 
     this.performanceTest = getFrontendPerformanceTest();
@@ -37,48 +37,48 @@ export class FrontendPerformanceSummary {
    */
   async generateSummary() {
     console.log('📊 Generating Frontend Performance Summary...');
-    
+
     try {
       // Collect current performance data
       const currentPerformance = await this.collectCurrentPerformance();
-      
+
       // Collect cache statistics
       const cacheStats = await this.collectCacheStats();
-      
+
       // Load historical data
       const historical = await this.loadHistoricalData();
-      
+
       // Generate insights and trends
       const insights = this.generateInsights(currentPerformance, cacheStats, historical);
-      
+
       // Create summary report
       const summary = {
         metadata: {
           timestamp: new Date().toISOString(),
           version: '1.0.0',
-          generatedBy: 'frontend-performance-summary'
+          generatedBy: 'frontend-performance-summary',
         },
         current: {
           performance: currentPerformance,
           cache: cacheStats,
-          status: this.determineOverallStatus(currentPerformance, cacheStats)
+          status: this.determineOverallStatus(currentPerformance, cacheStats),
         },
         historical,
         insights,
-        recommendations: this.generateRecommendations(currentPerformance, cacheStats, insights)
+        recommendations: this.generateRecommendations(currentPerformance, cacheStats, insights),
       };
 
       console.log('✅ Frontend performance summary generated');
       return summary;
-      
+
     } catch (error) {
       console.error('❌ Failed to generate frontend performance summary:', error.message);
       return {
         metadata: {
           timestamp: new Date().toISOString(),
-          error: error.message
+          error: error.message,
         },
-        status: 'ERROR'
+        status: 'ERROR',
       };
     }
   }
@@ -93,7 +93,7 @@ export class FrontendPerformanceSummary {
       console.warn('⚠️ Could not collect current performance data:', error.message);
       return {
         error: error.message,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
     }
   }
@@ -108,7 +108,7 @@ export class FrontendPerformanceSummary {
       console.warn('⚠️ Could not collect cache statistics:', error.message);
       return {
         error: error.message,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
     }
   }
@@ -120,7 +120,7 @@ export class FrontendPerformanceSummary {
     const historical = {
       performance: [],
       cache: [],
-      trends: {}
+      trends: {},
     };
 
     try {
@@ -134,7 +134,7 @@ export class FrontendPerformanceSummary {
             grade: data.summary?.overallGrade,
             uiResponseTime: data.ui?.responseTime,
             apiSuccessRate: data.api?.summary?.successRate,
-            apiResponseTime: data.api?.summary?.avgResponseTime
+            apiResponseTime: data.api?.summary?.avgResponseTime,
           });
         } catch (err) {
           console.warn(`⚠️ Could not parse ${file}:`, err.message);
@@ -150,7 +150,7 @@ export class FrontendPerformanceSummary {
             timestamp: data.timestamp,
             hitRate: data.performance?.overall?.hitRate,
             responseTime: data.performance?.overall?.avgResponseTime,
-            efficiency: data.efficiency?.efficiency?.overall
+            efficiency: data.efficiency?.efficiency?.overall,
           });
         } catch (err) {
           console.warn(`⚠️ Could not parse ${file}:`, err.message);
@@ -177,7 +177,7 @@ export class FrontendPerformanceSummary {
         .filter(file => file.startsWith(pattern) && file.endsWith('.json'))
         .map(file => path.join(dirPath, file))
         .sort();
-      
+
       return matchingFiles;
     } catch (error) {
       return [];
@@ -200,7 +200,7 @@ export class FrontendPerformanceSummary {
       trends.performance = {
         uiResponseTime: this.calculateTrend(uiTimes),
         apiSuccessRate: this.calculateTrend(apiSuccessRates),
-        apiResponseTime: this.calculateTrend(apiTimes)
+        apiResponseTime: this.calculateTrend(apiTimes),
       };
     }
 
@@ -212,7 +212,7 @@ export class FrontendPerformanceSummary {
 
       trends.cache = {
         hitRate: this.calculateTrend(hitRates),
-        responseTime: this.calculateTrend(responseTimes)
+        responseTime: this.calculateTrend(responseTimes),
       };
     }
 
@@ -223,13 +223,13 @@ export class FrontendPerformanceSummary {
    * Calculate trend direction for a series of values
    */
   calculateTrend(values) {
-    if (values.length < 2) return 'insufficient_data';
-    
+    if (values.length < 2) {return 'insufficient_data';}
+
     const first = values[0];
     const last = values[values.length - 1];
     const change = ((last - first) / first) * 100;
-    
-    if (Math.abs(change) < 5) return 'stable';
+
+    if (Math.abs(change) < 5) {return 'stable';}
     return change > 0 ? 'increasing' : 'decreasing';
   }
 
@@ -240,7 +240,7 @@ export class FrontendPerformanceSummary {
     const insights = {
       performance: [],
       cache: [],
-      integration: []
+      integration: [],
     };
 
     // Performance insights
@@ -250,7 +250,7 @@ export class FrontendPerformanceSummary {
         type: 'overall_grade',
         value: grade,
         message: `Current frontend performance grade: ${grade}`,
-        impact: this.getGradeImpact(grade)
+        impact: this.getGradeImpact(grade),
       });
     }
 
@@ -261,7 +261,7 @@ export class FrontendPerformanceSummary {
           type: 'api_reliability',
           value: successRate,
           message: `API success rate (${successRate}%) is below target (${this.config.apiSuccessRateThreshold}%)`,
-          impact: 'high'
+          impact: 'high',
         });
       }
     }
@@ -274,7 +274,7 @@ export class FrontendPerformanceSummary {
           type: 'cache_efficiency',
           value: hitRate,
           message: `Cache hit rate (${hitRate}%) is below target (${this.config.cacheHitRateThreshold}%)`,
-          impact: 'medium'
+          impact: 'medium',
         });
       }
     }
@@ -283,13 +283,13 @@ export class FrontendPerformanceSummary {
     if (performance.api?.summary?.avgResponseTime && cache.performance?.overall?.avgResponseTime) {
       const apiTime = performance.api.summary.avgResponseTime;
       const cacheTime = cache.performance.overall.avgResponseTime;
-      
+
       if (apiTime > cacheTime * 3) {
         insights.integration.push({
           type: 'cache_optimization_opportunity',
           value: { apiTime, cacheTime },
           message: `API response times (${apiTime}ms) could benefit from better caching (current: ${cacheTime}ms)`,
-          impact: 'medium'
+          impact: 'medium',
         });
       }
     }
@@ -299,7 +299,7 @@ export class FrontendPerformanceSummary {
       insights.performance.push({
         type: 'performance_degradation',
         message: 'API response times are trending upward',
-        impact: 'medium'
+        impact: 'medium',
       });
     }
 
@@ -307,7 +307,7 @@ export class FrontendPerformanceSummary {
       insights.cache.push({
         type: 'cache_degradation',
         message: 'Cache hit rates are trending downward',
-        impact: 'medium'
+        impact: 'medium',
       });
     }
 
@@ -325,7 +325,7 @@ export class FrontendPerformanceSummary {
       'B': 'medium',
       'C': 'high',
       'D': 'critical',
-      'F': 'critical'
+      'F': 'critical',
     };
     return gradeImpact[grade] || 'unknown';
   }
@@ -357,10 +357,10 @@ export class FrontendPerformanceSummary {
     }
 
     return {
-      level: issues.length === 0 ? 'HEALTHY' : 
-             issues.length <= 2 ? 'WARNING' : 'CRITICAL',
+      level: issues.length === 0 ? 'HEALTHY' :
+        issues.length <= 2 ? 'WARNING' : 'CRITICAL',
       issues,
-      score: Math.max(0, 100 - (issues.length * 25))
+      score: Math.max(0, 100 - (issues.length * 25)),
     };
   }
 
@@ -376,50 +376,50 @@ export class FrontendPerformanceSummary {
 
     highImpactInsights.forEach(insight => {
       switch (insight.type) {
-        case 'api_reliability':
-          recommendations.push({
-            priority: 'critical',
-            category: 'reliability',
-            title: 'Improve API Reliability',
-            description: insight.message,
-            actions: [
-              'Investigate failing API endpoints',
-              'Implement better error handling and retries',
-              'Add circuit breaker patterns',
-              'Monitor API dependencies'
-            ]
-          });
-          break;
+      case 'api_reliability':
+        recommendations.push({
+          priority: 'critical',
+          category: 'reliability',
+          title: 'Improve API Reliability',
+          description: insight.message,
+          actions: [
+            'Investigate failing API endpoints',
+            'Implement better error handling and retries',
+            'Add circuit breaker patterns',
+            'Monitor API dependencies',
+          ],
+        });
+        break;
 
-        case 'cache_efficiency':
-          recommendations.push({
-            priority: 'high',
-            category: 'performance',
-            title: 'Optimize Cache Strategy',
-            description: insight.message,
-            actions: [
-              'Review cache TTL settings',
-              'Implement cache warming strategies',
-              'Optimize cache key patterns',
-              'Consider cache partitioning'
-            ]
-          });
-          break;
+      case 'cache_efficiency':
+        recommendations.push({
+          priority: 'high',
+          category: 'performance',
+          title: 'Optimize Cache Strategy',
+          description: insight.message,
+          actions: [
+            'Review cache TTL settings',
+            'Implement cache warming strategies',
+            'Optimize cache key patterns',
+            'Consider cache partitioning',
+          ],
+        });
+        break;
 
-        case 'cache_optimization_opportunity':
-          recommendations.push({
-            priority: 'medium',
-            category: 'optimization',
-            title: 'Leverage Caching for API Performance',
-            description: insight.message,
-            actions: [
-              'Identify cacheable API responses',
-              'Implement response caching',
-              'Add cache headers to API responses',
-              'Consider edge caching'
-            ]
-          });
-          break;
+      case 'cache_optimization_opportunity':
+        recommendations.push({
+          priority: 'medium',
+          category: 'optimization',
+          title: 'Leverage Caching for API Performance',
+          description: insight.message,
+          actions: [
+            'Identify cacheable API responses',
+            'Implement response caching',
+            'Add cache headers to API responses',
+            'Consider edge caching',
+          ],
+        });
+        break;
       }
     });
 
@@ -434,8 +434,8 @@ export class FrontendPerformanceSummary {
           'Run detailed Lighthouse audits when Chrome is available',
           'Optimize Core Web Vitals',
           'Implement performance monitoring',
-          'Consider frontend optimization techniques'
-        ]
+          'Consider frontend optimization techniques',
+        ],
       });
     }
 
@@ -447,18 +447,18 @@ export class FrontendPerformanceSummary {
    */
   formatDashboard(summary) {
     const lines = [];
-    
+
     lines.push('🎯 Frontend Performance Dashboard');
     lines.push('================================');
     lines.push('');
-    
+
     // Overall status
     const status = summary.current?.status;
-    const statusIcon = status?.level === 'HEALTHY' ? '✅' : 
-                      status?.level === 'WARNING' ? '⚠️' : '❌';
+    const statusIcon = status?.level === 'HEALTHY' ? '✅' :
+      status?.level === 'WARNING' ? '⚠️' : '❌';
     lines.push(`${statusIcon} Overall Status: ${status?.level || 'UNKNOWN'} (Score: ${status?.score || 0}/100)`);
     lines.push('');
-    
+
     // Performance metrics
     if (summary.current?.performance) {
       const perf = summary.current.performance;
@@ -475,7 +475,7 @@ export class FrontendPerformanceSummary {
       }
       lines.push('');
     }
-    
+
     // Cache metrics
     if (summary.current?.cache?.performance?.overall) {
       const cache = summary.current.cache.performance.overall;
@@ -484,7 +484,7 @@ export class FrontendPerformanceSummary {
       lines.push(`   Response Time: ${cache.avgResponseTime}ms`);
       lines.push('');
     }
-    
+
     // Top recommendations
     if (summary.recommendations && summary.recommendations.length > 0) {
       lines.push('🎯 Top Recommendations:');
@@ -493,9 +493,9 @@ export class FrontendPerformanceSummary {
       });
       lines.push('');
     }
-    
+
     lines.push(`Generated: ${summary.metadata?.timestamp}`);
-    
+
     return lines.join('\n');
   }
 }
@@ -511,16 +511,16 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const command = process.argv[2] || 'dashboard';
 
   switch (command) {
-    case 'dashboard':
-      const result = await summary.generateSummary();
-      console.log(summary.formatDashboard(result));
-      break;
-    case 'json':
-      const jsonResult = await summary.generateSummary();
-      console.log(JSON.stringify(jsonResult, null, 2));
-      break;
-    default:
-      console.log('Available commands: dashboard, json');
-      process.exit(1);
+  case 'dashboard':
+    const result = await summary.generateSummary();
+    console.log(summary.formatDashboard(result));
+    break;
+  case 'json':
+    const jsonResult = await summary.generateSummary();
+    console.log(JSON.stringify(jsonResult, null, 2));
+    break;
+  default:
+    console.log('Available commands: dashboard, json');
+    process.exit(1);
   }
 }

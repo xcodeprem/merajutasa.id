@@ -27,26 +27,26 @@ function loadJson(path) {
 function validatePolicy() {
   console.log('Policy Validation');
   console.log('=================');
-  
+
   // Load schema and policy
   const schemaPath = join(REPO_ROOT, 'schemas', 'policy.json');
   const policyPath = join(REPO_ROOT, 'tools', 'policy', 'policy.json');
-  
+
   const schema = loadJson(schemaPath);
   const policy = loadJson(policyPath);
-  
+
   // Setup AJV validator
   const ajv = new Ajv({ allErrors: true, verbose: true });
   addFormats(ajv);
-  
+
   const validate = ajv.compile(schema);
-  
+
   console.log(`📄 Validating: ${policyPath}`);
   console.log(`📋 Schema: ${schemaPath}`);
-  
+
   // Validate against schema
   const isValid = validate(policy);
-  
+
   if (!isValid) {
     console.error('\n❌ Schema validation failed:');
     validate.errors.forEach(error => {
@@ -57,12 +57,12 @@ function validatePolicy() {
     });
     return false;
   }
-  
+
   console.log('✅ Schema validation passed');
-  
+
   // Additional validation checks
   let hasIssues = false;
-  
+
   // Check for duplicate keys in checks
   const checkNames = Object.keys(policy.checks);
   const uniqueCheckNames = [...new Set(checkNames)];
@@ -70,7 +70,7 @@ function validatePolicy() {
     console.error('❌ Duplicate check names found');
     hasIssues = true;
   }
-  
+
   // Validate route references
   policy.routes.forEach((route, index) => {
     route.requires.forEach(checkName => {
@@ -80,30 +80,30 @@ function validatePolicy() {
       }
     });
   });
-  
+
   // Check version consistency
   const latestVersionEntry = policy.metadata.version_history[policy.metadata.version_history.length - 1];
   if (latestVersionEntry && latestVersionEntry.version !== policy.version) {
     console.error(`❌ Version mismatch: policy.version=${policy.version}, latest history entry=${latestVersionEntry.version}`);
     hasIssues = true;
   }
-  
+
   if (!hasIssues) {
     console.log('✅ Additional validation passed');
   }
-  
+
   return !hasIssues;
 }
 
 function validateAllPolicies() {
   console.log('Validating all policy files...\n');
-  
+
   let allValid = true;
-  
+
   // For now, just validate the main policy file
   // In the future, this could scan for multiple policy files
   allValid = validatePolicy() && allValid;
-  
+
   console.log('\nSummary:');
   if (allValid) {
     console.log('✅ All policy files are valid');

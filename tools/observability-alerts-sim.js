@@ -16,11 +16,11 @@ function flattenMetricValues(metricsJson) {
       latestVal = m.values[m.values.length - 1].value;
     }
     // also mirror common aliases
-    if (name.includes('service_health_status')) flat.service_health_status = latestVal ?? 1;
-    if (name.includes('error_rate')) flat.error_rate = latestVal ?? 0;
-    if (name.includes('chain_integrity_score')) flat.chain_integrity_score = latestVal ?? 100;
-    if (name.includes('cpu_usage_percent')) flat.cpu_usage_percent = latestVal ?? 10;
-    if (name.includes('memory_usage_percent')) flat.memory_usage_percent = latestVal ?? 10;
+    if (name.includes('service_health_status')) {flat.service_health_status = latestVal ?? 1;}
+    if (name.includes('error_rate')) {flat.error_rate = latestVal ?? 0;}
+    if (name.includes('chain_integrity_score')) {flat.chain_integrity_score = latestVal ?? 100;}
+    if (name.includes('cpu_usage_percent')) {flat.cpu_usage_percent = latestVal ?? 10;}
+    if (name.includes('memory_usage_percent')) {flat.memory_usage_percent = latestVal ?? 10;}
   }
   // add some synthetic rollups commonly used by dashboards
   flat.avg_response_time = flat.avg_response_time ?? 50;
@@ -36,7 +36,7 @@ async function main() {
   await initializeObservability('merajutasa-service', {
     enableAllComponents: true,
     dashboards: { dashboardsEnabled: false },
-    metrics: { collectDefaultMetrics: true }
+    metrics: { collectDefaultMetrics: true },
   });
 
   const obs = getAdvancedObservabilitySystem();
@@ -78,14 +78,14 @@ async function main() {
   const flat2 = flattenMetricValues(mjson2);
   const triggered = alerting.evaluateMetrics({
     ...flat2,
-    avg_response_time: 6000
+    avg_response_time: 6000,
   });
 
   // emit a security event using standardized schema
   logging.security('auth_failed_spike', 'high', 'Multiple authentication failures detected', {
     actor: { id: 'system', type: 'system' },
     auth: { method: 'password', mfa: false, success: false },
-    labels: { test_vector: 'observability-alerts-sim' }
+    labels: { test_vector: 'observability-alerts-sim' },
   });
 
   // artifacts: rules + triggered alerts snapshot
@@ -94,13 +94,13 @@ async function main() {
   await writeArtifact('observability-alerts-fired.json', {
     generated_at: new Date().toISOString(),
     count: triggered.length,
-    alerts: triggered.map(a => ({ id: a.id, rule: a.rule, severity: a.severity, name: a.name, timestamp: a.timestamp }))
+    alerts: triggered.map(a => ({ id: a.id, rule: a.rule, severity: a.severity, name: a.name, timestamp: a.timestamp })),
   });
 
   // write a compact dashboards snapshot placeholder
   await writeArtifact('dashboards-snapshot.json', {
     system_overview: { widgets: ['system_health', 'response_time', 'error_rate', 'active_alerts'] },
-    security: { widgets: ['security_events', 'authentication_stats', 'threat_analysis'] }
+    security: { widgets: ['security_events', 'authentication_stats', 'threat_analysis'] },
   });
 
   // stop stream timer and shutdown observability to end process cleanly

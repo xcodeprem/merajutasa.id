@@ -17,7 +17,7 @@ class QuickScriptAnalyzer {
       // Commands referencing missing tools
       /concurrently/,
       // Commands with obvious syntax issues
-      /\$env:/
+      /\$env:/,
     ];
   }
 
@@ -35,7 +35,7 @@ class QuickScriptAnalyzer {
       }
       categories[prefix].push({
         name: scriptName,
-        command: scripts[scriptName]
+        command: scripts[scriptName],
       });
     });
     return categories;
@@ -55,7 +55,7 @@ class QuickScriptAnalyzer {
       name: scriptName,
       command,
       issues: [],
-      type: 'unknown'
+      type: 'unknown',
     };
 
     // Check for obsolete patterns
@@ -107,10 +107,10 @@ class QuickScriptAnalyzer {
 
   async analyzeAllScripts() {
     console.log('🔍 Quick Script Analysis Starting...\n');
-    
+
     const scripts = await this.loadScripts();
     const categories = this.categorizeScripts(scripts);
-    
+
     console.log(`📊 Found ${Object.keys(scripts).length} scripts in ${Object.keys(categories).length} categories\n`);
 
     const results = {
@@ -119,26 +119,26 @@ class QuickScriptAnalyzer {
       issues: [],
       obsolete: [],
       missing_files: [],
-      summary: {}
+      summary: {},
     };
 
     for (const [category, categoryScripts] of Object.entries(categories)) {
       console.log(`📋 Analyzing category: ${category} (${categoryScripts.length} scripts)`);
-      
+
       const categoryAnalysis = {
         count: categoryScripts.length,
         scripts: [],
-        issues: 0
+        issues: 0,
       };
 
       for (const script of categoryScripts) {
         const analysis = await this.analyzeScript(script.name, script.command);
         categoryAnalysis.scripts.push(analysis);
-        
+
         if (analysis.issues.length > 0) {
           categoryAnalysis.issues++;
           results.issues.push(analysis);
-          
+
           // Categorize issues
           analysis.issues.forEach(issue => {
             if (issue.includes('Obsolete pattern')) {
@@ -149,12 +149,12 @@ class QuickScriptAnalyzer {
           });
         }
       }
-      
+
       results.categories[category] = categoryAnalysis;
       if (categoryAnalysis.issues > 0) {
         console.log(`   ⚠️  ${categoryAnalysis.issues} issues found`);
       } else {
-        console.log(`   ✅ No obvious issues`);
+        console.log('   ✅ No obvious issues');
       }
     }
 
@@ -162,7 +162,7 @@ class QuickScriptAnalyzer {
       totalIssues: results.issues.length,
       obsoleteScripts: results.obsolete.length,
       missingFiles: results.missing_files.length,
-      healthyScripts: results.total - results.issues.length
+      healthyScripts: results.total - results.issues.length,
     };
 
     return results;
@@ -172,7 +172,7 @@ class QuickScriptAnalyzer {
     console.log('\n═'.repeat(80));
     console.log('📊 QUICK SCRIPT ANALYSIS REPORT');
     console.log('═'.repeat(80));
-    
+
     console.log(`📋 Total Scripts: ${results.total}`);
     console.log(`✅ Healthy Scripts: ${results.summary.healthyScripts}`);
     console.log(`⚠️  Scripts with Issues: ${results.summary.totalIssues}`);
@@ -222,7 +222,7 @@ class QuickScriptAnalyzer {
 // Run if called directly
 if (import.meta.url === `file://${process.argv[1]}`) {
   const analyzer = new QuickScriptAnalyzer();
-  
+
   analyzer.analyzeAllScripts()
     .then(results => {
       const report = analyzer.generateReport(results);

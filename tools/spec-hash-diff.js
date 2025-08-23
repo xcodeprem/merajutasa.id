@@ -75,8 +75,8 @@ async function main() {
       continue;
     }
 
-  const buf = await fs.readFile(fPath);
-  const currentHash = integrity_class === DEC_SELF_CLASS ? computeDecHash(buf) : sha256File(buf);
+    const buf = await fs.readFile(fPath);
+    const currentHash = integrity_class === DEC_SELF_CLASS ? computeDecHash(buf) : sha256File(buf);
 
     if (mode === 'seal-first' && isPlaceholder) {
       entry.hash_sha256 = currentHash;
@@ -103,7 +103,7 @@ async function main() {
     if (!isPlaceholder) {
       if (hash_sha256 === currentHash) {
         unchanged.push(fPath);
-  } else if (integrity_class === DEC_SELF_CLASS && mode === 'accept' && (includeSet.size===0 || includeSet.has(fPath))) {
+      } else if (integrity_class === DEC_SELF_CLASS && mode === 'accept' && (includeSet.size===0 || includeSet.has(fPath))) {
         // DEC canonical reseal: update manifest to canonical current hash
         entry.hash_sha256 = currentHash;
         manifestModified = true;
@@ -117,7 +117,7 @@ async function main() {
         violations.push({
           code: next_change_requires_dec ? 'HASH_MISMATCH_DEC_REQUIRED' : 'HASH_MISMATCH',
           path: fPath,
-          detail: `Manifest=${hash_sha256} current=${currentHash}`
+          detail: `Manifest=${hash_sha256} current=${currentHash}`,
         });
       }
       if (integrity_class === DEC_SELF_CLASS) {
@@ -131,15 +131,15 @@ async function main() {
           if (entry.hash_sha256 !== canonicalHash && mode !== 'accept') {
             violations.push({ code: 'DEC_CANONICAL_HASH_MISMATCH', path: fPath, detail: `canonical=${canonicalHash} manifest=${entry.hash_sha256}` });
           }
-            if (internal !== canonicalHash) {
-              if (mode === 'accept') {
-                const replaced = text.replace(/hash_of_decision_document:\s*"[0-9a-f]{64}"/, `hash_of_decision_document: "${canonicalHash}"`);
-                writeBackDECUpdates.push({ path: fPath, data: replaced });
-                updated.push(fPath);
-              } else {
-                violations.push({ code: 'DEC_INTERNAL_HASH_DIFFERS', path: fPath, detail: `internal=${internal} canonical=${canonicalHash}` });
-              }
+          if (internal !== canonicalHash) {
+            if (mode === 'accept') {
+              const replaced = text.replace(/hash_of_decision_document:\s*"[0-9a-f]{64}"/, `hash_of_decision_document: "${canonicalHash}"`);
+              writeBackDECUpdates.push({ path: fPath, data: replaced });
+              updated.push(fPath);
+            } else {
+              violations.push({ code: 'DEC_INTERNAL_HASH_DIFFERS', path: fPath, detail: `internal=${internal} canonical=${canonicalHash}` });
             }
+          }
         }
       }
     }
@@ -147,7 +147,7 @@ async function main() {
 
   if (mode !== 'seal-first' && placeholdersRemaining.length > 0) {
     placeholdersRemaining.forEach(p =>
-      violations.push({ code: 'PLACEHOLDER_AFTER_SEAL', path: p, detail: 'Placeholder remained post-freeze' })
+      violations.push({ code: 'PLACEHOLDER_AFTER_SEAL', path: p, detail: 'Placeholder remained post-freeze' }),
     );
   }
 
@@ -187,8 +187,8 @@ async function main() {
       total_entries: manifest.files.length,
       updated_count: updated.length,
       violation_count: violations.length,
-      placeholders_remaining_count: placeholdersRemaining.length
-    }
+      placeholders_remaining_count: placeholdersRemaining.length,
+    },
   };
 
   await fs.mkdir('artifacts', { recursive: true });
@@ -199,7 +199,7 @@ async function main() {
     violations: violations.map(v=>v.code),
     violation_count: violations.length,
     remaining_placeholders: placeholdersRemaining.length,
-    dec_ref_inconsistencies: decRefInconsistencies.length
+    dec_ref_inconsistencies: decRefInconsistencies.length,
   };
   await fs.writeFile(SUMMARY_PATH, JSON.stringify(summaryOut,null,2));
 
@@ -215,10 +215,10 @@ async function main() {
             ruleId: v.code,
             level: 'error',
             message: { text: `${v.code}: ${v.detail}` },
-            locations: [ { physicalLocation: { artifactLocation: { uri: v.path } } } ]
-          }))
-        }
-      ]
+            locations: [ { physicalLocation: { artifactLocation: { uri: v.path } } } ],
+          })),
+        },
+      ],
     };
     await fs.writeFile(SARIF_PATH, JSON.stringify(sarif,null,2));
   }

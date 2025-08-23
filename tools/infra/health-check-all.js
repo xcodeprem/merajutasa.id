@@ -9,12 +9,12 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { spawn } from 'child_process';
-import { 
+import {
   HEALTH_STATUS,
   createComponentHealth,
   createHealthSummary,
   validateComponentHealth,
-  validateHealthSummary
+  validateHealthSummary,
 } from './health-contract.js';
 import { stableStringify, addMetadata } from '../lib/json-stable.js';
 
@@ -29,7 +29,7 @@ const CONFIG = {
   retries: 1, // Retry once for flaky components
   failSoft: true, // Continue even if some components fail
   artifactsDir: path.join(process.cwd(), 'artifacts'),
-  securityScanFailSoft: true // Special handling for security:scan which is known to be flaky
+  securityScanFailSoft: true, // Special handling for security:scan which is known to be flaky
 };
 
 /**
@@ -38,68 +38,68 @@ const CONFIG = {
 const CATEGORY_MODULES = {
   observability: {
     modules: [
-      'infrastructure/observability/advanced-observability-system.js'
+      'infrastructure/observability/advanced-observability-system.js',
     ],
-    healthMethod: 'getAdvancedObservabilitySystem().getSystemStatus'
+    healthMethod: 'getAdvancedObservabilitySystem().getSystemStatus',
   },
   performance: {
     modules: [
       'infrastructure/performance/monitoring/sla-monitor.js',
-      'infrastructure/performance/cache/cache-strategies.js'
+      'infrastructure/performance/cache/cache-strategies.js',
     ],
-    healthMethod: 'healthCheck'
+    healthMethod: 'healthCheck',
   },
   'api-gateway': {
     modules: [
       'infrastructure/api-gateway/api-gateway-orchestrator.js',
-      'infrastructure/api-gateway/service-mesh.js'
+      'infrastructure/api-gateway/service-mesh.js',
     ],
-    healthMethod: 'getSystemStatus'
+    healthMethod: 'getSystemStatus',
   },
   'high-availability': {
     modules: [
       'infrastructure/high-availability/ha-orchestrator.js',
       'infrastructure/high-availability/health-monitoring.js',
-      'infrastructure/high-availability/auto-scaling.js'
+      'infrastructure/high-availability/auto-scaling.js',
     ],
-    healthMethod: 'healthCheck'
+    healthMethod: 'healthCheck',
   },
   compliance: {
     modules: [
       'infrastructure/compliance/audit-system.js',
       'infrastructure/compliance/compliance-automation.js',
       'infrastructure/compliance/compliance-orchestrator.js',
-      'infrastructure/compliance/privacy-rights-management.js'
+      'infrastructure/compliance/privacy-rights-management.js',
     ],
-    healthMethod: 'getHealthStatus'
+    healthMethod: 'getHealthStatus',
   },
   security: {
     modules: [
-      'infrastructure/security/enhanced/security-hardening.js'
+      'infrastructure/security/enhanced/security-hardening.js',
     ],
     healthMethod: 'scan', // Special handling needed
-    failSoft: true // Security scan is known to be flaky
+    failSoft: true, // Security scan is known to be flaky
   },
   monitoring: {
     modules: [
       'infrastructure/monitoring/metrics-collector.js',
-      'infrastructure/monitoring/structured-logger.js'  
+      'infrastructure/monitoring/structured-logger.js',
     ],
-    healthMethod: 'healthCheck'
+    healthMethod: 'healthCheck',
   },
   integrations: {
     modules: [
       'infrastructure/integration/component-dependency-analyzer.js',
-      'infrastructure/integration/infrastructure-integration-platform.js'
+      'infrastructure/integration/infrastructure-integration-platform.js',
     ],
-    healthMethod: 'getHealthStatus'
+    healthMethod: 'getHealthStatus',
   },
   dependencies: {
     modules: [
-      'infrastructure/integration/component-dependency-analyzer.js'
+      'infrastructure/integration/component-dependency-analyzer.js',
     ],
-    healthMethod: 'generateDependencyDocumentation'
-  }
+    healthMethod: 'generateDependencyDocumentation',
+  },
 };
 
 /**
@@ -133,30 +133,30 @@ async function executeWithTimeout(fn, timeout) {
  */
 async function executeSecurityScanFailSoft(componentPath) {
   const componentName = path.basename(componentPath, '.js');
-  
+
   try {
     // Try to import and run security scan
     const module = await import(path.resolve(process.cwd(), componentPath));
-    
+
     if (module.scan && typeof module.scan === 'function') {
       const result = await executeWithTimeout(() => module.scan(), CONFIG.timeout);
       return createComponentHealth(componentName, 'security', 'HEALTHY', {
-        metrics: { scanCompleted: true, scanResult: result }
+        metrics: { scanCompleted: true, scanResult: result },
       });
     } else {
       // If no scan function, just check if module loads
       return createComponentHealth(componentName, 'security', 'HEALTHY', {
-        metrics: { loadable: true }
+        metrics: { loadable: true },
       });
     }
   } catch (error) {
     // Fail-soft: report as FAILED but don't stop the entire process
     console.warn(`⚠️  Security scan failed (fail-soft): ${error.message}`);
     return createComponentHealth(componentName, 'security', 'FAILED', {
-      error: { 
+      error: {
         message: `Security scan failed: ${error.message}`,
-        code: 'SECURITY_SCAN_FAILED'
-      }
+        code: 'SECURITY_SCAN_FAILED',
+      },
     });
   }
 }
@@ -171,25 +171,25 @@ async function executeSecurityScanFailSoft(componentPath) {
 async function checkComponentHealth(componentPath, category, options = {}) {
   const componentName = path.basename(componentPath, '.js');
   const startTime = Date.now();
-  
+
   try {
     // Special handling for security components
     if (category === 'security' && CONFIG.securityScanFailSoft) {
       return await executeSecurityScanFailSoft(componentPath);
     }
-    
+
     // Import the module
     const module = await import(path.resolve(process.cwd(), componentPath));
     const responseTime = Date.now() - startTime;
-    
+
     // Try different health check patterns
     let healthResult = null;
-    
+
     // Try the specified health method for the category
     const categoryConfig = CATEGORY_MODULES[category];
     if (categoryConfig && categoryConfig.healthMethod) {
       const methodName = categoryConfig.healthMethod;
-      
+
       if (methodName.includes('.')) {
         // Handle nested method calls like 'getAdvancedObservabilitySystem().getSystemStatus'
         const parts = methodName.split('.');
@@ -216,7 +216,7 @@ async function checkComponentHealth(componentPath, category, options = {}) {
         }
       }
     }
-    
+
     // Fallback to standard health check patterns
     if (!healthResult) {
       if (module.healthCheck && typeof module.healthCheck === 'function') {
@@ -231,29 +231,29 @@ async function checkComponentHealth(componentPath, category, options = {}) {
         // Component loads but has no health check - consider it healthy
         healthResult = {
           status: 'healthy',
-          message: 'Component loadable, no explicit health check'
+          message: 'Component loadable, no explicit health check',
         };
       }
     }
-    
+
     // Standardize the response
     const status = healthResult?.status || healthResult?.state || 'HEALTHY';
     return createComponentHealth(componentName, category, status, {
       metrics: {
         responseTime,
         loadable: true,
-        ...healthResult
-      }
+        ...healthResult,
+      },
     });
-    
+
   } catch (error) {
     // Fail-soft: log error but continue with other components
     console.warn(`⚠️  Component ${componentName} health check failed: ${error.message}`);
     return createComponentHealth(componentName, category, 'FAILED', {
       error: {
         message: error.message,
-        code: error.code || error.name
-      }
+        code: error.code || error.name,
+      },
     });
   }
 }
@@ -265,21 +265,21 @@ async function checkComponentHealth(componentPath, category, options = {}) {
  */
 async function checkCategoryHealth(category) {
   console.log(`🔍 Checking ${category} health...`);
-  
+
   const categoryConfig = CATEGORY_MODULES[category];
   if (!categoryConfig) {
     console.warn(`⚠️  Unknown category: ${category}`);
     return [];
   }
-  
+
   const modules = categoryConfig.modules;
   const healthChecks = modules.map(modulePath =>
-    checkComponentHealth(modulePath, category, { retries: CONFIG.retries })
+    checkComponentHealth(modulePath, category, { retries: CONFIG.retries }),
   );
-  
+
   // Run health checks in parallel with timeout protection
   const results = await Promise.allSettled(healthChecks);
-  
+
   const componentHealths = [];
   results.forEach((result, index) => {
     if (result.status === 'fulfilled') {
@@ -290,15 +290,15 @@ async function checkCategoryHealth(category) {
       componentHealths.push(createComponentHealth(componentName, category, 'FAILED', {
         error: {
           message: result.reason?.message || 'Health check promise rejected',
-          code: 'PROMISE_REJECTED'
-        }
+          code: 'PROMISE_REJECTED',
+        },
       }));
     }
   });
-  
+
   const healthyCount = componentHealths.filter(h => h.status === HEALTH_STATUS.HEALTHY).length;
   console.log(`✅ ${category}: ${healthyCount}/${componentHealths.length} healthy`);
-  
+
   return componentHealths;
 }
 
@@ -309,55 +309,55 @@ async function checkCategoryHealth(category) {
  */
 async function generateArtifacts(allComponentHealths, categoryFilter = 'all') {
   console.log('📄 Generating deterministic health artifacts...');
-  
+
   // Ensure artifacts directory exists
   await fs.mkdir(CONFIG.artifactsDir, { recursive: true });
-  
+
   const filePrefix = categoryFilter === 'all' ? 'infra-health' : `infra-health-${categoryFilter}`;
-  
+
   // 1. Detailed health report (all component results)
   const detailsArtifact = addMetadata({
     category: categoryFilter,
     components: allComponentHealths,
-    totalComponents: allComponentHealths.length
+    totalComponents: allComponentHealths.length,
   }, { generator: 'infra-health-check-all' });
-  
+
   await fs.writeFile(
     path.join(CONFIG.artifactsDir, `${filePrefix}-details.json`),
-    stableStringify(detailsArtifact)
+    stableStringify(detailsArtifact),
   );
-  
+
   // 2. Health summary (aggregated counts)
   const summary = createHealthSummary(allComponentHealths);
   const summaryArtifact = addMetadata(summary, { generator: 'infra-health-check-all' });
-  
+
   await fs.writeFile(
     path.join(CONFIG.artifactsDir, `${filePrefix}-summary.json`),
-    stableStringify(summaryArtifact)
+    stableStringify(summaryArtifact),
   );
-  
+
   // 3. Health matrix (category breakdown with SLA)
   const matrix = {};
   const categoryCounts = {};
-  
+
   allComponentHealths.forEach(health => {
     if (!categoryCounts[health.category]) {
       categoryCounts[health.category] = { ok: 0, degraded: 0, failed: 0 };
     }
-    
+
     switch (health.status) {
-      case HEALTH_STATUS.HEALTHY:
-        categoryCounts[health.category].ok++;
-        break;
-      case HEALTH_STATUS.DEGRADED:
-        categoryCounts[health.category].degraded++;
-        break;
-      case HEALTH_STATUS.FAILED:
-        categoryCounts[health.category].failed++;
-        break;
+    case HEALTH_STATUS.HEALTHY:
+      categoryCounts[health.category].ok++;
+      break;
+    case HEALTH_STATUS.DEGRADED:
+      categoryCounts[health.category].degraded++;
+      break;
+    case HEALTH_STATUS.FAILED:
+      categoryCounts[health.category].failed++;
+      break;
     }
   });
-  
+
   Object.entries(categoryCounts).forEach(([category, counts]) => {
     const total = counts.ok + counts.degraded + counts.failed;
     matrix[category] = {
@@ -365,27 +365,27 @@ async function generateArtifacts(allComponentHealths, categoryFilter = 'all') {
       total,
       healthPercentage: Math.round((counts.ok / total) * 100),
       slaTarget: 95, // 95% health SLA
-      slaStatus: counts.ok / total >= 0.95 ? 'MEETS_SLA' : 'BELOW_SLA'
+      slaStatus: counts.ok / total >= 0.95 ? 'MEETS_SLA' : 'BELOW_SLA',
     };
   });
-  
+
   const matrixArtifact = addMetadata({
     category: categoryFilter,
     matrix,
     overallHealth: Math.round((summary.ok / summary.total) * 100),
-    overallSlaStatus: summary.ok / summary.total >= 0.95 ? 'MEETS_SLA' : 'BELOW_SLA'
+    overallSlaStatus: summary.ok / summary.total >= 0.95 ? 'MEETS_SLA' : 'BELOW_SLA',
   }, { generator: 'infra-health-check-all' });
-  
+
   await fs.writeFile(
     path.join(CONFIG.artifactsDir, `${filePrefix}-matrix.json`),
-    stableStringify(matrixArtifact)
+    stableStringify(matrixArtifact),
   );
-  
+
   console.log('✅ Artifacts generated:');
   console.log(`  • ${filePrefix}-details.json`);
   console.log(`  • ${filePrefix}-summary.json`);
   console.log(`  • ${filePrefix}-matrix.json`);
-  
+
   return { detailsArtifact, summaryArtifact, matrixArtifact };
 }
 
@@ -394,25 +394,25 @@ async function generateArtifacts(allComponentHealths, categoryFilter = 'all') {
  */
 async function runHealthCheckAll(targetCategory = null) {
   const categoryFilter = targetCategory || 'all';
-  
+
   console.log(`🏥 INFRASTRUCTURE HEALTH CHECK - ${categoryFilter.toUpperCase()}`);
   console.log('=' .repeat(60));
   console.log(`Timeout: ${CONFIG.timeout}ms per component | Retries: ${CONFIG.retries} | Fail-soft: ${CONFIG.failSoft}`);
   console.log();
-  
+
   const startTime = Date.now();
   const allComponentHealths = [];
-  
+
   // Determine which categories to check
   const categoriesToCheck = targetCategory ? [targetCategory] : Object.keys(CATEGORY_MODULES);
-  
+
   // Validate target category if specified
   if (targetCategory && !CATEGORY_MODULES[targetCategory]) {
     console.error(`❌ Unknown category: ${targetCategory}`);
     console.log(`Available categories: ${Object.keys(CATEGORY_MODULES).join(', ')}`);
     process.exit(1);
   }
-  
+
   // Check each category in parallel for efficiency
   const categoryPromises = categoriesToCheck.map(async category => {
     try {
@@ -422,18 +422,18 @@ async function runHealthCheckAll(targetCategory = null) {
       return []; // Fail-soft: return empty array for failed categories
     }
   });
-  
+
   const categoryResults = await Promise.allSettled(categoryPromises);
-  
+
   // Flatten results
   categoryResults.forEach(result => {
     if (result.status === 'fulfilled') {
       allComponentHealths.push(...result.value);
     }
   });
-  
+
   const duration = Date.now() - startTime;
-  
+
   // Validate all health objects
   const invalidHealths = allComponentHealths.filter(health => {
     const validation = validateComponentHealth(health);
@@ -442,20 +442,20 @@ async function runHealthCheckAll(targetCategory = null) {
     }
     return !validation.isValid;
   });
-  
+
   if (invalidHealths.length > 0) {
     console.warn(`⚠️  Found ${invalidHealths.length} invalid health objects`);
   }
-  
+
   // Generate deterministic artifacts
   const artifacts = await generateArtifacts(allComponentHealths, categoryFilter);
-  
+
   // Validate summary
   const summaryValidation = validateHealthSummary(artifacts.summaryArtifact);
   if (!summaryValidation.isValid) {
     console.error('❌ Generated summary failed validation:', summaryValidation.errors);
   }
-  
+
   // Final report
   const summary = artifacts.summaryArtifact;
   console.log('\n🏥 HEALTH CHECK SUMMARY');
@@ -465,7 +465,7 @@ async function runHealthCheckAll(targetCategory = null) {
   console.log(`Degraded: ${summary.degraded} | Failed: ${summary.failed}`);
   console.log(`Duration: ${duration}ms`);
   console.log(`Artifacts: ${CONFIG.artifactsDir}/infra-health-*.json`);
-  
+
   // Determine exit code based on fail-soft strategy
   if (CONFIG.failSoft) {
     // Success if we have any healthy components

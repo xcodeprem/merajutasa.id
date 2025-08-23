@@ -16,7 +16,7 @@ function request(method, path, body){
       let b=''; res.on('data',d=>b+=d); res.on('end',()=>{ try { resolve(JSON.parse(b||'{}')); } catch(e){ reject(e); } });
     });
     req.on('error',reject);
-    if (data) req.write(data);
+    if (data) {req.write(data);}
     req.end();
   });
 }

@@ -1,9 +1,9 @@
 /**
  * MerajutASA.id - Phase 2 Week 3: Anomaly Detection System
- * 
+ *
  * Advanced anomaly detection for system and business metrics
  * Provides intelligent anomaly detection using statistical methods
- * 
+ *
  * Features:
  * - Statistical anomaly detection (Z-score, IQR)
  * - Machine learning-based detection
@@ -11,7 +11,7 @@
  * - Real-time anomaly alerting
  * - Historical baseline learning
  * - Adaptive thresholds
- * 
+ *
  * @version 1.0.0
  * @since Phase 2 Week 3
  */
@@ -22,7 +22,7 @@ import { v4 as uuidv4 } from 'uuid';
 export class AnomalyDetectionSystem extends EventEmitter {
   constructor(config = {}) {
     super();
-    
+
     this.config = {
       serviceName: config.serviceName || 'merajutasa-service',
       enableStatisticalDetection: config.enableStatisticalDetection !== false,
@@ -31,7 +31,7 @@ export class AnomalyDetectionSystem extends EventEmitter {
       anomalyThreshold: config.anomalyThreshold || 2.5, // Z-score threshold
       learningPeriod: config.learningPeriod || 604800000, // 7 days
       alertingEnabled: config.alertingEnabled !== false,
-      ...config
+      ...config,
     };
 
     // Anomaly detection state
@@ -39,11 +39,11 @@ export class AnomalyDetectionSystem extends EventEmitter {
     this.anomalies = new Map();
     this.detectionRules = new Map();
     this.metricHistory = new Map();
-    
+
     // Statistical models
     this.statisticalModels = new Map();
     this.businessModels = new Map();
-    
+
     this.initialize();
   }
 
@@ -55,7 +55,7 @@ export class AnomalyDetectionSystem extends EventEmitter {
     this.setupBusinessLogicDetectors();
     this.setupAnomalyRules();
     this.startAnomalyProcessor();
-    
+
     console.log(`Anomaly detection system initialized for ${this.config.serviceName}`);
   }
 
@@ -63,7 +63,7 @@ export class AnomalyDetectionSystem extends EventEmitter {
    * Setup statistical anomaly detectors
    */
   setupStatisticalDetectors() {
-    if (!this.config.enableStatisticalDetection) return;
+    if (!this.config.enableStatisticalDetection) {return;}
 
     // Response time anomaly detection
     this.addStatisticalDetector('response_time', {
@@ -72,7 +72,7 @@ export class AnomalyDetectionSystem extends EventEmitter {
       method: 'zscore',
       threshold: 2.5,
       windowSize: 100, // Number of data points for baseline
-      sensitivity: 'medium'
+      sensitivity: 'medium',
     });
 
     // Error rate anomaly detection
@@ -82,7 +82,7 @@ export class AnomalyDetectionSystem extends EventEmitter {
       method: 'iqr',
       threshold: 1.5,
       windowSize: 50,
-      sensitivity: 'high'
+      sensitivity: 'high',
     });
 
     // Throughput anomaly detection
@@ -92,7 +92,7 @@ export class AnomalyDetectionSystem extends EventEmitter {
       method: 'zscore',
       threshold: 2.0,
       windowSize: 200,
-      sensitivity: 'medium'
+      sensitivity: 'medium',
     });
 
     // Memory usage anomaly detection
@@ -102,7 +102,7 @@ export class AnomalyDetectionSystem extends EventEmitter {
       method: 'trend',
       threshold: 0.8, // 80% increase trend
       windowSize: 30,
-      sensitivity: 'low'
+      sensitivity: 'low',
     });
 
     // CPU usage anomaly detection
@@ -112,7 +112,7 @@ export class AnomalyDetectionSystem extends EventEmitter {
       method: 'zscore',
       threshold: 2.0,
       windowSize: 50,
-      sensitivity: 'medium'
+      sensitivity: 'medium',
     });
   }
 
@@ -120,7 +120,7 @@ export class AnomalyDetectionSystem extends EventEmitter {
    * Setup business logic anomaly detectors
    */
   setupBusinessLogicDetectors() {
-    if (!this.config.enableBusinessLogicDetection) return;
+    if (!this.config.enableBusinessLogicDetection) {return;}
 
     // Signing operation anomaly detection
     this.addBusinessLogicDetector('signing_anomaly', {
@@ -128,12 +128,12 @@ export class AnomalyDetectionSystem extends EventEmitter {
       condition: (metrics, baseline) => {
         const currentFailureRate = metrics.signing_failures / metrics.signing_total;
         const baselineFailureRate = baseline.avg_signing_failure_rate || 0.01;
-        
+
         // Anomaly if failure rate is 5x higher than baseline
         return currentFailureRate > baselineFailureRate * 5;
       },
       severity: 'high',
-      description: 'Signing operation failure rate significantly higher than baseline'
+      description: 'Signing operation failure rate significantly higher than baseline',
     });
 
     // Chain integrity anomaly detection
@@ -142,12 +142,12 @@ export class AnomalyDetectionSystem extends EventEmitter {
       condition: (metrics, baseline) => {
         const currentIntegrity = metrics.chain_integrity_score;
         const baselineIntegrity = baseline.avg_chain_integrity || 99;
-        
+
         // Anomaly if integrity drops by more than 2%
         return currentIntegrity < baselineIntegrity - 2;
       },
       severity: 'critical',
-      description: 'Chain integrity score significantly lower than baseline'
+      description: 'Chain integrity score significantly lower than baseline',
     });
 
     // Governance verification anomaly detection
@@ -156,12 +156,12 @@ export class AnomalyDetectionSystem extends EventEmitter {
       condition: (metrics, baseline) => {
         const currentFailureRate = metrics.governance_verification_failures / metrics.governance_verifications_total;
         const baselineFailureRate = baseline.avg_governance_failure_rate || 0.05;
-        
+
         // Anomaly if governance failure rate is 3x higher than baseline
         return currentFailureRate > baselineFailureRate * 3;
       },
       severity: 'high',
-      description: 'Governance verification failure rate significantly higher than baseline'
+      description: 'Governance verification failure rate significantly higher than baseline',
     });
 
     // Equity scoring anomaly detection
@@ -170,12 +170,12 @@ export class AnomalyDetectionSystem extends EventEmitter {
       condition: (metrics, baseline) => {
         const currentAvgScore = metrics.avg_equity_score;
         const baselineAvgScore = baseline.avg_equity_score || 0.7;
-        
+
         // Anomaly if average equity score drops significantly
         return currentAvgScore < baselineAvgScore * 0.8;
       },
       severity: 'medium',
-      description: 'Average equity score significantly lower than baseline'
+      description: 'Average equity score significantly lower than baseline',
     });
 
     // User behavior anomaly detection
@@ -184,12 +184,12 @@ export class AnomalyDetectionSystem extends EventEmitter {
       condition: (metrics, baseline) => {
         const currentActiveUsers = metrics.active_users;
         const baselineActiveUsers = baseline.avg_active_users || 100;
-        
+
         // Anomaly if active users suddenly spike or drop significantly
         return Math.abs(currentActiveUsers - baselineActiveUsers) > baselineActiveUsers * 0.5;
       },
       severity: 'medium',
-      description: 'User activity significantly different from baseline'
+      description: 'User activity significantly different from baseline',
     });
   }
 
@@ -201,42 +201,42 @@ export class AnomalyDetectionSystem extends EventEmitter {
     this.addAnomalyRule('system_degradation', {
       name: 'System Degradation',
       condition: (anomalies) => {
-        const systemAnomalies = anomalies.filter(a => 
-          ['response_time', 'error_rate', 'cpu_usage', 'memory_usage'].includes(a.detector)
+        const systemAnomalies = anomalies.filter(a =>
+          ['response_time', 'error_rate', 'cpu_usage', 'memory_usage'].includes(a.detector),
         );
         return systemAnomalies.length >= 2;
       },
       severity: 'critical',
       action: 'alert',
-      description: 'Multiple system metrics showing anomalous behavior'
+      description: 'Multiple system metrics showing anomalous behavior',
     });
 
     // Business critical anomaly rule
     this.addAnomalyRule('business_critical', {
       name: 'Business Critical Anomaly',
       condition: (anomalies) => {
-        return anomalies.some(a => 
-          ['signing_anomaly', 'chain_integrity_anomaly'].includes(a.detector) && 
-          a.severity === 'critical'
+        return anomalies.some(a =>
+          ['signing_anomaly', 'chain_integrity_anomaly'].includes(a.detector) &&
+          a.severity === 'critical',
         );
       },
       severity: 'critical',
       action: 'immediate_alert',
-      description: 'Critical business function showing anomalous behavior'
+      description: 'Critical business function showing anomalous behavior',
     });
 
     // Performance degradation rule
     this.addAnomalyRule('performance_degradation', {
       name: 'Performance Degradation',
       condition: (anomalies) => {
-        const perfAnomalies = anomalies.filter(a => 
-          ['response_time', 'throughput'].includes(a.detector)
+        const perfAnomalies = anomalies.filter(a =>
+          ['response_time', 'throughput'].includes(a.detector),
         );
         return perfAnomalies.length >= 1;
       },
       severity: 'medium',
       action: 'monitor',
-      description: 'Performance metrics showing degradation'
+      description: 'Performance metrics showing degradation',
     });
   }
 
@@ -249,7 +249,7 @@ export class AnomalyDetectionSystem extends EventEmitter {
       ...config,
       enabled: config.enabled !== false,
       baseline: null,
-      lastUpdated: null
+      lastUpdated: null,
     });
   }
 
@@ -262,7 +262,7 @@ export class AnomalyDetectionSystem extends EventEmitter {
       ...config,
       enabled: config.enabled !== false,
       baseline: null,
-      lastUpdated: null
+      lastUpdated: null,
     });
   }
 
@@ -273,7 +273,7 @@ export class AnomalyDetectionSystem extends EventEmitter {
     this.detectionRules.set(ruleId, {
       id: ruleId,
       ...rule,
-      enabled: rule.enabled !== false
+      enabled: rule.enabled !== false,
     });
   }
 
@@ -330,17 +330,17 @@ export class AnomalyDetectionSystem extends EventEmitter {
     const anomalies = [];
 
     for (const [detectorId, detector] of this.statisticalModels) {
-      if (!detector.enabled) continue;
+      if (!detector.enabled) {continue;}
 
       try {
         const metricValue = this.extractMetricValue(metrics, detector.metric);
-        if (metricValue === null || metricValue === undefined) continue;
+        if (metricValue === null || metricValue === undefined) {continue;}
 
         const baseline = await this.getOrCreateBaseline(detectorId, detector);
-        if (!baseline) continue;
+        if (!baseline) {continue;}
 
         const isAnomaly = this.checkStatisticalAnomaly(metricValue, baseline, detector);
-        
+
         if (isAnomaly) {
           const anomaly = this.createAnomalyRecord(detectorId, detector, metricValue, baseline, metrics);
           anomalies.push(anomaly);
@@ -364,14 +364,14 @@ export class AnomalyDetectionSystem extends EventEmitter {
     const anomalies = [];
 
     for (const [detectorId, detector] of this.businessModels) {
-      if (!detector.enabled) continue;
+      if (!detector.enabled) {continue;}
 
       try {
         const baseline = await this.getOrCreateBaseline(detectorId, detector);
-        if (!baseline) continue;
+        if (!baseline) {continue;}
 
         const isAnomaly = detector.condition(metrics, baseline);
-        
+
         if (isAnomaly) {
           const anomaly = this.createAnomalyRecord(detectorId, detector, null, baseline, metrics);
           anomalies.push(anomaly);
@@ -390,15 +390,15 @@ export class AnomalyDetectionSystem extends EventEmitter {
    */
   checkStatisticalAnomaly(value, baseline, detector) {
     switch (detector.method) {
-      case 'zscore':
-        return this.checkZScoreAnomaly(value, baseline, detector.threshold);
-      case 'iqr':
-        return this.checkIQRAnomaly(value, baseline, detector.threshold);
-      case 'trend':
-        return this.checkTrendAnomaly(value, baseline, detector.threshold);
-      default:
-        console.warn(`Unknown anomaly detection method: ${detector.method}`);
-        return false;
+    case 'zscore':
+      return this.checkZScoreAnomaly(value, baseline, detector.threshold);
+    case 'iqr':
+      return this.checkIQRAnomaly(value, baseline, detector.threshold);
+    case 'trend':
+      return this.checkTrendAnomaly(value, baseline, detector.threshold);
+    default:
+      console.warn(`Unknown anomaly detection method: ${detector.method}`);
+      return false;
     }
   }
 
@@ -451,7 +451,7 @@ export class AnomalyDetectionSystem extends EventEmitter {
     const compositeAnomalies = [];
 
     for (const [ruleId, rule] of this.detectionRules) {
-      if (!rule.enabled) continue;
+      if (!rule.enabled) {continue;}
 
       try {
         if (rule.condition(anomalies)) {
@@ -465,7 +465,7 @@ export class AnomalyDetectionSystem extends EventEmitter {
             description: rule.description,
             childAnomalies: anomalies.map(a => a.id),
             timestamp: new Date().toISOString(),
-            service: this.config.serviceName
+            service: this.config.serviceName,
           };
 
           compositeAnomalies.push(compositeAnomaly);
@@ -495,7 +495,7 @@ export class AnomalyDetectionSystem extends EventEmitter {
       timestamp: new Date().toISOString(),
       service: this.config.serviceName,
       method: detector.method,
-      threshold: detector.threshold
+      threshold: detector.threshold,
     };
   }
 
@@ -520,7 +520,7 @@ export class AnomalyDetectionSystem extends EventEmitter {
    */
   async createBaseline(detectorId, detector) {
     const history = this.metricHistory.get(detector.metric) || [];
-    
+
     if (history.length < detector.windowSize) {
       return null; // Not enough data for baseline
     }
@@ -543,7 +543,7 @@ export class AnomalyDetectionSystem extends EventEmitter {
       trend: this.calculateTrend(values),
       recent_avg: this.calculateMean(values.slice(-10)), // Last 10 values
       createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
+      updatedAt: new Date().toISOString(),
     };
 
     return baseline;
@@ -554,7 +554,7 @@ export class AnomalyDetectionSystem extends EventEmitter {
    */
   updateBaseline(detectorId, value) {
     const baseline = this.baselines.get(detectorId);
-    if (!baseline) return;
+    if (!baseline) {return;}
 
     // Simple moving average update (can be made more sophisticated)
     const alpha = 0.1; // Learning rate
@@ -569,14 +569,14 @@ export class AnomalyDetectionSystem extends EventEmitter {
    */
   updateMetricHistory(metrics) {
     const timestamp = new Date();
-    
+
     for (const [key, value] of Object.entries(metrics)) {
       if (typeof value === 'number' && !isNaN(value)) {
         let history = this.metricHistory.get(key) || [];
-        
+
         history.push({
           value,
-          timestamp: timestamp.toISOString()
+          timestamp: timestamp.toISOString(),
         });
 
         // Keep only recent history (last 1000 points)
@@ -632,16 +632,16 @@ export class AnomalyDetectionSystem extends EventEmitter {
     const index = (sorted.length - 1) * percentile;
     const lower = Math.floor(index);
     const upper = Math.ceil(index);
-    
+
     if (lower === upper) {
       return sorted[lower];
     }
-    
+
     return sorted[lower] * (upper - index) + sorted[upper] * (index - lower);
   }
 
   calculateTrend(values) {
-    if (values.length < 2) return 0;
+    if (values.length < 2) {return 0;}
 
     // Simple linear trend calculation
     const n = values.length;
@@ -663,7 +663,7 @@ export class AnomalyDetectionSystem extends EventEmitter {
       median: baseline.median,
       stddev: baseline.stddev,
       method: baseline.method,
-      dataPoints: baseline.dataPoints
+      dataPoints: baseline.dataPoints,
     };
   }
 
@@ -696,25 +696,25 @@ export class AnomalyDetectionSystem extends EventEmitter {
    */
   getAnomalyStatistics() {
     const currentAnomalies = this.getCurrentAnomalies();
-    
+
     const stats = {
       total: currentAnomalies.length,
       bySeverity: {
         critical: currentAnomalies.filter(a => a.severity === 'critical').length,
         high: currentAnomalies.filter(a => a.severity === 'high').length,
         medium: currentAnomalies.filter(a => a.severity === 'medium').length,
-        low: currentAnomalies.filter(a => a.severity === 'low').length
+        low: currentAnomalies.filter(a => a.severity === 'low').length,
       },
       byType: {
         statistical: currentAnomalies.filter(a => a.type === 'statistical').length,
         business: currentAnomalies.filter(a => a.type === 'business').length,
-        composite: currentAnomalies.filter(a => a.type === 'composite').length
+        composite: currentAnomalies.filter(a => a.type === 'composite').length,
       },
       detectors: {
         statistical: this.statisticalModels.size,
         business: this.businessModels.size,
-        rules: this.detectionRules.size
-      }
+        rules: this.detectionRules.size,
+      },
     };
 
     return stats;
@@ -766,7 +766,7 @@ export class AnomalyDetectionSystem extends EventEmitter {
   async healthCheck() {
     try {
       const stats = this.getAnomalyStatistics();
-      
+
       return {
         status: 'healthy',
         service: this.config.serviceName,
@@ -775,18 +775,18 @@ export class AnomalyDetectionSystem extends EventEmitter {
           businessLogicDetection: this.config.enableBusinessLogicDetection,
           alerting: this.config.alertingEnabled,
           anomalyThreshold: this.config.anomalyThreshold,
-          baselineWindow: this.config.baselineWindow
+          baselineWindow: this.config.baselineWindow,
         },
         statistics: stats,
         baselines: this.baselines.size,
         metricHistory: this.metricHistory.size,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
     } catch (error) {
       return {
         status: 'unhealthy',
         error: error.message,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
     }
   }
@@ -802,7 +802,7 @@ export class AnomalyDetectionSystem extends EventEmitter {
     this.anomalies.clear();
     this.baselines.clear();
     this.metricHistory.clear();
-    
+
     console.log('Anomaly detection system shutdown complete');
   }
 }

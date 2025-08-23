@@ -61,16 +61,16 @@ async function main() {
         const a = perf.actual || {};
         const b = perf.budgets || {};
         const perfViol = [];
-        if (typeof a.perf_score === 'number' && typeof b.perf_score_min === 'number' && a.perf_score < b.perf_score_min) perfViol.push('PERF_SCORE');
-        if (typeof a.lcp_ms === 'number' && typeof b.lcp_ms === 'number' && a.lcp_ms > b.lcp_ms) perfViol.push('LCP');
-        if (typeof a.tbt_ms === 'number' && typeof b.tbt_ms === 'number' && a.tbt_ms > b.tbt_ms) perfViol.push('TBT');
-        if (typeof a.cls === 'number' && typeof b.cls_max === 'number' && a.cls > b.cls_max) perfViol.push('CLS');
+        if (typeof a.perf_score === 'number' && typeof b.perf_score_min === 'number' && a.perf_score < b.perf_score_min) {perfViol.push('PERF_SCORE');}
+        if (typeof a.lcp_ms === 'number' && typeof b.lcp_ms === 'number' && a.lcp_ms > b.lcp_ms) {perfViol.push('LCP');}
+        if (typeof a.tbt_ms === 'number' && typeof b.tbt_ms === 'number' && a.tbt_ms > b.tbt_ms) {perfViol.push('TBT');}
+        if (typeof a.cls === 'number' && typeof b.cls_max === 'number' && a.cls > b.cls_max) {perfViol.push('CLS');}
         out.summary.perf = {
           url: perf.url,
           actual: a,
           budgets: b,
           pass: perfViol.length === 0,
-          violations: perfViol
+          violations: perfViol,
         };
       }
       // A11y summary
@@ -82,7 +82,7 @@ async function main() {
         out.summary.a11y = {
           url: a11y.url,
           counts,
-          pass: (counts.serious ?? 0) === 0
+          pass: (counts.serious ?? 0) === 0,
         };
       }
       await fs.writeFile(govPath, JSON.stringify(out,null,2));
@@ -100,9 +100,9 @@ async function main() {
       governance_verify_pass: results.governance.code === 0,
       h1_guard_pass: results.h1_guard.code === 0,
       collector_reliability_pass: results.collector_reliability.code === 0,
-      signer_chain_append_and_verify_pass: results.signer_chain.ok
+      signer_chain_append_and_verify_pass: results.signer_chain.ok,
     },
-    details: results
+    details: results,
   };
   await fs.writeFile('artifacts/gate1-report.json', JSON.stringify(report, null, 2));
   if (!pass) {

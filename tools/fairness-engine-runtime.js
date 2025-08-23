@@ -33,7 +33,7 @@ async function run(){
   if(arg){
     const p = arg.split('=')[1];
     try { sequence = JSON.parse(await fs.readFile(p,'utf8')).sequence; } catch { sequence = generateSequence(); }
-  } else sequence = generateSequence();
+  } else {sequence = generateSequence();}
   let st=null; const transitions=[]; const stateDurations={NONE:0,CANDIDATE:0,ACTIVE:0,CLEARED:0};
   sequence.forEach((ratio, idx)=>{
     const res = decide(params, st, ratio); st = { ...res, lastRatio:ratio }; stateDurations[st.state] = (stateDurations[st.state]||0)+1; if(res.events.length){ res.events.forEach(ev=> transitions.push({ idx, ratio, ...ev })); }
@@ -46,9 +46,9 @@ async function run(){
     exits: transitions.filter(t=>t.type==='EXIT').length,
     final_state: st?.state || 'NONE',
     state_durations: stateDurations,
-    state_distribution: Object.fromEntries(Object.entries(stateDurations).map(([k,v])=>[k, Number((v/sequence.length).toFixed(3))]))
+    state_distribution: Object.fromEntries(Object.entries(stateDurations).map(([k,v])=>[k, Number((v/sequence.length).toFixed(3))])),
   };
-  const report = { version:'1.0.0', generated_utc: new Date().toISOString(), params_version: params.version||null, metrics, sequence }; 
+  const report = { version:'1.0.0', generated_utc: new Date().toISOString(), params_version: params.version||null, metrics, sequence };
   await fs.writeFile('artifacts/fairness-engine-runtime-report.json', JSON.stringify(report,null,2));
   console.log(`[fairness-engine-runtime] final=${metrics.final_state} enters=${metrics.enters} reenters=${metrics.reenters} exits=${metrics.exits}`);
 }

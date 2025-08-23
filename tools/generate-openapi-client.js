@@ -17,12 +17,12 @@ function buildClientSource(endpoints) {
   const methodsSrc = endpoints.map(ep => {
     const hasBody = ep.method === 'post' || ep.method === 'put' || ep.method === 'patch';
     const args = [];
-    if (ep.path.includes('{')) args.push('pathParams = {}');
-    if (hasBody) args.push('body');
+    if (ep.path.includes('{')) {args.push('pathParams = {}');}
+    if (hasBody) {args.push('body');}
     args.push('config = {}');
 
     // Build path interpolation
-    let pathExpr = '`' + ep.path.replace(/\{([^}]+)\}/g, '${pathParams.$1}') + '`';
+    const pathExpr = '`' + ep.path.replace(/\{([^}]+)\}/g, '${pathParams.$1}') + '`';
     const axiosCall = ep.method === 'get' || ep.method === 'delete'
       ? `instance.${ep.method}(${pathExpr}, config)`
       : `instance.${ep.method}(${pathExpr}, body, config)`;

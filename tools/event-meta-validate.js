@@ -19,7 +19,7 @@ async function main(){
   const { validators } = compileMetaValidators(ajv);
   const issues = [];
   const registryCount = validators.size;
-  if (registryCount < REQUIRED_MIN) issues.push({ code:'REQUIRED_EVENTS_INSUFFICIENT', size: registryCount });
+  if (registryCount < REQUIRED_MIN) {issues.push({ code:'REQUIRED_EVENTS_INSUFFICIENT', size: registryCount });}
 
   // Optionally, verify that schemas compile and have sensible required keys
   const schemasSummary = Object.entries(META_SCHEMAS).map(([k,s])=>({ event_name:k, required:(s.required||[]), additionalProperties: s.additionalProperties!==false }));

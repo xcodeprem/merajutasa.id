@@ -40,10 +40,10 @@ async function checkSecurityGating(policy) {
   try {
     const securityReport = await fs.readFile('artifacts/security-patterns-smoke.json', 'utf8');
     const security = JSON.parse(securityReport);
-    
+
     const highCount = security.high_severity_count || 0;
     const mediumCount = security.medium_severity_count || 0;
-    
+
     // Apply policy gating rules
     const secPolicy = policy?.checks?.['security-smoke']?.gating;
     if (secPolicy && secPolicy.HIGH && highCount > 0) {
@@ -51,11 +51,11 @@ async function checkSecurityGating(policy) {
       console.error('[governance-verify] HIGH security violations are now gating (FAIL)');
       return false;
     }
-    
+
     if (highCount > 0 || mediumCount > 0) {
       console.warn(`[governance-verify] Security violations detected: ${highCount}H/${mediumCount}M`);
     }
-    
+
     return true;
   } catch (error) {
     console.warn(`[governance-verify] Warning: Could not check security patterns: ${error.message}`);
@@ -125,7 +125,7 @@ const STEPS = [
   // Wave 2 anchors (non-blocking)
   { name: 'event-anchor', cmd: ['node','tools/event-anchor-chain.js'], advisory: true },
   { name: 'terminology-adoption', cmd: ['node','tools/terminology-adoption.js'], advisory: true },
-  { name: 'terminology-scan', cmd: ['node','tools/terminology-scan.js'], advisory: true }
+  { name: 'terminology-scan', cmd: ['node','tools/terminology-scan.js'], advisory: true },
 ];
 
 async function runStep(step){
@@ -137,15 +137,15 @@ async function runStep(step){
       const isAdvisory = !!step.advisory;
       const isCritical = !!step.critical;
       let status;
-      if(code === 0) status = 'OK';
-      else if(isAdvisory) status = 'ADVISORY';
-      else if(isCritical) status = 'ERROR';
-      else status = 'ERROR';
+      if(code === 0) {status = 'OK';}
+      else if(isAdvisory) {status = 'ADVISORY';}
+      else if(isCritical) {status = 'ERROR';}
+      else {status = 'ERROR';}
       if(code !== 0 && isAdvisory){
         console.error(`[governance-verify] Advisory step non-zero (continuing): ${step.name} exit=${code}`);
       }
       logAction({ action: 'step', step: step.name, cmd: step.cmd.join(' '), exit_code: code, status, duration_ms: durationMs, critical:isCritical, advisory:isAdvisory });
-      if(code === 0 || isAdvisory) return resolve();
+      if(code === 0 || isAdvisory) {return resolve();}
       reject(new Error(`${step.name} critical failure`));
     });
   });
@@ -162,7 +162,7 @@ async function logAction(entry){
     await fs.mkdir(ACTION_LOG_DIR,{recursive:true});
     const p = currentLogPath();
     let arr = [];
-    try { arr = JSON.parse(await fs.readFile(p,'utf8')); if(!Array.isArray(arr)) arr=[]; } catch {/*ignore*/}
+    try { arr = JSON.parse(await fs.readFile(p,'utf8')); if(!Array.isArray(arr)) {arr=[];} } catch {/*ignore*/}
     const logEntry = addMetadata({ timestamp: new Date().toISOString(), ...entry }, { generator: 'governance-verify' });
     arr.push(logEntry);
     await fs.writeFile(p, stableStringify(arr));
@@ -177,12 +177,12 @@ async function aggregate(){
     params: 'artifacts/param-integrity-matrix.json',
     hype: 'artifacts/hype-lint.json',
     disclaimers: 'artifacts/disclaimers-lint.json',
-  decLint: 'artifacts/dec-lint.json',
+    decLint: 'artifacts/dec-lint.json',
     principles: 'artifacts/principles-impact-report.json',
-  drift: 'artifacts/no-silent-drift-report.json',
-  policyAgg: 'artifacts/policy-aggregation-threshold.json',
-  terminologyAdoption: 'artifacts/terminology-adoption.json',
-  securitySmoke: 'artifacts/security-patterns-smoke.json'
+    drift: 'artifacts/no-silent-drift-report.json',
+    policyAgg: 'artifacts/policy-aggregation-threshold.json',
+    terminologyAdoption: 'artifacts/terminology-adoption.json',
+    securitySmoke: 'artifacts/security-patterns-smoke.json',
   };
   // add privacy asserts
   artifactPaths.privacyAsserts = 'artifacts/privacy-asserts.json';
@@ -197,16 +197,16 @@ async function aggregate(){
     param_mismatches: out.artifacts.params?.mismatches ?? 0,
     hype_hits: out.artifacts.hype?.total_hits ?? 0,
     disclaimers_status: out.artifacts.disclaimers?.status || 'unknown',
-  dec_lint_violation_count: out.artifacts.decLint?.summary?.violation_count ?? out.artifacts.decLint?.violations?.length ?? 0,
-  drift_status: out.artifacts.drift?.status || 'unknown',
-  policy_aggregation_status: out.artifacts.policyAgg?.status || 'unknown',
-  policy_aggregation_violations: out.artifacts.policyAgg?.violations?.length ?? 0,
-  terminology_adoption_percent: out.artifacts.terminologyAdoption?.adoptionPercent ?? null,
-  terminology_old_total: out.artifacts.terminologyAdoption?.old_total ?? null,
-  terminology_new_total: out.artifacts.terminologyAdoption?.new_total ?? null,
-  security_high_count: out.artifacts.securitySmoke?.high_severity_count ?? 0,
-  security_medium_count: out.artifacts.securitySmoke?.medium_severity_count ?? 0,
-  security_summary: out.artifacts.securitySmoke?.summary || 'unknown'
+    dec_lint_violation_count: out.artifacts.decLint?.summary?.violation_count ?? out.artifacts.decLint?.violations?.length ?? 0,
+    drift_status: out.artifacts.drift?.status || 'unknown',
+    policy_aggregation_status: out.artifacts.policyAgg?.status || 'unknown',
+    policy_aggregation_violations: out.artifacts.policyAgg?.violations?.length ?? 0,
+    terminology_adoption_percent: out.artifacts.terminologyAdoption?.adoptionPercent ?? null,
+    terminology_old_total: out.artifacts.terminologyAdoption?.old_total ?? null,
+    terminology_new_total: out.artifacts.terminologyAdoption?.new_total ?? null,
+    security_high_count: out.artifacts.securitySmoke?.high_severity_count ?? 0,
+    security_medium_count: out.artifacts.securitySmoke?.medium_severity_count ?? 0,
+    security_summary: out.artifacts.securitySmoke?.summary || 'unknown',
   };
   // privacy asserts summary
   const pa = out.artifacts.privacyAsserts || {};
@@ -214,20 +214,20 @@ async function aggregate(){
   out.summary.privacy_retention_len = pa?.checks?.retention?.length ?? null;
   out.summary.privacy_format_invalid_prev = pa?.checks?.format?.invalid_previous_count ?? null;
   out.summary.privacy_freshness_ok = pa?.checks?.freshness?.ok ?? null;
-  
+
   // Determine overall status
   const criticalFailures = [];
-  if (out.summary.param_mismatches > 0) criticalFailures.push('param-mismatches');
-  if (out.summary.dec_lint_violation_count > 0) criticalFailures.push('dec-violations');
-  if (out.summary.security_high_count > 0) criticalFailures.push('high-security');
-  if (out.summary.drift_status === 'FAIL') criticalFailures.push('drift-detected');
-  
+  if (out.summary.param_mismatches > 0) {criticalFailures.push('param-mismatches');}
+  if (out.summary.dec_lint_violation_count > 0) {criticalFailures.push('dec-violations');}
+  if (out.summary.security_high_count > 0) {criticalFailures.push('high-security');}
+  if (out.summary.drift_status === 'FAIL') {criticalFailures.push('drift-detected');}
+
   out.summary.overall_status = criticalFailures.length > 0 ? 'FAIL' : 'PASS';
   out.summary.critical_failures = criticalFailures;
-  
+
   // Add metadata
   const enhancedOut = addMetadata(out, { generator: 'governance-verify-aggregator' });
-  
+
   await fs.writeFile('artifacts/governance-verify-summary.json', stableStringify(enhancedOut));
 }
 
@@ -237,18 +237,18 @@ async function main(){
   const policyFlag = args.findIndex(arg => arg === '--policy');
   const policyPath = policyFlag >= 0 && args[policyFlag + 1] ? args[policyFlag + 1] : 'tools/policy/policy.json';
   const isA8Mode = args.includes('--a8');
-  
+
   // Load policy configuration
   const policy = await loadPolicy(policyPath);
-  
+
   // Special handling for the first step: mimic run but via helper
   if (process.argv[2] === '__internal_spechash__'){
     await runSpecHashWithAutoSeal();
     return;
   }
-  
+
   let securityGatingPassed = true;
-  
+
   for (const step of STEPS){
     console.log(`[governance-verify] Running step: ${step.name}${step.critical?' [CRITICAL]': (step.advisory?' [ADVISORY]':'')}`);
     if (step.name === 'spec-hash-diff-strict-or-autoseal'){
@@ -256,7 +256,7 @@ async function main(){
     } else {
       await runStep(step);
     }
-    
+
     // Check security gating after security-patterns-smoke step
     if (step.name === 'security-patterns-smoke' && policy) {
       securityGatingPassed = await checkSecurityGating(policy);
@@ -266,7 +266,7 @@ async function main(){
       }
     }
   }
-  
+
   // Final security gating check if not done during steps
   if (policy && securityGatingPassed) {
     securityGatingPassed = await checkSecurityGating(policy);
@@ -292,8 +292,8 @@ async function main(){
             seq: entry.seq,
             contentHash: entry.contentHash,
             prevHash: entry.prevHash,
-            ts: entry.ts
-          }
+            ts: entry.ts,
+          },
         }, null, 2));
         await logAction({ action:'chain-append', status:'OK', seq: entry.seq, contentHash: entry.contentHash });
       } else {

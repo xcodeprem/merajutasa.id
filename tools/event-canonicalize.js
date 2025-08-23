@@ -9,7 +9,7 @@
 import { promises as fs } from 'fs';
 
 function sortObject(value){
-  if (Array.isArray(value)) return value.map(sortObject);
+  if (Array.isArray(value)) {return value.map(sortObject);}
   if (value && typeof value === 'object'){
     const sorted = {};
     Object.keys(value).sort().forEach(k=>{ sorted[k] = sortObject(value[k]); });
@@ -20,7 +20,7 @@ function sortObject(value){
 
 async function readInput(file){
   if (file){ return JSON.parse(await fs.readFile(file,'utf8')); }
-  const chunks=[]; for await (const c of process.stdin) chunks.push(c);
+  const chunks=[]; for await (const c of process.stdin) {chunks.push(c);}
   return JSON.parse(Buffer.concat(chunks).toString('utf8'));
 }
 

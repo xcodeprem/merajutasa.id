@@ -13,26 +13,26 @@ export class CacheStatsMonitor {
       // Monitoring settings
       refreshInterval: options.refreshInterval || 30000, // 30 seconds
       retentionPeriod: options.retentionPeriod || 24 * 60 * 60 * 1000, // 24 hours
-      
+
       // Output settings
       outputPath: options.outputPath || 'artifacts/cache-statistics',
       saveHistory: options.saveHistory !== false,
-      
+
       // Thresholds
       lowHitRateThreshold: options.lowHitRateThreshold || 70, // 70%
       highMissRateThreshold: options.highMissRateThreshold || 30, // 30%
       slowResponseThreshold: options.slowResponseThreshold || 200, // 200ms
-      
-      ...options
+
+      ...options,
     };
 
     this.cache = getCacheStrategies();
     this.stats = {
       current: {},
       history: [],
-      alerts: []
+      alerts: [],
     };
-    
+
     this.isMonitoring = false;
     this.monitoringInterval = null;
   }
@@ -43,48 +43,48 @@ export class CacheStatsMonitor {
   async getCacheStats() {
     try {
       const timestamp = new Date().toISOString();
-      
+
       // Collect cache health information
       const cacheHealth = await this.cache.healthCheck();
-      
+
       // Get cache performance metrics
       const performanceMetrics = await this.collectPerformanceMetrics();
-      
+
       // Analyze cache patterns
       const patternAnalysis = await this.analyzeCachePatterns();
-      
+
       // Calculate efficiency metrics
       const efficiencyMetrics = this.calculateEfficiencyMetrics(performanceMetrics);
-      
+
       const stats = {
         timestamp,
         health: cacheHealth,
         performance: performanceMetrics,
         patterns: patternAnalysis,
         efficiency: efficiencyMetrics,
-        alerts: this.checkForAlerts(performanceMetrics, efficiencyMetrics)
+        alerts: this.checkForAlerts(performanceMetrics, efficiencyMetrics),
       };
 
       this.stats.current = stats;
-      
+
       // Add to history if monitoring
       if (this.isMonitoring) {
         this.addToHistory(stats);
       }
-      
+
       // Save statistics if enabled
       if (this.config.saveHistory) {
         await this.saveStats(stats);
       }
-      
+
       return stats;
-      
+
     } catch (error) {
       console.error('❌ Failed to collect cache statistics:', error.message);
       return {
         timestamp: new Date().toISOString(),
         error: error.message,
-        health: { status: 'error' }
+        health: { status: 'error' },
       };
     }
   }
@@ -97,7 +97,7 @@ export class CacheStatsMonitor {
       memory: await this.getMemoryCacheMetrics(),
       redis: await this.getRedisCacheMetrics(),
       hybrid: await this.getHybridCacheMetrics(),
-      overall: {}
+      overall: {},
     };
 
     // Calculate overall metrics
@@ -111,7 +111,7 @@ export class CacheStatsMonitor {
       totalMisses,
       hitRate: totalRequests > 0 ? Math.round((totalHits / totalRequests) * 100) : 0,
       missRate: totalRequests > 0 ? Math.round((totalMisses / totalRequests) * 100) : 0,
-      avgResponseTime: this.calculateAverageResponseTime(metrics)
+      avgResponseTime: this.calculateAverageResponseTime(metrics),
     };
 
     return metrics;
@@ -133,13 +133,13 @@ export class CacheStatsMonitor {
         utilizationPercent: Math.floor(Math.random() * 30) + 60,
         avgResponseTime: Math.floor(Math.random() * 5) + 1, // 1-6ms
         evictions: Math.floor(Math.random() * 10),
-        status: 'healthy'
+        status: 'healthy',
       };
     } catch (error) {
       return {
         layer: 'memory',
         error: error.message,
-        status: 'error'
+        status: 'error',
       };
     }
   }
@@ -161,13 +161,13 @@ export class CacheStatsMonitor {
         utilizationPercent: Math.floor(Math.random() * 40) + 40,
         avgResponseTime: Math.floor(Math.random() * 20) + 10, // 10-30ms
         networkLatency: Math.floor(Math.random() * 5) + 2, // 2-7ms
-        status: 'healthy'
+        status: 'healthy',
       };
     } catch (error) {
       return {
         layer: 'redis',
         error: error.message,
-        status: 'error'
+        status: 'error',
       };
     }
   }
@@ -187,13 +187,13 @@ export class CacheStatsMonitor {
         demotions: Math.floor(Math.random() * 15) + 3, // L1 to L2 demotions
         avgResponseTime: Math.floor(Math.random() * 15) + 5, // 5-20ms
         strategyEfficiency: Math.floor(Math.random() * 20) + 75, // 75-95%
-        status: 'healthy'
+        status: 'healthy',
       };
     } catch (error) {
       return {
         layer: 'hybrid',
         error: error.message,
-        status: 'error'
+        status: 'error',
       };
     }
   }
@@ -206,7 +206,7 @@ export class CacheStatsMonitor {
       topKeys: await this.getTopAccessedKeys(),
       accessPatterns: await this.getAccessPatterns(),
       hotspots: await this.identifyHotspots(),
-      recommendations: await this.generatePatternRecommendations()
+      recommendations: await this.generatePatternRecommendations(),
     };
   }
 
@@ -220,7 +220,7 @@ export class CacheStatsMonitor {
       { key: '/under-served', hits: Math.floor(Math.random() * 80) + 150, lastAccess: new Date().toISOString() },
       { key: '/weekly-trends', hits: Math.floor(Math.random() * 60) + 100, lastAccess: new Date().toISOString() },
       { key: '/monthly-rollup', hits: Math.floor(Math.random() * 40) + 50, lastAccess: new Date().toISOString() },
-      { key: '/health', hits: Math.floor(Math.random() * 200) + 300, lastAccess: new Date().toISOString() }
+      { key: '/health', hits: Math.floor(Math.random() * 200) + 300, lastAccess: new Date().toISOString() },
     ];
 
     return sampleKeys.sort((a, b) => b.hits - a.hits).slice(0, 10);
@@ -235,7 +235,7 @@ export class CacheStatsMonitor {
       lowTrafficHours: ['00:00-06:00', '22:00-24:00'],
       dailyTrend: 'increasing',
       weeklyTrend: 'stable',
-      seasonality: 'business_hours'
+      seasonality: 'business_hours',
     };
   }
 
@@ -249,15 +249,15 @@ export class CacheStatsMonitor {
         key: '/health',
         issue: 'Extremely high access frequency',
         impact: 'medium',
-        recommendation: 'Consider longer TTL or edge caching'
+        recommendation: 'Consider longer TTL or edge caching',
       },
       {
         type: 'large_value',
         key: '/monthly-rollup',
         issue: 'Large response size causing memory pressure',
         impact: 'high',
-        recommendation: 'Implement response compression or pagination'
-      }
+        recommendation: 'Implement response compression or pagination',
+      },
     ];
   }
 
@@ -270,14 +270,14 @@ export class CacheStatsMonitor {
         type: 'ttl_optimization',
         message: 'Adjust TTL for /kpi/h1 based on access patterns',
         priority: 'medium',
-        expectedImprovement: '15% hit rate increase'
+        expectedImprovement: '15% hit rate increase',
       },
       {
         type: 'preload_strategy',
         message: 'Implement cache preloading for morning peak hours',
         priority: 'low',
-        expectedImprovement: '5% response time decrease'
-      }
+        expectedImprovement: '5% response time decrease',
+      },
     ];
   }
 
@@ -286,24 +286,24 @@ export class CacheStatsMonitor {
    */
   calculateEfficiencyMetrics(performanceMetrics) {
     const { overall } = performanceMetrics;
-    
+
     return {
       efficiency: {
         overall: overall.hitRate,
         grade: this.getEfficiencyGrade(overall.hitRate),
         trend: this.calculateTrend(),
-        improvement: this.calculateImprovementPotential(overall.hitRate)
+        improvement: this.calculateImprovementPotential(overall.hitRate),
       },
       performance: {
         responseTime: overall.avgResponseTime,
         grade: this.getResponseTimeGrade(overall.avgResponseTime),
-        comparison: this.compareToBaseline(overall.avgResponseTime)
+        comparison: this.compareToBaseline(overall.avgResponseTime),
       },
       resource: {
         memoryEfficiency: this.calculateMemoryEfficiency(performanceMetrics),
         networkEfficiency: this.calculateNetworkEfficiency(performanceMetrics),
-        costEffectiveness: this.calculateCostEffectiveness(performanceMetrics)
-      }
+        costEffectiveness: this.calculateCostEffectiveness(performanceMetrics),
+      },
     };
   }
 
@@ -311,11 +311,11 @@ export class CacheStatsMonitor {
    * Get efficiency grade based on hit rate
    */
   getEfficiencyGrade(hitRate) {
-    if (hitRate >= 95) return 'A+';
-    if (hitRate >= 90) return 'A';
-    if (hitRate >= 85) return 'B+';
-    if (hitRate >= 80) return 'B';
-    if (hitRate >= 70) return 'C';
+    if (hitRate >= 95) {return 'A+';}
+    if (hitRate >= 90) {return 'A';}
+    if (hitRate >= 85) {return 'B+';}
+    if (hitRate >= 80) {return 'B';}
+    if (hitRate >= 70) {return 'C';}
     return 'D';
   }
 
@@ -323,11 +323,11 @@ export class CacheStatsMonitor {
    * Get response time grade
    */
   getResponseTimeGrade(avgResponseTime) {
-    if (avgResponseTime <= 10) return 'A+';
-    if (avgResponseTime <= 25) return 'A';
-    if (avgResponseTime <= 50) return 'B+';
-    if (avgResponseTime <= 100) return 'B';
-    if (avgResponseTime <= 200) return 'C';
+    if (avgResponseTime <= 10) {return 'A+';}
+    if (avgResponseTime <= 25) {return 'A';}
+    if (avgResponseTime <= 50) {return 'B+';}
+    if (avgResponseTime <= 100) {return 'B';}
+    if (avgResponseTime <= 200) {return 'C';}
     return 'D';
   }
 
@@ -337,14 +337,14 @@ export class CacheStatsMonitor {
   calculateAverageResponseTime(metrics) {
     const { memory, redis, hybrid } = metrics;
     const totalHits = memory.hits + redis.hits + hybrid.hits;
-    
-    if (totalHits === 0) return 0;
-    
-    const weightedSum = 
+
+    if (totalHits === 0) {return 0;}
+
+    const weightedSum =
       (memory.hits * memory.avgResponseTime) +
       (redis.hits * redis.avgResponseTime) +
       (hybrid.hits * hybrid.avgResponseTime);
-    
+
     return Math.round(weightedSum / totalHits);
   }
 
@@ -352,15 +352,15 @@ export class CacheStatsMonitor {
    * Calculate trend based on historical data
    */
   calculateTrend() {
-    if (this.stats.history.length < 2) return 'insufficient_data';
-    
+    if (this.stats.history.length < 2) {return 'insufficient_data';}
+
     const recent = this.stats.history.slice(-5);
     const hitRates = recent.map(stat => stat.performance?.overall?.hitRate || 0);
-    
+
     const trend = hitRates[hitRates.length - 1] - hitRates[0];
-    
-    if (trend > 2) return 'improving';
-    if (trend < -2) return 'declining';
+
+    if (trend > 2) {return 'improving';}
+    if (trend < -2) {return 'declining';}
     return 'stable';
   }
 
@@ -370,9 +370,9 @@ export class CacheStatsMonitor {
   calculateImprovementPotential(currentHitRate) {
     const maxPossible = 95; // Realistic maximum
     const potential = maxPossible - currentHitRate;
-    
-    if (potential <= 5) return 'low';
-    if (potential <= 15) return 'medium';
+
+    if (potential <= 5) {return 'low';}
+    if (potential <= 15) {return 'medium';}
     return 'high';
   }
 
@@ -382,12 +382,12 @@ export class CacheStatsMonitor {
   calculateMemoryEfficiency(metrics) {
     const memoryUtil = metrics.memory.utilizationPercent;
     const redisUtil = metrics.redis.utilizationPercent;
-    
+
     // Ideal utilization is 70-85%
     const avgUtil = (memoryUtil + redisUtil) / 2;
-    
-    if (avgUtil >= 70 && avgUtil <= 85) return 'optimal';
-    if (avgUtil < 70) return 'underutilized';
+
+    if (avgUtil >= 70 && avgUtil <= 85) {return 'optimal';}
+    if (avgUtil < 70) {return 'underutilized';}
     return 'overutilized';
   }
 
@@ -396,10 +396,10 @@ export class CacheStatsMonitor {
    */
   calculateNetworkEfficiency(metrics) {
     const networkLatency = metrics.redis.networkLatency || 5;
-    
-    if (networkLatency <= 3) return 'excellent';
-    if (networkLatency <= 7) return 'good';
-    if (networkLatency <= 15) return 'acceptable';
+
+    if (networkLatency <= 3) {return 'excellent';}
+    if (networkLatency <= 7) {return 'good';}
+    if (networkLatency <= 15) {return 'acceptable';}
     return 'poor';
   }
 
@@ -409,13 +409,13 @@ export class CacheStatsMonitor {
   calculateCostEffectiveness(metrics) {
     const hitRate = metrics.overall.hitRate;
     const resourceUsage = (metrics.memory.utilizationPercent + metrics.redis.utilizationPercent) / 2;
-    
+
     // Simple formula: high hit rate with reasonable resource usage
     const effectiveness = (hitRate / 100) * (1 - Math.abs(resourceUsage - 75) / 100);
-    
-    if (effectiveness >= 0.8) return 'excellent';
-    if (effectiveness >= 0.6) return 'good';
-    if (effectiveness >= 0.4) return 'fair';
+
+    if (effectiveness >= 0.8) {return 'excellent';}
+    if (effectiveness >= 0.6) {return 'good';}
+    if (effectiveness >= 0.4) {return 'fair';}
     return 'poor';
   }
 
@@ -425,11 +425,11 @@ export class CacheStatsMonitor {
   compareToBaseline(currentResponseTime) {
     const baseline = 50; // 50ms baseline
     const difference = currentResponseTime - baseline;
-    
-    if (difference <= -20) return 'much_better';
-    if (difference <= -5) return 'better';
-    if (difference <= 5) return 'similar';
-    if (difference <= 20) return 'worse';
+
+    if (difference <= -20) {return 'much_better';}
+    if (difference <= -5) {return 'better';}
+    if (difference <= 5) {return 'similar';}
+    if (difference <= 20) {return 'worse';}
     return 'much_worse';
   }
 
@@ -446,7 +446,7 @@ export class CacheStatsMonitor {
         type: 'low_hit_rate',
         severity: 'warning',
         message: `Cache hit rate (${overall.hitRate}%) is below threshold (${this.config.lowHitRateThreshold}%)`,
-        action: 'Review cache strategies and TTL settings'
+        action: 'Review cache strategies and TTL settings',
       });
     }
 
@@ -456,7 +456,7 @@ export class CacheStatsMonitor {
         type: 'slow_response',
         severity: 'warning',
         message: `Average response time (${overall.avgResponseTime}ms) exceeds threshold (${this.config.slowResponseThreshold}ms)`,
-        action: 'Investigate cache layer performance and network latency'
+        action: 'Investigate cache layer performance and network latency',
       });
     }
 
@@ -466,7 +466,7 @@ export class CacheStatsMonitor {
         type: 'high_memory_usage',
         severity: 'critical',
         message: `Memory cache utilization (${performanceMetrics.memory.utilizationPercent}%) is critically high`,
-        action: 'Increase memory cache size or review eviction policies'
+        action: 'Increase memory cache size or review eviction policies',
       });
     }
 
@@ -478,11 +478,11 @@ export class CacheStatsMonitor {
    */
   addToHistory(stats) {
     this.stats.history.push(stats);
-    
+
     // Clean up old history entries
     const cutoffTime = Date.now() - this.config.retentionPeriod;
-    this.stats.history = this.stats.history.filter(entry => 
-      new Date(entry.timestamp).getTime() > cutoffTime
+    this.stats.history = this.stats.history.filter(entry =>
+      new Date(entry.timestamp).getTime() > cutoffTime,
     );
   }
 
@@ -497,7 +497,7 @@ export class CacheStatsMonitor {
 
     console.log(`🔄 Starting cache statistics monitoring (interval: ${this.config.refreshInterval}ms)`);
     this.isMonitoring = true;
-    
+
     this.monitoringInterval = setInterval(async () => {
       try {
         await this.getCacheStats();
@@ -518,7 +518,7 @@ export class CacheStatsMonitor {
 
     console.log('⏹️ Stopping cache statistics monitoring');
     this.isMonitoring = false;
-    
+
     if (this.monitoringInterval) {
       clearInterval(this.monitoringInterval);
       this.monitoringInterval = null;
@@ -532,18 +532,18 @@ export class CacheStatsMonitor {
     try {
       // Ensure output directory exists
       await fs.mkdir(this.config.outputPath, { recursive: true });
-      
+
       // Save current stats
       const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
       const filename = `cache-stats-${timestamp}.json`;
       const filepath = path.join(this.config.outputPath, filename);
-      
+
       await fs.writeFile(filepath, JSON.stringify(stats, null, 2));
-      
+
       // Save latest stats
       const latestPath = path.join(this.config.outputPath, 'latest-cache-stats.json');
       await fs.writeFile(latestPath, JSON.stringify(stats, null, 2));
-      
+
     } catch (error) {
       console.error('❌ Failed to save cache statistics:', error.message);
     }
@@ -555,20 +555,20 @@ export class CacheStatsMonitor {
   async healthCheck() {
     try {
       const cacheHealth = await this.cache.healthCheck();
-      
+
       return {
         status: 'healthy',
         monitoring: this.isMonitoring,
         cacheStatus: cacheHealth.status,
         historyEntries: this.stats.history.length,
         lastUpdate: this.stats.current.timestamp || null,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
     } catch (error) {
       return {
         status: 'error',
         error: error.message,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
     }
   }
@@ -585,24 +585,24 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const command = process.argv[2] || 'stats';
 
   switch (command) {
-    case 'stats':
-      const stats = await monitor.getCacheStats();
-      console.log('Cache Statistics:', JSON.stringify(stats, null, 2));
-      break;
-    case 'monitor':
-      monitor.startMonitoring();
-      console.log('Press Ctrl+C to stop monitoring');
-      process.on('SIGINT', () => {
-        monitor.stopMonitoring();
-        process.exit(0);
-      });
-      break;
-    case 'health':
-      const health = await monitor.healthCheck();
-      console.log('Health Check:', JSON.stringify(health, null, 2));
-      break;
-    default:
-      console.log('Available commands: stats, monitor, health');
-      process.exit(1);
+  case 'stats':
+    const stats = await monitor.getCacheStats();
+    console.log('Cache Statistics:', JSON.stringify(stats, null, 2));
+    break;
+  case 'monitor':
+    monitor.startMonitoring();
+    console.log('Press Ctrl+C to stop monitoring');
+    process.on('SIGINT', () => {
+      monitor.stopMonitoring();
+      process.exit(0);
+    });
+    break;
+  case 'health':
+    const health = await monitor.healthCheck();
+    console.log('Health Check:', JSON.stringify(health, null, 2));
+    break;
+  default:
+    console.log('Available commands: stats, monitor, health');
+    process.exit(1);
   }
 }

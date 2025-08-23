@@ -9,7 +9,7 @@ import { performance } from 'perf_hooks';
 export class ServiceMeshIntegration extends EventEmitter {
   constructor(config = {}) {
     super();
-    
+
     this.config = {
       serviceName: 'unknown-service',
       healthCheckInterval: 30000,
@@ -19,7 +19,7 @@ export class ServiceMeshIntegration extends EventEmitter {
       retryAttempts: 3,
       retryDelay: 1000,
       enableMetrics: true,
-      ...config
+      ...config,
     };
 
     this.services = new Map();
@@ -30,7 +30,7 @@ export class ServiceMeshIntegration extends EventEmitter {
       successfulRequests: 0,
       failedRequests: 0,
       averageLatency: 0,
-      services: new Map()
+      services: new Map(),
     };
 
     this.healthCheckTimer = null;
@@ -51,27 +51,27 @@ export class ServiceMeshIntegration extends EventEmitter {
       status: 'unknown',
       lastHealthCheck: null,
       metadata: instance.metadata || {},
-      registeredAt: new Date().toISOString()
+      registeredAt: new Date().toISOString(),
     };
 
     if (!this.services.has(serviceName)) {
       this.services.set(serviceName, []);
     }
-    
+
     this.services.get(serviceName).push(serviceInstance);
-    
+
     // Initialize circuit breaker for this service
     if (!this.circuitBreakers.has(serviceName)) {
       this.initializeCircuitBreaker(serviceName);
     }
-    
+
     // Initialize load balancer for this service
     if (!this.loadBalancers.has(serviceName)) {
       this.initializeLoadBalancer(serviceName);
     }
-    
+
     this.emit('serviceRegistered', { serviceName, instance: serviceInstance });
-    
+
     return serviceInstance.id;
   }
 
@@ -116,7 +116,7 @@ export class ServiceMeshIntegration extends EventEmitter {
    */
   async callService(serviceName, callFunction, options = {}) {
     const circuitBreaker = this.circuitBreakers.get(serviceName);
-    
+
     if (circuitBreaker && circuitBreaker.state === 'open') {
       throw new Error(`Circuit breaker is open for service: ${serviceName}`);
     }
@@ -129,27 +129,27 @@ export class ServiceMeshIntegration extends EventEmitter {
       try {
         const instance = this.discoverService(serviceName);
         const result = await callFunction(instance);
-        
+
         // Record success
         this.recordServiceCall(serviceName, true, performance.now() - startTime);
         if (circuitBreaker) {
           circuitBreaker.recordSuccess();
         }
-        
+
         return result;
       } catch (error) {
         attempt++;
-        
+
         // Record failure
         this.recordServiceCall(serviceName, false, performance.now() - startTime);
         if (circuitBreaker) {
           circuitBreaker.recordFailure();
         }
-        
+
         if (attempt >= maxAttempts) {
           throw error;
         }
-        
+
         // Wait before retry
         await this.delay(options.retryDelay || this.config.retryDelay);
       }
@@ -162,7 +162,7 @@ export class ServiceMeshIntegration extends EventEmitter {
       failureCount: 0,
       lastFailureTime: null,
       successCount: 0,
-      
+
       recordSuccess: function() {
         this.successCount++;
         if (this.state === 'half-open' && this.successCount >= 3) {
@@ -170,18 +170,18 @@ export class ServiceMeshIntegration extends EventEmitter {
           this.failureCount = 0;
         }
       },
-      
+
       recordFailure: function() {
         this.failureCount++;
         this.lastFailureTime = Date.now();
-        
+
         if (this.failureCount >= this.threshold) {
           this.state = 'open';
         }
       },
-      
+
       canAttempt: function() {
-        if (this.state === 'closed') return true;
+        if (this.state === 'closed') {return true;}
         if (this.state === 'open') {
           if (Date.now() - this.lastFailureTime > this.timeout) {
             this.state = 'half-open';
@@ -192,9 +192,9 @@ export class ServiceMeshIntegration extends EventEmitter {
         }
         return this.state === 'half-open';
       },
-      
+
       threshold: this.config.circuitBreakerThreshold,
-      timeout: this.config.circuitBreakerTimeout
+      timeout: this.config.circuitBreakerTimeout,
     };
 
     this.circuitBreakers.set(serviceName, circuitBreaker);
@@ -204,48 +204,48 @@ export class ServiceMeshIntegration extends EventEmitter {
     const loadBalancer = {
       strategy: this.config.loadBalancing,
       currentIndex: 0,
-      
+
       selectInstance: function(instances) {
-        if (instances.length === 0) return null;
-        
+        if (instances.length === 0) {return null;}
+
         switch (this.strategy) {
-          case 'round-robin':
-            const instance = instances[this.currentIndex % instances.length];
-            this.currentIndex++;
-            return instance;
-            
-          case 'weighted':
-            return this.selectWeighted(instances);
-            
-          case 'least-connections':
-            return this.selectLeastConnections(instances);
-            
-          default:
-            return instances[0];
+        case 'round-robin':
+          const instance = instances[this.currentIndex % instances.length];
+          this.currentIndex++;
+          return instance;
+
+        case 'weighted':
+          return this.selectWeighted(instances);
+
+        case 'least-connections':
+          return this.selectLeastConnections(instances);
+
+        default:
+          return instances[0];
         }
       },
-      
+
       selectWeighted: function(instances) {
         const totalWeight = instances.reduce((sum, i) => sum + i.weight, 0);
         let random = Math.random() * totalWeight;
-        
+
         for (const instance of instances) {
           random -= instance.weight;
           if (random <= 0) {
             return instance;
           }
         }
-        
+
         return instances[0];
       },
-      
+
       selectLeastConnections: function(instances) {
         // For simplicity, return the first instance
         // In a real implementation, this would track active connections
-        return instances.reduce((least, current) => 
-          (current.connections || 0) < (least.connections || 0) ? current : least
+        return instances.reduce((least, current) =>
+          (current.connections || 0) < (least.connections || 0) ? current : least,
         );
-      }
+      },
     };
 
     this.loadBalancers.set(serviceName, loadBalancer);
@@ -265,13 +265,13 @@ export class ServiceMeshIntegration extends EventEmitter {
           const previousStatus = instance.status;
           instance.status = isHealthy ? 'healthy' : 'unhealthy';
           instance.lastHealthCheck = new Date().toISOString();
-          
+
           if (previousStatus !== instance.status) {
             this.emit('serviceStatusChanged', {
               serviceName,
               instance,
               previousStatus,
-              currentStatus: instance.status
+              currentStatus: instance.status,
             });
           }
         } catch (error) {
@@ -294,7 +294,7 @@ export class ServiceMeshIntegration extends EventEmitter {
 
   recordServiceCall(serviceName, success, latency) {
     this.metrics.totalRequests++;
-    
+
     if (success) {
       this.metrics.successfulRequests++;
     } else {
@@ -303,7 +303,7 @@ export class ServiceMeshIntegration extends EventEmitter {
 
     // Update average latency
     this.metrics.averageLatency = (
-      (this.metrics.averageLatency * (this.metrics.totalRequests - 1) + latency) / 
+      (this.metrics.averageLatency * (this.metrics.totalRequests - 1) + latency) /
       this.metrics.totalRequests
     );
 
@@ -313,13 +313,13 @@ export class ServiceMeshIntegration extends EventEmitter {
         totalRequests: 0,
         successfulRequests: 0,
         failedRequests: 0,
-        averageLatency: 0
+        averageLatency: 0,
       });
     }
 
     const serviceMetrics = this.metrics.services.get(serviceName);
     serviceMetrics.totalRequests++;
-    
+
     if (success) {
       serviceMetrics.successfulRequests++;
     } else {
@@ -327,7 +327,7 @@ export class ServiceMeshIntegration extends EventEmitter {
     }
 
     serviceMetrics.averageLatency = (
-      (serviceMetrics.averageLatency * (serviceMetrics.totalRequests - 1) + latency) / 
+      (serviceMetrics.averageLatency * (serviceMetrics.totalRequests - 1) + latency) /
       serviceMetrics.totalRequests
     );
   }
@@ -337,7 +337,7 @@ export class ServiceMeshIntegration extends EventEmitter {
       services: [],
       connections: [],
       circuitBreakers: {},
-      loadBalancers: {}
+      loadBalancers: {},
     };
 
     for (const [serviceName, instances] of this.services) {
@@ -349,8 +349,8 @@ export class ServiceMeshIntegration extends EventEmitter {
           port: i.port,
           status: i.status,
           weight: i.weight,
-          lastHealthCheck: i.lastHealthCheck
-        }))
+          lastHealthCheck: i.lastHealthCheck,
+        })),
       });
 
       const circuitBreaker = this.circuitBreakers.get(serviceName);
@@ -358,7 +358,7 @@ export class ServiceMeshIntegration extends EventEmitter {
         topology.circuitBreakers[serviceName] = {
           state: circuitBreaker.state,
           failureCount: circuitBreaker.failureCount,
-          successCount: circuitBreaker.successCount
+          successCount: circuitBreaker.successCount,
         };
       }
 
@@ -366,7 +366,7 @@ export class ServiceMeshIntegration extends EventEmitter {
       if (loadBalancer) {
         topology.loadBalancers[serviceName] = {
           strategy: loadBalancer.strategy,
-          currentIndex: loadBalancer.currentIndex
+          currentIndex: loadBalancer.currentIndex,
         };
       }
     }
@@ -375,8 +375,8 @@ export class ServiceMeshIntegration extends EventEmitter {
   }
 
   getMetrics() {
-    const successRate = this.metrics.totalRequests > 0 
-      ? (this.metrics.successfulRequests / this.metrics.totalRequests) * 100 
+    const successRate = this.metrics.totalRequests > 0
+      ? (this.metrics.successfulRequests / this.metrics.totalRequests) * 100
       : 0;
 
     return {
@@ -385,21 +385,21 @@ export class ServiceMeshIntegration extends EventEmitter {
         successfulRequests: this.metrics.successfulRequests,
         failedRequests: this.metrics.failedRequests,
         successRate: Math.round(successRate * 100) / 100,
-        averageLatency: Math.round(this.metrics.averageLatency * 100) / 100
+        averageLatency: Math.round(this.metrics.averageLatency * 100) / 100,
       },
       services: Object.fromEntries(
         Array.from(this.metrics.services.entries()).map(([name, metrics]) => [
           name,
           {
             ...metrics,
-            successRate: metrics.totalRequests > 0 
+            successRate: metrics.totalRequests > 0
               ? Math.round((metrics.successfulRequests / metrics.totalRequests) * 10000) / 100
               : 0,
-            averageLatency: Math.round(metrics.averageLatency * 100) / 100
-          }
-        ])
+            averageLatency: Math.round(metrics.averageLatency * 100) / 100,
+          },
+        ]),
       ),
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
   }
 
@@ -417,10 +417,10 @@ export class ServiceMeshIntegration extends EventEmitter {
       totalServices,
       healthyServices,
       circuitBreakers: Object.fromEntries(
-        Array.from(this.circuitBreakers.entries()).map(([name, cb]) => [name, cb.state])
+        Array.from(this.circuitBreakers.entries()).map(([name, cb]) => [name, cb.state]),
       ),
       uptime: process.uptime(),
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
   }
 
@@ -429,7 +429,7 @@ export class ServiceMeshIntegration extends EventEmitter {
       clearInterval(this.healthCheckTimer);
       this.healthCheckTimer = null;
     }
-    
+
     this.emit('serviceMeshStopped');
   }
 }

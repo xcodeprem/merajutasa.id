@@ -17,9 +17,9 @@ async function generateLintSummary() {
       markdown: null,
       dec: null,
       disclaimers: null,
-      security_patterns: null
+      security_patterns: null,
     },
-    overall_status: 'unknown'
+    overall_status: 'unknown',
   };
 
   let passCount = 0;
@@ -34,10 +34,10 @@ async function generateLintSummary() {
       summary.lint_results.dec = {
         status: decResults.status || 'unknown',
         files_checked: decResults.files_checked || 0,
-        violations: decResults.violations || 0
+        violations: decResults.violations || 0,
       };
       totalChecks++;
-      if (decResults.status === 'pass' || decResults.status === 'PASS' || (decResults.violations && decResults.violations.length === 0)) passCount++;
+      if (decResults.status === 'pass' || decResults.status === 'PASS' || (decResults.violations && decResults.violations.length === 0)) {passCount++;}
     } catch (error) {
       console.log('DEC lint results not available:', error.message);
       summary.lint_results.dec = { status: 'not_available', error: error.message };
@@ -51,10 +51,10 @@ async function generateLintSummary() {
       summary.lint_results.disclaimers = {
         status: disclaimersResults.status || 'unknown',
         pages_checked: disclaimersResults.pages_checked || 0,
-        violations: disclaimersResults.violations || 0
+        violations: disclaimersResults.violations || 0,
       };
       totalChecks++;
-      if (disclaimersResults.status === 'pass' || disclaimersResults.status === 'PASS' || disclaimersResults.violations === 0) passCount++;
+      if (disclaimersResults.status === 'pass' || disclaimersResults.status === 'PASS' || disclaimersResults.violations === 0) {passCount++;}
     } catch (error) {
       console.log('Disclaimers lint results not available:', error.message);
       summary.lint_results.disclaimers = { status: 'not_available', error: error.message };
@@ -68,10 +68,10 @@ async function generateLintSummary() {
       summary.lint_results.security_patterns = {
         status: securityResults.status || 'unknown',
         patterns_checked: securityResults.patterns_checked || 0,
-        high_severity_findings: securityResults.high_severity_findings || 0
+        high_severity_findings: securityResults.high_severity_findings || 0,
       };
       totalChecks++;
-      if (securityResults.status === 'pass' || securityResults.status === 'PASS' || securityResults.high_severity_findings === 0) passCount++;
+      if (securityResults.status === 'pass' || securityResults.status === 'PASS' || securityResults.high_severity_findings === 0) {passCount++;}
     } catch (error) {
       console.log('Security patterns results not available:', error.message);
       summary.lint_results.security_patterns = { status: 'not_available', error: error.message };
@@ -90,14 +90,14 @@ async function generateLintSummary() {
 
     // Generate badge data
     let lintBadge = 'unknown';
-    if (summary.overall_status === 'pass') lintBadge = 'passing';
-    else if (summary.overall_status === 'mostly_pass') lintBadge = 'mostly-passing';
-    else if (summary.overall_status === 'fail') lintBadge = 'failing';
-    else lintBadge = 'no-data';
+    if (summary.overall_status === 'pass') {lintBadge = 'passing';}
+    else if (summary.overall_status === 'mostly_pass') {lintBadge = 'mostly-passing';}
+    else if (summary.overall_status === 'fail') {lintBadge = 'failing';}
+    else {lintBadge = 'no-data';}
 
     summary.badge = {
       lint: lintBadge,
-      pass_rate: totalChecks > 0 ? Math.round((passCount / totalChecks) * 100) : 0
+      pass_rate: totalChecks > 0 ? Math.round((passCount / totalChecks) * 100) : 0,
     };
 
     // Ensure artifacts directory exists

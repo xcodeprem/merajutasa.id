@@ -12,7 +12,7 @@ const BANNED_DEFS = [
   { id:'RANKING',     needles:['ranking'],         baseSeverity:'MEDIUM', rationale:'Unsubstantiated ranking claim.', wordBoundary:true },
   { id:'TOP',         needles:['top'],             baseSeverity:'MEDIUM', rationale:'Generic superiority claim.', wordBoundary:true },
   { id:'TERBAIK',     needles:['terbaik'],         baseSeverity:'HIGH',   rationale:'“Terbaik” (best) absolute claim.' },
-  { id:'REVOLUSIONER',needles:['revolusioner'],    baseSeverity:'HIGH',   rationale:'Overclaim “revolutionary”.' }
+  { id:'REVOLUSIONER',needles:['revolusioner'],    baseSeverity:'HIGH',   rationale:'Overclaim “revolutionary”.' },
 ];
 
 function classifySeverity(def, line){
@@ -22,14 +22,14 @@ function classifySeverity(def, line){
 
 async function scanFile(f){
   let raw; try { raw = await fs.readFile(f,'utf8'); } catch { return []; }
-  if (/\x00/.test(raw.slice(0,1024))) return []; // skip binary
+  if (/\x00/.test(raw.slice(0,1024))) {return [];} // skip binary
   const lines = raw.split(/\r?\n/);
   const hits = [];
   for (let i=0;i<lines.length;i++){
     const line = lines[i];
-  if (/hype-lint-ignore-line/.test(line) || /lint-allow-negated-context/.test(line)) continue;
-  // Skip educational/spec pattern lines enumerating banned words (avoid false positives)
-  if (/GP7/.test(line) || /(revolusioner|terbaik).*(\(|\)|\||pattern|regex)/i.test(line)) continue;
+    if (/hype-lint-ignore-line/.test(line) || /lint-allow-negated-context/.test(line)) {continue;}
+    // Skip educational/spec pattern lines enumerating banned words (avoid false positives)
+    if (/GP7/.test(line) || /(revolusioner|terbaik).*(\(|\)|\||pattern|regex)/i.test(line)) {continue;}
     const lower = line.toLowerCase();
     for (const def of BANNED_DEFS){
       for (const needle of def.needles){
@@ -63,7 +63,7 @@ function aggregate(findings){
 async function main(){
   const patterns = ['docs/**/*.md','README.md'];
   const excludePatterns = [
-    'docs/governance/**',     // Governance guidance documents 
+    'docs/governance/**',     // Governance guidance documents
     'docs/onboarding/**',     // Agent onboarding guides
     'docs/principles/**',     // Principles guidance
     'docs/archive/**',        // Archived specifications
@@ -76,13 +76,13 @@ async function main(){
     'docs/analytics/**',      // Analytics specifications
     'docs/policies/**',       // Policy documents
     'docs/roadmap/**',        // Roadmap documents
-    'docs/master-spec/**'     // Master specifications
+    'docs/master-spec/**',     // Master specifications
   ];
-  
+
   const allFiles = (await Promise.all(patterns.map(p=>glob(p)))).flat();
   const excludeFiles = (await Promise.all(excludePatterns.map(p=>glob(p)))).flat();
   const excludeSet = new Set(excludeFiles);
-  
+
   const files = allFiles
     .filter(f => !excludeSet.has(f))
     .filter((v,i,a)=>a.indexOf(v)===i)
@@ -93,7 +93,7 @@ async function main(){
     // Skip very large (>500k) to prevent memory spikes
     try {
       const stat = await fs.stat(f);
-      if (stat.size > 500_000) continue;
+      if (stat.size > 500_000) {continue;}
     } catch { continue; }
     const rel = f.split(path.sep).join('/');
     const findings = await scanFile(rel);
@@ -110,8 +110,8 @@ async function main(){
     max_severity: maxSeverity,
     severity_counts: severityCounts,
     rule_counts: ruleCounts,
-  findings: allFindings.slice(0, 500), // cap
-  truncated: allFindings.length > 500
+    findings: allFindings.slice(0, 500), // cap
+    truncated: allFindings.length > 500,
   };
   await fs.writeFile('artifacts/hype-lint.json', JSON.stringify(out,null,2));
 }

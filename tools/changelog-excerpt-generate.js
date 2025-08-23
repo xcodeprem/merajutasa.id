@@ -15,11 +15,11 @@ async function main(){
     safeJson('artifacts/principles-impact-report.json'),
     safeJson('artifacts/pii-scan-report.json'),
     safeJson('artifacts/disclaimers-lint.json'),
-    safeJson('artifacts/fairness-sim-report.json')
+    safeJson('artifacts/fairness-sim-report.json'),
   ]);
   const [terms, trend] = await Promise.all([
     safeJson('artifacts/terminology-adoption.json'),
-    safeJson('artifacts/terminology-adoption-trend.json')
+    safeJson('artifacts/terminology-adoption-trend.json'),
   ]);
   const summary = {
     ts: new Date().toISOString(),
@@ -32,8 +32,8 @@ async function main(){
       dec_ref: 'DEC-20250817-09',
       adoption_percent: terms.adoptionPercent,
       suggestions_count: Array.isArray(terms.suggestions) ? terms.suggestions.length : 0,
-      trend_entries: trend?.entries_count ?? 0
-    } : null
+      trend_entries: trend?.entries_count ?? 0,
+    } : null,
   };
   const lines = [
     '# Transparency – Changelog Excerpt (Draft)',
@@ -45,11 +45,11 @@ async function main(){
     `- PII high-risk hits: ${summary.pii_high_risk_hits}`,
     `- Disclaimers lint status: ${summary.disclaimers_status}`,
     `- Fairness scenarios covered: ${summary.fairness_scenarios}`,
-  '',
-  '## Stage 2 Terminology Transition',
-  '',
-  terms ? `- DEC: DEC-20250817-09 — adoption ${terms.adoptionPercent}% (suggestions: ${(terms.suggestions||[]).length}, trend entries: ${trend?.entries_count ?? 0})` : '- DEC: DEC-20250817-09 — adoption n/a',
-    'This is an automatically generated draft. See artifacts JSON for details.'
+    '',
+    '## Stage 2 Terminology Transition',
+    '',
+    terms ? `- DEC: DEC-20250817-09 — adoption ${terms.adoptionPercent}% (suggestions: ${(terms.suggestions||[]).length}, trend entries: ${trend?.entries_count ?? 0})` : '- DEC: DEC-20250817-09 — adoption n/a',
+    'This is an automatically generated draft. See artifacts JSON for details.',
   ];
   await fs.writeFile('artifacts/changelog-excerpt-draft.md', lines.join('\n'));
   await fs.writeFile('artifacts/changelog-excerpt.json', JSON.stringify(summary,null,2));

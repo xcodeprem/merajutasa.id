@@ -10,7 +10,7 @@ const RESULTS = [];
 function log(name, ok, detail){
   RESULTS.push({ name, ok, detail });
   console.log(`[${ok? 'PASS':'FAIL'}] ${name}${detail? ' :: '+detail:''}`);
-  if (!ok) process.exitCode = 1;
+  if (!ok) {process.exitCode = 1;}
 }
 function req(method, url, body){
   return new Promise((resolve,reject)=>{
@@ -18,7 +18,7 @@ function req(method, url, body){
     const data = body? Buffer.from(JSON.stringify(body)) : null;
     const opt = { method, hostname: parsed.hostname, port: parsed.port, path: parsed.pathname, headers: data? { 'content-type':'application/json','content-length':data.length }:{} };
     const r = http.request(opt,res=>{ let b=''; res.on('data',d=>b+=d); res.on('end',()=>{ try { resolve({ status: res.statusCode, json: b? JSON.parse(b):{} }); } catch(e){ reject(e);} }); });
-    r.on('error',reject); if (data) r.write(data); r.end();
+    r.on('error',reject); if (data) {r.write(data);} r.end();
   });
 }
 const CHILDREN = [];
@@ -31,12 +31,12 @@ async function ensureService(path, port, healthPath){
   return new Promise(resolve=>{
     (function poll(){
       const req = http.get({ hostname:'localhost', port, path: probePath }, res=>{
-        if (res.statusCode === 200) return resolve(child);
-        if (Date.now()-start > maxWait) return resolve(child);
+        if (res.statusCode === 200) {return resolve(child);}
+        if (Date.now()-start > maxWait) {return resolve(child);}
         setTimeout(poll,150);
       });
       req.on('error',()=>{
-        if (Date.now()-start > maxWait) return resolve(child);
+        if (Date.now()-start > maxWait) {return resolve(child);}
         setTimeout(poll,150);
       });
     })();

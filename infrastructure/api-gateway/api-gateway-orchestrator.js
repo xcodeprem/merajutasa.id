@@ -6,13 +6,13 @@ import { EventEmitter } from 'events';
 
 /**
  * API Gateway & Management Orchestrator
- * Unified system that coordinates API Gateway, Service Mesh, 
+ * Unified system that coordinates API Gateway, Service Mesh,
  * CI/CD pipelines, and documentation generation
  */
 export class APIGatewayOrchestrator extends EventEmitter {
   constructor(config = {}) {
     super();
-    
+
     this.config = {
       serviceName: 'api-gateway-orchestrator',
       gatewayPort: 8080,
@@ -24,9 +24,9 @@ export class APIGatewayOrchestrator extends EventEmitter {
       services: {
         signer: { host: 'localhost', port: 4601 },
         chain: { host: 'localhost', port: 4602 },
-        collector: { host: 'localhost', port: 4603 }
+        collector: { host: 'localhost', port: 4603 },
       },
-      ...config
+      ...config,
     };
 
     this.components = {};
@@ -36,7 +36,7 @@ export class APIGatewayOrchestrator extends EventEmitter {
       totalRequests: 0,
       totalServices: 0,
       totalPipelines: 0,
-      uptime: 0
+      uptime: 0,
     };
 
     this.initializeComponents();
@@ -55,8 +55,8 @@ export class APIGatewayOrchestrator extends EventEmitter {
           serviceRoles: {
             collector: ['ingest:write'],
             chain: ['append:write'],
-            signer: ['sign:write']
-          }
+            signer: ['sign:write'],
+          },
         },
         validation: {
           enabled: true,
@@ -72,29 +72,29 @@ export class APIGatewayOrchestrator extends EventEmitter {
                     event_name: { type: 'string', minLength: 1 },
                     occurred_at: { type: 'string' },
                     received_at: { type: 'string' },
-                    meta: { type: 'object' }
+                    meta: { type: 'object' },
                   },
-                  additionalProperties: true
-                }
+                  additionalProperties: true,
+                },
               },
-              additionalProperties: false
-            }
-          }
+              additionalProperties: false,
+            },
+          },
         },
-        mtls: { enabled: false, simulateHeader: 'x-client-cert' }
+        mtls: { enabled: false, simulateHeader: 'x-client-cert' },
       });
 
       // Initialize Service Mesh
       this.components.serviceMesh = getServiceMesh({
         serviceName: this.config.serviceName,
-        enableMetrics: this.config.enableMetrics
+        enableMetrics: this.config.enableMetrics,
       });
 
       // Initialize OpenAPI Documentation
       if (this.config.enableDocumentation) {
         this.components.documentation = getOpenAPISystem({
           title: 'MerajutASA.id API Gateway',
-          version: '1.0.0'
+          version: '1.0.0',
         });
       }
 
@@ -102,13 +102,13 @@ export class APIGatewayOrchestrator extends EventEmitter {
       if (this.config.enableCICD) {
         this.components.cicd = getCICDManager({
           projectName: 'merajutasa-id',
-          enableAutoDeployment: false
+          enableAutoDeployment: false,
         });
       }
 
       this.status = 'initialized';
       this.emit('componentsInitialized');
-      
+
     } catch (error) {
       this.status = 'failed';
       this.emit('initializationFailed', error);
@@ -127,20 +127,20 @@ export class APIGatewayOrchestrator extends EventEmitter {
     try {
       // Register services with gateway and service mesh
       await this.registerServices();
-      
+
       // Start API Gateway
       await this.components.gateway.start();
-      
+
       // Generate API documentation
       if (this.components.documentation) {
         await this.components.documentation.generateDocumentation();
       }
-      
+
       // Setup health checking
       if (this.config.enableHealthChecking) {
         this.startHealthChecking();
       }
-      
+
       // Setup metrics collection
       if (this.config.enableMetrics) {
         this.startMetricsCollection();
@@ -148,14 +148,14 @@ export class APIGatewayOrchestrator extends EventEmitter {
 
       this.status = 'running';
       this.emit('systemStarted');
-      
-      console.log(`🚀 API Gateway Orchestrator started successfully`);
+
+      console.log('🚀 API Gateway Orchestrator started successfully');
       console.log(`📊 Gateway: http://localhost:${this.config.gatewayPort}`);
       console.log(`📚 Documentation: http://localhost:${this.config.gatewayPort}/docs`);
       console.log(`🔍 Health: http://localhost:${this.config.gatewayPort}/health`);
-      
+
       return this;
-      
+
     } catch (error) {
       this.status = 'failed';
       this.emit('startupFailed', error);
@@ -170,24 +170,24 @@ export class APIGatewayOrchestrator extends EventEmitter {
         this.components.gateway.registerService(serviceName, {
           ...serviceConfig,
           version: 'v1',
-          healthPath: '/health'
+          healthPath: '/health',
         });
 
         // Register with Service Mesh
         const instanceId = this.components.serviceMesh.registerService(serviceName, {
           ...serviceConfig,
           healthPath: '/health',
-          weight: 1
+          weight: 1,
         });
 
         console.log(`✅ Registered service: ${serviceName} (${instanceId})`);
         this.metrics.totalServices++;
-        
+
       } catch (error) {
         console.error(`❌ Failed to register service ${serviceName}:`, error.message);
       }
     }
-    
+
     this.emit('servicesRegistered', { count: this.metrics.totalServices });
   }
 
@@ -208,10 +208,10 @@ export class APIGatewayOrchestrator extends EventEmitter {
       const results = {
         gateway: await this.components.gateway.getHealthStatus(),
         serviceMesh: await this.components.serviceMesh.healthCheck(),
-        documentation: this.components.documentation ? 
+        documentation: this.components.documentation ?
           await this.components.documentation.healthCheck() : null,
-        cicd: this.components.cicd ? 
-          await this.components.cicd.healthCheck() : null
+        cicd: this.components.cicd ?
+          await this.components.cicd.healthCheck() : null,
       };
 
       const allHealthy = Object.values(results)
@@ -233,14 +233,14 @@ export class APIGatewayOrchestrator extends EventEmitter {
     try {
       const gatewayMetrics = this.components.gateway.getMetrics();
       const meshMetrics = this.components.serviceMesh.getMetrics();
-      
+
       this.metrics = {
         ...this.metrics,
         totalRequests: gatewayMetrics.gateway.requests,
         uptime: Date.now() - this.startTime.getTime(),
         gateway: gatewayMetrics,
         serviceMesh: meshMetrics,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
 
       this.emit('metricsUpdated', this.metrics);
@@ -265,7 +265,7 @@ export class APIGatewayOrchestrator extends EventEmitter {
         {
           name: 'test',
           type: 'test',
-          testSuites: ['npm run test:infrastructure', 'npm run test:services']
+          testSuites: ['npm run test:infrastructure', 'npm run test:services'],
         },
         {
           name: 'build',
@@ -273,25 +273,25 @@ export class APIGatewayOrchestrator extends EventEmitter {
           buildCommands: ['npm ci'],
           buildDocker: true,
           dockerImages: [
-            { name: 'api-gateway', dockerfile: 'infrastructure/docker/Dockerfile.gateway' }
-          ]
+            { name: 'api-gateway', dockerfile: 'infrastructure/docker/Dockerfile.gateway' },
+          ],
         },
         {
           name: 'deploy',
           type: 'deploy',
           strategy: 'rolling',
-          services: Object.keys(this.config.services)
+          services: Object.keys(this.config.services),
         },
         {
           name: 'healthcheck',
           type: 'healthcheck',
-          services: Object.keys(this.config.services)
-        }
-      ]
+          services: Object.keys(this.config.services),
+        },
+      ],
     };
 
     const pipeline = { ...defaultPipeline, ...pipelineConfig };
-    
+
     try {
       const result = await this.components.cicd.executePipeline(pipeline);
       this.metrics.totalPipelines++;
@@ -310,18 +310,18 @@ export class APIGatewayOrchestrator extends EventEmitter {
     try {
       // Add to configuration
       this.config.services[serviceName] = serviceConfig;
-      
+
       // Register with gateway and service mesh
       this.components.gateway.registerService(serviceName, {
         ...serviceConfig,
         version: 'v1',
-        healthPath: '/health'
+        healthPath: '/health',
       });
 
       const instanceId = this.components.serviceMesh.registerService(serviceName, {
         ...serviceConfig,
         healthPath: '/health',
-        weight: 1
+        weight: 1,
       });
 
       // Update documentation
@@ -331,10 +331,10 @@ export class APIGatewayOrchestrator extends EventEmitter {
 
       this.metrics.totalServices++;
       this.emit('serviceAdded', { serviceName, instanceId });
-      
+
       console.log(`✅ Dynamically registered service: ${serviceName}`);
       return instanceId;
-      
+
     } catch (error) {
       this.emit('serviceRegistrationFailed', { serviceName, error });
       throw error;
@@ -348,7 +348,7 @@ export class APIGatewayOrchestrator extends EventEmitter {
     try {
       // Get service instances
       const instances = this.components.serviceMesh.services.get(serviceName);
-      
+
       if (instances) {
         // Remove all instances
         for (const instance of instances) {
@@ -358,7 +358,7 @@ export class APIGatewayOrchestrator extends EventEmitter {
 
       // Remove from configuration
       delete this.config.services[serviceName];
-      
+
       // Update documentation
       if (this.components.documentation) {
         await this.components.documentation.generateDocumentation();
@@ -366,10 +366,10 @@ export class APIGatewayOrchestrator extends EventEmitter {
 
       this.metrics.totalServices--;
       this.emit('serviceRemoved', { serviceName });
-      
+
       console.log(`🗑️ Deregistered service: ${serviceName}`);
       return true;
-      
+
     } catch (error) {
       this.emit('serviceDeregistrationFailed', { serviceName, error });
       throw error;
@@ -381,26 +381,26 @@ export class APIGatewayOrchestrator extends EventEmitter {
    */
   async getSystemStatus() {
     const uptime = Date.now() - this.startTime.getTime();
-    
+
     const status = {
       orchestrator: {
         status: this.status,
         uptime: uptime,
         version: '1.0.0',
-        startTime: this.startTime.toISOString()
+        startTime: this.startTime.toISOString(),
       },
       components: {
         gateway: this.components.gateway ? await this.components.gateway.getHealthStatus() : null,
         serviceMesh: this.components.serviceMesh ? await this.components.serviceMesh.healthCheck() : null,
         documentation: this.components.documentation ? await this.components.documentation.healthCheck() : null,
-        cicd: this.components.cicd ? await this.components.cicd.healthCheck() : null
+        cicd: this.components.cicd ? await this.components.cicd.healthCheck() : null,
       },
       services: {
         registered: Object.keys(this.config.services),
-        count: this.metrics.totalServices
+        count: this.metrics.totalServices,
       },
       metrics: this.metrics,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
 
     return status;
@@ -415,12 +415,12 @@ export class APIGatewayOrchestrator extends EventEmitter {
         uptime: Date.now() - this.startTime.getTime(),
         totalServices: this.metrics.totalServices,
         totalPipelines: this.metrics.totalPipelines,
-        status: this.status
+        status: this.status,
       },
       gateway: this.components.gateway ? this.components.gateway.getMetrics() : null,
       serviceMesh: this.components.serviceMesh ? this.components.serviceMesh.getMetrics() : null,
       cicd: this.components.cicd ? this.components.cicd.getMetrics() : null,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
   }
 
@@ -429,20 +429,20 @@ export class APIGatewayOrchestrator extends EventEmitter {
    */
   async stop() {
     console.log('🛑 Stopping API Gateway Orchestrator...');
-    
+
     try {
       // Stop components
       if (this.components.gateway) {
         await this.components.gateway.stop();
       }
-      
+
       if (this.components.serviceMesh) {
         await this.components.serviceMesh.stop();
       }
 
       this.status = 'stopped';
       this.emit('systemStopped');
-      
+
       console.log('✅ API Gateway Orchestrator stopped successfully');
     } catch (error) {
       console.error('❌ Error during shutdown:', error.message);

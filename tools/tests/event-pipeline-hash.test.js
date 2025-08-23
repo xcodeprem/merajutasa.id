@@ -8,7 +8,7 @@ import { promises as fs } from 'fs';
 
 function runHasher(){
   const r = spawnSync(process.execPath, ['tools/event-pipeline-hash.js'], { encoding: 'utf8' });
-  if (r.status !== 0) throw new Error('hasher failed: ' + (r.stderr||r.stdout));
+  if (r.status !== 0) {throw new Error('hasher failed: ' + (r.stderr||r.stdout));}
 }
 
 async function main(){

@@ -20,7 +20,7 @@ export class AutoScalingSystem extends EventEmitter {
       scaleDownCooldown: 600000, // 10 minutes
       metricsWindow: 300000, // 5 minutes metrics window
       predictiveScalingEnabled: true,
-      ...config
+      ...config,
     };
 
     this.scalingState = {
@@ -30,7 +30,7 @@ export class AutoScalingSystem extends EventEmitter {
       lastScaleDown: null,
       scalingHistory: [],
       metricsHistory: [],
-      predictions: null
+      predictions: null,
     };
 
     this.services = new Map();
@@ -55,7 +55,7 @@ export class AutoScalingSystem extends EventEmitter {
     this.emit('auto-scaling-initialized', {
       minInstances: this.config.minInstances,
       maxInstances: this.config.maxInstances,
-      currentInstances: this.scalingState.currentInstances
+      currentInstances: this.scalingState.currentInstances,
     });
   }
 
@@ -67,14 +67,14 @@ export class AutoScalingSystem extends EventEmitter {
         maxInstances: serviceConfig.maxInstances || this.config.maxInstances,
         targetCPU: serviceConfig.targetCPU || this.config.targetCPU,
         targetMemory: serviceConfig.targetMemory || this.config.targetMemory,
-        ...serviceConfig
+        ...serviceConfig,
       },
       state: {
         currentInstances: serviceConfig.minInstances || this.config.minInstances,
         targetInstances: serviceConfig.minInstances || this.config.minInstances,
         lastScaleAction: null,
-        instances: new Map()
-      }
+        instances: new Map(),
+      },
     };
 
     this.services.set(serviceName, service);
@@ -83,7 +83,7 @@ export class AutoScalingSystem extends EventEmitter {
       memory: [],
       requestCount: [],
       responseTime: [],
-      errorRate: []
+      errorRate: [],
     });
 
     // Create scaling policy for service
@@ -102,22 +102,22 @@ export class AutoScalingSystem extends EventEmitter {
           threshold: service.config.scaleUpThreshold || this.config.scaleUpThreshold,
           duration: 300000, // 5 minutes
           action: 'scale-up',
-          factor: 2 // Double instances
+          factor: 2, // Double instances
         },
         {
           metric: 'memory',
           threshold: service.config.scaleUpThreshold || this.config.scaleUpThreshold,
           duration: 300000,
           action: 'scale-up',
-          factor: 2
+          factor: 2,
         },
         {
           metric: 'requestCount',
           threshold: 1000, // requests per minute
           duration: 180000, // 3 minutes
           action: 'scale-up',
-          factor: 1.5
-        }
+          factor: 1.5,
+        },
       ],
       scaleDownRules: [
         {
@@ -125,16 +125,16 @@ export class AutoScalingSystem extends EventEmitter {
           threshold: service.config.scaleDownThreshold || this.config.scaleDownThreshold,
           duration: 600000, // 10 minutes
           action: 'scale-down',
-          factor: 0.5 // Halve instances
+          factor: 0.5, // Halve instances
         },
         {
           metric: 'memory',
           threshold: service.config.scaleDownThreshold || this.config.scaleDownThreshold,
           duration: 600000,
           action: 'scale-down',
-          factor: 0.5
-        }
-      ]
+          factor: 0.5,
+        },
+      ],
     };
   }
 
@@ -156,7 +156,7 @@ export class AutoScalingSystem extends EventEmitter {
     for (const [serviceName, service] of this.services) {
       try {
         const serviceMetrics = await this.getServiceMetrics(serviceName);
-        
+
         // Store metrics
         const metricsStore = this.metrics.get(serviceName);
         metricsStore.cpu.push({ timestamp, value: serviceMetrics.cpu });
@@ -177,7 +177,7 @@ export class AutoScalingSystem extends EventEmitter {
         this.scalingState.metricsHistory.push({
           timestamp,
           serviceName,
-          metrics: serviceMetrics
+          metrics: serviceMetrics,
         });
 
         this.emit('metrics-collected', { serviceName, metrics: serviceMetrics, timestamp });
@@ -189,7 +189,7 @@ export class AutoScalingSystem extends EventEmitter {
 
     // Cleanup global metrics history
     const cutoff = timestamp - 24 * 60 * 60 * 1000;
-    while (this.scalingState.metricsHistory.length > 0 && 
+    while (this.scalingState.metricsHistory.length > 0 &&
            this.scalingState.metricsHistory[0].timestamp < cutoff) {
       this.scalingState.metricsHistory.shift();
     }
@@ -202,13 +202,13 @@ export class AutoScalingSystem extends EventEmitter {
       memory: Math.random() * 100,
       requestCount: Math.random() * 2000,
       responseTime: Math.random() * 1000 + 50,
-      errorRate: Math.random() * 5
+      errorRate: Math.random() * 5,
     };
 
     // Add some realistic patterns
     const hour = new Date().getHours();
     const isBusinessHours = hour >= 9 && hour <= 17;
-    
+
     if (isBusinessHours) {
       baseMetrics.cpu += 20;
       baseMetrics.memory += 15;
@@ -234,7 +234,7 @@ export class AutoScalingSystem extends EventEmitter {
     for (const [serviceName, service] of this.services) {
       try {
         const decision = await this.makeScalingDecision(serviceName);
-        
+
         if (decision.action !== 'no-action') {
           await this.executeScalingAction(serviceName, decision);
         }
@@ -249,18 +249,18 @@ export class AutoScalingSystem extends EventEmitter {
     const service = this.services.get(serviceName);
     const policy = this.scalingPolicies.get(serviceName);
     const metricsStore = this.metrics.get(serviceName);
-    
+
     if (!service || !policy || !metricsStore) {
       return { action: 'no-action', reason: 'Service not found' };
     }
 
     // Check cooldown periods
     const now = Date.now();
-    const lastScaleUp = service.state.lastScaleAction?.type === 'scale-up' 
-      ? service.state.lastScaleAction.timestamp 
+    const lastScaleUp = service.state.lastScaleAction?.type === 'scale-up'
+      ? service.state.lastScaleAction.timestamp
       : 0;
-    const lastScaleDown = service.state.lastScaleAction?.type === 'scale-down' 
-      ? service.state.lastScaleAction.timestamp 
+    const lastScaleDown = service.state.lastScaleAction?.type === 'scale-down'
+      ? service.state.lastScaleAction.timestamp
       : 0;
 
     const scaleUpCooldown = now - lastScaleUp < this.config.scaleUpCooldown;
@@ -268,7 +268,7 @@ export class AutoScalingSystem extends EventEmitter {
 
     // Get recent metrics
     const recentMetrics = this.getRecentMetrics(serviceName, this.config.metricsWindow);
-    
+
     if (!recentMetrics || recentMetrics.length === 0) {
       return { action: 'no-action', reason: 'No recent metrics available' };
     }
@@ -277,11 +277,11 @@ export class AutoScalingSystem extends EventEmitter {
     if (!scaleUpCooldown && service.state.currentInstances < service.config.maxInstances) {
       for (const rule of policy.scaleUpRules) {
         const violation = this.evaluateRule(rule, recentMetrics);
-        
+
         if (violation.triggered) {
           const targetInstances = Math.min(
             Math.ceil(service.state.currentInstances * rule.factor),
-            service.config.maxInstances
+            service.config.maxInstances,
           );
 
           return {
@@ -290,7 +290,7 @@ export class AutoScalingSystem extends EventEmitter {
             targetInstances,
             reason: `${rule.metric} ${violation.averageValue}% > ${rule.threshold}% for ${rule.duration}ms`,
             rule,
-            metrics: violation.metrics
+            metrics: violation.metrics,
           };
         }
       }
@@ -300,11 +300,11 @@ export class AutoScalingSystem extends EventEmitter {
     if (!scaleDownCooldown && service.state.currentInstances > service.config.minInstances) {
       for (const rule of policy.scaleDownRules) {
         const violation = this.evaluateRule(rule, recentMetrics);
-        
+
         if (violation.triggered) {
           const targetInstances = Math.max(
             Math.floor(service.state.currentInstances * rule.factor),
-            service.config.minInstances
+            service.config.minInstances,
           );
 
           return {
@@ -313,7 +313,7 @@ export class AutoScalingSystem extends EventEmitter {
             targetInstances,
             reason: `${rule.metric} ${violation.averageValue}% < ${rule.threshold}% for ${rule.duration}ms`,
             rule,
-            metrics: violation.metrics
+            metrics: violation.metrics,
           };
         }
       }
@@ -344,7 +344,7 @@ export class AutoScalingSystem extends EventEmitter {
     const averageValue = values.reduce((sum, val) => sum + val, 0) / values.length;
 
     let triggered = false;
-    
+
     if (rule.action === 'scale-up') {
       triggered = averageValue > rule.threshold;
     } else if (rule.action === 'scale-down') {
@@ -355,20 +355,20 @@ export class AutoScalingSystem extends EventEmitter {
       triggered,
       averageValue: Math.round(averageValue * 100) / 100,
       metrics: relevantMetrics,
-      sampleCount: relevantMetrics.length
+      sampleCount: relevantMetrics.length,
     };
   }
 
   getRecentMetrics(serviceName, windowMs) {
     const cutoff = Date.now() - windowMs;
     return this.scalingState.metricsHistory.filter(
-      m => m.serviceName === serviceName && m.timestamp >= cutoff
+      m => m.serviceName === serviceName && m.timestamp >= cutoff,
     );
   }
 
   async executeScalingAction(serviceName, decision) {
     const service = this.services.get(serviceName);
-    
+
     if (!service) {
       throw new Error(`Service ${serviceName} not found`);
     }
@@ -381,7 +381,7 @@ export class AutoScalingSystem extends EventEmitter {
       toInstances: decision.targetInstances,
       reason: decision.reason,
       startTime: Date.now(),
-      status: 'in-progress'
+      status: 'in-progress',
     };
 
     this.emit('scaling-action-started', scalingAction);
@@ -399,7 +399,7 @@ export class AutoScalingSystem extends EventEmitter {
       service.state.lastScaleAction = {
         type: decision.action,
         timestamp: Date.now(),
-        instances: decision.targetInstances
+        instances: decision.targetInstances,
       };
 
       scalingAction.status = 'completed';
@@ -430,15 +430,15 @@ export class AutoScalingSystem extends EventEmitter {
     // Simulate instance creation
     for (let i = 0; i < instancesToAdd; i++) {
       const instanceId = `${serviceName}-${Date.now()}-${i}`;
-      
+
       // Simulate instance startup time
       await this.sleep(2000);
-      
+
       service.state.instances.set(instanceId, {
         id: instanceId,
         status: 'running',
         startTime: Date.now(),
-        healthStatus: 'healthy'
+        healthStatus: 'healthy',
       });
 
       this.emit('instance-created', { serviceName, instanceId });
@@ -462,9 +462,9 @@ export class AutoScalingSystem extends EventEmitter {
     for (const instance of instances) {
       // Simulate graceful shutdown
       await this.sleep(1000);
-      
+
       service.state.instances.delete(instance.id);
-      
+
       this.emit('instance-removed', { serviceName, instanceId: instance.id });
     }
 
@@ -488,7 +488,7 @@ export class AutoScalingSystem extends EventEmitter {
 
     for (const [serviceName, service] of this.services) {
       const historicalMetrics = this.getHistoricalMetrics(serviceName, 24 * 60 * 60 * 1000); // Last 24 hours
-      
+
       if (historicalMetrics.length < 10) {
         continue; // Not enough data for prediction
       }
@@ -499,7 +499,7 @@ export class AutoScalingSystem extends EventEmitter {
 
     this.scalingState.predictions = {
       timestamp: Date.now(),
-      predictions
+      predictions,
     };
 
     this.emit('predictions-updated', this.scalingState.predictions);
@@ -508,12 +508,12 @@ export class AutoScalingSystem extends EventEmitter {
   generatePrediction(historicalMetrics) {
     // Simple prediction based on historical patterns
     // In a real implementation, this would use more sophisticated ML models
-    
+
     const metricsOverTime = historicalMetrics.map(m => ({
       timestamp: m.timestamp,
       cpu: m.metrics.cpu,
       memory: m.metrics.memory,
-      requestCount: m.metrics.requestCount
+      requestCount: m.metrics.requestCount,
     }));
 
     // Calculate trends
@@ -525,14 +525,14 @@ export class AutoScalingSystem extends EventEmitter {
     const nextHourPrediction = {
       cpu: Math.max(0, Math.min(100, cpuTrend.prediction + cpuTrend.variance)),
       memory: Math.max(0, Math.min(100, memoryTrend.prediction + memoryTrend.variance)),
-      requestCount: Math.max(0, requestTrend.prediction + requestTrend.variance)
+      requestCount: Math.max(0, requestTrend.prediction + requestTrend.variance),
     };
 
     return {
       nextHour: nextHourPrediction,
       trends: { cpuTrend, memoryTrend, requestTrend },
       confidence: this.calculatePredictionConfidence(metricsOverTime),
-      recommendation: this.generateScalingRecommendation(nextHourPrediction)
+      recommendation: this.generateScalingRecommendation(nextHourPrediction),
     };
   }
 
@@ -561,7 +561,7 @@ export class AutoScalingSystem extends EventEmitter {
       prediction,
       variance,
       direction: slope > 0 ? 'increasing' : slope < 0 ? 'decreasing' : 'stable',
-      slope
+      slope,
     };
   }
 
@@ -569,10 +569,10 @@ export class AutoScalingSystem extends EventEmitter {
     // Simple confidence calculation based on data consistency
     const dataPoints = metricsOverTime.length;
     const timespan = metricsOverTime[metricsOverTime.length - 1].timestamp - metricsOverTime[0].timestamp;
-    
+
     let confidence = Math.min(dataPoints / 50, 1); // More data = higher confidence
     confidence *= Math.min(timespan / (24 * 60 * 60 * 1000), 1); // Longer timespan = higher confidence
-    
+
     return Math.round(confidence * 100);
   }
 
@@ -581,49 +581,49 @@ export class AutoScalingSystem extends EventEmitter {
       return {
         action: 'scale-up',
         reason: 'Predicted high load in next hour',
-        suggestedFactor: 1.5
+        suggestedFactor: 1.5,
       };
     } else if (prediction.cpu < 30 && prediction.memory < 30 && prediction.requestCount < 200) {
       return {
         action: 'scale-down',
         reason: 'Predicted low load in next hour',
-        suggestedFactor: 0.7
+        suggestedFactor: 0.7,
       };
     }
 
     return {
       action: 'no-change',
-      reason: 'Predicted load within normal range'
+      reason: 'Predicted load within normal range',
     };
   }
 
   evaluatePredictiveScaling(serviceName) {
     const predictions = this.scalingState.predictions?.predictions[serviceName];
-    
+
     if (!predictions || predictions.confidence < 70) {
       return { action: 'no-action', reason: 'Low prediction confidence' };
     }
 
     const recommendation = predictions.recommendation;
-    
+
     if (recommendation.action === 'no-change') {
       return { action: 'no-action', reason: recommendation.reason };
     }
 
     const service = this.services.get(serviceName);
     const currentInstances = service.state.currentInstances;
-    
+
     let targetInstances;
-    
+
     if (recommendation.action === 'scale-up') {
       targetInstances = Math.min(
         Math.ceil(currentInstances * recommendation.suggestedFactor),
-        service.config.maxInstances
+        service.config.maxInstances,
       );
     } else {
       targetInstances = Math.max(
         Math.floor(currentInstances * recommendation.suggestedFactor),
-        service.config.minInstances
+        service.config.minInstances,
       );
     }
 
@@ -637,14 +637,14 @@ export class AutoScalingSystem extends EventEmitter {
       targetInstances,
       reason: `Predictive scaling: ${recommendation.reason} (${predictions.confidence}% confidence)`,
       predictive: true,
-      prediction: predictions.nextHour
+      prediction: predictions.nextHour,
     };
   }
 
   getHistoricalMetrics(serviceName, windowMs) {
     const cutoff = Date.now() - windowMs;
     return this.scalingState.metricsHistory.filter(
-      m => m.serviceName === serviceName && m.timestamp >= cutoff
+      m => m.serviceName === serviceName && m.timestamp >= cutoff,
     );
   }
 
@@ -653,11 +653,11 @@ export class AutoScalingSystem extends EventEmitter {
       system: {
         enabled: true,
         predictiveScalingEnabled: this.config.predictiveScalingEnabled,
-        totalServices: this.services.size
+        totalServices: this.services.size,
       },
       services: {},
       predictions: this.scalingState.predictions,
-      recentActions: this.scalingState.scalingHistory.slice(-10)
+      recentActions: this.scalingState.scalingHistory.slice(-10),
     };
 
     for (const [serviceName, service] of this.services) {
@@ -671,7 +671,7 @@ export class AutoScalingSystem extends EventEmitter {
         maxInstances: service.config.maxInstances,
         lastScaleAction: service.state.lastScaleAction,
         latestMetrics,
-        instanceStatus: Object.fromEntries(service.state.instances)
+        instanceStatus: Object.fromEntries(service.state.instances),
       };
     }
 
@@ -681,8 +681,8 @@ export class AutoScalingSystem extends EventEmitter {
   async healthCheck() {
     const services = Array.from(this.services.values());
     const totalInstances = services.reduce((sum, service) => sum + service.state.currentInstances, 0);
-    const healthyServices = services.filter(service => 
-      service.state.currentInstances >= service.config.minInstances
+    const healthyServices = services.filter(service =>
+      service.state.currentInstances >= service.config.minInstances,
     ).length;
 
     return {
@@ -693,7 +693,7 @@ export class AutoScalingSystem extends EventEmitter {
       totalInstances,
       predictiveScalingEnabled: this.config.predictiveScalingEnabled,
       recentScalingActions: this.scalingState.scalingHistory.length,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     };
   }
 
@@ -703,9 +703,9 @@ export class AutoScalingSystem extends EventEmitter {
 
   // Cleanup methods
   destroy() {
-    if (this.metricsInterval) clearInterval(this.metricsInterval);
-    if (this.scalingInterval) clearInterval(this.scalingInterval);
-    if (this.analyticsInterval) clearInterval(this.analyticsInterval);
+    if (this.metricsInterval) {clearInterval(this.metricsInterval);}
+    if (this.scalingInterval) {clearInterval(this.scalingInterval);}
+    if (this.analyticsInterval) {clearInterval(this.analyticsInterval);}
   }
 }
 

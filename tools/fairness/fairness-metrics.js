@@ -16,7 +16,7 @@ async function loadParams(){
 async function safeRead(p){ try { return JSON.parse(await fs.readFile(p,'utf8')); } catch { return null; } }
 
 function accumulateFromScenarios(scenarios, params){
-  if(!scenarios) return { states:{}, events:{}, scenario_count:0, time_in_state:{} };
+  if(!scenarios) {return { states:{}, events:{}, scenario_count:0, time_in_state:{} };}
   const states={}, events={}, time_in_state={};
   scenarios.scenarios?.forEach(sc=>{
     let st=null; const seq = sc.sequence || []; let lastState='NONE';
@@ -45,17 +45,17 @@ async function main(){
     generated_utc: new Date().toISOString(),
     sources: {
       scenarios_present: !!scenarios,
-      unit_tests_present: !!unit
+      unit_tests_present: !!unit,
     },
     transitions: eventsAgg.events,
-  final_state_distribution: eventsAgg.states,
-  time_in_state_snapshots: eventsAgg.time_in_state,
+    final_state_distribution: eventsAgg.states,
+    time_in_state_snapshots: eventsAgg.time_in_state,
     scenario_count: eventsAgg.scenario_count,
     unit_tests: unitSummary,
     quality: {
       unit_fail: unitSummary ? unitSummary.fail : null,
-      unit_pass: unitSummary ? unitSummary.pass : null
-    }
+      unit_pass: unitSummary ? unitSummary.pass : null,
+    },
   };
   await fs.writeFile('artifacts/fairness-metrics.json', JSON.stringify(report,null,2));
   console.log('[fairness-metrics] written artifacts/fairness-metrics.json');

@@ -53,12 +53,12 @@ async function main(){
     kek: { id: kek.id, alg: kek.alg, created_utc: kek.created_utc },
     deks: [
       { id: dek1_id, wrapped: wrapped1.wrapped, iv: wrapped1.iv, tag: wrapped1.tag, alg: wrapped1.alg, created_utc: ts },
-      { id: dek2_id, wrapped: wrapped2.wrapped, iv: wrapped2.iv, tag: wrapped2.tag, alg: wrapped2.alg, created_utc: ts }
+      { id: dek2_id, wrapped: wrapped2.wrapped, iv: wrapped2.iv, tag: wrapped2.tag, alg: wrapped2.alg, created_utc: ts },
     ],
     samples: [
       { dek_id: dek1_id, ciphertext: c1.ciphertext, iv: c1.iv, tag: c1.tag, alg: c1.alg },
-      { dek_id: dek2_id, ciphertext: c2.ciphertext, iv: c2.iv, tag: c2.tag, alg: c2.alg }
-    ]
+      { dek_id: dek2_id, ciphertext: c2.ciphertext, iv: c2.iv, tag: c2.tag, alg: c2.alg },
+    ],
   }, { category: 'security', name: 'secrets-rotation-keystore' });
 
   await fs.writeFile(KEYSTORE_PATH, stableStringify(keystore));
@@ -70,7 +70,7 @@ async function main(){
     algorithms: { kek: kek.alg, dek: 'AES-256-GCM' },
     results: { unwrap_dek1_ok: ok1, unwrap_dek2_ok: ok2, reencrypt_ok: ok2 && ok1 },
     active_dek_id: dek2_id,
-    previous_dek_id: dek1_id
+    previous_dek_id: dek1_id,
   }, { category: 'security', name: 'secrets-rotation-evidence' });
 
   await fs.writeFile(EVIDENCE_PATH, stableStringify(evidence));

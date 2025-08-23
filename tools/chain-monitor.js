@@ -7,7 +7,7 @@ async function main(){
   const issues=[];
   for (let i=0;i<chain.length;i++){
     const prev = i? chain[i-1].contentHash : null;
-    if (chain[i].prevHash !== prev) issues.push({ seq: i, code:'PREV_HASH_MISSING_OR_MISMATCH' });
+    if (chain[i].prevHash !== prev) {issues.push({ seq: i, code:'PREV_HASH_MISSING_OR_MISMATCH' });}
   }
   const report = { version:'1.0.0', generated_utc: new Date().toISOString(), length: chain.length, issues };
   await fs.mkdir('artifacts',{recursive:true});

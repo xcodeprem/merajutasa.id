@@ -32,13 +32,13 @@ function renderStatus() {
   const specHash = readJSONSafe('artifacts/spec-hash-diff.json');
   const securitySmoke = readJSONSafe('artifacts/security-patterns-smoke.json');
   const governance = readJSONSafe('artifacts/governance-verify-summary.json');
-  
+
   const lines = [];
-  
+
   // A8 (no-silent-drift) status
   const a8Status = a8Report?.summary?.status || a8Report?.status || 'UNKNOWN';
   lines.push(`- **A8 (no-silent-drift)**: ${a8Status}`);
-  
+
   // Spec hash status
   if (specHash?.summary) {
     const specStatus = typeof specHash.summary === 'string' ? specHash.summary : 'PASS';
@@ -51,13 +51,13 @@ function renderStatus() {
   } else {
     lines.push('- **Spec Hash**: UNKNOWN');
   }
-  
+
   // Security patterns status
   if (securitySmoke) {
     const totalViolations = securitySmoke.summary?.total_violations || 0;
     const highCount = securitySmoke.summary?.by_severity?.HIGH || securitySmoke.high_severity_count || 0;
     const mediumCount = securitySmoke.summary?.by_severity?.MEDIUM || securitySmoke.medium_severity_count || 0;
-    
+
     if (totalViolations === 0) {
       lines.push('- **Security Smoke**: PASS');
     } else if (highCount > 0 || mediumCount > 0) {
@@ -68,17 +68,17 @@ function renderStatus() {
   } else {
     lines.push('- **Security Smoke**: UNKNOWN');
   }
-  
+
   // Governance summary
   if (governance?.summary?.overall_status) {
     lines.push(`- **Overall Governance**: ${governance.summary.overall_status}`);
   }
-  
+
   // Last updated timestamp
   const timestamp = new Date().toISOString();
   lines.push('');
   lines.push(`*Last updated: ${timestamp}*`);
-  
+
   return lines.join('\n');
 }
 
@@ -89,16 +89,16 @@ function updateReadme() {
   const readmePath = path.resolve('README.md');
   const markerStart = '<!-- STATUS:BEGIN -->';
   const markerEnd = '<!-- STATUS:END -->';
-  
+
   if (!fs.existsSync(readmePath)) {
     console.error('[status-sync] ERROR: README.md not found');
     process.exitCode = 1;
     return;
   }
-  
+
   const original = fs.readFileSync(readmePath, 'utf8');
   const hasMarkers = original.includes(markerStart) && original.includes(markerEnd);
-  
+
   if (!hasMarkers) {
     console.error('[status-sync] ERROR: README markers missing. Add:');
     console.error(`  ${markerStart}`);
@@ -107,15 +107,15 @@ function updateReadme() {
     process.exitCode = 1;
     return;
   }
-  
+
   const statusBlock = renderStatus();
   const regex = new RegExp(`${markerStart}[\\s\\S]*?${markerEnd}`, 'g');
   const updated = original.replace(regex, `${markerStart}\n\n${statusBlock}\n\n${markerEnd}`);
-  
+
   if (updated !== original) {
     fs.writeFileSync(readmePath, updated, 'utf8');
     console.log('[status-sync] README status updated successfully');
-    
+
     // Log the change for CI
     console.log('::notice title=README Status Updated::Status section synchronized with artifacts');
   } else {
@@ -130,19 +130,19 @@ function validateSync() {
   const readmePath = path.resolve('README.md');
   const markerStart = '<!-- STATUS:BEGIN -->';
   const markerEnd = '<!-- STATUS:END -->';
-  
+
   if (!fs.existsSync(readmePath)) {
     console.error('[status-sync] ERROR: README.md not found');
     return false;
   }
-  
+
   const original = fs.readFileSync(readmePath, 'utf8');
   const statusBlock = renderStatus();
   const expectedContent = `${markerStart}\n\n${statusBlock}\n\n${markerEnd}`;
-  
+
   const regex = new RegExp(`${markerStart}[\\s\\S]*?${markerEnd}`, 'g');
   const updated = original.replace(regex, expectedContent);
-  
+
   return updated === original;
 }
 
@@ -152,22 +152,22 @@ function validateSync() {
 function main() {
   const args = process.argv.slice(2);
   const command = args[0];
-  
+
   switch (command) {
-    case 'validate':
-      if (validateSync()) {
-        console.log('[status-sync] README is in sync');
-        process.exit(0);
-      } else {
-        console.error('[status-sync] README is out of sync with artifacts');
-        process.exit(1);
-      }
-      break;
-      
-    case 'update':
-    default:
-      updateReadme();
-      break;
+  case 'validate':
+    if (validateSync()) {
+      console.log('[status-sync] README is in sync');
+      process.exit(0);
+    } else {
+      console.error('[status-sync] README is out of sync with artifacts');
+      process.exit(1);
+    }
+    break;
+
+  case 'update':
+  default:
+    updateReadme();
+    break;
   }
 }
 

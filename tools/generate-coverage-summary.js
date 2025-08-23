@@ -15,12 +15,12 @@ async function generateCoverageSummary() {
     generated_by: 'tools/generate-coverage-summary.js',
     coverage: {
       ui: null,
-      root_tests: null
+      root_tests: null,
     },
     build: {
       status: 'unknown',
-      artifacts_generated: false
-    }
+      artifacts_generated: false,
+    },
   };
 
   try {
@@ -29,29 +29,29 @@ async function generateCoverageSummary() {
     try {
       const uiCoverageData = await fs.readFile(uiCoveragePath, 'utf8');
       const uiCoverage = JSON.parse(uiCoverageData);
-      
+
       if (uiCoverage.total) {
         summary.coverage.ui = {
           lines: {
             pct: uiCoverage.total.lines.pct,
             covered: uiCoverage.total.lines.covered,
-            total: uiCoverage.total.lines.total
+            total: uiCoverage.total.lines.total,
           },
           statements: {
             pct: uiCoverage.total.statements.pct,
             covered: uiCoverage.total.statements.covered,
-            total: uiCoverage.total.statements.total
+            total: uiCoverage.total.statements.total,
           },
           functions: {
             pct: uiCoverage.total.functions.pct,
             covered: uiCoverage.total.functions.covered,
-            total: uiCoverage.total.functions.total
+            total: uiCoverage.total.functions.total,
           },
           branches: {
             pct: uiCoverage.total.branches.pct,
             covered: uiCoverage.total.branches.covered,
-            total: uiCoverage.total.branches.total
-          }
+            total: uiCoverage.total.branches.total,
+          },
         };
       }
     } catch (error) {
@@ -75,7 +75,7 @@ async function generateCoverageSummary() {
       const buildData = await fs.readFile(buildSummaryPath, 'utf8');
       const buildSummary = JSON.parse(buildData);
       summary.build = buildSummary;
-      
+
       // Check if build directory exists
       try {
         await fs.access('public/dist');
@@ -91,15 +91,15 @@ async function generateCoverageSummary() {
     let coverageBadge = 'unknown';
     if (summary.coverage.ui && summary.coverage.ui.lines) {
       const pct = summary.coverage.ui.lines.pct;
-      if (pct >= 90) coverageBadge = 'excellent';
-      else if (pct >= 80) coverageBadge = 'good';
-      else if (pct >= 60) coverageBadge = 'fair';
-      else coverageBadge = 'needs-improvement';
+      if (pct >= 90) {coverageBadge = 'excellent';}
+      else if (pct >= 80) {coverageBadge = 'good';}
+      else if (pct >= 60) {coverageBadge = 'fair';}
+      else {coverageBadge = 'needs-improvement';}
     }
 
     summary.badge = {
       coverage: coverageBadge,
-      coverage_pct: summary.coverage.ui?.lines?.pct || 0
+      coverage_pct: summary.coverage.ui?.lines?.pct || 0,
     };
 
     // Ensure artifacts directory exists

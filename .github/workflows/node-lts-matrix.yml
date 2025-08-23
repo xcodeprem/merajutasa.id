@@ -104,13 +104,21 @@ jobs:
 
       - name: Lint codebase
         run: |
+          echo "Running JavaScript/TypeScript linting..."
+          npm run lint:js:ci || echo "::warning::ESLint found issues that should be addressed"
+          echo "Running Prettier format check..."
+          npm run format:check:ci || echo "::warning::Prettier found formatting issues"
+          echo "Running markdown linting..."
           npm run lint:md || echo "Markdown linting issues (advisory)"
+          echo "Running DEC linting..."
           npm run lint:dec
+          echo "Running disclaimers linting..."
           npm run lint:disclaimers
         continue-on-error: ${{ matrix.node-version != 20 }}
 
       - name: Type checking & validation
         run: |
+          npm run typecheck
           npm run schema:validate
           npm run post-config:verify
         continue-on-error: ${{ matrix.node-version != 20 }}

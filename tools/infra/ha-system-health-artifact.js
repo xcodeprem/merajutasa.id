@@ -7,7 +7,7 @@ async function main() {
   const status = await ha.healthCheck();
 
   const artifactsDir = path.join(process.cwd(), 'artifacts');
-  if (!fs.existsSync(artifactsDir)) fs.mkdirSync(artifactsDir, { recursive: true });
+  if (!fs.existsSync(artifactsDir)) {fs.mkdirSync(artifactsDir, { recursive: true });}
   const outPath = path.join(artifactsDir, 'ha-system-health.json');
   fs.writeFileSync(outPath, JSON.stringify(status, null, 2));
   console.log(`Wrote ${outPath}`);

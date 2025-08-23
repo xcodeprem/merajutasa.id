@@ -12,7 +12,7 @@ const graphql = baseGraphql.defaults({ headers: { authorization: `token ${token}
 
 async function main() {
   try {
-    const data = await graphql(`query($owner:String!) { user(login: $owner) { login projectsV2(first: 5) { nodes { title number url } } } }`, { owner });
+    const data = await graphql('query($owner:String!) { user(login: $owner) { login projectsV2(first: 5) { nodes { title number url } } } }', { owner });
     const projects = data?.user?.projectsV2?.nodes || [];
     const out = { owner: data?.user?.login, projects: projects.map(p => ({ title: p.title, number: p.number, url: p.url })) };
     await fs.mkdir('artifacts', { recursive: true });

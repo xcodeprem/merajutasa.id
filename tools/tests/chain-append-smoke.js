@@ -15,7 +15,7 @@ function httpJson(options, body){
 async function main(){
   const canonical = '{"type":"CREDENTIAL_ISSUED","credId":"urn:merajutasa:cred:test","ts":"'+new Date().toISOString()+'"}';
   const sign = await httpJson({ hostname:'127.0.0.1', port:4601, path:'/sign', method:'POST', headers:{'content-type':'application/json'}}, { payload: canonical });
-  if (sign.status!==200) throw new Error('sign failed '+sign.status);
+  if (sign.status!==200) {throw new Error('sign failed '+sign.status);}
   const pub = await httpJson({ hostname:'127.0.0.1', port:4601, path:'/pubkey', method:'GET' });
   const append = await httpJson({ hostname:'127.0.0.1', port:4602, path:'/append', method:'POST', headers:{'content-type':'application/json'}}, { canonical, signature: sign.data.signature, publicKeyPem: pub.data.publicKeyPem });
   console.log(JSON.stringify(append,null,2));

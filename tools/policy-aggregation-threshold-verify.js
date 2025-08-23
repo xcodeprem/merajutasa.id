@@ -21,10 +21,10 @@ async function loadCells(path){
     const data = JSON.parse(raw);
     if (Array.isArray(data)) {
       const obj = {};
-      for (const it of data) { if (it && it.id) obj[it.id] = { count: Number(it.count||0) }; }
+      for (const it of data) { if (it && it.id) {obj[it.id] = { count: Number(it.count||0) };} }
       return obj;
     }
-    if (data && typeof data === 'object') return data;
+    if (data && typeof data === 'object') {return data;}
   } catch {/* ignore */}
   return null;
 }
@@ -34,7 +34,7 @@ function evaluate(cells){
   const keys = Object.keys(cells);
   for (const k of keys){
     const c = Number(cells[k]?.count || 0);
-    if (c < THRESHOLD) violations.push({ cell: k, count: c });
+    if (c < THRESHOLD) {violations.push({ cell: k, count: c });}
   }
   return { total_cells: keys.length, violations };
 }

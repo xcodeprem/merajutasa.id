@@ -1,0 +1,14 @@
+node_modules
+dist
+build
+coverage
+artifacts
+public/equity-ui-v2
+*.log
+*.cache
+.env*
+.DS_Store
+*.yml
+*.yaml
+*.md
+*.json

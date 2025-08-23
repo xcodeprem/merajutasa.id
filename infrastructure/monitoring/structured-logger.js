@@ -16,7 +16,7 @@ const LOG_LEVELS = {
   WARN: 2,
   ERROR: 3,
   FATAL: 4,
-  AUDIT: 5
+  AUDIT: 5,
 };
 
 // Current log level (configurable via environment)
@@ -31,7 +31,7 @@ const LOG_CONFIG = {
   enableFile: true,
   enableAudit: true,
   timestampFormat: 'iso',
-  includeStackTrace: true
+  includeStackTrace: true,
 };
 
 // Service metadata
@@ -41,11 +41,11 @@ const SERVICE_METADATA = {
   environment: process.env.NODE_ENV || 'development',
   nodeVersion: process.version,
   pid: process.pid,
-  hostname: process.env.HOSTNAME || 'localhost'
+  hostname: process.env.HOSTNAME || 'localhost',
 };
 
 // Current request context
-let requestContext = new Map();
+const requestContext = new Map();
 
 /**
  * Logger class with structured logging capabilities
@@ -70,7 +70,7 @@ class StructuredLogger {
   setRequestContext(requestId, context = {}) {
     requestContext.set(requestId, {
       ...context,
-      startTime: performance.now()
+      startTime: performance.now(),
     });
   }
 
@@ -104,7 +104,7 @@ class StructuredLogger {
   createBaseEntry(level, message, meta = {}) {
     const timestamp = new Date().toISOString();
     const correlationId = meta.correlationId || this.generateCorrelationId();
-    
+
     return {
       '@timestamp': timestamp,
       '@version': '1',
@@ -114,13 +114,13 @@ class StructuredLogger {
       service: SERVICE_METADATA,
       correlation: {
         id: correlationId,
-        requestId: meta.requestId || null
+        requestId: meta.requestId || null,
       },
       meta: { ...meta },
       performance: {
         uptime: process.uptime(),
-        memoryUsage: process.memoryUsage()
-      }
+        memoryUsage: process.memoryUsage(),
+      },
     };
   }
 
@@ -133,7 +133,7 @@ class StructuredLogger {
         name: error.name,
         message: error.message,
         stack: this.config.includeStackTrace ? error.stack : undefined,
-        code: error.code || null
+        code: error.code || null,
       };
     } else if (typeof error === 'object') {
       entry.error = error;
@@ -156,7 +156,7 @@ class StructuredLogger {
         userAgent: context.userAgent,
         ip: context.ip,
         user: context.user,
-        duration: context.startTime ? performance.now() - context.startTime : null
+        duration: context.startTime ? performance.now() - context.startTime : null,
       };
     }
     return entry;
@@ -166,14 +166,14 @@ class StructuredLogger {
    * Write log entry to file
    */
   async writeToFile(entry) {
-    if (!this.config.enableFile) return;
+    if (!this.config.enableFile) {return;}
 
     try {
       const logFile = `${this.config.logDir}/${SERVICE_METADATA.serviceName}.log`;
       const logLine = JSON.stringify(entry) + '\n';
-      
+
       await fs.appendFile(logFile, logLine);
-      
+
       // Check file size and rotate if necessary
       await this.rotateLogFileIfNeeded(logFile);
     } catch (error) {
@@ -185,14 +185,14 @@ class StructuredLogger {
    * Write audit log entry to separate file
    */
   async writeToAuditFile(entry) {
-    if (!this.config.enableAudit) return;
+    if (!this.config.enableAudit) {return;}
 
     try {
       const auditFile = `${this.config.logDir}/audit.log`;
       const logLine = JSON.stringify(entry) + '\n';
-      
+
       await fs.appendFile(auditFile, logLine);
-      
+
       // Check file size and rotate if necessary
       await this.rotateLogFileIfNeeded(auditFile, 'audit');
     } catch (error) {
@@ -206,13 +206,13 @@ class StructuredLogger {
   async rotateLogFileIfNeeded(logFile, type = 'main') {
     try {
       const stats = await fs.stat(logFile);
-      
+
       if (stats.size > this.config.maxFileSize) {
         const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
         const rotatedFile = logFile.replace(/\.log$/, `-${timestamp}.log`);
-        
+
         await fs.rename(logFile, rotatedFile);
-        
+
         // Clean up old log files
         await this.cleanupOldLogFiles(type);
       }
@@ -230,19 +230,19 @@ class StructuredLogger {
       // Sanitize service name to prevent regex injection
       const safeName = SERVICE_METADATA.serviceName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
       const pattern = type === 'audit' ? /^audit-.*\.log$/ : new RegExp(`^${safeName}-.*\\.log$`);
-      
+
       const logFiles = files
         .filter(file => pattern.test(file))
         .map(file => ({
           name: file,
-          path: `${this.config.logDir}/${file}`
+          path: `${this.config.logDir}/${file}`,
         }))
         .sort((a, b) => b.name.localeCompare(a.name));
 
       // Remove old files beyond the limit
       if (logFiles.length > this.config.maxFiles) {
         const filesToDelete = logFiles.slice(this.config.maxFiles);
-        
+
         for (const file of filesToDelete) {
           await fs.unlink(file.path);
         }
@@ -256,7 +256,7 @@ class StructuredLogger {
    * Write to console with formatted output
    */
   writeToConsole(entry) {
-    if (!this.config.enableConsole) return;
+    if (!this.config.enableConsole) {return;}
 
     const levelColors = {
       DEBUG: '\x1b[36m',  // Cyan
@@ -264,26 +264,26 @@ class StructuredLogger {
       WARN: '\x1b[33m',   // Yellow
       ERROR: '\x1b[31m',  // Red
       FATAL: '\x1b[35m',  // Magenta
-      AUDIT: '\x1b[34m'   // Blue
+      AUDIT: '\x1b[34m',   // Blue
     };
 
     const reset = '\x1b[0m';
     const color = levelColors[entry.level] || '';
-    
+
     const timestamp = entry['@timestamp'];
     const level = entry.level.padEnd(5);
     const correlationId = entry.correlation.id.substring(0, 8);
     const message = entry.message;
-    
+
     console.log(`${color}${timestamp} [${level}] (${correlationId}) ${message}${reset}`);
-    
+
     if (entry.error) {
       console.error(`${color}  Error: ${entry.error.message}${reset}`);
       if (entry.error.stack && this.config.includeStackTrace) {
         console.error(`${color}  Stack: ${entry.error.stack}${reset}`);
       }
     }
-    
+
     if (entry.meta && Object.keys(entry.meta).length > 0) {
       console.log(`${color}  Meta: ${JSON.stringify(entry.meta, null, 2)}${reset}`);
     }
@@ -294,32 +294,32 @@ class StructuredLogger {
    */
   async log(level, message, meta = {}, error = null) {
     const levelValue = LOG_LEVELS[level];
-    
+
     if (levelValue < CURRENT_LOG_LEVEL) {
       return; // Skip logging if below current level
     }
 
     const entry = this.createBaseEntry(level, message, meta);
-    
+
     if (error) {
       this.addErrorInfo(entry, error);
     }
-    
+
     if (meta.requestId) {
       this.addRequestInfo(entry, meta.requestId);
     }
 
     // Write to console
     this.writeToConsole(entry);
-    
+
     // Write to log file
     await this.writeToFile(entry);
-    
+
     // Write to audit file for AUDIT level
     if (level === 'AUDIT') {
       await this.writeToAuditFile(entry);
     }
-    
+
     return entry;
   }
 
@@ -348,7 +348,7 @@ class StructuredLogger {
     const auditMeta = {
       ...meta,
       auditType: 'user_action',
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
     return this.log('AUDIT', `AUDIT: ${action}`, auditMeta);
   }
@@ -361,9 +361,9 @@ class StructuredLogger {
       ...meta,
       operationType: operation,
       status: status,
-      category: 'governance'
+      category: 'governance',
     };
-    
+
     const level = status === 'success' ? 'INFO' : 'ERROR';
     return this.log(level, `Governance operation: ${operation} - ${status}`, governanceMeta);
   }
@@ -376,9 +376,9 @@ class StructuredLogger {
       ...meta,
       eventType: event,
       severity: severity,
-      category: 'security'
+      category: 'security',
     };
-    
+
     const level = severity === 'high' ? 'ERROR' : severity === 'medium' ? 'WARN' : 'INFO';
     return this.log(level, `Security event: ${event}`, securityMeta);
   }
@@ -391,9 +391,9 @@ class StructuredLogger {
       ...meta,
       metricName: metric,
       metricValue: value,
-      category: 'performance'
+      category: 'performance',
     };
-    
+
     return this.log('INFO', `Performance metric: ${metric} = ${value}`, perfMeta);
   }
 }
@@ -405,42 +405,42 @@ function createLoggingMiddleware(logger) {
   return function loggingMiddleware(req, res, next) {
     const requestId = req.headers['x-request-id'] || logger.generateCorrelationId();
     const startTime = performance.now();
-    
+
     // Set request context
     logger.setRequestContext(requestId, {
       method: req.method,
       url: req.url,
       userAgent: req.headers['user-agent'],
       ip: req.ip || req.connection.remoteAddress,
-      user: req.user?.id || 'anonymous'
+      user: req.user?.id || 'anonymous',
     });
-    
+
     // Add request ID to request object
     req.requestId = requestId;
-    
+
     // Log incoming request
     logger.info('Incoming request', {
       requestId: requestId,
       method: req.method,
       url: req.url,
       userAgent: req.headers['user-agent'],
-      ip: req.ip || req.connection.remoteAddress
+      ip: req.ip || req.connection.remoteAddress,
     });
-    
+
     // Log response when finished
     res.on('finish', () => {
       const duration = performance.now() - startTime;
-      
+
       logger.info('Request completed', {
         requestId: requestId,
         statusCode: res.statusCode,
-        duration: Math.round(duration * 100) / 100 // Round to 2 decimal places
+        duration: Math.round(duration * 100) / 100, // Round to 2 decimal places
       });
-      
+
       // Clear request context
       logger.clearRequestContext(requestId);
     });
-    
+
     next();
   };
 }
@@ -452,7 +452,7 @@ export {
   StructuredLogger,
   logger,
   createLoggingMiddleware,
-  LOG_LEVELS
+  LOG_LEVELS,
 };
 
 export default logger;

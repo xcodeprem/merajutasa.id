@@ -14,15 +14,15 @@ async function httpRequest(method, path, body, headers = {}) {
         'x-api-key': 'dev-key',
         'x-roles': 'ingest:write,append:write,sign:write',
         ...headers,
-        ...(data ? { 'content-length': data.length } : {})
-      }
+        ...(data ? { 'content-length': data.length } : {}),
+      },
     }, (res) => {
       let chunks = '';
       res.on('data', (d) => chunks += d);
       res.on('end', () => resolve({ status: res.statusCode, body: chunks ? JSON.parse(chunks) : {} }));
     });
     req.on('error', reject);
-    if (data) req.write(data);
+    if (data) {req.write(data);}
     req.end();
   });
 }

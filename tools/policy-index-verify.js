@@ -14,11 +14,11 @@ const README_PATH = 'README.md';
 function extractTable(md){
   const lines = md.split(/\r?\n/);
   const start = lines.findIndex(l=>/^\|\s*Policy ID\s*\|/i.test(l));
-  if (start<0) return [];
+  if (start<0) {return [];}
   const rows=[];
   for (let i=start+2; i<lines.length; i++){
     const l = lines[i];
-    if (!l.trim().startsWith('|')) break;
+    if (!l.trim().startsWith('|')) {break;}
     const cols = l.split('|').slice(1,-1).map(s=>s.trim());
     if (cols.length>=7){
       rows.push({ policyId: cols[0], file: cols[1], domain: cols[2], level: cols[3], decRef: cols[4], principles: cols[5], notes: cols[6] });
@@ -31,18 +31,18 @@ function extractNonCodeRefs(md){
   const lines = md.split(/\r?\n/);
   // Find the heading line for Non-code Policy References (case-insensitive)
   const start = lines.findIndex(l=>/^##\s*Non-code Policy References/i.test(l));
-  if (start < 0) return { items: [], sectionFound: false };
+  if (start < 0) {return { items: [], sectionFound: false };}
   const items = [];
   for (let i = start + 1; i < lines.length; i++){
     const l = lines[i];
-    if (/^#/ .test(l)) break; // next heading ends the section
+    if (/^#/ .test(l)) {break;} // next heading ends the section
     const m = /^\s*-\s+(.*)$/.exec(l);
     if (m){
       // take the raw path text, strip surrounding code/link markup if any
       let path = m[1].trim();
       // If it's a markdown link [text](path), extract inside parens
       const linkMatch = /^\[[^\]]+\]\(([^)]+)\)/.exec(path);
-      if (linkMatch) path = linkMatch[1];
+      if (linkMatch) {path = linkMatch[1];}
       // strip surrounding backticks
       path = path.replace(/^`+|`+$/g,'');
       items.push(path);
@@ -78,7 +78,7 @@ async function main(){
       const man = manifestPaths.get(path);
       const manDec = man.dec_ref || '';
       for (const token of decRefTxt.split('+').map(s=>s.trim())){
-        if (!token) continue;
+        if (!token) {continue;}
         if (!manDec.includes(token)){
           issues.push({ type:'DEC_REF_MISMATCH', policyId:r.policyId, path, indexDecRef: decRefTxt, manifestDecRef: manDec });
           break;

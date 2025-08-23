@@ -25,33 +25,33 @@ const PRINCIPLE_PATTERNS = {
   GP7: [ /hype/i, /revolusioner/i, /terbaik/i, /unggul/i, /super(ior)?/i, /top\b/i ],
   GP8: [ /portabil/i, /interoperab/i, /extensib/i ],
   GP9: [ /non-?ranking/i, /under-?served/i, /equity index/i, /fairness/i ],
-  GP10:[ /ethic/i, /ethical/i, /bias/i, /inclusion/i, /governance ethics/i ]
+  GP10:[ /ethic/i, /ethical/i, /bias/i, /inclusion/i, /governance ethics/i ],
 };
 
 function categorizeDomain(file){
-  if (file.startsWith('docs/privacy')) return 'privacy';
-  if (file.startsWith('docs/fairness')) return 'fairness';
-  if (file.startsWith('docs/governance')) return 'governance';
-  if (file.startsWith('docs/integrity')) return 'integrity';
-  if (file.startsWith('docs/analytics')) return 'analytics';
-  if (file.startsWith('docs/onboarding')) return 'onboarding';
-  if (file.startsWith('docs/principles')) return 'principles';
+  if (file.startsWith('docs/privacy')) {return 'privacy';}
+  if (file.startsWith('docs/fairness')) {return 'fairness';}
+  if (file.startsWith('docs/governance')) {return 'governance';}
+  if (file.startsWith('docs/integrity')) {return 'integrity';}
+  if (file.startsWith('docs/analytics')) {return 'analytics';}
+  if (file.startsWith('docs/onboarding')) {return 'onboarding';}
+  if (file.startsWith('docs/principles')) {return 'principles';}
   return 'other';
 }
 
 function getChangedFiles(){
   try {
     const res = spawnSync('git',['diff','--name-only','HEAD~1'], { encoding: 'utf8' });
-    if (res.status !== 0) return new Set();
+    if (res.status !== 0) {return new Set();}
     return new Set(res.stdout.split(/\r?\n/).filter(Boolean));
   } catch { return new Set(); }
 }
 
 function confidenceFromCount(count, domainCount){
-  if (count === 0) return 0;
-  if (count === 1) return 0.35 + (domainCount>1?0.05:0);
-  if (count <=3) return 0.55 + (domainCount>1?0.05:0);
-  if (count <=6) return 0.75 + (domainCount>1?0.05:0);
+  if (count === 0) {return 0;}
+  if (count === 1) {return 0.35 + (domainCount>1?0.05:0);}
+  if (count <=3) {return 0.55 + (domainCount>1?0.05:0);}
+  if (count <=6) {return 0.75 + (domainCount>1?0.05:0);}
   return 0.9;
 }
 
@@ -75,7 +75,7 @@ async function collectEvidence(){
               snippet: line.trim().slice(0,200),
               pattern: re.source,
               changed: changed.has(file) || false,
-              domain: categorizeDomain(file)
+              domain: categorizeDomain(file),
             });
           }
         });
@@ -104,7 +104,7 @@ async function main(){
       inferredImpact,
       confidence: Number(confidence.toFixed(2)),
       evidence_sample: shown,
-      evidence_truncated: count>MAX_SHOW
+      evidence_truncated: count>MAX_SHOW,
     };
   });
   const impacted = principles.filter(p=>p.inferredImpact).length;
@@ -113,7 +113,7 @@ async function main(){
     total_principles: principles.length,
     impacted,
     average_confidence: Number(avgConfidence.toFixed(2)),
-    max_confidence: Math.max(...principles.map(p=>p.confidence))
+    max_confidence: Math.max(...principles.map(p=>p.confidence)),
   };
   const report = { version: 2, generated_utc: new Date().toISOString(), principles, summary };
   await fs.writeFile('artifacts/principles-impact-report.json', JSON.stringify(report,null,2));

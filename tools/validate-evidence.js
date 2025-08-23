@@ -19,7 +19,7 @@ const REQUIRED = [
   { artifact: 'artifacts/fairness-sim-scenarios.json', schema: 'schemas/evidence/fairness-sim-scenarios-v1.json' },
   { artifact: 'artifacts/fairness-sim-report.json', schema: 'schemas/evidence/fairness-sim-report-v1.json' },
   { artifact: 'artifacts/no-silent-drift-report.json', schema: 'schemas/evidence/no-silent-drift-v1.json' },
-  { artifact: 'artifacts/secrets-rotation-evidence.json', schema: 'schemas/evidence/secrets-rotation-evidence-v1.json' }
+  { artifact: 'artifacts/secrets-rotation-evidence.json', schema: 'schemas/evidence/secrets-rotation-evidence-v1.json' },
 ];
 
 async function loadJSON(p){ return JSON.parse(await fs.readFile(p,'utf8')); }
@@ -58,13 +58,13 @@ async function main(){
     pass: results.filter(r=>r.status==='PASS').length,
     fail: results.filter(r=>r.status==='FAIL').length,
     missing: results.filter(r=>r.status==='MISSING').length,
-    schema_missing: results.filter(r=>r.status==='SCHEMA_MISSING').length
+    schema_missing: results.filter(r=>r.status==='SCHEMA_MISSING').length,
   };
   const out = { version:1, generated_utc: new Date().toISOString(), summary, results };
   await fs.mkdir('artifacts',{recursive:true});
   await fs.writeFile('artifacts/evidence-schema-validation.json', JSON.stringify(out,null,2));
   console.log(`[validate-evidence] PASS=${summary.pass} FAIL=${summary.fail} MISSING=${summary.missing}`);
-  if (summary.fail>0) process.exit(1);
+  if (summary.fail>0) {process.exit(1);}
 }
 
 main().catch(e=>{ console.error('validate-evidence error', e); process.exit(2); });

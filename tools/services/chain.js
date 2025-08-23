@@ -53,7 +53,7 @@ async function saveChain(chain){
 
 async function appendLog(entry){
   await fs.mkdir(DATA_DIR,{recursive:true});
-  await fs.appendFile(CHAIN_LOG_PATH, JSON.stringify(entry)+"\n");
+  await fs.appendFile(CHAIN_LOG_PATH, JSON.stringify(entry)+'\n');
 }
 
 function verifySig(pubPem, canonical, signature){

@@ -2,10 +2,10 @@
 
 /**
  * Interface Mapping Generator
- * 
+ *
  * Generates interface mapping from API documentation to determine upstream/downstream
  * component relationships based on documented API endpoints.
- * 
+ *
  * Success Criteria:
  * - Each component has upstream/downstream lists based on documented APIs
  * - No conflicts in endpoint names/versions
@@ -21,11 +21,11 @@ class InterfaceMappingGenerator {
     this.componentInventory = null;
     this.interfaceMapping = {
       generated_at: new Date().toISOString(),
-      version: "1.0.0",
+      version: '1.0.0',
       components: [],
       endpoints: [],
       conflicts: [],
-      statistics: {}
+      statistics: {},
     };
     this.conflicts = [];
   }
@@ -33,21 +33,21 @@ class InterfaceMappingGenerator {
   async run() {
     try {
       console.log('🔍 Generating interface mapping from API documentation...');
-      
+
       await this.loadData();
       await this.parseOpenApiSpec();
       await this.mapComponentInterfaces();
       await this.detectConflicts();
       await this.generateStatistics();
       await this.writeOutputFiles();
-      
+
       console.log(`✅ Generated interface mapping with ${this.interfaceMapping.components.length} components and ${this.interfaceMapping.endpoints.length} endpoints`);
       if (this.conflicts.length > 0) {
         console.log(`⚠️  Detected ${this.conflicts.length} endpoint conflicts`);
       } else {
         console.log('✅ No endpoint conflicts detected');
       }
-      
+
     } catch (error) {
       console.error('❌ Interface mapping generation failed:', error.message);
       process.exit(1);
@@ -77,7 +77,7 @@ class InterfaceMappingGenerator {
   async parseOpenApiSpec() {
     const endpoints = [];
     const paths = this.openApiSpec.paths || {};
-    
+
     for (const [path, methods] of Object.entries(paths)) {
       for (const [method, spec] of Object.entries(methods)) {
         if (typeof spec === 'object' && spec.summary) {
@@ -91,75 +91,75 @@ class InterfaceMappingGenerator {
             upstreamServices: this.extractUpstreamServices(path, spec),
             downstreamClients: this.extractDownstreamClients(path, spec),
             version: this.extractApiVersion(path),
-            port: this.determineServicePort(path, spec.tags)
+            port: this.determineServicePort(path, spec.tags),
           };
           endpoints.push(endpoint);
         }
       }
     }
-    
+
     this.interfaceMapping.endpoints = endpoints;
     console.log(`🔗 Parsed ${endpoints.length} API endpoints`);
   }
 
   determineServiceType(path, tags = []) {
-    if (path.includes('/signer/') || tags.includes('Signer')) return 'signer';
-    if (path.includes('/chain/') || tags.includes('Chain')) return 'chain';
-    if (path.includes('/collector/') || tags.includes('Collector')) return 'collector';
-    if (path.includes('/health') || path.includes('/metrics') || path.includes('/services') || tags.includes('Management')) return 'management';
+    if (path.includes('/signer/') || tags.includes('Signer')) {return 'signer';}
+    if (path.includes('/chain/') || tags.includes('Chain')) {return 'chain';}
+    if (path.includes('/collector/') || tags.includes('Collector')) {return 'collector';}
+    if (path.includes('/health') || path.includes('/metrics') || path.includes('/services') || tags.includes('Management')) {return 'management';}
     return 'unknown';
   }
 
   extractUpstreamServices(path, spec) {
     const upstreams = [];
-    
+
     // Signer service dependencies
     if (path.includes('/signer/')) {
       // Signer is typically a leaf service with minimal dependencies
       upstreams.push('authentication', 'configuration');
     }
-    
-    // Chain service dependencies  
+
+    // Chain service dependencies
     if (path.includes('/chain/')) {
       upstreams.push('signer', 'authentication', 'database', 'configuration');
     }
-    
+
     // Collector service dependencies
     if (path.includes('/collector/')) {
       upstreams.push('chain', 'signer', 'authentication', 'database', 'schema-validation', 'configuration');
     }
-    
+
     // Management endpoints dependencies
     if (path.includes('/health') || path.includes('/metrics') || path.includes('/services')) {
       upstreams.push('signer', 'chain', 'collector', 'monitoring', 'configuration');
     }
-    
+
     return upstreams;
   }
 
   extractDownstreamClients(path, spec) {
     const downstreams = [];
-    
+
     // Services that depend on signer
     if (path.includes('/signer/')) {
       downstreams.push('chain', 'collector', 'api-gateway');
     }
-    
+
     // Services that depend on chain
     if (path.includes('/chain/')) {
       downstreams.push('collector', 'api-gateway', 'governance-tools');
     }
-    
+
     // Services that depend on collector
     if (path.includes('/collector/')) {
       downstreams.push('analytics', 'reporting', 'api-gateway');
     }
-    
+
     // Services that depend on management endpoints
     if (path.includes('/health') || path.includes('/metrics') || path.includes('/services')) {
       downstreams.push('monitoring', 'alerting', 'dashboard', 'api-gateway');
     }
-    
+
     return downstreams;
   }
 
@@ -169,23 +169,23 @@ class InterfaceMappingGenerator {
   }
 
   determineServicePort(path, tags = []) {
-    if (path.includes('/signer/') || tags.includes('Signer')) return 4601;
-    if (path.includes('/chain/') || tags.includes('Chain')) return 4602; 
-    if (path.includes('/collector/') || tags.includes('Collector')) return 4603;
-    if (path.includes('/api/v1/')) return 8080; // API Gateway
+    if (path.includes('/signer/') || tags.includes('Signer')) {return 4601;}
+    if (path.includes('/chain/') || tags.includes('Chain')) {return 4602;}
+    if (path.includes('/collector/') || tags.includes('Collector')) {return 4603;}
+    if (path.includes('/api/v1/')) {return 8080;} // API Gateway
     return null;
   }
 
   async mapComponentInterfaces() {
     const components = [];
-    
+
     // Group endpoints by service type
     const serviceGroups = this.groupEndpointsByService();
-    
+
     for (const [serviceType, endpoints] of Object.entries(serviceGroups)) {
       // Find corresponding component from inventory
       const inventoryComponent = this.findComponentInInventory(serviceType);
-      
+
       const component = {
         name: serviceType,
         displayName: this.getDisplayName(serviceType),
@@ -194,39 +194,39 @@ class InterfaceMappingGenerator {
         version: inventoryComponent?.version || '1.0.0',
         port: endpoints[0]?.port || null,
         filePath: inventoryComponent?.filePath || null,
-        
+
         // Interface mappings
         providedEndpoints: endpoints.map(e => ({
           path: e.path,
           method: e.method,
           summary: e.summary,
-          version: e.version
+          version: e.version,
         })),
-        
+
         upstreamDependencies: this.consolidateUpstreams(endpoints),
         downstreamClients: this.consolidateDownstreams(endpoints),
-        
+
         // Existing inventory data
         existingUpstreams: inventoryComponent?.requiredUpstreams || [],
         failureImpact: inventoryComponent?.failureImpact || 'medium',
-        
+
         statistics: {
           endpointCount: endpoints.length,
           uniqueUpstreams: new Set(endpoints.flatMap(e => e.upstreamServices)).size,
-          uniqueDownstreams: new Set(endpoints.flatMap(e => e.downstreamClients)).size
-        }
+          uniqueDownstreams: new Set(endpoints.flatMap(e => e.downstreamClients)).size,
+        },
       };
-      
+
       components.push(component);
     }
-    
+
     this.interfaceMapping.components = components;
     console.log(`📋 Mapped ${components.length} service components`);
   }
 
   groupEndpointsByService() {
     const groups = {};
-    
+
     for (const endpoint of this.interfaceMapping.endpoints) {
       const serviceType = endpoint.serviceType;
       if (!groups[serviceType]) {
@@ -234,28 +234,28 @@ class InterfaceMappingGenerator {
       }
       groups[serviceType].push(endpoint);
     }
-    
+
     return groups;
   }
 
   findComponentInInventory(serviceType) {
-    if (!this.componentInventory?.components) return null;
-    
+    if (!this.componentInventory?.components) {return null;}
+
     // Try to find by name or category match
-    return this.componentInventory.components.find(comp => 
+    return this.componentInventory.components.find(comp =>
       comp.name?.toLowerCase().includes(serviceType) ||
       comp.category?.toLowerCase().includes(serviceType) ||
-      comp.className?.toLowerCase().includes(serviceType.replace('-', ''))
+      comp.className?.toLowerCase().includes(serviceType.replace('-', '')),
     );
   }
 
   getDisplayName(serviceType) {
     const names = {
       'signer': 'Signer Service',
-      'chain': 'Chain Service', 
+      'chain': 'Chain Service',
       'collector': 'Event Collector Service',
       'management': 'Management & Health Service',
-      'unknown': 'Unknown Service'
+      'unknown': 'Unknown Service',
     };
     return names[serviceType] || serviceType;
   }
@@ -275,10 +275,10 @@ class InterfaceMappingGenerator {
   async detectConflicts() {
     const conflicts = [];
     const seenEndpoints = new Map();
-    
+
     for (const endpoint of this.interfaceMapping.endpoints) {
       const key = `${endpoint.method} ${endpoint.path}`;
-      
+
       if (seenEndpoints.has(key)) {
         const existing = seenEndpoints.get(key);
         const conflict = {
@@ -286,7 +286,7 @@ class InterfaceMappingGenerator {
           endpoint: key,
           services: [existing.serviceType, endpoint.serviceType],
           versions: [existing.version, endpoint.version],
-          details: `Duplicate endpoint found across services: ${existing.serviceType} and ${endpoint.serviceType}`
+          details: `Duplicate endpoint found across services: ${existing.serviceType} and ${endpoint.serviceType}`,
         };
         conflicts.push(conflict);
       } else {
@@ -302,7 +302,7 @@ class InterfaceMappingGenerator {
           type: 'version_conflict',
           service: component.name,
           versions: Array.from(versions),
-          details: `Multiple API versions found in ${component.displayName}: ${Array.from(versions).join(', ')}`
+          details: `Multiple API versions found in ${component.displayName}: ${Array.from(versions).join(', ')}`,
         });
       }
     }
@@ -316,25 +316,25 @@ class InterfaceMappingGenerator {
       totalComponents: this.interfaceMapping.components.length,
       totalEndpoints: this.interfaceMapping.endpoints.length,
       totalConflicts: this.conflicts.length,
-      
+
       serviceDistribution: {},
       versionDistribution: {},
       portDistribution: {},
-      
+
       averageUpstreamsPerComponent: 0,
       averageDownstreamsPerComponent: 0,
       averageEndpointsPerComponent: 0,
-      
+
       criticalComponents: 0,
-      highImpactComponents: 0
+      highImpactComponents: 0,
     };
 
     // Service distribution
     for (const component of this.interfaceMapping.components) {
       stats.serviceDistribution[component.category] = (stats.serviceDistribution[component.category] || 0) + 1;
-      
-      if (component.failureImpact === 'critical') stats.criticalComponents++;
-      if (component.failureImpact === 'high') stats.highImpactComponents++;
+
+      if (component.failureImpact === 'critical') {stats.criticalComponents++;}
+      if (component.failureImpact === 'high') {stats.highImpactComponents++;}
     }
 
     // Version and port distribution
@@ -348,15 +348,15 @@ class InterfaceMappingGenerator {
     // Averages
     const components = this.interfaceMapping.components;
     stats.averageUpstreamsPerComponent = Math.round(
-      (components.reduce((sum, c) => sum + c.upstreamDependencies.length, 0) / components.length) * 10
+      (components.reduce((sum, c) => sum + c.upstreamDependencies.length, 0) / components.length) * 10,
     ) / 10;
-    
+
     stats.averageDownstreamsPerComponent = Math.round(
-      (components.reduce((sum, c) => sum + c.downstreamClients.length, 0) / components.length) * 10
+      (components.reduce((sum, c) => sum + c.downstreamClients.length, 0) / components.length) * 10,
     ) / 10;
-    
+
     stats.averageEndpointsPerComponent = Math.round(
-      (components.reduce((sum, c) => sum + c.providedEndpoints.length, 0) / components.length) * 10
+      (components.reduce((sum, c) => sum + c.providedEndpoints.length, 0) / components.length) * 10,
     ) / 10;
 
     this.interfaceMapping.statistics = stats;
@@ -364,7 +364,7 @@ class InterfaceMappingGenerator {
 
   async writeOutputFiles() {
     const outputDir = path.join(process.cwd(), 'docs/architecture');
-    
+
     // Ensure output directory exists
     if (!fs.existsSync(outputDir)) {
       fs.mkdirSync(outputDir, { recursive: true });
@@ -388,20 +388,20 @@ class InterfaceMappingGenerator {
 
   async writeCsvFile(csvPath) {
     const rows = [];
-    
+
     // Header row
     rows.push([
       'Component Name',
       'Display Name',
       'Category',
-      'Type', 
+      'Type',
       'Version',
       'Port',
       'Endpoint Count',
       'Upstream Dependencies',
       'Downstream Clients',
       'Failure Impact',
-      'File Path'
+      'File Path',
     ]);
 
     // Data rows
@@ -417,12 +417,12 @@ class InterfaceMappingGenerator {
         component.upstreamDependencies.join('; '),
         component.downstreamClients.join('; '),
         component.failureImpact,
-        component.filePath || ''
+        component.filePath || '',
       ]);
     }
 
-    const csvContent = rows.map(row => 
-      row.map(field => `"${String(field).replace(/"/g, '""')}"`).join(',')
+    const csvContent = rows.map(row =>
+      row.map(field => `"${String(field).replace(/"/g, '""')}"`).join(','),
     ).join('\n');
 
     fs.writeFileSync(csvPath, csvContent);
@@ -431,7 +431,7 @@ class InterfaceMappingGenerator {
   async writeSummaryReport(summaryPath) {
     const stats = this.interfaceMapping.statistics;
     const conflicts = this.interfaceMapping.conflicts;
-    
+
     const content = `# Interface Mapping Summary
 
 **Generated:** ${this.interfaceMapping.generated_at}  
@@ -451,21 +451,21 @@ This report maps interface relationships between components based on API documen
 
 ## Component Distribution
 
-${Object.entries(stats.serviceDistribution).map(([category, count]) => 
-  `- **${category}:** ${count} components`
-).join('\n')}
+${Object.entries(stats.serviceDistribution).map(([category, count]) =>
+    `- **${category}:** ${count} components`,
+  ).join('\n')}
 
 ## API Version Distribution
 
-${Object.entries(stats.versionDistribution).map(([version, count]) => 
-  `- **v${version}:** ${count} endpoints`
-).join('\n')}
+${Object.entries(stats.versionDistribution).map(([version, count]) =>
+    `- **v${version}:** ${count} endpoints`,
+  ).join('\n')}
 
 ## Port Distribution
 
-${Object.entries(stats.portDistribution).map(([port, count]) => 
-  `- **Port ${port}:** ${count} endpoints`
-).join('\n')}
+${Object.entries(stats.portDistribution).map(([port, count]) =>
+    `- **Port ${port}:** ${count} endpoints`,
+  ).join('\n')}
 
 ## Dependency Analysis
 

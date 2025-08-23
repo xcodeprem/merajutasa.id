@@ -25,7 +25,7 @@ function hoursBetweenISO(a, b){
   try {
     const t1 = new Date(a).getTime();
     const t2 = new Date(b).getTime();
-    if (!isFinite(t1) || !isFinite(t2)) return null;
+    if (!isFinite(t1) || !isFinite(t2)) {return null;}
     return Math.abs(t2 - t1) / 36e5;
   } catch { return null; }
 }
@@ -49,7 +49,7 @@ async function main(){
   const freshnessOk = ageHours == null ? false : ageHours <= 48; // advisory threshold
 
   const violations = [];
-  if (retentionLen > RETENTION_CAP) violations.push({ code:'RETENTION_OVERFLOW', message:`previous_salts length ${retentionLen} exceeds cap ${RETENTION_CAP}` });
+  if (retentionLen > RETENTION_CAP) {violations.push({ code:'RETENTION_OVERFLOW', message:`previous_salts length ${retentionLen} exceeds cap ${RETENTION_CAP}` });}
 
   const out = {
     status: violations.length ? 'fail' : 'ok',
@@ -58,9 +58,9 @@ async function main(){
     checks: {
       retention: { cap: RETENTION_CAP, length: retentionLen, ok: retentionLen <= RETENTION_CAP },
       format: { hash_salt_valid: hashSaltValid, invalid_previous_count: invalidPrev.length, sample_invalid: invalidPrev.slice(0,3) },
-      freshness: { last_rotated_utc: cfg.last_rotated_utc || null, age_hours: ageHours, ok: freshnessOk }
+      freshness: { last_rotated_utc: cfg.last_rotated_utc || null, age_hours: ageHours, ok: freshnessOk },
     },
-    violations
+    violations,
   };
   await fs.writeFile(ARTIFACT_PATH, JSON.stringify(out,null,2));
 
@@ -68,9 +68,9 @@ async function main(){
     console.error('[privacy-asserts] FAIL', violations.map(v=>v.code).join(','));
     process.exit(2);
   }
-  if (!hashSaltValid) console.warn('[privacy-asserts] WARN hash_salt not valid hex/length (advisory)');
-  if (invalidPrev.length) console.warn(`[privacy-asserts] WARN ${invalidPrev.length} invalid previous_salts entries (advisory)`);
-  if (freshnessOk === false) console.warn('[privacy-asserts] WARN rotation freshness > 48h or unknown (advisory)');
+  if (!hashSaltValid) {console.warn('[privacy-asserts] WARN hash_salt not valid hex/length (advisory)');}
+  if (invalidPrev.length) {console.warn(`[privacy-asserts] WARN ${invalidPrev.length} invalid previous_salts entries (advisory)`);}
+  if (freshnessOk === false) {console.warn('[privacy-asserts] WARN rotation freshness > 48h or unknown (advisory)');}
   console.log('[privacy-asserts] OK');
 }
 

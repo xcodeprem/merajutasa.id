@@ -60,7 +60,7 @@ class LightweightRedis extends EventEmitter {
 export class RedisManager extends EventEmitter {
   constructor(options = {}) {
     super();
-    
+
     this.config = {
       host: process.env.REDIS_HOST || 'localhost',
       port: process.env.REDIS_PORT || 6379,
@@ -70,7 +70,7 @@ export class RedisManager extends EventEmitter {
       maxRetriesPerRequest: 3,
       lazyConnect: true,
       keepAlive: 30000,
-      ...options
+      ...options,
     };
 
     this.client = null;
@@ -79,7 +79,7 @@ export class RedisManager extends EventEmitter {
     this.isConnected = false;
     this.connectionAttempts = 0;
     this.maxConnectionAttempts = 5;
-    
+
     // Cache statistics
     this.stats = {
       hits: 0,
@@ -88,7 +88,7 @@ export class RedisManager extends EventEmitter {
       deletes: 0,
       errors: 0,
       connectTime: null,
-      lastError: null
+      lastError: null,
     };
   }
 
@@ -97,36 +97,36 @@ export class RedisManager extends EventEmitter {
       // Use lightweight Redis for demo
       this.client = new LightweightRedis(this.config);
       await this.client.initialize();
-      
+
       // Setup for pub/sub (simplified for demo)
       this.subscriber = this.client;
       this.publisher = this.client;
 
       // Setup event handlers
       this.setupEventHandlers();
-      
+
       // Test connection
       await this.client.ping();
       this.isConnected = true;
       this.stats.connectTime = new Date().toISOString();
-      
+
       this.emit('connected');
       console.log('✅ Redis Manager initialized successfully');
-      
+
       return true;
     } catch (error) {
       this.connectionAttempts++;
       this.stats.errors++;
       this.stats.lastError = error.message;
-      
+
       console.error('❌ Redis connection failed:', error.message);
-      
+
       if (this.connectionAttempts < this.maxConnectionAttempts) {
         console.log(`🔄 Retrying connection (${this.connectionAttempts}/${this.maxConnectionAttempts})...`);
         await new Promise(resolve => setTimeout(resolve, 2000));
         return this.initialize();
       }
-      
+
       throw new Error(`Redis connection failed after ${this.maxConnectionAttempts} attempts`);
     }
   }
@@ -167,11 +167,11 @@ export class RedisManager extends EventEmitter {
 
     try {
       const value = await this.client.get(key);
-      
+
       if (value !== null) {
         this.stats.hits++;
         this.emit('cache:hit', { key, size: value.length });
-        
+
         // Parse JSON if it's a JSON string
         try {
           return JSON.parse(value);
@@ -198,17 +198,17 @@ export class RedisManager extends EventEmitter {
     try {
       // Serialize value if it's an object
       const serializedValue = typeof value === 'object' ? JSON.stringify(value) : value;
-      
+
       let result;
       if (ttl > 0) {
         result = await this.client.setex(key, ttl, serializedValue);
       } else {
         result = await this.client.set(key, serializedValue);
       }
-      
+
       this.stats.sets++;
       this.emit('cache:set', { key, ttl, size: serializedValue.length });
-      
+
       return result === 'OK';
     } catch (error) {
       this.stats.errors++;
@@ -243,7 +243,7 @@ export class RedisManager extends EventEmitter {
     try {
       const values = await this.client.mget(keys);
       const result = {};
-      
+
       keys.forEach((key, index) => {
         const value = values[index];
         if (value !== null) {
@@ -334,19 +334,19 @@ export class RedisManager extends EventEmitter {
       const start = Date.now();
       await this.client.ping();
       const latency = Date.now() - start;
-      
+
       return {
         status: 'healthy',
         connected: this.isConnected,
         latency,
-        stats: this.getStats()
+        stats: this.getStats(),
       };
     } catch (error) {
       return {
         status: 'unhealthy',
         connected: false,
         error: error.message,
-        stats: this.getStats()
+        stats: this.getStats(),
       };
     }
   }
@@ -354,13 +354,13 @@ export class RedisManager extends EventEmitter {
   getStats() {
     const totalRequests = this.stats.hits + this.stats.misses;
     const hitRate = totalRequests > 0 ? (this.stats.hits / totalRequests * 100).toFixed(2) : 0;
-    
+
     return {
       ...this.stats,
       hitRate: `${hitRate}%`,
       totalRequests,
-      uptime: this.stats.connectTime ? 
-        Date.now() - new Date(this.stats.connectTime).getTime() : 0
+      uptime: this.stats.connectTime ?
+        Date.now() - new Date(this.stats.connectTime).getTime() : 0,
     };
   }
 
@@ -376,7 +376,7 @@ export class RedisManager extends EventEmitter {
       if (this.publisher) {
         await this.publisher.quit();
       }
-      
+
       this.isConnected = false;
       console.log('✅ Redis Manager disconnected gracefully');
     } catch (error) {

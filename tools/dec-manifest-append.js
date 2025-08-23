@@ -7,7 +7,7 @@ function canonical(raw){
 
 async function main(){
   const file = process.argv[2];
-  if(!file){ console.error('File path required'); process.exit(1);}  
+  if(!file){ console.error('File path required'); process.exit(1);}
   const manifestPath = 'docs/integrity/spec-hash-manifest-v1.json';
   const raw = await fs.readFile(file,'utf8');
   const hash = crypto.createHash('sha256').update(canonical(raw)).digest('hex');
@@ -23,7 +23,7 @@ async function main(){
     integrity_class: 'decision',
     mutable_policy: 'immutable',
     next_change_requires_dec: false,
-    notes: 'Auto appended via dec-manifest-append.js'
+    notes: 'Auto appended via dec-manifest-append.js',
   });
   await fs.writeFile(manifestPath, JSON.stringify(manifest,null,2));
   console.log('Appended to manifest', file, hash);

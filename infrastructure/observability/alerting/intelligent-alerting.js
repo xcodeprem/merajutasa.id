@@ -1,16 +1,16 @@
 /**
  * MerajutASA.id - Phase 2 Week 3: Intelligent Alerting System
- * 
+ *
  * Advanced alerting with escalation, correlation, and anomaly detection
  * Provides intelligent alert management for enterprise operations
- * 
+ *
  * Features:
  * - Multi-channel alerting (email, Slack, PagerDuty, webhooks)
  * - Intelligent escalation policies
  * - Alert correlation and deduplication
  * - Anomaly-based alerting
  * - Customizable alert rules
- * 
+ *
  * @version 1.0.0
  * @since Phase 2 Week 3
  */
@@ -23,13 +23,13 @@ class LightweightEmailTransporter {
   constructor(config) {
     this.config = config;
   }
-  
+
   async sendMail(options) {
     console.log(`📧 [EMAIL ALERT] To: ${options.to}, Subject: ${options.subject}`);
     console.log(`📧 [EMAIL BODY] ${options.text || options.html}`);
     return { messageId: uuidv4() };
   }
-  
+
   close() {
     // No-op for lightweight implementation
   }
@@ -41,7 +41,7 @@ class LightweightHttpClient {
     console.log(`🌐 [HTTP DATA] ${JSON.stringify(data, null, 2)}`);
     return { status: 200, data: { ok: true } };
   }
-  
+
   static async get(url, config = {}) {
     console.log(`🌐 [HTTP ALERT] GET ${url}`);
     return { status: 200, data: { ok: true } };
@@ -57,18 +57,18 @@ try {
   console.log('✅ Using full email and HTTP implementations for alerting');
 } catch (error) {
   console.log('ℹ️ Email/HTTP packages not available for alerting, using lightweight fallback');
-  
+
   nodemailer = {
-    createTransport: (config) => new LightweightEmailTransporter(config)
+    createTransport: (config) => new LightweightEmailTransporter(config),
   };
-  
+
   axios = LightweightHttpClient;
 }
 
 export class IntelligentAlertingSystem extends EventEmitter {
   constructor(config = {}) {
     super();
-    
+
     this.config = {
       serviceName: config.serviceName || 'merajutasa-service',
       environment: config.environment || process.env.NODE_ENV || 'development',
@@ -76,7 +76,7 @@ export class IntelligentAlertingSystem extends EventEmitter {
       escalationEnabled: config.escalationEnabled !== false,
       correlationEnabled: config.correlationEnabled !== false,
       deduplicationWindow: config.deduplicationWindow || 300000, // 5 minutes
-      ...config
+      ...config,
     };
 
     // Alert storage and management
@@ -85,10 +85,10 @@ export class IntelligentAlertingSystem extends EventEmitter {
     this.alertRules = new Map();
     this.escalationPolicies = new Map();
     this.correlationRules = new Map();
-    
+
     // Channel configurations
     this.channels = new Map();
-    
+
     this.initialize();
   }
 
@@ -100,12 +100,12 @@ export class IntelligentAlertingSystem extends EventEmitter {
     this.setupDefaultEscalationPolicies();
     this.setupDefaultCorrelationRules();
     this.setupAlertChannels();
-    
+
     // Start background processes
     this.startAlertProcessor();
     this.startEscalationProcessor();
     this.startCorrelationProcessor();
-    
+
     console.log(`Intelligent alerting system initialized for ${this.config.serviceName}`);
   }
 
@@ -120,7 +120,7 @@ export class IntelligentAlertingSystem extends EventEmitter {
       severity: 'critical',
       description: 'Service is not responding to health checks',
       escalationPolicy: 'critical_escalation',
-      channels: ['email', 'slack', 'pagerduty']
+      channels: ['email', 'slack', 'pagerduty'],
     });
 
     // High error rate alerts
@@ -130,7 +130,7 @@ export class IntelligentAlertingSystem extends EventEmitter {
       severity: 'high',
       description: 'Error rate exceeds 10%',
       escalationPolicy: 'standard_escalation',
-      channels: ['email', 'slack']
+      channels: ['email', 'slack'],
     });
 
     // Response time alerts
@@ -140,7 +140,7 @@ export class IntelligentAlertingSystem extends EventEmitter {
       severity: 'medium',
       description: 'Average response time exceeds 5 seconds',
       escalationPolicy: 'standard_escalation',
-      channels: ['slack']
+      channels: ['slack'],
     });
 
     // Business logic alerts
@@ -153,7 +153,7 @@ export class IntelligentAlertingSystem extends EventEmitter {
       severity: 'high',
       description: 'Signing operation failure rate exceeds 5%',
       escalationPolicy: 'business_escalation',
-      channels: ['email', 'slack']
+      channels: ['email', 'slack'],
     });
 
     // Chain integrity alerts
@@ -163,7 +163,7 @@ export class IntelligentAlertingSystem extends EventEmitter {
       severity: 'critical',
       description: 'Chain integrity score below 95%',
       escalationPolicy: 'critical_escalation',
-      channels: ['email', 'slack', 'pagerduty']
+      channels: ['email', 'slack', 'pagerduty'],
     });
 
     // Resource utilization alerts
@@ -173,7 +173,7 @@ export class IntelligentAlertingSystem extends EventEmitter {
       severity: 'medium',
       description: 'Memory usage exceeds 85%',
       escalationPolicy: 'standard_escalation',
-      channels: ['slack']
+      channels: ['slack'],
     });
 
     this.addAlertRule('high_cpu_usage', {
@@ -182,7 +182,7 @@ export class IntelligentAlertingSystem extends EventEmitter {
       severity: 'medium',
       description: 'CPU usage exceeds 80%',
       escalationPolicy: 'standard_escalation',
-      channels: ['slack']
+      channels: ['slack'],
     });
   }
 
@@ -198,21 +198,21 @@ export class IntelligentAlertingSystem extends EventEmitter {
           level: 1,
           delay: 0, // Immediate
           recipients: ['oncall-engineer@merajutasa.id'],
-          channels: ['email', 'slack', 'pagerduty']
+          channels: ['email', 'slack', 'pagerduty'],
         },
         {
           level: 2,
           delay: 300000, // 5 minutes
           recipients: ['engineering-manager@merajutasa.id'],
-          channels: ['email', 'slack', 'pagerduty']
+          channels: ['email', 'slack', 'pagerduty'],
         },
         {
           level: 3,
           delay: 900000, // 15 minutes
           recipients: ['cto@merajutasa.id'],
-          channels: ['email', 'pagerduty']
-        }
-      ]
+          channels: ['email', 'pagerduty'],
+        },
+      ],
     });
 
     // Standard escalation policy
@@ -223,21 +223,21 @@ export class IntelligentAlertingSystem extends EventEmitter {
           level: 1,
           delay: 0, // Immediate
           recipients: ['oncall-engineer@merajutasa.id'],
-          channels: ['slack']
+          channels: ['slack'],
         },
         {
           level: 2,
           delay: 600000, // 10 minutes
           recipients: ['engineering-team@merajutasa.id'],
-          channels: ['email', 'slack']
+          channels: ['email', 'slack'],
         },
         {
           level: 3,
           delay: 1800000, // 30 minutes
           recipients: ['engineering-manager@merajutasa.id'],
-          channels: ['email', 'slack']
-        }
-      ]
+          channels: ['email', 'slack'],
+        },
+      ],
     });
 
     // Business escalation policy
@@ -248,15 +248,15 @@ export class IntelligentAlertingSystem extends EventEmitter {
           level: 1,
           delay: 0, // Immediate
           recipients: ['governance-team@merajutasa.id'],
-          channels: ['email', 'slack']
+          channels: ['email', 'slack'],
         },
         {
           level: 2,
           delay: 600000, // 10 minutes
           recipients: ['business-operations@merajutasa.id'],
-          channels: ['email', 'slack']
-        }
-      ]
+          channels: ['email', 'slack'],
+        },
+      ],
     });
   }
 
@@ -273,7 +273,7 @@ export class IntelligentAlertingSystem extends EventEmitter {
         return serviceDownAlerts.length > 0 && highErrorAlerts.length > 0;
       },
       action: 'suppress_child_alerts',
-      masterAlert: 'service_down'
+      masterAlert: 'service_down',
     });
 
     // Performance degradation correlation
@@ -283,13 +283,13 @@ export class IntelligentAlertingSystem extends EventEmitter {
         const slowResponseAlerts = alerts.filter(a => a.rule === 'slow_response_time');
         const highCpuAlerts = alerts.filter(a => a.rule === 'high_cpu_usage');
         const highMemoryAlerts = alerts.filter(a => a.rule === 'high_memory_usage');
-        
-        return slowResponseAlerts.length > 0 && 
+
+        return slowResponseAlerts.length > 0 &&
                (highCpuAlerts.length > 0 || highMemoryAlerts.length > 0);
       },
       action: 'create_composite_alert',
       compositeName: 'Performance Degradation',
-      compositeSeverity: 'high'
+      compositeSeverity: 'high',
     });
   }
 
@@ -305,7 +305,7 @@ export class IntelligentAlertingSystem extends EventEmitter {
         console.log(`[ALERT] ${alert.severity.toUpperCase()}: ${alert.message}`);
         console.log(`Service: ${alert.service}, Rule: ${alert.rule}`);
         console.log(`Time: ${alert.timestamp}`);
-      }
+      },
     });
 
     // Email channel
@@ -334,7 +334,7 @@ export class IntelligentAlertingSystem extends EventEmitter {
    */
   setupEmailChannel() {
     const emailConfig = this.config.email || {};
-    
+
     try {
       const transporter = nodemailer.createTransport({
         host: emailConfig.host || process.env.SMTP_HOST || 'localhost',
@@ -342,8 +342,8 @@ export class IntelligentAlertingSystem extends EventEmitter {
         secure: emailConfig.secure || false,
         auth: {
           user: emailConfig.user || process.env.SMTP_USER,
-          pass: emailConfig.pass || process.env.SMTP_PASS
-        }
+          pass: emailConfig.pass || process.env.SMTP_PASS,
+        },
       });
 
       this.channels.set('email', {
@@ -356,11 +356,11 @@ export class IntelligentAlertingSystem extends EventEmitter {
             from: this.channels.get('email').from,
             to: recipients.join(','),
             subject: `[${alert.severity.toUpperCase()}] ${alert.name} - ${this.config.serviceName}`,
-            html: this.generateEmailTemplate(alert)
+            html: this.generateEmailTemplate(alert),
           };
 
           await transporter.sendMail(mailOptions);
-        }
+        },
       });
     } catch (error) {
       console.warn('Failed to setup email channel:', error.message);
@@ -394,13 +394,13 @@ export class IntelligentAlertingSystem extends EventEmitter {
               { title: 'Service', value: alert.service, short: true },
               { title: 'Severity', value: alert.severity, short: true },
               { title: 'Message', value: alert.message, short: false },
-              { title: 'Time', value: alert.timestamp, short: true }
-            ]
-          }]
+              { title: 'Time', value: alert.timestamp, short: true },
+            ],
+          }],
         };
 
         await axios.post(webhookUrl, payload);
-      }
+      },
     });
   }
 
@@ -434,13 +434,13 @@ export class IntelligentAlertingSystem extends EventEmitter {
             custom_details: {
               rule: alert.rule,
               message: alert.message,
-              metrics: alert.metrics
-            }
-          }
+              metrics: alert.metrics,
+            },
+          },
         };
 
         await axios.post('https://events.pagerduty.com/v2/enqueue', payload);
-      }
+      },
     });
   }
 
@@ -464,9 +464,9 @@ export class IntelligentAlertingSystem extends EventEmitter {
       headers: webhookConfig.headers || {},
       send: async (alert) => {
         await axios.post(url, alert, {
-          headers: this.channels.get('webhook').headers
+          headers: this.channels.get('webhook').headers,
         });
-      }
+      },
     });
   }
 
@@ -478,7 +478,7 @@ export class IntelligentAlertingSystem extends EventEmitter {
       id: ruleId,
       ...rule,
       enabled: rule.enabled !== false,
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
     });
   }
 
@@ -490,7 +490,7 @@ export class IntelligentAlertingSystem extends EventEmitter {
       id: policyId,
       ...policy,
       enabled: policy.enabled !== false,
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
     });
   }
 
@@ -502,7 +502,7 @@ export class IntelligentAlertingSystem extends EventEmitter {
       id: ruleId,
       ...rule,
       enabled: rule.enabled !== false,
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
     });
   }
 
@@ -513,12 +513,12 @@ export class IntelligentAlertingSystem extends EventEmitter {
     const triggeredAlerts = [];
 
     for (const [ruleId, rule] of this.alertRules) {
-      if (!rule.enabled) continue;
+      if (!rule.enabled) {continue;}
 
       try {
         if (rule.condition(metrics)) {
           const alert = this.createAlert(ruleId, rule, metrics);
-          
+
           // Check for deduplication
           if (!this.isDuplicateAlert(alert)) {
             triggeredAlerts.push(alert);
@@ -562,7 +562,7 @@ export class IntelligentAlertingSystem extends EventEmitter {
       status: 'active',
       escalationLevel: 0,
       correlationId: null,
-      suppressedBy: null
+      suppressedBy: null,
     };
   }
 
@@ -571,12 +571,12 @@ export class IntelligentAlertingSystem extends EventEmitter {
    */
   isDuplicateAlert(alert) {
     const cutoffTime = Date.now() - this.config.deduplicationWindow;
-    
-    return this.alertHistory.some(existingAlert => 
+
+    return this.alertHistory.some(existingAlert =>
       existingAlert.rule === alert.rule &&
       existingAlert.service === alert.service &&
       new Date(existingAlert.timestamp).getTime() > cutoffTime &&
-      existingAlert.status === 'active'
+      existingAlert.status === 'active',
     );
   }
 
@@ -588,7 +588,7 @@ export class IntelligentAlertingSystem extends EventEmitter {
 
     for (const channelName of alert.channels) {
       const channel = this.channels.get(channelName);
-      
+
       if (channel && channel.enabled) {
         try {
           promises.push(channel.send(alert));
@@ -599,7 +599,7 @@ export class IntelligentAlertingSystem extends EventEmitter {
     }
 
     await Promise.allSettled(promises);
-    
+
     // Emit event for listeners
     this.emit('alert_sent', alert);
 
@@ -614,7 +614,7 @@ export class IntelligentAlertingSystem extends EventEmitter {
    */
   startEscalation(alert) {
     const policy = this.escalationPolicies.get(alert.escalationPolicy);
-    if (!policy || !policy.enabled) return;
+    if (!policy || !policy.enabled) {return;}
 
     const firstLevel = policy.levels[0];
     if (firstLevel && firstLevel.delay === 0) {
@@ -641,15 +641,15 @@ export class IntelligentAlertingSystem extends EventEmitter {
     const updatedAlert = {
       ...alert,
       escalationLevel: escalationLevel.level,
-      escalatedAt: new Date().toISOString()
+      escalatedAt: new Date().toISOString(),
     };
 
     // Send to escalation recipients
     const promises = [];
-    
+
     for (const channelName of escalationLevel.channels) {
       const channel = this.channels.get(channelName);
-      
+
       if (channel && channel.enabled) {
         try {
           if (channelName === 'email' && escalationLevel.recipients) {
@@ -664,7 +664,7 @@ export class IntelligentAlertingSystem extends EventEmitter {
     }
 
     await Promise.allSettled(promises);
-    
+
     this.emit('alert_escalated', updatedAlert);
   }
 
@@ -673,7 +673,7 @@ export class IntelligentAlertingSystem extends EventEmitter {
    */
   processCorrelation(alerts) {
     for (const [ruleId, rule] of this.correlationRules) {
-      if (!rule.enabled) continue;
+      if (!rule.enabled) {continue;}
 
       try {
         if (rule.condition(alerts)) {
@@ -690,14 +690,14 @@ export class IntelligentAlertingSystem extends EventEmitter {
    */
   executeCorrelationAction(rule, alerts) {
     switch (rule.action) {
-      case 'suppress_child_alerts':
-        this.suppressChildAlerts(rule, alerts);
-        break;
-      case 'create_composite_alert':
-        this.createCompositeAlert(rule, alerts);
-        break;
-      default:
-        console.warn(`Unknown correlation action: ${rule.action}`);
+    case 'suppress_child_alerts':
+      this.suppressChildAlerts(rule, alerts);
+      break;
+    case 'create_composite_alert':
+      this.createCompositeAlert(rule, alerts);
+      break;
+    default:
+      console.warn(`Unknown correlation action: ${rule.action}`);
     }
   }
 
@@ -710,7 +710,7 @@ export class IntelligentAlertingSystem extends EventEmitter {
 
     if (masterAlerts.length > 0) {
       const masterAlert = masterAlerts[0];
-      
+
       childAlerts.forEach(childAlert => {
         childAlert.suppressedBy = masterAlert.id;
         childAlert.status = 'suppressed';
@@ -736,7 +736,7 @@ export class IntelligentAlertingSystem extends EventEmitter {
       childAlerts: alerts.map(a => a.id),
       timestamp: new Date().toISOString(),
       status: 'active',
-      escalationLevel: 0
+      escalationLevel: 0,
     };
 
     this.activeAlerts.set(compositeAlert.id, compositeAlert);
@@ -753,10 +753,10 @@ export class IntelligentAlertingSystem extends EventEmitter {
       alert.status = 'resolved';
       alert.resolvedAt = new Date().toISOString();
       alert.resolvedBy = resolvedBy;
-      
+
       this.activeAlerts.delete(alertId);
       this.emit('alert_resolved', alert);
-      
+
       return true;
     }
     return false;
@@ -829,7 +829,7 @@ export class IntelligentAlertingSystem extends EventEmitter {
       high: '#ff8800',
       medium: '#ffaa00',
       low: '#ffff00',
-      info: '#0088ff'
+      info: '#0088ff',
     };
     return colors[severity] || '#888888';
   }
@@ -865,7 +865,7 @@ export class IntelligentAlertingSystem extends EventEmitter {
   cleanupOldAlerts() {
     const cutoffTime = Date.now() - (24 * 60 * 60 * 1000); // 24 hours
     this.alertHistory = this.alertHistory.filter(
-      alert => new Date(alert.timestamp).getTime() > cutoffTime
+      alert => new Date(alert.timestamp).getTime() > cutoffTime,
     );
   }
 
@@ -887,13 +887,13 @@ export class IntelligentAlertingSystem extends EventEmitter {
         correlationRules: this.correlationRules.size,
         activeChannels,
         alertHistory: this.alertHistory.length,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
     } catch (error) {
       return {
         status: 'unhealthy',
         error: error.message,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
     }
   }
@@ -905,7 +905,7 @@ export class IntelligentAlertingSystem extends EventEmitter {
     if (this.alertProcessorInterval) {
       clearInterval(this.alertProcessorInterval);
     }
-    
+
     this.activeAlerts.clear();
     console.log('Intelligent alerting system shutdown complete');
   }

@@ -28,11 +28,11 @@ function redact(text){
 
 function detectPiiCategories(text){
   const cats = new Set();
-  if (EMAIL_RE.test(text)) cats.add('CONTACT_EMAIL');
+  if (EMAIL_RE.test(text)) {cats.add('CONTACT_EMAIL');}
   EMAIL_RE.lastIndex = 0;
-  if (PHONE_RE.test(text)) cats.add('CONTACT_PHONE');
+  if (PHONE_RE.test(text)) {cats.add('CONTACT_PHONE');}
   PHONE_RE.lastIndex = 0;
-  if (NIK_RE.test(text)) cats.add('IDN_NIK');
+  if (NIK_RE.test(text)) {cats.add('IDN_NIK');}
   NIK_RE.lastIndex = 0;
   return [...cats];
 }
@@ -47,7 +47,7 @@ async function main(){
   const samples = [
     { categories:['product','ux'], text: 'Halo tim, email saya user@example.com, tolong perbaiki.' },
     { categories:['bug'], text: 'Kontak saya +62 812-3456-7890 bila butuh info lanjut.' },
-    { categories:['privacy'], text: 'NIK: 1234567890123456 ini tidak boleh tersimpan.' }
+    { categories:['privacy'], text: 'NIK: 1234567890123456 ini tidak boleh tersimpan.' },
   ];
 
   const results = [];
@@ -66,7 +66,7 @@ async function main(){
       categories: s.categories,
       redacted_text: red,
       pii_categories: piiCats,
-      meta: { len: s.text.length }
+      meta: { len: s.text.length },
     };
     const ok = validate(rec);
     if (!ok){

@@ -18,11 +18,11 @@ export class ResponseCompression {
       level: options.level || 6, // zlib compression level (1-9)
       windowBits: options.windowBits || 15,
       memLevel: options.memLevel || 8,
-      
+
       // Supported algorithms
       algorithms: options.algorithms || ['br', 'gzip', 'deflate'],
       defaultAlgorithm: options.defaultAlgorithm || 'gzip',
-      
+
       // Content type filtering
       compressibleTypes: options.compressibleTypes || [
         'text/html',
@@ -33,26 +33,26 @@ export class ResponseCompression {
         'application/xml',
         'text/xml',
         'text/plain',
-        'image/svg+xml'
+        'image/svg+xml',
       ],
-      
+
       // Performance settings
       enableCaching: options.enableCaching !== false,
       cacheSize: options.cacheSize || 100,
       maxCacheEntrySize: options.maxCacheEntrySize || 1024 * 1024, // 1MB
-      
+
       // Quality settings for Brotli
       brotliQuality: options.brotliQuality || 4,
       brotliWindowSize: options.brotliWindowSize || 22,
-      
-      ...options
+
+      ...options,
     };
 
     // Compression cache
     this.cache = new Map();
     this.cacheHits = 0;
     this.cacheMisses = 0;
-    
+
     // Statistics
     this.stats = {
       totalRequests: 0,
@@ -67,8 +67,8 @@ export class ResponseCompression {
       algorithmUsage: {
         'br': 0,
         'gzip': 0,
-        'deflate': 0
-      }
+        'deflate': 0,
+      },
     };
 
     // Prepare compression options
@@ -76,17 +76,17 @@ export class ResponseCompression {
       gzip: {
         level: this.config.level,
         windowBits: this.config.windowBits,
-        memLevel: this.config.memLevel
+        memLevel: this.config.memLevel,
       },
       deflate: {
         level: this.config.level,
         windowBits: this.config.windowBits,
-        memLevel: this.config.memLevel
+        memLevel: this.config.memLevel,
       },
       br: {
         [zlib.constants.BROTLI_PARAM_QUALITY]: this.config.brotliQuality,
-        [zlib.constants.BROTLI_PARAM_LGWIN]: this.config.brotliWindowSize
-      }
+        [zlib.constants.BROTLI_PARAM_LGWIN]: this.config.brotliWindowSize,
+      },
     };
   }
 
@@ -119,8 +119,8 @@ export class ResponseCompression {
   // Check if content type is compressible
   isCompressibleType(contentType) {
     const type = contentType.split(';')[0].toLowerCase();
-    return this.config.compressibleTypes.some(compressibleType => 
-      type === compressibleType || type.startsWith(compressibleType + '/')
+    return this.config.compressibleTypes.some(compressibleType =>
+      type === compressibleType || type.startsWith(compressibleType + '/'),
     );
   }
 
@@ -131,7 +131,7 @@ export class ResponseCompression {
     }
 
     const accepted = acceptEncoding.toLowerCase().split(',').map(s => s.trim());
-    
+
     // Check algorithms in order of preference
     for (const algorithm of this.config.algorithms) {
       const algorithmName = algorithm === 'br' ? 'br' : algorithm;
@@ -166,11 +166,11 @@ export class ResponseCompression {
     if (cached) {
       this.cacheHits++;
       this.stats.cacheHits++;
-      
+
       // Update LRU - move to end
       this.cache.delete(cacheKey);
       this.cache.set(cacheKey, cached);
-      
+
       return cached;
     }
 
@@ -181,7 +181,7 @@ export class ResponseCompression {
 
   // Store compressed content in cache
   setCachedCompression(cacheKey, compressedContent) {
-    if (!this.config.enableCaching || 
+    if (!this.config.enableCaching ||
         compressedContent.length > this.config.maxCacheEntrySize) {
       return;
     }
@@ -202,26 +202,26 @@ export class ResponseCompression {
 
     try {
       switch (algorithm) {
-        case 'br':
-          compressed = await brotliCompress(content, {
-            ...this.compressionOptions.br,
-            ...options
-          });
-          break;
-        case 'gzip':
-          compressed = await gzip(content, {
-            ...this.compressionOptions.gzip,
-            ...options
-          });
-          break;
-        case 'deflate':
-          compressed = await deflate(content, {
-            ...this.compressionOptions.deflate,
-            ...options
-          });
-          break;
-        default:
-          throw new Error(`Unsupported compression algorithm: ${algorithm}`);
+      case 'br':
+        compressed = await brotliCompress(content, {
+          ...this.compressionOptions.br,
+          ...options,
+        });
+        break;
+      case 'gzip':
+        compressed = await gzip(content, {
+          ...this.compressionOptions.gzip,
+          ...options,
+        });
+        break;
+      case 'deflate':
+        compressed = await deflate(content, {
+          ...this.compressionOptions.deflate,
+          ...options,
+        });
+        break;
+      default:
+        throw new Error(`Unsupported compression algorithm: ${algorithm}`);
       }
 
       const compressionTime = Date.now() - startTime;
@@ -237,7 +237,7 @@ export class ResponseCompression {
         originalSize: content.length,
         compressedSize: compressed.length,
         compressionRatio,
-        compressionTime
+        compressionTime,
       };
 
     } catch (error) {
@@ -252,7 +252,7 @@ export class ResponseCompression {
       contentType = 'text/plain',
       acceptEncoding = '',
       headers = {},
-      forceAlgorithm = null
+      forceAlgorithm = null,
     } = options;
 
     this.stats.totalRequests++;
@@ -269,7 +269,7 @@ export class ResponseCompression {
         originalSize: buffer.length,
         compressedSize: buffer.length,
         compressionRatio: 1,
-        compressed: false
+        compressed: false,
       };
     }
 
@@ -279,18 +279,18 @@ export class ResponseCompression {
     // Check cache
     const cacheKey = this.generateCacheKey(buffer, algorithm, options);
     const cached = this.getCachedCompression(cacheKey);
-    
+
     if (cached) {
       return {
         ...cached,
-        fromCache: true
+        fromCache: true,
       };
     }
 
     // Perform compression
     try {
       const result = await this.compressWithAlgorithm(buffer, algorithm, options);
-      
+
       // Cache the result
       this.setCachedCompression(cacheKey, {
         data: result.data,
@@ -298,20 +298,20 @@ export class ResponseCompression {
         originalSize: result.originalSize,
         compressedSize: result.compressedSize,
         compressionRatio: result.compressionRatio,
-        compressed: true
+        compressed: true,
       });
 
       this.stats.compressedRequests++;
       return {
         ...result,
         compressed: true,
-        fromCache: false
+        fromCache: false,
       };
 
     } catch (error) {
       console.error('Compression failed:', error.message);
       this.stats.skippedRequests++;
-      
+
       // Return original content on compression failure
       return {
         data: buffer,
@@ -320,7 +320,7 @@ export class ResponseCompression {
         compressedSize: buffer.length,
         compressionRatio: 1,
         compressed: false,
-        error: error.message
+        error: error.message,
       };
     }
   }
@@ -329,14 +329,14 @@ export class ResponseCompression {
   updateCompressionStats(originalSize, compressedSize, compressionTime, compressionRatio) {
     this.stats.totalOriginalBytes += originalSize;
     this.stats.totalCompressedBytes += compressedSize;
-    
+
     // Update average compression ratio
     const totalCompressed = this.stats.compressedRequests;
-    this.stats.averageCompressionRatio = 
+    this.stats.averageCompressionRatio =
       (this.stats.averageCompressionRatio * (totalCompressed - 1) + compressionRatio) / totalCompressed;
-    
+
     // Update average compression time
-    this.stats.averageCompressionTime = 
+    this.stats.averageCompressionTime =
       (this.stats.averageCompressionTime * (totalCompressed - 1) + compressionTime) / totalCompressed;
   }
 
@@ -357,7 +357,7 @@ export class ResponseCompression {
           const result = await this.compress(data, {
             contentType: res.get('Content-Type'),
             acceptEncoding: req.get('Accept-Encoding'),
-            headers: res.getHeaders()
+            headers: res.getHeaders(),
           });
 
           if (result.compressed) {
@@ -402,7 +402,7 @@ export class ResponseCompression {
     const compressedBytes = this.stats.totalCompressedBytes;
     const totalSavings = totalBytes - compressedBytes;
     const overallCompressionRatio = totalBytes > 0 ? totalBytes / compressedBytes : 1;
-    const compressionRate = this.stats.totalRequests > 0 ? 
+    const compressionRate = this.stats.totalRequests > 0 ?
       (this.stats.compressedRequests / this.stats.totalRequests * 100) : 0;
 
     return {
@@ -414,30 +414,30 @@ export class ResponseCompression {
       cacheStats: {
         size: this.cache.size,
         maxSize: this.config.cacheSize,
-        hitRate: this.cacheHits + this.cacheMisses > 0 ? 
-          (this.cacheHits / (this.cacheHits + this.cacheMisses) * 100).toFixed(2) : 0
+        hitRate: this.cacheHits + this.cacheMisses > 0 ?
+          (this.cacheHits / (this.cacheHits + this.cacheMisses) * 100).toFixed(2) : 0,
       },
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
   }
 
   // Health check
   async healthCheck() {
     const stats = this.getStats();
-    
+
     return {
       status: 'healthy',
       configuration: {
         threshold: this.config.threshold,
         algorithms: this.config.algorithms,
-        cachingEnabled: this.config.enableCaching
+        cachingEnabled: this.config.enableCaching,
       },
       performance: {
         averageCompressionTime: stats.averageCompressionTime,
         averageCompressionRatio: stats.averageCompressionRatio,
-        cacheHitRate: stats.cacheStats.hitRate
+        cacheHitRate: stats.cacheStats.hitRate,
       },
-      stats
+      stats,
     };
   }
 
@@ -465,8 +465,8 @@ export class ResponseCompression {
       algorithmUsage: {
         'br': 0,
         'gzip': 0,
-        'deflate': 0
-      }
+        'deflate': 0,
+      },
     };
   }
 }

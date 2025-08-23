@@ -21,7 +21,7 @@ const healthCheckModules = {
         status: response.ok ? 'healthy' : 'degraded',
         health_score: response.ok ? 100 : 50,
         endpoint: `http://localhost:${process.env.SIGNER_PORT || 4601}`,
-        details: { port: process.env.SIGNER_PORT || 4601 }
+        details: { port: process.env.SIGNER_PORT || 4601 },
       };
     } catch (error) {
       return {
@@ -29,7 +29,7 @@ const healthCheckModules = {
         status: 'critical',
         health_score: 0,
         error: error.message,
-        details: { port: process.env.SIGNER_PORT || 4601 }
+        details: { port: process.env.SIGNER_PORT || 4601 },
       };
     }
   },
@@ -42,7 +42,7 @@ const healthCheckModules = {
         status: response.ok ? 'healthy' : 'degraded',
         health_score: response.ok ? 100 : 50,
         endpoint: `http://localhost:${process.env.CHAIN_PORT || 4602}`,
-        details: { port: process.env.CHAIN_PORT || 4602 }
+        details: { port: process.env.CHAIN_PORT || 4602 },
       };
     } catch (error) {
       return {
@@ -50,7 +50,7 @@ const healthCheckModules = {
         status: 'critical',
         health_score: 0,
         error: error.message,
-        details: { port: process.env.CHAIN_PORT || 4602 }
+        details: { port: process.env.CHAIN_PORT || 4602 },
       };
     }
   },
@@ -63,7 +63,7 @@ const healthCheckModules = {
         status: response.ok ? 'healthy' : 'degraded',
         health_score: response.ok ? 100 : 50,
         endpoint: `http://localhost:${process.env.COLLECTOR_PORT || 4603}`,
-        details: { port: process.env.COLLECTOR_PORT || 4603 }
+        details: { port: process.env.COLLECTOR_PORT || 4603 },
       };
     } catch (error) {
       return {
@@ -71,7 +71,7 @@ const healthCheckModules = {
         status: 'critical',
         health_score: 0,
         error: error.message,
-        details: { port: process.env.COLLECTOR_PORT || 4603 }
+        details: { port: process.env.COLLECTOR_PORT || 4603 },
       };
     }
   },
@@ -89,7 +89,7 @@ const healthCheckModules = {
         name: 'Enterprise Audit System',
         status: 'critical',
         health_score: 0,
-        error: error.message
+        error: error.message,
       };
     }
   },
@@ -97,9 +97,9 @@ const healthCheckModules = {
   async complianceAutomation() {
     try {
       const { getComplianceAutomation } = await import('../infrastructure/compliance/compliance-automation.js');
-      const compliance = getComplianceAutomation({ 
+      const compliance = getComplianceAutomation({
         real_time_monitoring: false,
-        frameworks: ['gdpr', 'sox']
+        frameworks: ['gdpr', 'sox'],
       });
       const health = await compliance.getHealthStatus();
       await compliance.shutdown();
@@ -109,7 +109,7 @@ const healthCheckModules = {
         name: 'Compliance Automation',
         status: 'critical',
         health_score: 0,
-        error: error.message
+        error: error.message,
       };
     }
   },
@@ -119,7 +119,7 @@ const healthCheckModules = {
       const { getSecurityHardening } = await import('../infrastructure/security/enhanced/security-hardening.js');
       const security = getSecurityHardening({
         real_time_monitoring: false,
-        automated_response: false
+        automated_response: false,
       });
       const health = await security.getHealthStatus();
       await security.shutdown();
@@ -129,7 +129,7 @@ const healthCheckModules = {
         name: 'Security Hardening',
         status: 'critical',
         health_score: 0,
-        error: error.message
+        error: error.message,
       };
     }
   },
@@ -139,7 +139,7 @@ const healthCheckModules = {
       const { getPrivacyRightsManagement } = await import('../infrastructure/compliance/privacy-rights-management.js');
       const privacy = getPrivacyRightsManagement({
         automated_processing: false,
-        response_time_limit: 30
+        response_time_limit: 30,
       });
       const health = await privacy.getHealthStatus();
       await privacy.shutdown();
@@ -149,7 +149,7 @@ const healthCheckModules = {
         name: 'Privacy Rights Management',
         status: 'critical',
         health_score: 0,
-        error: error.message
+        error: error.message,
       };
     }
   },
@@ -159,7 +159,7 @@ const healthCheckModules = {
       const { getComplianceOrchestrator } = await import('../infrastructure/compliance/compliance-orchestrator.js');
       const orchestrator = getComplianceOrchestrator({
         real_time_correlation: false,
-        alerting_enabled: false
+        alerting_enabled: false,
       });
       const health = await orchestrator.getHealthStatus();
       await orchestrator.shutdown();
@@ -169,7 +169,7 @@ const healthCheckModules = {
         name: 'Compliance Orchestrator',
         status: 'critical',
         health_score: 0,
-        error: error.message
+        error: error.message,
       };
     }
   },
@@ -184,14 +184,14 @@ const healthCheckModules = {
         name: 'HA Orchestrator',
         status: health.status === 'healthy' ? 'healthy' : 'degraded',
         health_score: health.health_score || 75,
-        details: health.details
+        details: health.details,
       };
     } catch (error) {
       return {
         name: 'HA Orchestrator',
         status: 'critical',
         health_score: 0,
-        error: error.message
+        error: error.message,
       };
     }
   },
@@ -208,7 +208,7 @@ const healthCheckModules = {
         name: 'Observability System',
         status: 'critical',
         health_score: 0,
-        error: error.message
+        error: error.message,
       };
     }
   },
@@ -224,7 +224,7 @@ const healthCheckModules = {
         name: 'Log Aggregation System',
         status: 'critical',
         health_score: 0,
-        error: error.message
+        error: error.message,
       };
     }
   },
@@ -239,14 +239,14 @@ const healthCheckModules = {
         name: 'API Gateway',
         status: health.status === 'healthy' ? 'healthy' : 'degraded',
         health_score: health.health_score || 75,
-        details: health.details
+        details: health.details,
       };
     } catch (error) {
       return {
         name: 'API Gateway',
         status: 'critical',
         health_score: 0,
-        error: error.message
+        error: error.message,
       };
     }
   },
@@ -261,14 +261,14 @@ const healthCheckModules = {
         name: 'Performance Monitor',
         status: health.status === 'healthy' ? 'healthy' : 'degraded',
         health_score: health.health_score || 75,
-        details: health.details
+        details: health.details,
       };
     } catch (error) {
       return {
         name: 'Performance Monitor',
         status: 'critical',
         health_score: 0,
-        error: error.message
+        error: error.message,
       };
     }
   },
@@ -281,7 +281,7 @@ const healthCheckModules = {
       './data',
       './docs',
       './infrastructure',
-      './tools'
+      './tools',
     ];
 
     for (const dir of directories) {
@@ -290,13 +290,13 @@ const healthCheckModules = {
         checks.push({
           path: dir,
           accessible: true,
-          type: stats.isDirectory() ? 'directory' : 'file'
+          type: stats.isDirectory() ? 'directory' : 'file',
         });
       } catch (error) {
         checks.push({
           path: dir,
           accessible: false,
-          error: error.message
+          error: error.message,
         });
       }
     }
@@ -308,9 +308,9 @@ const healthCheckModules = {
       name: 'File System',
       status: healthScore > 80 ? 'healthy' : healthScore > 50 ? 'warning' : 'critical',
       health_score: healthScore,
-      details: { directories: checks, total: directories.length, accessible: accessibleCount }
+      details: { directories: checks, total: directories.length, accessible: accessibleCount },
     };
-  }
+  },
 };
 
 class IntegratedHealthChecker {
@@ -321,29 +321,29 @@ class IntegratedHealthChecker {
 
   async checkAll(components = null) {
     console.log('🏥 Starting comprehensive health check across all components...');
-    
+
     const componentsToCheck = components || Object.keys(healthCheckModules);
     const results = new Map();
-    
+
     // Run health checks in parallel for better performance
     const healthPromises = componentsToCheck.map(async (component) => {
       console.log(`🔍 Checking ${component}...`);
       try {
         const result = await healthCheckModules[component]();
         results.set(component, result);
-        
-        const statusIcon = result.status === 'healthy' ? '✅' : 
-                          result.status === 'warning' ? '⚠️' : 
-                          result.status === 'degraded' ? '🟡' : '❌';
+
+        const statusIcon = result.status === 'healthy' ? '✅' :
+          result.status === 'warning' ? '⚠️' :
+            result.status === 'degraded' ? '🟡' : '❌';
         console.log(`${statusIcon} ${result.name}: ${result.status} (${result.health_score}/100)`);
-        
+
         return result;
       } catch (error) {
         const errorResult = {
           name: component,
           status: 'critical',
           health_score: 0,
-          error: error.message
+          error: error.message,
         };
         results.set(component, errorResult);
         console.log(`❌ ${component}: critical (0/100) - ${error.message}`);
@@ -353,7 +353,7 @@ class IntegratedHealthChecker {
 
     await Promise.allSettled(healthPromises);
     this.results = results;
-    
+
     return this.generateReport();
   }
 
@@ -363,14 +363,14 @@ class IntegratedHealthChecker {
     const warningComponents = Array.from(this.results.values()).filter(r => r.status === 'warning').length;
     const degradedComponents = Array.from(this.results.values()).filter(r => r.status === 'degraded').length;
     const criticalComponents = Array.from(this.results.values()).filter(r => r.status === 'critical').length;
-    
+
     const avgHealthScore = Array.from(this.results.values())
       .reduce((sum, r) => sum + (r.health_score || 0), 0) / totalComponents;
-    
-    const overallStatus = avgHealthScore > 80 ? 'healthy' : 
-                         avgHealthScore > 60 ? 'warning' : 
-                         avgHealthScore > 40 ? 'degraded' : 'critical';
-    
+
+    const overallStatus = avgHealthScore > 80 ? 'healthy' :
+      avgHealthScore > 60 ? 'warning' :
+        avgHealthScore > 40 ? 'degraded' : 'critical';
+
     const report = {
       timestamp: new Date().toISOString(),
       overall_status: overallStatus,
@@ -381,11 +381,11 @@ class IntegratedHealthChecker {
         healthy: healthyComponents,
         warning: warningComponents,
         degraded: degradedComponents,
-        critical: criticalComponents
+        critical: criticalComponents,
       },
       components: Object.fromEntries(this.results),
       system_dependencies: this.generateDependencyGraph(),
-      recommendations: this.generateRecommendations()
+      recommendations: this.generateRecommendations(),
     };
 
     return report;
@@ -400,21 +400,21 @@ class IntegratedHealthChecker {
         { phase: 3, components: ['auditSystem', 'logAggregation'], description: 'Foundation services' },
         { phase: 4, components: ['securityHardening', 'privacyRights', 'complianceAutomation'], description: 'Compliance & Security services' },
         { phase: 5, components: ['complianceOrchestrator', 'observability'], description: 'Orchestration services' },
-        { phase: 6, components: ['haOrchestrator', 'apiGateway', 'performance'], description: 'Infrastructure services' }
+        { phase: 6, components: ['haOrchestrator', 'apiGateway', 'performance'], description: 'Infrastructure services' },
       ],
       dependencies: {
         complianceOrchestrator: ['auditSystem', 'securityHardening', 'privacyRights', 'complianceAutomation'],
         observability: ['logAggregation'],
         apiGateway: ['signer', 'chain', 'collector'],
         haOrchestrator: ['signer', 'chain', 'collector'],
-        performance: ['observability']
-      }
+        performance: ['observability'],
+      },
     };
   }
 
   generateRecommendations() {
     const recommendations = [];
-    
+
     for (const [component, result] of this.results) {
       if (result.status === 'critical') {
         recommendations.push({
@@ -422,7 +422,7 @@ class IntegratedHealthChecker {
           component,
           issue: `${result.name} is not responding`,
           action: `Restart ${component} service and check logs`,
-          health_score: result.health_score
+          health_score: result.health_score,
         });
       } else if (result.status === 'degraded') {
         recommendations.push({
@@ -430,7 +430,7 @@ class IntegratedHealthChecker {
           component,
           issue: `${result.name} performance degraded`,
           action: `Monitor ${component} resources and investigate performance`,
-          health_score: result.health_score
+          health_score: result.health_score,
         });
       } else if (result.status === 'warning') {
         recommendations.push({
@@ -438,7 +438,7 @@ class IntegratedHealthChecker {
           component,
           issue: `${result.name} showing warning signs`,
           action: `Review ${component} configuration and metrics`,
-          health_score: result.health_score
+          health_score: result.health_score,
         });
       }
     }
@@ -447,11 +447,11 @@ class IntegratedHealthChecker {
   }
 
   async saveReport(report) {
-  const reportPath = './artifacts/integrated-health-check-report.json';
-  // Ensure artifacts directory exists (Windows-safe)
-  await fs.mkdir(path.dirname(reportPath), { recursive: true });
-  const artifact = addMetadata(report, { generator: 'integrated-health-check' });
-  await fs.writeFile(reportPath, stableStringify(artifact));
+    const reportPath = './artifacts/integrated-health-check-report.json';
+    // Ensure artifacts directory exists (Windows-safe)
+    await fs.mkdir(path.dirname(reportPath), { recursive: true });
+    const artifact = addMetadata(report, { generator: 'integrated-health-check' });
+    await fs.writeFile(reportPath, stableStringify(artifact));
     console.log(`📊 Health check report saved to ${reportPath}`);
     return reportPath;
   }
@@ -463,7 +463,7 @@ class IntegratedHealthChecker {
     console.log(`📊 Overall Health Score: ${report.overall_health_score}/100`);
     console.log(`⏱️ Check Duration: ${report.duration_ms}ms`);
     console.log(`📈 Components: ${report.summary.healthy}✅ ${report.summary.warning}⚠️ ${report.summary.degraded}🟡 ${report.summary.critical}❌`);
-    
+
     if (report.recommendations.length > 0) {
       console.log('\n🔧 RECOMMENDATIONS:');
       report.recommendations.forEach((rec, i) => {
@@ -471,7 +471,7 @@ class IntegratedHealthChecker {
         console.log(`${icon} ${rec.priority.toUpperCase()}: ${rec.action}`);
       });
     }
-    
+
     console.log('\n📋 STARTUP DEPENDENCY ORDER:');
     report.system_dependencies.startup_order.forEach(phase => {
       console.log(`Phase ${phase.phase}: ${phase.components.join(', ')} - ${phase.description}`);
@@ -483,17 +483,17 @@ class IntegratedHealthChecker {
 async function main() {
   const args = process.argv.slice(2);
   const targetComponents = args.length > 0 ? args : null;
-  
+
   try {
     const checker = new IntegratedHealthChecker();
     const report = await checker.checkAll(targetComponents);
-    
+
     checker.printSummary(report);
     await checker.saveReport(report);
-    
+
     // Exit with appropriate code
     process.exit(report.overall_status === 'critical' ? 1 : 0);
-    
+
   } catch (error) {
     console.error('❌ Health check failed:', error.message);
     process.exit(1);

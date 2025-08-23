@@ -26,7 +26,7 @@ const CATEGORY_PATTERNS = [
   { code:'CHILD_NAME_AGE', re:/\b([A-Z][a-z]+(?:\s[A-Z][a-z]+)?)\s*\(\s*(\d{1,2})\s*(th|tahun)\s*\)/g, action:'BLOCK' },
   { code:'GEO_FINE', re:/\b(-?\d{1,2}\.\d{4,}),\s*(-?\d{1,3}\.\d{4,})\b/g, action:'BLOCK' },
   { code:'GOV_ID_DOC', re:/(KTP|SIM|Paspor)\s*(No\.?|Nomor)?\s*\d{8,}/gi, action:'BLOCK' },
-  { code:'EMAIL_IN_NAME', re:/[A-Za-z0-9]{5,}@/g, action:'REDACT' }
+  { code:'EMAIL_IN_NAME', re:/[A-Za-z0-9]{5,}@/g, action:'REDACT' },
 ];
 
 function sha256(str){ return createHash('sha256').update(str).digest('hex'); }

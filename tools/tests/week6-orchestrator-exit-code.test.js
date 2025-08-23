@@ -37,7 +37,7 @@ function runOnce() {
 
 function summarizeLines(s, max = 20) {
   const lines = s.split(/\r?\n/).filter(Boolean);
-  if (lines.length <= max) return lines;
+  if (lines.length <= max) {return lines;}
   return [...lines.slice(0, max - 3), '...', ...lines.slice(-2)];
 }
 

@@ -1,7 +1,7 @@
 /**
  * Component Dependency Analyzer
  * Lead Infrastructure Architect: Component dependency mapping and documentation
- * 
+ *
  * Analyzes dependencies between 35+ infrastructure components and generates
  * comprehensive startup order documentation and dependency visualization
  */
@@ -17,14 +17,14 @@ import fs from 'fs/promises';
 export class ComponentDependencyAnalyzer extends EventEmitter {
   constructor(config = {}) {
     super();
-    
+
     this.config = {
       analyzerName: 'merajutasa-dependency-analyzer',
       enableCriticalPathAnalysis: true,
       enableCircularDependencyDetection: true,
       enableStartupOptimization: true,
       generateVisualization: true,
-      ...config
+      ...config,
     };
 
     this.components = new Map();
@@ -33,7 +33,7 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
     this.criticalPaths = [];
     this.startupPhases = new Map();
     this.optimizationRecommendations = [];
-    
+
     this.analysisMetrics = {
       totalComponents: 0,
       totalDependencies: 0,
@@ -41,14 +41,14 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
       criticalPathCount: 0,
       maxDependencyDepth: 0,
       averageDependencyCount: 0,
-      lastAnalysis: null
+      lastAnalysis: null,
     };
 
     this.analyzerState = {
       initialized: false,
       analysisComplete: false,
       lastRun: null,
-      errorHistory: []
+      errorHistory: [],
     };
   }
 
@@ -57,14 +57,14 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
    */
   async initialize() {
     console.log('🔍 Initializing Component Dependency Analyzer...');
-    
+
     try {
       // Load component information
       await this.loadComponentRegistry();
-      
+
       // Build comprehensive dependency matrix
       await this.buildDependencyMatrix();
-      
+
       // Detect circular dependencies
       if (this.config.enableCircularDependencyDetection) {
         await this.detectCircularDependencies();
@@ -87,17 +87,17 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
       this.analyzerState.analysisComplete = true;
       this.analyzerState.lastRun = new Date();
       this.analysisMetrics.lastAnalysis = new Date();
-      
-      console.log(`✅ Component Dependency Analysis completed`);
+
+      console.log('✅ Component Dependency Analysis completed');
       console.log(`📊 Analyzed ${this.components.size} components`);
       console.log(`🔗 Mapped ${this.analysisMetrics.totalDependencies} dependencies`);
       console.log(`📋 Generated ${this.startupPhases.size} startup phases`);
-      
+
       this.emit('analysis-completed', {
         components: this.components.size,
         dependencies: this.analysisMetrics.totalDependencies,
         phases: this.startupPhases.size,
-        timestamp: new Date()
+        timestamp: new Date(),
       });
 
       return {
@@ -106,14 +106,14 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
         dependencies: this.analysisMetrics.totalDependencies,
         circularDependencies: this.circularDependencies.length,
         criticalPaths: this.criticalPaths.length,
-        startupPhases: this.startupPhases.size
+        startupPhases: this.startupPhases.size,
       };
     } catch (error) {
       console.error('❌ Failed to initialize Component Dependency Analyzer:', error.message);
       this.analyzerState.errorHistory.push({
         phase: 'initialization',
         error: error.message,
-        timestamp: new Date()
+        timestamp: new Date(),
       });
       throw error;
     }
@@ -124,12 +124,12 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
    */
   async loadComponentRegistry() {
     console.log('📚 Loading component registry...');
-    
+
     const infrastructurePath = path.join(process.cwd(), 'infrastructure');
     const componentTypes = [
       'api-gateway', 'auth', 'backup', 'cicd', 'compliance',
       'docker', 'high-availability', 'kubernetes', 'monitoring',
-      'observability', 'performance', 'reverse-proxy', 'security', 'terraform'
+      'observability', 'performance', 'reverse-proxy', 'security', 'terraform',
     ];
 
     for (const componentType of componentTypes) {
@@ -155,12 +155,12 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
   async loadComponentsFromDirectory(componentType, dirPath) {
     try {
       const files = await fs.readdir(dirPath, { recursive: true });
-      
+
       for (const file of files) {
         if (file.endsWith('.js')) {
           const componentName = path.basename(file, '.js');
           const componentId = `${componentType}/${componentName}`;
-          
+
           const component = {
             id: componentId,
             name: componentName,
@@ -171,7 +171,7 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
             phase: 0,
             criticality: 'medium',
             startupPriority: 0,
-            loadedAt: new Date()
+            loadedAt: new Date(),
           };
 
           // Analyze component file for dependencies
@@ -193,11 +193,11 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
   async analyzeComponentDependencies(component) {
     try {
       const content = await fs.readFile(component.path, 'utf8');
-      
+
       // Look for import statements that reference other infrastructure components
       const importRegex = /import.*from\s+['"`]\.\.?\/.*?['"`]/g;
       const imports = content.match(importRegex) || [];
-      
+
       for (const importStatement of imports) {
         const pathMatch = importStatement.match(/['"`](\.\.?\/.*?)['"`]/);
         if (pathMatch) {
@@ -212,7 +212,7 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
 
       // Remove duplicates
       component.dependencies = [...new Set(component.dependencies)];
-      
+
     } catch (error) {
       console.warn(`⚠️ Could not analyze dependencies for ${component.id}: ${error.message}`);
     }
@@ -237,7 +237,7 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
       '../reverse-proxy/': 'reverse-proxy',
       '../docker/': 'docker',
       '../kubernetes/': 'kubernetes',
-      '../terraform/': 'terraform'
+      '../terraform/': 'terraform',
     };
 
     for (const [pathPattern, componentType] of Object.entries(pathTypeMapping)) {
@@ -254,7 +254,7 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
    */
   async buildDependencyMatrix() {
     console.log('🔗 Building dependency matrix...');
-    
+
     // Enhanced dependency rules based on infrastructure architecture
     const dependencyRules = {
       'security': [],
@@ -271,7 +271,7 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
       'docker': ['security'],
       'kubernetes': ['docker', 'security', 'monitoring'],
       'terraform': ['security'],
-      'integration': ['security', 'monitoring', 'observability']
+      'integration': ['security', 'monitoring', 'observability'],
     };
 
     let totalDependencies = 0;
@@ -280,22 +280,22 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
     for (const [componentId, component] of this.components) {
       const componentType = component.type;
       const ruleDependencies = dependencyRules[componentType] || [];
-      
+
       // Combine rule-based and discovered dependencies
       const allDependencies = [...new Set([...ruleDependencies, ...component.dependencies])];
-      
+
       for (const depType of allDependencies) {
         // Find all components of the dependency type
         const dependencyComponents = Array.from(this.components.values())
           .filter(c => c.type === depType && c.id !== componentId);
-        
+
         for (const depComponent of dependencyComponents) {
           // Add dependency relationship
           if (!this.dependencyMatrix.has(componentId)) {
             this.dependencyMatrix.set(componentId, new Set());
           }
           this.dependencyMatrix.get(componentId).add(depComponent.id);
-          
+
           // Add reverse dependency (dependent relationship)
           depComponent.dependents.push(componentId);
           totalDependencies++;
@@ -305,7 +305,7 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
 
     this.analysisMetrics.totalDependencies = totalDependencies;
     this.analysisMetrics.averageDependencyCount = totalDependencies / this.components.size;
-    
+
     console.log(`✅ Built dependency matrix with ${totalDependencies} relationships`);
   }
 
@@ -314,10 +314,10 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
    */
   async detectCircularDependencies() {
     console.log('🔄 Detecting circular dependencies...');
-    
+
     const visited = new Set();
     const visiting = new Set();
-    
+
     const detectCycle = (componentId, path = []) => {
       if (visiting.has(componentId)) {
         // Found a cycle
@@ -327,18 +327,18 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
           cycle,
           length: cycle.length - 1,
           severity: this.calculateCycleSeverity(cycle),
-          detectedAt: new Date()
+          detectedAt: new Date(),
         });
         return;
       }
-      
+
       if (visited.has(componentId)) {
         return;
       }
 
       visiting.add(componentId);
       path.push(componentId);
-      
+
       const dependencies = this.dependencyMatrix.get(componentId) || new Set();
       for (const depId of dependencies) {
         detectCycle(depId, [...path]);
@@ -357,7 +357,7 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
     }
 
     this.analysisMetrics.circularDependencyCount = this.circularDependencies.length;
-    
+
     if (this.circularDependencies.length > 0) {
       console.warn(`⚠️ Detected ${this.circularDependencies.length} circular dependencies`);
       this.circularDependencies.forEach((cycle, index) => {
@@ -373,8 +373,8 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
    */
   calculateCycleSeverity(cycle) {
     // Determine severity based on cycle length and component criticality
-    if (cycle.length <= 3) return 'low';
-    if (cycle.length <= 5) return 'medium';
+    if (cycle.length <= 3) {return 'low';}
+    if (cycle.length <= 5) {return 'medium';}
     return 'high';
   }
 
@@ -383,15 +383,15 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
    */
   async analyzeCriticalPaths() {
     console.log('🎯 Analyzing critical paths...');
-    
+
     // Identify components with high impact (many dependents)
     for (const [componentId, component] of this.components) {
       const dependentCount = component.dependents.length;
       const dependencies = this.dependencyMatrix.get(componentId)?.size || 0;
-      
+
       // Calculate criticality score
       const criticalityScore = (dependentCount * 2) + dependencies;
-      
+
       if (criticalityScore >= 5) {
         const criticalPath = {
           component: componentId,
@@ -401,9 +401,9 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
           criticalityScore,
           impact: dependentCount > 5 ? 'high' : dependentCount > 2 ? 'medium' : 'low',
           reason: `${dependentCount} components depend on this service`,
-          analysisDate: new Date()
+          analysisDate: new Date(),
         };
-        
+
         this.criticalPaths.push(criticalPath);
         component.criticality = criticalPath.impact;
       }
@@ -411,7 +411,7 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
 
     // Sort by criticality score
     this.criticalPaths.sort((a, b) => b.criticalityScore - a.criticalityScore);
-    
+
     this.analysisMetrics.criticalPathCount = this.criticalPaths.length;
     console.log(`✅ Identified ${this.criticalPaths.length} critical paths`);
   }
@@ -421,45 +421,45 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
    */
   async generateStartupPhases() {
     console.log('📋 Generating startup phases...');
-    
+
     // Calculate startup phase for each component based on dependency depth
     const componentPhases = new Map();
     const calculating = new Set(); // To detect circular dependencies during calculation
-    
+
     const calculatePhase = (componentId, depth = 0) => {
       // Prevent infinite recursion
       if (depth > 20) {
         console.warn(`⚠️ Max depth reached for ${componentId}, assigning to phase 10`);
         return 10;
       }
-      
+
       if (componentPhases.has(componentId)) {
         return componentPhases.get(componentId);
       }
-      
+
       // Detect circular dependency during calculation
       if (calculating.has(componentId)) {
         console.warn(`⚠️ Circular dependency detected for ${componentId}, breaking cycle`);
         componentPhases.set(componentId, depth + 1);
         return depth + 1;
       }
-      
+
       calculating.add(componentId);
-      
+
       const dependencies = this.dependencyMatrix.get(componentId) || new Set();
       if (dependencies.size === 0) {
         componentPhases.set(componentId, 1);
         calculating.delete(componentId);
         return 1;
       }
-      
+
       let maxDepPhase = 0;
       for (const depId of dependencies) {
         if (this.components.has(depId)) {
           maxDepPhase = Math.max(maxDepPhase, calculatePhase(depId, depth + 1));
         }
       }
-      
+
       const phase = Math.min(maxDepPhase + 1, 10); // Cap at phase 10
       componentPhases.set(componentId, phase);
       calculating.delete(componentId);
@@ -471,7 +471,7 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
       if (!componentPhases.has(componentId)) {
         const phase = calculatePhase(componentId);
         this.components.get(componentId).phase = phase;
-        
+
         if (!this.startupPhases.has(phase)) {
           this.startupPhases.set(phase, []);
         }
@@ -481,10 +481,10 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
 
     // Calculate max depth
     this.analysisMetrics.maxDependencyDepth = componentPhases.size > 0 ? Math.max(...componentPhases.values()) : 1;
-    
+
     console.log(`✅ Generated ${this.startupPhases.size} startup phases`);
     console.log(`📊 Maximum dependency depth: ${this.analysisMetrics.maxDependencyDepth}`);
-    
+
     // Log circular dependency impact
     if (this.circularDependencies.length > 0) {
       console.warn(`⚠️ ${this.circularDependencies.length} circular dependencies may affect startup order`);
@@ -496,9 +496,9 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
    */
   async generateOptimizationRecommendations() {
     console.log('💡 Generating optimization recommendations...');
-    
+
     // Analyze for optimization opportunities
-    
+
     // 1. Components with too many dependencies
     for (const [componentId, component] of this.components) {
       const dependencies = this.dependencyMatrix.get(componentId)?.size || 0;
@@ -509,7 +509,7 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
           component: componentId,
           issue: `Component has ${dependencies} dependencies`,
           recommendation: 'Consider breaking down into smaller, more focused components',
-          impact: 'Improved maintainability and reduced coupling'
+          impact: 'Improved maintainability and reduced coupling',
         });
       }
     }
@@ -524,7 +524,7 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
           component: componentId,
           issue: `Component has ${dependentCount} dependents`,
           recommendation: 'Consider implementing facade or adapter patterns to reduce direct dependencies',
-          impact: 'Reduced risk of cascading failures and improved system resilience'
+          impact: 'Reduced risk of cascading failures and improved system resilience',
         });
       }
     }
@@ -538,7 +538,7 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
           component: componentId,
           issue: `Component is in phase ${component.phase}, indicating deep dependency chain`,
           recommendation: 'Consider flattening dependency hierarchy or introducing parallel startup',
-          impact: 'Faster startup times and reduced complexity'
+          impact: 'Faster startup times and reduced complexity',
         });
       }
     }
@@ -552,7 +552,7 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
           component: cycle.cycle.join(' → '),
           issue: 'Circular dependency detected',
           recommendation: 'Break circular dependency by introducing dependency injection or event-driven communication',
-          impact: 'Eliminates circular dependencies and improves system architecture'
+          impact: 'Eliminates circular dependencies and improves system architecture',
         });
       }
     }
@@ -570,9 +570,9 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
         generatedAt: new Date(),
         version: '1.0.0',
         architect: 'Lead Infrastructure Architect',
-        analyzer: this.config.analyzerName
+        analyzer: this.config.analyzerName,
       },
-      
+
       executive_summary: {
         total_components: this.analysisMetrics.totalComponents,
         total_dependencies: this.analysisMetrics.totalDependencies,
@@ -580,7 +580,7 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
         critical_paths: this.analysisMetrics.criticalPathCount,
         circular_dependencies: this.analysisMetrics.circularDependencyCount,
         max_dependency_depth: this.analysisMetrics.maxDependencyDepth,
-        health_score: this.calculateSystemHealthScore()
+        health_score: this.calculateSystemHealthScore(),
       },
 
       startup_orchestration: {
@@ -594,16 +594,16 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
               name: component?.name,
               type: component?.type,
               criticality: component?.criticality,
-              dependencies: Array.from(this.dependencyMatrix.get(id) || [])
+              dependencies: Array.from(this.dependencyMatrix.get(id) || []),
             };
           }),
           parallel_startup: componentIds.length > 1,
-          estimated_startup_time: this.estimatePhaseStartupTime(phase)
+          estimated_startup_time: this.estimatePhaseStartupTime(phase),
         })),
-        
+
         recommended_startup_order: this.generateRecommendedStartupOrder(),
-        
-        startup_script_template: this.generateStartupScriptTemplate()
+
+        startup_script_template: this.generateStartupScriptTemplate(),
       },
 
       dependency_analysis: {
@@ -619,8 +619,8 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
           dependencies: Array.from(this.dependencyMatrix.get(component.id) || []),
           dependents: component.dependents,
           dependency_count: this.dependencyMatrix.get(component.id)?.size || 0,
-          dependent_count: component.dependents.length
-        }))
+          dependent_count: component.dependents.length,
+        })),
       },
 
       optimization_recommendations: {
@@ -628,10 +628,10 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
         priority_actions: this.optimizationRecommendations
           .filter(r => r.priority === 'critical' || r.priority === 'high')
           .slice(0, 5),
-        system_improvements: this.generateSystemImprovements()
+        system_improvements: this.generateSystemImprovements(),
       },
 
-      visualization_data: this.config.generateVisualization ? this.generateVisualizationData() : null
+      visualization_data: this.config.generateVisualization ? this.generateVisualizationData() : null,
     };
 
     return documentation;
@@ -642,24 +642,24 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
    */
   calculateSystemHealthScore() {
     let score = 100;
-    
+
     // Deduct for circular dependencies
     score -= this.circularDependencies.length * 15;
-    
+
     // Deduct for high-risk components
     const highRiskComponents = this.criticalPaths.filter(p => p.impact === 'high').length;
     score -= highRiskComponents * 10;
-    
+
     // Deduct for deep dependency chains
     if (this.analysisMetrics.maxDependencyDepth > 5) {
       score -= (this.analysisMetrics.maxDependencyDepth - 5) * 5;
     }
-    
+
     // Deduct for high average dependency count
     if (this.analysisMetrics.averageDependencyCount > 3) {
       score -= (this.analysisMetrics.averageDependencyCount - 3) * 3;
     }
-    
+
     return Math.max(0, Math.min(100, score));
   }
 
@@ -673,7 +673,7 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
       3: 'Observability Layer - Advanced monitoring, metrics collection, and logging systems',
       4: 'Service Layer - API Gateway, performance optimization, and proxy services',
       5: 'Orchestration Layer - High availability, CI/CD, and compliance management',
-      6: 'Integration Layer - Cross-component coordination and advanced analytics'
+      6: 'Integration Layer - Cross-component coordination and advanced analytics',
     };
 
     return descriptions[phase] || `Phase ${phase} - Advanced integration and specialized components`;
@@ -687,7 +687,7 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
     const phaseMultiplier = phase * 10; // Additional 10 seconds per phase
     const componentCount = this.startupPhases.get(phase)?.length || 0;
     const componentTime = componentCount * 5; // 5 seconds per component
-    
+
     return `${baseTime + phaseMultiplier + componentTime}s`;
   }
 
@@ -696,28 +696,28 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
    */
   generateRecommendedStartupOrder() {
     const order = [];
-    
+
     for (const [phase, componentIds] of this.startupPhases) {
       // Sort components within phase by criticality and dependency count
       const sortedComponents = componentIds.sort((a, b) => {
         const compA = this.components.get(a);
         const compB = this.components.get(b);
-        
+
         // Prioritize by criticality, then by dependency count
         const criticalityOrder = { high: 3, medium: 2, low: 1 };
         const scoreA = criticalityOrder[compA.criticality] + compA.dependents.length;
         const scoreB = criticalityOrder[compB.criticality] + compB.dependents.length;
-        
+
         return scoreB - scoreA;
       });
-      
+
       order.push({
         phase,
         order: sortedComponents,
-        parallel: sortedComponents.length > 1 && phase > 1
+        parallel: sortedComponents.length > 1 && phase > 1,
       });
     }
-    
+
     return order;
   }
 
@@ -729,7 +729,7 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
       bash_script: this.generateBashStartupScript(),
       npm_scripts: this.generateNPMStartupScripts(),
       docker_compose: this.generateDockerComposeStartup(),
-      kubernetes: this.generateKubernetesStartup()
+      kubernetes: this.generateKubernetesStartup(),
     };
   }
 
@@ -741,21 +741,21 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
     script += '# Infrastructure Component Startup Script\n';
     script += '# Generated by Lead Infrastructure Architect\n\n';
     script += 'echo "🚀 Starting MerajutASA.id Infrastructure..."\n\n';
-    
+
     for (const [phase, componentIds] of this.startupPhases) {
       script += `# Phase ${phase}: ${this.getPhaseDescription(phase)}\n`;
       script += `echo "📋 Phase ${phase}: Starting ${componentIds.length} components..."\n\n`;
-      
+
       for (const componentId of componentIds) {
         const component = this.components.get(componentId);
         script += `echo "  Starting ${component.type}/${component.name}..."\n`;
         script += `npm run ${component.type}:start || echo "Warning: ${component.type} startup failed"\n`;
       }
-      
+
       script += `echo "✅ Phase ${phase} completed"\n`;
       script += 'sleep 10\n\n';
     }
-    
+
     script += 'echo "🎉 Infrastructure startup completed"\n';
     return script;
   }
@@ -765,20 +765,20 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
    */
   generateNPMStartupScripts() {
     const scripts = {};
-    
+
     for (const [phase, componentIds] of this.startupPhases) {
       const phaseComponents = componentIds.map(id => {
         const component = this.components.get(id);
         return `npm run ${component.type}:start`;
       }).join(' && ');
-      
+
       scripts[`infrastructure:phase-${phase}`] = phaseComponents;
     }
-    
+
     scripts['infrastructure:start-all'] = Array.from(this.startupPhases.keys())
       .map(phase => `npm run infrastructure:phase-${phase}`)
       .join(' && ');
-    
+
     return scripts;
   }
 
@@ -792,10 +792,10 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
         services[component.name] = {
           depends_on: Array.from(this.dependencyMatrix.get(component.id) || [])
             .map(depId => this.components.get(depId)?.name)
-            .filter(Boolean)
+            .filter(Boolean),
         };
         return services;
-      }, {})
+      }, {}),
     };
   }
 
@@ -809,8 +809,8 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
         deployments: componentIds.map(id => {
           const component = this.components.get(id);
           return `kubectl apply -f k8s/${component.type}/${component.name}.yaml`;
-        })
-      }))
+        }),
+      })),
     };
   }
 
@@ -834,26 +834,26 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
         category: 'Architecture',
         improvement: 'Implement dependency injection container',
         benefit: 'Reduce tight coupling between components',
-        effort: 'Medium'
+        effort: 'Medium',
       },
       {
         category: 'Performance',
         improvement: 'Parallel component initialization',
         benefit: 'Faster system startup times',
-        effort: 'Low'
+        effort: 'Low',
       },
       {
         category: 'Resilience',
         improvement: 'Circuit breaker pattern for critical dependencies',
         benefit: 'Improved fault tolerance',
-        effort: 'Medium'
+        effort: 'Medium',
       },
       {
         category: 'Monitoring',
         improvement: 'Dependency health monitoring dashboard',
         benefit: 'Better visibility into component relationships',
-        effort: 'Medium'
-      }
+        effort: 'Medium',
+      },
     ];
   }
 
@@ -869,21 +869,21 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
         phase: component.phase,
         criticality: component.criticality,
         size: component.dependents.length + 10,
-        color: this.getNodeColor(component.type)
+        color: this.getNodeColor(component.type),
       })),
       edges: Array.from(this.dependencyMatrix.entries()).flatMap(([fromId, dependencies]) =>
         Array.from(dependencies).map(toId => ({
           from: fromId,
           to: toId,
           type: 'dependency',
-          weight: 1
-        }))
+          weight: 1,
+        })),
       ),
       clusters: Array.from(this.startupPhases.entries()).map(([phase, componentIds]) => ({
         phase,
         components: componentIds,
-        description: this.getPhaseDescription(phase)
-      }))
+        description: this.getPhaseDescription(phase),
+      })),
     };
   }
 
@@ -906,9 +906,9 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
       'docker': '#82e0aa',
       'kubernetes': '#aed6f1',
       'terraform': '#f9e79f',
-      'integration': '#e8daef'
+      'integration': '#e8daef',
     };
-    
+
     return colors[componentType] || '#bdc3c7';
   }
 
@@ -924,9 +924,9 @@ export class ComponentDependencyAnalyzer extends EventEmitter {
         dependencies: this.analysisMetrics.totalDependencies,
         circularDependencies: this.analysisMetrics.circularDependencyCount,
         criticalPaths: this.analysisMetrics.criticalPathCount,
-        healthScore: this.calculateSystemHealthScore()
+        healthScore: this.calculateSystemHealthScore(),
       },
-      timestamp: new Date()
+      timestamp: new Date(),
     };
   }
 }

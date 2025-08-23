@@ -18,7 +18,7 @@ export function roundHalfUp(value, decimals = 2) {
 export function computeEquityIndex(buckets) {
   const counts = Object.values(buckets || {});
   const total = counts.reduce((a, b) => a + b, 0);
-  if (!total) return { raw: 0, rounded: 0 };
+  if (!total) {return { raw: 0, rounded: 0 };}
   const sorted = counts.slice().sort((a, b) => a - b);
   const n = sorted.length;
   let cumulative = 0;

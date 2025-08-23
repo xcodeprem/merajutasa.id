@@ -16,7 +16,7 @@ export function standardizeSecurityEvent(event = {}, context = {}) {
     security = {},
     http = {},
     network = {},
-    auth = {}
+    auth = {},
   } = event;
 
   const {
@@ -24,7 +24,7 @@ export function standardizeSecurityEvent(event = {}, context = {}) {
     environment = process.env.NODE_ENV || 'development',
     traceId = context.traceId || null,
     spanId = context.spanId || null,
-    correlationId = context.correlationId || uuidv4()
+    correlationId = context.correlationId || uuidv4(),
   } = context;
 
   return {
@@ -42,40 +42,40 @@ export function standardizeSecurityEvent(event = {}, context = {}) {
       id: actor.id || actor.user_id || 'unknown',
       type: actor.type || 'user',
       role: actor.role || 'unknown',
-      org_id: actor.org_id || null
+      org_id: actor.org_id || null,
     },
     resource: {
       id: resource.id || null,
       type: resource.type || null,
-      name: resource.name || null
+      name: resource.name || null,
     },
     // Correlation
     correlation: {
       correlation_id: correlationId,
       trace_id: traceId,
-      span_id: spanId
+      span_id: spanId,
     },
     // Auth context
     auth: {
       method: auth.method || security.auth_method || null,
       mfa: auth.mfa ?? security.mfa ?? null,
-      success: auth.success ?? null
+      success: auth.success ?? null,
     },
     // Network context
     network: {
       client_ip: network.ip || http.ip || null,
       user_agent: http.user_agent || null,
-      geo: network.geo || null
+      geo: network.geo || null,
     },
     // HTTP context
     http: {
       method: http.method || null,
       path: http.path || null,
-      status_code: http.status_code || null
+      status_code: http.status_code || null,
     },
     // Extra labels/kv
     labels: Object.assign({}, event.labels || {}),
-    metadata: Object.assign({}, event.metadata || {})
+    metadata: Object.assign({}, event.metadata || {}),
   };
 }
 

@@ -19,7 +19,7 @@ async function main(){
   for (const f of files){
     let txt; try { txt = await fs.readFile(f,'utf8'); } catch { continue; }
     const lower = txt.toLowerCase();
-    KEY_TOKENS.forEach(tok=>{ const m = lower.match(new RegExp(`\\b${tok}\\b`,'g')); if (m) freq[tok]+=m.length; });
+    KEY_TOKENS.forEach(tok=>{ const m = lower.match(new RegExp(`\\b${tok}\\b`,'g')); if (m) {freq[tok]+=m.length;} });
     const banned = [...txt.matchAll(BANNED_STAGE2)];
     if (banned.length){
       bannedOccurrences += banned.length;

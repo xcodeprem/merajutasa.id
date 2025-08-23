@@ -8,7 +8,7 @@ import { promises as fs } from 'fs';
 
 async function safe(p){ try { return JSON.parse(await fs.readFile(p,'utf8')); } catch { return null; } }
 
-function add(set,label){ if(label) set.add(label); }
+function add(set,label){ if(label) {set.add(label);} }
 
 async function main(){
   await fs.mkdir('artifacts',{recursive:true});
@@ -20,24 +20,24 @@ async function main(){
   const set = new Set();
 
   if(spec){
-    if(spec.violations && spec.violations.length>0) add(set,'integrity:hash-violation'); else add(set,'integrity:clean');
+    if(spec.violations && spec.violations.length>0) {add(set,'integrity:hash-violation');} else {add(set,'integrity:clean');}
   }
   if(hype){
-    if(hype.max_severity==='HIGH') add(set,'advisory:hype');
-    if((hype.severity_counts?.HIGH||0)===0) add(set,'hype:contained');
+    if(hype.max_severity==='HIGH') {add(set,'advisory:hype');}
+    if((hype.severity_counts?.HIGH||0)===0) {add(set,'hype:contained');}
   }
   if(disc){
-    if(disc.status==='ERROR') add(set,'advisory:disclaimers'); else add(set,'disclaimers:clean');
+    if(disc.status==='ERROR') {add(set,'advisory:disclaimers');} else {add(set,'disclaimers:clean');}
   }
   if(freshness){
     const stale = freshness.summary?.stale||0;
     const missing = freshness.summary?.missing||0;
-    if(stale>0) add(set,'evidence:stale');
-    if(missing>0) add(set,'evidence:missing');
-    if(stale===0 && missing===0) add(set,'evidence:fresh');
+    if(stale>0) {add(set,'evidence:stale');}
+    if(missing>0) {add(set,'evidence:missing');}
+    if(stale===0 && missing===0) {add(set,'evidence:fresh');}
   }
   if(param){
-    if((param.mismatches||0)>0) add(set,'params:drift'); else add(set,'params:aligned');
+    if((param.mismatches||0)>0) {add(set,'params:drift');} else {add(set,'params:aligned');}
   }
 
   const labels = [...set];

@@ -19,33 +19,33 @@ const testScenarios = [
     description: 'Default ports and hosts',
     env: {},
     expectedPorts: { signer: '4601', chain: '4602', collector: '4603' },
-    expectedHost: '0.0.0.0'
+    expectedHost: '0.0.0.0',
   },
   {
     name: 'custom_ports',
     description: 'Custom ports with default hosts',
     env: { SIGNER_PORT: '14601', CHAIN_PORT: '14602', COLLECTOR_PORT: '14603' },
     expectedPorts: { signer: '14601', chain: '14602', collector: '14603' },
-    expectedHost: '0.0.0.0'
+    expectedHost: '0.0.0.0',
   },
   {
     name: 'custom_hosts',
     description: 'Custom hosts with default ports',
     env: { SIGNER_HOST: '127.0.0.1', CHAIN_HOST: '127.0.0.1', COLLECTOR_HOST: '127.0.0.1' },
     expectedPorts: { signer: '4601', chain: '4602', collector: '4603' },
-    expectedHost: '127.0.0.1'
+    expectedHost: '127.0.0.1',
   },
   {
     name: 'custom_host_and_ports',
     description: 'Custom hosts and ports',
-    env: { 
+    env: {
       SIGNER_HOST: '127.0.0.1', SIGNER_PORT: '15601',
       CHAIN_HOST: '127.0.0.1', CHAIN_PORT: '15602',
-      COLLECTOR_HOST: '127.0.0.1', COLLECTOR_PORT: '15603'
+      COLLECTOR_HOST: '127.0.0.1', COLLECTOR_PORT: '15603',
     },
     expectedPorts: { signer: '15601', chain: '15602', collector: '15603' },
-    expectedHost: '127.0.0.1'
-  }
+    expectedHost: '127.0.0.1',
+  },
 ];
 
 function startService(serviceName, env = {}) {
@@ -53,7 +53,7 @@ function startService(serviceName, env = {}) {
     const script = `tools/services/${serviceName}.js`;
     const child = spawn('node', [script], {
       env: { ...process.env, ...env },
-      stdio: ['ignore', 'pipe', 'pipe']
+      stdio: ['ignore', 'pipe', 'pipe'],
     });
 
     let output = '';
@@ -101,36 +101,36 @@ function parseListeningMessage(output, serviceName) {
 
 async function testScenario(scenario) {
   console.log(`  Testing scenario: ${scenario.name} (${scenario.description})`);
-  
+
   const services = ['signer', 'chain', 'collector'];
   const results = [];
-  
+
   for (const serviceName of services) {
     try {
       const { child, output } = await startService(serviceName, scenario.env);
       const listening = parseListeningMessage(output, serviceName);
-      
+
       results.push({
         service: serviceName,
         success: true,
         listening,
-        output: output.trim()
+        output: output.trim(),
       });
-      
+
       // Kill the service
       child.kill('SIGTERM');
-      
+
       // Small delay to avoid port conflicts
       await new Promise(resolve => setTimeout(resolve, 100));
     } catch (error) {
       results.push({
         service: serviceName,
         success: false,
-        error: error.message
+        error: error.message,
       });
     }
   }
-  
+
   // Verify results
   let scenarioSuccess = true;
   for (const result of results) {
@@ -144,7 +144,7 @@ async function testScenario(scenario) {
       const expectedPort = scenario.expectedPorts[result.service];
       const actualHost = result.listening.host;
       const actualPort = result.listening.port;
-      
+
       if (actualHost !== scenario.expectedHost) {
         console.log(`    ❌ ${result.service}: Expected host ${scenario.expectedHost}, got ${actualHost}`);
         scenarioSuccess = false;
@@ -156,74 +156,74 @@ async function testScenario(scenario) {
       }
     }
   }
-  
+
   return scenarioSuccess;
 }
 
 async function testDataDirectoryConfiguration() {
   console.log('  Testing data directory configuration...');
-  
+
   // Test chain with custom data directory
   const tempDataDir = './test-chain-data';
   try {
     await fs.rm(tempDataDir, { recursive: true, force: true });
   } catch {}
-  
-  const { child: chainChild, output: chainOutput } = await startService('chain', { 
+
+  const { child: chainChild, output: chainOutput } = await startService('chain', {
     CHAIN_DATA_DIR: tempDataDir,
-    CHAIN_PORT: '16602'
+    CHAIN_PORT: '16602',
   });
-  
+
   chainChild.kill('SIGTERM');
   await new Promise(resolve => setTimeout(resolve, 200));
-  
+
   // Check if custom data directory was created
   let chainDataDirExists = false;
   try {
     await fs.access(tempDataDir);
     chainDataDirExists = true;
   } catch {}
-  
+
   // Test collector with custom events directory
   const tempEventsDir = './test-events-data';
   try {
     await fs.rm(tempEventsDir, { recursive: true, force: true });
   } catch {}
-  
-  const { child: collectorChild, output: collectorOutput } = await startService('collector', { 
+
+  const { child: collectorChild, output: collectorOutput } = await startService('collector', {
     EVENTS_DATA_DIR: tempEventsDir,
-    COLLECTOR_PORT: '16603'
+    COLLECTOR_PORT: '16603',
   });
-  
+
   collectorChild.kill('SIGTERM');
   await new Promise(resolve => setTimeout(resolve, 200));
-  
+
   // Cleanup
   try {
     await fs.rm(tempDataDir, { recursive: true, force: true });
     await fs.rm(tempEventsDir, { recursive: true, force: true });
   } catch {}
-  
+
   console.log(`    ✅ Chain custom data directory: ${chainDataDirExists ? 'Created' : 'Not created'}`);
-  console.log(`    ✅ Collector events directory: Configuration applied`);
-  
+  console.log('    ✅ Collector events directory: Configuration applied');
+
   return true;
 }
 
 async function verifyEnvFileConsistency() {
   console.log('  Verifying .env file consistency...');
-  
+
   const envExample = await fs.readFile('.env.example', 'utf8');
   const envDev = await fs.readFile('.env.development', 'utf8');
-  
+
   const requiredVars = [
     'SIGNER_PORT', 'SIGNER_HOST',
     'CHAIN_PORT', 'CHAIN_HOST', 'CHAIN_DATA_DIR',
-    'COLLECTOR_PORT', 'COLLECTOR_HOST', 'EVENTS_DATA_DIR'
+    'COLLECTOR_PORT', 'COLLECTOR_HOST', 'EVENTS_DATA_DIR',
   ];
-  
+
   let allVarsPresent = true;
-  
+
   for (const varName of requiredVars) {
     if (!envExample.includes(varName)) {
       console.log(`    ❌ Missing ${varName} in .env.example`);
@@ -232,27 +232,27 @@ async function verifyEnvFileConsistency() {
       console.log(`    ✅ ${varName} present in .env.example`);
     }
   }
-  
+
   return allVarsPresent;
 }
 
 async function main() {
   let allTestsPassed = true;
-  
+
   // Test each scenario
   for (const scenario of testScenarios) {
     const success = await testScenario(scenario);
-    if (!success) allTestsPassed = false;
+    if (!success) {allTestsPassed = false;}
   }
-  
+
   // Test data directory configuration
   const dataDirSuccess = await testDataDirectoryConfiguration();
-  if (!dataDirSuccess) allTestsPassed = false;
-  
+  if (!dataDirSuccess) {allTestsPassed = false;}
+
   // Verify environment file consistency
   const envConsistency = await verifyEnvFileConsistency();
-  if (!envConsistency) allTestsPassed = false;
-  
+  if (!envConsistency) {allTestsPassed = false;}
+
   if (allTestsPassed) {
     console.log('[test] env-config-verification OK');
     process.exit(0);

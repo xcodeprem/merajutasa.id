@@ -26,10 +26,10 @@ async function main(){
   await fs.mkdir('artifacts',{recursive:true});
   const cred = { id:`cred-${Date.now()}`, subject:'user:123', issued_at: new Date().toISOString(), claims:{ level:'basic' } };
   const sign = await httpPostJson(4601, '/sign', { payload: cred });
-  if (sign.status!==200) throw new Error('sign failed');
+  if (sign.status!==200) {throw new Error('sign failed');}
   const pub = await httpGetJson(4601, '/pubkey');
   const append = await httpPostJson(4602, '/append', { canonical: sign.json.canonical, signature: sign.json.signature, publicKeyPem: pub.json.publicKeyPem });
-  if (append.status!==200) throw new Error('append failed');
+  if (append.status!==200) {throw new Error('append failed');}
   await fs.writeFile('artifacts/credential-pipeline.json', JSON.stringify({ credential: cred, chain_entry: append.json },null,2));
   console.log('[credential-pipeline] OK seq='+append.json.seq);
 }

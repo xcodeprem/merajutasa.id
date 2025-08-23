@@ -13,7 +13,7 @@ function validateFile(filePath, expectations) {
 
 function main() {
   const artifactsDir = path.join(process.cwd(), 'artifacts');
-  if (!fs.existsSync(artifactsDir)) fs.mkdirSync(artifactsDir, { recursive: true });
+  if (!fs.existsSync(artifactsDir)) {fs.mkdirSync(artifactsDir, { recursive: true });}
 
   const checks = [];
   // Compliance deployments file
@@ -24,7 +24,7 @@ function main() {
       { key: 'pss.enforce', matchAll: ['pod-security.kubernetes.io/enforce: restricted'] },
       { key: 'apparmor', matchAll: ['container.apparmor.security.beta.kubernetes.io/'] },
       { key: 'container.securityContext', matchAll: ['allowPrivilegeEscalation: false', 'readOnlyRootFilesystem: true', 'capabilities:', 'drop:', '- ALL'] },
-    ]
+    ],
   ));
   // API gateway deployments file
   checks.push(validateFile(
@@ -34,7 +34,7 @@ function main() {
       { key: 'pss.enforce', matchAll: ['pod-security.kubernetes.io/enforce: restricted'] },
       { key: 'apparmor', matchAll: ['container.apparmor.security.beta.kubernetes.io/'] },
       { key: 'container.securityContext', matchAll: ['allowPrivilegeEscalation: false', 'readOnlyRootFilesystem: true', 'capabilities:', 'drop:', '- ALL'] },
-    ]
+    ],
   ));
 
   const policies = {

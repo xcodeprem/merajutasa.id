@@ -25,15 +25,15 @@ async function main(){
   if (!ready){ child.kill('SIGKILL'); console.error('[equity-smoke] FAIL: start'); process.exit(1); }
   try {
     const health = await httpGet('/health');
-    if (health.status!==200 || !health.json?.ok) throw new Error('health');
+    if (health.status!==200 || !health.json?.ok) {throw new Error('health');}
     const under = await httpGet('/under-served');
-    if (under.status!==200 || typeof under.json?.total !== 'number') throw new Error('under-served');
+    if (under.status!==200 || typeof under.json?.total !== 'number') {throw new Error('under-served');}
     const anomalies = await httpGet('/equity/anomalies');
-    if (anomalies.status!==200 || typeof anomalies.json?.anomalies_count !== 'number') throw new Error('anomalies');
+    if (anomalies.status!==200 || typeof anomalies.json?.anomalies_count !== 'number') {throw new Error('anomalies');}
     const summary = await httpGet('/equity/summary');
-    if (summary.status!==200 || typeof summary.json?.equity_index !== 'number') throw new Error('summary');
-  const monthly = await httpGet('/feedback/monthly');
-  if (monthly.status===200 && !Array.isArray(monthly.json?.months)) throw new Error('monthly');
+    if (summary.status!==200 || typeof summary.json?.equity_index !== 'number') {throw new Error('summary');}
+    const monthly = await httpGet('/feedback/monthly');
+    if (monthly.status===200 && !Array.isArray(monthly.json?.months)) {throw new Error('monthly');}
     console.log('[equity-smoke] PASS');
   } finally {
     child.kill('SIGKILL');

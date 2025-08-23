@@ -17,19 +17,19 @@ export class OpenAPIDocumentationSystem {
       description: 'Enterprise API for MerajutASA.id governance and integrity platform',
       servers: [
         { url: 'http://localhost:8080', description: 'Development' },
-        { url: 'https://api.merajutasa.id', description: 'Production' }
+        { url: 'https://api.merajutasa.id', description: 'Production' },
       ],
       contact: {
         name: 'MerajutASA.id API Team',
         email: 'api@merajutasa.id',
-        url: 'https://merajutasa.id'
+        url: 'https://merajutasa.id',
       },
       license: {
         name: 'UNLICENSED',
-        url: 'https://merajutasa.id/license'
+        url: 'https://merajutasa.id/license',
       },
       outputDir: 'docs/api',
-      ...config
+      ...config,
     };
 
     this.spec = this.initializeSpec();
@@ -45,7 +45,7 @@ export class OpenAPIDocumentationSystem {
         version: this.config.version,
         description: this.config.description,
         contact: this.config.contact,
-        license: this.config.license
+        license: this.config.license,
       },
       servers: this.config.servers,
       paths: {},
@@ -55,13 +55,13 @@ export class OpenAPIDocumentationSystem {
           BearerAuth: {
             type: 'http',
             scheme: 'bearer',
-            bearerFormat: 'JWT'
+            bearerFormat: 'JWT',
           },
           ApiKeyAuth: {
             type: 'apiKey',
             in: 'header',
-            name: 'X-API-Key'
-          }
+            name: 'X-API-Key',
+          },
         },
         responses: {
           Error: {
@@ -73,11 +73,11 @@ export class OpenAPIDocumentationSystem {
                   properties: {
                     error: { type: 'string' },
                     requestId: { type: 'string' },
-                    timestamp: { type: 'string', format: 'date-time' }
-                  }
-                }
-              }
-            }
+                    timestamp: { type: 'string', format: 'date-time' },
+                  },
+                },
+              },
+            },
           },
           Unauthorized: {
             description: 'Authentication required',
@@ -87,11 +87,11 @@ export class OpenAPIDocumentationSystem {
                   type: 'object',
                   properties: {
                     error: { type: 'string', example: 'Unauthorized' },
-                    requestId: { type: 'string' }
-                  }
-                }
-              }
-            }
+                    requestId: { type: 'string' },
+                  },
+                },
+              },
+            },
           },
           RateLimitExceeded: {
             description: 'Rate limit exceeded',
@@ -101,18 +101,18 @@ export class OpenAPIDocumentationSystem {
                   type: 'object',
                   properties: {
                     error: { type: 'string', example: 'Too many requests' },
-                    retryAfter: { type: 'integer', example: 900 }
-                  }
-                }
-              }
-            }
-          }
-        }
+                    retryAfter: { type: 'integer', example: 900 },
+                  },
+                },
+              },
+            },
+          },
+        },
       },
       security: [
         { BearerAuth: [] },
-        { ApiKeyAuth: [] }
-      ]
+        { ApiKeyAuth: [] },
+      ],
     };
   }
 
@@ -135,13 +135,13 @@ export class OpenAPIDocumentationSystem {
                 properties: {
                   publicKeyPem: { type: 'string', description: 'PEM-formatted public key' },
                   algorithm: { type: 'string', example: 'RS256' },
-                  keyId: { type: 'string' }
-                }
-              }
-            }
-          }
-        }
-      }
+                  keyId: { type: 'string' },
+                },
+              },
+            },
+          },
+        },
+      },
     });
 
     this.addEndpoint('/api/v1/signer/sign', 'post', {
@@ -156,19 +156,19 @@ export class OpenAPIDocumentationSystem {
               type: 'object',
               required: ['payload'],
               properties: {
-                payload: { 
-                  type: 'string', 
-                  description: 'Data to be signed (base64 encoded)' 
+                payload: {
+                  type: 'string',
+                  description: 'Data to be signed (base64 encoded)',
                 },
-                format: { 
-                  type: 'string', 
-                  enum: ['base64', 'hex'], 
-                  default: 'base64' 
-                }
-              }
-            }
-          }
-        }
+                format: {
+                  type: 'string',
+                  enum: ['base64', 'hex'],
+                  default: 'base64',
+                },
+              },
+            },
+          },
+        },
       },
       responses: {
         '200': {
@@ -181,13 +181,13 @@ export class OpenAPIDocumentationSystem {
                   canonical: { type: 'string', description: 'Canonical representation' },
                   hash_sha256: { type: 'string', description: 'SHA-256 hash' },
                   signature: { type: 'string', description: 'Digital signature' },
-                  timestamp: { type: 'string', format: 'date-time' }
-                }
-              }
-            }
-          }
-        }
-      }
+                  timestamp: { type: 'string', format: 'date-time' },
+                },
+              },
+            },
+          },
+        },
+      },
     });
 
     // Chain Service Endpoints
@@ -205,11 +205,11 @@ export class OpenAPIDocumentationSystem {
               properties: {
                 canonical: { type: 'string', description: 'Canonical data' },
                 signature: { type: 'string', description: 'Digital signature' },
-                publicKeyPem: { type: 'string', description: 'Public key in PEM format' }
-              }
-            }
-          }
-        }
+                publicKeyPem: { type: 'string', description: 'Public key in PEM format' },
+              },
+            },
+          },
+        },
       },
       responses: {
         '200': {
@@ -222,13 +222,13 @@ export class OpenAPIDocumentationSystem {
                   entryId: { type: 'string' },
                   blockHeight: { type: 'integer' },
                   hash: { type: 'string' },
-                  timestamp: { type: 'string', format: 'date-time' }
-                }
-              }
-            }
-          }
-        }
-      }
+                  timestamp: { type: 'string', format: 'date-time' },
+                },
+              },
+            },
+          },
+        },
+      },
     });
 
     this.addEndpoint('/api/v1/chain/head', 'get', {
@@ -247,13 +247,13 @@ export class OpenAPIDocumentationSystem {
                   hash: { type: 'string' },
                   prevHash: { type: 'string' },
                   timestamp: { type: 'string', format: 'date-time' },
-                  entries: { type: 'integer', description: 'Total entries in chain' }
-                }
-              }
-            }
-          }
-        }
-      }
+                  entries: { type: 'integer', description: 'Total entries in chain' },
+                },
+              },
+            },
+          },
+        },
+      },
     });
 
     // Collector Service Endpoints
@@ -269,27 +269,27 @@ export class OpenAPIDocumentationSystem {
               type: 'object',
               required: ['event_type', 'data'],
               properties: {
-                event_type: { 
-                  type: 'string', 
+                event_type: {
+                  type: 'string',
                   enum: ['user_action', 'system_event', 'governance_action'],
-                  description: 'Type of event being submitted'
+                  description: 'Type of event being submitted',
                 },
-                data: { 
+                data: {
                   type: 'object',
-                  description: 'Event payload data'
+                  description: 'Event payload data',
                 },
                 metadata: {
                   type: 'object',
                   properties: {
                     source: { type: 'string' },
                     version: { type: 'string' },
-                    correlation_id: { type: 'string' }
-                  }
-                }
-              }
-            }
-          }
-        }
+                    correlation_id: { type: 'string' },
+                  },
+                },
+              },
+            },
+          },
+        },
       },
       responses: {
         '200': {
@@ -302,13 +302,13 @@ export class OpenAPIDocumentationSystem {
                   event_id: { type: 'string' },
                   event_hash: { type: 'string' },
                   processed_at: { type: 'string', format: 'date-time' },
-                  status: { type: 'string', enum: ['accepted', 'processed', 'rejected'] }
-                }
-              }
-            }
-          }
-        }
-      }
+                  status: { type: 'string', enum: ['accepted', 'processed', 'rejected'] },
+                },
+              },
+            },
+          },
+        },
+      },
     });
 
     // Gateway Management Endpoints
@@ -327,17 +327,17 @@ export class OpenAPIDocumentationSystem {
                   status: { type: 'string', enum: ['healthy', 'degraded'] },
                   version: { type: 'string' },
                   uptime: { type: 'integer', description: 'Uptime in milliseconds' },
-                  services: { 
-                    type: 'array', 
+                  services: {
+                    type: 'array',
                     items: { type: 'string' },
-                    description: 'List of registered services'
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
+                    description: 'List of registered services',
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
     });
 
     this.addEndpoint('/metrics', 'get', {
@@ -360,16 +360,16 @@ export class OpenAPIDocumentationSystem {
                       errorRate: { type: 'number' },
                       avgLatency: { type: 'number' },
                       p95Latency: { type: 'number' },
-                      p99Latency: { type: 'number' }
-                    }
+                      p99Latency: { type: 'number' },
+                    },
                   },
-                  services: { type: 'object' }
-                }
-              }
-            }
-          }
-        }
-      }
+                  services: { type: 'object' },
+                },
+              },
+            },
+          },
+        },
+      },
     });
 
     this.addEndpoint('/services', 'get', {
@@ -392,16 +392,16 @@ export class OpenAPIDocumentationSystem {
                         name: { type: 'string' },
                         version: { type: 'string' },
                         endpoint: { type: 'string' },
-                        health: { type: 'string' }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
+                        health: { type: 'string' },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
     });
   }
 
@@ -409,7 +409,7 @@ export class OpenAPIDocumentationSystem {
     if (!this.spec.paths[path]) {
       this.spec.paths[path] = {};
     }
-    
+
     // Add common error responses
     if (!spec.responses['400']) {
       spec.responses['400'] = { $ref: '#/components/responses/Error' };
@@ -436,24 +436,24 @@ export class OpenAPIDocumentationSystem {
   async generateDocumentation() {
     // Register all service endpoints
     this.registerServiceEndpoints();
-    
+
     // Add common schemas
     this.addCommonSchemas();
-    
+
     // Generate OpenAPI specification file
     await this.writeOpenAPISpec();
-    
+
     // Generate HTML documentation
     await this.generateHTMLDocs();
-    
+
     // Generate Markdown documentation
     await this.generateMarkdownDocs();
-    
+
     return {
       spec: this.spec,
       endpoints: this.endpoints.size,
       schemas: this.schemas.size,
-      outputDir: this.config.outputDir
+      outputDir: this.config.outputDir,
     };
   }
 
@@ -465,8 +465,8 @@ export class OpenAPIDocumentationSystem {
         error: { type: 'string', description: 'Error message' },
         requestId: { type: 'string', description: 'Unique request identifier' },
         timestamp: { type: 'string', format: 'date-time' },
-        details: { type: 'object', description: 'Additional error details' }
-      }
+        details: { type: 'object', description: 'Additional error details' },
+      },
     });
 
     this.addSchema('SuccessResponse', {
@@ -476,8 +476,8 @@ export class OpenAPIDocumentationSystem {
         status: { type: 'string', enum: ['success'] },
         data: { type: 'object', description: 'Response data' },
         requestId: { type: 'string' },
-        timestamp: { type: 'string', format: 'date-time' }
-      }
+        timestamp: { type: 'string', format: 'date-time' },
+      },
     });
 
     this.addSchema('PaginationMeta', {
@@ -486,8 +486,8 @@ export class OpenAPIDocumentationSystem {
         page: { type: 'integer', minimum: 1 },
         limit: { type: 'integer', minimum: 1, maximum: 100 },
         total: { type: 'integer', minimum: 0 },
-        totalPages: { type: 'integer', minimum: 0 }
-      }
+        totalPages: { type: 'integer', minimum: 0 },
+      },
     });
   }
 
@@ -495,7 +495,7 @@ export class OpenAPIDocumentationSystem {
     const outputPath = path.join(this.config.outputDir, 'openapi.json');
     await fs.mkdir(this.config.outputDir, { recursive: true });
     await fs.writeFile(outputPath, JSON.stringify(this.spec, null, 2));
-    
+
     // Also write YAML version
     const yamlContent = this.convertToYAML(this.spec);
     await fs.writeFile(path.join(this.config.outputDir, 'openapi.yaml'), yamlContent);
@@ -559,7 +559,7 @@ export class OpenAPIDocumentationSystem {
 
   generateMarkdownContent() {
     const endpoints = Array.from(this.endpoints.entries());
-    
+
     return `# ${this.config.title}
 
 ${this.config.description}
@@ -585,8 +585,8 @@ This API supports multiple authentication methods:
 ## Endpoints
 
 ${endpoints.map(([path, spec]) => {
-  const [method, endpoint] = path.split(' ');
-  return `### ${method} ${endpoint}
+    const [method, endpoint] = path.split(' ');
+    return `### ${method} ${endpoint}
 
 **Summary:** ${spec.summary || 'No summary'}
 
@@ -595,11 +595,11 @@ ${endpoints.map(([path, spec]) => {
 **Tags:** ${spec.tags ? spec.tags.join(', ') : 'None'}
 
 **Responses:**
-${Object.entries(spec.responses).map(([code, response]) => 
-  `- **${code}:** ${response.description || response.$ref || 'No description'}`
-).join('\n')}
+${Object.entries(spec.responses).map(([code, response]) =>
+    `- **${code}:** ${response.description || response.$ref || 'No description'}`,
+  ).join('\n')}
 `;
-}).join('\n')}
+  }).join('\n')}
 
 ## Error Handling
 
@@ -624,7 +624,7 @@ All endpoints return consistent error responses:
   convertToYAML(obj, indent = 0) {
     const spaces = '  '.repeat(indent);
     let yaml = '';
-    
+
     for (const [key, value] of Object.entries(obj)) {
       if (value === null) {
         yaml += `${spaces}${key}: null\n`;
@@ -643,7 +643,7 @@ All endpoints return consistent error responses:
         yaml += `${spaces}${key}: ${typeof value === 'string' ? `"${value}"` : value}\n`;
       }
     }
-    
+
     return yaml;
   }
 
@@ -656,10 +656,10 @@ All endpoints return consistent error responses:
       services: [...new Set(Array.from(this.endpoints.values()).flatMap(spec => spec.tags || []))],
       outputFiles: [
         'openapi.json',
-        'openapi.yaml', 
+        'openapi.yaml',
         'index.html',
-        'API_DOCUMENTATION.md'
-      ]
+        'API_DOCUMENTATION.md',
+      ],
     };
   }
 
@@ -668,7 +668,7 @@ All endpoints return consistent error responses:
       status: 'healthy',
       endpoints: this.endpoints.size,
       schemas: this.schemas.size,
-      lastGenerated: new Date().toISOString()
+      lastGenerated: new Date().toISOString(),
     };
   }
 }

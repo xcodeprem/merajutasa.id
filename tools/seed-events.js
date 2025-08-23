@@ -25,7 +25,7 @@ async function waitForHealth(timeoutMs=3000){
   const start = Date.now();
   while (Date.now()-start < timeoutMs){
     const res = await get('/health');
-    if (res.ok) return true;
+    if (res.ok) {return true;}
     await sleep(200);
   }
   return false;

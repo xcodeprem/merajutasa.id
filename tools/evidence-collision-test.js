@@ -34,10 +34,10 @@ async function collectHashes(){
     'artifacts/disclaimers-lint.json',
     'artifacts/pii-scan-report.json',
     'artifacts/fairness-sim-scenarios.json',
-    'artifacts/no-silent-drift-report.json'
+    'artifacts/no-silent-drift-report.json',
   ];
   const out=[];
-  for(const p of paths){ const buf = await safeRead(p); if(!buf) continue; out.push({ id:p, path:p, full: sha256(buf) }); }
+  for(const p of paths){ const buf = await safeRead(p); if(!buf) {continue;} out.push({ id:p, path:p, full: sha256(buf) }); }
   return out;
 }
 
@@ -48,7 +48,7 @@ async function main(){
   const map = new Map(); const collisions=[];
   hashes.forEach(h=>{
     const prefix = h.full.slice(0,prefixLen);
-    if(map.has(prefix)) collisions.push({ prefix, first: map.get(prefix), second: h }); else map.set(prefix,h);
+    if(map.has(prefix)) {collisions.push({ prefix, first: map.get(prefix), second: h });} else {map.set(prefix,h);}
   });
   const report = {
     version:'1.0.0',
@@ -56,7 +56,7 @@ async function main(){
     prefix_length: prefixLen,
     artifact_hashes: hashes.length,
     collision_count: collisions.length,
-    collisions
+    collisions,
   };
   await fs.writeFile('artifacts/evidence-collision-test.json', JSON.stringify(report,null,2));
   if(collisions.length){

@@ -21,15 +21,15 @@ async function listDECFiles(dir){
   const entries = await fs.readdir(dir, { withFileTypes: true });
   for (const e of entries){
     const p = `${dir}/${e.name}`;
-    if (e.isDirectory()) continue;
-    if (e.isFile() && /DEC-\d{8}-\d{2}-.+\.md$/.test(e.name)) out.push(p);
+    if (e.isDirectory()) {continue;}
+    if (e.isFile() && /DEC-\d{8}-\d{2}-.+\.md$/.test(e.name)) {out.push(p);}
   }
   return out;
 }
 
 async function main(){
   const files = await listDECFiles(DEC_GLOB_DIR);
-  let mismatches = [];
+  const mismatches = [];
   for (const f of files){
     const buf = await fs.readFile(f);
     const text = buf.toString('utf8');

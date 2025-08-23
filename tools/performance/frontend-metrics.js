@@ -1,7 +1,7 @@
 /**
  * Frontend Performance Metrics Tool
  * Monitors UI performance for Phase 2 Week 2+ Performance Enhancement
- * 
+ *
  * Features:
  * - Lighthouse performance audits
  * - Real User Monitoring (RUM) collection
@@ -26,37 +26,37 @@ export class FrontendMetrics {
       targetUrl: options.targetUrl || 'http://localhost:4620/ui/',
       deviceTypes: options.deviceTypes || ['desktop', 'mobile'],
       networkThrottling: options.networkThrottling || 'simulated3G',
-      
+
       // Performance budgets
       performanceBudget: {
         performance: options.performanceBudget?.performance || 85,
         accessibility: options.performanceBudget?.accessibility || 95,
         bestPractices: options.performanceBudget?.bestPractices || 90,
         seo: options.performanceBudget?.seo || 90,
-        pwa: options.performanceBudget?.pwa || 70
+        pwa: options.performanceBudget?.pwa || 70,
       },
-      
+
       // Output settings
       outputPath: options.outputPath || 'artifacts/frontend-performance',
       saveReports: options.saveReports !== false,
       generateHtml: options.generateHtml !== false,
-      
+
       // Cache monitoring
       cacheEndpoints: options.cacheEndpoints || [
         '/kpi/h1',
         '/under-served',
         '/weekly-trends',
-        '/monthly-rollup'
+        '/monthly-rollup',
       ],
-      
-      ...options
+
+      ...options,
     };
 
     this.metrics = {
       lighthouse: [],
       cache: {},
       performance: {},
-      errors: []
+      errors: [],
     };
   }
 
@@ -65,39 +65,39 @@ export class FrontendMetrics {
    */
   async runPerformanceAudit() {
     console.log('🚀 Starting Frontend Performance Audit...');
-    
+
     try {
       // Ensure output directory exists
       await this.ensureOutputDirectory();
-      
+
       // Run Lighthouse audits for different devices
       for (const device of this.config.deviceTypes) {
         console.log(`📱 Running ${device} audit...`);
         const auditResult = await this.runLighthouseAudit(device);
         this.metrics.lighthouse.push(auditResult);
       }
-      
+
       // Monitor cache performance
       console.log('💾 Analyzing cache performance...');
       await this.analyzeCachePerformance();
-      
+
       // Generate performance report
       const report = await this.generatePerformanceReport();
-      
+
       // Save reports if enabled
       if (this.config.saveReports) {
         await this.saveReports(report);
       }
-      
+
       console.log('✅ Frontend performance audit completed');
       return report;
-      
+
     } catch (error) {
       console.error('❌ Frontend performance audit failed:', error.message);
       this.metrics.errors.push({
         timestamp: new Date().toISOString(),
         error: error.message,
-        stack: error.stack
+        stack: error.stack,
       });
       throw error;
     }
@@ -108,13 +108,13 @@ export class FrontendMetrics {
    */
   async runLighthouseAudit(device = 'desktop') {
     let chrome;
-    
+
     try {
       // Launch Chrome
       chrome = await chromeLauncher.launch({
-        chromeFlags: ['--headless', '--no-sandbox', '--disable-dev-shm-usage']
+        chromeFlags: ['--headless', '--no-sandbox', '--disable-dev-shm-usage'],
       });
-      
+
       // Configure Lighthouse options
       const options = {
         logLevel: 'error',
@@ -125,17 +125,17 @@ export class FrontendMetrics {
         throttling: device === 'mobile' ? {
           rttMs: 150,
           throughputKbps: 1.6 * 1024,
-          cpuSlowdownMultiplier: 4
+          cpuSlowdownMultiplier: 4,
         } : {
           rttMs: 40,
           throughputKbps: 10 * 1024,
-          cpuSlowdownMultiplier: 1
-        }
+          cpuSlowdownMultiplier: 1,
+        },
       };
-      
+
       // Run Lighthouse audit
       const result = await lighthouse(this.config.targetUrl, options);
-      
+
       // Extract key metrics
       const auditResult = {
         device,
@@ -146,7 +146,7 @@ export class FrontendMetrics {
           accessibility: Math.round(result.report.categories.accessibility.score * 100),
           bestPractices: Math.round(result.report.categories['best-practices'].score * 100),
           seo: Math.round(result.report.categories.seo.score * 100),
-          pwa: result.report.categories.pwa ? Math.round(result.report.categories.pwa.score * 100) : null
+          pwa: result.report.categories.pwa ? Math.round(result.report.categories.pwa.score * 100) : null,
         },
         metrics: {
           firstContentfulPaint: result.report.audits['first-contentful-paint']?.displayValue,
@@ -154,20 +154,20 @@ export class FrontendMetrics {
           firstMeaningfulPaint: result.report.audits['first-meaningful-paint']?.displayValue,
           speedIndex: result.report.audits['speed-index']?.displayValue,
           timeToInteractive: result.report.audits['interactive']?.displayValue,
-          cumulativeLayoutShift: result.report.audits['cumulative-layout-shift']?.displayValue
+          cumulativeLayoutShift: result.report.audits['cumulative-layout-shift']?.displayValue,
         },
         budgetViolations: this.checkBudgetViolations({
           performance: result.report.categories.performance.score * 100,
           accessibility: result.report.categories.accessibility.score * 100,
           bestPractices: result.report.categories['best-practices'].score * 100,
           seo: result.report.categories.seo.score * 100,
-          pwa: result.report.categories.pwa ? result.report.categories.pwa.score * 100 : 0
+          pwa: result.report.categories.pwa ? result.report.categories.pwa.score * 100 : 0,
         }),
-        fullReport: this.config.generateHtml ? result.report : null
+        fullReport: this.config.generateHtml ? result.report : null,
       };
-      
+
       return auditResult;
-      
+
     } finally {
       if (chrome) {
         await chrome.kill();
@@ -186,8 +186,8 @@ export class FrontendMetrics {
         cacheHits: 0,
         cacheMisses: 0,
         hitRate: 0,
-        avgResponseTime: 0
-      }
+        avgResponseTime: 0,
+      },
     };
 
     for (const endpoint of this.config.cacheEndpoints) {
@@ -195,11 +195,11 @@ export class FrontendMetrics {
         // Simulate cache analysis (in real implementation, this would connect to cache metrics)
         const endpointStats = await this.measureEndpointPerformance(endpoint);
         cacheStats.endpoints[endpoint] = endpointStats;
-        
+
         cacheStats.overall.totalRequests += endpointStats.totalRequests;
         cacheStats.overall.cacheHits += endpointStats.cacheHits;
         cacheStats.overall.cacheMisses += endpointStats.cacheMisses;
-        
+
       } catch (error) {
         console.warn(`⚠️ Could not analyze cache for ${endpoint}:`, error.message);
         cacheStats.endpoints[endpoint] = {
@@ -207,7 +207,7 @@ export class FrontendMetrics {
           totalRequests: 0,
           cacheHits: 0,
           cacheMisses: 0,
-          hitRate: 0
+          hitRate: 0,
         };
       }
     }
@@ -230,12 +230,12 @@ export class FrontendMetrics {
     // 2. Query cache statistics
     // 3. Measure response times
     // 4. Analyze cache hit/miss patterns
-    
+
     // Mock data for demonstration
     const totalRequests = Math.floor(Math.random() * 1000) + 100;
     const cacheHits = Math.floor(totalRequests * (0.7 + Math.random() * 0.25)); // 70-95% hit rate
     const cacheMisses = totalRequests - cacheHits;
-    
+
     return {
       endpoint,
       totalRequests,
@@ -243,7 +243,7 @@ export class FrontendMetrics {
       cacheMisses,
       hitRate: Math.round((cacheHits / totalRequests) * 100),
       avgResponseTime: Math.round(50 + Math.random() * 200), // 50-250ms
-      lastUpdated: new Date().toISOString()
+      lastUpdated: new Date().toISOString(),
     };
   }
 
@@ -252,18 +252,18 @@ export class FrontendMetrics {
    */
   checkBudgetViolations(scores) {
     const violations = [];
-    
+
     Object.entries(this.config.performanceBudget).forEach(([category, threshold]) => {
       if (scores[category] !== null && scores[category] < threshold) {
         violations.push({
           category,
           actual: scores[category],
           threshold,
-          violation: threshold - scores[category]
+          violation: threshold - scores[category],
         });
       }
     });
-    
+
     return violations;
   }
 
@@ -275,16 +275,16 @@ export class FrontendMetrics {
       metadata: {
         timestamp: new Date().toISOString(),
         version: '1.0.0',
-        config: this.config
+        config: this.config,
       },
       lighthouse: this.metrics.lighthouse,
       cache: this.metrics.cache,
       summary: {
         overallPerformance: 'pending',
         budgetCompliance: 'pending',
-        recommendations: []
+        recommendations: [],
       },
-      errors: this.metrics.errors
+      errors: this.metrics.errors,
     };
 
     // Calculate overall performance score
@@ -317,7 +317,7 @@ export class FrontendMetrics {
           type: 'performance',
           priority: 'high',
           message: `${audit.device} performance score (${audit.scores.performance}) is below budget (85)`,
-          action: 'Optimize Core Web Vitals, especially LCP and CLS'
+          action: 'Optimize Core Web Vitals, especially LCP and CLS',
         });
       }
 
@@ -326,7 +326,7 @@ export class FrontendMetrics {
           type: 'accessibility',
           priority: 'high',
           message: `${audit.device} accessibility score (${audit.scores.accessibility}) is below budget (95)`,
-          action: 'Review ARIA labels, contrast ratios, and keyboard navigation'
+          action: 'Review ARIA labels, contrast ratios, and keyboard navigation',
         });
       }
     });
@@ -337,7 +337,7 @@ export class FrontendMetrics {
         type: 'cache',
         priority: 'medium',
         message: `Cache hit rate (${this.metrics.cache.overall.hitRate}%) is below optimal (80%)`,
-        action: 'Review cache strategies and TTL settings'
+        action: 'Review cache strategies and TTL settings',
       });
     }
 
@@ -349,7 +349,7 @@ export class FrontendMetrics {
    */
   async saveReports(report) {
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
-    
+
     // Save JSON report
     const jsonPath = path.join(this.config.outputPath, `frontend-metrics-${timestamp}.json`);
     await fs.writeFile(jsonPath, JSON.stringify(report, null, 2));
@@ -398,7 +398,7 @@ export class FrontendMetrics {
     try {
       // Test if target URL is accessible
       const response = await fetch(this.config.targetUrl).catch(() => null);
-      
+
       return {
         status: 'healthy',
         targetUrl: this.config.targetUrl,
@@ -407,14 +407,14 @@ export class FrontendMetrics {
         capabilities: {
           lighthouse: true,
           cacheMonitoring: true,
-          performanceBudgets: true
-        }
+          performanceBudgets: true,
+        },
       };
     } catch (error) {
       return {
         status: 'error',
         error: error.message,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
     }
   }
@@ -429,25 +429,25 @@ export function getFrontendMetrics(options = {}) {
 if (import.meta.url === `file://${process.argv[1]}`) {
   const metrics = new FrontendMetrics({
     targetUrl: process.env.TARGET_URL || 'http://localhost:4620/ui/',
-    deviceTypes: process.env.DEVICE_TYPES ? process.env.DEVICE_TYPES.split(',') : ['desktop', 'mobile']
+    deviceTypes: process.env.DEVICE_TYPES ? process.env.DEVICE_TYPES.split(',') : ['desktop', 'mobile'],
   });
 
   const command = process.argv[2] || 'audit';
 
   switch (command) {
-    case 'audit':
-      await metrics.runPerformanceAudit();
-      break;
-    case 'cache-stats':
-      const cacheStats = await metrics.getCacheStats();
-      console.log('Cache Statistics:', JSON.stringify(cacheStats, null, 2));
-      break;
-    case 'health':
-      const health = await metrics.healthCheck();
-      console.log('Health Check:', JSON.stringify(health, null, 2));
-      break;
-    default:
-      console.log('Available commands: audit, cache-stats, health');
-      process.exit(1);
+  case 'audit':
+    await metrics.runPerformanceAudit();
+    break;
+  case 'cache-stats':
+    const cacheStats = await metrics.getCacheStats();
+    console.log('Cache Statistics:', JSON.stringify(cacheStats, null, 2));
+    break;
+  case 'health':
+    const health = await metrics.healthCheck();
+    console.log('Health Check:', JSON.stringify(health, null, 2));
+    break;
+  default:
+    console.log('Available commands: audit, cache-stats, health');
+    process.exit(1);
   }
 }

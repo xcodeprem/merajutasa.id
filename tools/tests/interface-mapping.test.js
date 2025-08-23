@@ -2,7 +2,7 @@
 
 /**
  * Interface Mapping Test Suite
- * 
+ *
  * Validates the interface mapping generation meets success criteria:
  * - Each component has upstream/downstream lists based on documented APIs
  * - No conflicts in endpoint names/versions
@@ -17,16 +17,16 @@ class InterfaceMappingTest {
     this.testResults = {
       passed: 0,
       failed: 0,
-      tests: []
+      tests: [],
     };
-    
+
     this.interfaceMapping = null;
     this.csvContent = null;
   }
 
   async runTests() {
     console.log('🧪 Running Interface Mapping Tests...\n');
-    
+
     try {
       await this.loadGeneratedFiles();
       await this.testFileGeneration();
@@ -34,11 +34,11 @@ class InterfaceMappingTest {
       await this.testEndpointMappings();
       await this.testConflictDetection();
       await this.testSuccessCriteria();
-      
+
       console.log('\n📊 Test Results:');
       console.log(`✅ Passed: ${this.testResults.passed}`);
       console.log(`❌ Failed: ${this.testResults.failed}`);
-      
+
       if (this.testResults.failed > 0) {
         console.log('\n❌ Failed Tests:');
         this.testResults.tests.filter(t => !t.passed).forEach(test => {
@@ -48,7 +48,7 @@ class InterfaceMappingTest {
       } else {
         console.log('\n✅ All tests passed!');
       }
-      
+
     } catch (error) {
       console.error('❌ Test suite failed:', error.message);
       process.exit(1);
@@ -57,7 +57,7 @@ class InterfaceMappingTest {
 
   async loadGeneratedFiles() {
     const basePath = path.join(process.cwd(), 'docs/architecture');
-    
+
     // Load JSON file
     const jsonPath = path.join(basePath, 'interface-mapping.json');
     if (fs.existsSync(jsonPath)) {
@@ -65,7 +65,7 @@ class InterfaceMappingTest {
     } else {
       throw new Error('interface-mapping.json not found');
     }
-    
+
     // Load CSV file
     const csvPath = path.join(basePath, 'interface-mapping.csv');
     if (fs.existsSync(csvPath)) {
@@ -77,19 +77,19 @@ class InterfaceMappingTest {
 
   async testFileGeneration() {
     const basePath = path.join(process.cwd(), 'docs/architecture');
-    
+
     this.test('JSON file exists', () => {
       return fs.existsSync(path.join(basePath, 'interface-mapping.json'));
     });
-    
+
     this.test('CSV file exists', () => {
       return fs.existsSync(path.join(basePath, 'interface-mapping.csv'));
     });
-    
+
     this.test('Summary file exists', () => {
       return fs.existsSync(path.join(basePath, 'interface-mapping-summary.md'));
     });
-    
+
     this.test('JSON has required structure', () => {
       return this.interfaceMapping &&
              this.interfaceMapping.components &&
@@ -97,7 +97,7 @@ class InterfaceMappingTest {
              this.interfaceMapping.statistics &&
              Array.isArray(this.interfaceMapping.components);
     });
-    
+
     this.test('CSV has header row', () => {
       const lines = this.csvContent.split('\n');
       return lines.length > 0 && lines[0].includes('Component Name');
@@ -106,12 +106,12 @@ class InterfaceMappingTest {
 
   async testComponentMappings() {
     this.test('Components have upstream/downstream lists', () => {
-      return this.interfaceMapping.components.every(comp => 
+      return this.interfaceMapping.components.every(comp =>
         Array.isArray(comp.upstreamDependencies) &&
-        Array.isArray(comp.downstreamClients)
+        Array.isArray(comp.downstreamClients),
       );
     });
-    
+
     this.test('All core services are mapped', () => {
       const serviceNames = this.interfaceMapping.components.map(c => c.name);
       return serviceNames.includes('signer') &&
@@ -119,28 +119,28 @@ class InterfaceMappingTest {
              serviceNames.includes('collector') &&
              serviceNames.includes('management');
     });
-    
+
     this.test('Each component has endpoints', () => {
-      return this.interfaceMapping.components.every(comp => 
-        Array.isArray(comp.providedEndpoints) && 
-        comp.providedEndpoints.length > 0
+      return this.interfaceMapping.components.every(comp =>
+        Array.isArray(comp.providedEndpoints) &&
+        comp.providedEndpoints.length > 0,
       );
     });
-    
+
     this.test('Service ports are correctly mapped', () => {
       const signerComponent = this.interfaceMapping.components.find(c => c.name === 'signer');
       const chainComponent = this.interfaceMapping.components.find(c => c.name === 'chain');
       const collectorComponent = this.interfaceMapping.components.find(c => c.name === 'collector');
-      
+
       return signerComponent?.port === 4601 &&
              chainComponent?.port === 4602 &&
              collectorComponent?.port === 4603;
     });
-    
+
     this.test('Dependencies are logically correct', () => {
       const chainComponent = this.interfaceMapping.components.find(c => c.name === 'chain');
       const collectorComponent = this.interfaceMapping.components.find(c => c.name === 'collector');
-      
+
       // Chain should depend on signer
       // Collector should depend on both chain and signer
       return chainComponent?.upstreamDependencies.includes('signer') &&
@@ -153,22 +153,22 @@ class InterfaceMappingTest {
     this.test('All OpenAPI endpoints are mapped', () => {
       return this.interfaceMapping.endpoints.length >= 8; // Based on openapi.json
     });
-    
+
     this.test('Endpoints have required fields', () => {
-      return this.interfaceMapping.endpoints.every(endpoint => 
+      return this.interfaceMapping.endpoints.every(endpoint =>
         endpoint.path &&
         endpoint.method &&
         endpoint.summary &&
         endpoint.serviceType &&
-        endpoint.version
+        endpoint.version,
       );
     });
-    
+
     this.test('API versions are extracted correctly', () => {
       const v1Endpoints = this.interfaceMapping.endpoints.filter(e => e.version === '1');
       return v1Endpoints.length > 0;
     });
-    
+
     this.test('Service types are correctly determined', () => {
       const serviceTypes = this.interfaceMapping.endpoints.map(e => e.serviceType);
       return serviceTypes.includes('signer') &&
@@ -182,13 +182,13 @@ class InterfaceMappingTest {
     this.test('No endpoint path conflicts detected', () => {
       return this.interfaceMapping.conflicts.length === 0;
     });
-    
+
     this.test('Endpoint uniqueness validation', () => {
       const endpointKeys = this.interfaceMapping.endpoints.map(e => `${e.method} ${e.path}`);
       const uniqueKeys = new Set(endpointKeys);
       return endpointKeys.length === uniqueKeys.size;
     });
-    
+
     this.test('Version consistency within services', () => {
       const versionConflicts = this.interfaceMapping.conflicts.filter(c => c.type === 'version_conflict');
       return versionConflicts.length === 0;
@@ -197,35 +197,35 @@ class InterfaceMappingTest {
 
   async testSuccessCriteria() {
     this.test('Success Criteria 1: Each component has upstream/downstream lists', () => {
-      return this.interfaceMapping.components.every(comp => 
+      return this.interfaceMapping.components.every(comp =>
         comp.upstreamDependencies.length >= 0 &&  // Can be 0 for leaf services
         comp.downstreamClients.length >= 0 &&     // Can be 0 for sink services
         Array.isArray(comp.upstreamDependencies) &&
-        Array.isArray(comp.downstreamClients)
+        Array.isArray(comp.downstreamClients),
       );
     });
-    
+
     this.test('Success Criteria 2: No endpoint name/version conflicts', () => {
       return this.interfaceMapping.conflicts.length === 0;
     });
-    
+
     this.test('Success Criteria 3: Required artifacts generated', () => {
       const basePath = path.join(process.cwd(), 'docs/architecture');
       return fs.existsSync(path.join(basePath, 'interface-mapping.json')) &&
              fs.existsSync(path.join(basePath, 'interface-mapping.csv'));
     });
-    
+
     this.test('Dependencies based on documented APIs', () => {
       // Verify that the dependencies make sense based on API relationships
       const signerDownstreams = this.interfaceMapping.components.find(c => c.name === 'signer')?.downstreamClients || [];
       const chainUpstreams = this.interfaceMapping.components.find(c => c.name === 'chain')?.upstreamDependencies || [];
-      
+
       // Chain service should be downstream of signer (uses signer for signing)
       // Chain service should have signer as upstream dependency
       return signerDownstreams.includes('chain') &&
              chainUpstreams.includes('signer');
     });
-    
+
     this.test('Statistics are correctly calculated', () => {
       const stats = this.interfaceMapping.statistics;
       return stats.totalComponents > 0 &&

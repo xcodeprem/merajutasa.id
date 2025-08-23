@@ -9,7 +9,7 @@ async function loadJson(p) {
 
 async function main() {
   const policy = await loadJson(path.join('tools','policy','scanner-policy.json'));
-  if (!policy) throw new Error('Missing tools/policy/scanner-policy.json');
+  if (!policy) {throw new Error('Missing tools/policy/scanner-policy.json');}
   const inputPath = process.env.OSV_RESULTS || 'osv-results.json';
   const results = await loadJson(inputPath) || {};
   const allow = new Set(policy.osv?.allowlist_ids || []);
@@ -24,11 +24,11 @@ async function main() {
     const id = v.id || v.vulnerability?.id || v.vuln || v.aliases?.[0];
     const severity = (v.severity?.[0]?.type || v.severity?.[0]?.score || v.ecosystem_specific?.severity || v.database_specific?.severity || v.severity || '');
     const sev = String(severity).toUpperCase().includes('CRITICAL') ? 'CRITICAL'
-              : String(severity).toUpperCase().includes('HIGH') ? 'HIGH'
-              : String(severity).toUpperCase().includes('MEDIUM') ? 'MEDIUM'
-              : String(severity).toUpperCase().includes('MODERATE') ? 'MEDIUM'
-              : String(severity).toUpperCase().includes('LOW') ? 'LOW' : 'UNKNOWN';
-    if (!id) continue;
+      : String(severity).toUpperCase().includes('HIGH') ? 'HIGH'
+        : String(severity).toUpperCase().includes('MEDIUM') ? 'MEDIUM'
+          : String(severity).toUpperCase().includes('MODERATE') ? 'MEDIUM'
+            : String(severity).toUpperCase().includes('LOW') ? 'LOW' : 'UNKNOWN';
+    if (!id) {continue;}
     const allowed = allow.has(id);
     findings.push({ id, severity: sev, allowed });
   }
@@ -41,10 +41,10 @@ async function main() {
       all: findings.length,
       bySeverity: findings.reduce((acc,f)=>{acc[f.severity]=(acc[f.severity]||0)+1;return acc;},{}),
       allowed: findings.filter(f=>f.allowed).length,
-      violating: violating.length
+      violating: violating.length,
     },
     violating,
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   };
   await fs.mkdir('artifacts', { recursive: true });
   await fs.writeFile(path.join('artifacts','sca-osv-enforce-summary.json'), JSON.stringify(summary, null, 2));

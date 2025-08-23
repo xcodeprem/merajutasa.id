@@ -66,25 +66,25 @@ function mdExtract(sectionBody, heading) {
   let capture = false;
   for (const line of lines) {
     const h = line.trim();
-    if (/^\-\s*Context:/i.test(h)) capture = heading.toLowerCase() === 'context';
-    else if (/^\-\s*Problem:/i.test(h)) capture = heading.toLowerCase() === 'problem';
-    else if (/^\-\s*Non\-Negotiable/i.test(h)) capture = heading.toLowerCase() === 'nonneg';
-    else if (/^\-\s*Deliverables:/i.test(h)) capture = heading.toLowerCase() === 'deliverables';
-    else if (/^\-\s*Acceptance/i.test(h)) capture = heading.toLowerCase() === 'acceptance';
-    else if (/^\-\s*DoD:/i.test(h)) capture = heading.toLowerCase() === 'dod';
-    else if (/^\-\s*Test Plan:/i.test(h)) capture = heading.toLowerCase() === 'testplan';
-    else if (/^\-\s*Perf/i.test(h)) capture = heading.toLowerCase() === 'perf';
-    else if (/^\-\s*Observability/i.test(h)) capture = heading.toLowerCase() === 'observability';
-    else if (/^\-\s*Docs/i.test(h)) capture = heading.toLowerCase() === 'docs';
-    else if (/^\-\s*Rollout/i.test(h)) capture = heading.toLowerCase() === 'rollout';
-    else if (/^\-\s*Dependencies/i.test(h)) capture = heading.toLowerCase() === 'dependencies';
-    else if (/^\-\s*Risks/i.test(h)) capture = heading.toLowerCase() === 'risks';
-    else if (/^\-\s*Metrics/i.test(h)) capture = heading.toLowerCase() === 'metrics';
+    if (/^\-\s*Context:/i.test(h)) {capture = heading.toLowerCase() === 'context';}
+    else if (/^\-\s*Problem:/i.test(h)) {capture = heading.toLowerCase() === 'problem';}
+    else if (/^\-\s*Non\-Negotiable/i.test(h)) {capture = heading.toLowerCase() === 'nonneg';}
+    else if (/^\-\s*Deliverables:/i.test(h)) {capture = heading.toLowerCase() === 'deliverables';}
+    else if (/^\-\s*Acceptance/i.test(h)) {capture = heading.toLowerCase() === 'acceptance';}
+    else if (/^\-\s*DoD:/i.test(h)) {capture = heading.toLowerCase() === 'dod';}
+    else if (/^\-\s*Test Plan:/i.test(h)) {capture = heading.toLowerCase() === 'testplan';}
+    else if (/^\-\s*Perf/i.test(h)) {capture = heading.toLowerCase() === 'perf';}
+    else if (/^\-\s*Observability/i.test(h)) {capture = heading.toLowerCase() === 'observability';}
+    else if (/^\-\s*Docs/i.test(h)) {capture = heading.toLowerCase() === 'docs';}
+    else if (/^\-\s*Rollout/i.test(h)) {capture = heading.toLowerCase() === 'rollout';}
+    else if (/^\-\s*Dependencies/i.test(h)) {capture = heading.toLowerCase() === 'dependencies';}
+    else if (/^\-\s*Risks/i.test(h)) {capture = heading.toLowerCase() === 'risks';}
+    else if (/^\-\s*Metrics/i.test(h)) {capture = heading.toLowerCase() === 'metrics';}
     // Stop capture when a top-level new dash heading appears
     if (/^\-\s+[A-Z]/.test(h) && !/^\-\s*(Context|Problem|Non\-Negotiable|Deliverables|Acceptance|DoD|Test Plan|Perf|Observability|Docs|Rollout|Dependencies|Risks|Metrics)/i.test(h)) {
       capture = false;
     }
-    if (capture) out.push(line);
+    if (capture) {out.push(line);}
   }
   return out.join('\n').trim();
 }
@@ -108,13 +108,13 @@ function buildContextBlock(issueIdx, domainTitle, sectionBody, parentNumber) {
     nonneg ? `\n### Non-Negotiable Requirements\n${limit(nonneg, 2000)}\n` : '',
     acc ? `\n### Acceptance Criteria (excerpt)\n${limit(acc, 1000)}\n` : '',
     dod ? `\n### Definition of Done (excerpt)\n${limit(dod, 800)}\n` : '',
-    CONTEXT_MARKER_END
+    CONTEXT_MARKER_END,
   ].filter(Boolean);
   return lines.join('\n');
 }
 
 function upsertContextIntoBody(existingBody, contextBlock) {
-  if (!existingBody || typeof existingBody !== 'string') existingBody = '';
+  if (!existingBody || typeof existingBody !== 'string') {existingBody = '';}
   const beginIdx = existingBody.indexOf(CONTEXT_MARKER_BEGIN);
   const endIdx = existingBody.indexOf(CONTEXT_MARKER_END);
   if (beginIdx !== -1 && endIdx !== -1 && endIdx > beginIdx) {
@@ -129,15 +129,15 @@ function upsertContextIntoBody(existingBody, contextBlock) {
   if (lines[0]?.startsWith('# ')) {
     // find first blank line after H1
     insertAt = lines.findIndex((l, idx) => idx > 0 && l.trim() === '');
-    if (insertAt === -1) insertAt = 1;
-    else insertAt = insertAt + 1;
+    if (insertAt === -1) {insertAt = 1;}
+    else {insertAt = insertAt + 1;}
   }
   const updated = [
     ...lines.slice(0, insertAt),
     '',
     contextBlock,
     '',
-    ...lines.slice(insertAt)
+    ...lines.slice(insertAt),
   ].join('\n').replace(/\n{3,}/g, '\n\n');
   return updated.trim() + '\n';
 }
@@ -153,13 +153,13 @@ function buildMiniContext(issueIdx, domainTitle, sectionBody, parentNumber, pare
     header,
     ctx ? `\n${limit(ctx, 600)}\n` : '',
     prob ? `\nProblem: ${limit(prob, 400)}\n` : '',
-    CONTEXT_MARKER_END_MINI
+    CONTEXT_MARKER_END_MINI,
   ].filter(Boolean);
   return lines.join('\n');
 }
 
 function upsertMiniContext(existingBody, miniBlock) {
-  if (!existingBody || typeof existingBody !== 'string') existingBody = '';
+  if (!existingBody || typeof existingBody !== 'string') {existingBody = '';}
   const b = existingBody.indexOf(CONTEXT_MARKER_BEGIN_MINI);
   const e = existingBody.indexOf(CONTEXT_MARKER_END_MINI);
   if (b !== -1 && e !== -1 && e > b) {
@@ -265,7 +265,7 @@ async function main() {
       res.errors.push({ parent: parentNum, error: `List sub-issues failed: ${e.message}` });
       continue;
     }
-    if (!children.length) continue;
+    if (!children.length) {continue;}
 
     const contextBlock = buildContextBlock(idx, narrative.title, narrative.body, parentNum);
 

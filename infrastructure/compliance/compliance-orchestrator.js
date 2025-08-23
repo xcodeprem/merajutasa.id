@@ -1,12 +1,12 @@
 /**
  * Compliance & Security Orchestrator for MerajutASA.id
- * 
+ *
  * Central orchestration system that coordinates all compliance and security components:
  * - Enterprise Audit System
  * - Compliance Automation
  * - Security Hardening
  * - Privacy Rights Management
- * 
+ *
  * Features:
  * - Unified compliance and security dashboard
  * - Cross-component event correlation
@@ -30,7 +30,7 @@ import { privacyRightsManagement } from './privacy-rights-management.js';
 export class ComplianceOrchestrator extends EventEmitter {
   constructor(options = {}) {
     super();
-    
+
     this.options = {
       orchestrationInterval: options.orchestrationInterval || 3600000, // 1 hour
       reportingDir: options.reportingDir || 'artifacts/compliance-orchestration',
@@ -40,12 +40,12 @@ export class ComplianceOrchestrator extends EventEmitter {
         critical: 90,
         high: 70,
         medium: 50,
-        low: 30
+        low: 30,
       },
       alertingEnabled: options.alertingEnabled !== false,
-      ...options
+      ...options,
     };
-    
+
     this.orchestrationState = {
       status: 'initializing',
       components: {},
@@ -53,20 +53,20 @@ export class ComplianceOrchestrator extends EventEmitter {
       riskAssessment: {},
       lastOrchestration: null,
       alerts: [],
-      dashboardData: {}
+      dashboardData: {},
     };
-    
+
     this.components = this.initializeComponents();
     this.eventCorrelator = this.initializeEventCorrelator();
     this.riskAnalyzer = this.initializeRiskAnalyzer();
     this.reportAggregator = this.initializeReportAggregator();
-    
+
     this.setupEventListeners();
-    
+
     if (this.options.autoStartPeriodicOrchestration) {
       this.setupPeriodicOrchestration();
     }
-    
+
     console.log('🎼 Compliance & Security Orchestrator initialized');
     console.log(`⚡ Real-time correlation: ${this.options.enableRealTimeCorrelation ? 'Enabled' : 'Disabled'}`);
     console.log(`🔔 Alerting: ${this.options.alertingEnabled ? 'Enabled' : 'Disabled'}`);
@@ -83,7 +83,7 @@ export class ComplianceOrchestrator extends EventEmitter {
         status: 'unknown',
         lastCheck: null,
         healthScore: 0,
-        events: 0
+        events: 0,
       },
       complianceAutomation: {
         name: 'Compliance Automation',
@@ -91,7 +91,7 @@ export class ComplianceOrchestrator extends EventEmitter {
         status: 'unknown',
         lastCheck: null,
         healthScore: 0,
-        assessments: 0
+        assessments: 0,
       },
       securityHardening: {
         name: 'Security Hardening',
@@ -99,7 +99,7 @@ export class ComplianceOrchestrator extends EventEmitter {
         status: 'unknown',
         lastCheck: null,
         healthScore: 0,
-        threats: 0
+        threats: 0,
       },
       privacyRightsManagement: {
         name: 'Privacy Rights Management',
@@ -107,8 +107,8 @@ export class ComplianceOrchestrator extends EventEmitter {
         status: 'unknown',
         lastCheck: null,
         healthScore: 0,
-        requests: 0
-      }
+        requests: 0,
+      },
     };
   }
 
@@ -123,49 +123,49 @@ export class ComplianceOrchestrator extends EventEmitter {
           correlate_with: ['compliance_assessment', 'audit_event'],
           time_window: 3600000, // 1 hour
           severity_threshold: 'medium',
-          action: 'trigger_compliance_assessment'
+          action: 'trigger_compliance_assessment',
         },
         'privacy_request_security_alert': {
           trigger: 'privacy_request',
           correlate_with: ['security_threat', 'audit_event'],
           time_window: 1800000, // 30 minutes
           severity_threshold: 'high',
-          action: 'enhance_security_monitoring'
+          action: 'enhance_security_monitoring',
         },
         'compliance_violation_pattern': {
           trigger: 'compliance_violation',
           correlate_with: ['compliance_violation'],
           time_window: 86400000, // 24 hours
           count_threshold: 3,
-          action: 'trigger_investigation'
+          action: 'trigger_investigation',
         },
         'audit_anomaly_security_risk': {
           trigger: 'audit_event',
           correlate_with: ['security_threat'],
           time_window: 1800000, // 30 minutes
           pattern: 'unusual_activity',
-          action: 'escalate_security_response'
-        }
+          action: 'escalate_security_response',
+        },
       },
-      
+
       correlateEvents: async (newEvent) => {
         const correlations = [];
-        
+
         for (const [ruleName, rule] of Object.entries(this.eventCorrelator.correlationRules || {})) {
           const correlation = await this.checkCorrelationRule(newEvent, rule, ruleName);
           if (correlation) {
             correlations.push(correlation);
           }
         }
-        
+
         return correlations;
       },
-      
+
       processCorrelations: async (correlations) => {
         for (const correlation of correlations) {
           await this.handleCorrelation(correlation);
         }
-      }
+      },
     };
   }
 
@@ -179,36 +179,36 @@ export class ComplianceOrchestrator extends EventEmitter {
         'security_threats_high': { weight: 0.25, type: 'security' },
         'privacy_violations': { weight: 0.2, type: 'privacy' },
         'audit_anomalies': { weight: 0.15, type: 'operational' },
-        'response_time_slow': { weight: 0.1, type: 'operational' }
+        'response_time_slow': { weight: 0.1, type: 'operational' },
       },
-      
+
       assessOverallRisk: async () => {
         console.log('📊 Conducting overall risk assessment...');
-        
+
         const riskAssessment = {
           assessed_at: new Date().toISOString(),
           overall_risk_score: 0,
           risk_level: 'low',
           risk_factors: {},
           recommendations: [],
-          immediate_actions: []
+          immediate_actions: [],
         };
-        
+
         // Assess each component's risk contribution
         let totalWeightedRisk = 0;
         let totalWeight = 0;
-        
+
         for (const [factorName, factor] of Object.entries(this.riskAnalyzer.riskFactors || {})) {
           const factorRisk = await this.assessRiskFactor(factorName, factor);
           riskAssessment.risk_factors[factorName] = factorRisk;
-          
+
           totalWeightedRisk += factorRisk.score * factor.weight;
           totalWeight += factor.weight;
         }
-        
+
         // Calculate overall risk score
         riskAssessment.overall_risk_score = Math.round(totalWeightedRisk / totalWeight);
-        
+
         // Determine risk level
         if (riskAssessment.overall_risk_score >= this.options.riskThresholds.critical) {
           riskAssessment.risk_level = 'critical';
@@ -219,13 +219,13 @@ export class ComplianceOrchestrator extends EventEmitter {
         } else {
           riskAssessment.risk_level = 'low';
         }
-        
+
         // Generate recommendations
         riskAssessment.recommendations = this.generateRiskRecommendations(riskAssessment);
         riskAssessment.immediate_actions = this.generateImmediateActions(riskAssessment);
-        
+
         return riskAssessment;
-      }
+      },
     };
   }
 
@@ -236,7 +236,7 @@ export class ComplianceOrchestrator extends EventEmitter {
     return {
       generateUnifiedReport: async (reportType = 'comprehensive') => {
         console.log(`📋 Generating unified ${reportType} report...`);
-        
+
         const report = {
           report_id: `unified_${reportType}_${Date.now()}`,
           generated_at: new Date().toISOString(),
@@ -248,46 +248,46 @@ export class ComplianceOrchestrator extends EventEmitter {
           security_posture: {},
           privacy_metrics: {},
           recommendations: [],
-          action_items: []
+          action_items: [],
         };
-        
+
         // Collect component reports
         report.component_reports.audit = await this.collectAuditReport();
         report.component_reports.compliance = await this.collectComplianceReport();
         report.component_reports.security = await this.collectSecurityReport();
         report.component_reports.privacy = await this.collectPrivacyReport();
-        
+
         // Generate unified risk assessment
         report.risk_assessment = await this.riskAnalyzer.assessOverallRisk();
-        
+
         // Aggregate compliance status
         report.compliance_status = this.aggregateComplianceStatus(report.component_reports);
-        
+
         // Aggregate security posture
         report.security_posture = this.aggregateSecurityPosture(report.component_reports);
-        
+
         // Aggregate privacy metrics
         report.privacy_metrics = this.aggregatePrivacyMetrics(report.component_reports);
-        
+
         // Generate executive summary
         report.executive_summary = this.generateExecutiveSummary(report);
-        
+
         // Consolidate recommendations
         report.recommendations = this.consolidateRecommendations(report);
-        
+
         // Generate action items
         report.action_items = this.generateActionItems(report);
-        
+
         // Save unified report
         const reportPath = path.join(this.options.reportingDir, 'unified-reports', `${report.report_id}.json`);
         await fs.mkdir(path.dirname(reportPath), { recursive: true });
         await fs.writeFile(reportPath, JSON.stringify(report, null, 2), 'utf8');
-        
+
         console.log(`📊 Unified report generated: ${report.report_id}`);
         this.emit('unified_report_generated', report);
-        
+
         return report;
-      }
+      },
     };
   }
 
@@ -296,19 +296,19 @@ export class ComplianceOrchestrator extends EventEmitter {
    */
   setupEventListeners() {
     console.log('👂 Setting up component event listeners...');
-    
+
     // Audit System events
     auditSystem.on('audit_event', (event) => this.handleComponentEvent('auditSystem', 'audit_event', event));
     auditSystem.on('compliance_violation', (event) => this.handleComponentEvent('auditSystem', 'compliance_violation', event));
-    
+
     // Compliance Automation events
     complianceAutomation.on('assessment_completed', (event) => this.handleComponentEvent('complianceAutomation', 'assessment_completed', event));
     complianceAutomation.on('compliance_alert', (event) => this.handleComponentEvent('complianceAutomation', 'compliance_alert', event));
-    
+
     // Security Hardening events
     securityHardening.on('threat_detected', (event) => this.handleComponentEvent('securityHardening', 'threat_detected', event));
     securityHardening.on('incident_response_executed', (event) => this.handleComponentEvent('securityHardening', 'incident_response_executed', event));
-    
+
     // Privacy Rights Management events
     privacyRightsManagement.on('request_received', (event) => this.handleComponentEvent('privacyRightsManagement', 'request_received', event));
     privacyRightsManagement.on('request_overdue', (event) => this.handleComponentEvent('privacyRightsManagement', 'request_overdue', event));
@@ -321,29 +321,29 @@ export class ComplianceOrchestrator extends EventEmitter {
     try {
       // Update component statistics
       this.updateComponentStatistics(componentName, eventType);
-      
+
       // Correlate with other events if enabled
       if (this.options.enableRealTimeCorrelation) {
         const correlations = await this.eventCorrelator.correlateEvents({
           component: componentName,
           type: eventType,
           data: eventData,
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         });
-        
+
         if (correlations.length > 0) {
           await this.eventCorrelator.processCorrelations(correlations);
         }
       }
-      
+
       // Check for alert conditions
       if (this.options.alertingEnabled) {
         await this.checkAlertConditions(componentName, eventType, eventData);
       }
-      
+
       // Update dashboard data
       this.updateDashboardData();
-      
+
     } catch (error) {
       console.error(`❌ Error handling component event from ${componentName}:`, error);
     }
@@ -355,30 +355,30 @@ export class ComplianceOrchestrator extends EventEmitter {
   async performOrchestration() {
     try {
       console.log('🎼 Starting orchestration cycle...');
-      
+
       this.orchestrationState.status = 'running';
-      
+
       // Check component health
       await this.checkComponentHealth();
-      
+
       // Perform risk assessment
       this.orchestrationState.riskAssessment = await this.riskAnalyzer.assessOverallRisk();
-      
+
       // Update dashboard data
       this.updateDashboardData();
-      
+
       // Generate periodic reports if needed
       await this.checkReportingSchedule();
-      
+
       // Process any pending correlations
       await this.processCorrelationBacklog();
-      
+
       this.orchestrationState.lastOrchestration = new Date().toISOString();
       this.orchestrationState.status = 'idle';
-      
+
       console.log('✅ Orchestration cycle completed');
       this.emit('orchestration_completed', this.orchestrationState);
-      
+
     } catch (error) {
       console.error('❌ Orchestration cycle failed:', error);
       this.orchestrationState.status = 'error';
@@ -391,39 +391,39 @@ export class ComplianceOrchestrator extends EventEmitter {
    */
   async checkComponentHealth() {
     console.log('🔍 Checking component health...');
-    
+
     for (const [componentName, component] of Object.entries(this.components)) {
       try {
         // Get component status
         let status;
         let healthScore = 0;
-        
+
         switch (componentName) {
-          case 'auditSystem':
-            status = component.instance.getStatistics();
-            healthScore = this.calculateAuditHealthScore(status);
-            break;
-          case 'complianceAutomation':
-            status = component.instance.getComplianceStatus();
-            healthScore = this.calculateComplianceHealthScore(status);
-            break;
-          case 'securityHardening':
-            status = component.instance.getSecurityStatus();
-            healthScore = this.calculateSecurityHealthScore(status);
-            break;
-          case 'privacyRightsManagement':
-            status = component.instance.getPrivacyStatus();
-            healthScore = this.calculatePrivacyHealthScore(status);
-            break;
+        case 'auditSystem':
+          status = component.instance.getStatistics();
+          healthScore = this.calculateAuditHealthScore(status);
+          break;
+        case 'complianceAutomation':
+          status = component.instance.getComplianceStatus();
+          healthScore = this.calculateComplianceHealthScore(status);
+          break;
+        case 'securityHardening':
+          status = component.instance.getSecurityStatus();
+          healthScore = this.calculateSecurityHealthScore(status);
+          break;
+        case 'privacyRightsManagement':
+          status = component.instance.getPrivacyStatus();
+          healthScore = this.calculatePrivacyHealthScore(status);
+          break;
         }
-        
+
         // Update component status
         component.status = healthScore > 80 ? 'healthy' : healthScore > 60 ? 'warning' : 'critical';
         component.healthScore = healthScore;
         component.lastCheck = new Date().toISOString();
-        
+
         console.log(`📊 ${component.name}: ${component.status} (${healthScore}/100)`);
-        
+
       } catch (error) {
         console.error(`❌ Health check failed for ${componentName}:`, error);
         component.status = 'error';
@@ -441,9 +441,9 @@ export class ComplianceOrchestrator extends EventEmitter {
       overall_status: this.calculateOverallStatus(),
       component_health: Object.fromEntries(
         Object.entries(this.components).map(([name, comp]) => [
-          name, 
-          { status: comp.status, score: comp.healthScore }
-        ])
+          name,
+          { status: comp.status, score: comp.healthScore },
+        ]),
       ),
       risk_assessment: this.orchestrationState.riskAssessment,
       recent_alerts: this.orchestrationState.alerts.slice(-10),
@@ -451,8 +451,8 @@ export class ComplianceOrchestrator extends EventEmitter {
         total_events: this.getTotalEvents(),
         active_threats: this.getActiveThreats(),
         pending_requests: this.getPendingRequests(),
-        compliance_score: this.getOverallComplianceScore()
-      }
+        compliance_score: this.getOverallComplianceScore(),
+      },
     };
   }
 
@@ -463,7 +463,7 @@ export class ComplianceOrchestrator extends EventEmitter {
     setInterval(async () => {
       await this.performOrchestration();
     }, this.options.orchestrationInterval);
-    
+
     // Initial orchestration
     setTimeout(() => this.performOrchestration(), 5000);
   }
@@ -482,31 +482,31 @@ export class ComplianceOrchestrator extends EventEmitter {
             name: comp.name,
             status: comp.status,
             health_score: comp.healthScore,
-            last_check: comp.lastCheck
-          }
-        ])
+            last_check: comp.lastCheck,
+          },
+        ]),
       ),
       configuration: {
         orchestration_interval: this.options.orchestrationInterval,
         real_time_correlation: this.options.enableRealTimeCorrelation,
         alerting_enabled: this.options.alertingEnabled,
-        risk_thresholds: this.options.riskThresholds
-      }
+        risk_thresholds: this.options.riskThresholds,
+      },
     };
   }
 
   // Helper methods for component health calculation
   calculateAuditHealthScore(status) {
     let score = 100;
-    if (status.buffer_size > 50) score -= 20;
-    if (status.totalEvents === 0) score -= 30;
-    if (status.complianceViolations > 0) score -= status.complianceViolations * 5;
+    if (status.buffer_size > 50) {score -= 20;}
+    if (status.totalEvents === 0) {score -= 30;}
+    if (status.complianceViolations > 0) {score -= status.complianceViolations * 5;}
     return Math.max(0, score);
   }
 
   calculateComplianceHealthScore(status) {
     let score = 100;
-    if (status.activeAlerts && status.activeAlerts.length > 0) score -= status.activeAlerts.length * 10;
+    if (status.activeAlerts && status.activeAlerts.length > 0) {score -= status.activeAlerts.length * 10;}
     if (status.scores && Object.keys(status.scores).length > 0) {
       const scoreValues = Object.values(status.scores);
       const avgScore = scoreValues.reduce((a, b) => a + b, 0) / scoreValues.length;
@@ -528,18 +528,18 @@ export class ComplianceOrchestrator extends EventEmitter {
 
   calculatePrivacyHealthScore(status) {
     let score = status.complianceScore || 100;
-    if (status.activeRequests && status.activeRequests > 10) score -= 20;
-    if (status.averageResponseTime > 20 * 24 * 60 * 60 * 1000) score -= 30; // > 20 days
+    if (status.activeRequests && status.activeRequests > 10) {score -= 20;}
+    if (status.averageResponseTime > 20 * 24 * 60 * 60 * 1000) {score -= 30;} // > 20 days
     return Math.max(0, score);
   }
 
   calculateOverallStatus() {
     const healthScores = Object.values(this.components).map(c => c.healthScore);
-    if (healthScores.length === 0) return 'unknown';
+    if (healthScores.length === 0) {return 'unknown';}
     const avgHealth = healthScores.reduce((a, b) => a + b, 0) / healthScores.length;
-    
-    if (avgHealth >= 80) return 'healthy';
-    if (avgHealth >= 60) return 'warning';
+
+    if (avgHealth >= 80) {return 'healthy';}
+    if (avgHealth >= 60) {return 'warning';}
     return 'critical';
   }
 
@@ -548,18 +548,18 @@ export class ComplianceOrchestrator extends EventEmitter {
     const component = this.components[componentName];
     if (component) {
       switch (eventType) {
-        case 'audit_event':
-          component.events++;
-          break;
-        case 'assessment_completed':
-          component.assessments++;
-          break;
-        case 'threat_detected':
-          component.threats++;
-          break;
-        case 'request_received':
-          component.requests++;
-          break;
+      case 'audit_event':
+        component.events++;
+        break;
+      case 'assessment_completed':
+        component.assessments++;
+        break;
+      case 'threat_detected':
+        component.threats++;
+        break;
+      case 'request_received':
+        component.requests++;
+        break;
       }
     }
   }
@@ -568,79 +568,79 @@ export class ComplianceOrchestrator extends EventEmitter {
     // Simplified correlation logic
     const recentEvents = this.orchestrationState.correlatedEvents
       .filter(e => Date.now() - new Date(e.timestamp).getTime() < rule.time_window);
-    
-    const matchingEvents = recentEvents.filter(e => 
-      rule.correlate_with.includes(e.type) || e.type === rule.trigger
+
+    const matchingEvents = recentEvents.filter(e =>
+      rule.correlate_with.includes(e.type) || e.type === rule.trigger,
     );
-    
+
     if (matchingEvents.length >= (rule.count_threshold || 1)) {
       return {
         rule: ruleName,
         trigger_event: newEvent,
         correlated_events: matchingEvents,
         action: rule.action,
-        confidence: 0.8
+        confidence: 0.8,
       };
     }
-    
+
     return null;
   }
 
   async handleCorrelation(correlation) {
     console.log(`🔗 Handling correlation: ${correlation.rule}`);
-    
+
     // Store correlation
     this.orchestrationState.correlatedEvents.push({
       correlation_id: `corr_${Date.now()}`,
       rule: correlation.rule,
       action: correlation.action,
       timestamp: new Date().toISOString(),
-      events: correlation.correlated_events.length
+      events: correlation.correlated_events.length,
     });
-    
+
     // Execute correlation action
     switch (correlation.action) {
-      case 'trigger_compliance_assessment':
-        await complianceAutomation.performComplianceAssessment();
-        break;
-      case 'enhance_security_monitoring':
-        console.log('🔒 Enhancing security monitoring...');
-        break;
-      case 'trigger_investigation':
-        console.log('🔍 Triggering investigation...');
-        break;
-      case 'escalate_security_response':
-        console.log('🚨 Escalating security response...');
-        break;
+    case 'trigger_compliance_assessment':
+      await complianceAutomation.performComplianceAssessment();
+      break;
+    case 'enhance_security_monitoring':
+      console.log('🔒 Enhancing security monitoring...');
+      break;
+    case 'trigger_investigation':
+      console.log('🔍 Triggering investigation...');
+      break;
+    case 'escalate_security_response':
+      console.log('🚨 Escalating security response...');
+      break;
     }
-    
+
     this.emit('correlation_processed', correlation);
   }
 
   async checkAlertConditions(componentName, eventType, eventData) {
     // Check for alert conditions based on event
     const alerts = [];
-    
+
     if (eventType === 'compliance_violation') {
       alerts.push({
         type: 'compliance_violation',
         severity: 'high',
         component: componentName,
         message: 'Compliance violation detected',
-        data: eventData
+        data: eventData,
       });
     }
-    
+
     if (eventType === 'threat_detected' && eventData.severity === 'critical') {
       alerts.push({
         type: 'critical_threat',
         severity: 'critical',
         component: componentName,
         message: 'Critical security threat detected',
-        data: eventData
+        data: eventData,
       });
     }
-    
+
     // Process alerts
     for (const alert of alerts) {
       await this.processAlert(alert);
@@ -650,9 +650,9 @@ export class ComplianceOrchestrator extends EventEmitter {
   async processAlert(alert) {
     alert.id = `alert_${Date.now()}`;
     alert.timestamp = new Date().toISOString();
-    
+
     this.orchestrationState.alerts.push(alert);
-    
+
     console.log(`🚨 Alert generated: ${alert.type} (${alert.severity})`);
     this.emit('alert_generated', alert);
   }
@@ -711,7 +711,7 @@ export class ComplianceOrchestrator extends EventEmitter {
 
   getOverallComplianceScore() {
     const scores = Object.values(this.components).map(c => c.healthScore);
-    if (scores.length === 0) return 0;
+    if (scores.length === 0) {return 0;}
     return scores.reduce((a, b) => a + b, 0) / scores.length;
   }
 
@@ -734,10 +734,10 @@ export class ComplianceOrchestrator extends EventEmitter {
       key_metrics: {
         compliance_score: 85,
         security_score: 88,
-        privacy_score: 92
+        privacy_score: 92,
       },
       critical_issues: 0,
-      recommendations: 3
+      recommendations: 3,
     };
   }
 
@@ -745,14 +745,14 @@ export class ComplianceOrchestrator extends EventEmitter {
     return [
       { priority: 'high', category: 'security', title: 'Address critical vulnerabilities' },
       { priority: 'medium', category: 'compliance', title: 'Update policy documentation' },
-      { priority: 'low', category: 'privacy', title: 'Improve consent management' }
+      { priority: 'low', category: 'privacy', title: 'Improve consent management' },
     ];
   }
 
   generateActionItems(report) {
     return [
       { due_date: '2024-09-01', assignee: 'security_team', task: 'Patch critical vulnerabilities' },
-      { due_date: '2024-09-15', assignee: 'compliance_team', task: 'Review policy updates' }
+      { due_date: '2024-09-15', assignee: 'compliance_team', task: 'Review policy updates' },
     ];
   }
 
@@ -762,40 +762,40 @@ export class ComplianceOrchestrator extends EventEmitter {
     let score = 0;
     try {
       switch (factorName) {
-        case 'compliance_score_low': {
-          const status = this.components.complianceAutomation?.instance?.getComplianceStatus?.();
-          const avg = status?.average_compliance_score ?? 85;
-          score = clamp(100 - avg);
-          break;
-        }
-        case 'security_threats_high': {
-          const s = this.components.securityHardening?.instance?.getSecurityStatus?.();
-          const threats = (s?.activeThreats || []).length;
-          score = clamp(threats * 20);
-          break;
-        }
-        case 'privacy_violations': {
-          const p = this.components.privacyRightsManagement?.instance?.getPrivacyStatus?.();
-          const pending = Array.from((p?.activeRequests || new Map()).values()).filter(r => r.status !== 'completed' && r.status !== 'closed').length;
-          score = clamp(pending * 5);
-          break;
-        }
-        case 'audit_anomalies': {
-          const a = this.components.auditSystem?.instance?.getStatistics?.();
-          const violations = a?.complianceViolations || 0;
-          score = clamp(violations * 10);
-          break;
-        }
-        case 'response_time_slow': {
-          const p = this.components.privacyRightsManagement?.instance?.getPrivacyStatus?.();
-          // Convert ms to days approx if value seems large; otherwise treat as days already
-          const art = p?.averageResponseTime || 0;
-          const days = art > 1000 * 60 * 60 * 24 ? (art / (1000 * 60 * 60 * 24)) : art;
-          score = clamp((days / 30) * 100); // 30+ days => 100
-          break;
-        }
-        default:
-          score = 0;
+      case 'compliance_score_low': {
+        const status = this.components.complianceAutomation?.instance?.getComplianceStatus?.();
+        const avg = status?.average_compliance_score ?? 85;
+        score = clamp(100 - avg);
+        break;
+      }
+      case 'security_threats_high': {
+        const s = this.components.securityHardening?.instance?.getSecurityStatus?.();
+        const threats = (s?.activeThreats || []).length;
+        score = clamp(threats * 20);
+        break;
+      }
+      case 'privacy_violations': {
+        const p = this.components.privacyRightsManagement?.instance?.getPrivacyStatus?.();
+        const pending = Array.from((p?.activeRequests || new Map()).values()).filter(r => r.status !== 'completed' && r.status !== 'closed').length;
+        score = clamp(pending * 5);
+        break;
+      }
+      case 'audit_anomalies': {
+        const a = this.components.auditSystem?.instance?.getStatistics?.();
+        const violations = a?.complianceViolations || 0;
+        score = clamp(violations * 10);
+        break;
+      }
+      case 'response_time_slow': {
+        const p = this.components.privacyRightsManagement?.instance?.getPrivacyStatus?.();
+        // Convert ms to days approx if value seems large; otherwise treat as days already
+        const art = p?.averageResponseTime || 0;
+        const days = art > 1000 * 60 * 60 * 24 ? (art / (1000 * 60 * 60 * 24)) : art;
+        score = clamp((days / 30) * 100); // 30+ days => 100
+        break;
+      }
+      default:
+        score = 0;
       }
     } catch {
       score = 0;
@@ -806,12 +806,12 @@ export class ComplianceOrchestrator extends EventEmitter {
   generateRiskRecommendations(assessment) {
     return [
       { priority: 'high', action: 'Improve security monitoring' },
-      { priority: 'medium', action: 'Update compliance procedures' }
+      { priority: 'medium', action: 'Update compliance procedures' },
     ];
   }
 
   generateImmediateActions(assessment) {
-    return assessment.risk_level === 'critical' ? 
+    return assessment.risk_level === 'critical' ?
       ['Activate incident response', 'Notify stakeholders'] : [];
   }
 
@@ -831,7 +831,7 @@ export class ComplianceOrchestrator extends EventEmitter {
   async getHealthStatus() {
     const status = this.getOrchestrationStatus();
     const health_score = this.calculateHealthScore(status);
-    
+
     return {
       name: 'Compliance Orchestrator',
       status: health_score > 80 ? 'healthy' : health_score > 50 ? 'warning' : 'critical',
@@ -844,8 +844,8 @@ export class ComplianceOrchestrator extends EventEmitter {
         active_alerts: status.alerts?.length || 0,
         risk_level: status.riskAssessment?.risk_level,
         uptime: status.uptime,
-        real_time_correlation: status.configuration?.real_time_correlation
-      }
+        real_time_correlation: status.configuration?.real_time_correlation,
+      },
     };
   }
 
@@ -854,33 +854,33 @@ export class ComplianceOrchestrator extends EventEmitter {
    */
   calculateHealthScore(status) {
     let score = 100;
-    
+
     // Deduct for unhealthy components
     const totalComponents = Object.keys(status.components).length;
     const healthyComponents = Object.values(status.components).filter(c => c.status === 'healthy').length;
-    
+
     if (totalComponents > 0) {
       const healthyRatio = healthyComponents / totalComponents;
-      if (healthyRatio < 0.5) score -= 40;
-      else if (healthyRatio < 0.7) score -= 25;
-      else if (healthyRatio < 0.9) score -= 10;
+      if (healthyRatio < 0.5) {score -= 40;}
+      else if (healthyRatio < 0.7) {score -= 25;}
+      else if (healthyRatio < 0.9) {score -= 10;}
     }
-    
+
     // Deduct for active alerts
     const alertCount = status.alerts?.length || 0;
-    if (alertCount > 5) score -= 20;
-    else if (alertCount > 2) score -= 10;
-    else if (alertCount > 0) score -= 5;
-    
+    if (alertCount > 5) {score -= 20;}
+    else if (alertCount > 2) {score -= 10;}
+    else if (alertCount > 0) {score -= 5;}
+
     // Deduct for high risk level
     const riskLevel = status.riskAssessment?.risk_level;
-    if (riskLevel === 'critical') score -= 30;
-    else if (riskLevel === 'high') score -= 20;
-    else if (riskLevel === 'medium') score -= 10;
-    
+    if (riskLevel === 'critical') {score -= 30;}
+    else if (riskLevel === 'high') {score -= 20;}
+    else if (riskLevel === 'medium') {score -= 10;}
+
     // Bonus for real-time correlation
-    if (status.configuration?.real_time_correlation) score += 5;
-    
+    if (status.configuration?.real_time_correlation) {score += 5;}
+
     return Math.max(0, score);
   }
 
@@ -889,15 +889,15 @@ export class ComplianceOrchestrator extends EventEmitter {
    */
   async shutdown() {
     console.log('🎼 Shutting down compliance orchestrator...');
-    
+
     try {
       // Generate final orchestration status
       const finalStatus = this.getOrchestrationStatus();
       console.log('📊 Final orchestration status:', finalStatus);
-      
+
       this.emit('shutdown', finalStatus);
       console.log('✅ Compliance orchestrator shutdown complete');
-      
+
     } catch (error) {
       console.error('❌ Error during orchestrator shutdown:', error);
       throw error;
@@ -928,39 +928,39 @@ export default ComplianceOrchestrator;
 // CLI interface for npm script execution
 if (__isDirectRun) {
   const args = process.argv.slice(2);
-  
+
   async function main() {
     try {
-  if (args.includes('--once')) {
+      if (args.includes('--once')) {
         console.log('🎼 Running compliance orchestrator in one-shot mode...');
-        
+
         // Create orchestrator instance without auto-starting periodic orchestration
-        const orchestrator = new ComplianceOrchestrator({ 
-          autoStartPeriodicOrchestration: false 
+        const orchestrator = new ComplianceOrchestrator({
+          autoStartPeriodicOrchestration: false,
         });
-        
+
         // Perform single orchestration cycle
         await orchestrator.performOrchestration();
-        
+
         // Get final status and determine exit code
         const status = orchestrator.getOrchestrationStatus();
         const healthScore = orchestrator.calculateHealthScore(status);
-        
-        console.log(`📊 Orchestration completed:`);
+
+        console.log('📊 Orchestration completed:');
         console.log(`  - Health score: ${healthScore}/100`);
         console.log(`  - Status: ${status.status}`);
         console.log(`  - Active components: ${Object.keys(status.components).length}`);
-        
+
         // Shutdown gracefully
         await orchestrator.shutdown();
-        
+
         // Log warning if below threshold, but do not fail one-shot validation run
         if (healthScore < 50) {
           console.log('⚠️ Health score below acceptable threshold (50)');
         }
         console.log('✅ Compliance orchestration completed successfully');
         process.exit(0);
-        
+
       } else if (args.includes('--generate-report')) {
         console.log('📋 Generating unified compliance & security report (one-shot)...');
         const orchestrator = new ComplianceOrchestrator({ autoStartPeriodicOrchestration: false });
@@ -973,38 +973,38 @@ if (__isDirectRun) {
         await orchestrator.shutdown();
         console.log('✅ Unified report generation completed');
         process.exit(0);
-        
+
       } else {
         console.log('📖 Compliance Orchestrator CLI');
         console.log('Usage:');
         console.log('  --once               Run single orchestration cycle and exit');
         console.log('  --generate-report    Generate unified compliance & security report and exit');
         console.log('  (no args)            Run continuous orchestration (default)');
-        
+
         // Default behavior: start continuous orchestration
         const orchestrator = new ComplianceOrchestrator();
         console.log('🎼 Starting continuous orchestration mode...');
         console.log('Press Ctrl+C to stop');
-        
+
         // Handle graceful shutdown
         process.on('SIGINT', async () => {
           console.log('\n🛑 Received shutdown signal...');
           await orchestrator.shutdown();
           process.exit(0);
         });
-        
+
         process.on('SIGTERM', async () => {
           console.log('\n🛑 Received termination signal...');
           await orchestrator.shutdown();
           process.exit(0);
         });
       }
-      
+
     } catch (error) {
       console.error('❌ Compliance orchestrator failed:', error.message);
       process.exit(1);
     }
   }
-  
+
   main();
 }

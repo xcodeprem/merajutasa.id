@@ -12,7 +12,7 @@ function req(method, path, body){
     const r = http.request(new URL(path, ORIGIN), { method, headers: data? { 'content-type':'application/json','content-length': data.length }:{} }, res=>{
       let b=''; res.on('data',d=>b+=d); res.on('end',()=>{ try{ resolve(JSON.parse(b||'{}')); }catch(e){ reject(e);} });
     });
-    r.on('error',reject); if (data) r.write(data); r.end();
+    r.on('error',reject); if (data) {r.write(data);} r.end();
   });
 }
 
@@ -29,7 +29,7 @@ function req(method, path, body){
   if (!ok){ proc = spawn(process.execPath, ['tools/services/signer.js'], { stdio:'ignore' }); }
   const start = Date.now();
   while (!ok && Date.now()-start < 3000){ ok = await health(); await new Promise(r=>setTimeout(r,150)); }
-  if (!ok) throw new Error('signer not reachable');
+  if (!ok) {throw new Error('signer not reachable');}
   const payload = { foo:'bar', n:1 };
   const signed = await req('POST','/sign',{ payload });
   assert(signed.signature && signed.canonical);

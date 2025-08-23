@@ -13,7 +13,7 @@ async function main(){
   const canonical = JSON.stringify({ mode: spec.mode, updated: spec.updated, summary: spec.summary });
 
   const signerRes = await fetch(`http://127.0.0.1:${signerPort}/sign`, {
-    method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify({ payload: canonical })
+    method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify({ payload: canonical }),
   });
   if(!signerRes.ok){
     throw new Error(`signer not reachable (status ${signerRes.status})`);
@@ -25,7 +25,7 @@ async function main(){
   }
   const { publicKeyPem } = await pubRes.json();
   const chainRes = await fetch(`http://127.0.0.1:${chainPort}/append`, {
-    method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify({ canonical: sig.canonical, signature: sig.signature, publicKeyPem })
+    method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify({ canonical: sig.canonical, signature: sig.signature, publicKeyPem }),
   });
   if(!chainRes.ok){
     throw new Error(`chain append failed (status ${chainRes.status})`);
