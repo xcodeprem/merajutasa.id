@@ -44,29 +44,33 @@ export const Header = () => {
           </div>
 
           {/* Desktop navigation */}
-          <div className="hidden md:flex items-center space-x-4">
+          <nav
+            className="hidden md:flex items-center space-x-4"
+            aria-label="Primary Navigation"
+            role="navigation"
+          >
             <a
               href="#/analytics"
-              className="text-sm text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-300 transition-colors"
+              className="text-sm text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-300 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 rounded"
             >
               Analytics
             </a>
             <a
               href="#/compliance"
-              className="text-sm text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-300 transition-colors"
+              className="text-sm text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-300 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 rounded"
             >
               Compliance
             </a>
             <a
               href="#/settings"
-              className="text-sm text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-300 transition-colors"
+              className="text-sm text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-300 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 rounded"
             >
               Settings
             </a>
             {/* Language toggle */}
             <button
               onClick={toggleLanguage}
-              className="p-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+              className="p-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
               aria-label={`${t('language')}: ${i18n.language.toUpperCase()}`}
             >
               <LanguageIcon className="h-5 w-5" />
@@ -76,7 +80,7 @@ export const Header = () => {
             {/* Theme toggle */}
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+              className="p-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
               aria-label={`${t('theme')}: ${theme === 'light' ? t('light') : t('dark')}`}
             >
               {theme === 'light' ? (
@@ -103,14 +107,16 @@ export const Header = () => {
             >
               {t('link.privacy')}
             </a>
-          </div>
+          </nav>
 
           {/* Mobile menu button */}
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+              className="p-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
               aria-label={t('accessibility.menu')}
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-menu"
             >
               {isMenuOpen ? <XMarkIcon className="h-6 w-6" /> : <Bars3Icon className="h-6 w-6" />}
             </button>
@@ -119,13 +125,17 @@ export const Header = () => {
 
         {/* Mobile menu */}
         {isMenuOpen && (
-          <div className="md:hidden border-t border-gray-200 dark:border-gray-700 py-2">
+          <nav
+            id="mobile-menu"
+            className="md:hidden border-t border-gray-200 dark:border-gray-700 py-2"
+            aria-label="Primary Navigation"
+          >
             <div className="px-2 pt-2 pb-3 space-y-1">
               {/* Mobile controls */}
               <div className="flex items-center justify-between px-3 py-2">
                 <button
                   onClick={toggleLanguage}
-                  className="flex items-center space-x-2 text-gray-600 dark:text-gray-300"
+                  className="flex items-center space-x-2 text-gray-600 dark:text-gray-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 rounded"
                 >
                   <LanguageIcon className="h-5 w-5" />
                   <span>
@@ -134,7 +144,7 @@ export const Header = () => {
                 </button>
                 <button
                   onClick={toggleTheme}
-                  className="flex items-center space-x-2 text-gray-600 dark:text-gray-300"
+                  className="flex items-center space-x-2 text-gray-600 dark:text-gray-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 rounded"
                 >
                   {theme === 'light' ? (
                     <MoonIcon className="h-5 w-5" />
@@ -150,7 +160,7 @@ export const Header = () => {
                 href="/equity-ui/ui/methodology"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block px-3 py-2 text-base font-medium text-blue-600 dark:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md"
+                className="block px-3 py-2 text-base font-medium text-blue-600 dark:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
               >
                 {t('link.methodology')}
               </a>
@@ -158,30 +168,30 @@ export const Header = () => {
                 href="/equity-ui/ui/privacy-faq"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block px-3 py-2 text-base font-medium text-blue-600 dark:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md"
+                className="block px-3 py-2 text-base font-medium text-blue-600 dark:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
               >
                 {t('link.privacy')}
               </a>
               <a
                 href="#/analytics"
-                className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md"
+                className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
               >
                 Analytics
               </a>
               <a
                 href="#/compliance"
-                className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md"
+                className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
               >
                 Compliance
               </a>
               <a
                 href="#/settings"
-                className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md"
+                className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
               >
                 Settings
               </a>
             </div>
-          </div>
+          </nav>
         )}
       </div>
     </header>

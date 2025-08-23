@@ -20,7 +20,7 @@ export default function CompliancePage() {
   const loading = health.isLoading || services.isLoading || chainHead.isLoading;
 
   return (
-    <div className="max-w-7xl mx-auto p-4 space-y-6">
+    <div className="max-w-7xl mx-auto p-4 space-y-6" role="main">
       <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">Compliance</h2>
 
       <Card title="Audit Signals" loading={loading}>
