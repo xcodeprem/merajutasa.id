@@ -1,6 +1,7 @@
 // Simple in-memory token manager with optional session persistence and refresh stub
 let accessToken = null;
 let accessTokenExpiry = null; // epoch ms
+let refreshToken = null;
 
 const listeners = new Set();
 
@@ -28,6 +29,8 @@ export function setAccessToken(token, { ttlMs, expiresAt } = {}) {
         'equity_ui_session_token_exp',
         accessTokenExpiry ? String(accessTokenExpiry) : ''
       );
+  // persist refresh token if available
+  if (refreshToken) sessionStorage.setItem('equity_ui_refresh_token', refreshToken);
     }
   } catch {
     void 0; // storage unavailable
@@ -40,10 +43,12 @@ export function getAccessToken() {
     try {
       const remembered = sessionStorage.getItem('equity_ui_session_token') || '';
       const exp = sessionStorage.getItem('equity_ui_session_token_exp');
+  const rt = sessionStorage.getItem('equity_ui_refresh_token') || '';
       if (remembered) {
         accessToken = remembered;
         accessTokenExpiry = exp ? Number(exp) : null;
       }
+  if (rt) refreshToken = rt;
     } catch {
       void 0; // ignore
     }
@@ -56,12 +61,17 @@ export function getAccessToken() {
   return accessToken;
 }
 
+export function getAccessTokenExpiry() {
+  return accessTokenExpiry;
+}
+
 export function clearAccessToken() {
   accessToken = null;
   accessTokenExpiry = null;
   try {
     sessionStorage.removeItem('equity_ui_session_token');
     sessionStorage.removeItem('equity_ui_session_token_exp');
+  sessionStorage.removeItem('equity_ui_refresh_token');
   } catch {
     void 0; // ignore
   }
@@ -74,6 +84,7 @@ export function rememberInSession(enable) {
     if (!enable) {
       sessionStorage.removeItem('equity_ui_session_token');
       sessionStorage.removeItem('equity_ui_session_token_exp');
+  sessionStorage.removeItem('equity_ui_refresh_token');
     }
   } catch {
     void 0; // ignore
@@ -108,4 +119,21 @@ export async function refreshAccessToken() {
   // Placeholder: implement call to refresh endpoint if provided
   // For now, no-op; return current token
   return getAccessToken();
+}
+
+// Optional refresh token helpers
+export function setRefreshToken(token) {
+  refreshToken = token || null;
+  try {
+    if (sessionStorage.getItem('equity_ui_remember_session_token') === '1') {
+      if (token) sessionStorage.setItem('equity_ui_refresh_token', token);
+      else sessionStorage.removeItem('equity_ui_refresh_token');
+    }
+  } catch {
+    // ignore
+  }
+}
+
+export function getRefreshToken() {
+  return refreshToken;
 }

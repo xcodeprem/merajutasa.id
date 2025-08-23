@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 import './App.css';
 import { useRealtimeDashboard } from './services/websocket/useRealtimeDashboard';
 import { useAuth } from './services/auth/useAuth';
+import { startSilentRefresh, stopSilentRefresh } from './services/auth/authService';
 
 // Create a query client
 const queryClient = new QueryClient({
@@ -24,6 +25,11 @@ function RealtimeRoot() {
   const { t } = useTranslation();
   useRealtimeDashboard({ enabled: true });
   const { isAuthenticated } = useAuth();
+  React.useEffect(() => {
+    if (isAuthenticated) startSilentRefresh();
+    else stopSilentRefresh();
+    return stopSilentRefresh;
+  }, [isAuthenticated]);
   const [hash, setHash] = React.useState(() => window.location.hash);
   React.useEffect(() => {
     const onHash = () => setHash(window.location.hash);

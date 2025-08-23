@@ -1,5 +1,14 @@
-import { getAccessToken, clearAccessToken, subscribe } from './tokenManager';
+import {
+  getAccessToken,
+  getAccessTokenExpiry,
+  getRefreshToken,
+  setAccessToken,
+  setRefreshToken,
+  clearAccessToken,
+  subscribe,
+} from './tokenManager';
 import { createApiClient } from '../generatedClient';
+import axios from 'axios';
 
 // Lightweight auth service: manages refresh and logout
 const gatewayBase =
@@ -26,11 +35,17 @@ export async function refreshToken() {
   lastRefreshAt = now;
   refreshing = (async () => {
     try {
-      // If backend exposes refresh, call here. Placeholder fallback: no-op.
-      const token = getAccessToken();
-      if (!token) return null;
-      // Example (disabled): await axios.post(`${gatewayBase}/auth/refresh`)
-      return token;
+      const rt = getRefreshToken();
+      if (!rt) return null;
+      const res = await axios.post(`${gatewayBase}/auth/refresh`, { refresh_token: rt });
+      const { access_token, expires_in, refresh_token } = res.data || {};
+      if (access_token) {
+        const ttlMs = typeof expires_in === 'number' ? expires_in * 1000 : undefined;
+        setAccessToken(access_token, ttlMs ? { ttlMs } : {});
+        if (refresh_token) setRefreshToken(refresh_token);
+        return access_token;
+      }
+      return null;
     } catch {
       return null;
     } finally {
@@ -77,4 +92,25 @@ export function createAuthedGatewayClient() {
     getApiV1SignerPubkey: () => wrap(client.getApiV1SignerPubkey),
     postApiV1SignerSign: (body) => wrap(client.postApiV1SignerSign, body),
   };
+}
+
+// Silent refresh scheduler: triggers refresh ~60s before expiry when possible
+let silentTimer = null;
+export function startSilentRefresh() {
+  stopSilentRefresh();
+  const exp = getAccessTokenExpiry();
+  const tok = getAccessToken();
+  if (!tok || !exp) return;
+  const lead = 60_000; // 60s early
+  const delay = Math.max(0, exp - Date.now() - lead);
+  silentTimer = setTimeout(() => {
+    refreshToken().finally(() => startSilentRefresh());
+  }, delay);
+}
+
+export function stopSilentRefresh() {
+  if (silentTimer) {
+    clearTimeout(silentTimer);
+    silentTimer = null;
+  }
 }

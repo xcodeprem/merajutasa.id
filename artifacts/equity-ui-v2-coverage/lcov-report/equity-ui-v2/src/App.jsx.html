@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">98.57% </span>
+                <span class="strong">96.25% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>69/70</span>
+                <span class='fraction'>77/80</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">82.35% </span>
+                <span class="strong">78.94% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>14/17</span>
+                <span class='fraction'>15/19</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">98.57% </span>
+                <span class="strong">96.25% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>69/70</span>
+                <span class='fraction'>77/80</span>
             </div>
         
             
@@ -145,7 +145,22 @@
 <a name='L80'></a><a href='#L80'>80</a>
 <a name='L81'></a><a href='#L81'>81</a>
 <a name='L82'></a><a href='#L82'>82</a>
-<a name='L83'></a><a href='#L83'>83</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a>
+<a name='L92'></a><a href='#L92'>92</a>
+<a name='L93'></a><a href='#L93'>93</a>
+<a name='L94'></a><a href='#L94'>94</a>
+<a name='L95'></a><a href='#L95'>95</a>
+<a name='L96'></a><a href='#L96'>96</a>
+<a name='L97'></a><a href='#L97'>97</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -167,6 +182,11 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
@@ -206,8 +226,16 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -238,6 +266,7 @@ import { useTranslation } from 'react-i18next';
 import './App.css';
 import { useRealtimeDashboard } from './services/websocket/useRealtimeDashboard';
 import { useAuth } from './services/auth/useAuth';
+import { startSilentRefresh, stopSilentRefresh } from './services/auth/authService';
 &nbsp;
 // Create a query client
 const queryClient = new QueryClient({
@@ -253,6 +282,11 @@ function RealtimeRoot() {
   const { t } = useTranslation();
   useRealtimeDashboard({ enabled: true });
   const { isAuthenticated } = useAuth();
+  React.useEffect(() =&gt; {
+    if (isAuthenticated) <span class="branch-0 cbranch-no" title="branch not covered" >startSilentRefresh();</span>
+    else stopSilentRefresh();
+    return stopSilentRefresh;
+  }, [isAuthenticated]);
   const [hash, setHash] = React.useState(() =&gt; window.location.hash);
   React.useEffect(() =&gt; {
     const onHash = () =&gt; setHash(window.location.hash);
@@ -287,9 +321,17 @@ function RealtimeRoot() {
             {<span class="branch-0 cbranch-no" title="branch not covered" >isSettings ? (</span>
 <span class="cstat-no" title="statement not covered" >              &lt;SettingsPage /&gt;</span>
             ) : isCompliance ? (
-<span class="branch-0 cbranch-no" title="branch not covered" >              isAuthenticated ? &lt;CompliancePage /&gt; : &lt;</span>SettingsPage /&gt;
+<span class="branch-0 cbranch-no" title="branch not covered" >              isAuthenticated ? (</span>
+<span class="cstat-no" title="statement not covered" >                &lt;CompliancePage /&gt;</span>
+              ) : (
+                &lt;SettingsPage /&gt;
+              )
             ) : isAnalytics ? (
-<span class="branch-0 cbranch-no" title="branch not covered" >              isAuthenticated ? &lt;AnalyticsPage /&gt; : &lt;</span>SettingsPage /&gt;
+<span class="branch-0 cbranch-no" title="branch not covered" >              isAuthenticated ? (</span>
+<span class="cstat-no" title="statement not covered" >                &lt;AnalyticsPage /&gt;</span>
+              ) : (
+                &lt;SettingsPage /&gt;
+              )
             ) : (
               &lt;Dashboard /&gt;
             )}
@@ -316,7 +358,7 @@ export default App;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-08-23T12:02:02.208Z
+                at 2025-08-23T12:07:25.407Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
