@@ -1,0 +1,13 @@
+{
+  "task": "env-alignment-validation",
+  "timestamp_utc": "2025-08-23T07:14:30Z",
+  "results": {
+    "governance:verify": {
+      "status": "FAIL",
+      "violations": 68,
+      "artifact": "artifacts/spec-hash-diff.json"
+    },
+    "test:services": { "status": "PASS" },
+    "collector:reliability": { "status": "PASS" }
+  }
+}
