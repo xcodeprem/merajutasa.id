@@ -1,0 +1,481 @@
+{
+  "_metadata": {
+    "generated_at": "2025-08-23T16:32:27.762Z",
+    "generator": "tools/enterprise-issue-template-propagate.js",
+    "version": "1.0"
+  },
+  "action": "enterprise_issue_template_propagation",
+  "epic": 83,
+  "errors": [],
+  "options": {
+    "grandchildren": true
+  },
+  "updated": [
+    {
+      "number": 4,
+      "role": "parent",
+      "status": "updated"
+    },
+    {
+      "number": 19,
+      "parent": 4,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 20,
+      "parent": 4,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "child": 20,
+      "number": 22,
+      "parent": 4,
+      "role": "grandchild",
+      "status": "updated"
+    },
+    {
+      "number": 21,
+      "parent": 4,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "child": 21,
+      "number": 23,
+      "parent": 4,
+      "role": "grandchild",
+      "status": "updated"
+    },
+    {
+      "child": 21,
+      "number": 24,
+      "parent": 4,
+      "role": "grandchild",
+      "status": "updated"
+    },
+    {
+      "child": 21,
+      "number": 25,
+      "parent": 4,
+      "role": "grandchild",
+      "status": "updated"
+    },
+    {
+      "number": 5,
+      "role": "parent",
+      "status": "updated"
+    },
+    {
+      "number": 26,
+      "parent": 5,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "child": 26,
+      "number": 31,
+      "parent": 5,
+      "role": "grandchild",
+      "status": "updated"
+    },
+    {
+      "child": 26,
+      "number": 32,
+      "parent": 5,
+      "role": "grandchild",
+      "status": "updated"
+    },
+    {
+      "number": 27,
+      "parent": 5,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 28,
+      "parent": 5,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "child": 28,
+      "number": 33,
+      "parent": 5,
+      "role": "grandchild",
+      "status": "updated"
+    },
+    {
+      "number": 29,
+      "parent": 5,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 30,
+      "parent": 5,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 6,
+      "role": "parent",
+      "status": "updated"
+    },
+    {
+      "number": 34,
+      "parent": 6,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 35,
+      "parent": 6,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 36,
+      "parent": 6,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 37,
+      "parent": 6,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 7,
+      "role": "parent",
+      "status": "updated"
+    },
+    {
+      "number": 38,
+      "parent": 7,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 39,
+      "parent": 7,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 40,
+      "parent": 7,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 41,
+      "parent": 7,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 80,
+      "parent": 7,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 8,
+      "role": "parent",
+      "status": "updated"
+    },
+    {
+      "number": 42,
+      "parent": 8,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 43,
+      "parent": 8,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 44,
+      "parent": 8,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 45,
+      "parent": 8,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 9,
+      "role": "parent",
+      "status": "updated"
+    },
+    {
+      "number": 46,
+      "parent": 9,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 47,
+      "parent": 9,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 48,
+      "parent": 9,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 49,
+      "parent": 9,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 10,
+      "role": "parent",
+      "status": "updated"
+    },
+    {
+      "number": 50,
+      "parent": 10,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 51,
+      "parent": 10,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 52,
+      "parent": 10,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 53,
+      "parent": 10,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 11,
+      "role": "parent",
+      "status": "updated"
+    },
+    {
+      "number": 54,
+      "parent": 11,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 55,
+      "parent": 11,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 56,
+      "parent": 11,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 57,
+      "parent": 11,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 81,
+      "parent": 11,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 12,
+      "role": "parent",
+      "status": "updated"
+    },
+    {
+      "number": 58,
+      "parent": 12,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 59,
+      "parent": 12,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 60,
+      "parent": 12,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 61,
+      "parent": 12,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 13,
+      "role": "parent",
+      "status": "updated"
+    },
+    {
+      "number": 62,
+      "parent": 13,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 63,
+      "parent": 13,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 64,
+      "parent": 13,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 14,
+      "role": "parent",
+      "status": "updated"
+    },
+    {
+      "number": 65,
+      "parent": 14,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 66,
+      "parent": 14,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 67,
+      "parent": 14,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 68,
+      "parent": 14,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 15,
+      "role": "parent",
+      "status": "updated"
+    },
+    {
+      "number": 69,
+      "parent": 15,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 70,
+      "parent": 15,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 71,
+      "parent": 15,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 16,
+      "role": "parent",
+      "status": "updated"
+    },
+    {
+      "number": 72,
+      "parent": 16,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 73,
+      "parent": 16,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 74,
+      "parent": 16,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 17,
+      "role": "parent",
+      "status": "updated"
+    },
+    {
+      "number": 82,
+      "parent": 17,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 75,
+      "parent": 17,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 76,
+      "parent": 17,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 18,
+      "role": "parent",
+      "status": "updated"
+    },
+    {
+      "number": 77,
+      "parent": 18,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 78,
+      "parent": 18,
+      "role": "child",
+      "status": "updated"
+    },
+    {
+      "number": 79,
+      "parent": 18,
+      "role": "child",
+      "status": "updated"
+    }
+  ]
+}

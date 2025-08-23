@@ -4,8 +4,34 @@ name: Infrastructure CI & Component Testing
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - 'README.md'
+      - 'docs/**'
+      - 'content/**'
+      - 'artifacts/**'
+      - '**/*.md'
+      - '**/*.mdx'
+      - '**/*.png'
+      - '**/*.jpg'
+      - '**/*.jpeg'
+      - '**/*.gif'
+      - '**/*.svg'
+      - '**/*.json'
   pull_request:
     branches: [main]
+    paths-ignore:
+      - 'README.md'
+      - 'docs/**'
+      - 'content/**'
+      - 'artifacts/**'
+      - '**/*.md'
+      - '**/*.mdx'
+      - '**/*.png'
+      - '**/*.jpg'
+      - '**/*.jpeg'
+      - '**/*.gif'
+      - '**/*.svg'
+      - '**/*.json'
 
 permissions:
   contents: read
@@ -15,6 +41,42 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      run_heavy: ${{ steps.compute.outputs.run_heavy }}
+    steps:
+      - name: Paths filter
+        id: pf
+        uses: dorny/paths-filter@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          filters: |
+            week6:
+              - 'public/equity-ui-v2/**'
+              - 'tools/**'
+              - 'schemas/**'
+            infra:
+              - 'infrastructure/**'
+              - 'Dockerfile*'
+              - '**/Dockerfile'
+      - name: Compute run_heavy
+        id: compute
+        shell: bash
+        run: |
+          set -euo pipefail
+          WEEK6="${{ steps.pf.outputs.week6 }}"
+          INFRA="${{ steps.pf.outputs.infra }}"
+          HAS_FULL_CI=$(node -e "const ev=require(process.env.GITHUB_EVENT_PATH);const lbl=(ev.pull_request&&ev.pull_request.labels||[]).map(l=>l.name.toLowerCase());console.log(lbl.includes('full-ci')?'true':'false')")
+          if [ "${{ github.event_name }}" = 'pull_request' ]; then
+            if [ "$WEEK6" = 'true' ] || [ "$INFRA" = 'true' ] || [ "$HAS_FULL_CI" = 'true' ]; then
+              echo "run_heavy=true" >> "$GITHUB_OUTPUT"
+            else
+              echo "run_heavy=false" >> "$GITHUB_OUTPUT"
+            fi
+          else
+            echo "run_heavy=true" >> "$GITHUB_OUTPUT"
+          fi
   governance-gates:
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -239,6 +301,8 @@ jobs:
             artifacts/infra-health-*.json
 
   operational-health:
+  needs: [changes]
+  if: ${{ github.event_name != 'pull_request' || needs.changes.outputs.run_heavy == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
@@ -286,6 +350,8 @@ jobs:
             artifacts/ha-*.json
 
   week6-integration:
+  needs: [changes]
+  if: ${{ github.event_name != 'pull_request' || needs.changes.outputs.run_heavy == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -321,6 +387,8 @@ jobs:
             artifacts/audit/*.ndjson
 
   week6-component-tests:
+  needs: [changes]
+  if: ${{ github.event_name != 'pull_request' || needs.changes.outputs.run_heavy == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     strategy:

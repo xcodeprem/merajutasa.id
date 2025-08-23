@@ -752,3 +752,31 @@ Struktur keputusan & parameter fairness sudah solid; tinggal hash seal + evidenc
 ---
 
 Referensi publik: Lihat Methodology Snippet (H0) untuk ringkasan non‑ranking dan privasi → docs/transparency/methodology-snippet-h0.md
+
+---
+
+## CI Fast Paths & Labels (Operational Guide)
+
+Untuk mempercepat alur kerja tanpa melemahkan proteksi branch:
+
+- Docs-only Fast Pass
+  - Jika perubahan hanya menyentuh README/docs/content/artifacts (bukan code/workflows), workflow “Required Contexts (Docs-only Fast Pass)” akan menandai checks wajib sebagai sukses.
+  - Workflow besar (CI Guard, Infra CI, CodeQL, Gitleaks) di-skip via `paths-ignore`.
+  - Tetap memerlukan minimal 1 approval sebelum merge ke `main`.
+
+- Auto-label “docs-only”
+  - PR otomatis diberi label `docs-only` bila hanya menyentuh path dokumentasi.
+  - Bisa menambah label manual kalau perlu.
+
+- Auto-label “full-ci”
+  - PR otomatis diberi label `full-ci` bila menyentuh path berdampak berat:
+    - `public/equity-ui-v2/**`, `tools/**`, `schemas/**`, `infrastructure/**`, `Dockerfile*`, `.github/workflows/**`
+  - Menjamin job berat tetap berjalan saat relevan.
+
+- Gating job berat di PR
+  - `Infrastructure CI & Component Testing` (operational-health, week6-integration, week6-component-tests) hanya jalan di PR bila:
+    - ada perubahan pada path berdampak berat, atau
+    - PR berlabel `full-ci`.
+  - Pada push ke `main` tetap dijalankan untuk kualitas rilis.
+
+Catatan: Proteksi `main` tetap aktif (required checks + code owners + 1 approval). Selalu gunakan branch fitur + PR.

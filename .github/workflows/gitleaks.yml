@@ -2,8 +2,22 @@ name: "Gitleaks"
 on:
   pull_request:
     branches: [ "main" ]
+    paths-ignore:
+      - 'README.md'
+      - 'docs/**'
+      - 'content/**'
+      - 'artifacts/**'
+      - '**/*.md'
+      - '**/*.mdx'
+      - '**/*.png'
+      - '**/*.jpg'
+      - '**/*.jpeg'
+      - '**/*.gif'
+      - '**/*.svg'
+      - '**/*.json'
 permissions:
   contents: read
+  checks: write
 jobs:
   scan:
     runs-on: ubuntu-latest
@@ -14,3 +28,17 @@ jobs:
       - uses: gitleaks/gitleaks-action@12e7d55e6d1f9ec86b44f8e35fed08399b60cbc0 # v2.4.0
         with:
           args: detect -v --redact --config=.gitleaks.toml
+      - name: Report required context (security/secret-scan)
+        if: always()
+        uses: actions/github-script@60a0d83039c74a4aee7da9c2741b5b301c6f6f72 # v7.0.1
+        env:
+          JOB_STATUS: ${{ job.status }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const head_sha = context.eventName === 'pull_request' ? context.payload.pull_request.head.sha : context.sha;
+            const conclusion = process.env.JOB_STATUS === 'success' ? 'success' : 'failure';
+            const name = 'security/secret-scan';
+            await github.rest.checks.create({ owner, repo, name, head_sha, status: 'completed', conclusion, output: { title: name, summary: 'Reported by Gitleaks bridge step' } });

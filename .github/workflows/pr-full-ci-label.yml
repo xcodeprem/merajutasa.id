@@ -1,0 +1,42 @@
+name: PR Labeler (full-ci)
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    branches: [ main ]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  label-full-ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (shallow)
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+        with:
+          fetch-depth: 0
+
+      - name: Detect heavy-impact changes
+        id: changes
+        uses: dorny/paths-filter@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          filters: |
+            heavy:
+              - 'public/equity-ui-v2/**'
+              - 'tools/**'
+              - 'schemas/**'
+              - 'infrastructure/**'
+              - 'Dockerfile'
+              - '**/Dockerfile'
+              - '**/Dockerfile.*'
+              - '.github/workflows/**'
+
+      - name: Add full-ci label when heavy changes detected
+        if: steps.changes.outputs.heavy == 'true'
+        uses: actions-ecosystem/action-add-labels@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          labels: full-ci
