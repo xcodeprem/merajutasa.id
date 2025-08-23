@@ -2,7 +2,7 @@ name: H1 Guard & KPI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch: {}
 
 permissions:
@@ -25,19 +25,25 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
         with:
-          node-version: '24'
-          cache: 'npm'
+          node-version: "24"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
 
       - name: Run A8 (no-silent-drift) Gates
         uses: ./.github/actions/run-a8
         with:
-          policy-path: 'tools/policy/policy.json'
+          policy-path: "tools/policy/policy.json"
 
       - name: Run H1 Guard
         run: |
           node tools/h1-verify-guard.js
         env:
-          PERF_ADVISORY: 'true'
+          PERF_ADVISORY: "true"
           GITHUB_EVENT_NAME: ${{ github.event_name }}
           GITHUB_ACTOR: ${{ github.actor }}
           PR_HEAD_REF: ${{ github.head_ref || '' }}

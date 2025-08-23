@@ -30,14 +30,18 @@
   },
   "dashboard": {
     "title": "H1 Equity Dashboard",
-    "subtitle": "Transparency and fairness monitoring system"
+    "subtitle": "Transparency and fairness monitoring system",
+    "kpi_visualization": "KPI Visualization"
   },
   "common": {
     "loading": "Loading...",
     "error": "An error occurred",
+    "load_failed": "Failed to load dashboard data",
     "retry": "Retry",
     "view_raw": "View raw data",
     "refresh": "Refresh",
+    "refresh_data": "Refresh data",
+    "na": "n/a",
     "note": "Note:"
   },
   "language": "Language",
@@ -76,16 +80,23 @@
   "compliance": {
     "title": "Compliance",
     "audit_signals": "Audit Signals",
+    "gateway_health": "Gateway Health",
+    "services": "Services",
+    "chain_head": "Chain Head",
     "non_ranking": "Non-ranking Copy & Disclaimers",
     "non_ranking_copy": "This application avoids ranking, scoring, or ordinal comparisons of people or groups. All visuals are descriptive aggregates for governance and fairness review."
   },
   "settings": {
     "title": "Settings",
+    "access_token": "Access Token",
     "token": "Token",
+    "paste_token": "Paste token",
     "remember_session": "Remember in this session",
     "save_token": "Save Token",
     "clear": "Clear",
     "api_key": "API Key",
+    "api_key_card": "API Key",
+    "api_key_placeholder": "API key (optional)",
     "save_api_key": "Save API Key",
     "language": "Language",
     "lang_en": "English",

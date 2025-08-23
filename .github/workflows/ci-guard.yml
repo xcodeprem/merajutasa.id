@@ -3,9 +3,9 @@ name: CI Guard (H1)
 on:
   workflow_dispatch:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
   pull_request_target:
     types: [opened, synchronize, reopened]
 
@@ -49,13 +49,19 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
         with:
-          node-version: '24'
-          cache: 'npm'
+          node-version: "24"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npm run equity-ui-v2:test:a11y:e2e --silent --workspaces=false || npx playwright install --with-deps
 
       - name: Run A8 (no-silent-drift) Gates
         uses: ./.github/actions/run-a8
         with:
-          policy-path: 'tools/policy/policy.json'
+          policy-path: "tools/policy/policy.json"
 
       - name: Event Taxonomy Consistency
         run: npm run test:event-taxonomy

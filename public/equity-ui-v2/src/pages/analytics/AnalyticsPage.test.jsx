@@ -31,9 +31,10 @@ function renderWithQuery(ui) {
 describe('AnalyticsPage', () => {
   it('renders snapshot controls and charts', async () => {
     renderWithQuery(<AnalyticsPage />);
-    // Snapshot controls
-  expect(screen.getByText(/Snapshot Simulation/i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /Play|Pause/i })).toBeInTheDocument();
+    // Snapshot controls (title localized)
+    expect(screen.getByText(/Snapshot Simulation|Simulasi Snapshot/i)).toBeInTheDocument();
+    // Play/Pause button localized
+    expect(screen.getByRole('button', { name: /Play|Pause|Putar|Jeda/i })).toBeInTheDocument();
 
     // Lazy charts appear after suspense
     await waitFor(() => expect(screen.getByText('TrendsMock')).toBeInTheDocument());

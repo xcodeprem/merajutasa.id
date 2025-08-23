@@ -5,20 +5,16 @@ import { toHaveNoViolations } from 'jest-axe';
 
 expect.extend(toHaveNoViolations);
 
-// Simulate GitHub Pages environment to prevent live API calls in tests
-Object.defineProperty(window, 'location', {
-  value: new URL('https://example.github.io/test'),
-});
+// Do not override window.location to avoid jsdom SecurityError; rely on mocks instead
 
-// Ensure tests default to English translations before i18n is initialized
+// Ensure tests default to English translations and initialize i18n
 try {
   window.localStorage.setItem('equity_ui_lang', 'en');
 } catch {
   // ignore
 }
-
-// Initialize i18n globally for tests
-import './src/services/i18n';
+import i18n from './src/services/i18n';
+i18n.changeLanguage('en');
 
 // Mock axios to avoid network requests during tests
 vi.mock('axios', () => {

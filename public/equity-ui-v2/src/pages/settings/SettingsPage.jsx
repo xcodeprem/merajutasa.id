@@ -59,7 +59,7 @@ const SettingsPage = () => {
         {t('settings.title')}
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Card title="Access Token">
+  <Card title={t('settings.access_token')}>
           <form onSubmit={onSaveToken} className="space-y-3">
             <label
               htmlFor="access-token"
@@ -72,7 +72,7 @@ const SettingsPage = () => {
               type="password"
               value={token}
               onChange={(e) => setToken(e.target.value)}
-              placeholder="Paste token"
+              placeholder={t('settings.paste_token')}
               className="w-full p-2 rounded border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
             />
             <label className="flex items-center space-x-2 text-sm">
@@ -101,7 +101,7 @@ const SettingsPage = () => {
           </form>
         </Card>
 
-        <Card title="API Key">
+  <Card title={t('settings.api_key_card')}>
           <form onSubmit={onSaveApiKey} className="space-y-3">
             <label htmlFor="api-key" className="block text-sm text-gray-600 dark:text-gray-400">
               {t('settings.api_key')}
@@ -111,7 +111,7 @@ const SettingsPage = () => {
               type="text"
               value={apiKey}
               onChange={(e) => setApiKeyLocal(e.target.value)}
-              placeholder="API key (optional)"
+              placeholder={t('settings.api_key_placeholder')}
               className="w-full p-2 rounded border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
             />
             <div className="flex gap-2">

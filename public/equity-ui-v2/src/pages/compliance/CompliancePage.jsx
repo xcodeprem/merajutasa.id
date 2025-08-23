@@ -29,9 +29,9 @@ export default function CompliancePage() {
 
       <Card title={t('compliance.audit_signals')} loading={loading}>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <DataCard title="Gateway Health" data={health.data} />
-          <DataCard title="Services" data={services.data} />
-          <DataCard title="Chain Head" data={chainHead.data} />
+          <DataCard title={t('compliance.gateway_health')} data={health.data} />
+          <DataCard title={t('compliance.services')} data={services.data} />
+          <DataCard title={t('compliance.chain_head')} data={chainHead.data} />
         </div>
       </Card>
 

@@ -39,10 +39,16 @@ if (typeof window !== 'undefined') {
     try {
       localStorage.setItem('equity_ui_lang', lng);
     } catch {
-      // ignore
+      // ignore storage errors in private mode/tests
     }
-    const url = new URL(window.location);
-    url.searchParams.set('lang', lng);
-    window.history.replaceState({}, '', url);
+    try {
+      if (typeof window.history?.replaceState === 'function') {
+        const url = new URL(window.location.href);
+        url.searchParams.set('lang', lng);
+        window.history.replaceState({}, '', url.toString());
+      }
+    } catch {
+      // ignore jsdom SecurityError during tests
+    }
   });
 }

@@ -53,7 +53,7 @@ export const Dashboard = () => {
             {t('common.error')}
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mb-4">
-            {error.message || 'Failed to load dashboard data'}
+            {error.message || t('common.load_failed')}
           </p>
           <button
             onClick={handleRefresh}
@@ -87,12 +87,13 @@ export const Dashboard = () => {
         {/* Last updated info with refresh button */}
         <div className="flex items-center justify-between mb-6">
           <div className="text-sm text-gray-500 dark:text-gray-400">
-            {t('label.updated')} {dataUpdatedAt ? new Date(dataUpdatedAt).toLocaleString() : 'n/a'}
+            {t('label.updated')}{' '}
+            {dataUpdatedAt ? new Date(dataUpdatedAt).toLocaleString() : t('common.na')}
           </div>
           <button
             onClick={handleRefresh}
             className="inline-flex items-center px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
-            aria-label="Refresh data"
+            aria-label={t('common.refresh_data')}
           >
             <RefreshCw className="h-4 w-4 mr-1" />
             {t('common.refresh')}
@@ -209,7 +210,7 @@ export const Dashboard = () => {
           </Card>
 
           {/* KPI Chart */}
-          <Card title="KPI Visualization">
+          <Card title={t('dashboard.kpi_visualization')}>
             <KPIChart kpiData={kpi} />
           </Card>
         </div>

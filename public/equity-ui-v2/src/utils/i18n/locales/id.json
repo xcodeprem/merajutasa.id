@@ -30,14 +30,18 @@
   },
   "dashboard": {
     "title": "Dashboard Ekuitas H1",
-    "subtitle": "Sistem pemantauan transparansi dan keadilan"
+    "subtitle": "Sistem pemantauan transparansi dan keadilan",
+    "kpi_visualization": "Visualisasi KPI"
   },
   "common": {
     "loading": "Memuat...",
     "error": "Terjadi kesalahan",
+    "load_failed": "Gagal memuat data dashboard",
     "retry": "Coba lagi",
     "view_raw": "Lihat data mentah",
     "refresh": "Muat ulang",
+    "refresh_data": "Muat ulang data",
+    "na": "n/a",
     "note": "Catatan:"
   },
   "language": "Bahasa",
@@ -76,16 +80,23 @@
   "compliance": {
     "title": "Compliance",
     "audit_signals": "Sinyal Audit",
+    "gateway_health": "Kesehatan Gateway",
+    "services": "Layanan",
+    "chain_head": "Kepala Rantai",
     "non_ranking": "Teks Non-ranking & Disclaimer",
     "non_ranking_copy": "Aplikasi ini menghindari pemeringkatan atau perbandingan ordinal. Semua visual bersifat agregat deskriptif untuk tinjauan tata kelola dan keadilan."
   },
   "settings": {
     "title": "Pengaturan",
+    "access_token": "Access Token",
     "token": "Token",
+    "paste_token": "Tempel token",
     "remember_session": "Ingat di sesi ini",
     "save_token": "Simpan Token",
     "clear": "Hapus",
     "api_key": "API Key",
+    "api_key_card": "API Key",
+    "api_key_placeholder": "API key (opsional)",
     "save_api_key": "Simpan API Key",
     "language": "Bahasa",
     "lang_en": "English",
