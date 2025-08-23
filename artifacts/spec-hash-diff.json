@@ -1,6 +1,6 @@
 {
   "mode": "verify",
-  "timestamp_utc": "2025-08-23T23:14:17Z",
+  "timestamp_utc": "2025-08-23T23:34:07Z",
   "updated": [],
   "unchanged": [
     "docs/governance/dec/DEC-style-guide-v2.md"
@@ -281,7 +281,7 @@
     {
       "code": "HASH_MISMATCH_DEC_REQUIRED",
       "path": "tools/fairness/engine-core.js",
-      "detail": "Manifest=1d027b7fd7ed25b1b63e29bed6ef402d5f02d87edb15d2000b1402bcc40b12a4 current=082aa01b00eb14d52105af45361bd2cd1a5aafdde2c815f0d37dcda39129fd1d"
+      "detail": "Manifest=1d027b7fd7ed25b1b63e29bed6ef402d5f02d87edb15d2000b1402bcc40b12a4 current=7560896a713900ab97f5d7dda7cdcba16fc4f197fc43f3516cb22090b01383a6"
     },
     {
       "code": "HASH_MISMATCH_DEC_REQUIRED",
