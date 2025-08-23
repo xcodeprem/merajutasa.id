@@ -1,0 +1,222 @@
+{
+  "generated_at": "2025-08-23T11:45:34.650Z",
+  "dist": "public/dist",
+  "total_files": 42,
+  "total_bytes": 3464137,
+  "compressed": {
+    "br": 10,
+    "gz": 10
+  },
+  "files": [
+    {
+      "file": ".headers",
+      "size": 96,
+      "ext": ""
+    },
+    {
+      "file": "assets/AnalyticsPage-B-DIzPmh.js",
+      "size": 3668,
+      "ext": ".js"
+    },
+    {
+      "file": "assets/AnalyticsPage-B-DIzPmh.js.br",
+      "size": 1248,
+      "ext": ".br"
+    },
+    {
+      "file": "assets/AnalyticsPage-B-DIzPmh.js.gz",
+      "size": 1384,
+      "ext": ".gz"
+    },
+    {
+      "file": "assets/AnalyticsPage-B-DIzPmh.js.map",
+      "size": 10918,
+      "ext": ".map"
+    },
+    {
+      "file": "assets/AnalyticsPage-DHBFZvu7.jsx",
+      "size": 4572,
+      "ext": ".jsx"
+    },
+    {
+      "file": "assets/AnomaliesChart-B8lg0q7N.js",
+      "size": 1022,
+      "ext": ".js"
+    },
+    {
+      "file": "assets/AnomaliesChart-B8lg0q7N.js.br",
+      "size": 573,
+      "ext": ".br"
+    },
+    {
+      "file": "assets/AnomaliesChart-B8lg0q7N.js.gz",
+      "size": 645,
+      "ext": ".gz"
+    },
+    {
+      "file": "assets/AnomaliesChart-B8lg0q7N.js.map",
+      "size": 3243,
+      "ext": ".map"
+    },
+    {
+      "file": "assets/Charts-Ck9J2qXv.js",
+      "size": 2011,
+      "ext": ".js"
+    },
+    {
+      "file": "assets/Charts-Ck9J2qXv.js.br",
+      "size": 726,
+      "ext": ".br"
+    },
+    {
+      "file": "assets/Charts-Ck9J2qXv.js.gz",
+      "size": 851,
+      "ext": ".gz"
+    },
+    {
+      "file": "assets/Charts-Ck9J2qXv.js.map",
+      "size": 6110,
+      "ext": ".map"
+    },
+    {
+      "file": "assets/CompliancePage-DXwOo-SU.js",
+      "size": 1213,
+      "ext": ".js"
+    },
+    {
+      "file": "assets/CompliancePage-DXwOo-SU.js.br",
+      "size": 495,
+      "ext": ".br"
+    },
+    {
+      "file": "assets/CompliancePage-DXwOo-SU.js.gz",
+      "size": 571,
+      "ext": ".gz"
+    },
+    {
+      "file": "assets/CompliancePage-DXwOo-SU.js.map",
+      "size": 3345,
+      "ext": ".map"
+    },
+    {
+      "file": "assets/index-BEE2hGYQ.css",
+      "size": 8287,
+      "ext": ".css"
+    },
+    {
+      "file": "assets/index-BEE2hGYQ.css.br",
+      "size": 1913,
+      "ext": ".br"
+    },
+    {
+      "file": "assets/index-BEE2hGYQ.css.gz",
+      "size": 2247,
+      "ext": ".gz"
+    },
+    {
+      "file": "assets/index-DJxMcEB6.js",
+      "size": 168002,
+      "ext": ".js"
+    },
+    {
+      "file": "assets/index-DJxMcEB6.js.br",
+      "size": 51173,
+      "ext": ".br"
+    },
+    {
+      "file": "assets/index-DJxMcEB6.js.gz",
+      "size": 58551,
+      "ext": ".gz"
+    },
+    {
+      "file": "assets/index-DJxMcEB6.js.map",
+      "size": 817624,
+      "ext": ".map"
+    },
+    {
+      "file": "assets/index-z75ChK2C.js",
+      "size": 391879,
+      "ext": ".js"
+    },
+    {
+      "file": "assets/index-z75ChK2C.js.br",
+      "size": 108270,
+      "ext": ".br"
+    },
+    {
+      "file": "assets/index-z75ChK2C.js.gz",
+      "size": 124818,
+      "ext": ".gz"
+    },
+    {
+      "file": "assets/index-z75ChK2C.js.map",
+      "size": 1654238,
+      "ext": ".map"
+    },
+    {
+      "file": "assets/SettingsPage-BrffwR_z.js",
+      "size": 3412,
+      "ext": ".js"
+    },
+    {
+      "file": "assets/SettingsPage-BrffwR_z.js.br",
+      "size": 926,
+      "ext": ".br"
+    },
+    {
+      "file": "assets/SettingsPage-BrffwR_z.js.gz",
+      "size": 1089,
+      "ext": ".gz"
+    },
+    {
+      "file": "assets/SettingsPage-BrffwR_z.js.map",
+      "size": 9094,
+      "ext": ".map"
+    },
+    {
+      "file": "assets/SettingsPage-D6x3lUMi.jsx",
+      "size": 5519,
+      "ext": ".jsx"
+    },
+    {
+      "file": "assets/TrendsChart-DcrAQ2ed.js",
+      "size": 1110,
+      "ext": ".js"
+    },
+    {
+      "file": "assets/TrendsChart-DcrAQ2ed.js.br",
+      "size": 622,
+      "ext": ".br"
+    },
+    {
+      "file": "assets/TrendsChart-DcrAQ2ed.js.gz",
+      "size": 711,
+      "ext": ".gz"
+    },
+    {
+      "file": "assets/TrendsChart-DcrAQ2ed.js.map",
+      "size": 3444,
+      "ext": ".map"
+    },
+    {
+      "file": "index.html",
+      "size": 3724,
+      "ext": ".html"
+    },
+    {
+      "file": "index.html.br",
+      "size": 1540,
+      "ext": ".br"
+    },
+    {
+      "file": "index.html.gz",
+      "size": 1756,
+      "ext": ".gz"
+    },
+    {
+      "file": "vite.svg",
+      "size": 1497,
+      "ext": ".svg"
+    }
+  ]
+}

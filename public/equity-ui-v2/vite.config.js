@@ -1,9 +1,20 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import viteCompression from 'vite-plugin-compression';
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    // Pre-compress assets for fast static serving
+    viteCompression({ algorithm: 'gzip', ext: '.gz', threshold: 512, deleteOriginFile: false }),
+    viteCompression({
+      algorithm: 'brotliCompress',
+      ext: '.br',
+      threshold: 512,
+      deleteOriginFile: false,
+    }),
+  ],
   server: {
     proxy: {
       '/kpi': 'http://localhost:4620',
@@ -20,6 +31,12 @@ export default defineConfig({
         changeOrigin: true,
       },
     },
+  },
+  build: {
+    // Emit to repo-level public/dist for standardized distribution
+    outDir: '../dist',
+    emptyOutDir: true,
+    sourcemap: true,
   },
   test: {
     environment: 'jsdom',

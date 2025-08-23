@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:dist": "vite build && node -e \"import('fs').then(fs=>fs.promises.writeFile('../dist/.headers', JSON.stringify({ cache: { html: 'no-cache', assets: 'public, max-age=31536000, immutable' } }, null, 2)))\"",
+    "serve:dist": "node ../../tools/static-server.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "preview": "vite preview",
@@ -58,6 +60,7 @@
     "prettier": "^3.3.3",
     "tailwindcss": "^4.1.12",
     "vite": "^7.1.2",
-    "vitest": "^2.0.5"
+    "vitest": "^2.0.5",
+    "vite-plugin-compression": "^0.5.1"
   }
 }
