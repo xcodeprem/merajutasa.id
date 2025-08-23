@@ -62,6 +62,8 @@ id_ed25519*
 # Cloud and API credentials
 *credentials*
 *secret*
+!*secret*.test.js
+!*secret*.js
 *token*
 .aws/
 .azure/
