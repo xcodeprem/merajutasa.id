@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
 import { Card, DataCard } from '../../components/Card';
 import Disclaimers from '../../components/Disclaimers';
@@ -16,14 +17,17 @@ function useAuditSignals() {
 }
 
 export default function CompliancePage() {
+  const { t } = useTranslation();
   const { health, services, chainHead } = useAuditSignals();
   const loading = health.isLoading || services.isLoading || chainHead.isLoading;
 
   return (
     <div className="max-w-7xl mx-auto p-4 space-y-6" role="main">
-      <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">Compliance</h2>
+      <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+        {t('compliance.title')}
+      </h2>
 
-      <Card title="Audit Signals" loading={loading}>
+      <Card title={t('compliance.audit_signals')} loading={loading}>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <DataCard title="Gateway Health" data={health.data} />
           <DataCard title="Services" data={services.data} />
@@ -31,10 +35,9 @@ export default function CompliancePage() {
         </div>
       </Card>
 
-      <Card title="Non-ranking Copy & Disclaimers">
+      <Card title={t('compliance.non_ranking')}>
         <p className="text-sm text-gray-700 dark:text-gray-200">
-          This application avoids ranking, scoring, or ordinal comparisons of people or groups. All
-          visuals are descriptive aggregates for governance and fairness review.
+          {t('compliance.non_ranking_copy')}
         </p>
         <Disclaimers pageId="compliance" />
       </Card>

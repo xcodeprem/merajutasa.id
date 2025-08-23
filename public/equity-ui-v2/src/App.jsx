@@ -4,6 +4,7 @@ import { ThemeProvider } from './stores/ThemeContext';
 import { Header } from './components/Header';
 import { Dashboard } from './components/Dashboard';
 import './services/i18n'; // Initialize i18n
+import { useTranslation } from 'react-i18next';
 import './App.css';
 import { useRealtimeDashboard } from './services/websocket/useRealtimeDashboard';
 import { getAccessToken } from './services/auth/tokenManager';
@@ -19,6 +20,7 @@ const queryClient = new QueryClient({
 });
 
 function RealtimeRoot() {
+  const { t } = useTranslation();
   useRealtimeDashboard({ enabled: true });
   const [hash, setHash] = React.useState(() => window.location.hash);
   React.useEffect(() => {
@@ -47,7 +49,9 @@ function RealtimeRoot() {
     <ThemeProvider>
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
         <Header />
-        <React.Suspense fallback={<div className="p-6 text-center text-gray-500">Loading…</div>}>
+        <React.Suspense
+          fallback={<div className="p-6 text-center text-gray-500">{t('common.loading')}</div>}
+        >
           {isSettings ? (
             <SettingsPage />
           ) : isCompliance ? (

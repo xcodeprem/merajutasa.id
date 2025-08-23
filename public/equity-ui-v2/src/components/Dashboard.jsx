@@ -38,7 +38,7 @@ export const Dashboard = () => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-300">{t('loading')}</p>
+          <p className="text-gray-600 dark:text-gray-300">{t('common.loading')}</p>
         </div>
       </div>
     );
@@ -49,7 +49,9 @@ export const Dashboard = () => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center max-w-md mx-auto">
           <AlertCircle className="h-12 w-12 text-red-500 mx-auto mb-4" />
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">{t('error')}</h2>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+            {t('common.error')}
+          </h2>
           <p className="text-gray-600 dark:text-gray-300 mb-4">
             {error.message || 'Failed to load dashboard data'}
           </p>
@@ -58,7 +60,7 @@ export const Dashboard = () => {
             className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
           >
             <RefreshCw className="h-4 w-4 mr-2" />
-            {t('retry')}
+            {t('common.retry')}
           </button>
         </div>
       </div>
@@ -93,7 +95,7 @@ export const Dashboard = () => {
             aria-label="Refresh data"
           >
             <RefreshCw className="h-4 w-4 mr-1" />
-            Refresh
+            {t('common.refresh')}
           </button>
         </div>
 
@@ -138,7 +140,7 @@ export const Dashboard = () => {
                 {/* Raw data */}
                 <details className="mt-4">
                   <summary className="cursor-pointer text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">
-                    View raw data
+                    {t('common.view_raw')}
                   </summary>
                   <pre className="mt-2 bg-gray-50 dark:bg-gray-900 p-3 rounded text-sm overflow-auto max-h-64 whitespace-pre-wrap">
                     {JSON.stringify(weekly, null, 2)}
@@ -192,7 +194,7 @@ export const Dashboard = () => {
                 {/* Raw data */}
                 <details>
                   <summary className="cursor-pointer text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">
-                    View raw data
+                    {t('common.view_raw')}
                   </summary>
                   <pre className="mt-2 bg-gray-50 dark:bg-gray-900 p-3 rounded text-sm overflow-auto max-h-64 whitespace-pre-wrap">
                     {JSON.stringify(monthly, null, 2)}
@@ -201,7 +203,7 @@ export const Dashboard = () => {
               </div>
             ) : (
               <p className="text-gray-500 dark:text-gray-400 text-center py-8">
-                No monthly feedback data yet
+                {t('feedback.no_monthly')}
               </p>
             )}
           </Card>
@@ -264,7 +266,7 @@ export const Dashboard = () => {
         {/* GitHub Pages note */}
         <div className="mt-6 text-sm text-gray-500 dark:text-gray-400 text-center">
           <p>
-            Note: On GitHub Pages, data loads from{' '}
+            {t('common.note')} On GitHub Pages, data loads from{' '}
             <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">data/*.json</code>{' '}
             snapshots.
             <span className="ml-2">

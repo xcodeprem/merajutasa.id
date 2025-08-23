@@ -1,0 +1,95 @@
+{
+  "nav": {
+    "analytics": "Analytics",
+    "compliance": "Compliance",
+    "settings": "Settings"
+  },
+  "badge": {
+    "fairness": "fairness",
+    "under": "under-served",
+    "anoms": "anomalies",
+    "revoc": "revocations"
+  },
+  "heading": {
+    "under": "Under-served",
+    "kpi": "KPI Summary",
+    "weekly": "Weekly Trends",
+    "monthly": "Monthly Feedback"
+  },
+  "label": { "updated": "Last updated:" },
+  "link": { "methodology": "Methodology: Hysteresis & Under-Served", "privacy": "Privacy FAQ" },
+  "snapshots": { "index": "Snapshots index" },
+  "decision": { "mix": { "na": "decision mix: n/a" } },
+  "spark": { "na": "sparkline: n/a" },
+  "monthly": {
+    "latest": "Latest month",
+    "total": "Total",
+    "avglen": "Avg length",
+    "categories": "Categories",
+    "pii": "PII"
+  },
+  "dashboard": {
+    "title": "H1 Equity Dashboard",
+    "subtitle": "Transparency and fairness monitoring system"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "retry": "Retry",
+    "view_raw": "View raw data",
+    "refresh": "Refresh",
+    "note": "Note:"
+  },
+  "language": "Language",
+  "theme": "Theme",
+  "light": "Light",
+  "dark": "Dark",
+  "menu": "Menu",
+  "navigation": "Navigation",
+  "accessibility": {
+    "skipToContent": "Skip to main content",
+    "menu": "Navigation menu",
+    "close": "Close"
+  },
+  "risk": {
+    "title": "Risk Summary",
+    "collector": "Collector",
+    "chain": "Chain",
+    "privacy": "Privacy"
+  },
+  "analytics": {
+    "title": "Analytics",
+    "snapshot": "Snapshot Simulation",
+    "decision_trends": "Decision Trends",
+    "anomalies_overview": "Anomalies Overview",
+    "loading_trends": "Loading trends…",
+    "loading_anoms": "Loading anomalies…",
+    "preparing_chart": "Preparing chart…",
+    "play": "Play",
+    "pause": "Pause",
+    "prev": "Prev",
+    "next": "Next",
+    "reset": "Reset",
+    "current": "Current:",
+    "drilldown": "Drilldown:"
+  },
+  "compliance": {
+    "title": "Compliance",
+    "audit_signals": "Audit Signals",
+    "non_ranking": "Non-ranking Copy & Disclaimers",
+    "non_ranking_copy": "This application avoids ranking, scoring, or ordinal comparisons of people or groups. All visuals are descriptive aggregates for governance and fairness review."
+  },
+  "settings": {
+    "title": "Settings",
+    "token": "Token",
+    "remember_session": "Remember in this session",
+    "save_token": "Save Token",
+    "clear": "Clear",
+    "api_key": "API Key",
+    "save_api_key": "Save API Key",
+    "language": "Language",
+    "lang_en": "English",
+    "lang_id": "Bahasa Indonesia"
+  },
+  "feedback": { "no_monthly": "No monthly feedback data yet" }
+}

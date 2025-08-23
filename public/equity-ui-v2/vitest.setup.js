@@ -10,6 +10,16 @@ Object.defineProperty(window, 'location', {
   value: new URL('https://example.github.io/test'),
 });
 
+// Ensure tests default to English translations before i18n is initialized
+try {
+  window.localStorage.setItem('equity_ui_lang', 'en');
+} catch {
+  // ignore
+}
+
+// Initialize i18n globally for tests
+import './src/services/i18n';
+
 // Mock axios to avoid network requests during tests
 vi.mock('axios', () => {
   const mockGet = vi.fn(async (url) => {

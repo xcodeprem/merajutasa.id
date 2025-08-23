@@ -11,7 +11,7 @@ import {
 } from '../../services/auth/tokenManager';
 
 const SettingsPage = () => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [token, setToken] = React.useState(() => getAccessToken() || '');
   const [remember, setRemember] = React.useState(() => {
     try {
@@ -55,12 +55,17 @@ const SettingsPage = () => {
 
   return (
     <main className="max-w-5xl mx-auto p-6">
-      <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Settings</h2>
+      <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">
+        {t('settings.title')}
+      </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card title="Access Token">
           <form onSubmit={onSaveToken} className="space-y-3">
-            <label htmlFor="access-token" className="block text-sm text-gray-600 dark:text-gray-400">
-              Token
+            <label
+              htmlFor="access-token"
+              className="block text-sm text-gray-600 dark:text-gray-400"
+            >
+              {t('settings.token')}
             </label>
             <input
               id="access-token"
@@ -76,21 +81,21 @@ const SettingsPage = () => {
                 checked={remember}
                 onChange={(e) => setRemember(e.target.checked)}
               />
-              <span>Remember in this session</span>
+              <span>{t('settings.remember_session')}</span>
             </label>
             <div className="flex gap-2">
               <button
                 type="submit"
                 className="px-3 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
               >
-                Save Token
+                {t('settings.save_token')}
               </button>
               <button
                 type="button"
                 onClick={onClearToken}
                 className="px-3 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
               >
-                Clear
+                {t('settings.clear')}
               </button>
             </div>
           </form>
@@ -99,7 +104,7 @@ const SettingsPage = () => {
         <Card title="API Key">
           <form onSubmit={onSaveApiKey} className="space-y-3">
             <label htmlFor="api-key" className="block text-sm text-gray-600 dark:text-gray-400">
-              API Key
+              {t('settings.api_key')}
             </label>
             <input
               id="api-key"
@@ -114,7 +119,7 @@ const SettingsPage = () => {
                 type="submit"
                 className="px-3 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
               >
-                Save API Key
+                {t('settings.save_api_key')}
               </button>
               <button
                 type="button"
@@ -124,16 +129,19 @@ const SettingsPage = () => {
                 }}
                 className="px-3 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
               >
-                Clear
+                {t('settings.clear')}
               </button>
             </div>
           </form>
         </Card>
 
-        <Card title="Language">
+        <Card title={t('settings.language')}>
           <div className="space-y-3">
-            <label htmlFor="language-select" className="block text-sm text-gray-600 dark:text-gray-400">
-              Language
+            <label
+              htmlFor="language-select"
+              className="block text-sm text-gray-600 dark:text-gray-400"
+            >
+              {t('settings.language')}
             </label>
             <select
               id="language-select"
@@ -141,8 +149,8 @@ const SettingsPage = () => {
               onChange={onLangChange}
               className="w-full p-2 rounded border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
             >
-              <option value="id">Bahasa Indonesia</option>
-              <option value="en">English</option>
+              <option value="id">{t('settings.lang_id')}</option>
+              <option value="en">{t('settings.lang_en')}</option>
             </select>
           </div>
         </Card>

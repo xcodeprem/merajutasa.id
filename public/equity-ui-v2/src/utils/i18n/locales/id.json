@@ -1,0 +1,95 @@
+{
+  "nav": {
+    "analytics": "Analytics",
+    "compliance": "Compliance",
+    "settings": "Settings"
+  },
+  "badge": {
+    "fairness": "keadilan",
+    "under": "under-served",
+    "anoms": "anomali",
+    "revoc": "pencabutan"
+  },
+  "heading": {
+    "under": "Under-served",
+    "kpi": "Ringkasan KPI",
+    "weekly": "Tren Mingguan",
+    "monthly": "Umpan Balik Bulanan"
+  },
+  "label": { "updated": "Terakhir diperbarui:" },
+  "link": { "methodology": "Metodologi: Hysteresis & Under-Served", "privacy": "FAQ Privasi" },
+  "snapshots": { "index": "Indeks snapshot" },
+  "decision": { "mix": { "na": "komposisi keputusan: n/a" } },
+  "spark": { "na": "sparkline: n/a" },
+  "monthly": {
+    "latest": "Bulan terbaru",
+    "total": "Total",
+    "avglen": "Rata2 panjang",
+    "categories": "Kategori",
+    "pii": "PII"
+  },
+  "dashboard": {
+    "title": "Dashboard Ekuitas H1",
+    "subtitle": "Sistem pemantauan transparansi dan keadilan"
+  },
+  "common": {
+    "loading": "Memuat...",
+    "error": "Terjadi kesalahan",
+    "retry": "Coba lagi",
+    "view_raw": "Lihat data mentah",
+    "refresh": "Muat ulang",
+    "note": "Catatan:"
+  },
+  "language": "Bahasa",
+  "theme": "Tema",
+  "light": "Terang",
+  "dark": "Gelap",
+  "menu": "Menu",
+  "navigation": "Navigasi",
+  "accessibility": {
+    "skipToContent": "Lewati ke konten utama",
+    "menu": "Menu navigasi",
+    "close": "Tutup"
+  },
+  "risk": {
+    "title": "Ringkasan Risiko",
+    "collector": "Kolektor",
+    "chain": "Rantai",
+    "privacy": "Privasi"
+  },
+  "analytics": {
+    "title": "Analytics",
+    "snapshot": "Simulasi Snapshot",
+    "decision_trends": "Tren Keputusan",
+    "anomalies_overview": "Ringkasan Anomali",
+    "loading_trends": "Memuat tren…",
+    "loading_anoms": "Memuat anomali…",
+    "preparing_chart": "Menyiapkan chart…",
+    "play": "Putar",
+    "pause": "Jeda",
+    "prev": "Sebelum",
+    "next": "Berikut",
+    "reset": "Reset",
+    "current": "Saat ini:",
+    "drilldown": "Drilldown:"
+  },
+  "compliance": {
+    "title": "Compliance",
+    "audit_signals": "Sinyal Audit",
+    "non_ranking": "Teks Non-ranking & Disclaimer",
+    "non_ranking_copy": "Aplikasi ini menghindari pemeringkatan atau perbandingan ordinal. Semua visual bersifat agregat deskriptif untuk tinjauan tata kelola dan keadilan."
+  },
+  "settings": {
+    "title": "Pengaturan",
+    "token": "Token",
+    "remember_session": "Ingat di sesi ini",
+    "save_token": "Simpan Token",
+    "clear": "Hapus",
+    "api_key": "API Key",
+    "save_api_key": "Simpan API Key",
+    "language": "Bahasa",
+    "lang_en": "English",
+    "lang_id": "Bahasa Indonesia"
+  },
+  "feedback": { "no_monthly": "Belum ada data umpan balik bulanan" }
+}

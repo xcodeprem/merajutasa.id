@@ -53,19 +53,19 @@ export const Header = () => {
               href="#/analytics"
               className="text-sm text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-300 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 rounded"
             >
-              Analytics
+              {t('nav.analytics')}
             </a>
             <a
               href="#/compliance"
               className="text-sm text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-300 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 rounded"
             >
-              Compliance
+              {t('nav.compliance')}
             </a>
             <a
               href="#/settings"
               className="text-sm text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-300 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 rounded"
             >
-              Settings
+              {t('nav.settings')}
             </a>
             {/* Language toggle */}
             <button
@@ -176,19 +176,19 @@ export const Header = () => {
                 href="#/analytics"
                 className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
               >
-                Analytics
+                {t('nav.analytics')}
               </a>
               <a
                 href="#/compliance"
                 className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
               >
-                Compliance
+                {t('nav.compliance')}
               </a>
               <a
                 href="#/settings"
                 className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
               >
-                Settings
+                {t('nav.settings')}
               </a>
             </div>
           </nav>

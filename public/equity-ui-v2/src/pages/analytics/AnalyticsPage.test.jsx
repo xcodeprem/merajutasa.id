@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import '../../services/i18n';
 
 // Mock API to return simple data
 vi.mock('../../services/api', () => ({
@@ -31,7 +32,7 @@ describe('AnalyticsPage', () => {
   it('renders snapshot controls and charts', async () => {
     renderWithQuery(<AnalyticsPage />);
     // Snapshot controls
-    expect(screen.getByText(/Snapshot Simulation/i)).toBeInTheDocument();
+  expect(screen.getByText(/Snapshot Simulation/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Play|Pause/i })).toBeInTheDocument();
 
     // Lazy charts appear after suspense
