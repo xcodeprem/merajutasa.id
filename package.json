@@ -308,7 +308,8 @@
     "issues:narratives:propagate:all": "node tools/narratives-propagate.js --grandchildren",
     "issues:enterprise:propagate": "node tools/enterprise-issue-template-propagate.js",
   "issues:enterprise:propagate:all": "node tools/enterprise-issue-template-propagate.js --grandchildren",
-  "epic:83:enterprise": "node tools/epic-83-upsert-enterprise.js"
+  "epic:83:enterprise": "node tools/epic-83-upsert-enterprise.js",
+  "epic:83:narratives": "node tools/epic-83-upsert-narratives.js"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
