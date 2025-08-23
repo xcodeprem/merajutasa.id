@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-23T22:26:28.161Z",
+  "generated_utc": "2025-08-23T23:02:06.016Z",
   "evidence_phase": "1.5",
   "artifacts": [
     {
@@ -8,9 +8,9 @@
       "path": "artifacts/spec-hash-diff.json",
       "exists": true,
       "size_bytes": 24561,
-      "sha256": "debf1375df8bff0a965da4800d8912dff0ea7a2a432cb69f08ada1922d20ca4a",
-      "sha256_short": "debf1375df8bff0a",
-      "display_hash_prefix": "debf1375df8bff0a",
+      "sha256": "340197a0deccc97dc6136cb26804ee493843edee09b698f72e250fc6a43b1858",
+      "sha256_short": "340197a0deccc97d",
+      "display_hash_prefix": "340197a0deccc97d",
       "schema_ref": "spec-hash-diff-v1.json",
       "category": "governance"
     },
@@ -62,10 +62,10 @@
       "id": "A6",
       "path": "artifacts/pii-scan-report.json",
       "exists": true,
-      "size_bytes": 18703,
-      "sha256": "17843dd1c89a17bfdea6c4a37d337f5b664bc9021a99fb2f298760bb563d6f0a",
-      "sha256_short": "17843dd1c89a17bf",
-      "display_hash_prefix": "17843dd1c89a17bf",
+      "size_bytes": 18842,
+      "sha256": "d33a2152b5f09ed040788b030e5a7386ccce6cd3a0656b7f756e2d34669b0a40",
+      "sha256_short": "d33a2152b5f09ed0",
+      "display_hash_prefix": "d33a2152b5f09ed0",
       "schema_ref": "pii-scan-v1.json",
       "category": "privacy"
     },
@@ -129,9 +129,9 @@
       "path": "artifacts/evidence-schema-validation.json",
       "exists": true,
       "size_bytes": 1312,
-      "sha256": "0efe6ba53351ebd4eff21e543fb16c6d157770b72eab3dd69dc1e96c9af67e08",
-      "sha256_short": "0efe6ba53351ebd4",
-      "display_hash_prefix": "0efe6ba53351ebd4",
+      "sha256": "7a8b70d396175788e40fa4b1fe434f00b16d35d5d1afd0b35560a3ce3494f31b",
+      "sha256_short": "7a8b70d396175788",
+      "display_hash_prefix": "7a8b70d396175788",
       "schema_ref": null,
       "category": "meta"
     }
@@ -140,7 +140,7 @@
     "total": 12,
     "missing": 0,
     "with_schema": 11,
-    "bundle_hash": "1b433c551728eea4d6b8e5178dbb8b152a6d62006dd8ec1ab7113846c22fed21"
+    "bundle_hash": "7385a59c2c5ba64e5474e681073f8e64c5e2e9637ebe302adfdc630a942dc89f"
   },
   "integrity": {
     "hash_algorithm": "SHA256",

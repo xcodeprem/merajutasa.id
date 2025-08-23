@@ -1,0 +1,64 @@
+{
+  "timestamp": "2025-08-23T23:04:38.704Z",
+  "workflow_file": "node-lts-matrix.yml",
+  "tests": {
+    "total": 11,
+    "passed": 11,
+    "failed": 0
+  },
+  "results": [
+    {
+      "name": "Workflow file exists",
+      "status": "PASS"
+    },
+    {
+      "name": "Workflow has correct structure",
+      "status": "PASS"
+    },
+    {
+      "name": "Node LTS matrix is configured",
+      "status": "PASS"
+    },
+    {
+      "name": "Caching strategy is comprehensive",
+      "status": "PASS"
+    },
+    {
+      "name": "All actions are pinned to SHA",
+      "status": "PASS"
+    },
+    {
+      "name": "Artifact uploads are configured",
+      "status": "PASS"
+    },
+    {
+      "name": "SBOM generation is configured",
+      "status": "PASS"
+    },
+    {
+      "name": "Security scanning is configured",
+      "status": "PASS"
+    },
+    {
+      "name": "Concurrency control is configured",
+      "status": "PASS"
+    },
+    {
+      "name": "Job timeouts are configured",
+      "status": "PASS"
+    },
+    {
+      "name": "Required contexts are reported",
+      "status": "PASS"
+    }
+  ],
+  "status": "PASS",
+  "coverage": {
+    "node_lts_matrix": true,
+    "caching_strategy": true,
+    "actions_pinning": true,
+    "sbom_generation": true,
+    "security_scanning": true,
+    "artifact_uploads": true
+  }
+}

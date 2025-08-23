@@ -12,6 +12,22 @@
       },
       "results": [
         {
+          "ruleId": "PLATE_ID",
+          "level": "warning",
+          "message": {
+            "text": "PLATE_ID docs/ci-artifacts.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs/ci-artifacts.md"
+                }
+              }
+            }
+          ]
+        },
+        {
           "ruleId": "EMAIL_IN_NAME",
           "level": "note",
           "message": {

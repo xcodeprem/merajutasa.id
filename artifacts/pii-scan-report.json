@@ -3,12 +3,12 @@
   "status": "ADVISORY",
   "summary": {
     "distinctCategories": 12,
-    "totalFindings": 103,
+    "totalFindings": 104,
     "categoryCounts": {
+      "PLATE_ID": 20,
       "EMAIL_IN_NAME": 34,
       "EDU_NISN": 2,
       "CONTACT_EMAIL": 18,
-      "PLATE_ID": 19,
       "IDN_NIK": 2,
       "GENERIC_16DIGIT": 4,
       "CONTACT_PHONE": 3,
@@ -21,6 +21,12 @@
     "highRiskHits": 9
   },
   "findings": [
+    {
+      "file": "docs/ci-artifacts.md",
+      "category": "PLATE_ID",
+      "action": "WARN",
+      "sample": "E2E…#71c38faf"
+    },
     {
       "file": "docs/agent-context-pack.md",
       "category": "EMAIL_IN_NAME",
