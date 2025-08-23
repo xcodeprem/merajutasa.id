@@ -1,0 +1,58 @@
+{
+  "ts": "2025-08-23T00:00:00.000Z",
+  "area": "public/equity-ui modernization",
+  "target_structure": "public/equity-ui-v2/",
+  "requirements": {
+    "tech_stack": {
+      "choice": "React 19 + Vite 7 + Tailwind 4 + React Query 5 + Zustand",
+      "status": "done"
+    },
+    "real_time_integration": {
+      "status": "partial",
+      "implemented": [
+        "Socket.IO client hook for dashboard",
+        "Gateway health/services/chain head"
+      ],
+      "pending": [
+        "Expand gateway client coverage to all Phase 2 APIs as needed"
+      ]
+    },
+    "advanced_visualization": {
+      "status": "done",
+      "notes": "Lazy charts for trends/anomalies, KPI chart"
+    },
+    "mobile_responsive": {
+      "status": "done",
+      "notes": "Tailwind responsive utilities applied"
+    },
+    "accessibility": {
+      "status": "baseline",
+      "notes": "jest-axe/unit checks; landmarks/aria; see a11y-and-performance.md"
+    },
+    "i18n": {
+      "status": "done",
+      "notes": "react-i18next with en/id and URL param"
+    },
+    "performance": {
+      "status": "configured",
+      "notes": "Code-splitting, gzip/brotli, cache headers, dist report; SLA monitor hooks available"
+    }
+  },
+  "docs": [
+    "public/equity-ui-v2/docs/README.md",
+    "public/equity-ui-v2/docs/architecture.md",
+    "public/equity-ui-v2/docs/contributing.md",
+    "public/equity-ui-v2/docs/scripts.md",
+    "public/equity-ui-v2/docs/page-data-mapping.md",
+    "public/equity-ui-v2/docs/a11y-and-performance.md",
+    "public/equity-ui-v2/docs/adrs/ADR-0001-stack-and-build.md",
+    "public/equity-ui-v2/docs/adrs/ADR-0002-authn-authz-and-refresh.md",
+    "public/equity-ui-v2/docs/adrs/ADR-0003-data-sourcing-and-fallbacks.md"
+  ],
+  "next_steps": [
+    "Map additional Phase 2 API endpoints into services/api.js and add unit tests",
+    "Add session-expiry toast and manual refresh button",
+    "Expand a11y tests and run Playwright a11y flows",
+    "Measure P95/P99 using observability: health and tune staleTime/refetch intervals"
+  ]
+}
