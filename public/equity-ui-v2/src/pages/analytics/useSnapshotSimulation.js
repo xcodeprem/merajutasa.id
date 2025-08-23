@@ -11,7 +11,7 @@ export function useSnapshotSimulation({ frames = [], intervalMs = 1200, getId })
   const [playing, setPlaying] = useState(false);
   const timerRef = useRef(null);
 
-  const safeGetId = useMemo(() => getId || ((f, i) => (f?.id ?? i)), [getId]);
+  const safeGetId = useMemo(() => getId || ((f, i) => f?.id ?? i), [getId]);
 
   const currentFrame = frames?.[currentIndex] ?? null;
 

@@ -278,8 +278,8 @@ export const Dashboard = () => {
           </p>
         </div>
 
-  {/* Canonical disclaimers */}
-  <Disclaimers pageId="dashboard" />
+        {/* Canonical disclaimers */}
+        <Disclaimers pageId="dashboard" />
       </main>
     </div>
   );

@@ -1,5 +1,5 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -18,14 +18,14 @@ export default defineConfig({
         target: 'http://localhost:8080',
         ws: true,
         changeOrigin: true,
-      }
-    }
+      },
+    },
   },
   test: {
     environment: 'jsdom',
     setupFiles: ['./vitest.setup.js'],
-  globals: true,
+    globals: true,
     include: ['src/**/*.{test,spec}.jsx'],
-    css: true
-  }
-})
+    css: true,
+  },
+});

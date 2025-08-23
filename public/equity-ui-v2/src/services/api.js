@@ -1,6 +1,7 @@
 // API service: combines Gateway OpenAPI client for Phase 2 endpoints and direct equity UI endpoints for data views
 import axios from 'axios';
 import { createApiClient } from './generatedClient';
+import { getAccessToken, getApiKey as getApiKeyStored } from './auth/tokenManager';
 
 const isOnPages = () => {
   return typeof window !== 'undefined' && /github\.io/.test(location.host);
@@ -25,10 +26,8 @@ const gatewayBase =
     : 'http://localhost:8080';
 export const gatewayClient = createApiClient({
   baseURL: gatewayBase,
-  getToken: () =>
-    typeof localStorage !== 'undefined' ? localStorage.getItem('equity_ui_token') : null,
-  getApiKey: () =>
-    typeof localStorage !== 'undefined' ? localStorage.getItem('equity_ui_api_key') : null,
+  getToken: () => getAccessToken(),
+  getApiKey: () => getApiKeyStored(),
 });
 
 // Direct equity UI data endpoints (proxied in dev via Vite)

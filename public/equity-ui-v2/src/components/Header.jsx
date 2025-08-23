@@ -57,6 +57,12 @@ export const Header = () => {
             >
               Compliance
             </a>
+            <a
+              href="#/settings"
+              className="text-sm text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-300 transition-colors"
+            >
+              Settings
+            </a>
             {/* Language toggle */}
             <button
               onClick={toggleLanguage}
@@ -167,6 +173,12 @@ export const Header = () => {
                 className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md"
               >
                 Compliance
+              </a>
+              <a
+                href="#/settings"
+                className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md"
+              >
+                Settings
               </a>
             </div>
           </div>

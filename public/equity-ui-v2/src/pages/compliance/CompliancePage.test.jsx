@@ -20,7 +20,7 @@ function renderWithQuery(ui) {
 describe('CompliancePage', () => {
   it('renders audit signals and disclaimers', async () => {
     renderWithQuery(<CompliancePage />);
-  await screen.findByText(/Audit Signals/i);
+    await screen.findByText(/Audit Signals/i);
     // Disclaimers section exists
     await screen.findByTestId('disclaimers');
   });

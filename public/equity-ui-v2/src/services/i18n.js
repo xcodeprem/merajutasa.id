@@ -88,9 +88,15 @@ const translations = {
   },
 };
 
-// Get initial language from URL params or default to 'id'
+// Get initial language from localStorage, then URL params, else default 'id'
 const getInitialLanguage = () => {
   if (typeof window !== 'undefined') {
+    try {
+      const saved = localStorage.getItem('equity_ui_lang');
+      if (saved) return saved;
+    } catch {
+      // ignore
+    }
     const params = new URLSearchParams(window.location.search);
     return params.get('lang') || 'id';
   }
@@ -110,3 +116,17 @@ i18n.use(initReactI18next).init({
 });
 
 export default i18n;
+
+// Persist language changes and keep URL param synced
+if (typeof window !== 'undefined') {
+  i18n.on('languageChanged', (lng) => {
+    try {
+      localStorage.setItem('equity_ui_lang', lng);
+    } catch {
+      // ignore
+    }
+    const url = new URL(window.location);
+    url.searchParams.set('lang', lng);
+    window.history.replaceState({}, '', url);
+  });
+}

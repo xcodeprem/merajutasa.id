@@ -6,8 +6,12 @@ import { Card } from '../../components/Card';
 import Disclaimers from '../../components/Disclaimers';
 import { useSnapshotSimulation } from './useSnapshotSimulation';
 
-const TrendsChart = React.lazy(() => import('../../components/charts/TrendsChart').then(m => ({ default: m.TrendsChart })));
-const AnomaliesChart = React.lazy(() => import('../../components/charts/AnomaliesChart').then(m => ({ default: m.AnomaliesChart })));
+const TrendsChart = React.lazy(() =>
+  import('../../components/charts/TrendsChart').then((m) => ({ default: m.TrendsChart }))
+);
+const AnomaliesChart = React.lazy(() =>
+  import('../../components/charts/AnomaliesChart').then((m) => ({ default: m.AnomaliesChart }))
+);
 
 export default function AnalyticsPage() {
   const { data: weeklyRaw, isLoading: loadingWeekly } = useQuery({
@@ -48,10 +52,16 @@ export default function AnalyticsPage() {
           >
             {sim.playing ? 'Pause' : 'Play'}
           </button>
-          <button onClick={() => sim.step(-1)} className="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700">
+          <button
+            onClick={() => sim.step(-1)}
+            className="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700"
+          >
             Prev
           </button>
-          <button onClick={() => sim.step(1)} className="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700">
+          <button
+            onClick={() => sim.step(1)}
+            className="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700"
+          >
             Next
           </button>
           <button onClick={sim.reset} className="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700">
@@ -68,7 +78,9 @@ export default function AnalyticsPage() {
         {!isReady ? (
           <div className="p-6 text-center text-gray-500">Loading trends…</div>
         ) : (
-          <Suspense fallback={<div className="p-6 text-center text-gray-500">Preparing chart…</div>}>
+          <Suspense
+            fallback={<div className="p-6 text-center text-gray-500">Preparing chart…</div>}
+          >
             <TrendsChart weekly={weekly} onDrilldown={setTrendDrill} />
           </Suspense>
         )}
@@ -84,7 +96,9 @@ export default function AnalyticsPage() {
         {!isReady ? (
           <div className="p-6 text-center text-gray-500">Loading anomalies…</div>
         ) : (
-          <Suspense fallback={<div className="p-6 text-center text-gray-500">Preparing chart…</div>}>
+          <Suspense
+            fallback={<div className="p-6 text-center text-gray-500">Preparing chart…</div>}
+          >
             <AnomaliesChart anomalies={anomalies} onDrilldown={setAnomDrill} />
           </Suspense>
         )}
@@ -95,8 +109,8 @@ export default function AnalyticsPage() {
         )}
       </Card>
 
-  {/* Canonical disclaimers on analytics */}
-  <Disclaimers pageId="analytics" />
+      {/* Canonical disclaimers on analytics */}
+      <Disclaimers pageId="analytics" />
     </div>
   );
 }

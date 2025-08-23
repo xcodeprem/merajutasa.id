@@ -7,7 +7,10 @@ import { apiGateway } from '../../services/api';
 function useAuditSignals() {
   // Reuse gateway endpoints as proxy for compliance signals
   const health = useQuery({ queryKey: ['gatewayHealth'], queryFn: () => apiGateway.getHealth() });
-  const services = useQuery({ queryKey: ['gatewayServices'], queryFn: () => apiGateway.getServices() });
+  const services = useQuery({
+    queryKey: ['gatewayServices'],
+    queryFn: () => apiGateway.getServices(),
+  });
   const chainHead = useQuery({ queryKey: ['chainHead'], queryFn: () => apiGateway.getChainHead() });
   return { health, services, chainHead };
 }

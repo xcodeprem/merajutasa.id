@@ -11,15 +11,7 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 export function TrendsChart({ weekly, onDrilldown, className = '' }) {
   const { labels, datasets } = useMemo(() => {
@@ -35,11 +27,7 @@ export function TrendsChart({ weekly, onDrilldown, className = '' }) {
     });
     return {
       labels,
-      datasets: [
-        make('POS', '#16a34a'),
-        make('BND', '#f59e0b'),
-        make('NEG', '#dc2626'),
-      ],
+      datasets: [make('POS', '#16a34a'), make('BND', '#f59e0b'), make('NEG', '#dc2626')],
     };
   }, [weekly]);
 
