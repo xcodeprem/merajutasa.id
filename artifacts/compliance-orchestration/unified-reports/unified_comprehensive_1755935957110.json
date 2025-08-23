@@ -1,0 +1,188 @@
+{
+  "report_id": "unified_comprehensive_1755935957110",
+  "generated_at": "2025-08-23T07:59:17.111Z",
+  "report_type": "comprehensive",
+  "executive_summary": {
+    "overall_status": "good",
+    "key_metrics": {
+      "compliance_score": 85,
+      "security_score": 88,
+      "privacy_score": 92
+    },
+    "critical_issues": 0,
+    "recommendations": 3
+  },
+  "component_reports": {
+    "audit": {
+      "totalEvents": 0,
+      "eventsToday": 0,
+      "complianceViolations": 0,
+      "encryptedEvents": 0,
+      "lastFlush": null,
+      "buffer_size": 0,
+      "uptime": 0.2471183,
+      "memory_usage": {
+        "rss": 36499456,
+        "heapTotal": 7929856,
+        "heapUsed": 5896144,
+        "external": 2013019,
+        "arrayBuffers": 16659
+      },
+      "configuration": {
+        "compliance_mode": "strict",
+        "retention_days": 2555,
+        "batch_size": 100
+      }
+    },
+    "compliance": {
+      "scores": {},
+      "violations": [],
+      "assessments": {},
+      "lastAssessment": null,
+      "activeAlerts": [],
+      "pendingActions": [],
+      "system_uptime": 0.2472604,
+      "last_check": "2025-08-23T07:59:17.111Z",
+      "monitoring_active": true,
+      "frameworks_monitored": [
+        "gdpr",
+        "sox",
+        "iso27001",
+        "pci"
+      ]
+    },
+    "security": {
+      "threatLevel": "medium",
+      "activeThreats": [],
+      "vulnerabilities": [],
+      "incidents": [],
+      "securityScore": 100,
+      "lastScan": null,
+      "policies": {},
+      "configurations": {},
+      "uptime": 0.2473166,
+      "last_check": "2025-08-23T07:59:17.112Z",
+      "monitoring_active": true,
+      "automated_response_enabled": true,
+      "threat_detectors": 4,
+      "active_policies": 4
+    },
+    "privacy": {
+      "activeRequests": {},
+      "consentRecords": {},
+      "dataInventory": {},
+      "processedRequests": 0,
+      "averageResponseTime": 0,
+      "complianceScore": 100,
+      "uptime": 0.2473623,
+      "last_check": "2025-08-23T07:59:17.112Z",
+      "jurisdictions_supported": [
+        "gdpr",
+        "ccpa",
+        "pipeda",
+        "lgpd"
+      ],
+      "automated_processing_enabled": true
+    }
+  },
+  "risk_assessment": {
+    "assessed_at": "2025-08-23T07:59:17.112Z",
+    "overall_risk_score": 5,
+    "risk_level": "low",
+    "risk_factors": {
+      "compliance_score_low": {
+        "name": "compliance_score_low",
+        "type": "compliance",
+        "score": 15,
+        "impact": "medium",
+        "likelihood": "low"
+      },
+      "security_threats_high": {
+        "name": "security_threats_high",
+        "type": "security",
+        "score": 0,
+        "impact": "medium",
+        "likelihood": "low"
+      },
+      "privacy_violations": {
+        "name": "privacy_violations",
+        "type": "privacy",
+        "score": 0,
+        "impact": "medium",
+        "likelihood": "low"
+      },
+      "audit_anomalies": {
+        "name": "audit_anomalies",
+        "type": "operational",
+        "score": 0,
+        "impact": "medium",
+        "likelihood": "low"
+      },
+      "response_time_slow": {
+        "name": "response_time_slow",
+        "type": "operational",
+        "score": 0,
+        "impact": "medium",
+        "likelihood": "low"
+      }
+    },
+    "recommendations": [
+      {
+        "priority": "high",
+        "action": "Improve security monitoring"
+      },
+      {
+        "priority": "medium",
+        "action": "Update compliance procedures"
+      }
+    ],
+    "immediate_actions": []
+  },
+  "compliance_status": {
+    "overall_score": 85,
+    "frameworks": [
+      "gdpr",
+      "sox",
+      "iso27001"
+    ]
+  },
+  "security_posture": {
+    "security_score": 88,
+    "active_threats": 2,
+    "vulnerabilities": 5
+  },
+  "privacy_metrics": {
+    "active_requests": 10,
+    "average_response": 15,
+    "compliance_rate": 95
+  },
+  "recommendations": [
+    {
+      "priority": "high",
+      "category": "security",
+      "title": "Address critical vulnerabilities"
+    },
+    {
+      "priority": "medium",
+      "category": "compliance",
+      "title": "Update policy documentation"
+    },
+    {
+      "priority": "low",
+      "category": "privacy",
+      "title": "Improve consent management"
+    }
+  ],
+  "action_items": [
+    {
+      "due_date": "2024-09-01",
+      "assignee": "security_team",
+      "task": "Patch critical vulnerabilities"
+    },
+    {
+      "due_date": "2024-09-15",
+      "assignee": "compliance_team",
+      "task": "Review policy updates"
+    }
+  ]
+}

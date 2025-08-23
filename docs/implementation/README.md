@@ -83,6 +83,12 @@ This directory contains comprehensive documentation for the MerajutASA.id infras
 
 *Refresh instructions: Run `npm run governance:verify` and `npm run week6:status` scripts for latest evidence.*
 
+Additional Week 6 evidence:
+
+- Unified compliance & security report: `artifacts/compliance-orchestration/unified-reports/*.json` (generate via `npm run compliance:unified-report`)
+- Security scan artifacts: `artifacts/security/scans/*.json` (run `npm run security:scan`)
+- Audit trail NDJSON: `artifacts/audit/audit-*.ndjson` (auto-flushed after scans)
+
 ### Gap Analysis
 
 - **[Comprehensive Gap Analysis](gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md)** - 500+ line industry alignment analysis

@@ -1,0 +1,20 @@
+{
+  "scan_id": "scan_1755936105004_6sireguwb",
+  "scan_type": "full",
+  "started_at": "2025-08-23T08:01:45.004Z",
+  "vulnerabilities": [
+    {
+      "type": "dependency_vulnerability",
+      "severity": "medium",
+      "package": "@octokit/graphql",
+      "version": "^9.0.1",
+      "description": "Vulnerability found in @octokit/graphql@^9.0.1",
+      "cvss_score": "2.1",
+      "cve_id": "CVE-2024-7302"
+    }
+  ],
+  "threats": [],
+  "configuration_issues": [],
+  "overall_score": 95,
+  "recommendations": []
+}

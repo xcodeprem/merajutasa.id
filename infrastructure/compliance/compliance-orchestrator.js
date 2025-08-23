@@ -931,7 +931,7 @@ if (__isDirectRun) {
   
   async function main() {
     try {
-      if (args.includes('--once')) {
+  if (args.includes('--once')) {
         console.log('🎼 Running compliance orchestrator in one-shot mode...');
         
         // Create orchestrator instance without auto-starting periodic orchestration
@@ -961,11 +961,25 @@ if (__isDirectRun) {
         console.log('✅ Compliance orchestration completed successfully');
         process.exit(0);
         
+      } else if (args.includes('--generate-report')) {
+        console.log('📋 Generating unified compliance & security report (one-shot)...');
+        const orchestrator = new ComplianceOrchestrator({ autoStartPeriodicOrchestration: false });
+        // Run a quick orchestration pass to populate state
+        await orchestrator.performOrchestration();
+        const report = await orchestrator.reportAggregator.generateUnifiedReport('comprehensive');
+        // Best-effort flush of audit trail for determinism
+        try { await orchestrator.components?.auditSystem?.instance?.flushEvents?.(); } catch {}
+        console.log('📄 Unified report path hint:', 'artifacts/compliance-orchestration/unified-reports/' + report.report_id + '.json');
+        await orchestrator.shutdown();
+        console.log('✅ Unified report generation completed');
+        process.exit(0);
+        
       } else {
         console.log('📖 Compliance Orchestrator CLI');
         console.log('Usage:');
-        console.log('  --once    Run single orchestration cycle and exit');
-        console.log('  (no args) Run continuous orchestration (default)');
+        console.log('  --once               Run single orchestration cycle and exit');
+        console.log('  --generate-report    Generate unified compliance & security report and exit');
+        console.log('  (no args)            Run continuous orchestration (default)');
         
         // Default behavior: start continuous orchestration
         const orchestrator = new ComplianceOrchestrator();

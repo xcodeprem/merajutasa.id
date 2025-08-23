@@ -164,6 +164,10 @@ jobs:
         if: matrix.check-type == 'compliance'
         run: npm run compliance:report
 
+      - name: Generate unified compliance & security report
+        if: matrix.check-type == 'compliance'
+        run: npm run compliance:unified-report
+
       - name: Run privacy rights check
         if: matrix.check-type == 'privacy'
         run: npm run privacy:rights
@@ -178,6 +182,7 @@ jobs:
             artifacts/compliance/assessments/*.json
             artifacts/compliance/compliance-report-*.json
             artifacts/compliance/regulatory/*.json
+            artifacts/compliance-orchestration/unified-reports/*.json
             artifacts/privacy-*.json
             artifacts/privacy/requests/*.json
             artifacts/security/scans/*.json

@@ -19,6 +19,7 @@
 
 import fs from 'fs/promises';
 import path from 'path';
+import { pathToFileURL } from 'url';
 import crypto from 'crypto';
 import { EventEmitter } from 'events';
 // Defer audit system import to avoid hard failures on import cycles
@@ -1033,8 +1034,18 @@ export function getSecurityHardening(options = {}) {
 
 export default SecurityHardening;
 
+// Windows-safe direct-run detection
+const __isDirectRun = (() => {
+  try {
+    const argv1 = process.argv && process.argv[1] ? process.argv[1] : '';
+    return import.meta.url === pathToFileURL(argv1).href;
+  } catch {
+    return false;
+  }
+})();
+
 // CLI interface for npm script execution
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (__isDirectRun) {
   const args = process.argv.slice(2);
   
   async function main() {
@@ -1051,6 +1062,13 @@ if (import.meta.url === `file://${process.argv[1]}`) {
         console.log(`  - Configuration issues: ${scanResult.configuration_issues.length}`);
         console.log(`  - Overall security score: ${scanResult.overall_score}/100`);
         
+        // Ensure audit events are flushed to artifacts before exiting
+        try {
+          await auditSystem?.flushEvents?.();
+        } catch (e) {
+          console.warn('⚠️ Audit flush skipped or failed:', e?.message || e);
+        }
+
         // Exit with appropriate code
         if (scanResult.overall_score < 70) {
           console.log('⚠️ Security score below acceptable threshold (70)');
