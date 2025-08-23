@@ -1,0 +1,56 @@
+{
+  "generatedAt": "2025-08-23T09:22:34.654Z",
+  "specPath": "D:\\farid\\tigabelas8\\merajutasa.id\\docs\\api\\openapi.json",
+  "outputFile": "D:\\farid\\tigabelas8\\merajutasa.id\\public\\equity-ui-v2\\src\\services\\generatedClient.js",
+  "totalEndpoints": 8,
+  "endpoints": [
+    {
+      "path": "/api/v1/signer/pubkey",
+      "method": "get",
+      "func": "getApiV1SignerPubkey",
+      "summary": "Get signer public key"
+    },
+    {
+      "path": "/api/v1/signer/sign",
+      "method": "post",
+      "func": "postApiV1SignerSign",
+      "summary": "Sign a payload"
+    },
+    {
+      "path": "/api/v1/chain/append",
+      "method": "post",
+      "func": "postApiV1ChainAppend",
+      "summary": "Append to integrity chain"
+    },
+    {
+      "path": "/api/v1/chain/head",
+      "method": "get",
+      "func": "getApiV1ChainHead",
+      "summary": "Get chain head"
+    },
+    {
+      "path": "/api/v1/collector/ingest",
+      "method": "post",
+      "func": "postApiV1CollectorIngest",
+      "summary": "Ingest event data"
+    },
+    {
+      "path": "/health",
+      "method": "get",
+      "func": "getHealth",
+      "summary": "Gateway health check"
+    },
+    {
+      "path": "/metrics",
+      "method": "get",
+      "func": "getMetrics",
+      "summary": "Gateway metrics"
+    },
+    {
+      "path": "/services",
+      "method": "get",
+      "func": "getServices",
+      "summary": "List available services"
+    }
+  ]
+}

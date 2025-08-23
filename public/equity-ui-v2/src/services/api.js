@@ -1,5 +1,6 @@
-// API service for connecting to live infrastructure APIs
+// API service: combines Gateway OpenAPI client for Phase 2 endpoints and direct equity UI endpoints for data views
 import axios from 'axios';
+import { createApiClient } from './generatedClient';
 
 const isOnPages = () => {
   return typeof window !== 'undefined' && /github\.io/.test(location.host);
@@ -17,21 +18,28 @@ const API_ENDPOINTS = {
   '/health': '/health'
 };
 
-// Create axios instance with base configuration
-const api = axios.create({
-  timeout: 10000,
-  headers: {
-    'Content-Type': 'application/json',
-  },
+// Gateway client (Phase 2) with auth/error interceptors
+const gatewayBase = typeof window !== 'undefined' ? (window.__GATEWAY_BASE_URL__ || 'http://localhost:8080') : 'http://localhost:8080';
+export const gatewayClient = createApiClient({
+  baseURL: gatewayBase,
+  getToken: () => (typeof localStorage !== 'undefined' ? localStorage.getItem('equity_ui_token') : null),
+  getApiKey: () => (typeof localStorage !== 'undefined' ? localStorage.getItem('equity_ui_api_key') : null),
 });
+
+// Direct equity UI data endpoints (proxied in dev via Vite)
+const api = axios.create({ timeout: 10000, headers: { 'Content-Type': 'application/json' } });
 
 // API functions
 export const healthCheck = async () => {
-  if (isOnPages()) {
-    return { ok: true }; // Skip health check on GitHub Pages
+  if (isOnPages()) return { ok: true };
+  try {
+    const data = await gatewayClient.getHealth();
+    return data;
+  } catch {
+    // Fallback to proxy /health if gateway not running
+    const response = await api.get(API_ENDPOINTS['/health']);
+    return response.data;
   }
-  const response = await api.get(API_ENDPOINTS['/health']);
-  return response.data;
 };
 
 export const fetchKPIData = async () => {
@@ -97,4 +105,15 @@ export const fetchDashboardData = async () => {
     console.error('[API] Dashboard data fetch error:', error);
     throw error;
   }
+};
+
+// Example: Phase 2 API wrapper (generated client)
+export const apiGateway = {
+  getHealth: () => gatewayClient.getHealth(),
+  getServices: () => gatewayClient.getServices(),
+  getChainHead: () => gatewayClient.getApiV1ChainHead(),
+  appendChain: (payload) => gatewayClient.postApiV1ChainAppend(payload),
+  signerPubKey: () => gatewayClient.getApiV1SignerPubkey(),
+  signerSign: (body) => gatewayClient.postApiV1SignerSign(body),
+  ingestEvent: (event) => gatewayClient.postApiV1CollectorIngest(event),
 };

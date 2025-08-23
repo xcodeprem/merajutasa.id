@@ -1,26 +1,22 @@
 // Card component for data display
 import React from 'react';
 
-export const Card = ({ 
-  title, 
-  children, 
-  className = '', 
+export const Card = ({
+  title,
+  children,
+  className = '',
   headerActions = null,
   loading = false,
-  error = null 
+  error = null,
 }) => {
   return (
-    <div className={`bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm ${className}`}>
+    <div
+      className={`bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm ${className}`}
+    >
       {title && (
         <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-            {title}
-          </h3>
-          {headerActions && (
-            <div className="flex items-center space-x-2">
-              {headerActions}
-            </div>
-          )}
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{title}</h3>
+          {headerActions && <div className="flex items-center space-x-2">{headerActions}</div>}
         </div>
       )}
       <div className="p-4">

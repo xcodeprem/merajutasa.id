@@ -10,13 +10,13 @@ import { RefreshCw, AlertCircle } from 'lucide-react';
 
 export const Dashboard = () => {
   const { t } = useTranslation();
-  
+
   const {
     data: dashboardData,
     isLoading,
     error,
     refetch,
-    dataUpdatedAt
+    dataUpdatedAt,
   } = useQuery({
     queryKey: ['dashboardData'],
     queryFn: fetchDashboardData,
@@ -44,9 +44,7 @@ export const Dashboard = () => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center max-w-md mx-auto">
           <AlertCircle className="h-12 w-12 text-red-500 mx-auto mb-4" />
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-            {t('error')}
-          </h2>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">{t('error')}</h2>
           <p className="text-gray-600 dark:text-gray-300 mb-4">
             {error.message || 'Failed to load dashboard data'}
           </p>
@@ -97,40 +95,37 @@ export const Dashboard = () => {
         {/* Charts and data grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           {/* Under-served data */}
-          <DataCard 
+          <DataCard
             title={t('heading.under')}
             data={underServed || { error: 'missing under-served' }}
           />
 
           {/* KPI Summary */}
-          <DataCard 
-            title={t('heading.kpi')}
-            data={kpi || { error: 'missing kpi' }}
-          />
+          <DataCard title={t('heading.kpi')} data={kpi || { error: 'missing kpi' }} />
         </div>
 
         {/* Weekly trends with chart */}
         <div className="mb-6">
-          <Card 
-            title={t('heading.weekly')}
-            className="h-auto"
-          >
+          <Card title={t('heading.weekly')} className="h-auto">
             {weekly ? (
               <div className="space-y-4">
                 {/* Decision trends chart */}
                 <DecisionTrendsChart weeklyData={weekly} />
-                
+
                 {/* Decision mix badges */}
                 {weekly.decision_mix && (
                   <div className="flex flex-wrap gap-2 pt-4 border-t border-gray-200 dark:border-gray-700">
                     <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100">
-                      POS: {weekly.decision_mix.counts.POS} ({Math.round(weekly.decision_mix.ratios.POS * 100)}%)
+                      POS: {weekly.decision_mix.counts.POS} (
+                      {Math.round(weekly.decision_mix.ratios.POS * 100)}%)
                     </span>
                     <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-800 dark:text-yellow-100">
-                      BND: {weekly.decision_mix.counts.BND} ({Math.round(weekly.decision_mix.ratios.BND * 100)}%)
+                      BND: {weekly.decision_mix.counts.BND} (
+                      {Math.round(weekly.decision_mix.ratios.BND * 100)}%)
                     </span>
                     <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800 dark:bg-red-800 dark:text-red-100">
-                      NEG: {weekly.decision_mix.counts.NEG} ({Math.round(weekly.decision_mix.ratios.NEG * 100)}%)
+                      NEG: {weekly.decision_mix.counts.NEG} (
+                      {Math.round(weekly.decision_mix.ratios.NEG * 100)}%)
                     </span>
                   </div>
                 )}
@@ -164,15 +159,20 @@ export const Dashboard = () => {
                   const latest = monthly.months[monthly.months.length - 1];
                   const cats = latest.categories || {};
                   const pii = latest.pii || {};
-                  const fmt = (o) => Object.keys(o).sort().map(k => `${k.toUpperCase()}: ${o[k]}`).join(' · ');
-                  
+                  const fmt = (o) =>
+                    Object.keys(o)
+                      .sort()
+                      .map((k) => `${k.toUpperCase()}: ${o[k]}`)
+                      .join(' · ');
+
                   return (
                     <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg">
                       <div className="mb-2">
                         <strong>{t('monthly.latest')}</strong>: {latest.month}
                       </div>
                       <div className="mb-2">
-                        {t('monthly.total')}: <strong>{latest.total}</strong> · {t('monthly.avglen')}: {latest.avg_len}
+                        {t('monthly.total')}: <strong>{latest.total}</strong> ·{' '}
+                        {t('monthly.avglen')}: {latest.avg_len}
                       </div>
                       <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">
                         {t('monthly.categories')}: {fmt(cats) || '—'}
@@ -213,35 +213,43 @@ export const Dashboard = () => {
             <div className="space-y-3">
               <div className="flex justify-between items-center">
                 <span className="font-medium">{t('risk.collector')}:</span>
-                <span className={`px-2 py-1 rounded text-sm ${
-                  risk.collector?.status === 'healthy' 
-                    ? 'bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100'
-                    : 'bg-red-100 text-red-800 dark:bg-red-800 dark:text-red-100'
-                }`}>
+                <span
+                  className={`px-2 py-1 rounded text-sm ${
+                    risk.collector?.status === 'healthy'
+                      ? 'bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100'
+                      : 'bg-red-100 text-red-800 dark:bg-red-800 dark:text-red-100'
+                  }`}
+                >
                   {risk.collector?.status || 'n/a'}
-                  {risk.collector?.success_rate_pct != null && ` (${risk.collector.success_rate_pct}% success)`}
+                  {risk.collector?.success_rate_pct != null &&
+                    ` (${risk.collector.success_rate_pct}% success)`}
                 </span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="font-medium">{t('risk.chain')}:</span>
-                <span className={`px-2 py-1 rounded text-sm ${
-                  risk.chain?.status === 'healthy' 
-                    ? 'bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100'
-                    : 'bg-red-100 text-red-800 dark:bg-red-800 dark:text-red-100'
-                }`}>
+                <span
+                  className={`px-2 py-1 rounded text-sm ${
+                    risk.chain?.status === 'healthy'
+                      ? 'bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100'
+                      : 'bg-red-100 text-red-800 dark:bg-red-800 dark:text-red-100'
+                  }`}
+                >
                   {risk.chain?.status || 'n/a'}
                   {risk.chain?.mismatches != null && ` (mismatches: ${risk.chain.mismatches})`}
                 </span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="font-medium">{t('risk.privacy')}:</span>
-                <span className={`px-2 py-1 rounded text-sm ${
-                  risk.privacy?.status === 'healthy' 
-                    ? 'bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100'
-                    : 'bg-red-100 text-red-800 dark:bg-red-800 dark:text-red-100'
-                }`}>
+                <span
+                  className={`px-2 py-1 rounded text-sm ${
+                    risk.privacy?.status === 'healthy'
+                      ? 'bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100'
+                      : 'bg-red-100 text-red-800 dark:bg-red-800 dark:text-red-100'
+                  }`}
+                >
                   {risk.privacy?.status || 'n/a'}
-                  {risk.privacy?.pii_high_risk_hits != null && ` (high-risk: ${risk.privacy.pii_high_risk_hits})`}
+                  {risk.privacy?.pii_high_risk_hits != null &&
+                    ` (high-risk: ${risk.privacy.pii_high_risk_hits})`}
                 </span>
               </div>
             </div>
@@ -251,10 +259,12 @@ export const Dashboard = () => {
         {/* GitHub Pages note */}
         <div className="mt-6 text-sm text-gray-500 dark:text-gray-400 text-center">
           <p>
-            Note: On GitHub Pages, data loads from <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">data/*.json</code> snapshots.
+            Note: On GitHub Pages, data loads from{' '}
+            <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">data/*.json</code>{' '}
+            snapshots.
             <span className="ml-2">
-              <a 
-                href="/equity-ui/snapshots.html" 
+              <a
+                href="/equity-ui/snapshots.html"
                 className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"
               >
                 {t('snapshots.index')}

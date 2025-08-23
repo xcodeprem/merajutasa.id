@@ -12,7 +12,13 @@ export default defineConfig({
       '/revocations': 'http://localhost:4620',
       '/feedback': 'http://localhost:4620',
       '/risk': 'http://localhost:4620',
-      '/health': 'http://localhost:4620'
+      '/health': 'http://localhost:4620',
+      // WebSocket proxy to API Gateway
+      '/socket.io': {
+        target: 'http://localhost:8080',
+        ws: true,
+        changeOrigin: true,
+      }
     }
   },
   test: {

@@ -2,13 +2,13 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../stores/ThemeContext';
-import { 
-  Bars3Icon, 
-  XMarkIcon, 
-  SunIcon, 
+import {
+  Bars3Icon,
+  XMarkIcon,
+  SunIcon,
   MoonIcon,
   LanguageIcon,
-  ChartBarIcon 
+  ChartBarIcon,
 } from '@heroicons/react/24/outline';
 
 export const Header = () => {
@@ -19,7 +19,7 @@ export const Header = () => {
   const toggleLanguage = () => {
     const newLang = i18n.language === 'id' ? 'en' : 'id';
     i18n.changeLanguage(newLang);
-    
+
     // Update URL parameter
     const url = new URL(window.location);
     url.searchParams.set('lang', newLang);
@@ -94,11 +94,7 @@ export const Header = () => {
               className="p-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
               aria-label={t('accessibility.menu')}
             >
-              {isMenuOpen ? (
-                <XMarkIcon className="h-6 w-6" />
-              ) : (
-                <Bars3Icon className="h-6 w-6" />
-              )}
+              {isMenuOpen ? <XMarkIcon className="h-6 w-6" /> : <Bars3Icon className="h-6 w-6" />}
             </button>
           </div>
         </div>
@@ -114,7 +110,9 @@ export const Header = () => {
                   className="flex items-center space-x-2 text-gray-600 dark:text-gray-300"
                 >
                   <LanguageIcon className="h-5 w-5" />
-                  <span>{t('language')}: {i18n.language.toUpperCase()}</span>
+                  <span>
+                    {t('language')}: {i18n.language.toUpperCase()}
+                  </span>
                 </button>
                 <button
                   onClick={toggleTheme}
@@ -128,7 +126,7 @@ export const Header = () => {
                   <span>{theme === 'light' ? t('dark') : t('light')}</span>
                 </button>
               </div>
-              
+
               {/* Mobile links */}
               <a
                 href="/equity-ui/ui/methodology"

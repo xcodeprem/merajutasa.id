@@ -180,6 +180,8 @@
     "cicd:deploy": "node -e \"import('./infrastructure/cicd/pipeline-manager.js').then(m => m.getCICDManager().executePipeline({name: 'Development Deployment'}).then(r => console.log('Pipeline:', JSON.stringify(r, null, 2))))\"",
     "cicd:status": "node -e \"import('./infrastructure/cicd/pipeline-manager.js').then(m => m.getCICDManager().healthCheck().then(h => console.log('CI/CD:', JSON.stringify(h, null, 2))))\"",
     "docs:generate": "node -e \"import('./infrastructure/api-gateway/openapi-documentation.js').then(m => m.getOpenAPISystem().generateDocumentation().then(d => console.log('Documentation:', JSON.stringify(d, null, 2))))\"",
+  "api:client:generate": "node tools/generate-openapi-client.js",
+  "api:client:smoke": "node tools/openapi-client-smoke.js",
     "docs:summary": "node -e \"import('./infrastructure/api-gateway/openapi-documentation.js').then(m => console.log('Documentation Summary:', JSON.stringify(m.getOpenAPISystem().getDocumentationSummary(), null, 2)))\"",
     "gap:enhanced": "node tools/gap-analysis-enhanced.js",
     "phase:tracker": "node tools/generate-phase-tracker.js",

@@ -17,7 +17,7 @@ export const KPIBadge = ({ label, value, type = 'default', className = '' }) => 
   };
 
   return (
-    <span 
+    <span
       className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${getStatusColor()} ${className}`}
       role="status"
       aria-label={`${label}: ${value}`}
@@ -32,17 +32,13 @@ export const KPIBadges = ({ kpiData, underServedData }) => {
 
   const fairnessStatus = kpiData?.fairness?.pass ? 'PASS' : 'FAIL';
   const fairnessType = kpiData?.fairness?.pass ? 'success' : 'error';
-  
+
   const underServedCount = underServedData?.total ?? 'n/a';
   const anomaliesCount = kpiData?.equity?.anomalies_count ?? 'n/a';
 
   return (
     <div className="flex flex-wrap gap-2 mb-4" role="group" aria-label="KPI Status Indicators">
-      <KPIBadge
-        label={t('badge.fairness')}
-        value={fairnessStatus}
-        type={fairnessType}
-      />
+      <KPIBadge label={t('badge.fairness')} value={fairnessStatus} type={fairnessType} />
       <KPIBadge
         label={t('badge.under')}
         value={underServedCount}
@@ -53,11 +49,7 @@ export const KPIBadges = ({ kpiData, underServedData }) => {
         value={anomaliesCount}
         type={anomaliesCount > 0 ? 'warning' : 'success'}
       />
-      <KPIBadge
-        label={t('badge.revoc')}
-        value="0"
-        type="success"
-      />
+      <KPIBadge label={t('badge.revoc')} value="0" type="success" />
     </div>
   );
 };

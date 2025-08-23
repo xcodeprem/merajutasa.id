@@ -5,6 +5,7 @@ import { Header } from './components/Header';
 import { Dashboard } from './components/Dashboard';
 import './services/i18n'; // Initialize i18n
 import './App.css';
+import { useRealtimeDashboard } from './services/websocket/useRealtimeDashboard';
 
 // Create a query client
 const queryClient = new QueryClient({
@@ -17,6 +18,8 @@ const queryClient = new QueryClient({
 });
 
 function App() {
+  // Start realtime updates (disabled automatically on GitHub Pages unless WS configured)
+  useRealtimeDashboard({ enabled: true });
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>

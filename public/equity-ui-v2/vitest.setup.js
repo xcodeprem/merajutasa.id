@@ -20,10 +20,10 @@ vi.mock('axios', () => {
 		if (String(url).includes('/health')) return { data: { ok: true } };
 		return { data: {} };
 	});
-	return {
-		default: {
-			create: () => ({ get: mockGet }),
-			get: mockGet,
-		},
-	};
+			const create = () => ({
+				get: mockGet,
+				post: vi.fn(async () => ({ data: { ok: true } })),
+			interceptors: { request: { use: () => {} }, response: { use: () => {} } },
+		});
+		return { default: { create, get: mockGet } };
 });
