@@ -1,0 +1,66 @@
+name: Required Contexts Reporter (bridge)
+
+on:
+  workflow_run:
+    workflows:
+      - CI Guard (H1)
+      - CodeQL
+      - Gitleaks
+    types: [completed]
+
+permissions:
+  contents: read
+  checks: write
+
+concurrency:
+  group: required-contexts-report-${{ github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  bridge:
+    name: bridge-required-contexts
+    runs-on: ubuntu-latest
+    if: |
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.head_branch == 'main' || startsWith(github.event.workflow_run.head_branch, 'feat/') || startsWith(github.event.workflow_run.head_branch, 'fix/') || startsWith(github.event.workflow_run.head_branch, 'chore/')
+    steps:
+      - name: Mirror workflow outcome to required contexts
+        uses: actions/github-script@60a0d83039c74a4aee7da9c2741b5b301c6f6f72 # v7.0.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const run = context.payload.workflow_run;
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const head_sha = run.head_sha;
+            const wfName = run.name;
+            const conclusion = run.conclusion || 'neutral';
+
+            /** Map source workflow name -> list of required context names to set */
+            const map = {
+              'CI Guard (H1)': ['ci/build', 'ci/lint', 'ci/test'],
+              'CodeQL': ['security/codeql'],
+              'Gitleaks': ['security/secret-scan'],
+            };
+
+            const names = map[wfName] || [];
+            if (names.length === 0) {
+              core.info(`No required context mapping for workflow: ${wfName}`);
+              return;
+            }
+
+            for (const name of names) {
+              core.info(`Bridging ${wfName} -> ${name} (${conclusion}) for ${head_sha}`);
+              await github.rest.checks.create({
+                owner,
+                repo,
+                name,
+                head_sha,
+                status: 'completed',
+                conclusion,
+                output: {
+                  title: name,
+                  summary: `${wfName} completed with conclusion '${conclusion}'. Bridged to required context '${name}'.`
+                }
+              });
+            }

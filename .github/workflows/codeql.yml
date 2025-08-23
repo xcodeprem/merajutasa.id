@@ -36,6 +36,7 @@ on:
 
 permissions:
   contents: read
+  checks: write
 
 concurrency:
   group: codeql-${{ github.ref }}
@@ -66,3 +67,17 @@ jobs:
         uses: github/codeql-action/autobuild@e2b3eafc8d227b0241d48be5f425d47c2d750a13 # v3.26.10
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@e2b3eafc8d227b0241d48be5f425d47c2d750a13 # v3.26.10
+      - name: Report required context (security/codeql)
+        if: always()
+        uses: actions/github-script@60a0d83039c74a4aee7da9c2741b5b301c6f6f72 # v7.0.1
+        env:
+          JOB_STATUS: ${{ job.status }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const head_sha = context.eventName === 'pull_request' ? context.payload.pull_request.head.sha : context.sha;
+            const conclusion = process.env.JOB_STATUS === 'success' ? 'success' : 'failure';
+            const name = 'security/codeql';
+            await github.rest.checks.create({ owner, repo, name, head_sha, status: 'completed', conclusion, output: { title: name, summary: 'Reported by CodeQL bridge step' } });
