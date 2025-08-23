@@ -1,18 +1,18 @@
 {
-  "timestamp": "2025-08-22T11:02:00.860Z",
+  "timestamp": "2025-08-23T12:48:53.876Z",
   "test_suite": "Week 6 Component Smoke Tests",
   "summary": {
     "total": 6,
     "passed": 6,
     "failed": 0,
     "success_rate": 100,
-    "total_duration": 6545
+    "total_duration": 6542
   },
   "results": [
     {
       "name": "End-to-End Audit Event Flow",
       "status": "PASSED",
-      "duration": 1004
+      "duration": 1005
     },
     {
       "name": "Security Threat Detection Flow",
@@ -37,7 +37,7 @@
     {
       "name": "Error Recovery Flow",
       "status": "PASSED",
-      "duration": 4
+      "duration": 3
     }
   ],
   "smoke_test_validation": {
