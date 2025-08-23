@@ -14,7 +14,9 @@ describe('tokenManager', () => {
     try {
       sessionStorage.clear();
       localStorage.clear();
-    } catch {}
+    } catch {
+      // ignore storage in test env
+    }
     clearAccessToken();
   });
 
@@ -51,6 +53,8 @@ describe('tokenManager', () => {
       expect(sessionStorage.getItem('equity_ui_session_token')).toBeNull();
       expect(sessionStorage.getItem('equity_ui_session_token_exp')).toBeNull();
       expect(sessionStorage.getItem('equity_ui_refresh_token')).toBeNull();
-    } catch {}
+    } catch {
+      // ignore storage in test env
+    }
   });
 });
