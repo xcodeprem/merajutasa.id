@@ -1,0 +1,60 @@
+{
+  "dependencies": {
+    "git": {
+      "available": true,
+      "error": null,
+      "version": "git version 2.51.0"
+    },
+    "java": {
+      "available": true,
+      "error": null,
+      "version": "openjdk version \"17.0.16\" 2025-07-15"
+    },
+    "pip3": {
+      "available": true,
+      "error": null,
+      "version": "pip 24.0 from /usr/lib/python3/dist-packages/pip (python 3.12)"
+    },
+    "python3": {
+      "available": true,
+      "error": null,
+      "version": "Python 3.12.3"
+    },
+    "wget": {
+      "available": true,
+      "error": null,
+      "version": "GNU Wget 1.21.4 built on linux-gnu."
+    }
+  },
+  "installation_type": "git_history_sanitization_tools",
+  "recommendations": [],
+  "status": "SUCCESS",
+  "summary": "Both git-filter-repo and BFG installed successfully",
+  "timestamp": "2025-08-23T21:15:24.974Z",
+  "tools": {
+    "bfg": {
+      "path": "/tmp/sanitization-tools/bfg.jar",
+      "requires_java": true,
+      "status": "ALREADY_DOWNLOADED",
+      "tool": "bfg"
+    },
+    "git_filter_repo": {
+      "path": "git-filter-repo",
+      "status": "ALREADY_INSTALLED",
+      "tool": "git-filter-repo",
+      "version": "a40bce548d2c"
+    }
+  },
+  "usage_examples": {
+    "bfg": [
+      "java -jar bfg.jar --delete-files '*.key' repo.git",
+      "java -jar bfg.jar --replace-text secrets.txt repo.git",
+      "java -jar bfg.jar --delete-folders cache repo.git"
+    ],
+    "git_filter_repo": [
+      "git filter-repo --strip-blobs-bigger-than 10M",
+      "git filter-repo --path-glob '*.key' --invert-paths",
+      "git filter-repo --replace-text secrets.txt"
+    ]
+  }
+}
