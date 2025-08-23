@@ -39,6 +39,7 @@
     "spec-hash:verify": "node tools/spec-hash-diff.js --mode=verify",
     "spec-hash:seal": "node tools/spec-hash-diff.js --mode=seal-first",
     "spec-hash:auto-seal-readme": "node tools/spec-hash-diff.js --mode=accept --include=README.md",
+  "spec-hash:auto-seal-allowlist": "node tools/spec-hash-diff.js --mode=accept --allowlist=docs/integrity/auto-seal-allowlist.json",
     "param:integrity": "node tools/param-integrity.js",
     "param:lock": "node tools/param-lock-verify.js",
     "evidence:validate": "node tools/validate-evidence.js",

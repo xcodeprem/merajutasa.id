@@ -285,20 +285,29 @@ export class APIGatewayCore {
 
     // Schema validation middleware for JSON bodies on write methods
     let validator = null;
-    if (this.config.validation?.enabled && this.config.validation.serviceSchemas?.[serviceName]) {
+    const initValidator = async () => {
+      if (!(this.config.validation?.enabled && this.config.validation.serviceSchemas?.[serviceName])) return;
       try {
-        // Lazy import AJV to avoid overhead when not needed
-        const Ajv = (await import('ajv')).default;
-        const addFormats = (await import('ajv-formats')).default;
+        // Safe Ajv loader for Node 18-22: avoid top-level await timing issues
+        const ajvMod = await import('ajv');
+        const Ajv = ajvMod.default || ajvMod;
+        const addFmMod = await import('ajv-formats');
+        const addFormats = addFmMod.default || addFmMod;
         const ajv = new Ajv({ allErrors: true, strict: false });
         addFormats(ajv);
         validator = ajv.compile(this.config.validation.serviceSchemas[serviceName]);
       } catch (e) {
-        console.warn(`Schema validation disabled for ${serviceName}:`, e.message);
+        console.warn(`Schema validation disabled for ${serviceName}:`, e?.message || e);
       }
-    }
+    };
+    // Kick off initialization but do not block route wiring
+    void initValidator();
 
     const schemaValidation = async (req, res, next) => {
+      // Lazy initialize if not ready yet
+      if (!validator) {
+        await initValidator();
+      }
       if (!validator) return next();
       if (!['POST', 'PUT', 'PATCH'].includes(req.method)) return next();
       const valid = validator(req.body || {});
