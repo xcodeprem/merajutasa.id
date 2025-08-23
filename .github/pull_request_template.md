@@ -157,16 +157,16 @@ Semua poin di bawah ini WAJIB dipenuhi. PR yang tidak memenuhi akan ditolak tanp
 
 ## 8. POLICY-AS-CODE & LINT STATUS
 
-| Policy / Lint | Status | Catatan | Artifact Path |
-|---------------|--------|---------|---------------|
-| aggregation.min_cell_threshold |  |  |  |
-| disclaimers.presence |  |  |  |
-| credential.field.prohibited |  |  |  |
-| hysteresis.params.lock |  |  |  |
-| terminology.usage.threshold |  |  |  |
-| equity.delta.anomaly (observational) |  |  |  |
-| hype.language (jika aktif) |  |  |  |
-| PII pattern config load |  |  |  |
+| Policy / Lint                        | Status | Catatan | Artifact Path |
+| ------------------------------------ | ------ | ------- | ------------- |
+| aggregation.min_cell_threshold       |        |         |               |
+| disclaimers.presence                 |        |         |               |
+| credential.field.prohibited          |        |         |               |
+| hysteresis.params.lock               |        |         |               |
+| terminology.usage.threshold          |        |         |               |
+| equity.delta.anomaly (observational) |        |         |               |
+| hype.language (jika aktif)           |        |         |               |
+| PII pattern config load              |        |         |               |
 
 ## 9. EVENT SCHEMA & INSTRUMENTATION
 
@@ -193,8 +193,8 @@ Coverage (%): …
 ## 11. RISK ASSESSMENT
 
 | Risk | Likelihood | Impact | Mitigasi | Residual |
-|------|------------|--------|----------|----------|
-|  |  |  |  |  |
+| ---- | ---------- | ------ | -------- | -------- |
+|      |            |        |          |          |
 
 ## 12. DECISIONS (BARU ATAU DI-UPDATE)
 
@@ -214,14 +214,14 @@ Chain events annotate? (Ya/Tidak)
 
 ## 14. POST-MERGE ACTIONS
 
-| Action | Owner | Deadline | Status |
-|--------|-------|----------|--------|
-| Update DEC hash references |  |  |  |
-| Publish methodology fragment update |  |  |  |
-| Seed new config to staging/prod |  |  |  |
-| Run backfill script / reindex |  |  |  |
-| Dashboard panel update |  |  |  |
-| Add changelog excerpt entry (if H2+) |  |  |  |
+| Action                               | Owner | Deadline | Status |
+| ------------------------------------ | ----- | -------- | ------ |
+| Update DEC hash references           |       |          |        |
+| Publish methodology fragment update  |       |          |        |
+| Seed new config to staging/prod      |       |          |        |
+| Run backfill script / reindex        |       |          |        |
+| Dashboard panel update               |       |          |        |
+| Add changelog excerpt entry (if H2+) |       |          |        |
 
 ## 15. OBSERVABILITY CHECKLIST
 
@@ -238,12 +238,12 @@ Chain events annotate? (Ya/Tidak)
 
 ## 17. PERFORMANCE & A11Y NOTES
 
-| Aspect | Result | Baseline | Evidence |
-|--------|--------|----------|----------|
-| p75 LCP delta |  |  |  |
-| Bundle size delta (KB) |  |  |  |
-| Accessibility new issues |  |  |  |
-| CPU / Memory regression |  |  |  |
+| Aspect                   | Result | Baseline | Evidence |
+| ------------------------ | ------ | -------- | -------- |
+| p75 LCP delta            |        |          |          |
+| Bundle size delta (KB)   |        |          |          |
+| Accessibility new issues |        |          |          |
+| CPU / Memory regression  |        |          |          |
 
 ## 18. FAIRNESS & USER COMPREHENSION COPY
 
@@ -254,8 +254,8 @@ Chain events annotate? (Ya/Tidak)
 ## 19. DATA SCHEMA / STORAGE MIGRATIONS
 
 | Table | Change | Backward-Compatible? | Migration Script Path |
-|-------|--------|----------------------|-----------------------|
-|  |  |  |  |
+| ----- | ------ | -------------------- | --------------------- |
+|       |        |                      |                       |
 Rollback strategy:
 
 ## 20. CONFIG / PARAMETER DIFF
@@ -305,7 +305,7 @@ Saya menyatakan PR ini:
 ## 26. SPEC HASH INTEGRITY (NEW – DO NOT REMOVE)
 
 | Spec File | Old Hash | New Hash | Expected Version Bump | DEC Ref | Status |
-|-----------|----------|----------|-----------------------|---------|--------|
+| --------- | -------- | -------- | --------------------- | ------- | ------ |
 <!-- AUTO:SPEC_HASH_ROWS -->
 Script Output: <!-- AUTO:SPEC_HASH_ARTIFACT -->
 
@@ -326,7 +326,7 @@ If any missing, justify:
 ## 28. PARAMETER INTEGRITY MATRIX (NEW)
 
 | Domain | Parameter | Config Value | Code Detected | Match? | Action |
-|--------|-----------|--------------|---------------|--------|--------|
+| ------ | --------- | ------------ | ------------- | ------ | ------ |
 <!-- AUTO:PARAM_MATRIX -->
 
 ## 29. TERMINOLOGY ADOPTION IMPACT (NEW)
@@ -340,7 +340,7 @@ If any missing, justify:
 ## 30. SAMPLING & OBSERVABILITY (NEW)
 
 | Item | Old | New | DEC Required? | Notes |
-|------|-----|-----|---------------|-------|
+| ---- | --- | --- | ------------- | ----- |
 <!-- AUTO:OBS_SAMPLING -->
 Ingestion success 24h: <!-- AUTO:OBS_INGEST_PCT -->%  
 Event lag p95: <!-- AUTO:OBS_LAG_P95 --> ms  
@@ -362,7 +362,7 @@ pipeline_hash diff: <!-- AUTO:PIPELINE_HASH_DIFF -->
 ## 33. DATA MINIMIZATION & FIELD CLASSIFICATION (NEW)
 
 | Field | Level (L0–L4) | Sensitive? | Justification | Alt Considered |
-|-------|---------------|------------|--------------|----------------|
+| ----- | ------------- | ---------- | ------------- | -------------- |
 <!-- AUTO:DATA_FIELDS -->
 
 ## 34. EXTERNAL NARRATIVE & ANTI-HYPE AUDIT (NEW)
@@ -410,7 +410,7 @@ Penjelasan:
 - Jangan menulis manual di antara marker; tambahkan klarifikasi di bawah marker “SUMMARY” atau di Section 25 / 22 bila perlu.
 
 | Principle | Inferred (Heuristic) | Declared (Author) | Alignment | Mitigation / Notes |
-|-----------|----------------------|-------------------|----------|--------------------|
+| --------- | -------------------- | ----------------- | --------- | ------------------ |
 <!-- AUTO:PRINCIPLES_MATRIX_ROWS -->
 
 Summary / Additional Manual Notes:
@@ -422,22 +422,22 @@ If any Alignment = DIVERGE → Jelaskan mitigasi jelas (policy link / lint / DEC
 
 ### APPENDIX A: AUTOMATION LEGEND (REFERENCE – DO NOT MODIFY ABOVE)
 
-| Marker | Source Script | Output Type | Phase Available | Failure Condition |
-|--------|---------------|------------|-----------------|------------------|
-| AUTO:SPEC_HASH_ROWS | spec-hash-diff.js | Table rows (file hash diff) | Post-seal | Hash changed tanpa DEC |
-| AUTO:SPEC_HASH_ARTIFACT | spec-hash-diff.js | JSON artifact name | Post-seal | Missing artifact |
-| AUTO:EVIDENCE:* | evidence-bundle.js | Checklist ticks | Phase 1+ | Missing critical artifact |
-| AUTO:PARAM_MATRIX | param-integrity.js | Table rows (parameter comparisons) | Phase 1 | Mismatch w/out DEC |
-| AUTO:TERM_ADOPTION_DIFF | terminology-scan.js | Percentage delta | Phase 1 | Adoption regression |
-| AUTO:TERM_ADOPTION_ARTIFACT | terminology-scan.js | JSON path | Phase 1 | Missing artifact |
-| AUTO:OBS_SAMPLING / OBS_INGEST_PCT / OBS_LAG_P95 | observability-metrics.js | Metrics numeric | Phase 1 | Null / sentinel -1 |
-| AUTO:FAIR_SIM_* | fairness-sim.js | Simulation metrics | Phase 1 | Churn spike > threshold |
-| AUTO:DATA_FIELDS | data-field-classifier.js | Table classification | Phase 1 | Unjustified sensitive field |
-| AUTO:HYPE_* | hype-lint.js | Count / status | Phase 1 | Banned terms present |
-| AUTO:AUDIT_* | audit-replay.js | Replay summary | Phase 2 | Mismatch chain/state |
-| AUTO:NO_DRIFT_* | no-silent-drift.js | Checklist results | Phase 2 | Any drift flag |
-| AUTO:PRINCIPLES_MATRIX_ROWS | principles-impact.js | Principle rows | Phase 0 | Undeclared impacted principle |
-| AUTO:PRINCIPLES_MATRIX_SUMMARY | principles-impact.js | Summary text | Phase 0 | Summary empty while rows flagged |
+| Marker                                           | Source Script            | Output Type                        | Phase Available | Failure Condition                |
+| ------------------------------------------------ | ------------------------ | ---------------------------------- | --------------- | -------------------------------- |
+| AUTO:SPEC_HASH_ROWS                              | spec-hash-diff.js        | Table rows (file hash diff)        | Post-seal       | Hash changed tanpa DEC           |
+| AUTO:SPEC_HASH_ARTIFACT                          | spec-hash-diff.js        | JSON artifact name                 | Post-seal       | Missing artifact                 |
+| AUTO:EVIDENCE:*                                  | evidence-bundle.js       | Checklist ticks                    | Phase 1+        | Missing critical artifact        |
+| AUTO:PARAM_MATRIX                                | param-integrity.js       | Table rows (parameter comparisons) | Phase 1         | Mismatch w/out DEC               |
+| AUTO:TERM_ADOPTION_DIFF                          | terminology-scan.js      | Percentage delta                   | Phase 1         | Adoption regression              |
+| AUTO:TERM_ADOPTION_ARTIFACT                      | terminology-scan.js      | JSON path                          | Phase 1         | Missing artifact                 |
+| AUTO:OBS_SAMPLING / OBS_INGEST_PCT / OBS_LAG_P95 | observability-metrics.js | Metrics numeric                    | Phase 1         | Null / sentinel -1               |
+| AUTO:FAIR_SIM_*                                  | fairness-sim.js          | Simulation metrics                 | Phase 1         | Churn spike > threshold          |
+| AUTO:DATA_FIELDS                                 | data-field-classifier.js | Table classification               | Phase 1         | Unjustified sensitive field      |
+| AUTO:HYPE_*                                      | hype-lint.js             | Count / status                     | Phase 1         | Banned terms present             |
+| AUTO:AUDIT_*                                     | audit-replay.js          | Replay summary                     | Phase 2         | Mismatch chain/state             |
+| AUTO:NO_DRIFT_*                                  | no-silent-drift.js       | Checklist results                  | Phase 2         | Any drift flag                   |
+| AUTO:PRINCIPLES_MATRIX_ROWS                      | principles-impact.js     | Principle rows                     | Phase 0         | Undeclared impacted principle    |
+| AUTO:PRINCIPLES_MATRIX_SUMMARY                   | principles-impact.js     | Summary text                       | Phase 0         | Summary empty while rows flagged |
 
 Legend Status (Policy/Lint):
 
@@ -456,18 +456,18 @@ Alignment (Principles):
 
 ### APPENDIX B: POLICY CODE REFERENCE (PLACEHOLDER)
 
-| Policy Code | Domain | Active Phase | DEC Required on Change | Notes |
-|-------------|--------|-------------|------------------------|-------|
-| hysteresis.params.lock | Fairness | Phase 0 | Yes | Parameter fairness Option F |
-| principles.reference | Governance | Phase 0 (WARN) | Yes | Escalates 48h→ERROR |
-| disclaimers.presence | Narrative | (Planned) | Yes | Menunggu DISC-DEC |
-| equity.delta.anomaly | Analytics | (Planned) | Yes | Lock anomaly delta (0.03) |
-| credential.field.prohibited | Schema | (Planned) | Yes | Disallow risky mutable fields |
-| aggregation.min_cell_threshold | Privacy | (Planned) | Yes | Prevent small group leakage |
-| terminology.usage.threshold | Adoption | (Planned) | No (DEC escalate) | Track new term adoption |
-| hype.language | Narrative | (Planned) | No (config) | Banned lexicon gating |
-| pii.patterns.lock | Privacy | (Planned) | Yes | Append vs modify distinction |
-| evidence.completeness | Governance | (Phase 2) | Yes | Merge block if below threshold |
+| Policy Code                    | Domain     | Active Phase   | DEC Required on Change | Notes                          |
+| ------------------------------ | ---------- | -------------- | ---------------------- | ------------------------------ |
+| hysteresis.params.lock         | Fairness   | Phase 0        | Yes                    | Parameter fairness Option F    |
+| principles.reference           | Governance | Phase 0 (WARN) | Yes                    | Escalates 48h→ERROR            |
+| disclaimers.presence           | Narrative  | (Planned)      | Yes                    | Menunggu DISC-DEC              |
+| equity.delta.anomaly           | Analytics  | (Planned)      | Yes                    | Lock anomaly delta (0.03)      |
+| credential.field.prohibited    | Schema     | (Planned)      | Yes                    | Disallow risky mutable fields  |
+| aggregation.min_cell_threshold | Privacy    | (Planned)      | Yes                    | Prevent small group leakage    |
+| terminology.usage.threshold    | Adoption   | (Planned)      | No (DEC escalate)      | Track new term adoption        |
+| hype.language                  | Narrative  | (Planned)      | No (config)            | Banned lexicon gating          |
+| pii.patterns.lock              | Privacy    | (Planned)      | Yes                    | Append vs modify distinction   |
+| evidence.completeness          | Governance | (Phase 2)      | Yes                    | Merge block if below threshold |
 
 (Baris baru hanya ditambahkan, tidak mengganti.)
 
