@@ -11,6 +11,11 @@
   },
   "packageManager": "npm@9.8.1",
   "scripts": {
+    "frontend:performance-test": "node tools/performance/frontend-performance-test.js",
+    "frontend:lighthouse": "node tools/performance/frontend-metrics.js",
+    "cache:stats": "node tools/performance/cache-stats.js stats",
+    "frontend:summary": "node tools/performance/frontend-summary.js json",
+    "perf:metrics": "node tools/performance/write-perf-metrics.js",
     "project:spotcheck": "node tools/github/project-spotcheck.js --owner=xcodeprem --repo=merajutasa.id",
     "project:sync": "node tools/github/project-sync-item.js",
     "project:token:diag": "node tools/github/project-token-diagnostics.js",

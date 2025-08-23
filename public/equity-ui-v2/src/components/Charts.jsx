@@ -1,5 +1,6 @@
 // Chart component using Chart.js for advanced visualization
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -25,9 +26,10 @@ ChartJS.register(
 );
 
 export const DecisionTrendsChart = ({ weeklyData, className = '' }) => {
+  const { t } = useTranslation();
   if (!weeklyData?.weeks || weeklyData.weeks.length === 0) {
     return (
-      <div className={`p-4 text-center text-gray-500 ${className}`}>No trend data available</div>
+      <div className={`p-4 text-center text-gray-500 ${className}`}>{t('charts.no_trend')}</div>
     );
   }
 
@@ -36,7 +38,7 @@ export const DecisionTrendsChart = ({ weeklyData, className = '' }) => {
   if (weeks.length === 0) {
     return (
       <div className={`p-4 text-center text-gray-500 ${className}`}>
-        No decision trend data available
+        {t('charts.no_decision_trend')}
       </div>
     );
   }
@@ -100,10 +102,9 @@ export const DecisionTrendsChart = ({ weeklyData, className = '' }) => {
 };
 
 export const KPIChart = ({ kpiData, className = '' }) => {
+  const { t } = useTranslation();
   if (!kpiData) {
-    return (
-      <div className={`p-4 text-center text-gray-500 ${className}`}>No KPI data available</div>
-    );
+    return <div className={`p-4 text-center text-gray-500 ${className}`}>{t('charts.no_kpi')}</div>;
   }
 
   const equity = kpiData.equity || {};

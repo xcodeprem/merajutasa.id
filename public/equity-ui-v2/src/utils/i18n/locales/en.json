@@ -103,4 +103,10 @@
     "lang_id": "Bahasa Indonesia"
   },
   "feedback": { "no_monthly": "No monthly feedback data yet" }
+  ,
+  "charts": {
+    "no_trend": "No trend data available",
+    "no_decision_trend": "No decision trend data available",
+    "no_kpi": "No KPI data available"
+  }
 }

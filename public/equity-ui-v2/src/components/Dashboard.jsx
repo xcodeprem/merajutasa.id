@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { fetchDashboardData } from '../services/api';
 import { KPIBadges } from './KPIBadges';
 import { Card, DataCard } from './Card';
-import { DecisionTrendsChart, KPIChart } from './Charts';
+const Charts = React.lazy(() => import('./Charts'));
 import { RefreshCw, AlertCircle } from 'lucide-react';
 import { useSyncDashboardToStore } from '../stores/sync';
 import Disclaimers from './Disclaimers';
@@ -118,7 +118,15 @@ export const Dashboard = () => {
             {weekly ? (
               <div className="space-y-4">
                 {/* Decision trends chart */}
-                <DecisionTrendsChart weeklyData={weekly} />
+                <React.Suspense
+                  fallback={
+                    <div className="h-64 flex items-center justify-center text-gray-500">
+                      {t('common.loading')}
+                    </div>
+                  }
+                >
+                  <Charts.DecisionTrendsChart weeklyData={weekly} />
+                </React.Suspense>
 
                 {/* Decision mix badges */}
                 {weekly.decision_mix && (
@@ -211,7 +219,15 @@ export const Dashboard = () => {
 
           {/* KPI Chart */}
           <Card title={t('dashboard.kpi_visualization')}>
-            <KPIChart kpiData={kpi} />
+            <React.Suspense
+              fallback={
+                <div className="h-64 flex items-center justify-center text-gray-500">
+                  {t('common.loading')}
+                </div>
+              }
+            >
+              <Charts.KPIChart kpiData={kpi} />
+            </React.Suspense>
           </Card>
         </div>
 

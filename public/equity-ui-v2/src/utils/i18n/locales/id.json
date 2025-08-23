@@ -102,5 +102,10 @@
     "lang_en": "English",
     "lang_id": "Bahasa Indonesia"
   },
-  "feedback": { "no_monthly": "Belum ada data umpan balik bulanan" }
+  "feedback": { "no_monthly": "Belum ada data umpan balik bulanan" },
+  "charts": {
+    "no_trend": "Tidak ada data tren",
+    "no_decision_trend": "Tidak ada data tren keputusan",
+    "no_kpi": "Tidak ada data KPI"
+  }
 }
