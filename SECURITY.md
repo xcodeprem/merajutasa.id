@@ -463,41 +463,119 @@ Ensure:
 
 **SLA**: All secrets discovered in repository history must be rotated within **24 hours** of detection.
 
+**Automated Detection**: Repository is scanned every commit via pre-commit hooks and CI/CD pipelines.
+
+**Rotation Tracking**: All rotation activities are logged in `artifacts/credential-rotation-log.ndjson` with full audit trail.
+
+### Automated Rotation Workflow
+
+#### Automated Rotation Workflow
+
+```bash
+# Comprehensive rotation workflow (detection + rotation + logging)
+node tools/security/credential-rotation-manager.js
+
+# Or use npm scripts:
+npm run security:rotation              # Full rotation workflow
+npm run security:rotation:status      # Quick status overview  
+npm run security:rotation:emergency   # Emergency rotation mode
+npm run security:comprehensive        # Complete security check
+
+# Status and monitoring
+npm run security:rotation:status      # Display current rotation status
+node tools/security/credential-rotation-status.js  # Generate full status report
+```
+
+#### Rotation Testing & Validation
+
+```bash
+# Test emergency rotation procedures
+npm run test:credential-rotation
+
+# Test secret protection mechanisms  
+npm run test:secret-protection
+
+# Comprehensive security validation
+npm run security:comprehensive
+```
+
+#### Rotation Artifacts
+
+- **Rotation Log**: `artifacts/credential-rotation-log.ndjson` (append-only audit trail)
+- **Rotation Report**: `artifacts/credential-rotation-report.json` (latest status)
+- **Emergency Alerts**: `artifacts/emergency-rotation-required.json` (created if secrets detected)
+
 ### Supported Secret Types & Rotation Procedures
 
 #### API Keys & Tokens
 
-- **Detection**: Automated via secret scanning and manual audits
+- **Detection**: Automated via gitleaks pattern matching (GitHub tokens, AWS keys, JWT tokens)
 - **Rotation**: Generate new API key/token, update all references, revoke old key
 - **Validation**: Test all integrations before revoking old credentials
+- **Logging**: All rotation events logged with rotation_id for tracking
 
 #### Database Credentials
 
+- **Detection**: Connection strings with embedded credentials
 - **Rotation**: Update connection strings, restart services, verify connectivity
 - **Validation**: Connection tests across all environments
+- **Zero-downtime**: Rolling deployment with overlapping credential validity
 
 #### Cryptographic Keys
 
 - **SSH Keys**: Generate new keypair, update authorized_keys, remove old key
 - **TLS Certificates**: Issue new certificate, update server configuration, revoke old certificate
 - **Signing Keys**: Generate new keypair, update public key distribution, maintain backwards compatibility period
+- **Key Escrow**: Secure backup of rotation keys for audit compliance
 
 #### Environment Variables
 
 - **Process**: Update .env files, restart services, validate configuration
 - **Verification**: Functional testing across affected systems
+- **Rollback**: Maintain previous values for emergency rollback
 
 ### Emergency Rotation Procedure
 
-1. **Immediate Actions** (within 1 hour):
-   - Revoke compromised credentials if possible
-   - Generate temporary replacement credentials
-   - Update critical systems to prevent service disruption
+#### Immediate Response (< 30 minutes)
 
-2. **Full Rotation** (within 24 hours):
-   - Generate permanent replacement credentials
-   - Update all systems and configurations
-   - Validate all integrations and services
+1. **Alert Triggering**: Automatic alerts when secrets detected
+2. **Access Revocation**: Immediately revoke compromised credentials where possible
+3. **Service Protection**: Enable emergency protection mode
+4. **Incident Logging**: Create incident record with unique incident_id
+
+#### Full Rotation (< 4 hours)
+
+1. **Generate New Credentials**: Create replacement credentials with strong entropy
+2. **Deploy Updates**: Rolling deployment to all affected systems
+3. **Validate Services**: Comprehensive testing across all environments
+4. **Revoke Old Credentials**: Complete revocation of compromised credentials
+5. **Audit Trail**: Full documentation of rotation in governance artifacts
+
+#### Post-Rotation Verification (< 24 hours)
+
+1. **Security Scan**: Full repository re-scan to confirm clean status
+2. **Access Log Review**: Verify no unauthorized access during rotation window
+3. **Service Monitoring**: Extended monitoring period for service stability
+4. **Compliance Report**: Generate rotation compliance report for audit
+
+### Compliance & Audit Requirements
+
+#### Rotation Documentation
+
+All credential rotations must include:
+
+- **Rotation Trigger**: What detected the need for rotation
+- **Credentials Affected**: Complete inventory of rotated credentials
+- **Timeline**: Detailed timeline from detection to completion
+- **Validation Results**: Test results confirming successful rotation
+- **Access Impact**: Any service disruptions or access issues
+
+#### Audit Trail Integrity
+
+- **Immutable Logging**: Rotation logs use append-only format
+- **Cryptographic Hashing**: Each log entry includes integrity hash
+- **Retention Policy**: 7-year retention for compliance requirements
+- **External Backup**: Rotation logs backed up to external audit system
 
 ## 🧹 Git History Sanitization
 
