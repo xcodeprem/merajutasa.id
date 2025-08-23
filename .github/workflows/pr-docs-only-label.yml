@@ -1,0 +1,55 @@
+name: PR Labeler (docs-only)
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    branches: [ main ]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  label-docs-only:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (shallow)
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+        with:
+          fetch-depth: 0
+
+      - name: Detect changed paths
+        id: changes
+        uses: dorny/paths-filter@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          filters: |
+            docs:
+              - 'README.md'
+              - 'docs/**'
+              - 'content/**'
+              - 'artifacts/**'
+              - '**/*.md'
+              - '**/*.mdx'
+              - '**/*.png'
+              - '**/*.jpg'
+              - '**/*.jpeg'
+              - '**/*.gif'
+              - '**/*.svg'
+              - 'docs/**/*.json'
+              - 'content/**/*.json'
+            code:
+              - '!README.md'
+              - '!docs/**'
+              - '!content/**'
+              - '!artifacts/**'
+              - '!**/*.md'
+              - '!**/*.mdx'
+              - '**'
+
+      - name: Add docs-only label when appropriate
+        if: steps.changes.outputs.docs == 'true' && steps.changes.outputs.code == 'false'
+        uses: actions-ecosystem/action-add-labels@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          labels: docs-only
