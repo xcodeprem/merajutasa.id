@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-08-22T11:02:00.860Z",
+  "timestamp": "2025-08-23T12:36:15.000Z",
   "test_suite": "Week 6 Component Smoke Tests",
   "summary": {
     "total": 6,
@@ -12,7 +12,7 @@
     {
       "name": "End-to-End Audit Event Flow",
       "status": "PASSED",
-      "duration": 1004
+      "duration": 1005
     },
     {
       "name": "Security Threat Detection Flow",

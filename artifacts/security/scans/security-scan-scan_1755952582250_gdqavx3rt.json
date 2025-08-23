@@ -1,0 +1,20 @@
+{
+  "scan_id": "scan_1755952582250_gdqavx3rt",
+  "scan_type": "full",
+  "started_at": "2025-08-23T12:36:22.250Z",
+  "vulnerabilities": [
+    {
+      "type": "dependency_vulnerability",
+      "severity": "low",
+      "package": "glob",
+      "version": "^11.0.3",
+      "description": "Vulnerability found in glob@^11.0.3",
+      "cvss_score": "1.5",
+      "cve_id": "CVE-2024-2432"
+    }
+  ],
+  "threats": [],
+  "configuration_issues": [],
+  "overall_score": 98,
+  "recommendations": []
+}
