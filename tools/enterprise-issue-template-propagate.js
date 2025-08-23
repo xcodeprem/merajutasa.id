@@ -9,8 +9,31 @@ import { fileURLToPath } from "url";
 import { execFileSync } from "child_process";
 import { stableStringify, addMetadata } from "./lib/json-stable.js";
 
+// Resolve __dirname early (ESM)
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Load reviewers config after __dirname is defined
+const REVIEWERS_CONFIG_PATH = path.resolve(
+  __dirname,
+  "../config/reviewers.json"
+);
+let REVIEW_CFG = {
+  tech_owner: process.env.TECH_OWNER || "xcodeprem",
+  required_reviewers: (
+    process.env.REQUIRED_REVIEWERS || "Andhika-Rey,xcodeprem"
+  )
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean),
+};
+try {
+  const raw = await fs.readFile(REVIEWERS_CONFIG_PATH, "utf8");
+  const cfg = JSON.parse(raw);
+  if (cfg?.tech_owner) REVIEW_CFG.tech_owner = cfg.tech_owner;
+  if (Array.isArray(cfg?.required_reviewers) && cfg.required_reviewers.length)
+    REVIEW_CFG.required_reviewers = cfg.required_reviewers;
+} catch {}
 
 const OWNER = "xcodeprem";
 const REPO = "merajutasa.id";
@@ -200,8 +223,10 @@ function buildEnterpriseBlock(issueIdx, domainTitle, sectionBody) {
     `\n## Rollout Plan & Rollback\n${
       rollout || "- Tahapan penyebaran, verifikasi, rollback teruji."
     }`,
-    `\n## Tech Owner (wajib)\n@owner-here`,
-    `\n## Required Reviewers\n@reviewer1 @reviewer2`,
+    `\n## Tech Owner (wajib)\n@${REVIEW_CFG.tech_owner}`,
+    `\n## Required Reviewers\n${REVIEW_CFG.required_reviewers
+      .map((r) => `@${r}`)
+      .join(" ")}`,
     `\n## Due Date (UTC, YYYY-MM-DD)\n2025-09-15`,
     BLOCK_END,
   ];
