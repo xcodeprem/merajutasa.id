@@ -3,8 +3,34 @@ name: CodeQL
 on:
   push:
     branches: [ main ]
+    paths-ignore:
+      - 'README.md'
+      - 'docs/**'
+      - 'content/**'
+      - 'artifacts/**'
+      - '**/*.md'
+      - '**/*.mdx'
+      - '**/*.png'
+      - '**/*.jpg'
+      - '**/*.jpeg'
+      - '**/*.gif'
+      - '**/*.svg'
+      - '**/*.json'
   pull_request:
     branches: [ main ]
+    paths-ignore:
+      - 'README.md'
+      - 'docs/**'
+      - 'content/**'
+      - 'artifacts/**'
+      - '**/*.md'
+      - '**/*.mdx'
+      - '**/*.png'
+      - '**/*.jpg'
+      - '**/*.jpeg'
+      - '**/*.gif'
+      - '**/*.svg'
+      - '**/*.json'
   schedule:
     - cron: '0 18 * * 1'
 

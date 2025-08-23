@@ -2,6 +2,19 @@ name: "Gitleaks"
 on:
   pull_request:
     branches: [ "main" ]
+    paths-ignore:
+      - 'README.md'
+      - 'docs/**'
+      - 'content/**'
+      - 'artifacts/**'
+      - '**/*.md'
+      - '**/*.mdx'
+      - '**/*.png'
+      - '**/*.jpg'
+      - '**/*.jpeg'
+      - '**/*.gif'
+      - '**/*.svg'
+      - '**/*.json'
 permissions:
   contents: read
 jobs:
