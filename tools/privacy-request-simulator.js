@@ -92,8 +92,8 @@ class PrivacyRequestSimulator {
    * Simulate individual privacy request
    */
   async simulateRequest(requestType) {
-    const requestId = `req_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-    const userId = `user_${Math.random().toString(36).substr(2, 9)}`;
+  const requestId = `req_${Date.now()}_${crypto.randomUUID()}`;
+  const userId = `user_${crypto.randomUUID()}`;
     
     const request = {
       request_id: requestId,
@@ -114,7 +114,7 @@ class PrivacyRequestSimulator {
     request.processing_time_ms = Date.now() - processingStart;
     
     // Simulate success/failure
-    const success = Math.random() > 0.05; // 95% success rate
+  const success = crypto.randomInt(0, 100) >= 5; // ~95% success rate
     request.status = success ? 'success' : 'failed';
     
     if (!success) {

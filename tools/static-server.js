@@ -2,6 +2,8 @@
 // Serves public/dist with strong caching for hashed assets and shorter for HTML
 import express from "express";
 import compression from "compression";
+import helmet from "helmet";
+import rateLimit from "express-rate-limit";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -13,6 +15,26 @@ const distDir = path.resolve(__dirname, "../public/dist");
 const port = process.env.UI_PORT || 5174;
 
 app.use(compression());
+
+// Trust proxy when behind reverse proxies (for accurate rate limiting IPs)
+app.set("trust proxy", true);
+
+// Security headers (conservative CSP disabled to avoid breaking SPA dev)
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+    crossOriginEmbedderPolicy: false,
+  })
+);
+
+// Basic rate limiting to mitigate abuse
+const limiter = rateLimit({
+  windowMs: 60 * 1000, // 1 minute
+  max: Number(process.env.UI_RATE_LIMIT_MAX || 600), // requests per IP per window
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+app.use(limiter);
 
 // Set cache headers
 app.use((req, res, next) => {

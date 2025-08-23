@@ -42,9 +42,9 @@ export function createApiClient({ baseURL, getToken, getApiKey, onError } = {}) 
 
   instance.interceptors.request.use((config) => {
     try {
-      const token = getToken ? getToken() : (typeof localStorage !== 'undefined' ? localStorage.getItem('equity_ui_token') : null);
+  const token = getToken ? getToken() : null;
       if (token) config.headers = { ...(config.headers || {}), Authorization: 'Bearer ' + token };
-      const apiKey = getApiKey ? getApiKey() : (typeof localStorage !== 'undefined' ? localStorage.getItem('equity_ui_api_key') : null);
+  const apiKey = getApiKey ? getApiKey() : null;
       if (apiKey) config.headers = { ...(config.headers || {}), 'X-API-Key': apiKey };
     } catch {}
     return config;

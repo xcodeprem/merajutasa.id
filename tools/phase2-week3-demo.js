@@ -91,7 +91,7 @@ class Phase2Week3Demo {
     ];
 
     for (const op of operations) {
-      await this.observability.traceBusinessOperation(op.name, async (span) => {
+        await this.observability.traceBusinessOperation(op.name, async (span) => {
         console.log(`   🔗 Tracing: ${op.name}`);
         
         // Simulate operation duration
@@ -110,7 +110,7 @@ class Phase2Week3Demo {
       }, {
         operationId: `demo_${Date.now()}`,
         userAgent: 'MerajutASA-Demo/1.0',
-        requestId: `req_${Math.random().toString(36).substr(2, 9)}`
+          requestId: `req_${(await import('crypto')).randomUUID()}`
       });
     }
 
@@ -124,18 +124,18 @@ class Phase2Week3Demo {
     // Generate sample metrics
     const sampleMetrics = {
       // System metrics
-      avg_response_time: 145 + Math.random() * 50,
-      error_rate: Math.random() * 5,
-      throughput: 50 + Math.random() * 30,
-      cpu_usage_percent: 45 + Math.random() * 20,
-      memory_usage_percent: 65 + Math.random() * 15,
+    avg_response_time: 145 + (await import('crypto')).webcrypto.getRandomValues(new Uint32Array(1))[0] % 50,
+    error_rate: ((await import('crypto')).webcrypto.getRandomValues(new Uint32Array(1))[0] % 500) / 100,
+    throughput: 50 + ((await import('crypto')).webcrypto.getRandomValues(new Uint32Array(1))[0] % 30),
+    cpu_usage_percent: 45 + ((await import('crypto')).webcrypto.getRandomValues(new Uint32Array(1))[0] % 20),
+    memory_usage_percent: 65 + ((await import('crypto')).webcrypto.getRandomValues(new Uint32Array(1))[0] % 15),
       
       // Business metrics
-      signing_operations_success: Math.floor(Math.random() * 100),
-      signing_operations_failed: Math.floor(Math.random() * 5),
-      chain_integrity_score: 95 + Math.random() * 5,
-      governance_verifications_total: Math.floor(Math.random() * 50),
-      equity_score_avg: 0.7 + Math.random() * 0.2,
+    signing_operations_success: (await import('crypto')).randomInt(0, 100),
+    signing_operations_failed: (await import('crypto')).randomInt(0, 5),
+    chain_integrity_score: 95 + ((await import('crypto')).randomInt(0, 5)),
+    governance_verifications_total: (await import('crypto')).randomInt(0, 50),
+    equity_score_avg: 0.7 + ((await import('crypto')).randomInt(0, 200) / 1000),
       
       // Performance metrics
       cache_hit_ratio: 0.85 + Math.random() * 0.1,
@@ -399,7 +399,7 @@ class Phase2Week3Demo {
       for (let i = 0; i < iterations; i++) {
         switch (op.operation) {
           case 'metric':
-            this.observability.recordUnifiedMetric(`benchmark_${i}`, Math.random() * 100);
+              this.observability.recordUnifiedMetric(`benchmark_${i}`, (await import('crypto')).randomInt(0, 100));
             break;
           case 'log':
             const logging = this.observability.components.get('logging');
