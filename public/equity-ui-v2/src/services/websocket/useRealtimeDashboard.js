@@ -1,13 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { createSocket } from './socket';
-import {
-  adaptKPI,
-  adaptWeeklyTrends,
-  adaptUnderServed,
-  adaptAnomalies,
-  adaptRiskDigest,
-} from '../api/feed-adapters';
+import { applyRealtimeToStore } from '../../stores/sync';
 
 const defaultState = {
   kpi: null,
@@ -27,29 +21,27 @@ export function useRealtimeDashboard({ enabled = true, authToken, logger = conso
     if (!enabled) return;
 
     const onEvent = (channel, payload) => {
+      // Update global store (normalized via adapters inside applyRealtimeToStore)
+      applyRealtimeToStore(channel, payload);
+
+      // Also update React Query cached dashboard data for existing consumers
       queryClient.setQueryData(['dashboardData'], (prev) => {
         const base = prev && typeof prev === 'object' ? prev : defaultState;
-        let next = base;
+        const ts = new Date().toISOString();
         switch (channel) {
           case 'kpi':
-            next = { ...base, kpi: adaptKPI(payload), lastUpdated: new Date().toISOString() };
-            break;
+            return { ...base, kpi: payload, lastUpdated: ts };
           case 'weekly_trends':
-            next = { ...base, weekly: adaptWeeklyTrends(payload), lastUpdated: new Date().toISOString() };
-            break;
+            return { ...base, weekly: payload, lastUpdated: ts };
           case 'under_served':
-            next = { ...base, underServed: adaptUnderServed(payload), lastUpdated: new Date().toISOString() };
-            break;
+            return { ...base, underServed: payload, lastUpdated: ts };
           case 'equity_anomalies':
-            next = { ...base, anomalies: adaptAnomalies(payload), lastUpdated: new Date().toISOString() };
-            break;
+            return { ...base, anomalies: payload, lastUpdated: ts };
           case 'risk_digest':
-            next = { ...base, risk: adaptRiskDigest(payload), lastUpdated: new Date().toISOString() };
-            break;
+            return { ...base, risk: payload, lastUpdated: ts };
           default:
-            next = base;
+            return { ...base, lastUpdated: ts };
         }
-        return next;
       });
     };
 
@@ -58,7 +50,7 @@ export function useRealtimeDashboard({ enabled = true, authToken, logger = conso
     return () => {
       try {
         socketRef.current?.disconnect();
-  } catch {
+      } catch {
         // ignore cleanup errors
       }
       socketRef.current = null;

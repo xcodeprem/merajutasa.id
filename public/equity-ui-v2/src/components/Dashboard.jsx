@@ -7,6 +7,7 @@ import { KPIBadges } from './KPIBadges';
 import { Card, DataCard } from './Card';
 import { DecisionTrendsChart, KPIChart } from './Charts';
 import { RefreshCw, AlertCircle } from 'lucide-react';
+import { useSyncDashboardToStore } from '../stores/sync';
 
 export const Dashboard = () => {
   const { t } = useTranslation();
@@ -23,6 +24,9 @@ export const Dashboard = () => {
     refetchInterval: 30000, // Refetch every 30 seconds for real-time data
     staleTime: 10000, // Consider data stale after 10 seconds
   });
+
+  // Always call at top-level; internal effect guards undefined
+  useSyncDashboardToStore(dashboardData);
 
   const handleRefresh = () => {
     refetch();

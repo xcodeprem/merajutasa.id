@@ -31,23 +31,33 @@ describe('useRealtimeDashboard', () => {
     let qc;
     render(
       <QueryClientProvider client={client}>
-        <Harness onReady={(q) => { qc = q; }} />
+        <Harness
+          onReady={(q) => {
+            qc = q;
+          }}
+        />
       </QueryClientProvider>
     );
 
     // Seed cache
-    qc.setQueryData(['dashboardData'], { kpi: null, weekly: null, underServed: null, anomalies: null, risk: null });
+    qc.setQueryData(['dashboardData'], {
+      kpi: null,
+      weekly: null,
+      underServed: null,
+      anomalies: null,
+      risk: null,
+    });
 
-  // Simulate messages via captured onEvent
-  emit('kpi', { equity: { rate: 0.9 }, fairness: {} });
-  emit('weekly_trends', { weeks: [{ w: 1 }], decision_mix: null });
-  emit('under_served', { total: 2, groups: [] });
-  emit('equity_anomalies', [{ id: 1 }]);
-  emit('risk_digest', { collector: {}, chain: {}, privacy: {} });
+    // Simulate messages via captured onEvent
+    emit('kpi', { equity: { rate: 0.9 }, fairness: {} });
+    emit('weekly_trends', { weeks: [{ w: 1 }], decision_mix: null });
+    emit('under_served', { total: 2, groups: [] });
+    emit('equity_anomalies', [{ id: 1 }]);
+    emit('risk_digest', { collector: {}, chain: {}, privacy: {} });
 
-  const data = qc.getQueryData(['dashboardData']);
-  expect(data.kpi).toBeTruthy();
-  expect(data.kpi.equity.rate).toBe(0.9);
+    const data = qc.getQueryData(['dashboardData']);
+    expect(data.kpi).toBeTruthy();
+    expect(data.kpi.equity.rate).toBe(0.9);
     expect(Array.isArray(data.weekly.weeks)).toBe(true);
     expect(data.underServed.total).toBe(2);
     expect(Array.isArray(data.anomalies)).toBe(true);

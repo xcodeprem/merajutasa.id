@@ -9,21 +9,26 @@ const isOnPages = () => {
 // API endpoint mapping for different environments
 const API_ENDPOINTS = {
   '/kpi/h1': isOnPages() ? 'data/h1-kpi-summary.json' : '/kpi/h1',
-  '/kpi/weekly': isOnPages() ? 'data/weekly-trends.json' : '/kpi/weekly', 
+  '/kpi/weekly': isOnPages() ? 'data/weekly-trends.json' : '/kpi/weekly',
   '/under-served': isOnPages() ? 'data/under-served.json' : '/under-served',
   '/equity/anomalies': isOnPages() ? 'data/equity-anomalies.json' : '/equity/anomalies',
   '/revocations': isOnPages() ? 'data/revocations.json' : '/revocations',
   '/feedback/monthly': isOnPages() ? 'data/feedback-monthly-rollup.json' : '/feedback/monthly',
   '/risk/digest': isOnPages() ? 'data/risk-digest.json' : '/risk/digest',
-  '/health': '/health'
+  '/health': '/health',
 };
 
 // Gateway client (Phase 2) with auth/error interceptors
-const gatewayBase = typeof window !== 'undefined' ? (window.__GATEWAY_BASE_URL__ || 'http://localhost:8080') : 'http://localhost:8080';
+const gatewayBase =
+  typeof window !== 'undefined'
+    ? window.__GATEWAY_BASE_URL__ || 'http://localhost:8080'
+    : 'http://localhost:8080';
 export const gatewayClient = createApiClient({
   baseURL: gatewayBase,
-  getToken: () => (typeof localStorage !== 'undefined' ? localStorage.getItem('equity_ui_token') : null),
-  getApiKey: () => (typeof localStorage !== 'undefined' ? localStorage.getItem('equity_ui_api_key') : null),
+  getToken: () =>
+    typeof localStorage !== 'undefined' ? localStorage.getItem('equity_ui_token') : null,
+  getApiKey: () =>
+    typeof localStorage !== 'undefined' ? localStorage.getItem('equity_ui_api_key') : null,
 });
 
 // Direct equity UI data endpoints (proxied in dev via Vite)
