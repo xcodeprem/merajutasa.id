@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-22T11:06:15.628Z",
+  "generated_utc": "2025-08-23T07:14:01.226Z",
   "default_threshold_hours": 24,
   "items": [
     {
@@ -14,7 +14,7 @@
     {
       "path": "artifacts/param-integrity-matrix.json",
       "exists": true,
-      "age_hours": 0,
+      "age_hours": 16.28,
       "threshold_hours": 24,
       "status": "PASS",
       "source_timestamp_type": "internal"
@@ -22,7 +22,7 @@
     {
       "path": "artifacts/principles-impact-report.json",
       "exists": true,
-      "age_hours": 0,
+      "age_hours": 20.13,
       "threshold_hours": 24,
       "status": "PASS",
       "source_timestamp_type": "internal"
@@ -30,7 +30,7 @@
     {
       "path": "artifacts/hype-lint.json",
       "exists": true,
-      "age_hours": 0,
+      "age_hours": 20.13,
       "threshold_hours": 24,
       "status": "PASS",
       "source_timestamp_type": "internal"
@@ -38,9 +38,9 @@
     {
       "path": "artifacts/disclaimers-lint.json",
       "exists": true,
-      "age_hours": 0,
+      "age_hours": 38.75,
       "threshold_hours": 24,
-      "status": "PASS",
+      "status": "STALE",
       "source_timestamp_type": "mtime"
     },
     {
@@ -54,15 +54,15 @@
     {
       "path": "artifacts/fairness-sim-scenarios.json",
       "exists": true,
-      "age_hours": 0,
+      "age_hours": 140.02,
       "threshold_hours": 24,
-      "status": "PASS",
+      "status": "STALE",
       "source_timestamp_type": "mtime"
     },
     {
       "path": "artifacts/fairness-sim-report.json",
       "exists": true,
-      "age_hours": 0,
+      "age_hours": 19.9,
       "threshold_hours": 24,
       "status": "PASS",
       "source_timestamp_type": "mtime"
@@ -78,9 +78,9 @@
   ],
   "summary": {
     "total": 9,
-    "pass": 9,
-    "stale": 0,
+    "pass": 7,
+    "stale": 2,
     "missing": 0,
-    "overall_status": "PASS"
+    "overall_status": "ADVISORY"
   }
 }

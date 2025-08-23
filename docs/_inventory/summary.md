@@ -1,6 +1,6 @@
 # Documentation Inventory Summary
 
-Generated: 2025-08-21T21:15:21.669Z
+Generated: 2025-08-23T00:00:00.000Z
 Total Files: 168
 Scan Directory: `docs/`
 
@@ -53,13 +53,13 @@ This inventory provides a comprehensive scan of all documentation files in the r
 
 ## Gap Analysis
 
-### Missing Documents (3)
+### Missing Documents (0)
 
-The following documents are referenced in the PR template but not found in the repository:
+All previously flagged references now exist:
 
-- `docs/fairness/hysteresis-config-v1.yml` - Referenced in PR template (high priority)
-- `docs/master-spec/master-spec-v2.md` - Referenced in PR template (high priority)
-- `docs/integrity/spec-hash-manifest-v1.json` - Referenced in PR template (high priority)
+- `docs/fairness/hysteresis-config-v1.yml` — present
+- `docs/master-spec/master-spec-v2.0.md` — present
+- `docs/integrity/spec-hash-manifest-v1.json` — present
 
 ## Domain Overview
 
@@ -297,3 +297,5 @@ Files updated in the last 30 days:
 ---
 
 *This summary is generated automatically from `tools/docs-inventory.js`. To update, run the inventory script again.*
+
+Evidence: see `artifacts/docs-metrics.json` and `docs/_reports/link-check.json` for link integrity and inventory coverage.

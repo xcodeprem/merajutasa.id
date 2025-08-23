@@ -2,7 +2,7 @@
 
 Status: Canonical TOC & Information Architecture v1.0  
 Purpose: Menyediakan navigasi terpusat untuk semua domain dokumentasi dengan hierarki yang jelas  
-Last Updated: 2025-08-21
+Last Updated: 2025-08-23
 
 > **Navigation Hub**  
 > Dokumen ini menjadi titik masuk utama untuk navigasi lintas domain dokumentasi MerajutASA.id, mencakup governance, integrity, fairness, analytics, privacy, dan contributor guides.
@@ -16,6 +16,7 @@ Central governance processes, policies, and decision-making frameworks.
 ### Core Governance
 
 - **[Policy Index v1.0](governance/policy-index-v1.md)** - Konsolidasi seluruh policy-as-code & lint guardrail
+- **[Governance & Decision Management Index](governance/index.md)** - Indeks terpusat DEC, kebijakan, dan proses
 - **[Handbook Index](governance/handbook-index.md)** - Navigasi area governance & integrity
 - **[Decision Process](governance/README-decision-log-process.md)** - Proses keputusan dan decision log
 

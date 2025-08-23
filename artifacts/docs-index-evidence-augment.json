@@ -1,0 +1,17 @@
+{
+  "generatedAt": "2025-08-23T00:00:00.000Z",
+  "updated": [
+    "docs/governance/index.md",
+    "docs/contributing.md"
+  ],
+  "notes": {
+    "governance_index": "timestamp refreshed",
+    "contributing": "added governance-aware cross-links; refreshed last updated"
+  },
+  "links": [
+    "governance/index.md",
+    "integrity/spec-hash-manifest-v1.json",
+    "governance/dec/"
+  ],
+  "manifest": "docs/integrity/spec-hash-manifest-v1.json"
+}

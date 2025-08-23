@@ -2,7 +2,7 @@
 
 Status: Active Documentation Contribution Guide v1.0  
 Purpose: Panduan komprehensif untuk kontribusi dokumentasi dengan fokus pada konsistensi terminology dan style  
-Last Updated: 2025-08-21
+Last Updated: 2025-08-23
 
 > **Contributor Hub**  
 > Dokumen ini menyediakan panduan lengkap untuk berkontribusi pada dokumentasi MerajutASA.id dengan standar kualitas tinggi, konsistensi terminology, dan alignment dengan kebijakan governance.
@@ -314,4 +314,14 @@ npm run governance:verify
 
 dec_ref: Related to DEC-20250817-09 (Terminology Adoption)
 
-Last updated: 2025-08-21 by governance automation
+---
+
+### 🔒 Governance-aware links
+
+- Governance overview: see governance/index.md
+- Integrity spec-hash manifest: integrity/spec-hash-manifest-v1.json
+- Decision records (DEC) are immutable: governance/dec/
+
+Catatan: Untuk perubahan semantik pada dokumen yang digovern, buat DEC baru dan referensikan via `dec_ref` atau file delta; hindari mengubah konten DEC yang sudah ada (immutable).
+
+Last updated: 2025-08-23 by governance automation

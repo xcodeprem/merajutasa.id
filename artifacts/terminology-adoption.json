@@ -1,914 +1,969 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-22T11:06:16.329Z",
+  "generated_utc": "2025-08-22T19:42:48.390Z",
   "old_total": 0,
   "new_total": 0,
   "adoptionPercent": 100,
   "files": [
     {
-      "file": "docs/verify-cli.md",
+      "file": "docs\\verify-cli.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/index.md",
+      "file": "docs\\index.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/contributing.md",
+      "file": "docs\\contributing.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/agent-context-pack.md",
+      "file": "docs\\agent-context-pack.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/ux/README.md",
+      "file": "docs\\_inventory\\summary.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/trust/trust-page.md",
+      "file": "docs\\trust\\trust-page.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/trust/trust-hysteresis.md",
+      "file": "docs\\trust\\trust-hysteresis.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/transparency/methodology-snippet-h0.md",
+      "file": "docs\\transparency\\methodology-snippet-h0.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/transparency/changelog-excerpt-phase1.5.md",
+      "file": "docs\\transparency\\changelog-excerpt-phase1.5.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/tests/hysteresis-test-plan-v1.md",
+      "file": "docs\\ux\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/tests/README.md",
+      "file": "docs\\tests\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-6.md",
+      "file": "docs\\tests\\hysteresis-test-plan-v1.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-5.md",
+      "file": "docs\\support\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-4.md",
+      "file": "docs\\team-guides\\TEAM-SETUP-GUIDE-PHASE-2-WEEK-6.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-3.md",
+      "file": "docs\\team-guides\\TEAM-SETUP-GUIDE-PHASE-2-WEEK-5.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-2.md",
+      "file": "docs\\team-guides\\TEAM-SETUP-GUIDE-PHASE-2-WEEK-4.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-1.md",
+      "file": "docs\\team-guides\\TEAM-SETUP-GUIDE-PHASE-2-WEEK-3.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/support/README.md",
+      "file": "docs\\team-guides\\TEAM-SETUP-GUIDE-PHASE-2-WEEK-2.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/strategic-analysis/STRATEGIC-IMPLEMENTATION-ANALYSIS.md",
+      "file": "docs\\team-guides\\TEAM-SETUP-GUIDE-PHASE-2-WEEK-1.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/status/progress-recap-wave0-completion-2025-08-13T0819Z.md",
+      "file": "docs\\security\\secrets-rotation.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/status/progress-recap-latest-2025-08-12T035901Z.md",
+      "file": "docs\\security\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/status/gate3-verification-2025-08-17.md",
+      "file": "docs\\security\\policy-inventory.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/status/gate2-verification-2025-08-17.md",
+      "file": "docs\\security\\incident-response.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/status/gate1-verification-2025-08-17.md",
+      "file": "docs\\scripts\\NPM-SCRIPTS-ORGANIZATION.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/status/README-h0-completion.md",
+      "file": "docs\\schemas\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/status/GATE-1-CHECKLIST.md",
+      "file": "docs\\runbooks\\validation-playbook.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/security/README.md",
+      "file": "docs\\runbooks\\boot-sequence-local.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/scripts/NPM-SCRIPTS-ORGANIZATION.md",
+      "file": "docs\\runbooks\\boot-sequence-k8s.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/schemas/README.md",
+      "file": "docs\\runbooks\\boot-sequence-docker.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/runbooks/validation-playbook.md",
+      "file": "docs\\roadmap\\roadmap-next-phase-v2.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/runbooks/boot-sequence-local.md",
+      "file": "docs\\roadmap\\roadmap-master-v1.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/runbooks/boot-sequence-k8s.md",
+      "file": "docs\\roadmap\\next-milestones-gate3.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/runbooks/boot-sequence-docker.md",
+      "file": "docs\\roadmap\\next-milestones-gate2.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/roadmap/roadmap-next-phase-v2.md",
+      "file": "docs\\release\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/roadmap/roadmap-master-v1.md",
+      "file": "docs\\public\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/roadmap/next-milestones-gate3.md",
+      "file": "docs\\public\\ABOUT-PORTAL-PANTI.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/roadmap/next-milestones-gate2.md",
+      "file": "docs\\quick-reference\\QUICK-REFERENCE-PHASE-2-WEEK-6.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/release/README.md",
+      "file": "docs\\quick-reference\\QUICK-REFERENCE-PHASE-2-WEEK-5.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-6.md",
+      "file": "docs\\quick-reference\\QUICK-REFERENCE-PHASE-2-WEEK-4.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md",
+      "file": "docs\\quick-reference\\QUICK-REFERENCE-PHASE-2-WEEK-3.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-4.md",
+      "file": "docs\\quick-reference\\QUICK-REFERENCE-PHASE-2-WEEK-2.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-3.md",
+      "file": "docs\\quick-reference\\QUICK-REFERENCE-PHASE-2-WEEK-1.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-2.md",
+      "file": "docs\\principles\\GP1-GP10-index.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-1.md",
+      "file": "docs\\privacy\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/public/README.md",
+      "file": "docs\\privacy\\pii-scan-fixture.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/public/ABOUT-PORTAL-PANTI.md",
+      "file": "docs\\privacy\\pii-rotation-policy.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/privacy/pii-scan-fixture.md",
+      "file": "docs\\privacy\\pii-pattern-library-v1.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/privacy/pii-rotation-policy.md",
+      "file": "docs\\privacy\\index.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/privacy/pii-pattern-library-v1.md",
+      "file": "docs\\privacy\\dsr-validation.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/privacy/index.md",
+      "file": "docs\\policies\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/privacy/README.md",
+      "file": "docs\\strategic-analysis\\STRATEGIC-IMPLEMENTATION-ANALYSIS.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/principles/GP1-GP10-index.md",
+      "file": "docs\\playbooks\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/policies/README.md",
+      "file": "docs\\playbooks\\github-projects-personal-integration-merajutasa.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/playbooks/github-projects-personal-integration-merajutasa.md",
+      "file": "docs\\planning\\STRATEGIC-PLANNING-INDEX.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/playbooks/README.md",
+      "file": "docs\\planning\\IMMEDIATE-ACTION-PLAN-WEEK-1.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/planning/STRATEGIC-PLANNING-INDEX.md",
+      "file": "docs\\status\\README-h0-completion.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/planning/IMMEDIATE-ACTION-PLAN-WEEK-1.md",
+      "file": "docs\\status\\progress-recap-wave0-completion-2025-08-13T0819Z.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/phase-2/PHASE-2-WEEK-6-DELIVERY-DOCUMENTATION.md",
+      "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/phase-2/PHASE-2-WEEK-5-DELIVERY-DOCUMENTATION.md",
+      "file": "docs\\status\\gate3-verification-2025-08-17.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/phase-2/PHASE-2-WEEK-4-DELIVERY-DOCUMENTATION.md",
+      "file": "docs\\status\\gate2-verification-2025-08-17.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/phase-2/PHASE-2-WEEK-3-DELIVERY-DOCUMENTATION.md",
+      "file": "docs\\status\\gate1-verification-2025-08-17.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/phase-2/PHASE-2-WEEK-2-STRATEGIC-ANALYSIS.md",
+      "file": "docs\\status\\GATE-1-CHECKLIST.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/phase-2/PHASE-2-WEEK-2-DELIVERY-DOCUMENTATION.md",
+      "file": "docs\\phase-1\\PHASE-1-IMPLEMENTATION-GUIDE.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/phase-2/PHASE-2-WEEK-1-DELIVERY-DOCUMENTATION.md",
+      "file": "docs\\phase-1\\PHASE-1-IMPLEMENTATION-COMPLETE.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/phase-2/PHASE-2-IMPLEMENTATION-GUIDE.md",
+      "file": "docs\\operations\\startup-order.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/phase-1/PHASE-1-IMPLEMENTATION-GUIDE.md",
+      "file": "docs\\operations\\scripts-week6-integration.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/phase-1/PHASE-1-IMPLEMENTATION-COMPLETE.md",
+      "file": "docs\\operations\\scripts-validation.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/operations/startup-order.md",
+      "file": "docs\\operations\\scripts-governance.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/operations/scripts-week6-integration.md",
+      "file": "docs\\operations\\scripts-governance-quickstart.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/operations/scripts-validation.md",
+      "file": "docs\\operations\\scripts-cleanup-plan.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/operations/scripts-governance.md",
+      "file": "docs\\operations\\post-config-verification.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/operations/scripts-cleanup-plan.md",
+      "file": "docs\\operations\\integrated-health-checks.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/operations/post-config-verification.md",
+      "file": "docs\\operations\\infra-health-triage.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/operations/integrated-health-checks.md",
+      "file": "docs\\operations\\health-scripts-governance.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/operations/infra-health-triage.md",
+      "file": "docs\\master-spec-deltas\\delta-master-spec-v2-DEC-20250813-06-event-schema-alignment.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/operations/health-scripts-governance.md",
+      "file": "docs\\master-spec-deltas\\delta-master-spec-v2-DEC-20250812-02.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/onboarding/startup-dependencies-guide.md",
+      "file": "docs\\master-spec\\master-spec-v2.0.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/onboarding/environment-setup.md",
+      "file": "docs\\legal\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/onboarding/agent-role-policy-v1.md",
+      "file": "docs\\phase-2\\PHASE-2-WEEK-6-DELIVERY-DOCUMENTATION.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/onboarding/agent-knowledge-baseline-2025-08-14.md",
+      "file": "docs\\phase-2\\PHASE-2-WEEK-5-DELIVERY-DOCUMENTATION.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/onboarding/agent-guardrails-v1.md",
+      "file": "docs\\phase-2\\PHASE-2-WEEK-4-DELIVERY-DOCUMENTATION.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/onboarding/agent-bootstrap-manifest.md",
+      "file": "docs\\phase-2\\PHASE-2-WEEK-3-DELIVERY-DOCUMENTATION.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/master-spec-deltas/delta-master-spec-v2-DEC-20250813-06-event-schema-alignment.md",
+      "file": "docs\\phase-2\\PHASE-2-WEEK-2-STRATEGIC-ANALYSIS.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/master-spec-deltas/delta-master-spec-v2-DEC-20250812-02.md",
+      "file": "docs\\phase-2\\PHASE-2-WEEK-2-DELIVERY-DOCUMENTATION.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/master-spec/master-spec-v2.0.md",
+      "file": "docs\\phase-2\\PHASE-2-WEEK-1-DELIVERY-DOCUMENTATION.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/legal/README.md",
+      "file": "docs\\phase-2\\PHASE-2-IMPLEMENTATION-GUIDE.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/integrity/verify-cli-doc-draft.md",
+      "file": "docs\\onboarding\\startup-dependencies-guide.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/integrity/index.md",
+      "file": "docs\\onboarding\\environment-setup.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/integrity/hash-excerpt-module.md",
+      "file": "docs\\onboarding\\agent-role-policy-v1.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/integrity/gating-policy-annotations.md",
+      "file": "docs\\onboarding\\agent-knowledge-baseline-2025-08-14.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/integrity/evidence-minimum-phase1.5-v1.md",
+      "file": "docs\\onboarding\\agent-guardrails-v1.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/integrity/credential-schema-final-v1.md",
+      "file": "docs\\onboarding\\agent-bootstrap-manifest.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/integrity/api-verification-docs.md",
+      "file": "docs\\integrity\\verify-cli-doc-draft.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/integrity/README.md",
+      "file": "docs\\integrity\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/infrastructure/week6-component-integration-guide.md",
+      "file": "docs\\integrity\\index.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/infrastructure/health-monitoring.md",
+      "file": "docs\\integrity\\hash-excerpt-module.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/infrastructure/README.md",
+      "file": "docs\\integrity\\gating-policy-annotations.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/implementation/sanity-checks-guide.md",
+      "file": "docs\\integrity\\evidence-minimum-phase1.5-v1.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/implementation/README.md",
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/toolchain-overview.md",
+      "file": "docs\\integrity\\api-verification-docs.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/todo-post-DEC-20250812-02.md",
+      "file": "docs\\infrastructure\\week6-component-integration-guide.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/terminology.md",
+      "file": "docs\\infrastructure\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/terminology-banner.md",
+      "file": "docs\\infrastructure\\README-health.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/statement-orientasi-portal-panti.md",
+      "file": "docs\\infrastructure\\k8s-policies-readme.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/signature-pipeline-plan-v1.md",
+      "file": "docs\\infrastructure\\infra-health-triage-runbook.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/policy-index-v1.md",
+      "file": "docs\\infrastructure\\health-scripts-governance.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/phase-tracker-ops.md",
+      "file": "docs\\infrastructure\\health-monitoring.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/lint-principles-reference-spec-v1.md",
+      "file": "docs\\infrastructure\\container-k8s-baseline.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/index.md",
+      "file": "docs\\feedback\\feedback.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/handbook-index.md",
+      "file": "docs\\gap-analysis\\JAWABAN-GAP-ANALYSIS.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/disclaimers-lint-spec-v1.md",
+      "file": "docs\\gap-analysis\\GAP-ANALYSIS-SUMMARY.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/allowlist-management-sop.md",
+      "file": "docs\\gap-analysis\\EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/README.md",
+      "file": "docs\\implementation\\sanity-checks-guide.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/README-decision-log-process.md",
+      "file": "docs\\implementation\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/gap-analysis/JAWABAN-GAP-ANALYSIS.md",
+      "file": "docs\\faq\\privacy-faq-abridged.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/gap-analysis/GAP-ANALYSIS-SUMMARY.md",
+      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
+      "file": "docs\\fairness\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/feedback/feedback.md",
+      "file": "docs\\fairness\\index.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/faq/privacy-faq-abridged.md",
+      "file": "docs\\fairness\\hysteresis-state-machine-transitions.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/faq/faq-fairness-hysteresis-update.md",
+      "file": "docs\\fairness\\hysteresis-public-methodology-fragment-v1.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/fairness/index.md",
+      "file": "docs\\fairness\\equity-under-served-section.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/fairness/hysteresis-state-machine-transitions.md",
+      "file": "docs\\fairness\\equity-snapshot-pseudocode.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/fairness/hysteresis-public-methodology-fragment-v1.md",
+      "file": "docs\\fairness\\equity-page.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/fairness/equity-under-served-section.md",
+      "file": "docs\\data\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/fairness/equity-snapshot-pseudocode.md",
+      "file": "docs\\governance\\toolchain-overview.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/fairness/equity-page.md",
+      "file": "docs\\governance\\todo-post-DEC-20250812-02.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/fairness/README.md",
+      "file": "docs\\governance\\terminology.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/development/scripts.md",
+      "file": "docs\\governance\\terminology-banner.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/data/README.md",
+      "file": "docs\\governance\\statement-orientasi-portal-panti.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/ci/dependency-drift-check.md",
+      "file": "docs\\governance\\signature-pipeline-plan-v1.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/audit/00-rubrik-audit-portal-panti.md",
+      "file": "docs\\governance\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/archive/ux_public-multipage-experience-master-spec-v2.md",
+      "file": "docs\\governance\\README-decision-log-process.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/archive/fairness_equity-hysteresis-options-v1.md",
+      "file": "docs\\governance\\policy-index-v1.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/architecture/startup-order.md",
+      "file": "docs\\governance\\phase-tracker-ops.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/architecture/interface-mapping-summary.md",
+      "file": "docs\\governance\\lint-principles-reference-spec-v1.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/architecture/failure-impact-matrix.md",
+      "file": "docs\\governance\\index.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/architecture/dependency-mapping.md",
+      "file": "docs\\governance\\handbook-index.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/architecture/component-inventory-summary.md",
+      "file": "docs\\governance\\disclaimers-lint-spec-v1.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/architecture/LEAD-INFRASTRUCTURE-ARCHITECT-SUMMARY.md",
+      "file": "docs\\governance\\allowlist-management-sop.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/architecture/INFRASTRUCTURE-ARCHITECTURE-OVERVIEW.md",
+      "file": "docs\\compliance\\evidence-map.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/api/README.md",
+      "file": "docs\\ci\\dependency-drift-check.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/api/API_DOCUMENTATION.md",
+      "file": "docs\\development\\scripts.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/analytics/media-digest.md",
+      "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/analytics/index.md",
+      "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/analytics/event-schema-canonical-v1.md",
+      "file": "docs\\architecture\\startup-order.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/analytics/dashboard-widgets-hysteresis-initial.md",
+      "file": "docs\\architecture\\LEAD-INFRASTRUCTURE-ARCHITECT-SUMMARY.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/analysis/INFRASTRUCTURE-UPDATE-ANALYSIS-V1.md",
+      "file": "docs\\architecture\\interface-mapping-summary.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/adr/0006-security-integration.md",
+      "file": "docs\\architecture\\INFRASTRUCTURE-ARCHITECTURE-OVERVIEW.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/adr/0005-dependency-mapping.md",
+      "file": "docs\\architecture\\failure-impact-matrix.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/_inventory/summary.md",
+      "file": "docs\\architecture\\dependency-mapping.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/produk/portal-panti/02-model-data-minimal-aman.md",
+      "file": "docs\\architecture\\component-inventory-summary.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/produk/portal-panti/01-ruang-lingkup-produk.md",
+      "file": "docs\\audit\\00-rubrik-audit-portal-panti.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/produk/portal-panti/00-orientasi-komprehensif.md",
+      "file": "docs\\analytics\\media-digest.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/privacy/corpus/positive-highrisk.md",
+      "file": "docs\\analytics\\index.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/privacy/corpus/negative-decoy.md",
+      "file": "docs\\analytics\\event-schema-canonical-v1.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/trace/archive-trace-index-v1.md",
+      "file": "docs\\analytics\\dashboard-widgets-hysteresis-initial.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/dec/DEC-style-guide-v3.md",
+      "file": "docs\\analysis\\INFRASTRUCTURE-UPDATE-ANALYSIS-V1.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/dec/DEC-style-guide-v2.md",
+      "file": "docs\\api\\README.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/dec/DEC-style-guide-v1.md",
+      "file": "docs\\api\\API_DOCUMENTATION.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/dec/DEC-20250817-09-stage2-terminology-transition.md",
+      "file": "docs\\adr\\0006-security-integration.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/dec/DEC-20250816-01-governance-pipeline-security-enhancement.md",
+      "file": "docs\\adr\\0005-dependency-mapping.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/dec/DEC-20250815-03-trace-index-update.md",
+      "file": "docs\\produk\\portal-panti\\02-model-data-minimal-aman.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/dec/DEC-20250815-02-hysteresis-config-update.md",
+      "file": "docs\\produk\\portal-panti\\01-ruang-lingkup-produk.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/dec/DEC-20250815-01-governed-editorial-maintenance.md",
+      "file": "docs\\produk\\portal-panti\\00-orientasi-komprehensif.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/dec/DEC-20250813-10-feedback-categories-canonical.md",
+      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/dec/DEC-20250813-09-equity-index-rounding.md",
+      "file": "docs\\privacy\\corpus\\negative-decoy.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/dec/DEC-20250813-08-evidence-hash-display-length.md",
+      "file": "docs\\governance\\trace\\archive-trace-index-v1.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/dec/DEC-20250813-07-hype-threshold-transition.md",
+      "file": "docs\\governance\\audit\\README-audit-process.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md",
+      "file": "docs\\governance\\audit\\pr-template-line-audit-2025-08-12T0509Z.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/dec/DEC-20250813-05-gating-policy-wave1-adoption.md",
+      "file": "docs\\governance\\dec\\DEC-style-guide-v3.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/dec/DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
+      "file": "docs\\governance\\dec\\DEC-style-guide-v2.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/dec/DEC-20250813-03-disclaimers-presence-enforcement.md",
+      "file": "docs\\governance\\dec\\DEC-style-guide-v1.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/dec/DEC-20250813-02-signature-pipeline-adoption.md",
+      "file": "docs\\governance\\dec\\DEC-20250817-09-stage2-terminology-transition.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/dec/DEC-20250813-01-known-debt-register.md",
+      "file": "docs\\governance\\dec\\DEC-20250816-01-governance-pipeline-security-enhancement.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/dec/DEC-20250812-04-governance-baseline-thresholds.md",
+      "file": "docs\\governance\\dec\\DEC-20250815-03-trace-index-update.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/dec/DEC-20250812-03-principles-reference-activation.md",
+      "file": "docs\\governance\\dec\\DEC-20250815-02-hysteresis-config-update.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md",
+      "file": "docs\\governance\\dec\\DEC-20250815-01-governed-editorial-maintenance.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
+      "file": "docs\\governance\\dec\\DEC-20250813-10-feedback-categories-canonical.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/audit/README-audit-process.md",
+      "file": "docs\\governance\\dec\\DEC-20250813-09-equity-index-rounding.md",
       "oldCount": 0,
       "newCount": 0
     },
     {
-      "file": "docs/governance/dec/templates/DEC-template-v1.md",
+      "file": "docs\\governance\\dec\\DEC-20250813-08-evidence-hash-display-length.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250813-07-hype-threshold-transition.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250813-06-consolidated-governed-edits.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250813-05-gating-policy-wave1-adoption.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250813-03-disclaimers-presence-enforcement.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250813-02-signature-pipeline-adoption.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250813-01-known-debt-register.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250812-04-governance-baseline-thresholds.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250812-03-principles-reference-activation.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250812-02-hysteresis-adoption.md",
+      "oldCount": 0,
+      "newCount": 0
+    },
+    {
+      "file": "docs\\governance\\dec\\templates\\DEC-template-v1.md",
       "oldCount": 0,
       "newCount": 0
     }
   ],
   "suggestions": [
     {
-      "file": "docs/index.md",
+      "file": "docs\\index.md",
       "suggestions": [
         {
           "old": "master",
@@ -923,7 +978,7 @@
       ]
     },
     {
-      "file": "docs/contributing.md",
+      "file": "docs\\contributing.md",
       "suggestions": [
         {
           "old": "ranking",
@@ -948,7 +1003,22 @@
       ]
     },
     {
-      "file": "docs/trust/trust-hysteresis.md",
+      "file": "docs\\_inventory\\summary.md",
+      "suggestions": [
+        {
+          "old": "master",
+          "new": "utama",
+          "count": 15
+        },
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "file": "docs\\trust\\trust-hysteresis.md",
       "suggestions": [
         {
           "old": "ranking",
@@ -958,7 +1028,7 @@
       ]
     },
     {
-      "file": "docs/transparency/methodology-snippet-h0.md",
+      "file": "docs\\transparency\\methodology-snippet-h0.md",
       "suggestions": [
         {
           "old": "ranking",
@@ -968,7 +1038,7 @@
       ]
     },
     {
-      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-6.md",
+      "file": "docs\\team-guides\\TEAM-SETUP-GUIDE-PHASE-2-WEEK-6.md",
       "suggestions": [
         {
           "old": "top",
@@ -978,7 +1048,7 @@
       ]
     },
     {
-      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-5.md",
+      "file": "docs\\team-guides\\TEAM-SETUP-GUIDE-PHASE-2-WEEK-5.md",
       "suggestions": [
         {
           "old": "user",
@@ -988,7 +1058,7 @@
       ]
     },
     {
-      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-4.md",
+      "file": "docs\\team-guides\\TEAM-SETUP-GUIDE-PHASE-2-WEEK-4.md",
       "suggestions": [
         {
           "old": "user",
@@ -998,7 +1068,7 @@
       ]
     },
     {
-      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-3.md",
+      "file": "docs\\team-guides\\TEAM-SETUP-GUIDE-PHASE-2-WEEK-3.md",
       "suggestions": [
         {
           "old": "user",
@@ -1008,7 +1078,7 @@
       ]
     },
     {
-      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-2.md",
+      "file": "docs\\team-guides\\TEAM-SETUP-GUIDE-PHASE-2-WEEK-2.md",
       "suggestions": [
         {
           "old": "top",
@@ -1018,7 +1088,7 @@
       ]
     },
     {
-      "file": "docs/team-guides/TEAM-SETUP-GUIDE-PHASE-2-WEEK-1.md",
+      "file": "docs\\team-guides\\TEAM-SETUP-GUIDE-PHASE-2-WEEK-1.md",
       "suggestions": [
         {
           "old": "user",
@@ -1028,7 +1098,7 @@
       ]
     },
     {
-      "file": "docs/strategic-analysis/STRATEGIC-IMPLEMENTATION-ANALYSIS.md",
+      "file": "docs\\security\\policy-inventory.md",
       "suggestions": [
         {
           "old": "user",
@@ -1038,37 +1108,17 @@
       ]
     },
     {
-      "file": "docs/status/progress-recap-latest-2025-08-12T035901Z.md",
+      "file": "docs\\security\\incident-response.md",
       "suggestions": [
-        {
-          "old": "master",
-          "new": "utama",
-          "count": 2
-        },
         {
           "old": "user",
           "new": "pengguna",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "file": "docs/status/gate3-verification-2025-08-17.md",
-      "suggestions": [
-        {
-          "old": "peringkat",
-          "new": "tanpa peringkat",
           "count": 3
-        },
-        {
-          "old": "master",
-          "new": "utama",
-          "count": 2
         }
       ]
     },
     {
-      "file": "docs/runbooks/boot-sequence-k8s.md",
+      "file": "docs\\runbooks\\boot-sequence-k8s.md",
       "suggestions": [
         {
           "old": "top",
@@ -1083,7 +1133,7 @@
       ]
     },
     {
-      "file": "docs/runbooks/boot-sequence-docker.md",
+      "file": "docs\\runbooks\\boot-sequence-docker.md",
       "suggestions": [
         {
           "old": "user",
@@ -1093,7 +1143,7 @@
       ]
     },
     {
-      "file": "docs/roadmap/roadmap-next-phase-v2.md",
+      "file": "docs\\roadmap\\roadmap-next-phase-v2.md",
       "suggestions": [
         {
           "old": "user",
@@ -1103,7 +1153,7 @@
       ]
     },
     {
-      "file": "docs/roadmap/roadmap-master-v1.md",
+      "file": "docs\\roadmap\\roadmap-master-v1.md",
       "suggestions": [
         {
           "old": "ranking",
@@ -1133,7 +1183,7 @@
       ]
     },
     {
-      "file": "docs/roadmap/next-milestones-gate3.md",
+      "file": "docs\\roadmap\\next-milestones-gate3.md",
       "suggestions": [
         {
           "old": "master",
@@ -1143,7 +1193,7 @@
       ]
     },
     {
-      "file": "docs/roadmap/next-milestones-gate2.md",
+      "file": "docs\\roadmap\\next-milestones-gate2.md",
       "suggestions": [
         {
           "old": "master",
@@ -1153,52 +1203,7 @@
       ]
     },
     {
-      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-6.md",
-      "suggestions": [
-        {
-          "old": "user",
-          "new": "pengguna",
-          "count": 4
-        }
-      ]
-    },
-    {
-      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-5.md",
-      "suggestions": [
-        {
-          "old": "top",
-          "new": "rekomendasi",
-          "count": 2
-        },
-        {
-          "old": "user",
-          "new": "pengguna",
-          "count": 2
-        }
-      ]
-    },
-    {
-      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-3.md",
-      "suggestions": [
-        {
-          "old": "user",
-          "new": "pengguna",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "file": "docs/quick-reference/QUICK-REFERENCE-PHASE-2-WEEK-2.md",
-      "suggestions": [
-        {
-          "old": "top",
-          "new": "rekomendasi",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "file": "docs/public/ABOUT-PORTAL-PANTI.md",
+      "file": "docs\\public\\ABOUT-PORTAL-PANTI.md",
       "suggestions": [
         {
           "old": "peringkat",
@@ -1208,43 +1213,8 @@
       ]
     },
     {
-      "file": "docs/privacy/pii-scan-fixture.md",
+      "file": "docs\\quick-reference\\QUICK-REFERENCE-PHASE-2-WEEK-6.md",
       "suggestions": [
-        {
-          "old": "user",
-          "new": "pengguna",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "file": "docs/privacy/pii-pattern-library-v1.md",
-      "suggestions": [
-        {
-          "old": "ranking",
-          "new": "tanpa ranking",
-          "count": 3
-        },
-        {
-          "old": "master",
-          "new": "utama",
-          "count": 1
-        },
-        {
-          "old": "user",
-          "new": "pengguna",
-          "count": 5
-        }
-      ]
-    },
-    {
-      "file": "docs/privacy/index.md",
-      "suggestions": [
-        {
-          "old": "ranking",
-          "new": "tanpa ranking",
-          "count": 1
-        },
         {
           "old": "user",
           "new": "pengguna",
@@ -1253,7 +1223,42 @@
       ]
     },
     {
-      "file": "docs/principles/GP1-GP10-index.md",
+      "file": "docs\\quick-reference\\QUICK-REFERENCE-PHASE-2-WEEK-5.md",
+      "suggestions": [
+        {
+          "old": "top",
+          "new": "rekomendasi",
+          "count": 2
+        },
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "file": "docs\\quick-reference\\QUICK-REFERENCE-PHASE-2-WEEK-3.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs\\quick-reference\\QUICK-REFERENCE-PHASE-2-WEEK-2.md",
+      "suggestions": [
+        {
+          "old": "top",
+          "new": "rekomendasi",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs\\principles\\GP1-GP10-index.md",
       "suggestions": [
         {
           "old": "ranking",
@@ -1278,7 +1283,62 @@
       ]
     },
     {
-      "file": "docs/policies/README.md",
+      "file": "docs\\privacy\\pii-scan-fixture.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs\\privacy\\pii-pattern-library-v1.md",
+      "suggestions": [
+        {
+          "old": "ranking",
+          "new": "tanpa ranking",
+          "count": 3
+        },
+        {
+          "old": "master",
+          "new": "utama",
+          "count": 1
+        },
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "file": "docs\\privacy\\index.md",
+      "suggestions": [
+        {
+          "old": "ranking",
+          "new": "tanpa ranking",
+          "count": 1
+        },
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "file": "docs\\privacy\\dsr-validation.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "file": "docs\\policies\\README.md",
       "suggestions": [
         {
           "old": "ranking",
@@ -1288,7 +1348,17 @@
       ]
     },
     {
-      "file": "docs/playbooks/github-projects-personal-integration-merajutasa.md",
+      "file": "docs\\strategic-analysis\\STRATEGIC-IMPLEMENTATION-ANALYSIS.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs\\playbooks\\github-projects-personal-integration-merajutasa.md",
       "suggestions": [
         {
           "old": "user",
@@ -1298,7 +1368,7 @@
       ]
     },
     {
-      "file": "docs/planning/STRATEGIC-PLANNING-INDEX.md",
+      "file": "docs\\planning\\STRATEGIC-PLANNING-INDEX.md",
       "suggestions": [
         {
           "old": "master",
@@ -1313,7 +1383,7 @@
       ]
     },
     {
-      "file": "docs/planning/IMMEDIATE-ACTION-PLAN-WEEK-1.md",
+      "file": "docs\\planning\\IMMEDIATE-ACTION-PLAN-WEEK-1.md",
       "suggestions": [
         {
           "old": "master",
@@ -1323,7 +1393,37 @@
       ]
     },
     {
-      "file": "docs/phase-2/PHASE-2-WEEK-3-DELIVERY-DOCUMENTATION.md",
+      "file": "docs\\status\\progress-recap-latest-2025-08-12T035901Z.md",
+      "suggestions": [
+        {
+          "old": "master",
+          "new": "utama",
+          "count": 2
+        },
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs\\status\\gate3-verification-2025-08-17.md",
+      "suggestions": [
+        {
+          "old": "peringkat",
+          "new": "tanpa peringkat",
+          "count": 3
+        },
+        {
+          "old": "master",
+          "new": "utama",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "file": "docs\\phase-1\\PHASE-1-IMPLEMENTATION-GUIDE.md",
       "suggestions": [
         {
           "old": "user",
@@ -1333,7 +1433,7 @@
       ]
     },
     {
-      "file": "docs/phase-2/PHASE-2-WEEK-2-STRATEGIC-ANALYSIS.md",
+      "file": "docs\\operations\\scripts-governance.md",
       "suggestions": [
         {
           "old": "user",
@@ -1343,7 +1443,77 @@
       ]
     },
     {
-      "file": "docs/phase-2/PHASE-2-WEEK-2-DELIVERY-DOCUMENTATION.md",
+      "file": "docs\\operations\\scripts-cleanup-plan.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs\\operations\\post-config-verification.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs\\master-spec-deltas\\delta-master-spec-v2-DEC-20250813-06-event-schema-alignment.md",
+      "suggestions": [
+        {
+          "old": "whitelist",
+          "new": "daftar izin",
+          "count": 1
+        },
+        {
+          "old": "master",
+          "new": "utama",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "file": "docs\\master-spec-deltas\\delta-master-spec-v2-DEC-20250812-02.md",
+      "suggestions": [
+        {
+          "old": "master",
+          "new": "utama",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "file": "docs\\master-spec\\master-spec-v2.0.md",
+      "suggestions": [
+        {
+          "old": "ranking",
+          "new": "tanpa ranking",
+          "count": 3
+        },
+        {
+          "old": "peringkat",
+          "new": "tanpa peringkat",
+          "count": 1
+        },
+        {
+          "old": "terbaik",
+          "new": "sesuai kebutuhan",
+          "count": 1
+        },
+        {
+          "old": "master",
+          "new": "utama",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "file": "docs\\phase-2\\PHASE-2-WEEK-3-DELIVERY-DOCUMENTATION.md",
       "suggestions": [
         {
           "old": "user",
@@ -1353,7 +1523,7 @@
       ]
     },
     {
-      "file": "docs/phase-2/PHASE-2-WEEK-1-DELIVERY-DOCUMENTATION.md",
+      "file": "docs\\phase-2\\PHASE-2-WEEK-2-STRATEGIC-ANALYSIS.md",
       "suggestions": [
         {
           "old": "user",
@@ -1363,7 +1533,27 @@
       ]
     },
     {
-      "file": "docs/phase-2/PHASE-2-IMPLEMENTATION-GUIDE.md",
+      "file": "docs\\phase-2\\PHASE-2-WEEK-2-DELIVERY-DOCUMENTATION.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "file": "docs\\phase-2\\PHASE-2-WEEK-1-DELIVERY-DOCUMENTATION.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs\\phase-2\\PHASE-2-IMPLEMENTATION-GUIDE.md",
       "suggestions": [
         {
           "old": "master",
@@ -1378,47 +1568,7 @@
       ]
     },
     {
-      "file": "docs/phase-1/PHASE-1-IMPLEMENTATION-GUIDE.md",
-      "suggestions": [
-        {
-          "old": "user",
-          "new": "pengguna",
-          "count": 3
-        }
-      ]
-    },
-    {
-      "file": "docs/operations/scripts-governance.md",
-      "suggestions": [
-        {
-          "old": "user",
-          "new": "pengguna",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "file": "docs/operations/scripts-cleanup-plan.md",
-      "suggestions": [
-        {
-          "old": "user",
-          "new": "pengguna",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "file": "docs/operations/post-config-verification.md",
-      "suggestions": [
-        {
-          "old": "user",
-          "new": "pengguna",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "file": "docs/onboarding/environment-setup.md",
+      "file": "docs\\onboarding\\environment-setup.md",
       "suggestions": [
         {
           "old": "master",
@@ -1428,7 +1578,7 @@
       ]
     },
     {
-      "file": "docs/onboarding/agent-role-policy-v1.md",
+      "file": "docs\\onboarding\\agent-role-policy-v1.md",
       "suggestions": [
         {
           "old": "ranking",
@@ -1443,7 +1593,7 @@
       ]
     },
     {
-      "file": "docs/onboarding/agent-knowledge-baseline-2025-08-14.md",
+      "file": "docs\\onboarding\\agent-knowledge-baseline-2025-08-14.md",
       "suggestions": [
         {
           "old": "ranking",
@@ -1463,7 +1613,7 @@
       ]
     },
     {
-      "file": "docs/onboarding/agent-guardrails-v1.md",
+      "file": "docs\\onboarding\\agent-guardrails-v1.md",
       "suggestions": [
         {
           "old": "ranking",
@@ -1478,7 +1628,7 @@
       ]
     },
     {
-      "file": "docs/onboarding/agent-bootstrap-manifest.md",
+      "file": "docs\\onboarding\\agent-bootstrap-manifest.md",
       "suggestions": [
         {
           "old": "ranking",
@@ -1508,57 +1658,7 @@
       ]
     },
     {
-      "file": "docs/master-spec-deltas/delta-master-spec-v2-DEC-20250813-06-event-schema-alignment.md",
-      "suggestions": [
-        {
-          "old": "whitelist",
-          "new": "daftar izin",
-          "count": 1
-        },
-        {
-          "old": "master",
-          "new": "utama",
-          "count": 3
-        }
-      ]
-    },
-    {
-      "file": "docs/master-spec-deltas/delta-master-spec-v2-DEC-20250812-02.md",
-      "suggestions": [
-        {
-          "old": "master",
-          "new": "utama",
-          "count": 3
-        }
-      ]
-    },
-    {
-      "file": "docs/master-spec/master-spec-v2.0.md",
-      "suggestions": [
-        {
-          "old": "ranking",
-          "new": "tanpa ranking",
-          "count": 3
-        },
-        {
-          "old": "peringkat",
-          "new": "tanpa peringkat",
-          "count": 1
-        },
-        {
-          "old": "terbaik",
-          "new": "sesuai kebutuhan",
-          "count": 1
-        },
-        {
-          "old": "master",
-          "new": "utama",
-          "count": 5
-        }
-      ]
-    },
-    {
-      "file": "docs/integrity/index.md",
+      "file": "docs\\integrity\\index.md",
       "suggestions": [
         {
           "old": "master",
@@ -1568,7 +1668,7 @@
       ]
     },
     {
-      "file": "docs/integrity/evidence-minimum-phase1.5-v1.md",
+      "file": "docs\\integrity\\evidence-minimum-phase1.5-v1.md",
       "suggestions": [
         {
           "old": "ranking",
@@ -1578,7 +1678,7 @@
       ]
     },
     {
-      "file": "docs/integrity/credential-schema-final-v1.md",
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
       "suggestions": [
         {
           "old": "ranking",
@@ -1603,7 +1703,7 @@
       ]
     },
     {
-      "file": "docs/infrastructure/health-monitoring.md",
+      "file": "docs\\infrastructure\\health-monitoring.md",
       "suggestions": [
         {
           "old": "master",
@@ -1613,7 +1713,27 @@
       ]
     },
     {
-      "file": "docs/implementation/README.md",
+      "file": "docs\\gap-analysis\\JAWABAN-GAP-ANALYSIS.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs\\gap-analysis\\EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
+      "suggestions": [
+        {
+          "old": "master",
+          "new": "utama",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "file": "docs\\implementation\\README.md",
       "suggestions": [
         {
           "old": "master",
@@ -1628,7 +1748,67 @@
       ]
     },
     {
-      "file": "docs/governance/todo-post-DEC-20250812-02.md",
+      "file": "docs\\faq\\privacy-faq-abridged.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs\\faq\\faq-fairness-hysteresis-update.md",
+      "suggestions": [
+        {
+          "old": "ranking",
+          "new": "tanpa ranking",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "file": "docs\\fairness\\index.md",
+      "suggestions": [
+        {
+          "old": "ranking",
+          "new": "tanpa ranking",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "file": "docs\\fairness\\hysteresis-public-methodology-fragment-v1.md",
+      "suggestions": [
+        {
+          "old": "ranking",
+          "new": "tanpa ranking",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "file": "docs\\fairness\\equity-under-served-section.md",
+      "suggestions": [
+        {
+          "old": "ranking",
+          "new": "tanpa ranking",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs\\fairness\\equity-page.md",
+      "suggestions": [
+        {
+          "old": "ranking",
+          "new": "tanpa ranking",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs\\governance\\todo-post-DEC-20250812-02.md",
       "suggestions": [
         {
           "old": "master",
@@ -1638,7 +1818,7 @@
       ]
     },
     {
-      "file": "docs/governance/statement-orientasi-portal-panti.md",
+      "file": "docs\\governance\\statement-orientasi-portal-panti.md",
       "suggestions": [
         {
           "old": "ranking",
@@ -1658,7 +1838,7 @@
       ]
     },
     {
-      "file": "docs/governance/lint-principles-reference-spec-v1.md",
+      "file": "docs\\governance\\lint-principles-reference-spec-v1.md",
       "suggestions": [
         {
           "old": "ranking",
@@ -1688,7 +1868,7 @@
       ]
     },
     {
-      "file": "docs/governance/index.md",
+      "file": "docs\\governance\\index.md",
       "suggestions": [
         {
           "old": "whitelist",
@@ -1698,7 +1878,7 @@
       ]
     },
     {
-      "file": "docs/governance/disclaimers-lint-spec-v1.md",
+      "file": "docs\\governance\\disclaimers-lint-spec-v1.md",
       "suggestions": [
         {
           "old": "ranking",
@@ -1733,102 +1913,7 @@
       ]
     },
     {
-      "file": "docs/gap-analysis/JAWABAN-GAP-ANALYSIS.md",
-      "suggestions": [
-        {
-          "old": "user",
-          "new": "pengguna",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "file": "docs/gap-analysis/EKSPANSI-KOMPREHENSIF-GAP-ANALYSIS.md",
-      "suggestions": [
-        {
-          "old": "master",
-          "new": "utama",
-          "count": 2
-        }
-      ]
-    },
-    {
-      "file": "docs/faq/privacy-faq-abridged.md",
-      "suggestions": [
-        {
-          "old": "user",
-          "new": "pengguna",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "file": "docs/faq/faq-fairness-hysteresis-update.md",
-      "suggestions": [
-        {
-          "old": "ranking",
-          "new": "tanpa ranking",
-          "count": 3
-        }
-      ]
-    },
-    {
-      "file": "docs/fairness/index.md",
-      "suggestions": [
-        {
-          "old": "ranking",
-          "new": "tanpa ranking",
-          "count": 3
-        }
-      ]
-    },
-    {
-      "file": "docs/fairness/hysteresis-public-methodology-fragment-v1.md",
-      "suggestions": [
-        {
-          "old": "ranking",
-          "new": "tanpa ranking",
-          "count": 2
-        }
-      ]
-    },
-    {
-      "file": "docs/fairness/equity-under-served-section.md",
-      "suggestions": [
-        {
-          "old": "ranking",
-          "new": "tanpa ranking",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "file": "docs/fairness/equity-page.md",
-      "suggestions": [
-        {
-          "old": "ranking",
-          "new": "tanpa ranking",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "file": "docs/audit/00-rubrik-audit-portal-panti.md",
-      "suggestions": [
-        {
-          "old": "peringkat",
-          "new": "tanpa peringkat",
-          "count": 2
-        },
-        {
-          "old": "terbaik",
-          "new": "sesuai kebutuhan",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "file": "docs/archive/ux_public-multipage-experience-master-spec-v2.md",
+      "file": "docs\\archive\\ux_public-multipage-experience-master-spec-v2.md",
       "suggestions": [
         {
           "old": "ranking",
@@ -1848,7 +1933,7 @@
       ]
     },
     {
-      "file": "docs/archive/fairness_equity-hysteresis-options-v1.md",
+      "file": "docs\\archive\\fairness_equity-hysteresis-options-v1.md",
       "suggestions": [
         {
           "old": "ranking",
@@ -1868,7 +1953,22 @@
       ]
     },
     {
-      "file": "docs/analytics/media-digest.md",
+      "file": "docs\\audit\\00-rubrik-audit-portal-panti.md",
+      "suggestions": [
+        {
+          "old": "peringkat",
+          "new": "tanpa peringkat",
+          "count": 2
+        },
+        {
+          "old": "terbaik",
+          "new": "sesuai kebutuhan",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs\\analytics\\media-digest.md",
       "suggestions": [
         {
           "old": "ranking",
@@ -1878,7 +1978,7 @@
       ]
     },
     {
-      "file": "docs/analytics/index.md",
+      "file": "docs\\analytics\\index.md",
       "suggestions": [
         {
           "old": "ranking",
@@ -1893,7 +1993,7 @@
       ]
     },
     {
-      "file": "docs/analytics/event-schema-canonical-v1.md",
+      "file": "docs\\analytics\\event-schema-canonical-v1.md",
       "suggestions": [
         {
           "old": "ranking",
@@ -1918,7 +2018,7 @@
       ]
     },
     {
-      "file": "docs/analysis/INFRASTRUCTURE-UPDATE-ANALYSIS-V1.md",
+      "file": "docs\\analysis\\INFRASTRUCTURE-UPDATE-ANALYSIS-V1.md",
       "suggestions": [
         {
           "old": "user",
@@ -1928,22 +2028,7 @@
       ]
     },
     {
-      "file": "docs/_inventory/summary.md",
-      "suggestions": [
-        {
-          "old": "master",
-          "new": "utama",
-          "count": 15
-        },
-        {
-          "old": "user",
-          "new": "pengguna",
-          "count": 4
-        }
-      ]
-    },
-    {
-      "file": "docs/produk/portal-panti/01-ruang-lingkup-produk.md",
+      "file": "docs\\produk\\portal-panti\\01-ruang-lingkup-produk.md",
       "suggestions": [
         {
           "old": "ranking",
@@ -1958,7 +2043,7 @@
       ]
     },
     {
-      "file": "docs/produk/portal-panti/00-orientasi-komprehensif.md",
+      "file": "docs\\produk\\portal-panti\\00-orientasi-komprehensif.md",
       "suggestions": [
         {
           "old": "terbaik",
@@ -1968,7 +2053,7 @@
       ]
     },
     {
-      "file": "docs/privacy/corpus/positive-highrisk.md",
+      "file": "docs\\privacy\\corpus\\positive-highrisk.md",
       "suggestions": [
         {
           "old": "user",
@@ -1978,7 +2063,7 @@
       ]
     },
     {
-      "file": "docs/privacy/corpus/negative-decoy.md",
+      "file": "docs\\privacy\\corpus\\negative-decoy.md",
       "suggestions": [
         {
           "old": "user",
@@ -1988,7 +2073,7 @@
       ]
     },
     {
-      "file": "docs/governance/trace/archive-trace-index-v1.md",
+      "file": "docs\\governance\\trace\\archive-trace-index-v1.md",
       "suggestions": [
         {
           "old": "ranking",
@@ -2003,7 +2088,17 @@
       ]
     },
     {
-      "file": "docs/governance/dec/DEC-20250817-09-stage2-terminology-transition.md",
+      "file": "docs\\governance\\audit\\pr-template-line-audit-2025-08-12T0509Z.md",
+      "suggestions": [
+        {
+          "old": "user",
+          "new": "pengguna",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "docs\\governance\\dec\\DEC-20250817-09-stage2-terminology-transition.md",
       "suggestions": [
         {
           "old": "ranking",
@@ -2048,7 +2143,7 @@
       ]
     },
     {
-      "file": "docs/governance/dec/DEC-20250816-01-governance-pipeline-security-enhancement.md",
+      "file": "docs\\governance\\dec\\DEC-20250816-01-governance-pipeline-security-enhancement.md",
       "suggestions": [
         {
           "old": "user",
@@ -2058,7 +2153,7 @@
       ]
     },
     {
-      "file": "docs/governance/dec/DEC-20250815-01-governed-editorial-maintenance.md",
+      "file": "docs\\governance\\dec\\DEC-20250815-01-governed-editorial-maintenance.md",
       "suggestions": [
         {
           "old": "master",
@@ -2068,7 +2163,7 @@
       ]
     },
     {
-      "file": "docs/governance/dec/DEC-20250813-10-feedback-categories-canonical.md",
+      "file": "docs\\governance\\dec\\DEC-20250813-10-feedback-categories-canonical.md",
       "suggestions": [
         {
           "old": "ranking",
@@ -2083,7 +2178,7 @@
       ]
     },
     {
-      "file": "docs/governance/dec/DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
+      "file": "docs\\governance\\dec\\DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
       "suggestions": [
         {
           "old": "ranking",
@@ -2098,7 +2193,7 @@
       ]
     },
     {
-      "file": "docs/governance/dec/DEC-20250813-03-disclaimers-presence-enforcement.md",
+      "file": "docs\\governance\\dec\\DEC-20250813-03-disclaimers-presence-enforcement.md",
       "suggestions": [
         {
           "old": "user",
@@ -2108,7 +2203,7 @@
       ]
     },
     {
-      "file": "docs/governance/dec/DEC-20250813-01-known-debt-register.md",
+      "file": "docs\\governance\\dec\\DEC-20250813-01-known-debt-register.md",
       "suggestions": [
         {
           "old": "user",
@@ -2118,7 +2213,7 @@
       ]
     },
     {
-      "file": "docs/governance/dec/DEC-20250812-04-governance-baseline-thresholds.md",
+      "file": "docs\\governance\\dec\\DEC-20250812-04-governance-baseline-thresholds.md",
       "suggestions": [
         {
           "old": "whitelist",
@@ -2128,7 +2223,7 @@
       ]
     },
     {
-      "file": "docs/governance/dec/DEC-20250812-03-principles-reference-activation.md",
+      "file": "docs\\governance\\dec\\DEC-20250812-03-principles-reference-activation.md",
       "suggestions": [
         {
           "old": "ranking",
@@ -2138,7 +2233,7 @@
       ]
     },
     {
-      "file": "docs/governance/dec/DEC-20250812-02-hysteresis-adoption.md",
+      "file": "docs\\governance\\dec\\DEC-20250812-02-hysteresis-adoption.md",
       "suggestions": [
         {
           "old": "ranking",
@@ -2148,16 +2243,6 @@
         {
           "old": "master",
           "new": "utama",
-          "count": 1
-        }
-      ]
-    },
-    {
-      "file": "docs/governance/audit/pr-template-line-audit-2025-08-12T0509Z.md",
-      "suggestions": [
-        {
-          "old": "user",
-          "new": "pengguna",
           "count": 1
         }
       ]

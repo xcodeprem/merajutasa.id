@@ -6,7 +6,7 @@
 
 Status: Canonical Governance Reference  
 Purpose: Indeks terpusat semua Decision Documents (DEC), kebijakan, dan spesifikasi naratif untuk kejelasan rujukan keputusan dan compliance  
-Last Updated: 2025-08-21
+Last Updated: 2025-08-23
 
 > **Navigation Hub untuk Governance**  
 > Dokumen ini menyediakan akses terpusat ke semua dokumen keputusan (DEC), kebijakan governance, dan spesifikasi terkait dalam sistem MerajutASA.id.

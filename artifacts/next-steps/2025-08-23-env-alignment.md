@@ -1,0 +1,3 @@
+- Added SIGNER_ORIGIN, CHAIN_ORIGIN, COLLECTOR_BASE to .env.example for consistent host-side defaults used by tools/tests.
+- Next: mirror these keys in environment-specific files if present (.env.local/.env.development/.env.production) and ensure Docker/K8s reference not needed (tools read host envs).
+- Validate by running: npm run governance:verify; npm run test:services; npm run collector:reliability; check artifacts/ for summaries.

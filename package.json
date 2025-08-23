@@ -86,6 +86,7 @@
     "infra:health:monitoring": "node tools/infra/health-check-all.js monitoring",
     "infra:health:integrations": "node tools/infra/health-check-all.js integrations",
     "infra:health:dependencies": "node tools/infra/health-check-all.js dependencies",
+  "infra:health:bundle": "node tools/infra/health-bundle.js",
     "infra:container-k8s-verify": "node tools/infra/container-k8s-verify.js",
     "k8s:baseline:validate": "node tools/infra/k8s-baseline-validate.js",
     
@@ -269,6 +270,8 @@
     "deps:matrix": "node tools/dependencies-matrix-generator.js",
     "deps:svg": "node scripts/deps/export-svg.js",
     "deps:all": "npm run deps:graph && npm run deps:matrix && npm run deps:svg",
+  "ci:infra-health": "npm run infra:health:bundle",
+  "ci:health:baseline": "npm run health:check && npm run infra:health:all",
     "compliance:assess": "node tools/compliance-assessment.js",
     "compliance:orchestrator:test": "node tools/compliance-orchestrator-test.js",
     "privacy:request:simulate": "node tools/privacy-request-simulator.js",

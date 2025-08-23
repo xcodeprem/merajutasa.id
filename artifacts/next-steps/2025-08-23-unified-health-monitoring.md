@@ -1,0 +1,4 @@
+- Enable nightly job to run `ci:infra-health` and upload `infra-health-bundle.json` as artifact.
+- Wire `infra:health:bundle` into CI summary step to surface overall status.
+- Consider adding baseline comparison for `infra-health-*-summary.json` to detect drift.
+- Expand observability and API gateway health checks once optional deps are installed.

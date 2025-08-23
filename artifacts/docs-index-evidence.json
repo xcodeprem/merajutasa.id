@@ -1,0 +1,23 @@
+{
+  "generatedAt": "2025-08-23T00:00:00Z",
+  "source": "docs/index.md",
+  "subIndexes": [
+    { "path": "docs/governance/index.md", "status": "present" },
+    { "path": "docs/integrity/index.md", "status": "present" },
+    { "path": "docs/fairness/index.md", "status": "present" },
+    { "path": "docs/analytics/index.md", "status": "present" },
+    { "path": "docs/privacy/index.md", "status": "present" }
+  ],
+  "linkCheck": {
+    "report": "docs/_reports/link-check.json",
+    "summary": {
+      "files": 1,
+      "totalLinks": 85,
+      "broken": 0
+    }
+  },
+  "governed": {
+    "manifest": "docs/integrity/spec-hash-manifest-v1.json",
+    "mode": "append-only updates to indexes"
+  }
+}

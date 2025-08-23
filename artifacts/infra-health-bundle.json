@@ -1,0 +1,463 @@
+{
+  "_metadata": {
+    "generated_at": "2025-08-22T19:21:52.625Z",
+    "generator": "infra-health-bundle",
+    "version": "1.0"
+  },
+  "categories": {
+    "api-gateway": {
+      "_metadata": {
+        "actor": "copilot-swe-agent[bot]",
+        "generated_at": "2025-08-18T22:48:00.215Z",
+        "generator": "infra-health-check-all",
+        "git_ref": "refs/heads/copilot/fix-59",
+        "git_sha": "648f3b5b2612c310b356c773ab0fd1a5bf52512e",
+        "run_id": "17054360234",
+        "version": "1.0"
+      },
+      "byCategory": {
+        "api-gateway": {
+          "degraded": 0,
+          "failed": 0,
+          "ok": 2
+        }
+      },
+      "degraded": 0,
+      "failed": 0,
+      "ok": 2,
+      "total": 2,
+      "ts": "2025-08-18T22:48:00.215Z"
+    },
+    "compliance": {
+      "_metadata": {
+        "actor": "copilot-swe-agent[bot]",
+        "generated_at": "2025-08-18T22:40:19.647Z",
+        "generator": "infra-health-check-all",
+        "git_ref": "refs/heads/copilot/fix-59",
+        "git_sha": "b04c9b610d95311381d46a86ed0c40db6df4e827",
+        "run_id": "17054171227",
+        "version": "1.0"
+      },
+      "byCategory": {
+        "compliance": {
+          "degraded": 0,
+          "failed": 0,
+          "ok": 4
+        }
+      },
+      "degraded": 0,
+      "failed": 0,
+      "ok": 4,
+      "total": 4,
+      "ts": "2025-08-18T22:40:19.647Z"
+    },
+    "dependencies": {
+      "_metadata": {
+        "actor": "copilot-swe-agent[bot]",
+        "generated_at": "2025-08-21T14:11:20.529Z",
+        "generator": "infra-health-check-all",
+        "git_ref": "refs/heads/copilot/fix-97",
+        "git_sha": "bb84e55a171bb3f84d4a74129f701a78a72c91e1",
+        "run_id": "17129338006",
+        "version": "1.0"
+      },
+      "byCategory": {
+        "dependencies": {
+          "degraded": 0,
+          "failed": 0,
+          "ok": 1
+        }
+      },
+      "degraded": 0,
+      "failed": 0,
+      "ok": 1,
+      "total": 1,
+      "ts": "2025-08-21T14:11:20.529Z"
+    },
+    "high-availability": null,
+    "integrations": null,
+    "monitoring": {
+      "_metadata": {
+        "actor": "copilot-swe-agent[bot]",
+        "generated_at": "2025-08-18T22:47:59.196Z",
+        "generator": "infra-health-check-all",
+        "git_ref": "refs/heads/copilot/fix-59",
+        "git_sha": "648f3b5b2612c310b356c773ab0fd1a5bf52512e",
+        "run_id": "17054360234",
+        "version": "1.0"
+      },
+      "byCategory": {
+        "monitoring": {
+          "degraded": 0,
+          "failed": 0,
+          "ok": 2
+        }
+      },
+      "degraded": 0,
+      "failed": 0,
+      "ok": 2,
+      "total": 2,
+      "ts": "2025-08-18T22:47:59.196Z"
+    },
+    "observability": {
+      "_metadata": {
+        "actor": "copilot-swe-agent[bot]",
+        "generated_at": "2025-08-21T14:20:35.454Z",
+        "generator": "infra-health-check-all",
+        "git_ref": "refs/heads/copilot/fix-98",
+        "git_sha": "041844b8df02b4bd10c7e44b205a5ce0abf614b0",
+        "run_id": "17129601138",
+        "version": "1.0"
+      },
+      "byCategory": {
+        "observability": {
+          "degraded": 0,
+          "failed": 1,
+          "ok": 0
+        }
+      },
+      "degraded": 0,
+      "failed": 1,
+      "ok": 0,
+      "total": 1,
+      "ts": "2025-08-21T14:20:35.454Z"
+    },
+    "performance": {
+      "_metadata": {
+        "actor": "copilot-swe-agent[bot]",
+        "generated_at": "2025-08-21T13:47:05.504Z",
+        "generator": "infra-health-check-all",
+        "git_ref": "refs/heads/copilot/fix-96",
+        "git_sha": "21b77cbff7e9f7b8054201604346d8a7c1b6eb84",
+        "run_id": "17128674831",
+        "version": "1.0"
+      },
+      "byCategory": {
+        "performance": {
+          "degraded": 0,
+          "failed": 0,
+          "ok": 2
+        }
+      },
+      "degraded": 0,
+      "failed": 0,
+      "ok": 2,
+      "total": 2,
+      "ts": "2025-08-21T13:47:05.504Z"
+    },
+    "security": null
+  },
+  "integrated": {
+    "components": {
+      "apiGateway": {
+        "error": "Unexpected reserved word",
+        "health_score": 0,
+        "name": "API Gateway",
+        "status": "critical"
+      },
+      "auditSystem": {
+        "details": {
+          "buffer_size": 0,
+          "compliance_mode": "strict",
+          "compliance_violations": 0,
+          "storage_path": "/tmp/health-check-audit",
+          "total_events": 0,
+          "uptime": 0.1518945
+        },
+        "health_score": 100,
+        "last_check": "2025-08-22T19:21:51.960Z",
+        "name": "Enterprise Audit System",
+        "status": "healthy"
+      },
+      "chain": {
+        "details": {
+          "port": 4602
+        },
+        "endpoint": "http://localhost:4602",
+        "health_score": 50,
+        "name": "Chain Service",
+        "status": "degraded"
+      },
+      "collector": {
+        "details": {
+          "port": 4603
+        },
+        "error": "fetch failed",
+        "health_score": 0,
+        "name": "Collector Service",
+        "status": "critical"
+      },
+      "complianceAutomation": {
+        "details": {
+          "active_alerts": 0,
+          "average_compliance_score": 85,
+          "frameworks_active": 4,
+          "is_running": false,
+          "total_assessments": 0,
+          "uptime": 0.003
+        },
+        "health_score": 90,
+        "last_check": "2025-08-22T19:21:52.008Z",
+        "name": "Compliance Automation",
+        "status": "healthy"
+      },
+      "complianceOrchestrator": {
+        "details": {
+          "active_alerts": 0,
+          "component_count": 4,
+          "healthy_components": 0,
+          "orchestration_status": "initializing",
+          "real_time_correlation": true,
+          "uptime": 0.2212214
+        },
+        "health_score": 65,
+        "last_check": "2025-08-22T19:21:52.030Z",
+        "name": "Compliance Orchestrator",
+        "status": "warning"
+      },
+      "fileSystem": {
+        "details": {
+          "accessible": 5,
+          "directories": [
+            {
+              "accessible": true,
+              "path": "./artifacts",
+              "type": "directory"
+            },
+            {
+              "accessible": true,
+              "path": "./data",
+              "type": "directory"
+            },
+            {
+              "accessible": true,
+              "path": "./docs",
+              "type": "directory"
+            },
+            {
+              "accessible": true,
+              "path": "./infrastructure",
+              "type": "directory"
+            },
+            {
+              "accessible": true,
+              "path": "./tools",
+              "type": "directory"
+            }
+          ],
+          "total": 5
+        },
+        "health_score": 100,
+        "name": "File System",
+        "status": "healthy"
+      },
+      "haOrchestrator": {
+        "health_score": 75,
+        "name": "HA Orchestrator",
+        "status": "healthy"
+      },
+      "logAggregation": {
+        "auditLogSize": 0,
+        "configuration": {
+          "logDir": "artifacts/logs",
+          "logLevel": "info"
+        },
+        "logBufferSize": 0,
+        "securityLogSize": 0,
+        "status": "healthy"
+      },
+      "observability": {
+        "error": "obs.getHealthStatus is not a function",
+        "health_score": 0,
+        "name": "Observability System",
+        "status": "critical"
+      },
+      "performance": {
+        "error": "Cannot find module 'D:\\farid\\tigabelas8\\merajutasa.id\\infrastructure\\performance\\performance-orchestrator.js' imported from D:\\farid\\tigabelas8\\merajutasa.id\\tools\\integrated-health-check.js",
+        "health_score": 0,
+        "name": "Performance Monitor",
+        "status": "critical"
+      },
+      "privacyRights": {
+        "details": {
+          "automated_processing": true,
+          "average_response_time": 0,
+          "completed_requests": 0,
+          "jurisdictions_supported": 4,
+          "pending_requests": 0,
+          "total_requests": 0,
+          "uptime": 0.2241817
+        },
+        "health_score": 110,
+        "last_check": "2025-08-22T19:21:52.032Z",
+        "name": "Privacy Rights Management",
+        "status": "healthy"
+      },
+      "securityHardening": {
+        "details": {
+          "active_threats": 0,
+          "automated_response": true,
+          "incidents": 0,
+          "monitoring_active": true,
+          "security_score": 100,
+          "threat_level": "medium",
+          "uptime": 0.1783514,
+          "vulnerabilities": 0
+        },
+        "health_score": 100,
+        "last_check": "2025-08-22T19:21:51.986Z",
+        "name": "Security Hardening",
+        "status": "healthy"
+      },
+      "signer": {
+        "details": {
+          "port": 4601
+        },
+        "error": "fetch failed",
+        "health_score": 0,
+        "name": "Signer Service",
+        "status": "critical"
+      }
+    },
+    "duration_ms": 227,
+    "overall_health_score": 49,
+    "overall_status": "degraded",
+    "recommendations": [
+      {
+        "action": "Restart performance service and check logs",
+        "component": "performance",
+        "health_score": 0,
+        "issue": "Performance Monitor is not responding",
+        "priority": "high"
+      },
+      {
+        "action": "Restart signer service and check logs",
+        "component": "signer",
+        "health_score": 0,
+        "issue": "Signer Service is not responding",
+        "priority": "high"
+      },
+      {
+        "action": "Monitor chain resources and investigate performance",
+        "component": "chain",
+        "health_score": 50,
+        "issue": "Chain Service performance degraded",
+        "priority": "medium"
+      },
+      {
+        "action": "Restart collector service and check logs",
+        "component": "collector",
+        "health_score": 0,
+        "issue": "Collector Service is not responding",
+        "priority": "high"
+      },
+      {
+        "action": "Review complianceOrchestrator configuration and metrics",
+        "component": "complianceOrchestrator",
+        "health_score": 65,
+        "issue": "Compliance Orchestrator showing warning signs",
+        "priority": "low"
+      },
+      {
+        "action": "Restart apiGateway service and check logs",
+        "component": "apiGateway",
+        "health_score": 0,
+        "issue": "API Gateway is not responding",
+        "priority": "high"
+      },
+      {
+        "action": "Restart observability service and check logs",
+        "component": "observability",
+        "health_score": 0,
+        "issue": "Observability System is not responding",
+        "priority": "high"
+      }
+    ],
+    "summary": {
+      "critical": 5,
+      "degraded": 1,
+      "healthy": 7,
+      "total_components": 14,
+      "warning": 1
+    },
+    "system_dependencies": {
+      "dependencies": {
+        "apiGateway": [
+          "signer",
+          "chain",
+          "collector"
+        ],
+        "complianceOrchestrator": [
+          "auditSystem",
+          "securityHardening",
+          "privacyRights",
+          "complianceAutomation"
+        ],
+        "haOrchestrator": [
+          "signer",
+          "chain",
+          "collector"
+        ],
+        "observability": [
+          "logAggregation"
+        ],
+        "performance": [
+          "observability"
+        ]
+      },
+      "startup_order": [
+        {
+          "components": [
+            "fileSystem"
+          ],
+          "description": "File system access validation",
+          "phase": 1
+        },
+        {
+          "components": [
+            "signer",
+            "chain",
+            "collector"
+          ],
+          "description": "Core services (can start in parallel)",
+          "phase": 2
+        },
+        {
+          "components": [
+            "auditSystem",
+            "logAggregation"
+          ],
+          "description": "Foundation services",
+          "phase": 3
+        },
+        {
+          "components": [
+            "securityHardening",
+            "privacyRights",
+            "complianceAutomation"
+          ],
+          "description": "Compliance & Security services",
+          "phase": 4
+        },
+        {
+          "components": [
+            "complianceOrchestrator",
+            "observability"
+          ],
+          "description": "Orchestration services",
+          "phase": 5
+        },
+        {
+          "components": [
+            "haOrchestrator",
+            "apiGateway",
+            "performance"
+          ],
+          "description": "Infrastructure services",
+          "phase": 6
+        }
+      ]
+    },
+    "timestamp": "2025-08-22T19:21:52.120Z"
+  }
+}

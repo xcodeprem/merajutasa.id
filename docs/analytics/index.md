@@ -2,7 +2,7 @@
 
 Status: Canonical Index v1.0  
 Purpose: Comprehensive index for event schema, validation, and analytics pipeline  
-Last Updated: 2025-08-21
+Last Updated: 2025-08-23
 
 > **Analytics Framework Hub**  
 > This document provides centralized navigation and overview of MerajutASA.id's event tracking, schema validation, and analytics infrastructure. Covers schema specifications, validation processes, pipeline integrity, and observability workflows.

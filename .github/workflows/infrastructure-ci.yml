@@ -47,6 +47,9 @@ jobs:
       - name: Parameter integrity check
         run: npm run param:integrity
 
+      - name: Parameter lock verification
+        run: npm run param:lock
+
       - name: Upload governance artifacts
         if: always()
         uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874  # v4.4.0
@@ -56,6 +59,8 @@ jobs:
             artifacts/governance-verify-summary.json
             artifacts/spec-hash-diff.json
             artifacts/param-integrity-matrix.json
+            artifacts/param-lock-status.json
+            artifacts/no-silent-drift-report.json
 
   test-suite:
     runs-on: ubuntu-latest
@@ -89,6 +94,37 @@ jobs:
           path: |
             artifacts/week6-component-*.json
             artifacts/*-test.json
+            artifacts/import-dependency-check.json
+
+  test-all:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332  # v4.1.7
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b  # v4.0.3
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run full test suite (test:all)
+        run: npm run test:all
+
+      - name: Upload test:all artifacts
+        if: always()
+        uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874  # v4.4.0
+        with:
+          name: test-all-artifacts
+          path: |
+            artifacts/*-test.json
+            artifacts/week6-component-*.json
             artifacts/import-dependency-check.json
 
   security-compliance:

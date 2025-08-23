@@ -2,7 +2,7 @@
 
 Status: Canonical Privacy Documentation Hub  
 Purpose: Indeks terpusat untuk kebijakan privasi, deteksi PII, minimalisasi data, dan strategi mitigasi risiko  
-Last Updated: 2025-08-21
+Last Updated: 2025-08-23
 
 > **Privacy-First Architecture**  
 > MerajutASA.id menerapkan prinsip privacy-by-design dengan deteksi PII otomatis, minimalisasi data, dan transparansi kontrol untuk mencegah kebocoran data pribadi sambil mempertahankan utilitas feedback publik.

@@ -8,6 +8,7 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 import { pathToFileURL } from 'url';
+import { stableStringify, addMetadata } from './lib/json-stable.js';
 
 // Import health check modules
 const healthCheckModules = {
@@ -449,7 +450,8 @@ class IntegratedHealthChecker {
   const reportPath = './artifacts/integrated-health-check-report.json';
   // Ensure artifacts directory exists (Windows-safe)
   await fs.mkdir(path.dirname(reportPath), { recursive: true });
-  await fs.writeFile(reportPath, JSON.stringify(report, null, 2));
+  const artifact = addMetadata(report, { generator: 'integrated-health-check' });
+  await fs.writeFile(reportPath, stableStringify(artifact));
     console.log(`📊 Health check report saved to ${reportPath}`);
     return reportPath;
   }
