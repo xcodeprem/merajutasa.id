@@ -1,3 +1,66 @@
+# PULL REQUEST (Non-Negotiable Enterprise Standard)
+
+Semua poin di bawah ini WAJIB dipenuhi. PR yang tidak memenuhi akan ditolak tanpa pengecualian.
+
+## Ringkasan
+- Tujuan PR (spesifik, tidak ambigu):
+- Issue rujukan: Closes #<id> (wajib jika ada)
+- Jenis perubahan: [ ] Feature [ ] Fix [ ] Security [ ] Docs [ ] Infra/CI [ ] Refactor [ ] Performance [ ] Test-only
+
+## Bukti Pemenuhan Standar
+
+### 1) Keamanan & Supply Chain
+- [ ] Tidak ada rahasia di kode/commit/artefak; semua variabel sensitif via GitHub Secrets
+- [ ] Semua GitHub Actions dipin ke commit SHA (tidak ke tag bergerak)
+- [ ] CodeQL lulus tanpa critical/high
+- [ ] Dependabot tidak melaporkan critical/high terbuka terkait perubahan ini
+- [ ] SBOM dihasilkan (Syft/CycloneDX) dan diunggah sebagai artifact
+- [ ] Lisensi file/komponen dipatuhi; file LICENSE konsisten
+
+### 2) Kualitas Kode & Testing
+- [ ] ESLint/Prettier/typecheck lulus
+- [ ] Unit tests ditambahkan/diperbarui dan lulus
+- [ ] Integration tests sesuai kontrak API ditambahkan/diperbarui dan lulus
+- [ ] E2E tests (bila relevan) ditambahkan/diperbarui dan lulus
+- [ ] Coverage tidak menurun; tetap >= ambang minimum
+
+### 3) Performa & Reliabilitas
+- [ ] Performance budgets dipenuhi (cantumkan angka p95/p99 di bawah)
+- [ ] Load/soak test lulus bila relevan
+- [ ] Strategi retry/backoff/circuit breaker (jika jaringan) ditetapkan
+- [ ] Backward compatibility dijaga atau migrasi disediakan
+
+### 4) Observability
+- [ ] Logging terstruktur (JSON) dengan trace/span-id
+- [ ] Tracing OpenTelemetry meng-cover jalur kritikal
+- [ ] Metrics, dashboard, dan alert ditambahkan/diperbarui
+- [ ] Error tracking diintegrasikan (DSN via env)
+
+### 5) Dokumentasi & Operasional
+- [ ] README/ADR/Docs diperbarui
+- [ ] Runbook rilis/rollback tersedia dan teruji
+- [ ] Perubahan konfigurasi didokumentasikan per-environment
+- [ ] Breaking changes dicatat jelas (lihat bagian khusus)
+
+## Detail Teknis
+- Arsitektur dan keputusan kunci:
+- Skema data/API yang berubah (sertakan OpenAPI diff jika ada):
+- Dampak kompatibilitas dan rencana migrasi:
+
+## Hasil Uji (tautkan artefak CI)
+- Laporan test:
+- Laporan coverage:
+- Laporan beban/kinerja:
+- SBOM/provenance:
+
+## Breaking Changes
+- [ ] Tidak ada
+- Jika ada, jelaskan dampak dan prosedur migrasi/rollback:
+
+## Checklist Admin
+- [ ] Branch up-to-date dengan target
+- [ ] Semua status checks lulus
+- [ ] Minimal 1 reviewer menyetujui (atau sesuai policy)
 # Pull Request Template – MerajutASA
 
 (Template ini disusun BERDASARKAN seluruh spesifikasi & keputusan yang sudah terdokumentasi: Master Spec v2.0, Credential Schema v1.0, Hysteresis Decision (DEC-20250812-02), Event Schema v1.0, Disclaimers Lint Spec v1.0, PII Pattern Library v1.0, Roadmap Master v1.0, Progress Recaps, dan semua prinsip GP1–GP10. Template INI TIDAK menggantikan dokumen manapun dan TIDAK menghapus strategi sebelumnya. Gunakan untuk memastikan setiap perubahan selaras dengan guardrail dan governance. Setiap bagian WAJIB dipertimbangkan; kosongkan hanya bila benar‑benar tidak relevan dan jelaskan mengapa.)

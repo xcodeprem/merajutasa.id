@@ -1,0 +1,4 @@
+- Optional: Verify EPIC #83 native roll-up via API and append result to artifacts/sub-issue-link-audit-2025-08-23.json under `epic_verification`.
+- Optional: Link this narratives file from EPIC #83 description for discoverability.
+- Optional: Run `npm run governance:verify` and attach summary to the EPIC.
+- Optional: Create a short README pointer in docs/analysis/README.md to index narratives.

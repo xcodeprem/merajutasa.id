@@ -1,0 +1,62 @@
+name: "EPIC: Enterprise-Grade Program"
+description: "Lacak program multi-issue dengan standar non-negotiable."
+title: "EPIC: <Ringkas dan Spesifik>"
+labels:
+  - epic
+  - governance
+assignees:
+  - xcodeprem
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Semua persyaratan di bawah ini bersifat wajib. Tidak ada pengecualian.
+  - type: textarea
+    id: objectives
+    attributes:
+      label: Objectives (Tujuan yang terukur)
+      description: "Nyatakan tujuan EPIC secara kuantitatif (SLA, SLO, security posture, cakupan, waktu siklus)."
+      placeholder: "Contoh: 99.95% uptime, 0 critical vulns, 90% coverage, <10m deploy time."
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope (Dalam cakupan dan di luar cakupan)
+      placeholder: "Nyatakan apa yang termasuk dan apa yang tidak."
+    validations:
+      required: true
+  - type: textarea
+    id: success_metrics
+    attributes:
+      label: Success Metrics (Sukses terukur)
+      placeholder: "Metode verifikasi keberhasilan: metrik, SLO, audit, uji penerimaan."
+    validations:
+      required: true
+  - type: textarea
+    id: timeline
+    attributes:
+      label: Timeline & Milestones
+      placeholder: "Jadwal target dan checkpoint validasi."
+    validations:
+      required: true
+  - type: textarea
+    id: risks
+    attributes:
+      label: Risks & Mitigations
+      placeholder: "Risiko besar dan strategi mitigasi yang spesifik."
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies
+      placeholder: "Sebutkan ketergantungan internal/eksternal."
+  - type: textarea
+    id: children
+    attributes:
+      label: Children Issues
+      description: "Daftar issue anak yang harus diselesaikan (gunakan referensi #issue)."
+      placeholder: "- [ ] #123\n- [ ] #456"
+    validations:
+      required: true

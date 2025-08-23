@@ -1,0 +1,127 @@
+name: "Task: Enterprise-Grade Implementation"
+description: "Template tugas dengan persyaratan non-negotiable (security, quality, reliability)."
+title: "<Domain>: <Judul tugas yang tegas dan spesifik>"
+labels:
+  - engineering
+  - high priority
+assignees:
+  - xcodeprem
+body:
+  - type: markdown
+    attributes:
+      value: "Semua persyaratan di bawah ini bersifat wajib. PR tanpa bukti pemenuhan akan ditolak."
+  - type: textarea
+    id: context
+    attributes:
+      label: Context & Problem Statement
+      placeholder: "Nyatakan kondisi saat ini dan masalah yang harus diatasi. Jangan umum."
+    validations:
+      required: true
+  - type: textarea
+    id: non_negotiable
+    attributes:
+      label: Non-Negotiable Requirements
+      description: "Daftar 'HARUS' yang tidak bisa dinegosiasikan."
+      placeholder: "- HARUS ...\n- HARUS ..."
+    validations:
+      required: true
+  - type: textarea
+    id: deliverables
+    attributes:
+      label: Deliverables
+      placeholder: "- Artefak, konfigurasi, file, diagram, dashboard, dsb."
+    validations:
+      required: true
+  - type: checkboxes
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria (semua wajib dicentang)
+      options:
+        - label: Implementasi mematuhi PR template dan semua checklist lulus
+          required: true
+        - label: Unit/integration/E2E tests ditambahkan dan lulus di CI
+          required: true
+        - label: CodeQL, Dependabot, dan secret scan bersih (0 critical/high)
+          required: true
+        - label: Performance budgets dan beban uji lulus
+          required: true
+        - label: Observability (log terstruktur, tracing, error tracking) aktif
+          required: true
+        - label: Dokumentasi dan runbook lengkap dan akurat
+          required: true
+  - type: textarea
+    id: dod
+    attributes:
+      label: Definition of Done (DoD)
+      placeholder: "Nyatakan kondisi objektif yang menandakan tugas selesai."
+    validations:
+      required: true
+  - type: checkboxes
+    id: security
+    attributes:
+      label: Security & Compliance Gates
+      options:
+        - label: Tidak ada rahasia dalam repo/PR; semua via Secrets
+          required: true
+        - label: Semua Actions dipin ke commit SHA
+          required: true
+        - label: SBOM dihasilkan dan disimpan sebagai artifact
+          required: true
+        - label: License header dan file LICENSE sesuai
+          required: true
+  - type: textarea
+    id: tests
+    attributes:
+      label: Test Plan
+      placeholder: "- Unit: ...\n- Integration: ...\n- E2E: ...\n- Negative cases: ...\n- Failure injection/rollback: ..."
+    validations:
+      required: true
+  - type: textarea
+    id: perf
+    attributes:
+      label: Performance & Reliability
+      placeholder: "- Budget: ...\n- Latency p95: ...\n- Error rate: ...\n- SLA/SLO: ...\n- Load test target: ..."
+    validations:
+      required: true
+  - type: textarea
+    id: observability
+    attributes:
+      label: Observability
+      placeholder: "- Logging: ...\n- Tracing: ...\n- Metrics: ...\n- Alerts: ..."
+    validations:
+      required: true
+  - type: textarea
+    id: docs
+    attributes:
+      label: Documentation & Runbooks
+      placeholder: "- README/ADR/update docs: ...\n- Playbook rilis/rollback: ..."
+    validations:
+      required: true
+  - type: textarea
+    id: rollout
+    attributes:
+      label: Rollout Plan & Rollback
+      placeholder: "- Tahapan penyebaran, verifikasi, rollback teruji."
+    validations:
+      required: true
+  - type: input
+    id: owner
+    attributes:
+      label: Tech Owner (wajib)
+      placeholder: "@handle"
+    validations:
+      required: true
+  - type: input
+    id: reviewers
+    attributes:
+      label: Required Reviewers
+      placeholder: "@handle1, @handle2"
+    validations:
+      required: true
+  - type: input
+    id: due
+    attributes:
+      label: Due Date (UTC, YYYY-MM-DD)
+      placeholder: "2025-09-15"
+    validations:
+      required: true
