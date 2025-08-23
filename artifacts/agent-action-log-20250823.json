@@ -526,5 +526,25 @@
     "status": "ERROR",
     "step": "spec-hash-diff",
     "timestamp": "2025-08-23T21:36:30.294Z"
+  },
+  {
+    "_metadata": {
+      "actor": "copilot-swe-agent[bot]",
+      "generated_at": "2025-08-23T21:48:09.221Z",
+      "generator": "governance-verify",
+      "git_ref": "refs/heads/copilot/fix-4",
+      "git_sha": "e9d2d0728b12be4ec63d2f3ad5a35a8e8f278f4b",
+      "run_id": "17180497942",
+      "version": "1.0"
+    },
+    "action": "step",
+    "advisory": false,
+    "cmd": "node tools/spec-hash-diff.js --mode=verify",
+    "critical": true,
+    "duration_ms": 77,
+    "exit_code": 1,
+    "status": "ERROR",
+    "step": "spec-hash-diff",
+    "timestamp": "2025-08-23T21:48:09.221Z"
   }
 ]
