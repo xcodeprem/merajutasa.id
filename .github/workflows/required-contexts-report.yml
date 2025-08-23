@@ -1,0 +1,98 @@
+name: Required Contexts Reporter
+
+on:
+  workflow_run:
+    workflows:
+      - CI Guard (H1)
+      - Gitleaks
+      - CodeQL
+    types: [completed]
+
+permissions:
+  contents: read
+  checks: write
+
+concurrency:
+  group: required-contexts-report-${{ github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  report:
+    if: ${{ github.event.workflow_run.event == 'pull_request' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Map and publish required contexts
+        uses: actions/github-script@60a0d83039c74a4aee7da9c2741b5b301c6f6f72 # v7.0.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const run = context.payload.workflow_run;
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            if (!run.pull_requests || run.pull_requests.length === 0) {
+              core.info('No associated pull requests for this workflow_run; nothing to report.');
+              return;
+            }
+
+            // Use the first associated PR (GitHub links a single PR for workflow_run on PR events)
+            const pr = run.pull_requests[0];
+            const head_sha = pr.head.sha;
+
+            /**
+             * Map workflow_run.name and conclusion -> required status contexts
+             * Required contexts: ci/build, ci/lint, ci/test, security/codeql, security/secret-scan
+             */
+            const toOutcome = (conclusion) => conclusion === 'success' ? 'success' : 'failure';
+
+            /** @type {{ name: string, conclusion: 'success'|'failure', summary: string }[]} */
+            let mappings = [];
+
+            switch (run.name) {
+              case 'CI Guard (H1)': {
+                const c = toOutcome(run.conclusion || 'failure');
+                const names = ['ci/build', 'ci/lint', 'ci/test'];
+                mappings = names.map(n => ({
+                  name: n,
+                  conclusion: c,
+                  summary: `Mirrored from CI Guard (H1) workflow_run ${run.id} → ${n}`
+                }));
+                break;
+              }
+              case 'CodeQL': {
+                mappings = [{
+                  name: 'security/codeql',
+                  conclusion: toOutcome(run.conclusion || 'failure'),
+                  summary: `Mirrored from CodeQL workflow_run ${run.id}`
+                }];
+                break;
+              }
+              case 'Gitleaks': {
+                mappings = [{
+                  name: 'security/secret-scan',
+                  conclusion: toOutcome(run.conclusion || 'failure'),
+                  summary: `Mirrored from Gitleaks workflow_run ${run.id}`
+                }];
+                break;
+              }
+              default: {
+                core.info(`Workflow ${run.name} not mapped; exiting.`);
+                return;
+              }
+            }
+
+            for (const m of mappings) {
+              core.info(`Publishing required context: ${m.name} = ${m.conclusion}`);
+              await github.rest.checks.create({
+                owner,
+                repo,
+                name: m.name,
+                head_sha,
+                status: 'completed',
+                conclusion: m.conclusion,
+                output: {
+                  title: m.name,
+                  summary: m.summary
+                }
+              });
+            }
