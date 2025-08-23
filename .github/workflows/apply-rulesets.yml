@@ -1,10 +1,8 @@
 name: Apply Repository Rulesets
-'on':
+on:
   workflow_dispatch: {}
-
 permissions:
   contents: read
-
 jobs:
   apply:
     runs-on: ubuntu-latest
@@ -28,7 +26,7 @@ jobs:
           echo "owner=${GITHUB_REPOSITORY%%/*}" >> "$GITHUB_OUTPUT"
           echo "repo=${GITHUB_REPOSITORY#*/}" >> "$GITHUB_OUTPUT"
 
-  - name: "Apply branch protection: main"
+      - name: "Apply branch protection: main"
         shell: bash
         run: |
           set -euo pipefail
@@ -67,7 +65,7 @@ jobs:
             "/repos/${OWNER}/${REPO}/branches/main/protection" \
             --input protection.json
 
-  - name: "Create or update repository ruleset for release/*"
+      - name: "Create or update repository ruleset for release/*"
         shell: bash
         run: |
           set -euo pipefail
@@ -134,7 +132,7 @@ jobs:
               --input ruleset.json
           fi
 
-  - name: "Summary"
+      - name: "Summary"
         shell: bash
         run: |
           {
