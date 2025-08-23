@@ -11,6 +11,8 @@
   },
   "packageManager": "npm@9.8.1",
   "scripts": {
+    "coverage:summary": "node tools/generate-coverage-summary.js",
+    "lint:summary": "node tools/generate-lint-summary.js",
     "frontend:performance-test": "node tools/performance/frontend-performance-test.js",
     "frontend:lighthouse": "node tools/performance/frontend-metrics.js",
     "cache:stats": "node tools/performance/cache-stats.js stats",

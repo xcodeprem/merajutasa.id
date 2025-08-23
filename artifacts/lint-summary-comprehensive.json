@@ -1,0 +1,27 @@
+{
+  "timestamp": "2025-08-23T22:33:55.562Z",
+  "generated_by": "tools/generate-lint-summary.js",
+  "lint_results": {
+    "markdown": null,
+    "dec": {
+      "status": "unknown",
+      "files_checked": 0,
+      "violations": []
+    },
+    "disclaimers": {
+      "status": "PASS",
+      "pages_checked": 0,
+      "violations": 0
+    },
+    "security_patterns": {
+      "status": "unknown",
+      "patterns_checked": 0,
+      "high_severity_findings": 0
+    }
+  },
+  "overall_status": "mostly_pass",
+  "badge": {
+    "lint": "mostly-passing",
+    "pass_rate": 67
+  }
+}
