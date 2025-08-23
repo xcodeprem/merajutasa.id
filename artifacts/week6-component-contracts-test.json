@@ -1,12 +1,12 @@
 {
-  "timestamp": "2025-08-23T12:36:08.264Z",
+  "timestamp": "2025-08-23T12:48:47.147Z",
   "test_suite": "Week 6 Component Contract Tests",
   "summary": {
     "total": 7,
     "passed": 7,
     "failed": 0,
     "success_rate": 100,
-    "total_duration": 32
+    "total_duration": 30
   },
   "results": [
     {
@@ -42,7 +42,7 @@
     {
       "name": "Minimal Audit Event Flow",
       "status": "PASSED",
-      "duration": 1
+      "duration": 0
     }
   ],
   "contract_validation": {

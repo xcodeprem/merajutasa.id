@@ -1,0 +1,20 @@
+{
+  "scan_id": "scan_1755953350554_3pynquafb",
+  "scan_type": "full",
+  "started_at": "2025-08-23T12:49:10.554Z",
+  "vulnerabilities": [
+    {
+      "type": "dependency_vulnerability",
+      "severity": "medium",
+      "package": "ajv-formats",
+      "version": "^3.0.1",
+      "description": "Vulnerability found in ajv-formats@^3.0.1",
+      "cvss_score": "8.5",
+      "cve_id": "CVE-2024-5267"
+    }
+  ],
+  "threats": [],
+  "configuration_issues": [],
+  "overall_score": 95,
+  "recommendations": []
+}

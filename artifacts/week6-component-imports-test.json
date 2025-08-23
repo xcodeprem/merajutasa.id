@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-08-23T12:36:08.040Z",
+  "timestamp": "2025-08-23T12:48:46.929Z",
   "test_suite": "Week 6 Component Import Tests",
   "summary": {
     "total": 7,
@@ -22,7 +22,7 @@
     {
       "name": "Compliance Orchestrator Imports",
       "status": "PASSED",
-      "duration": 1
+      "duration": 0
     },
     {
       "name": "No Circular Imports",
@@ -32,7 +32,7 @@
     {
       "name": "Component Import Resolution",
       "status": "PASSED",
-      "duration": 15
+      "duration": 14
     },
     {
       "name": "Component Instance Creation",
