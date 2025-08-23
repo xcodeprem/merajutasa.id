@@ -58,9 +58,17 @@ function RealtimeRoot() {
             {isSettings ? (
               <SettingsPage />
             ) : isCompliance ? (
-              isAuthenticated ? <CompliancePage /> : <SettingsPage />
+              isAuthenticated ? (
+                <CompliancePage />
+              ) : (
+                <SettingsPage />
+              )
             ) : isAnalytics ? (
-              isAuthenticated ? <AnalyticsPage /> : <SettingsPage />
+              isAuthenticated ? (
+                <AnalyticsPage />
+              ) : (
+                <SettingsPage />
+              )
             ) : (
               <Dashboard />
             )}

@@ -2,9 +2,10 @@ import { getAccessToken, clearAccessToken, subscribe } from './tokenManager';
 import { createApiClient } from '../generatedClient';
 
 // Lightweight auth service: manages refresh and logout
-const gatewayBase = typeof window !== 'undefined'
-  ? window.__GATEWAY_BASE_URL__ || 'http://localhost:8080'
-  : 'http://localhost:8080';
+const gatewayBase =
+  typeof window !== 'undefined'
+    ? window.__GATEWAY_BASE_URL__ || 'http://localhost:8080'
+    : 'http://localhost:8080';
 
 let lastRefreshAt = 0;
 let refreshing = null;
@@ -30,7 +31,7 @@ export async function refreshToken() {
       if (!token) return null;
       // Example (disabled): await axios.post(`${gatewayBase}/auth/refresh`)
       return token;
-  } catch {
+    } catch {
       return null;
     } finally {
       refreshing = null;

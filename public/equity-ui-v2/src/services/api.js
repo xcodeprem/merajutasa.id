@@ -1,7 +1,6 @@
 // API service: combines Gateway OpenAPI client for Phase 2 endpoints and direct equity UI endpoints for data views
 import axios from 'axios';
-import { createApiClient } from './generatedClient';
-import { getAccessToken, getApiKey as getApiKeyStored } from './auth/tokenManager';
+import { createAuthedGatewayClient } from './auth/authService';
 
 const isOnPages = () => {
   return typeof window !== 'undefined' && /github\.io/.test(location.host);
@@ -19,16 +18,8 @@ const API_ENDPOINTS = {
   '/health': '/health',
 };
 
-// Gateway client (Phase 2) with auth/error interceptors
-const gatewayBase =
-  typeof window !== 'undefined'
-    ? window.__GATEWAY_BASE_URL__ || 'http://localhost:8080'
-    : 'http://localhost:8080';
-export const gatewayClient = createApiClient({
-  baseURL: gatewayBase,
-  getToken: () => getAccessToken(),
-  getApiKey: () => getApiKeyStored(),
-});
+// Authed client with 401 refresh+retry semantics
+export const gatewayClient = createAuthedGatewayClient();
 
 // Direct equity UI data endpoints (proxied in dev via Vite)
 const api = axios.create({ timeout: 10000, headers: { 'Content-Type': 'application/json' } });
