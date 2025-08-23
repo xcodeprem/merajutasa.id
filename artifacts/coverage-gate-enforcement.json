@@ -1,88 +1,12 @@
 {
-  "timestamp": "2025-08-23T23:55:11.156Z",
+  "timestamp": "2025-08-23T23:57:38.165Z",
+  "error": "UI coverage data not available. Run tests with coverage first.",
+  "overall_status": "ERROR",
   "thresholds": {
     "lines": 80,
     "functions": 80,
     "branches": 70,
     "statements": 80
   },
-  "coverage_actual": {
-    "lines": {
-      "pct": 72.03,
-      "covered": 1543,
-      "total": 2142
-    },
-    "statements": {
-      "pct": 72.03,
-      "covered": 1543,
-      "total": 2142
-    },
-    "functions": {
-      "pct": 59.7,
-      "covered": 80,
-      "total": 134
-    },
-    "branches": {
-      "pct": 55.93,
-      "covered": 198,
-      "total": 354
-    }
-  },
-  "checks": {
-    "lines": {
-      "threshold": 80,
-      "actual": 72.03,
-      "passed": false,
-      "covered": 1543,
-      "total": 2142
-    },
-    "functions": {
-      "threshold": 80,
-      "actual": 59.7,
-      "passed": false,
-      "covered": 80,
-      "total": 134
-    },
-    "branches": {
-      "threshold": 70,
-      "actual": 55.93,
-      "passed": false,
-      "covered": 198,
-      "total": 354
-    },
-    "statements": {
-      "threshold": 80,
-      "actual": 72.03,
-      "passed": false,
-      "covered": 1543,
-      "total": 2142
-    }
-  },
-  "overall_status": "FAIL",
-  "failures": [
-    {
-      "metric": "lines",
-      "threshold": 80,
-      "actual": 72.03,
-      "deficit": 7.969999999999999
-    },
-    {
-      "metric": "functions",
-      "threshold": 80,
-      "actual": 59.7,
-      "deficit": 20.299999999999997
-    },
-    {
-      "metric": "branches",
-      "threshold": 70,
-      "actual": 55.93,
-      "deficit": 14.07
-    },
-    {
-      "metric": "statements",
-      "threshold": 80,
-      "actual": 72.03,
-      "deficit": 7.969999999999999
-    }
-  ]
+  "context": "Coverage gate enforcement failed - this may indicate missing coverage data or configuration issues"
 }

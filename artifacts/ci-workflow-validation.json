@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-08-23T23:52:42.816Z",
+  "timestamp": "2025-08-23T23:57:37.792Z",
   "tests": [
     {
       "name": "Artifacts Directory Setup",
@@ -10,25 +10,25 @@
     {
       "name": "Coverage Summary Generation",
       "status": "PASS",
-      "duration": 196,
+      "duration": 191,
       "message": "Test completed successfully"
     },
     {
       "name": "Coverage Gate Enforcement",
       "status": "PASS",
-      "duration": 193,
+      "duration": 188,
       "message": "Test completed successfully"
     },
     {
       "name": "UI Testing Setup",
       "status": "PASS",
-      "duration": 0,
+      "duration": 1,
       "message": "Test completed successfully"
     },
     {
       "name": "Security Scanning Setup",
       "status": "PASS",
-      "duration": 1,
+      "duration": 0,
       "message": "Test completed successfully"
     },
     {
@@ -40,7 +40,7 @@
     {
       "name": "Dependency Security Checks",
       "status": "PASS",
-      "duration": 569,
+      "duration": 527,
       "message": "Test completed successfully"
     }
   ],
