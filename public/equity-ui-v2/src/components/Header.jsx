@@ -45,6 +45,12 @@ export const Header = () => {
 
           {/* Desktop navigation */}
           <div className="hidden md:flex items-center space-x-4">
+            <a
+              href="#/analytics"
+              className="text-sm text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-300 transition-colors"
+            >
+              Analytics
+            </a>
             {/* Language toggle */}
             <button
               onClick={toggleLanguage}
@@ -143,6 +149,12 @@ export const Header = () => {
                 className="block px-3 py-2 text-base font-medium text-blue-600 dark:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md"
               >
                 {t('link.privacy')}
+              </a>
+              <a
+                href="#/analytics"
+                className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md"
+              >
+                Analytics
               </a>
             </div>
           </div>

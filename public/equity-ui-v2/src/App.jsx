@@ -19,11 +19,26 @@ const queryClient = new QueryClient({
 
 function RealtimeRoot() {
   useRealtimeDashboard({ enabled: true });
+  const [hash, setHash] = React.useState(() => window.location.hash);
+  React.useEffect(() => {
+    const onHash = () => setHash(window.location.hash);
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
+  }, []);
+
+  const isAnalytics = hash === '#/analytics';
+  const AnalyticsPage = React.useMemo(
+    () => React.lazy(() => import('./pages/analytics/AnalyticsPage')),
+    []
+  );
+
   return (
     <ThemeProvider>
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
         <Header />
-        <Dashboard />
+        <React.Suspense fallback={<div className="p-6 text-center text-gray-500">Loading…</div>}>
+          {isAnalytics ? <AnalyticsPage /> : <Dashboard />}
+        </React.Suspense>
       </div>
     </ThemeProvider>
   );
