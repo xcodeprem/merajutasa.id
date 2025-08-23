@@ -114,6 +114,18 @@ secret.*
 *.credentials
 .credentials/
 
+# SSH keys and authentication files  
+ssh_key*
+*_key
+auth.*
+authentication.*
+
+# AWS and cloud config files with potential secrets
+aws-config.*
+*-config.yml
+*-config.yaml
+.aws-*
+
 # Package artifacts (moved to build section above for consolidation)
 # *.tgz
 
