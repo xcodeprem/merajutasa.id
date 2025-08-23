@@ -17,17 +17,22 @@ const queryClient = new QueryClient({
   },
 });
 
-function App() {
-  // Start realtime updates (disabled automatically on GitHub Pages unless WS configured)
+function RealtimeRoot() {
   useRealtimeDashboard({ enabled: true });
   return (
+    <ThemeProvider>
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+        <Header />
+        <Dashboard />
+      </div>
+    </ThemeProvider>
+  );
+}
+
+function App() {
+  return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider>
-        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
-          <Header />
-          <Dashboard />
-        </div>
-      </ThemeProvider>
+      <RealtimeRoot />
     </QueryClientProvider>
   );
 }
