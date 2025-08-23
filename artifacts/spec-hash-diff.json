@@ -1,7 +1,8 @@
 {
-  "mode": "accept",
-  "timestamp_utc": "2025-08-23T08:44:29Z",
-  "updated": [
+  "mode": "verify",
+  "timestamp_utc": "2025-08-23T10:04:20Z",
+  "updated": [],
+  "unchanged": [
     "docs/roadmap/roadmap-master-v1.md",
     "docs/governance/signature-pipeline-plan-v1.md",
     "docs/governance/dec/DEC-20250813-02-signature-pipeline-adoption.md",
@@ -33,6 +34,7 @@
     "docs/archive/ux_public-multipage-experience-master-spec-v2.md",
     "docs/governance/trace/archive-trace-index-v1.md",
     "docs/onboarding/agent-bootstrap-manifest.md",
+    "README.md",
     "docs/governance/dec/DEC-20250812-04-governance-baseline-thresholds.md",
     "docs/integrity/evidence-minimum-phase1.5-v1.md",
     "docs/governance/dec/DEC-20250813-01-known-debt-register.md",
@@ -45,6 +47,7 @@
     "docs/integrity/gating-policy-v1.json",
     "docs/governance/dec/DEC-20250813-07-hype-threshold-transition.md",
     "docs/governance/dec/DEC-style-guide-v1.md",
+    "docs/governance/dec/DEC-style-guide-v2.md",
     "docs/governance/dec/DEC-20250813-05-gating-policy-wave1-adoption.md",
     "docs/governance/dec/DEC-20250813-06-consolidated-governed-edits.md",
     "docs/governance/dec/DEC-20250813-08-evidence-hash-display-length.md",
@@ -57,16 +60,12 @@
     "docs/verify-cli.md",
     "docs/public/ABOUT-PORTAL-PANTI.md"
   ],
-  "unchanged": [
-    "README.md",
-    "docs/governance/dec/DEC-style-guide-v2.md"
-  ],
   "placeholders_sealed": [],
   "placeholders_remaining": [],
   "violations": [],
   "summary": {
     "total_entries": 56,
-    "updated_count": 54,
+    "updated_count": 0,
     "violation_count": 0,
     "placeholders_remaining_count": 0
   }

@@ -8,6 +8,7 @@ import { Card, DataCard } from './Card';
 import { DecisionTrendsChart, KPIChart } from './Charts';
 import { RefreshCw, AlertCircle } from 'lucide-react';
 import { useSyncDashboardToStore } from '../stores/sync';
+import Disclaimers from './Disclaimers';
 
 export const Dashboard = () => {
   const { t } = useTranslation();
@@ -276,6 +277,9 @@ export const Dashboard = () => {
             </span>
           </p>
         </div>
+
+  {/* Canonical disclaimers */}
+  <Disclaimers pageId="dashboard" />
       </main>
     </div>
   );

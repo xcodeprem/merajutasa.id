@@ -140,12 +140,6 @@
       "threshold": 2
     },
     {
-      "file": "docs\\scripts\\NPM-SCRIPTS-ORGANIZATION.md",
-      "category": "PLATE_ID",
-      "action": "WARN",
-      "sample": "E2E…#71c38faf"
-    },
-    {
       "file": "docs\\status\\gate1-verification-2025-08-17.md",
       "category": "EMAIL_IN_NAME",
       "action": "REDACT",
@@ -195,6 +189,18 @@
         "PLATE_ID"
       ],
       "threshold": 2
+    },
+    {
+      "file": "docs\\scripts\\NPM-SCRIPTS-ORGANIZATION.md",
+      "category": "PLATE_ID",
+      "action": "WARN",
+      "sample": "E2E…#71c38faf"
+    },
+    {
+      "file": "docs\\public\\ABOUT-PORTAL-PANTI.md",
+      "category": "PLATE_ID",
+      "action": "WARN",
+      "sample": "W3C…#158bfbd3"
     },
     {
       "file": "docs\\quick-reference\\QUICK-REFERENCE-PHASE-2-WEEK-6.md",
@@ -300,12 +306,6 @@
         "EMAIL_IN_NAME"
       ],
       "threshold": 2
-    },
-    {
-      "file": "docs\\public\\ABOUT-PORTAL-PANTI.md",
-      "category": "PLATE_ID",
-      "action": "WARN",
-      "sample": "W3C…#158bfbd3"
     },
     {
       "file": "docs\\privacy\\pii-scan-fixture.md",
@@ -496,6 +496,24 @@
       "sample": "sarif@…#a47c47a3"
     },
     {
+      "file": "docs\\integrity\\index.md",
+      "category": "PLATE_ID",
+      "action": "WARN",
+      "sample": "W3C…#158bfbd3"
+    },
+    {
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "category": "PLATE_ID",
+      "action": "WARN",
+      "sample": "W3C…#158bfbd3"
+    },
+    {
+      "file": "docs\\integrity\\credential-schema-final-v1.md",
+      "category": "PLATE_ID",
+      "action": "WARN",
+      "sample": "W3C…#158bfbd3"
+    },
+    {
       "file": "docs\\operations\\infra-health-triage.md",
       "category": "CONTACT_EMAIL",
       "action": "REDACT",
@@ -515,24 +533,6 @@
         "EMAIL_IN_NAME"
       ],
       "threshold": 2
-    },
-    {
-      "file": "docs\\integrity\\index.md",
-      "category": "PLATE_ID",
-      "action": "WARN",
-      "sample": "W3C…#158bfbd3"
-    },
-    {
-      "file": "docs\\integrity\\credential-schema-final-v1.md",
-      "category": "PLATE_ID",
-      "action": "WARN",
-      "sample": "W3C…#158bfbd3"
-    },
-    {
-      "file": "docs\\integrity\\credential-schema-final-v1.md",
-      "category": "PLATE_ID",
-      "action": "WARN",
-      "sample": "W3C…#158bfbd3"
     },
     {
       "file": "docs\\infrastructure\\health-monitoring.md",
@@ -575,24 +575,6 @@
       "category": "CONTACT_EMAIL",
       "action": "REDACT",
       "sample": "api@me…#7651962c"
-    },
-    {
-      "file": "docs\\produk\\portal-panti\\02-model-data-minimal-aman.md",
-      "category": "PLATE_ID",
-      "action": "WARN",
-      "sample": "I18N…#ac7d64d5"
-    },
-    {
-      "file": "docs\\produk\\portal-panti\\01-ruang-lingkup-produk.md",
-      "category": "PLATE_ID",
-      "action": "WARN",
-      "sample": "W3C…#158bfbd3"
-    },
-    {
-      "file": "docs\\produk\\portal-panti\\00-orientasi-komprehensif.md",
-      "category": "PLATE_ID",
-      "action": "WARN",
-      "sample": "W3C…#158bfbd3"
     },
     {
       "file": "docs\\privacy\\corpus\\positive-highrisk.md",
@@ -687,6 +669,24 @@
       "category": "GENERIC_16DIGIT",
       "action": "BLOCK",
       "sample": "221122…#6e8ab731"
+    },
+    {
+      "file": "docs\\produk\\portal-panti\\02-model-data-minimal-aman.md",
+      "category": "PLATE_ID",
+      "action": "WARN",
+      "sample": "I18N…#ac7d64d5"
+    },
+    {
+      "file": "docs\\produk\\portal-panti\\01-ruang-lingkup-produk.md",
+      "category": "PLATE_ID",
+      "action": "WARN",
+      "sample": "W3C…#158bfbd3"
+    },
+    {
+      "file": "docs\\produk\\portal-panti\\00-orientasi-komprehensif.md",
+      "category": "PLATE_ID",
+      "action": "WARN",
+      "sample": "W3C…#158bfbd3"
     }
   ]
 }

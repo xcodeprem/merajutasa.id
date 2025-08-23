@@ -300,22 +300,6 @@
           ]
         },
         {
-          "ruleId": "PLATE_ID",
-          "level": "warning",
-          "message": {
-            "text": "PLATE_ID docs\\scripts\\NPM-SCRIPTS-ORGANIZATION.md"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "docs\\scripts\\NPM-SCRIPTS-ORGANIZATION.md"
-                }
-              }
-            }
-          ]
-        },
-        {
           "ruleId": "EMAIL_IN_NAME",
           "level": "note",
           "message": {
@@ -438,6 +422,38 @@
               "physicalLocation": {
                 "artifactLocation": {
                   "uri": "docs\\roadmap\\roadmap-master-v1.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "PLATE_ID",
+          "level": "warning",
+          "message": {
+            "text": "PLATE_ID docs\\scripts\\NPM-SCRIPTS-ORGANIZATION.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\scripts\\NPM-SCRIPTS-ORGANIZATION.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "PLATE_ID",
+          "level": "warning",
+          "message": {
+            "text": "PLATE_ID docs\\public\\ABOUT-PORTAL-PANTI.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\public\\ABOUT-PORTAL-PANTI.md"
                 }
               }
             }
@@ -694,22 +710,6 @@
               "physicalLocation": {
                 "artifactLocation": {
                   "uri": "docs\\quick-reference\\QUICK-REFERENCE-PHASE-2-WEEK-3.md"
-                }
-              }
-            }
-          ]
-        },
-        {
-          "ruleId": "PLATE_ID",
-          "level": "warning",
-          "message": {
-            "text": "PLATE_ID docs\\public\\ABOUT-PORTAL-PANTI.md"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "docs\\public\\ABOUT-PORTAL-PANTI.md"
                 }
               }
             }
@@ -1164,54 +1164,6 @@
           ]
         },
         {
-          "ruleId": "CONTACT_EMAIL",
-          "level": "note",
-          "message": {
-            "text": "CONTACT_EMAIL docs\\operations\\infra-health-triage.md"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "docs\\operations\\infra-health-triage.md"
-                }
-              }
-            }
-          ]
-        },
-        {
-          "ruleId": "EMAIL_IN_NAME",
-          "level": "note",
-          "message": {
-            "text": "EMAIL_IN_NAME docs\\operations\\infra-health-triage.md"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "docs\\operations\\infra-health-triage.md"
-                }
-              }
-            }
-          ]
-        },
-        {
-          "ruleId": "MULTI_CATEGORY_ESCALATION",
-          "level": "note",
-          "message": {
-            "text": "MULTI_CATEGORY_ESCALATION docs\\operations\\infra-health-triage.md"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "docs\\operations\\infra-health-triage.md"
-                }
-              }
-            }
-          ]
-        },
-        {
           "ruleId": "PLATE_ID",
           "level": "warning",
           "message": {
@@ -1254,6 +1206,54 @@
               "physicalLocation": {
                 "artifactLocation": {
                   "uri": "docs\\integrity\\credential-schema-final-v1.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CONTACT_EMAIL",
+          "level": "note",
+          "message": {
+            "text": "CONTACT_EMAIL docs\\operations\\infra-health-triage.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\operations\\infra-health-triage.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "EMAIL_IN_NAME",
+          "level": "note",
+          "message": {
+            "text": "EMAIL_IN_NAME docs\\operations\\infra-health-triage.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\operations\\infra-health-triage.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "MULTI_CATEGORY_ESCALATION",
+          "level": "note",
+          "message": {
+            "text": "MULTI_CATEGORY_ESCALATION docs\\operations\\infra-health-triage.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\operations\\infra-health-triage.md"
                 }
               }
             }
@@ -1366,54 +1366,6 @@
               "physicalLocation": {
                 "artifactLocation": {
                   "uri": "docs\\api\\API_DOCUMENTATION.md"
-                }
-              }
-            }
-          ]
-        },
-        {
-          "ruleId": "PLATE_ID",
-          "level": "warning",
-          "message": {
-            "text": "PLATE_ID docs\\produk\\portal-panti\\02-model-data-minimal-aman.md"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "docs\\produk\\portal-panti\\02-model-data-minimal-aman.md"
-                }
-              }
-            }
-          ]
-        },
-        {
-          "ruleId": "PLATE_ID",
-          "level": "warning",
-          "message": {
-            "text": "PLATE_ID docs\\produk\\portal-panti\\01-ruang-lingkup-produk.md"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "docs\\produk\\portal-panti\\01-ruang-lingkup-produk.md"
-                }
-              }
-            }
-          ]
-        },
-        {
-          "ruleId": "PLATE_ID",
-          "level": "warning",
-          "message": {
-            "text": "PLATE_ID docs\\produk\\portal-panti\\00-orientasi-komprehensif.md"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "docs\\produk\\portal-panti\\00-orientasi-komprehensif.md"
                 }
               }
             }
@@ -1638,6 +1590,54 @@
               "physicalLocation": {
                 "artifactLocation": {
                   "uri": "docs\\privacy\\corpus\\negative-decoy.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "PLATE_ID",
+          "level": "warning",
+          "message": {
+            "text": "PLATE_ID docs\\produk\\portal-panti\\02-model-data-minimal-aman.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\produk\\portal-panti\\02-model-data-minimal-aman.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "PLATE_ID",
+          "level": "warning",
+          "message": {
+            "text": "PLATE_ID docs\\produk\\portal-panti\\01-ruang-lingkup-produk.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\produk\\portal-panti\\01-ruang-lingkup-produk.md"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "PLATE_ID",
+          "level": "warning",
+          "message": {
+            "text": "PLATE_ID docs\\produk\\portal-panti\\00-orientasi-komprehensif.md"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docs\\produk\\portal-panti\\00-orientasi-komprehensif.md"
                 }
               }
             }

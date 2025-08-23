@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchWeeklyTrends, fetchEquityAnomalies } from '../../services/api';
 import { adaptWeeklyTrends, adaptAnomalies } from '../../services/api/feed-adapters';
 import { Card } from '../../components/Card';
+import Disclaimers from '../../components/Disclaimers';
 import { useSnapshotSimulation } from './useSnapshotSimulation';
 
 const TrendsChart = React.lazy(() => import('../../components/charts/TrendsChart').then(m => ({ default: m.TrendsChart })));
@@ -93,6 +94,9 @@ export default function AnalyticsPage() {
           </div>
         )}
       </Card>
+
+  {/* Canonical disclaimers on analytics */}
+  <Disclaimers pageId="analytics" />
     </div>
   );
 }

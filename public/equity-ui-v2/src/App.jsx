@@ -27,8 +27,13 @@ function RealtimeRoot() {
   }, []);
 
   const isAnalytics = hash === '#/analytics';
+  const isCompliance = hash === '#/compliance';
   const AnalyticsPage = React.useMemo(
     () => React.lazy(() => import('./pages/analytics/AnalyticsPage')),
+    []
+  );
+  const CompliancePage = React.useMemo(
+    () => React.lazy(() => import('./pages/compliance/CompliancePage')),
     []
   );
 
@@ -37,7 +42,7 @@ function RealtimeRoot() {
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
         <Header />
         <React.Suspense fallback={<div className="p-6 text-center text-gray-500">Loading…</div>}>
-          {isAnalytics ? <AnalyticsPage /> : <Dashboard />}
+          {isCompliance ? <CompliancePage /> : isAnalytics ? <AnalyticsPage /> : <Dashboard />}
         </React.Suspense>
       </div>
     </ThemeProvider>

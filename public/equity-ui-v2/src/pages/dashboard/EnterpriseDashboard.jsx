@@ -5,6 +5,7 @@ import { useAppStore } from '../../stores/useAppStore';
 import { QuickFilters } from './QuickFilters';
 import { Card, DataCard } from '../../components/Card';
 import { KPIChart, DecisionTrendsChart } from '../../components/Charts';
+import Disclaimers from '../../components/Disclaimers';
 
 export function EnterpriseDashboard() {
   const { data: dashboardData } = useQuery({
@@ -137,6 +138,9 @@ export function EnterpriseDashboard() {
           {JSON.stringify(monthly ?? {}, null, 2)}
         </pre>
       </Card>
+
+  {/* Canonical disclaimers */}
+  <Disclaimers pageId="dashboard" />
     </div>
   );
 }

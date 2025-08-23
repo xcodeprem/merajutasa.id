@@ -1,143 +1,139 @@
 {
   "_metadata": {
-    "actor": "copilot-swe-agent[bot]",
-    "generated_at": "2025-08-22T11:06:14.719Z",
+    "generated_at": "2025-08-23T10:04:25.297Z",
     "generator": "dec-lint.js",
-    "git_ref": "refs/heads/copilot/fix-77",
-    "git_sha": "39cd3b67ff332dd81d70a51427fdad6eb163c28d",
-    "run_id": "17153466992",
     "version": "1.0"
   },
   "results": [
     {
       "file": "DEC-20250812-02-hysteresis-adoption.md",
-      "hash": "590cdd8be80eba519d52aa5a825b129aca6ddf8e2a5b32683a2e19f73d978fd1",
+      "hash": "a99e20be90ef46ca20a0e46f7fd1c3c9b8688081fb53bac667875eb5f8bb70d0",
       "id": "DEC-20250812-02",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250812-03-principles-reference-activation.md",
-      "hash": "e8cb894bbd99eebefbab7ca30824785c88dee8f3d72d814af4d318c8ff1b28b1",
+      "hash": "6768d18bff8f7891998230cb18673d852409b1e2692e2b2abea384eb705e4b6a",
       "id": "DEC-20250812-03",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250812-04-governance-baseline-thresholds.md",
-      "hash": "57b630cfd2277ad04307f6d5e4ec961b816f91386a6d7fb705e76fc2bf7bfb62",
+      "hash": "5c50fd47b4238aad25118c06e4b4024b66bedd1f1c66ecd5e307ad4dcc57abd6",
       "id": "DEC-20250812-04",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250813-01-known-debt-register.md",
-      "hash": "21ccf5f76bc674061a9120b0531ff0e9c5b5fc3695cb545475d94d703a734b8e",
+      "hash": "3323845a5d7236bff20ba6485c9d7fc88a03ae0f0877ba1e7c0894acb4380348",
       "id": "DEC-20250813-01",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250813-02-signature-pipeline-adoption.md",
-      "hash": "a59dc9b0161686d061abd35e9b7d0d0630dcc06bb947a62f2e1ed15dbe0c6ea5",
+      "hash": "c0798623aa8949bf4f1ce115d719bdf641450d8ad906ed4b61cc34534b8163a0",
       "id": "DEC-20250813-02",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250813-03-disclaimers-presence-enforcement.md",
-      "hash": "229f1158fe860c0fbd35015f10630d15b59d1b744e0457d385a73b31d958d231",
+      "hash": "925a3c1b73e9e9f61563a90273376846557d6cf9f4206ae59130f9fe2c5aaae9",
       "id": "DEC-20250813-03",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250813-04-text-normalization-disclaimers-whitelist.md",
-      "hash": "61b36f68b2bd1688252261746abb622d8b7c4c025405414a2baebff06bda07fe",
+      "hash": "7648f585a0b56b29ca8fe31a97ecb75ba3908f86f372e7ab1b46e137e3f76424",
       "id": "DEC-20250813-04",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250813-05-gating-policy-wave1-adoption.md",
-      "hash": "4ff94ec39e6ffe51f599b77b492476883af6c5696070b9a3fb99dfa3b64793c7",
+      "hash": "8d98db9891bbae54b575ad65b173f4d773f2ad1fc7dce5c9224f5f01efe34f8c",
       "id": "DEC-20250813-05",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250813-06-consolidated-governed-edits.md",
-      "hash": "54b52a3a570726287087b5aaf10c79c7982dc776e62c0da0a26ed1b2f5b495f3",
+      "hash": "ea1e6ce3aac7ca95d8a74f15fa6d24d6e2647472f889122ac2a1559a8e3effb5",
       "id": "DEC-20250813-06",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250813-07-hype-threshold-transition.md",
-      "hash": "0950440708e7af21d15100a336d8ba65898ba47a0cd312e5fc400f4de8fc6093",
+      "hash": "41b3c48f1e9afd12a2b98d18438b0badc0c38e9cb0a6f0c18115482ad3c9ad7e",
       "id": "DEC-20250813-07",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250813-08-evidence-hash-display-length.md",
-      "hash": "34ad1c883c52a0ff1d0b729b371a35ff1f0a0fe680257caf2f2bce241bad630d",
+      "hash": "5f6bff7ece250ff0d9bf7dc3a88461a831565d18997a0cdaaa819511fce565cb",
       "id": "DEC-20250813-08",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250813-09-equity-index-rounding.md",
-      "hash": "38ec9bc31e1976f95d5d534e7d9e93e75f07534c04f35a480bbca8c1798f3fd9",
+      "hash": "9621605f0aaf99aa9a971aed35eab31e8ae346b62d49c2639e1c0b7df8a6eaa1",
       "id": "DEC-20250813-09",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250813-10-feedback-categories-canonical.md",
-      "hash": "a73118b5211e44ba3c8da47ed761c7101423edba18d999f69efdc3db5d364a30",
+      "hash": "29ad36b8744ae3dfbdb15852f8ac7d24774dd5642d1380facbbf5822af55dfe8",
       "id": "DEC-20250813-10",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250815-01-governed-editorial-maintenance.md",
-      "hash": "1dae67aab19daaee75c00ef7ca173666729c8baddc6a09f8a9fede6a78fff43e",
+      "hash": "dd76154a33c2ba8ac6b3381efa70b27c0cd38120b9aa26a2a0fece0542693c1a",
       "id": "DEC-20250815-01",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250815-02-hysteresis-config-update.md",
-      "hash": "c039b400269d0003c1d07524c340d05329235c8e77a1f9fcc9dfa1e6672b560d",
+      "hash": "bc79fb1a532e3193015189de07ef102488f811780f3c74d5076a98ac223f1ca5",
       "id": "DEC-20250815-02",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250815-03-trace-index-update.md",
-      "hash": "5e841450ada5fb19d493535ad4b82f8804e609d32c68d60f4f73cb06aca33c98",
+      "hash": "3e3015873238259fb761b5db41bcd7f55d14d0229ebaa7fe3711ef715872351d",
       "id": "DEC-20250815-03",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250816-01-governance-pipeline-security-enhancement.md",
-      "hash": "2cfa9e8ad3b888db3fa61997111c1117a0ddde532fab55971c7171e79d08bfd2",
+      "hash": "8f8f4860263d623c259f14135a5344baa5b0b9204f7c70efa0d0ee593a392d6b",
       "id": "DEC-20250816-01",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-20250817-09-stage2-terminology-transition.md",
-      "hash": "33215bcd0e32b03ba9258fcba216df5d4923e29b5bb6c5380b0d43849cc7d6e8",
+      "hash": "73f4a999fc875db2dc5d7ec00153a39c1252eb81327698d43b0feea9c9aedc2f",
       "id": "DEC-20250817-09",
       "violations": [],
       "warnings": []
     },
     {
       "file": "DEC-style-guide-v1.md",
-      "hash": "55c77fb8c21f4cf0474e5923268268d64e8fc13ac95bd392066e290d3a0a3441",
+      "hash": "e94f4c6d85b4e78d936a417841e848c555539d309a24badba845669f8f641a91",
       "id": "GUIDANCE-DOC-DEC-STYLE-V1",
       "violations": [],
       "warnings": []
@@ -151,7 +147,7 @@
     },
     {
       "file": "DEC-style-guide-v3.md",
-      "hash": "fa6ca1309615f42d5c4fb64de9dd3cb1c76e6c788a57108937b14c598feb733c",
+      "hash": "c4b998f16eee370a5f14cfa5964ee9640578e16a9a91b4bd91221336cfeb9c87",
       "id": "GUIDANCE-DEC-STYLE-V3",
       "violations": [],
       "warnings": []

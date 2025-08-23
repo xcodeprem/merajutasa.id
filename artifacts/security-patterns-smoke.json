@@ -1,12 +1,22 @@
 {
-  "timestamp": "2025-08-22T11:06:13.603Z",
-  "files_scanned": 195,
-  "violations": [],
+  "timestamp": "2025-08-23T10:04:24.213Z",
+  "files_scanned": 213,
+  "violations": [
+    {
+      "file": "tools\\infra\\container-k8s-verify.js",
+      "line": 6,
+      "pattern": "EXEC_SYNC_USAGE",
+      "severity": "MEDIUM",
+      "description": "execSync usage - consider execFileSync for better security",
+      "match": "execSync(",
+      "context": "const out = execSync(cmd, { stdio: ['ignore', 'pipe', 'pipe'] }).toString();"
+    }
+  ],
   "summary": {
-    "total_violations": 0,
+    "total_violations": 1,
     "by_severity": {
       "HIGH": 0,
-      "MEDIUM": 0,
+      "MEDIUM": 1,
       "LOW": 0
     }
   }

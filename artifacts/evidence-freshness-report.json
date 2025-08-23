@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_utc": "2025-08-23T07:14:01.226Z",
+  "generated_utc": "2025-08-23T10:04:28.129Z",
   "default_threshold_hours": 24,
   "items": [
     {
@@ -14,7 +14,7 @@
     {
       "path": "artifacts/param-integrity-matrix.json",
       "exists": true,
-      "age_hours": 16.28,
+      "age_hours": 0,
       "threshold_hours": 24,
       "status": "PASS",
       "source_timestamp_type": "internal"
@@ -22,7 +22,7 @@
     {
       "path": "artifacts/principles-impact-report.json",
       "exists": true,
-      "age_hours": 20.13,
+      "age_hours": 0,
       "threshold_hours": 24,
       "status": "PASS",
       "source_timestamp_type": "internal"
@@ -30,7 +30,7 @@
     {
       "path": "artifacts/hype-lint.json",
       "exists": true,
-      "age_hours": 20.13,
+      "age_hours": 0,
       "threshold_hours": 24,
       "status": "PASS",
       "source_timestamp_type": "internal"
@@ -38,9 +38,9 @@
     {
       "path": "artifacts/disclaimers-lint.json",
       "exists": true,
-      "age_hours": 38.75,
+      "age_hours": 0,
       "threshold_hours": 24,
-      "status": "STALE",
+      "status": "PASS",
       "source_timestamp_type": "mtime"
     },
     {
@@ -54,7 +54,7 @@
     {
       "path": "artifacts/fairness-sim-scenarios.json",
       "exists": true,
-      "age_hours": 140.02,
+      "age_hours": 142.86,
       "threshold_hours": 24,
       "status": "STALE",
       "source_timestamp_type": "mtime"
@@ -62,7 +62,7 @@
     {
       "path": "artifacts/fairness-sim-report.json",
       "exists": true,
-      "age_hours": 19.9,
+      "age_hours": 22.75,
       "threshold_hours": 24,
       "status": "PASS",
       "source_timestamp_type": "mtime"
@@ -70,7 +70,7 @@
     {
       "path": "artifacts/evidence-bundle.json",
       "exists": true,
-      "age_hours": 0,
+      "age_hours": 2.84,
       "threshold_hours": 6,
       "status": "PASS",
       "source_timestamp_type": "internal"
@@ -78,8 +78,8 @@
   ],
   "summary": {
     "total": 9,
-    "pass": 7,
-    "stale": 2,
+    "pass": 8,
+    "stale": 1,
     "missing": 0,
     "overall_status": "ADVISORY"
   }
