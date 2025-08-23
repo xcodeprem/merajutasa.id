@@ -233,6 +233,8 @@
     "equity-ui-v2:build": "cd public/equity-ui-v2 && npm run build",
     "equity-ui-v2:preview": "cd public/equity-ui-v2 && npm run preview",
     "equity-ui-v2:install": "cd public/equity-ui-v2 && npm install",
+  "equity-ui-v2:test": "cd public/equity-ui-v2 && npm test",
+  "equity-ui-v2:lint": "cd public/equity-ui-v2 && npm run lint",
     "h1:kpi": "node tools/generate-h1-kpi-summary.js",
     "h1:guard": "node tools/h1-verify-guard.js",
     "kpi:weekly": "node tools/weekly-trend-aggregator.js",

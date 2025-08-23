@@ -14,5 +14,12 @@ export default defineConfig({
       '/risk': 'http://localhost:4620',
       '/health': 'http://localhost:4620'
     }
+  },
+  test: {
+    environment: 'jsdom',
+    setupFiles: ['./vitest.setup.js'],
+  globals: true,
+    include: ['src/**/*.{test,spec}.jsx'],
+    css: true
   }
 })

@@ -111,7 +111,6 @@ export const KPIChart = ({ kpiData, className = '' }) => {
   }
 
   const equity = kpiData.equity || {};
-  const fairness = kpiData.fairness || {};
   
   const data = {
     labels: ['Anomalies', 'Under-served', 'Total Units'],

@@ -90,6 +90,8 @@ public/equity-ui-v2/
 # From project root
 npm run equity-ui-v2:install  # Install dependencies
 npm run equity-ui-v2:dev      # Start development server
+npm run equity-ui-v2:test     # Run tests
+npm run equity-ui-v2:lint     # Run linter
 
 # Or from this directory
 npm install
@@ -183,15 +185,19 @@ The new React dashboard maintains API compatibility with the existing equity ser
 ## 🧪 Testing
 
 ```bash
-# Run linting
+# Lint
 npm run lint
 
-# Build and verify
-npm run build
+# Unit tests
+npm run test
 
-# Start with equity service for integration testing
-npm run service:equity &
-npm run dev
+# Build and preview
+npm run build
+npm run preview
+
+# Optional: start equity service for live API
+# From repo root
+# npm run service:equity
 ```
 
 ## 📈 Performance
