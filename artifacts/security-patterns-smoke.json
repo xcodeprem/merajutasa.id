@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-08-23T10:04:24.213Z",
-  "files_scanned": 213,
+  "timestamp": "2025-08-23T18:54:18.901Z",
+  "files_scanned": 216,
   "violations": [
     {
-      "file": "tools\\infra\\container-k8s-verify.js",
+      "file": "tools/infra/container-k8s-verify.js",
       "line": 6,
       "pattern": "EXEC_SYNC_USAGE",
       "severity": "MEDIUM",
