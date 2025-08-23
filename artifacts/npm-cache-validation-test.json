@@ -1,0 +1,16 @@
+{
+  "tool": "npm-cache-validation",
+  "timestamp": "2025-08-23T22:16:25.388Z",
+  "total_setup_node_usages": 30,
+  "cached_setup_node_usages": 30,
+  "cache_coverage_percent": 100,
+  "violations": {
+    "setup_node_without_cache": [],
+    "action_tag_violations": []
+  },
+  "compliance": {
+    "npm_cache_complete": true,
+    "sha_pinning_complete": true,
+    "allowlist_updated": true
+  }
+}
