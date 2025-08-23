@@ -1,0 +1,149 @@
+name: Apply Repository Rulesets
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.RULESET_ADMIN_TOKEN }}
+
+    steps:
+      - name: Verify admin token exists
+        shell: bash
+        run: |
+          if [ -z "${GH_TOKEN:-}" ]; then
+            echo "Secret RULESET_ADMIN_TOKEN is required (fine-grained PAT with repository admin + rulesets + branch protection)."
+            exit 1
+          fi
+
+      - name: Define context
+        id: ctx
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "owner=${GITHUB_REPOSITORY%%/*}" >> "$GITHUB_OUTPUT"
+          echo "repo=${GITHUB_REPOSITORY#*/}" >> "$GITHUB_OUTPUT"
+
+      - name: Apply branch protection: main
+        shell: bash
+        run: |
+          set -euo pipefail
+          OWNER="${{ steps.ctx.outputs.owner }}"
+          REPO="${{ steps.ctx.outputs.repo }}"
+
+          cat > protection.json <<'JSON'
+          {
+            "required_status_checks": {
+              "strict": true,
+              "contexts": [
+                "ci/build",
+                "ci/lint",
+                "ci/test",
+                "security/codeql",
+                "security/secret-scan"
+              ]
+            },
+            "enforce_admins": true,
+            "required_pull_request_reviews": {
+              "dismiss_stale_reviews": true,
+              "require_code_owner_reviews": true,
+              "required_approving_review_count": 1
+            },
+            "restrictions": null,
+            "required_linear_history": true,
+            "allow_force_pushes": false,
+            "allow_deletions": false,
+            "required_conversation_resolution": true
+          }
+          JSON
+
+          gh api \
+            --method PUT \
+            -H "Accept: application/vnd.github+json" \
+            "/repos/${OWNER}/${REPO}/branches/main/protection" \
+            --input protection.json
+
+      - name: Create or update repository ruleset for release/*
+        shell: bash
+        run: |
+          set -euo pipefail
+          OWNER="${{ steps.ctx.outputs.owner }}"
+          REPO="${{ steps.ctx.outputs.repo }}"
+
+          cat > ruleset.json <<'JSON'
+          {
+            "name": "release-protection",
+            "target": "branch",
+            "enforcement": "active",
+            "conditions": {
+              "ref_name": { "include": ["release/*"], "exclude": [] }
+            },
+            "bypass_actors": [],
+            "rules": [
+              {
+                "type": "pull_request",
+                "parameters": {
+                  "require_code_owner_review": true,
+                  "required_approvals": 1,
+                  "dismiss_stale_reviews_on_push": true,
+                  "require_last_push_approval": false
+                }
+              },
+              {
+                "type": "required_status_checks",
+                "parameters": {
+                  "strict_required_status_checks": true,
+                  "required_status_checks": [
+                    "ci/build",
+                    "ci/lint",
+                    "ci/test",
+                    "security/codeql",
+                    "security/secret-scan"
+                  ]
+                }
+              },
+              { "type": "non_fast_forward" },
+              { "type": "deletion", "parameters": { "block_deletions": true } },
+              { "type": "linear_history" },
+              { "type": "conversation_resolution" }
+            ]
+          }
+          JSON
+
+          # List rulesets and find existing one by name
+          LIST=$(gh api -H "Accept: application/vnd.github+json" "/repos/${OWNER}/${REPO}/rulesets")
+          EXISTING_ID=$(printf "%s" "$LIST" | jq -r '.[] | select(.name=="release-protection") | .id')
+
+          if [ -n "${EXISTING_ID}" ] && [ "${EXISTING_ID}" != "null" ]; then
+            echo "Updating existing ruleset ID ${EXISTING_ID}"
+            gh api \
+              --method PATCH \
+              -H "Accept: application/vnd.github+json" \
+              "/repos/${OWNER}/${REPO}/rulesets/${EXISTING_ID}" \
+              --input ruleset.json
+          else
+            echo "Creating new ruleset release-protection"
+            gh api \
+              --method POST \
+              -H "Accept: application/vnd.github+json" \
+              "/repos/${OWNER}/${REPO}/rulesets" \
+              --input ruleset.json
+          fi
+
+      - name: Summary
+        shell: bash
+        run: |
+          {
+            echo "Applied protections:"
+            echo "- main branch: required PR review, code owner review, required checks, linear history, no force-push/deletion, conversation resolution."
+            echo "- release/* ruleset: PR review, code owners, required checks, non-fast-forward, no deletion, linear history, conversation resolution."
+            echo
+            echo "Note:"
+            echo "- Ensure your CI job names match the required_status_checks contexts:"
+            echo "  ci/build, ci/lint, ci/test, security/codeql, security/secret-scan"
+            echo "  Adjust them if you use different names."
+          } | tee -a "$GITHUB_STEP_SUMMARY"
