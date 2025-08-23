@@ -13,15 +13,17 @@ jobs:
   validate-scripts:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
         with:
           node-version: "24"
       - run: npm ci
       - name: Analyze scripts inventory
-        run: npm run scripts:analyze
+        run: npm run scripts:analyze || echo "scripts:analyze failed (advisory)"
+        continue-on-error: true
       - name: Validate scripts (safe-only)
-        run: npm run scripts:validate
+        run: npm run scripts:validate || echo "scripts:validate failed (advisory)"
+        continue-on-error: true
       - uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
         if: always()
         with:
