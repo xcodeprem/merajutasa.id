@@ -52,9 +52,9 @@ Menyelesaikan gap kritikal di Week 6: Security Hardening & Compliance Orchestrat
   - [ ] Daftarkan env vars baru (README atau docs/config) dan contoh `.env.example`
 
 ## 6) Risiko & Mitigasi
-- Integrasi lintas-komponen bisa mempengaruhi CI waktu lama → gunakan subset smoke + artifacts ringkas
-- Perubahan scripts besar berisiko regressi → lakukan audit bertahap dan simpan laporan validasi
-- Security scan noisy → fokus pada fail yang memblokir, catat whitelist/justifikasi di artifacts
+- Cross-component integration may increase CI duration → use a smoke test subset and concise artifacts
+- Large script changes risk regression → conduct gradual audits and save validation reports
+- Security scan may be noisy → focus on blocking failures, document whitelists/justifications in artifacts
 
 ## 7) Dependencies
 - Observability stack minimal up untuk health checks
