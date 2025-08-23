@@ -17,11 +17,11 @@ describe('useAppStore', () => {
   });
 
   it('updates modules via actions', () => {
-  useAppStore.getState().setKpi({ equity: { rate: 1 } });
-  useAppStore.getState().setWeekly({ weeks: [1] });
-  useAppStore.getState().setUnderServed({ total: 2, groups: [] });
-  useAppStore.getState().setAnomalies([{ id: 1 }]);
-  useAppStore.getState().setRisk({ collector: {} });
+    useAppStore.getState().setKpi({ equity: { rate: 1 } });
+    useAppStore.getState().setWeekly({ weeks: [1] });
+    useAppStore.getState().setUnderServed({ total: 2, groups: [] });
+    useAppStore.getState().setAnomalies([{ id: 1 }]);
+    useAppStore.getState().setRisk({ collector: {} });
     const v = useAppStore.getState();
     expect(v.kpi.equity.rate).toBe(1);
     expect(v.weekly.weeks[0]).toBe(1);
@@ -31,9 +31,9 @@ describe('useAppStore', () => {
   });
 
   it('auth and settings persistence setters', () => {
-  useAppStore.getState().setAuthToken('t');
-  useAppStore.getState().setApiKey('k');
-  useAppStore.getState().updateSettings({ theme: 'dark', locale: 'id' });
+    useAppStore.getState().setAuthToken('t');
+    useAppStore.getState().setApiKey('k');
+    useAppStore.getState().updateSettings({ theme: 'dark', locale: 'id' });
     const v = useAppStore.getState();
     expect(v.auth.token).toBe('t');
     expect(v.auth.apiKey).toBe('k');
