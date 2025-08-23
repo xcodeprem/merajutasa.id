@@ -1,0 +1,53 @@
+name: PR Template Guard (Non-Negotiable)
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+
+jobs:
+  guard:
+    name: Validate PR body matches enterprise template
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    steps:
+      - name: Check PR body for required sections and sentinel
+        shell: bash
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          set -euo pipefail
+          die() { echo "::error::$1"; exit 1; }
+          # Normalize to lowercase markers for robust matching while keeping exact keys too
+          body_lc=$(printf "%s" "$PR_BODY" | tr '[:upper:]' '[:lower:]')
+
+          # Required headings from template
+          req=(
+            "## ringkasan"
+            "## bukti pemenuhan standar"
+            "1) keamanan & supply chain"
+            "2) kualitas kode & testing"
+            "3) performa & reliabilitas"
+            "4) observability"
+            "5) dokumentasi & operasional"
+            "## detail teknis"
+            "## hasil uji (tautkan artefak ci)"
+            "## checklist admin"
+            "eof_pr_template_v1_sentinel"
+          )
+
+          missing=()
+          for key in "${req[@]}"; do
+            if ! grep -Fqi -- "$key" <<<"$body_lc"; then
+              missing+=("$key")
+            fi
+          done
+
+          if (( ${#missing[@]} > 0 )); then
+            echo "PR body tidak memenuhi template enterprise. Bagian wajib yang hilang:" >&2
+            for k in "${missing[@]}"; do echo " - $k" >&2; done
+            echo "\nHarus menggunakan template: .github/PULL_REQUEST_TEMPLATE.md (jangan menghapus sentinel)." >&2
+            die "Lengkapi PR sesuai template lalu update PR."
+          fi
+
+          echo "PR body lulus validasi template."
