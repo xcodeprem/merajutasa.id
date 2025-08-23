@@ -1,6 +1,6 @@
 {
   "_metadata": {
-    "generated_at": "2025-08-22T19:21:52.625Z",
+    "generated_at": "2025-08-23T08:22:32.935Z",
     "generator": "infra-health-bundle",
     "version": "1.0"
   },
@@ -162,10 +162,10 @@
           "compliance_violations": 0,
           "storage_path": "/tmp/health-check-audit",
           "total_events": 0,
-          "uptime": 0.1518945
+          "uptime": 0.1183554
         },
         "health_score": 100,
-        "last_check": "2025-08-22T19:21:51.960Z",
+        "last_check": "2025-08-23T08:22:32.241Z",
         "name": "Enterprise Audit System",
         "status": "healthy"
       },
@@ -194,10 +194,10 @@
           "frameworks_active": 4,
           "is_running": false,
           "total_assessments": 0,
-          "uptime": 0.003
+          "uptime": 0.001
         },
         "health_score": 90,
-        "last_check": "2025-08-22T19:21:52.008Z",
+        "last_check": "2025-08-23T08:22:32.261Z",
         "name": "Compliance Automation",
         "status": "healthy"
       },
@@ -208,10 +208,10 @@
           "healthy_components": 0,
           "orchestration_status": "initializing",
           "real_time_correlation": true,
-          "uptime": 0.2212214
+          "uptime": 0.1510244
         },
         "health_score": 65,
-        "last_check": "2025-08-22T19:21:52.030Z",
+        "last_check": "2025-08-23T08:22:32.274Z",
         "name": "Compliance Orchestrator",
         "status": "warning"
       },
@@ -286,10 +286,10 @@
           "jurisdictions_supported": 4,
           "pending_requests": 0,
           "total_requests": 0,
-          "uptime": 0.2241817
+          "uptime": 0.1258031
         },
         "health_score": 110,
-        "last_check": "2025-08-22T19:21:52.032Z",
+        "last_check": "2025-08-23T08:22:32.250Z",
         "name": "Privacy Rights Management",
         "status": "healthy"
       },
@@ -301,11 +301,11 @@
           "monitoring_active": true,
           "security_score": 100,
           "threat_level": "medium",
-          "uptime": 0.1783514,
+          "uptime": 0.1168112,
           "vulnerabilities": 0
         },
         "health_score": 100,
-        "last_check": "2025-08-22T19:21:51.986Z",
+        "last_check": "2025-08-23T08:22:32.241Z",
         "name": "Security Hardening",
         "status": "healthy"
       },
@@ -319,7 +319,7 @@
         "status": "critical"
       }
     },
-    "duration_ms": 227,
+    "duration_ms": 179,
     "overall_health_score": 49,
     "overall_status": "degraded",
     "recommendations": [
@@ -338,13 +338,6 @@
         "priority": "high"
       },
       {
-        "action": "Monitor chain resources and investigate performance",
-        "component": "chain",
-        "health_score": 50,
-        "issue": "Chain Service performance degraded",
-        "priority": "medium"
-      },
-      {
         "action": "Restart collector service and check logs",
         "component": "collector",
         "health_score": 0,
@@ -357,6 +350,13 @@
         "health_score": 65,
         "issue": "Compliance Orchestrator showing warning signs",
         "priority": "low"
+      },
+      {
+        "action": "Monitor chain resources and investigate performance",
+        "component": "chain",
+        "health_score": 50,
+        "issue": "Chain Service performance degraded",
+        "priority": "medium"
       },
       {
         "action": "Restart apiGateway service and check logs",
@@ -458,6 +458,6 @@
         }
       ]
     },
-    "timestamp": "2025-08-22T19:21:52.120Z"
+    "timestamp": "2025-08-23T08:22:32.351Z"
   }
 }

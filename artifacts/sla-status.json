@@ -24,7 +24,7 @@
       "error_rate": 0.1,
       "throughput_min": 10
     },
-    "timestamp": "2025-08-22T17:14:35.632Z"
+    "timestamp": "2025-08-23T08:23:25.995Z"
   },
   "chain_service": {
     "service": "chain_service",
@@ -51,7 +51,7 @@
       "error_rate": 0.05,
       "throughput_min": 5
     },
-    "timestamp": "2025-08-22T17:14:35.633Z"
+    "timestamp": "2025-08-23T08:23:25.996Z"
   },
   "collector_service": {
     "service": "collector_service",
@@ -78,7 +78,7 @@
       "error_rate": 0.2,
       "throughput_min": 20
     },
-    "timestamp": "2025-08-22T17:14:35.633Z"
+    "timestamp": "2025-08-23T08:23:25.996Z"
   },
   "backup_service": {
     "service": "backup_service",
@@ -105,6 +105,6 @@
       "error_rate": 1,
       "throughput_min": 1
     },
-    "timestamp": "2025-08-22T17:14:35.633Z"
+    "timestamp": "2025-08-23T08:23:25.996Z"
   }
 }

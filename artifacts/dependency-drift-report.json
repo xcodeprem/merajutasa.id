@@ -1,11 +1,7 @@
 {
   "_metadata": {
-    "actor": "copilot-swe-agent[bot]",
-    "generated_at": "2025-08-22T10:17:10.652Z",
+    "generated_at": "2025-08-23T08:23:45.504Z",
     "generator": "dependency-drift-detector.js",
-    "git_ref": "refs/heads/copilot/fix-170",
-    "git_sha": "45942cd89099a5a9adebacc6b6e20275c2c558ee",
-    "run_id": "17152366844",
     "version": "1.0"
   },
   "analysis": {
@@ -24,7 +20,7 @@
   ],
   "metadata": {
     "ci_mode": false,
-    "event_name": "dynamic",
+    "event_name": "unknown",
     "pr_number": null
   },
   "recommendations": [

@@ -1,0 +1,20 @@
+{
+  "scan_id": "scan_1755936938510_f37c3b3ms",
+  "scan_type": "full",
+  "started_at": "2025-08-23T08:15:38.510Z",
+  "vulnerabilities": [
+    {
+      "type": "dependency_vulnerability",
+      "severity": "low",
+      "package": "pa11y",
+      "version": "^9.0.0",
+      "description": "Vulnerability found in pa11y@^9.0.0",
+      "cvss_score": "1.2",
+      "cve_id": "CVE-2024-1021"
+    }
+  ],
+  "threats": [],
+  "configuration_issues": [],
+  "overall_score": 98,
+  "recommendations": []
+}

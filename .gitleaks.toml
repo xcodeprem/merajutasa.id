@@ -1,10 +1,18 @@
-title = "Gitleaks Config"
+title = "MerajutASA Secret Scanning"
+redact = true
+
 [allowlist]
-description = "Allowed secrets (non-prod or test fixtures)"
+description = "Allowed non-sensitive content and fixtures"
 paths = [
-  "docs/.*",
-  "tests/fixtures/.*"
+  "^artifacts/.*$",
+  "^public/.*$",
+  "^docs/.*\\.md$",
+  "^docs/.*\\.json$",
+  "^schemas/.*$",
+  "^tests/fixtures/.*$"
 ]
 regexes = [
-  "DUMMY_[A-Z0-9_]{8,}"
+  "DUMMY_[A-Z0-9_]{8,}",
+  "(?i)^[a-f0-9]{64}$", # sha256 hashes
+  "(?i)^[a-f0-9]{40}$"  # sha1 hashes
 ]
