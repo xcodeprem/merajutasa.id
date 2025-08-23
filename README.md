@@ -336,6 +336,7 @@ npm run api-gateway:start
 - **Advanced threat detection**: Behavioral anomaly analysis and automated response
 - **Privacy rights automation**: 30-day response for GDPR/CCPA/PIPEDA/LGPD requests
 - **Zero-trust architecture**: Policy enforcement with configurable security rules
+- **Secret scanning & protection**: Comprehensive secret detection with push protection, pre-commit hooks, and automated history scanning
 
 ### 🌍 High Availability & Resilience  
 
