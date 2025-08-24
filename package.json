@@ -48,6 +48,7 @@
     "security:rotation:emergency": "node tools/security/credential-rotation-manager.js --emergency",
     "security:comprehensive": "npm run security:secret-scan && npm run security:rotation && npm run test:credential-rotation",
     "test:secret-protection": "node tools/tests/secret-protection.test.js",
+    "test:security-workflows": "node tools/tests/security-workflows-validation.test.js",
     "test:credential-rotation": "node tools/tests/credential-rotation-emergency.test.js",
     "test:gitignore-patterns": "node tools/tests/gitignore-patterns.test.js",
     "test": "npm run test:governance && npm run test:services && npm run test:infrastructure",
@@ -369,6 +370,7 @@
     "helmet": "^8.1.0",
     "http-proxy-middleware": "^3.0.5",
     "ioredis": "^5.3.2",
+    "js-yaml": "^4.1.0",
     "node-cache": "^5.1.2",
     "uuid": "^11.1.0",
     "yaml": "^2.8.1"
