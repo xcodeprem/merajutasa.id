@@ -1,6 +1,6 @@
 {
   "mode": "verify",
-  "timestamp_utc": "2025-08-23T23:48:35Z",
+  "timestamp_utc": "2025-08-24T12:18:48Z",
   "updated": [],
   "unchanged": [
     "docs/governance/dec/DEC-style-guide-v2.md"
@@ -196,7 +196,7 @@
     {
       "code": "HASH_MISMATCH_DEC_REQUIRED",
       "path": "README.md",
-      "detail": "Manifest=6ee68a6aa3d39073330ead3fb3a22a906765e7f5aeda7a5963d7bdb58a7280f0 current=1c282821a167c7dc767e03f06ec674e1cd1d2b0d1e4be6250678f681cb28fc84"
+      "detail": "Manifest=6ee68a6aa3d39073330ead3fb3a22a906765e7f5aeda7a5963d7bdb58a7280f0 current=342e223548b60cac01941e2e5d06979c83ac40b9200cb9bfccd4c912487844a7"
     },
     {
       "code": "HASH_MISMATCH",
