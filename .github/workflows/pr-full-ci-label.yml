@@ -3,7 +3,12 @@ name: PR Labeler (full-ci)
 on:
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
-    branches: [ main ]
+    
+    param($m)
+    $inside = $m.Groups[1].Value + 'main' + $m.Groups[2].Value
+    if ($inside -notmatch 'master') { return 'branches: [' + ($inside.Trim().TrimEnd(',')) + ', master]' }
+    return $m.Value
+  
 
 permissions:
   contents: read

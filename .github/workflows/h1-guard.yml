@@ -2,7 +2,12 @@ name: H1 Guard & KPI
 
 on:
   push:
-    branches: [main]
+    
+    param($m)
+    $inside = $m.Groups[1].Value + 'main' + $m.Groups[2].Value
+    if ($inside -notmatch 'master') { return 'branches: [' + ($inside.Trim().TrimEnd(',')) + ', master]' }
+    return $m.Value
+  
   workflow_dispatch: {}
 
 permissions:

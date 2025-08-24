@@ -7,7 +7,12 @@ on:
       - "package.json"
       - ".github/workflows/integrated-health.yml"
   push:
-    branches: [ main ]
+    
+    param($m)
+    $inside = $m.Groups[1].Value + 'main' + $m.Groups[2].Value
+    if ($inside -notmatch 'master') { return 'branches: [' + ($inside.Trim().TrimEnd(',')) + ', master]' }
+    return $m.Value
+  
 permissions:
   contents: read
 jobs:

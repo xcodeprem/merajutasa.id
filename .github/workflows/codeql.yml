@@ -2,7 +2,12 @@ name: CodeQL
 
 on:
   push:
-    branches: [ main ]
+    
+    param($m)
+    $inside = $m.Groups[1].Value + 'main' + $m.Groups[2].Value
+    if ($inside -notmatch 'master') { return 'branches: [' + ($inside.Trim().TrimEnd(',')) + ', master]' }
+    return $m.Value
+  
     paths-ignore:
       - 'README.md'
       - 'docs/**'
@@ -17,7 +22,12 @@ on:
       - '**/*.svg'
       - '**/*.json'
   pull_request:
-    branches: [ main ]
+    
+    param($m)
+    $inside = $m.Groups[1].Value + 'main' + $m.Groups[2].Value
+    if ($inside -notmatch 'master') { return 'branches: [' + ($inside.Trim().TrimEnd(',')) + ', master]' }
+    return $m.Value
+  
     paths-ignore:
       - 'README.md'
       - 'docs/**'

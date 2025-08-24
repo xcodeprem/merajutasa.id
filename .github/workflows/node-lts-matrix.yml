@@ -2,7 +2,12 @@ name: Node LTS Matrix Build
 
 on:
   push:
-    branches: [ main ]
+    
+    param($m)
+    $inside = $m.Groups[1].Value + 'main' + $m.Groups[2].Value
+    if ($inside -notmatch 'master') { return 'branches: [' + ($inside.Trim().TrimEnd(',')) + ', master]' }
+    return $m.Value
+  
     paths-ignore:
       - '**/*.md'
       - '**/*.mdx'
@@ -14,7 +19,12 @@ on:
       - '**/*.gif'
       - '**/*.svg'
   pull_request:
-    branches: [ main ]
+    
+    param($m)
+    $inside = $m.Groups[1].Value + 'main' + $m.Groups[2].Value
+    if ($inside -notmatch 'master') { return 'branches: [' + ($inside.Trim().TrimEnd(',')) + ', master]' }
+    return $m.Value
+  
     paths-ignore:
       - '**/*.md'
       - '**/*.mdx'

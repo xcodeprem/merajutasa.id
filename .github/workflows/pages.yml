@@ -5,7 +5,12 @@ on:
   schedule:
     - cron: '15 2 * * *' # nightly publish with fresh snapshots
   push:
-    branches: [ main ]
+    
+    param($m)
+    $inside = $m.Groups[1].Value + 'main' + $m.Groups[2].Value
+    if ($inside -notmatch 'master') { return 'branches: [' + ($inside.Trim().TrimEnd(',')) + ', master]' }
+    return $m.Value
+  
 
 permissions:
   contents: read

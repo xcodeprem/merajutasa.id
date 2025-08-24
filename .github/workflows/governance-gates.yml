@@ -2,9 +2,19 @@ name: Governance Gates Integration
 
 on:
   push:
-    branches: [main]
+    
+    param($m)
+    $inside = $m.Groups[1].Value + 'main' + $m.Groups[2].Value
+    if ($inside -notmatch 'master') { return 'branches: [' + ($inside.Trim().TrimEnd(',')) + ', master]' }
+    return $m.Value
+  
   pull_request:
-    branches: [main]
+    
+    param($m)
+    $inside = $m.Groups[1].Value + 'main' + $m.Groups[2].Value
+    if ($inside -notmatch 'master') { return 'branches: [' + ($inside.Trim().TrimEnd(',')) + ', master]' }
+    return $m.Value
+  
   pull_request_target:
     types: [opened, synchronize, reopened]
   workflow_dispatch: {}
