@@ -1,0 +1,150 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://merajutasa.id/schemas/orphanage-v1.json",
+  "title": "Orphanage Profile Schema v1",
+  "description": "JSON Schema for orphanage profile data used in merajutasa.id",
+  "type": "object",
+  "required": ["slug", "name", "description"],
+  "additionalProperties": true,
+  "properties": {
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "URL-safe identifier for the orphanage"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Full name of the orphanage"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Description of the orphanage's mission and activities"
+    },
+    "summary": {
+      "type": "string",
+      "description": "Brief summary of the orphanage"
+    },
+    "active": {
+      "type": "boolean",
+      "description": "Whether the orphanage is currently active"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last update timestamp"
+    },
+    "address": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "street": { "type": "string" },
+        "city": { "type": "string" },
+        "province": { "type": "string" },
+        "postalCode": { "type": "string" },
+        "country": { "type": "string" }
+      }
+    },
+    "location": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "lat": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "lng": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        }
+      }
+    },
+    "contacts": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "phone": { "type": "string" },
+        "website": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "alt": { "type": "string" },
+          "caption": { "type": "string" }
+        }
+      }
+    },
+    "social": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "facebook": {
+          "type": "string",
+          "format": "uri"
+        },
+        "twitter": {
+          "type": "string",
+          "format": "uri"
+        },
+        "instagram": {
+          "type": "string",
+          "format": "uri"
+        },
+        "youtube": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "donation": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "bankAccounts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+              "bank": { "type": "string" },
+              "accountNumber": { "type": "string" },
+              "accountName": { "type": "string" }
+            }
+          }
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+              "label": { "type": "string" },
+              "url": {
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
