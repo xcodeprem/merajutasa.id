@@ -214,17 +214,15 @@ jobs:
           echo "High vulnerabilities: $HIGH"
           
           if [ "$CRITICAL" -gt 0 ] || [ "$HIGH" -gt 0 ]; then
-            echo "::error::Found $CRITICAL critical and $HIGH high vulnerabilities"
+            echo "::error::Found $CRITICAL critical and $HIGH high vulnerabilities - failing build per security requirements"
             exit 1
           fi
-        continue-on-error: true
 
       - name: Run secret scanning
         run: |
           echo "🔒 Running secret scanning..."
-          npm run secrets:scan || echo "Secret scanning completed"
-          npm run security:secret-scan || echo "Security scan completed"
-        continue-on-error: true
+          npm run secrets:scan
+          npm run security:secret-scan
 
       - name: Generate SBOM
         uses: anchore/sbom-action@d94f46e13c6c62f59525ac9a1e147a99dc0b9bf5 # v0.17.0
@@ -242,6 +240,29 @@ jobs:
             artifacts/sbom-comprehensive.spdx.json
             artifacts/secret-*.json
           retention-days: 90
+
+      - name: Report security status check
+        if: always()
+        uses: actions/github-script@60a0d83039c74a4aee7da9c2741b5b301c6f6f72 # v7.0.1
+        env:
+          JOB_STATUS: ${{ job.status }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const head_sha = context.eventName === 'pull_request' ? context.payload.pull_request.head.sha : context.sha;
+            const conclusion = process.env.JOB_STATUS === 'success' ? 'success' : 'failure';
+            const name = 'ci/security';
+            await github.rest.checks.create({ 
+              owner, repo, name, head_sha, 
+              status: 'completed', 
+              conclusion, 
+              output: { 
+                title: 'Security Scanning', 
+                summary: 'Comprehensive security scanning including npm audit and secret scanning' 
+              } 
+            });
 
   performance-tests:
     name: 'Performance & Load Tests'

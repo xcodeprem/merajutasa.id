@@ -1,0 +1,40 @@
+{
+  "test_type": "security_workflows_validation",
+  "timestamp": "2025-08-24T12:24:49.748Z",
+  "status": "PASS",
+  "summary": "Security workflows validation: 5 passed, 0 failed",
+  "tests": {
+    "total": 5,
+    "passed": 5,
+    "failed": 0
+  },
+  "results": [
+    {
+      "name": "CodeQL workflow runs on PRs",
+      "status": "PASS"
+    },
+    {
+      "name": "Gitleaks workflow enforces failures",
+      "status": "PASS"
+    },
+    {
+      "name": "CI comprehensive tests enforces security failures",
+      "status": "PASS"
+    },
+    {
+      "name": "Dependabot is configured",
+      "status": "PASS"
+    },
+    {
+      "name": "Required status check contexts are documented",
+      "status": "PASS"
+    }
+  ],
+  "requirements_met": {
+    "codeql_on_prs": true,
+    "secret_scan_enforced": true,
+    "dependency_scanning": true,
+    "security_gates_enforced": true,
+    "status_checks_documented": true
+  }
+}

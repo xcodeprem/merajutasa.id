@@ -14,7 +14,8 @@ To maintain code quality and security, the following status checks are required 
 
 ### Additional Required Checks
 
-- **CodeQL analysis** - Static code analysis
+- **security/codeql** - CodeQL static code analysis
+- **security/secret-scan** - Secret scanning with Gitleaks
 - **SBOM generation** - Software Bill of Materials
 - **Governance verification** - Hash integrity and policy compliance
 - **Coverage gate enforcement** - Minimum 80% test coverage (progressive to 90%+)
@@ -31,7 +32,9 @@ To maintain code quality and security, the following status checks are required 
       "ci/build",
       "ci/lint", 
       "ci/test",
-      "ci/security"
+      "ci/security",
+      "security/codeql",
+      "security/secret-scan"
     ]
   },
   "enforce_admins": true,
