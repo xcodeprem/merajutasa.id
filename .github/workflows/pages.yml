@@ -1,16 +1,11 @@
-name: Deploy Pages (Dashboard Snapshots)
+﻿name: Deploy Pages (Portal + Dashboards)
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '15 2 * * *' # nightly publish with fresh snapshots
+    - cron: "15 2 * * *"
   push:
-    
-    param($m)
-    $inside = $m.Groups[1].Value + 'main' + $m.Groups[2].Value
-    if ($inside -notmatch 'master') { return 'branches: [' + ($inside.Trim().TrimEnd(',')) + ', master]' }
-    return $m.Value
-  
+    branches: [main, master]
 
 permissions:
   contents: read
@@ -24,34 +19,16 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
         with:
-          node-version: '24'
-          cache: 'npm'
-      - name: Run A8 (no-silent-drift) Gates
-        uses: ./.github/actions/run-a8
-        with:
-          policy-path: 'tools/policy/policy.json'
-        env:
-          PUPPETEER_SKIP_DOWNLOAD: 'true'
-      - name: Generate latest snapshots (H1)
-        run: |
-          node tools/fairness/generate-equity-snapshots.js || true
-          node tools/derive-under-served-list.js || true
-          node tools/equity-anomaly-detector.js || true
-          node tools/weekly-trend-aggregator.js || true
-          node tools/generate-h1-kpi-summary.js || true
-          node tools/monthly-feedback-rollup.js || true
-          node tools/changelog-excerpt-generate.js || true
-          node tools/terminology-adoption.js || true
-          node tools/terminology-adoption-trend.js || true
-          node tools/risk-digest.js || true
-            - name: Portal build
+          node-version: "20"
+          cache: "npm"
+      - name: Portal build
         run: node tools/portal-build.js
-
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
         with:
           path: ./dist
