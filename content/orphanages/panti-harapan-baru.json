@@ -1,0 +1,14 @@
+﻿{
+  "slug": "panti-harapan-baru",
+  "name": "Panti Asuhan Harapan Baru",
+  "city": "Yogyakarta",
+  "province": "DI Yogyakarta",
+  "description": "Fokus pada dukungan nutrisi, bimbingan belajar, dan kegiatan seni.",
+  "programs": ["Dapur sehat", "Bimbel sore", "Seni & musik"],
+  "donation_links": [
+    {"label": "Donasi via Saweria", "url": "https://saweria.co/"}
+  ],
+  "website": "https://harapan-baru.example",
+  "contact_email": "halo@harapanbaru.example",
+  "image_url": "https://images.unsplash.com/photo-1520976042209-1d9b8f4e2f38?w=1200&q=80&auto=format&fit=crop"
+}
