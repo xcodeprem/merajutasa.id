@@ -1,9 +1,7 @@
 ﻿function qs(n){return new URLSearchParams(window.location.search).get(n)}
 async function fetchJSON(path){const r=await fetch(path,{cache:'no-store'});if(!r.ok) throw new Error('Fetch '+path+' '+r.status);return r.json()}
-
 async function renderIndex(){
-  const root = document.getElementById('list')
-  if(!root) return
+  const root = document.getElementById('list'); if(!root) return
   const idx = await fetchJSON('/content-index.json').catch(()=>({orphanages:[]}))
   root.innerHTML = ''
   for(const o of idx.orphanages){
@@ -17,7 +15,6 @@ async function renderIndex(){
     root.appendChild(el)
   }
 }
-
 async function renderDetail(){
   const slug = qs('org'); if(!slug) return
   const data = await fetchJSON(`/content/orphanages/${slug}.json`)
@@ -27,6 +24,4 @@ async function renderDetail(){
   const ulp = document.getElementById('programs'); if(ulp) ulp.innerHTML = (data.programs||[]).map(p=>`<li>${p}</li>`).join('')
   const uld = document.getElementById('donations'); if(uld) uld.innerHTML = (data.donation_links||[]).map(d=>`<li><a class="a-btn" href="${d.url}" target="_blank" rel="noopener">${d.label}</a></li>`).join('')
 }
-
-renderIndex();
-renderDetail();
+renderIndex(); renderDetail();
