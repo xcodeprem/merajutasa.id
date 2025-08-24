@@ -18,7 +18,7 @@ async function build(){
     const files = (await fs.promises.readdir(contentDir)).filter(f => f.endsWith(".json"))
     for (const f of files) {
       const src = path.join(contentDir, f)
-      const obj = JSON.parse(await fs.promises.readFile(src, "utf8"))
+      const obj = (()=>{ const raw = fs.readFileSync(src, "utf8"); const s = raw && raw.charCodeAt(0) === 0xFEFF ? raw.slice(1) : raw; return JSON.parse(s); })()
       items.push({ slug: obj.slug, name: obj.name, city: obj.city, province: obj.province, description: obj.description })
       await copyFile(src, path.join(dist, "content", "orphanages", f))
     }
@@ -28,3 +28,4 @@ async function build(){
   console.log(`Portal built: ${items.length} orphanage entries.`)
 }
 build().catch(e => { console.error(e); process.exitCode = 1 })
+
