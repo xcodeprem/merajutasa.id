@@ -5,6 +5,7 @@ This document describes the comprehensive CI artifact saving implementation for 
 ## Artifact Types and Structure
 
 ### Build Artifacts
+
 - **Name Pattern**: `ui-build-{run_id}`
 - **Contents**: Production build outputs from `npm run equity-ui-v2:build`
 - **Location**: `public/dist/` + build summaries in `artifacts/build/`
@@ -12,6 +13,7 @@ This document describes the comprehensive CI artifact saving implementation for 
 - **Includes**: Compiled assets, source maps, compressed files, build environment info
 
 ### Test Coverage Artifacts
+
 - **Name Pattern**: `test-coverage-{run_id}`
 - **Contents**: Comprehensive coverage reports and test summaries
 - **Includes**:
@@ -22,6 +24,7 @@ This document describes the comprehensive CI artifact saving implementation for 
 - **Retention**: 30 days
 
 ### UI Test Artifacts
+
 - **Name Pattern**: `ui2-tests-{run_id}`
 - **Contents**: UI-specific test results and coverage
 - **Includes**:
@@ -31,12 +34,14 @@ This document describes the comprehensive CI artifact saving implementation for 
 - **Retention**: 30 days
 
 ### Security Artifacts
+
 - **Name Pattern**: `sbom-{run_id}`
 - **Contents**: Software Bill of Materials
 - **Format**: SPDX JSON
 - **Retention**: 90 days (longest retention for security compliance)
 
 ### KPI and Monitoring Artifacts
+
 - **Name Pattern**: `h1-kpi-artifacts`
 - **Contents**: Performance metrics, equity reports, compliance data
 - **Retention**: 30 days
@@ -46,6 +51,7 @@ This document describes the comprehensive CI artifact saving implementation for 
 The implementation includes comprehensive summary generators:
 
 ### Coverage Summary (`npm run coverage:summary`)
+
 ```json
 {
   "timestamp": "2025-08-23T22:35:12.797Z",
@@ -62,6 +68,7 @@ The implementation includes comprehensive summary generators:
 ```
 
 ### Lint Summary (`npm run lint:summary`)
+
 ```json
 {
   "timestamp": "2025-08-23T22:35:17.418Z",
@@ -78,6 +85,7 @@ The implementation includes comprehensive summary generators:
 ## Badge Integration
 
 The summary files generate badge-compatible data:
+
 - Coverage percentage and status
 - Lint pass/fail status
 - Build success/failure status
@@ -85,6 +93,7 @@ The summary files generate badge-compatible data:
 ## Performance Compliance
 
 All workflows maintain the repository standard of < 10 minute runtime:
+
 - Builds use npm caching
 - Tests run with `continue-on-error: true` for advisory mode
 - Artifact uploads happen in parallel where possible
@@ -99,6 +108,7 @@ All workflows maintain the repository standard of < 10 minute runtime:
 ## Usage in CI
 
 These artifacts are automatically generated and uploaded by:
+
 - `.github/workflows/ci-guard.yml` - Main CI pipeline
 - `.github/workflows/infrastructure-ci.yml` - Infrastructure testing
 - `.github/workflows/sbom.yml` - Security bill of materials

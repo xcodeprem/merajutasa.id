@@ -7,12 +7,14 @@ The coverage gate ensures that all code changes maintain adequate test coverage 
 ## Coverage Thresholds
 
 ### Current Requirements (Phase 1)
+
 - **Lines**: ≥80%
 - **Functions**: ≥80%  
 - **Statements**: ≥80%
 - **Branches**: ≥70%
 
 ### Progressive Plan
+
 1. **Phase 1** (current): 80% minimum for core metrics
 2. **Phase 2** (Q1 2025): Increase to 85%
 3. **Phase 3** (Q2 2025): Target 90%+ for production readiness
@@ -44,12 +46,14 @@ npm run coverage:gate
 ### CI Integration
 
 The coverage gate runs automatically in:
+
 - `.github/workflows/ci-guard.yml`
 - `.github/workflows/node-lts-matrix.yml`
 
 ### Checking Coverage Reports
 
 Coverage artifacts are generated in:
+
 - `artifacts/equity-ui-v2-coverage/` - Raw coverage data
 - `artifacts/coverage-summary-comprehensive.json` - Summary data
 - `artifacts/coverage-gate-enforcement.json` - Gate results
@@ -69,8 +73,9 @@ open ../../artifacts/equity-ui-v2-coverage/lcov-report/index.html
 ### 2. Add Missing Tests
 
 Focus on:
+
 - Untested functions (biggest impact on function coverage)
-- Complex conditionals (improves branch coverage) 
+- Complex conditionals (improves branch coverage)
 - Error handling paths
 - Edge cases
 
@@ -93,12 +98,14 @@ test('handles API failure gracefully', async () => {
 ### 4. Coverage Patterns
 
 **Effective patterns:**
+
 - Test public API methods thoroughly
 - Mock external dependencies
 - Use data-driven tests for multiple scenarios
 - Test both success and failure paths
 
 **Avoid:**
+
 - Testing implementation details
 - Trivial getter/setter tests
 - Mocking everything (reduces confidence)
@@ -158,6 +165,7 @@ const COVERAGE_THRESHOLDS = {
 ### Future Configuration
 
 Thresholds will be moved to a configuration file for easier updates:
+
 - `docs/governance/coverage-policy.yml`
 - Support for per-file/directory thresholds
 - Integration with DEC change approval process
@@ -165,6 +173,7 @@ Thresholds will be moved to a configuration file for easier updates:
 ## Governance Integration
 
 Coverage requirements are enforced through:
+
 - **Branch Protection**: Coverage gate is a required status check
 - **PR Reviews**: Coverage reports included in PR artifacts
 - **Audit Trail**: All coverage enforcement logged

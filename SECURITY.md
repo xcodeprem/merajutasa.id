@@ -253,8 +253,8 @@ npm run test:secret-protection  # Validates hooks prevent secret commits
 
 ### Emergency Contacts
 
-- **Security Team**: security@merajutasa.id
-- **Incident Response**: incident@merajutasa.id  
+- **Security Team**: <security@merajutasa.id>
+- **Incident Response**: <incident@merajutasa.id>  
 - **On-call Engineer**: +1-XXX-XXX-XXXX (to be configured)
 - **Escalation**: CTO/CISO notification for critical incidents
 
@@ -586,11 +586,13 @@ All credential rotations must include:
 ### Available Sanitization Tools
 
 #### git-filter-repo (Primary Tool)
+
 - **Installation**: `npm run security:install-tools`
 - **Use Case**: Comprehensive history rewriting, file removal, content replacement
 - **Command**: `node tools/security/git-history-sanitizer.js`
 
 #### BFG Repo-Cleaner (Backup Tool)  
+
 - **Installation**: Automatic via Java (included in sanitizer)
 - **Use Case**: Fast secret replacement, large file removal
 - **Integration**: Automatic fallback in sanitization workflow
@@ -600,6 +602,7 @@ All credential rotations must include:
 #### Immediate Response (< 30 minutes)
 
 1. **Detect and Assess**:
+
    ```bash
    # Run comprehensive history scan
    node tools/security/history-secret-scan.js
@@ -609,12 +612,14 @@ All credential rotations must include:
    ```
 
 2. **Install Sanitization Tools**:
+
    ```bash
    # Ensure tools are available
    node tools/security/install-sanitization-tools.js
    ```
 
 3. **Validate Protection Systems**:
+
    ```bash
    # Test complete protection workflow
    node tools/tests/comprehensive-secret-protection.test.js
@@ -623,18 +628,21 @@ All credential rotations must include:
 #### History Sanitization (< 2 hours)
 
 4. **Create Repository Backup**:
+
    ```bash
    # Automatic backup creation before sanitization
    # Backup stored in /tmp/repo-backup/original-repo.git
    ```
 
 5. **Execute Sanitization**:
+
    ```bash
    # Clean git history using all available tools
    node tools/security/git-history-sanitizer.js
    ```
 
 6. **Verify Results**:
+
    ```bash
    # Post-sanitization verification scan
    # Confirms zero secrets remain in history
@@ -643,6 +651,7 @@ All credential rotations must include:
 #### Post-Sanitization Actions
 
 7. **Force Push Clean History**:
+
    ```bash
    # Push sanitized history to remote
    git push --force-with-lease origin main
@@ -658,6 +667,7 @@ All credential rotations must include:
 #### Automated Emergency Response
 
 Trigger via GitHub Actions:
+
 ```bash
 # Emergency sanitization workflow
 gh workflow run secret-sanitization.yml \
@@ -665,7 +675,8 @@ gh workflow run secret-sanitization.yml \
   -f sanitize_immediately=true
 ```
 
-#### Features:
+#### Features
+
 - **Emergency Scan**: Full history scanning on demand
 - **Tool Validation**: Automatic verification of sanitization tools
 - **Destructive Action Protection**: Requires environment approval
@@ -674,12 +685,14 @@ gh workflow run secret-sanitization.yml \
 
 ### Sanitization Capabilities
 
-#### Automatic Removal:
+#### Automatic Removal
+
 - **Secret Files**: `.env*`, `*.key`, `*.pem`, `*.p12`, `*.pfx`
 - **Large Files**: Files > 10MB (potential data dumps)
 - **Secret Patterns**: API keys, passwords, tokens (configurable)
 
-#### Custom Patterns:
+#### Custom Patterns
+
 ```javascript
 // Add custom secret patterns to sanitization
 const customSecrets = [
@@ -690,13 +703,15 @@ const customSecrets = [
 
 ### Compliance & Audit
 
-#### SLA Monitoring:
+#### SLA Monitoring
+
 - **Detection to Action**: < 30 minutes
 - **Complete Sanitization**: < 2 hours  
 - **Team Notification**: Immediate
 - **Audit Trail**: Complete incident logging
 
-#### Audit Artifacts:
+#### Audit Artifacts
+
 - **Scan Reports**: `artifacts/history-secret-scan-report.json`
 - **Sanitization Logs**: `artifacts/git-history-sanitization-report.json`
 - **Test Results**: `artifacts/comprehensive-secret-protection-test.json`
@@ -704,18 +719,20 @@ const customSecrets = [
 
 ### Recovery Procedures
 
-#### If Sanitization Fails:
+#### If Sanitization Fails
+
 1. **Restore from Backup**: Repository backup available in `/tmp/repo-backup/`
 2. **Manual Intervention**: Contact security team for manual cleanup
 3. **Alternative Tools**: Use manual git-filter-repo or BFG commands
 4. **Nuclear Option**: Create new repository with clean slate
 
-#### Post-Incident Review:
+#### Post-Incident Review
+
 - Analyze root cause of secret exposure
 - Update prevention measures (pre-commit hooks, scanning)
 - Review and improve sanitization procedures
 - Team training on secret management best practices
-   - Document rotation in audit trail
+  - Document rotation in audit trail
 
 3. **Verification** (within 48 hours):
    - Confirm old credentials are fully revoked

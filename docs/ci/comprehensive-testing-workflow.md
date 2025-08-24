@@ -11,41 +11,48 @@ This repository implements a comprehensive CI/CD testing workflow that enforces 
 This is the main CI workflow that runs on all pull requests and pushes to main. It includes:
 
 #### **Unit & Integration Tests**
+
 - Runs governance, services, and infrastructure test suites
 - Executes UI unit tests with coverage reporting
 - Generates comprehensive coverage summaries
 - Enforces minimum coverage thresholds (≥80% for lines, functions, statements)
 
 #### **End-to-End Tests**
+
 - Builds optimized UI assets
 - Runs Playwright E2E tests
 - Executes accessibility testing
 - Validates user workflows
 
 #### **Security Scanning**
+
 - npm audit for dependency vulnerabilities (fails on critical/high)
 - Secret scanning with Gitleaks
 - Generates SBOM (Software Bill of Materials)
 - CodeQL static analysis (separate workflow)
 
 #### **Performance Testing**
+
 - Bundle size validation (5MB limit)
 - Performance budget enforcement
 - Load testing capabilities
 
 #### **Observability Checks**
+
 - Logging, tracing, and monitoring validation
 - Health check verification
 
 ## Coverage Requirements
 
 ### Current Thresholds
+
 - **Lines**: ≥80%
-- **Functions**: ≥80% 
+- **Functions**: ≥80%
 - **Statements**: ≥80%
 - **Branches**: ≥70% (more lenient initially)
 
 ### Progressive Plan
+
 - **Phase 1**: 80% minimum (current)
 - **Phase 2**: 85% target
 - **Phase 3**: 90%+ goal
@@ -98,6 +105,7 @@ npm run coverage:gate
 ```
 
 ### Validate CI Workflow
+
 ```bash
 # Test CI workflow components
 npm run test:ci-workflow
@@ -116,25 +124,30 @@ npm run frontend:performance-test
 The workflow generates several artifacts for analysis:
 
 ### Coverage Reports
+
 - `artifacts/coverage-summary-comprehensive.json`
 - `artifacts/coverage-gate-enforcement.json`
 - `artifacts/equity-ui-v2-coverage/`
 
 ### Test Results
+
 - `artifacts/e2e-results/`
 - `artifacts/test-coverage/`
 - `playwright-report/` (E2E test reports)
 
 ### Security Artifacts
+
 - `artifacts/security/npm-audit.json`
 - `artifacts/sbom-comprehensive.spdx.json`
 - `artifacts/secret-*.json`
 
 ### Performance Reports
+
 - `artifacts/performance/bundle-size-check.json`
 - `artifacts/perf-*.json`
 
 ### CI Summary
+
 - `artifacts/ci-summary/comprehensive-ci-report.json`
 
 ## Troubleshooting
@@ -142,6 +155,7 @@ The workflow generates several artifacts for analysis:
 ### Common Issues
 
 #### Coverage Gate Failures
+
 ```bash
 # Generate coverage data first
 npm run coverage:summary
@@ -151,6 +165,7 @@ npm run coverage:gate
 ```
 
 #### E2E Test Failures
+
 ```bash
 # Install Playwright browsers
 cd public/equity-ui-v2
@@ -161,6 +176,7 @@ npx playwright test --ui
 ```
 
 #### Security Scan Issues
+
 ```bash
 # Update dependencies
 npm audit fix
@@ -170,6 +186,7 @@ npm run secrets:scan
 ```
 
 #### Build Failures
+
 ```bash
 # Clear cache and reinstall
 rm -rf node_modules package-lock.json
@@ -193,11 +210,13 @@ The workflow respects these environment variables:
 ## Performance Budgets
 
 ### Bundle Size Limits
+
 - **Maximum bundle size**: 5MB
 - **Individual chunk limit**: 1MB
 - **CSS limit**: 500KB
 
 ### Performance Metrics
+
 - **Time to Interactive**: < 3s
 - **First Contentful Paint**: < 1.5s
 - **Cumulative Layout Shift**: < 0.1
@@ -205,12 +224,14 @@ The workflow respects these environment variables:
 ## Security Policies
 
 ### Vulnerability Management
+
 - **Critical vulnerabilities**: Block merge immediately
 - **High vulnerabilities**: Block merge immediately  
 - **Medium vulnerabilities**: Warning (advisory)
 - **Low vulnerabilities**: Allowed
 
 ### Secret Scanning
+
 - Gitleaks configuration in `.gitleaks.toml`
 - Scans commit history and staged files
 - Blocks commits containing secrets
@@ -258,6 +279,7 @@ The workflow integrates with observability systems:
 ## Future Enhancements
 
 ### Planned Improvements
+
 - Visual regression testing
 - Cross-browser testing matrix
 - Dependency update automation
@@ -266,6 +288,7 @@ The workflow integrates with observability systems:
 - Compliance reporting automation
 
 ### Phase 2 Goals
+
 - Increase coverage to 85%
 - Add integration testing
 - Implement chaos engineering
