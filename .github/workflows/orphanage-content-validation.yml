@@ -1,4 +1,4 @@
-name: Orphanage content validation
+name: orphanage-content-validation
 
 on:
   pull_request:
@@ -22,7 +22,7 @@ jobs:
           repository: xcodeprem/merajutasa-governance
           path: governance
 
-      - name: Validate orphanage content
+    - name: Validate orphanage content
         uses: ./governance/.github/actions/validate-orphanages
         with:
           content_dir: portal/content/orphanages
