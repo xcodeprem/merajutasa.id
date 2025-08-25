@@ -3,32 +3,26 @@ name: orphanage-content-validation
 on:
   pull_request:
     paths:
-      - 'content/orphanages/**/*.json'
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  pull-requests: read
-
-concurrency:
-  group: orphanage-validation-${{ github.ref }}
-  cancel-in-progress: true
+      - 'content/orphanages/**'
+      - '.github/workflows/orphanage-content-validation.yml'
 
 jobs:
   validate:
+    name: validate
     runs-on: ubuntu-latest
-    timeout-minutes: 10
     steps:
-      - name: Checkout
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
-
-      - name: Setup Node.js
-        uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
+      - name: Checkout portal
+        uses: actions/checkout@v4
         with:
-          node-version: "20"
+          path: portal
 
-      - name: Install AJV and dependencies
-        run: npm install --no-save ajv@8 ajv-formats@3 ajv-cli@5
+      - name: Checkout governance
+        uses: actions/checkout@v4
+        with:
+          repository: xcodeprem/merajutasa-governance
+          path: governance
 
-      - name: Validate orphanage JSON files
-        run: npx ajv validate -s .github/schemas/orphanage-v1.json -d 'content/orphanages/*.json' --spec=draft7 -c ajv-formats --errors=line
+    - name: Validate orphanage content
+        uses: ./governance/.github/actions/validate-orphanages
+        with:
+          content_dir: portal/content/orphanages
