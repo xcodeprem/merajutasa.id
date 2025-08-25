@@ -83,13 +83,14 @@ To maintain code quality and security, the following status checks are required 
 The coverage gate enforces minimum test coverage thresholds:
 
 - **Lines**: ≥80% (target: 90%+)
-- **Functions**: ≥80% (target: 90%+) 
+- **Functions**: ≥80% (target: 90%+)
 - **Statements**: ≥80% (target: 90%+)
 - **Branches**: ≥70% (target: 80%+)
 
 **Progressive Plan:**
+
 1. **Phase 1** (current): 80% minimum for lines, functions, statements
-2. **Phase 2** (future): 85% minimum 
+2. **Phase 2** (future): 85% minimum
 3. **Phase 3** (target): 90%+ minimum
 
 **Enforcement:** Coverage gate fails the build if any threshold is not met. Use `npm run coverage:gate` to check locally.

@@ -7,6 +7,7 @@
 [![Gitleaks](https://github.com/xcodeprem/merajutasa.id/actions/workflows/gitleaks.yml/badge.svg)](https://github.com/xcodeprem/merajutasa.id/actions/workflows/gitleaks.yml)
 [![H1 Guard & KPI](https://github.com/xcodeprem/merajutasa.id/actions/workflows/h1-guard.yml/badge.svg)](https://github.com/xcodeprem/merajutasa.id/actions/workflows/h1-guard.yml)
 [![Deploy Pages (Dashboard Snapshots)](https://github.com/xcodeprem/merajutasa.id/actions/workflows/pages.yml/badge.svg)](https://github.com/xcodeprem/merajutasa.id/actions/workflows/pages.yml)
+[![Orphanage Content Validation](https://github.com/xcodeprem/merajutasa.id/actions/workflows/orphanage-content-validation.yml/badge.svg)](https://github.com/xcodeprem/merajutasa.id/actions/workflows/orphanage-content-validation.yml)
 [![Coverage Gate](https://img.shields.io/badge/coverage-%E2%89%A580%25-green)](docs/ci/comprehensive-testing-workflow.md)
 [![Changelog Excerpt](https://img.shields.io/badge/changelog-excerpt-blue)](https://xcodeprem.github.io/merajutasa.id/changelog.html)
 
