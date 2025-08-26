@@ -363,7 +363,7 @@
     "@octokit/graphql": "^9.0.1",
     "@octokit/rest": "^22.0.0",
     "compression": "^1.7.4",
-    "concurrently": "^9.2.0",
+    "concurrently": "^9.2.1",
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "express-rate-limit": "^8.0.1",
