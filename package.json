@@ -343,7 +343,7 @@
     "epic:83:narratives": "node tools/epic-83-upsert-narratives.js"
   },
   "devDependencies": {
-    "@eslint/js": "^9.34.0",
+    "@eslint/js": "^9.35.0",
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
     "chrome-launcher": "^1.0.0",
