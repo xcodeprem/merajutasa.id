@@ -340,7 +340,9 @@
     "issues:enterprise:propagate": "node tools/enterprise-issue-template-propagate.js",
     "issues:enterprise:propagate:all": "node tools/enterprise-issue-template-propagate.js --grandchildren",
     "epic:83:enterprise": "node tools/epic-83-upsert-enterprise.js",
-    "epic:83:narratives": "node tools/epic-83-upsert-narratives.js"
+    "epic:83:narratives": "node tools/epic-83-upsert-narratives.js",
+    "blueprint:traceability": "node tools/blueprint-traceability-matrix.js",
+    "test:blueprint-traceability": "node tools/tests/blueprint-traceability-matrix.test.js"
   },
   "devDependencies": {
     "@eslint/js": "^9.34.0",
